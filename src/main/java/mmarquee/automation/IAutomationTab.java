@@ -7,4 +7,5 @@ public interface IAutomationTab {
     void selectTabPage(String name);
     String name();
     IAutomationEditBox getEditBoxByIndex(int index);
+    IAutomationCheckbox getCheckboxByIndex(int index);
 }

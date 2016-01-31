@@ -1,6 +1,11 @@
 package mmarquee.automation;
 
+import mmarquee.automation.uiautomation.ToggleState;
+
+import java.io.Console;
+
 public class Main {
+
 	public static void main(String[] args) {
 
 		UIAutomation automation = new UIAutomation();
@@ -21,8 +26,11 @@ public class Main {
 
 		String text = tb1.text();
 
+		IAutomationCheckbox check = window.getCheckboxByIndex(0);
+		check.toggle();
 
-		String xxx = "Hi";
-		//List<IAutomationWindow> list = automation.getDesktopWindows();
+		ToggleState state = check.getToggleState();
+
+		String dummy = "";
 	}
 } 

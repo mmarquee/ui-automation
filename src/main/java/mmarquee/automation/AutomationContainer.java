@@ -33,47 +33,9 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
-    /*
-    function TAutomationContainer.GetControlByControlType(title: string; id: word): IUIAutomationElement;
-var
-  element : IUIAutomationElement;
-  collection : IUIAutomationElementArray;
-  count : integer;
-  name : widestring;
-  length : integer;
-  retVal : integer;
-
-begin
-  result := nil;
-
-  // Find the element
-  collection := FindAll(TreeScope_Descendants);
-
-  collection.Get_Length(length);
-
-  for count := 0 to length -1 do
-  begin
-    collection.GetElement(count, element);
-    element.Get_CurrentControlType(retVal);
-
-    if (retval = id) then
-    begin
-      element.Get_CurrentName(name);
-
-      if (name = title)then
-      begin
-        result := element;
-        break;
-      end;
-    end;
-  end;
-
-  if result = nil then
-    raise EDelphiAutomationException.Create('Unable to find control');
-
-end;
-
-     */
+    public IAutomationCheckbox getCheckboxByIndex(int index) {
+        return new AutomationCheckbox(this.uiAuto, this.getControlByControlType(index, ControlTypeID.CheckBoxControlTypeId));
+    }
 
     public IAutomationTab getTabByIndex(int index){
         return new AutomationTab(this.uiAuto, this.getControlByControlType(index, ControlTypeID.TabControlTypeId));

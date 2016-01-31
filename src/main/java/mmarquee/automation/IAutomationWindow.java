@@ -6,5 +6,6 @@ package mmarquee.automation;
 public interface IAutomationWindow {
     void focus();
     IAutomationTab getTabByIndex(int index);
+    IAutomationCheckbox getCheckboxByIndex(int index);
     String name();
 }
