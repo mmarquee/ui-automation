@@ -17,10 +17,12 @@ public class Main {
 		tab.selectTabPage("Last Tab");
 	//	String tabName = tab.name();
 
-		IAutomationEditBox tb1 = tab.setEditBoxByIndex(0);
+		IAutomationEditBox tb1 = tab.getEditBoxByIndex(0);
 
 		String text = tb1.text();
 
+
+		String xxx = "Hi";
 		//List<IAutomationWindow> list = automation.getDesktopWindows();
 	}
 } 

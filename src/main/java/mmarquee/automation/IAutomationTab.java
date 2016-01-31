@@ -6,5 +6,5 @@ package mmarquee.automation;
 public interface IAutomationTab {
     void selectTabPage(String name);
     String name();
-    IAutomationEditBox setEditBoxByIndex(int index);
+    IAutomationEditBox getEditBoxByIndex(int index);
 }

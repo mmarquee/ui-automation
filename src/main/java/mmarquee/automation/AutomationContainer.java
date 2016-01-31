@@ -78,4 +78,9 @@ end;
     public IAutomationTab getTabByIndex(int index){
         return new AutomationTab(this.uiAuto, this.getControlByControlType(index, ControlTypeID.TabControlTypeId));
     }
+
+    public IAutomationEditBox getEditBoxByIndex(int index) {
+        return new AutomationEditBox(this.uiAuto, this.getControlByControlType(index, ControlTypeID.EditControlTypeId));
+    }
+
 }

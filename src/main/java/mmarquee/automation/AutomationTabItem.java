@@ -14,9 +14,6 @@ public class AutomationTabItem extends AutomationContainer implements IAutomatio
     }
 
     public void select() {
-
-        String nsme = this.name();
-
         com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.SelectionItemPatternId);
 
         if (unknown != null) {
@@ -28,23 +25,4 @@ public class AutomationTabItem extends AutomationContainer implements IAutomatio
             }
         }
     }
-    /*
-
-procedure TAutomationTabItem.Select;
-var
-  unknown: IInterface;
-  Pattern  : IUIAutomationInvokePattern;
-
-begin
-  fElement.GetCurrentPattern(UIA_SelectionItemPatternID, unknown);
-
-  if (unknown <> nil) then
-  begin
-    if unknown.QueryInterface(IUIAutomationSelectionItemPattern, Pattern) = S_OK then
-    begin
-      Pattern.Invoke;
-    end;
-  end;
-end;
-     */
 }

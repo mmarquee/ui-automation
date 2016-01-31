@@ -23,27 +23,6 @@ public class AutomationTab extends AutomationContainer implements IAutomationTab
         }
     }
 
-    /*
-    procedure TAutomationTab.SelectTabPage(const value: string);
-var
-  count : integer;
-
-begin
-  for count := 0 to self.FTabItems.Count -1 do
-  begin
-    if self.FTabItems[count].Name = value then
-    begin
-      self.FTabItems[count].Select;
-//      FSelectedItem := self.FTabItems[count];
-      break;
-    end;
-  end;
-end;
-     */
-    public IAutomationEditBox setEditBoxByIndex(int index) {
-        return new AutomationEditBox();
-    }
-
     public AutomationTab (IUIAutomation uiAuto, IUIAutomationElement element) {
         this.element = element;
         this.uiAuto = uiAuto;
@@ -65,5 +44,4 @@ end;
             }
         }
     }
-
 }
