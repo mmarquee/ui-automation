@@ -22,10 +22,10 @@ public class Main {
 		tab.selectTabPage("Last Tab");
 	//	String tabName = tab.name();
 
-		IProvidesText tb1;
-		tb1 = tab.getEditBoxByIndex(0);
+		IProvidesText eb1;
+		eb1 = tab.getEditBoxByIndex(0);
 
-		String text = tb1.text();
+		String text = eb1.text();
 
 		IAutomationCheckbox check = window.getCheckboxByIndex(0);
 		check.toggle();
@@ -34,6 +34,17 @@ public class Main {
 
 		IAutomationRadioButton radio = window.getRadioButtonByIndex(1);
 		radio.selectItem();
+
+		IAutomationStatusBar statusbar = window.getStatusBar();
+		IProvidesText tb0 = statusbar.getTextBoxByIndex(0);
+		IProvidesText tb1 = statusbar.getTextBoxByIndex(1);
+		String eb0Text = tb0.text();
+		String eb1Text = tb1.text();
+
+		IAutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
+		cb1.setText("Replacements");
+
+		String txt = cb1.text();
 
 		String dummy = "";
 	}

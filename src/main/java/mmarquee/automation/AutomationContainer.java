@@ -38,6 +38,30 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
+    protected IUIAutomationElement getControlByControlType(String name, int id) {
+        IUIAutomationElementArray collection;
+
+        IUIAutomationElement foundElement = null;
+
+        collection = this.findAll(TreeScope.TreeScope_Descendants);
+
+        int length = collection.length();
+
+        for (int count = 0; count < length; count++) {
+            IUIAutomationElement element = collection.getElement(count);
+            int retVal = element.currentControlType();
+            String elementName = element.currentName();
+
+            if (retVal == id)  {
+                if (elementName.equals(name)) {
+                    foundElement = element;
+                }
+            }
+        }
+
+        return foundElement;
+    }
+
     public IAutomationCheckbox getCheckboxByIndex(int index) {
         return new AutomationCheckbox(this.getControlByControlType(index, ControlTypeID.CheckBoxControlTypeId), this.uiAuto);
     }
@@ -54,4 +78,11 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationRadioButton(this.getControlByControlType(index, ControlTypeID.RadioButtonControlTypeId), this.uiAuto);
     }
 
+    public IAutomationTextBox getTextBoxByIndex(int index) {
+        return new AutomationTextBox(this.getControlByControlType(index, ControlTypeID.TextControlTypeId), this.uiAuto);
+    }
+
+    public IAutomationComboBox getComboboxByName(String name) {
+        return new AutomationComboBox(this.getControlByControlType(name, ControlTypeID.ComboBoxControlTypeId), this.uiAuto);
+    }
 }

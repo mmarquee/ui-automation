@@ -8,5 +8,7 @@ public interface IAutomationWindow {
     IAutomationTab getTabByIndex(int index);
     IAutomationCheckbox getCheckboxByIndex(int index);
     IAutomationRadioButton getRadioButtonByIndex(int index);
+    IAutomationStatusBar getStatusBar();
+    IAutomationComboBox getComboboxByName(String name);
     String name();
 }
