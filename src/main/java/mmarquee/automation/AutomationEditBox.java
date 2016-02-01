@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationEditBox extends AutomationBase implements IAutomationEditBox {
+public class AutomationEditBox extends AutomationBase implements IAutomationEditBox, IProvidesText {
     public String text() {
         //return this.name();
         com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);
@@ -24,8 +24,7 @@ public class AutomationEditBox extends AutomationBase implements IAutomationEdit
         return value;
     }
 
-    public AutomationEditBox(IUIAutomation uiAuto, IUIAutomationElement element) {
-        this.element = element;
-        this.uiAuto = uiAuto;
+    public AutomationEditBox(IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
     }
 }

@@ -7,5 +7,6 @@ public interface IAutomationWindow {
     void focus();
     IAutomationTab getTabByIndex(int index);
     IAutomationCheckbox getCheckboxByIndex(int index);
+    IAutomationRadioButton getRadioButtonByIndex(int index);
     String name();
 }

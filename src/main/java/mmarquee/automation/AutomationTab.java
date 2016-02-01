@@ -18,14 +18,13 @@ public class AutomationTab extends AutomationContainer implements IAutomationTab
     public void selectTabPage(String name) {
         for (int count = 0; count < this.tabItems.size(); count++) {
             if (name.equals(this.tabItems.get(count).name())) {
-                this.tabItems.get(count).select();
+                this.tabItems.get(count).selectItem();
             }
         }
     }
 
-    public AutomationTab (IUIAutomation uiAuto, IUIAutomationElement element) {
-        this.element = element;
-        this.uiAuto = uiAuto;
+    public AutomationTab (IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
 
         // Now get the list of tab items
         tabItems = new ArrayList<IAutomationTabItem>();
@@ -40,7 +39,7 @@ public class AutomationTab extends AutomationContainer implements IAutomationTab
             int retVal = elem.currentControlType();
 
             if (retVal == ControlTypeID.TabItemControlTypeId) {
-                this.tabItems.add(new AutomationTabItem(this.uiAuto, elem));
+                this.tabItems.add(new AutomationTabItem(elem, this.uiAuto));
             }
         }
     }

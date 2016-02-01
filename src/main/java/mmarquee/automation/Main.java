@@ -22,7 +22,8 @@ public class Main {
 		tab.selectTabPage("Last Tab");
 	//	String tabName = tab.name();
 
-		IAutomationEditBox tb1 = tab.getEditBoxByIndex(0);
+		IProvidesText tb1;
+		tb1 = tab.getEditBoxByIndex(0);
 
 		String text = tb1.text();
 
@@ -30,6 +31,9 @@ public class Main {
 		check.toggle();
 
 		ToggleState state = check.getToggleState();
+
+		IAutomationRadioButton radio = window.getRadioButtonByIndex(1);
+		radio.selectItem();
 
 		String dummy = "";
 	}

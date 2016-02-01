@@ -22,13 +22,12 @@ public class UIAutomation {
         rootElement = uiAuto.getRootElement();
     }
 
-    public IAutomationApplication launch (String... command) {
+    public IAutomationApplication launch(String... command) {
         ProcessBuilder pb = new ProcessBuilder(command);
 
         try {
             process = pb.start();
-        }
-        catch (java.io.IOException ex) {
+        } catch (java.io.IOException ex) {
             // Never do this in real code
         }
 
@@ -37,7 +36,7 @@ public class UIAutomation {
         // want, but this is a bit odd, and not sure whether this is actually how it SHOULD work at all.
 
 
-        return new AutomationApplication(uiAuto, process, rootElement);
+        return new AutomationApplication(rootElement, uiAuto, process);
     }
 
     public IAutomationWindow getDesktopWindow(String title) {
@@ -51,19 +50,19 @@ public class UIAutomation {
 
         IAutomationWindow foundElement = null;
 
-        for(int count=0; count < length; count++){
+        for (int count = 0; count < length; count++) {
             IUIAutomationElement element = collection.getElement(count);
             String name = element.currentName();
 
             if (name.equals(title)) {
-                foundElement = new AutomationWindow(this.uiAuto, element);
+                foundElement = new AutomationWindow(element, this.uiAuto);
             }
         }
 
         return foundElement;
     }
 
-    public List<IAutomationWindow> getDesktopWindows () {
+    public List<IAutomationWindow> getDesktopWindows() {
 
         List<IAutomationWindow> result = new ArrayList<IAutomationWindow>();
 
@@ -73,45 +72,12 @@ public class UIAutomation {
 
         int length = collection.length();
 
-        for(int count=0; count < length; count++){
+        for (int count = 0; count < length; count++) {
             IUIAutomationElement element = collection.getElement(count);
-            //String name = element.currentName();
 
-            result.add(new AutomationWindow(this.uiAuto, element));
+            result.add(new AutomationWindow(element, this.uiAuto));
         }
 
         return result;
     }
-
-    /*
-    class function TAutomationDesktop.getDesktopWindows: TObjectList<TAutomationWindow>;
-var
-  res : TObjectList<TAutomationWindow>;
-  collection : IUIAutomationElementArray;
-  condition : IUIAutomationCondition;
-  element : IUIAutomationElement;
-  name : WideString;
-  count, length : integer;
-
-begin
-  res := TObjectList<TAutomationWindow>.create();
-
-  condition := TUIAuto.CreateTrueCondition;
-
-  rootElement.FindAll(TreeScope_Children, condition, collection);
-
-  collection.Get_Length(length);
-
-  for count := 0 to length -1 do
-  begin
-    collection.GetElement(count, element);
-    element.Get_CurrentName(name);
-    res.Add(TAutomationWindow.create(element, true));
-  end;
-
-  result := res;
-end;
-
-     */
-
 }

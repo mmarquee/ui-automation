@@ -11,8 +11,7 @@ public class AutomationWindow extends AutomationContainer implements IAutomation
         this.element.setFocus();
     }
 
-    public AutomationWindow (IUIAutomation uiAuto, IUIAutomationElement element) {
-        this.element = element;
-        this.uiAuto = uiAuto;
+    public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
     }
 }

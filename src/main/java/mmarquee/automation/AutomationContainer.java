@@ -6,6 +6,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 28/01/2016.
  */
 public class AutomationContainer extends AutomationBase {
+
+    public AutomationContainer (IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
+    }
+
     protected IUIAutomationElement getControlByControlType(int index, int id) {
         IUIAutomationElementArray collection;
 
@@ -34,15 +39,19 @@ public class AutomationContainer extends AutomationBase {
     }
 
     public IAutomationCheckbox getCheckboxByIndex(int index) {
-        return new AutomationCheckbox(this.uiAuto, this.getControlByControlType(index, ControlTypeID.CheckBoxControlTypeId));
+        return new AutomationCheckbox(this.getControlByControlType(index, ControlTypeID.CheckBoxControlTypeId), this.uiAuto);
     }
 
     public IAutomationTab getTabByIndex(int index){
-        return new AutomationTab(this.uiAuto, this.getControlByControlType(index, ControlTypeID.TabControlTypeId));
+        return new AutomationTab(this.getControlByControlType(index, ControlTypeID.TabControlTypeId), this.uiAuto);
     }
 
     public IAutomationEditBox getEditBoxByIndex(int index) {
-        return new AutomationEditBox(this.uiAuto, this.getControlByControlType(index, ControlTypeID.EditControlTypeId));
+        return new AutomationEditBox(this.getControlByControlType(index, ControlTypeID.EditControlTypeId), this.uiAuto);
+    }
+
+    public IAutomationRadioButton getRadioButtonByIndex(int index) {
+        return new AutomationRadioButton(this.getControlByControlType(index, ControlTypeID.RadioButtonControlTypeId), this.uiAuto);
     }
 
 }

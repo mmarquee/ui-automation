@@ -5,5 +5,5 @@ package mmarquee.automation;
  */
 public interface IAutomationTabItem {
     String name();
-    void select();
+    void selectItem();
 }

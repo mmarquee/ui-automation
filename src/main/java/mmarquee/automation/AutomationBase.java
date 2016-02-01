@@ -10,6 +10,11 @@ public class AutomationBase {
 
     protected IUIAutomation uiAuto;
 
+    public AutomationBase (IUIAutomationElement element, IUIAutomation uiAuto) {
+        this.element = element;
+        this.uiAuto = uiAuto;
+    }
+
     public String name () {
         return this.element.currentName();
     }
@@ -35,4 +40,39 @@ public class AutomationBase {
 
         return collection;
     }
+
+    protected IUIAutomationSelectionItemPattern getSelectItemPattern() {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.SelectionItemPatternId);
+
+        IUIAutomationSelectionItemPattern pattern = null;
+
+        if (unknown != null) {
+            IUIAutomationSelectionItemPattern selectItemPattern =
+                    unknown.queryInterface(IUIAutomationSelectionItemPattern.class);
+
+            if (selectItemPattern != null) {
+                pattern = selectItemPattern;
+            }
+        }
+
+        return pattern;
+    }
+
+    protected IUIAutomationTogglePattern getTogglePattern() {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.TogglePatternId);
+
+        IUIAutomationTogglePattern togglePattern = null;
+
+        if (unknown != null) {
+            IUIAutomationTogglePattern pattern =
+                    unknown.queryInterface(IUIAutomationTogglePattern.class);
+
+            if (pattern != null) {
+                togglePattern = pattern;
+            }
+        }
+
+        return togglePattern;
+    }
+
 }

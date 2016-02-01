@@ -12,7 +12,8 @@ public class AutomationApplication
     private Process process;
 
     public void waitWhileBusy() {
-
+        //WaitForInputIdle(this.rocess, timeout);
+        // Need to solve this !!!
     }
 
     public IAutomationWindow getWindow(String title) {
@@ -31,12 +32,11 @@ public class AutomationApplication
             }
         }
 
-        return new AutomationWindow(this.uiAuto, foundElement);
+        return new AutomationWindow(foundElement, this.uiAuto);
     }
 
-    public AutomationApplication (IUIAutomation uiAuto, Process process, IUIAutomationElement element) {
+    public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {
+        super(element, uiAuto);
         this.process = process;
-        this.uiAuto = uiAuto;
-        this.element = element;
     }
 }
