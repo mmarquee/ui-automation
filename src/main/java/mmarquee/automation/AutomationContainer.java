@@ -85,4 +85,8 @@ public class AutomationContainer extends AutomationBase {
     public IAutomationComboBox getComboboxByName(String name) {
         return new AutomationComboBox(this.getControlByControlType(name, ControlTypeID.ComboBoxControlTypeId), this.uiAuto);
     }
+
+    public IAutomationButton getButtonByName(String name) {
+        return new AutomationButton(this.getControlByControlType(name, ControlTypeID.ButtonControlTypeId), this.uiAuto);
+    }
 }
