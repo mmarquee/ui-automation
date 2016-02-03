@@ -7,7 +7,7 @@ import javax.naming.ldap.Control;
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationWindow extends AutomationContainer implements IAutomationWindow {
+public class AutomationWindow extends AutomationContainer {
 
     public void focus() {
         this.element.setFocus();
@@ -17,14 +17,14 @@ public class AutomationWindow extends AutomationContainer implements IAutomation
         super(element, uiAuto);
     }
 
-    public IAutomationStatusBar getStatusBar() {
+    public AutomationStatusBar getStatusBar() {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
         IUIAutomationElementArray collection = this.element.findAll(TreeScope.TreeScope_Descendants, condition);
 
         int length = collection.length();
 
-        IAutomationStatusBar found = null;
+        AutomationStatusBar found = null;
 
         for (int count = 0; count < length; count++) {
             IUIAutomationElement element = collection.getElement(count);

@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 01/02/2016.
  */
-public class AutomationComboBox extends AutomationBase implements IAutomationComboBox {
+public class AutomationComboBox extends AutomationBase {
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
     }

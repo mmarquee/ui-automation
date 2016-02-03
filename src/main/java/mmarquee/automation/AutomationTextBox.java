@@ -1,13 +1,11 @@
 package mmarquee.automation;
 
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 01/02/2016.
  */
-public class AutomationTextBox extends AutomationBase implements IAutomationTextBox {
+public class AutomationTextBox extends AutomationBase {
     public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

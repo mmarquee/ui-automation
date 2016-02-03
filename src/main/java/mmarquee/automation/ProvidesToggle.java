@@ -3,6 +3,6 @@ package mmarquee.automation;
 /**
  * Created by inpwt on 01/02/2016.
  */
-public interface IProvidesText {
-    String text();
+public interface ProvidesToggle {
+    void toggle ();
 }

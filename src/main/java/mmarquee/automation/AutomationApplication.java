@@ -6,8 +6,7 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationApplication
-        extends AutomationBase
-        implements IAutomationApplication {
+        extends AutomationBase {
 
     private Process process;
 
@@ -16,7 +15,7 @@ public class AutomationApplication
         // Need to solve this !!!
     }
 
-    public IAutomationWindow getWindow(String title) {
+    public AutomationWindow getWindow(String title) {
 
         IUIAutomationElement foundElement = null;
 

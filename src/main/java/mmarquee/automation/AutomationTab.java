@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationTab extends AutomationContainer implements IAutomationTab {
+public class AutomationTab extends AutomationContainer {
 
-    private List<IAutomationTabItem> tabItems;
+    private List<AutomationTabItem> tabItems;
 
     public void selectTabPage(String name) {
         for (int count = 0; count < this.tabItems.size(); count++) {
@@ -27,7 +27,7 @@ public class AutomationTab extends AutomationContainer implements IAutomationTab
         super(element, uiAuto);
 
         // Now get the list of tab items
-        tabItems = new ArrayList<IAutomationTabItem>();
+        tabItems = new ArrayList<AutomationTabItem>();
 
         IUIAutomationElementArray collection = this.findAll(TreeScope.TreeScope_Descendants);
 

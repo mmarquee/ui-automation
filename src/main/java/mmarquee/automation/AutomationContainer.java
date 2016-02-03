@@ -62,31 +62,31 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
-    public IAutomationCheckbox getCheckboxByIndex(int index) {
+    public AutomationCheckbox getCheckboxByIndex(int index) {
         return new AutomationCheckbox(this.getControlByControlType(index, ControlTypeID.CheckBoxControlTypeId), this.uiAuto);
     }
 
-    public IAutomationTab getTabByIndex(int index){
+    public AutomationTab getTabByIndex(int index){
         return new AutomationTab(this.getControlByControlType(index, ControlTypeID.TabControlTypeId), this.uiAuto);
     }
 
-    public IAutomationEditBox getEditBoxByIndex(int index) {
+    public AutomationEditBox getEditBoxByIndex(int index) {
         return new AutomationEditBox(this.getControlByControlType(index, ControlTypeID.EditControlTypeId), this.uiAuto);
     }
 
-    public IAutomationRadioButton getRadioButtonByIndex(int index) {
+    public AutomationRadioButton getRadioButtonByIndex(int index) {
         return new AutomationRadioButton(this.getControlByControlType(index, ControlTypeID.RadioButtonControlTypeId), this.uiAuto);
     }
 
-    public IAutomationTextBox getTextBoxByIndex(int index) {
+    public AutomationTextBox getTextBoxByIndex(int index) {
         return new AutomationTextBox(this.getControlByControlType(index, ControlTypeID.TextControlTypeId), this.uiAuto);
     }
 
-    public IAutomationComboBox getComboboxByName(String name) {
+    public AutomationComboBox getComboboxByName(String name) {
         return new AutomationComboBox(this.getControlByControlType(name, ControlTypeID.ComboBoxControlTypeId), this.uiAuto);
     }
 
-    public IAutomationButton getButtonByName(String name) {
+    public AutomationButton getButtonByName(String name) {
         return new AutomationButton(this.getControlByControlType(name, ControlTypeID.ButtonControlTypeId), this.uiAuto);
     }
 }

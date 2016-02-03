@@ -22,7 +22,7 @@ public class UIAutomation {
         rootElement = uiAuto.getRootElement();
     }
 
-    public IAutomationApplication launch(String... command) {
+    public AutomationApplication launch(String... command) {
         ProcessBuilder pb = new ProcessBuilder(command);
 
         try {
@@ -31,16 +31,11 @@ public class UIAutomation {
             // Never do this in real code
         }
 
-        // OK, we have started the application, so how do we actually get the firt element in the 'tree' of controls?
-        // the Delphi code semms to get passed this by now getting the list of dekstop windows and finding the one we
-        // want, but this is a bit odd, and not sure whether this is actually how it SHOULD work at all.
-
-
         return new AutomationApplication(rootElement, uiAuto, process);
     }
 
-    public IAutomationWindow getDesktopWindow(String title) {
-        List<IAutomationWindow> result = new ArrayList<IAutomationWindow>();
+    public AutomationWindow getDesktopWindow(String title) {
+        List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
@@ -48,7 +43,7 @@ public class UIAutomation {
 
         int length = collection.length();
 
-        IAutomationWindow foundElement = null;
+        AutomationWindow foundElement = null;
 
         for (int count = 0; count < length; count++) {
             IUIAutomationElement element = collection.getElement(count);
@@ -62,9 +57,9 @@ public class UIAutomation {
         return foundElement;
     }
 
-    public List<IAutomationWindow> getDesktopWindows() {
+    public List<AutomationWindow> getDesktopWindows() {
 
-        List<IAutomationWindow> result = new ArrayList<IAutomationWindow>();
+        List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
