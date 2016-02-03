@@ -75,4 +75,20 @@ public class AutomationBase {
         return togglePattern;
     }
 
+    protected IUIAutomationInvokePattern getInvokePattern() {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.InvokePatternId);
+
+        IUIAutomationInvokePattern invokePattern = null;
+
+        if (unknown != null) {
+            IUIAutomationInvokePattern pattern =
+                    unknown.queryInterface(IUIAutomationInvokePattern.class);
+
+            if (pattern != null) {
+                invokePattern = pattern;
+            }
+        }
+
+        return invokePattern;
+    }
 }
