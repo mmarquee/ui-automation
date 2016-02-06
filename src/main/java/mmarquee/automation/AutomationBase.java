@@ -58,6 +58,82 @@ public class AutomationBase {
         return pattern;
     }
 
+    protected IUIAutomationSelectionPattern getSelectionPattern() {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.SelectionPatternId);
+
+        IUIAutomationSelectionPattern pattern = null;
+
+        if (unknown != null) {
+            IUIAutomationSelectionPattern selectPattern =
+                    unknown.queryInterface(IUIAutomationSelectionPattern.class);
+
+            if (selectPattern != null) {
+                pattern = selectPattern;
+            }
+        }
+
+        return pattern;
+    }
+
+    protected IUIAutomationValuePattern getValuePattern() {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);
+
+        IUIAutomationValuePattern valuePattern = null;
+
+        if (unknown != null) {
+            IUIAutomationValuePattern pattern =
+                    unknown.queryInterface(IUIAutomationValuePattern.class);
+
+            if (pattern != null) {
+                valuePattern = pattern;
+            }
+        }
+
+        return valuePattern;
+    }
+
+    protected IUIAutomationTablePattern getTablePattern() {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.TablePatternId);
+
+        IUIAutomationTablePattern tablePattern = null;
+
+        if (unknown != null) {
+            IUIAutomationTablePattern pattern =
+                    unknown.queryInterface(IUIAutomationTablePattern.class);
+
+            if (pattern != null) {
+                tablePattern = pattern;
+            }
+        }
+
+        return tablePattern;
+    }
+
+    private com4j.Com4jObject getPattern (int id) {
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
+
+        if (unknown != null) {
+            return unknown;
+        } else {
+            return null;
+        }
+    }
+
+    protected IUIAutomationGridPattern getGridPattern() {
+        com4j.Com4jObject unknown = getPattern(PatternID.GridPatternId);
+
+        IUIAutomationGridPattern gridPattern = null;
+
+        IUIAutomationGridPattern pattern =
+                unknown.queryInterface(IUIAutomationGridPattern.class);
+
+        if (pattern != null) {
+            gridPattern = pattern;
+        }
+
+        return gridPattern;
+    }
+
     protected IUIAutomationTogglePattern getTogglePattern() {
         com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.TogglePatternId);
 

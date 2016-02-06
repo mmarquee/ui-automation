@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 31/01/2016.
  */
-public class AutomationCheckbox extends AutomationBase implements IProvidesToggle {
+public class AutomationCheckbox extends AutomationBase {
 
     private IUIAutomationTogglePattern togglePattern;
 

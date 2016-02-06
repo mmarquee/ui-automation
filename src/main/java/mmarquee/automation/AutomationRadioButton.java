@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 31/01/2016.
  */
-public class AutomationRadioButton extends AutomationBase implements IProvidesSelectItem {
+public class AutomationRadioButton extends AutomationBase {
 
     private IUIAutomationSelectionItemPattern selectItemPattern;
 

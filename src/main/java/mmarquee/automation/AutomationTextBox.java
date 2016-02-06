@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 01/02/2016.
  */
-public class AutomationTextBox extends AutomationBase implements ProvidesText {
+public class AutomationTextBox extends AutomationBase {
     public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

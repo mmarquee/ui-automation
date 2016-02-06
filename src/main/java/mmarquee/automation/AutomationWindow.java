@@ -2,12 +2,10 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.*;
 
-import javax.naming.ldap.Control;
-
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationWindow extends AutomationContainer implements ProvidesFocus {
+public class AutomationWindow extends AutomationContainer {
 
     public void focus() {
         this.element.setFocus();

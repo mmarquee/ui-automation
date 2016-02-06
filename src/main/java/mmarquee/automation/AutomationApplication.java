@@ -5,9 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationApplication
-        extends AutomationBase {
-
+public class AutomationApplication extends AutomationBase {
     private Process process;
 
     public void waitWhileBusy() {

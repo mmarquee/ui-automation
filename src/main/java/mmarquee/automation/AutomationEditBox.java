@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationEditBox extends AutomationBase implements ProvidesText {
+public class AutomationEditBox extends AutomationBase {
     public String text() {
         //return this.name();
         com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);

@@ -5,7 +5,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 02/02/2016.
  */
-public class AutomationButton extends AutomationBase implements ProvidesClick, ProvidesFocus {
+public class AutomationButton extends AutomationBase {
 
     private IUIAutomationInvokePattern invokePattern = null;
 
