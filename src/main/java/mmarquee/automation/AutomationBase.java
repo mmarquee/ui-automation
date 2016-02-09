@@ -135,13 +135,16 @@ public class AutomationBase {
         }
     }
 
+    protected IUIAutomationWindowPattern getWindowPattern() {
+        com4j.Com4jObject unknown = getPattern(PatternID.WindowPatternId);
+
+        return unknown.queryInterface(IUIAutomationWindowPattern.class);
+    }
+
     protected IUIAutomationExpandCollapsePattern getCollapsePattern() {
         com4j.Com4jObject unknown = getPattern(PatternID.ExpandCollapsePatternId);
 
-        IUIAutomationExpandCollapsePattern pattern =
-                unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
-
-        return pattern;
+        return unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
     }
 
     protected IUIAutomationGridPattern getGridPattern() {

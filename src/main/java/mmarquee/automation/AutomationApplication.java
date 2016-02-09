@@ -25,7 +25,7 @@ import com.sun.jna.*;
 public class AutomationApplication extends AutomationBase {
     private Process process;
 
-    public void waitWhileBusy() {
+    public void waitForInputIdle() {
         //WaitForInputIdle(this.rocess, timeout);
         // Need to solve this !!!
 

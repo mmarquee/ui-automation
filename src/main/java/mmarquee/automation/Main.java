@@ -18,8 +18,6 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.ToggleState;
 
-import java.util.List;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -27,7 +25,7 @@ public class Main {
 
 		AutomationApplication application = automation.launch("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
 
-		application.waitWhileBusy();
+		application.waitForInputIdle();
 
 		AutomationWindow window = automation.getDesktopWindow("Form1");
 		String name = window.name();

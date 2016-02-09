@@ -23,12 +23,16 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationWindow extends AutomationContainer {
 
+    private IUIAutomationWindowPattern windowPattern;
+
     public void focus() {
         this.element.setFocus();
     }
 
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+
+        this.windowPattern = this.getWindowPattern();
     }
 
     public AutomationStatusBar getStatusBar() {
@@ -57,5 +61,9 @@ public class AutomationWindow extends AutomationContainer {
         IUIAutomationElement menu = this.getControlByControlType(0, ControlTypeID.MenuBarControlTypeId);
 
         return (new AutomationMainMenu(menu, this.uiAuto));
+    }
+
+    public void waitForInputIdle(int timeout) {
+        this.windowPattern.waitForInputIdle(timeout);
     }
 }
