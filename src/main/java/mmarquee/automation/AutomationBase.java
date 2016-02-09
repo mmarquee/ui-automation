@@ -119,6 +119,15 @@ public class AutomationBase {
         }
     }
 
+    protected IUIAutomationExpandCollapsePattern getCollapsePattern() {
+        com4j.Com4jObject unknown = getPattern(PatternID.ExpandCollapsePatternId);
+
+        IUIAutomationExpandCollapsePattern pattern =
+                unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
+
+        return pattern;
+    }
+
     protected IUIAutomationGridPattern getGridPattern() {
         com4j.Com4jObject unknown = getPattern(PatternID.GridPatternId);
 

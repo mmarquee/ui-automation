@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jna.version>4.2.1</jna.version>
   </properties>
 
   <dependencies>
@@ -20,6 +21,17 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>${jna.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <classifier>platform</classifier>
+      <version>${jna.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.com4j</groupId>

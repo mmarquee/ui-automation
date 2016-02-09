@@ -38,6 +38,34 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
+    protected IUIAutomationElement getControlByControlType(int index, int id, String controlName) {
+        IUIAutomationElementArray collection;
+
+        IUIAutomationElement foundElement = null;
+
+        collection = this.findAll(TreeScope.TreeScope_Descendants);
+
+        int length = collection.length();
+
+        int counter = 0;
+
+        for (int count = 0; count < length; count++) {
+            IUIAutomationElement element = collection.getElement(count);
+            int retVal = element.currentControlType();
+            String cName = element.currentClassName();
+
+            if (cName.equals(controlName)) {
+                if (counter == index) {
+                    foundElement = element;
+                } else {
+                    counter++;
+                }
+            }
+        }
+
+        return foundElement;
+    }
+
     protected IUIAutomationElement getControlByControlType(String name, int id) {
         IUIAutomationElementArray collection;
 
@@ -88,5 +116,9 @@ public class AutomationContainer extends AutomationBase {
 
     public AutomationButton getButtonByName(String name) {
         return new AutomationButton(this.getControlByControlType(name, ControlTypeID.ButtonControlTypeId), this.uiAuto);
+    }
+
+    public AutomationStringGrid getStringGridByIndex(int name) {
+        return new AutomationStringGrid(this.getControlByControlType(name, ControlTypeID.DataGridControlTypeId, "TAutomationStringGrid"), this.uiAuto);
     }
 }

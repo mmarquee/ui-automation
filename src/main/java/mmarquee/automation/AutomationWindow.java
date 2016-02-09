@@ -36,4 +36,10 @@ public class AutomationWindow extends AutomationContainer {
 
         return found;
     }
+
+    public AutomationMainMenu getMainMenu() {
+        IUIAutomationElement menu = this.getControlByControlType(0, ControlTypeID.MenuBarControlTypeId);
+
+        return (new AutomationMainMenu(menu, this.uiAuto));
+    }
 }

@@ -2,6 +2,8 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.ToggleState;
 
+import java.util.List;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -35,9 +37,24 @@ public class Main {
 
 		AutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
 		cb1.setText("Replacements");
-
 		String txt = cb1.text();
 
+//		AutomationComboBox cb0 = window.getComboboxByName("ComboBox1");
+//		List<AutomationListItem> items = cb0.getList();
+
 		String dummy = "";
+/*
+		AutomationButton button1 = window.getButtonByName("OK");
+		button1.click();
+
+		AutomationButton button2 = window.getButtonByName("Cancel");
+		button2.click();
+*/
+		// Now string grids
+		AutomationStringGrid grid = window.getStringGridByIndex(0);
+
+		AutomationStringGridItem item = grid.getItem(0,0);
+
+		String itemName = item.name();
 	}
 } 

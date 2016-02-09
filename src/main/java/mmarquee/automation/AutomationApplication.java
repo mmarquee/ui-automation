@@ -1,6 +1,7 @@
 package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.*;
+import com.sun.jna.*;
 
 /**
  * Created by inpwt on 26/01/2016.
@@ -11,6 +12,12 @@ public class AutomationApplication extends AutomationBase {
     public void waitWhileBusy() {
         //WaitForInputIdle(this.rocess, timeout);
         // Need to solve this !!!
+
+     //   com.sun.jna.win32;
+
+        //win32.User32.INSTANCE.WaitForInputIdle();
+
+        //com.sun.jna.
     }
 
     public AutomationWindow getWindow(String title) {
