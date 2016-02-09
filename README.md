@@ -6,7 +6,7 @@
 # License
 Apache Version 2.0 Copyright (C) 2016
 
-See LICECE.txt for details.
+See LICENCE.txt for details.
   
 # See also
 * [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation)
