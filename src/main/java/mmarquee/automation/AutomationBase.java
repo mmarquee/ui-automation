@@ -35,6 +35,10 @@ public class AutomationBase {
         return this.element.currentName();
     }
 
+    public void setName(String name) {
+        this.element.setName(name);
+    }
+
     protected IUIAutomationElementArray findAll() {
         return this.findAll(TreeScope.TreeScope_Children);
     }
@@ -57,74 +61,6 @@ public class AutomationBase {
         return collection;
     }
 
-    protected IUIAutomationSelectionItemPattern getSelectItemPattern() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.SelectionItemPatternId);
-
-        IUIAutomationSelectionItemPattern pattern = null;
-
-        if (unknown != null) {
-            IUIAutomationSelectionItemPattern selectItemPattern =
-                    unknown.queryInterface(IUIAutomationSelectionItemPattern.class);
-
-            if (selectItemPattern != null) {
-                pattern = selectItemPattern;
-            }
-        }
-
-        return pattern;
-    }
-
-    protected IUIAutomationSelectionPattern getSelectionPattern() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.SelectionPatternId);
-
-        IUIAutomationSelectionPattern pattern = null;
-
-        if (unknown != null) {
-            IUIAutomationSelectionPattern selectPattern =
-                    unknown.queryInterface(IUIAutomationSelectionPattern.class);
-
-            if (selectPattern != null) {
-                pattern = selectPattern;
-            }
-        }
-
-        return pattern;
-    }
-
-    protected IUIAutomationValuePattern getValuePattern() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);
-
-        IUIAutomationValuePattern valuePattern = null;
-
-        if (unknown != null) {
-            IUIAutomationValuePattern pattern =
-                    unknown.queryInterface(IUIAutomationValuePattern.class);
-
-            if (pattern != null) {
-                valuePattern = pattern;
-            }
-        }
-
-        return valuePattern;
-    }
-
-    protected IUIAutomationTablePattern getTablePattern() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.TablePatternId);
-
-        IUIAutomationTablePattern tablePattern = null;
-
-        if (unknown != null) {
-            IUIAutomationTablePattern pattern =
-                    unknown.queryInterface(IUIAutomationTablePattern.class);
-
-            if (pattern != null) {
-                tablePattern = pattern;
-            }
-        }
-
-        return tablePattern;
-    }
-
     private com4j.Com4jObject getPattern (int id) {
         com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
 
@@ -135,64 +71,55 @@ public class AutomationBase {
         }
     }
 
+    protected IUIAutomationSelectionItemPattern getSelectItemPattern() {
+        com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItemPatternId);
+
+        return unknown.queryInterface(IUIAutomationSelectionItemPattern.class);    }
+
+    protected IUIAutomationSelectionPattern getSelectionPattern() {
+        com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionPatternId);
+
+        return unknown.queryInterface(IUIAutomationSelectionPattern.class);
+    }
+
+    protected IUIAutomationValuePattern getValuePattern() {
+        com4j.Com4jObject unknown = this.getPattern(PatternID.ValuePatternId);
+
+        return unknown.queryInterface(IUIAutomationValuePattern.class);
+    }
+
+    protected IUIAutomationTablePattern getTablePattern() {
+        com4j.Com4jObject unknown = this.getPattern(PatternID.TablePatternId);
+
+        return unknown.queryInterface(IUIAutomationTablePattern.class);
+    }
+
     protected IUIAutomationWindowPattern getWindowPattern() {
-        com4j.Com4jObject unknown = getPattern(PatternID.WindowPatternId);
+        com4j.Com4jObject unknown = this.getPattern(PatternID.WindowPatternId);
 
         return unknown.queryInterface(IUIAutomationWindowPattern.class);
     }
 
     protected IUIAutomationExpandCollapsePattern getCollapsePattern() {
-        com4j.Com4jObject unknown = getPattern(PatternID.ExpandCollapsePatternId);
+        com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapsePatternId);
 
         return unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
     }
 
     protected IUIAutomationGridPattern getGridPattern() {
-        com4j.Com4jObject unknown = getPattern(PatternID.GridPatternId);
+        com4j.Com4jObject unknown = this.getPattern(PatternID.GridPatternId);
 
-        IUIAutomationGridPattern gridPattern = null;
-
-        IUIAutomationGridPattern pattern =
-                unknown.queryInterface(IUIAutomationGridPattern.class);
-
-        if (pattern != null) {
-            gridPattern = pattern;
-        }
-
-        return gridPattern;
+        return unknown.queryInterface(IUIAutomationGridPattern.class);
     }
 
     protected IUIAutomationTogglePattern getTogglePattern() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.TogglePatternId);
+        com4j.Com4jObject unknown = this.getPattern(PatternID.TogglePatternId);
 
-        IUIAutomationTogglePattern togglePattern = null;
-
-        if (unknown != null) {
-            IUIAutomationTogglePattern pattern =
-                    unknown.queryInterface(IUIAutomationTogglePattern.class);
-
-            if (pattern != null) {
-                togglePattern = pattern;
-            }
-        }
-
-        return togglePattern;
+        return unknown.queryInterface(IUIAutomationTogglePattern.class);
     }
 
     protected IUIAutomationInvokePattern getInvokePattern() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.InvokePatternId);
-
-        IUIAutomationInvokePattern invokePattern = null;
-
-        if (unknown != null) {
-            IUIAutomationInvokePattern pattern =
-                    unknown.queryInterface(IUIAutomationInvokePattern.class);
-
-            if (pattern != null) {
-                invokePattern = pattern;
-            }
-        }
-
-        return invokePattern;
+        com4j.Com4jObject unknown = this.getPattern(PatternID.InvokePatternId);
+        return unknown.queryInterface(IUIAutomationInvokePattern.class);
     }
 }

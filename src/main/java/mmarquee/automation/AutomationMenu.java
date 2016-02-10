@@ -16,8 +16,14 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+
 /**
  * Created by inpwt on 09/02/2016.
  */
-public class AutomationMenu  {
+public class AutomationMenu extends AutomationBase {
+    public AutomationMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
+    }
 }

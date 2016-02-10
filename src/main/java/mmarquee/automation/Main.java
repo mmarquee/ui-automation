@@ -70,5 +70,6 @@ public class Main {
 		AutomationStringGridItem item = grid.getItem(0,0);
 
 		String itemName = item.name();
+		item.setName("This");
 	}
 } 
