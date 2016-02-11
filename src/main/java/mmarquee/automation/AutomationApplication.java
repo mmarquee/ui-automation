@@ -17,7 +17,7 @@
 package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.*;
-import com.sun.jna.*;
+import com.sun.jna.platform.win32.User32.*;
 
 /**
  * Created by inpwt on 26/01/2016.
@@ -32,6 +32,12 @@ public class AutomationApplication extends AutomationBase {
      //   com.sun.jna.win32;
 
         //win32.User32.INSTANCE.WaitForInputIdle();
+
+
+     ///   WaitForInputIdle();
+
+
+        //win32.User32.WaitForInputIdle();
 
         //com.sun.jna.
     }
