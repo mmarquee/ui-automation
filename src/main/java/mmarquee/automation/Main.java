@@ -25,7 +25,8 @@ public class Main {
 
 		AutomationApplication application = automation.launch("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
 
-		application.waitForInputIdle();
+		// Wait for the process to start
+		application.waitForInputIdle(5000);
 
 		AutomationWindow window = automation.getDesktopWindow("Form1");
 		String name = window.name();

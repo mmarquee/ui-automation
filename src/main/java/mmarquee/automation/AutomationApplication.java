@@ -16,30 +16,21 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.*;
+import com.sun.jna.*;
 import mmarquee.automation.uiautomation.*;
-import com.sun.jna.platform.win32.User32.*;
+import java.lang.reflect.Field;
 
 /**
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationApplication extends AutomationBase {
     private Process process;
+    private final User32 user32 = User32.INSTANCE;
+    private WinNT.HANDLE handle = new WinNT.HANDLE();
 
-    public void waitForInputIdle() {
-        //WaitForInputIdle(this.rocess, timeout);
-        // Need to solve this !!!
-
-     //   com.sun.jna.win32;
-
-        //win32.User32.INSTANCE.WaitForInputIdle();
-
-
-     ///   WaitForInputIdle();
-
-
-        //win32.User32.WaitForInputIdle();
-
-        //com.sun.jna.
+    public void waitForInputIdle(int timeout) {
+        user32.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
     }
 
     public AutomationWindow getWindow(String title) {
@@ -64,5 +55,19 @@ public class AutomationApplication extends AutomationBase {
     public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {
         super(element, uiAuto);
         this.process = process;
+
+        // From : http://www.golesny.de/p/code/javagetpid.
+
+        if (this.process.getClass().getName().equals("java.lang.Wind32Process") ||
+                this.process.getClass().getName().equals("java.lang.ProcessImpl")) {
+            try {
+                Field f = this.process.getClass().getDeclaredField("handle");
+                f.setAccessible(true);
+                long handl = f.getLong(this.process);
+                this.handle.setPointer(Pointer.createConstant(handl));
+            } catch (Throwable e) {
+              // Handle the error nicely
+            }
+        }
     }
 }

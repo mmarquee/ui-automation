@@ -50,6 +50,26 @@ public class UIAutomation {
         return new AutomationApplication(rootElement, uiAuto, process);
     }
 
+    public AutomationApplication attach(Process process) {
+        return new AutomationApplication(rootElement, uiAuto, process);
+    }
+
+    public AutomationApplication launchOrAttach(String... command) {
+
+        // 1. Try and find in the list of processes
+        // 2. If not found launch
+
+    //    if () {
+
+      //      // Now attach to the process
+      //      this.attach(proc);
+      //  } else {
+      //      return this.launch(command);
+      //  }
+
+        return this.launch(command);
+    }
+
     public AutomationWindow getDesktopWindow(String title) {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
