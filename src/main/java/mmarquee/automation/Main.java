@@ -23,7 +23,7 @@ public class Main {
 	public static void main(String[] args) {
 		UIAutomation automation = new UIAutomation();
 
-		AutomationApplication application = automation.launch("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
+		AutomationApplication application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
 
 		// Wait for the process to start
 		application.waitForInputIdle(5000);
