@@ -71,55 +71,120 @@ public class AutomationBase {
         }
     }
 
+    /**
+     * <p>
+     * Gets the selectItem pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
+     */
     protected IUIAutomationSelectionItemPattern getSelectItemPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItemPatternId);
 
         return unknown.queryInterface(IUIAutomationSelectionItemPattern.class);    }
 
+    /**
+     * <p>
+     * Gets the selection pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationSelectionPattern associated with this control
+     */
     protected IUIAutomationSelectionPattern getSelectionPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionPatternId);
 
         return unknown.queryInterface(IUIAutomationSelectionPattern.class);
     }
 
+    /**
+     * <p>
+     * Gets the value pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationValuePattern associated with this control
+     */
     protected IUIAutomationValuePattern getValuePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.ValuePatternId);
 
         return unknown.queryInterface(IUIAutomationValuePattern.class);
     }
 
+    /**
+     * <p>
+     * Gets the table pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationTablePattern associated with this control
+     */
     protected IUIAutomationTablePattern getTablePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.TablePatternId);
 
         return unknown.queryInterface(IUIAutomationTablePattern.class);
     }
 
+    /**
+     * <p>
+     * Gets the window pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationWindowPattern associated with this control
+     */
     protected IUIAutomationWindowPattern getWindowPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.WindowPatternId);
 
         return unknown.queryInterface(IUIAutomationWindowPattern.class);
     }
 
-    protected IUIAutomationExpandCollapsePattern getCollapsePattern() {
+    /**
+     * <p>
+     * Gets the expand/collapse pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
+     */
+    protected IUIAutomationExpandCollapsePattern getExpandCollapsePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapsePatternId);
 
         return unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
     }
 
+    /**
+     * <p>
+     * Gets the grid pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationGridPattern associated with this control
+     */
     protected IUIAutomationGridPattern getGridPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.GridPatternId);
 
         return unknown.queryInterface(IUIAutomationGridPattern.class);
     }
 
+    /**
+     * <p>
+     * Gets the toggle pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationTogglePattern associated with this control
+     */
     protected IUIAutomationTogglePattern getTogglePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.TogglePatternId);
 
         return unknown.queryInterface(IUIAutomationTogglePattern.class);
     }
 
+    /**
+     * <p>
+     * Gets the involes pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationInvokePattern associated with this control
+     */
     protected IUIAutomationInvokePattern getInvokePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.InvokePatternId);
         return unknown.queryInterface(IUIAutomationInvokePattern.class);
+    }
+
+    /**
+     * <p>
+     * Gets the text pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationTextPattern associated with this control
+     */
+    protected IUIAutomationTextPattern getTextPattern() {
+        com4j.Com4jObject unknown = this.getPattern(PatternID.TextPatternId);
+        return unknown.queryInterface(IUIAutomationTextPattern.class);
     }
 }

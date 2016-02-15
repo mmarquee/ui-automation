@@ -31,10 +31,20 @@ public class AutomationButton extends AutomationBase {
         this.invokePattern = this.getInvokePattern();
     }
 
+    /**
+     * <p>
+     * Invokes the click event for this control
+     * </p>
+     */
     public void click() {
         this.invokePattern.invoke();
     }
 
+    /**
+     * <p>
+     * Sets the focus to this control
+     * </p>
+     */
     public void focus() {
         this.element.setFocus();
     }

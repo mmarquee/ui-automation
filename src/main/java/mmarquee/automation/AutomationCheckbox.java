@@ -25,10 +25,20 @@ public class AutomationCheckbox extends AutomationBase {
 
     private IUIAutomationTogglePattern togglePattern;
 
+    /**
+     * <p>
+     * Invokes the toggle event for this control
+     * </p>
+     */
     public void toggle () {
         this.togglePattern.toggle();
     }
 
+    /**
+     * <p>
+     * Gets the toggle state of this control
+     * </p>
+     */
     public ToggleState getToggleState () {
         return this.togglePattern.currentToggleState();
     }

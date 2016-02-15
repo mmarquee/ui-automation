@@ -46,6 +46,7 @@ public class AutomationApplication extends AutomationBase {
             String name = element.currentName();
             if (name.equals(title)){
                 foundElement = element;
+                break;
             }
         }
 

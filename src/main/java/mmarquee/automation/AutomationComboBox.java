@@ -29,7 +29,7 @@ public class AutomationComboBox extends AutomationBase {
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
-        this.collapsePattern = this.getCollapsePattern();
+        this.collapsePattern = this.getExpandCollapsePattern();
     }
 
     public String text() {

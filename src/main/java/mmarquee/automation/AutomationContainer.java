@@ -45,6 +45,7 @@ public class AutomationContainer extends AutomationBase {
             if (retVal == id)  {
                 if (counter == index) {
                     foundElement = element;
+                    break;
                 } else {
                     counter++;
                 }
@@ -73,6 +74,7 @@ public class AutomationContainer extends AutomationBase {
             if (cName.equals(controlName)) {
                 if (counter == index) {
                     foundElement = element;
+                    break;
                 } else {
                     counter++;
                 }
@@ -99,6 +101,7 @@ public class AutomationContainer extends AutomationBase {
             if (retVal == id)  {
                 if (elementName.equals(name)) {
                     foundElement = element;
+                    break;
                 }
             }
         }
@@ -116,6 +119,14 @@ public class AutomationContainer extends AutomationBase {
 
     public AutomationEditBox getEditBoxByIndex(int index) {
         return new AutomationEditBox(this.getControlByControlType(index, ControlTypeID.EditControlTypeId), this.uiAuto);
+    }
+
+    public AutomationSlider getSliderByName(String name) {
+        return new AutomationSlider(this.getControlByControlType(name, ControlTypeID.SliderControlTypeId), this.uiAuto);
+    }
+
+    public AutomationMaskedEdit getMaskedEditByIndex(int index) {
+        return new AutomationMaskedEdit(this.getControlByControlType(index, ControlTypeID.EditControlTypeId), this.uiAuto);
     }
 
     public AutomationRadioButton getRadioButtonByIndex(int index) {
@@ -136,5 +147,9 @@ public class AutomationContainer extends AutomationBase {
 
     public AutomationStringGrid getStringGridByIndex(int name) {
         return new AutomationStringGrid(this.getControlByControlType(name, ControlTypeID.DataGridControlTypeId, "TAutomationStringGrid"), this.uiAuto);
+    }
+
+    public AutomationHyperlink getHyperlinkByName(int name) {
+        return new AutomationHyperlink((this.getControlByControlType(name, ControlTypeID.HyperlinkControlType)), this.uiAuto);
     }
 }
