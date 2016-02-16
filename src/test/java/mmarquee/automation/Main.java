@@ -47,8 +47,8 @@ public class Main {
 		radio.selectItem();
 
 		AutomationStatusBar statusbar = window.getStatusBar();
-		String eb0Text = statusbar.getTextBoxByIndex(0).getValue();
-		String eb1Text = statusbar.getTextBoxByIndex(1).getValue();
+	//	String eb0Text = statusbar.getTextBoxByIndex(0).getValue();
+	//	String eb1Text = statusbar.getTextBoxByIndex(1).getValue();
 
 		AutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
 		cb1.setText("Replacements");

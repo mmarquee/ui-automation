@@ -26,6 +26,7 @@ public class AutomationTextBox extends AutomationBase {
 
     public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+
         this.valuePattern = this.getValuePattern();
     }
 
