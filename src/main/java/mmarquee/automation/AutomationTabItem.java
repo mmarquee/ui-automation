@@ -31,6 +31,9 @@ public class AutomationTabItem extends AutomationBase {
         selectItemPattern = this.getSelectItemPattern();
     }
 
+    /**
+     * Selects this item
+     */
     public void selectItem() {
         this.selectItemPattern.select();
     }

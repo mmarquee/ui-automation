@@ -29,10 +29,19 @@ public class AutomationApplication extends AutomationBase {
     private final User32 user32 = User32.INSTANCE;
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
+    /**
+     * Waits for the application to accept input, i.e. not be idle
+     * @param timeout
+     */
     public void waitForInputIdle(int timeout) {
         user32.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
     }
 
+    /**
+     * Gets the window associated with the title
+     * @param title The title to look for
+     * @return An AutomationWindow
+     */
     public AutomationWindow getWindow(String title) {
 
         IUIAutomationElement foundElement = null;
@@ -53,6 +62,12 @@ public class AutomationApplication extends AutomationBase {
         return new AutomationWindow(foundElement, this.uiAuto);
     }
 
+    /**
+     * Constructor for the AutomationApplication.
+     * @param element The underlying automation element
+     * @param uiAuto The IUIAutomation associated with this session
+     * @param process The process for this application.
+     */
     public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {
         super(element, uiAuto);
         this.process = process;

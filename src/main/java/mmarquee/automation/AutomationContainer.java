@@ -109,47 +109,111 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
+    /**
+     * Gets the checkbox associated with the given index
+     * @param index Index of the control
+     * @return AutomationCheckbox that represents the found control
+     */
     public AutomationCheckbox getCheckboxByIndex(int index) {
         return new AutomationCheckbox(this.getControlByControlType(index, ControlTypeID.CheckBoxControlTypeId), this.uiAuto);
     }
 
+    /**
+     * Gets the Tab control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
     public AutomationTab getTabByIndex(int index){
         return new AutomationTab(this.getControlByControlType(index, ControlTypeID.TabControlTypeId), this.uiAuto);
     }
 
+    /**
+     * Gets the Editbox control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
     public AutomationEditBox getEditBoxByIndex(int index) {
         return new AutomationEditBox(this.getControlByControlType(index, ControlTypeID.EditControlTypeId), this.uiAuto);
     }
 
-    public AutomationSlider getSliderByName(String name) {
-        return new AutomationSlider(this.getControlByControlType(name, ControlTypeID.SliderControlTypeId), this.uiAuto);
+    /**
+     * Gets the slider control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationSlider getSliderByName(int index) {
+        return new AutomationSlider(this.getControlByControlType(index, ControlTypeID.SliderControlTypeId), this.uiAuto);
     }
 
+    /**
+     * Gets the (JHC) Masked Edit control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
     public AutomationMaskedEdit getMaskedEditByIndex(int index) {
-        return new AutomationMaskedEdit(this.getControlByControlType(index, ControlTypeID.EditControlTypeId), this.uiAuto);
+        return new AutomationMaskedEdit(this.getControlByControlType(index, ControlTypeID.EditControlTypeId, "TAutomationMaskEdit"), this.uiAuto);
     }
 
+    /**
+     * Gets the radio button control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
     public AutomationRadioButton getRadioButtonByIndex(int index) {
         return new AutomationRadioButton(this.getControlByControlType(index, ControlTypeID.RadioButtonControlTypeId), this.uiAuto);
     }
 
+    /**
+     * Gets the text box control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
     public AutomationTextBox getTextBoxByIndex(int index) {
         return new AutomationTextBox(this.getControlByControlType(index, ControlTypeID.TextControlTypeId), this.uiAuto);
     }
 
+    /**
+     * Gets the combobox control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     */
     public AutomationComboBox getComboboxByName(String name) {
         return new AutomationComboBox(this.getControlByControlType(name, ControlTypeID.ComboBoxControlTypeId), this.uiAuto);
     }
 
+    /**
+     * Gets the button control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     */
     public AutomationButton getButtonByName(String name) {
         return new AutomationButton(this.getControlByControlType(name, ControlTypeID.ButtonControlTypeId), this.uiAuto);
     }
 
-    public AutomationStringGrid getStringGridByIndex(int name) {
-        return new AutomationStringGrid(this.getControlByControlType(name, ControlTypeID.DataGridControlTypeId, "TAutomationStringGrid"), this.uiAuto);
+    /**
+     * Gets the (JHC) String Grid control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationStringGrid getStringGridByIndex(int index) {
+        return new AutomationStringGrid(this.getControlByControlType(index, ControlTypeID.DataGridControlTypeId, "TAutomationStringGrid"), this.uiAuto);
     }
 
-    public AutomationHyperlink getHyperlinkByName(int name) {
-        return new AutomationHyperlink((this.getControlByControlType(name, ControlTypeID.HyperlinkControlType)), this.uiAuto);
+    /**
+     * Gets the hyperlink control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationHyperlink getHyperlinkByName(int index) {
+        return new AutomationHyperlink((this.getControlByControlType(index, ControlTypeID.HyperlinkControlTypeId)), this.uiAuto);
+    }
+
+    /**
+     * Gets the calendar control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationCalendar getCalendarByName (int index) {
+        return new AutomationCalendar((this.getControlByControlType(index, ControlTypeID.CalendarControlTypeId)), this.uiAuto);
     }
 }

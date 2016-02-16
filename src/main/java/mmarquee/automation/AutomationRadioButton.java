@@ -31,6 +31,9 @@ public class AutomationRadioButton extends AutomationBase {
         selectItemPattern = this.getSelectItemPattern();
     }
 
+    /**
+     * Selects this element
+     */
     public void selectItem() {
         this.selectItemPattern.select();
     }

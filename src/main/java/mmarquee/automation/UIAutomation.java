@@ -23,6 +23,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.win32.W32APIOptions;
 import com.sun.jna.Native;
 import mmarquee.automation.uiautomation.*;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,9 +63,8 @@ public class UIAutomation {
     }
 
     public AutomationApplication launchOrAttach(String... command) {
-
-        // 1. Try and find in the list of processes
-        // 2. If not found launch
+        File file = new File(command[0]);
+        String filename = file.getName();
 
         Kernel32 kernel32 = (Kernel32) Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
         Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
@@ -74,12 +75,10 @@ public class UIAutomation {
 
         try {
             while (kernel32.Process32Next(snapshot, processEntry)) {
-                String filename = Native.toString(processEntry.szExeFile);
+                String fname = Native.toString(processEntry.szExeFile);
 
-                // need to truncate the incoming filename
-                if (filename.equals(command)) {
+                if (fname.equals(filename)) {
                  //   Process process = new Process();
-                    // This is going to fail
                     found = true;
                     return new AutomationApplication(rootElement, uiAuto, process);
                 }
@@ -87,14 +86,6 @@ public class UIAutomation {
         } finally {
             kernel32.CloseHandle(snapshot);
         }
-
-    //    if () {
-
-      //      // Now attach to the process
-      //      this.attach(proc);
-      //  } else {
-      //      return this.launch(command);
-      //  }
 
         if (!found) {
             return this.launch(command);

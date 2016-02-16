@@ -24,7 +24,12 @@ import mmarquee.automation.uiautomation.*;
 public class AutomationEditBox extends AutomationBase {
 
     private IUIAutomationValuePattern valuePattern;
-    public String text() {
+
+    /**
+     * Gets the value of the control
+     * @return
+     */
+    public String getValue() {
         return valuePattern.currentValue();
     }
 

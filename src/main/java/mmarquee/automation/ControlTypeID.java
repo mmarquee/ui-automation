@@ -26,7 +26,7 @@ public final class ControlTypeID {
     public static final int CheckBoxControlTypeId = 50002;
     public static final int ComboBoxControlTypeId = 50003;
     public static final int EditControlTypeId = 50004;
-    public static final int HyperlinkControlType = 50005;
+    public static final int HyperlinkControlTypeId = 50005;
     public static final int ImageControlTypeId = 50006;
     public static final int ListItemControlTypeId = 50007;
     public static final int ListControlTypeId = 50008;

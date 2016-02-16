@@ -25,53 +25,49 @@ import java.util.List;
  */
 public class AutomationComboBox extends AutomationBase {
     private IUIAutomationExpandCollapsePattern collapsePattern;
+    private IUIAutomationValuePattern valuePattern;
 
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
         this.collapsePattern = this.getExpandCollapsePattern();
+        this.valuePattern = this.getValuePattern();
     }
 
+    /**
+     * Gets the text associated with this element
+     * @return The current value
+     */
     public String text() {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);
-
-        String value = "";
-
-        if (unknown != null) {
-            IUIAutomationValuePattern pattern =
-                    unknown.queryInterface(IUIAutomationValuePattern.class);
-
-            if (pattern != null) {
-                value = pattern.currentValue();
-            }
-        }
-
-        return value;
+        return valuePattern.currentValue();
     }
 
+    /**
+     * Sets the text associated with this element
+     * @param text The value to be set
+     */
     public void setText(String text) {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);
-
-        String value = "";
-
-        if (unknown != null) {
-            IUIAutomationValuePattern pattern =
-                    unknown.queryInterface(IUIAutomationValuePattern.class);
-
-            if (pattern != null) {
-                pattern.setValue(text);
-            }
-        }
+        valuePattern.setValue(text);
     }
 
+    /**
+     * Expands the element
+     */
     public void expand() {
         this.collapsePattern.expand();
     }
 
+    /**
+     * Collapses the element
+     */
     public void collapse() {
         this.collapsePattern.collapse();
     }
-    // just for a while, need to encapsulate the elements properly
+
+    /**
+     * Gets the list of items assoiated with this element.
+     * @return List of AutomationListItems
+     */
     public List<AutomationListItem> getList() {
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();

@@ -8,6 +8,11 @@ Tests and automation programs using ui-automation can be written with Java and u
 
 It provides a consistent object-oriented API, hiding the complexity of Microsoft's UIAutomation library and windows messages.
 
+## A bit of history
+The code here is used to test applications written in Delphi (specifically Delphi XE5), there are assumptions about the names of classes that have been created, in order to provide automation interfaces that are not part of the standard Delphi controls.
+
+The MS UIAutomation Library is a COM control, and the classes that represent this have been extracted using com4j.
+
 ## Getting started
 
 The ui-automation library is a wrapper for the UIAutomationClient library, which has been extracted using com4j. As the generated code is large and complex, this has been wrapped up in a number of classes, each providing classes that encapsulate part of this library (together with other utility methods as necessary).

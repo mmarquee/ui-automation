@@ -26,7 +26,6 @@ import java.util.List;
  */
 public class AutomationStringGrid extends AutomationBase
 {
-
     private IUIAutomationValuePattern valuePattern;
     private IUIAutomationGridPattern gridPattern;
     private IUIAutomationTablePattern tablePattern;
@@ -41,14 +40,26 @@ public class AutomationStringGrid extends AutomationBase
         this.selectionPattern = this.getSelectionPattern();
     }
 
-    public String value() {
+    /**
+     * Gets the text associated with the active cell of this element
+     * @return The value of the item
+     */
+    public String getValue() {
         return this.valuePattern.currentValue();
     }
 
+    /**
+     * Whether the grid is read only
+     * @return Read only?
+     */
     public boolean isReadOnly() {
         return this.valuePattern.currentIsReadOnly() == 1;
     }
 
+    /**
+     * Gets the selected item from the grid
+     * @return AutomationStringGridItem
+     */
     public AutomationStringGridItem selected() {
         IUIAutomationElementArray collection = selectionPattern.getCurrentSelection();
 
@@ -57,6 +68,10 @@ public class AutomationStringGrid extends AutomationBase
         return item;
     }
 
+    /**
+     * Gets the list of the column headers
+     * @return List of GridItems
+     */
     public List<AutomationStringGridItem> getColumnHeaders () {
 
         IUIAutomationElementArray collection = tablePattern.getCurrentColumnHeaders();
@@ -71,6 +86,12 @@ public class AutomationStringGrid extends AutomationBase
         return items;
     }
 
+    /**
+     * Gets the item associated with the given cell
+     * @param x X Offset
+     * @param y Y Offset
+     * @return The GridItem at the given cell position
+     */
     public AutomationStringGridItem getItem(int x, int y) {
         return new AutomationStringGridItem(this.gridPattern.getItem(x, y), uiAuto);
     }

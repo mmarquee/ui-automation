@@ -31,18 +31,35 @@ public class AutomationBase {
         this.uiAuto = uiAuto;
     }
 
+    /**
+     * Gets the name associated with this element
+     * @return The name of the element
+     */
     public String name () {
         return this.element.currentName();
     }
 
+    /**
+     * Sets the name of the element
+     * @param name The name to be set.
+     */
     public void setName(String name) {
         this.element.setName(name);
     }
 
+    /**
+     * Finds all of the elements that are associated with this element
+     * @return IUIAutomationElementArray
+     */
     protected IUIAutomationElementArray findAll() {
         return this.findAll(TreeScope.TreeScope_Children);
     }
 
+    /**
+     * Finds all of the elements that are associated with the given condition.
+     * @param scope The scope of where to look
+     * @return IUIAutomationElementArray
+     */
     protected IUIAutomationElementArray findAll(TreeScope scope) {
         IUIAutomationCondition condition = this.createTrueCondition();
 
@@ -51,10 +68,20 @@ public class AutomationBase {
         return collection;
     }
 
+    /**
+     * Creates a true condition
+     * @return The true condition
+     */
     protected IUIAutomationCondition createTrueCondition() {
         return uiAuto.createTrueCondition();
     }
 
+    /**
+     * Finds all of the elements that are associated with the given condition.
+     * @param scope The scope of where to look
+     * @param condition The condition to check
+     * @return IUIAutomationElementArray
+     */
     protected IUIAutomationElementArray findAll(TreeScope scope, IUIAutomationCondition condition) {
         IUIAutomationElementArray collection = this.element.findAll(scope, condition);
 

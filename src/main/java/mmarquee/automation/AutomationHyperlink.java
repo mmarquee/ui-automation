@@ -26,7 +26,9 @@ public class AutomationHyperlink extends AutomationBase {
         super(element, uiAuto);
     }
 
+    /**
+     * Fires the click event associated with this element.
+     */
     public void click() {
-
     }
 }

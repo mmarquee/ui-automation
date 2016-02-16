@@ -25,6 +25,9 @@ public class AutomationWindow extends AutomationContainer {
 
     private IUIAutomationWindowPattern windowPattern;
 
+    /**
+     * Focuses this control.
+     */
     public void focus() {
         this.element.setFocus();
     }
@@ -35,6 +38,10 @@ public class AutomationWindow extends AutomationContainer {
         this.windowPattern = this.getWindowPattern();
     }
 
+    /**
+     * Gets the statusbar associated with this window
+     * @return The statusbar
+     */
     public AutomationStatusBar getStatusBar() {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
@@ -57,12 +64,20 @@ public class AutomationWindow extends AutomationContainer {
         return found;
     }
 
+    /**
+     * Gets the main menu associated with this window
+     * @return The main menu
+     */
     public AutomationMainMenu getMainMenu() {
         IUIAutomationElement menu = this.getControlByControlType(0, ControlTypeID.MenuBarControlTypeId);
 
         return (new AutomationMainMenu(menu, this.uiAuto));
     }
 
+    /**
+     * Waits for this window to become idle.
+     * @param timeout The timeout
+     */
     public void waitForInputIdle(int timeout) {
         this.windowPattern.waitForInputIdle(timeout);
     }

@@ -36,7 +36,7 @@ public class Main {
 		tab.selectTabPage("Last Tab");
 	//	String tabName = tab.name();
 
-		String text = tab.getEditBoxByIndex(0).text();
+		String text = tab.getEditBoxByIndex(0).getValue();
 
 		AutomationCheckbox check = window.getCheckboxByIndex(0);
 		check.toggle();
@@ -47,8 +47,8 @@ public class Main {
 		radio.selectItem();
 
 		AutomationStatusBar statusbar = window.getStatusBar();
-		String eb0Text = statusbar.getTextBoxByIndex(0).text();
-		String eb1Text = statusbar.getTextBoxByIndex(1).text();
+		String eb0Text = statusbar.getTextBoxByIndex(0).getValue();
+		String eb1Text = statusbar.getTextBoxByIndex(1).getValue();
 
 		AutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
 		cb1.setText("Replacements");

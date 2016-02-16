@@ -22,25 +22,18 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationTextBox extends AutomationBase {
+    private IUIAutomationValuePattern valuePattern;
+
     public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+        this.valuePattern = this.getValuePattern();
     }
 
-    public String text() {
-        //return this.name();
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(PatternID.ValuePatternId);
-
-        String value = "";
-
-        if (unknown != null) {
-            IUIAutomationValuePattern pattern =
-                    unknown.queryInterface(IUIAutomationValuePattern.class);
-
-            if (pattern != null) {
-                value = pattern.currentValue();
-            }
-        }
-
-        return value;
+    /**
+     * Gets the text associated with this element
+     * @return The current text
+     */
+    public String getValue() {
+        return valuePattern.currentValue();
     }
 }

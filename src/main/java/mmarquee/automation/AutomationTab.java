@@ -28,6 +28,10 @@ public class AutomationTab extends AutomationContainer {
 
     private List<AutomationTabItem> tabItems;
 
+    /**
+     * Selects the tab with the given name
+     * @param name The name of the tab to select
+     */
     public void selectTabPage(String name) {
         for (int count = 0; count < this.tabItems.size(); count++) {
             if (name.equals(this.tabItems.get(count).name())) {
