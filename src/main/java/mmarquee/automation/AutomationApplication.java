@@ -66,6 +66,17 @@ public class AutomationApplication extends AutomationBase {
      * Constructor for the AutomationApplication.
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
+     * @param handle The handle of this application.
+     */
+    public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, WinNT.HANDLE handle) {
+        super(element, uiAuto);
+        this.handle = handle;
+    }
+
+    /**
+     * Constructor for the AutomationApplication.
+     * @param element The underlying automation element
+     * @param uiAuto The IUIAutomation associated with this session
      * @param process The process for this application.
      */
     public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {

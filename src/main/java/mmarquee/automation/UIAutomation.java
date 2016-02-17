@@ -34,9 +34,7 @@ import java.util.List;
 public class UIAutomation {
 
     private IUIAutomationElement rootElement;
-
     private IUIAutomation uiAuto;
-
     private Process process;
 
     public UIAutomation() {
@@ -46,6 +44,11 @@ public class UIAutomation {
         rootElement = uiAuto.getRootElement();
     }
 
+    /**
+     * Launches the application
+     * @param command The command to be called
+     * @return AutomationApplication that represents the application
+     */
     public AutomationApplication launch(String... command) {
         ProcessBuilder pb = new ProcessBuilder(command);
 
@@ -58,10 +61,20 @@ public class UIAutomation {
         return new AutomationApplication(rootElement, uiAuto, process);
     }
 
+    /**
+     * Attaches to the application process
+     * @param process Process to attach to
+     * @return AutomationApplication that represents the application
+     */
     public AutomationApplication attach(Process process) {
         return new AutomationApplication(rootElement, uiAuto, process);
     }
 
+    /**
+     * Attachs or launches the application
+     * @param command Command to be started
+     * @return AutomationApplication that represents the application
+     */
     public AutomationApplication launchOrAttach(String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
@@ -78,9 +91,8 @@ public class UIAutomation {
                 String fname = Native.toString(processEntry.szExeFile);
 
                 if (fname.equals(filename)) {
-                 //   Process process = new Process();
                     found = true;
-                    return new AutomationApplication(rootElement, uiAuto, process);
+                    break;
                 }
             }
         } finally {
@@ -90,10 +102,15 @@ public class UIAutomation {
         if (!found) {
             return this.launch(command);
         } else {
-            return null;  // Should never get here
+            return new AutomationApplication(rootElement, uiAuto, new WinNT.HANDLE(processEntry.th32ProcessID));
         }
     }
 
+    /**
+     * Gets the desktop window associated with the title
+     * @param title Title to search for
+     * @return AutomationWindow The found window
+     */
     public AutomationWindow getDesktopWindow(String title) {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
@@ -117,6 +134,10 @@ public class UIAutomation {
         return foundElement;
     }
 
+    /**
+     * Gets the list of desktop windows
+     * @return List of desktop windows
+     */
     public List<AutomationWindow> getDesktopWindows() {
 
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
