@@ -16,11 +16,9 @@
 
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.Kernel32;
-import com.sun.jna.platform.win32.Tlhelp32;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.win32.W32APIOptions;
+import com.sun.jna.Pointer;
 import com.sun.jna.Native;
 import mmarquee.automation.uiautomation.*;
 
@@ -75,12 +73,12 @@ public class UIAutomation {
      * @param command Command to be started
      * @return AutomationApplication that represents the application
      */
-    public AutomationApplication launchOrAttach(String... command) {
+    public AutomationApplication launchOrAttach(String... command) throws Exception {
         File file = new File(command[0]);
         String filename = file.getName();
 
         Kernel32 kernel32 = (Kernel32) Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
-        Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
 
         WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
 
@@ -102,7 +100,19 @@ public class UIAutomation {
         if (!found) {
             return this.launch(command);
         } else {
-            return new AutomationApplication(rootElement, uiAuto, new WinNT.HANDLE(processEntry.th32ProcessID));
+            WinNT.HANDLE handle = Kernel32.INSTANCE.OpenProcess (
+                0x0400| /* PROCESS_QUERY_INFORMATION */
+                0x0800| /* PROCESS_SUSPEND_RESUME */
+                0x0001| /* PROCESS_TERMINATE */
+                0x00100000 /* SYNCHRONIZE */,
+                false,
+                processEntry.th32ProcessID.intValue());
+
+            if (handle == null) {
+                throw new Exception(Kernel32Util.formatMessageFromLastErrorCode(Kernel32.INSTANCE.GetLastError()));
+            }
+
+            return new AutomationApplication(rootElement, uiAuto, handle);
         }
     }
 

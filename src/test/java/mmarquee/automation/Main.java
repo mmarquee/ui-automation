@@ -18,12 +18,20 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.ToggleState;
 
+import java.util.List;
+
 public class Main {
 
 	public static void main(String[] args) {
 		UIAutomation automation = new UIAutomation();
 
-		AutomationApplication application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
+		AutomationApplication application = null;
+
+		try {
+			application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
+		} catch (Throwable ex) {
+			// Smother
+		}
 
 		// Wait for the process to start
 		application.waitForInputIdle(5000);
@@ -54,8 +62,8 @@ public class Main {
 		cb1.setText("Replacements");
 		String txt = cb1.text();
 
-//		AutomationComboBox cb0 = window.getComboboxByName("ComboBox1");
-//		List<AutomationListItem> items = cb0.getList();
+		AutomationComboBox cb0 = window.getComboboxByName("AutomatedComboBox2");
+		List<AutomationListItem> items = cb0.getList();
 
 		String dummy = "";
 /*

@@ -25,7 +25,7 @@ import java.lang.reflect.Field;
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationApplication extends AutomationBase {
-    private Process process;
+   // private Process process;
     private final User32 user32 = User32.INSTANCE;
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
@@ -81,16 +81,16 @@ public class AutomationApplication extends AutomationBase {
      */
     public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {
         super(element, uiAuto);
-        this.process = process;
+     //   this.process = process;
 
         // From : http://www.golesny.de/p/code/javagetpid.
 
-        if (this.process.getClass().getName().equals("java.lang.Wind32Process") ||
-                this.process.getClass().getName().equals("java.lang.ProcessImpl")) {
+        if (process.getClass().getName().equals("java.lang.Wind32Process") ||
+                process.getClass().getName().equals("java.lang.ProcessImpl")) {
             try {
-                Field f = this.process.getClass().getDeclaredField("handle");
+                Field f = process.getClass().getDeclaredField("handle");
                 f.setAccessible(true);
-                long handl = f.getLong(this.process);
+                long handl = f.getLong(process);
                 this.handle.setPointer(Pointer.createConstant(handl));
             } catch (Throwable e) {
               // Handle the error nicely
