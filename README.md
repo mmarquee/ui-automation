@@ -22,15 +22,13 @@ The ui-automation library is a wrapper for the UIAutomationClient library, which
 The AutomationApplication class provides functionality to start and attach to an application. There are 3 class methods provided to do this.
 
 * Launch - this will launch the application supplied, and pass in any supplied arguments
-* Attach(*) - this will attach to an already launched application, based on the executable name
-* LaunchOrAttach(*) - this will either attach to an already launched application, or launch the application.
+* Attach - this will attach to an already launched application, based on the executable name
+* LaunchOrAttach - this will either attach to an already launched application, or launch the application.
 
-(*) Not yet implemented
-
-The snippet below will check launch Project1.exe.
+The snippet below will check whether Project1.exe is running, attaching to it if it is, or launch it if not.
 
 ```java
-  AutomationApplication application = automation.launch("...\\Project1.exe");
+  AutomationApplication application = automation.launchOrAttach("...\\Project1.exe");
 ```
 
 ### Getting hold of a window
