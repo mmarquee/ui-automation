@@ -58,12 +58,12 @@ public class Main {
 	//	String eb0Text = statusbar.getTextBoxByIndex(0).getValue();
 	//	String eb1Text = statusbar.getTextBoxByIndex(1).getValue();
 
-		AutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
-		cb1.setText("Replacements");
-		String txt = cb1.text();
+	AutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
+    cb1.setText("Replacements");
+	String txt = cb1.text();
 
-		AutomationComboBox cb0 = window.getComboboxByName("AutomatedComboBox2");
-		List<AutomationListItem> items = cb0.getList();
+	AutomationComboBox cb0 = window.getComboboxByName("AutomatedCombobox2");
+	List<AutomationListItem> items = cb0.getList();
 
 		String dummy = "";
 /*
