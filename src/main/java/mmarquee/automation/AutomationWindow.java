@@ -65,11 +65,20 @@ public class AutomationWindow extends AutomationContainer {
     }
 
     /**
+     * Gets the system menu associated with this window
+     * @return The system menu
+     */
+    public AutomationSystemMenu getSystemMenu() {
+        IUIAutomationElement menu = this.getControlByControlType(0, ControlTypeID.MenuBarControlTypeId);
+        return (new AutomationSystemMenu(menu, this.uiAuto));
+    }
+
+    /**
      * Gets the main menu associated with this window
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        IUIAutomationElement menu = this.getControlByControlType(0, ControlTypeID.MenuBarControlTypeId);
+        IUIAutomationElement menu = this.getControlByControlType(1, ControlTypeID.MenuBarControlTypeId);
 
         return (new AutomationMainMenu(menu, this.uiAuto));
     }

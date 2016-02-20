@@ -19,20 +19,11 @@ package mmarquee.automation;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 10/02/2016.
+ * Created by inpwt on 20/02/2016.
  */
-public class AutomationMenuItem extends AutomationBase {
-    private IUIAutomationInvokePattern invokePattern;
+public class AutomationTreeView extends AutomationBase {
 
-    public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationTreeView(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-        this.invokePattern = this.getInvokePattern();
-    }
-
-    /**
-     * Invoke the click pattern for the menu item
-     */
-    public void click() {
-        this.invokePattern.invoke();;
     }
 }

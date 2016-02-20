@@ -40,6 +40,18 @@ public class Main {
 		String name = window.name();
 	//	window.focus();
 
+//		AutomationSystemMenu menu = window.getSystemMenu();
+//		AutomationMenuItem maximise = menu.getItem("Maximise");
+
+		AutomationMainMenu menu = window.getMainMenu();
+		//menu.expand();
+		AutomationMenu file = menu.getMenu("File");
+		AutomationMenuItem exit = file.getMenuItem("Exit");
+		exit.click();
+
+		//AutomationMenuItem maximise = menu.getItem("Maximise");
+
+
 		AutomationTab tab = window.getTabByIndex(0);
 		tab.selectTabPage("Last Tab");
 	//	String tabName = tab.name();
@@ -80,5 +92,7 @@ public class Main {
 
 		String itemName = item.name();
 		item.setName("This");
+
+		AutomationTreeView tree = window.getTreeViewByIndex(0);
 	}
 } 

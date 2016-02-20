@@ -209,6 +209,15 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the treeview control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationTreeView getTreeViewByIndex(int index) {
+        return new AutomationTreeView((this.getControlByControlType(index, ControlTypeID.TreeControlTypeId)), this.uiAuto);
+    }
+
+    /**
      * Gets the calendar control associated with the given index
      * @param index Index of the control
      * @return The found control

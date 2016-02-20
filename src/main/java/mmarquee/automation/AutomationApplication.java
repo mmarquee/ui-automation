@@ -25,7 +25,6 @@ import java.lang.reflect.Field;
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationApplication extends AutomationBase {
-   // private Process process;
     private final User32 user32 = User32.INSTANCE;
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
@@ -81,8 +80,6 @@ public class AutomationApplication extends AutomationBase {
      */
     public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {
         super(element, uiAuto);
-     //   this.process = process;
-
         // From : http://www.golesny.de/p/code/javagetpid.
 
         if (process.getClass().getName().equals("java.lang.Wind32Process") ||

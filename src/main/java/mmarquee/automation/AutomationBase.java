@@ -72,10 +72,17 @@ public class AutomationBase {
      * Creates a true condition
      * @return The true condition
      */
-    protected IUIAutomationCondition createTrueCondition() {
+    public IUIAutomationCondition createTrueCondition() {
         return uiAuto.createTrueCondition();
     }
+/*
+    public IUIAutomationCondition createNameCondition(String name) {
+        //return uiAuto.createTrueCondition();
+     //   return new IUIAutomationPropertyCondition(IUIAutomationPropertyCondition.NameProperty, "File"))
 
+        return uiAuto.createPropertyCondition(, name);
+    }
+*/
     /**
      * Finds all of the elements that are associated with the given condition.
      * @param scope The scope of where to look

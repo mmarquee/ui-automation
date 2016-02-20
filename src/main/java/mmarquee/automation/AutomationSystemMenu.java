@@ -16,31 +16,31 @@
 
 package mmarquee.automation;
 
-
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 09/02/2016.
+ * Created by inpwt on 19/02/2016.
  */
-public class AutomationMainMenu extends AutomationBase {
-    public AutomationMainMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
+public class AutomationSystemMenu extends AutomationBase {
+
+    public AutomationSystemMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-//        this.getItems();
+        this.getItems();
     }
 
-    public AutomationMenu getMenu(String name) {
+    public AutomationMenuItem getItem(String name) {
+
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
         IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Children, condition);
+                this.element.findAll(TreeScope.TreeScope_Descendants, condition);
 
         int length = collection.length();
-
-        boolean found = false;
         IUIAutomationElement foundElement = null;
+        boolean found = false;
 
-        for (int count = 0; count < length; count++) {
+        for(int count = 0; count < length; count++) {
             IUIAutomationElement elem = collection.getElement(count);
             String eName = elem.currentName();
 
@@ -52,8 +52,9 @@ public class AutomationMainMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenu(foundElement, uiAuto);
+            return new AutomationMenuItem(foundElement, this.uiAuto);
         } else {
+            // Throw an exception
             return null;
         }
     }
@@ -71,3 +72,4 @@ public class AutomationMainMenu extends AutomationBase {
         String name = element.currentName();
     }
 }
+
