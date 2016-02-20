@@ -26,4 +26,13 @@ public class AutomationTreeView extends AutomationBase {
     public AutomationTreeView(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
+
+    public AutomationTreeViewItem getItem(String name) {
+        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
+                uiAuto.createAndCondition(
+                        uiAuto.createPropertyCondition(PropertyID.NamePropertyId, name),
+                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.TreeItemControlTypeId)));
+
+        return new AutomationTreeViewItem(item, this.uiAuto);
+    }
 }

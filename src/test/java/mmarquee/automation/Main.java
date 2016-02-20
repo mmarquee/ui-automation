@@ -43,11 +43,12 @@ public class Main {
 //		AutomationSystemMenu menu = window.getSystemMenu();
 //		AutomationMenuItem maximise = menu.getItem("Maximise");
 
-		AutomationMainMenu menu = window.getMainMenu();
+		// Interact with menus
+//		AutomationMainMenu menu = window.getMainMenu();
 		//menu.expand();
-		AutomationMenu file = menu.getMenu("File");
-		AutomationMenuItem exit = file.getMenuItem("Exit");
-		exit.click();
+//		AutomationMenu file = menu.getMenu("File");
+//		AutomationMenuItem exit = file.getMenuItem("Exit");
+//		exit.click();
 
 		//AutomationMenuItem maximise = menu.getItem("Maximise");
 
@@ -94,5 +95,7 @@ public class Main {
 		item.setName("This");
 
 		AutomationTreeView tree = window.getTreeViewByIndex(0);
+		AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
+		treeItem.select();
 	}
 } 
