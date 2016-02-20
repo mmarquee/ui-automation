@@ -27,6 +27,11 @@ public class AutomationTreeView extends AutomationBase {
         super(element, uiAuto);
     }
 
+    /**
+     * Gets the item that has the name
+     * @param name The name to look for
+     * @return The AutomationTreeViewItem
+     */
     public AutomationTreeViewItem getItem(String name) {
         IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
                 uiAuto.createAndCondition(

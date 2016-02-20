@@ -19,16 +19,17 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by inpwt on 09/02/2016.
  */
 public class AutomationMainMenu extends AutomationBase {
     public AutomationMainMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-
-//        this.getItems();
     }
-
+/*
     public AutomationMenu getMenu(String name) {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
@@ -57,17 +58,27 @@ public class AutomationMainMenu extends AutomationBase {
             return null;
         }
     }
+*/
 
-    private void getItems() {
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
+    public AutomationMenuItem getMenuItem (String name) {
+        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
+                uiAuto.createAndCondition(
+                        uiAuto.createPropertyCondition(PropertyID.NamePropertyId, name),
+                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId)));
 
-        IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Children, condition);
+        return new AutomationMenuItem(item, this.uiAuto);
+    }
 
-        int length = collection.length();
+    public List<AutomationMenuItem> getItems() {
+        IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Descendants,
+                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId));
 
-        IUIAutomationElement element = collection.getElement(0);
+        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
-        String name = element.currentName();
+        for(int count = 0; count < items.length(); count++) {
+            list.add(new AutomationMenuItem(items.getElement(count), uiAuto));
+        }
+
+        return list;
     }
 }

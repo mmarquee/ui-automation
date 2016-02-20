@@ -22,16 +22,47 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationMenuItem extends AutomationBase {
     private IUIAutomationInvokePattern invokePattern;
+    private IUIAutomationExpandCollapsePattern expandPattern;
 
     public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-        this.invokePattern = this.getInvokePattern();
+        try {
+            this.invokePattern = this.getInvokePattern();
+        } catch (Exception ex) {
+            // All is OK
+        }
+
+        try {
+            this.expandPattern = this.getExpandCollapsePattern();
+        } catch (Exception ex) {
+            // All is OK
+        }
+    }
+
+    /**
+     * Invoke the expand pattern for the menu item
+     */
+    public void expand() {
+        if (this.expandPattern != null) {
+            this.expandPattern.expand();
+        }
     }
 
     /**
      * Invoke the click pattern for the menu item
      */
     public void click() {
-        this.invokePattern.invoke();;
+        if (this.invokePattern != null) {
+            this.invokePattern.invoke();
+        }
+    }
+
+    public AutomationMenuItem getMenuItem (String name) {
+        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
+                uiAuto.createAndCondition(
+                        uiAuto.createPropertyCondition(PropertyID.NamePropertyId, name),
+                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId)));
+
+        return new AutomationMenuItem(item, this.uiAuto);
     }
 }

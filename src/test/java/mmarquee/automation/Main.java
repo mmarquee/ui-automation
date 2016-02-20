@@ -38,20 +38,25 @@ public class Main {
 
 		AutomationWindow window = automation.getDesktopWindow("Form1");
 		String name = window.name();
-	//	window.focus();
-
-//		AutomationSystemMenu menu = window.getSystemMenu();
-//		AutomationMenuItem maximise = menu.getItem("Maximise");
 
 		// Interact with menus
-//		AutomationMainMenu menu = window.getMainMenu();
-		//menu.expand();
-//		AutomationMenu file = menu.getMenu("File");
-//		AutomationMenuItem exit = file.getMenuItem("Exit");
-//		exit.click();
+		AutomationMainMenu menu = window.getMainMenu();
 
-		//AutomationMenuItem maximise = menu.getItem("Maximise");
+		List<AutomationMenuItem> items = menu.getItems();
 
+		for (AutomationMenuItem item : items) {
+			item.expand();
+			String name1 = item.name();
+		}
+
+		//String name1 = items.get(0).name();
+		//String name2 = items.get(1).name();
+
+		AutomationMenuItem file = items.get(0);
+		file.expand();
+
+		AutomationMenuItem exit = file.getMenuItem("Exit");
+		exit.click();
 
 		AutomationTab tab = window.getTabByIndex(0);
 		tab.selectTabPage("Last Tab");
@@ -76,7 +81,7 @@ public class Main {
 	String txt = cb1.text();
 
 	AutomationComboBox cb0 = window.getComboboxByName("AutomatedCombobox2");
-	List<AutomationListItem> items = cb0.getList();
+	List<AutomationListItem> litems = cb0.getList();
 
 		String dummy = "";
 /*
