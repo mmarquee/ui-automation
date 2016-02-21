@@ -28,15 +28,19 @@ public class AutomationMenuItem extends AutomationBase {
         super(element, uiAuto);
         try {
             this.invokePattern = this.getInvokePattern();
+            this.click();
         } catch (Exception ex) {
             // All is OK
         }
 
-        try {
+        //if (this.element.)
+
+     //   try {
             this.expandPattern = this.getExpandCollapsePattern();
-        } catch (Exception ex) {
-            // All is OK
-        }
+     //   } catch (Exception ex) {
+     //       // All is OK
+     //
+     //   }
     }
 
     /**
@@ -44,7 +48,22 @@ public class AutomationMenuItem extends AutomationBase {
      */
     public void expand() {
         if (this.expandPattern != null) {
+            try {
+                this.element.wait(750);
+            } catch (Exception ex) {
+                // Not sure about this yet
+            }
+
             this.expandPattern.expand();
+        }
+    }
+
+    /**
+     * Invoke the collapse pattern for the menu item
+     */
+    public void collapse() {
+        if (this.expandPattern != null) {
+            this.expandPattern.collapse();
         }
     }
 
@@ -58,7 +77,13 @@ public class AutomationMenuItem extends AutomationBase {
     }
 
     public AutomationMenuItem getMenuItem (String name) {
-        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
+
+        IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Children,
+                uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId));
+
+        int length = items.length();
+
+        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Children,
                 uiAuto.createAndCondition(
                         uiAuto.createPropertyCondition(PropertyID.NamePropertyId, name),
                         uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId)));

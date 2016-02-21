@@ -24,28 +24,31 @@ import static java.lang.Thread.sleep;
  * Created by inpwt on 09/02/2016.
  */
 public class AutomationMenu extends AutomationBase {
-    IUIAutomationExpandCollapsePattern expandCollpasePattern;
+//    IUIAutomationExpandCollapsePattern expandCollpasePattern;
 
     public AutomationMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        this.expandCollpasePattern = this.getExpandCollapsePattern();
+  //      this.expandCollpasePattern = this.getExpandCollapsePattern();
     }
 
     public AutomationMenuItem getMenuItem(String name) {
+
+//        this.click();
+
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
-        expandCollpasePattern.expand();
+//        expandCollpasePattern.expand();
 
-        try {
-            sleep(750); // From Delphi code
-        } catch (Exception ex) {
-            // Not sure about this yet
-        }
+  //      try {
+    //        this.element.wait(750);
+      //  } catch (Exception ex) {
+        //    // Not sure about this yet
+      //  }
 
 
         IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Descendants, condition);
+                this.element.findAll(TreeScope.TreeScope_Children, condition);
 
         int length = collection.length();
 
@@ -63,13 +66,12 @@ public class AutomationMenu extends AutomationBase {
             }
         }
 
-        expandCollpasePattern.collapse();
+//        expandCollpasePattern.collapse();
 
         if (found) {
             return new AutomationMenuItem(foundElement, uiAuto);
         } else {
             return null;
         }
-
     }
 }

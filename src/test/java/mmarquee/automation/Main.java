@@ -54,8 +54,14 @@ public class Main {
 
 		AutomationMenuItem file = items.get(0);
 		file.expand();
+        file.collapse();
+        try {
+            Thread.sleep(750);                 //750 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 
-		AutomationMenuItem exit = file.getMenuItem("Exit");
+		AutomationMenuItem exit = file.getMenuItem("Exit1");
 		exit.click();
 
 		AutomationTab tab = window.getTabByIndex(0);
