@@ -85,8 +85,7 @@ public class AutomationMenuItem extends AutomationBase {
      */
     public List<AutomationMenuItem> getItems() {
         IUIAutomationElementArray items = this.findAll();
-              //  this.createControlTypeCondition(PropertyID.ControlType));
-
+        
         int length = items.length();
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
