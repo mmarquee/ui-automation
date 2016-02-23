@@ -46,6 +46,11 @@ public class Main {
 
 		AutomationMenuItem item = items.get(0);
 		item.expand();
+		try {
+			Thread.sleep(750);
+		} catch (Exception ex) {
+			// Not sure about this yet
+		}
 		String name1 = item.name();
 		List<AutomationMenuItem> subItems = item.getItems();
 

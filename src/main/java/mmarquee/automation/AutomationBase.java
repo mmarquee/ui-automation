@@ -72,10 +72,7 @@ public class AutomationBase {
      */
     protected IUIAutomationElementArray findAll(TreeScope scope) {
         IUIAutomationCondition condition = this.createTrueCondition();
-
-        IUIAutomationElementArray collection = this.findAll(scope, condition);
-
-        return collection;
+        return this.findAll(scope, condition);
     }
 
     /**

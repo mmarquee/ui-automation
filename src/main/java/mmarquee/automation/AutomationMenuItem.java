@@ -51,12 +51,6 @@ public class AutomationMenuItem extends AutomationBase {
      */
     public void expand() {
         if (this.expandPattern != null) {
-            try {
-                this.element.wait(750);
-            } catch (Exception ex) {
-                // Not sure about this yet
-            }
-
             this.expandPattern.expand();
         }
     }
@@ -84,8 +78,8 @@ public class AutomationMenuItem extends AutomationBase {
      * @return List of menu items
      */
     public List<AutomationMenuItem> getItems() {
-        IUIAutomationElementArray items = this.findAll();
-        
+        IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants);
+
         int length = items.length();
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
@@ -104,12 +98,12 @@ public class AutomationMenuItem extends AutomationBase {
      */
     public AutomationMenuItem getMenuItem (String name) {
 
-        IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Children,
+        IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Descendants,
                 this.createControlTypeCondition(ControlTypeID.MenuItem));
 
         int length = items.length();
 
-        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Children,
+        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlTypeID.MenuItem)));
