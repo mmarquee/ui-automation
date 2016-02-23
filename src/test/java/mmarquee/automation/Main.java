@@ -44,13 +44,10 @@ public class Main {
 
 		List<AutomationMenuItem> items = menu.getItems();
 
-		String name1 = "";
-
-		for (AutomationMenuItem item : items) {
-			item.expand();
-			name1 = item.name();
-			List<AutomationMenuItem> subItems = item.getItems();
-		}
+		AutomationMenuItem item = items.get(0);
+		item.expand();
+		String name1 = item.name();
+		List<AutomationMenuItem> subItems = item.getItems();
 
 /*
 		AutomationMenuItem file = items.get(0);
@@ -108,10 +105,10 @@ public class Main {
 		// Now string grids
 		AutomationStringGrid grid = window.getStringGridByIndex(0);
 
-		AutomationStringGridItem item = grid.getItem(0,0);
+		AutomationStringGridItem item1 = grid.getItem(0,0);
 
-		String itemName = item.name();
-		item.setName("This");
+		String itemName = item1.name();
+		item1.setName("This");
 
 		AutomationTreeView tree = window.getTreeViewByIndex(0);
 		AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");

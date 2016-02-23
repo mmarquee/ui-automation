@@ -86,7 +86,7 @@ public class AutomationContainer extends AutomationBase {
 
     protected IUIAutomationElement getControlByControlType(String name, int id) {
         return this.findFirst(TreeScope.TreeScope_Descendants,
-                this.createOrCondition(this.createNamePropertyCondition(name),
+                this.createAndCondition(this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(id)));
     }
 

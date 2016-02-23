@@ -79,6 +79,10 @@ public class AutomationMenuItem extends AutomationBase {
         }
     }
 
+    /**
+     * Gets the items associated with this menuitem
+     * @return List of menu items
+     */
     public List<AutomationMenuItem> getItems() {
         IUIAutomationElementArray items = this.findAll();
               //  this.createControlTypeCondition(PropertyID.ControlType));
@@ -94,17 +98,22 @@ public class AutomationMenuItem extends AutomationBase {
         return list;
     }
 
+    /**
+     * Get the menu item associated with this name
+     * @param name to look for
+     * @return The menu item
+     */
     public AutomationMenuItem getMenuItem (String name) {
 
         IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Children,
-                uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.MenuItem));
+                this.createControlTypeCondition(ControlTypeID.MenuItem));
 
         int length = items.length();
 
         IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Children,
-                uiAuto.createAndCondition(
-                        uiAuto.createPropertyCondition(PropertyID.Name, name),
-                        uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.MenuItem)));
+                this.createAndCondition(
+                        this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(ControlTypeID.MenuItem)));
 
         return new AutomationMenuItem(item, this.uiAuto);
     }

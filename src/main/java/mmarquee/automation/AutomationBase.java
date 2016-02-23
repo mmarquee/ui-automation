@@ -87,6 +87,14 @@ public class AutomationBase {
     }
 
     /**
+     * Creates a false condition
+     * @return The condition
+     */
+    public IUIAutomationCondition createFalseCondition() {
+        return uiAuto.createFalseCondition();
+    }
+
+    /**
      * Creates a name property condition
      * @param name The name to use
      * @return The condition
@@ -112,6 +120,16 @@ public class AutomationBase {
      */
     public IUIAutomationCondition createOrCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2) {
         return uiAuto.createOrCondition(condition1, condition2);
+    }
+
+    /**
+     * Creates an AND condition
+     * @param condition1
+     * @param condition2
+     * @return
+     */
+    public IUIAutomationCondition createAndCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2) {
+        return uiAuto.createAndCondition(condition1, condition2);
     }
 
     /**

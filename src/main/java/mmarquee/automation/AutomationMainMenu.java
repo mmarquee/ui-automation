@@ -29,49 +29,19 @@ public class AutomationMainMenu extends AutomationBase {
     public AutomationMainMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
-/*
-    public AutomationMenu getMenu(String name) {
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
-
-        IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Children, condition);
-
-        int length = collection.length();
-
-        boolean found = false;
-        IUIAutomationElement foundElement = null;
-
-        for (int count = 0; count < length; count++) {
-            IUIAutomationElement elem = collection.getElement(count);
-            String eName = elem.currentName();
-
-            if (eName.equals(name)) {
-                found = true;
-                foundElement = elem;
-                break;
-            }
-        }
-
-        if (found) {
-            return new AutomationMenu(foundElement, uiAuto);
-        } else {
-            return null;
-        }
-    }
-*/
 
     public AutomationMenuItem getMenuItem (String name) {
         IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
-                uiAuto.createAndCondition(
-                        uiAuto.createPropertyCondition(PropertyID.Name, name),
-                        uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.MenuItem)));
+                this.createAndCondition(
+                     this.createNamePropertyCondition(name),
+                     this.createControlTypeCondition(ControlTypeID.MenuItem)));
 
         return new AutomationMenuItem(item, this.uiAuto);
     }
 
     public List<AutomationMenuItem> getItems() {
         IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Descendants,
-                        uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.MenuItem));
+                this.createControlTypeCondition(ControlTypeID.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
