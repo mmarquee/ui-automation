@@ -38,20 +38,21 @@ public class Main {
 
 		AutomationWindow window = automation.getDesktopWindow("Form1");
 		String name = window.name();
-/*
+
 		// Interact with menus
 		AutomationMainMenu menu = window.getMainMenu();
 
 		List<AutomationMenuItem> items = menu.getItems();
 
+		String name1 = "";
+
 		for (AutomationMenuItem item : items) {
 			item.expand();
-			String name1 = item.name();
+			name1 = item.name();
+			List<AutomationMenuItem> subItems = item.getItems();
 		}
 
-		//String name1 = items.get(0).name();
-		//String name2 = items.get(1).name();
-
+/*
 		AutomationMenuItem file = items.get(0);
 		file.expand();
         file.collapse();
@@ -88,6 +89,12 @@ public class Main {
 	String txt = cb1.text();
 
 	AutomationComboBox cb0 = window.getComboboxByName("AutomatedCombobox2");
+	cb0.expand();
+	try {
+		cb0.wait(750);
+	} catch (Exception ex) {
+		// Time out
+	}
 	List<AutomationListItem> litems = cb0.getList();
 
 		String dummy = "";

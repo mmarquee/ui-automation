@@ -17,6 +17,9 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by inpwt on 10/02/2016.
  */
@@ -74,6 +77,21 @@ public class AutomationMenuItem extends AutomationBase {
         if (this.invokePattern != null) {
             this.invokePattern.invoke();
         }
+    }
+
+    public List<AutomationMenuItem> getItems() {
+        IUIAutomationElementArray items = this.findAll();
+              //  this.createControlTypeCondition(PropertyID.ControlType));
+
+        int length = items.length();
+
+        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
+
+        for (int count = 0; count < items.length(); count++) {
+            list.add(new AutomationMenuItem(items.getElement(count), uiAuto));
+        }
+
+        return list;
     }
 
     public AutomationMenuItem getMenuItem (String name) {
