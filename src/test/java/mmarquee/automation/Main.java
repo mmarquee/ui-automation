@@ -28,7 +28,7 @@ public class Main {
 		AutomationApplication application = null;
 
 		try {
-			application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
+			application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
 		} catch (Throwable ex) {
 			// Smother
 		}
@@ -38,7 +38,7 @@ public class Main {
 
 		AutomationWindow window = automation.getDesktopWindow("Form1");
 		String name = window.name();
-
+/*
 		// Interact with menus
 		AutomationMainMenu menu = window.getMainMenu();
 
@@ -63,6 +63,7 @@ public class Main {
 
 		AutomationMenuItem exit = file.getMenuItem("Exit1");
 		exit.click();
+*/
 
 		AutomationTab tab = window.getTabByIndex(0);
 		tab.selectTabPage("Last Tab");

@@ -85,28 +85,9 @@ public class AutomationContainer extends AutomationBase {
     }
 
     protected IUIAutomationElement getControlByControlType(String name, int id) {
-        IUIAutomationElementArray collection;
-
-        IUIAutomationElement foundElement = null;
-
-        collection = this.findAll(TreeScope.TreeScope_Descendants);
-
-        int length = collection.length();
-
-        for (int count = 0; count < length; count++) {
-            IUIAutomationElement element = collection.getElement(count);
-            int retVal = element.currentControlType();
-            String elementName = element.currentName();
-
-            if (retVal == id)  {
-                if (elementName.equals(name)) {
-                    foundElement = element;
-                    break;
-                }
-            }
-        }
-
-        return foundElement;
+        return this.findFirst(TreeScope.TreeScope_Descendants,
+                this.createOrCondition(this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(id)));
     }
 
     /**

@@ -56,6 +56,16 @@ public class AutomationBase {
     }
 
     /**
+     * Finds the first match for the oondition
+     * @param scope The scope of where to look
+     * @param condition The condition to use
+     * @return The found IUIAutomationElement
+     */
+    protected IUIAutomationElement findFirst(TreeScope scope, IUIAutomationCondition condition) {
+        return this.element.findFirst(scope, condition);
+    }
+
+    /**
      * Finds all of the elements that are associated with the given condition.
      * @param scope The scope of where to look
      * @return IUIAutomationElementArray
@@ -75,14 +85,35 @@ public class AutomationBase {
     public IUIAutomationCondition createTrueCondition() {
         return uiAuto.createTrueCondition();
     }
-/*
-    public IUIAutomationCondition createNameCondition(String name) {
-        //return uiAuto.createTrueCondition();
-     //   return new IUIAutomationPropertyCondition(IUIAutomationPropertyCondition.NameProperty, "File"))
 
-        return uiAuto.createPropertyCondition(, name);
+    /**
+     * Creates a name property condition
+     * @param name The name to use
+     * @return The condition
+     */
+    public IUIAutomationCondition createNamePropertyCondition(String name) {
+        return uiAuto.createPropertyCondition(PropertyID.Name, name);
     }
-*/
+
+    /**
+     * Creates a control type property condition
+     * @param id The control type to use
+     * @return The condition
+     */
+    public IUIAutomationCondition createControlTypeCondition(int id) {
+        return uiAuto.createPropertyCondition(PropertyID.ControlType, id);
+    }
+
+    /**
+     * Creatss an or condition
+     * @param condition1 First condition
+     * @param condition2 Second condition
+     * @return The Or Condition
+     */
+    public IUIAutomationCondition createOrCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2) {
+        return uiAuto.createOrCondition(condition1, condition2);
+    }
+
     /**
      * Finds all of the elements that are associated with the given condition.
      * @param scope The scope of where to look
