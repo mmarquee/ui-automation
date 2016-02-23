@@ -82,7 +82,7 @@ public class AutomationComboBox extends AutomationBase {
 
             int retValue = element.currentControlType();
 
-            if (retValue == ControlTypeID.ListItemControlTypeId) {
+            if (retValue == ControlTypeID.ListItem) {
 
                 list.add(new AutomationListItem(element, this.uiAuto));
             }

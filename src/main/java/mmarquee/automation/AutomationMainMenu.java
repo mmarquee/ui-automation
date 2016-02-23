@@ -63,15 +63,15 @@ public class AutomationMainMenu extends AutomationBase {
     public AutomationMenuItem getMenuItem (String name) {
         IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
                 uiAuto.createAndCondition(
-                        uiAuto.createPropertyCondition(PropertyID.NamePropertyId, name),
-                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId)));
+                        uiAuto.createPropertyCondition(PropertyID.Name, name),
+                        uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.MenuItem)));
 
         return new AutomationMenuItem(item, this.uiAuto);
     }
 
     public List<AutomationMenuItem> getItems() {
         IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Descendants,
-                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.MenuItemControlTypeId));
+                        uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 

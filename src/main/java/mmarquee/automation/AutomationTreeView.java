@@ -35,8 +35,8 @@ public class AutomationTreeView extends AutomationBase {
     public AutomationTreeViewItem getItem(String name) {
         IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
                 uiAuto.createAndCondition(
-                        uiAuto.createPropertyCondition(PropertyID.NamePropertyId, name),
-                        uiAuto.createPropertyCondition(PropertyID.ControlTypePropertyId, ControlTypeID.TreeItemControlTypeId)));
+                        uiAuto.createPropertyCondition(PropertyID.Name, name),
+                        uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.TreeItem)));
 
         return new AutomationTreeViewItem(item, this.uiAuto);
     }
