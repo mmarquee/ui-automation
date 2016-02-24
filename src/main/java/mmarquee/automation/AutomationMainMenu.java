@@ -20,9 +20,6 @@ import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 /**
  * Created by inpwt on 09/02/2016.
@@ -44,16 +41,15 @@ public class AutomationMainMenu extends AutomationBase {
 
         IUIAutomationElement foundElement = null;
 
+        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+                this.createAndCondition(
+                        this.createNamePropertyCondition(name0),
+                        this.createControlTypeCondition(ControlTypeID.MenuItem)));
+
         if (!name1.isEmpty()) {
             // Needs a subitem
-            IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
-                    this.createAndCondition(
-                            this.createNamePropertyCondition(name0),
-                            this.createControlTypeCondition(ControlTypeID.MenuItem)));
             if (item != null) {
                 // Find the subitem now
-            //    AutomationMenuItem menuItem = new AutomationMenuItem(item, uiAuto);
-            //    menuItem.expand();
                 com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse);
                 IUIAutomationExpandCollapsePattern pattern = unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
                 pattern.expand();
@@ -67,14 +63,8 @@ public class AutomationMainMenu extends AutomationBase {
                         this.createAndCondition(
                                 this.createNamePropertyCondition(name1),
                                 this.createControlTypeCondition(ControlTypeID.MenuItem)).getCondition());
-            }
-        } else {
-            // Just get the item
-            foundElement = this.findFirst(TreeScope.TreeScope_Descendants,
-                    this.createAndCondition(
-                            this.createNamePropertyCondition(name0),
-                            this.createControlTypeCondition(ControlTypeID.MenuItem)));
 
+            }
         }
 
         return new AutomationMenuItem(foundElement, this.uiAuto);

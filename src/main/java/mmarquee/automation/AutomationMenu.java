@@ -24,54 +24,7 @@ import static java.lang.Thread.sleep;
  * Created by inpwt on 09/02/2016.
  */
 public class AutomationMenu extends AutomationBase {
-//    IUIAutomationExpandCollapsePattern expandCollpasePattern;
-
     public AutomationMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-
-  //      this.expandCollpasePattern = this.getExpandCollapsePattern();
-    }
-
-    public AutomationMenuItem getMenuItem(String name) {
-
-//        this.click();
-
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
-
-//        expandCollpasePattern.expand();
-
-  //      try {
-    //        this.element.wait(750);
-      //  } catch (Exception ex) {
-        //    // Not sure about this yet
-      //  }
-
-
-        IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Children, condition);
-
-        int length = collection.length();
-
-        boolean found = false;
-        IUIAutomationElement foundElement = null;
-
-        for (int count = 0; count < length; count++) {
-            IUIAutomationElement elem = collection.getElement(count);
-            String eName = elem.currentName();
-
-            if (eName.equals(name)) {
-                found = true;
-                foundElement = elem;
-                break;
-            }
-        }
-
-//        expandCollpasePattern.collapse();
-
-        if (found) {
-            return new AutomationMenuItem(foundElement, uiAuto);
-        } else {
-            return null;
-        }
     }
 }
