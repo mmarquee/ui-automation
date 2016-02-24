@@ -106,7 +106,7 @@ public class AutomationBase {
      * @param id The control type to use
      * @return The condition
      */
-    public Condition createControlTypeCondition(int id) {
+    public ControlIdCondition createControlTypeCondition(int id) {
         return new ControlIdCondition(this.uiAuto, id);
     }
 
@@ -137,9 +137,7 @@ public class AutomationBase {
      * @return IUIAutomationElementArray
      */
     protected IUIAutomationElementArray findAll(TreeScope scope, Condition condition) {
-        IUIAutomationElementArray collection = this.element.findAll(scope, condition.getCondition());
-
-        return collection;
+        return this.element.findAll(scope, condition.getCondition());
     }
 
     private com4j.Com4jObject getPattern (int id) {
