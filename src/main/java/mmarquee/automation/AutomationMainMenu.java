@@ -31,7 +31,7 @@ public class AutomationMainMenu extends AutomationBase {
     }
 
     public AutomationMenuItem getMenuItem (String name) {
-        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
+        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                      this.createNamePropertyCondition(name),
                      this.createControlTypeCondition(ControlTypeID.MenuItem)));
@@ -40,7 +40,7 @@ public class AutomationMainMenu extends AutomationBase {
     }
 
     public List<AutomationMenuItem> getItems() {
-        IUIAutomationElementArray items = this.element.findAll(TreeScope.TreeScope_Descendants,
+        IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants,
                 this.createControlTypeCondition(ControlTypeID.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();

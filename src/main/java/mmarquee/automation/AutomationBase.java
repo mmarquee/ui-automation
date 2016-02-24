@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.condition.*;;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -61,8 +62,8 @@ public class AutomationBase {
      * @param condition The condition to use
      * @return The found IUIAutomationElement
      */
-    protected IUIAutomationElement findFirst(TreeScope scope, IUIAutomationCondition condition) {
-        return this.element.findFirst(scope, condition);
+    protected IUIAutomationElement findFirst(TreeScope scope, Condition condition) {
+        return this.element.findFirst(scope, condition.getCondition());
     }
 
     /**
@@ -71,7 +72,7 @@ public class AutomationBase {
      * @return IUIAutomationElementArray
      */
     protected IUIAutomationElementArray findAll(TreeScope scope) {
-        IUIAutomationCondition condition = this.createTrueCondition();
+        TrueCondition condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
 
@@ -79,16 +80,16 @@ public class AutomationBase {
      * Creates a true condition
      * @return The true condition
      */
-    public IUIAutomationCondition createTrueCondition() {
-        return uiAuto.createTrueCondition();
+    public TrueCondition createTrueCondition() {
+        return new TrueCondition(this.uiAuto);
     }
 
     /**
      * Creates a false condition
      * @return The condition
      */
-    public IUIAutomationCondition createFalseCondition() {
-        return uiAuto.createFalseCondition();
+    public FalseCondition createFalseCondition() {
+        return new FalseCondition(this.uiAuto);
     }
 
     /**
@@ -96,8 +97,8 @@ public class AutomationBase {
      * @param name The name to use
      * @return The condition
      */
-    public IUIAutomationCondition createNamePropertyCondition(String name) {
-        return uiAuto.createPropertyCondition(PropertyID.Name, name);
+    public NameCondition createNamePropertyCondition(String name) {
+        return new NameCondition(this.uiAuto, name);
     }
 
     /**
@@ -105,8 +106,8 @@ public class AutomationBase {
      * @param id The control type to use
      * @return The condition
      */
-    public IUIAutomationCondition createControlTypeCondition(int id) {
-        return uiAuto.createPropertyCondition(PropertyID.ControlType, id);
+    public Condition createControlTypeCondition(int id) {
+        return new ControlIdCondition(this.uiAuto, id);
     }
 
     /**
@@ -115,8 +116,8 @@ public class AutomationBase {
      * @param condition2 Second condition
      * @return The Or Condition
      */
-    public IUIAutomationCondition createOrCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2) {
-        return uiAuto.createOrCondition(condition1, condition2);
+    public OrCondition createOrCondition(Condition condition1, Condition condition2) {
+        return new OrCondition(this.uiAuto, condition1, condition2);
     }
 
     /**
@@ -125,8 +126,8 @@ public class AutomationBase {
      * @param condition2
      * @return
      */
-    public IUIAutomationCondition createAndCondition(IUIAutomationCondition condition1, IUIAutomationCondition condition2) {
-        return uiAuto.createAndCondition(condition1, condition2);
+    public AndCondition createAndCondition(Condition condition1, Condition condition2) {
+        return new AndCondition(this.uiAuto, condition1, condition2);
     }
 
     /**
@@ -135,8 +136,8 @@ public class AutomationBase {
      * @param condition The condition to check
      * @return IUIAutomationElementArray
      */
-    protected IUIAutomationElementArray findAll(TreeScope scope, IUIAutomationCondition condition) {
-        IUIAutomationElementArray collection = this.element.findAll(scope, condition);
+    protected IUIAutomationElementArray findAll(TreeScope scope, Condition condition) {
+        IUIAutomationElementArray collection = this.element.findAll(scope, condition.getCondition());
 
         return collection;
     }

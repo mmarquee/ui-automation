@@ -33,7 +33,7 @@ public class AutomationTreeView extends AutomationBase {
      * @return The AutomationTreeViewItem
      */
     public AutomationTreeViewItem getItem(String name) {
-        IUIAutomationElement item = this.element.findFirst(TreeScope.TreeScope_Descendants,
+        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlTypeID.TreeItem)));
