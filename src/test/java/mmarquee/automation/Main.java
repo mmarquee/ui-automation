@@ -42,31 +42,15 @@ public class Main {
 		// Interact with menus
 		AutomationMainMenu menu = window.getMainMenu();
 
-		List<AutomationMenuItem> items = menu.getItems();
+//		List<AutomationMenuItem> items = menu.getItems();
 
-		AutomationMenuItem item = items.get(0);
-		item.expand();
-		try {
-			Thread.sleep(750);
-		} catch (Exception ex) {
-			// Not sure about this yet
-		}
-		String name1 = item.name();
-		List<AutomationMenuItem> subItems = item.getItems();
+//		AutomationMenuItem item = items.get(0);
+//		item.expand();
 
-/*
-		AutomationMenuItem file = items.get(0);
-		file.expand();
-        file.collapse();
-        try {
-            Thread.sleep(750);                 //750 milliseconds is one second.
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+//		String name1 = item.name();
 
-		AutomationMenuItem exit = file.getMenuItem("Exit1");
+		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
 		exit.click();
-*/
 
 		AutomationTab tab = window.getTabByIndex(0);
 		tab.selectTabPage("Last Tab");

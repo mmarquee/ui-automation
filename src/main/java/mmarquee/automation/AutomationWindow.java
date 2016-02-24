@@ -80,7 +80,7 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationMainMenu getMainMenu() {
         IUIAutomationElement menu = this.getControlByControlType(1, ControlTypeID.MenuBar);
 
-        return (new AutomationMainMenu(menu, this.uiAuto));
+        return (new AutomationMainMenu(this.element, menu, this.uiAuto));
     }
 
     /**

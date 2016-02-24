@@ -17,51 +17,16 @@ package mmarquee.automation;
 
 import mmarquee.automation.uiautomation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by inpwt on 10/02/2016.
  */
 public class AutomationMenuItem extends AutomationBase {
     private IUIAutomationInvokePattern invokePattern;
-    private IUIAutomationExpandCollapsePattern expandPattern;
 
     public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-        try {
-            this.invokePattern = this.getInvokePattern();
-            this.click();
-        } catch (Exception ex) {
-            // All is OK
-        }
 
-        //if (this.element.)
-
-     //   try {
-            this.expandPattern = this.getExpandCollapsePattern();
-     //   } catch (Exception ex) {
-     //       // All is OK
-     //
-     //   }
-    }
-
-    /**
-     * Invoke the expand pattern for the menu item
-     */
-    public void expand() {
-        if (this.expandPattern != null) {
-            this.expandPattern.expand();
-        }
-    }
-
-    /**
-     * Invoke the collapse pattern for the menu item
-     */
-    public void collapse() {
-        if (this.expandPattern != null) {
-            this.expandPattern.collapse();
-        }
+        this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -71,43 +36,5 @@ public class AutomationMenuItem extends AutomationBase {
         if (this.invokePattern != null) {
             this.invokePattern.invoke();
         }
-    }
-
-    /**
-     * Gets the items associated with this menuitem
-     * @return List of menu items
-     */
-    public List<AutomationMenuItem> getItems() {
-        IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants);
-
-        int length = items.length();
-
-        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
-
-        for (int count = 0; count < items.length(); count++) {
-            list.add(new AutomationMenuItem(items.getElement(count), uiAuto));
-        }
-
-        return list;
-    }
-
-    /**
-     * Get the menu item associated with this name
-     * @param name to look for
-     * @return The menu item
-     */
-    public AutomationMenuItem getMenuItem (String name) {
-
-        IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants,
-                this.createControlTypeCondition(ControlTypeID.MenuItem));
-
-        int length = items.length();
-
-        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
-                this.createAndCondition(
-                        this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(ControlTypeID.MenuItem)));
-
-        return new AutomationMenuItem(item, this.uiAuto);
     }
 }

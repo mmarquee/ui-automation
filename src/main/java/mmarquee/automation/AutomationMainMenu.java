@@ -16,27 +16,68 @@
 
 package mmarquee.automation;
 
-
 import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Created by inpwt on 09/02/2016.
  */
 public class AutomationMainMenu extends AutomationBase {
-    public AutomationMainMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+
+    private IUIAutomationElement parent;
+
+    public IUIAutomationElement getParent() {
+        return this.parent;
     }
 
-    public AutomationMenuItem getMenuItem (String name) {
-        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
-                this.createAndCondition(
-                     this.createNamePropertyCondition(name),
-                     this.createControlTypeCondition(ControlTypeID.MenuItem)));
+    public AutomationMainMenu(IUIAutomationElement parent, IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
+        this.parent = parent;
+    }
 
-        return new AutomationMenuItem(item, this.uiAuto);
+    public AutomationMenuItem getMenuItem (String name0, String name1) {
+
+        IUIAutomationElement foundElement = null;
+
+        if (!name1.isEmpty()) {
+            // Needs a subitem
+            IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+                    this.createAndCondition(
+                            this.createNamePropertyCondition(name0),
+                            this.createControlTypeCondition(ControlTypeID.MenuItem)));
+            if (item != null) {
+                // Find the subitem now
+            //    AutomationMenuItem menuItem = new AutomationMenuItem(item, uiAuto);
+            //    menuItem.expand();
+                com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse);
+                IUIAutomationExpandCollapsePattern pattern = unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
+                pattern.expand();
+                try {
+                    Thread.sleep(750);
+                } catch (Exception ex) {
+                    // Seems to be find
+                }
+
+                foundElement = this.getParent().findFirst(TreeScope.TreeScope_Descendants,
+                        this.createAndCondition(
+                                this.createNamePropertyCondition(name1),
+                                this.createControlTypeCondition(ControlTypeID.MenuItem)).getCondition());
+            }
+        } else {
+            // Just get the item
+            foundElement = this.findFirst(TreeScope.TreeScope_Descendants,
+                    this.createAndCondition(
+                            this.createNamePropertyCondition(name0),
+                            this.createControlTypeCondition(ControlTypeID.MenuItem)));
+
+        }
+
+        return new AutomationMenuItem(foundElement, this.uiAuto);
     }
 
     public List<AutomationMenuItem> getItems() {

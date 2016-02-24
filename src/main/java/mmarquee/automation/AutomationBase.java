@@ -247,7 +247,7 @@ public class AutomationBase {
 
     /**
      * <p>
-     * Gets the involes pattern for this control
+     * Gets the invoke pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
      */
