@@ -20,12 +20,10 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class SelectionItemPattern extends Pattern {
+public class SelectionItemPattern {
     private IUIAutomationSelectionItemPattern pattern;
 
-    public SelectionItemPattern(IUIAutomation automation, IUIAutomationSelectionItemPattern pattern) {
-        super(automation);
-
+    public SelectionItemPattern(IUIAutomationSelectionItemPattern pattern) {
         this.pattern = pattern;
     }
 

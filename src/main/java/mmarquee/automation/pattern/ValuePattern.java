@@ -20,11 +20,10 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class ValuePattern extends Pattern {
+public class ValuePattern {
     private IUIAutomationValuePattern pattern;
 
-    public ValuePattern (IUIAutomation automation, IUIAutomationValuePattern pattern) {
-        super(automation);
+    public ValuePattern (IUIAutomationValuePattern pattern) {
         this.pattern = pattern;
     }
 

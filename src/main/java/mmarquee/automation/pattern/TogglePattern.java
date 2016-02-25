@@ -8,12 +8,10 @@ import mmarquee.automation.uiautomation.ToggleState;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class TogglePattern extends Pattern {
+public class TogglePattern {
     private IUIAutomationTogglePattern pattern;
 
-    public TogglePattern(IUIAutomation automation, IUIAutomationTogglePattern pattern) {
-        super(automation);
-
+    public TogglePattern(IUIAutomationTogglePattern pattern) {
         this.pattern = pattern;
     }
 

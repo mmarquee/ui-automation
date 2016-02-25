@@ -20,11 +20,10 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class GridPattern extends Pattern {
+public class GridPattern {
     private IUIAutomationGridPattern pattern;
 
-    public GridPattern (IUIAutomation automation, IUIAutomationGridPattern pattern) {
-        super(automation);
+    public GridPattern (IUIAutomationGridPattern pattern) {
         this.pattern = pattern;
     }
 

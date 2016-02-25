@@ -5,12 +5,10 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class InvokePattern extends Pattern {
+public class InvokePattern {
     private IUIAutomationInvokePattern pattern;
 
-    public InvokePattern (IUIAutomation automation, IUIAutomationInvokePattern pattern) {
-        super(automation);
-
+    public InvokePattern (IUIAutomationInvokePattern pattern) {
         this.pattern = pattern;
     }
 

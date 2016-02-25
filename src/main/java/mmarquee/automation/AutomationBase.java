@@ -123,9 +123,9 @@ public class AutomationBase {
 
     /**
      * Creates an AND condition
-     * @param condition1
-     * @param condition2
-     * @return
+     * @param condition1 First condition
+     * @param condition2 Second condition
+     * @return The And condition
      */
     public AndCondition createAndCondition(Condition condition1, Condition condition2) {
         return new AndCondition(this.uiAuto, condition1, condition2);
@@ -160,7 +160,7 @@ public class AutomationBase {
     protected SelectionItemPattern getSelectItemPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem);
 
-        return new SelectionItemPattern(this.uiAuto, unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
+        return new SelectionItemPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
     }
 
     /**
@@ -172,7 +172,7 @@ public class AutomationBase {
     protected SelectionPattern getSelectionPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Selection);
 
-        return new SelectionPattern(this.uiAuto, unknown.queryInterface(IUIAutomationSelectionPattern.class));
+        return new SelectionPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
     }
 
     /**
@@ -184,7 +184,7 @@ public class AutomationBase {
     protected ValuePattern getValuePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Value);
 
-        return new ValuePattern(this.uiAuto, unknown.queryInterface(IUIAutomationValuePattern.class));
+        return new ValuePattern(unknown.queryInterface(IUIAutomationValuePattern.class));
     }
 
     /**
@@ -196,7 +196,7 @@ public class AutomationBase {
     protected TablePattern getTablePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Table);
 
-        return new TablePattern(this.uiAuto, unknown.queryInterface(IUIAutomationTablePattern.class));
+        return new TablePattern(unknown.queryInterface(IUIAutomationTablePattern.class));
     }
 
     /**
@@ -208,7 +208,7 @@ public class AutomationBase {
     protected WindowPattern getWindowPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Window);
 
-        return new WindowPattern(this.uiAuto, unknown.queryInterface(IUIAutomationWindowPattern.class));
+        return new WindowPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
     }
 
     /**
@@ -220,7 +220,7 @@ public class AutomationBase {
     protected ExpandCollapsePattern getExpandCollapsePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse);
 
-        return new ExpandCollapsePattern(this.uiAuto, unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
+        return new ExpandCollapsePattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
     }
 
     /**
@@ -232,7 +232,7 @@ public class AutomationBase {
     protected GridPattern getGridPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Grid);
 
-        return new GridPattern(this.uiAuto, unknown.queryInterface(IUIAutomationGridPattern.class));
+        return new GridPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
     }
 
     /**
@@ -244,7 +244,7 @@ public class AutomationBase {
     protected TogglePattern getTogglePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle);
 
-        return new TogglePattern(this.uiAuto, unknown.queryInterface(IUIAutomationTogglePattern.class));
+        return new TogglePattern(unknown.queryInterface(IUIAutomationTogglePattern.class));
     }
 
     /**
@@ -255,7 +255,7 @@ public class AutomationBase {
      */
     protected InvokePattern getInvokePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
-        return new InvokePattern(uiAuto, unknown.queryInterface(IUIAutomationInvokePattern.class));
+        return new InvokePattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
     }
 
     /**
@@ -266,6 +266,6 @@ public class AutomationBase {
      */
     protected TextPattern getTextPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Text);
-        return new TextPattern(this.uiAuto, unknown.queryInterface(IUIAutomationTextPattern.class));
+        return new TextPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
     }
 }
