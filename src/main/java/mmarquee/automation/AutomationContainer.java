@@ -182,6 +182,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the document associated with the given index
+     * @param index Index of the control
+     * @return The document control
+     */
+    public AutomationDocument getgetDocumentByIndex(int index) {
+        IUIAutomationElement elem = this.getControlByControlType(index, ControlTypeID.Document);
+
+        return new AutomationDocument(elem, this.uiAuto);
+    }
+
+    /**
      * Gets the hyperlink control associated with the given index
      * @param index Index of the control
      * @return The found control
