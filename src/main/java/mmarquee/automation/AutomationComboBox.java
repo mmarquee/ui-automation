@@ -16,6 +16,8 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.ExpandCollapsePattern;
+import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +26,8 @@ import java.util.List;
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationComboBox extends AutomationBase {
-    private IUIAutomationExpandCollapsePattern collapsePattern;
-    private IUIAutomationValuePattern valuePattern;
+    private ExpandCollapsePattern collapsePattern;
+    private ValuePattern valuePattern;
 
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
@@ -65,7 +67,7 @@ public class AutomationComboBox extends AutomationBase {
     }
 
     /**
-     * Gets the list of items assoiated with this element.
+     * Gets the list of items associated with this element.
      * @return List of AutomationListItems
      */
     public List<AutomationListItem> getList() {

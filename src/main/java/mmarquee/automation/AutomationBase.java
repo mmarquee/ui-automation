@@ -16,7 +16,8 @@
 
 package mmarquee.automation;
 
-import mmarquee.automation.condition.*;;
+import mmarquee.automation.condition.*;
+import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -156,10 +157,11 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
      */
-    protected IUIAutomationSelectionItemPattern getSelectItemPattern() {
+    protected SelectionItemPattern getSelectItemPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem);
 
-        return unknown.queryInterface(IUIAutomationSelectionItemPattern.class);    }
+        return new SelectionItemPattern(this.uiAuto, unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
+    }
 
     /**
      * <p>
@@ -167,10 +169,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
      */
-    protected IUIAutomationSelectionPattern getSelectionPattern() {
+    protected SelectionPattern getSelectionPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Selection);
 
-        return unknown.queryInterface(IUIAutomationSelectionPattern.class);
+        return new SelectionPattern(this.uiAuto, unknown.queryInterface(IUIAutomationSelectionPattern.class));
     }
 
     /**
@@ -179,10 +181,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationValuePattern associated with this control
      */
-    protected IUIAutomationValuePattern getValuePattern() {
+    protected ValuePattern getValuePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Value);
 
-        return unknown.queryInterface(IUIAutomationValuePattern.class);
+        return new ValuePattern(this.uiAuto, unknown.queryInterface(IUIAutomationValuePattern.class));
     }
 
     /**
@@ -191,10 +193,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTablePattern associated with this control
      */
-    protected IUIAutomationTablePattern getTablePattern() {
+    protected TablePattern getTablePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Table);
 
-        return unknown.queryInterface(IUIAutomationTablePattern.class);
+        return new TablePattern(this.uiAuto, unknown.queryInterface(IUIAutomationTablePattern.class));
     }
 
     /**
@@ -203,10 +205,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
      */
-    protected IUIAutomationWindowPattern getWindowPattern() {
+    protected WindowPattern getWindowPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Window);
 
-        return unknown.queryInterface(IUIAutomationWindowPattern.class);
+        return new WindowPattern(this.uiAuto, unknown.queryInterface(IUIAutomationWindowPattern.class));
     }
 
     /**
@@ -215,10 +217,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
      */
-    protected IUIAutomationExpandCollapsePattern getExpandCollapsePattern() {
+    protected ExpandCollapsePattern getExpandCollapsePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse);
 
-        return unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
+        return new ExpandCollapsePattern(this.uiAuto, unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
     }
 
     /**
@@ -227,10 +229,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationGridPattern associated with this control
      */
-    protected IUIAutomationGridPattern getGridPattern() {
+    protected GridPattern getGridPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Grid);
 
-        return unknown.queryInterface(IUIAutomationGridPattern.class);
+        return new GridPattern(this.uiAuto, unknown.queryInterface(IUIAutomationGridPattern.class));
     }
 
     /**
@@ -239,10 +241,10 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTogglePattern associated with this control
      */
-    protected IUIAutomationTogglePattern getTogglePattern() {
+    protected TogglePattern getTogglePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle);
 
-        return unknown.queryInterface(IUIAutomationTogglePattern.class);
+        return new TogglePattern(this.uiAuto, unknown.queryInterface(IUIAutomationTogglePattern.class));
     }
 
     /**
@@ -251,9 +253,9 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
      */
-    protected IUIAutomationInvokePattern getInvokePattern() {
+    protected InvokePattern getInvokePattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
-        return unknown.queryInterface(IUIAutomationInvokePattern.class);
+        return new InvokePattern(uiAuto, unknown.queryInterface(IUIAutomationInvokePattern.class));
     }
 
     /**
@@ -262,8 +264,8 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTextPattern associated with this control
      */
-    protected IUIAutomationTextPattern getTextPattern() {
+    protected TextPattern getTextPattern() {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Text);
-        return unknown.queryInterface(IUIAutomationTextPattern.class);
+        return new TextPattern(this.uiAuto, unknown.queryInterface(IUIAutomationTextPattern.class));
     }
 }

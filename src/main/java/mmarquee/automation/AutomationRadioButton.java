@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.SelectionItemPattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationRadioButton extends AutomationBase {
 
-    private IUIAutomationSelectionItemPattern selectItemPattern;
+    private SelectionItemPattern selectItemPattern;
 
     public AutomationRadioButton(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.WindowPattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationWindow extends AutomationContainer {
 
-    private IUIAutomationWindowPattern windowPattern;
+    private WindowPattern windowPattern;
 
     /**
      * Focuses this control.

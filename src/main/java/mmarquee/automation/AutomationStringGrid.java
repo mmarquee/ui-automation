@@ -16,6 +16,10 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.GridPattern;
+import mmarquee.automation.pattern.SelectionPattern;
+import mmarquee.automation.pattern.TablePattern;
+import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -26,10 +30,10 @@ import java.util.List;
  */
 public class AutomationStringGrid extends AutomationBase
 {
-    private IUIAutomationValuePattern valuePattern;
-    private IUIAutomationGridPattern gridPattern;
-    private IUIAutomationTablePattern tablePattern;
-    private IUIAutomationSelectionPattern selectionPattern;
+    private ValuePattern valuePattern;
+    private GridPattern gridPattern;
+    private TablePattern tablePattern;
+    private SelectionPattern selectionPattern;
 
     public AutomationStringGrid(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

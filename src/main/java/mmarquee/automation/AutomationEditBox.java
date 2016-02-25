@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationEditBox extends AutomationBase {
 
-    private IUIAutomationValuePattern valuePattern;
+    private ValuePattern valuePattern;
 
     /**
      * Gets the value of the control

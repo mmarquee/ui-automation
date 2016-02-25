@@ -13,29 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.InvokePattern;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 
 /**
- * Created by inpwt on 10/02/2016.
+ * Created by inpwt on 25/02/2016.
  */
-public class AutomationMenuItem extends AutomationBase {
-    private InvokePattern invokePattern;
+public class TextPattern extends Pattern {
+    private IUIAutomationTextPattern pattern;
 
-    public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
-
-        this.invokePattern = this.getInvokePattern();
-    }
-
-    /**
-     * Invoke the click pattern for the menu item
-     */
-    public void click() {
-        if (this.invokePattern != null) {
-            this.invokePattern.invoke();
-        }
+    public TextPattern(IUIAutomation automation, IUIAutomationTextPattern pattern) {
+        super(automation);
+        this.pattern = pattern;
     }
 }

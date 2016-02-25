@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.InvokePattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationButton extends AutomationBase {
 
-    private IUIAutomationInvokePattern invokePattern = null;
+    private InvokePattern invokePattern = null;
 
     public AutomationButton(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);

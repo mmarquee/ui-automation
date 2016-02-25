@@ -1,5 +1,6 @@
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -8,7 +9,7 @@ import mmarquee.automation.uiautomation.*;
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
 public class AutomationCalendar extends AutomationBase {
-    private IUIAutomationValuePattern valuePattern;
+    private ValuePattern valuePattern;
 
     public AutomationCalendar(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

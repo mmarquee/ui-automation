@@ -16,13 +16,14 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationTextBox extends AutomationBase {
-    private IUIAutomationValuePattern valuePattern;
+    private ValuePattern valuePattern;
 
     public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

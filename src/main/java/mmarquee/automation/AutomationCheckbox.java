@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.TogglePattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationCheckbox extends AutomationBase {
 
-    private IUIAutomationTogglePattern togglePattern;
+    private TogglePattern togglePattern;
 
     /**
      * <p>

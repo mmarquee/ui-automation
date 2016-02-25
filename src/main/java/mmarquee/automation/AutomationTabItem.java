@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.SelectionItemPattern;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationTabItem extends AutomationBase {
 
-    private IUIAutomationSelectionItemPattern selectItemPattern;
+    private SelectionItemPattern selectItemPattern;
 
     public AutomationTabItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
