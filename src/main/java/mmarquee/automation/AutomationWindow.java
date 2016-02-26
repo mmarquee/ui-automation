@@ -139,6 +139,7 @@ public class AutomationWindow extends AutomationContainer {
                 break;
             } else {
                 try {
+                    // Wait for it
                     Thread.sleep(500);
                 } catch (InterruptedException ex) {
                     // interrupted
