@@ -30,7 +30,7 @@ public class Main {
 		try {
 			application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
 		} catch (Throwable ex) {
-			// Smother
+			// Smother????
 		}
 
 		// Wait for the process to start
@@ -40,8 +40,7 @@ public class Main {
 		String name = window.name();
 
 		// Interact with menus
-//		AutomationMainMenu menu = window.getMainMenu();
-
+		AutomationMainMenu menu = window.getMainMenu();
 //		List<AutomationMenuItem> items = menu.getItems();
 
 //		AutomationMenuItem item = items.get(0);
@@ -49,8 +48,13 @@ public class Main {
 
 //		String name1 = item.name();
 
-//		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-//		exit.click();
+		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+		exit.click();
+
+		AutomationWindow popup = window.getWindow("Project1");
+		AutomationButton btn = popup.getButton("OK");
+
+		btn.click();
 
 		AutomationTab tab = window.getTab(0);
 		tab.selectTabPage("Last Tab");
@@ -106,7 +110,8 @@ public class Main {
 		} catch (ItemNotFoundException ex) {
 			// Not found
 		}
-
+/*
+Stopped working!
 		AutomationList list = window.getListItem(0);
 		try {
 			AutomationListItem listItem = list.getItem("First (List)");
@@ -114,5 +119,6 @@ public class Main {
 		} catch (ItemNotFoundException ex) {
 			// Not found
 		}
+		*/
 	}
 }

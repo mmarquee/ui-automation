@@ -58,6 +58,7 @@ public class AutomationWindow extends AutomationContainer {
 
             if (retVal == ControlTypeID.StatusBar) {
                 found = new AutomationStatusBar(element, uiAuto);
+                break;
             }
         }
 
@@ -126,10 +127,24 @@ public class AutomationWindow extends AutomationContainer {
      * @return The child window
      */
     public AutomationWindow getWindow(String title) {
-        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
-                this.createAndCondition(
-                        this.createNamePropertyCondition(title),
-                        this.createControlTypeCondition(ControlTypeID.Window)));
+        IUIAutomationElement item = null;
+
+        for (int count = 0; count < 10; count++) {
+            item = this.findFirst(TreeScope.TreeScope_Descendants,
+                    this.createAndCondition(
+                            this.createNamePropertyCondition(title),
+                            this.createControlTypeCondition(ControlTypeID.Window)));
+
+            if (item != null) {
+                break;
+            } else {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    // interrupted
+                }
+            }
+        }
 
         return new AutomationWindow(item, this.uiAuto);
     }
