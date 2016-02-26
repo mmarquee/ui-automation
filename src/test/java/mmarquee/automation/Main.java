@@ -40,7 +40,7 @@ public class Main {
 		String name = window.name();
 
 		// Interact with menus
-		AutomationMainMenu menu = window.getMainMenu();
+//		AutomationMainMenu menu = window.getMainMenu();
 
 //		List<AutomationMenuItem> items = menu.getItems();
 
@@ -49,8 +49,8 @@ public class Main {
 
 //		String name1 = item.name();
 
-		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-		exit.click();
+//		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+//		exit.click();
 
 		AutomationTab tab = window.getTabByIndex(0);
 		tab.selectTabPage("Last Tab");
@@ -102,5 +102,9 @@ public class Main {
 		AutomationTreeView tree = window.getTreeViewByIndex(0);
 		AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
 		treeItem.select();
+
+		AutomationList list = window.getListItem(0);
+		AutomationListItem listItem = list.getItem("First (List)");
+		listItem.select();
 	}
-} 
+}

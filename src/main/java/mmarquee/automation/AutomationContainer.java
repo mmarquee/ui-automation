@@ -211,6 +211,15 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the list control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationList getListItem(int index) {
+        return new AutomationList((this.getControlByControlType(index, ControlTypeID.List)), this.uiAuto);
+    }
+
+    /**
      * Gets the calendar control associated with the given index
      * @param index Index of the control
      * @return The found control
