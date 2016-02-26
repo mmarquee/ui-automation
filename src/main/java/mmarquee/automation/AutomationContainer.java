@@ -96,7 +96,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return AutomationCheckbox that represents the found control
      */
-    public AutomationCheckbox getCheckboxByIndex(int index) {
+    public AutomationCheckbox getCheckbox(int index) {
         return new AutomationCheckbox(this.getControlByControlType(index, ControlTypeID.CheckBox), this.uiAuto);
     }
 
@@ -105,7 +105,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationTab getTabByIndex(int index){
+    public AutomationTab getTab(int index){
         return new AutomationTab(this.getControlByControlType(index, ControlTypeID.Tab), this.uiAuto);
     }
 
@@ -114,8 +114,17 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationEditBox getEditBoxByIndex(int index) {
+    public AutomationEditBox getEditBox(int index) {
         return new AutomationEditBox(this.getControlByControlType(index, ControlTypeID.Edit), this.uiAuto);
+    }
+
+    /**
+     * Gets the Editbox control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     */
+    public AutomationEditBox getEditBox(String name) {
+        return new AutomationEditBox(this.getControlByControlType(name, ControlTypeID.Edit), this.uiAuto);
     }
 
     /**
@@ -132,7 +141,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationMaskedEdit getMaskedEditByIndex(int index) {
+    public AutomationMaskedEdit getMaskedEdit(int index) {
         return new AutomationMaskedEdit(this.getControlByControlType(index, ControlTypeID.Edit, "TAutomationMaskEdit"), this.uiAuto);
     }
 
@@ -141,7 +150,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationRadioButton getRadioButtonByIndex(int index) {
+    public AutomationRadioButton getRadioButton(int index) {
         return new AutomationRadioButton(this.getControlByControlType(index, ControlTypeID.RadioButton), this.uiAuto);
     }
 
@@ -150,7 +159,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationTextBox getTextBoxByIndex(int index) {
+    public AutomationTextBox getTextBox(int index) {
         return new AutomationTextBox(this.getControlByControlType(index, ControlTypeID.Text), this.uiAuto);
     }
 
@@ -159,7 +168,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      */
-    public AutomationComboBox getComboboxByName(String name) {
+    public AutomationComboBox getCombobox(String name) {
         return new AutomationComboBox(this.getControlByControlType(name, ControlTypeID.ComboBox), this.uiAuto);
     }
 
@@ -168,7 +177,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      */
-    public AutomationButton getButtonByName(String name) {
+    public AutomationButton getButton(String name) {
         return new AutomationButton(this.getControlByControlType(name, ControlTypeID.Button), this.uiAuto);
     }
 
@@ -177,7 +186,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationStringGrid getStringGridByIndex(int index) {
+    public AutomationStringGrid getStringGrid(int index) {
         return new AutomationStringGrid(this.getControlByControlType(index, ControlTypeID.DataGrid, "TAutomationStringGrid"), this.uiAuto);
     }
 
@@ -186,7 +195,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The document control
      */
-    public AutomationDocument getgetDocumentByIndex(int index) {
+    public AutomationDocument getDocument(int index) {
         IUIAutomationElement elem = this.getControlByControlType(index, ControlTypeID.Document);
 
         return new AutomationDocument(elem, this.uiAuto);
@@ -197,7 +206,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationHyperlink getHyperlinkByName(int index) {
+    public AutomationHyperlink getHyperlink(int index) {
         return new AutomationHyperlink((this.getControlByControlType(index, ControlTypeID.Hyperlink)), this.uiAuto);
     }
 
@@ -206,7 +215,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationTreeView getTreeViewByIndex(int index) {
+    public AutomationTreeView getTreeView(int index) {
         return new AutomationTreeView((this.getControlByControlType(index, ControlTypeID.Tree)), this.uiAuto);
     }
 
@@ -224,7 +233,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationCalendar getCalendarByName (int index) {
+    public AutomationCalendar getCalendar (int index) {
         return new AutomationCalendar((this.getControlByControlType(index, ControlTypeID.Calendar)), this.uiAuto);
     }
 }

@@ -34,6 +34,10 @@ public class AutomationEditBox extends AutomationBase {
         return valuePattern.currentValue();
     }
 
+    public void setValue(String value) {
+        this.valuePattern.setValue(value);
+    }
+
     public AutomationEditBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

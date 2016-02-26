@@ -52,29 +52,29 @@ public class Main {
 //		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
 //		exit.click();
 
-		AutomationTab tab = window.getTabByIndex(0);
+		AutomationTab tab = window.getTab(0);
 		tab.selectTabPage("Last Tab");
 	//	String tabName = tab.name();
 
-		String text = tab.getEditBoxByIndex(0).getValue();
+		String text = tab.getEditBox(0).getValue();
 
-		AutomationCheckbox check = window.getCheckboxByIndex(0);
+		AutomationCheckbox check = window.getCheckbox(0);
 		check.toggle();
 
 		ToggleState state = check.getToggleState();
 
-		AutomationRadioButton radio = window.getRadioButtonByIndex(1);
+		AutomationRadioButton radio = window.getRadioButton(1);
 		radio.selectItem();
 
 		AutomationStatusBar statusbar = window.getStatusBar();
 	//	String eb0Text = statusbar.getTextBoxByIndex(0).getValue();
 	//	String eb1Text = statusbar.getTextBoxByIndex(1).getValue();
 
-	AutomationComboBox cb1 = window.getComboboxByName("AutomatedCombobox1");
+	AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
     cb1.setText("Replacements");
 	String txt = cb1.text();
 
-	AutomationComboBox cb0 = window.getComboboxByName("AutomatedCombobox2");
+	AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
 	cb0.expand();
 	try {
 		cb0.wait(750);
@@ -92,14 +92,14 @@ public class Main {
 		button2.click();
 */
 		// Now string grids
-		AutomationStringGrid grid = window.getStringGridByIndex(0);
+		AutomationStringGrid grid = window.getStringGrid(0);
 
 		AutomationStringGridItem item1 = grid.getItem(0,0);
 
 		String itemName = item1.name();
 		item1.setName("This");
 
-		AutomationTreeView tree = window.getTreeViewByIndex(0);
+		AutomationTreeView tree = window.getTreeView(0);
 		AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
 		treeItem.select();
 

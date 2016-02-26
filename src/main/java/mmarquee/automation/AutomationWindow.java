@@ -24,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationWindow extends AutomationContainer {
 
-    private WindowPattern windowPattern;
+   // private WindowPattern windowPattern;
 
     /**
      * Focuses this control.
@@ -35,8 +35,6 @@ public class AutomationWindow extends AutomationContainer {
 
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-
-        this.windowPattern = this.getWindowPattern();
     }
 
     /**
@@ -89,20 +87,37 @@ public class AutomationWindow extends AutomationContainer {
      * @param timeout The timeout
      */
     public void waitForInputIdle(int timeout) {
-        this.windowPattern.waitForInputIdle(timeout);
+        WindowPattern windowPattern = this.getWindowPattern();
+        windowPattern.waitForInputIdle(timeout);
     }
 
     /**
      * Maximize the window
      */
     public void maximize() {
-        this.windowPattern.maximize();
+        WindowPattern windowPattern = this.getWindowPattern();
+        windowPattern.maximize();
     }
 
     /**
      * Minimize the window
      */
     public void minimize() {
-        this.windowPattern.minimize();
+        WindowPattern windowPattern = this.getWindowPattern();
+        windowPattern.minimize();
+    }
+
+    /**
+     * Finds the child window with the given title
+     * @param title Title to search for
+     * @return The child window
+     */
+    public AutomationWindow getWindow(String title) {
+        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+                this.createAndCondition(
+                        this.createNamePropertyCondition(title),
+                        this.createControlTypeCondition(ControlTypeID.Window)));
+
+        return new AutomationWindow(item, this.uiAuto);
     }
 }
