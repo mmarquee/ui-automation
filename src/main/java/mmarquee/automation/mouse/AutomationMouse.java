@@ -30,4 +30,14 @@ public class AutomationMouse {
         }
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
+
+    public void rightClick() {
+        robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+        try {
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            // Hmmm.
+        }
+        robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+    }
 }

@@ -37,6 +37,13 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
+     * Waits for the application to accept input, i.e. not be idle, with maximun timeout
+     */
+    public void waitForInputIdle() {
+        user32.WaitForInputIdle(this.handle, new WinDef.DWORD(0xFFFFFFFF));
+    }
+
+    /**
      * Gets the window associated with the title
      * @param title The title to look for
      * @return An AutomationWindow
