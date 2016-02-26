@@ -23,11 +23,16 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 26/01/2016.
  */
-public class AutomationBase {
+public abstract class AutomationBase {
     protected IUIAutomationElement element;
 
     protected IUIAutomation uiAuto;
 
+    /**
+     * Constructor for the AutomationBase class
+     * @param element Element to use
+     * @param uiAuto The automation object
+     */
     public AutomationBase (IUIAutomationElement element, IUIAutomation uiAuto) {
         this.element = element;
         this.uiAuto = uiAuto;
@@ -141,6 +146,12 @@ public class AutomationBase {
         return this.element.findAll(scope, condition.getCondition());
     }
 
+    /**
+     * Gets the underlying automation pattern
+     * @param id The control id to look for
+     * @return The pattern
+     * @throws PatternNotFoundException
+     */
     private com4j.Com4jObject getPattern (int id) throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
 

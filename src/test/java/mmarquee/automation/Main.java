@@ -100,11 +100,19 @@ public class Main {
 		item1.setName("This");
 
 		AutomationTreeView tree = window.getTreeView(0);
-		AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
-		treeItem.select();
+		try {
+			AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
+			treeItem.select();
+		} catch (ItemNotFoundException ex) {
+			// Not found
+		}
 
 		AutomationList list = window.getListItem(0);
-		AutomationListItem listItem = list.getItem("First (List)");
-		listItem.select();
+		try {
+			AutomationListItem listItem = list.getItem("First (List)");
+			listItem.select();
+		} catch (ItemNotFoundException ex) {
+			// Not found
+		}
 	}
 }

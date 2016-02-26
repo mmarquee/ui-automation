@@ -32,12 +32,16 @@ public class AutomationTreeView extends AutomationBase {
      * @param name The name to look for
      * @return The AutomationTreeViewItem
      */
-    public AutomationTreeViewItem getItem(String name) {
+    public AutomationTreeViewItem getItem(String name) throws ItemNotFoundException {
         IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlTypeID.TreeItem)));
 
-        return new AutomationTreeViewItem(item, this.uiAuto);
+        if (item != null) {
+            return new AutomationTreeViewItem(item, this.uiAuto);
+        } else {
+            throw new ItemNotFoundException();
+        }
     }
 }

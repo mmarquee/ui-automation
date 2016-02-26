@@ -35,8 +35,20 @@ public class AutomationEditBox extends AutomationBase {
         return valuePattern.currentValue();
     }
 
+    /**
+     * Sets the value of the edit box
+     * @param value The value to set
+     */
     public void setValue(String value) {
         this.valuePattern.setValue(value);
+    }
+
+    /**
+     * Whether the element is read only
+     * @return True if readonly, otherwise false.
+     */
+    public boolean isReadOnly() {
+        return this.valuePattern.currentIsReadOnly() == 1;
     }
 
     public AutomationEditBox(IUIAutomationElement element, IUIAutomation uiAuto) {

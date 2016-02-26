@@ -27,6 +27,11 @@ public class AutomationButton extends AutomationBase {
 
     private InvokePattern invokePattern = null;
 
+    /**
+     * Constrcutor for the AutomationButton
+     * @param element The underlying automation element
+     * @param uiAuto The automation library
+     */
     public AutomationButton(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
