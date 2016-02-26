@@ -91,4 +91,18 @@ public class AutomationWindow extends AutomationContainer {
     public void waitForInputIdle(int timeout) {
         this.windowPattern.waitForInputIdle(timeout);
     }
+
+    /**
+     * Maximize the window
+     */
+    public void maximize() {
+        this.windowPattern.maximize();
+    }
+
+    /**
+     * Minimize the window
+     */
+    public void minimize() {
+        this.windowPattern.minimize();
+    }
 }

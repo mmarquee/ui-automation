@@ -15,4 +15,16 @@ public class WindowPattern {
     public void waitForInputIdle(int timeout){
         pattern.waitForInputIdle(timeout);
     }
+
+    public void maximize() {
+        this.pattern.setWindowVisualState(WindowVisualState.WindowVisualState_Maximized);
+    }
+
+    public void minimize() {
+        this.pattern.setWindowVisualState(WindowVisualState.WindowVisualState_Minimized);
+    }
+
+    public int currentIsModal () {
+        this.pattern.currentIsModal();
+    }
 }
