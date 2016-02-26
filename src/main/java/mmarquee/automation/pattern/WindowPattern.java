@@ -25,6 +25,6 @@ public class WindowPattern {
     }
 
     public int currentIsModal () {
-        this.pattern.currentIsModal();
+        return this.pattern.currentIsModal();
     }
 }
