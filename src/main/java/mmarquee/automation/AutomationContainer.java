@@ -236,4 +236,12 @@ public class AutomationContainer extends AutomationBase {
     public AutomationCalendar getCalendar (int index) {
         return new AutomationCalendar((this.getControlByControlType(index, ControlTypeID.Calendar)), this.uiAuto);
     }
+
+    /**
+     * Gets the panel control associated with the given index
+     * @param index Index of the control
+     */
+    public AutomationPanel getPanel (int index) {
+        return new AutomationPanel((this.getControlByControlType(index, ControlTypeID.Pane)), this.uiAuto);
+    }
 }

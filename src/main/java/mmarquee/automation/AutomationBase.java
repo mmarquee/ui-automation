@@ -279,4 +279,11 @@ public abstract class AutomationBase {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Text);
         return new TextPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
     }
+
+    /**
+     * Gets the bounding rectangle of the control
+     */
+  //  public void getBoundingRectangle() {
+ //       this.element.currentBoundingRectangle();
+ //   }
 }
