@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItemPattern;
 import mmarquee.automation.uiautomation.*;
 
@@ -29,7 +30,11 @@ public class AutomationTabItem extends AutomationBase {
     public AutomationTabItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        selectItemPattern = this.getSelectItemPattern();
+        try {
+            selectItemPattern = this.getSelectItemPattern();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 
     /**

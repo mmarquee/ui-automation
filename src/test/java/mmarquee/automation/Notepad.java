@@ -39,7 +39,7 @@ public class Notepad {
 		AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
 		window.focus();
 
-		AutomationDocument document = window.getgetDocumentByIndex(0);
+		AutomationDocument document = window.getDocument(0);
 		//document.setText("This is a journey into sound");
 
 		document.setName("This is a journey into sound");

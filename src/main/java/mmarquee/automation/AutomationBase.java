@@ -141,13 +141,13 @@ public class AutomationBase {
         return this.element.findAll(scope, condition.getCondition());
     }
 
-    private com4j.Com4jObject getPattern (int id) {
+    private com4j.Com4jObject getPattern (int id) throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
 
         if (unknown != null) {
             return unknown;
         } else {
-            return null;
+            throw new PatternNotFoundException();
         }
     }
 
@@ -157,7 +157,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
      */
-    protected SelectionItemPattern getSelectItemPattern() {
+    protected SelectionItemPattern getSelectItemPattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem);
 
         return new SelectionItemPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
@@ -169,7 +169,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
      */
-    protected SelectionPattern getSelectionPattern() {
+    protected SelectionPattern getSelectionPattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Selection);
 
         return new SelectionPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
@@ -181,7 +181,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationValuePattern associated with this control
      */
-    protected ValuePattern getValuePattern() {
+    protected ValuePattern getValuePattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Value);
 
         return new ValuePattern(unknown.queryInterface(IUIAutomationValuePattern.class));
@@ -193,7 +193,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTablePattern associated with this control
      */
-    protected TablePattern getTablePattern() {
+    protected TablePattern getTablePattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Table);
 
         return new TablePattern(unknown.queryInterface(IUIAutomationTablePattern.class));
@@ -205,7 +205,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
      */
-    protected WindowPattern getWindowPattern() {
+    protected WindowPattern getWindowPattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Window);
 
         return new WindowPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
@@ -217,7 +217,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
      */
-    protected ExpandCollapsePattern getExpandCollapsePattern() {
+    protected ExpandCollapsePattern getExpandCollapsePattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse);
 
         return new ExpandCollapsePattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
@@ -229,7 +229,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationGridPattern associated with this control
      */
-    protected GridPattern getGridPattern() {
+    protected GridPattern getGridPattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Grid);
 
         return new GridPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
@@ -241,7 +241,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTogglePattern associated with this control
      */
-    protected TogglePattern getTogglePattern() {
+    protected TogglePattern getTogglePattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle);
 
         return new TogglePattern(unknown.queryInterface(IUIAutomationTogglePattern.class));
@@ -253,7 +253,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
      */
-    protected InvokePattern getInvokePattern() {
+    protected InvokePattern getInvokePattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
         return new InvokePattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
     }
@@ -264,7 +264,7 @@ public class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTextPattern associated with this control
      */
-    protected TextPattern getTextPattern() {
+    protected TextPattern getTextPattern() throws PatternNotFoundException {
         com4j.Com4jObject unknown = this.getPattern(PatternID.Text);
         return new TextPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
     }

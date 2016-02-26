@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.WindowPattern;
 import mmarquee.automation.uiautomation.*;
 
@@ -87,24 +88,36 @@ public class AutomationWindow extends AutomationContainer {
      * @param timeout The timeout
      */
     public void waitForInputIdle(int timeout) {
-        WindowPattern windowPattern = this.getWindowPattern();
-        windowPattern.waitForInputIdle(timeout);
+        try {
+            WindowPattern windowPattern = this.getWindowPattern();
+            windowPattern.waitForInputIdle(timeout);
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 
     /**
      * Maximize the window
      */
     public void maximize() {
-        WindowPattern windowPattern = this.getWindowPattern();
-        windowPattern.maximize();
+        try {
+            WindowPattern windowPattern = this.getWindowPattern();
+            windowPattern.maximize();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 
     /**
      * Minimize the window
      */
     public void minimize() {
-        WindowPattern windowPattern = this.getWindowPattern();
-        windowPattern.minimize();
+        try {
+            WindowPattern windowPattern = this.getWindowPattern();
+            windowPattern.minimize();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 
     /**

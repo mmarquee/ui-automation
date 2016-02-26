@@ -17,6 +17,7 @@
 package mmarquee.automation;
 
 import mmarquee.automation.pattern.ExpandCollapsePattern;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 import java.util.ArrayList;
@@ -32,8 +33,12 @@ public class AutomationComboBox extends AutomationBase {
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
-        this.collapsePattern = this.getExpandCollapsePattern();
-        this.valuePattern = this.getValuePattern();
+        try {
+            this.collapsePattern = this.getExpandCollapsePattern();
+            this.valuePattern = this.getValuePattern();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 
     /**

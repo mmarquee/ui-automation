@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.TogglePattern;
 import mmarquee.automation.uiautomation.*;
 
@@ -47,6 +48,10 @@ public class AutomationCheckbox extends AutomationBase {
     public AutomationCheckbox (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        togglePattern = this.getTogglePattern();
+        try {
+            togglePattern = this.getTogglePattern();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 }

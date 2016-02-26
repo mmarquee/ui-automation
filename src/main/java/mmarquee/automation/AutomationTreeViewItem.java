@@ -1,5 +1,6 @@
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItemPattern;
 import mmarquee.automation.uiautomation.*;
 
@@ -13,7 +14,12 @@ public class AutomationTreeViewItem extends AutomationBase {
     public AutomationTreeViewItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        this.selectItemPattern = this.getSelectItemPattern();
+        try {
+            this.selectItemPattern = this.getSelectItemPattern();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
+
     }
 
     public void select() {

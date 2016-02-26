@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
 
@@ -41,6 +42,10 @@ public class AutomationEditBox extends AutomationBase {
     public AutomationEditBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        this.valuePattern = this.getValuePattern();
+        try {
+            this.valuePattern = this.getValuePattern();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 }

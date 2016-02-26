@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionPattern;
 import mmarquee.automation.pattern.ValuePattern;
 import mmarquee.automation.uiautomation.*;
@@ -33,7 +34,11 @@ public class AutomationList extends AutomationBase {
     public AutomationList(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        this.selectionPattern = this.getSelectionPattern();
+        try {
+            this.selectionPattern = this.getSelectionPattern();
+        } catch (PatternNotFoundException ex) {
+            // Handle this nicely somehow
+        }
     }
 
     public AutomationListItem getItem(String name) {
