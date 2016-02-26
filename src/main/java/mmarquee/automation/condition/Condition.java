@@ -15,7 +15,9 @@
  */
 package mmarquee.automation.condition;
 
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.uiautomation.*;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by inpwt on 24/02/2016.
@@ -27,7 +29,13 @@ public abstract class Condition {
         this.uiAuto = uiAuto;
     }
 
-    public IUIAutomationCondition getCondition() {
-        return null;
+    /**
+     * Base 'abstract' method for Condition, needs to be implemented in the
+     * subclasses, otherwise an exception is raised
+     * @return
+     * @throws NotImplementedException
+     */
+    public IUIAutomationCondition getCondition() throws NotImplementedException {
+        throw new NotImplementedException();
     }
 }

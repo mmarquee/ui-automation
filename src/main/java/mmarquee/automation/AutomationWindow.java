@@ -16,8 +16,7 @@
 
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.WindowPattern;
+import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
 /**

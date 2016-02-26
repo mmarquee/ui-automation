@@ -28,7 +28,7 @@ public class Main {
 		AutomationApplication application = null;
 
 		try {
-			application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\DelphiUIAutomation\\demo\\democlient\\Win32\\Debug\\Project1.exe");
+			application = automation.launchOrAttach("C:\\Users\\inpwt\\Desktop\\ui-automation\\apps\\Project1.exe");
 		} catch (Throwable ex) {
 			// Smother????
 		}
@@ -110,8 +110,7 @@ public class Main {
 		} catch (ItemNotFoundException ex) {
 			// Not found
 		}
-/*
-Stopped working!
+
 		AutomationList list = window.getListItem(0);
 		try {
 			AutomationListItem listItem = list.getItem("First (List)");
@@ -119,6 +118,5 @@ Stopped working!
 		} catch (ItemNotFoundException ex) {
 			// Not found
 		}
-		*/
 	}
 }

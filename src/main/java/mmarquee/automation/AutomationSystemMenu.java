@@ -29,7 +29,7 @@ public class AutomationSystemMenu extends AutomationBase {
         this.getItems();
     }
 
-    public AutomationMenuItem getItem(String name) {
+    public AutomationMenuItem getItem(String name) throws ItemNotFoundException {
 
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
@@ -55,7 +55,7 @@ public class AutomationSystemMenu extends AutomationBase {
             return new AutomationMenuItem(foundElement, this.uiAuto);
         } else {
             // Throw an exception
-            return null;
+            throw  new ItemNotFoundException();
         }
     }
 

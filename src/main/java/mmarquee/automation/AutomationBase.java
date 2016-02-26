@@ -63,7 +63,7 @@ public abstract class AutomationBase {
     }
 
     /**
-     * Finds the first match for the oondition
+     * Finds the first match for the condition
      * @param scope The scope of where to look
      * @param condition The condition to use
      * @return The found IUIAutomationElement
