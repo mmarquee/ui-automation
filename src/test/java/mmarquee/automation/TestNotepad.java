@@ -25,7 +25,7 @@ public class TestNotepad {
         AutomationDocument document = window.getDocument(0);
         //document.setText("This is a journey into sound");
 
-        document.setName("This is a journey into sound");
+//        document.setName("This is a journey into sound");
 
 /*
 		AutomationMainMenu menu = window.getMainMenu();
