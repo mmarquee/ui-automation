@@ -43,7 +43,7 @@ public class TestMain {
         String name = window.name();
         boolean val = window.isModal();
 
-        WinDef.RECT rect = window.getBoundingRectangle();
+        java.lang.Object rect = window.getBoundingRectangle();
 
         // Interact with menus
         AutomationMainMenu menu = window.getMainMenu();
@@ -58,7 +58,10 @@ public class TestMain {
         exit.click();
 
         AutomationWindow popup = window.getWindow("Project1");
+        Object val111 = popup.getBoundingRectangle();
+
         AutomationButton btn = popup.getButton("OK");
+        Object val11 = btn.getBoundingRectangle();
 
         boolean val1 = popup.isModal();
 

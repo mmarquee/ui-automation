@@ -16,7 +16,9 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
+import com4j.NativeType;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
@@ -358,21 +360,19 @@ public abstract class AutomationBase {
     }
 
     /**
+     * Is the control enabaled
+     * @return Enabled ?
+     */
+    public boolean isEnabled () {
+        return this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle).equals(true);
+    }
+
+    /**
      * Gets the bounding rectangle of the control
      *
      * As com4j hasn't created the method, we have use other methods
      */
-     public WinDef.RECT getBoundingRectangle() {
-
-         WinDef.RECT rect = new WinDef.RECT();
-
-        // Buffer buffer = this.element.currentBoundingRectangle();
-
-         java.lang.Object value = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
-
-         //WinDef.RECT rect = this.element.currentBoundingRectangle();
-         //return this.element.currentBoundingRectangle();
-
-        return rect;
+     public java.lang.Object getBoundingRectangle() {
+         return this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
      }
 }

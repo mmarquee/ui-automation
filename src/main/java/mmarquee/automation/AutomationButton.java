@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation;
 
 import mmarquee.automation.pattern.InvokePattern;
@@ -28,7 +27,7 @@ public class AutomationButton extends AutomationBase {
     private InvokePattern invokePattern = null;
 
     /**
-     * Constrcutor for the AutomationButton
+     * Constructor for the AutomationButton
      * @param element The underlying automation element
      * @param uiAuto The automation library
      */
