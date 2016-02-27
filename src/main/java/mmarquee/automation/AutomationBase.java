@@ -37,20 +37,82 @@ public abstract class AutomationBase {
     public AutomationBase (IUIAutomationElement element, IUIAutomation uiAuto) {
         this.element = element;
         this.uiAuto = uiAuto;
-
-        this.getProperties();
     }
 
-    private void getProperties() {
-        java.lang.Object value = this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable);
-        java.lang.Object value1 = this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable);
-        java.lang.Object value2 = this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable);
-        java.lang.Object value3 = this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable);
-        java.lang.Object value4 = this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable);
-        java.lang.Object value5 = this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable);
+    public java.lang.Object isDockPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable);
+    }
 
-        java.lang.Object value6 = this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable);
-        java.lang.Object value7 = this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable);
+    public java.lang.Object isExpandCollapsePatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable);
+    }
+
+    public java.lang.Object isGridItemPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable);
+    }
+
+    public java.lang.Object isMultipleViewPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable);
+    }
+
+    public java.lang.Object isInvokePatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable);
+    }
+
+    public java.lang.Object isGridPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable);
+    }
+
+    public java.lang.Object isRangeValuePatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable);
+    }
+
+    public java.lang.Object isScrollPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable);
+    }
+
+    public java.lang.Object isSelectionItemPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable);
+    }
+
+    public java.lang.Object isScrollItemPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable);
+    }
+
+    public java.lang.Object isWindowPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable);
+    }
+
+    public java.lang.Object isTextPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsTextPatternAvailable);
+    }
+
+    public java.lang.Object isTableItemPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsTableItemPatternAvailable);
+    }
+
+    public java.lang.Object isTablePatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsTablePatternAvailable);
+    }
+
+    public java.lang.Object isSelectionPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionPatternAvailable);
+    }
+
+    public java.lang.Object isTransformPatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsTransformPatternAvailable);
+    }
+
+    public java.lang.Object isTogglePatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsTogglePatternAvailable);
+    }
+
+    public java.lang.Object isValuePatternAvailable () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsValuePatternAvailable);
+    }
+
+    public java.lang.Object isOffscreen () {
+        return this.element.getCurrentPropertyValue(PropertyID.IsOffscreen);
     }
 
     /**

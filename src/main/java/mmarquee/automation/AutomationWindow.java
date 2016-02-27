@@ -36,9 +36,7 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        Object value = this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable);
-
-        if (value.equals(true)) {
+        if (this.isWindowPatternAvailable().equals(true)) {
             try {
                 this.windowPattern = this.getWindowPattern();
             } catch (PatternNotFoundException ex) {
@@ -149,8 +147,10 @@ public class AutomationWindow extends AutomationContainer {
      * @return True if modal
      */
     public boolean isModal() {
-        Object val = this.element.getCurrentPropertyValue(PropertyID.WindowIsModal);
+        return this.element.getCurrentPropertyValue(PropertyID.WindowIsModal).equals(true);
+    }
 
-        return val.equals(true);
+    public boolean isTopmost() {
+        return this.element.getCurrentPropertyValue(PropertyID.WindowIsTopmost).equals(true);
     }
 }
