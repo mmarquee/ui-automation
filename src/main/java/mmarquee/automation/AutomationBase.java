@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
@@ -36,6 +37,20 @@ public abstract class AutomationBase {
     public AutomationBase (IUIAutomationElement element, IUIAutomation uiAuto) {
         this.element = element;
         this.uiAuto = uiAuto;
+
+        this.getProperties();
+    }
+
+    private void getProperties() {
+        java.lang.Object value = this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable);
+        java.lang.Object value1 = this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable);
+        java.lang.Object value2 = this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable);
+        java.lang.Object value3 = this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable);
+        java.lang.Object value4 = this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable);
+        java.lang.Object value5 = this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable);
+
+        java.lang.Object value6 = this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable);
+        java.lang.Object value7 = this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable);
     }
 
     /**
@@ -282,8 +297,20 @@ public abstract class AutomationBase {
 
     /**
      * Gets the bounding rectangle of the control
+     *
+     * As com4j hasn't created the method, we have use other methods
      */
-  //  public void getBoundingRectangle() {
- //       this.element.currentBoundingRectangle();
- //   }
+     public WinDef.RECT getBoundingRectangle() {
+
+         WinDef.RECT rect = new WinDef.RECT();
+
+        // Buffer buffer = this.element.currentBoundingRectangle();
+
+         java.lang.Object value = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
+
+         //WinDef.RECT rect = this.element.currentBoundingRectangle();
+         //return this.element.currentBoundingRectangle();
+
+        return rect;
+     }
 }

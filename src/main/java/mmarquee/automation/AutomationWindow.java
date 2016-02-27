@@ -24,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationWindow extends AutomationContainer {
 
-   // private WindowPattern windowPattern;
+    private WindowPattern windowPattern;
 
     /**
      * Focuses this control.
@@ -35,6 +35,16 @@ public class AutomationWindow extends AutomationContainer {
 
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+
+        Object value = this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable);
+
+        if (value.equals(true)) {
+            try {
+                this.windowPattern = this.getWindowPattern();
+            } catch (PatternNotFoundException ex) {
+                // Smother this?
+            }
+        }
     }
 
     /**
@@ -88,36 +98,21 @@ public class AutomationWindow extends AutomationContainer {
      * @param timeout The timeout
      */
     public void waitForInputIdle(int timeout) {
-        try {
-            WindowPattern windowPattern = this.getWindowPattern();
-            windowPattern.waitForInputIdle(timeout);
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.windowPattern.waitForInputIdle(timeout);
     }
 
     /**
      * Maximize the window
      */
     public void maximize() {
-        try {
-            WindowPattern windowPattern = this.getWindowPattern();
-            windowPattern.maximize();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.windowPattern.maximize();
     }
 
     /**
      * Minimize the window
      */
     public void minimize() {
-        try {
-            WindowPattern windowPattern = this.getWindowPattern();
-            windowPattern.minimize();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.windowPattern.minimize();
     }
 
     /**
@@ -147,5 +142,15 @@ public class AutomationWindow extends AutomationContainer {
         }
 
         return new AutomationWindow(item, this.uiAuto);
+    }
+
+    /**
+     * Whether this window is modal
+     * @return True if modal
+     */
+    public boolean isModal() {
+        Object val = this.element.getCurrentPropertyValue(PropertyID.WindowIsModal);
+
+        return val.equals(true);
     }
 }

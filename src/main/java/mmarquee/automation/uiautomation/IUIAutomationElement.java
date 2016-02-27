@@ -16,6 +16,8 @@
 
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.PointerByReference;
 import com4j.*;
 
 @IID("{D22108AA-8AC5-49A5-837B-37BBB3D7591E}")

@@ -15,6 +15,7 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.uiautomation.ToggleState;
 
 import java.util.List;
@@ -40,6 +41,9 @@ public class TestMain {
 
         AutomationWindow window = automation.getDesktopWindow("Form1");
         String name = window.name();
+        boolean val = window.isModal();
+
+        WinDef.RECT rect = window.getBoundingRectangle();
 
         // Interact with menus
         AutomationMainMenu menu = window.getMainMenu();
@@ -55,6 +59,8 @@ public class TestMain {
 
         AutomationWindow popup = window.getWindow("Project1");
         AutomationButton btn = popup.getButton("OK");
+
+        boolean val1 = popup.isModal();
 
         btn.click();
 
