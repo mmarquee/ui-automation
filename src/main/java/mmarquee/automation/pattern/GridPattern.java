@@ -23,8 +23,16 @@ import mmarquee.automation.uiautomation.*;
 public class GridPattern {
     private IUIAutomationGridPattern pattern;
 
-    public GridPattern (IUIAutomationGridPattern pattern) {
+    public GridPattern () {
+        this.pattern = null;
+    }
+
+    public void setPattern(IUIAutomationGridPattern pattern) {
         this.pattern = pattern;
+    }
+
+    public boolean isAvailable () {
+        return (pattern == null);
     }
 
     public IUIAutomationElement getItem(int x, int y) {

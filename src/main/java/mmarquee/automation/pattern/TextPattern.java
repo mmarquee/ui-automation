@@ -22,10 +22,18 @@ import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class TextPattern {
+public class TextPattern extends Pattern {
     private IUIAutomationTextPattern pattern;
 
-    public TextPattern(IUIAutomationTextPattern pattern) {
+    public void setPattern (IUIAutomationTextPattern pattern) {
         this.pattern = pattern;
+    }
+
+    public boolean isAvailable () {
+        return (pattern == null);
+    }
+
+    public TextPattern() {
+        this.pattern = null;
     }
 }
