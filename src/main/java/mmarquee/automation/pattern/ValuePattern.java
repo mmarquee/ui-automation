@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
+import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -31,8 +32,8 @@ public class ValuePattern implements Pattern {
         return (pattern == null);
     }
 
-    public void setPattern (IUIAutomationValuePattern pattern) {
-        this.pattern = pattern;
+    public void setPattern (Com4jObject pattern) {
+        this.pattern = (IUIAutomationValuePattern)pattern;
     }
 
     public String currentValue() {

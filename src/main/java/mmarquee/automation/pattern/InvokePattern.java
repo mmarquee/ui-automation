@@ -1,5 +1,6 @@
 package mmarquee.automation.pattern;
 
+import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -12,8 +13,8 @@ public class InvokePattern implements Pattern {
         this.pattern = null;
     }
 
-    public void setPattern (IUIAutomationInvokePattern pattern) {
-        this.pattern = pattern;
+    public void setPattern (Com4jObject pattern) {
+        this.pattern = (IUIAutomationInvokePattern)pattern;
     }
 
     public void invoke() {

@@ -15,9 +15,22 @@
  */
 package mmarquee.automation.pattern;
 
+import com4j.Com4jObject;
+import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+
 /**
  * Created by inpwt on 28/02/2016.
  */
 public interface Pattern {
+    /**
+     * Is the pattern available?
+     * @return True if available
+     */
     boolean isAvailable ();
+
+    /**
+     * Sets the pattern
+     * @param pattern The pattern to set
+     */
+    void setPattern (Com4jObject pattern);
 }

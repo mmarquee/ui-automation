@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
+import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -27,8 +28,8 @@ public class SelectionItemPattern implements Pattern {
         this.pattern = null;
     }
 
-    public void setPattern(IUIAutomationSelectionItemPattern pattern) {
-        this.pattern = pattern;
+    public void setPattern(Com4jObject pattern) {
+        this.pattern = (IUIAutomationSelectionItemPattern)pattern;
     }
 
     public void select () {

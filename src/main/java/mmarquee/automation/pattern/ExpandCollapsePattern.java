@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
+import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -24,11 +25,11 @@ public class ExpandCollapsePattern implements Pattern {
     private IUIAutomationExpandCollapsePattern pattern;
 
     public ExpandCollapsePattern () {
-        this.pattern = pattern;
+        this.pattern = null;
     }
 
-    public void setPattern (IUIAutomationExpandCollapsePattern pattern) {
-        this.pattern = pattern;
+    public void setPattern (Com4jObject pattern) {
+        this.pattern = (IUIAutomationExpandCollapsePattern)pattern;
     }
 
     public void expand() {

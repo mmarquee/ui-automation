@@ -1,5 +1,6 @@
 package mmarquee.automation.pattern;
 
+import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
@@ -15,8 +16,8 @@ public class TogglePattern implements Pattern {
         return (pattern == null);
     }
 
-    public void setPattern(IUIAutomationTogglePattern pattern) {
-        this.pattern = pattern;
+    public void setPattern(Com4jObject pattern) {
+        this.pattern = (IUIAutomationTogglePattern)pattern;
     }
 
     public TogglePattern() {

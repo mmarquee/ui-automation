@@ -17,10 +17,18 @@ public class AutomationMouse {
         }
     }
 
+    /**
+     * Moves mouse pointer to given screen coordinates.
+     * @param x         X position
+     * @param y         Y position
+     */
     public void setLocation(int x, int y) {
         robot.mouseMove(x, y);
     }
 
+    /**
+     * Clicks the left mouse button
+     */
     public void leftClick() {
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
         try {
@@ -31,6 +39,9 @@ public class AutomationMouse {
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
 
+    /**
+     * Clicks the right mouse button
+     */
     public void rightClick() {
         robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
         try {
