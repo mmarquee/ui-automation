@@ -17,6 +17,7 @@ package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.uiautomation.ToggleState;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -28,12 +29,15 @@ public class TestMain {
     public void run () {
         UIAutomation automation = new UIAutomation();
 
+        Logger logger = Logger.getLogger(AutomationBase.class.getName());
+
         AutomationApplication application = null;
 
         try {
             application = automation.launchOrAttach("apps\\Project1.exe");
         } catch (Throwable ex) {
             // Smother????
+            logger.warn("Failed to find application", ex);
         }
 
         // Wait for the process to start
@@ -41,6 +45,8 @@ public class TestMain {
 
         AutomationWindow window = automation.getDesktopWindow("Form1");
         String name = window.name();
+        logger.info(name);
+
         boolean val = window.isModal();
 
         java.lang.Object rect = window.getBoundingRectangle();
@@ -72,6 +78,7 @@ public class TestMain {
         //	String tabName = tab.name();
 
         String text = tab.getEditBox(0).getValue();
+        logger.info(text);
 
         AutomationCheckbox check = window.getCheckbox(0);
         check.toggle();
@@ -89,6 +96,8 @@ public class TestMain {
         cb1.setText("Replacements");
         String txt = cb1.text();
 
+        logger.info(txt);
+
         AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
         cb0.expand();
         try {
@@ -98,21 +107,15 @@ public class TestMain {
         }
         List<AutomationListItem> litems = cb0.getList();
 
-        String dummy = "";
-    /*
-            AutomationButton button1 = window.getButtonByName("OK");
-            button1.click();
-
-            AutomationButton button2 = window.getButtonByName("Cancel");
-            button2.click();
-    */
         // Now string grids
         AutomationStringGrid grid = window.getStringGrid(0);
 
         AutomationStringGridItem item1 = grid.getItem(0, 0);
 
         String itemName = item1.name();
+        logger.info(itemName);
         item1.setName("This");
+        logger.info(item1.name());
 
         AutomationTreeView tree = window.getTreeView(0);
         try {
