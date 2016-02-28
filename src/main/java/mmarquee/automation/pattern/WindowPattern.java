@@ -5,10 +5,18 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class WindowPattern {
+public class WindowPattern implements Pattern {
     private IUIAutomationWindowPattern pattern;
 
-    public WindowPattern (IUIAutomationWindowPattern pattern) {
+    public WindowPattern () {
+        this.pattern = null;
+    }
+
+    public boolean isAvailable () {
+        return (pattern == null);
+    }
+
+    public void setPattern (IUIAutomationWindowPattern pattern) {
         this.pattern = pattern;
     }
 

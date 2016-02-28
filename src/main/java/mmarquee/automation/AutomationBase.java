@@ -248,9 +248,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
      */
     protected SelectionItemPattern getSelectItemPattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem);
+        SelectionItemPattern pattern = new SelectionItemPattern();
 
-        return new SelectionItemPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
+        if (isSelectionItemPatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -260,9 +266,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
      */
     protected SelectionPattern getSelectionPattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.Selection);
+        SelectionPattern pattern = new SelectionPattern();
 
-        return new SelectionPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
+        if (isSelectionPatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Selection);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -272,9 +284,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationValuePattern associated with this control
      */
     protected ValuePattern getValuePattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.Value);
+        ValuePattern pattern = new ValuePattern();
 
-        return new ValuePattern(unknown.queryInterface(IUIAutomationValuePattern.class));
+        if (isValuePatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Value);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationValuePattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -284,9 +302,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTablePattern associated with this control
      */
     protected TablePattern getTablePattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.Table);
+        TablePattern pattern = new TablePattern();
 
-        return new TablePattern(unknown.queryInterface(IUIAutomationTablePattern.class));
+        if (isTablePatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Table);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationTablePattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -296,9 +320,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
      */
     protected WindowPattern getWindowPattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.Window);
+        WindowPattern pattern = new WindowPattern();
 
-        return new WindowPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
+        if (isWindowPatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Window);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -308,9 +338,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
      */
     protected ExpandCollapsePattern getExpandCollapsePattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse);
+        ExpandCollapsePattern pattern = new ExpandCollapsePattern();
 
-        return new ExpandCollapsePattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
+        if (isExpandCollapsePatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -323,7 +359,7 @@ public abstract class AutomationBase {
         GridPattern pattern = new GridPattern();
 
         if (isGridPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Grid);
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
         }
@@ -356,8 +392,15 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
      */
     protected InvokePattern getInvokePattern() throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
-        return new InvokePattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
+        InvokePattern pattern = new InvokePattern();
+
+        if (isInvokePatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
+        }
+
+        return pattern;
     }
 
     /**
@@ -378,7 +421,7 @@ public abstract class AutomationBase {
     }
 
     /**
-     * Is the control enabaled
+     * Is the control enabled
      * @return Enabled ?
      */
     public boolean isEnabled () {

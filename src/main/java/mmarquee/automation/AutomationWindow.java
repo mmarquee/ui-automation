@@ -19,6 +19,8 @@ package mmarquee.automation;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
+import java.io.Console;
+
 /**
  * Created by inpwt on 26/01/2016.
  */
@@ -36,12 +38,10 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-        if (this.isWindowPatternAvailable().equals(true)) {
-            try {
-                this.windowPattern = this.getWindowPattern();
-            } catch (PatternNotFoundException ex) {
-                // Smother this?
-            }
+        try {
+            this.windowPattern = this.getWindowPattern();
+        } catch (PatternNotFoundException ex) {
+            // log this
         }
     }
 

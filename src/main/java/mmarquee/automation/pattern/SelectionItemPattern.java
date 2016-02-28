@@ -20,14 +20,22 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class SelectionItemPattern {
+public class SelectionItemPattern implements Pattern {
     private IUIAutomationSelectionItemPattern pattern;
 
-    public SelectionItemPattern(IUIAutomationSelectionItemPattern pattern) {
+    public SelectionItemPattern() {
+        this.pattern = null;
+    }
+
+    public void setPattern(IUIAutomationSelectionItemPattern pattern) {
         this.pattern = pattern;
     }
 
     public void select () {
         pattern.select();
+    }
+
+    public boolean isAvailable () {
+        return (pattern == null);
     }
 }

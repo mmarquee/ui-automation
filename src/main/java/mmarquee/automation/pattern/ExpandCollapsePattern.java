@@ -20,10 +20,14 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class ExpandCollapsePattern {
+public class ExpandCollapsePattern implements Pattern {
     private IUIAutomationExpandCollapsePattern pattern;
 
-    public ExpandCollapsePattern (IUIAutomationExpandCollapsePattern pattern) {
+    public ExpandCollapsePattern () {
+        this.pattern = pattern;
+    }
+
+    public void setPattern (IUIAutomationExpandCollapsePattern pattern) {
         this.pattern = pattern;
     }
 
@@ -35,4 +39,7 @@ public class ExpandCollapsePattern {
         this.pattern.collapse();
     }
 
+    public boolean isAvailable () {
+        return (pattern == null);
+    }
 }

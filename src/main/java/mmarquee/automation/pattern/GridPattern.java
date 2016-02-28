@@ -20,7 +20,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class GridPattern {
+public class GridPattern implements Pattern {
     private IUIAutomationGridPattern pattern;
 
     public GridPattern () {
