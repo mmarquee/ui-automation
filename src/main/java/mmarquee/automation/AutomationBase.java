@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
@@ -433,7 +434,12 @@ public abstract class AutomationBase {
     /**
      * Gets the bounding rectangle of the control
      */
-     public java.lang.Object getBoundingRectangle() {
-         return this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
+     public WinDef.RECT getBoundingRectangle() {
+         Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
+
+         // obj is always empty :-(
+         WinDef.RECT rect = new WinDef.RECT();
+
+         return rect;
      }
 }
