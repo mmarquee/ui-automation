@@ -24,6 +24,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 03/02/2016.
  */
 public class AutomationHyperlink extends AutomationBase {
+    /**
+     * Constructor for the AutomationHyperlink
+     * @param element
+     * @param uiAuto
+     */
     public AutomationHyperlink(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
@@ -31,15 +36,15 @@ public class AutomationHyperlink extends AutomationBase {
     /**
      * Fires the click event associated with this element.
      *
-     * The Delphi version of this depends on getting the bounding rect for the control, and
+     * The Delphi version of this depends on getting the clickable point for the control, and
      * finding middle of the control and clicking on it, but the Com4j classes skip this and
      * the property version of this also does not work
      */
     public void click() {
-        WinDef.RECT rect = this.getBoundingRectangle();
+        WinDef.POINT point = this.getClickablePoint();
 
         AutomationMouse mouse = new AutomationMouse();
-        mouse.setLocation(rect.top +5, rect.left +5);
+        mouse.setLocation(point.x, point.y);
         mouse.leftClick();
     }
 }

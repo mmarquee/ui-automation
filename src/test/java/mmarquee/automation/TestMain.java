@@ -88,13 +88,19 @@ public class TestMain {
         AutomationRadioButton radio = window.getRadioButton(1);
         radio.selectItem();
 
-        AutomationStatusBar statusbar = window.getStatusBar();
-        //	String eb0Text = statusbar.getTextBoxByIndex(0).getValue();
-        //	String eb1Text = statusbar.getTextBoxByIndex(1).getValue();
+     //   AutomationStatusBar statusbar = window.getStatusBar();
+
+       // AutomationTextBox tb0 = statusbar.getTextBox(0);
+     //   AutomationTextBox tb1 = statusbar.getTextBox(1);
+
+       // String eb0Text = statusbar.getTextBox(0).getValue();
+      //  String eb1Text = statusbar.getTextBox(1).getValue();
 
         AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
         cb1.setText("Replacements");
         String txt = cb1.text();
+
+        cb1.getClickablePoint();
 
         logger.info("Text for AutomatedCombobox1 is " + txt);
 

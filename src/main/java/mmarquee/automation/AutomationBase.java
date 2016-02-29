@@ -115,8 +115,24 @@ public abstract class AutomationBase {
         return this.element.getCurrentPropertyValue(PropertyID.IsValuePatternAvailable).equals(true);
     }
 
-    protected boolean isOffscreen () {
+    /**
+     * Is the control off screen?
+     * @return Off screen?
+     */
+    protected boolean isOffScreen () {
         return this.element.getCurrentPropertyValue(PropertyID.IsOffscreen).equals(true);
+    }
+
+    /**
+     * Gets a clickable point for the control
+     * @return
+     */
+    public WinDef.POINT getClickablePoint () {
+        Object value = this.element.getCurrentPropertyValue(PropertyID.ClickablePoint);
+
+        WinDef.POINT point = new WinDef.POINT();
+
+        return point;
     }
 
     /**
