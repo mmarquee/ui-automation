@@ -27,6 +27,8 @@ public class AutomationApplication extends AutomationBase {
     private final User32 user32 = User32.INSTANCE;
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
+    private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
+
     /**
      * Waits for the application to accept input, i.e. not be idle
      * @param timeout
@@ -36,10 +38,10 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Waits for the application to accept input, i.e. not be idle, with maximun timeout
+     * Waits for the application to accept input, i.e. not be idle, with maximum timeout
      */
     public void waitForInputIdle() {
-        user32.WaitForInputIdle(this.handle, new WinDef.DWORD(0xFFFFFFFF));
+        user32.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
     }
 
     /**
