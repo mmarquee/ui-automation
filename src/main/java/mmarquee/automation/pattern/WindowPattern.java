@@ -31,7 +31,7 @@ public class WindowPattern extends BasePattern {
     }
 
     /**
-     * Maximize the controll
+     * Maximize the control
      */
     public void maximize() {
         ((IUIAutomationWindowPattern)this.pattern).setWindowVisualState(WindowVisualState.WindowVisualState_Maximized);
@@ -48,7 +48,16 @@ public class WindowPattern extends BasePattern {
      * Returns whether this control is modal
      * @return Is this control modal
      */
-    public int currentIsModal () {
-        return ((IUIAutomationWindowPattern)this.pattern).currentIsModal();
+    public boolean isModal () {
+        return ((IUIAutomationWindowPattern)this.pattern).currentIsModal()  == 1;
     }
+
+    /**
+     * IS this window topmost
+     * @return Is the window topmost
+     */
+    public boolean isTopMost () {
+        return ((IUIAutomationWindowPattern)this.pattern).currentIsTopmost() == 1;
+    }
+
 }

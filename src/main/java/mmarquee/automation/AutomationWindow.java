@@ -147,10 +147,14 @@ public class AutomationWindow extends AutomationContainer {
      * @return True if modal
      */
     public boolean isModal() {
-        return this.element.getCurrentPropertyValue(PropertyID.WindowIsModal).equals(true);
+        return this.windowPattern.isModal();
     }
 
-    public boolean isTopmost() {
-        return this.element.getCurrentPropertyValue(PropertyID.WindowIsTopmost).equals(true);
+    /**
+     * Whether this window is topmost
+     * @return True if topmost
+     */
+    public boolean isTopMost() {
+        return this.windowPattern.isTopMost();
     }
 }
