@@ -15,9 +15,19 @@
  */
 package mmarquee.automation.pattern;
 
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
+
 /**
  * Created by inpwt on 25/02/2016.
  */
 public class TextPattern extends BasePattern {
     //?? Needs to do SOMETHING!!!
+    public void getSelection() {
+        IUIAutomationTextRangeArray selection =
+                ((IUIAutomationTextPattern)pattern).getSelection();
+
+        // OK, now what?
+    }
 }

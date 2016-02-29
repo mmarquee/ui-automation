@@ -34,4 +34,16 @@ public class ExpandCollapsePattern extends BasePattern {
     public void collapse() {
         ((IUIAutomationExpandCollapsePattern)this.pattern).collapse();
     }
+
+    /**
+     * Determines whether the control is expanded
+     * @return Is the control expanded
+     */
+    public boolean isExpanded() {
+        ExpandCollapseState state =
+            ((IUIAutomationExpandCollapsePattern)this.pattern).currentExpandCollapseState();
+
+        return state == ExpandCollapseState.ExpandCollapseState_Expanded;
+    }
+
 }

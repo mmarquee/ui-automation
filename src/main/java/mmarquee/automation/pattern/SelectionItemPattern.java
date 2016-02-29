@@ -21,6 +21,9 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 25/02/2016.
  */
 public class SelectionItemPattern extends BasePattern {
+    /**
+     * Selects the given item
+     */
     public void select () {
         ((IUIAutomationSelectionItemPattern)pattern).select();
     }
