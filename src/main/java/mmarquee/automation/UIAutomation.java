@@ -123,24 +123,20 @@ public class UIAutomation {
     public AutomationWindow getDesktopWindow(String title) {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
+        IUIAutomationElement element = null;
 
-        IUIAutomationElementArray collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
+        for (int loop = 0; loop <10; loop++) {
+            element = this.rootElement.findFirst(TreeScope.TreeScope_Descendants,
+                    this.uiAuto.createAndCondition(
+                            this.uiAuto.createPropertyCondition(PropertyID.Name, title),
+                            this.uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.Window)));
 
-        int length = collection.length();
-
-        AutomationWindow foundElement = null;
-
-        for (int count = 0; count < length; count++) {
-            IUIAutomationElement element = collection.getElement(count);
-            String name = element.currentName();
-
-            if (name.equals(title)) {
-                foundElement = new AutomationWindow(element, this.uiAuto);
+            if (element != null) {
+                break;
             }
         }
 
-        return foundElement;
+        return new AutomationWindow(element, this.uiAuto);
     }
 
     /**
