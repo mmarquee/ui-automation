@@ -15,28 +15,13 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class SelectionItemPattern implements Pattern {
-    private IUIAutomationSelectionItemPattern pattern;
-
-    public SelectionItemPattern() {
-        this.pattern = null;
-    }
-
-    public void setPattern(Com4jObject pattern) {
-        this.pattern = (IUIAutomationSelectionItemPattern)pattern;
-    }
-
+public class SelectionItemPattern extends BasePattern {
     public void select () {
-        pattern.select();
-    }
-
-    public boolean isAvailable () {
-        return (pattern == null);
+        ((IUIAutomationSelectionItemPattern)pattern).select();
     }
 }

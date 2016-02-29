@@ -78,7 +78,7 @@ public class TestMain {
         //	String tabName = tab.name();
 
         String text = tab.getEditBox(0).getValue();
-        logger.info(text);
+        logger.info("Text for editBox1 is " + text);
 
         AutomationCheckbox check = window.getCheckbox(0);
         check.toggle();
@@ -96,7 +96,7 @@ public class TestMain {
         cb1.setText("Replacements");
         String txt = cb1.text();
 
-        logger.info(txt);
+        logger.info("Text for AutomatedCombobox1 is " + txt);
 
         AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
         cb0.expand();

@@ -15,36 +15,33 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class ValuePattern implements Pattern {
-    private IUIAutomationValuePattern pattern;
-
-    public ValuePattern () {
-        this.pattern = null;
-    }
-
-    public boolean isAvailable () {
-        return (pattern == null);
-    }
-
-    public void setPattern (Com4jObject pattern) {
-        this.pattern = (IUIAutomationValuePattern)pattern;
-    }
-
+public class ValuePattern extends BasePattern {
+    /**
+     * Get the current value of the control
+     * @return
+     */
     public String currentValue() {
-        return pattern.currentValue();
+        return ((IUIAutomationValuePattern)pattern).currentValue();
     }
 
+    /**
+     * Gets the current readonly status of the control
+     * @return True if read-only
+     */
     public int currentIsReadOnly() {
-        return pattern.currentIsReadOnly();
+        return ((IUIAutomationValuePattern)pattern).currentIsReadOnly();
     }
 
+    /**
+     * Sets the value of the control
+     * @param value Value to use
+     */
     public void setValue(String value) {
-        pattern.setValue(value);
+        ((IUIAutomationValuePattern)pattern).setValue(value);
     }
 }

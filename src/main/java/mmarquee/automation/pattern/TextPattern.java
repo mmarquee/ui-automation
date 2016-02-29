@@ -15,26 +15,9 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.Com4jObject;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
-
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class TextPattern implements Pattern {
-    private IUIAutomationTextPattern pattern;
-
-    public void setPattern (Com4jObject pattern) {
-        this.pattern = (IUIAutomationTextPattern)pattern;
-    }
-
-    public boolean isAvailable () {
-        return (pattern == null);
-    }
-
-    public TextPattern() {
-        this.pattern = null;
-    }
+public class TextPattern extends BasePattern {
+    //?? Needs to do SOMETHING!!!
 }

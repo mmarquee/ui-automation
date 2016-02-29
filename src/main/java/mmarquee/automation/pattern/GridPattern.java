@@ -15,28 +15,19 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class GridPattern implements Pattern {
-    private IUIAutomationGridPattern pattern;
-
-    public GridPattern () {
-        this.pattern = null;
-    }
-
-    public void setPattern(Com4jObject pattern) {
-        this.pattern = (IUIAutomationGridPattern) pattern;
-    }
-
-    public boolean isAvailable () {
-        return (pattern == null);
-    }
-
+public class GridPattern extends BasePattern {
+    /**
+     * Get the item associated with the given cell
+     * @param x Cell X position
+     * @param y Cell Y position
+     * @return The item associated with the cell
+     */
     public IUIAutomationElement getItem(int x, int y) {
-        return pattern.getItem(x, y);
+        return ((IUIAutomationGridPattern)pattern).getItem(x, y);
     }
 }

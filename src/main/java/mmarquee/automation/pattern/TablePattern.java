@@ -15,28 +15,13 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.Com4jObject;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class TablePattern implements Pattern {
-    private IUIAutomationTablePattern pattern;
-
-    public TablePattern () {
-        this.pattern = null;
-    }
-
-    public boolean isAvailable () {
-        return (pattern == null);
-    }
-
-    public void setPattern (Com4jObject pattern) {
-        this.pattern = (IUIAutomationTablePattern)pattern;
-    }
-
+public class TablePattern extends BasePattern {
     public IUIAutomationElementArray getCurrentColumnHeaders() {
-        return this.pattern.getCurrentColumnHeaders();
+        return ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
     }
 }

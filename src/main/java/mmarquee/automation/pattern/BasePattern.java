@@ -15,23 +15,38 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.*;
-
+import com4j.Com4jObject;
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by inpwt on 29/02/2016.
  */
-public class ExpandCollapsePattern extends BasePattern {
+public abstract class BasePattern implements Pattern {
+
     /**
-     * Expands the control
+     * The underlying automation pattern
      */
-    public void expand() {
-        ((IUIAutomationExpandCollapsePattern)this.pattern).expand();
+    protected Com4jObject pattern;
+
+    /**
+     * Constructs a Pattern
+     */
+    public BasePattern () {
+        this.pattern = null;
+    }
+
+
+    /**
+     * Sets the pattern
+     * @param pattern The pattern to set
+     */
+    public void setPattern(Com4jObject pattern) {
+        this.pattern =  pattern;
     }
 
     /**
-     * Collapses the control
+     * Is this pattern available?
+     * @return
      */
-    public void collapse() {
-        ((IUIAutomationExpandCollapsePattern)this.pattern).collapse();
+    public boolean isAvailable () {
+        return (pattern == null);
     }
 }
