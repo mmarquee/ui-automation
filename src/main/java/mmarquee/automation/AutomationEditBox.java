@@ -32,7 +32,7 @@ public class AutomationEditBox extends AutomationBase {
      * @return
      */
     public String getValue() {
-        return valuePattern.currentValue();
+        return valuePattern.value();
     }
 
     /**
@@ -48,7 +48,7 @@ public class AutomationEditBox extends AutomationBase {
      * @return True if readonly, otherwise false.
      */
     public boolean isReadOnly() {
-        return this.valuePattern.currentIsReadOnly() == 1;
+        return this.valuePattern.isReadOnly() == 1;
     }
 
     public AutomationEditBox(IUIAutomationElement element, IUIAutomation uiAuto) {

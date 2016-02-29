@@ -27,4 +27,12 @@ public class SelectionItemPattern extends BasePattern {
     public void select () {
         ((IUIAutomationSelectionItemPattern)pattern).select();
     }
+
+    /**
+     * Is the control selected
+     * @return True if selected
+     */
+    public boolean isSelected () {
+        return ((IUIAutomationSelectionItemPattern)pattern).currentIsSelected() == 1.;
+    }
 }

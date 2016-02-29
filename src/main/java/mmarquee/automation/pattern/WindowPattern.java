@@ -34,19 +34,19 @@ public class WindowPattern extends BasePattern {
      * Maximize the control
      */
     public void maximize() {
-        ((IUIAutomationWindowPattern)this.pattern).setWindowVisualState(WindowVisualState.WindowVisualState_Maximized);
+        this.setWindowState(WindowVisualState.WindowVisualState_Maximized);
     }
 
     /**
      * Minimize the control
      */
     public void minimize() {
-        ((IUIAutomationWindowPattern)this.pattern).setWindowVisualState(WindowVisualState.WindowVisualState_Minimized);
+        this.setWindowState(WindowVisualState.WindowVisualState_Minimized);
     }
 
     /**
      * Returns whether this control is modal
-     * @return Is this control modal
+     * @return Is this control modal?
      */
     public boolean isModal () {
         return ((IUIAutomationWindowPattern)this.pattern).currentIsModal()  == 1;
@@ -60,4 +60,18 @@ public class WindowPattern extends BasePattern {
         return ((IUIAutomationWindowPattern)this.pattern).currentIsTopmost() == 1;
     }
 
+    /**
+     * Closes the window
+     */
+    public void close() {
+        ((IUIAutomationWindowPattern)this.pattern).close();
+    }
+
+    /**
+     * Sets the visual state
+     * @param state The state to set
+     */
+    public void setWindowState(WindowVisualState state) {
+        ((IUIAutomationWindowPattern)this.pattern).setWindowVisualState(state);
+    }
 }

@@ -50,7 +50,7 @@ public class AutomationStringGrid extends AutomationBase
      * @return The value of the item
      */
     public String getValue() {
-        return this.valuePattern.currentValue();
+        return this.valuePattern.value();
     }
 
     /**
@@ -58,7 +58,7 @@ public class AutomationStringGrid extends AutomationBase
      * @return Read only?
      */
     public boolean isReadOnly() {
-        return this.valuePattern.currentIsReadOnly() == 1;
+        return this.valuePattern.isReadOnly() == 1;
     }
 
     /**

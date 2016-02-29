@@ -46,7 +46,7 @@ public class AutomationComboBox extends AutomationBase {
      * @return The current value
      */
     public String text() {
-        return valuePattern.currentValue();
+        return valuePattern.value();
     }
 
     /**

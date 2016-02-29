@@ -40,6 +40,6 @@ public class AutomationTextBox extends AutomationBase {
      * @return The current text
      */
     public String getValue() {
-        return valuePattern.currentValue();
+        return valuePattern.value();
     }
 }

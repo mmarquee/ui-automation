@@ -30,4 +30,20 @@ public class GridPattern extends BasePattern {
     public IUIAutomationElement getItem(int x, int y) {
         return ((IUIAutomationGridPattern)pattern).getItem(x, y);
     }
+
+    /**
+     * Gets the row count
+     * @return The tow count
+     */
+    public int rowCount() {
+        return ((IUIAutomationGridPattern)pattern).currentRowCount();
+    }
+
+    /**
+     * Gets the coloumn count
+     * @return The column count
+     */
+    public int columnCount() {
+        return ((IUIAutomationGridPattern)pattern).currentColumnCount();
+    }
 }

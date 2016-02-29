@@ -25,7 +25,7 @@ public class ValuePattern extends BasePattern {
      * Get the current value of the control
      * @return
      */
-    public String currentValue() {
+    public String value() {
         return ((IUIAutomationValuePattern)pattern).currentValue();
     }
 
@@ -33,7 +33,7 @@ public class ValuePattern extends BasePattern {
      * Gets the current readonly status of the control
      * @return True if read-only
      */
-    public int currentIsReadOnly() {
+    public int isReadOnly() {
         return ((IUIAutomationValuePattern)pattern).currentIsReadOnly();
     }
 

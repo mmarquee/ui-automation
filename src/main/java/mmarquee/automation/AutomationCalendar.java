@@ -26,6 +26,6 @@ public class AutomationCalendar extends AutomationBase {
      * @return The current value
      */
     public String getValue() {
-        return this.valuePattern.currentValue();
+        return this.valuePattern.value();
     }
 }
