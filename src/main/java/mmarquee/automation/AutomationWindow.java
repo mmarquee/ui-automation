@@ -16,6 +16,9 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.User32Util;
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
@@ -154,5 +157,20 @@ public class AutomationWindow extends AutomationContainer {
      */
     public boolean isTopMost() {
         return this.windowPattern.isTopMost();
+    }
+
+    /**
+     * Sets transparency of the window
+     * @param alpha 0..255 alpha attribute
+     */
+    public void getTransparency(int alpha) {
+//        int handle = this.getNativeWindowHandle();
+//
+//        WinDef.HWND hwnd = new WinDef.HWND(handle);
+//
+//        User32 user32 = User32.INSTANCE;
+//
+//        user32.SetWindowLong(hwnd, user32.GWL_EXSTYLE, user32.WS_EX_LAYERED);
+//        user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, user32.LWA_ALPHA);
     }
 }

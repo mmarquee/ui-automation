@@ -449,12 +449,22 @@ public abstract class AutomationBase {
     /**
      * Gets the bounding rectangle of the control
      */
-     public WinDef.RECT getBoundingRectangle() {
+    public WinDef.RECT getBoundingRectangle() {
          Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
 
          // obj is always empty :-(
          WinDef.RECT rect = new WinDef.RECT();
 
          return rect;
-     }
+    }
+
+    /**
+     * Get the native window handle
+     * @return The handle
+     */
+    public int getNativeWindowHandle() {
+        Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle);
+
+        return (Integer)value;
+    }
 }
