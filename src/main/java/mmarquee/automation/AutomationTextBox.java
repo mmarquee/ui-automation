@@ -16,22 +16,15 @@
 
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationTextBox extends AutomationBase {
-    private Value valuePattern;
 
     public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-        try {
-            this.valuePattern = this.getValuePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
     }
 
     /**
@@ -39,6 +32,6 @@ public class AutomationTextBox extends AutomationBase {
      * @return The current text
      */
     public String getValue() {
-        return valuePattern.value();
+        return this.element.currentName();
     }
 }

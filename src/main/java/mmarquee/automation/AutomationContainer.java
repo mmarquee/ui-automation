@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -23,7 +24,11 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationContainer extends AutomationBase {
 
-    public AutomationContainer (IUIAutomationElement element, IUIAutomation uiAuto) {
+    /**
+     * Constructor for AutomationContainer
+     * @param element The underlying element
+     * @param uiAuto The automation bit
+     */    public AutomationContainer (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -32,7 +37,9 @@ public class AutomationContainer extends AutomationBase {
 
         IUIAutomationElement foundElement = null;
 
-        collection = this.findAll(TreeScope.TreeScope_Descendants);
+        ControlIdCondition condition = new ControlIdCondition(this.uiAuto, id);
+
+        collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
 
         int length = collection.length();
 
@@ -40,16 +47,16 @@ public class AutomationContainer extends AutomationBase {
 
         for (int count = 0; count < length; count++) {
             IUIAutomationElement element = collection.getElement(count);
-            int retVal = element.currentControlType();
+          //  int retVal = element.currentControlType();
 
-            if (retVal == id)  {
+          //  if (retVal == id)  {
                 if (counter == index) {
                     foundElement = element;
                     break;
                 } else {
                     counter++;
                 }
-            }
+         //   }
         }
 
         return foundElement;
@@ -160,7 +167,9 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTextBox getTextBox(int index) {
-        return new AutomationTextBox(this.getControlByControlType(index, ControlTypeID.Text), this.uiAuto);
+        IUIAutomationElement elem = this.getControlByControlType(index, ControlTypeID.Text);
+
+        return new AutomationTextBox(elem, this.uiAuto);
     }
 
     /**

@@ -22,6 +22,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationStatusBar extends AutomationContainer {
+    /**
+     * Constructor for AutomationStatusBar
+     * @param element The underlying element
+     * @param uiAuto The automation bit
+     */
     public AutomationStatusBar(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
