@@ -1,10 +1,7 @@
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.ValuePattern;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import mmarquee.automation.pattern.*;
+import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 15/02/2016.
@@ -13,7 +10,7 @@ import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
  */
 public class AutomationSlider extends AutomationBase {
 
-    private ValuePattern valuePattern;
+    private Value valuePattern;
 
     public AutomationSlider(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

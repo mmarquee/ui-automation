@@ -15,13 +15,14 @@
  */
 package mmarquee.automation.pattern;
 
+
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class TablePattern extends BasePattern {
-    public IUIAutomationElementArray getCurrentColumnHeaders() {
-        return ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
+public class Selection extends BasePattern {
+    public IUIAutomationElementArray getCurrentSelection () {
+        return ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
     }
 }

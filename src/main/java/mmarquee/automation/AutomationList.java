@@ -17,19 +17,15 @@
 package mmarquee.automation;
 
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionPattern;
-import mmarquee.automation.pattern.ValuePattern;
+import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationList extends AutomationBase {
 
-    private SelectionPattern selectionPattern;
+    private Selection selectionPattern;
 
     public AutomationList(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

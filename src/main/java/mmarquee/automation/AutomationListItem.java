@@ -17,7 +17,7 @@
 package mmarquee.automation;
 
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionItemPattern;
+import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -25,7 +25,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationListItem extends AutomationBase {
 
-    private SelectionItemPattern selectItemPattern;
+    private SelectionItem selectItemPattern;
 
     public AutomationListItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

@@ -20,28 +20,30 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class ValuePattern extends BasePattern {
+public class Grid extends BasePattern {
     /**
-     * Get the current value of the control
-     * @return
+     * Get the item associated with the given cell
+     * @param x Cell X position
+     * @param y Cell Y position
+     * @return The item associated with the cell
      */
-    public String value() {
-        return ((IUIAutomationValuePattern)pattern).currentValue();
+    public IUIAutomationElement getItem(int x, int y) {
+        return ((IUIAutomationGridPattern)pattern).getItem(x, y);
     }
 
     /**
-     * Gets the current readonly status of the control
-     * @return True if read-only
+     * Gets the row count
+     * @return The tow count
      */
-    public int isReadOnly() {
-        return ((IUIAutomationValuePattern)pattern).currentIsReadOnly();
+    public int rowCount() {
+        return ((IUIAutomationGridPattern)pattern).currentRowCount();
     }
 
     /**
-     * Sets the value of the control
-     * @param value Value to use
+     * Gets the coloumn count
+     * @return The column count
      */
-    public void setValue(String value) {
-        ((IUIAutomationValuePattern)pattern).setValue(value);
+    public int columnCount() {
+        return ((IUIAutomationGridPattern)pattern).currentColumnCount();
     }
 }

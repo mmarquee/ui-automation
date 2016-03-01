@@ -13,32 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package mmarquee.automation.pattern;
 
-package mmarquee.automation;
-
-import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 01/02/2016.
+ * Created by inpwt on 25/02/2016.
  */
-public class AutomationTextBox extends AutomationBase {
-    private Value valuePattern;
-
-    public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
-        try {
-            this.valuePattern = this.getValuePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
-    }
-
+public class Invoke extends BasePattern {
     /**
-     * Gets the text associated with this element
-     * @return The current text
+     * Invokes the pattern on the control
      */
-    public String getValue() {
-        return valuePattern.value();
+    public void invoke() {
+        ((IUIAutomationInvokePattern)(this.pattern)).invoke();
     }
 }

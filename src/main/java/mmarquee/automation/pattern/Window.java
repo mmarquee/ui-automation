@@ -20,7 +20,7 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class WindowPattern extends BasePattern {
+public class Window extends BasePattern {
 
     /**
      * Waits for the window to be idle, and allow input

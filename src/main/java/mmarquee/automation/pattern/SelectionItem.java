@@ -13,34 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package mmarquee.automation.pattern;
 
-package mmarquee.automation;
-
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 31/01/2016.
+ * Created by inpwt on 25/02/2016.
  */
-public class AutomationRadioButton extends AutomationBase {
-
-    private SelectionItem selectItemPattern;
-
-    public AutomationRadioButton(IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
-
-        try {
-            selectItemPattern = this.getSelectItemPattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+public class SelectionItem extends BasePattern {
+    /**
+     * Selects the given item
+     */
+    public void select () {
+        ((IUIAutomationSelectionItemPattern)pattern).select();
     }
 
     /**
-     * Selects this element
+     * Is the control selected
+     * @return True if selected
      */
-    public void selectItem() {
-        this.selectItemPattern.select();
+    public boolean isSelected () {
+        return ((IUIAutomationSelectionItemPattern)pattern).currentIsSelected() == 1.;
     }
 }

@@ -20,30 +20,30 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class GridPattern extends BasePattern {
+public class ExpandCollapse extends BasePattern {
     /**
-     * Get the item associated with the given cell
-     * @param x Cell X position
-     * @param y Cell Y position
-     * @return The item associated with the cell
+     * Expands the control
      */
-    public IUIAutomationElement getItem(int x, int y) {
-        return ((IUIAutomationGridPattern)pattern).getItem(x, y);
+    public void expand() {
+        ((IUIAutomationExpandCollapsePattern)this.pattern).expand();
     }
 
     /**
-     * Gets the row count
-     * @return The tow count
+     * Collapses the control
      */
-    public int rowCount() {
-        return ((IUIAutomationGridPattern)pattern).currentRowCount();
+    public void collapse() {
+        ((IUIAutomationExpandCollapsePattern)this.pattern).collapse();
     }
 
     /**
-     * Gets the coloumn count
-     * @return The column count
+     * Determines whether the control is expanded
+     * @return Is the control expanded
      */
-    public int columnCount() {
-        return ((IUIAutomationGridPattern)pattern).currentColumnCount();
+    public boolean isExpanded() {
+        ExpandCollapseState state =
+            ((IUIAutomationExpandCollapsePattern)this.pattern).currentExpandCollapseState();
+
+        return state == ExpandCollapseState.ExpandCollapseState_Expanded;
     }
+
 }

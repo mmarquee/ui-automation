@@ -15,7 +15,7 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.InvokePattern;
+import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
@@ -24,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationButton extends AutomationBase {
 
-    private InvokePattern invokePattern = null;
+    private Invoke invokePattern = null;
 
     /**
      * Constructor for the AutomationButton

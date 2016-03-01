@@ -15,19 +15,33 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
+import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class TextPattern extends BasePattern {
-    //?? Needs to do SOMETHING!!!
-    public void getSelection() {
-        IUIAutomationTextRangeArray selection =
-                ((IUIAutomationTextPattern)pattern).getSelection();
+public class Value extends BasePattern {
+    /**
+     * Get the current value of the control
+     * @return
+     */
+    public String value() {
+        return ((IUIAutomationValuePattern)pattern).currentValue();
+    }
 
-        // OK, now what?
+    /**
+     * Gets the current readonly status of the control
+     * @return True if read-only
+     */
+    public int isReadOnly() {
+        return ((IUIAutomationValuePattern)pattern).currentIsReadOnly();
+    }
+
+    /**
+     * Sets the value of the control
+     * @param value Value to use
+     */
+    public void setValue(String value) {
+        ((IUIAutomationValuePattern)pattern).setValue(value);
     }
 }

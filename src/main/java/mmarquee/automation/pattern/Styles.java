@@ -15,14 +15,17 @@
  */
 package mmarquee.automation.pattern;
 
-
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by inpwt on 01/03/2016.
  */
-public class SelectionPattern extends BasePattern {
-    public IUIAutomationElementArray getCurrentSelection () {
-        return ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
+public class Styles extends BasePattern {
+    public String getStyleName () {
+        return ((IUIAutomationStylesPattern)this.pattern).currentStyleName();
+    }
+
+    public int getStyleId () {
+        return ((IUIAutomationStylesPattern)this.pattern).currentStyleId();
     }
 }

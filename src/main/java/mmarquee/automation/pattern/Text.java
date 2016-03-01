@@ -15,16 +15,19 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class InvokePattern extends BasePattern {
-    /**
-     * Invokes the pattern on the control
-     */
-    public void invoke() {
-        ((IUIAutomationInvokePattern)(this.pattern)).invoke();
+public class Text extends BasePattern {
+    //?? Needs to do SOMETHING!!!
+    public void getSelection() {
+        IUIAutomationTextRangeArray selection =
+                ((IUIAutomationTextPattern)pattern).getSelection();
+
+        // OK, now what?
     }
 }

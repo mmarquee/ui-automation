@@ -19,14 +19,12 @@ package mmarquee.automation;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
-import java.io.Console;
-
 /**
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationWindow extends AutomationContainer {
 
-    private WindowPattern windowPattern;
+    private Window windowPattern;
 
     /**
      * Focuses this control.

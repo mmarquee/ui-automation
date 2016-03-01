@@ -20,30 +20,8 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 25/02/2016.
  */
-public class ExpandCollapsePattern extends BasePattern {
-    /**
-     * Expands the control
-     */
-    public void expand() {
-        ((IUIAutomationExpandCollapsePattern)this.pattern).expand();
+public class Table extends BasePattern {
+    public IUIAutomationElementArray getCurrentColumnHeaders() {
+        return ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
     }
-
-    /**
-     * Collapses the control
-     */
-    public void collapse() {
-        ((IUIAutomationExpandCollapsePattern)this.pattern).collapse();
-    }
-
-    /**
-     * Determines whether the control is expanded
-     * @return Is the control expanded
-     */
-    public boolean isExpanded() {
-        ExpandCollapseState state =
-            ((IUIAutomationExpandCollapsePattern)this.pattern).currentExpandCollapseState();
-
-        return state == ExpandCollapseState.ExpandCollapseState_Expanded;
-    }
-
 }

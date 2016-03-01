@@ -16,8 +16,7 @@
 
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.ValuePattern;
+import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -25,7 +24,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationEditBox extends AutomationBase {
 
-    private ValuePattern valuePattern;
+    private Value valuePattern;
 
     /**
      * Gets the value of the control

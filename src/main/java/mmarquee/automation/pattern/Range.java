@@ -15,24 +15,17 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by inpwt on 01/03/2016.
  */
-public class SelectionItemPattern extends BasePattern {
-    /**
-     * Selects the given item
-     */
-    public void select () {
-        ((IUIAutomationSelectionItemPattern)pattern).select();
+public class Range extends BasePattern {
+    public void setValue (double value) {
+        ((IUIAutomationRangeValuePattern)this.pattern).setValue(value);
     }
 
-    /**
-     * Is the control selected
-     * @return True if selected
-     */
-    public boolean isSelected () {
-        return ((IUIAutomationSelectionItemPattern)pattern).currentIsSelected() == 1.;
+    public double getValue () {
+        return ((IUIAutomationRangeValuePattern)this.pattern).currentValue();
     }
 }

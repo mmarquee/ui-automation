@@ -15,7 +15,7 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.InvokePattern;
+import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
@@ -23,7 +23,7 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 10/02/2016.
  */
 public class AutomationMenuItem extends AutomationBase {
-    private InvokePattern invokePattern;
+    private Invoke invokePattern;
 
     public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
