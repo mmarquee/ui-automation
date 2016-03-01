@@ -17,6 +17,7 @@ package mmarquee.automation.pattern;
 
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 
 /**
@@ -29,5 +30,17 @@ public class Text extends BasePattern {
                 ((IUIAutomationTextPattern)pattern).getSelection();
 
         // OK, now what?
+    }
+
+    public void getDocumentRange () {
+        ((IUIAutomationTextPattern)pattern).getSelection();
+    }
+
+    public String getText() {
+        IUIAutomationTextRange range = ((IUIAutomationTextPattern)pattern).documentRange();
+
+        String text = range.getText(-1);
+
+        return range.getText(-1);
     }
 }

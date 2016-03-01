@@ -36,9 +36,13 @@ public class TestNotepad {
 
         AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
         window.focus();
+        window.maximize();
 
         AutomationDocument document = window.getDocument(0);
+
         //document.setText("This is a journey into sound");
+
+        String text = document.getText();
 
 //        document.setName("This is a journey into sound");
 

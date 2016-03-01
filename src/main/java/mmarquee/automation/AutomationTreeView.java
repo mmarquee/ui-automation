@@ -36,7 +36,7 @@ public class AutomationTreeView extends AutomationBase {
         IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(ControlTypeID.TreeItem)));
+                        this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
             return new AutomationTreeViewItem(item, this.uiAuto);

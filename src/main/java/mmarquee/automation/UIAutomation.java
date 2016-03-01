@@ -129,7 +129,7 @@ public class UIAutomation {
             element = this.rootElement.findFirst(TreeScope.TreeScope_Descendants,
                     this.uiAuto.createAndCondition(
                             this.uiAuto.createPropertyCondition(PropertyID.Name, title),
-                            this.uiAuto.createPropertyCondition(PropertyID.ControlType, ControlTypeID.Window)));
+                            this.uiAuto.createPropertyCondition(PropertyID.ControlType, ControlType.Window)));
 
             if (element != null) {
                 break;

@@ -55,7 +55,7 @@ public class AutomationTab extends AutomationContainer {
 
             int retVal = elem.currentControlType();
 
-            if (retVal == ControlTypeID.TabItem) {
+            if (retVal == ControlType.TabItem) {
                 this.tabItems.add(new AutomationTabItem(elem, this.uiAuto));
             }
         }

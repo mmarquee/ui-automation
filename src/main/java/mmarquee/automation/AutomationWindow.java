@@ -61,7 +61,7 @@ public class AutomationWindow extends AutomationContainer {
 
             int retVal = element.currentControlType();
 
-            if (retVal == ControlTypeID.StatusBar) {
+            if (retVal == ControlType.StatusBar) {
                 found = new AutomationStatusBar(element, uiAuto);
                 break;
             }
@@ -75,7 +75,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The system menu
      */
     public AutomationSystemMenu getSystemMenu() {
-        IUIAutomationElement menu = this.getControlByControlType(0, ControlTypeID.MenuBar);
+        IUIAutomationElement menu = this.getControlByControlType(0, ControlType.MenuBar);
         return (new AutomationSystemMenu(menu, this.uiAuto));
     }
 
@@ -84,7 +84,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        IUIAutomationElement menu = this.getControlByControlType(1, ControlTypeID.MenuBar);
+        IUIAutomationElement menu = this.getControlByControlType(1, ControlType.MenuBar);
 
         return (new AutomationMainMenu(this.element, menu, this.uiAuto));
     }
@@ -123,7 +123,7 @@ public class AutomationWindow extends AutomationContainer {
             item = this.findFirst(TreeScope.TreeScope_Descendants,
                     this.createAndCondition(
                             this.createNamePropertyCondition(title),
-                            this.createControlTypeCondition(ControlTypeID.Window)));
+                            this.createControlTypeCondition(ControlType.Window)));
 
             if (item != null) {
                 break;

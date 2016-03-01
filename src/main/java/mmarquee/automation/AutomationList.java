@@ -47,7 +47,7 @@ public class AutomationList extends AutomationBase {
         IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(ControlTypeID.ListItem)));
+                        this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
             return new AutomationListItem(item, this.uiAuto);

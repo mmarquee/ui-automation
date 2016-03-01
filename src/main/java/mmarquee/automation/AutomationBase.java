@@ -415,7 +415,6 @@ public abstract class AutomationBase {
 
         if (isInvokePatternAvailable()) {
             com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
-
             pattern.setPattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
         }
 

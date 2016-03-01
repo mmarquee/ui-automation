@@ -44,7 +44,7 @@ public class AutomationMainMenu extends AutomationBase {
         IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name0),
-                        this.createControlTypeCondition(ControlTypeID.MenuItem)));
+                        this.createControlTypeCondition(ControlType.MenuItem)));
 
         if (!name1.isEmpty()) {
             // Needs a subitem
@@ -62,7 +62,7 @@ public class AutomationMainMenu extends AutomationBase {
                 foundElement = this.getParent().findFirst(TreeScope.TreeScope_Descendants,
                         this.createAndCondition(
                                 this.createNamePropertyCondition(name1),
-                                this.createControlTypeCondition(ControlTypeID.MenuItem)).getCondition());
+                                this.createControlTypeCondition(ControlType.MenuItem)).getCondition());
 
             }
         }
@@ -72,7 +72,7 @@ public class AutomationMainMenu extends AutomationBase {
 
     public List<AutomationMenuItem> getItems() {
         IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants,
-                this.createControlTypeCondition(ControlTypeID.MenuItem));
+                this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 

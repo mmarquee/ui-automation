@@ -9,21 +9,25 @@ import mmarquee.automation.uiautomation.*;
  * Needs work to get working
  */
 public class AutomationDocument extends AutomationBase {
-    //private TextPattern textPattern;
+    private Text textPattern;
     //private ValuePattern valuePattern;
 
     public AutomationDocument(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
-      //  this.textPattern = this.getTextPattern();
+        try {
+            this.textPattern = this.getTextPattern();
+        } catch (PatternNotFoundException ex) {
+            // Smother???
+        }
     //    this.valuePattern = this.getValuePattern();
     }
 
-  //  public void setText(String text) {
-    //    this.valuePattern.setValue(text);
-   // }
+//    public void setText(String text) {
+//        this.textPattern..setValue(text);
+ //   }
 
-  //  public String getText() {
-  //      return this.textPattern
-  //  }
+    public String getText() {
+        return this.textPattern.getText();
+    }
 }
