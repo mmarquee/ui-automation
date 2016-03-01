@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation;
 
+import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,8 @@ import java.util.List;
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationComboBox extends AutomationBase {
-    private mmarquee.automation.pattern.ExpandCollapse collapsePattern;
-    private mmarquee.automation.pattern.Value valuePattern;
+    private ExpandCollapse collapsePattern;
+    private Value valuePattern;
 
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
@@ -59,6 +59,14 @@ public class AutomationComboBox extends AutomationBase {
      */
     public void expand() {
         this.collapsePattern.expand();
+    }
+
+    /**
+     * Is the control expanded
+     * @return True if expanded
+     */
+    public boolean isExpanded() {
+        return collapsePattern.isExpanded();
     }
 
     /**

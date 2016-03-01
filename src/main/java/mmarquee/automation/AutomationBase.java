@@ -450,12 +450,14 @@ public abstract class AutomationBase {
      * Gets the bounding rectangle of the control
      */
     public WinDef.RECT getBoundingRectangle() {
-         Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
+        Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
+
 
          // obj is always empty :-(
-         WinDef.RECT rect = new WinDef.RECT();
+        WinDef.RECT rect = new WinDef.RECT();
+        rect = (WinDef.RECT)obj;
 
-         return rect;
+        return rect;
     }
 
     /**

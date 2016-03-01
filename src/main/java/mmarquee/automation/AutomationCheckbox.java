@@ -45,6 +45,11 @@ public class AutomationCheckbox extends AutomationBase {
         return this.togglePattern.currentToggleState();
     }
 
+    /**
+     * Constructor for the AutomationCheckbox
+     * @param element
+     * @param uiAuto
+     */
     public AutomationCheckbox (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
