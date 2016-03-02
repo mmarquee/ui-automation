@@ -146,5 +146,9 @@ public class TestMain {
         AutomationWindow popup1 = window.getWindow("Project1");
         AutomationButton btn1 = popup1.getButton("OK");
         btn1.click();
+
+        AutomationToolBar toolbar = window.getToolBar("Toolbar1");
+     //   AutomationButton btn2 = toolbar.getButtonById("Item 1");
+      //  btn2.click();
     }
 }

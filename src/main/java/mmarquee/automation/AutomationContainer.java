@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation;
 
 import mmarquee.automation.condition.ControlIdCondition;
@@ -62,6 +61,13 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
+    /**
+     * Gets the control by the control type, for s given control name
+     * @param index Index of the control
+     * @param id Control type
+     * @param controlName
+     * @return The matching element
+     */
     protected IUIAutomationElement getControlByControlType(int index, int id, String controlName) {
         IUIAutomationElementArray collection;
 
@@ -91,6 +97,12 @@ public class AutomationContainer extends AutomationBase {
         return foundElement;
     }
 
+    /**
+     * Gets the control by the control type
+     * @param name Name to use
+     * @param id Control type
+     * @return The matching element
+     */
     protected IUIAutomationElement getControlByControlType(String name, int id) {
         return this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
@@ -175,9 +187,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTextBox getTextBox(int index) {
-        IUIAutomationElement elem = this.getControlByControlType(index, ControlType.Text);
-
-        return new AutomationTextBox(elem, this.uiAuto);
+        return new AutomationTextBox(this.getControlByControlType(index, ControlType.Text), this.uiAuto);
     }
 
     /**
@@ -201,6 +211,16 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the button control associated with the given index
+     *
+     * @param index
+     * @return
+     */
+    public AutomationButton getButton(int index) {
+        return new AutomationButton(this.getControlByControlType(index, ControlType.Button), this.uiAuto);
+    }
+
+    /**
      * Gets the (JHC) String Grid control associated with the given index
      *
      * @param index Index of the control
@@ -217,9 +237,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The document control
      */
     public AutomationDocument getDocument(int index) {
-        IUIAutomationElement elem = this.getControlByControlType(index, ControlType.Document);
-
-        return new AutomationDocument(elem, this.uiAuto);
+        return new AutomationDocument(this.getControlByControlType(index, ControlType.Document), this.uiAuto);
     }
 
     /**
@@ -282,10 +300,20 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Get the ToolBar associated with the given name
+     *
+     * @param name The name
+     * @return The AutomationToolBar
+     */
+    public AutomationToolBar getToolBar(String name) {
+        return new AutomationToolBar((this.getControlByControlType(name, ControlType.ToolBar)), this.uiAuto);
+    }
+
+    /**
      * Get the ToolBar associated with the given index
      *
      * @param index The index
-     * @return The AutomationAppBar
+     * @return The AutomationToolBar
      */
     public AutomationToolBar getToolBar(int index) {
         return new AutomationToolBar((this.getControlByControlType(index, ControlType.ToolBar)), this.uiAuto);

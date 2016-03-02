@@ -22,7 +22,7 @@ import mmarquee.automation.uiautomation.*;
  *
  * IDockProvider, IExpandCollapse,
  */
-public class AutomationToolBar extends AutomationBase {
+public class AutomationToolBar extends AutomationContainer {
     /**
      * Constructor for the AutomationToolBar.
      *
