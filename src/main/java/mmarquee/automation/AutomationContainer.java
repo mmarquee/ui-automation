@@ -252,11 +252,20 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the appbar associated with the given index
+     * Get the AppBar associated with the given index
      * @param index The index
      * @return The AutomationAppBar
      */
     public AutomationAppBar getAppBar(int index) {
         return new AutomationAppBar((this.getControlByControlType(index, ControlType.AppBar)), this.uiAuto);
+    }
+
+    /**
+     * Get the ToolBar associated with the given index
+     * @param index The index
+     * @return The AutomationAppBar
+     */
+    public AutomationToolBar getToolBar(int index) {
+        return new AutomationToolBar((this.getControlByControlType(index, ControlType.ToolBar)), this.uiAuto);
     }
 }

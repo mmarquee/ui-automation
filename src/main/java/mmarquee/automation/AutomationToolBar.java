@@ -19,17 +19,17 @@ import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 02/03/2016.
+ *
+ * IDockProvider, IExpandCollapse,
  */
-public class AutomationAppBar extends AutomationBase {
+public class AutomationToolBar extends AutomationBase {
     /**
-     * Constructor for the AutomationAppBar.
-     *
-     * This element seems to be undocumented
+     * Constructor for the AutomationToolBar.
      *
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
      */
-    public AutomationAppBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationToolBar(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }
