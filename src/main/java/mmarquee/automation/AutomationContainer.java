@@ -28,10 +28,11 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Constructor for AutomationContainer
+     *
      * @param element The underlying element
-     * @param uiAuto The automation bit
+     * @param uiAuto  The automation bit
      */
-    public AutomationContainer (IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationContainer(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -99,6 +100,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the checkbox associated with the given index
+     *
      * @param index Index of the control
      * @return AutomationCheckbox that represents the found control
      */
@@ -108,15 +110,17 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the Tab control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationTab getTab(int index){
+    public AutomationTab getTab(int index) {
         return new AutomationTab(this.getControlByControlType(index, ControlType.Tab), this.uiAuto);
     }
 
     /**
      * Gets the Editbox control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -126,6 +130,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the Editbox control associated with the given name
+     *
      * @param name Name of the control
      * @return The found control
      */
@@ -135,6 +140,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the slider control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -144,6 +150,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the (JHC) Masked Edit control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -153,6 +160,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the radio button control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -162,6 +170,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the text box control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -173,6 +182,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the combobox control associated with the given name
+     *
      * @param name Name of the control
      * @return The found control
      */
@@ -182,6 +192,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the button control associated with the given name
+     *
      * @param name Name of the control
      * @return The found control
      */
@@ -191,6 +202,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the (JHC) String Grid control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -200,6 +212,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the document associated with the given index
+     *
      * @param index Index of the control
      * @return The document control
      */
@@ -211,6 +224,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the hyperlink control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -220,6 +234,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the treeview control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -229,6 +244,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the list control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
@@ -238,23 +254,26 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the calendar control associated with the given index
+     *
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationCalendar getCalendar (int index) {
+    public AutomationCalendar getCalendar(int index) {
         return new AutomationCalendar((this.getControlByControlType(index, ControlType.Calendar)), this.uiAuto);
     }
 
     /**
      * Gets the panel control associated with the given index
+     *
      * @param index Index of the control
      */
-    public AutomationPanel getPanel (int index) {
+    public AutomationPanel getPanel(int index) {
         return new AutomationPanel((this.getControlByControlType(index, ControlType.Pane)), this.uiAuto);
     }
 
     /**
      * Get the AppBar associated with the given index
+     *
      * @param index The index
      * @return The AutomationAppBar
      */
@@ -264,6 +283,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Get the ToolBar associated with the given index
+     *
      * @param index The index
      * @return The AutomationAppBar
      */
@@ -273,6 +293,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Get the RibbonBar associated with the given index
+     *
      * @param index The index
      * @return The AutomationRibbonBar
      */
@@ -282,10 +303,11 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the AutomationReBar associated with this index
+     *
      * @param index The index
      * @return The control wrapper
      */
     public AutomationReBar getReBar(int index) {
         return new AutomationReBar(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32"), this.uiAuto);
-
     }
+}
