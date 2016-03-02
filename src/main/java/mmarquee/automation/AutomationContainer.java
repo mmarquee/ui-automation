@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation;
 
 import mmarquee.automation.condition.ControlIdCondition;
@@ -62,7 +63,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the control type, for s given control name
+     * Gets the control by the control type, for s given control index
      * @param index Index of the control
      * @param id Control type
      * @param controlName
@@ -217,7 +218,8 @@ public class AutomationContainer extends AutomationBase {
      * @return
      */
     public AutomationButton getButton(int index) {
-        return new AutomationButton(this.getControlByControlType(index, ControlType.Button), this.uiAuto);
+        IUIAutomationElement elem = this.getControlByControlType(index, ControlType.Button);
+        return new AutomationButton(elem, this.uiAuto);
     }
 
     /**

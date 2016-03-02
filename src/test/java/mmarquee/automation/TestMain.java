@@ -147,8 +147,11 @@ public class TestMain {
         AutomationButton btn1 = popup1.getButton("OK");
         btn1.click();
 
-        AutomationToolBar toolbar = window.getToolBar("Toolbar1");
-     //   AutomationButton btn2 = toolbar.getButtonById("Item 1");
-      //  btn2.click();
+        /* This doesn't seem to work */
+        /*
+        AutomationToolBar toolbar = window.getToolBar(0);
+        AutomationButton btn0 = toolbar.getButton(0);
+        btn0.click();
+        */
     }
 }
