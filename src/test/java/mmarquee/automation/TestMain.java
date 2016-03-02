@@ -140,5 +140,11 @@ public class TestMain {
         } catch (ItemNotFoundException ex) {
             // Not found
         }
+
+        AutomationHyperlink link = window.getHyperlink(0);
+        link.click();
+        AutomationWindow popup1 = window.getWindow("Project1");
+        AutomationButton btn1 = popup1.getButton("OK");
+        btn1.click();
     }
 }
