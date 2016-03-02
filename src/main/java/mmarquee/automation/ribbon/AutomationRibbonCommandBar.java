@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package mmarquee.automation.ribbon;
 
+import mmarquee.automation.AutomationPanel;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by inpwt on 02/03/2016.
+ *
+ * Specialist pane that represents the RibbonBar
  */
-public class AutomationPanel extends AutomationContainer {
-    public AutomationPanel(IUIAutomationElement element, IUIAutomation uiAuto) {
+public class AutomationRibbonCommandBar extends AutomationPanel {
+    public AutomationRibbonCommandBar(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

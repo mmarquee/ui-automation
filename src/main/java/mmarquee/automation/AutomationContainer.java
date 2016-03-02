@@ -17,6 +17,7 @@
 package mmarquee.automation;
 
 import mmarquee.automation.condition.ControlIdCondition;
+import mmarquee.automation.ribbon.AutomationRibbonBar;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -267,5 +268,14 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationToolBar getToolBar(int index) {
         return new AutomationToolBar((this.getControlByControlType(index, ControlType.ToolBar)), this.uiAuto);
+    }
+
+    /**
+     * Get the RibbonBar associated with the given index
+     * @param index The index
+     * @return The AutomationRibbonBar
+     */
+    public AutomationRibbonBar getRibbonBar(int index) {
+        return new AutomationRibbonBar(this.getControlByControlType(index, ControlType.Pane, "UIRibbonCommandBarDock"), this.uiAuto);
     }
 }

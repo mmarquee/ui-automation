@@ -13,15 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package mmarquee.automation.ribbon;
 
+import mmarquee.automation.AutomationPanel;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by inpwt on 02/03/2016.
  */
-public class AutomationPanel extends AutomationContainer {
-    public AutomationPanel(IUIAutomationElement element, IUIAutomation uiAuto) {
+public class AutomationRibbonWorkPane extends AutomationPanel {
+    public AutomationRibbonWorkPane(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
+
+    /**
+     * Get the RibbonWorkPane associated with the given index
+     * @param index The index
+     * @return The AutomationRibbonWorkPane
+     */
+    public AutomationRibbonWorkPane getRibbonWorkPane(int index) {
+        return new AutomationRibbonWorkPane(this.getControlByControlType(index, ControlType.Pane, "UIRibbonCommandBar"), this.uiAuto);
+    }
 }
+
