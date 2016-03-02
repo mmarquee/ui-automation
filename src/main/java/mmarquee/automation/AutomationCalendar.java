@@ -11,6 +11,11 @@ import mmarquee.automation.uiautomation.*;
 public class AutomationCalendar extends AutomationBase {
     private Value valuePattern;
 
+    /**
+     * Constructor for the AutomationCalendar.
+     * @param element The underlying automation element
+     * @param uiAuto The IUIAutomation associated with this session
+     */
     public AutomationCalendar(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
         try {

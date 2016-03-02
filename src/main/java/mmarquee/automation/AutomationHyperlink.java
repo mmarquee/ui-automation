@@ -17,12 +17,16 @@ package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.mouse.AutomationMouse;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 03/02/2016.
  */
 public class AutomationHyperlink extends AutomationBase {
+    private Invoke invokePattern;
+
     /**
      * Constructor for the AutomationHyperlink
      * @param element
@@ -30,20 +34,20 @@ public class AutomationHyperlink extends AutomationBase {
      */
     public AutomationHyperlink(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+
+        try {
+            this.invokePattern = this.getInvokePattern();
+        } catch (PatternNotFoundException ex) {
+            // Smother, really?
+        }
     }
 
     /**
      * Fires the click event associated with this element.
-     *
-     * The Delphi version of this depends on getting the clickable point for the control, and
-     * finding middle of the control and clicking on it, but the Com4j classes skip this and
-     * the property version of this also does not work
-     */
+     **/
     public void click() {
-        WinDef.POINT point = this.getClickablePoint();
-
-        AutomationMouse mouse = new AutomationMouse();
-        mouse.setLocation(point.x, point.y);
-        mouse.leftClick();
+        if (this.invokePattern.isAvailable()) {
+            this.invokePattern.invoke();
+        }
     }
 }

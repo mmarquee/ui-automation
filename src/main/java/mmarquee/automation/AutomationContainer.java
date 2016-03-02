@@ -250,4 +250,13 @@ public class AutomationContainer extends AutomationBase {
     public AutomationPanel getPanel (int index) {
         return new AutomationPanel((this.getControlByControlType(index, ControlType.Pane)), this.uiAuto);
     }
+
+    /**
+     * Get the appbar associated with the given index
+     * @param index The index
+     * @return The AutomationAppBar
+     */
+    public AutomationAppBar getAppBar(int index) {
+        return new AutomationAppBar((this.getControlByControlType(index, ControlType.AppBar)), this.uiAuto);
+    }
 }

@@ -27,6 +27,11 @@ public class AutomationComboBox extends AutomationBase {
     private ExpandCollapse collapsePattern;
     private Value valuePattern;
 
+    /**
+     * Constructor for the AutomationComboBox.
+     * @param element The underlying automation element
+     * @param uiAuto The IUIAutomation associated with this session
+     */
     public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
