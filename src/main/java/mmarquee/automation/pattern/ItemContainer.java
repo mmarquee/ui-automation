@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.MarshalAs;
-import com4j.NativeType;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -26,9 +24,9 @@ public class ItemContainer extends BasePattern {
 
     /**
      * Finds an item by property
-     * @param pStartAfter
-     * @param propertyId
-     * @param value
+     * @param pStartAfter Where to start in the tree of elements
+     * @param propertyId The property id to find
+     * @param value The value of the property
      * @return
      */
     public IUIAutomationElement findItemByProperty (IUIAutomationElement pStartAfter, int propertyId, Object value) {
