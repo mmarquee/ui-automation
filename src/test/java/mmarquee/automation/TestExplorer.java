@@ -15,6 +15,9 @@
  */
 package mmarquee.automation;
 
+import mmarquee.automation.ribbon.*;
+import org.apache.log4j.Logger;
+
 /**
  * Created by inpwt on 26/02/2016.
  *
@@ -24,15 +27,57 @@ package mmarquee.automation;
 public class TestExplorer {
     public void run() {
 
+        Logger logger = Logger.getLogger(AutomationBase.class.getName());
+
         UIAutomation automation = new UIAutomation();
 
         AutomationApplication application = null;
 
         try {
+            // Start the application
             application = automation.launchOrAttach("explorer");
         } catch (Throwable ex) {
             // Smother
+            logger.error("Failed to launch or attach");
         }
+
+        application.waitForInputIdle(5000);
+
+        // Get the main explorer window
+        AutomationWindow window = automation.getDesktopWindow("File Explorer");
+        window.focus();
+
+        // Get the ribbon, work our way down and click the "Preview Button"
+        AutomationRibbonBar ribbon = window.getRibbonBar(0);
+        AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar(0);
+        AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane(0);
+        logger.info("First work pane is " + pane.name());
+
+        AutomationNUIPane uiPane = pane.getNUIPane(0);
+        logger.info("First NUIPane is " + uiPane.name());
+
+        AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+        AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+
+        AutomationTab tab = uiHWND.getTab(0);
+        tab.selectTabPage("View");
+
+        AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+
+        AutomationToolBar panes = panel.getToolBar("Panes");
+
+        panes.getButton("Preview pane").click();
+
+        /*
+        // Minimize
+        btn.click();
+        try {
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            logger.info("Interrupted");
+        }
+        */
+
 /*
         // Wait for the process to start
         application.waitForInputIdle(5000);

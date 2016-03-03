@@ -16,27 +16,15 @@
 package mmarquee.automation.ribbon;
 
 import mmarquee.automation.AutomationPanel;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 02/03/2016.
  *
- * Specialist pane that represents the RibbonBar
+ * Specialist pane that represents the NUIPane (part of the MS ribbon controls)
  */
-public class AutomationRibbonBar extends AutomationPanel {
-    public AutomationRibbonBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+public class AutomationNUIPane extends AutomationPanel {
+    public AutomationNUIPane(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-    }
-
-    //
-
-    /**
-     * Get the RibbonCommandBar associated with the given index
-     * @param index The index
-     * @return The AutomationRibbonBar
-     */
-    public AutomationRibbonCommandBar getRibbonCommandBar(int index) {
-        return new AutomationRibbonCommandBar(this.getControlByControlType(index, ControlType.Pane, "UIRibbonCommandBar"), this.uiAuto);
     }
 }

@@ -18,7 +18,10 @@ package mmarquee.automation;
 
 import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.rebar.AutomationReBar;
+import mmarquee.automation.ribbon.AutomationNUIPane;
+import mmarquee.automation.ribbon.AutomationNetUIHWND;
 import mmarquee.automation.ribbon.AutomationRibbonBar;
+import mmarquee.automation.ribbon.AutomationRibbonWorkPane;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -292,6 +295,15 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the panel control associated with the given name
+     *
+     * @param name Name of the control
+     */
+    public AutomationPanel getPanel(String name) {
+        return new AutomationPanel((this.getControlByControlType(name, ControlType.Pane)), this.uiAuto);
+    }
+
+    /**
      * Get the AppBar associated with the given index
      *
      * @param index The index
@@ -340,4 +352,34 @@ public class AutomationContainer extends AutomationBase {
     public AutomationReBar getReBar(int index) {
         return new AutomationReBar(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32"), this.uiAuto);
     }
+
+    /**
+     * Get the RibbonWorkPane associated with the given index
+     * @param index The index
+     * @return The AutomationRibbonWorkPane
+     */
+    public AutomationRibbonWorkPane getRibbonWorkPane(int index) {
+        return new AutomationRibbonWorkPane(this.getControlByControlType(index, ControlType.Pane, "UIRibbonWorkPane"), this.uiAuto);
+    }
+
+    /**
+     * Get the AutomationNUIPane associated with the given index
+     * @param index The index
+     * @return The AutomationNUIPane
+     */
+    public AutomationNUIPane getNUIPane(int index) {
+        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"), this.uiAuto);
+    }
+
+    /**
+     * Get the AutomationNetUIHWND associated with the given index
+     * @param index The index
+     * @return The AutomationNetUIHWND
+     */
+    public AutomationNetUIHWND getNetUIHWND(int index) {
+        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"), this.uiAuto);
+    }
+
+
+
 }

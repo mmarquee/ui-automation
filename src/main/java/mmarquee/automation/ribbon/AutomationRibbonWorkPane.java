@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.ribbon;
 
+import mmarquee.automation.AutomationContainer;
 import mmarquee.automation.AutomationPanel;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
@@ -22,18 +23,9 @@ import mmarquee.automation.uiautomation.*;
 /**
  * Created by inpwt on 02/03/2016.
  */
-public class AutomationRibbonWorkPane extends AutomationPanel {
+public class AutomationRibbonWorkPane extends AutomationContainer {
     public AutomationRibbonWorkPane(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
-    }
-
-    /**
-     * Get the RibbonWorkPane associated with the given index
-     * @param index The index
-     * @return The AutomationRibbonWorkPane
-     */
-    public AutomationRibbonWorkPane getRibbonWorkPane(int index) {
-        return new AutomationRibbonWorkPane(this.getControlByControlType(index, ControlType.Pane, "UIRibbonCommandBar"), this.uiAuto);
     }
 }
 
