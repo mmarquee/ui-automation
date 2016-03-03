@@ -36,6 +36,12 @@ public class AutomationMainMenu extends AutomationBase {
         this.parent = parent;
     }
 
+    /**
+     * Get the menu item associated with the hierarchy of names
+     * @param name0 First Name
+     * @param name1 Second name
+     * @return The menu item that matches the name
+     */
     public AutomationMenuItem getMenuItem (String name0, String name1) {
 
         IUIAutomationElement foundElement = null;
@@ -69,6 +75,10 @@ public class AutomationMainMenu extends AutomationBase {
         return new AutomationMenuItem(foundElement, this.uiAuto);
     }
 
+    /**
+     * Gets the items associated with this menu control
+     * @return The list of items
+     */
     public List<AutomationMenuItem> getItems() {
         IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants,
                 this.createControlTypeCondition(ControlType.MenuItem));
