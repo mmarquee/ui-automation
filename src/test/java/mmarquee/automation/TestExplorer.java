@@ -17,6 +17,9 @@ package mmarquee.automation;
 
 /**
  * Created by inpwt on 26/02/2016.
+ *
+ * Test the automation library on a non-Delphi application, and see
+ * whether we can get to all the bits of the UI
  */
 public class TestExplorer {
     public void run() {
