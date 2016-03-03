@@ -15,6 +15,7 @@
  */
 package mmarquee.automation;
 
+import mmarquee.automation.rebar.AutomationReBar;
 import mmarquee.automation.ribbon.*;
 import org.apache.log4j.Logger;
 
@@ -67,6 +68,23 @@ public class TestExplorer {
         AutomationToolBar panes = panel.getToolBar("Panes");
 
         panes.getButton("Preview pane").click();
+        AutomationSplitButton split = panes.getSplitButton("Navigation pane");
+        split.click();
+        try {
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            logger.info("Interrupted");
+        }
+        split.click();
+
+        AutomationReBar rebar = window.getReBar(0);
+        AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
+
+        logger.info("Toolbar = " + toolbar.name());
+        AutomationButton upButton = toolbar.getButton(0);
+        upButton.click();
+
+
 
         /*
         // Minimize

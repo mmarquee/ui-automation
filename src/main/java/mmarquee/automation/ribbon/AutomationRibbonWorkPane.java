@@ -27,5 +27,14 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
     public AutomationRibbonWorkPane(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
+
+    /**
+     * Get the AutomationNUIPane associated with the given index
+     * @param index The index
+     * @return The AutomationNUIPane
+     */
+    public AutomationNUIPane getNUIPane(int index) {
+        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"), this.uiAuto);
+    }
 }
 

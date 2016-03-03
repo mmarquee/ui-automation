@@ -16,6 +16,7 @@
 package mmarquee.automation.ribbon;
 
 import mmarquee.automation.AutomationPanel;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -26,5 +27,14 @@ import mmarquee.automation.uiautomation.*;
 public class AutomationNUIPane extends AutomationPanel {
     public AutomationNUIPane(IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+    }
+
+    /**
+     * Get the AutomationNetUIHWND associated with the given index
+     * @param index The index
+     * @return The AutomationNetUIHWND
+     */
+    public AutomationNetUIHWND getNetUIHWND(int index) {
+        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"), this.uiAuto);
     }
 }

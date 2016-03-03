@@ -350,36 +350,16 @@ public class AutomationContainer extends AutomationBase {
      * @return The control wrapper
      */
     public AutomationReBar getReBar(int index) {
+        IUIAutomationElement elem = this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32");
         return new AutomationReBar(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32"), this.uiAuto);
     }
 
     /**
-     * Get the RibbonWorkPane associated with the given index
-     * @param index The index
-     * @return The AutomationRibbonWorkPane
+     * Get the AutomationSplitButton associated with the given name
+     * @param name The name to look for
+     * @return The AutomationSplitButton
      */
-    public AutomationRibbonWorkPane getRibbonWorkPane(int index) {
-        return new AutomationRibbonWorkPane(this.getControlByControlType(index, ControlType.Pane, "UIRibbonWorkPane"), this.uiAuto);
+    public AutomationSplitButton getSplitButton(String name) {
+        return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton), this.uiAuto);
     }
-
-    /**
-     * Get the AutomationNUIPane associated with the given index
-     * @param index The index
-     * @return The AutomationNUIPane
-     */
-    public AutomationNUIPane getNUIPane(int index) {
-        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"), this.uiAuto);
-    }
-
-    /**
-     * Get the AutomationNetUIHWND associated with the given index
-     * @param index The index
-     * @return The AutomationNetUIHWND
-     */
-    public AutomationNetUIHWND getNetUIHWND(int index) {
-        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"), this.uiAuto);
-    }
-
-
-
 }
