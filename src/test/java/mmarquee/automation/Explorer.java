@@ -20,10 +20,10 @@ import mmarquee.automation.uiautomation.ToggleState;
 
 import java.util.List;
 
-public class Notepad {
+public class Explorer {
 
 	public static void main(String[] args) {
-		TestNotepad main = new TestNotepad();
+		TestExplorer main = new TestExplorer();
 
 		main.run();
 	}

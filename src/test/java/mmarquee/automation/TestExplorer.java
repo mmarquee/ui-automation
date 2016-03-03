@@ -18,7 +18,7 @@ package mmarquee.automation;
 /**
  * Created by inpwt on 26/02/2016.
  */
-public class TestNotepad {
+public class TestExplorer {
     public void run() {
 
         UIAutomation automation = new UIAutomation();
@@ -26,11 +26,11 @@ public class TestNotepad {
         AutomationApplication application = null;
 
         try {
-            application = automation.launchOrAttach("notepad.exe");
+            application = automation.launchOrAttach("explorer");
         } catch (Throwable ex) {
             // Smother
         }
-
+/*
         // Wait for the process to start
         application.waitForInputIdle(5000);
 
@@ -43,7 +43,7 @@ public class TestNotepad {
         //document.setText("This is a journey into sound");
 
         String text = document.getText();
-
+*/
 //        document.setName("This is a journey into sound");
 
 /*
