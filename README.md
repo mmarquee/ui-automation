@@ -64,18 +64,27 @@ In order to click the 'OK' button associated with the connection window, it can 
 
 The currently supported controls are ...
 
-* TButton
-* TCheckBox
-* TComboBox
-* TEditBox
-* TRadioButton
-* TStatusBar
-* TStringGrid (using an extended TStringGrid control that implements UIAutomation patterns)
-* TPageControl
-* TTab
-* TTextBox
+* Button
+* CheckBox
+* ComboBox
+* EditBox
+* RadioButton
+* StatusBar
+* StringGrid and StringGridItem (see below)
+* PageControl
+* Tab
+* TextBox
+* TreeView and TreeViewItem
+* Menu and MenuItem
+* SplitButton (partially)
+* Some Ribbon implementations
+* Hyperlink
+* Panel
+* Toolbar
 
 ## TAutomatedStringGrid
+
+The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation.
 
 ```java
     AutomationStringGrid grid = window.getStringGridByIndex(0);
