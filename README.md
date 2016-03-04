@@ -69,6 +69,7 @@ The currently supported controls are ...
 * ComboBox
 * EditBox
 * RadioButton
+* ToggleButton
 * StatusBar
 * StringGrid and StringGridItem (see below)
 * PageControl
@@ -77,19 +78,45 @@ The currently supported controls are ...
 * TreeView and TreeViewItem
 * Menu and MenuItem
 * SplitButton (partially)
-* Some Ribbon implementations
+* Some Ribbon implementations (see below)
 * Hyperlink
 * Panel
 * Toolbar
 
 ## TAutomatedStringGrid
 
-The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation.
+The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation. In order to get the element associated with the specific TAutomatedStringGrid, then this is done in the following manner.
 
 ```java
-    AutomationStringGrid grid = window.getStringGridByIndex(0);
+    AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
     AutomationStringGridItem item = grid.getItem(0,0);
-	String itemName = item.name();
+    String itemName = item.name();
+```
+
+## The Ribbon control
+
+The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows, finding the button associated with the Preview Pane and clicking on it to turn it on/off.
+
+```java
+   AutomationRibbonBar ribbon = window.getRibbonBar(0);
+   AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar(0);
+   AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane(0);
+   logger.info("First work pane is " + pane.name());
+
+   AutomationNUIPane uiPane = pane.getNUIPane(0);
+   logger.info("First NUIPane is " + uiPane.name());
+
+   AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+   AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+
+   AutomationTab tab = uiHWND.getTab(0);
+   tab.selectTabPage("View");
+
+   AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+
+   AutomationToolBar panes = panel.getToolBar("Panes");
+
+   panes.getButton("Preview pane").click();
 ```
 
 # Contributors
