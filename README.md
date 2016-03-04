@@ -84,10 +84,10 @@ The currently supported controls are ...
 
 ## TAutomatedStringGrid
 
-The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation.
+The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation. In order to get the element associated with the specific TAutomatedStringGrid, then this is done in the following manner.
 
 ```java
-    AutomationStringGrid grid = window.getStringGridByIndex(0);
+    AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
     AutomationStringGridItem item = grid.getItem(0,0);
 	String itemName = item.name();
 ```
