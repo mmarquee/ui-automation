@@ -114,7 +114,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the checkbox associated with the given index
-     *
      * @param index Index of the control
      * @return AutomationCheckbox that represents the found control
      */
@@ -124,7 +123,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the Tab control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -134,7 +132,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the Editbox control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -144,7 +141,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the Editbox control associated with the given name
-     *
      * @param name Name of the control
      * @return The found control
      */
@@ -154,7 +150,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the slider control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -164,7 +159,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the (JHC) Masked Edit control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -174,7 +168,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the radio button control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -184,7 +177,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the text box control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -194,7 +186,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the combobox control associated with the given name
-     *
      * @param name Name of the control
      * @return The found control
      */
@@ -204,7 +195,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the button control associated with the given name
-     *
      * @param name Name of the control
      * @return The found control
      */
@@ -214,7 +204,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the button control associated with the given index
-     *
      * @param index
      * @return
      */
@@ -225,7 +214,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the  String Grid control associated with the given index, with a specific control name
-     *
      * @param index Index of the control
      * @param controlName*
      * @return The found control
@@ -245,7 +233,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the document associated with the given index
-     *
      * @param index Index of the control
      * @return The document control
      */
@@ -255,7 +242,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the hyperlink control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -265,7 +251,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the treeview control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -274,8 +259,16 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the treeview control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     */
+    public AutomationTreeView getTreeView(String name) {
+        return new AutomationTreeView((this.getControlByControlType(name, ControlType.Tree)), this.uiAuto);
+    }
+
+    /**
      * Gets the list control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -285,7 +278,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the calendar control associated with the given index
-     *
      * @param index Index of the control
      * @return The found control
      */
@@ -295,7 +287,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the panel control associated with the given index
-     *
      * @param index Index of the control
      */
     public AutomationPanel getPanel(int index) {
@@ -304,7 +295,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the panel control associated with the given name
-     *
      * @param name Name of the control
      */
     public AutomationPanel getPanel(String name) {
@@ -313,7 +303,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Get the AppBar associated with the given index
-     *
      * @param index The index
      * @return The AutomationAppBar
      */
@@ -323,7 +312,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Get the ToolBar associated with the given name
-     *
      * @param name The name
      * @return The AutomationToolBar
      */
@@ -333,7 +321,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Get the ToolBar associated with the given index
-     *
      * @param index The index
      * @return The AutomationToolBar
      */
@@ -351,7 +338,6 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the AutomationReBar associated with this index
-     *
      * @param index The index
      * @return The control wrapper
      */

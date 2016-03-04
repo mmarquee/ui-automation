@@ -80,9 +80,24 @@ public class TestExplorer {
         AutomationReBar rebar = window.getReBar(0);
         AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
 
-        logger.info("Toolbar = " + toolbar.name());
-        AutomationButton upButton = toolbar.getButton(0);
-        upButton.click();
+     //   logger.info("Toolbar = " + toolbar.name());
+     //   AutomationButton upButton = toolbar.getButton(0);
+     //   upButton.click();
+
+        // Now try and get to the list of items in explorer
+        AutomationPanel explorer = window.getPanel("File Explorer");
+        AutomationPanel pane0 = explorer.getPanel(0);
+        AutomationPanel explorerPane = pane0.getPanel("Explorer Pane");
+        AutomationPanel folderLayoutPane = explorerPane.getPanel("Folder Layout Pane");
+        AutomationPanel controlHost = folderLayoutPane.getPanel(0);
+        AutomationTreeView treeView = controlHost.getTreeView(0);
+        try {
+            AutomationTreeViewItem desktopItem = treeView.getItem("Desktop");
+
+            desktopItem.select();
+        } catch (ItemNotFoundException ex) {
+            logger.error("Didn't find Desktop");
+        }
 
 
 
