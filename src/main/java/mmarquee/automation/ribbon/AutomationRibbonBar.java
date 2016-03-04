@@ -29,14 +29,11 @@ public class AutomationRibbonBar extends AutomationPanel {
         super(element, uiAuto);
     }
 
-    //
-
     /**
-     * Get the RibbonCommandBar associated with the given index
-     * @param index The index
+     * Get the RibbonCommandBar associated with this container
      * @return The AutomationRibbonBar
      */
-    public AutomationRibbonCommandBar getRibbonCommandBar(int index) {
-        return new AutomationRibbonCommandBar(this.getControlByControlType(index, ControlType.Pane, "UIRibbonCommandBar"), this.uiAuto);
+    public AutomationRibbonCommandBar getRibbonCommandBar() {
+        return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBar"), this.uiAuto);
     }
 }

@@ -18,10 +18,8 @@ package mmarquee.automation;
 
 import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.rebar.AutomationReBar;
-import mmarquee.automation.ribbon.AutomationNUIPane;
-import mmarquee.automation.ribbon.AutomationNetUIHWND;
 import mmarquee.automation.ribbon.AutomationRibbonBar;
-import mmarquee.automation.ribbon.AutomationRibbonWorkPane;
+import mmarquee.automation.stringgrid.AutomationStringGrid;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -226,13 +224,23 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the (JHC) String Grid control associated with the given index
+     * Gets the  String Grid control associated with the given index, with a specific control name
      *
      * @param index Index of the control
+     * @param controlName*
      * @return The found control
      */
+    public AutomationStringGrid getStringGrid(int index, String controlName) {
+        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid, controlName), this.uiAuto);
+    }
+
+    /**
+     * Gets the  String Grid control associated with the given index
+     * @param index
+     * @return
+     */
     public AutomationStringGrid getStringGrid(int index) {
-        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid, "TAutomationStringGrid"), this.uiAuto);
+        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid), this.uiAuto);
     }
 
     /**
@@ -334,13 +342,11 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the RibbonBar associated with the given index
-     *
-     * @param index The index
+     * Get the RibbonBar associated this container
      * @return The AutomationRibbonBar
      */
-    public AutomationRibbonBar getRibbonBar(int index) {
-        return new AutomationRibbonBar(this.getControlByControlType(index, ControlType.Pane, "UIRibbonCommandBarDock"), this.uiAuto);
+    public AutomationRibbonBar getRibbonBar() {
+        return new AutomationRibbonBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBarDock"), this.uiAuto);
     }
 
     /**

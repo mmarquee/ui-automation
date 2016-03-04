@@ -15,7 +15,7 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.stringgrid.*;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
@@ -116,14 +116,14 @@ public class TestMain {
         List<AutomationListItem> litems = cb0.getList();
 
         // Now string grids
-        AutomationStringGrid grid = window.getStringGrid(0);
+        AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
 
-        AutomationStringGridItem item1 = grid.getItem(0, 0);
+        AutomationStringGridCell cell1 = grid.getItem(0, 0);
 
-        String itemName = item1.name();
+        String itemName = cell1.name();
         logger.info(itemName);
-        item1.setName("This");
-        logger.info(item1.name());
+        cell1.setName("This");
+        logger.info(cell1.name());
 
         AutomationTreeView tree = window.getTreeView(0);
         try {

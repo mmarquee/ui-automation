@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package mmarquee.automation;
+package mmarquee.automation.stringgrid;
 
+import mmarquee.automation.AutomationBase;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 import java.util.List;
@@ -64,10 +65,10 @@ public class AutomationStringGrid extends AutomationBase
      * Gets the selected item from the grid
      * @return AutomationStringGridItem
      */
-    public AutomationStringGridItem selected() {
+    public AutomationStringGridCell selected() {
         IUIAutomationElementArray collection = selectionPattern.getCurrentSelection();
 
-        AutomationStringGridItem item = new AutomationStringGridItem(collection.getElement(0), uiAuto);
+        AutomationStringGridCell item = new AutomationStringGridCell(collection.getElement(0), uiAuto);
 
         return item;
     }
@@ -76,15 +77,15 @@ public class AutomationStringGrid extends AutomationBase
      * Gets the list of the column headers
      * @return List of GridItems
      */
-    public List<AutomationStringGridItem> getColumnHeaders () {
+    public List<AutomationStringGridCell> getColumnHeaders () {
 
         IUIAutomationElementArray collection = tablePattern.getCurrentColumnHeaders();
         int length = collection.length();
 
-        List<AutomationStringGridItem> items = new ArrayList<AutomationStringGridItem>();
+        List<AutomationStringGridCell> items = new ArrayList<AutomationStringGridCell>();
 
         for (int count = 0; count < length; count++) {
-            items.add(new AutomationStringGridItem(collection.getElement(count), uiAuto));
+            items.add(new AutomationStringGridCell(collection.getElement(count), uiAuto));
         }
 
         return items;
@@ -96,7 +97,7 @@ public class AutomationStringGrid extends AutomationBase
      * @param y Y Offset
      * @return The GridItem at the given cell position
      */
-    public AutomationStringGridItem getItem(int x, int y) {
-        return new AutomationStringGridItem(this.grid.getItem(x, y), uiAuto);
+    public AutomationStringGridCell getItem(int x, int y) {
+        return new AutomationStringGridCell(this.grid.getItem(x, y), uiAuto);
     }
 }

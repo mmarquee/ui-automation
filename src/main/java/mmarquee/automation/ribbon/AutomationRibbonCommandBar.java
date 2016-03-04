@@ -31,11 +31,10 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
     }
 
     /**
-     * Get the RibbonWorkPane associated with the given index
-     * @param index The index
+     * Get the RibbonWorkPane associated with the container
      * @return The AutomationRibbonWorkPane
      */
-    public AutomationRibbonWorkPane getRibbonWorkPane(int index) {
-        return new AutomationRibbonWorkPane(this.getControlByControlType(index, ControlType.Pane, "UIRibbonWorkPane"), this.uiAuto);
+    public AutomationRibbonWorkPane getRibbonWorkPane() {
+        return new AutomationRibbonWorkPane(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane"), this.uiAuto);
     }
 }

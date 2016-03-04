@@ -49,9 +49,9 @@ public class TestExplorer {
         window.focus();
 
         // Get the ribbon, work our way down and click the "Preview Button"
-        AutomationRibbonBar ribbon = window.getRibbonBar(0);
-        AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar(0);
-        AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane(0);
+        AutomationRibbonBar ribbon = window.getRibbonBar();
+        AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+        AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
         logger.info("First work pane is " + pane.name());
 
         AutomationNUIPane uiPane = pane.getNUIPane(0);
