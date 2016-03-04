@@ -69,6 +69,7 @@ The currently supported controls are ...
 * ComboBox
 * EditBox
 * RadioButton
+* ToggleButton
 * StatusBar
 * StringGrid and StringGridItem (see below)
 * PageControl
@@ -77,7 +78,7 @@ The currently supported controls are ...
 * TreeView and TreeViewItem
 * Menu and MenuItem
 * SplitButton (partially)
-* Some Ribbon implementations
+* Some Ribbon implementations (see below)
 * Hyperlink
 * Panel
 * Toolbar
@@ -89,7 +90,33 @@ The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation)
 ```java
     AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
     AutomationStringGridItem item = grid.getItem(0,0);
-	String itemName = item.name();
+    String itemName = item.name();
+```
+
+## The Ribbon control
+
+The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows, finding the button associated with the Preview Pane and clicking on it to turn it on/off.
+
+```java
+   AutomationRibbonBar ribbon = window.getRibbonBar(0);
+   AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar(0);
+   AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane(0);
+   logger.info("First work pane is " + pane.name());
+
+   AutomationNUIPane uiPane = pane.getNUIPane(0);
+   logger.info("First NUIPane is " + uiPane.name());
+
+   AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+   AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+
+   AutomationTab tab = uiHWND.getTab(0);
+   tab.selectTabPage("View");
+
+   AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+
+   AutomationToolBar panes = panel.getToolBar("Panes");
+
+   panes.getButton("Preview pane").click();
 ```
 
 # Contributors
