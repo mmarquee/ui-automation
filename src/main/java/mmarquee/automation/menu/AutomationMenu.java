@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package mmarquee.automation;
+package mmarquee.automation.menu;
 
+import mmarquee.automation.AutomationBase;
 import mmarquee.automation.uiautomation.*;
 
 import static java.lang.Thread.sleep;

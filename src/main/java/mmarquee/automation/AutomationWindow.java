@@ -16,9 +16,8 @@
 
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.User32Util;
-import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.menu.AutomationMainMenu;
+import mmarquee.automation.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
@@ -36,6 +35,11 @@ public class AutomationWindow extends AutomationContainer {
         this.element.setFocus();
     }
 
+    /**
+     * Constructor for the AutomationWindow
+     * @param element The underlying element
+     * @param uiAuto The automation library
+     */
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
@@ -157,6 +161,14 @@ public class AutomationWindow extends AutomationContainer {
      */
     public boolean isTopMost() {
         return this.windowPattern.isTopMost();
+    }
+
+    /**
+     * Get the AutomationTitleBar associated with the given name
+     * @return The AutomationTitleBar
+     */
+    public AutomationTitleBar getTitleBar() {
+        return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar), this.uiAuto);
     }
 
     /**

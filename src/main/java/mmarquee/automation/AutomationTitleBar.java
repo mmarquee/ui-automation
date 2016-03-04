@@ -15,32 +15,18 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 10/02/2016.
+ * Created by inpwt on 04/03/2016.
  */
-public class AutomationMenuItem extends AutomationBase {
-    private Invoke invokePattern;
-
-    public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
-
-        try {
-            this.invokePattern = this.getInvokePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
-    }
-
+public class AutomationTitleBar extends AutomationBase {
     /**
-     * Invoke the click pattern for the menu item
+     * Constructor for the AutomationTitleBar.
+     * @param element The underlying automation element
+     * @param uiAuto The IUIAutomation associated with this session
      */
-    public void click() {
-        if (this.invokePattern != null) {
-            this.invokePattern.invoke();
-        }
+    public AutomationTitleBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+        super(element, uiAuto);
     }
 }

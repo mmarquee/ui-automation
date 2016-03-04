@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package mmarquee.automation;
+package mmarquee.automation.menu;
 
+import mmarquee.automation.AutomationBase;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
 /**

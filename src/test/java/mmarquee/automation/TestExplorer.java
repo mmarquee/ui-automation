@@ -84,6 +84,7 @@ public class TestExplorer {
      //   AutomationButton upButton = toolbar.getButton(0);
      //   upButton.click();
 
+        /*
         // Now try and get to the list of items in explorer
         AutomationPanel explorer = window.getPanel("File Explorer");
         AutomationPanel pane0 = explorer.getPanel(0);
@@ -98,7 +99,7 @@ public class TestExplorer {
         } catch (ItemNotFoundException ex) {
             logger.error("Didn't find Desktop");
         }
-
+*/
 
 
         /*

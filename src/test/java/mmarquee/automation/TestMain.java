@@ -15,6 +15,8 @@
  */
 package mmarquee.automation;
 
+import mmarquee.automation.menu.AutomationMainMenu;
+import mmarquee.automation.menu.AutomationMenuItem;
 import mmarquee.automation.stringgrid.*;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;

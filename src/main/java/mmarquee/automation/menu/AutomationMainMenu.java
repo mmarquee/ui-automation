@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package mmarquee.automation.menu;
 
+import mmarquee.automation.AutomationBase;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
