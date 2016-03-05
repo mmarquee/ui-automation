@@ -84,13 +84,29 @@ public class TestExplorer {
      //   AutomationButton upButton = toolbar.getButton(0);
      //   upButton.click();
 
-        /*
+
         // Now try and get to the list of items in explorer
         AutomationPanel explorer = window.getPanel("File Explorer");
-        AutomationPanel pane0 = explorer.getPanel(0);
-        AutomationPanel explorerPane = pane0.getPanel("Explorer Pane");
+        logger.info(explorer.name());
+        AutomationPanel pane0 = explorer.getPanel("Control Host");
+        logger.info(pane0.name());
+        AutomationTreeView treeView = pane0.getTreeView(0);
+        logger.info(treeView.name());
+        try {
+            AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
+            logger.info(treeItem.name());
+            treeItem.select();
+            treeItem.click();
+        } catch (ItemNotFoundException ex) {
+            logger.info("Didn't find the item");
+        }
+
+        /*
+        logger.info(explorerPane.name());
         AutomationPanel folderLayoutPane = explorerPane.getPanel("Folder Layout Pane");
+        logger.info(folderLayoutPane.name());
         AutomationPanel controlHost = folderLayoutPane.getPanel(0);
+        logger.info(controlHost.name());
         AutomationTreeView treeView = controlHost.getTreeView(0);
         try {
             AutomationTreeViewItem desktopItem = treeView.getItem("Desktop");
@@ -100,7 +116,6 @@ public class TestExplorer {
             logger.error("Didn't find Desktop");
         }
 */
-
 
         /*
         // Minimize
