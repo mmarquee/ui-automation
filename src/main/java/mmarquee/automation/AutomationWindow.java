@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.User32Util;
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
@@ -26,6 +22,8 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 26/01/2016.
  */
 public class AutomationWindow extends AutomationContainer {
+
+    protected AutomationElement elem;
 
     private Window windowPattern;
 
@@ -36,8 +34,20 @@ public class AutomationWindow extends AutomationContainer {
         this.element.setFocus();
     }
 
+    /*
     public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+
+        try {
+            this.windowPattern = this.getWindowPattern();
+        } catch (PatternNotFoundException ex) {
+            // log this
+        }
+    }
+*/
+
+    public AutomationWindow (AutomationElement element, IUIAutomation uiAuto) {
+        super(element.element, uiAuto);
 
         try {
             this.windowPattern = this.getWindowPattern();
@@ -140,7 +150,7 @@ public class AutomationWindow extends AutomationContainer {
             }
         }
 
-        return new AutomationWindow(item, this.uiAuto);
+        return new AutomationWindow(new AutomationElement(item), this.uiAuto);
     }
 
     /**

@@ -49,7 +49,7 @@ public class AutomationApplication extends AutomationBase {
      * @param title The title to look for
      * @return An AutomationWindow
      */
-    public AutomationWindow getWindow(String title) {
+    public AutomationWindow getWindow(String title) throws ElementNotFoundException {
 
         IUIAutomationElement foundElement = null;
 
@@ -66,7 +66,13 @@ public class AutomationApplication extends AutomationBase {
             }
         }
 
-        return new AutomationWindow(foundElement, this.uiAuto);
+        if (foundElement != null) {
+            AutomationElement elem = new AutomationElement(foundElement);
+
+            return new AutomationWindow(elem, this.uiAuto);
+        } else {
+            throw new ElementNotFoundException();
+        }
     }
 
     /**
