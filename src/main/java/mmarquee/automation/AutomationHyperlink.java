@@ -46,8 +46,6 @@ public class AutomationHyperlink extends AutomationBase {
      * Fires the click event associated with this element.
      **/
     public void click() {
-   //     if (this.invokePattern.isAvailable()) {
-            this.invokePattern.invoke();
-    //    }
+        this.invokePattern.invoke();
     }
 }

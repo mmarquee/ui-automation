@@ -25,6 +25,8 @@ public class Invoke extends BasePattern {
      * Invokes the pattern on the control
      */
     public void invoke() {
-        ((IUIAutomationInvokePattern)(this.pattern)).invoke();
+        if (this.isAvailable()) {
+            ((IUIAutomationInvokePattern)this.pattern).invoke();
+        }
     }
 }
