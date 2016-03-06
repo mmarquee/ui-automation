@@ -15,6 +15,8 @@
  */
 package mmarquee.automation;
 
+import mmarquee.automation.menu.AutomationMainMenu;
+import mmarquee.automation.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
