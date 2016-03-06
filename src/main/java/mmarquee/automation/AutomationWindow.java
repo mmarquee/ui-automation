@@ -43,8 +43,8 @@ public class AutomationWindow extends AutomationContainer {
     }
 
     /**
-     * Gets the statusbar associated with this window
-     * @return The statusbar
+     * Gets the status bar associated with this window
+     * @return The status bar
      */
     public AutomationStatusBar getStatusBar() {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();

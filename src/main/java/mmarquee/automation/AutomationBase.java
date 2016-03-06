@@ -27,7 +27,7 @@ import org.apache.log4j.*;
  */
 public abstract class AutomationBase {
 
-    private final Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    protected final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
     protected IUIAutomationElement element;
 
