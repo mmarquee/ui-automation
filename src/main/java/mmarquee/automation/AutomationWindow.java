@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation;
 
-import mmarquee.automation.menu.AutomationMainMenu;
-import mmarquee.automation.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
@@ -35,13 +32,8 @@ public class AutomationWindow extends AutomationContainer {
         this.element.setFocus();
     }
 
-    /**
-     * Constructor for the AutomationWindow
-     * @param element The underlying element
-     * @param uiAuto The automation library
-     */
-    public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationWindow (AutomationElement element, IUIAutomation uiAuto) {
+        super(element.element, uiAuto);
 
         try {
             this.windowPattern = this.getWindowPattern();
@@ -51,8 +43,8 @@ public class AutomationWindow extends AutomationContainer {
     }
 
     /**
-     * Gets the statusbar associated with this window
-     * @return The statusbar
+     * Gets the status bar associated with this window
+     * @return The status bar
      */
     public AutomationStatusBar getStatusBar() {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
@@ -144,7 +136,7 @@ public class AutomationWindow extends AutomationContainer {
             }
         }
 
-        return new AutomationWindow(item, this.uiAuto);
+        return new AutomationWindow(new AutomationElement(item), this.uiAuto);
     }
 
     /**

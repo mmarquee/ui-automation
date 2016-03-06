@@ -136,7 +136,7 @@ public class UIAutomation {
             }
         }
 
-        return new AutomationWindow(element, this.uiAuto);
+        return new AutomationWindow(new AutomationElement(element), this.uiAuto);
     }
 
     /**
@@ -156,7 +156,7 @@ public class UIAutomation {
         for (int count = 0; count < length; count++) {
             IUIAutomationElement element = collection.getElement(count);
 
-            result.add(new AutomationWindow(element, this.uiAuto));
+            result.add(new AutomationWindow(new AutomationElement(element), this.uiAuto));
         }
 
         return result;
