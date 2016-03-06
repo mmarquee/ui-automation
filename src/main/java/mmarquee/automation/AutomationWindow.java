@@ -23,8 +23,6 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationWindow extends AutomationContainer {
 
-    protected AutomationElement elem;
-
     private Window windowPattern;
 
     /**
@@ -33,18 +31,6 @@ public class AutomationWindow extends AutomationContainer {
     public void focus() {
         this.element.setFocus();
     }
-
-    /*
-    public AutomationWindow (IUIAutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
-
-        try {
-            this.windowPattern = this.getWindowPattern();
-        } catch (PatternNotFoundException ex) {
-            // log this
-        }
-    }
-*/
 
     public AutomationWindow (AutomationElement element, IUIAutomation uiAuto) {
         super(element.element, uiAuto);
