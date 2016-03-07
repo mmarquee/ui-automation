@@ -16,6 +16,12 @@
 package mmarquee.automation.pattern;
 
 import com4j.Com4jObject;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by inpwt on 29/02/2016.
  */
@@ -33,6 +39,16 @@ public abstract class BasePattern implements Pattern {
         this.pattern = null;
     }
 
+    protected List<AutomationElement> collectionToList(IUIAutomationElementArray collection) {
+
+        List<AutomationElement> list = new ArrayList<AutomationElement>();
+
+        for(int count = 0; count < collection.length(); count++) {
+            list.add(new AutomationElement(collection.getElement(count)));
+        }
+
+        return list;
+    }
 
     /**
      * Sets the pattern

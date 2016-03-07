@@ -15,11 +15,8 @@
  */
 package mmarquee.automation.pattern;
 
-
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.uiautomation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,14 +25,6 @@ import java.util.List;
 public class Selection extends BasePattern {
     public List<AutomationElement> getCurrentSelection () {
         IUIAutomationElementArray collection = ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
-
-        List<AutomationElement> list = new ArrayList<AutomationElement>();
-
-        for(int count = 0; count < collection.length(); count++) {
-            list.add(new AutomationElement(collection.getElement(count)));
-        }
-
-        return list;
-
+        return this.collectionToList(collection);
     }
 }
