@@ -27,7 +27,7 @@ public class AutomationStatusBar extends AutomationContainer {
      * @param element The underlying element
      * @param uiAuto The automation bit
      */
-    public AutomationStatusBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationStatusBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

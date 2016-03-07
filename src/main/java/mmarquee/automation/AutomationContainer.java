@@ -33,7 +33,7 @@ public class AutomationContainer extends AutomationBase {
      * @param element The underlying element
      * @param uiAuto  The automation bit
      */
-    public AutomationContainer(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationContainer(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -118,7 +118,7 @@ public class AutomationContainer extends AutomationBase {
      * @return AutomationCheckbox that represents the found control
      */
     public AutomationCheckbox getCheckbox(int index) {
-        return new AutomationCheckbox(this.getControlByControlType(index, ControlType.CheckBox), this.uiAuto);
+        return new AutomationCheckbox(new AutomationElement(this.getControlByControlType(index, ControlType.CheckBox)), this.uiAuto);
     }
 
     /**
@@ -127,7 +127,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTab getTab(int index) {
-        return new AutomationTab(this.getControlByControlType(index, ControlType.Tab), this.uiAuto);
+        return new AutomationTab(new AutomationElement(this.getControlByControlType(index, ControlType.Tab)), this.uiAuto);
     }
 
     /**
@@ -136,7 +136,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationEditBox getEditBox(int index) {
-        return new AutomationEditBox(this.getControlByControlType(index, ControlType.Edit), this.uiAuto);
+        return new AutomationEditBox(new AutomationElement(this.getControlByControlType(index, ControlType.Edit)), this.uiAuto);
     }
 
     /**
@@ -145,7 +145,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationEditBox getEditBox(String name) {
-        return new AutomationEditBox(this.getControlByControlType(name, ControlType.Edit), this.uiAuto);
+        return new AutomationEditBox(new AutomationElement(this.getControlByControlType(name, ControlType.Edit)), this.uiAuto);
     }
 
     /**
@@ -154,7 +154,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationSlider getSliderByName(int index) {
-        return new AutomationSlider(this.getControlByControlType(index, ControlType.Slider), this.uiAuto);
+        return new AutomationSlider(new AutomationElement(this.getControlByControlType(index, ControlType.Slider)), this.uiAuto);
     }
 
     /**
@@ -163,7 +163,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationMaskedEdit getMaskedEdit(int index) {
-        return new AutomationMaskedEdit(this.getControlByControlType(index, ControlType.Edit, "TAutomationMaskEdit"), this.uiAuto);
+        return new AutomationMaskedEdit(new AutomationElement(this.getControlByControlType(index, ControlType.Edit, "TAutomationMaskEdit")), this.uiAuto);
     }
 
     /**
@@ -172,7 +172,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationRadioButton getRadioButton(int index) {
-        return new AutomationRadioButton(this.getControlByControlType(index, ControlType.RadioButton), this.uiAuto);
+        return new AutomationRadioButton(new AutomationElement(this.getControlByControlType(index, ControlType.RadioButton)), this.uiAuto);
     }
 
     /**
@@ -181,7 +181,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTextBox getTextBox(int index) {
-        return new AutomationTextBox(this.getControlByControlType(index, ControlType.Text), this.uiAuto);
+        return new AutomationTextBox(new AutomationElement(this.getControlByControlType(index, ControlType.Text)), this.uiAuto);
     }
 
     /**
@@ -190,7 +190,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationComboBox getCombobox(String name) {
-        return new AutomationComboBox(this.getControlByControlType(name, ControlType.ComboBox), this.uiAuto);
+        return new AutomationComboBox(new AutomationElement(this.getControlByControlType(name, ControlType.ComboBox)), this.uiAuto);
     }
 
     /**
@@ -199,7 +199,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationButton getButton(String name) {
-        return new AutomationButton(this.getControlByControlType(name, ControlType.Button), this.uiAuto);
+        return new AutomationButton(new AutomationElement(this.getControlByControlType(name, ControlType.Button)), this.uiAuto);
     }
 
     /**
@@ -208,7 +208,7 @@ public class AutomationContainer extends AutomationBase {
      * @return
      */
     public AutomationButton getButton(int index) {
-        IUIAutomationElement elem = this.getControlByControlType(index, ControlType.Button);
+        AutomationElement elem = new AutomationElement(this.getControlByControlType(index, ControlType.Button));
         return new AutomationButton(elem, this.uiAuto);
     }
 
@@ -219,16 +219,16 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationStringGrid getStringGrid(int index, String controlName) {
-        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid, controlName), this.uiAuto);
+        return new AutomationStringGrid(new AutomationElement(this.getControlByControlType(index, ControlType.DataGrid, controlName)), this.uiAuto);
     }
 
     /**
      * Gets the  String Grid control associated with the given index
      * @param index
-     * @return
+     * @return The string grid
      */
     public AutomationStringGrid getStringGrid(int index) {
-        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid), this.uiAuto);
+        return new AutomationStringGrid(new AutomationElement(this.getControlByControlType(index, ControlType.DataGrid)), this.uiAuto);
     }
 
     /**
@@ -237,7 +237,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The document control
      */
     public AutomationDocument getDocument(int index) {
-        return new AutomationDocument(this.getControlByControlType(index, ControlType.Document), this.uiAuto);
+        return new AutomationDocument(new AutomationElement(this.getControlByControlType(index, ControlType.Document)), this.uiAuto);
     }
 
     /**
@@ -246,7 +246,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationHyperlink getHyperlink(int index) {
-        return new AutomationHyperlink((this.getControlByControlType(index, ControlType.Hyperlink)), this.uiAuto);
+        return new AutomationHyperlink(new AutomationElement(this.getControlByControlType(index, ControlType.Hyperlink)), this.uiAuto);
     }
 
     /**
@@ -255,7 +255,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTreeView getTreeView(int index) {
-        return new AutomationTreeView((this.getControlByControlType(index, ControlType.Tree)), this.uiAuto);
+        return new AutomationTreeView(new AutomationElement(this.getControlByControlType(index, ControlType.Tree)), this.uiAuto);
     }
 
     /**
@@ -264,7 +264,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTreeView getTreeView(String name) {
-        return new AutomationTreeView((this.getControlByControlType(name, ControlType.Tree)), this.uiAuto);
+        return new AutomationTreeView(new AutomationElement(this.getControlByControlType(name, ControlType.Tree)), this.uiAuto);
     }
 
     /**
@@ -273,7 +273,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationList getListItem(int index) {
-        return new AutomationList((this.getControlByControlType(index, ControlType.List)), this.uiAuto);
+        return new AutomationList(new AutomationElement(this.getControlByControlType(index, ControlType.List)), this.uiAuto);
     }
 
     /**
@@ -282,7 +282,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationCalendar getCalendar(int index) {
-        return new AutomationCalendar((this.getControlByControlType(index, ControlType.Calendar)), this.uiAuto);
+        return new AutomationCalendar(new AutomationElement(this.getControlByControlType(index, ControlType.Calendar)), this.uiAuto);
     }
 
     /**
@@ -290,7 +290,7 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      */
     public AutomationPanel getPanel(int index) {
-        return new AutomationPanel((this.getControlByControlType(index, ControlType.Pane)), this.uiAuto);
+        return new AutomationPanel(new AutomationElement(this.getControlByControlType(index, ControlType.Pane)), this.uiAuto);
     }
 
     /**
@@ -298,7 +298,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      */
     public AutomationPanel getPanel(String name) {
-        return new AutomationPanel((this.getControlByControlType(name, ControlType.Pane)), this.uiAuto);
+        return new AutomationPanel(new AutomationElement(this.getControlByControlType(name, ControlType.Pane)), this.uiAuto);
     }
 
     /**
@@ -307,7 +307,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationAppBar
      */
     public AutomationAppBar getAppBar(int index) {
-        return new AutomationAppBar((this.getControlByControlType(index, ControlType.AppBar)), this.uiAuto);
+        return new AutomationAppBar(new AutomationElement(this.getControlByControlType(index, ControlType.AppBar)), this.uiAuto);
     }
 
     /**
@@ -316,7 +316,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationToolBar
      */
     public AutomationToolBar getToolBar(String name) {
-        return new AutomationToolBar((this.getControlByControlType(name, ControlType.ToolBar)), this.uiAuto);
+        return new AutomationToolBar(new AutomationElement(this.getControlByControlType(name, ControlType.ToolBar)), this.uiAuto);
     }
 
     /**
@@ -325,7 +325,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationToolBar
      */
     public AutomationToolBar getToolBar(int index) {
-        return new AutomationToolBar((this.getControlByControlType(index, ControlType.ToolBar)), this.uiAuto);
+        return new AutomationToolBar(new AutomationElement(this.getControlByControlType(index, ControlType.ToolBar)), this.uiAuto);
     }
 
     /**
@@ -333,7 +333,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationRibbonBar
      */
     public AutomationRibbonBar getRibbonBar() {
-        return new AutomationRibbonBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBarDock"), this.uiAuto);
+        return new AutomationRibbonBar(new AutomationElement(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBarDock")), this.uiAuto);
     }
 
     /**
@@ -342,8 +342,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The control wrapper
      */
     public AutomationReBar getReBar(int index) {
-        IUIAutomationElement elem = this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32");
-        return new AutomationReBar(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32"), this.uiAuto);
+        return new AutomationReBar(new AutomationElement(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32")), this.uiAuto);
     }
 
     /**
@@ -352,6 +351,6 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationSplitButton
      */
     public AutomationSplitButton getSplitButton(String name) {
-        return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton), this.uiAuto);
+        return new AutomationSplitButton(new AutomationElement(this.getControlByControlType(name, ControlType.SplitButton)), this.uiAuto);
     }
 }

@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.ribbon;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationPanel;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
@@ -25,7 +26,7 @@ import mmarquee.automation.uiautomation.*;
  * Specialist pane that represents the NUIPane (part of the MS ribbon controls)
  */
 public class AutomationNUIPane extends AutomationPanel {
-    public AutomationNUIPane(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationNUIPane(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -35,6 +36,6 @@ public class AutomationNUIPane extends AutomationPanel {
      * @return The AutomationNetUIHWND
      */
     public AutomationNetUIHWND getNetUIHWND(int index) {
-        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"), this.uiAuto);
+        return new AutomationNetUIHWND(new AutomationElement(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND")), this.uiAuto);
     }
 }

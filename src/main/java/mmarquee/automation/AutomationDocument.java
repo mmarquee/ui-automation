@@ -16,7 +16,7 @@ public class AutomationDocument extends AutomationBase {
      * @param element The underlying automation element
      * @param uiAuto The automation library
      */
-    public AutomationDocument(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationDocument(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

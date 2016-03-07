@@ -16,6 +16,7 @@
 package mmarquee.automation.menu;
 
 import mmarquee.automation.AutomationBase;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
@@ -26,7 +27,7 @@ import mmarquee.automation.uiautomation.*;
 public class AutomationMenuItem extends AutomationBase {
     private Invoke invokePattern;
 
-    public AutomationMenuItem(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationMenuItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

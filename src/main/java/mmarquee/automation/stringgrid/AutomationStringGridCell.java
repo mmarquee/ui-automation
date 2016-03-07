@@ -17,6 +17,7 @@
 package mmarquee.automation.stringgrid;
 
 import mmarquee.automation.AutomationBase;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 
@@ -24,7 +25,7 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
  * Created by inpwt on 04/02/2016.
  */
 public class AutomationStringGridCell extends AutomationBase {
-    public AutomationStringGridCell(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationStringGridCell(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

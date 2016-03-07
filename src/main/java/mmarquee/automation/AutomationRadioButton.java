@@ -27,7 +27,7 @@ public class AutomationRadioButton extends AutomationBase {
 
     private SelectionItem selectItemPattern;
 
-    public AutomationRadioButton(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationRadioButton(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

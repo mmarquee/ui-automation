@@ -16,6 +16,7 @@
 package mmarquee.automation.ribbon;
 
 import mmarquee.automation.AutomationContainer;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationPanel;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
@@ -24,7 +25,7 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 02/03/2016.
  */
 public class AutomationRibbonWorkPane extends AutomationContainer {
-    public AutomationRibbonWorkPane(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationRibbonWorkPane(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -34,7 +35,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @return The AutomationNUIPane
      */
     public AutomationNUIPane getNUIPane(int index) {
-        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"), this.uiAuto);
+        return new AutomationNUIPane(new AutomationElement(this.getControlByControlType(index, ControlType.Pane, "NUIPane")), this.uiAuto);
     }
 }
 

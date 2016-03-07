@@ -50,7 +50,7 @@ public class AutomationCheckbox extends AutomationBase {
      * @param element
      * @param uiAuto
      */
-    public AutomationCheckbox (IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationCheckbox (AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

@@ -23,7 +23,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationTreeView extends AutomationBase {
 
-    public AutomationTreeView(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationTreeView(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -39,7 +39,7 @@ public class AutomationTreeView extends AutomationBase {
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
-            return new AutomationTreeViewItem(item, this.uiAuto);
+            return new AutomationTreeViewItem(new AutomationElement(item), this.uiAuto);
         } else {
             throw new ItemNotFoundException();
         }

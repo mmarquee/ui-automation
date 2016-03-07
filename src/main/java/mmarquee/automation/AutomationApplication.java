@@ -81,7 +81,7 @@ public class AutomationApplication extends AutomationBase {
      * @param uiAuto The IUIAutomation associated with this session
      * @param handle The handle of this application.
      */
-    public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, WinNT.HANDLE handle) {
+    public AutomationApplication (AutomationElement element, IUIAutomation uiAuto, WinNT.HANDLE handle) {
         super(element, uiAuto);
         this.handle = handle;
     }
@@ -92,7 +92,7 @@ public class AutomationApplication extends AutomationBase {
      * @param uiAuto The IUIAutomation associated with this session
      * @param process The process for this application.
      */
-    public AutomationApplication (IUIAutomationElement element, IUIAutomation uiAuto, Process process) {
+    public AutomationApplication (AutomationElement element, IUIAutomation uiAuto, Process process) {
         super(element, uiAuto);
         // From : http://www.golesny.de/p/code/javagetpid.
 

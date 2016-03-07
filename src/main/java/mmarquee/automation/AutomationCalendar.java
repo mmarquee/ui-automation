@@ -16,7 +16,7 @@ public class AutomationCalendar extends AutomationBase {
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
      */
-    public AutomationCalendar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationCalendar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
         try {
             this.valuePattern = this.getValuePattern();

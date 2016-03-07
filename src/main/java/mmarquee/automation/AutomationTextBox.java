@@ -23,7 +23,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationTextBox extends AutomationBase {
 
-    public AutomationTextBox(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationTextBox(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 

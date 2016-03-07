@@ -27,7 +27,7 @@ public class AutomationList extends AutomationBase {
 
     private Selection selectionPattern;
 
-    public AutomationList(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationList(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {
@@ -50,7 +50,7 @@ public class AutomationList extends AutomationBase {
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item, this.uiAuto);
+            return new AutomationListItem(new AutomationElement(item), this.uiAuto);
         } else {
             throw new ItemNotFoundException();
         }

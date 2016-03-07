@@ -38,8 +38,8 @@ public abstract class AutomationBase {
      * @param element Element to use
      * @param uiAuto The automation object
      */
-    public AutomationBase (IUIAutomationElement element, IUIAutomation uiAuto) {
-        this.element = element;
+    public AutomationBase (AutomationElement element, IUIAutomation uiAuto) {
+        this.element = element.element;
         this.uiAuto = uiAuto;
     }
 

@@ -29,7 +29,7 @@ public class AutomationAppBar extends AutomationBase {
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
      */
-    public AutomationAppBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationAppBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

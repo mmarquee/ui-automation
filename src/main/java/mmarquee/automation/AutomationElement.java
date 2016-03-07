@@ -29,7 +29,7 @@ public class AutomationElement {
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;
     }
-
+/*
     public Object getCurrentPropertyValue(int propertyId) {
         return this.element.getCurrentPropertyValue(propertyId);
     }
@@ -58,4 +58,5 @@ public class AutomationElement {
     public IUIAutomationElementArray findAll(TreeScope scope, IUIAutomationCondition condition) {
         return this.element.findAll(scope, condition);
     }
+    */
 }

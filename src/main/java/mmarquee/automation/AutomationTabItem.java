@@ -27,7 +27,7 @@ public class AutomationTabItem extends AutomationBase {
 
     private SelectionItem selectItemPattern;
 
-    public AutomationTabItem(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationTabItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

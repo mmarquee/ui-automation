@@ -55,7 +55,7 @@ public class UIAutomation {
             // Never do this in real code
         }
 
-        return new AutomationApplication(rootElement, uiAuto, process);
+        return new AutomationApplication(new AutomationElement(rootElement), uiAuto, process);
     }
 
     /**
@@ -64,7 +64,7 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication attach(Process process) {
-        return new AutomationApplication(rootElement, uiAuto, process);
+        return new AutomationApplication(new AutomationElement(rootElement), uiAuto, process);
     }
 
     /**
@@ -111,7 +111,7 @@ public class UIAutomation {
                 throw new Exception(Kernel32Util.formatMessageFromLastErrorCode(Kernel32.INSTANCE.GetLastError()));
             }
 
-            return new AutomationApplication(rootElement, uiAuto, handle);
+            return new AutomationApplication(new AutomationElement(rootElement), uiAuto, handle);
         }
     }
 

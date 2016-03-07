@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.ribbon;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationPanel;
 import mmarquee.automation.uiautomation.*;
 
@@ -24,7 +25,7 @@ import mmarquee.automation.uiautomation.*;
  * Specialist pane that represents the NetUIHWND (part of the MS ribbon controls)
  */
 public class AutomationNetUIHWND extends AutomationPanel {
-    public AutomationNetUIHWND(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationNetUIHWND(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

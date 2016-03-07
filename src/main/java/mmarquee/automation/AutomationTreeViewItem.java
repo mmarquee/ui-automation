@@ -13,7 +13,7 @@ public class AutomationTreeViewItem extends AutomationBase {
     private SelectionItem selectItemPattern;
     private Invoke invokePattern;
 
-    public AutomationTreeViewItem(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationTreeViewItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

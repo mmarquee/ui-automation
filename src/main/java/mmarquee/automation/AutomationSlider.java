@@ -12,7 +12,7 @@ public class AutomationSlider extends AutomationBase {
 
     private Value valuePattern;
 
-    public AutomationSlider(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationSlider(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

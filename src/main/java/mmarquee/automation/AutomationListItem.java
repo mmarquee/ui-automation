@@ -27,7 +27,7 @@ public class AutomationListItem extends AutomationBase {
 
     private SelectionItem selectItemPattern;
 
-    public AutomationListItem(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationListItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

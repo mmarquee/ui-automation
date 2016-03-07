@@ -17,6 +17,7 @@
 package mmarquee.automation.menu;
 
 import mmarquee.automation.AutomationBase;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.uiautomation.*;
 
 import static java.lang.Thread.sleep;
@@ -25,7 +26,7 @@ import static java.lang.Thread.sleep;
  * Created by inpwt on 09/02/2016.
  */
 public class AutomationMenu extends AutomationBase {
-    public AutomationMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationMenu(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

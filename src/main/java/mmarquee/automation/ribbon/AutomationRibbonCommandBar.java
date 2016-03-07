@@ -16,6 +16,7 @@
 package mmarquee.automation.ribbon;
 
 import mmarquee.automation.AutomationContainer;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationPanel;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.*;
@@ -26,7 +27,7 @@ import mmarquee.automation.uiautomation.*;
  * Specialist pane that represents the RibbonBar
  */
 public class AutomationRibbonCommandBar extends AutomationContainer {
-    public AutomationRibbonCommandBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationRibbonCommandBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 
@@ -35,6 +36,6 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
      * @return The AutomationRibbonWorkPane
      */
     public AutomationRibbonWorkPane getRibbonWorkPane() {
-        return new AutomationRibbonWorkPane(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane"), this.uiAuto);
+        return new AutomationRibbonWorkPane(new AutomationElement(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane")), this.uiAuto);
     }
 }

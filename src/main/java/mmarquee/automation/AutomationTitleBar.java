@@ -26,7 +26,7 @@ public class AutomationTitleBar extends AutomationBase {
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
      */
-    public AutomationTitleBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationTitleBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

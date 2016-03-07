@@ -7,7 +7,7 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
  * Created by inpwt on 15/02/2016.
  */
 public class AutomationMaskedEdit extends AutomationEditBox {
-    public AutomationMaskedEdit(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationMaskedEdit(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

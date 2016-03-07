@@ -17,6 +17,7 @@
 package mmarquee.automation.menu;
 
 import mmarquee.automation.AutomationBase;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
@@ -25,7 +26,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationSystemMenu extends AutomationBase {
 
-    public AutomationSystemMenu(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationSystemMenu(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         this.getItems();
@@ -54,7 +55,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(foundElement, this.uiAuto);
+            return new AutomationMenuItem(new AutomationElement(foundElement), this.uiAuto);
         } else {
             // Throw an exception
             throw  new ItemNotFoundException();

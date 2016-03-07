@@ -22,7 +22,7 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationSplitButton extends AutomationButton {
 
-    public AutomationSplitButton(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationSplitButton(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

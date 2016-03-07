@@ -16,6 +16,7 @@
 package mmarquee.automation.menu;
 
 import mmarquee.automation.AutomationBase;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.*;
@@ -34,7 +35,7 @@ public class AutomationMainMenu extends AutomationBase {
         return this.parent;
     }
 
-    public AutomationMainMenu(IUIAutomationElement parent, IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationMainMenu(IUIAutomationElement parent, AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
         this.parent = parent;
     }
@@ -75,7 +76,7 @@ public class AutomationMainMenu extends AutomationBase {
             }
         }
 
-        return new AutomationMenuItem(foundElement, this.uiAuto);
+        return new AutomationMenuItem(new AutomationElement(foundElement), this.uiAuto);
     }
 
     /**
@@ -89,7 +90,7 @@ public class AutomationMainMenu extends AutomationBase {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for(int count = 0; count < items.length(); count++) {
-            list.add(new AutomationMenuItem(items.getElement(count), uiAuto));
+            list.add(new AutomationMenuItem(new AutomationElement(items.getElement(count)), uiAuto));
         }
 
         return list;

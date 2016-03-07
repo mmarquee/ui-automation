@@ -32,7 +32,7 @@ public class AutomationHyperlink extends AutomationBase {
      * @param element
      * @param uiAuto
      */
-    public AutomationHyperlink(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationHyperlink(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {

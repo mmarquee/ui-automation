@@ -32,7 +32,7 @@ public class AutomationComboBox extends AutomationBase {
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
      */
-    public AutomationComboBox(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationComboBox(AutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
         try {
@@ -101,7 +101,7 @@ public class AutomationComboBox extends AutomationBase {
 
             if (retValue == ControlType.ListItem) {
 
-                list.add(new AutomationListItem(element, this.uiAuto));
+                list.add(new AutomationListItem(new AutomationElement(element), this.uiAuto));
             }
         }
 

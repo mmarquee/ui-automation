@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -27,8 +28,8 @@ public class Grid extends BasePattern {
      * @param y Cell Y position
      * @return The item associated with the cell
      */
-    public IUIAutomationElement getItem(int x, int y) {
-        return ((IUIAutomationGridPattern)pattern).getItem(x, y);
+    public AutomationElement getItem(int x, int y) {
+        return new AutomationElement(((IUIAutomationGridPattern)pattern).getItem(x, y));
     }
 
     /**

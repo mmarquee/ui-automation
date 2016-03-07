@@ -29,7 +29,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @param element The underlying automation element
      * @param uiAuto The IUIAutomation associated with this session
      */
-    public AutomationToolBar(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationToolBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }
 }

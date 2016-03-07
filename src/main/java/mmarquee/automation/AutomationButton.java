@@ -31,7 +31,7 @@ public class AutomationButton extends AutomationBase {
      * @param element The underlying automation element
      * @param uiAuto The automation library
      */
-    public AutomationButton(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationButton(AutomationElement element, IUIAutomation uiAuto) {
         super (element, uiAuto);
 
         try {

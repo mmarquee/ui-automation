@@ -17,6 +17,7 @@
 package mmarquee.automation.stringgrid;
 
 import mmarquee.automation.AutomationBase;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 import java.util.List;
@@ -32,7 +33,7 @@ public class AutomationStringGrid extends AutomationBase
     private Table tablePattern;
     private Selection selectionPattern;
 
-    public AutomationStringGrid(IUIAutomationElement element, IUIAutomation uiAuto) {
+    public AutomationStringGrid(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
         try {
@@ -68,7 +69,7 @@ public class AutomationStringGrid extends AutomationBase
     public AutomationStringGridCell selected() {
         IUIAutomationElementArray collection = selectionPattern.getCurrentSelection();
 
-        AutomationStringGridCell item = new AutomationStringGridCell(collection.getElement(0), uiAuto);
+        AutomationStringGridCell item = new AutomationStringGridCell(new AutomationElement(collection.getElement(0)), uiAuto);
 
         return item;
     }
@@ -85,7 +86,7 @@ public class AutomationStringGrid extends AutomationBase
         List<AutomationStringGridCell> items = new ArrayList<AutomationStringGridCell>();
 
         for (int count = 0; count < length; count++) {
-            items.add(new AutomationStringGridCell(collection.getElement(count), uiAuto));
+            items.add(new AutomationStringGridCell(new AutomationElement(collection.getElement(count)), uiAuto));
         }
 
         return items;
