@@ -85,8 +85,8 @@ public class AutomationContainer extends AutomationBase {
 
         for (int count = 0; count < length; count++) {
             AutomationElement element = collection.get(count);
-            int retVal = element.element.currentControlType();
-            String cName = element.element.currentClassName();
+            int retVal = element.currentControlType();
+            String cName = element.currentClassName();
 
             if (cName.equals(controlName)) {
                 if (counter == index) {

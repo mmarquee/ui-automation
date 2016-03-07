@@ -23,9 +23,7 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 06/03/2016.
  */
 public class AutomationElement {
-
-    // For now, should be protected
-    public IUIAutomationElement element;
+    protected IUIAutomationElement element;
 
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;
@@ -33,6 +31,14 @@ public class AutomationElement {
 /*
     public Object getCurrentPropertyValue(int propertyId) {
         return this.element.getCurrentPropertyValue(propertyId);
+    }
+*/
+    public int currentControlType() {
+        return this.element.currentControlType();
+    }
+
+    public String currentClassName() {
+        return this.element.currentClassName();
     }
 
     public String currentName() {
@@ -42,7 +48,7 @@ public class AutomationElement {
     public void setName(String name) {
         this.element.setName(name);
     }
-
+/*
     public AutomationElement findFirst(TreeScope scope, Condition condition) {
         IUIAutomationElement elem = this.element.findFirst(scope, condition.getCondition());
         return new AutomationElement(elem);
@@ -51,11 +57,11 @@ public class AutomationElement {
     public com4j.Com4jObject getCurrentPattern(int patternId) {
         return this.element.getCurrentPattern(patternId);
     }
-
+*/
     public void setFocus() {
         this.element.setFocus();
     }
-
+/*
     public IUIAutomationElementArray findAll(TreeScope scope, IUIAutomationCondition condition) {
         return this.element.findAll(scope, condition);
     }

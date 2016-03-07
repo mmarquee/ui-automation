@@ -60,7 +60,7 @@ public class AutomationApplication extends AutomationBase {
 
         for(int count=0; count < length; count++){
             AutomationElement element = collection.get(count);
-            String name = element.element.currentName();
+            String name = element.currentName();
             if (name.equals(title)){
                 foundElement = element;
                 break;
