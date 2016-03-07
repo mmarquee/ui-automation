@@ -19,6 +19,9 @@ import mmarquee.automation.condition.Condition;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by inpwt on 06/03/2016.
  */
@@ -94,9 +97,16 @@ public class AutomationElement {
     public void setFocus() {
         this.element.setFocus();
     }
-/*
-    public IUIAutomationElementArray findAll(TreeScope scope, IUIAutomationCondition condition) {
-        return this.element.findAll(scope, condition);
+
+    public List<AutomationElement> findAll(TreeScope scope, IUIAutomationCondition condition) {
+        IUIAutomationElementArray collection = this.element.findAll(scope, condition);
+
+        List<AutomationElement> items = new ArrayList<AutomationElement>();
+
+        for (int count = 0; count < collection.length(); count++) {
+            items.add(new AutomationElement(collection.getElement(count)));
+        }
+
+        return items;
     }
-    */
 }

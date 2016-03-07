@@ -243,14 +243,7 @@ public abstract class AutomationBase {
      * @return IUIAutomationElementArray
      */
     protected List<AutomationElement> findAll(TreeScope scope, Condition condition) {
-        IUIAutomationElementArray collection = this.element.element.findAll(scope, condition.getCondition());
-
-        List<AutomationElement> list = new ArrayList<AutomationElement>();
-
-        for(int count = 0; count < collection.length(); count++) {
-            list.add(new AutomationElement(collection.getElement(count)));
-        }
-
+        List<AutomationElement> list = this.element.findAll(scope, condition.getCondition());
         return list;
     }
 
@@ -261,7 +254,7 @@ public abstract class AutomationBase {
      * @throws PatternNotFoundException
      */
     private com4j.Com4jObject getPattern (int id) throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.element.element.getCurrentPattern(id);
+        com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
 
         if (unknown != null) {
             return unknown;

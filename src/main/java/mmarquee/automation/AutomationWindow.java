@@ -20,6 +20,8 @@ import mmarquee.automation.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
+import java.util.List;
+
 /**
  * Created by inpwt on 26/01/2016.
  */
@@ -51,19 +53,19 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationStatusBar getStatusBar() {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
-        IUIAutomationElementArray collection = this.element.element.findAll(TreeScope.TreeScope_Descendants, condition);
+        List<AutomationElement> collection = this.element.findAll(TreeScope.TreeScope_Descendants, condition);
 
-        int length = collection.length();
+        int length = collection.size();
 
         AutomationStatusBar found = null;
 
         for (int count = 0; count < length; count++) {
-            IUIAutomationElement element = collection.getElement(count);
+            AutomationElement element = collection.get(count);
 
             int retVal = element.currentControlType();
 
             if (retVal == ControlType.StatusBar) {
-                found = new AutomationStatusBar(new AutomationElement(element), uiAuto);
+                found = new AutomationStatusBar(element, uiAuto);
                 break;
             }
         }
