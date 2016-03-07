@@ -89,19 +89,19 @@ public class AutomationComboBox extends AutomationBase {
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 
-        IUIAutomationElementArray collection =
+        List<AutomationElement> collection =
                 this.findAll(TreeScope.TreeScope_Descendants);
 
-        int length = collection.length();
+        int length = collection.size();
 
         for (int count = 0; count < length; count++ ) {
-            IUIAutomationElement element = collection.getElement(count);
+            AutomationElement element = collection.get(count);
 
-            int retValue = element.currentControlType();
+            int retValue = element.element.currentControlType();
 
             if (retValue == ControlType.ListItem) {
 
-                list.add(new AutomationListItem(new AutomationElement(element), this.uiAuto));
+                list.add(new AutomationListItem(element, this.uiAuto));
             }
         }
 

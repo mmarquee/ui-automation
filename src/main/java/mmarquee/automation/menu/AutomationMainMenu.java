@@ -84,13 +84,13 @@ public class AutomationMainMenu extends AutomationBase {
      * @return The list of items
      */
     public List<AutomationMenuItem> getItems() {
-        IUIAutomationElementArray items = this.findAll(TreeScope.TreeScope_Descendants,
+        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
                 this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
-        for(int count = 0; count < items.length(); count++) {
-            list.add(new AutomationMenuItem(new AutomationElement(items.getElement(count)), uiAuto));
+        for(int count = 0; count < items.size(); count++) {
+            list.add(new AutomationMenuItem(items.get(count), uiAuto));
         }
 
         return list;

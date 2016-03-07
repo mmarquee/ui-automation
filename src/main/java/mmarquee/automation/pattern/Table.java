@@ -15,13 +15,25 @@
  */
 package mmarquee.automation.pattern;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.uiautomation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
 public class Table extends BasePattern {
-    public IUIAutomationElementArray getCurrentColumnHeaders() {
-        return ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
+    public List<AutomationElement> getCurrentColumnHeaders() {
+        IUIAutomationElementArray collection = ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
+
+        List<AutomationElement> list = new ArrayList<AutomationElement>();
+
+        for(int count = 0; count < collection.length(); count++) {
+            list.add(new AutomationElement(collection.getElement(count)));
+        }
+
+        return list;
     }
 }

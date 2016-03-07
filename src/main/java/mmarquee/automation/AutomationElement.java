@@ -24,7 +24,8 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationElement {
 
-    protected IUIAutomationElement element;
+    // For now, should be protected
+    public IUIAutomationElement element;
 
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;

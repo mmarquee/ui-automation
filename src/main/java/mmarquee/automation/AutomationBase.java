@@ -22,6 +22,9 @@ import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by inpwt on 26/01/2016.
  */
@@ -153,9 +156,9 @@ public abstract class AutomationBase {
 
     /**
      * Finds all of the elements that are associated with this element
-     * @return IUIAutomationElementArray
+     * @return List<AutomationElement>
      */
-    protected IUIAutomationElementArray findAll() {
+    protected List<AutomationElement> findAll() {
         return this.findAll(TreeScope.TreeScope_Children);
     }
 
@@ -172,9 +175,9 @@ public abstract class AutomationBase {
     /**
      * Finds all of the elements that are associated with the given condition.
      * @param scope The scope of where to look
-     * @return IUIAutomationElementArray
+     * @return List<AutomationElement>
      */
-    protected IUIAutomationElementArray findAll(TreeScope scope) {
+    protected List<AutomationElement> findAll(TreeScope scope) {
         TrueCondition condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
@@ -239,8 +242,16 @@ public abstract class AutomationBase {
      * @param condition The condition to check
      * @return IUIAutomationElementArray
      */
-    protected IUIAutomationElementArray findAll(TreeScope scope, Condition condition) {
-        return this.element.findAll(scope, condition.getCondition());
+    protected List<AutomationElement> findAll(TreeScope scope, Condition condition) {
+        IUIAutomationElementArray collection = this.element.findAll(scope, condition.getCondition());
+
+        List<AutomationElement> list = new ArrayList<AutomationElement>();
+
+        for(int count = 0; count < collection.length(); count++) {
+            list.add(new AutomationElement(collection.getElement(count)));
+        }
+
+        return list;
     }
 
     /**

@@ -46,17 +46,17 @@ public class AutomationTab extends AutomationContainer {
         // Now get the list of tab items
         tabItems = new ArrayList<AutomationTabItem>();
 
-        IUIAutomationElementArray collection = this.findAll(TreeScope.TreeScope_Descendants);
+        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants);
 
-        int length = collection.length();
+        int length = collection.size();
 
         for (int count = 0; count < length; count++ ) {
-            IUIAutomationElement elem = collection.getElement(count);
+            AutomationElement elem = collection.get(count);
 
-            int retVal = elem.currentControlType();
+            int retVal = elem.element.currentControlType();
 
             if (retVal == ControlType.TabItem) {
-                this.tabItems.add(new AutomationTabItem(new AutomationElement(elem), this.uiAuto));
+                this.tabItems.add(new AutomationTabItem(elem, this.uiAuto));
             }
         }
     }

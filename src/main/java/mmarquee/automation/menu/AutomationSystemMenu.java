@@ -19,7 +19,10 @@ package mmarquee.automation.menu;
 import mmarquee.automation.AutomationBase;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.condition.Condition;
 import mmarquee.automation.uiautomation.*;
+
+import java.util.List;
 
 /**
  * Created by inpwt on 19/02/2016.
@@ -34,18 +37,18 @@ public class AutomationSystemMenu extends AutomationBase {
 
     public AutomationMenuItem getItem(String name) throws ItemNotFoundException {
 
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
+        Condition condition = this.createTrueCondition();
 
-        IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Descendants, condition);
+        List<AutomationElement> collection =
+                this.findAll(TreeScope.TreeScope_Descendants, condition);
 
-        int length = collection.length();
-        IUIAutomationElement foundElement = null;
+        int length = collection.size();
+        AutomationElement foundElement = null;
         boolean found = false;
 
         for(int count = 0; count < length; count++) {
-            IUIAutomationElement elem = collection.getElement(count);
-            String eName = elem.currentName();
+            AutomationElement elem = collection.get(count);
+            String eName = elem.element.currentName();
 
             if (eName.equals(name)) {
                 found = true;
@@ -55,7 +58,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(new AutomationElement(foundElement), this.uiAuto);
+            return new AutomationMenuItem(foundElement, this.uiAuto);
         } else {
             // Throw an exception
             throw  new ItemNotFoundException();
@@ -63,16 +66,14 @@ public class AutomationSystemMenu extends AutomationBase {
     }
 
     private void getItems() {
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
+        Condition condition = this.createTrueCondition();
 
-        IUIAutomationElementArray collection =
-                this.element.findAll(TreeScope.TreeScope_Children, condition);
+        List<AutomationElement> collection =
+                this.findAll(TreeScope.TreeScope_Children, condition);
 
-        int length = collection.length();
+        AutomationElement element = collection.get(0);
 
-        IUIAutomationElement element = collection.getElement(0);
-
-        String name = element.currentName();
+        String name = element.element.currentName();
     }
 }
 

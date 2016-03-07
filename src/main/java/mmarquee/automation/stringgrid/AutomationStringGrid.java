@@ -67,9 +67,9 @@ public class AutomationStringGrid extends AutomationBase
      * @return AutomationStringGridItem
      */
     public AutomationStringGridCell selected() {
-        IUIAutomationElementArray collection = selectionPattern.getCurrentSelection();
+        List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        AutomationStringGridCell item = new AutomationStringGridCell(new AutomationElement(collection.getElement(0)), uiAuto);
+        AutomationStringGridCell item = new AutomationStringGridCell(collection.get(0), uiAuto);
 
         return item;
     }
@@ -80,13 +80,13 @@ public class AutomationStringGrid extends AutomationBase
      */
     public List<AutomationStringGridCell> getColumnHeaders () {
 
-        IUIAutomationElementArray collection = tablePattern.getCurrentColumnHeaders();
-        int length = collection.length();
+        List<AutomationElement> collection = tablePattern.getCurrentColumnHeaders();
+        int length = collection.size();
 
         List<AutomationStringGridCell> items = new ArrayList<AutomationStringGridCell>();
 
         for (int count = 0; count < length; count++) {
-            items.add(new AutomationStringGridCell(new AutomationElement(collection.getElement(count)), uiAuto));
+            items.add(new AutomationStringGridCell(collection.get(count), uiAuto));
         }
 
         return items;

@@ -20,6 +20,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by inpwt on 26/01/2016.
  */
@@ -60,8 +63,7 @@ public class AutomationList extends AutomationBase {
      * Gets the current selection
      * @return The current selection
      */
-    public IUIAutomationElementArray getCurrentSelection() {
+    public List<AutomationElement> getCurrentSelection() {
         return this.selectionPattern.getCurrentSelection();
     }
-
 }

@@ -16,13 +16,26 @@
 package mmarquee.automation.pattern;
 
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.uiautomation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by inpwt on 25/02/2016.
  */
 public class Selection extends BasePattern {
-    public IUIAutomationElementArray getCurrentSelection () {
-        return ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
+    public List<AutomationElement> getCurrentSelection () {
+        IUIAutomationElementArray collection = ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
+
+        List<AutomationElement> list = new ArrayList<AutomationElement>();
+
+        for(int count = 0; count < collection.length(); count++) {
+            list.add(new AutomationElement(collection.getElement(count)));
+        }
+
+        return list;
+
     }
 }

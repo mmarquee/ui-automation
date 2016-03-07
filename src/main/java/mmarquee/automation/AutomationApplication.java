@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.*;
 import com.sun.jna.*;
 import mmarquee.automation.uiautomation.*;
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
@@ -51,15 +52,15 @@ public class AutomationApplication extends AutomationBase {
      */
     public AutomationWindow getWindow(String title) throws ElementNotFoundException {
 
-        IUIAutomationElement foundElement = null;
+        AutomationElement foundElement = null;
 
-        IUIAutomationElementArray collection = this.findAll();
+        List<AutomationElement> collection = this.findAll();
 
-        int length = collection.length();
+        int length = collection.size();
 
         for(int count=0; count < length; count++){
-            IUIAutomationElement element = collection.getElement(count);
-            String name = element.currentName();
+            AutomationElement element = collection.get(count);
+            String name = element.element.currentName();
             if (name.equals(title)){
                 foundElement = element;
                 break;
@@ -67,9 +68,7 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            AutomationElement elem = new AutomationElement(foundElement);
-
-            return new AutomationWindow(elem, this.uiAuto);
+            return new AutomationWindow(foundElement, this.uiAuto);
         } else {
             throw new ElementNotFoundException();
         }

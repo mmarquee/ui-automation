@@ -22,6 +22,8 @@ import mmarquee.automation.ribbon.AutomationRibbonBar;
 import mmarquee.automation.stringgrid.AutomationStringGrid;
 import mmarquee.automation.uiautomation.*;
 
+import java.util.List;
+
 /**
  * Created by inpwt on 28/01/2016.
  */
@@ -38,20 +40,20 @@ public class AutomationContainer extends AutomationBase {
     }
 
     protected AutomationElement getControlByControlType(int index, int id) {
-        IUIAutomationElementArray collection;
+        List<AutomationElement> collection;
 
-        IUIAutomationElement foundElement = null;
+        AutomationElement foundElement = null;
 
         ControlIdCondition condition = new ControlIdCondition(this.uiAuto, id);
 
         collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
 
-        int length = collection.length();
+        int length = collection.size();
 
         int counter = 0;
 
         for (int count = 0; count < length; count++) {
-            IUIAutomationElement element = collection.getElement(count);
+            AutomationElement element = collection.get(count);
             if (counter == index) {
                 foundElement = element;
                 break;
@@ -60,7 +62,7 @@ public class AutomationContainer extends AutomationBase {
             }
         }
 
-        return new AutomationElement(foundElement);
+        return foundElement;
     }
 
     /**
@@ -71,20 +73,20 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element
      */
     protected AutomationElement getControlByControlType(int index, int id, String controlName) {
-        IUIAutomationElementArray collection;
+        List<AutomationElement> collection;
 
-        IUIAutomationElement foundElement = null;
+        AutomationElement foundElement = null;
 
         collection = this.findAll(TreeScope.TreeScope_Descendants);
 
-        int length = collection.length();
+        int length = collection.size();
 
         int counter = 0;
 
         for (int count = 0; count < length; count++) {
-            IUIAutomationElement element = collection.getElement(count);
-            int retVal = element.currentControlType();
-            String cName = element.currentClassName();
+            AutomationElement element = collection.get(count);
+            int retVal = element.element.currentControlType();
+            String cName = element.element.currentClassName();
 
             if (cName.equals(controlName)) {
                 if (counter == index) {
@@ -96,7 +98,7 @@ public class AutomationContainer extends AutomationBase {
             }
         }
 
-        return new AutomationElement(foundElement);
+        return foundElement;
     }
 
     /**
