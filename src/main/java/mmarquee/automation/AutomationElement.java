@@ -77,6 +77,13 @@ public class AutomationElement {
         this.element.setName(name);
     }
 
+    /**
+     * Finds the first element that matches the condition
+     * @param scope Tree scope
+     * @param condition The condition
+     * @return The first matching element
+     * @throws ElementNotFoundException
+     */
     public AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
         IUIAutomationElement elem = this.element.findFirst(scope, condition.getCondition());
 
@@ -87,6 +94,11 @@ public class AutomationElement {
         }
     }
 
+    /**
+     * Get the current pattern that matches the patternId
+     * @param patternId What pattern to get
+     * @return The pattern
+     */
     public com4j.Com4jObject getCurrentPattern(int patternId) {
         return this.element.getCurrentPattern(patternId);
     }
@@ -98,6 +110,12 @@ public class AutomationElement {
         this.element.setFocus();
     }
 
+    /**
+     * Gets all of the elements that match the condition and scope
+     * @param scope The scope in the element tree
+     * @param condition The onndition
+     * @return List of matching elements
+     */
     public List<AutomationElement> findAll(TreeScope scope, IUIAutomationCondition condition) {
         IUIAutomationElementArray collection = this.element.findAll(scope, condition);
 
