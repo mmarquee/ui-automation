@@ -32,7 +32,7 @@ public abstract class AutomationBase {
 
     protected final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
-    protected IUIAutomationElement element;
+    protected AutomationElement element;
 
     protected IUIAutomation uiAuto;
 
@@ -42,7 +42,7 @@ public abstract class AutomationBase {
      * @param uiAuto The automation object
      */
     public AutomationBase (AutomationElement element, IUIAutomation uiAuto) {
-        this.element = element.element;
+        this.element = element;
         this.uiAuto = uiAuto;
     }
 
@@ -169,7 +169,7 @@ public abstract class AutomationBase {
      * @return The found IUIAutomationElement
      */
     protected IUIAutomationElement findFirst(TreeScope scope, Condition condition) {
-        return this.element.findFirst(scope, condition.getCondition());
+        return this.element.element.findFirst(scope, condition.getCondition());
     }
 
     /**
@@ -243,7 +243,7 @@ public abstract class AutomationBase {
      * @return IUIAutomationElementArray
      */
     protected List<AutomationElement> findAll(TreeScope scope, Condition condition) {
-        IUIAutomationElementArray collection = this.element.findAll(scope, condition.getCondition());
+        IUIAutomationElementArray collection = this.element.element.findAll(scope, condition.getCondition());
 
         List<AutomationElement> list = new ArrayList<AutomationElement>();
 
@@ -261,7 +261,7 @@ public abstract class AutomationBase {
      * @throws PatternNotFoundException
      */
     private com4j.Com4jObject getPattern (int id) throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
+        com4j.Com4jObject unknown = this.element.element.getCurrentPattern(id);
 
         if (unknown != null) {
             return unknown;

@@ -51,7 +51,7 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationStatusBar getStatusBar() {
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
 
-        IUIAutomationElementArray collection = this.element.findAll(TreeScope.TreeScope_Descendants, condition);
+        IUIAutomationElementArray collection = this.element.element.findAll(TreeScope.TreeScope_Descendants, condition);
 
         int length = collection.length();
 
@@ -84,7 +84,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.MenuBar), this.uiAuto));
+        return (new AutomationMainMenu(this.element.element, this.getControlByControlType(1, ControlType.MenuBar), this.uiAuto));
     }
 
     /**
