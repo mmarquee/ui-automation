@@ -36,6 +36,6 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
      * @return The AutomationRibbonWorkPane
      */
     public AutomationRibbonWorkPane getRibbonWorkPane() {
-        return new AutomationRibbonWorkPane(new AutomationElement(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane")), this.uiAuto);
+        return new AutomationRibbonWorkPane(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane"), this.uiAuto);
     }
 }

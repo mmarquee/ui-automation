@@ -35,7 +35,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @return The AutomationNUIPane
      */
     public AutomationNUIPane getNUIPane(int index) {
-        return new AutomationNUIPane(new AutomationElement(this.getControlByControlType(index, ControlType.Pane, "NUIPane")), this.uiAuto);
+        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"), this.uiAuto);
     }
 }
 

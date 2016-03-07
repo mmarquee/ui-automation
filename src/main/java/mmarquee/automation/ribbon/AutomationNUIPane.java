@@ -36,6 +36,6 @@ public class AutomationNUIPane extends AutomationPanel {
      * @return The AutomationNetUIHWND
      */
     public AutomationNetUIHWND getNetUIHWND(int index) {
-        return new AutomationNetUIHWND(new AutomationElement(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND")), this.uiAuto);
+        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"), this.uiAuto);
     }
 }

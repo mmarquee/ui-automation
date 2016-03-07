@@ -76,8 +76,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The system menu
      */
     public AutomationSystemMenu getSystemMenu() {
-        IUIAutomationElement menu = this.getControlByControlType(0, ControlType.MenuBar);
-        return (new AutomationSystemMenu(new AutomationElement(menu), this.uiAuto));
+        return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar), this.uiAuto));
     }
 
     /**
@@ -85,9 +84,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        IUIAutomationElement menu = this.getControlByControlType(1, ControlType.MenuBar);
-
-        return (new AutomationMainMenu(this.element, new AutomationElement(menu), this.uiAuto));
+        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.MenuBar), this.uiAuto));
     }
 
     /**
@@ -162,7 +159,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The AutomationTitleBar
      */
     public AutomationTitleBar getTitleBar() {
-        return new AutomationTitleBar(new AutomationElement(this.getControlByControlType(0, ControlType.TitleBar)), this.uiAuto);
+        return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar), this.uiAuto);
     }
 
     /**
