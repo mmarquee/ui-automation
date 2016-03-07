@@ -58,48 +58,61 @@ public class TestExplorer {
         logger.info("First NUIPane is " + uiPane.name());
 
         AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
-        AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
 
-        AutomationTab tab = uiHWND.getTab(0);
-        tab.selectTabPage("View");
-
-        AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
-
-        AutomationToolBar panes = panel.getToolBar("Panes");
-
-        panes.getButton("Preview pane").click();
-        AutomationSplitButton split = panes.getSplitButton("Navigation pane");
-        split.click();
         try {
-            Thread.sleep(500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
+            AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+
+            AutomationTab tab = uiHWND.getTab(0);
+            tab.selectTabPage("View");
+
+            AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+
+            AutomationToolBar panes = panel.getToolBar("Panes");
+
+            panes.getButton("Preview pane").click();
+            AutomationSplitButton split = panes.getSplitButton("Navigation pane");
+            split.click();
+            try {
+                Thread.sleep(500);
+            } catch (Exception ex) {
+                logger.info("Interrupted");
+            }
+            split.click();
+        } catch (ElementNotFoundException ex) {
+
         }
-        split.click();
 
         AutomationReBar rebar = window.getReBar(0);
-        AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
-
-     //   logger.info("Toolbar = " + toolbar.name());
-     //   AutomationButton upButton = toolbar.getButton(0);
-     //   upButton.click();
-
-
-        // Now try and get to the list of items in explorer
-        AutomationPanel explorer = window.getPanel("File Explorer");
-        logger.info(explorer.name());
-        AutomationPanel pane0 = explorer.getPanel("Control Host");
-        logger.info(pane0.name());
-        AutomationTreeView treeView = pane0.getTreeView(0);
-        logger.info(treeView.name());
         try {
-            AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
-            logger.info(treeItem.name());
-            treeItem.select();
-            treeItem.click();
-        } catch (ItemNotFoundException ex) {
-            logger.info("Didn't find the item");
+            AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
+
+            //   logger.info("Toolbar = " + toolbar.name());
+            //   AutomationButton upButton = toolbar.getButton(0);
+            //   upButton.click();
+        } catch (ElementNotFoundException ex) {
+
         }
+
+        try {
+            // Now try and get to the list of items in explorer
+            AutomationPanel explorer = window.getPanel("File Explorer");
+            logger.info(explorer.name());
+            AutomationPanel pane0 = explorer.getPanel("Control Host");
+            logger.info(pane0.name());
+            AutomationTreeView treeView = pane0.getTreeView(0);
+            logger.info(treeView.name());
+            try {
+                AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
+                logger.info(treeItem.name());
+                treeItem.select();
+                treeItem.click();
+            } catch (ItemNotFoundException ex) {
+                logger.info("Didn't find the item");
+            }
+        } catch (ElementNotFoundException ex) {
+
+        }
+
 
         /*
         logger.info(explorerPane.name());

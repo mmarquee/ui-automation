@@ -73,16 +73,20 @@ public class AutomationElement {
     public void setName(String name) {
         this.element.setName(name);
     }
-/*
-    public AutomationElement findFirst(TreeScope scope, Condition condition) {
+
+    public AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
         IUIAutomationElement elem = this.element.findFirst(scope, condition.getCondition());
-        return new AutomationElement(elem);
+
+        if (elem != null) {
+            return new AutomationElement(elem);
+        } else {
+            throw new ElementNotFoundException();
+        }
     }
 
     public com4j.Com4jObject getCurrentPattern(int patternId) {
         return this.element.getCurrentPattern(patternId);
     }
-*/
 
     /**
      * Sets focus to the element

@@ -46,14 +46,14 @@ public class AutomationList extends AutomationBase {
      * @return The selected item
      * @throws ItemNotFoundException when the item is not found
      */
-    public AutomationListItem getItem(String name) throws ItemNotFoundException {
-        IUIAutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+    public AutomationListItem getItem(String name) throws ItemNotFoundException, ElementNotFoundException {
+        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(new AutomationElement(item), this.uiAuto);
+            return new AutomationListItem(item, this.uiAuto);
         } else {
             throw new ItemNotFoundException();
         }

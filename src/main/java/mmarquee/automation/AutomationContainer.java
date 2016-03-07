@@ -107,11 +107,11 @@ public class AutomationContainer extends AutomationBase {
      * @param id Control type
      * @return The matching element
      */
-    protected AutomationElement getControlByControlType(String name, int id) {
-        return new AutomationElement(this.findFirst(TreeScope.TreeScope_Descendants,
+    protected AutomationElement getControlByControlType(String name, int id) throws ElementNotFoundException {
+        return this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(id))));
+                        this.createControlTypeCondition(id)));
     }
 
     /**
@@ -146,7 +146,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      */
-    public AutomationEditBox getEditBox(String name) {
+    public AutomationEditBox getEditBox(String name) throws ElementNotFoundException {
         return new AutomationEditBox(this.getControlByControlType(name, ControlType.Edit), this.uiAuto);
     }
 
@@ -191,7 +191,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      */
-    public AutomationComboBox getCombobox(String name) {
+    public AutomationComboBox getCombobox(String name) throws ElementNotFoundException {
         return new AutomationComboBox(this.getControlByControlType(name, ControlType.ComboBox), this.uiAuto);
     }
 
@@ -200,7 +200,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      */
-    public AutomationButton getButton(String name) {
+    public AutomationButton getButton(String name) throws ElementNotFoundException {
         return new AutomationButton(this.getControlByControlType(name, ControlType.Button), this.uiAuto);
     }
 
@@ -264,7 +264,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      */
-    public AutomationTreeView getTreeView(String name) {
+    public AutomationTreeView getTreeView(String name) throws ElementNotFoundException {
         return new AutomationTreeView(this.getControlByControlType(name, ControlType.Tree), this.uiAuto);
     }
 
@@ -298,7 +298,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the panel control associated with the given name
      * @param name Name of the control
      */
-    public AutomationPanel getPanel(String name) {
+    public AutomationPanel getPanel(String name) throws ElementNotFoundException {
         return new AutomationPanel(this.getControlByControlType(name, ControlType.Pane), this.uiAuto);
     }
 
@@ -316,7 +316,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name The name
      * @return The AutomationToolBar
      */
-    public AutomationToolBar getToolBar(String name) {
+    public AutomationToolBar getToolBar(String name) throws ElementNotFoundException {
         return new AutomationToolBar(this.getControlByControlType(name, ControlType.ToolBar), this.uiAuto);
     }
 
@@ -351,7 +351,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name The name to look for
      * @return The AutomationSplitButton
      */
-    public AutomationSplitButton getSplitButton(String name) {
+    public AutomationSplitButton getSplitButton(String name) throws ElementNotFoundException {
         return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton), this.uiAuto);
     }
 }

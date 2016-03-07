@@ -84,7 +84,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        return (new AutomationMainMenu(this.element.element, this.getControlByControlType(1, ControlType.MenuBar), this.uiAuto));
+        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.MenuBar), this.uiAuto));
     }
 
     /**
@@ -115,18 +115,24 @@ public class AutomationWindow extends AutomationContainer {
      * @return The child window
      */
     public AutomationWindow getWindow(String title) {
-        IUIAutomationElement item = null;
+        AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {
-            item = this.findFirst(TreeScope.TreeScope_Descendants,
-                    this.createAndCondition(
-                            this.createNamePropertyCondition(title),
-                            this.createControlTypeCondition(ControlType.Window)));
+            try {
+                item = this.findFirst(TreeScope.TreeScope_Descendants,
+                        this.createAndCondition(
+                                this.createNamePropertyCondition(title),
+                                this.createControlTypeCondition(ControlType.Window)));
+            } catch (ElementNotFoundException ex) {
+                logger.info("Failed to find window");
+            }
 
             if (item != null) {
+                logger.info("Found window");
                 break;
             } else {
                 try {
+                    logger.info("Did not find window, retrying");
                     // Wait for it
                     Thread.sleep(500);
                 } catch (InterruptedException ex) {
@@ -135,7 +141,7 @@ public class AutomationWindow extends AutomationContainer {
             }
         }
 
-        return new AutomationWindow(new AutomationElement(item), this.uiAuto);
+        return new AutomationWindow(item, this.uiAuto);
     }
 
     /**

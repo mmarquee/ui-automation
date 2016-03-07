@@ -20,6 +20,7 @@ import mmarquee.automation.menu.AutomationMenuItem;
 import mmarquee.automation.stringgrid.*;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
+import org.w3c.dom.Element;
 
 import java.util.List;
 
@@ -62,18 +63,22 @@ public class TestMain {
 
 //		String name1 = item.name();
 
-        AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-        exit.click();
+        try {
+            AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+            exit.click();
 
-        AutomationWindow popup = window.getWindow("Project1");
-        Object val111 = popup.getBoundingRectangle();
+            AutomationWindow popup = window.getWindow("Project1");
+            Object val111 = popup.getBoundingRectangle();
 
-        AutomationButton btn = popup.getButton("OK");
-        Object val11 = btn.getBoundingRectangle();
+            AutomationButton btn = popup.getButton("OK");
+            Object val11 = btn.getBoundingRectangle();
 
-        boolean val1 = popup.isModal();
+            boolean val1 = popup.isModal();
 
-        btn.click();
+            btn.click();
+        } catch (ElementNotFoundException ex) {
+            logger.info("Failed to find menu");
+        }
 
         AutomationTab tab = window.getTab(0);
         tab.selectTabPage("Last Tab");
@@ -100,22 +105,30 @@ public class TestMain {
 
         logger.info("Statusbar text = " + eb1Text);
 
-        AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
-        cb1.setText("Replacements");
-        String txt = cb1.text();
-
-        cb1.getClickablePoint();
-
-        logger.info("Text for AutomatedCombobox1 is " + txt);
-
-        AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
-        cb0.expand();
         try {
-            cb0.wait(750);
-        } catch (Exception ex) {
-            // Time out
+            AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
+            cb1.setText("Replacements");
+            String txt = cb1.text();
+
+            cb1.getClickablePoint();
+
+            logger.info("Text for AutomatedCombobox1 is " + txt);
+        } catch (ElementNotFoundException ex) {
+
         }
-        List<AutomationListItem> litems = cb0.getList();
+
+        try {
+            AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
+            cb0.expand();
+            try {
+                cb0.wait(750);
+            } catch (Exception ex) {
+                // Time out
+            }
+            List<AutomationListItem> litems = cb0.getList();
+        } catch (ElementNotFoundException ex) {
+
+        }
 
         // Now string grids
         AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
@@ -133,6 +146,8 @@ public class TestMain {
             treeItem.select();
         } catch (ItemNotFoundException ex) {
             // Not found
+        } catch (ElementNotFoundException ex) {
+            // Not found
         }
 
         AutomationList list = window.getListItem(0);
@@ -141,13 +156,19 @@ public class TestMain {
             listItem.select();
         } catch (ItemNotFoundException ex) {
             // Not found
+        } catch (ElementNotFoundException ex) {
+            // Not found
         }
 
         AutomationHyperlink link = window.getHyperlink(0);
         link.click();
         AutomationWindow popup1 = window.getWindow("Project1");
-        AutomationButton btn1 = popup1.getButton("OK");
-        btn1.click();
+        try {
+            AutomationButton btn1 = popup1.getButton("OK");
+            btn1.click();
+        } catch (ElementNotFoundException ex) {
+
+        }
 
         /* This doesn't seem to work */
         /*

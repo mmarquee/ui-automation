@@ -166,10 +166,10 @@ public abstract class AutomationBase {
      * Finds the first match for the condition
      * @param scope The scope of where to look
      * @param condition The condition to use
-     * @return The found IUIAutomationElement
+     * @return The found AutomationElement
      */
-    protected IUIAutomationElement findFirst(TreeScope scope, Condition condition) {
-        return this.element.element.findFirst(scope, condition.getCondition());
+    protected AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
+        return this.element.findFirst(scope, condition);
     }
 
     /**
