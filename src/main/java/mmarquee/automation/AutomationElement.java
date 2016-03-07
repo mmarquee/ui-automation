@@ -25,26 +25,51 @@ import mmarquee.automation.uiautomation.*;
 public class AutomationElement {
     protected IUIAutomationElement element;
 
+    /**
+     * Constructor of AutomationElement
+     * @param element
+     */
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;
     }
 
+    /**
+     * Gets the property associated with the passed in id
+     * @param propertyId The property ID to get
+     * @return The property ID
+     */
     public Object getCurrentPropertyValue(int propertyId) {
         return this.element.getCurrentPropertyValue(propertyId);
     }
 
+    /**
+     * Gets the current control type
+     * @return The current control type
+     */
     public int currentControlType() {
         return this.element.currentControlType();
     }
 
+    /**
+     * Gets the current class name of the element
+     * @return The current class name
+     */
     public String currentClassName() {
         return this.element.currentClassName();
     }
 
+    /**
+     * Gets the current name of the control
+     * @return The name of the element
+     */
     public String currentName() {
         return this.element.currentName();
     }
 
+    /**
+     * Sets the name of the element
+     * @param name The name to use
+     */
     public void setName(String name) {
         this.element.setName(name);
     }
@@ -58,6 +83,10 @@ public class AutomationElement {
         return this.element.getCurrentPattern(patternId);
     }
 */
+
+    /**
+     * Sets focus to the element
+     */
     public void setFocus() {
         this.element.setFocus();
     }
