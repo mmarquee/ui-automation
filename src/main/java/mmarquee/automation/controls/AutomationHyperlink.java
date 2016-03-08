@@ -29,8 +29,8 @@ public class AutomationHyperlink extends AutomationBase {
 
     /**
      * Constructor for the AutomationHyperlink
-     * @param element
-     * @param uiAuto
+     * @param element The underlying automation element
+     * @param uiAuto The automation library
      */
     public AutomationHyperlink(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

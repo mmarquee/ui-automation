@@ -70,7 +70,7 @@ public class UIAutomation {
     }
 
     /**
-     * Attachs or launches the application
+     * Attaches or launches the application
      * @param command Command to be started
      * @return AutomationApplication that represents the application
      */
@@ -123,8 +123,6 @@ public class UIAutomation {
      * @return AutomationWindow The found window
      */
     public AutomationWindow getDesktopWindow(String title) {
-        List<AutomationWindow> result = new ArrayList<AutomationWindow>();
-
         IUIAutomationElement element = null;
 
         for (int loop = 0; loop <10; loop++) {

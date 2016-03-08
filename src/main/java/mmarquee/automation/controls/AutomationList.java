@@ -33,6 +33,11 @@ public class AutomationList extends AutomationBase {
 
     private Selection selectionPattern;
 
+    /**
+     * Constructor for the AutomationList
+     * @param element The underlying automation element
+     * @param uiAuto The automation library
+     */
     public AutomationList(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

@@ -30,7 +30,7 @@ public class AutomationEditBox extends AutomationBase {
 
     /**
      * Gets the value of the control
-     * @return
+     * @return The string value of the control
      */
     public String getValue() {
         return valuePattern.value();

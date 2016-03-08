@@ -27,6 +27,9 @@ import java.util.List;
 
 /**
  * Created by inpwt on 28/01/2016.
+ *
+ * Encapsulates the functionality of 'containers' i.e. elemenst that
+ * host other elements
  */
 public class AutomationContainer extends AutomationBase {
 
@@ -70,7 +73,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the control by the control type, for s given control index
      * @param index Index of the control
      * @param id Control type
-     * @param controlName
+     * @param controlName The control name to use
      * @return The matching element
      */
     protected AutomationElement getControlByControlType(int index, int id, String controlName) {
@@ -207,8 +210,8 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the button control associated with the given index
-     * @param index
-     * @return
+     * @param index The index of the button
+     * @return The AutomationButton
      */
     public AutomationButton getButton(int index) {
         return new AutomationButton(this.getControlByControlType(index, ControlType.Button), this.uiAuto);
@@ -225,8 +228,8 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the  String Grid control associated with the given index
-     * @param index
+     * Gets the String Grid control associated with the given index
+     * @param index The index to look for
      * @return The string grid
      */
     public AutomationStringGrid getStringGrid(int index) {

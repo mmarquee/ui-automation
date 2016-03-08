@@ -131,7 +131,10 @@ public abstract class AutomationBase {
 
     /**
      * Gets a clickable point for the control
-     * @return
+     *
+     * This is currently not working
+     *
+     * @return The clickable point
      */
     public WinDef.POINT getClickablePoint () {
         Object value = this.element.getCurrentPropertyValue(PropertyID.ClickablePoint);
@@ -246,8 +249,7 @@ public abstract class AutomationBase {
      * @return IUIAutomationElementArray
      */
     protected List<AutomationElement> findAll(TreeScope scope, Condition condition) {
-        List<AutomationElement> list = this.element.findAll(scope, condition.getCondition());
-        return list;
+        return this.element.findAll(scope, condition.getCondition());
     }
 
     /**

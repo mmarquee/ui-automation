@@ -16,7 +16,6 @@
 package mmarquee.automation;
 
 import mmarquee.automation.condition.Condition;
-import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class AutomationElement {
 
     /**
      * Constructor of AutomationElement
-     * @param element
+     * @param element The element
      */
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;

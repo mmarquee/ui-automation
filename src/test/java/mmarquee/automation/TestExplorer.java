@@ -80,7 +80,7 @@ public class TestExplorer {
             }
             split.click();
         } catch (ElementNotFoundException ex) {
-
+            logger.info("Failed to find element");
         }
 
         AutomationReBar rebar = window.getReBar(0);
@@ -91,7 +91,7 @@ public class TestExplorer {
             //   AutomationButton upButton = toolbar.getButton(0);
             //   upButton.click();
         } catch (ElementNotFoundException ex) {
-
+            logger.info("Failed to find element");
         }
 
         try {
@@ -111,9 +111,8 @@ public class TestExplorer {
                 logger.info("Didn't find the item");
             }
         } catch (ElementNotFoundException ex) {
-
+            logger.info("Failed to find element");
         }
-
 
         /*
         logger.info(explorerPane.name());

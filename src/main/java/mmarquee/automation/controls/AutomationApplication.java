@@ -34,7 +34,7 @@ public class AutomationApplication extends AutomationBase {
 
     /**
      * Waits for the application to accept input, i.e. not be idle
-     * @param timeout
+     * @param timeout Timeout to wait for
      */
     public void waitForInputIdle(int timeout) {
         user32.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));

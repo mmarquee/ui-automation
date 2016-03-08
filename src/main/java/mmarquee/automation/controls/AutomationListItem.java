@@ -29,6 +29,11 @@ public class AutomationListItem extends AutomationBase {
 
     private SelectionItem selectItemPattern;
 
+    /**
+     * Constructor for the AuyomationListItem
+     * @param element The underlying automation element
+     * @param uiAuto The automation library
+     */
     public AutomationListItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
@@ -39,6 +44,9 @@ public class AutomationListItem extends AutomationBase {
         }
     }
 
+    /**
+     * Selects this item
+     */
     public void select() {
         this.selectItemPattern.select();
     }

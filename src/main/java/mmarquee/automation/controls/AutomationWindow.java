@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
+ *
+ * Encapsulates the 'window' element
  */
 public class AutomationWindow extends AutomationContainer {
 
