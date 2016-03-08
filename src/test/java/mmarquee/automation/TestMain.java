@@ -15,12 +15,11 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.menu.AutomationMainMenu;
-import mmarquee.automation.menu.AutomationMenuItem;
-import mmarquee.automation.stringgrid.*;
+import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.menu.*;
+import mmarquee.automation.controls.stringgrid.*;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
-import org.w3c.dom.Element;
 
 import java.util.List;
 
