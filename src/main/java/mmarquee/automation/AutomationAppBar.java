@@ -27,7 +27,7 @@ public class AutomationAppBar extends AutomationBase {
      * This element seems to be undocumented
      *
      * @param element The underlying automation element
-     * @param uiAuto The IUIAutomation associated with this session
+     * @param uiAuto The AutomationElement associated with this session
      */
     public AutomationAppBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);

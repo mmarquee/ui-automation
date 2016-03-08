@@ -113,7 +113,7 @@ public class AutomationElement {
     /**
      * Gets all of the elements that match the condition and scope
      * @param scope The scope in the element tree
-     * @param condition The onndition
+     * @param condition The condition
      * @return List of matching elements
      */
     public List<AutomationElement> findAll(TreeScope scope, IUIAutomationCondition condition) {

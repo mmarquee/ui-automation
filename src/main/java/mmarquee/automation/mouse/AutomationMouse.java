@@ -5,10 +5,15 @@ import java.awt.event.InputEvent;
 
 /**
  * Created by inpwt on 26/02/2016.
+ *
+ * Wrapper for Robot class
  */
 public class AutomationMouse {
     private Robot robot;
 
+    /**
+     * Constructor for the AutomationMouse
+     */
     public AutomationMouse () {
         try {
             robot = new Robot();

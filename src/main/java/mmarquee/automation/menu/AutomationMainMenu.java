@@ -28,10 +28,20 @@ public class AutomationMainMenu extends AutomationBase {
 
     private AutomationElement parent;
 
+    /**
+     * Gets the parent element of the menu element
+     * @return The parent element
+     */
     public AutomationElement getParent() {
         return this.parent;
     }
 
+    /**
+     * Constructor for AutomationMainMenu
+     * @param parent Parent of the element
+     * @param element The element
+     * @param uiAuto The automation interface
+     */
     public AutomationMainMenu(AutomationElement parent, AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
         this.parent = parent;

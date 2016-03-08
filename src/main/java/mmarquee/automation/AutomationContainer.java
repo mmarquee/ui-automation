@@ -354,4 +354,13 @@ public class AutomationContainer extends AutomationBase {
     public AutomationSplitButton getSplitButton(String name) throws ElementNotFoundException {
         return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton), this.uiAuto);
     }
+
+    /**
+     * Get the AutomationCustom element associated with the given name
+     * @param name The name to look for
+     * @return The AutomationCustom
+     */
+    public AutomationCustom getCustom(String name) throws ElementNotFoundException {
+        return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom), this.uiAuto);
+    }
 }
