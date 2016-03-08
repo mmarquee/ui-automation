@@ -27,6 +27,11 @@ import mmarquee.automation.uiautomation.*;
  */
 public class AutomationTreeView extends AutomationBase {
 
+    /**
+     * Construct the AutomationTreeView
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationTreeView(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

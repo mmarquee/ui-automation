@@ -24,6 +24,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 02/03/2016.
  */
 public class AutomationRibbonWorkPane extends AutomationContainer {
+    /**
+     * Construct the AutomationRibbonWorkPane
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationRibbonWorkPane(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

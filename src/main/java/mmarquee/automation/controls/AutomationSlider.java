@@ -14,6 +14,11 @@ public class AutomationSlider extends AutomationBase {
 
     private Value valuePattern;
 
+    /**
+     * Construct the AutomationSlider
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationSlider(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

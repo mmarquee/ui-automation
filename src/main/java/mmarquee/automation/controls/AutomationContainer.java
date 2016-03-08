@@ -46,27 +46,11 @@ public class AutomationContainer extends AutomationBase {
     protected AutomationElement getControlByControlType(int index, int id) {
         List<AutomationElement> collection;
 
-        AutomationElement foundElement = null;
-
         ControlIdCondition condition = new ControlIdCondition(this.uiAuto, id);
 
         collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
 
-        int length = collection.size();
-
-        int counter = 0;
-
-        for (int count = 0; count < length; count++) {
-            AutomationElement element = collection.get(count);
-            if (counter == index) {
-                foundElement = element;
-                break;
-            } else {
-                counter++;
-            }
-        }
-
-        return foundElement;
+        return collection.get(index);
     }
 
     /**

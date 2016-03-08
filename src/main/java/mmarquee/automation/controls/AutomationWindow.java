@@ -63,6 +63,15 @@ public class AutomationWindow extends AutomationContainer {
 
         AutomationStatusBar found = null;
 
+        for(AutomationElement element: collection) {
+            int retVal = element.currentControlType();
+
+            if (retVal == ControlType.StatusBar) {
+                found = new AutomationStatusBar(element, uiAuto);
+                break;
+            }
+        }
+
         for (int count = 0; count < collection.size(); count++) {
             AutomationElement element = collection.get(count);
 

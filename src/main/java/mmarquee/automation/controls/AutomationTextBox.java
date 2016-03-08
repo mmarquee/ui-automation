@@ -24,7 +24,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 01/02/2016.
  */
 public class AutomationTextBox extends AutomationBase {
-
+    /**
+     * Construct the AutomationTextBox
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationTextBox(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

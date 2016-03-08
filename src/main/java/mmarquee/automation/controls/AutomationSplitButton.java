@@ -23,7 +23,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 03/03/2016.
  */
 public class AutomationSplitButton extends AutomationButton {
-
+    /**
+     * Construct the AutomationSplitButton
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationSplitButton(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

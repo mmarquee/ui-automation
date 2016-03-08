@@ -26,6 +26,11 @@ import mmarquee.automation.uiautomation.*;
  * Specialist pane that represents the RibbonBar
  */
 public class AutomationRibbonCommandBar extends AutomationContainer {
+    /**
+     * Construct the AutomationRibbonCommandBar
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationRibbonCommandBar(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

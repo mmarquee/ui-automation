@@ -23,6 +23,11 @@ import mmarquee.automation.uiautomation.*;
  * Created by inpwt on 26/02/2016.
  */
 public class AutomationPanel extends AutomationContainer {
+    /**
+     * Construct the AutomationPanel
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationPanel(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

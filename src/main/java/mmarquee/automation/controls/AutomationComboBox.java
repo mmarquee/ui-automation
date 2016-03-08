@@ -94,11 +94,7 @@ public class AutomationComboBox extends AutomationBase {
         List<AutomationElement> collection =
                 this.findAll(TreeScope.TreeScope_Descendants);
 
-        int length = collection.size();
-
-        for (int count = 0; count < length; count++ ) {
-            AutomationElement element = collection.get(count);
-
+        for (AutomationElement element : collection) {
             int retValue = element.currentControlType();
 
             if (retValue == ControlType.ListItem) {
