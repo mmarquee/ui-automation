@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.condition.TrueCondition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.*;
@@ -56,15 +57,13 @@ public class AutomationWindow extends AutomationContainer {
      * @return The status bar
      */
     public AutomationStatusBar getStatusBar() {
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
+        TrueCondition condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.element.findAll(TreeScope.TreeScope_Descendants, condition);
-
-        int length = collection.size();
+        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
 
         AutomationStatusBar found = null;
 
-        for (int count = 0; count < length; count++) {
+        for (int count = 0; count < collection.size(); count++) {
             AutomationElement element = collection.get(count);
 
             int retVal = element.currentControlType();
