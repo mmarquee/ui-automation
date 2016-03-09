@@ -16,7 +16,10 @@
 package mmarquee.automation;
 
 import mmarquee.automation.condition.Condition;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomationCondition;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,12 +16,13 @@
 
 package mmarquee.automation.controls.stringgrid;
 
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.*;
-import mmarquee.automation.uiautomation.*;
-import java.util.List;
+import mmarquee.automation.uiautomation.IUIAutomation;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by inpwt on 03/02/2016.

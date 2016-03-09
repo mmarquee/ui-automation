@@ -1,7 +1,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.AutomationEditBox;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**

@@ -17,8 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 01/02/2016.

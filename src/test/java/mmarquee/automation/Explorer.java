@@ -16,10 +16,6 @@
 
 package mmarquee.automation;
 
-import mmarquee.automation.uiautomation.ToggleState;
-
-import java.util.List;
-
 public class Explorer {
 
 	public static void main(String[] args) {

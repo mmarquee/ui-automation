@@ -15,8 +15,8 @@
  */
 package mmarquee.automation.condition;
 
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

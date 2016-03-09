@@ -21,8 +21,10 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.condition.TrueCondition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.pattern.*;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 

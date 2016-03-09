@@ -16,7 +16,6 @@
 package mmarquee.automation.pattern;
 
 import com4j.Com4jObject;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 
 /**
  * Created by inpwt on 28/02/2016.

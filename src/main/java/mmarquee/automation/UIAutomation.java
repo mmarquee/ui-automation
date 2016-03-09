@@ -16,9 +16,9 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.win32.W32APIOptions;
-import com.sun.jna.Native;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;

@@ -16,10 +16,10 @@
 
 package mmarquee.automation.controls.stringgrid;
 
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**

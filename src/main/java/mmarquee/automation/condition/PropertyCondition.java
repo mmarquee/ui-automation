@@ -1,7 +1,6 @@
 package mmarquee.automation.condition;
 
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationCondition;
 
 /**
  * Created by inpwt on 24/02/2016.

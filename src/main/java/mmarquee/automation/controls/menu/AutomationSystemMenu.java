@@ -16,11 +16,12 @@
 
 package mmarquee.automation.controls.menu;
 
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.condition.Condition;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 

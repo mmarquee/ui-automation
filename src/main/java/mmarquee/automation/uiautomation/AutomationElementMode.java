@@ -16,8 +16,6 @@
 
 package mmarquee.automation.uiautomation;
 
-import com4j.*;
-
 /**
  */
 public enum AutomationElementMode {
