@@ -44,11 +44,9 @@ public class AutomationContainer extends AutomationBase {
     }
 
     protected AutomationElement getControlByControlType(int index, int id) {
-        List<AutomationElement> collection;
-
         ControlIdCondition condition = new ControlIdCondition(this.uiAuto, id);
 
-        collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
+        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
 
         return collection.get(index);
     }
@@ -341,6 +339,24 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationSplitButton getSplitButton(String name) throws ElementNotFoundException {
         return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton), this.uiAuto);
+    }
+
+    /**
+     * Get the AutomationImage associated with the given name
+     * @param name The name to look for
+     * @return The AutomationImage
+     */
+    public AutomationImage getImage(String name) throws ElementNotFoundException {
+        return new AutomationImage(this.getControlByControlType(name, ControlType.Image), this.uiAuto);
+    }
+
+    /**
+     * Get the AutomationSpinner element associated with the given name
+     * @param name The name to look for
+     * @return The AutomationCustom
+     */
+    public AutomationSpinner getSpinner(String name) throws ElementNotFoundException {
+        return new AutomationSpinner(this.getControlByControlType(name, ControlType.Spinner), this.uiAuto);
     }
 
     /**

@@ -96,10 +96,10 @@ public class TestMain {
 
         AutomationStatusBar statusbar = window.getStatusBar();
 
-       // AutomationTextBox tb0 = statusbar.getTextBox(0);
+        // AutomationTextBox tb0 = statusbar.getTextBox(0);
         AutomationTextBox tb1 = statusbar.getTextBox(1);
 
-       // String eb0Text = statusbar.getTextBox(0).getValue();
+        // String eb0Text = statusbar.getTextBox(0).getValue();
         String eb1Text = tb1.getValue();
 
         logger.info("Statusbar text = " + eb1Text);
@@ -166,14 +166,24 @@ public class TestMain {
             AutomationButton btn1 = popup1.getButton("OK");
             btn1.click();
         } catch (ElementNotFoundException ex) {
+            logger.info("Failed to find button");
+        }
 
+        try {
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            logger.info("Interrupted");
         }
 
         /* This doesn't seem to work */
-        /*
         AutomationToolBar toolbar = window.getToolBar(0);
+        logger.info(toolbar.name());
+
+        // Looks like the button is a problem with Delphi
         AutomationButton btn0 = toolbar.getButton(0);
-        btn0.click();
-        */
+
+        if (btn0.isEnabled()) {
+            btn0.click();
+        }
     }
 }

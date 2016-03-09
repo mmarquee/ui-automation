@@ -47,6 +47,10 @@ public class AutomationTreeViewItem extends AutomationBase {
      * Click the item
      */
     public void click() {
-        this.invokePattern.invoke();
+        if (this.isInvokePatternAvailable()) {
+            this.invokePattern.invoke();
+        } else {
+            logger.info("Invoke pattern is not available");
+        }
     }
 }

@@ -83,6 +83,13 @@ public class TestExplorer {
             logger.info("Failed to find element");
         }
 
+        try {
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            logger.info("Interrupted");
+        }
+
+
         AutomationReBar rebar = window.getReBar(0);
         try {
             AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
@@ -105,13 +112,29 @@ public class TestExplorer {
             try {
                 AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
                 logger.info(treeItem.name());
-                treeItem.select();
+
+                try {
+                    Thread.sleep(500);
+                } catch (Exception ex) {
+                    logger.info("Interrupted");
+                }
+
                 treeItem.click();
             } catch (ItemNotFoundException ex) {
                 logger.info("Didn't find the item");
             }
         } catch (ElementNotFoundException ex) {
             logger.info("Failed to find element");
+        }
+
+        AutomationToolBar toolbar = window.getToolBar(0);
+        logger.info(toolbar.name());
+
+        // Looks like the button is a problem with Delphi
+        AutomationButton btn0 = toolbar.getButton(0);
+        logger.info(btn0.name());
+        if (btn0.isEnabled()) {
+            btn0.click();
         }
 
         /*

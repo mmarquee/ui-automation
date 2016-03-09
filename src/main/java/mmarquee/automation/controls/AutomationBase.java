@@ -452,7 +452,7 @@ public abstract class AutomationBase {
      * @return Enabled ?
      */
     public boolean isEnabled () {
-        return this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsEnabled).equals(true);
     }
 
     /**
