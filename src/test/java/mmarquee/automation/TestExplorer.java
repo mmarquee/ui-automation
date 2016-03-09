@@ -16,7 +16,7 @@
 package mmarquee.automation;
 
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.rebar.*;
+import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.*;
 import org.apache.log4j.Logger;
 

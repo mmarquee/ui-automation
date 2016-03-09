@@ -16,7 +16,9 @@
 
 package mmarquee.automation.uiautomation;
 
-import com4j.*;
+import com4j.Com4jObject;
+import com4j.IID;
+import com4j.VTID;
 
 @IID("{09E31E18-872D-4873-93D1-1E541EC133FD}")
 public interface IUIAutomationProxyFactoryMapping extends Com4jObject {

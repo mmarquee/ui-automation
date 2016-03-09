@@ -16,8 +16,10 @@
 package mmarquee.automation;
 
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.*;
-import mmarquee.automation.controls.stringgrid.*;
+import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
+import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 

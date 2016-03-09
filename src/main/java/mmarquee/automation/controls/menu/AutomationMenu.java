@@ -16,11 +16,9 @@
 
 package mmarquee.automation.controls.menu;
 
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.uiautomation.*;
-
-import static java.lang.Thread.sleep;
+import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 09/02/2016.

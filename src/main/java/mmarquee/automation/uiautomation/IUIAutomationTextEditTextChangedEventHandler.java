@@ -16,7 +16,9 @@
 
 package mmarquee.automation.uiautomation;
 
-import com4j.*;
+import com4j.Com4jObject;
+import com4j.IID;
+import com4j.VTID;
 
 @IID("{92FAA680-E704-4156-931A-E32D5BB38F3F}")
 public interface IUIAutomationTextEditTextChangedEventHandler extends Com4jObject {

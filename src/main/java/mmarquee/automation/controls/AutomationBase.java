@@ -24,7 +24,7 @@ import mmarquee.automation.PropertyID;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
-import org.apache.log4j.*;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
