@@ -34,6 +34,11 @@ public class AutomationStringGrid extends AutomationBase
     private Table tablePattern;
     private Selection selectionPattern;
 
+    /**
+     * Construct the AutomationStringGrid
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationStringGrid(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

@@ -24,6 +24,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Created by inpwt on 09/02/2016.
  */
 public class AutomationMenu extends AutomationBase {
+    /**
+     * Construct the AutomationMenu
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationMenu(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

@@ -25,6 +25,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Specialist pane that represents the NetUIHWND (part of the MS ribbon controls)
  */
 public class AutomationNetUIHWND extends AutomationPanel {
+    /**
+     * Construct the AutomationNetUIHWND
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationNetUIHWND(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

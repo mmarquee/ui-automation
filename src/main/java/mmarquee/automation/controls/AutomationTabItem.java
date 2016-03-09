@@ -28,6 +28,11 @@ public class AutomationTabItem extends AutomationBase {
 
     private SelectionItem selectItemPattern;
 
+    /**
+     * Construct the AutomationTabItem
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationTabItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

@@ -29,7 +29,11 @@ import java.util.List;
  * Created by inpwt on 19/02/2016.
  */
 public class AutomationSystemMenu extends AutomationBase {
-
+    /**
+     * Construct the AutomationSystemMenu
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationSystemMenu(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

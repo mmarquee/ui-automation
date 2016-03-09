@@ -61,10 +61,7 @@ public class AutomationApplication extends AutomationBase {
 
         List<AutomationElement> collection = this.findAll();
 
-        int length = collection.size();
-
-        for(int count=0; count < length; count++){
-            AutomationElement element = collection.get(count);
+        for (AutomationElement element : collection) {
             String name = element.currentName();
             if (name.equals(title)){
                 foundElement = element;

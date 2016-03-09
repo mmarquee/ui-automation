@@ -14,6 +14,11 @@ public class AutomationTreeViewItem extends AutomationBase {
     private SelectionItem selectItemPattern;
     private Invoke invokePattern;
 
+    /**
+     * Construct the AutomationTreeViewItem
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationTreeViewItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

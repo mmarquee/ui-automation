@@ -26,6 +26,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Specialist pane that represents the NUIPane (part of the MS ribbon controls)
  */
 public class AutomationNUIPane extends AutomationPanel {
+    /**
+     * Construct the AutomationNUIPane
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationNUIPane(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

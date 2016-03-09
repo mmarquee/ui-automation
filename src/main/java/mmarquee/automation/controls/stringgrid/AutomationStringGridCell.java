@@ -24,6 +24,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Created by inpwt on 04/02/2016.
  */
 public class AutomationStringGridCell extends AutomationBase {
+    /**
+     * Construct the AutomationStringGridCell
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationStringGridCell(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
     }

@@ -25,7 +25,7 @@ public class AutomationAppBar extends AutomationBase {
     /**
      * Constructor for the AutomationAppBar.
      *
-     * This element seems to be undocumented
+     * This element seems to be undocumented by Microsoft
      *
      * @param element The underlying automation element
      * @param uiAuto The AutomationElement associated with this session

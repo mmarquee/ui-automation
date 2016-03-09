@@ -27,6 +27,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public class AutomationMenuItem extends AutomationBase {
     private Invoke invokePattern;
 
+    /**
+     * Construct the AutomationMenuItem
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationMenuItem(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 

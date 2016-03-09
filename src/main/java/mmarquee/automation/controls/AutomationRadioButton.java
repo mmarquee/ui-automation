@@ -28,6 +28,11 @@ public class AutomationRadioButton extends AutomationBase {
 
     private SelectionItem selectItemPattern;
 
+    /**
+     * Construct the AutomationRadioButton
+     * @param element The element
+     * @param uiAuto The automation library
+     */
     public AutomationRadioButton(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
 
