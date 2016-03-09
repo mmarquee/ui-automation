@@ -183,7 +183,29 @@ public class TestMain {
         AutomationButton btn0 = toolbar.getButton(0);
 
         if (btn0.isEnabled()) {
+            logger.info("btn0 Enabled");
             btn0.click();
+        }
+
+        AutomationButton btn1 = toolbar.getButton(1);
+
+        if (btn1.isEnabled()) {
+            logger.info("btn1 Enabled");
+            btn1.click();
+        }
+
+        AutomationButton btn2 = toolbar.getButton(2);
+
+        if (btn2.isEnabled()) {
+            logger.info("btn2 Enabled");
+            btn2.click();
+        }
+
+        AutomationButton btn3 = toolbar.getButton(3);
+
+        if (btn3.isEnabled()) {
+            logger.info("btn3 Enabled");
+            btn3.click();
         }
     }
 }

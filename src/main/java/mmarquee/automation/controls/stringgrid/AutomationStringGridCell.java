@@ -18,12 +18,17 @@ package mmarquee.automation.controls.stringgrid;
 
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 04/02/2016.
  */
 public class AutomationStringGridCell extends AutomationBase {
+
+   // private Value valuePattern;
+
     /**
      * Construct the AutomationStringGridCell
      * @param element The element
@@ -31,5 +36,32 @@ public class AutomationStringGridCell extends AutomationBase {
      */
     public AutomationStringGridCell(AutomationElement element, IUIAutomation uiAuto) {
         super(element, uiAuto);
+
+     //   try {
+     //       this.valuePattern = this.getValuePattern();
+     //   } catch (PatternNotFoundException ex) {
+     //       logger.info("Value pattern not found");
+     //   }
     }
+
+    /**
+     * Gets the text associated with this element
+     * @return The current value
+     */
+ //   public String value() {
+ //       return valuePattern.value();
+ //   }
+
+ //   public boolean isReadOnly() {
+ //       int value = valuePattern.isReadOnly();
+ //       return (value == 1);
+ //   }
+
+    /**
+     * Sets the value
+     * @param value The value to set
+     */
+ //   public void setValue(String value) {
+ //       this.valuePattern.setValue(value);
+ //   }
 }
