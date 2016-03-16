@@ -10,7 +10,8 @@ public class TestJacob {
     public void run() {
 
         ActiveXComponent msui =
-                new ActiveXComponent("{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
+                new ActiveXComponent("CLSID:{944DE083-8FB8-45CF-BCB7-C477ACB2F897}");
+  //              new ActiveXComponent("UIAutomationClient");
         Dispatch uiautomation = msui.getObject();
 
         Object root[] = new Object[1];
