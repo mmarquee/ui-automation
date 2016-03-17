@@ -15,6 +15,10 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinUser;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
@@ -29,6 +33,66 @@ import java.util.List;
  * Created by inpwt on 26/02/2016.
  */
 public class TestMain {
+
+    private static String stripName(char[] name) {
+        int i = 0;
+        while (i < name.length && name[i] != '\0') {
+            i++;
+        }
+
+        char[] name1 = new char[i];
+        System.arraycopy(name, 0, name1, 0, i);
+        return new String(name1);
+    }
+
+    public void dumpWindows() {
+        final User32 usr = User32.INSTANCE;
+
+        usr.EnumWindows(new WinUser.WNDENUMPROC() {
+            public boolean callback(WinDef.HWND hwnd, Pointer data) {
+                char[] name = new char[1000];
+                char[] text = new char[1000];
+
+                usr.GetClassName(hwnd, name, 1000);
+
+                int len = usr.GetWindowTextLength(hwnd);
+
+                usr.GetWindowText(hwnd, text, 1000);
+
+                System.err.println("WndClass: "
+                        + stripName(name)
+                        + " = '"
+                        + stripName(text)
+                        + "'");
+
+                usr.EnumChildWindows(hwnd, new WinUser.WNDENUMPROC() {
+
+                    public boolean callback(WinDef.HWND hwnd, Pointer pntr) {
+                        char[] iname = new char[1000];
+                        char[] itext = new char[1000];
+
+                        WinDef.RECT rect = new WinDef.RECT();
+
+                        usr.GetWindowRect(hwnd, rect);
+
+                        usr.GetClassName(hwnd, iname, 1000);
+                        usr.GetWindowText(hwnd, itext, 1000);
+
+                        System.err.println("  WndClass: "
+                                + stripName(iname)
+                                + " = '"
+                                + stripName(itext)
+                                + "'");
+
+                        return true;
+                    }
+                }, null);
+
+                return true;
+            }
+        }, null);
+
+    }
 
     public void run () {
         UIAutomation automation = new UIAutomation();
