@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.automation.pattern.raw.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**

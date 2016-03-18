@@ -1,6 +1,6 @@
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
+import mmarquee.automation.pattern.raw.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**

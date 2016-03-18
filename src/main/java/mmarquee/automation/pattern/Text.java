@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.pattern.raw.IUIAutomationTextPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 

@@ -16,15 +16,13 @@
 
 package mmarquee.automation;
 
-import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
-import com.sun.jna.win32.W32APIOptions;
+import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

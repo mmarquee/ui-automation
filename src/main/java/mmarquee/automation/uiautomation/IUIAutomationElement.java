@@ -17,6 +17,7 @@
 package mmarquee.automation.uiautomation;
 
 import com4j.*;
+import mmarquee.automation.condition.raw.IUIAutomationCondition;
 
 @IID("{D22108AA-8AC5-49A5-837B-37BBB3D7591E}")
 public interface IUIAutomationElement extends Com4jObject {
@@ -45,7 +46,7 @@ public interface IUIAutomationElement extends Com4jObject {
   @VTID(5)
   mmarquee.automation.uiautomation.IUIAutomationElement findFirst(
     mmarquee.automation.uiautomation.TreeScope scope,
-    mmarquee.automation.uiautomation.IUIAutomationCondition condition);
+    IUIAutomationCondition condition);
 
 
   /**
@@ -57,7 +58,7 @@ public interface IUIAutomationElement extends Com4jObject {
   @VTID(6)
   mmarquee.automation.uiautomation.IUIAutomationElementArray findAll(
     mmarquee.automation.uiautomation.TreeScope scope,
-    mmarquee.automation.uiautomation.IUIAutomationCondition condition);
+    IUIAutomationCondition condition);
 
 
   /**
@@ -70,7 +71,7 @@ public interface IUIAutomationElement extends Com4jObject {
   @VTID(7)
   mmarquee.automation.uiautomation.IUIAutomationElement findFirstBuildCache(
     mmarquee.automation.uiautomation.TreeScope scope,
-    mmarquee.automation.uiautomation.IUIAutomationCondition condition,
+    IUIAutomationCondition condition,
     mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
 
 
@@ -84,7 +85,7 @@ public interface IUIAutomationElement extends Com4jObject {
   @VTID(8)
   mmarquee.automation.uiautomation.IUIAutomationElementArray findAllBuildCache(
     mmarquee.automation.uiautomation.TreeScope scope,
-    mmarquee.automation.uiautomation.IUIAutomationCondition condition,
+    IUIAutomationCondition condition,
     mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
 
 

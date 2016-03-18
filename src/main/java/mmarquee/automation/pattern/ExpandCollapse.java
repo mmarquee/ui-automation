@@ -15,8 +15,8 @@
  */
 package mmarquee.automation.pattern;
 
+import mmarquee.automation.pattern.raw.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.ExpandCollapseState;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 
 /**
  * Created by inpwt on 25/02/2016.

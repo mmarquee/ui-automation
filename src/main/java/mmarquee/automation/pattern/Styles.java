@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.automation.pattern.raw.IUIAutomationStylesPattern;
 
 /**
  * Created by inpwt on 01/03/2016.

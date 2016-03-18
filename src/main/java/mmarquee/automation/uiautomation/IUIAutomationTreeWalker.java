@@ -19,6 +19,7 @@ package mmarquee.automation.uiautomation;
 import com4j.Com4jObject;
 import com4j.IID;
 import com4j.VTID;
+import mmarquee.automation.condition.raw.IUIAutomationCondition;
 
 @IID("{4042C624-389C-4AFC-A630-9DF854A541FC}")
 public interface IUIAutomationTreeWalker extends Com4jObject {
@@ -163,7 +164,7 @@ public interface IUIAutomationTreeWalker extends Com4jObject {
    */
 
   @VTID(15)
-  mmarquee.automation.uiautomation.IUIAutomationCondition condition();
+  IUIAutomationCondition condition();
 
 
   // Properties:

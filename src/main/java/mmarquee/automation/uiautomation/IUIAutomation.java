@@ -17,6 +17,7 @@
 package mmarquee.automation.uiautomation;
 
 import com4j.*;
+import mmarquee.automation.condition.raw.IUIAutomationCondition;
 
 @IID("{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}")
 public interface IUIAutomation extends Com4jObject {
@@ -110,7 +111,7 @@ public interface IUIAutomation extends Com4jObject {
 
       @VTID(13)
       mmarquee.automation.uiautomation.IUIAutomationTreeWalker createTreeWalker(
-        mmarquee.automation.uiautomation.IUIAutomationCondition pCondition);
+        IUIAutomationCondition pCondition);
 
 
       /**
@@ -154,7 +155,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(17)
-      mmarquee.automation.uiautomation.IUIAutomationCondition rawViewCondition();
+      IUIAutomationCondition rawViewCondition();
 
 
       /**
@@ -165,7 +166,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(18)
-      mmarquee.automation.uiautomation.IUIAutomationCondition controlViewCondition();
+      IUIAutomationCondition controlViewCondition();
 
 
       /**
@@ -176,7 +177,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(19)
-      mmarquee.automation.uiautomation.IUIAutomationCondition contentViewCondition();
+      IUIAutomationCondition contentViewCondition();
 
 
       /**
@@ -192,7 +193,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(21)
-      mmarquee.automation.uiautomation.IUIAutomationCondition createTrueCondition();
+      IUIAutomationCondition createTrueCondition();
 
 
       /**
@@ -200,7 +201,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(22)
-      mmarquee.automation.uiautomation.IUIAutomationCondition createFalseCondition();
+      IUIAutomationCondition createFalseCondition();
 
 
       /**
@@ -210,7 +211,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(23)
-      mmarquee.automation.uiautomation.IUIAutomationCondition createPropertyCondition(
+      IUIAutomationCondition createPropertyCondition(
         int propertyId,
         @MarshalAs(NativeType.VARIANT) java.lang.Object value);
 
@@ -223,7 +224,7 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(24)
-      mmarquee.automation.uiautomation.IUIAutomationCondition createPropertyConditionEx(
+      IUIAutomationCondition createPropertyConditionEx(
         int propertyId,
         @MarshalAs(NativeType.VARIANT) java.lang.Object value,
         mmarquee.automation.uiautomation.PropertyConditionFlags flags);
@@ -236,9 +237,9 @@ public interface IUIAutomation extends Com4jObject {
        */
 
       @VTID(25)
-      mmarquee.automation.uiautomation.IUIAutomationCondition createAndCondition(
-        mmarquee.automation.uiautomation.IUIAutomationCondition condition1,
-        mmarquee.automation.uiautomation.IUIAutomationCondition condition2);
+      IUIAutomationCondition createAndCondition(
+        IUIAutomationCondition condition1,
+        IUIAutomationCondition condition2);
 
 
         /**
@@ -248,8 +249,8 @@ public interface IUIAutomation extends Com4jObject {
          */
 
         @VTID(27)
-        mmarquee.automation.uiautomation.IUIAutomationCondition createAndConditionFromNativeArray(
-          Holder<mmarquee.automation.uiautomation.IUIAutomationCondition> conditions,
+        IUIAutomationCondition createAndConditionFromNativeArray(
+          Holder<IUIAutomationCondition> conditions,
           int conditionCount);
 
 
@@ -260,9 +261,9 @@ public interface IUIAutomation extends Com4jObject {
          */
 
         @VTID(28)
-        mmarquee.automation.uiautomation.IUIAutomationCondition createOrCondition(
-          mmarquee.automation.uiautomation.IUIAutomationCondition condition1,
-          mmarquee.automation.uiautomation.IUIAutomationCondition condition2);
+        IUIAutomationCondition createOrCondition(
+          IUIAutomationCondition condition1,
+          IUIAutomationCondition condition2);
 
 
           /**
@@ -272,8 +273,8 @@ public interface IUIAutomation extends Com4jObject {
            */
 
           @VTID(30)
-          mmarquee.automation.uiautomation.IUIAutomationCondition createOrConditionFromNativeArray(
-            Holder<mmarquee.automation.uiautomation.IUIAutomationCondition> conditions,
+          IUIAutomationCondition createOrConditionFromNativeArray(
+            Holder<IUIAutomationCondition> conditions,
             int conditionCount);
 
 
@@ -283,8 +284,8 @@ public interface IUIAutomation extends Com4jObject {
            */
 
           @VTID(31)
-          mmarquee.automation.uiautomation.IUIAutomationCondition createNotCondition(
-            mmarquee.automation.uiautomation.IUIAutomationCondition condition);
+          IUIAutomationCondition createNotCondition(
+            IUIAutomationCondition condition);
 
 
           /**
