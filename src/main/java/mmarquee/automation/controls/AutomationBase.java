@@ -16,6 +16,7 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
@@ -47,6 +48,13 @@ public abstract class AutomationBase {
     public AutomationBase (AutomationElement element, IUIAutomation uiAuto) {
         this.element = element;
         this.uiAuto = uiAuto;
+
+        // Can we get the handle (HWND) and hence the rect?
+        WinDef.HWND handle = this.getNativeWindowHandle();
+
+
+
+//        this.element.
     }
 
     protected boolean isDockPatternAvailable () {
@@ -473,9 +481,13 @@ public abstract class AutomationBase {
      * Get the native window handle
      * @return The handle
      */
-    public int getNativeWindowHandle() {
+    public WinDef.HWND getNativeWindowHandle() {
         Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle);
 
-        return (Integer)value;
+        WinDef.HWND hwnd = new WinDef.HWND();
+
+       // hwnd.
+
+        return hwnd;
     }
 }

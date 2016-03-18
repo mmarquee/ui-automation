@@ -22,6 +22,7 @@ import com.sun.jna.win32.W32APIOptions;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,15 +49,8 @@ public class UIAutomation {
      * @param command The command to be called
      * @return AutomationApplication that represents the application
      */
-    public AutomationApplication launch(String... command) {
-        ProcessBuilder pb = new ProcessBuilder(command);
-
-        try {
-            process = pb.start();
-        } catch (java.io.IOException ex) {
-            // Never do this in real code
-        }
-
+    public AutomationApplication launch(String... command) throws java.io.IOException {
+        process = Utils.startProcess(command);
         return new AutomationApplication(new AutomationElement(rootElement), uiAuto, process);
     }
 
@@ -75,43 +69,15 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication launchOrAttach(String... command) throws Exception {
-        File file = new File(command[0]);
-        String filename = file.getName();
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+            new Tlhelp32.PROCESSENTRY32.ByReference();
 
-        Kernel32 kernel32 = (Kernel32) Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
-
-        boolean found = false;
-
-        try {
-            while (kernel32.Process32Next(snapshot, processEntry)) {
-                String fname = Native.toString(processEntry.szExeFile);
-
-                if (fname.equals(filename)) {
-                    found = true;
-                    break;
-                }
-            }
-        } finally {
-            kernel32.CloseHandle(snapshot);
-        }
+        boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
             return this.launch(command);
         } else {
-            WinNT.HANDLE handle = Kernel32.INSTANCE.OpenProcess (
-                0x0400| /* PROCESS_QUERY_INFORMATION */
-                0x0800| /* PROCESS_SUSPEND_RESUME */
-                0x0001| /* PROCESS_TERMINATE */
-                0x00100000 /* SYNCHRONIZE */,
-                false,
-                processEntry.th32ProcessID.intValue());
-
-            if (handle == null) {
-                throw new Exception(Kernel32Util.formatMessageFromLastErrorCode(Kernel32.INSTANCE.GetLastError()));
-            }
+            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
 
             return new AutomationApplication(new AutomationElement(rootElement), uiAuto, handle);
         }
