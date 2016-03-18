@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class UIAutomation {
 
-    private IUIAutomationElement rootElement;
+    private AutomationElement rootElement;
     private IUIAutomation uiAuto;
     private Process process;
 
@@ -39,7 +39,7 @@ public class UIAutomation {
 
         uiAuto = ClassFactory.createCUIAutomation();
 
-        rootElement = uiAuto.getRootElement();
+        rootElement = new AutomationElement(uiAuto.getRootElement());
     }
 
     /**
@@ -49,7 +49,7 @@ public class UIAutomation {
      */
     public AutomationApplication launch(String... command) throws java.io.IOException {
         process = Utils.startProcess(command);
-        return new AutomationApplication(new AutomationElement(rootElement), uiAuto, process);
+        return new AutomationApplication(rootElement, uiAuto, process);
     }
 
     /**
@@ -58,7 +58,7 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication attach(Process process) {
-        return new AutomationApplication(new AutomationElement(rootElement), uiAuto, process);
+        return new AutomationApplication(rootElement, uiAuto, process);
     }
 
     /**
@@ -77,7 +77,7 @@ public class UIAutomation {
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
 
-            return new AutomationApplication(new AutomationElement(rootElement), uiAuto, handle);
+            return new AutomationApplication(rootElement, uiAuto, handle);
         }
     }
 
@@ -90,7 +90,7 @@ public class UIAutomation {
         IUIAutomationElement element = null;
 
         for (int loop = 0; loop <10; loop++) {
-            element = this.rootElement.findFirst(TreeScope.TreeScope_Descendants,
+            element = this.rootElement.element.findFirst(TreeScope.TreeScope_Descendants,
                     this.uiAuto.createAndCondition(
                             this.uiAuto.createPropertyCondition(PropertyID.Name, title),
                             this.uiAuto.createPropertyCondition(PropertyID.ControlType, ControlType.Window)));
@@ -108,21 +108,40 @@ public class UIAutomation {
      * @return List of desktop windows
      */
     public List<AutomationWindow> getDesktopWindows() {
-
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
-
         IUIAutomationCondition condition = uiAuto.createTrueCondition();
+        List<AutomationElement> collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
 
-        IUIAutomationElementArray collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
-
-        int length = collection.length();
+        int length = collection.size();
 
         for (int count = 0; count < length; count++) {
-            IUIAutomationElement element = collection.getElement(count);
+            AutomationElement element = collection.get(count);
 
-            result.add(new AutomationWindow(new AutomationElement(element), this.uiAuto));
+            result.add(new AutomationWindow(element, this.uiAuto));
         }
 
         return result;
+    }
+
+    /**
+     * Does this automation object support IUIAutomation2
+     * i.e. is it Windows 8 or above?
+     * @return supports IUIAutomation2
+     */
+    public boolean supportsAutomation2 () {
+        //return this.uiAuto as IUIAutomation2;
+//        return (IUIAutomation2.isAssignableFrom(this.uiAuto.getClass()));
+        return false;
+    }
+
+    /**
+     * Does this automation object support IUIAutomation3
+     * i.e. is it Windows 8.1 or above?
+     * @return supports IUIAutomation3
+     */
+    public boolean supportsAutomation3 () {
+        //return this.uiAuto as IUIAutomation3;
+  //      return (this.uiAuto instanceOf IUIAutomation3);
+        return false;
     }
 }
