@@ -17,10 +17,10 @@ public class AutomationSlider extends AutomationBase {
     /**
      * Construct the AutomationSlider
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationSlider(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationSlider(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             this.valuePattern = this.getValuePattern();

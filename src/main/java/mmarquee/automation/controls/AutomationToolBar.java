@@ -28,9 +28,9 @@ public class AutomationToolBar extends AutomationContainer {
      * Constructor for the AutomationToolBar.
      *
      * @param element The underlying automation element
-     * @param uiAuto The IUIAutomation associated with this session
+     * @param automation The IUIAutomation associated with this session
      */
-    public AutomationToolBar(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationToolBar(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 }

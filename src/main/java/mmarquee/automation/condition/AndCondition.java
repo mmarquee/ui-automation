@@ -28,13 +28,13 @@ public class AndCondition extends Condition {
 
     private List<Condition> conditions;
 
-    public AndCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public AndCondition (IUIAutomation automation) {
+        super(automation);
         List<Condition> conditions = new ArrayList<Condition>();
     }
 
-    public AndCondition (IUIAutomation uiAuto, Condition firstCondition, Condition secondCondition) {
-        super(uiAuto);
+    public AndCondition (IUIAutomation automation, Condition firstCondition, Condition secondCondition) {
+        super(automation);
 
         this.conditions = new ArrayList<Condition>();
         this.add(firstCondition);
@@ -50,7 +50,7 @@ public class AndCondition extends Condition {
      * @return the underlying IUIAutomationCondition
      */
     public IUIAutomationCondition getCondition () {
-        return uiAuto.createAndCondition(
+        return automation.createAndCondition(
                 this.conditions.get(0).getCondition(),
                 this.conditions.get(1).getCondition());
     }

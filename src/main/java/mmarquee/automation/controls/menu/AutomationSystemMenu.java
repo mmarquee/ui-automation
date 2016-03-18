@@ -32,10 +32,10 @@ public class AutomationSystemMenu extends AutomationBase {
     /**
      * Construct the AutomationSystemMenu
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationSystemMenu(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationSystemMenu(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         this.getItems();
     }
@@ -63,7 +63,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(foundElement, this.uiAuto);
+            return new AutomationMenuItem(foundElement, this.automation);
         } else {
             // Throw an exception
             throw  new ItemNotFoundException();

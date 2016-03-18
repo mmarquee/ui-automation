@@ -31,10 +31,10 @@ public class AutomationTabItem extends AutomationBase {
     /**
      * Construct the AutomationTabItem
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationTabItem(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationTabItem(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             selectItemPattern = this.getSelectItemPattern();

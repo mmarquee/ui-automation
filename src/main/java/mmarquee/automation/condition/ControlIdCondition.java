@@ -25,18 +25,22 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public class ControlIdCondition extends PropertyCondition {
     private int id;
 
-    public ControlIdCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public ControlIdCondition (IUIAutomation automation) {
+        super(automation);
         this.property = PropertyID.ControlType;
     }
 
-    public ControlIdCondition (IUIAutomation uiAuto, int id) {
-        super(uiAuto);
+    public ControlIdCondition (IUIAutomation automation, int id) {
+        super(automation);
         this.id = id;
        this.property = PropertyID.ControlType;
     }
 
+    /**
+     * Gets the underlying condition
+     * @return The underlying condition
+     */
     public IUIAutomationCondition getCondition () {
-        return uiAuto.createPropertyCondition(this.property, this.id);
+        return automation.createPropertyCondition(this.property, this.id);
     }
 }

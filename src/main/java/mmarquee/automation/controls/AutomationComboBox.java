@@ -35,10 +35,10 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Constructor for the AutomationComboBox.
      * @param element The underlying automation element
-     * @param uiAuto The IUIAutomation associated with this session
+     * @param automation The IUIAutomation associated with this session
      */
-    public AutomationComboBox(AutomationElement element, IUIAutomation uiAuto) {
-        super (element, uiAuto);
+    public AutomationComboBox(AutomationElement element, IUIAutomation automation) {
+        super (element, automation);
 
         try {
             this.collapsePattern = this.getExpandCollapsePattern();
@@ -102,7 +102,7 @@ public class AutomationComboBox extends AutomationBase {
 
             if (retValue == ControlType.ListItem) {
 
-                list.add(new AutomationListItem(element, this.uiAuto));
+                list.add(new AutomationListItem(element, this.automation));
             }
         }
 

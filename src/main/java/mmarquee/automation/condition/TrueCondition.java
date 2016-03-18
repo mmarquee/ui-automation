@@ -22,11 +22,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Created by inpwt on 24/02/2016.
  */
 public class TrueCondition extends Condition {
-    public TrueCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public TrueCondition (IUIAutomation automation) {
+        super(automation);
     }
 
     public IUIAutomationCondition getCondition() {
-        return uiAuto.createTrueCondition();
+        return automation.createTrueCondition();
     }
 }

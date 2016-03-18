@@ -25,9 +25,9 @@ public class AutomationPanel extends AutomationContainer {
     /**
      * Construct the AutomationPanel
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationPanel(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationPanel(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 }

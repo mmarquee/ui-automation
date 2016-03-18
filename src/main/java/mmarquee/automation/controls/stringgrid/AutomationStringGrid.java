@@ -37,10 +37,10 @@ public class AutomationStringGrid extends AutomationBase
     /**
      * Construct the AutomationStringGrid
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationStringGrid(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationStringGrid(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             this.valuePattern = this.getValuePattern();
@@ -75,9 +75,7 @@ public class AutomationStringGrid extends AutomationBase
     public AutomationStringGridCell selected() {
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        AutomationStringGridCell item = new AutomationStringGridCell(collection.get(0), uiAuto);
-
-        return item;
+        return new AutomationStringGridCell(collection.get(0), automation);
     }
 
     /**
@@ -92,7 +90,7 @@ public class AutomationStringGrid extends AutomationBase
         List<AutomationStringGridCell> items = new ArrayList<AutomationStringGridCell>();
 
         for (int count = 0; count < length; count++) {
-            items.add(new AutomationStringGridCell(collection.get(count), uiAuto));
+            items.add(new AutomationStringGridCell(collection.get(count), automation));
         }
 
         return items;
@@ -105,6 +103,6 @@ public class AutomationStringGrid extends AutomationBase
      * @return The GridItem at the given cell position
      */
     public AutomationStringGridCell getItem(int x, int y) {
-        return new AutomationStringGridCell(this.grid.getItem(x, y), uiAuto);
+        return new AutomationStringGridCell(this.grid.getItem(x, y), automation);
     }
 }

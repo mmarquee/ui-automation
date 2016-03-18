@@ -31,10 +31,10 @@ public class AutomationRadioButton extends AutomationBase {
     /**
      * Construct the AutomationRadioButton
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationRadioButton(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationRadioButton(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             selectItemPattern = this.getSelectItemPattern();

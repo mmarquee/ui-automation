@@ -27,13 +27,13 @@ import java.util.List;
 public class OrCondition extends Condition {
     private List<Condition> conditions;
 
-    public OrCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public OrCondition (IUIAutomation automation) {
+        super(automation);
         List<Condition> conditions = new ArrayList<Condition>();
     }
 
-    public OrCondition (IUIAutomation uiAuto, Condition firstCondition, Condition secondCondition) {
-        super(uiAuto);
+    public OrCondition (IUIAutomation automation, Condition firstCondition, Condition secondCondition) {
+        super(automation);
 
         this.conditions = new ArrayList<Condition>();
         this.add(firstCondition);
@@ -49,7 +49,7 @@ public class OrCondition extends Condition {
      * @return the underlying IUIAutomationCondition
      */
     public IUIAutomationCondition getCondition () {
-        return uiAuto.createOrCondition(
+        return automation.createOrCondition(
                 this.conditions.get(0).getCondition(),
                 this.conditions.get(1).getCondition());
     }

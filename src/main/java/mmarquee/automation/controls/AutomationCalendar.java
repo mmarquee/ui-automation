@@ -31,10 +31,10 @@ public class AutomationCalendar extends AutomationBase {
     /**
      * Constructor for the AutomationCalendar.
      * @param element The underlying automation element
-     * @param uiAuto The IUIAutomation associated with this session
+     * @param automation The IUIAutomation associated with this session
      */
-    public AutomationCalendar(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationCalendar(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
         try {
             this.valuePattern = this.getValuePattern();
         } catch (PatternNotFoundException ex) {

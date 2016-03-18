@@ -70,7 +70,7 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            return new AutomationWindow(foundElement, this.uiAuto);
+            return new AutomationWindow(foundElement, this.automation);
         } else {
             throw new ElementNotFoundException();
         }
@@ -79,22 +79,22 @@ public class AutomationApplication extends AutomationBase {
     /**
      * Constructor for the AutomationApplication.
      * @param element The underlying automation element
-     * @param uiAuto The IUIAutomation associated with this session
+     * @param automation The IUIAutomation associated with this session
      * @param handle The handle of this application.
      */
-    public AutomationApplication (AutomationElement element, IUIAutomation uiAuto, WinNT.HANDLE handle) {
-        super(element, uiAuto);
+    public AutomationApplication (AutomationElement element, IUIAutomation automation, WinNT.HANDLE handle) {
+        super(element, automation);
         this.handle = handle;
     }
 
     /**
      * Constructor for the AutomationApplication.
      * @param element The underlying automation element
-     * @param uiAuto The IUIAutomation associated with this session
+     * @param automation The IUIAutomation associated with this session
      * @param process The process for this application.
      */
-    public AutomationApplication (AutomationElement element, IUIAutomation uiAuto, Process process) {
-        super(element, uiAuto);
+    public AutomationApplication (AutomationElement element, IUIAutomation automation, Process process) {
+        super(element, automation);
         // From : http://www.golesny.de/p/code/javagetpid.
 
         if (process.getClass().getName().equals("java.lang.Wind32Process") ||

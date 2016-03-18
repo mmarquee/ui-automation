@@ -30,10 +30,10 @@ public class AutomationButton extends AutomationBase {
     /**
      * Constructor for the AutomationButton
      * @param element The underlying automation element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationButton(AutomationElement element, IUIAutomation uiAuto) {
-        super (element, uiAuto);
+    public AutomationButton(AutomationElement element, IUIAutomation automation) {
+        super (element, automation);
 
         try {
             this.invokePattern = this.getInvokePattern();

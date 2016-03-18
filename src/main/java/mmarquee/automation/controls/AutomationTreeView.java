@@ -31,10 +31,10 @@ public class AutomationTreeView extends AutomationBase {
     /**
      * Construct the AutomationTreeView
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationTreeView(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationTreeView(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 
     /**
@@ -49,7 +49,7 @@ public class AutomationTreeView extends AutomationBase {
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
-            return new AutomationTreeViewItem(item, this.uiAuto);
+            return new AutomationTreeViewItem(item, this.automation);
         } else {
             throw new ItemNotFoundException();
         }

@@ -23,10 +23,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by inpwt on 24/02/2016.
  */
 public abstract class Condition {
-    protected IUIAutomation uiAuto;
+    protected IUIAutomation automation;
 
-    public Condition (IUIAutomation uiAuto) {
-        this.uiAuto = uiAuto;
+    public Condition (IUIAutomation automation) {
+        this.automation = automation;
     }
 
     /**

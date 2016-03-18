@@ -38,16 +38,16 @@ public abstract class AutomationBase {
 
     protected AutomationElement element;
 
-    protected IUIAutomation uiAuto;
+    protected IUIAutomation automation;
 
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
-     * @param uiAuto The automation object
+     * @param automation The automation object
      */
-    public AutomationBase (AutomationElement element, IUIAutomation uiAuto) {
+    public AutomationBase (AutomationElement element, IUIAutomation automation) {
         this.element = element;
-        this.uiAuto = uiAuto;
+        this.automation = automation;
 
         // Can we get the handle (HWND) and hence the rect?
         WinDef.HWND handle = this.getNativeWindowHandle();
@@ -201,7 +201,7 @@ public abstract class AutomationBase {
      * @return The true condition
      */
     public TrueCondition createTrueCondition() {
-        return new TrueCondition(this.uiAuto);
+        return new TrueCondition(this.automation);
     }
 
     /**
@@ -209,7 +209,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public FalseCondition createFalseCondition() {
-        return new FalseCondition(this.uiAuto);
+        return new FalseCondition(this.automation);
     }
 
     /**
@@ -218,7 +218,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public NameCondition createNamePropertyCondition(String name) {
-        return new NameCondition(this.uiAuto, name);
+        return new NameCondition(this.automation, name);
     }
 
     /**
@@ -227,7 +227,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public ControlIdCondition createControlTypeCondition(int id) {
-        return new ControlIdCondition(this.uiAuto, id);
+        return new ControlIdCondition(this.automation, id);
     }
 
     /**
@@ -237,7 +237,7 @@ public abstract class AutomationBase {
      * @return The Or Condition
      */
     public OrCondition createOrCondition(Condition condition1, Condition condition2) {
-        return new OrCondition(this.uiAuto, condition1, condition2);
+        return new OrCondition(this.automation, condition1, condition2);
     }
 
     /**
@@ -247,7 +247,7 @@ public abstract class AutomationBase {
      * @return The And condition
      */
     public AndCondition createAndCondition(Condition condition1, Condition condition2) {
-        return new AndCondition(this.uiAuto, condition1, condition2);
+        return new AndCondition(this.automation, condition1, condition2);
     }
 
     /**

@@ -52,8 +52,8 @@ public class AutomationEditBox extends AutomationBase {
         return this.valuePattern.isReadOnly() == 1;
     }
 
-    public AutomationEditBox(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationEditBox(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             this.valuePattern = this.getValuePattern();

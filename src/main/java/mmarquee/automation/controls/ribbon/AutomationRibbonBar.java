@@ -29,10 +29,10 @@ public class AutomationRibbonBar extends AutomationPanel {
     /**
      * Construct the AutomationRibbonBar
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationRibbonBar(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationRibbonBar(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 
     /**
@@ -40,6 +40,6 @@ public class AutomationRibbonBar extends AutomationPanel {
      * @return The AutomationRibbonBar
      */
     public AutomationRibbonCommandBar getRibbonCommandBar() {
-        return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBar"), this.uiAuto);
+        return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBar"), this.automation);
     }
 }

@@ -22,11 +22,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Created by inpwt on 24/02/2016.
  */
 public class FalseCondition extends Condition{
-    public FalseCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public FalseCondition (IUIAutomation automation) {
+        super(automation);
     }
 
     public IUIAutomationCondition getCondition() {
-        return uiAuto.createFalseCondition();
+        return this.automation.createFalseCondition();
     }
 }

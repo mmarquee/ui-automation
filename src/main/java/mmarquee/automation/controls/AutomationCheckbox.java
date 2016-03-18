@@ -50,10 +50,10 @@ public class AutomationCheckbox extends AutomationBase {
     /**
      * Constructor for the AutomationCheckbox
      * @param element The element
-     * @param uiAuto The automation interface
+     * @param automation The automation interface
      */
-    public AutomationCheckbox (AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationCheckbox (AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             togglePattern = this.getTogglePattern();

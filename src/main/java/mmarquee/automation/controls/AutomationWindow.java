@@ -44,8 +44,13 @@ public class AutomationWindow extends AutomationContainer {
         this.element.setFocus();
     }
 
-    public AutomationWindow (AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    /**
+     * Constructor for the AutomationWindow
+     * @param element The underlying element
+     * @param automation The automation library
+     */
+    public AutomationWindow (AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             this.windowPattern = this.getWindowPattern();
@@ -69,7 +74,7 @@ public class AutomationWindow extends AutomationContainer {
             int retVal = element.currentControlType();
 
             if (retVal == ControlType.StatusBar) {
-                found = new AutomationStatusBar(element, uiAuto);
+                found = new AutomationStatusBar(element, automation);
                 break;
             }
         }
@@ -80,7 +85,7 @@ public class AutomationWindow extends AutomationContainer {
             int retVal = element.currentControlType();
 
             if (retVal == ControlType.StatusBar) {
-                found = new AutomationStatusBar(element, uiAuto);
+                found = new AutomationStatusBar(element, automation);
                 break;
             }
         }
@@ -93,7 +98,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The system menu
      */
     public AutomationSystemMenu getSystemMenu() {
-        return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar), this.uiAuto));
+        return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar), this.automation));
     }
 
     /**
@@ -101,7 +106,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.MenuBar), this.uiAuto));
+        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.MenuBar), this.automation));
     }
 
     /**
@@ -158,7 +163,7 @@ public class AutomationWindow extends AutomationContainer {
             }
         }
 
-        return new AutomationWindow(item, this.uiAuto);
+        return new AutomationWindow(item, this.automation);
     }
 
     /**
@@ -182,7 +187,7 @@ public class AutomationWindow extends AutomationContainer {
      * @return The AutomationTitleBar
      */
     public AutomationTitleBar getTitleBar() {
-        return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar), this.uiAuto);
+        return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar), this.automation);
     }
 
     /**

@@ -26,9 +26,9 @@ public class AutomationImage extends AutomationBase {
     /**
      * Construct the AutomationImage
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationImage(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationImage(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 }

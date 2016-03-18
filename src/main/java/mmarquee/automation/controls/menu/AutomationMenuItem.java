@@ -30,10 +30,10 @@ public class AutomationMenuItem extends AutomationBase {
     /**
      * Construct the AutomationMenuItem
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationMenuItem(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationMenuItem(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         try {
             this.invokePattern = this.getInvokePattern();

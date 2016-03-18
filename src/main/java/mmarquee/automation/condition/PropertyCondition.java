@@ -8,7 +8,7 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public abstract class PropertyCondition extends Condition {
     protected int property = -1;
 
-    public PropertyCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public PropertyCondition (IUIAutomation automation) {
+        super(automation);
     }
 }

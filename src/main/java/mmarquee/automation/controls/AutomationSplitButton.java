@@ -25,9 +25,9 @@ public class AutomationSplitButton extends AutomationButton {
     /**
      * Construct the AutomationSplitButton
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationSplitButton(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationSplitButton(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 }

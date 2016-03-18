@@ -43,8 +43,13 @@ public class AutomationTab extends AutomationContainer {
         }
     }
 
-    public AutomationTab (AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    /**
+     * Constructor for the AutomationTab
+     * @param element The underlying element
+     * @param automation The automation library
+     */
+    public AutomationTab (AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
         // Now get the list of tab items
         tabItems = new ArrayList<AutomationTabItem>();
@@ -59,7 +64,7 @@ public class AutomationTab extends AutomationContainer {
             int retVal = elem.currentControlType();
 
             if (retVal == ControlType.TabItem) {
-                this.tabItems.add(new AutomationTabItem(elem, this.uiAuto));
+                this.tabItems.add(new AutomationTabItem(elem, this.automation));
             }
         }
     }

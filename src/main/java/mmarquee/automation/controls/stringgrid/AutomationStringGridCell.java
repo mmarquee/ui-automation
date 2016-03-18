@@ -32,10 +32,10 @@ public class AutomationStringGridCell extends AutomationBase {
     /**
      * Construct the AutomationStringGridCell
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationStringGridCell(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationStringGridCell(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
 
      //   try {
      //       this.valuePattern = this.getValuePattern();

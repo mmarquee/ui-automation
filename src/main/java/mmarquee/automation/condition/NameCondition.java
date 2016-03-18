@@ -25,18 +25,18 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public class NameCondition  extends PropertyCondition {
     private String name;
 
-    public NameCondition (IUIAutomation uiAuto) {
-        super(uiAuto);
+    public NameCondition (IUIAutomation automation) {
+        super(automation);
         this.property = PropertyID.Name;
     }
 
-    public NameCondition (IUIAutomation uiAuto, String name) {
-        super(uiAuto);
+    public NameCondition (IUIAutomation automation, String name) {
+        super(automation);
         this.name = name;
         this.property = PropertyID.Name;
     }
 
     public IUIAutomationCondition getCondition () {
-        return uiAuto.createPropertyCondition(this.property, this.name);
+        return automation.createPropertyCondition(this.property, this.name);
     }
 }

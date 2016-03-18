@@ -10,9 +10,9 @@ public class AutomationMaskedEdit extends AutomationEditBox {
     /**
      * Construct the AutomationMaskedEdit
      * @param element The element
-     * @param uiAuto The automation library
+     * @param automation The automation library
      */
-    public AutomationMaskedEdit(AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationMaskedEdit(AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 }

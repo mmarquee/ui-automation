@@ -32,14 +32,13 @@ import java.util.List;
 public class UIAutomation {
 
     private AutomationElement rootElement;
-    private IUIAutomation uiAuto;
-    private Process process;
+    private IUIAutomation automation;
 
     public UIAutomation() {
 
-        uiAuto = ClassFactory.createCUIAutomation();
+        automation = ClassFactory.createCUIAutomation();
 
-        rootElement = new AutomationElement(uiAuto.getRootElement());
+        rootElement = new AutomationElement(automation.getRootElement());
     }
 
     /**
@@ -48,8 +47,8 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication launch(String... command) throws java.io.IOException {
-        process = Utils.startProcess(command);
-        return new AutomationApplication(rootElement, uiAuto, process);
+        Process process = Utils.startProcess(command);
+        return new AutomationApplication(rootElement, automation, process);
     }
 
     /**
@@ -58,7 +57,7 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication attach(Process process) {
-        return new AutomationApplication(rootElement, uiAuto, process);
+        return new AutomationApplication(rootElement, automation, process);
     }
 
     /**
@@ -77,7 +76,7 @@ public class UIAutomation {
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
 
-            return new AutomationApplication(rootElement, uiAuto, handle);
+            return new AutomationApplication(rootElement, automation, handle);
         }
     }
 
@@ -86,21 +85,21 @@ public class UIAutomation {
      * @param title Title to search for
      * @return AutomationWindow The found window
      */
-    public AutomationWindow getDesktopWindow(String title) {
-        IUIAutomationElement element = null;
+    public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
+        AutomationElement element = null;
 
         for (int loop = 0; loop <10; loop++) {
-            element = this.rootElement.element.findFirst(TreeScope.TreeScope_Descendants,
-                    this.uiAuto.createAndCondition(
-                            this.uiAuto.createPropertyCondition(PropertyID.Name, title),
-                            this.uiAuto.createPropertyCondition(PropertyID.ControlType, ControlType.Window)));
+            element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
+                    this.automation.createAndCondition(
+                            this.automation.createPropertyCondition(PropertyID.Name, title),
+                            this.automation.createPropertyCondition(PropertyID.ControlType, ControlType.Window)));
 
             if (element != null) {
                 break;
             }
         }
 
-        return new AutomationWindow(new AutomationElement(element), this.uiAuto);
+        return new AutomationWindow(element, this.automation);
     }
 
     /**
@@ -109,7 +108,7 @@ public class UIAutomation {
      */
     public List<AutomationWindow> getDesktopWindows() {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
-        IUIAutomationCondition condition = uiAuto.createTrueCondition();
+        IUIAutomationCondition condition = automation.createTrueCondition();
         List<AutomationElement> collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
 
         int length = collection.size();
@@ -117,7 +116,7 @@ public class UIAutomation {
         for (int count = 0; count < length; count++) {
             AutomationElement element = collection.get(count);
 
-            result.add(new AutomationWindow(element, this.uiAuto));
+            result.add(new AutomationWindow(element, this.automation));
         }
 
         return result;
@@ -129,8 +128,8 @@ public class UIAutomation {
      * @return supports IUIAutomation2
      */
     public boolean supportsAutomation2 () {
-        //return this.uiAuto as IUIAutomation2;
-//        return (IUIAutomation2.isAssignableFrom(this.uiAuto.getClass()));
+        //return this.automation as IUIAutomation2;
+//        return (IUIAutomation2.isAssignableFrom(this.automation.getClass()));
         return false;
     }
 
@@ -140,8 +139,8 @@ public class UIAutomation {
      * @return supports IUIAutomation3
      */
     public boolean supportsAutomation3 () {
-        //return this.uiAuto as IUIAutomation3;
-  //      return (this.uiAuto instanceOf IUIAutomation3);
+        //return this.automation as IUIAutomation3;
+  //      return (this.automation instanceOf IUIAutomation3);
         return false;
     }
 }

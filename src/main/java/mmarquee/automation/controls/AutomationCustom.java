@@ -27,9 +27,9 @@ public class AutomationCustom extends AutomationBase {
     /**
      * Constructor for the AutomationCustom
      * @param element The element
-     * @param uiAuto The automation interface
+     * @param automation The automation interface
      */
-    public AutomationCustom (AutomationElement element, IUIAutomation uiAuto) {
-        super(element, uiAuto);
+    public AutomationCustom (AutomationElement element, IUIAutomation automation) {
+        super(element, automation);
     }
 }

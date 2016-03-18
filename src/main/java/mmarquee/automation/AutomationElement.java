@@ -97,6 +97,23 @@ public class AutomationElement {
     }
 
     /**
+     * Finds the first element that matches the raw condition
+     * @param scope Tree scope
+     * @param condition The raw condition
+     * @return The first matching element
+     * @throws ElementNotFoundException
+     */
+    public AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) throws ElementNotFoundException {
+        IUIAutomationElement elem = this.element.findFirst(scope, condition);
+
+        if (elem != null) {
+            return new AutomationElement(elem);
+        } else {
+            throw new ElementNotFoundException();
+        }
+    }
+
+    /**
      * Get the current pattern that matches the patternId
      * @param patternId What pattern to get
      * @return The pattern
