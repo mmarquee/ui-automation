@@ -18,6 +18,10 @@ package mmarquee.automation.uiautomation;
 
 import com4j.*;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
+import mmarquee.automation.eventhandlers.raw.IUIAutomationEventHandler;
+import mmarquee.automation.eventhandlers.raw.IUIAutomationFocusChangedEventHandler;
+import mmarquee.automation.eventhandlers.raw.IUIAutomationPropertyChangedEventHandler;
+import mmarquee.automation.eventhandlers.raw.IUIAutomationStructureChangedEventHandler;
 
 @IID("{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}")
 public interface IUIAutomation extends Com4jObject {
@@ -302,7 +306,7 @@ public interface IUIAutomation extends Com4jObject {
             mmarquee.automation.uiautomation.IUIAutomationElement element,
             mmarquee.automation.uiautomation.TreeScope scope,
             mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            mmarquee.automation.uiautomation.IUIAutomationEventHandler handler);
+            IUIAutomationEventHandler handler);
 
 
           /**
@@ -315,7 +319,7 @@ public interface IUIAutomation extends Com4jObject {
           void removeAutomationEventHandler(
             int eventId,
             mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.IUIAutomationEventHandler handler);
+            IUIAutomationEventHandler handler);
 
 
           /**
@@ -332,7 +336,7 @@ public interface IUIAutomation extends Com4jObject {
             mmarquee.automation.uiautomation.IUIAutomationElement element,
             mmarquee.automation.uiautomation.TreeScope scope,
             mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler handler,
+            IUIAutomationPropertyChangedEventHandler handler,
             Holder<Integer> propertyArray,
             int propertyCount);
 
@@ -350,7 +354,7 @@ public interface IUIAutomation extends Com4jObject {
             mmarquee.automation.uiautomation.IUIAutomationElement element,
             mmarquee.automation.uiautomation.TreeScope scope,
             mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler handler,
+            IUIAutomationPropertyChangedEventHandler handler,
             int[] propertyArray);
 
 
@@ -362,7 +366,7 @@ public interface IUIAutomation extends Com4jObject {
           @VTID(36)
           void removePropertyChangedEventHandler(
             mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler handler);
+            IUIAutomationPropertyChangedEventHandler handler);
 
 
           /**
@@ -377,7 +381,7 @@ public interface IUIAutomation extends Com4jObject {
             mmarquee.automation.uiautomation.IUIAutomationElement element,
             mmarquee.automation.uiautomation.TreeScope scope,
             mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            mmarquee.automation.uiautomation.IUIAutomationStructureChangedEventHandler handler);
+            IUIAutomationStructureChangedEventHandler handler);
 
 
           /**
@@ -388,7 +392,7 @@ public interface IUIAutomation extends Com4jObject {
           @VTID(38)
           void removeStructureChangedEventHandler(
             mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.IUIAutomationStructureChangedEventHandler handler);
+            IUIAutomationStructureChangedEventHandler handler);
 
 
           /**
@@ -399,7 +403,7 @@ public interface IUIAutomation extends Com4jObject {
           @VTID(39)
           void addFocusChangedEventHandler(
             mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            mmarquee.automation.uiautomation.IUIAutomationFocusChangedEventHandler handler);
+            IUIAutomationFocusChangedEventHandler handler);
 
 
           /**
@@ -408,7 +412,7 @@ public interface IUIAutomation extends Com4jObject {
 
           @VTID(40)
           void removeFocusChangedEventHandler(
-            mmarquee.automation.uiautomation.IUIAutomationFocusChangedEventHandler handler);
+            IUIAutomationFocusChangedEventHandler handler);
 
 
           /**

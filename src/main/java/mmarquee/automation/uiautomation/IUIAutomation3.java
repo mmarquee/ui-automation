@@ -18,8 +18,12 @@ package mmarquee.automation.uiautomation;
 
 import com4j.IID;
 import com4j.VTID;
+import mmarquee.automation.eventhandlers.raw.IUIAutomationTextEditTextChangedEventHandler;
 
 @IID("{73D768DA-9B51-4B89-936E-C209290973E7}")
+/**
+ * Requires Windows 8.1 or higher
+ */
 public interface IUIAutomation3 extends mmarquee.automation.uiautomation.IUIAutomation2 {
   // Methods:
   /**
@@ -36,7 +40,7 @@ public interface IUIAutomation3 extends mmarquee.automation.uiautomation.IUIAuto
     mmarquee.automation.uiautomation.TreeScope scope,
     mmarquee.automation.uiautomation.TextEditChangeType textEditChangeType,
     mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-    mmarquee.automation.uiautomation.IUIAutomationTextEditTextChangedEventHandler handler);
+    IUIAutomationTextEditTextChangedEventHandler handler);
 
 
   /**
@@ -47,7 +51,7 @@ public interface IUIAutomation3 extends mmarquee.automation.uiautomation.IUIAuto
   @VTID(65)
   void removeTextEditTextChangedEventHandler(
     mmarquee.automation.uiautomation.IUIAutomationElement element,
-    mmarquee.automation.uiautomation.IUIAutomationTextEditTextChangedEventHandler handler);
+    IUIAutomationTextEditTextChangedEventHandler handler);
 
 
   // Properties:

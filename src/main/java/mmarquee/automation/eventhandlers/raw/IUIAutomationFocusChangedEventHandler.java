@@ -14,26 +14,22 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.uiautomation;
+package mmarquee.automation.eventhandlers.raw;
 
 import com4j.Com4jObject;
 import com4j.IID;
 import com4j.VTID;
 
-@IID("{E81D1B4E-11C5-42F8-9754-E7036C79F054}")
-public interface IUIAutomationStructureChangedEventHandler extends Com4jObject {
+@IID("{C270F6B5-5C69-4290-9745-7A7F97169468}")
+public interface IUIAutomationFocusChangedEventHandler extends Com4jObject {
   // Methods:
   /**
    * @param sender Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-   * @param changeType Mandatory mmarquee.automation.uiautomation.StructureChangeType parameter.
-   * @param runtimeId Mandatory int[] parameter.
    */
 
   @VTID(3)
-  void handleStructureChangedEvent(
-    mmarquee.automation.uiautomation.IUIAutomationElement sender,
-    mmarquee.automation.uiautomation.StructureChangeType changeType,
-    int[] runtimeId);
+  void handleFocusChangedEvent(
+    mmarquee.automation.uiautomation.IUIAutomationElement sender);
 
 
   // Properties:

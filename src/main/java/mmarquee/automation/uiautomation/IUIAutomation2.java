@@ -19,7 +19,11 @@ package mmarquee.automation.uiautomation;
 import com4j.IID;
 import com4j.VTID;
 
+
 @IID("{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}")
+/**
+ * Requires Windows 8 or higher
+ */
 public interface IUIAutomation2 extends mmarquee.automation.uiautomation.IUIAutomation {
   // Methods:
   /**

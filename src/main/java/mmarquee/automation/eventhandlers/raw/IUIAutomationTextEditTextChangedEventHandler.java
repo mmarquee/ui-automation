@@ -14,22 +14,26 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.uiautomation;
+package mmarquee.automation.eventhandlers.raw;
 
 import com4j.Com4jObject;
 import com4j.IID;
 import com4j.VTID;
 
-@IID("{C270F6B5-5C69-4290-9745-7A7F97169468}")
-public interface IUIAutomationFocusChangedEventHandler extends Com4jObject {
+@IID("{92FAA680-E704-4156-931A-E32D5BB38F3F}")
+public interface IUIAutomationTextEditTextChangedEventHandler extends Com4jObject {
   // Methods:
   /**
    * @param sender Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
+   * @param textEditChangeType Mandatory mmarquee.automation.uiautomation.TextEditChangeType parameter.
+   * @param eventStrings Mandatory java.lang.String[] parameter.
    */
 
   @VTID(3)
-  void handleFocusChangedEvent(
-    mmarquee.automation.uiautomation.IUIAutomationElement sender);
+  void handleTextEditTextChangedEvent(
+    mmarquee.automation.uiautomation.IUIAutomationElement sender,
+    mmarquee.automation.uiautomation.TextEditChangeType textEditChangeType,
+    java.lang.String[] eventStrings);
 
 
   // Properties:

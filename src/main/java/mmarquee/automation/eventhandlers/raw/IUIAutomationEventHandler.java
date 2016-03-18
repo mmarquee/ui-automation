@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.uiautomation;
+package mmarquee.automation.eventhandlers.raw;
 
 import com4j.Com4jObject;
 import com4j.IID;
