@@ -1,4 +1,4 @@
-package mmarquee.automation;
+package mmarquee.automation.win32;
 
 import java.awt.*;
 import java.util.List;

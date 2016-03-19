@@ -26,6 +26,8 @@ import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
 import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
 import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.utils.User32Ext;
+import mmarquee.automation.win32.AutomationObject;
+import mmarquee.automation.win32.Win32Object;
 import org.apache.log4j.Logger;
 
 import java.util.List;

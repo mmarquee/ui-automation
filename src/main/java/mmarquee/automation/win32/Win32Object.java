@@ -1,4 +1,4 @@
-package mmarquee.automation;
+package mmarquee.automation.win32;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
