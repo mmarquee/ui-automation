@@ -34,6 +34,9 @@ public class UIAutomation {
     private AutomationElement rootElement;
     private IUIAutomation automation;
 
+    /**
+     * Constructor for UIAutomation library
+     */
     public UIAutomation() {
 
         automation = ClassFactory.createCUIAutomation();

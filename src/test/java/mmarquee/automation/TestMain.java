@@ -25,6 +25,7 @@ import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
 import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
 import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.automation.utils.User32Ext;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -277,6 +278,45 @@ public class TestMain {
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");
+        }
+
+    }
+
+    public void run2() {
+
+        final User32Ext usr32Ext = User32Ext.INSTANCE;
+
+        // Get the root object (i.e. null)
+        Win32Object obj = new Win32Object(null);
+
+        getDesktopWindowsALT(obj);
+    }
+
+    public void getDesktopWindowsALT(AutomationObject obj) {
+        List<AutomationObject> chld = obj.getChildItems();
+
+        for (AutomationObject ch: chld) {
+            System.err.println(((Win32Object)ch).getWndClass());
+
+            List<AutomationObject> chld2 = ch.getChildItems();
+
+            for (AutomationObject ch2: chld2) {
+
+                String cname = ((Win32Object) ch2).getWndClass();
+
+                try {
+                    UIAObject uia = ((Win32Object) ch2).toUIAObject();
+
+                    String name = uia.getName();
+                    java.awt.Rectangle rect = uia.getBoundingRectangle();
+
+                    System.err.println(cname + " - '" + name + "'");
+
+                } catch (Exception ex) {
+                    // Something went wrong
+                    System.err.println("Ooops");
+                }
+            }
         }
     }
 }

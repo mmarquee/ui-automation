@@ -26,6 +26,17 @@ import java.io.File;
  */
 public class Utils {
 
+    public static String stripName(char[] name) {
+        int i = 0;
+        while (i < name.length && name[i] != '\0') {
+            i++;
+        }
+
+        char[] name1 = new char[i];
+        System.arraycopy(name, 0, name1, 0, i);
+        return new String(name1);
+    }
+
     /**
      * Gets the handle of a process from the process entry
      * @param processEntry The processEntry to use

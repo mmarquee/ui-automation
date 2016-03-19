@@ -38,7 +38,7 @@ public class AutomationMainMenu extends AutomationBase {
      * Gets the parent element of the menu element
      * @return The parent element
      */
-    public AutomationElement getParent() {
+    private AutomationElement getParent() {
         return this.parent;
     }
 
