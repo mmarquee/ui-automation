@@ -4,27 +4,32 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinUser;
-import mmarquee.automation.utils.User32Ext;
-import mmarquee.automation.utils.Utils;
-
+import mmarquee.automation.utils.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by inpwt on 19/03/2016.
  */
-public class Win32Object extends AutomationObject {
-    WinDef.HWND handle;
+public class Win32AutomationObject implements AutomationObject {
+    public WinDef.HWND handle;
 
-    public Win32Object(WinDef.HWND hwnd) {
+    public Win32AutomationObject(WinDef.HWND hwnd) {
         this.handle = hwnd;
     }
 
-
-    public String getWndClass() {
+    public String getWindowClass() {
         final User32 usr = User32.INSTANCE;
         char[] iname = new char[1000];
         usr.GetClassName(handle, iname, 1000);
+        return Utils.stripName(iname);
+    }
+
+    public String getWindowText() {
+        final User32 usr = User32.INSTANCE;
+        char[] iname = new char[1000];
+        usr.GetWindowText(handle, iname, 1000);
         return Utils.stripName(iname);
     }
 
@@ -36,13 +41,7 @@ public class Win32Object extends AutomationObject {
         return new Rectangle(rect.left, rect.top, rect.right - rect.left, rect.top - rect.bottom);
     }
 
-    public AutomationObject getParent() {
-        final User32Ext usr32Ext = User32Ext.INSTANCE;
-
-        return new Win32Object(usr32Ext.GetParent(handle));
-    }
-
-    public java.util.List<AutomationObject> getChildItems() {
+    public List<AutomationObject> getChildItems() {
 
         final ArrayList<AutomationObject> objects = new ArrayList<AutomationObject>();
 
@@ -52,7 +51,7 @@ public class Win32Object extends AutomationObject {
             usr.EnumChildWindows(handle, new WinUser.WNDENUMPROC() {
 
                 public boolean callback(WinDef.HWND hwnd, Pointer pntr) {
-                    objects.add(new Win32Object(hwnd));
+                    objects.add(new Win32AutomationObject(hwnd));
                     return true;
                 }
             }, null);
@@ -60,12 +59,17 @@ public class Win32Object extends AutomationObject {
             usr.EnumWindows(new WinUser.WNDENUMPROC() {
 
                 public boolean callback(WinDef.HWND hwnd, Pointer pntr) {
-                    objects.add(new Win32Object(hwnd));
+                    objects.add(new Win32AutomationObject(hwnd));
                     return true;
                 }
             }, null);
         }
 
         return objects;
+    }
+
+    public AutomationObject getParent() {
+        final User32Ext usr32Ext = User32Ext.INSTANCE;
+        return new Win32AutomationObject(usr32Ext.GetParent(handle));
     }
 }

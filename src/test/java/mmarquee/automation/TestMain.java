@@ -27,7 +27,7 @@ import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
 import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.utils.User32Ext;
 import mmarquee.automation.win32.AutomationObject;
-import mmarquee.automation.win32.Win32Object;
+import mmarquee.automation.win32.Win32AutomationObject;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -115,7 +115,7 @@ public class TestMain {
         application.waitForInputIdle(5000);
 
         try {
-            AutomationWindow window = automation.getDesktopWindow("Form1");
+            AutomationWindow window = automation.getDesktopWindow2("Form1");
             String name = window.name();
             logger.info(name);
 
@@ -289,7 +289,7 @@ public class TestMain {
         final User32Ext usr32Ext = User32Ext.INSTANCE;
 
         // Get the root object (i.e. null)
-        Win32Object obj = new Win32Object(null);
+        Win32AutomationObject obj = new Win32AutomationObject(null);
 
         getDesktopWindowsALT(obj);
     }
@@ -298,26 +298,32 @@ public class TestMain {
         List<AutomationObject> chld = obj.getChildItems();
 
         for (AutomationObject ch: chld) {
-            System.err.println(((Win32Object)ch).getWndClass());
+            System.err.println("  -" + ((Win32AutomationObject)ch).getWindowClass() + " - '" + ((Win32AutomationObject) ch).getWindowText() + "'");
 
             List<AutomationObject> chld2 = ch.getChildItems();
 
             for (AutomationObject ch2: chld2) {
 
-                String cname = ((Win32Object) ch2).getWndClass();
+                String cname = ((Win32AutomationObject) ch2).getWindowClass();
 
-                try {
-                    UIAObject uia = ((Win32Object) ch2).toUIAObject();
+                String name = ((Win32AutomationObject) ch2).getWindowText();
 
-                    String name = uia.getName();
-                    java.awt.Rectangle rect = uia.getBoundingRectangle();
+                System.err.println("  -" + cname + " - '" + name + "'");
 
-                    System.err.println(cname + " - '" + name + "'");
+// After this we are stuck, as com4j doesn't support all of the things we want it to.
 
-                } catch (Exception ex) {
-                    // Something went wrong
-                    System.err.println("Ooops");
-                }
+               // try {
+//                    UIAObject uia = ((Win32Object) ch2).toUIAObject();
+//
+  //                  String name = uia.getName();
+    //                java.awt.Rectangle rect = uia.getBoundingRectangle();
+//
+  //                  System.err.println(cname + " - '" + name + "'");
+//
+  //              } catch (Exception ex) {
+    //                // Something went wrong
+      //              System.err.println("Ooops");
+        //        }
             }
         }
     }

@@ -20,8 +20,8 @@ public class Main {
 	public static void main(String[] args) {
         TestMain main = new TestMain();
 
-      //  main.run();
+        main.run();
 
-        main.run2();
+      //  main.run2();
 	}
 }

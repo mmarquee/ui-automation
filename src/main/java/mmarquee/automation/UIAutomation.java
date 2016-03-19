@@ -21,8 +21,13 @@ import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.utils.User32Ext;
 import mmarquee.automation.utils.Utils;
+import mmarquee.automation.win32.AutomationObject;
+import mmarquee.automation.win32.Win32AutomationObject;
 
+import java.nio.Buffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +39,8 @@ public class UIAutomation {
     private AutomationElement rootElement;
     private IUIAutomation automation;
 
+    private Win32AutomationObject rootObject;
+
     /**
      * Constructor for UIAutomation library
      */
@@ -42,6 +49,12 @@ public class UIAutomation {
         automation = ClassFactory.createCUIAutomation();
 
         rootElement = new AutomationElement(automation.getRootElement());
+
+
+        final User32Ext usr32Ext = User32Ext.INSTANCE;
+
+        // Get the root object (i.e. null)
+        rootObject = new Win32AutomationObject(null);
     }
 
     /**
@@ -81,6 +94,40 @@ public class UIAutomation {
 
             return new AutomationApplication(rootElement, automation, handle);
         }
+    }
+
+    private List<AutomationObject> getChildItems() {
+        return rootObject.getChildItems();
+    }
+
+    public AutomationWindow getDesktopWindow2(String title) throws ElementNotFoundException {
+        AutomationElement element = null;
+        boolean found = false;
+
+        Win32AutomationObject object = null;
+
+        List<AutomationObject> chld = this.getChildItems();
+        for (AutomationObject ch : chld) {
+
+            System.err.println("  -" + ((Win32AutomationObject) ch).getWindowClass() + " - '" + ((Win32AutomationObject) ch).getWindowText() + "'");
+
+            if (((Win32AutomationObject) ch).getWindowText().equals(title)) {
+                found = true;
+                object = (Win32AutomationObject)ch;
+
+                break;
+            }
+        }
+
+        if (!found) {
+            throw new ElementNotFoundException();
+        }
+
+        java.nio.Buffer buffer = new IntBuffer();
+
+        IUIAutomationElement elem = this.automation.elementFromHandle(object.handle);
+
+        return new AutomationWindow(element, this.automation);
     }
 
     /**

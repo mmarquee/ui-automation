@@ -28,7 +28,8 @@ import java.util.List;
  * Created by inpwt on 06/03/2016.
  */
 public class AutomationElement {
-    protected IUIAutomationElement element;
+    // public for now
+    public IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement
