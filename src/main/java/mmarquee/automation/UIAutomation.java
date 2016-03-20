@@ -27,6 +27,7 @@ import mmarquee.automation.win32.AutomationObject;
 import mmarquee.automation.win32.Win32AutomationObject;
 
 import java.nio.Buffer;
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,9 +124,11 @@ public class UIAutomation {
             throw new ElementNotFoundException();
         }
 
-        java.nio.Buffer buffer = new IntBuffer();
+    //    java.nio.Buffer buffer = new IntBuffer();
 
-        IUIAutomationElement elem = this.automation.elementFromHandle(object.handle);
+        ByteBuffer byteBuffer = ByteBuffer.wrap((byte)object.handle);
+
+        IUIAutomationElement elem = this.automation.elementFromHandle(byteBuffer);
 
         return new AutomationWindow(element, this.automation);
     }

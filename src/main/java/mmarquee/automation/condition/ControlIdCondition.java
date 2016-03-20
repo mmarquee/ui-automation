@@ -25,6 +25,10 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public class ControlIdCondition extends PropertyCondition {
     private int id;
 
+    /**
+     * Constructor fot the condition
+     * @param automation
+     */
     public ControlIdCondition (IUIAutomation automation) {
         super(automation);
         this.property = PropertyID.ControlType;

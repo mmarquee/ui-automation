@@ -28,11 +28,21 @@ public class AndCondition extends Condition {
 
     private List<Condition> conditions;
 
+    /**
+     * Constructor for Condition
+     * @param automation The automation library
+     */
     public AndCondition (IUIAutomation automation) {
         super(automation);
         List<Condition> conditions = new ArrayList<Condition>();
     }
 
+    /**
+     * Constructor for Condition
+     * @param automation The automation library
+     * @param firstCondition First condition
+     * @param secondCondition Second condition
+     */
     public AndCondition (IUIAutomation automation, Condition firstCondition, Condition secondCondition) {
         super(automation);
 
@@ -41,12 +51,16 @@ public class AndCondition extends Condition {
         this.add(secondCondition);
     }
 
+    /**
+     * Add a condition
+     * @param condition The condition to add
+     */
     private void add(Condition condition) {
         this.conditions.add(condition);
     }
 
     /**
-     * Getst the raw condition
+     * Gets the raw condition
      * @return the underlying IUIAutomationCondition
      */
     public IUIAutomationCondition getCondition () {

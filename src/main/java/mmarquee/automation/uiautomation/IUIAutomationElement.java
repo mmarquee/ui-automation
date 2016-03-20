@@ -460,6 +460,11 @@ public interface IUIAutomationElement extends Com4jObject {
   java.lang.String currentItemStatus();
 
 
+  @VTID(43)
+//  @ReturnValue(type = GUID)
+  Object Get_CurrentBoundingRectangle();
+
+
   /**
    * <p>
    * Getter method for the COM property "CurrentLabeledBy"
