@@ -26,7 +26,8 @@ public class ControlIdCondition extends PropertyCondition {
     private int id;
 
     /**
-     * Constructor fot the condition
+     * Constructor for the condition
+     * @param automation the automation library
      * @param automation
      */
     public ControlIdCondition (IUIAutomation automation) {
@@ -34,6 +35,11 @@ public class ControlIdCondition extends PropertyCondition {
         this.property = PropertyID.ControlType;
     }
 
+    /**
+     * Constructor for the condition
+     * @param automation the automation library
+     * @param id The property id
+     */
     public ControlIdCondition (IUIAutomation automation, int id) {
         super(automation);
         this.id = id;
