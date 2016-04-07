@@ -101,6 +101,16 @@ public class UIAutomation {
         return rootObject.getChildItems();
     }
 
+    /**
+     * Get the desktop window with the given title.
+     *
+     * This attempts to map the 'raw' automation object to the UIAutomationObject, not entirely
+     * successfully.
+     *
+     * @param title The title to use
+     * @return The automation objet
+     * @throws ElementNotFoundException
+     */
     public AutomationWindow getDesktopWindow2(String title) throws ElementNotFoundException {
         AutomationElement element = null;
         boolean found = false;

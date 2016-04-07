@@ -26,6 +26,11 @@ import java.io.File;
  */
 public class Utils {
 
+    /**
+     * Strip the name to a string
+     * @param name The name
+     * @return The stripped string
+     */
     public static String stripName(char[] name) {
         int i = 0;
         while (i < name.length && name[i] != '\0') {
