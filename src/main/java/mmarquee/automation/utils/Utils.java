@@ -26,23 +26,6 @@ import java.io.File;
  * Created by inpwt on 18/03/2016.
  */
 public class Utils {
-
-    /**
-     * Strip the name to a string
-     * @param name The name
-     * @return The stripped string
-     */
-    public static String stripName(char[] name) {
-        int i = 0;
-        while (i < name.length && name[i] != '\0') {
-            i++;
-        }
-
-        char[] name1 = new char[i];
-        System.arraycopy(name, 0, name1, 0, i);
-        return new String(name1);
-    }
-
     /**
      * Gets the handle of a process from the process entry
      * @param processEntry The processEntry to use
@@ -52,10 +35,10 @@ public class Utils {
     public static WinNT.HANDLE getHandleFromProcessEntry(Tlhelp32.PROCESSENTRY32.ByReference processEntry) throws Exception {
 
         WinNT.HANDLE handle = Kernel32.INSTANCE.OpenProcess (
-                0x0400| /* PROCESS_QUERY_INFORMATION */
-                        0x0800| /* PROCESS_SUSPEND_RESUME */
-                        0x0001| /* PROCESS_TERMINATE */
-                        0x00100000 /* SYNCHRONIZE */,
+                0x0400 |    /* PROCESS_QUERY_INFORMATION */
+                0x0800 |    /* PROCESS_SUSPEND_RESUME */
+                0x0001 |    /* PROCESS_TERMINATE */
+                0x00100000  /* SYNCHRONIZE */,
                 false,
                 processEntry.th32ProcessID.intValue());
 

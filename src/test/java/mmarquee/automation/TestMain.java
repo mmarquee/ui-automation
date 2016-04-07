@@ -15,6 +15,7 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
@@ -37,17 +38,9 @@ import java.util.List;
  */
 public class TestMain {
 
-    private static String stripName(char[] name) {
-        int i = 0;
-        while (i < name.length && name[i] != '\0') {
-            i++;
-        }
-
-        char[] name1 = new char[i];
-        System.arraycopy(name, 0, name1, 0, i);
-        return new String(name1);
-    }
-
+    /**
+     * Dump the lisr of windows
+     */
     public void dumpWindows() {
         final User32 usr = User32.INSTANCE;
 
@@ -63,9 +56,9 @@ public class TestMain {
                 usr.GetWindowText(hwnd, text, 1000);
 
                 System.err.println("WndClass: "
-                        + stripName(name)
+                        + Native.toString(name)
                         + " = '"
-                        + stripName(text)
+                        + Native.toString(text)
                         + "'");
 
                 usr.EnumChildWindows(hwnd, new WinUser.WNDENUMPROC() {
@@ -82,9 +75,9 @@ public class TestMain {
                         usr.GetWindowText(hwnd, itext, 1000);
 
                         System.err.println("  WndClass: "
-                                + stripName(iname)
+                                + Native.toString(iname)
                                 + " = '"
-                                + stripName(itext)
+                                + Native.toString(itext)
                                 + "'");
 
                         return true;

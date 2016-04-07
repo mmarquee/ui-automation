@@ -16,6 +16,7 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.AutomationApplication;
@@ -28,6 +29,7 @@ import mmarquee.automation.win32.Win32AutomationObject;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,6 +134,12 @@ public class UIAutomation {
         if (!found) {
             throw new ElementNotFoundException();
         }
+
+        Pointer pointer = object.handle.getPointer();
+
+        Buffer buffer = ByteBuffer.
+
+        //Buffer buffer = ByteBuffer.
 
    //     Buffer buffer = ByteBuffer.wrap(object.handle);
 
