@@ -19,6 +19,7 @@ import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.win32.W32APIOptions;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
@@ -107,4 +108,12 @@ public class Utils {
 
         return pb.start();
     }
+
+    /*
+    public BufferedImage capture(WinDef.HWND hwnd) {
+        BufferedImage image = new BufferedImage();
+
+        return image;
+    }
+    */
 }
