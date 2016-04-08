@@ -112,6 +112,36 @@ public class UIAutomation {
      * @return The automation objet
      * @throws ElementNotFoundException
      */
+
+    public AutomationWindow getDesktopWindow2(String title)  throws ElementNotFoundException {
+        AutomationElement element = null;
+        boolean found = false;
+
+        Win32AutomationObject object = null;
+
+        List<AutomationObject> chld = this.getChildItems();
+        for (AutomationObject ch : chld) {
+
+            System.err.println("  -" + ((Win32AutomationObject) ch).getWindowClass() + " - '" + ((Win32AutomationObject) ch).getWindowText() + "'");
+
+            if (((Win32AutomationObject) ch).getWindowText().equals(title)) {
+                found = true;
+                object = (Win32AutomationObject)ch;
+
+                break;
+            }
+        }
+
+        if (!found) {
+            throw new ElementNotFoundException();
+        }
+
+        IUIAutomationElement elem = (IUIAutomationElement)object;
+
+        return new AutomationWindow(new AutomationElement(elem), this.automation);
+    }
+
+    /*
     public AutomationWindow getDesktopWindow2(String title) throws ElementNotFoundException {
         AutomationElement element = null;
         boolean found = false;
@@ -147,7 +177,7 @@ public class UIAutomation {
 
         return new AutomationWindow(element, this.automation);
     }
-
+*/
     /**
      * Gets the desktop window associated with the title
      * @param title Title to search for

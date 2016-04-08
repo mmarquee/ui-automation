@@ -108,13 +108,15 @@ public class TestMain {
         application.waitForInputIdle(5000);
 
         try {
-            AutomationWindow window = automation.getDesktopWindow2("Form1");
+            AutomationWindow window = automation.getDesktopWindow("Form1");
             String name = window.name();
             logger.info(name);
 
             boolean val = window.isModal();
 
             java.lang.Object rect = window.getBoundingRectangle();
+
+            WinDef.HWND handle = window.getNativeWindowHandle();
 
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();

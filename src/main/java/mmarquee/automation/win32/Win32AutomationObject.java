@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.win32;
 
+import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
@@ -42,7 +43,7 @@ public class Win32AutomationObject implements AutomationObject {
         final User32 usr = User32.INSTANCE;
         char[] iname = new char[1000];
         usr.GetClassName(handle, iname, 1000);
-        return Utils.stripName(iname);
+        return Native.toString(iname);
     }
 
     /**
@@ -54,7 +55,7 @@ public class Win32AutomationObject implements AutomationObject {
         char[] iname = new char[1000];
         usr.GetWindowText(handle, iname, 1000);
 
-        return Utils.stripName(iname);
+        return Native.toString(iname);
     }
 
     /**

@@ -16,6 +16,7 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.Native;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
@@ -486,7 +487,7 @@ public abstract class AutomationBase {
 
         WinDef.HWND hwnd = new WinDef.HWND();
 
-       // hwnd.
+        // hwnd.
 
         return hwnd;
     }
