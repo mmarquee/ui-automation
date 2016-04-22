@@ -119,7 +119,22 @@ public class TestMain {
 
                 logger.info("Text for AutomatedCombobox1 is " + txt);
             } catch (ElementNotFoundException ex) {
+                logger.error("Failed to find element");
+            }
 
+            try {
+                AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
+
+                String value = me0.getValue();
+                logger.info("Initial value " + value);
+
+                me0.setValue("12/12/99");
+
+                String value1 = me0.getValue();
+                logger.info("Changed value is " + value1);
+
+            } catch (ElementNotFoundException ex) {
+                logger.error("Failed to find maskededit");
             }
 
             try {
@@ -181,7 +196,7 @@ public class TestMain {
                 logger.info("Interrupted");
             }
 
-        /* This doesn't seem to work */
+            /* This doesn't seem to work */
             AutomationToolBar toolbar = window.getToolBar(0);
             logger.info(toolbar.name());
 

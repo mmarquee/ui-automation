@@ -23,6 +23,7 @@ import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -85,6 +86,49 @@ public class AutomationContainer extends AutomationBase {
                     counter++;
                 }
             }
+        }
+
+        return foundElement;
+    }
+
+    /**
+     * Gets the control by the control type, for s given control index.
+     *
+     * There is probably a much better way of doing this
+     *
+     * @param name Name of the control
+     * @param id Control type
+     * @param controlName The control name to use
+     * @return The matching element
+     */
+    protected AutomationElement getControlByControlType(String name, int id, String controlName) throws ElementNotFoundException {
+        List<AutomationElement> collection;
+
+        AutomationElement foundElement = null;
+
+        collection = this.findAll(TreeScope.TreeScope_Descendants);
+
+        int length = collection.size();
+
+        for (int count = 0; count < length; count++) {
+            AutomationElement element = collection.get(count);
+            int retVal = element.currentControlType();
+            String className = element.currentClassName();
+
+            if (retVal == id) {
+                if (className.equals(controlName)) {
+                    String cName = element.currentName();
+
+                    if (cName.equals(name)) {
+                        foundElement = element;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (foundElement == null) {
+            throw new ElementNotFoundException();
         }
 
         return foundElement;
@@ -155,6 +199,15 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationMaskedEdit getMaskedEdit(int index) {
         return new AutomationMaskedEdit(this.getControlByControlType(index, ControlType.Edit, "TAutomationMaskEdit"), this.automation);
+    }
+
+    /**
+     * Gets the (JHC) Masked Edit control associated with the given index
+     * @param name Name of the control
+     * @return The found control
+     */
+    public AutomationMaskedEdit getMaskedEdit(String name) throws ElementNotFoundException {
+        return new AutomationMaskedEdit(this.getControlByControlType(name, ControlType.Edit, "TAutomatedMaskEdit"), this.automation);
     }
 
     /**
