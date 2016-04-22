@@ -15,20 +15,13 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinUser;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
 import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
 import mmarquee.automation.uiautomation.ToggleState;
-import mmarquee.automation.utils.User32Ext;
-import mmarquee.automation.win32.AutomationObject;
-import mmarquee.automation.win32.Win32AutomationObject;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -38,59 +31,7 @@ import java.util.List;
  */
 public class TestMain {
 
-    /**
-     * Dump the lisr of windows
-     */
-    public void dumpWindows() {
-        final User32 usr = User32.INSTANCE;
-
-        usr.EnumWindows(new WinUser.WNDENUMPROC() {
-            public boolean callback(WinDef.HWND hwnd, Pointer data) {
-                char[] name = new char[1000];
-                char[] text = new char[1000];
-
-                usr.GetClassName(hwnd, name, 1000);
-
-                int len = usr.GetWindowTextLength(hwnd);
-
-                usr.GetWindowText(hwnd, text, 1000);
-
-                System.err.println("WndClass: "
-                        + Native.toString(name)
-                        + " = '"
-                        + Native.toString(text)
-                        + "'");
-
-                usr.EnumChildWindows(hwnd, new WinUser.WNDENUMPROC() {
-
-                    public boolean callback(WinDef.HWND hwnd, Pointer pntr) {
-                        char[] iname = new char[1000];
-                        char[] itext = new char[1000];
-
-                        WinDef.RECT rect = new WinDef.RECT();
-
-                        usr.GetWindowRect(hwnd, rect);
-
-                        usr.GetClassName(hwnd, iname, 1000);
-                        usr.GetWindowText(hwnd, itext, 1000);
-
-                        System.err.println("  WndClass: "
-                                + Native.toString(iname)
-                                + " = '"
-                                + Native.toString(itext)
-                                + "'");
-
-                        return true;
-                    }
-                }, null);
-
-                return true;
-            }
-        }, null);
-
-    }
-
-    public void run () {
+    public void run() {
         UIAutomation automation = new UIAutomation();
 
         Logger logger = Logger.getLogger(AutomationBase.class.getName());
@@ -275,51 +216,6 @@ public class TestMain {
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");
-        }
-
-    }
-
-    public void run2() {
-
-        final User32Ext usr32Ext = User32Ext.INSTANCE;
-
-        // Get the root object (i.e. null)
-        Win32AutomationObject obj = new Win32AutomationObject(null);
-
-        getDesktopWindowsALT(obj);
-    }
-
-    public void getDesktopWindowsALT(AutomationObject obj) {
-        List<AutomationObject> chld = obj.getChildItems();
-
-        for (AutomationObject ch: chld) {
-            System.err.println("  -" + ((Win32AutomationObject)ch).getWindowClass() + " - '" + ((Win32AutomationObject) ch).getWindowText() + "'");
-
-            List<AutomationObject> chld2 = ch.getChildItems();
-
-            for (AutomationObject ch2: chld2) {
-
-                String cname = ((Win32AutomationObject) ch2).getWindowClass();
-
-                String name = ((Win32AutomationObject) ch2).getWindowText();
-
-                System.err.println("  -" + cname + " - '" + name + "'");
-
-// After this we are stuck, as com4j doesn't support all of the things we want it to.
-
-               // try {
-//                    UIAObject uia = ((Win32Object) ch2).toUIAObject();
-//
-  //                  String name = uia.getName();
-    //                java.awt.Rectangle rect = uia.getBoundingRectangle();
-//
-  //                  System.err.println(cname + " - '" + name + "'");
-//
-  //              } catch (Exception ex) {
-    //                // Something went wrong
-      //              System.err.println("Ooops");
-        //        }
-            }
         }
     }
 }

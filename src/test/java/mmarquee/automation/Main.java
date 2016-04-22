@@ -21,7 +21,5 @@ public class Main {
         TestMain main = new TestMain();
 
         main.run();
-
-      //  main.run2();
 	}
 }
