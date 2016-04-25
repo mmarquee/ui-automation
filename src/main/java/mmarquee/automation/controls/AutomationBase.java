@@ -331,6 +331,24 @@ public abstract class AutomationBase {
 
     /**
      * <p>
+     * Gets the rangevalue pattern for this control
+     * </p>
+     * @return  Returns ths IUIAutomationRangeValuePattern associated with this control
+     */
+    protected Range getRangePattern() throws PatternNotFoundException {
+        Range pattern = new Range();
+
+        if (isRangeValuePatternAvailable()) {
+            com4j.Com4jObject unknown = this.getPattern(PatternID.RangeValue);
+
+            pattern.setPattern(unknown.queryInterface(IUIAutomationRangeValuePattern.class));
+        }
+
+        return pattern;
+    }
+
+    /**
+     * <p>
      * Gets the table pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationTablePattern associated with this control

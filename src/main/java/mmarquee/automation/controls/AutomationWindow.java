@@ -102,11 +102,31 @@ public class AutomationWindow extends AutomationContainer {
     }
 
     /**
-     * Gets the main menu associated with this window
+     * Gets the main menu associated with this window.
+     *
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu() {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.MenuBar), this.automation));
+        return getMainMenu(1);
+    }
+
+    /**
+     * Gets the main menu associated with this window.
+     *
+     * @offset The menu offset to get
+     * @return The main menu
+     */
+    public AutomationMainMenu getMainMenu(int offset) {
+        return (new AutomationMainMenu(this.element, this.getControlByControlType(offset, ControlType.MenuBar), this.automation));
+    }
+
+    /**
+     * Gets the menu associated with this window.
+     *
+     * @return The main menu
+     */
+    public AutomationMainMenu getMenu() {
+        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.Menu), this.automation));
     }
 
     /**

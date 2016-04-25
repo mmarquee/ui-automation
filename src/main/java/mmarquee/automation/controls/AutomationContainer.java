@@ -247,6 +247,15 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the combobox control associated with the given name
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationComboBox getCombobox(int index) throws ElementNotFoundException {
+        return new AutomationComboBox(this.getControlByControlType(index, ControlType.ComboBox), this.automation);
+    }
+
+    /**
+     * Gets the combobox control associated with the given name
      * @param name Name of the control
      * @return The found control
      */

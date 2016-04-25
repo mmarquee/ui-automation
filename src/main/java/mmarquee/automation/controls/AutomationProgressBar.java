@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Range;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
@@ -24,6 +26,9 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Wrapper for the ProgressBar control.
  */
 public class AutomationProgressBar extends AutomationBase {
+
+    private Range rangePattern;
+
     /**
      * Construct the AutomationPanel
      * @param element The element
@@ -31,5 +36,19 @@ public class AutomationProgressBar extends AutomationBase {
      */
     public AutomationProgressBar(AutomationElement element, IUIAutomation automation) {
         super(element, automation);
+
+        try {
+            this.rangePattern = this.getRangePattern();
+        } catch (PatternNotFoundException ex) {
+            //?????
+        }
+    }
+
+    public double getRangeValue() {
+        return this.rangePattern.getValue();
+    }
+
+    public void setRangeValue(double value) {
+        this.rangePattern.setValue(value);
     }
 }
