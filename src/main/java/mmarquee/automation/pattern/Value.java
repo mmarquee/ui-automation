@@ -23,7 +23,7 @@ import mmarquee.automation.pattern.raw.IUIAutomationValuePattern;
 public class Value extends BasePattern {
     /**
      * Get the current value of the control
-     * @return
+     * @return The current value
      */
     public String value() {
         return ((IUIAutomationValuePattern)pattern).currentValue();
