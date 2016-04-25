@@ -23,6 +23,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 /**
  * Created by inpwt on 16/02/2016.
  *
+ * Wrapper for the Calendar element.
+ *
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
 public class AutomationCalendar extends AutomationBase {

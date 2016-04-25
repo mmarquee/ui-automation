@@ -81,7 +81,9 @@ The currently supported controls are ...
 * Some Ribbon implementations (see below)
 * Hyperlink
 * Panel
-* Toolbar
+* Toolbar (Delphi Toolbars do not seem to be like other ToolBars)
+* ProgressBar
+* MaskedEdit (see below)
 
 ## TAutomatedStringGrid
 
@@ -92,6 +94,53 @@ The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation)
     AutomationStringGridItem item = grid.getCell(0,0);
     String itemName = item.name();
 ```
+
+This specifically looks controls with a control name of "TAutomatedMaskEdit", which is the name of the Delphi control introduced in the above project.
+
+### TAutomatedStringGrid
+TODO: Needs example
+
+## MaskedEdit
+
+As noted above the [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The Delphi implementation of a masked edit is another of these.
+
+```java
+    try {
+        AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
+
+        // Get the current vslue
+        String value = me0.getValue();
+
+        // Set the value
+        me0.setValue("12/12/99");
+
+        // Get the value again
+        String value1 = me0.getValue();
+
+    } catch (ElementNotFoundException ex) {
+      ..
+    }
+```
+
+This specifically looks controls with a control name of "TAutomatedMaskEdit", which is the name of the Delphi control introduced in the above project.
+
+## Menus
+
+Menus are rather tricky, as they need to be expanded and collapsed before the menuitems can be seen via automation, also these menu items do not belong to the parent item, but the overall menu.
+
+The example below shows the current (as of 25/04/2016) support for 2 level menus. If either of these text items are not found the ElementNotFoundException exception will be thrown.
+
+```java
+    try {
+      AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+      exit.click();
+    } catch (ElementNotFoundException ex) {
+      ..
+    }
+```
+
+## Popup Menus
+TODO: Needs example
 
 ## The Ribbon control
 

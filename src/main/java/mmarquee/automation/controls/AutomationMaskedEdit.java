@@ -5,6 +5,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 15/02/2016.
+ *
+ * Wrapper around the MaskedEdit control - specifically the automated version.
  */
 public class AutomationMaskedEdit extends AutomationEditBox {
     /**

@@ -8,6 +8,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 20/02/2016.
+ *
+ * Wrapper for the TreeViewItem element.
  */
 public class AutomationTreeViewItem extends AutomationBase {
 

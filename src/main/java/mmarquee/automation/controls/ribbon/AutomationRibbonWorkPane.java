@@ -22,6 +22,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 02/03/2016.
+ *
+ * * Specialist pane that represents the RibbonWorkPane of the MS Ribbon control.
  */
 public class AutomationRibbonWorkPane extends AutomationContainer {
     /**

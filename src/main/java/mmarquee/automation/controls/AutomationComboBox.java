@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 01/02/2016.
+ *
+ * Wrapper for the ComboBoc element.
  */
 public class AutomationComboBox extends AutomationBase {
     private ExpandCollapse collapsePattern;

@@ -20,7 +20,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 02/03/2016.
- *
+
+ * Wrapper for the Toolbar element.
  * IDockProvider, IExpandCollapse,
  */
 public class AutomationToolBar extends AutomationContainer {

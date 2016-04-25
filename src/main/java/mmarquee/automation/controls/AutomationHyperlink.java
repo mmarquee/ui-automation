@@ -22,6 +22,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 03/02/2016.
+ *
+ * Wrapper for the Hyperlink element.
  */
 public class AutomationHyperlink extends AutomationBase {
     private Invoke invokePattern;

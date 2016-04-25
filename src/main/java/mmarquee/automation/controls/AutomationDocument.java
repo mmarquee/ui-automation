@@ -24,6 +24,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 /**
  * Created by inpwt on 16/02/2016.
  *
+ * Wrapper for the Document element.
+ *
  * Needs work to get working
  */
 public class AutomationDocument extends AutomationBase {

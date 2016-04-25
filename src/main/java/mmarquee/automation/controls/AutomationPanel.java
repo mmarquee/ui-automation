@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 26/02/2016.
+ *
+ * Wrapper for the Panel element.
  */
 public class AutomationPanel extends AutomationContainer {
     /**

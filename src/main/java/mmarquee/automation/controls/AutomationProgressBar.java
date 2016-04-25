@@ -13,42 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
- * Created by inpwt on 28/01/2016.
+ * Created by inpwt on 25/04/2016.
  *
- * Wrapper for the TabItem element.
+ * Wrapper for the ProgressBar control.
  */
-public class AutomationTabItem extends AutomationBase {
-
-    private SelectionItem selectItemPattern;
-
+public class AutomationProgressBar extends AutomationBase {
     /**
-     * Construct the AutomationTabItem
+     * Construct the AutomationPanel
      * @param element The element
      * @param automation The automation library
      */
-    public AutomationTabItem(AutomationElement element, IUIAutomation automation) {
+    public AutomationProgressBar(AutomationElement element, IUIAutomation automation) {
         super(element, automation);
-
-        try {
-            selectItemPattern = this.getSelectItemPattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
-    }
-
-    /**
-     * Selects this item
-     */
-    public void selectItem() {
-        this.selectItemPattern.select();
     }
 }

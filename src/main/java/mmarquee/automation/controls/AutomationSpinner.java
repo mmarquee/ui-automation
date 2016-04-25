@@ -21,6 +21,8 @@ import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 26/02/2016.
+ *
+ * Wrapper for the Spinner element.
  */
 public class AutomationSpinner extends AutomationBase {
     /**

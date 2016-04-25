@@ -6,7 +6,7 @@ import java.awt.event.InputEvent;
 /**
  * Created by inpwt on 26/02/2016.
  *
- * Wrapper for Robot class
+ * Wrapper for Robot, used if no other option is available.
  */
 public class AutomationMouse {
     private Robot robot;

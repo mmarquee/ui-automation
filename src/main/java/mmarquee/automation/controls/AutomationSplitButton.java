@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 03/03/2016.
+ *
+ * Wrapper for the SplitButton element.
  */
 public class AutomationSplitButton extends AutomationButton {
     /**

@@ -21,7 +21,7 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 /**
  * Created by inpwt on 08/03/2016.
  *
- * Try and encapsulate the Custom ControlId
+ * Wrapper for the Custom ControlId
  */
 public class AutomationCustom extends AutomationBase {
     /**

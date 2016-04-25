@@ -22,6 +22,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 09/02/2016.
+ *
+ * * Wrapper for the Menu control element.
  */
 public class AutomationMenu extends AutomationBase {
     /**

@@ -26,6 +26,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 03/02/2016.
+ *
+ * Wrapper around the Delphi automated string grid
  */
 public class AutomationStringGrid extends AutomationBase
 {

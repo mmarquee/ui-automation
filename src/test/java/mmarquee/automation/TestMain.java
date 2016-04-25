@@ -147,18 +147,18 @@ public class TestMain {
                 }
                 List<AutomationListItem> litems = cb0.getList();
             } catch (ElementNotFoundException ex) {
-
+                logger.error("Failed to find combobox");
             }
 
             // Now string grids
             AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
 
-            AutomationStringGridCell cell1 = grid.getItem(0, 0);
+            AutomationStringGridCell cell1 = grid.getItem(1, 1);
 
             String itemName = cell1.name();
-            logger.info(itemName);
+            logger.info("Grid item is " + itemName);
             cell1.setName("This");
-            logger.info(cell1.name());
+            logger.info("Grid item is " + cell1.name());
 
             AutomationTreeView tree = window.getTreeView(0);
             try {

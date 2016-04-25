@@ -29,6 +29,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 09/02/2016.
+ *
+ * Wrapper for the MainMenu element.
  */
 public class AutomationMainMenu extends AutomationBase {
 

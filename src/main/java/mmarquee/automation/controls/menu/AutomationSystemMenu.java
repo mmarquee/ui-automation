@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 19/02/2016.
+ *
+ * Wrapper for the SystemMenu control element.
  */
 public class AutomationSystemMenu extends AutomationBase {
     /**

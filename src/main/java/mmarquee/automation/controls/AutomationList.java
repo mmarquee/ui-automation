@@ -29,6 +29,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
+ *
+ * Wrapper for the List control element.
  */
 public class AutomationList extends AutomationBase {
 

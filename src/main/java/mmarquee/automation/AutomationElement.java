@@ -26,6 +26,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 06/03/2016.
+ *
+ * Wrapper for the underlying automation element.
  */
 public class AutomationElement {
     // public for now

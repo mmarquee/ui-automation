@@ -26,6 +26,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
+ *
+ * Wrapper for the Tab element.
  */
 public class AutomationTab extends AutomationContainer {
 

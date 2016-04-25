@@ -23,7 +23,6 @@ import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -47,7 +46,7 @@ public class AutomationContainer extends AutomationBase {
         super(element, automation);
     }
 
-    protected AutomationElement getControlByControlType(int index, int id) {
+    AutomationElement getControlByControlType(int index, int id) {
         ControlIdCondition condition = new ControlIdCondition(this.automation, id);
 
         List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
@@ -172,6 +171,24 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationEditBox getEditBox(int index) {
         return new AutomationEditBox(this.getControlByControlType(index, ControlType.Edit), this.automation);
+    }
+
+    /**
+     * Gets the ProgressBar control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     */
+    public AutomationProgressBar getProgressBar(int index) {
+        return new AutomationProgressBar(this.getControlByControlType(index, ControlType.ProgressBar), this.automation);
+    }
+
+    /**
+     * Gets the ProgressBar control associated with the given index
+     * @param name Name of the control
+     * @return The found control
+     */
+    public AutomationProgressBar getProgressBar(String name) throws ElementNotFoundException {
+        return new AutomationProgressBar(this.getControlByControlType(name, ControlType.ProgressBar), this.automation);
     }
 
     /**

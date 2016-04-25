@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 02/03/2016.
+ *
+ * Wrapper for the AppBar element
  */
 public class AutomationAppBar extends AutomationBase {
     /**

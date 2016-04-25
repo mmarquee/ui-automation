@@ -21,6 +21,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 01/02/2016.
+ *
+ * Wrapper for the StatusBar element.
  */
 public class AutomationStatusBar extends AutomationContainer {
     /**

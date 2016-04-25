@@ -16,7 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.Native;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
@@ -32,10 +31,12 @@ import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
+ *
+ * The base for automation.
  */
 public abstract class AutomationBase {
 
-    protected final Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
     protected AutomationElement element;
 
@@ -52,10 +53,6 @@ public abstract class AutomationBase {
 
         // Can we get the handle (HWND) and hence the rect?
         WinDef.HWND handle = this.getNativeWindowHandle();
-
-
-
-//        this.element.
     }
 
     protected boolean isDockPatternAvailable () {
@@ -469,7 +466,6 @@ public abstract class AutomationBase {
      */
     public WinDef.RECT getBoundingRectangle() {
         Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
-
 
          // obj is always empty :-(
         WinDef.RECT rect = new WinDef.RECT();

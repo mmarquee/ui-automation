@@ -8,6 +8,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 /**
  * Created by inpwt on 15/02/2016.
  *
+ * Wrapper for the Slider element.
+ *
  * IRangeProvider, ISelectionProvider, IValueProvider
  */
 public class AutomationSlider extends AutomationBase {

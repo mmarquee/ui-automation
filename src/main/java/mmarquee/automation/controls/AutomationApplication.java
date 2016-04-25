@@ -28,6 +28,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 26/01/2016.
+ *
+ * Wrapper around the Application element
  */
 public class AutomationApplication extends AutomationBase {
     private final User32 user32 = User32.INSTANCE;

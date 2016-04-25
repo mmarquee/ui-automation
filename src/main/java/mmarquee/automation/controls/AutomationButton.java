@@ -22,6 +22,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 02/02/2016.
+ *
+ * Wrapper around the Button element.
  */
 public class AutomationButton extends AutomationBase {
 

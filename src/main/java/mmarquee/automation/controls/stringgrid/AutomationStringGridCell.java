@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls.stringgrid;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Value;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 04/02/2016.
+ *
+ * Wrapper around the 'virtual' cell element in the automated Delphi string grid
  */
 public class AutomationStringGridCell extends AutomationBase {
-
-   // private Value valuePattern;
 
     /**
      * Construct the AutomationStringGridCell

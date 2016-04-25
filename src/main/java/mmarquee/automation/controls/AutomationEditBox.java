@@ -23,6 +23,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 26/01/2016.
+ *
+ * Wrapper around the edit box element
  */
 public class AutomationEditBox extends AutomationBase {
 

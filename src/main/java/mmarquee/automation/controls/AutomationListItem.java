@@ -23,6 +23,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 09/02/2016.
+ *
+ * Wrapper for the ListItem element.
  */
 public class AutomationListItem extends AutomationBase {
 

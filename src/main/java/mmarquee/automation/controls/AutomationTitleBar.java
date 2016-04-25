@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 04/03/2016.
+ *
+ * Wrapper for the TitleBar element.
  */
 public class AutomationTitleBar extends AutomationBase {
     /**
