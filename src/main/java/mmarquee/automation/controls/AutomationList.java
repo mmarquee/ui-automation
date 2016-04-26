@@ -23,6 +23,7 @@ import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
@@ -47,7 +48,28 @@ public class AutomationList extends AutomationBase {
         try {
             this.selectionPattern = this.getSelectionPattern();
         } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
+            logger.info("Could not get SelectionPattern");
+        }
+    }
+
+    /**
+     * Gets the item associated with the index
+     *
+     * @param index Index of element to get
+     * @return The selected item
+     * @throws ItemNotFoundException when the item is not found
+     */
+    public AutomationListItem getItem(int index) throws ItemNotFoundException, ElementNotFoundException {
+
+        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
+                this.createControlTypeCondition(ControlType.ListItem));
+
+        AutomationElement item = items.get(index);
+
+        if (item != null) {
+            return new AutomationListItem(item, this.automation);
+        } else {
+            throw new ItemNotFoundException();
         }
     }
 

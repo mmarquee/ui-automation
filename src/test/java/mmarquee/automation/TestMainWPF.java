@@ -125,6 +125,15 @@ public class TestMainWPF {
           //  progress.setRangeValue(100.0);
           //  logger.info("Progress is now = " + progress.getRangeValue());
 
+            // SLIDER *********************************************
+
+            AutomationSlider slider = window.getSlider(0);
+            logger.info("Slider value = " + slider.getRangeValue());
+
+            // Looks like this does bad things too
+     //       progress.setRangeValue(25);
+     //       logger.info("Progress is now = " + progress.getRangeValue());
+
             // Status bar *********************************************
 
             AutomationStatusBar statusbar = window.getStatusBar();
@@ -146,13 +155,17 @@ public class TestMainWPF {
 
             try {
                 AutomationComboBox cb0 = window.getCombobox(0);
-             //   cb0.setText("Replacement");
-                String txt = cb0.text();
 
-                logger.info("Text for Combobox is " + txt);
+// NOTE: this causes NPE now
+//                String txt = cb0.text();
+//
+//                logger.info("Text for Combobox is " + txt);
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find element");
             }
+
+
+            // MASKED EDIT ****************************************
 /*
             try {
                 AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
@@ -201,17 +214,39 @@ public class TestMainWPF {
             } catch (ElementNotFoundException ex) {
                 // Not found
             }
+*/
+
+            // BUTTONS ***********************************
+
+            // NOTE: WPF buttons will set the automationID to be the name of the control
+
+            AutomationButton btn = window.getButtonByAutomationId("btnClickMe");
+            logger.info(btn.name());
+            btn.click();
+
+            // LISTS ****************************************
+
+            // NOTE: WPF lists also seem to be different,
+
 
             AutomationList list = window.getListItem(0);
             try {
-                AutomationListItem listItem = list.getItem("First (List)");
+                AutomationListItem listItem = list.getItem("Hello, Window world!");
                 listItem.select();
+                logger.info(listItem.name());
+
+                // Now find by index
+                AutomationListItem listItem0 = list.getItem(0);
+                listItem0.select();
+                logger.info("0th element is " + listItem0.name());
+
             } catch (ItemNotFoundException ex) {
-                // Not found
+                logger.info("Didn't find item");
             } catch (ElementNotFoundException ex) {
-                // Not found
+                logger.info("Didn't find element");
             }
 
+            /*
             AutomationHyperlink link = window.getHyperlink(0);
             link.click();
             AutomationWindow popup1 = window.getWindow("Project1");

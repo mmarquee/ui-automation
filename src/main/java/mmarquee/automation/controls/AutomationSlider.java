@@ -2,6 +2,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Range;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -14,7 +15,7 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  */
 public class AutomationSlider extends AutomationBase {
 
-    private Value valuePattern;
+    private Range rangePattern;
 
     /**
      * Construct the AutomationSlider
@@ -25,17 +26,17 @@ public class AutomationSlider extends AutomationBase {
         super(element, automation);
 
         try {
-            this.valuePattern = this.getValuePattern();
+            this.rangePattern = this.getRangePattern();
         } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
+            logger.info("RangeValue pattern not found");
         }
     }
 
-    /**
-     * Gets the current value of the control
-     * @return The current value
-     */
-    public String getValue() {
-        return this.valuePattern.value();
+    public double getRangeValue() {
+        return this.rangePattern.getValue();
+    }
+
+    public void setRangeValue(double value) {
+        this.rangePattern.setValue(value);
     }
 }

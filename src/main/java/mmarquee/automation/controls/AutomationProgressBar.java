@@ -40,7 +40,7 @@ public class AutomationProgressBar extends AutomationBase {
         try {
             this.rangePattern = this.getRangePattern();
         } catch (PatternNotFoundException ex) {
-            //?????
+            logger.info("RangeValue pattern not found");
         }
     }
 

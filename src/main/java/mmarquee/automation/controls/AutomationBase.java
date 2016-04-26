@@ -220,6 +220,15 @@ public abstract class AutomationBase {
     }
 
     /**
+     * Creats an automation ID property condition
+     * @param automationId The automation ID to use
+     * @return The condition
+     */
+    public AutomationIdCondition createAutomationIdPropertyCondition(String automationId) {
+        return new AutomationIdCondition(this.automation, automationId);
+    }
+
+    /**
      * Creates a control type property condition
      * @param id The control type to use
      * @return The condition

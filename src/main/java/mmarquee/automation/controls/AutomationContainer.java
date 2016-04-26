@@ -147,6 +147,19 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the control by the control type and automation ID
+     * @param automationId Name to use
+     * @param controlType Control type
+     * @return The matching element
+     */
+    protected AutomationElement getControlByAutomationId(String automationId, int controlType) throws ElementNotFoundException {
+        return this.findFirst(TreeScope.TreeScope_Descendants,
+                this.createAndCondition(
+                        this.createAutomationIdPropertyCondition(automationId),
+                        this.createControlTypeCondition(controlType)));
+    }
+
+    /**
      * Gets the checkbox associated with the given index
      * @param index Index of the control
      * @return AutomationCheckbox that represents the found control
@@ -205,8 +218,17 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      */
-    public AutomationSlider getSliderByName(int index) {
+    public AutomationSlider getSlider(int index) {
         return new AutomationSlider(this.getControlByControlType(index, ControlType.Slider), this.automation);
+    }
+
+    /**
+     * Gets the slider control associated with the given index
+     * @param name Name of the control
+     * @return The found control
+     */
+    public AutomationSlider getSlider(String name) throws ElementNotFoundException {
+        return new AutomationSlider(this.getControlByControlType(name, ControlType.Slider), this.automation);
     }
 
     /**
@@ -271,6 +293,11 @@ public class AutomationContainer extends AutomationBase {
     public AutomationButton getButton(String name) throws ElementNotFoundException {
         return new AutomationButton(this.getControlByControlType(name, ControlType.Button), this.automation);
     }
+
+    public AutomationButton getButtonByAutomationId(String id)  throws ElementNotFoundException {
+        return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button), this.automation);
+    }
+
 
     /**
      * Gets the button control associated with the given index
