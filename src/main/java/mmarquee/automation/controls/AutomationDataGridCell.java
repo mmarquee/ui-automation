@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.stringgrid;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.controls.AutomationBase;
@@ -24,14 +24,14 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  *
  * Wrapper around the 'virtual' cell element in the automated Delphi string grid
  */
-public class AutomationStringGridCell extends AutomationBase {
+public class AutomationDataGridCell extends AutomationBase {
 
     /**
-     * Construct the AutomationStringGridCell
+     * Construct the AutomationDataGridCell
      * @param element The element
      * @param automation The automation library
      */
-    public AutomationStringGridCell(AutomationElement element, IUIAutomation automation) {
+    public AutomationDataGridCell(AutomationElement element, IUIAutomation automation) {
         super(element, automation);
 
      //   try {

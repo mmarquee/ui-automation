@@ -16,14 +16,21 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.condition.ControlIdCondition;
+import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.TreeScope;
+
+import java.awt.*;
 
 /**
  * Created by inpwt on 04/03/2016.
  *
  * Wrapper for the TitleBar element.
  */
-public class AutomationTitleBar extends AutomationBase {
+public class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
      * @param element The underlying automation element
@@ -32,4 +39,13 @@ public class AutomationTitleBar extends AutomationBase {
     public AutomationTitleBar(AutomationElement element, IUIAutomation automation) {
         super(element, automation);
     }
+
+    public AutomationMainMenu getMenuBar() throws ElementNotFoundException {
+        ControlIdCondition condition = new ControlIdCondition(this.automation, ControlType.MenuBar);
+
+        AutomationElement element = this.findFirst(TreeScope.TreeScope_Descendants, condition);
+
+        return new AutomationMainMenu(this.element, element, this.automation);
+    }
+
 }

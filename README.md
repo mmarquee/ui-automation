@@ -71,7 +71,7 @@ The currently supported controls are ...
 * RadioButton
 * ToggleButton
 * StatusBar
-* StringGrid and StringGridCell (see below)
+* DataGrid and DataGridCell (see below)
 * PageControl
 * Tab
 * TextBox
@@ -85,24 +85,32 @@ The currently supported controls are ...
 * ProgressBar
 * MaskedEdit (see below)
 
-## TAutomatedStringGrid
+## TAutomatedDataGrid
 
-The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation. In order to get the element associated with the specific TAutomatedStringGrid, then this is done in the following manner.
-
+### WFP
 ```java
-    AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
-    AutomationStringGridItem item = grid.getCell(0,0);
+    AutomationDataGrid grid = window.getDataGrid(0);
+    AutomationDataGridItem item = grid.getCell(0,0);
     String itemName = item.name();
 ```
 
-This specifically looks controls with a control name of "TAutomatedMaskEdit", which is the name of the Delphi control introduced in the above project.
+### Delphi
 
-### TAutomatedStringGrid
-TODO: Needs example
+The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation. In order to get the element associated with the specific TAutomationStringGrid, then this is done in the following manner.
+
+```java
+    AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
+    AutomationDataGridItem item = grid.getCell(0,0);
+    String itemName = item.name();
+```
+
+This specifically looks controls with a control name of "TAutomationStringGrid", which is the name of the Delphi control introduced in the above project.
 
 ## MaskedEdit
 
 As noted above the [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The Delphi implementation of a masked edit is another of these.
+
+There does not seem to be an equivalent WPF control.
 
 ```java
     try {

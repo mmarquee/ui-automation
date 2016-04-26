@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.utils;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.win32.W32APIOptions;
@@ -22,6 +23,8 @@ import java.io.File;
 
 /**
  * Created by inpwt on 18/03/2016.
+ *
+ * Utility methods used in the project
  */
 public class Utils {
     /**

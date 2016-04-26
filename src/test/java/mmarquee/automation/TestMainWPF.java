@@ -18,7 +18,6 @@ package mmarquee.automation;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.stringgrid.*;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
@@ -152,10 +151,25 @@ public class TestMainWPF {
             try {
                 AutomationComboBox cb0 = window.getCombobox(0);
 
-// NOTE: this causes NPE now
+// NPE thrown here
 //                String txt = cb0.text();
-//
-//                logger.info("Text for Combobox is " + txt);
+//                logger.info("Text for Combobox is `" + txt + "`");
+            } catch (ElementNotFoundException ex) {
+                logger.error("Failed to find element");
+            }
+
+            // EDITTABLE COMBOBOX ************************************
+
+            try {
+                AutomationComboBox cb1 = window.getCombobox(1);
+
+                String txt = cb1.text();
+
+                logger.info("Text for Combobox is `" + txt + "`");
+
+                cb1.setText("Here we are");
+                logger.info("Text for Combobox is now `" + cb1.text() + "`");
+
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find element");
             }
@@ -177,29 +191,16 @@ public class TestMainWPF {
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find maskededit");
             }
-
-            try {
-                AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
-                cb0.expand();
-                try {
-                    cb0.wait(750);
-                } catch (Exception ex) {
-                    // Time out
-                }
-                List<AutomationListItem> litems = cb0.getList();
-            } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find combobox");
-            }
 */
 
             // DATAGRIDS ***********************************************************
 
-            // These are entirely different beasts in WPF
+            // These are entirely different beasts in WPF, but look the same to us!
 
             // Now string grids
-            AutomationStringGrid grid = window.getStringGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(0);
 
-            AutomationStringGridCell cell1 = grid.getItem(1, 1);
+            AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
             String itemName = cell1.name();
             logger.info("Grid item is " + itemName);
@@ -231,9 +232,6 @@ public class TestMainWPF {
 
             // LISTS ****************************************
 
-            // NOTE: WPF lists also seem to be different,
-
-
             AutomationList list = window.getListItem(0);
             try {
                 AutomationListItem listItem = list.getItem("Hello, Window world!");
@@ -256,27 +254,9 @@ public class TestMainWPF {
             AutomationHyperlink link = window.getHyperlink(0);
             link.click();
 
-/*
-            AutomationWindow popup1 = window.getWindow("Project1");
-            try {
-                AutomationButton btn1 = popup1.getButton("OK");
-                btn1.click();
-            } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find button");
-            }
-
-            try {
-                Thread.sleep(500);
-            } catch (Exception ex) {
-                logger.info("Interrupted");
-            }
-
-            // This doesn't seem to work with VCL controls - not even through UISpy
-*/
             AutomationToolBar toolbar = window.getToolBar(0);
             logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
 
-            // Looks like the button is a problem with Delphi
             AutomationButton btn1 = toolbar.getButton(1);
 
             if (btn1.isEnabled()) {
@@ -284,29 +264,52 @@ public class TestMainWPF {
                 logger.info(btn1.name());
                 btn1.click();
 
-            }
-/*
-            AutomationButton btn1 = toolbar.getButton(1);
+                // Now cope with the results of the click
+                AutomationWindow popup = window.getWindow("New Thing");
 
-            if (btn1.isEnabled()) {
-                logger.info("btn1 Enabled");
-                btn1.click();
-            }
+                AutomationButton okBtn = popup.getButton("OK");
 
-            AutomationButton btn2 = toolbar.getButton(2);
+                boolean val1 = popup.isModal();
 
-            if (btn2.isEnabled()) {
-                logger.info("btn2 Enabled");
-                btn2.click();
+                logger.info("Modal - " + val1);
+
+                okBtn.click();
             }
 
-            AutomationButton btn3 = toolbar.getButton(3);
+            // CALENDAR ***********************************
 
-            if (btn3.isEnabled()) {
-                logger.info("btn3 Enabled");
-                btn3.click();
-            }
-*/
+            tab.selectTabPage("Calendar");
+
+            AutomationCalendar calendar = window.getCalendar(0);
+
+            logger.info("Date is " + calendar.name());
+
+            // Not sure what we can get out of a calendar
+
+            // DOCUMENT *********************************************
+
+            tab.selectTabPage("Document");
+
+            AutomationDocument document = window.getDocument(0);
+
+            logger.info("Document name is " + document.name());
+
+            // TITLEBAR ****************************************
+
+            AutomationTitleBar titleBar = window.getTitleBar();
+            logger.info("TitleBar name is " + titleBar.name());
+
+            AutomationMainMenu menuBar = titleBar.getMenuBar();
+
+            AutomationButton btnMin = titleBar.getButton(0);
+            AutomationButton btnMax = titleBar.getButton(1);
+            AutomationButton btnClose = titleBar.getButton(2);
+
+            logger.info(btnMin.name());
+            logger.info(btnMax.name());
+            logger.info(btnClose.name());
+
+
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");
         }

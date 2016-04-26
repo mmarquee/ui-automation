@@ -22,7 +22,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
-import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -314,8 +313,8 @@ public class AutomationContainer extends AutomationBase {
      * @param controlName*
      * @return The found control
      */
-    public AutomationStringGrid getStringGrid(int index, String controlName) {
-        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid, controlName), this.automation);
+    public AutomationDataGrid getDataGrid(int index, String controlName) {
+        return new AutomationDataGrid(this.getControlByControlType(index, ControlType.DataGrid, controlName), this.automation);
     }
 
     /**
@@ -323,8 +322,8 @@ public class AutomationContainer extends AutomationBase {
      * @param index The index to look for
      * @return The string grid
      */
-    public AutomationStringGrid getStringGrid(int index) {
-        return new AutomationStringGrid(this.getControlByControlType(index, ControlType.DataGrid), this.automation);
+    public AutomationDataGrid getDataGrid(int index) {
+        return new AutomationDataGrid(this.getControlByControlType(index, ControlType.DataGrid), this.automation);
     }
 
     /**

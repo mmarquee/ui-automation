@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.controls.stringgrid;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -29,7 +28,7 @@ import java.util.List;
  *
  * Wrapper around the Delphi automated string grid
  */
-public class AutomationStringGrid extends AutomationBase
+public class AutomationDataGrid extends AutomationBase
 {
     private Value valuePattern;
     private Grid grid;
@@ -37,11 +36,11 @@ public class AutomationStringGrid extends AutomationBase
     private Selection selectionPattern;
 
     /**
-     * Construct the AutomationStringGrid
+     * Construct the AutomationDataGrid
      * @param element The element
      * @param automation The automation library
      */
-    public AutomationStringGrid(AutomationElement element, IUIAutomation automation) {
+    public AutomationDataGrid(AutomationElement element, IUIAutomation automation) {
         super(element, automation);
 
         try {
@@ -74,25 +73,25 @@ public class AutomationStringGrid extends AutomationBase
      * Gets the selected item from the grid
      * @return AutomationStringGridItem
      */
-    public AutomationStringGridCell selected() {
+    public AutomationDataGridCell selected() {
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        return new AutomationStringGridCell(collection.get(0), automation);
+        return new AutomationDataGridCell(collection.get(0), automation);
     }
 
     /**
      * Gets the list of the column headers
      * @return List of GridItems
      */
-    public List<AutomationStringGridCell> getColumnHeaders () {
+    public List<AutomationDataGridCell> getColumnHeaders () {
 
         List<AutomationElement> collection = tablePattern.getCurrentColumnHeaders();
         int length = collection.size();
 
-        List<AutomationStringGridCell> items = new ArrayList<AutomationStringGridCell>();
+        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (int count = 0; count < length; count++) {
-            items.add(new AutomationStringGridCell(collection.get(count), automation));
+            items.add(new AutomationDataGridCell(collection.get(count), automation));
         }
 
         return items;
@@ -104,7 +103,7 @@ public class AutomationStringGrid extends AutomationBase
      * @param y Y Offset
      * @return The GridItem at the given cell position
      */
-    public AutomationStringGridCell getItem(int x, int y) {
-        return new AutomationStringGridCell(this.grid.getItem(x, y), automation);
+    public AutomationDataGridCell getItem(int x, int y) {
+        return new AutomationDataGridCell(this.grid.getItem(x, y), automation);
     }
 }

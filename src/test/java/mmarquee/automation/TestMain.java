@@ -19,8 +19,8 @@ import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
-import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
+import mmarquee.automation.controls.AutomationDataGrid;
+import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
@@ -150,9 +150,9 @@ public class TestMain {
             }
 
             // Now string grids
-            AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
+            AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
 
-            AutomationStringGridCell cell1 = grid.getItem(1, 1);
+            AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
             String itemName = cell1.name();
             logger.info("Grid item is " + itemName);
