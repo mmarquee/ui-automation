@@ -18,13 +18,9 @@ package mmarquee.automation;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.stringgrid.AutomationStringGrid;
-import mmarquee.automation.controls.stringgrid.AutomationStringGridCell;
+import mmarquee.automation.controls.stringgrid.*;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
-
-import java.util.List;
 
 /**
  * Created by inpwt on 26/02/2016.
@@ -194,9 +190,14 @@ public class TestMainWPF {
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find combobox");
             }
+*/
+
+            // DATAGRIDS ***********************************************************
+
+            // These are entirely different beasts in WPF
 
             // Now string grids
-            AutomationStringGrid grid = window.getStringGrid(0, "TAutomationStringGrid");
+            AutomationStringGrid grid = window.getStringGrid(0);
 
             AutomationStringGridCell cell1 = grid.getItem(1, 1);
 
@@ -205,16 +206,20 @@ public class TestMainWPF {
             cell1.setName("This");
             logger.info("Grid item is " + cell1.name());
 
+            // TREEVIEW **************************
+
             AutomationTreeView tree = window.getTreeView(0);
             try {
-                AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
+                AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
                 treeItem.select();
+
+                logger.info("Item is " + treeItem.name());
+
             } catch (ItemNotFoundException ex) {
-                // Not found
+                logger.info("Failed to find item");
             } catch (ElementNotFoundException ex) {
-                // Not found
+                logger.info("Failed to find element");
             }
-*/
 
             // BUTTONS ***********************************
 
@@ -246,9 +251,12 @@ public class TestMainWPF {
                 logger.info("Didn't find element");
             }
 
-            /*
+            // HYPERLINK ***********************************
+
             AutomationHyperlink link = window.getHyperlink(0);
             link.click();
+
+/*
             AutomationWindow popup1 = window.getWindow("Project1");
             try {
                 AutomationButton btn1 = popup1.getButton("OK");
@@ -263,19 +271,21 @@ public class TestMainWPF {
                 logger.info("Interrupted");
             }
 
-            // This doesn't seem to work
-            /*
+            // This doesn't seem to work with VCL controls - not even through UISpy
+*/
             AutomationToolBar toolbar = window.getToolBar(0);
-            logger.info(toolbar.name());
+            logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
 
             // Looks like the button is a problem with Delphi
-            AutomationButton btn0 = toolbar.getButton(0);
+            AutomationButton btn1 = toolbar.getButton(1);
 
-            if (btn0.isEnabled()) {
+            if (btn1.isEnabled()) {
                 logger.info("btn0 Enabled");
-                btn0.click();
-            }
+                logger.info(btn1.name());
+                btn1.click();
 
+            }
+/*
             AutomationButton btn1 = toolbar.getButton(1);
 
             if (btn1.isEnabled()) {
