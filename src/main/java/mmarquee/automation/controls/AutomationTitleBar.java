@@ -47,5 +47,4 @@ public class AutomationTitleBar extends AutomationContainer {
 
         return new AutomationMainMenu(this.element, element, this.automation);
     }
-
 }

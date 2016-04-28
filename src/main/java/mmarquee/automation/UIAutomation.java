@@ -27,6 +27,8 @@ import java.util.List;
 
 /**
  * Created by HumphreysM on 26/01/2016.
+ *
+ * The base automation wrapper.
  */
 public class UIAutomation {
 
@@ -114,11 +116,7 @@ public class UIAutomation {
         IUIAutomationCondition condition = automation.createTrueCondition();
         List<AutomationElement> collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
 
-        int length = collection.size();
-
-        for (int count = 0; count < length; count++) {
-            AutomationElement element = collection.get(count);
-
+        for (AutomationElement element : collection) {
             result.add(new AutomationWindow(element, this.automation));
         }
 

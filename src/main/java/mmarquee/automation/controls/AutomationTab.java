@@ -38,9 +38,9 @@ public class AutomationTab extends AutomationContainer {
      * @param name The name of the tab to select
      */
     public void selectTabPage(String name) {
-        for (int count = 0; count < this.tabItems.size(); count++) {
-            if (name.equals(this.tabItems.get(count).name())) {
-                this.tabItems.get(count).selectItem();
+        for(AutomationTabItem item: tabItems) {
+            if (name.equals(item.name())) {
+                item.selectItem();
             }
         }
     }
@@ -58,11 +58,7 @@ public class AutomationTab extends AutomationContainer {
 
         List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants);
 
-        int length = collection.size();
-
-        for (int count = 0; count < length; count++ ) {
-            AutomationElement elem = collection.get(count);
-
+        for (AutomationElement elem: collection) {
             int retVal = elem.currentControlType();
 
             if (retVal == ControlType.TabItem) {

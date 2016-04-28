@@ -21,6 +21,8 @@ import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 /**
  * Created by inpwt on 26/02/2016.
  */
@@ -221,6 +223,12 @@ public class TestMainWPF {
             cell1.setName("This");
             logger.info("Grid item is " + cell1.name());
 
+            List<AutomationDataGridCell> headers = grid.getColumnHeaders();
+
+            for(AutomationDataGridCell cell : headers) {
+                logger.info(cell.name());
+            }
+
             // TREEVIEW **************************
 
             AutomationTreeView tree = window.getTreeView(0);
@@ -327,6 +335,7 @@ public class TestMainWPF {
             AutomationEditBox passwd = window.getPasswordEditBox(0);
             passwd.setValue("Hello there everyone");
 
+            logger.info("IsPassword = " + passwd.isPassword());
             // Can't get the text out of a password control, but probably shouldn'y just crash.
             //   logger.info(passwd.getValue());
 

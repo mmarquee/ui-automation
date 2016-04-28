@@ -79,9 +79,7 @@ public class AutomationWindow extends AutomationContainer {
             }
         }
 
-        for (int count = 0; count < collection.size(); count++) {
-            AutomationElement element = collection.get(count);
-
+        for(AutomationElement element: collection) {
             int retVal = element.currentControlType();
 
             if (retVal == ControlType.StatusBar) {
@@ -113,7 +111,7 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Gets the main menu associated with this window.
      *
-     * @offset The menu offset to get
+     * @param offset The menu offset to get
      * @return The main menu
      */
     public AutomationMainMenu getMainMenu(int offset) {

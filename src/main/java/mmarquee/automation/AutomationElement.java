@@ -30,7 +30,10 @@ import java.util.List;
  * Wrapper for the underlying automation element.
  */
 public class AutomationElement {
-    // public for now
+
+    /**
+     * The underlying automation element
+     */
     public IUIAutomationElement element;
 
     /**
@@ -64,6 +67,14 @@ public class AutomationElement {
      */
     public String currentClassName() {
         return this.element.currentClassName();
+    }
+
+    /**
+     * Gets the current IsPassword value.
+     * @return True if IsPassword
+     */
+    public Boolean currentIsPassword() {
+        return this.element.currentIsPassword() == 1;
     }
 
     /**
@@ -106,7 +117,7 @@ public class AutomationElement {
      * @return The first matching element
      * @throws ElementNotFoundException
      */
-    public AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) throws ElementNotFoundException {
+    AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) throws ElementNotFoundException {
         IUIAutomationElement elem = this.element.findFirst(scope, condition);
 
         if (elem != null) {

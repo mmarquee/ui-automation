@@ -39,7 +39,13 @@ public abstract class BasePattern implements Pattern {
         this.pattern = null;
     }
 
-    protected List<AutomationElement> collectionToList(IUIAutomationElementArray collection) {
+    /**
+     * Turns a collection (array) of automation elements, it to a collection.
+     *
+     * @param collection The ElementArray.
+     * @return The List
+     */
+    List<AutomationElement> collectionToList(IUIAutomationElementArray collection) {
 
         List<AutomationElement> list = new ArrayList<AutomationElement>();
 
@@ -60,7 +66,7 @@ public abstract class BasePattern implements Pattern {
 
     /**
      * Is this pattern available?
-     * @return
+     * @return True if available.
      */
     public boolean isAvailable () {
         return (pattern == null);

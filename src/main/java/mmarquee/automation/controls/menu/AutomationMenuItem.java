@@ -71,8 +71,8 @@ public class AutomationMenuItem extends AutomationBase {
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
-        for(int count = 0; count < items.size(); count++) {
-            list.add(new AutomationMenuItem(items.get(count), automation));
+        for (AutomationElement item : items) {
+            list.add(new AutomationMenuItem(item, automation));
         }
 
         return list;

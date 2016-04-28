@@ -49,12 +49,10 @@ public class AutomationSystemMenu extends AutomationBase {
         List<AutomationElement> collection =
                 this.findAll(TreeScope.TreeScope_Descendants, condition);
 
-        int length = collection.size();
         AutomationElement foundElement = null;
         boolean found = false;
 
-        for(int count = 0; count < length; count++) {
-            AutomationElement elem = collection.get(count);
+        for (AutomationElement elem: collection) {
             String eName = elem.currentName();
 
             if (eName.equals(name)) {

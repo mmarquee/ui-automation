@@ -54,6 +54,19 @@ public class AutomationEditBox extends AutomationBase {
         return this.valuePattern.isReadOnly() == 1;
     }
 
+    /**
+     * Whether the element is a password
+     * @return True if it's a password, otherwise false.
+     */
+    public boolean isPassword() {
+        return this.element.currentIsPassword();
+    }
+
+    /**
+     * Constructor for the AutomationEditBox
+     * @param element The undelying element
+     * @param automation The automation library
+     */
     public AutomationEditBox(AutomationElement element, IUIAutomation automation) {
         super(element, automation);
 

@@ -17,10 +17,11 @@ package mmarquee.automation;
 
 /**
  * Created by inpwt on 28/01/2016.
+ *
+ * Automation Pattern Identifiers
+ * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee671195%28v=vs.85%29.aspx
  */
 public final class PatternID {
-    // Automation Pattern Identifiers
-    // See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee671195%28v=vs.85%29.aspx
     public static final int Invoke = 10000;
     public static final int Selection = 10001;
     public static final int Value = 10002;

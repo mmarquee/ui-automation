@@ -18,9 +18,10 @@ package mmarquee.automation;
 
 /**
  * Created by inpwt on 27/01/2016.
+ *
+ * Control types - see https://msdn.microsoft.com/en-us/library/windows/desktop/ee671198(v=vs.85).aspx
  */
 public final class ControlType {
-    // Control types - see https://msdn.microsoft.com/en-us/library/windows/desktop/ee671198(v=vs.85).aspx
     public static final int Button      = 50000;
     public static final int Calendar    = 50001;
     public static final int CheckBox    = 50002;

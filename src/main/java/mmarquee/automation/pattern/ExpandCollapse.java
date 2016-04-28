@@ -46,5 +46,4 @@ public class ExpandCollapse extends BasePattern {
 
         return state == ExpandCollapseState.ExpandCollapseState_Expanded;
     }
-
 }

@@ -17,10 +17,11 @@ package mmarquee.automation;
 
 /**
  * Created by inpwt on 28/01/2016.
+ *
+ * Automation Property Identifiers
+ * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee684017(v=vs.85).aspx
  */
 public final class PropertyID {
-    // Automation Property Identifiers
-    // See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee684017(v=vs.85).aspx
     public static final int RuntimeId            = 30000;
     public static final int BoundingRectangle    = 30001;
     public static final int ProcessId            = 30002;

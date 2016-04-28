@@ -67,13 +67,9 @@ public class AutomationContainer extends AutomationBase {
 
         collection = this.findAll(TreeScope.TreeScope_Descendants);
 
-        int length = collection.size();
-
         int counter = 0;
 
-        for (int count = 0; count < length; count++) {
-            AutomationElement element = collection.get(count);
-            int retVal = element.currentControlType();
+        for (AutomationElement element : collection) {
             String cName = element.currentClassName();
 
             if (cName.equals(controlName)) {
@@ -108,8 +104,7 @@ public class AutomationContainer extends AutomationBase {
 
         int length = collection.size();
 
-        for (int count = 0; count < length; count++) {
-            AutomationElement element = collection.get(count);
+        for (AutomationElement element : collection) {
             int retVal = element.currentControlType();
             String className = element.currentClassName();
 
