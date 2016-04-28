@@ -309,6 +309,13 @@ public class TestMainWPF {
             logger.info(btnMax.name());
             logger.info(btnClose.name());
 
+            // PASSWORD EDITBOX **********************************
+            AutomationEditBox passwd = window.getPasswordEditBox(0);
+
+            passwd.setValue("Hello there everyone");
+
+            // Can't get the text out of a password control, but probably shouldn'y just crash.
+         //   logger.info(passwd.getValue());
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");

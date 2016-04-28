@@ -185,6 +185,10 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationEditBox(this.getControlByControlType(index, ControlType.Edit), this.automation);
     }
 
+    public AutomationEditBox getPasswordEditBox(int index) {
+        return new AutomationEditBox(this.getControlByControlType(index, ControlType.Edit, "PasswordBox"), this.automation);
+    }
+
     /**
      * Gets the ProgressBar control associated with the given index
      * @param index Index of the control
