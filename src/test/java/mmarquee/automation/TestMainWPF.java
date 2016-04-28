@@ -102,21 +102,15 @@ public class TestMainWPF {
 
             exit.click();
 
-            // Need to sort out the example - needs to be modal(?) and have a title
+            AutomationWindow popup = window.getWindow("Confirm Exit");
 
-            AutomationWindow popup = window.getWindow("Project1");
-            Object val111 = popup.getBoundingRectangle();
-
-            AutomationButton btn = popup.getButton("OK");
-            Object val11 = btn.getBoundingRectangle();
+            AutomationButton btn = popup.getButton("Cancel");
 
             boolean val1 = popup.isModal();
 
-            btn.click();
+            logger.info("Modal? " + val1);
 
-//            } catch (ElementNotFoundException ex) {
-//                logger.info("Failed to find menu");
-//            }
+            btn.click();
 
             // Get and set an edit box by index (WPF doesn't care about control names)
 
@@ -212,25 +206,6 @@ public class TestMainWPF {
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find element");
             }
-
-
-            // MASKED EDIT ****************************************
-/*
-            try {
-                AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
-
-                String value = me0.getValue();
-                logger.info("Initial value " + value);
-
-                me0.setValue("12/12/99");
-
-                String value1 = me0.getValue();
-                logger.info("Changed value is " + value1);
-
-            } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find maskededit");
-            }
-*/
 
             // DATAGRIDS ***********************************************************
 
