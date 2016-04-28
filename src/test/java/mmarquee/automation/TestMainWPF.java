@@ -15,9 +15,9 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
@@ -41,40 +41,79 @@ public class TestMainWPF {
         }
 
         // Wait for the process to start
+        // This doesn't seem to wait for WPF examples
         application.waitForInputIdle(5000);
 
+        // Sleep for WPF, to address above issue
         try {
-            AutomationWindow window = automation.getDesktopWindow("MainWindow");
+            Thread.sleep(500);
+        } catch (Exception ex) {
+            logger.info("Interrupted");
+        }
+
+        AutomationWindow window = null;
+
+        try {
+            window = automation.getDesktopWindow("MainWindow");
+        } catch (ElementNotFoundException ex) {
+            logger.info("Failed to find `MainWindow`");
+        }
+
+        try {
             String name = window.name();
             logger.info(name);
 
             boolean val = window.isModal();
 
-            Object rect = window.getBoundingRectangle();
-
-            WinDef.HWND handle = window.getNativeWindowHandle();
-
             // Interact with menus
+            // System menu is `MenuBar`
             AutomationMainMenu menu = window.getMainMenu(0);
+
+            logger.info("Menu name " + menu.name());
+
+            logger.info(menu.getItems().size() + " menu items");
+
+            logger.info(menu.getItems().get(0).name());
+
+            // Actual program menu is a `Menu`
+
+            AutomationMainMenu mainMenu = window.getMenu(0);
+            logger.info("Menu name " + mainMenu.name());
+
+            logger.info(mainMenu.getItems().size() + " menu items");
+
+            logger.info(mainMenu.getItems().get(0).name());
 
 //            AutomationMainMenu menu = window.getMenu();   // WPF menus seem to be different from Delphi VCL windows
 
-            // Not menus for now
+            AutomationMenuItem file = mainMenu.getItems().get(0);
+            file.expand();
 
-//            try {
-//                AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-//                exit.click();
-/*
-                AutomationWindow popup = window.getWindow("Project1");
-                Object val111 = popup.getBoundingRectangle();
+            // A short wait for the expand to work
+            try {
+                Thread.sleep(500);
+            } catch (Exception ex) {
+                logger.info("Interrupted");
+            }
 
-                AutomationButton btn = popup.getButton("OK");
-                Object val11 = btn.getBoundingRectangle();
+            logger.info("Items = " + file.getItems().size());
 
-                boolean val1 = popup.isModal();
+            AutomationMenuItem exit = file.getItems().get(3);
 
-                btn.click();
-                */
+            exit.click();
+
+            // Need to sort out the example - needs to be modal(?) and have a title
+
+            AutomationWindow popup = window.getWindow("Project1");
+            Object val111 = popup.getBoundingRectangle();
+
+            AutomationButton btn = popup.getButton("OK");
+            Object val11 = btn.getBoundingRectangle();
+
+            boolean val1 = popup.isModal();
+
+            btn.click();
+
 //            } catch (ElementNotFoundException ex) {
 //                logger.info("Failed to find menu");
 //            }
@@ -117,8 +156,8 @@ public class TestMainWPF {
             logger.info("Progress = " + progress.getRangeValue());
 
             // Looks like this does bad things
-          //  progress.setRangeValue(100.0);
-          //  logger.info("Progress is now = " + progress.getRangeValue());
+            //  progress.setRangeValue(100.0);
+            //  logger.info("Progress is now = " + progress.getRangeValue());
 
             // SLIDER *********************************************
 
@@ -126,8 +165,8 @@ public class TestMainWPF {
             logger.info("Slider value = " + slider.getRangeValue());
 
             // Looks like this does bad things too
-     //       progress.setRangeValue(25);
-     //       logger.info("Progress is now = " + progress.getRangeValue());
+            //       progress.setRangeValue(25);
+            //       logger.info("Progress is now = " + progress.getRangeValue());
 
             // Status bar *********************************************
 
@@ -226,9 +265,9 @@ public class TestMainWPF {
 
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
-            AutomationButton btn = window.getButtonByAutomationId("btnClickMe");
-            logger.info(btn.name());
-            btn.click();
+            AutomationButton btnClickMe = window.getButtonByAutomationId("btnClickMe");
+            logger.info(btnClickMe.name());
+            btnClickMe.click();
 
             // LISTS ****************************************
 
@@ -265,13 +304,13 @@ public class TestMainWPF {
                 btn1.click();
 
                 // Now cope with the results of the click
-                AutomationWindow popup = window.getWindow("New Thing");
+                AutomationWindow popup1 = window.getWindow("New Thing");
 
-                AutomationButton okBtn = popup.getButton("OK");
+                AutomationButton okBtn = popup1.getButton("OK");
 
-                boolean val1 = popup.isModal();
+                boolean val2 = popup1.isModal();
 
-                logger.info("Modal - " + val1);
+                logger.info("Modal - " + val2);
 
                 okBtn.click();
             }
@@ -311,11 +350,10 @@ public class TestMainWPF {
 
             // PASSWORD EDITBOX **********************************
             AutomationEditBox passwd = window.getPasswordEditBox(0);
-
             passwd.setValue("Hello there everyone");
 
             // Can't get the text out of a password control, but probably shouldn'y just crash.
-         //   logger.info(passwd.getValue());
+            //   logger.info(passwd.getValue());
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");

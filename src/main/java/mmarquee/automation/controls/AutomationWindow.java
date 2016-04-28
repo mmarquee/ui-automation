@@ -123,10 +123,10 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Gets the menu associated with this window.
      *
-     * @return The main menu
+     * @return The menu
      */
-    public AutomationMainMenu getMenu() {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(1, ControlType.Menu), this.automation));
+    public AutomationMainMenu getMenu(int index) {
+        return (new AutomationMainMenu(this.element, this.getControlByControlType(0, ControlType.Menu), this.automation));
     }
 
     /**

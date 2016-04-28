@@ -46,7 +46,7 @@ public class AutomationComboBox extends AutomationBase {
             this.collapsePattern = this.getExpandCollapsePattern();
             this.valuePattern = this.getValuePattern();
         } catch (mmarquee.automation.pattern.PatternNotFoundException ex) {
-            // Handle this nicely somehow
+            logger.info("Failed to get patterns");
         }
     }
 

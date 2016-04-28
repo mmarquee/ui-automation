@@ -16,10 +16,16 @@
 package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.TreeScope;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by inpwt on 10/02/2016.
@@ -28,6 +34,7 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  */
 public class AutomationMenuItem extends AutomationBase {
     private Invoke invokePattern;
+    private ExpandCollapse collapsePattern;
 
     /**
      * Construct the AutomationMenuItem
@@ -38,9 +45,10 @@ public class AutomationMenuItem extends AutomationBase {
         super(element, automation);
 
         try {
+            this.collapsePattern = this.getExpandCollapsePattern();
             this.invokePattern = this.getInvokePattern();
         } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
+        //    logger.info("Failed to get patterns");
         }
     }
 
@@ -51,5 +59,44 @@ public class AutomationMenuItem extends AutomationBase {
         if (this.invokePattern != null) {
             this.invokePattern.invoke();
         }
+    }
+
+    /**
+     * Gets the list of items associatd with this menuitem
+     * @return List of menu items
+     */
+    public List<AutomationMenuItem> getItems() {
+        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
+                this.createControlTypeCondition(ControlType.MenuItem));
+
+        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
+
+        for(int count = 0; count < items.size(); count++) {
+            list.add(new AutomationMenuItem(items.get(count), automation));
+        }
+
+        return list;
+    }
+
+    /**
+     * Is the control expanded
+     * @return True if expanded
+     */
+    public boolean isExpanded() {
+        return collapsePattern.isExpanded();
+    }
+
+    /**
+     * Collapses the element
+     */
+    public void collapse() {
+        this.collapsePattern.collapse();
+    }
+
+    /**
+     * Expands the element
+     */
+    public void expand() {
+        this.collapsePattern.expand();
     }
 }

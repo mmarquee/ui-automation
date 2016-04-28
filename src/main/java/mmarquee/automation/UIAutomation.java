@@ -90,7 +90,8 @@ public class UIAutomation {
     public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
         AutomationElement element = null;
 
-        for (int loop = 0; loop <10; loop++) {
+        for (int loop = 0; loop <25; loop++) {
+
             element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
                     this.automation.createAndCondition(
                             this.automation.createPropertyCondition(PropertyID.Name, title),
