@@ -8,7 +8,28 @@
   <packaging>jar</packaging>
 
   <name>ui-automation</name>
-  <url>http://maven.apache.org</url>
+  <description>A Java library that wraps the MS UIAutomation library.</description>
+  <url>http://github.com/mmarquee/ui-automation</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Mark Humphreys</name>
+      <email>inpwtepydjuf@gmail.com</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:mmarquee/ui-automation.git</connection>
+    <developerConnection>scm:git:git@github.com:mmarquee/ui-automation.git</developerConnection>
+    <url>git@github.com:mmarquee/ui-automation.git</url>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
