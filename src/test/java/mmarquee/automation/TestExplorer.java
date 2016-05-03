@@ -23,11 +23,11 @@ import org.apache.log4j.Logger;
 /**
  * Created by inpwt on 26/02/2016.
  *
- * Test the automation library on a non-Delphi application, and see
+ * Test the automation library on a non-Delphi, non-WPF application, and see
  * whether we can get to all the bits of the UI
  */
-public class TestExplorer {
-    public void run() {
+class TestExplorer {
+    void run() {
 
         Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
@@ -136,55 +136,6 @@ public class TestExplorer {
             if (btn0.isEnabled()) {
                 btn0.click();
             }
-
-        /*
-        logger.info(explorerPane.name());
-        AutomationPanel folderLayoutPane = explorerPane.getPanel("Folder Layout Pane");
-        logger.info(folderLayoutPane.name());
-        AutomationPanel controlHost = folderLayoutPane.getPanel(0);
-        logger.info(controlHost.name());
-        AutomationTreeView treeView = controlHost.getTreeView(0);
-        try {
-            AutomationTreeViewItem desktopItem = treeView.getItem("Desktop");
-
-            desktopItem.select();
-        } catch (ItemNotFoundException ex) {
-            logger.error("Didn't find Desktop");
-        }
-*/
-
-        /*
-        // Minimize
-        btn.click();
-        try {
-            Thread.sleep(500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
-        */
-
-/*
-        // Wait for the process to start
-        application.waitForInputIdle(5000);
-
-        AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
-        window.focus();
-        window.maximize();
-
-        AutomationDocument document = window.getDocument(0);
-
-        //document.setText("This is a journey into sound");
-
-        String text = document.getText();
-*/
-//        document.setName("This is a journey into sound");
-
-/*
-		AutomationMainMenu menu = window.getMainMenu();
-
-		AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-		exit.click();
-		*/
 
         } catch (ElementNotFoundException ex) {
             logger.info("Faile to find element");

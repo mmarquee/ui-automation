@@ -25,6 +25,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 26/02/2016.
+ *
+ * Test the automation wrapper on a WPF application.
  */
 public class TestMainWPF {
 

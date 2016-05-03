@@ -27,7 +27,9 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by inpwt on 26/02/2016
+ *  *
+ * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestMain {
 
