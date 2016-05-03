@@ -45,6 +45,10 @@ public class UIAutomation {
         rootElement = new AutomationElement(automation.getRootElement());
     }
 
+    /**
+     * Gets the instance
+     * @return the instance of the ui automation library
+     */
     public final static UIAutomation getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new UIAutomation();
