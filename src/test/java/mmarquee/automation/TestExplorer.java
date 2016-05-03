@@ -31,7 +31,7 @@ public class TestExplorer {
 
         Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
-        UIAutomation automation = new UIAutomation();
+        UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
 

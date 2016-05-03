@@ -29,16 +29,15 @@ import java.util.List;
 public class TestMainWPF {
 
     public void run() {
-        UIAutomation automation = new UIAutomation();
-
         Logger logger = Logger.getLogger(AutomationBase.class.getName());
+
+        UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
 
         try {
             application = automation.launchOrAttach("apps\\SampleWpfApplication.exe");
         } catch (Throwable ex) {
-            // Smother????
             logger.warn("Failed to find application", ex);
         }
 

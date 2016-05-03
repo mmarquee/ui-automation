@@ -32,17 +32,25 @@ import java.util.List;
  */
 public class UIAutomation {
 
+    private static UIAutomation INSTANCE = null;
+
     private AutomationElement rootElement;
     private IUIAutomation automation;
 
     /**
      * Constructor for UIAutomation library
      */
-    public UIAutomation() {
-
+    protected UIAutomation() {
         automation = ClassFactory.createCUIAutomation();
-
         rootElement = new AutomationElement(automation.getRootElement());
+    }
+
+    public final static UIAutomation getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new UIAutomation();
+        }
+
+        return INSTANCE;
     }
 
     /**

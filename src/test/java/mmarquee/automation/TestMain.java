@@ -32,7 +32,7 @@ import java.util.List;
 public class TestMain {
 
     public void run() {
-        UIAutomation automation = new UIAutomation();
+        UIAutomation automation = UIAutomation.getInstance();
 
         Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
