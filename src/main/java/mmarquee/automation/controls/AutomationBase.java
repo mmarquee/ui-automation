@@ -145,9 +145,19 @@ public abstract class AutomationBase {
     public WinDef.POINT getClickablePoint () {
         Object value = this.element.getCurrentPropertyValue(PropertyID.ClickablePoint);
 
+        logger.info(value);
+
         WinDef.POINT point = new WinDef.POINT();
 
         return point;
+    }
+
+    /**
+     * Gets the processID of the element
+     * @return The processId for the element
+     */
+    public Object getProcessId() {
+        return this.element.getPrcoessId();
     }
 
     /**

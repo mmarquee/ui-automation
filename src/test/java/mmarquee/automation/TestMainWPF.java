@@ -15,6 +15,7 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
@@ -63,13 +64,19 @@ public class TestMainWPF {
         }
 
         try {
+
+            Object id = window.getProcessId();
+            logger.info("Process = " + id.toString());
+
+            WinDef.POINT point = window.getClickablePoint();
+            logger.info("Clickable point = " + point.toString());
+
             String name = window.name();
             logger.info(name);
 
             boolean val = window.isModal();
 
             // Interact with menus
-            // System menu is `MenuBar`
             AutomationMainMenu menu = window.getMainMenu(0);
 
             logger.info("Menu name " + menu.name());

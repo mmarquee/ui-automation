@@ -58,6 +58,14 @@ public class UIAutomation {
     }
 
     /**
+     * Created a cache request
+     * @return The created cache request
+     */
+    public IUIAutomationCacheRequest createCacheRequest() {
+        return this.createCacheRequest();
+    }
+
+    /**
      * Launches the application
      * @param command The command to be called
      * @return AutomationApplication that represents the application

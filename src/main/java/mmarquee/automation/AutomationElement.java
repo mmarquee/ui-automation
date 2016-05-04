@@ -53,6 +53,15 @@ public class AutomationElement {
         return this.element.getCurrentPropertyValue(propertyId);
     }
 
+
+    /**
+     * Gete the processID property
+     * @return Object representing the processId
+     */
+    public Object getPrcoessId() {
+        return getCurrentPropertyValue(PropertyID.ProcessId);
+    }
+
     /**
      * Gets the current control type
      * @return The current control type

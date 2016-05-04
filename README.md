@@ -11,11 +11,29 @@ It provides a consistent object-oriented API, hiding the complexity of Microsoft
 ## A bit of history
 The code here is used to test applications written in Delphi (specifically Delphi XE5), there are assumptions about the names of classes that have been created, in order to provide automation interfaces that are not part of the standard Delphi controls.
 
+# Developer documentation
+
 The MS UIAutomation Library is a COM control, and the classes that represent this have been extracted using com4j.
+
+## Maven
+Coming soon.
+```
+     <groupId>com.github.mmarquee</groupId>
+     <artifactId>ui-automation</artifactId>
+     <version>0.0.1</version>
+```
 
 ## Getting started
 
 The ui-automation library is a wrapper for the UIAutomationClient library, which has been extracted using com4j. As the generated code is large and complex, this has been wrapped up in a number of classes, each providing classes that encapsulate part of this library (together with other utility methods as necessary).
+
+### Initialising
+
+In order to get access to the automation API, an UIAutomation instance needs to be created, this is done as follows.
+
+```java
+        UIAutomation automation = UIAutomation.getInstance();
+```
 
 ### Launching an application
 
@@ -134,7 +152,11 @@ This specifically looks controls with a control name of "TAutomatedMaskEdit", wh
 
 ## Menus
 
-Menus are rather tricky, as they need to be expanded and collapsed before the menuitems can be seen via automation, also these menu items do not belong to the parent item, but the overall menu.
+There appear to be 2 different types of menus, MenuBar and Menu based, VCL/Delphi and 'classic' windows applications menus start with a MenuBar. where as .NET applications start with Menus. Examples are shown below and in the examples provided.
+
+### Delphi / VCL Menus
+
+VCL Menus are rather tricky, as they need to be expanded and collapsed before the menuitems can be seen via automation, also these menu items do not belong to the parent item, but the overall menu.
 
 The example below shows the current (as of 25/04/2016) support for 2 level menus. If either of these text items are not found the ElementNotFoundException exception will be thrown.
 
@@ -147,6 +169,28 @@ The example below shows the current (as of 25/04/2016) support for 2 level menus
     }
 ```
 
+### WPF Menus
+
+```java
+    AutomationMainMenu mainMenu = window.getMenu(0);
+
+    // Get the first menu item (i.e. "File")
+    AutomationMenuItem file = mainMenu.getItems().get(0);
+    file.expand();
+
+    // A short wait for the expand to work
+    try {
+        Thread.sleep(500);
+    } catch (Exception ex) {
+        logger.info("Interrupted");
+    }
+
+    // Look for a specific menu item (in this case 'exit' is the 4th entry)
+    AutomationMenuItem exit = file.getItems().get(3);
+
+    exit.click();
+```
+
 ## Popup Menus
 TODO: Needs example
 
@@ -155,25 +199,35 @@ TODO: Needs example
 The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows, finding the button associated with the Preview Pane and clicking on it to turn it on/off.
 
 ```java
-   AutomationRibbonBar ribbon = window.getRibbonBar();
-   AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
-   AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
-   logger.info("First work pane is " + pane.name());
+    AutomationRibbonBar ribbon = window.getRibbonBar();
+    AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+    AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
+    logger.info("First work pane is " + pane.name());
 
-   AutomationNUIPane uiPane = pane.getNUIPane(0);
-   logger.info("First NUIPane is " + uiPane.name());
+    AutomationNUIPane uiPane = pane.getNUIPane(0);
+    logger.info("First NUIPane is " + uiPane.name());
 
-   AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
-   AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+    AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+    AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
 
-   AutomationTab tab = uiHWND.getTab(0);
-   tab.selectTabPage("View");
+    AutomationTab tab = uiHWND.getTab(0);
+    tab.selectTabPage("View");
 
-   AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+    AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
 
-   AutomationToolBar panes = panel.getToolBar("Panes");
+    AutomationToolBar panes = panel.getToolBar("Panes");
 
-   panes.getButton("Preview pane").click();
+    panes.getButton("Preview pane").click();
+```
+
+## Caching
+
+TODO: Further examples and documentation
+
+```java
+    UIAutomation automation = UIAutomation.getInstance();
+    IUIAutomationCacheRequest cacheRequest = automation.createCacheRequest();
+    ...
 ```
 
 # Contributors
