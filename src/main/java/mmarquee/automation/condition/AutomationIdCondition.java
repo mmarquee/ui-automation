@@ -34,7 +34,7 @@ public class AutomationIdCondition  extends PropertyCondition {
      */
     public AutomationIdCondition (IUIAutomation automation) {
         super(automation);
-        this.property = PropertyID.AutomationId;
+        this.property = PropertyID.AutomationId.getValue();
     }
 
     /**
@@ -46,7 +46,7 @@ public class AutomationIdCondition  extends PropertyCondition {
     public AutomationIdCondition (IUIAutomation automation, String automationId) {
         super(automation);
         this.name = automationId;
-        this.property = PropertyID.AutomationId;
+        this.property = PropertyID.AutomationId.getValue();
     }
 
     /**

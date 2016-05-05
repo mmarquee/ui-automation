@@ -52,6 +52,9 @@ public class TestNotepad {
             String name = window.name();
             logger.info(name);
 
+            Object framework = window.getFramework();
+            logger.info("Framework is " + framework.toString());
+
             boolean val = window.isModal();
 
             AutomationEditBox edit = window.getEditBox(0);

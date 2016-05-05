@@ -74,7 +74,7 @@ public class AutomationMainMenu extends AutomationBase {
             // Needs a subitem
             if (item != null) {
                 // Find the subitem now
-                com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse);
+                com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
                 IUIAutomationExpandCollapsePattern pattern = unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
                 pattern.expand();
                 try {

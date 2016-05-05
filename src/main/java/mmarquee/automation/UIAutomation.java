@@ -17,6 +17,7 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.*;
+import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
@@ -35,7 +36,9 @@ public class UIAutomation {
     private static UIAutomation INSTANCE = null;
 
     private AutomationElement rootElement;
-    private IUIAutomation automation;
+
+    // TODO: Fix this (changed for caching
+    public IUIAutomation automation;
 
     /**
      * Constructor for UIAutomation library
@@ -58,11 +61,11 @@ public class UIAutomation {
     }
 
     /**
-     * Created a cache request
-     * @return The created cache request
+     * Create a cache request
+     * @return The created mmarquee.automation.cache request
      */
-    public IUIAutomationCacheRequest createCacheRequest() {
-        return this.createCacheRequest();
+    public CacheRequest createCacheRequest() {
+        return new CacheRequest();
     }
 
     /**
@@ -116,8 +119,8 @@ public class UIAutomation {
 
             element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
                     this.automation.createAndCondition(
-                            this.automation.createPropertyCondition(PropertyID.Name, title),
-                            this.automation.createPropertyCondition(PropertyID.ControlType, ControlType.Window)));
+                            this.automation.createPropertyCondition(PropertyID.Name.getValue(), title),
+                            this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), ControlType.Window)));
 
             if (element != null) {
                 break;

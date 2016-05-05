@@ -21,40 +21,50 @@ package mmarquee.automation;
  * Automation Pattern Identifiers
  * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee671195%28v=vs.85%29.aspx
  */
-public final class PatternID {
-    public static final int Invoke = 10000;
-    public static final int Selection = 10001;
-    public static final int Value = 10002;
-    public static final int RangeValue = 10003;
-    public static final int Scroll = 10004;
-    public static final int ExpandCollapse = 10005;
-    public static final int Grid = 10006;
-    public static final int GridItem = 10007;
-    public static final int MultipleView = 10008;
-    public static final int Window = 10009;
-    public static final int SelectionItem = 10010;
-    public static final int Dock = 10011;
-    public static final int Table = 10012;
-    public static final int TableItem = 10013;
-    public static final int Text = 10014;
-    public static final int Toggle = 10015;
-    public static final int Transform = 10016;
-    public static final int ScrollItem = 10017;
-    public static final int LegacyIAccessible = 10018;
-    public static final int ItemContainer = 10019;
-    public static final int VirtualizedItem = 10020;
-    public static final int SynchronizedInput = 10021;
-    public static final int ObjectModel = 10022;
-    public static final int Annotation = 10023;
-    public static final int TextPattern2Id = 10024;
-    public static final int Styles = 10025;
-    public static final int Spreadsheet = 10026;
-    public static final int SpreadsheetItem = 10027;
-    public static final int TransformPattern2Id = 10028;
-    public static final int TextChild = 10029;
-    public static final int Drag = 10030;
-    public static final int DropTarget = 10031;
-    public static final int TextEdit = 10032;
-    public static final int CustomNavigation = 10033;
 
+public enum PatternID {
+    Invoke(10000),
+    Selection(10001),
+    Value(10002),
+    RangeValue(10003),
+    Scroll(10004),
+    ExpandCollapse(10005),
+    Grid(10006),
+    GridItem(10007),
+    MultipleView(10008),
+    Window(10009),
+    SelectionItem(10010),
+    Dock(10011),
+    Table(10012),
+    TableItem(10013),
+    Text(10014),
+    Toggle(10015),
+    Transform(10016),
+    ScrollItem(10017),
+    LegacyIAccessible(10018),
+    ItemContainer(10019),
+    VirtualizedItem(10020),
+    SynchronizedInput(10021),
+    ObjectModel(10022),
+    Annotation(10023),
+    TextPattern2Id(10024),
+    Styles(10025),
+    Spreadsheet(10026),
+    SpreadsheetItem(10027),
+    TransformPattern2Id(10028),
+    TextChild(10029),
+    Drag(10030),
+    DropTarget(10031),
+    TextEdit(10032),
+    CustomNavigation(10033);
+
+    private int value;
+
+    public int getValue() {
+        return this.value;
+    }
+
+    PatternID (int value) {
+        this.value = value;
+    }
 }

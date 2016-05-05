@@ -27,13 +27,13 @@ public class NameCondition  extends PropertyCondition {
 
     public NameCondition (IUIAutomation automation) {
         super(automation);
-        this.property = PropertyID.Name;
+        this.property = PropertyID.Name.getValue();
     }
 
     public NameCondition (IUIAutomation automation, String name) {
         super(automation);
         this.name = name;
-        this.property = PropertyID.Name;
+        this.property = PropertyID.Name.getValue();
     }
 
     public IUIAutomationCondition getCondition () {

@@ -54,6 +54,9 @@ public class TestMain {
             String name = window.name();
             logger.info(name);
 
+            Object framework = window.getFramework();
+            logger.info("Framework is " + framework.toString());
+
             boolean val = window.isModal();
 
             java.lang.Object rect = window.getBoundingRectangle();

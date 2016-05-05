@@ -64,6 +64,8 @@ public class TestMainWPF {
         }
 
         try {
+            Object framework = window.getFramework();
+            logger.info("Framework is " + framework.toString());
 
             Object id = window.getProcessId();
             logger.info("Process = " + id.toString());

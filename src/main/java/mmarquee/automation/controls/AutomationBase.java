@@ -19,11 +19,11 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.pattern.raw.*;
+import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 
@@ -56,75 +56,75 @@ public abstract class AutomationBase {
     }
 
     protected boolean isDockPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isExpandCollapsePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isGridItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isMultipleViewPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isInvokePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isGridPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isRangeValuePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isScrollPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isSelectionItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isScrollItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isWindowPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTextPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTextPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTableItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTableItemPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTablePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTablePatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isSelectionPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTransformPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTransformPatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTogglePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTogglePatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isValuePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsValuePatternAvailable).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(true);
     }
 
     /**
@@ -132,7 +132,7 @@ public abstract class AutomationBase {
      * @return Off screen?
      */
     protected boolean isOffScreen () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsOffscreen).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(true);
     }
 
     /**
@@ -143,7 +143,7 @@ public abstract class AutomationBase {
      * @return The clickable point
      */
     public WinDef.POINT getClickablePoint () {
-        Object value = this.element.getCurrentPropertyValue(PropertyID.ClickablePoint);
+        Object value = this.element.getCurrentPropertyValue(PropertyID.ClickablePoint.getValue());
 
         logger.info(value);
 
@@ -158,6 +158,10 @@ public abstract class AutomationBase {
      */
     public Object getProcessId() {
         return this.element.getPrcoessId();
+    }
+
+    public Object getFramework() {
+        return this.element.getCurrentPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
@@ -304,7 +308,7 @@ public abstract class AutomationBase {
         SelectionItem pattern = new SelectionItem();
 
         if (isSelectionItemPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
         }
@@ -322,7 +326,7 @@ public abstract class AutomationBase {
         Selection pattern = new Selection();
 
         if (isSelectionPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Selection);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Selection.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
         }
@@ -340,7 +344,7 @@ public abstract class AutomationBase {
         Value pattern = new Value();
 
         if (isValuePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Value);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Value.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationValuePattern.class));
         }
@@ -358,7 +362,7 @@ public abstract class AutomationBase {
         Range pattern = new Range();
 
         if (isRangeValuePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.RangeValue);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.RangeValue.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationRangeValuePattern.class));
         }
@@ -376,7 +380,7 @@ public abstract class AutomationBase {
         Table pattern = new Table();
 
         if (isTablePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Table);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Table.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationTablePattern.class));
         }
@@ -394,7 +398,7 @@ public abstract class AutomationBase {
         Window pattern = new Window();
 
         if (isWindowPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Window);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Window.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
         }
@@ -412,7 +416,7 @@ public abstract class AutomationBase {
         ExpandCollapse pattern = new ExpandCollapse();
 
         if (isExpandCollapsePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
         }
@@ -430,7 +434,7 @@ public abstract class AutomationBase {
         Grid pattern = new Grid();
 
         if (isGridPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Grid);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Grid.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
         }
@@ -448,7 +452,7 @@ public abstract class AutomationBase {
         Toggle pattern = new Toggle();
 
         if (isTogglePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationTogglePattern.class));
         }
@@ -466,7 +470,7 @@ public abstract class AutomationBase {
         Invoke pattern = new Invoke();
 
         if (isInvokePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke.getValue());
             pattern.setPattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
         }
 
@@ -483,7 +487,7 @@ public abstract class AutomationBase {
         Text pattern = new Text();
 
         if (this.isTextPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Text);
+            com4j.Com4jObject unknown = this.getPattern(PatternID.Text.getValue());
             pattern.setPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
         }
 
@@ -495,14 +499,14 @@ public abstract class AutomationBase {
      * @return Enabled ?
      */
     public boolean isEnabled () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsEnabled).equals(true);
+        return this.element.getCurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(true);
     }
 
     /**
      * Gets the bounding rectangle of the control
      */
     public WinDef.RECT getBoundingRectangle() {
-        Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle);
+        Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle.getValue());
 
          // obj is always empty :-(
         WinDef.RECT rect = new WinDef.RECT();
@@ -516,7 +520,7 @@ public abstract class AutomationBase {
      * @return The handle
      */
     public WinDef.HWND getNativeWindowHandle() {
-        Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle);
+        Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
 
         WinDef.HWND hwnd = new WinDef.HWND();
 

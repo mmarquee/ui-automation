@@ -59,7 +59,7 @@ public class AutomationElement {
      * @return Object representing the processId
      */
     public Object getPrcoessId() {
-        return getCurrentPropertyValue(PropertyID.ProcessId);
+        return getCurrentPropertyValue(PropertyID.ProcessId.getValue());
     }
 
     /**

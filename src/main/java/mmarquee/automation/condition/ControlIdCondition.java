@@ -32,7 +32,7 @@ public class ControlIdCondition extends PropertyCondition {
      */
     public ControlIdCondition (IUIAutomation automation) {
         super(automation);
-        this.property = PropertyID.ControlType;
+        this.property = PropertyID.ControlType.getValue();
     }
 
     /**
@@ -43,7 +43,7 @@ public class ControlIdCondition extends PropertyCondition {
     public ControlIdCondition (IUIAutomation automation, int id) {
         super(automation);
         this.id = id;
-       this.property = PropertyID.ControlType;
+       this.property = PropertyID.ControlType.getValue();
     }
 
     /**
