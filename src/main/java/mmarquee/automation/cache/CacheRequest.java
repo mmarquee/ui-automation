@@ -38,16 +38,17 @@ public class CacheRequest {
 
     /**
      * Adds a property to the cache request
+     * @param propertyId the property to add
      */
     public void Add(PropertyID propertyId) {
         this.cacheRequest.addProperty(propertyId.getValue());
     }
 
     /**
-     * Adds a patternID to the reque
-     * @param patternId
+     * Adds a patternID to the request
+     * @param patternId Pattern to add
      */
     public void Add(PatternID patternId) {
-        this.cacheRequest.addPattern(patternId.getValue());;
+        this.cacheRequest.addPattern(patternId.getValue());
     }
 }
