@@ -23,6 +23,12 @@ import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,5 +168,15 @@ public class UIAutomation {
      */
     public boolean supportsAutomation3 () {
         return this.automation instanceof IUIAutomation3;
+    }
+
+    /**
+     * Captures the screen.
+     * @throws AWTException Robot exception
+     * @throws IOException IO Exception
+     */
+    public void captureScreen() throws AWTException, IOException {
+        BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        ImageIO.write(image, "png", new File("screenshot.png"));
     }
 }
