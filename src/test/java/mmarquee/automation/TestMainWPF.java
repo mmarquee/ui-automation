@@ -116,22 +116,26 @@ public class TestMainWPF {
 
             exit.click();
 
-            AutomationWindow popup = window.getWindow("Confirm Exit");
-
-            AutomationButton btn = popup.getButton("Cancel");
-
-            boolean val1 = popup.isModal();
-
-            logger.info("Modal? " + val1);
-
             try {
-                automation.captureScreen();
-            } catch (Exception ex) {
-                // Should capture each exception
-                logger.info("Failed to capture screen for some reason");
-            }
+                AutomationWindow popup = window.getWindow("Confirm Exit");
 
-            btn.click();
+                AutomationButton btn = popup.getButton("Cancel");
+
+                boolean val1 = popup.isModal();
+
+                logger.info("Modal? " + val1);
+
+                try {
+                    automation.captureScreen();
+                } catch (Exception ex) {
+                    // Should capture each exception
+                    logger.info("Failed to capture screen for some reason");
+                }
+
+                btn.click();
+            } catch (ItemNotFoundException ex) {
+                logger.info("Failed to find popup");
+            }
 
             // Get and set an edit box by index (WPF doesn't care about control names)
 
@@ -306,15 +310,19 @@ public class TestMainWPF {
                 btn1.click();
 
                 // Now cope with the results of the click
-                AutomationWindow popup1 = window.getWindow("New Thing");
+                try {
+                    AutomationWindow popup1 = window.getWindow("New Thing");
 
-                AutomationButton okBtn = popup1.getButton("OK");
+                    AutomationButton okBtn = popup1.getButton("OK");
 
-                boolean val2 = popup1.isModal();
+                    boolean val2 = popup1.isModal();
 
-                logger.info("Modal - " + val2);
+                    logger.info("Modal - " + val2);
 
-                okBtn.click();
+                    okBtn.click();
+                } catch (ItemNotFoundException ex) {
+                    logger.info("Failed to find window");
+                }
             }
 
             // CALENDAR ***********************************
@@ -367,6 +375,13 @@ public class TestMainWPF {
             AutomationElement element;
 
             logger.info("Investigated the cache");
+
+            // Window / element not found
+            try {
+                AutomationWindow popupNotThere = window.getWindow("Not there");
+            } catch (ItemNotFoundException ex) {
+                logger.info("Failed to find window");
+            }
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");

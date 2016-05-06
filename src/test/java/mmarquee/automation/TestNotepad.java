@@ -68,14 +68,17 @@ public class TestNotepad {
                 AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
                 exit.click();
 
-                AutomationWindow popup = window.getWindow("Notepad");
+                try {
+                    AutomationWindow popup = window.getWindow("Notepad");
 
-                AutomationButton btn = popup.getButton("Don't Save");
+                    AutomationButton btn = popup.getButton("Don't Save");
 
-                btn.click();
+                    btn.click();
 
-                logger.info("All closed down now");
-
+                    logger.info("All closed down now");
+                } catch (ItemNotFoundException ex) {
+                    logger.info("Failed to find window");
+                }
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find exit menu item");
             }

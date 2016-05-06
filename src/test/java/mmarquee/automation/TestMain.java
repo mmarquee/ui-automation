@@ -76,15 +76,19 @@ public class TestMain {
                 AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
                 exit.click();
 
-                AutomationWindow popup = window.getWindow("Project1");
-                Object val111 = popup.getBoundingRectangle();
+                try {
+                    AutomationWindow popup = window.getWindow("Project1");
+                    Object val111 = popup.getBoundingRectangle();
 
-                AutomationButton btn = popup.getButton("OK");
-                Object val11 = btn.getBoundingRectangle();
+                    AutomationButton btn = popup.getButton("OK");
+                    Object val11 = btn.getBoundingRectangle();
 
-                boolean val1 = popup.isModal();
+                    boolean val1 = popup.isModal();
 
-                btn.click();
+                    btn.click();
+                } catch (ItemNotFoundException ex) {
+                    logger.info("Failed to find window");
+                }
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find menu");
             }
@@ -186,12 +190,17 @@ public class TestMain {
 
             AutomationHyperlink link = window.getHyperlink(0);
             link.click();
-            AutomationWindow popup1 = window.getWindow("Project1");
+
             try {
-                AutomationButton btn1 = popup1.getButton("OK");
-                btn1.click();
-            } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find button");
+                AutomationWindow popup1 = window.getWindow("Project1");
+                try {
+                    AutomationButton btn1 = popup1.getButton("OK");
+                    btn1.click();
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find button");
+                }
+            } catch (ItemNotFoundException ex) {
+                logger.info("Failed to find window");
             }
 
             try {

@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.condition.TrueCondition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
@@ -154,7 +155,7 @@ public class AutomationWindow extends AutomationContainer {
      * @param title Title to search for
      * @return The child window
      */
-    public AutomationWindow getWindow(String title) {
+    public AutomationWindow getWindow(String title) throws ItemNotFoundException {
         AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {
@@ -179,6 +180,10 @@ public class AutomationWindow extends AutomationContainer {
                     // interrupted
                 }
             }
+        }
+
+        if (item == null) {
+            throw new ItemNotFoundException();
         }
 
         return new AutomationWindow(item, this.automation);
