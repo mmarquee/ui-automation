@@ -157,7 +157,7 @@ public abstract class AutomationBase {
      * @return The processId for the element
      */
     public Object getProcessId() {
-        return this.element.getPrcoessId();
+        return this.element.getProcessId();
     }
 
     public Object getFramework() {

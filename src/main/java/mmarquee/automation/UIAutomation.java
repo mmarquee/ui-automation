@@ -43,6 +43,8 @@ public class UIAutomation {
 
     private AutomationElement rootElement;
 
+    private boolean attached = false;
+
     // TODO: Fix this (changed for caching
     public IUIAutomation automation;
 
@@ -81,6 +83,7 @@ public class UIAutomation {
      */
     public AutomationApplication launch(String... command) throws java.io.IOException {
         Process process = Utils.startProcess(command);
+        this.attached = false;
         return new AutomationApplication(rootElement, automation, process);
     }
 
@@ -90,6 +93,7 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication attach(Process process) {
+        this.attached = true;
         return new AutomationApplication(rootElement, automation, process);
     }
 
@@ -109,10 +113,11 @@ public class UIAutomation {
             return null;
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-
             return new AutomationApplication(rootElement, automation, handle);
         }
     }
+
+
 
     /**
      * Attaches or launches the application
@@ -126,12 +131,21 @@ public class UIAutomation {
         boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
+
             return this.launch(command);
         } else {
+            this.attached = true;
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-
             return new AutomationApplication(rootElement, automation, handle);
         }
+    }
+
+    /**
+     * Did we attach or launch
+     * @return True if attached, otherwise false
+     */
+    public boolean isAttached() {
+        return this.attached;
     }
 
     /**

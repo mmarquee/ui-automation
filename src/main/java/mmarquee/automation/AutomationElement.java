@@ -58,7 +58,7 @@ public class AutomationElement {
      * Gete the processID property
      * @return Object representing the processId
      */
-    public Object getPrcoessId() {
+    public Object getProcessId() {
         return getCurrentPropertyValue(PropertyID.ProcessId.getValue());
     }
 
@@ -107,15 +107,14 @@ public class AutomationElement {
      * @param scope Tree scope
      * @param condition The condition
      * @return The first matching element
-     * @throws ElementNotFoundException
      */
-    public AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
+    public AutomationElement findFirst(TreeScope scope, Condition condition) {
         IUIAutomationElement elem = this.element.findFirst(scope, condition.getCondition());
 
         if (elem != null) {
             return new AutomationElement(elem);
         } else {
-            throw new ElementNotFoundException();
+            return null;
         }
     }
 
@@ -124,15 +123,14 @@ public class AutomationElement {
      * @param scope Tree scope
      * @param condition The raw condition
      * @return The first matching element
-     * @throws ElementNotFoundException
      */
-    AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) throws ElementNotFoundException {
+    AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) {
         IUIAutomationElement elem = this.element.findFirst(scope, condition);
 
         if (elem != null) {
             return new AutomationElement(elem);
         } else {
-            throw new ElementNotFoundException();
+            return null;
         }
     }
 
