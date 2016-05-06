@@ -160,6 +160,10 @@ public abstract class AutomationBase {
         return this.element.getProcessId();
     }
 
+    /**
+     * Gets the framework used by the element
+     * @return The framework object (really a string)
+     */
     public Object getFramework() {
         return this.element.getCurrentPropertyValue(PropertyID.FrameworkId.getValue());
     }
