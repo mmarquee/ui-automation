@@ -94,6 +94,27 @@ public class UIAutomation {
     }
 
     /**
+     * Finds the given process
+     * @param command Command to look for
+     * @return The Application
+     * @throws Exception If findProcessEntry throws an exception.
+     */
+    public AutomationApplication findProcess(String... command) throws Exception {
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+                new Tlhelp32.PROCESSENTRY32.ByReference();
+
+        boolean found = Utils.findProcessEntry(processEntry, command);
+
+        if (!found) {
+            return null;
+        } else {
+            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
+
+            return new AutomationApplication(rootElement, automation, handle);
+        }
+    }
+
+    /**
      * Attaches or launches the application
      * @param command Command to be started
      * @return AutomationApplication that represents the application
