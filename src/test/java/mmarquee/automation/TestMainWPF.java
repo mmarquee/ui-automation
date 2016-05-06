@@ -16,6 +16,7 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
@@ -64,6 +65,7 @@ public class TestMainWPF {
         }
 
         try {
+
             Object framework = window.getFramework();
             logger.info("Framework is " + framework.toString());
 
@@ -348,6 +350,16 @@ public class TestMainWPF {
             logger.info("IsPassword = " + passwd.isPassword());
             // Can't get the text out of a password control, but probably shouldn'y just crash.
             //   logger.info(passwd.getValue());
+
+            logger.info("Investigate the cache");
+
+            CacheRequest cache = automation.createCacheRequest();
+            cache.add(PropertyID.Name);
+            cache.add(PropertyID.IsEnabled);
+
+            AutomationElement element;
+
+            logger.info("Investigated the cache");
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");

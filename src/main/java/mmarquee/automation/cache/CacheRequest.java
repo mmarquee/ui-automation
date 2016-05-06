@@ -40,7 +40,7 @@ public class CacheRequest {
      * Adds a property to the cache request
      * @param propertyId the property to add
      */
-    public void Add(PropertyID propertyId) {
+    public void add(PropertyID propertyId) {
         this.cacheRequest.addProperty(propertyId.getValue());
     }
 
@@ -48,7 +48,7 @@ public class CacheRequest {
      * Adds a patternID to the request
      * @param patternId Pattern to add
      */
-    public void Add(PatternID patternId) {
+    public void add(PatternID patternId) {
         this.cacheRequest.addPattern(patternId.getValue());
     }
 }

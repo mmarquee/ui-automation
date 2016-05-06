@@ -152,9 +152,7 @@ public class UIAutomation {
      * @return supports IUIAutomation2
      */
     public boolean supportsAutomation2 () {
-        //return this.automation as IUIAutomation2;
-//        return (IUIAutomation2.isAssignableFrom(this.automation.getClass()));
-        return false;
+        return this.automation instanceof IUIAutomation2;
     }
 
     /**
@@ -163,8 +161,6 @@ public class UIAutomation {
      * @return supports IUIAutomation3
      */
     public boolean supportsAutomation3 () {
-        //return this.automation as IUIAutomation3;
-  //      return (this.automation instanceOf IUIAutomation3);
-        return false;
+        return this.automation instanceof IUIAutomation3;
     }
 }
