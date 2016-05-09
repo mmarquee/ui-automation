@@ -19,11 +19,14 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
+import mmarquee.automation.condition.TrueCondition;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.pattern.raw.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.TreeScope;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +56,37 @@ public class AutomationMainMenu extends AutomationBase {
     public AutomationMainMenu(AutomationElement parent, AutomationElement element, IUIAutomation automation) {
         super(element, automation);
         this.parent = parent;
+    }
+
+    /**
+     * Get the menu item associated with the hierarchy of names.
+     * This is to get around an odd menu when testing in Delphi.
+     */
+    public void getMenuItemFudge () throws ElementNotFoundException {
+        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+                this.createAndCondition(
+                        this.createNamePropertyCondition("Help"),
+                        this.createControlTypeCondition(ControlType.MenuItem)));
+
+        if (item != null) {
+            com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
+            IUIAutomationExpandCollapsePattern pattern = unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
+            pattern.expand();
+
+            try {
+                Thread.sleep(750);
+            } catch (Exception ex) {
+                // Seems to be find
+            }
+
+            try {
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_A);
+                robot.delay(500);
+            } catch (AWTException ex) {
+                // What is going to happen here?
+            }
+        }
     }
 
     /**

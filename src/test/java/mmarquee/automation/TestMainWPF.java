@@ -363,7 +363,7 @@ public class TestMainWPF {
             passwd.setValue("Hello there everyone");
 
             logger.info("IsPassword = " + passwd.isPassword());
-            // Can't get the text out of a password control, but probably shouldn'y just crash.
+            // Can't get the text out of a password control, but probably shouldn't just crash.
             //   logger.info(passwd.getValue());
 
             logger.info("Investigate the cache");
@@ -382,6 +382,11 @@ public class TestMainWPF {
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find window");
             }
+
+            logger.info("ARIA role : " + window.getAriaRole());
+            logger.info("Orientation: " + window.getOrientation().toString());
+            logger.info("Item Status: " + window.getItemStatus());
+            logger.info("FrameworkId: " + window.getFrameworkId());
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");

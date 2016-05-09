@@ -256,7 +256,7 @@ public abstract class AutomationBase {
     }
 
     /**
-     * Creatss an or condition
+     * Creates an OR condition
      * @param condition1 First condition
      * @param condition2 Second condition
      * @return The Or Condition
@@ -500,7 +500,7 @@ public abstract class AutomationBase {
 
     /**
      * Is the control enabled
-     * @return Enabled ?
+     * @return Enabled?
      */
     public boolean isEnabled () {
         return this.element.getCurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(true);
@@ -531,5 +531,29 @@ public abstract class AutomationBase {
         // hwnd.
 
         return hwnd;
+    }
+
+    /**
+     * Gets the ARIA role of the element
+     * @return The ARIA role
+     */
+    public String getAriaRole() {
+        return this.element.getAriaRole();
+    }
+
+    public OrientationType getOrientation() {
+        return this.element.getOrientation();
+    }
+
+//    public int[] getRuntimeId() {
+//        return this.element.getRuntimeId();
+//    }
+
+    public String getFrameworkId() {
+        return this.element.getFrameworkId();
+    }
+
+    public String getItemStatus() {
+        return this.element.currentItemStatus();
     }
 }

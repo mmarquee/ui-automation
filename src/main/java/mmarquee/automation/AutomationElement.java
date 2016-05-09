@@ -19,6 +19,7 @@ import mmarquee.automation.condition.Condition;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
@@ -58,9 +59,9 @@ public class AutomationElement {
      * Gete the processID property
      * @return Object representing the processId
      */
-    public Object getProcessId() {
-        return getCurrentPropertyValue(PropertyID.ProcessId.getValue());
-    }
+ //   public Object getProcessId() {
+ //       return getCurrentPropertyValue(PropertyID.ProcessId.getValue());
+ //   }
 
     /**
      * Gets the current control type
@@ -166,5 +167,53 @@ public class AutomationElement {
         }
 
         return items;
+    }
+
+    /**
+     * Gets the current ARIA role
+     * @return String representing the ARIA role
+     */
+    public String getAriaRole() {
+        return element.currentAriaRole();
+    }
+
+    /**
+     * Gets the current orientation
+     * @return The orientation
+     */
+    public OrientationType getOrientation() {
+        return element.currentOrientation();
+    }
+
+    /**
+     * GEts the framework ID
+     * @return The framework ID
+     */
+    public String getFrameworkId() {
+        return element.currentFrameworkId();
+    }
+
+    /**
+     * Get the runtime ID
+     * @return The runetime ID
+     */
+    public int[] getRuntimeId() {
+        return element.getRuntimeId();
+    }
+
+    /**
+     * Gets the process ID
+     * @return The process ID
+     */
+    public Object getProcessId() {
+        return element.currentProcessId();
+    }
+
+    /**
+     * Gets the current item status
+     * @return The status
+     */
+    public String currentItemStatus() {
+        return element.currentItemStatus();
     }
 }
