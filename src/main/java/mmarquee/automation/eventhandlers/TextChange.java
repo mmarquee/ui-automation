@@ -15,8 +15,32 @@
  */
 package mmarquee.automation.eventhandlers;
 
+import mmarquee.automation.eventhandlers.raw.IUIAutomationTextEditTextChangedEventHandler;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.TextEditChangeType;
+
 /**
  * Created by inpwt on 18/03/2016.
+ *
+ * Wrapper for the IUIAutomationTextEditTextChangedEventHandler
  */
-public class TextChange extends EventHandler {
+public class TextChange {
+    private IUIAutomationTextEditTextChangedEventHandler eventHandler;
+
+    /**
+     * Constructor for TextChange handler
+     * @param sender The sender
+     * @param textEditChangeType What type of change was it?
+     * @param eventStrings The event strings
+     */
+    public TextChange(IUIAutomationElement sender,
+                      TextEditChangeType textEditChangeType,
+                      java.lang.String[] eventStrings) {
+        this.eventHandler.handleTextEditTextChangedEvent(sender,
+                textEditChangeType,
+                eventStrings);
+    }
 }
+
+
+

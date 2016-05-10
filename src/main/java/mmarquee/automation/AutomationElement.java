@@ -194,8 +194,8 @@ public class AutomationElement {
     }
 
     /**
-     * Get the runtime ID
-     * @return The runetime ID
+     * Get the runtime Id
+     * @return The runtime ID
      */
     public int[] getRuntimeId() {
         return element.getRuntimeId();
@@ -213,7 +213,15 @@ public class AutomationElement {
      * Gets the current item status
      * @return The status
      */
-    public String currentItemStatus() {
-        return element.currentItemStatus();
+    public String getItemStatus() {
+        return this.element.currentItemStatus();
+    }
+
+    /**
+     * Gets the current accelerator key associated with the element
+     * @return The accelerator key
+     */
+    public String getAcceleratorKey() {
+        return this.element.currentAcceleratorKey();
     }
 }

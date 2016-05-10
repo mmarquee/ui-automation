@@ -26,6 +26,7 @@ import mmarquee.automation.pattern.raw.*;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -541,19 +542,45 @@ public abstract class AutomationBase {
         return this.element.getAriaRole();
     }
 
+    /**
+     * The current orientation of the element
+     * @return The orientation
+     */
     public OrientationType getOrientation() {
         return this.element.getOrientation();
     }
 
-//    public int[] getRuntimeId() {
+    /**
+     * Gets the runtime id
+     * @return The runtime id
+     * @throws NotImplementedException
+     */
+    public int[] getRuntimeId() throws NotImplementedException {
 //        return this.element.getRuntimeId();
-//    }
+        throw new NotImplementedException();
+    }
 
+    /**
+     * Gets the current framework ID for the element
+     * @return The framework id
+     */
     public String getFrameworkId() {
         return this.element.getFrameworkId();
     }
 
+    /**
+     * Gets the current item status
+     * @return The item status
+     */
     public String getItemStatus() {
-        return this.element.currentItemStatus();
+        return this.element.getItemStatus();
+    }
+
+    /**
+     * Gets the current accelerator key for th element
+     * @return The key
+     */
+    public String getAcceleratorKey() {
+        return this.element.getAcceleratorKey();
     }
 }

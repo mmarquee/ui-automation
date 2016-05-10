@@ -59,8 +59,14 @@ public class AutomationMainMenu extends AutomationBase {
     }
 
     /**
+     * <p>
      * Get the menu item associated with the hierarchy of names.
-     * This is to get around an odd menu when testing in Delphi.
+     * </p>
+     * <p>
+     * This is to get around an odd menu when testing in the Delphi application that
+     * is used as a primary testbed for this library - it looks for "Help" and the expands
+     * the menu item found and then pressed the 'A' key.
+     * </p>
      */
     public void getMenuItemFudge () throws ElementNotFoundException {
         AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
@@ -76,9 +82,10 @@ public class AutomationMainMenu extends AutomationBase {
             try {
                 Thread.sleep(750);
             } catch (Exception ex) {
-                // Seems to be find
+                // Seems to be fine, but interrupted
             }
 
+            // Now press the correct key
             try {
                 Robot robot = new Robot();
                 robot.keyPress(KeyEvent.VK_A);

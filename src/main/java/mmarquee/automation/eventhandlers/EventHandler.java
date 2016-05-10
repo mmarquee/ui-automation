@@ -15,8 +15,24 @@
  */
 package mmarquee.automation.eventhandlers;
 
+import mmarquee.automation.eventhandlers.raw.IUIAutomationEventHandler;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+
 /**
  * Created by inpwt on 18/03/2016.
+ *
+ * Wrapper for the IUIAutomationEventHandler
  */
 public class EventHandler {
+    private IUIAutomationEventHandler handler;
+
+    /**
+     * Constructor for the event handler
+     * @param sender The sender
+     * @param eventId The event id to hsndle
+     */
+    public EventHandler(IUIAutomationElement sender,
+                        int eventId) {
+        this.handler.handleAutomationEvent(sender, eventId);
+    }
 }
