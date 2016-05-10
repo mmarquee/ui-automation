@@ -35,6 +35,8 @@ public class AutomationApplication extends AutomationBase {
     private final User32 user32 = User32.INSTANCE;
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
+    private boolean isAttached = false;
+
     private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
 
     /**
@@ -43,6 +45,22 @@ public class AutomationApplication extends AutomationBase {
      */
     public void waitForInputIdle(int timeout) {
         user32.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
+    }
+
+    /**
+     * Gets whether the application was already running
+     * @return Attached or not
+     */
+    public boolean getIsAttached() {
+        return this.isAttached;
+    }
+
+    /**
+     * Sets the isAttached value
+     * @param value True or false
+     */
+    public void setIsAttached(boolean value) {
+        this.isAttached = value;
     }
 
     /**
@@ -84,9 +102,10 @@ public class AutomationApplication extends AutomationBase {
      * @param automation The IUIAutomation associated with this session
      * @param handle The handle of this application.
      */
-    public AutomationApplication (AutomationElement element, IUIAutomation automation, WinNT.HANDLE handle) {
+    public AutomationApplication (AutomationElement element, IUIAutomation automation, WinNT.HANDLE handle, boolean attached) {
         super(element, automation);
         this.handle = handle;
+        this.isAttached = attached;
     }
 
     /**
@@ -95,9 +114,11 @@ public class AutomationApplication extends AutomationBase {
      * @param automation The IUIAutomation associated with this session
      * @param process The process for this application.
      */
-    public AutomationApplication (AutomationElement element, IUIAutomation automation, Process process) {
+    public AutomationApplication (AutomationElement element, IUIAutomation automation, Process process, boolean attached) {
         super(element, automation);
         // From : http://www.golesny.de/p/code/javagetpid.
+
+        this.isAttached = attached;
 
         if (process.getClass().getName().equals("java.lang.Wind32Process") ||
                 process.getClass().getName().equals("java.lang.ProcessImpl")) {

@@ -68,7 +68,7 @@ public class AutomationMainMenu extends AutomationBase {
      * the menu item found and then pressed the 'A' key.
      * </p>
      */
-    public void getMenuItemFudge () throws ElementNotFoundException {
+    public void menuItemFudge () throws ElementNotFoundException {
         AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
                         this.createNamePropertyCondition("Help"),

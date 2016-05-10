@@ -53,7 +53,7 @@ public abstract class AutomationBase {
         this.automation = automation;
 
         // Can we get the handle (HWND) and hence the rect?
-        WinDef.HWND handle = this.getNativeWindowHandle();
+//        WinDef.HWND handle = this.getNativeWindowHandle();
     }
 
     protected boolean isDockPatternAvailable () {
@@ -524,6 +524,7 @@ public abstract class AutomationBase {
      * Get the native window handle
      * @return The handle
      */
+    /*
     public WinDef.HWND getNativeWindowHandle() {
         Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
 
@@ -533,6 +534,7 @@ public abstract class AutomationBase {
 
         return hwnd;
     }
+*/
 
     /**
      * Gets the ARIA role of the element

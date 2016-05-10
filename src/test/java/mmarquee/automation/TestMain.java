@@ -61,7 +61,7 @@ public class TestMain {
 
             java.lang.Object rect = window.getBoundingRectangle();
 
-            WinDef.HWND handle = window.getNativeWindowHandle();
+       //     WinDef.HWND handle = window.getNativeWindowHandle();
 
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();

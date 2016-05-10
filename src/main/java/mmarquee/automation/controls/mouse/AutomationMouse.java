@@ -45,6 +45,14 @@ public class AutomationMouse {
     }
 
     /**
+     * Double clicks the left mouse.
+     */
+    public void doubleLeftClick() {
+        leftClick();
+        leftClick();
+    }
+
+    /**
      * Clicks the right mouse button
      */
     public void rightClick() {
