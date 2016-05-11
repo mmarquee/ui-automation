@@ -59,19 +59,18 @@ public class AutomationMainMenu extends AutomationBase {
     }
 
     /**
-     * <p>
      * Get the menu item associated with the hierarchy of names.
-     * </p>
-     * <p>
      * This is to get around an odd menu when testing in the Delphi application that
      * is used as a primary testbed for this library - it looks for "Help" and the expands
      * the menu item found and then pressed the 'A' key.
-     * </p>
+     * @param item0 Top level menu item
+     * @param eventKey Key to press
+     * @throws ElementNotFoundException Thrown when the element is not found.
      */
-    public void menuItemFudge () throws ElementNotFoundException {
+    public void menuItemFudge (String item0, int eventKey) throws ElementNotFoundException {
         AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
                 this.createAndCondition(
-                        this.createNamePropertyCondition("Help"),
+                        this.createNamePropertyCondition(item0),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
         if (item != null) {
@@ -88,7 +87,7 @@ public class AutomationMainMenu extends AutomationBase {
             // Now press the correct key
             try {
                 Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_A);
+                robot.keyPress(eventKey);
                 robot.delay(500);
             } catch (AWTException ex) {
                 // What is going to happen here?

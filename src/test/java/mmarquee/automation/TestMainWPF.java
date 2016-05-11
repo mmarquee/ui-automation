@@ -20,6 +20,7 @@ import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
@@ -376,17 +377,31 @@ public class TestMainWPF {
 
             logger.info("Investigated the cache");
 
+            logger.info("ARIA role : " + window.getAriaRole());
+            logger.info("Orientation: " + window.getOrientation().toString());
+            logger.info("Item Status: " + window.getItemStatus());
+            logger.info("FrameworkId: " + window.getFrameworkId());
+
+            AutomationMouse mouse = new AutomationMouse();
+            mouse.setLocation(1119, 896);
+            mouse.rightClick();
+
+            try {
+                Thread.sleep(500);
+            } catch (Exception ex) {
+                logger.info("Interrupted");
+            }
+
+            window.dumpUI();
+
+            // Should be able to get the popup menu here
+
             // Window / element not found
             try {
                 AutomationWindow popupNotThere = window.getWindow("Not there");
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find window");
             }
-
-            logger.info("ARIA role : " + window.getAriaRole());
-            logger.info("Orientation: " + window.getOrientation().toString());
-            logger.info("Item Status: " + window.getItemStatus());
-            logger.info("FrameworkId: " + window.getFrameworkId());
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");

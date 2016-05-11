@@ -18,7 +18,9 @@ package mmarquee.automation;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
@@ -61,6 +63,23 @@ public class TestNotepad {
 
             edit.setValue("This is a test of automation");
 
+            window.focus();
+            window.maximize();
+
+            // Now do a popup?
+            AutomationMouse mouse = new AutomationMouse();
+            mouse.setLocation(500,250);
+            mouse.rightClick();
+
+            try {
+                Thread.sleep(1500);
+            } catch (Exception ex) {
+                logger.info("Interrupted");
+            }
+
+            window.dumpUI();
+
+/*
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();
 
@@ -70,7 +89,6 @@ public class TestNotepad {
 
                 try {
                     AutomationWindow popup = window.getWindow("Notepad");
-
                     AutomationButton btn = popup.getButton("Don't Save");
 
                     btn.click();
@@ -82,6 +100,7 @@ public class TestNotepad {
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find exit menu item");
             }
+            */
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");
         }

@@ -474,4 +474,21 @@ public class AutomationContainer extends AutomationBase {
     public AutomationCustom getCustom(String name) throws ElementNotFoundException {
         return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom), this.automation);
     }
+
+    /**
+     * Dumps the control tree, used for exploring interfaces
+     */
+    public void dumpUI() {
+        logger.info("About to start dumping");
+
+        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants);
+
+        for (AutomationElement element : collection) {
+            String cName = element.currentName();
+
+            logger.info(".." + cName);
+        }
+
+        logger.info("All done dumping");
+    }
 }

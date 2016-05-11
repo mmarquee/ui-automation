@@ -18,9 +18,9 @@ The MS UIAutomation Library is a COM control, and the classes that represent thi
 ## Maven
 Coming soon.
 ```
-     <groupId>com.github.mmarquee</groupId>
-     <artifactId>ui-automation</artifactId>
-     <version>0.0.1</version>
+  <groupId>com.github.mmarquee</groupId>
+  <artifactId>ui-automation</artifactId>
+  <version>0.0.1</version>
 ```
 
 ## Getting started
@@ -32,7 +32,7 @@ The ui-automation library is a wrapper for the UIAutomationClient library, which
 In order to get access to the automation API, an UIAutomation instance needs to be created, this is done as follows.
 
 ```java
-        UIAutomation automation = UIAutomation.getInstance();
+  UIAutomation automation = UIAutomation.getInstance();
 ```
 
 ### Launching an application
@@ -74,8 +74,8 @@ Each control contained in a window can be identified by the index of that contro
 In order to click the 'OK' button associated with the connection window, it can be found by the text associated with the button, the following code will find the button, and call the click event.
 
 ```java
-    AutomationButton button1 = window.getButtonByName("OK");
-    button1.click();
+  AutomationButton button1 = window.getButtonByName("OK");
+  button1.click();
 ```
 
 # Current supported controls
@@ -107,9 +107,9 @@ The currently supported controls are ...
 
 ### WFP
 ```java
-    AutomationDataGrid grid = window.getDataGrid(0);
-    AutomationDataGridItem item = grid.getCell(0,0);
-    String itemName = item.name();
+  AutomationDataGrid grid = window.getDataGrid(0);
+  AutomationDataGridItem item = grid.getCell(0,0);
+  String itemName = item.name();
 ```
 
 ### Delphi
@@ -117,9 +117,9 @@ The currently supported controls are ...
 The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The TAutomatedStringGrid is one of these, as the base Delphi (as of XE5 at least) control does not implement the Grid or Table interfaces and so is opaque to automation. In order to get the element associated with the specific TAutomationStringGrid, then this is done in the following manner.
 
 ```java
-    AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
-    AutomationDataGridItem item = grid.getCell(0,0);
-    String itemName = item.name();
+  AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
+  AutomationDataGridItem item = grid.getCell(0,0);
+  String itemName = item.name();
 ```
 
 This specifically looks controls with a control name of "TAutomationStringGrid", which is the name of the Delphi control introduced in the above project.
@@ -131,64 +131,72 @@ As noted above the [DelphiUIAutomation](https://github.com/markhumphreysjhc/Delp
 There does not seem to be an equivalent WPF control.
 
 ```java
-    try {
-        AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
+  try {
+    AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
 
-        // Get the current vslue
-        String value = me0.getValue();
+    // Get the current vslue
+    String value = me0.getValue();
 
-        // Set the value
-        me0.setValue("12/12/99");
+    // Set the value
+    me0.setValue("12/12/99");
 
-        // Get the value again
-        String value1 = me0.getValue();
+    // Get the value again
+    String value1 = me0.getValue();
 
-    } catch (ElementNotFoundException ex) {
-      ..
-    }
+  } catch (ElementNotFoundException ex) {
+    ..
+  }
 ```
 
 This specifically looks controls with a control name of "TAutomatedMaskEdit", which is the name of the Delphi control introduced in the above project.
 
 ## Menus
 
-There appear to be 2 different types of menus, MenuBar and Menu based, VCL/Delphi and 'classic' windows applications menus start with a MenuBar. where as .NET applications start with Menus. Examples are shown below and in the examples provided.
+There appear to be 2 different types of menus, depending on the framework that is being used, MenuBar and Menu based, VCL/Delphi and 'classic' windows applications menus start with a MenuBar. where as .NET applications start with Menus. Examples are shown below and in the examples provided.
 
 ### Delphi / VCL Menus
 
-VCL Menus are rather tricky, as they need to be expanded and collapsed before the menuitems can be seen via automation, also these menu items do not belong to the parent item, but the overall menu.
+VCL menus are rather tricky, as they need to be expanded and collapsed before the menuitems can be seen via automation, also these menu items do not belong to the parent item, but the overall menu.
 
 The example below shows the current (as of 25/04/2016) support for 2 level menus. If either of these text items are not found the ElementNotFoundException exception will be thrown.
 
 ```java
-    try {
-      AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-      exit.click();
-    } catch (ElementNotFoundException ex) {
-      ..
-    }
+  try {
+    AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+    exit.click();
+  } catch (ElementNotFoundException ex) {
+    ..
+  }
+```
+
+#### Menu fudge
+There has been one odd menu that we have found in our applications, and at the moment this is encapsulated in a fudge method, as shown below. This finds the menu and clicks it, as here doesn't seem to be a nice way of doing this with the other methods.
+
+```java
+  // Find the Help | About and click it
+  menu.menuClickFudge("Help", KeyEvent.VK_A);
 ```
 
 ### WPF Menus
 
 ```java
-    AutomationMainMenu mainMenu = window.getMenu(0);
+  AutomationMainMenu mainMenu = window.getMenu(0);
 
-    // Get the first menu item (i.e. "File")
-    AutomationMenuItem file = mainMenu.getItems().get(0);
-    file.expand();
+  // Get the first menu item (i.e. "File")
+  AutomationMenuItem file = mainMenu.getItems().get(0);
+  file.expand();
 
-    // A short wait for the expand to work
-    try {
-        Thread.sleep(500);
-    } catch (Exception ex) {
-        logger.info("Interrupted");
-    }
+  // A short wait for the expand to work
+  try {
+    Thread.sleep(500);
+  } catch (Exception ex) {
+    logger.info("Interrupted");
+  }
 
-    // Look for a specific menu item (in this case 'exit' is the 4th entry)
-    AutomationMenuItem exit = file.getItems().get(3);
+  // Look for a specific menu item (in this case 'exit' is the 4th entry)
+  AutomationMenuItem exit = file.getItems().get(3);
 
-    exit.click();
+  exit.click();
 ```
 
 ## Popup Menus
@@ -199,25 +207,25 @@ TODO: Needs example
 The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows, finding the button associated with the Preview Pane and clicking on it to turn it on/off.
 
 ```java
-    AutomationRibbonBar ribbon = window.getRibbonBar();
-    AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
-    AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
-    logger.info("First work pane is " + pane.name());
+  AutomationRibbonBar ribbon = window.getRibbonBar();
+  AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+  AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
+  logger.info("First work pane is " + pane.name());
 
-    AutomationNUIPane uiPane = pane.getNUIPane(0);
-    logger.info("First NUIPane is " + uiPane.name());
+  AutomationNUIPane uiPane = pane.getNUIPane(0);
+  logger.info("First NUIPane is " + uiPane.name());
 
-    AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
-    AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+  AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+  AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
 
-    AutomationTab tab = uiHWND.getTab(0);
-    tab.selectTabPage("View");
+  AutomationTab tab = uiHWND.getTab(0);
+  tab.selectTabPage("View");
 
-    AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+  AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
 
-    AutomationToolBar panes = panel.getToolBar("Panes");
+  AutomationToolBar panes = panel.getToolBar("Panes");
 
-    panes.getButton("Preview pane").click();
+  panes.getButton("Preview pane").click();
 ```
 
 ## Caching
@@ -225,10 +233,13 @@ The ribbon control is a complex structure, but the tree of controls is navigable
 TODO: Further examples and documentation
 
 ```java
-    UIAutomation automation = UIAutomation.getInstance();
-    IUIAutomationCacheRequest cacheRequest = automation.createCacheRequest();
-    ...
+  UIAutomation automation = UIAutomation.getInstance();
+  IUIAutomationCacheRequest cacheRequest = automation.createCacheRequest();
+  ...
 ```
+
+## Event Handling
+TODO: Not yet implemented
 
 # Contributors
 [Mark Humphreys](https://github.com/mmarquee)
