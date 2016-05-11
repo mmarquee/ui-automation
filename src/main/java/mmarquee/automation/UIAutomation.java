@@ -21,6 +21,8 @@ import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.eventhandlers.EventHandler;
+import mmarquee.automation.eventhandlers.FocusChange;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
@@ -56,6 +58,7 @@ public class UIAutomation {
 
     /**
      * Gets the instance
+     *
      * @return the instance of the ui automation library
      */
     public final static UIAutomation getInstance() {
@@ -68,6 +71,7 @@ public class UIAutomation {
 
     /**
      * Create a cache request
+     *
      * @return The created mmarquee.automation.cache request
      */
     public CacheRequest createCacheRequest() {
@@ -76,6 +80,7 @@ public class UIAutomation {
 
     /**
      * Launches the application
+     *
      * @param command The command to be called
      * @return AutomationApplication that represents the application
      */
@@ -86,6 +91,7 @@ public class UIAutomation {
 
     /**
      * Attaches to the application process
+     *
      * @param process Process to attach to
      * @return AutomationApplication that represents the application
      */
@@ -95,6 +101,7 @@ public class UIAutomation {
 
     /**
      * Finds the given process
+     *
      * @param command Command to look for
      * @return The Application
      * @throws Exception If findProcessEntry throws an exception.
@@ -115,12 +122,13 @@ public class UIAutomation {
 
     /**
      * Attaches or launches the application
+     *
      * @param command Command to be started
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication launchOrAttach(String... command) throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-            new Tlhelp32.PROCESSENTRY32.ByReference();
+                new Tlhelp32.PROCESSENTRY32.ByReference();
 
         boolean found = Utils.findProcessEntry(processEntry, command);
 
@@ -134,13 +142,14 @@ public class UIAutomation {
 
     /**
      * Gets the desktop window associated with the title
+     *
      * @param title Title to search for
      * @return AutomationWindow The found window
      */
     public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
         AutomationElement element = null;
 
-        for (int loop = 0; loop <25; loop++) {
+        for (int loop = 0; loop < 25; loop++) {
 
             element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
                     this.automation.createAndCondition(
@@ -157,6 +166,7 @@ public class UIAutomation {
 
     /**
      * Gets the list of desktop windows
+     *
      * @return List of desktop windows
      */
     public List<AutomationWindow> getDesktopWindows() {
@@ -174,28 +184,48 @@ public class UIAutomation {
     /**
      * Does this automation object support IUIAutomation2
      * i.e. is it Windows 8 or above?
+     *
      * @return supports IUIAutomation2
      */
-    public boolean supportsAutomation2 () {
+    public boolean supportsAutomation2() {
         return this.automation instanceof IUIAutomation2;
     }
 
     /**
      * Does this automation object support IUIAutomation3
      * i.e. is it Windows 8.1 or above?
+     *
      * @return supports IUIAutomation3
      */
-    public boolean supportsAutomation3 () {
+    public boolean supportsAutomation3() {
         return this.automation instanceof IUIAutomation3;
     }
 
     /**
      * Captures the screen.
+     *
+     * @param filename The filename
      * @throws AWTException Robot exception
-     * @throws IOException IO Exception
+     * @throws IOException  IO Exception
      */
-    public void captureScreen() throws AWTException, IOException {
+
+    public void captureScreen(String filename) throws AWTException, IOException {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        ImageIO.write(image, "png", new File("screenshot.png"));
+        ImageIO.write(image, "png", new File(filename));
+    }
+
+    /**
+     * Adds an event handler for the given event.
+     *
+     * @param sender       The sender
+     * @param eventId      The event id
+     * @param treeScope    The treescope
+     * @param eventHandler The EventHandler to add
+     */
+    public void addAutomationEventHandler(IUIAutomationElement sender,
+                                   int eventId,
+                                   TreeScope treeScope,
+                                   EventHandler eventHandler) {
+        this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler.getEventHandler());
     }
 }

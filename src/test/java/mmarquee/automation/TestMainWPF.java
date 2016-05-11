@@ -126,7 +126,7 @@ public class TestMainWPF {
                 logger.info("Modal? " + val1);
 
                 try {
-                    automation.captureScreen();
+                    automation.captureScreen("TestMainWPF.png");
                 } catch (Exception ex) {
                     // Should capture each exception
                     logger.info("Failed to capture screen for some reason");

@@ -15,32 +15,33 @@
  */
 package mmarquee.automation.eventhandlers;
 
-import mmarquee.automation.eventhandlers.raw.IUIAutomationEventHandler;
+import mmarquee.automation.eventhandlers.raw.IUIAutomationFocusChangedEventHandler;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 
 /**
  * Created by inpwt on 18/03/2016.
  *
- * Wrapper for the IUIAutomationEventHandler
+ * Wrapper for the IUIAutomationFocusChangedEventHandler
  */
-public class EventHandler {
-    private IUIAutomationEventHandler handler;
+public class FocusChange {
+    private IUIAutomationFocusChangedEventHandler eventHandler;
 
     /**
-     * Constructor for the event handler
+     * Constructor for TextChange handler
      * @param sender The sender
-     * @param eventId The event id to hsndle
      */
-    public EventHandler(IUIAutomationElement sender,
-                        int eventId) {
-        this.handler.handleAutomationEvent(sender, eventId);
+    public FocusChange(IUIAutomationElement sender) {
+        this.eventHandler.handleFocusChangedEvent(sender);
     }
 
     /**
      * Gets the raw event handler
-     * @return IUIAutomationEventHandler The event handler
+     * @return The event handler
      */
-    public IUIAutomationEventHandler getEventHandler() {
-        return this.handler;
+    public IUIAutomationFocusChangedEventHandler getEventHandler() {
+        return this.eventHandler;
     }
 }
+
+
+
