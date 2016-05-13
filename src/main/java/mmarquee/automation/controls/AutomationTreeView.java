@@ -43,6 +43,8 @@ public class AutomationTreeView extends AutomationBase {
      * Gets the item that has the name
      * @param name The name to look for
      * @return The AutomationTreeViewItem
+     * @throws ItemNotFoundException when the item is not found
+     * @throws ElementNotFoundException when the element is not found
      */
     public AutomationTreeViewItem getItem(String name) throws ItemNotFoundException, ElementNotFoundException {
         AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,

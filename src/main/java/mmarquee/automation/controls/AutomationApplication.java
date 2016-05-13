@@ -74,6 +74,7 @@ public class AutomationApplication extends AutomationBase {
      * Gets the window associated with the title
      * @param title The title to look for
      * @return An AutomationWindow
+     * @throws ElementNotFoundException Count find element
      */
     public AutomationWindow getWindow(String title) throws ElementNotFoundException {
 
@@ -101,6 +102,7 @@ public class AutomationApplication extends AutomationBase {
      * @param element The underlying automation element
      * @param automation The IUIAutomation associated with this session
      * @param handle The handle of this application.
+     * @param attached if we attach or launch the application?
      */
     public AutomationApplication (AutomationElement element, IUIAutomation automation, WinNT.HANDLE handle, boolean attached) {
         super(element, automation);
@@ -113,7 +115,8 @@ public class AutomationApplication extends AutomationBase {
      * @param element The underlying automation element
      * @param automation The IUIAutomation associated with this session
      * @param process The process for this application.
-     */
+     * @param attached if we attach or launch the application?
+     * */
     public AutomationApplication (AutomationElement element, IUIAutomation automation, Process process, boolean attached) {
         super(element, automation);
         // From : http://www.golesny.de/p/code/javagetpid.

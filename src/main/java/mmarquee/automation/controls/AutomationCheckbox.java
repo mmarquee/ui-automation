@@ -44,6 +44,7 @@ public class AutomationCheckbox extends AutomationBase {
      * <p>
      * Gets the toggle state of this control
      * </p>
+     * @return The toggle state
      */
     public ToggleState getToggleState () {
         return this.togglePattern.currentToggleState();

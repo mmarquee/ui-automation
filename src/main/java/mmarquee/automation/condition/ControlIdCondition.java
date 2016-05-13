@@ -28,7 +28,6 @@ public class ControlIdCondition extends PropertyCondition {
     /**
      * Constructor for the condition
      * @param automation the automation library
-     * @param automation
      */
     public ControlIdCondition (IUIAutomation automation) {
         super(automation);

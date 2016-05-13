@@ -187,7 +187,7 @@ public abstract class AutomationBase {
 
     /**
      * Finds all of the elements that are associated with this element
-     * @return List<AutomationElement>
+     * @return List List of elements
      */
     protected List<AutomationElement> findAll() {
         return this.findAll(TreeScope.TreeScope_Children);
@@ -198,6 +198,7 @@ public abstract class AutomationBase {
      * @param scope The scope of where to look
      * @param condition The condition to use
      * @return The found AutomationElement
+     * @throws ElementNotFoundException No elements found
      */
     protected AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
         return this.element.findFirst(scope, condition);
@@ -308,6 +309,7 @@ public abstract class AutomationBase {
      * Gets the selectItem pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
+     * @throws PatternNotFoundException Pattern not found
      */
     protected SelectionItem getSelectItemPattern() throws PatternNotFoundException {
         SelectionItem pattern = new SelectionItem();
@@ -326,6 +328,7 @@ public abstract class AutomationBase {
      * Gets the selection pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
+     * @throws PatternNotFoundException Pattern not found
      */
     protected Selection getSelectionPattern() throws PatternNotFoundException {
         Selection pattern = new Selection();
@@ -344,6 +347,7 @@ public abstract class AutomationBase {
      * Gets the value pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationValuePattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Value getValuePattern() throws PatternNotFoundException {
         Value pattern = new Value();
@@ -362,6 +366,7 @@ public abstract class AutomationBase {
      * Gets the rangevalue pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationRangeValuePattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Range getRangePattern() throws PatternNotFoundException {
         Range pattern = new Range();
@@ -380,6 +385,7 @@ public abstract class AutomationBase {
      * Gets the table pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationTablePattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Table getTablePattern() throws PatternNotFoundException {
         Table pattern = new Table();
@@ -398,6 +404,7 @@ public abstract class AutomationBase {
      * Gets the window pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Window getWindowPattern() throws PatternNotFoundException {
         Window pattern = new Window();
@@ -416,6 +423,7 @@ public abstract class AutomationBase {
      * Gets the expand/collapse pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected ExpandCollapse getExpandCollapsePattern() throws PatternNotFoundException {
         ExpandCollapse pattern = new ExpandCollapse();
@@ -434,6 +442,7 @@ public abstract class AutomationBase {
      * Gets the grid pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationGridPattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Grid getGridPattern() throws PatternNotFoundException {
         Grid pattern = new Grid();
@@ -452,6 +461,7 @@ public abstract class AutomationBase {
      * Gets the toggle pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationTogglePattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Toggle getTogglePattern() throws PatternNotFoundException {
         Toggle pattern = new Toggle();
@@ -470,6 +480,7 @@ public abstract class AutomationBase {
      * Gets the invoke pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Invoke getInvokePattern() throws PatternNotFoundException {
         Invoke pattern = new Invoke();
@@ -487,6 +498,7 @@ public abstract class AutomationBase {
      * Gets the text pattern for this control
      * </p>
      * @return  Returns ths IUIAutomationTextPattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
      */
     protected Text getTextPattern() throws PatternNotFoundException {
         Text pattern = new Text();
@@ -509,6 +521,7 @@ public abstract class AutomationBase {
 
     /**
      * Gets the bounding rectangle of the control
+     * @return The bounding rectangle
      */
     public WinDef.RECT getBoundingRectangle() {
         Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle.getValue());
@@ -555,7 +568,7 @@ public abstract class AutomationBase {
     /**
      * Gets the runtime id
      * @return The runtime id
-     * @throws NotImplementedException
+     * @throws NotImplementedException Throws big error, so not implemented
      */
     public int[] getRuntimeId() throws NotImplementedException {
 //        return this.element.getRuntimeId();

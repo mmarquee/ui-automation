@@ -29,6 +29,8 @@ public class PropertyChange {
     /**
      * Constructor for TextChange handler
      * @param sender The sender
+     * @param propertyId The property id
+     * @param newValue the new value
      */
     public PropertyChange(IUIAutomationElement sender, int propertyId, Object newValue) {
         this.eventHandler.handlePropertyChangedEvent(sender, propertyId, newValue);

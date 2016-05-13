@@ -121,7 +121,7 @@ public class AutomationWindow extends AutomationContainer {
 
     /**
      * Gets the menu associated with this window.
-     *
+     * @param index Index of the menu
      * @return The menu
      */
     public AutomationMainMenu getMenu(int index) {
@@ -154,6 +154,7 @@ public class AutomationWindow extends AutomationContainer {
      * Finds the child window with the given title
      * @param title Title to search for
      * @return The child window
+     * @throws ItemNotFoundException when the item is not found
      */
     public AutomationWindow getWindow(String title) throws ItemNotFoundException {
         AutomationElement item = null;
@@ -217,6 +218,7 @@ public class AutomationWindow extends AutomationContainer {
      * Sets transparency of the window
      * @param alpha 0..255 alpha attribute
      */
+    /*
     public void getTransparency(int alpha) {
 //        int handle = this.getNativeWindowHandle();
 //
@@ -226,5 +228,5 @@ public class AutomationWindow extends AutomationContainer {
 //
 //        user32.SetWindowLong(hwnd, user32.GWL_EXSTYLE, user32.WS_EX_LAYERED);
 //        user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, user32.LWA_ALPHA);
-    }
+    }*/
 }

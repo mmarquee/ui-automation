@@ -58,6 +58,7 @@ public class AutomationList extends AutomationBase {
      * @param index Index of element to get
      * @return The selected item
      * @throws ItemNotFoundException when the item is not found
+     * @throws ElementNotFoundException when the element is not found
      */
     public AutomationListItem getItem(int index) throws ItemNotFoundException, ElementNotFoundException {
 
@@ -78,6 +79,7 @@ public class AutomationList extends AutomationBase {
      * @param name Name to look for
      * @return The selected item
      * @throws ItemNotFoundException when the item is not found
+     * @throws ElementNotFoundException when the element is not found
      */
     public AutomationListItem getItem(String name) throws ItemNotFoundException, ElementNotFoundException {
         AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,

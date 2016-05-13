@@ -83,6 +83,7 @@ public class UIAutomation {
      *
      * @param command The command to be called
      * @return AutomationApplication that represents the application
+     * @throws java.io.IOException Cannot start application?
      */
     public AutomationApplication launch(String... command) throws java.io.IOException {
         Process process = Utils.startProcess(command);
@@ -125,6 +126,7 @@ public class UIAutomation {
      *
      * @param command Command to be started
      * @return AutomationApplication that represents the application
+     * @throws java.lang.Exception Unable to find process
      */
     public AutomationApplication launchOrAttach(String... command) throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
@@ -145,6 +147,7 @@ public class UIAutomation {
      *
      * @param title Title to search for
      * @return AutomationWindow The found window
+     * @throws ElementNotFoundException Element is not found
      */
     public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
         AutomationElement element = null;

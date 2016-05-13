@@ -16,7 +16,7 @@ public class Toggle extends BasePattern {
 
     /**
      * Gets the toggled state of the control
-     * @return
+     * @return The toggled state
      */
     public ToggleState currentToggleState() {
         return ((IUIAutomationTogglePattern)(this.pattern)).currentToggleState();

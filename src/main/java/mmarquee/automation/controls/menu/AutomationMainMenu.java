@@ -100,6 +100,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @param name0 First Name
      * @param name1 Second name
      * @return The menu item that matches the name
+     * @throws ElementNotFoundException Menu element not found
      */
     public AutomationMenuItem getMenuItem (String name0, String name1) throws ElementNotFoundException {
 

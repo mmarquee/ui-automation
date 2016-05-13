@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.utils;
 
-import com.sun.istack.internal.NotNull;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.win32.W32APIOptions;
@@ -52,6 +51,7 @@ public class Utils {
 
     /**
      * Finds the given process in the process list
+     * @param processEntry The process entry
      * @param command Command
      * @return The found process entry
      */

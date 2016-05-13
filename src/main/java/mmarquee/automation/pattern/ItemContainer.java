@@ -28,7 +28,7 @@ public class ItemContainer extends BasePattern {
      * @param pStartAfter Where to start in the tree of elements
      * @param propertyId The property id to find
      * @param value The value of the property
-     * @return
+     * @return The item found
      */
     public IUIAutomationElement findItemByProperty (IUIAutomationElement pStartAfter, int propertyId, Object value) {
         return ((IUIAutomationItemContainerPattern)this.pattern).findItemByProperty(pStartAfter, propertyId, value);

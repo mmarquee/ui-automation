@@ -32,8 +32,8 @@ public abstract class Condition {
     /**
      * Base 'abstract' method for Condition, needs to be implemented in the
      * subclasses, otherwise an exception is raised
-     * @return
-     * @throws NotImplementedException
+     * @return The raw condition
+     * @throws NotImplementedException Not implemented
      */
     public IUIAutomationCondition getCondition() throws NotImplementedException {
         throw new NotImplementedException();
