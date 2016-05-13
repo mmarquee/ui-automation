@@ -16,7 +16,6 @@ The code here is used to test applications written in Delphi (specifically Delph
 The MS UIAutomation Library is a COM control, and the classes that represent this have been extracted using com4j.
 
 ## Maven
-Coming soon.
 ```
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
