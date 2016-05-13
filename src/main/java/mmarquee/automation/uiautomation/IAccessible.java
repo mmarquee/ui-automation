@@ -151,7 +151,7 @@ public interface IAccessible extends Com4jObject {
    * <p>
    * Getter method for the COM property "accHelpTopic"
    * </p>
-   * @param pszHelpFile Mandatory Holder<java.lang.String> parameter.
+   * @param pszHelpFile Mandatory Holder parameter.
    * @param varChild Optional parameter. Default value is com4j.Variant.getMissing()
    * @return  Returns a value of type int
    */
@@ -230,10 +230,10 @@ public interface IAccessible extends Com4jObject {
 
 
   /**
-   * @param pxLeft Mandatory Holder<Integer> parameter.
-   * @param pyTop Mandatory Holder<Integer> parameter.
-   * @param pcxWidth Mandatory Holder<Integer> parameter.
-   * @param pcyHeight Mandatory Holder<Integer> parameter.
+   * @param pxLeft Mandatory Holder parameter.
+   * @param pyTop Mandatory Holder parameter.
+   * @param pcxWidth Mandatory Holder parameter.
+   * @param pcyHeight Mandatory Holder parameter.
    * @param varChild Optional parameter. Default value is com4j.Variant.getMissing()
    */
 

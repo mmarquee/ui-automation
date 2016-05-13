@@ -27,6 +27,7 @@ public abstract class ClassFactory {
 
   /**
    * The Central Class for UIAutomation
+   * @return The central UIAutomation object
    */
   public static mmarquee.automation.uiautomation.IUIAutomation createCUIAutomation() {
     return COM4J.createInstance( mmarquee.automation.uiautomation.IUIAutomation.class, "{FF48DBA4-60EF-4201-AA87-54103EEF594E}" );
@@ -34,6 +35,7 @@ public abstract class ClassFactory {
 
   /**
    * The Central Class for UIAutomation8
+   * @return The central UIAutomation2 object
    */
   public static mmarquee.automation.uiautomation.IUIAutomation2 createCUIAutomation8() {
     return COM4J.createInstance( mmarquee.automation.uiautomation.IUIAutomation2.class, "{E22AD333-B25F-460C-83D0-0581107395C9}" );

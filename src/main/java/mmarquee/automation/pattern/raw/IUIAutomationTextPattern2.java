@@ -34,7 +34,7 @@ public interface IUIAutomationTextPattern2 extends IUIAutomationTextPattern {
 
 
   /**
-   * @param isActive Mandatory Holder<Integer> parameter.
+   * @param isActive Mandatory Holder parameter.
    * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationTextRange
    */
 

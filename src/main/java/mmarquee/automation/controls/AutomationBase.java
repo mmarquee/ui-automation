@@ -207,7 +207,7 @@ public abstract class AutomationBase {
     /**
      * Finds all of the elements that are associated with the given condition.
      * @param scope The scope of where to look
-     * @return List<AutomationElement>
+     * @return List list of all the elements found
      */
     protected List<AutomationElement> findAll(TreeScope scope) {
         TrueCondition condition = this.createTrueCondition();

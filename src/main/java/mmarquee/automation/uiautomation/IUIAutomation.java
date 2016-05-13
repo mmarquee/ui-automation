@@ -247,7 +247,7 @@ public interface IUIAutomation extends Com4jObject {
 
 
         /**
-         * @param conditions Mandatory Holder<mmarquee.automation.uiautomation.IUIAutomationCondition> parameter.
+         * @param conditions Mandatory Holder parameter.
          * @param conditionCount Mandatory int parameter.
          * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
          */
@@ -271,7 +271,7 @@ public interface IUIAutomation extends Com4jObject {
 
 
           /**
-           * @param conditions Mandatory Holder<mmarquee.automation.uiautomation.IUIAutomationCondition> parameter.
+           * @param conditions Mandatory Holder parameter.
            * @param conditionCount Mandatory int parameter.
            * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
            */
@@ -327,7 +327,7 @@ public interface IUIAutomation extends Com4jObject {
            * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
            * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
            * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler parameter.
-           * @param propertyArray Mandatory Holder<Integer> parameter.
+           * @param propertyArray Mandatory Holder parameter.
            * @param propertyCount Mandatory int parameter.
            */
 
@@ -423,7 +423,7 @@ public interface IUIAutomation extends Com4jObject {
 
 
           /**
-           * @param array Mandatory Holder<Integer> parameter.
+           * @param array Mandatory Holder parameter.
            * @param arrayCount Mandatory int parameter.
            * @return  Returns a value of type int[]
            */
