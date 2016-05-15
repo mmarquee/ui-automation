@@ -199,11 +199,28 @@ There has been one odd menu that we have found in our applications, and at the m
 ```
 
 ## Popup Menus
-TODO: Needs example
+A popup menu is just another menu, and can be accessed in the same manner. In the WPF example, there is a button that has an associated context menu, the code below illustrates how to get at this menu and associated menu items
+
+```java
+  AutomationMouse mouse = new AutomationMouse();
+  mouse.setLocation(1119, 896);
+  mouse.rightClick();
+
+  // Wait to make sure menu is displayed
+  try {
+    Thread.sleep(500);
+  } catch (Exception ex) {
+    logger.info("Interrupted");
+  }
+
+  // Should be able to get the popup menu here
+  AutomationMenu popup = window.getMenu(0)
+  
+```
 
 ## The Ribbon control
 
-The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows, finding the button associated with the Preview Pane and clicking on it to turn it on/off.
+The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows (automating the Windows Explorer), finding the button associated with the Preview Pane and clicking on it to turn it on/off.
 
 ```java
   AutomationRibbonBar ribbon = window.getRibbonBar();
