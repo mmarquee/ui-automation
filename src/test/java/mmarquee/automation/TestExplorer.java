@@ -27,9 +27,10 @@ import org.apache.log4j.Logger;
  * whether we can get to all the bits of the UI
  */
 class TestExplorer {
-    void run() {
 
-        Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    Logger logger = Logger.getLogger(AutomationBase.class.getName());
+
+    void run() {
 
         UIAutomation automation = UIAutomation.getInstance();
 

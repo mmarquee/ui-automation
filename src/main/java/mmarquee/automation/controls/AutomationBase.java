@@ -16,18 +16,20 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.Pointer;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
+import mmarquee.automation.pattern.Window;
 import mmarquee.automation.pattern.raw.*;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.List;
 
 /**
@@ -43,6 +45,8 @@ public abstract class AutomationBase {
 
     protected IUIAutomation automation;
 
+    private WinDef.HWND handle = null;
+
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
@@ -53,7 +57,7 @@ public abstract class AutomationBase {
         this.automation = automation;
 
         // Can we get the handle (HWND) and hence the rect?
-//        WinDef.HWND handle = this.getNativeWindowHandle();
+        this.handle = this.getNativeWindowHandle();
     }
 
     protected boolean isDockPatternAvailable () {
@@ -524,11 +528,13 @@ public abstract class AutomationBase {
      * @return The bounding rectangle
      */
     public WinDef.RECT getBoundingRectangle() {
-        Object obj = this.element.getCurrentPropertyValue(PropertyID.BoundingRectangle.getValue());
-
-         // obj is always empty :-(
+        final User32 usr = User32.INSTANCE;
         WinDef.RECT rect = new WinDef.RECT();
-        rect = (WinDef.RECT)obj;
+        usr.GetWindowRect(this.handle, rect);
+
+        // Adjust so that right and bottom match width and height
+        rect.right = rect.right -rect.left;
+        rect.bottom = rect.bottom -rect.top;
 
         return rect;
     }
@@ -537,17 +543,10 @@ public abstract class AutomationBase {
      * Get the native window handle
      * @return The handle
      */
-    /*
     public WinDef.HWND getNativeWindowHandle() {
         Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
-
-        WinDef.HWND hwnd = new WinDef.HWND();
-
-        // hwnd.
-
-        return hwnd;
+        return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
     }
-*/
 
     /**
      * Gets the ARIA role of the element
@@ -581,6 +580,14 @@ public abstract class AutomationBase {
      */
     public String getFrameworkId() {
         return this.element.getFrameworkId();
+    }
+
+    /**
+     * Gets the current provider description
+     * @return The provider description
+     */
+    public String getProviderDescription() {
+        return this.element.getProviderDescription();
     }
 
     /**

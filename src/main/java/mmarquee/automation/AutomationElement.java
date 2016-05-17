@@ -186,13 +186,20 @@ public class AutomationElement {
     }
 
     /**
-     * GEts the framework ID
+     * Gets the framework ID
      * @return The framework ID
      */
     public String getFrameworkId() {
-        return element.currentFrameworkId();
+        return this.element.currentFrameworkId();
     }
 
+    /**
+     * Gets the provider description
+     * @return The provider description
+     */
+    public String getProviderDescription() {
+        return this.element.currentProviderDescription();
+    }
     /**
      * Get the runtime Id
      * @return The runtime ID

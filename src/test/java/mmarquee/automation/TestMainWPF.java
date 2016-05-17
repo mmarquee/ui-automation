@@ -15,6 +15,7 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.controls.*;
@@ -24,6 +25,7 @@ import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -33,9 +35,9 @@ import java.util.List;
  */
 public class TestMainWPF {
 
-    public void run() {
-        Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
+    public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
@@ -377,6 +379,13 @@ public class TestMainWPF {
 
             logger.info("Investigated the cache");
 
+            logger.info("Provider Description:" + window.getProviderDescription());
+            logger.info("Handle: " + window.getNativeWindowHandle());
+
+            WinDef.RECT rect = window.getBoundingRectangle();
+
+            logger.info("Rect: " + rect);
+
             logger.info("ARIA role : " + window.getAriaRole());
             logger.info("Orientation: " + window.getOrientation().toString());
             logger.info("Item Status: " + window.getItemStatus());
@@ -392,7 +401,7 @@ public class TestMainWPF {
                 logger.info("Interrupted");
             }
 
-            window.dumpUI();
+            //window.dumpUI();
 
             // Should be able to get the popup menu here
 

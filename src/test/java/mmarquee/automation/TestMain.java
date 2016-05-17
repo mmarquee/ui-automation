@@ -33,10 +33,10 @@ import java.util.List;
  */
 public class TestMain {
 
+    Logger logger = Logger.getLogger(AutomationBase.class.getName());
+
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
-
-        Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
         AutomationApplication application = null;
 
