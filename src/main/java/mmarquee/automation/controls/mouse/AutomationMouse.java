@@ -1,5 +1,7 @@
 package mmarquee.automation.controls.mouse;
 
+import mmarquee.automation.UIAutomation;
+
 import java.awt.*;
 import java.awt.event.InputEvent;
 
@@ -9,18 +11,35 @@ import java.awt.event.InputEvent;
  * Wrapper for Robot, used if no other option is available.
  */
 public class AutomationMouse {
+
+    private static AutomationMouse INSTANCE = null;
+
     private Robot robot;
 
     /**
      * Constructor for the AutomationMouse
      */
-    public AutomationMouse () {
+    protected AutomationMouse () {
         try {
             robot = new Robot();
         } catch (AWTException ex) {
             // Not sure what happens if this fails
         }
     }
+
+    /**
+     * Gets the instance
+     *
+     * @return the instance of the ui automation library
+     */
+    public final static AutomationMouse getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new AutomationMouse();
+        }
+
+        return INSTANCE;
+    }
+
 
     /**
      * Moves mouse pointer to given screen coordinates.

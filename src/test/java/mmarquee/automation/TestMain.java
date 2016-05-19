@@ -31,9 +31,7 @@ import java.util.List;
  *  *
  * Test the automation wrapper on a Delphi VCL application.
  */
-public class TestMain {
-
-    Logger logger = Logger.getLogger(AutomationBase.class.getName());
+public class TestMain extends TestBase {
 
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
@@ -148,11 +146,9 @@ public class TestMain {
             try {
                 AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
                 cb0.expand();
-                try {
-                    cb0.wait(750);
-                } catch (Exception ex) {
-                    // Time out
-                }
+
+                this.rest();
+
                 List<AutomationListItem> litems = cb0.getList();
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find combobox");
@@ -203,11 +199,7 @@ public class TestMain {
                 logger.info("Failed to find window");
             }
 
-            try {
-                Thread.sleep(500);
-            } catch (Exception ex) {
-                logger.info("Interrupted");
-            }
+            this.rest();
 
             /* This doesn't seem to work */
             AutomationToolBar toolbar = window.getToolBar(0);

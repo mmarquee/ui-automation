@@ -15,7 +15,6 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.controls.*;
@@ -25,7 +24,6 @@ import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 
-import java.awt.*;
 import java.util.List;
 
 /**
@@ -33,9 +31,7 @@ import java.util.List;
  *
  * Test the automation wrapper on a WPF application.
  */
-public class TestMainWPF {
-
-    Logger logger = Logger.getLogger(AutomationBase.class.getName());
+public class TestMainWPF extends TestBase {
 
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
@@ -53,11 +49,7 @@ public class TestMainWPF {
         application.waitForInputIdle(5000);
 
         // Sleep for WPF, to address above issue
-        try {
-            Thread.sleep(500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
+        this.rest();
 
         AutomationWindow window = null;
 
@@ -106,12 +98,7 @@ public class TestMainWPF {
             AutomationMenuItem file = mainMenu.getItems().get(0);
             file.expand();
 
-            // A short wait for the expand to work
-            try {
-                Thread.sleep(500);
-            } catch (Exception ex) {
-                logger.info("Interrupted");
-            }
+            this.rest();
 
             logger.info("Items = " + file.getItems().size());
 
@@ -391,15 +378,17 @@ public class TestMainWPF {
             logger.info("Item Status: " + window.getItemStatus());
             logger.info("FrameworkId: " + window.getFrameworkId());
 
-            AutomationMouse mouse = new AutomationMouse();
-            mouse.setLocation(1119, 896);
+            AutomationMouse mouse = AutomationMouse.getInstance();
+
+            AutomationButton rightClickBtn = window.getButton("Right-click me!");
+
+            //mouse.setLocation(1119, 896);
+            WinDef.POINT clickPoint = rightClickBtn.getClickablePoint();
+
+            mouse.setLocation(clickPoint.x, clickPoint.y);
             mouse.rightClick();
 
-            try {
-                Thread.sleep(500);
-            } catch (Exception ex) {
-                logger.info("Interrupted");
-            }
+            this.rest();
 
             //window.dumpUI();
 

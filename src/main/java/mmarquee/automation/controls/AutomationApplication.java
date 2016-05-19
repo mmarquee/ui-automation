@@ -32,11 +32,20 @@ import java.util.List;
  * Wrapper around the Application element
  */
 public class AutomationApplication extends AutomationBase {
-    private final User32 user32 = User32.INSTANCE;
+
+    /**
+     * The window handle
+     */
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
+    /**
+     * Did we attach to the application, or start it
+     */
     private boolean isAttached = false;
 
+    /**
+     * A very, very long timeout
+     */
     private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
 
     /**

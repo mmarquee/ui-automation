@@ -31,7 +31,7 @@ import java.util.List;
  *  *
  * Test the automation wrapper on a Delphi VCL application.
  */
-public class TestNotepad {
+public class TestNotepad extends TestBase {
 
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
@@ -67,15 +67,11 @@ public class TestNotepad {
             window.maximize();
 
             // Now do a popup?
-            AutomationMouse mouse = new AutomationMouse();
+            AutomationMouse mouse = AutomationMouse.getInstance();
             mouse.setLocation(500,250);
             mouse.rightClick();
 
-            try {
-                Thread.sleep(1500);
-            } catch (Exception ex) {
-                logger.info("Interrupted");
-            }
+            this.rest();
 
             window.dumpUI();
 

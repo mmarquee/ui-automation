@@ -26,9 +26,7 @@ import org.apache.log4j.Logger;
  * Test the automation library on a non-Delphi, non-WPF application, and see
  * whether we can get to all the bits of the UI
  */
-class TestExplorer {
-
-    Logger logger = Logger.getLogger(AutomationBase.class.getName());
+class TestExplorer extends TestBase {
 
     void run() {
 
@@ -75,21 +73,15 @@ class TestExplorer {
                 panes.getButton("Preview pane").click();
                 AutomationSplitButton split = panes.getSplitButton("Navigation pane");
                 split.click();
-                try {
-                    Thread.sleep(500);
-                } catch (Exception ex) {
-                    logger.info("Interrupted");
-                }
+
+                this.rest();
+
                 split.click();
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find element");
             }
 
-            try {
-                Thread.sleep(500);
-            } catch (Exception ex) {
-                logger.info("Interrupted");
-            }
+            this.rest();
 
             AutomationReBar rebar = window.getReBar(0);
             try {
@@ -114,11 +106,7 @@ class TestExplorer {
                     AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
                     logger.info(treeItem.name());
 
-                    try {
-                        Thread.sleep(500);
-                    } catch (Exception ex) {
-                        logger.info("Interrupted");
-                    }
+                    this.rest();
 
                     treeItem.click();
                 } catch (ItemNotFoundException ex) {

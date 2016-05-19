@@ -45,7 +45,7 @@ public class UIAutomation {
 
     private AutomationElement rootElement;
 
-    // TODO: Fix this (changed for caching
+    // TODO: Fix this (changed for caching for now)
     public IUIAutomation automation;
 
     /**

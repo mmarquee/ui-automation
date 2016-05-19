@@ -47,6 +47,8 @@ public abstract class AutomationBase {
 
     private WinDef.HWND handle = null;
 
+    protected final User32 user32 = User32.INSTANCE;
+
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
@@ -56,8 +58,10 @@ public abstract class AutomationBase {
         this.element = element;
         this.automation = automation;
 
-        // Can we get the handle (HWND) and hence the rect?
-        this.handle = this.getNativeWindowHandle();
+        if (element != null) {
+            // Can we get the handle (HWND) and hence the rect?
+            this.handle = this.getNativeWindowHandle();
+        }
     }
 
     protected boolean isDockPatternAvailable () {
@@ -143,16 +147,16 @@ public abstract class AutomationBase {
     /**
      * Gets a clickable point for the control
      *
-     * This is currently not working
+     * This is manufactured by getting the bouning rect and finding the middle point.
      *
      * @return The clickable point
      */
     public WinDef.POINT getClickablePoint () {
-        Object value = this.element.getCurrentPropertyValue(PropertyID.ClickablePoint.getValue());
+        WinDef.RECT rect = this.getBoundingRectangle();
 
-        logger.info(value);
-
-        WinDef.POINT point = new WinDef.POINT();
+        WinDef.POINT point = new WinDef.POINT(
+                rect.left + (rect.right /2),
+                rect.top + (rect.bottom /2));
 
         return point;
     }
@@ -528,9 +532,8 @@ public abstract class AutomationBase {
      * @return The bounding rectangle
      */
     public WinDef.RECT getBoundingRectangle() {
-        final User32 usr = User32.INSTANCE;
         WinDef.RECT rect = new WinDef.RECT();
-        usr.GetWindowRect(this.handle, rect);
+        user32.GetWindowRect(this.handle, rect);
 
         // Adjust so that right and bottom match width and height
         rect.right = rect.right -rect.left;
