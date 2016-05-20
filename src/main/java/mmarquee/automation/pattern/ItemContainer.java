@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the itemcontainer pattern
  */
 public class ItemContainer extends BasePattern {
 

@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the window pattern.
  */
 public class Window extends BasePattern {
 
@@ -32,14 +34,14 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Maximize the control
+     * Maximize the 'window'
      */
     public void maximize() {
         this.setWindowState(WindowVisualState.WindowVisualState_Maximized);
     }
 
     /**
-     * Minimize the control
+     * Minimize the 'window'
      */
     public void minimize() {
         this.setWindowState(WindowVisualState.WindowVisualState_Minimized);
@@ -62,7 +64,7 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Closes the window
+     * Closes the 'window'
      */
     public void close() {
         ((IUIAutomationWindowPattern)this.pattern).close();

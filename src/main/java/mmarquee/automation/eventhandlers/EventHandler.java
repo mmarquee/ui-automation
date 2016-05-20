@@ -29,7 +29,7 @@ public class EventHandler {
     /**
      * Constructor for the event handler
      * @param sender The sender
-     * @param eventId The event id to hsndle
+     * @param eventId The event id to handle
      */
     public EventHandler(IUIAutomationElement sender,
                         int eventId) {

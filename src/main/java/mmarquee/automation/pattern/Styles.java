@@ -19,12 +19,22 @@ import mmarquee.automation.pattern.raw.IUIAutomationStylesPattern;
 
 /**
  * Created by inpwt on 01/03/2016.
+ *
+ * Wrapper around the styles pattern.
  */
 public class Styles extends BasePattern {
+    /**
+     * Gets the style by name
+     * @return The style name.
+     */
     public String getStyleName () {
         return ((IUIAutomationStylesPattern)this.pattern).currentStyleName();
     }
 
+    /**
+     * Gets the style id.
+     * @return The style id.
+     */
     public int getStyleId () {
         return ((IUIAutomationStylesPattern)this.pattern).currentStyleId();
     }

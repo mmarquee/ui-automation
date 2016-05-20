@@ -19,6 +19,8 @@ import mmarquee.automation.pattern.raw.IUIAutomationValuePattern;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the value pattern.
  */
 public class Value extends BasePattern {
     /**

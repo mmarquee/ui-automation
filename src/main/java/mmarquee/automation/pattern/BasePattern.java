@@ -24,6 +24,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 29/02/2016.
+ *
+ * Base for the pattern wrappers
  */
 public abstract class BasePattern implements Pattern {
 

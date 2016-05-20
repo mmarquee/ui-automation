@@ -5,6 +5,8 @@ import mmarquee.automation.uiautomation.ToggleState;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the toggle pattern.
  */
 public class Toggle extends BasePattern {
     /**

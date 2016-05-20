@@ -19,6 +19,8 @@ import com4j.Com4jObject;
 
 /**
  * Created by inpwt on 28/02/2016.
+ *
+ * Interface describing the basic behaviour of a pattern.
  */
 public interface Pattern {
     /**

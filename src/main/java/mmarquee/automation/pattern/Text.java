@@ -21,9 +21,15 @@ import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the text pattern
  */
 public class Text extends BasePattern {
-    //?? Needs to do SOMETHING!!!
+    /**
+     * Gets the selection.
+     *
+     * Not functional at the moment.
+     */
     public void getSelection() {
         IUIAutomationTextRangeArray selection =
                 ((IUIAutomationTextPattern)pattern).getSelection();
@@ -31,10 +37,17 @@ public class Text extends BasePattern {
         // OK, now what?
     }
 
+    /**
+     * Gets the document range from the pattern.
+     */
     public void getDocumentRange () {
         ((IUIAutomationTextPattern)pattern).getSelection();
     }
 
+    /**
+     * Gets the text from the pattern.
+     * @return The text.
+     */
     public String getText() {
         IUIAutomationTextRange range = ((IUIAutomationTextPattern)pattern).documentRange();
 

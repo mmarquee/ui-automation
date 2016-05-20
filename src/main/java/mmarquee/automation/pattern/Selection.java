@@ -23,6 +23,8 @@ import java.util.List;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the Selection pattern.
  */
 public class Selection extends BasePattern {
     public List<AutomationElement> getCurrentSelection () {

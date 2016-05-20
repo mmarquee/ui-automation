@@ -20,6 +20,8 @@ import mmarquee.automation.uiautomation.ExpandCollapseState;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for  the ExpandCollapse pattern
  */
 public class ExpandCollapse extends BasePattern {
     /**

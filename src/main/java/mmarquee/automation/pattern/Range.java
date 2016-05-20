@@ -19,6 +19,8 @@ import mmarquee.automation.pattern.raw.IUIAutomationRangeValuePattern;
 
 /**
  * Created by inpwt on 01/03/2016.
+ *
+ * Wrapper for the range pattern.
  */
 public class Range extends BasePattern {
     public void setValue (double value) {

@@ -17,8 +17,10 @@ package mmarquee.automation.cache;
 
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.condition.Condition;
 import mmarquee.automation.uiautomation.IUIAutomationCacheRequest;
 import mmarquee.automation.PatternID;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by inpwt on 05/05/2016.
@@ -34,6 +36,28 @@ public class CacheRequest {
      */
     public CacheRequest() {
         this.cacheRequest = UIAutomation.getInstance().CreateCacheRequest();
+    }
+/*
+    public void activate() {
+        this.cacheRequest.
+    }
+*/
+
+    /**
+     * Stets the tree filter condition
+     * @param condition The filter condition.
+     */
+    public void setTreeFilter(Condition condition) {
+        this.cacheRequest.treeFilter(condition.getCondition());
+    }
+
+
+    /**
+     * Sets the treeScope of the cache
+     * @param treeScope The treeScope to use.
+     */
+    public void setTreeScope(TreeScope treeScope) {
+        this.cacheRequest.treeScope(treeScope);
     }
 
     /**

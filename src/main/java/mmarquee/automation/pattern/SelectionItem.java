@@ -19,6 +19,8 @@ import mmarquee.automation.pattern.raw.IUIAutomationSelectionItemPattern;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the SelectionItem pattern.
  */
 public class SelectionItem extends BasePattern {
     /**

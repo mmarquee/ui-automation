@@ -19,6 +19,8 @@ import mmarquee.automation.pattern.raw.IUIAutomationInvokePattern;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the Invoke pattern
  */
 public class Invoke extends BasePattern {
     /**

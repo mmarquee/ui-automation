@@ -23,8 +23,15 @@ import java.util.List;
 
 /**
  * Created by inpwt on 25/02/2016.
+ *
+ * Wrapper for the table pattern
  */
 public class Table extends BasePattern {
+
+    /**
+     * Gets the column headers for the grid.
+     * @return
+     */
     public List<AutomationElement> getCurrentColumnHeaders() {
         IUIAutomationElementArray collection = ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
         return this.collectionToList(collection);

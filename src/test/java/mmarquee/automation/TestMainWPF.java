@@ -22,6 +22,7 @@ import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.automation.uiautomation.TreeScope;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -361,8 +362,13 @@ public class TestMainWPF extends TestBase {
             CacheRequest cache = automation.createCacheRequest();
             cache.add(PropertyID.Name);
             cache.add(PropertyID.IsEnabled);
+            cache.setTreeScope(TreeScope.TreeScope_Children);
+            //cache.setTreeFilter();
+
 
             AutomationElement element;
+
+
 
             logger.info("Investigated the cache");
 
