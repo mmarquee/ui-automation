@@ -15,19 +15,19 @@
  */
 package mmarquee.automation.condition;
 
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Wrapper for the true condition.
  */
 public class TrueCondition extends Condition {
-    public TrueCondition (UIAutomation automation) {
-        super(automation);
-    }
-
+    /**
+     * Gets the raw property
+     * @return The underlying, raw condition
+     */
     public IUIAutomationCondition getCondition() {
-        return automation.CreateTrueCondition();
+        return this.automation.CreateTrueCondition();
     }
 }

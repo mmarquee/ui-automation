@@ -30,22 +30,16 @@ public class AutomationIdCondition  extends PropertyCondition {
 
     /**
      * Constructor, for an empty condition.
-     *
-     * @param automation the automation library
      */
-    public AutomationIdCondition (UIAutomation automation) {
-        super(automation);
+    public AutomationIdCondition () {
         this.property = PropertyID.AutomationId.getValue();
     }
 
     /**
      * Constructor, with supplied automation ID.
-     *
-     * @param automation The automation library
      * @param automationId The automation ID
      */
-    public AutomationIdCondition (UIAutomation automation, String automationId) {
-        super(automation);
+    public AutomationIdCondition (String automationId) {
         this.name = automationId;
         this.property = PropertyID.AutomationId.getValue();
     }
@@ -55,6 +49,6 @@ public class AutomationIdCondition  extends PropertyCondition {
      * @return The underlying, raw condition
      */
     public IUIAutomationCondition getCondition () {
-        return automation.CreatePropertyCondition(this.property, this.name);
+        return this.automation.CreatePropertyCondition(this.property, this.name);
     }
 }

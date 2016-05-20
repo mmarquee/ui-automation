@@ -16,28 +16,34 @@
 package mmarquee.automation.condition;
 
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Wrapper for the Property condition, for name.
  */
 public class NameCondition  extends PropertyCondition {
     private String name;
 
-    public NameCondition (UIAutomation automation) {
-        super(automation);
+    public NameCondition () {
         this.property = PropertyID.Name.getValue();
     }
 
-    public NameCondition (UIAutomation automation, String name) {
-        super(automation);
+    /**
+     * Constructor for the name condition
+     * @param name The name to check
+     */
+    public NameCondition (String name) {
         this.name = name;
         this.property = PropertyID.Name.getValue();
     }
 
+    /**
+     * Gets the raw property
+     * @return The underlying, raw condition
+     */
     public IUIAutomationCondition getCondition () {
-        return automation.CreatePropertyCondition(this.property, this.name);
+        return this.automation.CreatePropertyCondition(this.property, this.name);
     }
 }

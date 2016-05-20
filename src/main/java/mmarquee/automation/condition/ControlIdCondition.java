@@ -22,26 +22,24 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * A control ID base condition.
  */
 public class ControlIdCondition extends PropertyCondition {
     private int id;
 
     /**
      * Constructor for the condition
-     * @param automation the automation library
      */
-    public ControlIdCondition (UIAutomation automation) {
-        super(automation);
+    public ControlIdCondition () {
         this.property = PropertyID.ControlType.getValue();
     }
 
     /**
      * Constructor for the condition
-     * @param automation the automation library
      * @param id The property id
      */
-    public ControlIdCondition (UIAutomation automation, int id) {
-        super(automation);
+    public ControlIdCondition (int id) {
         this.id = id;
        this.property = PropertyID.ControlType.getValue();
     }
@@ -51,6 +49,6 @@ public class ControlIdCondition extends PropertyCondition {
      * @return The underlying condition
      */
     public IUIAutomationCondition getCondition () {
-        return automation.CreatePropertyCondition(this.property, this.id);
+        return this.automation.CreatePropertyCondition(this.property, this.id);
     }
 }

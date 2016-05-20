@@ -21,12 +21,14 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Wrapper for a FALSE condition.
  */
 public class FalseCondition extends Condition{
-    public FalseCondition (UIAutomation automation) {
-        super(automation);
-    }
-
+    /**
+     * Gets the raw property
+     * @return The underlying, raw condition
+     */
     public IUIAutomationCondition getCondition() {
         return this.automation.CreateFalseCondition();
     }

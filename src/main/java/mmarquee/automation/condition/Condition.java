@@ -22,13 +22,11 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Base class for conditions
  */
 public abstract class Condition {
-    protected UIAutomation automation;
-
-    public Condition(UIAutomation automation) {
-        this.automation = automation;
-    }
+    protected UIAutomation automation = UIAutomation.getInstance();
 
     /**
      * Base 'abstract' method for Condition, needs to be implemented in the

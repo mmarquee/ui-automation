@@ -15,32 +15,40 @@
  */
 package mmarquee.automation.condition;
 
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Wrapper for the OR condition.
  */
 public class OrCondition extends Condition {
     private List<Condition> conditions;
 
-    public OrCondition (UIAutomation automation) {
-        super(automation);
+    /**
+     * Constructor for OrCondition
+     */
+    public OrCondition () {
         List<Condition> conditions = new ArrayList<Condition>();
     }
 
-    public OrCondition (UIAutomation automation, Condition firstCondition, Condition secondCondition) {
-        super(automation);
-
+    /**
+     * Constructor for OrCondition
+     * @param firstCondition First condition
+     * @param secondCondition second condition
+     */
+    public OrCondition (Condition firstCondition, Condition secondCondition) {
         this.conditions = new ArrayList<Condition>();
         this.add(firstCondition);
         this.add(secondCondition);
     }
 
+    /**
+     * Adds a sub-condition to this condition
+     * @param condition The condition to add
+     */
     private void add(Condition condition) {
         conditions.add(condition);
     }

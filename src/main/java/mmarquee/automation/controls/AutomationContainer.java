@@ -45,7 +45,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     AutomationElement getControlByControlType(int index, int id) {
-        ControlIdCondition condition = new ControlIdCondition(this.automation, id);
+        ControlIdCondition condition = new ControlIdCondition(id);
 
         List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
 

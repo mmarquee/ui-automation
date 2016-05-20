@@ -222,7 +222,7 @@ public abstract class AutomationBase {
      * @return The true condition
      */
     public TrueCondition createTrueCondition() {
-        return new TrueCondition(this.automation);
+        return new TrueCondition();
     }
 
     /**
@@ -230,7 +230,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public FalseCondition createFalseCondition() {
-        return new FalseCondition(this.automation);
+        return new FalseCondition();
     }
 
     /**
@@ -239,7 +239,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public NameCondition createNamePropertyCondition(String name) {
-        return new NameCondition(this.automation, name);
+        return new NameCondition(name);
     }
 
     /**
@@ -248,7 +248,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public AutomationIdCondition createAutomationIdPropertyCondition(String automationId) {
-        return new AutomationIdCondition(this.automation, automationId);
+        return new AutomationIdCondition(automationId);
     }
 
     /**
@@ -257,7 +257,7 @@ public abstract class AutomationBase {
      * @return The condition
      */
     public ControlIdCondition createControlTypeCondition(int id) {
-        return new ControlIdCondition(this.automation, id);
+        return new ControlIdCondition(id);
     }
 
     /**
@@ -267,7 +267,7 @@ public abstract class AutomationBase {
      * @return The Or Condition
      */
     public OrCondition createOrCondition(Condition condition1, Condition condition2) {
-        return new OrCondition(this.automation, condition1, condition2);
+        return new OrCondition(condition1, condition2);
     }
 
     /**
@@ -277,7 +277,7 @@ public abstract class AutomationBase {
      * @return The And condition
      */
     public AndCondition createAndCondition(Condition condition1, Condition condition2) {
-        return new AndCondition(this.automation, condition1, condition2);
+        return new AndCondition(condition1, condition2);
     }
 
     /**

@@ -15,16 +15,11 @@
  */
 package mmarquee.automation.condition;
 
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomation;
-
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Base for the property conditions
  */
 public abstract class PropertyCondition extends Condition {
     protected int property = -1;
-
-    public PropertyCondition (UIAutomation automation) {
-        super(automation);
-    }
 }

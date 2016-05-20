@@ -15,15 +15,14 @@
  */
 package mmarquee.automation.condition;
 
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by inpwt on 24/02/2016.
+ *
+ * Wrapper for the And Condition.
  */
 public class AndCondition extends Condition {
 
@@ -31,22 +30,17 @@ public class AndCondition extends Condition {
 
     /**
      * Constructor for Condition
-     * @param automation The automation library
      */
-    public AndCondition (UIAutomation automation) {
-        super(automation);
+    public AndCondition () {
         List<Condition> conditions = new ArrayList<Condition>();
     }
 
     /**
      * Constructor for Condition
-     * @param automation The automation library
      * @param firstCondition First condition
      * @param secondCondition Second condition
      */
-    public AndCondition (UIAutomation automation, Condition firstCondition, Condition secondCondition) {
-        super(automation);
-
+    public AndCondition (Condition firstCondition, Condition secondCondition) {
         this.conditions = new ArrayList<Condition>();
         this.add(firstCondition);
         this.add(secondCondition);
@@ -65,7 +59,7 @@ public class AndCondition extends Condition {
      * @return the underlying IUIAutomationCondition
      */
     public IUIAutomationCondition getCondition () {
-        return automation.CreateAndCondition(
+        return this.automation.CreateAndCondition(
                 this.conditions.get(0).getCondition(),
                 this.conditions.get(1).getCondition());
     }
