@@ -31,10 +31,9 @@ public class AutomationHyperlink extends AutomationBase {
     /**
      * Constructor for the AutomationHyperlink
      * @param element The underlying automation element
-     * @param automation The automation library
      */
-    public AutomationHyperlink(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationHyperlink(AutomationElement element) {
+        super(element);
 
         try {
             this.invokePattern = this.getInvokePattern();

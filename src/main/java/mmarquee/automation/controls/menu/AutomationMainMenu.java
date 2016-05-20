@@ -51,10 +51,9 @@ public class AutomationMainMenu extends AutomationBase {
      * Constructor for AutomationMainMenu
      * @param parent Parent of the element
      * @param element The element
-     * @param automation The automation interface
      */
-    public AutomationMainMenu(AutomationElement parent, AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationMainMenu(AutomationElement parent, AutomationElement element) {
+        super(element);
         this.parent = parent;
     }
 
@@ -132,7 +131,7 @@ public class AutomationMainMenu extends AutomationBase {
             }
         }
 
-        return new AutomationMenuItem(foundElement, this.automation);
+        return new AutomationMenuItem(foundElement);
     }
 
     /**
@@ -146,7 +145,7 @@ public class AutomationMainMenu extends AutomationBase {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
         
         for(AutomationElement item: items) {
-            list.add(new AutomationMenuItem(item, automation));
+            list.add(new AutomationMenuItem(item));
         }
 
         return list;

@@ -34,10 +34,9 @@ public class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
      * @param element The underlying automation element
-     * @param automation The IUIAutomation associated with this session
      */
-    public AutomationTitleBar(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationTitleBar(AutomationElement element) {
+        super(element);
     }
 
     public AutomationMainMenu getMenuBar() throws ElementNotFoundException {
@@ -45,6 +44,6 @@ public class AutomationTitleBar extends AutomationContainer {
 
         AutomationElement element = this.findFirst(TreeScope.TreeScope_Descendants, condition);
 
-        return new AutomationMainMenu(this.element, element, this.automation);
+        return new AutomationMainMenu(this.element, element);
     }
 }

@@ -34,10 +34,9 @@ public class AutomationDocument extends AutomationBase {
     /**
      * Constructor for the AutomationDocument
      * @param element The underlying automation element
-     * @param automation The automation library
      */
-    public AutomationDocument(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationDocument(AutomationElement element) {
+        super(element);
 
         try {
             this.textPattern = this.getTextPattern();

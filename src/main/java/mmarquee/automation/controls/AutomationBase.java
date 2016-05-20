@@ -19,14 +19,11 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PropertyID;
+import mmarquee.automation.*;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.pattern.raw.*;
-import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -43,7 +40,7 @@ public abstract class AutomationBase {
 
     protected AutomationElement element;
 
-    protected IUIAutomation automation;
+    protected UIAutomation automation = UIAutomation.getInstance();
 
     private WinDef.HWND handle = null;
 
@@ -52,11 +49,9 @@ public abstract class AutomationBase {
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
-     * @param automation The automation object
      */
-    public AutomationBase (AutomationElement element, IUIAutomation automation) {
+    public AutomationBase (AutomationElement element) {
         this.element = element;
-        this.automation = automation;
 
         if (element != null) {
             // Can we get the handle (HWND) and hence the rect?

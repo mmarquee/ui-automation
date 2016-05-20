@@ -34,10 +34,9 @@ public class AutomationSystemMenu extends AutomationBase {
     /**
      * Construct the AutomationSystemMenu
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationSystemMenu(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationSystemMenu(AutomationElement element) {
+        super(element);
 
         this.getItems();
     }
@@ -63,7 +62,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(foundElement, this.automation);
+            return new AutomationMenuItem(foundElement);
         } else {
             // Throw an exception
             throw  new ItemNotFoundException();

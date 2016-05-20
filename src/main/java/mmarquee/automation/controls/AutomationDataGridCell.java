@@ -29,10 +29,9 @@ public class AutomationDataGridCell extends AutomationBase {
     /**
      * Construct the AutomationDataGridCell
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationDataGridCell(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationDataGridCell(AutomationElement element) {
+        super(element);
 
      //   try {
      //       this.valuePattern = this.getValuePattern();

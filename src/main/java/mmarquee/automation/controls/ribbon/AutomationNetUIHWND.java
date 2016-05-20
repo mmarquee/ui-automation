@@ -28,9 +28,8 @@ public class AutomationNetUIHWND extends AutomationPanel {
     /**
      * Construct the AutomationNetUIHWND
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationNetUIHWND(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationNetUIHWND(AutomationElement element) {
+        super(element);
     }
 }

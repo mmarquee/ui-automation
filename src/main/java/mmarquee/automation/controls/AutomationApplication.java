@@ -100,7 +100,7 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            return new AutomationWindow(foundElement, this.automation);
+            return new AutomationWindow(foundElement);
         } else {
             throw new ElementNotFoundException();
         }
@@ -109,12 +109,11 @@ public class AutomationApplication extends AutomationBase {
     /**
      * Constructor for the AutomationApplication.
      * @param element The underlying automation element
-     * @param automation The IUIAutomation associated with this session
      * @param handle The handle of this application.
      * @param attached if we attach or launch the application?
      */
-    public AutomationApplication (AutomationElement element, IUIAutomation automation, WinNT.HANDLE handle, boolean attached) {
-        super(element, automation);
+    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached) {
+        super(element);
         this.handle = handle;
         this.isAttached = attached;
     }
@@ -122,12 +121,11 @@ public class AutomationApplication extends AutomationBase {
     /**
      * Constructor for the AutomationApplication.
      * @param element The underlying automation element
-     * @param automation The IUIAutomation associated with this session
      * @param process The process for this application.
      * @param attached if we attach or launch the application?
      * */
-    public AutomationApplication (AutomationElement element, IUIAutomation automation, Process process, boolean attached) {
-        super(element, automation);
+    public AutomationApplication (AutomationElement element, Process process, boolean attached) {
+        super(element);
         // From : http://www.golesny.de/p/code/javagetpid.
 
         this.isAttached = attached;

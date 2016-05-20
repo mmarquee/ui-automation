@@ -29,10 +29,9 @@ public class AutomationNUIPane extends AutomationPanel {
     /**
      * Construct the AutomationNUIPane
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationNUIPane(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationNUIPane(AutomationElement element) {
+        super(element);
     }
 
     /**
@@ -41,6 +40,6 @@ public class AutomationNUIPane extends AutomationPanel {
      * @return The AutomationNetUIHWND
      */
     public AutomationNetUIHWND getNetUIHWND(int index) {
-        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"), this.automation);
+        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"));
     }
 }

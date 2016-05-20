@@ -28,10 +28,9 @@ public class AutomationTextBox extends AutomationBase {
     /**
      * Construct the AutomationTextBox
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationTextBox(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationTextBox(AutomationElement element) {
+        super(element);
     }
 
     /**

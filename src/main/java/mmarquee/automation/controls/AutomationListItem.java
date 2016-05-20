@@ -33,10 +33,9 @@ public class AutomationListItem extends AutomationBase {
     /**
      * Constructor for the AuyomationListItem
      * @param element The underlying automation element
-     * @param automation The automation library
      */
-    public AutomationListItem(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationListItem(AutomationElement element) {
+        super(element);
 
         try {
             this.selectItemPattern = this.getSelectItemPattern();

@@ -16,6 +16,7 @@
 package mmarquee.automation.condition;
 
 import mmarquee.automation.PropertyID;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -25,18 +26,18 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public class NameCondition  extends PropertyCondition {
     private String name;
 
-    public NameCondition (IUIAutomation automation) {
+    public NameCondition (UIAutomation automation) {
         super(automation);
         this.property = PropertyID.Name.getValue();
     }
 
-    public NameCondition (IUIAutomation automation, String name) {
+    public NameCondition (UIAutomation automation, String name) {
         super(automation);
         this.name = name;
         this.property = PropertyID.Name.getValue();
     }
 
     public IUIAutomationCondition getCondition () {
-        return automation.createPropertyCondition(this.property, this.name);
+        return automation.CreatePropertyCondition(this.property, this.name);
     }
 }

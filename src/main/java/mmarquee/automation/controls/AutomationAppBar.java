@@ -30,9 +30,8 @@ public class AutomationAppBar extends AutomationBase {
      * This element seems to be undocumented by Microsoft
      *
      * @param element The underlying automation element
-     * @param automation The AutomationElement associated with this session
      */
-    public AutomationAppBar(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationAppBar(AutomationElement element) {
+        super(element);
     }
 }

@@ -28,9 +28,8 @@ public class AutomationSpinner extends AutomationBase {
     /**
      * Construct the AutomationSpinner
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationSpinner(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationSpinner(AutomationElement element) {
+        super(element);
     }
 }

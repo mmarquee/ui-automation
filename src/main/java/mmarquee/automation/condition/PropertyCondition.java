@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.condition;
 
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
@@ -23,7 +24,7 @@ import mmarquee.automation.uiautomation.IUIAutomation;
 public abstract class PropertyCondition extends Condition {
     protected int property = -1;
 
-    public PropertyCondition (IUIAutomation automation) {
+    public PropertyCondition (UIAutomation automation) {
         super(automation);
     }
 }

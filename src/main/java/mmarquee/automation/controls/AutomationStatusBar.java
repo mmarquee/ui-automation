@@ -28,9 +28,8 @@ public class AutomationStatusBar extends AutomationContainer {
     /**
      * Constructor for AutomationStatusBar
      * @param element The underlying element
-     * @param automation The automation bit
      */
-    public AutomationStatusBar(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationStatusBar(AutomationElement element) {
+        super(element);
     }
 }

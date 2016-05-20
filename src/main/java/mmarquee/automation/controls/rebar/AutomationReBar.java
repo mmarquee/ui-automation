@@ -13,9 +13,8 @@ public class AutomationReBar extends AutomationContainer {
     /**
      * Construct the AutomationReBar
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationReBar(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationReBar(AutomationElement element) {
+        super(element);
     }
 }

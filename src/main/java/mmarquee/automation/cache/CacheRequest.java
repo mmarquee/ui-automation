@@ -33,7 +33,7 @@ public class CacheRequest {
      * Constructor for the cacheRequest
      */
     public CacheRequest() {
-        this.cacheRequest = UIAutomation.getInstance().automation.createCacheRequest();
+        this.cacheRequest = UIAutomation.getInstance().CreateCacheRequest();
     }
 
     /**

@@ -38,10 +38,9 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Construct the AutomationDataGrid
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationDataGrid(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationDataGrid(AutomationElement element) {
+        super(element);
 
         try {
             this.valuePattern = this.getValuePattern();
@@ -76,7 +75,7 @@ public class AutomationDataGrid extends AutomationBase
     public AutomationDataGridCell selected() {
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        return new AutomationDataGridCell(collection.get(0), automation);
+        return new AutomationDataGridCell(collection.get(0));
     }
 
     /**
@@ -90,7 +89,7 @@ public class AutomationDataGrid extends AutomationBase
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for(AutomationElement item : collection) {
-            items.add(new AutomationDataGridCell(item, automation));
+            items.add(new AutomationDataGridCell(item));
         }
 
         return items;
@@ -103,6 +102,6 @@ public class AutomationDataGrid extends AutomationBase
      * @return The GridItem at the given cell position
      */
     public AutomationDataGridCell getItem(int x, int y) {
-        return new AutomationDataGridCell(this.grid.getItem(x, y), automation);
+        return new AutomationDataGridCell(this.grid.getItem(x, y));
     }
 }

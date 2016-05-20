@@ -19,10 +19,9 @@ public class AutomationTreeViewItem extends AutomationBase {
     /**
      * Construct the AutomationTreeViewItem
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationTreeViewItem(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationTreeViewItem(AutomationElement element) {
+        super(element);
 
         try {
             this.selectItemPattern = this.getSelectItemPattern();

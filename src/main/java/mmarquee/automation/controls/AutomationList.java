@@ -40,10 +40,9 @@ public class AutomationList extends AutomationBase {
     /**
      * Constructor for the AutomationList
      * @param element The underlying automation element
-     * @param automation The automation library
      */
-    public AutomationList(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationList(AutomationElement element) {
+        super(element);
 
         try {
             this.selectionPattern = this.getSelectionPattern();
@@ -68,7 +67,7 @@ public class AutomationList extends AutomationBase {
         AutomationElement item = items.get(index);
 
         if (item != null) {
-            return new AutomationListItem(item, this.automation);
+            return new AutomationListItem(item);
         } else {
             throw new ItemNotFoundException();
         }
@@ -88,7 +87,7 @@ public class AutomationList extends AutomationBase {
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item, this.automation);
+            return new AutomationListItem(item);
         } else {
             throw new ItemNotFoundException();
         }

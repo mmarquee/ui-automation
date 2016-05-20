@@ -65,10 +65,9 @@ public class AutomationEditBox extends AutomationBase {
     /**
      * Constructor for the AutomationEditBox
      * @param element The undelying element
-     * @param automation The automation library
      */
-    public AutomationEditBox(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationEditBox(AutomationElement element) {
+        super(element);
 
         try {
             this.valuePattern = this.getValuePattern();

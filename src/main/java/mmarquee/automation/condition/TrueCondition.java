@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.condition;
 
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -22,11 +23,11 @@ import mmarquee.automation.uiautomation.IUIAutomation;
  * Created by inpwt on 24/02/2016.
  */
 public class TrueCondition extends Condition {
-    public TrueCondition (IUIAutomation automation) {
+    public TrueCondition (UIAutomation automation) {
         super(automation);
     }
 
     public IUIAutomationCondition getCondition() {
-        return automation.createTrueCondition();
+        return automation.CreateTrueCondition();
     }
 }

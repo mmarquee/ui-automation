@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.condition;
 
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -27,12 +28,12 @@ import java.util.List;
 public class OrCondition extends Condition {
     private List<Condition> conditions;
 
-    public OrCondition (IUIAutomation automation) {
+    public OrCondition (UIAutomation automation) {
         super(automation);
         List<Condition> conditions = new ArrayList<Condition>();
     }
 
-    public OrCondition (IUIAutomation automation, Condition firstCondition, Condition secondCondition) {
+    public OrCondition (UIAutomation automation, Condition firstCondition, Condition secondCondition) {
         super(automation);
 
         this.conditions = new ArrayList<Condition>();
@@ -49,7 +50,7 @@ public class OrCondition extends Condition {
      * @return the underlying IUIAutomationCondition
      */
     public IUIAutomationCondition getCondition () {
-        return automation.createOrCondition(
+        return automation.CreateOrCondition(
                 this.conditions.get(0).getCondition(),
                 this.conditions.get(1).getCondition());
     }

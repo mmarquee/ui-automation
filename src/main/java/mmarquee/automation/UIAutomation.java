@@ -46,7 +46,7 @@ public class UIAutomation {
     private AutomationElement rootElement;
 
     // TODO: Fix this (changed for caching for now)
-    public IUIAutomation automation;
+    protected IUIAutomation automation;
 
     /**
      * Constructor for UIAutomation library
@@ -87,7 +87,7 @@ public class UIAutomation {
      */
     public AutomationApplication launch(String... command) throws java.io.IOException {
         Process process = Utils.startProcess(command);
-        return new AutomationApplication(rootElement, automation, process, false);
+        return new AutomationApplication(rootElement, process, false);
     }
 
     /**
@@ -97,7 +97,7 @@ public class UIAutomation {
      * @return AutomationApplication that represents the application
      */
     public AutomationApplication attach(Process process) {
-        return new AutomationApplication(rootElement, automation, process, true);
+        return new AutomationApplication(rootElement, process, true);
     }
 
     /**
@@ -117,7 +117,7 @@ public class UIAutomation {
             return null;
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, automation, handle, true);
+            return new AutomationApplication(rootElement, handle, true);
         }
     }
 
@@ -138,7 +138,7 @@ public class UIAutomation {
             return this.launch(command);
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, automation, handle, true);
+            return new AutomationApplication(rootElement, handle, true);
         }
     }
 
@@ -164,7 +164,7 @@ public class UIAutomation {
             }
         }
 
-        return new AutomationWindow(element, this.automation);
+        return new AutomationWindow(element);
     }
 
     /**
@@ -178,7 +178,7 @@ public class UIAutomation {
         List<AutomationElement> collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationWindow(element, this.automation));
+            result.add(new AutomationWindow(element));
         }
 
         return result;
@@ -230,5 +230,42 @@ public class UIAutomation {
                                    TreeScope treeScope,
                                    EventHandler eventHandler) {
         this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler.getEventHandler());
+    }
+
+    /**
+     * Creates the raw and condition
+     * @param condition0 First condition
+     * @param condition1 Second condition
+     * @return The AndCondition
+     */
+    public IUIAutomationCondition CreateAndCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
+        return automation.createAndCondition(
+                condition0, condition1);
+    }
+
+    public IUIAutomationCondition CreateFalseCondition () {
+        return this.automation.createFalseCondition();
+    }
+
+    public IUIAutomationCondition CreateTrueCondition () {
+        return this.automation.createTrueCondition();
+    }
+
+    /**
+     * Getst the raw condition
+     * @return the underlying IUIAutomationCondition
+     */
+    public IUIAutomationCondition CreateOrCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
+        return automation.createOrCondition(
+                condition0,
+                condition1);
+    }
+
+    public IUIAutomationCondition CreatePropertyCondition (int property, java.lang.Object value) {
+        return automation.createPropertyCondition(property, value);
+    }
+
+    public IUIAutomationCacheRequest CreateCacheRequest() {
+        return this.automation.createCacheRequest();
     }
 }

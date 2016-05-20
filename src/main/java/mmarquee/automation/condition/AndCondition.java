@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.condition;
 
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -32,7 +33,7 @@ public class AndCondition extends Condition {
      * Constructor for Condition
      * @param automation The automation library
      */
-    public AndCondition (IUIAutomation automation) {
+    public AndCondition (UIAutomation automation) {
         super(automation);
         List<Condition> conditions = new ArrayList<Condition>();
     }
@@ -43,7 +44,7 @@ public class AndCondition extends Condition {
      * @param firstCondition First condition
      * @param secondCondition Second condition
      */
-    public AndCondition (IUIAutomation automation, Condition firstCondition, Condition secondCondition) {
+    public AndCondition (UIAutomation automation, Condition firstCondition, Condition secondCondition) {
         super(automation);
 
         this.conditions = new ArrayList<Condition>();
@@ -64,7 +65,7 @@ public class AndCondition extends Condition {
      * @return the underlying IUIAutomationCondition
      */
     public IUIAutomationCondition getCondition () {
-        return automation.createAndCondition(
+        return automation.CreateAndCondition(
                 this.conditions.get(0).getCondition(),
                 this.conditions.get(1).getCondition());
     }

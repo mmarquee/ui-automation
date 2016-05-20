@@ -16,6 +16,7 @@
 package mmarquee.automation.condition;
 
 import mmarquee.automation.PropertyID;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomation;
 
@@ -29,7 +30,7 @@ public class ControlIdCondition extends PropertyCondition {
      * Constructor for the condition
      * @param automation the automation library
      */
-    public ControlIdCondition (IUIAutomation automation) {
+    public ControlIdCondition (UIAutomation automation) {
         super(automation);
         this.property = PropertyID.ControlType.getValue();
     }
@@ -39,7 +40,7 @@ public class ControlIdCondition extends PropertyCondition {
      * @param automation the automation library
      * @param id The property id
      */
-    public ControlIdCondition (IUIAutomation automation, int id) {
+    public ControlIdCondition (UIAutomation automation, int id) {
         super(automation);
         this.id = id;
        this.property = PropertyID.ControlType.getValue();
@@ -50,6 +51,6 @@ public class ControlIdCondition extends PropertyCondition {
      * @return The underlying condition
      */
     public IUIAutomationCondition getCondition () {
-        return automation.createPropertyCondition(this.property, this.id);
+        return automation.CreatePropertyCondition(this.property, this.id);
     }
 }

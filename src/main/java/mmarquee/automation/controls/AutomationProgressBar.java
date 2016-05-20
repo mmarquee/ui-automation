@@ -32,10 +32,9 @@ public class AutomationProgressBar extends AutomationBase {
     /**
      * Construct the AutomationPanel
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationProgressBar(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationProgressBar(AutomationElement element) {
+        super(element);
 
         try {
             this.rangePattern = this.getRangePattern();

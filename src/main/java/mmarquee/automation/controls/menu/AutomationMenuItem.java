@@ -39,10 +39,9 @@ public class AutomationMenuItem extends AutomationBase {
     /**
      * Construct the AutomationMenuItem
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationMenuItem(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationMenuItem(AutomationElement element) {
+        super(element);
 
         try {
             this.collapsePattern = this.getExpandCollapsePattern();
@@ -72,7 +71,7 @@ public class AutomationMenuItem extends AutomationBase {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(item, automation));
+            list.add(new AutomationMenuItem(item));
         }
 
         return list;

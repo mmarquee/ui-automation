@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.condition;
 
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -23,15 +24,16 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by inpwt on 24/02/2016.
  */
 public abstract class Condition {
-    protected IUIAutomation automation;
+    protected UIAutomation automation;
 
-    public Condition (IUIAutomation automation) {
+    public Condition(UIAutomation automation) {
         this.automation = automation;
     }
 
     /**
      * Base 'abstract' method for Condition, needs to be implemented in the
      * subclasses, otherwise an exception is raised
+     *
      * @return The raw condition
      * @throws NotImplementedException Not implemented
      */
@@ -39,3 +41,4 @@ public abstract class Condition {
         throw new NotImplementedException();
     }
 }
+

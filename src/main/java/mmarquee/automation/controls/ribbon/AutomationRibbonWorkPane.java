@@ -29,10 +29,9 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
     /**
      * Construct the AutomationRibbonWorkPane
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationRibbonWorkPane(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationRibbonWorkPane(AutomationElement element) {
+        super(element);
     }
 
     /**
@@ -41,7 +40,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @return The AutomationNUIPane
      */
     public AutomationNUIPane getNUIPane(int index) {
-        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"), this.automation);
+        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"));
     }
 }
 

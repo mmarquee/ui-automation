@@ -29,9 +29,8 @@ public class AutomationMenu extends AutomationBase {
     /**
      * Construct the AutomationMenu
      * @param element The element
-     * @param automation The automation library
      */
-    public AutomationMenu(AutomationElement element, IUIAutomation automation) {
-        super(element, automation);
+    public AutomationMenu(AutomationElement element) {
+        super(element);
     }
 }
