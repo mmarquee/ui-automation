@@ -243,10 +243,18 @@ public class UIAutomation {
                 condition0, condition1);
     }
 
+    /**
+     * Creates a false Condition
+     * @return The condition
+     */
     public IUIAutomationCondition CreateFalseCondition () {
         return this.automation.createFalseCondition();
     }
 
+    /**
+     * Creates a true Condition
+     * @return The condition
+     */
     public IUIAutomationCondition CreateTrueCondition () {
         return this.automation.createTrueCondition();
     }
