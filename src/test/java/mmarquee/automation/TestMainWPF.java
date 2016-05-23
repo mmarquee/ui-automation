@@ -17,10 +17,15 @@ package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.cache.CacheRequest;
+import mmarquee.automation.condition.Condition;
+import mmarquee.automation.condition.TrueCondition;
+import mmarquee.automation.condition.raw.IUIAutomationBoolCondition;
+import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.apache.log4j.Logger;
@@ -363,12 +368,18 @@ public class TestMainWPF extends TestBase {
             cache.add(PropertyID.Name);
             cache.add(PropertyID.IsEnabled);
             cache.setTreeScope(TreeScope.TreeScope_Children);
-            //cache.setTreeFilter();
 
+            TrueCondition condition = new TrueCondition();
+            cache.setTreeFilter(condition);
 
-            AutomationElement element;
+            List<AutomationElement> elements = window.findAllBuildCache(
+                    cache);
 
-
+            if (elements == null) {
+                logger.info("Cache seems to be empty");
+            } else {
+                logger.info(("Cached items : " + elements.size()));
+            }
 
             logger.info("Investigated the cache");
 

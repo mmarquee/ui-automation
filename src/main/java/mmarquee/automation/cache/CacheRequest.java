@@ -31,26 +31,39 @@ public class CacheRequest {
 
     private IUIAutomationCacheRequest cacheRequest;
 
+    private Condition treeFilter;
+
     /**
      * Constructor for the cacheRequest
      */
     public CacheRequest() {
         this.cacheRequest = UIAutomation.getInstance().CreateCacheRequest();
     }
-/*
-    public void activate() {
-        this.cacheRequest.
+
+    /**
+     * Get the raw cache request
+     * @return The raw cache request
+     */
+    public IUIAutomationCacheRequest getCacheRequest() {
+        return this.cacheRequest;
     }
-*/
 
     /**
      * Stets the tree filter condition
      * @param condition The filter condition.
      */
     public void setTreeFilter(Condition condition) {
+        this.treeFilter = condition;
         this.cacheRequest.treeFilter(condition.getCondition());
     }
 
+    /**
+     * Gets the treeScope of the cache
+     * @return The treeScope
+     */
+    public Condition getTreeFilter() {
+        return this.treeFilter;
+    }
 
     /**
      * Sets the treeScope of the cache
@@ -58,6 +71,14 @@ public class CacheRequest {
      */
     public void setTreeScope(TreeScope treeScope) {
         this.cacheRequest.treeScope(treeScope);
+    }
+
+    /**
+     * Gets the treeScope of the cache
+     * @return The treeScope
+     */
+    public TreeScope getTreeScope() {
+        return this.cacheRequest.treeScope();
     }
 
     /**

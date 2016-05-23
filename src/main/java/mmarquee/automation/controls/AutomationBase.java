@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
 import mmarquee.automation.*;
+import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.pattern.Window;
@@ -602,5 +603,16 @@ public abstract class AutomationBase {
      */
     public String getAcceleratorKey() {
         return this.element.getAcceleratorKey();
+    }
+
+    /**
+     * Find all, but from the cache
+     * @param cacheRequest The cache request
+     * @return The found collection of elements
+     */
+    public List<AutomationElement> findAllBuildCache (CacheRequest cacheRequest) {
+        return this.element.findAllBuildCache(cacheRequest.getTreeScope(),
+                cacheRequest.getTreeFilter(),
+                cacheRequest.getCacheRequest());
     }
 }

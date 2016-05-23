@@ -15,12 +15,10 @@
  */
 package mmarquee.automation;
 
+import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.Condition;
 import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +33,7 @@ public class AutomationElement {
     /**
      * The underlying automation element
      */
-    public IUIAutomationElement element;
+    private IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement
@@ -230,5 +228,26 @@ public class AutomationElement {
      */
     public String getAcceleratorKey() {
         return this.element.currentAcceleratorKey();
+    }
+
+    /**
+     * Find all, but from the cache
+     * @param treeScope The treeScope
+     * @param condition The filter condition
+     * @param cacheRequest The cache request
+     * @return The found collection of elements
+     */
+    public List<AutomationElement> findAllBuildCache (TreeScope treeScope,
+                                                        Condition condition,
+                                                        IUIAutomationCacheRequest cacheRequest) {
+        IUIAutomationElementArray collection = this.element.findAllBuildCache(treeScope, condition.getCondition(), cacheRequest);
+
+        List<AutomationElement> items = new ArrayList<AutomationElement>();
+
+        for (int count = 0; count < collection.length(); count++) {
+            items.add(new AutomationElement(collection.getElement(count)));
+        }
+
+        return items;
     }
 }

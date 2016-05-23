@@ -269,6 +269,12 @@ public class UIAutomation {
                 condition1);
     }
 
+    /**
+     * Creates a property condition
+     * @param property The property to check
+     * @param value The value of the property
+     * @return The property condition
+     */
     public IUIAutomationCondition CreatePropertyCondition (int property, java.lang.Object value) {
         return automation.createPropertyCondition(property, value);
     }
