@@ -379,6 +379,13 @@ public class TestMainWPF extends TestBase {
                 logger.info("Cache seems to be empty");
             } else {
                 logger.info(("Cached items : " + elements.size()));
+
+                // See what is actually in the cache
+                /* Currently this causes a big crash
+                for (AutomationElement element: elements) {
+                    logger.info(": " + element.cachedName());
+                }
+                */
             }
 
             logger.info("Investigated the cache");

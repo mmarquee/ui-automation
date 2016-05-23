@@ -615,4 +615,10 @@ public abstract class AutomationBase {
                 cacheRequest.getTreeFilter(),
                 cacheRequest.getCacheRequest());
     }
+
+    protected AutomationElement findFirstBuildCache(CacheRequest cacheRequest) throws ElementNotFoundException {
+        return this.element.findFirstBuildCache(cacheRequest.getTreeScope(),
+                cacheRequest.getTreeFilter(),
+                cacheRequest.getCacheRequest());
+    }
 }

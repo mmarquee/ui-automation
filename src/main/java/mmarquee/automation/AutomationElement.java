@@ -94,6 +94,13 @@ public class AutomationElement {
     }
 
     /**
+     * Gets the cached name of the control
+     * @return The cached name of the element
+     */
+    public String cachedName() {
+        return this.element.cachedName();
+    }
+    /**
      * Sets the name of the element
      * @param name The name to use
      */
@@ -249,5 +256,23 @@ public class AutomationElement {
         }
 
         return items;
+    }
+
+    /**
+     * Finds the first element that matches the condition, building the cache
+     * @param treeScope Tree scope
+     * @param condition The condition
+     * @return The first matching element
+     */
+    public AutomationElement findFirstBuildCache(TreeScope treeScope,
+                                                 Condition condition,
+                                                 IUIAutomationCacheRequest cacheRequest) {
+        IUIAutomationElement elem = this.element.findFirstBuildCache(treeScope, condition.getCondition(), cacheRequest);
+
+        if (elem != null) {
+            return new AutomationElement(elem);
+        } else {
+            return null;
+        }
     }
 }
