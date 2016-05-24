@@ -15,6 +15,9 @@
  */
 package mmarquee.automation.eventhandlers;
 
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.EventID;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.eventhandlers.raw.IUIAutomationEventHandler;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 
@@ -24,16 +27,14 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
  * Wrapper for the IUIAutomationEventHandler
  */
 public class EventHandler {
+
     private IUIAutomationEventHandler handler;
 
     /**
      * Constructor for the event handler
-     * @param sender The sender
-     * @param eventId The event id to handle
      */
-    public EventHandler(IUIAutomationElement sender,
-                        int eventId) {
-        this.handler.handleAutomationEvent(sender, eventId);
+    public EventHandler() {
+        this.handler = UIAutomation.getInstance();
     }
 
     /**
@@ -42,5 +43,9 @@ public class EventHandler {
      */
     public IUIAutomationEventHandler getEventHandler() {
         return this.handler;
+    }
+
+    void handleAutomationEvent(IUIAutomationElement sender, int eventId) {
+
     }
 }

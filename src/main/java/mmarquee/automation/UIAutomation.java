@@ -222,7 +222,7 @@ public class UIAutomation {
      *
      * @param sender       The sender
      * @param eventId      The event id
-     * @param treeScope    The treescope
+     * @param treeScope    The treeScope
      * @param eventHandler The EventHandler to add
      */
     public void addAutomationEventHandler(IUIAutomationElement sender,
@@ -230,6 +230,18 @@ public class UIAutomation {
                                    TreeScope treeScope,
                                    EventHandler eventHandler) {
         this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler.getEventHandler());
+    }
+
+    /**
+     * Removed the event handler from the element
+     * @param element The element
+     * @param eventId The event
+     * @param eventHandler The handler
+     */
+    public void removeAutomationEventHandler(IUIAutomationElement element,
+                                             int eventId,
+                                             EventHandler eventHandler) {
+        this.automation.removeAutomationEventHandler(eventId, element, eventHandler.getEventHandler());
     }
 
     /**

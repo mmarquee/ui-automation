@@ -32,8 +32,10 @@ public class AutomationElement {
 
     /**
      * The underlying automation element
+     *
+     * TODO: Make this work with protected (done for EventHandler)
      */
-    private IUIAutomationElement element;
+    public IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement
@@ -245,8 +247,8 @@ public class AutomationElement {
      * @return The found collection of elements
      */
     public List<AutomationElement> findAllBuildCache (TreeScope treeScope,
-                                                        Condition condition,
-                                                        IUIAutomationCacheRequest cacheRequest) {
+                                                      Condition condition,
+                                                      IUIAutomationCacheRequest cacheRequest) {
         IUIAutomationElementArray collection = this.element.findAllBuildCache(treeScope, condition.getCondition(), cacheRequest);
 
         List<AutomationElement> items = new ArrayList<AutomationElement>();

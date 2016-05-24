@@ -39,7 +39,10 @@ public abstract class AutomationBase {
 
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
-    protected AutomationElement element;
+    /**
+     * TODO: Make this work with protected (done for EventHandler)
+     */
+    public AutomationElement element;
 
     protected UIAutomation automation = UIAutomation.getInstance();
 
@@ -616,6 +619,12 @@ public abstract class AutomationBase {
                 cacheRequest.getCacheRequest());
     }
 
+    /**
+     * Find first, but from the cache
+     * @param cacheRequest The cache request
+     * @return The cached element
+     * @throws ElementNotFoundException Thrown if the element is not found
+     */
     protected AutomationElement findFirstBuildCache(CacheRequest cacheRequest) throws ElementNotFoundException {
         return this.element.findFirstBuildCache(cacheRequest.getTreeScope(),
                 cacheRequest.getTreeFilter(),

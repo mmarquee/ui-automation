@@ -17,19 +17,14 @@ package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.cache.CacheRequest;
-import mmarquee.automation.condition.Condition;
 import mmarquee.automation.condition.TrueCondition;
-import mmarquee.automation.condition.raw.IUIAutomationBoolCondition;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.eventhandlers.EventHandler;
 import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.uiautomation.TreeScope;
-import org.apache.log4j.Logger;
-
 import java.util.List;
 
 /**
@@ -367,6 +362,7 @@ public class TestMainWPF extends TestBase {
             CacheRequest cache = automation.createCacheRequest();
             cache.add(PropertyID.Name);
             cache.add(PropertyID.IsEnabled);
+            cache.add(PropertyID.ControlType);
             cache.setTreeScope(TreeScope.TreeScope_Children);
 
             TrueCondition condition = new TrueCondition();
@@ -382,10 +378,11 @@ public class TestMainWPF extends TestBase {
 
                 // See what is actually in the cache
                 /* Currently this causes a big crash
+                */
                 for (AutomationElement element: elements) {
                     logger.info(": " + element.cachedName());
                 }
-                */
+                /**/
             }
 
             logger.info("Investigated the cache");
@@ -424,6 +421,20 @@ public class TestMainWPF extends TestBase {
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find window");
             }
+
+            // OK, lets have a look and event handlers
+            EventHandler handler = new EventHandler();
+            automation.addAutomationEventHandler(window.element.element,
+                    EventID.Invoke_Invoked.getValue(),
+                    TreeScope.TreeScope_Children,
+                    handler);
+
+            AutomationButton btn2 = window.getButton(1);
+            btn2.click();
+
+            automation.removeAutomationEventHandler(window.element.element,
+                    EventID.Invoke_Invoked.getValue(),
+                    handler);
 
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");
