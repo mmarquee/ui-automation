@@ -35,6 +35,8 @@ public class Text extends BasePattern {
                 ((IUIAutomationTextPattern)pattern).getSelection();
 
         // OK, now what?
+        int len = selection.length();
+
     }
 
     /**

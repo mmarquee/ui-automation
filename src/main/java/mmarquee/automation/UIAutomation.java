@@ -225,25 +225,26 @@ public class UIAutomation {
      * @param treeScope    The treeScope
      * @param eventHandler The EventHandler to add
      */
+    /*
     public void addAutomationEventHandler(IUIAutomationElement sender,
                                    int eventId,
                                    TreeScope treeScope,
                                    EventHandler eventHandler) {
-        this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler.getEventHandler());
+        this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler);
     }
-
+*/
     /**
      * Removed the event handler from the element
      * @param element The element
      * @param eventId The event
      * @param eventHandler The handler
      */
-    public void removeAutomationEventHandler(IUIAutomationElement element,
+/*    public void removeAutomationEventHandler(IUIAutomationElement element,
                                              int eventId,
                                              EventHandler eventHandler) {
-        this.automation.removeAutomationEventHandler(eventId, element, eventHandler.getEventHandler());
+        this.automation.removeAutomationEventHandler(eventId, element, eventHandler);
     }
-
+*/
     /**
      * Creates the raw and condition
      * @param condition0 First condition

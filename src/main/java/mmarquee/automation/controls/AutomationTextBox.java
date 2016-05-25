@@ -37,6 +37,6 @@ public class AutomationTextBox extends AutomationBase {
      * @return The current text
      */
     public String getValue() {
-        return this.element.currentName();
+        return this.element.getName();
     }
 }

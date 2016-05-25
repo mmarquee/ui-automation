@@ -110,7 +110,7 @@ public class AutomationContainer extends AutomationBase {
 
             if (retVal == id) {
                 if (className.equals(controlName)) {
-                    String cName = element.currentName();
+                    String cName = element.getName();
 
                     if (cName.equals(name)) {
                         foundElement = element;
@@ -513,7 +513,7 @@ public class AutomationContainer extends AutomationBase {
         List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants);
 
         for (AutomationElement element : collection) {
-            String cName = element.currentName();
+            String cName = element.getName();
 
             logger.info(".." + cName);
         }

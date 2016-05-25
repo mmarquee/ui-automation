@@ -15,37 +15,72 @@
  */
 package mmarquee.automation.eventhandlers;
 
+import com4j.Com4jObject;
+import com4j.ComThread;
+import com4j.EventCookie;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.EventID;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.eventhandlers.raw.IUIAutomationEventHandler;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 
+import java.util.logging.Logger;
+
 /**
  * Created by inpwt on 18/03/2016.
  *
  * Wrapper for the IUIAutomationEventHandler
  */
-public class EventHandler {
+public class EventHandler /* implements IUIAutomationEventHandler */ {
 
-    private IUIAutomationEventHandler handler;
+    static final Logger logger = Logger.getLogger(EventHandler.class.getName());
 
-    /**
-     * Constructor for the event handler
-     */
-    public EventHandler() {
-        this.handler = UIAutomation.getInstance();
+    private String name;
+
+    public void handleAutomationEvent(
+            IUIAutomationElement sender,
+            int eventId) {
+        logger.info("handleAutomationEvent fired");
+    }
+/*
+    public <T extends Com4jObject> boolean is(Class<T> var1) {
+        return true;
     }
 
-    /**
-     * Gets the raw event handler
-     * @return IUIAutomationEventHandler The event handler
-     */
-    public IUIAutomationEventHandler getEventHandler() {
-        return this.handler;
-    }
-
-    void handleAutomationEvent(IUIAutomationElement sender, int eventId) {
+    public <T extends Com4jObject> T queryInterface(Class<T> var1) {
 
     }
+
+    public <T> EventCookie advise(Class<T> var1, T var2) {
+
+    }
+*/
+    public void setName(String var1) {
+        this.name = var1;
+    }
+
+    public String toString() {
+        return this.name + "EventHandler"; //?
+    }
+/*
+    public void dispose() {
+
+    }
+
+    public ComThread getComThread() {
+
+    }
+
+    public long getPointer() {
+
+    }
+
+    public long getIUnknownPointer() {
+
+    }
+
+    public int getPtr() {
+
+    }
+*/
 }

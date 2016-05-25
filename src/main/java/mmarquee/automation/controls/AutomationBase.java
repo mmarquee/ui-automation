@@ -181,7 +181,7 @@ public abstract class AutomationBase {
      * @return The name of the element
      */
     public String name () {
-        return this.element.currentName();
+        return this.element.getName();
     }
 
     /**

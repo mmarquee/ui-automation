@@ -23,6 +23,7 @@ import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.eventhandlers.EventHandler;
+import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
@@ -363,6 +364,7 @@ public class TestMainWPF extends TestBase {
             cache.add(PropertyID.Name);
             cache.add(PropertyID.IsEnabled);
             cache.add(PropertyID.ControlType);
+            cache.add(PatternID.SelectionItem);
             cache.setTreeScope(TreeScope.TreeScope_Children);
 
             TrueCondition condition = new TrueCondition();
@@ -421,7 +423,7 @@ public class TestMainWPF extends TestBase {
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find window");
             }
-
+/*
             // OK, lets have a look and event handlers
             EventHandler handler = new EventHandler();
             automation.addAutomationEventHandler(window.element.element,
@@ -435,7 +437,7 @@ public class TestMainWPF extends TestBase {
             automation.removeAutomationEventHandler(window.element.element,
                     EventID.Invoke_Invoked.getValue(),
                     handler);
-
+*/
         } catch (ElementNotFoundException ex) {
             logger.info("Element Not Found ");
         }

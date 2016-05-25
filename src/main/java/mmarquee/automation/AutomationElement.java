@@ -30,6 +30,8 @@ import java.util.List;
  */
 public class AutomationElement {
 
+    private boolean isCached = false;
+
     /**
      * The underlying automation element
      *
@@ -43,6 +45,12 @@ public class AutomationElement {
      */
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;
+        this.isCached = false;
+    }
+
+    public AutomationElement(IUIAutomationElement element, boolean cached) {
+        this.element = element;
+        this.isCached = cached;
     }
 
     /**
@@ -87,11 +95,24 @@ public class AutomationElement {
         return this.element.currentIsPassword() == 1;
     }
 
+    /**]
+     * Gets the name, either from the current ot cache property
+     * @return The name (either cached or current)
+     */
+    public String getName() {
+        if (this.isCached) {
+            return this.cachedName();
+        } else {
+            return this.currentName();
+        }
+
+    }
+
     /**
      * Gets the current name of the control
      * @return The name of the element
      */
-    public String currentName() {
+    protected String currentName() {
         return this.element.currentName();
     }
 
@@ -99,9 +120,10 @@ public class AutomationElement {
      * Gets the cached name of the control
      * @return The cached name of the element
      */
-    public String cachedName() {
+    protected String cachedName() {
         return this.element.cachedName();
     }
+
     /**
      * Sets the name of the element
      * @param name The name to use
@@ -254,7 +276,7 @@ public class AutomationElement {
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
         for (int count = 0; count < collection.length(); count++) {
-            items.add(new AutomationElement(collection.getElement(count)));
+            items.add(new AutomationElement(collection.getElement(count), true));
         }
 
         return items;

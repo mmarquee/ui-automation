@@ -52,7 +52,7 @@ public class AutomationSystemMenu extends AutomationBase {
         boolean found = false;
 
         for (AutomationElement elem: collection) {
-            String eName = elem.currentName();
+            String eName = elem.getName();
 
             if (eName.equals(name)) {
                 found = true;
@@ -77,7 +77,7 @@ public class AutomationSystemMenu extends AutomationBase {
 
         AutomationElement element = collection.get(0);
 
-        String name = element.currentName();
+        String name = element.getName();
     }
 }
 
