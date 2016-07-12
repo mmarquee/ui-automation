@@ -18,7 +18,6 @@ package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.condition.Condition;
 import mmarquee.automation.controls.AutomationBase;
 
 import java.util.List;

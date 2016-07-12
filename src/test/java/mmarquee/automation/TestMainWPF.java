@@ -16,7 +16,6 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.condition.TrueCondition;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;

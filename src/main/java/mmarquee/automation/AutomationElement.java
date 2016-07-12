@@ -15,13 +15,14 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.condition.Condition;
 import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
@@ -54,21 +55,20 @@ public class AutomationElement {
      * @return The property ID
      */
     public Object get_CurrentPropertyValue(int propertyId) {
-        PointerByReference pbr = new PointerByReference();
+        Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
-        int result = this.element.get_CurrentPropertyValue(propertyId, pbr);
+        int result = this.element.get_CurrentPropertyValue(propertyId, value);
 
-        return pbr.getValue();  //??
+        return value.getValue();  //??
     }
-
 
     /**
      * Gete the processID property
      * @return Object representing the processId
      */
- //   public Object getProcessId() {
- //       return getCurrentPropertyValue(PropertyID.ProcessId.getValue());
- //   }
+    public Object getProcessId() {
+        return get_CurrentPropertyValue(PropertyID.ProcessId.getValue());
+    }
 
     /**
      * Gets the current control type
@@ -164,7 +164,7 @@ public class AutomationElement {
      * @param pCondition The raw condition
      * @return The first matching element
      */
-    AutomationElement findFirstFromRawCondition(TreeScope scope, PointerByReference pCondition) {
+    AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) {
         PointerByReference pbr = new PointerByReference();
 
         this.element.findFirst(scope, pCondition.getValue(), pbr);
@@ -211,13 +211,13 @@ public class AutomationElement {
      * @param pCondition The condition
      * @return List of matching elements
      */
-    public List<AutomationElement> findAll(TreeScope scope, PointerByReference pCondition) {
+    public List<AutomationElement> findAll(TreeScope scope, Pointer pCondition) {
 
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
         PointerByReference pAll = new PointerByReference();
 
-        int resultAll = this.element.findAll(scope, pCondition.getValue(), pAll);
+        int resultAll = this.element.findAll(scope, pCondition, pAll);
 
         // What has come out of findAll ??
 

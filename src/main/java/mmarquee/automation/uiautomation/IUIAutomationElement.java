@@ -2,10 +2,7 @@ package mmarquee.automation.uiautomation;
 
 import com.sun.jna.Function;
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WTypes;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
@@ -109,7 +106,7 @@ public interface IUIAutomationElement {
     int get_CurrentIsPassword(IntByReference value);
     int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
     int get_CurrentPattern(Integer patternId, PointerByReference pbr);
-    int get_CurrentPropertyValue();
+    int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value);
 
     public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-85 IUIAutomationElement
@@ -150,6 +147,11 @@ public interface IUIAutomationElement {
                 public int findAll(TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr) {
                     Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                }
+
+                public int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value) {
+                    Function f = Function.getFunction(vTable[10], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, propertyId, value});
                 }
 
                 public int get_CurrentPattern(Integer patternId, PointerByReference pbr) {

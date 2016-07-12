@@ -205,7 +205,7 @@ public class UIAutomation {
 
         for (int loop = 0; loop < 15; loop++) {
 
-            element = this.rootElement.findFirstFromRawCondition(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+            element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
 
             if (element != null) {
                 break;
@@ -236,6 +236,29 @@ public class UIAutomation {
 
         // Checks ?
         return pbr;
+    }
+
+    public Pointer CreateControlTypeCondition(int id) {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        variant.setValue(Variant.VT_INT, id);
+
+        return this.createPropertyCondition(PropertyID.ControlType, variant).getValue();
+    }
+
+    public Pointer CreateAutomationIdPropertyCondition(String automationId) {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        return this.createPropertyCondition(PropertyID.AutomationId, variant).getValue();
+    }
+
+    public Pointer CreateNamePropertyCondition(String name) {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        return this.createPropertyCondition(PropertyID.Name, variant).getValue();
     }
 
     private PointerByReference createPropertyCondition(PropertyID id, Variant.VARIANT.ByValue value) {
@@ -275,7 +298,7 @@ public class UIAutomation {
         PointerByReference pbr = this.createPropertyCondition(PropertyID.ControlType, variant);
 
         for (int loop = 0; loop < 15; loop++) {
-            element = this.rootElement.findFirstFromRawCondition(new TreeScope(TreeScope.TreeScope_Descendants),
+            element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                     pbr);
 
             if (element != null) {
@@ -310,7 +333,8 @@ public class UIAutomation {
             IUIAutomationCondition condition =
                     IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
 
-            List<AutomationElement> collection = this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), condition);
+            List<AutomationElement> collection =
+                    this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue());
 
             for (AutomationElement element : collection) {
                 result.add(new AutomationWindow(element));
@@ -398,12 +422,12 @@ public class UIAutomation {
      * Creates a false Condition
      * @return The condition
      */
-    public IUIAutomationCondition CreateFalseCondition () {
+    public Pointer CreateFalseCondition () {
         PointerByReference pCondition = new PointerByReference();
 
         this.automation.CreateFalseCondition(pCondition);
 
-        Unknown unkConditionA = new Unknown(pCondition.getValue());
+/*        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
@@ -414,20 +438,20 @@ public class UIAutomation {
         } else {
             return null; // or throw excption
         }
+*/
+        return pCondition.getValue();
     }
 
     /**
      * Creates a true Condition
      * @return The condition
      */
-    public IUIAutomationCondition CreateTrueCondition () {
-//        return this.automation.createTrueCondition();
-
+    public Pointer CreateTrueCondition () {
         PointerByReference pTrueCondition = new PointerByReference();
 
         this.automation.CreateTrueCondition(pTrueCondition);
 
-        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
+/*        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
@@ -438,6 +462,9 @@ public class UIAutomation {
         } else {
             return null; // or throw excption
         }
+*/
+        return pTrueCondition.getValue();
+
     }
 
     /**

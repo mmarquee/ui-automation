@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.pattern;
 
-import com4j.Com4jObject;
-
 /**
  * Created by inpwt on 28/02/2016.
  *

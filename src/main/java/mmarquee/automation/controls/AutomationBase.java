@@ -19,8 +19,8 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.*;
@@ -94,43 +94,43 @@ public abstract class AutomationBase {
     }
 
     protected boolean isSelectionItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isScrollItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isWindowPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTextPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTableItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTablePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isSelectionPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTransformPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isTogglePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isValuePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(true);
     }
 
     /**
@@ -138,7 +138,7 @@ public abstract class AutomationBase {
      * @return Off screen?
      */
     protected boolean isOffScreen () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(true);
     }
 
     /**
@@ -171,7 +171,7 @@ public abstract class AutomationBase {
      * @return The framework object (really a string)
      */
     public Object getFramework() {
-        return this.element.getCurrentPropertyValue(PropertyID.FrameworkId.getValue());
+        return this.element.get_CurrentPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
@@ -186,16 +186,16 @@ public abstract class AutomationBase {
      * Sets the name of the element
      * @param name The name to be set.
      */
-    public void setName(String name) {
-        this.element.setName(name);
-    }
+//    public void setName(String name) {
+ //       this.element.setName(name);
+ //   }
 
     /**
      * Finds all of the elements that are associated with this element
      * @return List List of elements
      */
     protected List<AutomationElement> findAll() {
-        return this.findAll(TreeScope.TreeScope_Children);
+        return this.findAll(new TreeScope(TreeScope.TreeScope_Children));
     }
 
     /**
@@ -205,9 +205,9 @@ public abstract class AutomationBase {
      * @return The found AutomationElement
      * @throws ElementNotFoundException No elements found
      */
-    protected AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
-        return this.element.findFirst(scope, condition);
-    }
+//    protected AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
+//        return this.element.findFirst(scope, condition);
+//    }
 
     /**
      * Finds all of the elements that are associated with the given condition.
@@ -215,7 +215,7 @@ public abstract class AutomationBase {
      * @return List list of all the elements found
      */
     protected List<AutomationElement> findAll(TreeScope scope) {
-        TrueCondition condition = this.createTrueCondition();
+        Pointer condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
 
@@ -223,16 +223,16 @@ public abstract class AutomationBase {
      * Creates a true condition
      * @return The true condition
      */
-    public TrueCondition createTrueCondition() {
-        return new TrueCondition();
+    public Pointer createTrueCondition() {
+        return this.automation.CreateTrueCondition();
     }
 
     /**
      * Creates a false condition
      * @return The condition
      */
-    public FalseCondition createFalseCondition() {
-        return new FalseCondition();
+    public Pointer createFalseCondition() {
+        return this.automation.CreateFalseCondition();
     }
 
     /**
@@ -240,8 +240,8 @@ public abstract class AutomationBase {
      * @param name The name to use
      * @return The condition
      */
-    public NameCondition createNamePropertyCondition(String name) {
-        return new NameCondition(name);
+    public Pointer createNamePropertyCondition(String name) {
+        return this.automation.CreateNamePropertyCondition(name);
     }
 
     /**
@@ -249,8 +249,8 @@ public abstract class AutomationBase {
      * @param automationId The automation ID to use
      * @return The condition
      */
-    public AutomationIdCondition createAutomationIdPropertyCondition(String automationId) {
-        return new AutomationIdCondition(automationId);
+    public Pointer createAutomationIdPropertyCondition(String automationId) {
+        return this.automation.CreateAutomationIdPropertyCondition(automationId);
     }
 
     /**
@@ -258,8 +258,8 @@ public abstract class AutomationBase {
      * @param id The control type to use
      * @return The condition
      */
-    public ControlIdCondition createControlTypeCondition(int id) {
-        return new ControlIdCondition(id);
+    public Pointer createControlTypeCondition(int id) {
+        return this.automation.CreateControlTypeCondition(id);
     }
 
     /**
@@ -288,8 +288,8 @@ public abstract class AutomationBase {
      * @param condition The condition to check
      * @return IUIAutomationElementArray
      */
-    protected List<AutomationElement> findAll(TreeScope scope, Condition condition) {
-        return this.element.findAll(scope, condition.getCondition());
+    protected List<AutomationElement> findAll(TreeScope scope, Pointer condition) {
+        return this.element.findAll(scope, condition);
     }
 
     /**
@@ -298,8 +298,8 @@ public abstract class AutomationBase {
      * @return The pattern
      * @throws PatternNotFoundException
      */
-    private com4j.Com4jObject getPattern (int id) throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
+    private PointerByReference getPattern (int id) throws PatternNotFoundException {
+        PointerByReference unknown = this.element.getCurrentPattern(id);
 
         if (unknown != null) {
             return unknown;
@@ -320,7 +320,7 @@ public abstract class AutomationBase {
         SelectionItem pattern = new SelectionItem();
 
         if (isSelectionItemPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
         }
@@ -339,7 +339,7 @@ public abstract class AutomationBase {
         Selection pattern = new Selection();
 
         if (isSelectionPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Selection.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
         }
@@ -358,7 +358,7 @@ public abstract class AutomationBase {
         Value pattern = new Value();
 
         if (isValuePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Value.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationValuePattern.class));
         }
@@ -377,7 +377,7 @@ public abstract class AutomationBase {
         Range pattern = new Range();
 
         if (isRangeValuePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.RangeValue.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.RangeValue.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationRangeValuePattern.class));
         }
@@ -396,7 +396,7 @@ public abstract class AutomationBase {
         Table pattern = new Table();
 
         if (isTablePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Table.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationTablePattern.class));
         }
@@ -415,7 +415,7 @@ public abstract class AutomationBase {
         Window pattern = new Window();
 
         if (isWindowPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Window.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
         }
@@ -434,7 +434,7 @@ public abstract class AutomationBase {
         ExpandCollapse pattern = new ExpandCollapse();
 
         if (isExpandCollapsePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
         }
@@ -453,7 +453,7 @@ public abstract class AutomationBase {
         Grid pattern = new Grid();
 
         if (isGridPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Grid.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Grid.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
         }
@@ -472,7 +472,7 @@ public abstract class AutomationBase {
         Toggle pattern = new Toggle();
 
         if (isTogglePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
 
             pattern.setPattern(unknown.queryInterface(IUIAutomationTogglePattern.class));
         }
@@ -491,7 +491,7 @@ public abstract class AutomationBase {
         Invoke pattern = new Invoke();
 
         if (isInvokePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Invoke.getValue());
             pattern.setPattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
         }
 
@@ -509,7 +509,7 @@ public abstract class AutomationBase {
         Text pattern = new Text();
 
         if (this.isTextPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Text.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Text.getValue());
             pattern.setPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
         }
 
@@ -521,7 +521,7 @@ public abstract class AutomationBase {
      * @return Enabled?
      */
     public boolean isEnabled () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(true);
     }
 
     /**
@@ -544,7 +544,7 @@ public abstract class AutomationBase {
      * @return The handle
      */
     public WinDef.HWND getNativeWindowHandle() {
-        Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
         return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
     }
 
@@ -560,9 +560,9 @@ public abstract class AutomationBase {
      * The current orientation of the element
      * @return The orientation
      */
-    public OrientationType getOrientation() {
-        return this.element.getOrientation();
-    }
+//    public OrientationType getOrientation() {
+//        return this.element.getOrientation();
+//    }
 
     /**
      * Gets the runtime id
@@ -578,31 +578,31 @@ public abstract class AutomationBase {
      * Gets the current framework ID for the element
      * @return The framework id
      */
-    public String getFrameworkId() {
-        return this.element.getFrameworkId();
-    }
+//    public String getFrameworkId() {
+//        return this.element.getFrameworkId();
+//    }
 
     /**
      * Gets the current provider description
      * @return The provider description
      */
-    public String getProviderDescription() {
-        return this.element.getProviderDescription();
-    }
+  //  public String getProviderDescription() {
+  //      return this.element.getProviderDescription();
+  //  }
 
     /**
      * Gets the current item status
      * @return The item status
      */
-    public String getItemStatus() {
-        return this.element.getItemStatus();
-    }
+//    public String getItemStatus() {
+  //      return this.element.getItemStatus();
+  //  }
 
     /**
      * Gets the current accelerator key for th element
      * @return The key
      */
-    public String getAcceleratorKey() {
-        return this.element.getAcceleratorKey();
-    }
+ //   public String getAcceleratorKey() {
+ //       return this.element.getAcceleratorKey();
+ //   }
 }
