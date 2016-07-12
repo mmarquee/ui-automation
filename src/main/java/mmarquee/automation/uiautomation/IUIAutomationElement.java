@@ -109,6 +109,7 @@ public interface IUIAutomationElement {
     int get_CurrentIsPassword(IntByReference value);
     int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
     int get_CurrentPattern(Integer patternId, PointerByReference pbr);
+    int get_CurrentPropertyValue();
 
     public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-85 IUIAutomationElement
@@ -151,6 +152,11 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
                 }
 
+                public int get_CurrentPattern(Integer patternId, PointerByReference pbr) {
+                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, patternId, pbr});
+                }
+
                 public /* [propget] */ int get_CurrentName(/* [retval][out] */ PointerByReference sr) {
                     Function f = Function.getFunction(vTable[23], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, sr});
@@ -174,11 +180,6 @@ public interface IUIAutomationElement {
                 public int get_ClickablePoint(WinDef.POINT clickable, IntByReference ok) {
                     Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, clickable, ok});
-                }
-
-                public int get_CurrentPattern(Integer patternId, PointerByReference pbr) {
-                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, patternId, pbr});
                 }
             };
         }

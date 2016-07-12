@@ -53,9 +53,13 @@ public class AutomationElement {
      * @param propertyId The property ID to get
      * @return The property ID
      */
-//    public Object getCurrentPropertyValue(int propertyId) {
-//        return this.element.getCurrentPropertyValue(propertyId);
-//    }
+    public Object get_CurrentPropertyValue(int propertyId) {
+        PointerByReference pbr = new PointerByReference();
+
+        int result = this.element.get_CurrentPropertyValue(propertyId, pbr);
+
+        return pbr.getValue();  //??
+    }
 
 
     /**
@@ -189,7 +193,9 @@ public class AutomationElement {
     public PointerByReference getCurrentPattern(int patternId) {
         PointerByReference pbr = new PointerByReference();
 
-        return this.element.get_CurrentPattern(patternId, pbr);
+        int result = this.element.get_CurrentPattern(patternId, pbr);
+
+        return pbr;
     }
 
     /**

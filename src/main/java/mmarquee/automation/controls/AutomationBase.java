@@ -23,7 +23,6 @@ import mmarquee.automation.*;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.pattern.raw.*;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -63,35 +62,35 @@ public abstract class AutomationBase {
     }
 
     protected boolean isDockPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isExpandCollapsePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isGridItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isMultipleViewPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isInvokePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isGridPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isRangeValuePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isScrollPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(true);
+        return this.element.get_CurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(true);
     }
 
     protected boolean isSelectionItemPatternAvailable () {
@@ -605,28 +604,5 @@ public abstract class AutomationBase {
      */
     public String getAcceleratorKey() {
         return this.element.getAcceleratorKey();
-    }
-
-    /**
-     * Find all, but from the cache
-     * @param cacheRequest The cache request
-     * @return The found collection of elements
-     */
-    public List<AutomationElement> findAllBuildCache (CacheRequest cacheRequest) {
-        return this.element.findAllBuildCache(cacheRequest.getTreeScope(),
-                cacheRequest.getTreeFilter(),
-                cacheRequest.getCacheRequest());
-    }
-
-    /**
-     * Find first, but from the cache
-     * @param cacheRequest The cache request
-     * @return The cached element
-     * @throws ElementNotFoundException Thrown if the element is not found
-     */
-    protected AutomationElement findFirstBuildCache(CacheRequest cacheRequest) throws ElementNotFoundException {
-        return this.element.findFirstBuildCache(cacheRequest.getTreeScope(),
-                cacheRequest.getTreeFilter(),
-                cacheRequest.getCacheRequest());
     }
 }
