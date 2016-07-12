@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 25/04/2016.

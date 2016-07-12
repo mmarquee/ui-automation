@@ -22,8 +22,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 

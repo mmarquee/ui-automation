@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.*;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 import java.util.ArrayList;
 import java.util.List;

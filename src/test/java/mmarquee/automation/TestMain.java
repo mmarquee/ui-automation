@@ -15,14 +15,11 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.AutomationDataGrid;
 import mmarquee.automation.controls.AutomationDataGridCell;
-import mmarquee.automation.uiautomation.ToggleState;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 

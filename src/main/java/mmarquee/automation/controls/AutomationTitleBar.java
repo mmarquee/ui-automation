@@ -20,7 +20,6 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by inpwt on 04/03/2016.

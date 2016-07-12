@@ -16,16 +16,12 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.TrueCondition;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.eventhandlers.EventHandler;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.ToggleState;
-import mmarquee.automation.uiautomation.TreeScope;
+
 import java.util.List;
 
 /**

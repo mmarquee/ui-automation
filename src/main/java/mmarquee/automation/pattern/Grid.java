@@ -16,7 +16,6 @@
 package mmarquee.automation.pattern;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.pattern.raw.IUIAutomationGridPattern;
 
 /**
  * Created by inpwt on 25/02/2016.

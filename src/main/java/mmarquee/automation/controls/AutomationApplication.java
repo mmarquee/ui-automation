@@ -16,12 +16,10 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 import java.lang.reflect.Field;
 import java.util.List;

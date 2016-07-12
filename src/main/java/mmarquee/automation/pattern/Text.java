@@ -15,10 +15,6 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.raw.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextRange;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
-
 /**
  * Created by inpwt on 25/02/2016.
  *

@@ -1,537 +1,211 @@
-/*
- * Copyright 2016 inpwtepydjuf@gmail.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package mmarquee.automation.uiautomation;
 
-import com4j.*;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.eventhandlers.raw.IUIAutomationEventHandler;
-import mmarquee.automation.eventhandlers.raw.IUIAutomationFocusChangedEventHandler;
-import mmarquee.automation.eventhandlers.raw.IUIAutomationPropertyChangedEventHandler;
-import mmarquee.automation.eventhandlers.raw.IUIAutomationStructureChangedEventHandler;
+import com.sun.jna.Function;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 
-@IID("{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}")
-public interface IUIAutomation extends Com4jObject {
-  // Methods:
-  /**
-   * @param el1 Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-   * @param el2 Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-   * @return  Returns a value of type int
-   */
-
-  @VTID(3)
-  int compareElements(
-    mmarquee.automation.uiautomation.IUIAutomationElement el1,
-    mmarquee.automation.uiautomation.IUIAutomationElement el2);
-
-
-  /**
-   * @param runtimeId1 Mandatory int[] parameter.
-   * @param runtimeId2 Mandatory int[] parameter.
-   * @return  Returns a value of type int
-   */
-
-  @VTID(4)
-  int compareRuntimeIds(
-    int[] runtimeId1,
-    int[] runtimeId2);
-
-
-  /**
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(5)
-  mmarquee.automation.uiautomation.IUIAutomationElement getRootElement();
-
-
-  /**
-   * @param hwnd Mandatory java.nio.Buffer parameter.
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(6)
-  mmarquee.automation.uiautomation.IUIAutomationElement elementFromHandle(
-    java.nio.Buffer hwnd);
-
+/**
+ * Created by HumphreysM on 06/07/2016.
+ */
+public interface IUIAutomation {
+    /**
+     * The interface IID for QueryInterface et al
+     */
+    public final static Guid.IID IID_IUIAUTOMATION = new Guid.IID(
+            "{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
 
     /**
-     * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
+     *
+     * Retrieves pointers to the supported interfaces on an object.
+     * This method calls IUnknown::AddRef on the pointer it returns.
+     *
+     * @param riid
+     *            The identifier of the interface being requested.
+     *
+     * @param ppvObject
+     *            The address of a pointer variable that receives the interface pointer requested in the riid parameter. Upon successful
+     *            return, *ppvObject contains the requested interface pointer to the object. If the object does not support the
+     *            interface, *ppvObject is set to NULL.
+     *
+     * @return
+     *            This method returns S_OK if the interface is supported, and E_NOINTERFACE otherwise. If ppvObject is NULL, this method returns E_POINTER.
+     *            For any one object, a specific query for the IUnknown interface on any of the object's interfaces must always return the same pointer value.
+     *            This enables a client to determine whether two pointers point to the same component by calling QueryInterfacewith IID_IUnknown
+     *            and comparing the results. It is specifically not the case that queries for interfaces other than IUnknown (even the same interface
+     *            through the same pointer) must return the same pointer value.
+     *
+     *            There are four requirements for implementations of QueryInterface (In these cases, "must succeed" means "must succeed barring
+     *            catastrophic failure."):
+     *            The set of interfaces accessible on an object through QueryInterface must be static, not dynamic. This means that if a call
+     *            toQueryInterface for a pointer to a specified interface succeeds the first time, it must succeed again, and if it fails
+     *            the first time, it must fail on all subsequent queries. 
+     *
+     *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed. 
+     *
+     *            It must be symmetric: if a client holding a pointer to one interface queries successfully for another, a query through
+     *            the obtained pointer for the first interface must succeed. 
+     *
+     *            It must be transitive: if a client holding a pointer to one interface queries successfully for a second, and through that
+     *            pointer queries successfully for a third interface, a query for the first interface through the pointer for the
+     *            third interface must succeed. 
+     *            Notes to Implementers
+     *            Implementations of QueryInterface must never check ACLs. The main reason for this rule is that COM requires that an object supporting a
+     *            particular interface always return success when queried for that interface. Another reason is that checking ACLs on QueryInterface
+     *            does not provide any real security because any client who has access to a particular interface can hand it directly to another
+     *            client without any calls back to the server. Also, because COM caches interface pointers, it does not callQueryInterface on
+     *            the server every time a client does a query.
      */
-
-    @VTID(8)
-    mmarquee.automation.uiautomation.IUIAutomationElement getFocusedElement();
-
+    WinNT.HRESULT QueryInterface(
+            Guid.REFIID riid,
+            PointerByReference ppvObject);
 
     /**
-     * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-     * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
+     *
+     * Increments the reference count for an interface on an object. This method should be called for every new copy of a pointer to an interface on an object.
+     * @return
+     *            The method returns the new reference count. This value is intended to be used only for test purposes.
+     *
+     *            Objects use a reference counting mechanism to ensure that the lifetime of the object includes the lifetime of references to it. You use AddRef
+     *            to stabilize a copy of an interface pointer. It can also be called when the life of a cloned pointer must extend beyond the
+     *            lifetime of the original pointer. The cloned pointer must be released by calling IUnknown::Release.
+     *
+     *            The internal reference counter that AddRef maintains should be a 32-bit unsigned integer.
+     *            Notes to Callers
+     *            Call this method for every new copy of an interface pointer that you make. For example, if you are passing a copy of a pointer
+     *            back from a method, you must call AddRef on that pointer. You must also call AddRef on a pointer before passing it as an in-out
+     *            parameter to a method; the method will call IUnknown::Release before copying the out-value on top of it.
      */
-
-    @VTID(9)
-    mmarquee.automation.uiautomation.IUIAutomationElement getRootElementBuildCache(
-      mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
+    int AddRef();
 
     /**
-     * @param hwnd Mandatory java.nio.Buffer parameter.
-     * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-     * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
+     * Decrements the reference count for an interface on an object.
+     *
+     * @return
+     *            The method returns the new reference count. This value is intended to be used only for test purposes.
+     *
+     *            When the reference count on an object reaches zero, Release must cause the interface pointer to free itself. When the released
+     *            pointer is the only existing reference to an object (whether the object supports single or multiple interfaces), the
+     *            implementation must free the object.
+     *
+     *            Note that aggregation of objects restricts the ability to recover interface pointers.
+     *            Notes to Callers
+     *            Call this method when you no longer need to use an interface pointer. If you are writing a method that takes an in-out
+     *            parameter, call Release on the pointer you are passing in before copying the out-value on top of it.
+     */
+    int Release();
+
+    int GetRootElement(PointerByReference root);
+    int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element);
+    int CreateAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
+    int CreatePropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition);
+    int CreateOrCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
+    int CreateTrueCondition(PointerByReference condition);
+    int CreateFalseCondition(PointerByReference condition);
+    int CompareElements(Pointer element1, Pointer element2, IntByReference same);
+
+     /*
+    Use this like:
+    PointerByReference pbr=new PointerByReference();
+    HRESULT result=SomeCOMObject.QueryInterface(IID_IUIAUTOMATION, pbr);
+    if(COMUtils.SUCCEEDED(result)) IUIAutomation iua=IUIAutomation.Converter.PointerToIUIAutomation(pbr);
      */
 
-    @VTID(10)
-    mmarquee.automation.uiautomation.IUIAutomationElement elementFromHandleBuildCache(
-      java.nio.Buffer hwnd,
-      mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
-
-      /**
-       * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-       */
-
-      @VTID(12)
-      mmarquee.automation.uiautomation.IUIAutomationElement getFocusedElementBuildCache(
-        mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
-
-      /**
-       * @param pCondition Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationTreeWalker
-       */
-
-      @VTID(13)
-      mmarquee.automation.uiautomation.IUIAutomationTreeWalker createTreeWalker(
-        IUIAutomationCondition pCondition);
-
-
-      /**
-       * <p>
-       * Getter method for the COM property "ControlViewWalker"
-       * </p>
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationTreeWalker
-       */
-
-      @VTID(14)
-      mmarquee.automation.uiautomation.IUIAutomationTreeWalker controlViewWalker();
-
-
-      /**
-       * <p>
-       * Getter method for the COM property "ContentViewWalker"
-       * </p>
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationTreeWalker
-       */
-
-      @VTID(15)
-      mmarquee.automation.uiautomation.IUIAutomationTreeWalker contentViewWalker();
-
-
-      /**
-       * <p>
-       * Getter method for the COM property "RawViewWalker"
-       * </p>
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationTreeWalker
-       */
-
-      @VTID(16)
-      mmarquee.automation.uiautomation.IUIAutomationTreeWalker rawViewWalker();
-
-
-      /**
-       * <p>
-       * Getter method for the COM property "RawViewCondition"
-       * </p>
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(17)
-      IUIAutomationCondition rawViewCondition();
-
-
-      /**
-       * <p>
-       * Getter method for the COM property "ControlViewCondition"
-       * </p>
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(18)
-      IUIAutomationCondition controlViewCondition();
-
-
-      /**
-       * <p>
-       * Getter method for the COM property "ContentViewCondition"
-       * </p>
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(19)
-      IUIAutomationCondition contentViewCondition();
-
-
-      /**
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCacheRequest
-       */
-
-      @VTID(20)
-      mmarquee.automation.uiautomation.IUIAutomationCacheRequest createCacheRequest();
-
-
-      /**
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(21)
-      IUIAutomationCondition createTrueCondition();
-
-
-      /**
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(22)
-      IUIAutomationCondition createFalseCondition();
-
-
-      /**
-       * @param propertyId Mandatory int parameter.
-       * @param value Mandatory java.lang.Object parameter.
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(23)
-      IUIAutomationCondition createPropertyCondition(
-        int propertyId,
-        @MarshalAs(NativeType.VARIANT) java.lang.Object value);
-
-
-      /**
-       * @param propertyId Mandatory int parameter.
-       * @param value Mandatory java.lang.Object parameter.
-       * @param flags Mandatory mmarquee.automation.uiautomation.PropertyConditionFlags parameter.
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(24)
-      IUIAutomationCondition createPropertyConditionEx(
-        int propertyId,
-        @MarshalAs(NativeType.VARIANT) java.lang.Object value,
-        mmarquee.automation.uiautomation.PropertyConditionFlags flags);
-
-
-      /**
-       * @param condition1 Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-       * @param condition2 Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-       * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-       */
-
-      @VTID(25)
-      IUIAutomationCondition createAndCondition(
-        IUIAutomationCondition condition1,
-        IUIAutomationCondition condition2);
-
-
-        /**
-         * @param conditions Mandatory Holder parameter.
-         * @param conditionCount Mandatory int parameter.
-         * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-         */
-
-        @VTID(27)
-        IUIAutomationCondition createAndConditionFromNativeArray(
-          Holder<IUIAutomationCondition> conditions,
-          int conditionCount);
-
-
-        /**
-         * @param condition1 Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-         * @param condition2 Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-         * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-         */
-
-        @VTID(28)
-        IUIAutomationCondition createOrCondition(
-          IUIAutomationCondition condition1,
-          IUIAutomationCondition condition2);
-
-
-          /**
-           * @param conditions Mandatory Holder parameter.
-           * @param conditionCount Mandatory int parameter.
-           * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-           */
-
-          @VTID(30)
-          IUIAutomationCondition createOrConditionFromNativeArray(
-            Holder<IUIAutomationCondition> conditions,
-            int conditionCount);
-
-
-          /**
-           * @param condition Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-           * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationCondition
-           */
-
-          @VTID(31)
-          IUIAutomationCondition createNotCondition(
-            IUIAutomationCondition condition);
-
-
-          /**
-           * @param eventId Mandatory int parameter.
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-           * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationEventHandler parameter.
-           */
-
-          @VTID(32)
-          void addAutomationEventHandler(
-            int eventId,
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.TreeScope scope,
-            mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            IUIAutomationEventHandler handler);
-
-
-          /**
-           * @param eventId Mandatory int parameter.
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationEventHandler parameter.
-           */
-
-          @VTID(33)
-          void removeAutomationEventHandler(
-            int eventId,
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            IUIAutomationEventHandler handler);
-
-
-          /**
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-           * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler parameter.
-           * @param propertyArray Mandatory Holder parameter.
-           * @param propertyCount Mandatory int parameter.
-           */
-
-          @VTID(34)
-          void addPropertyChangedEventHandlerNativeArray(
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.TreeScope scope,
-            mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            IUIAutomationPropertyChangedEventHandler handler,
-            Holder<Integer> propertyArray,
-            int propertyCount);
-
-
-          /**
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-           * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler parameter.
-           * @param propertyArray Mandatory int[] parameter.
-           */
-
-          @VTID(35)
-          void addPropertyChangedEventHandler(
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.TreeScope scope,
-            mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            IUIAutomationPropertyChangedEventHandler handler,
-            int[] propertyArray);
-
-
-          /**
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationPropertyChangedEventHandler parameter.
-           */
-
-          @VTID(36)
-          void removePropertyChangedEventHandler(
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            IUIAutomationPropertyChangedEventHandler handler);
-
-
-          /**
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-           * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationStructureChangedEventHandler parameter.
-           */
-
-          @VTID(37)
-          void addStructureChangedEventHandler(
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            mmarquee.automation.uiautomation.TreeScope scope,
-            mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            IUIAutomationStructureChangedEventHandler handler);
-
-
-          /**
-           * @param element Mandatory mmarquee.automation.uiautomation.IUIAutomationElement parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationStructureChangedEventHandler parameter.
-           */
-
-          @VTID(38)
-          void removeStructureChangedEventHandler(
-            mmarquee.automation.uiautomation.IUIAutomationElement element,
-            IUIAutomationStructureChangedEventHandler handler);
-
-
-          /**
-           * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationFocusChangedEventHandler parameter.
-           */
-
-          @VTID(39)
-          void addFocusChangedEventHandler(
-            mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest,
-            IUIAutomationFocusChangedEventHandler handler);
-
-
-          /**
-           * @param handler Mandatory mmarquee.automation.uiautomation.IUIAutomationFocusChangedEventHandler parameter.
-           */
-
-          @VTID(40)
-          void removeFocusChangedEventHandler(
-            IUIAutomationFocusChangedEventHandler handler);
-
-
-          /**
-           */
-
-          @VTID(41)
-          void removeAllEventHandlers();
-
-
-          /**
-           * @param array Mandatory Holder parameter.
-           * @param arrayCount Mandatory int parameter.
-           * @return  Returns a value of type int[]
-           */
-
-          @VTID(42)
-          int[] intNativeArrayToSafeArray(
-            Holder<Integer> array,
-            int arrayCount);
-
-
-                /**
-                 * @param factory Mandatory mmarquee.automation.uiautomation.IUIAutomationProxyFactory parameter.
-                 * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationProxyFactoryEntry
-                 */
-
-                @VTID(47)
-                mmarquee.automation.uiautomation.IUIAutomationProxyFactoryEntry createProxyFactoryEntry(
-                  mmarquee.automation.uiautomation.IUIAutomationProxyFactory factory);
-
-
-                /**
-                 * <p>
-                 * Getter method for the COM property "ProxyFactoryMapping"
-                 * </p>
-                 * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationProxyFactoryMapping
-                 */
-
-                @VTID(48)
-                mmarquee.automation.uiautomation.IUIAutomationProxyFactoryMapping proxyFactoryMapping();
-
-
-                /**
-                 * @param property Mandatory int parameter.
-                 * @return  Returns a value of type java.lang.String
-                 */
-
-                @VTID(49)
-                java.lang.String getPropertyProgrammaticName(
-                  int property);
-
-
-                /**
-                 * @param pattern Mandatory int parameter.
-                 * @return  Returns a value of type java.lang.String
-                 */
-
-                @VTID(50)
-                java.lang.String getPatternProgrammaticName(
-                  int pattern);
-
-
-                    /**
-                     * @param value Mandatory java.lang.Object parameter.
-                     * @return  Returns a value of type int
-                     */
-
-                    @VTID(53)
-                    int checkNotSupported(
-                      @MarshalAs(NativeType.VARIANT) java.lang.Object value);
-
-
-                    /**
-                     * <p>
-                     * Getter method for the COM property "ReservedNotSupportedValue"
-                     * </p>
-                     * @return  Returns a value of type com4j.Com4jObject
-                     */
-
-                    @VTID(54)
-                    com4j.Com4jObject reservedNotSupportedValue();
-
-
-                    /**
-                     * <p>
-                     * Getter method for the COM property "ReservedMixedAttributeValue"
-                     * </p>
-                     * @return  Returns a value of type com4j.Com4jObject
-                     */
-
-                    @VTID(55)
-                    com4j.Com4jObject reservedMixedAttributeValue();
-
-
-                    /**
-                     * @param accessible Mandatory mmarquee.automation.uiautomation.IAccessible parameter.
-                     * @param childId Mandatory int parameter.
-                     * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-                     */
-
-                    @VTID(56)
-                    mmarquee.automation.uiautomation.IUIAutomationElement elementFromIAccessible(
-                      mmarquee.automation.uiautomation.IAccessible accessible,
-                      int childId);
-
-
-                    /**
-                     * @param accessible Mandatory mmarquee.automation.uiautomation.IAccessible parameter.
-                     * @param childId Mandatory int parameter.
-                     * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-                     * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-                     */
-
-                    @VTID(57)
-                    mmarquee.automation.uiautomation.IUIAutomationElement elementFromIAccessibleBuildCache(
-                      mmarquee.automation.uiautomation.IAccessible accessible,
-                      int childId,
-                      mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
-
-                    // Properties:
-                  }
+    public static class Converter {
+
+        private static int UIA_COMPARE_ELEMENTS = 3;
+        private static int UIA_COMPARE_RUNTIME_IDS = 4;
+        private static int UIA_GET_ROOT_ELEMENT = 5;
+        private static int UIA_GET_ELEMENT_FROM_HANDLE = 6;
+        private static int UIA_GET_FOCUSED_ELEMENT = 8;
+        private static int UIA_CREATE_TRUE_CONDITION = 21;
+        private static int UIA_CREATE_FALSE_CONDITION = 22;
+        private static int UIA_CREATE_PROPERTY_CONDITION = 23;
+        private static int UIA_CREATE_AND_CONDITION = 25;
+        private static int UIA_CREATE_OR_CONDITION = 28;
+        private static int UIA_CREATE_NOT_CONDITION = 31;
+        private static int UIA_GET_PATTERN_PROGRAMMATIC_NAME = 50;
+        private static int UIA_ELEMENT_FROM_IACCESSIBLE = 56;
+
+        private static int UIAutomation_Methods  = 58; // 0-2 IUnknown, 3-57 IUIAutomation
+
+        private static Pointer myInterfacePointer;
+
+        public static IUIAutomation PointerToIUIAutomation(final PointerByReference ptr) {
+            myInterfacePointer = ptr.getValue();
+            Pointer vTablePointer = myInterfacePointer.getPointer(0);
+
+            final Pointer[] vTable = new Pointer[UIAutomation_Methods];
+            vTablePointer.read(0, vTable, 0, vTable.length);
+            return new IUIAutomation() {
+
+                // IUnknown
+
+          //      @Override
+                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
+                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
+                    return new WinNT.HRESULT(f.invokeInt(new Object[]{myInterfacePointer, byValue, pointerByReference}));
+                }
+
+           //     @Override
+                public int AddRef() {
+                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer});
+                }
+
+                public int Release() {
+                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer});
+                }
+
+                // IUIAutomation actual (there are more obviously, not yet implemented(
+
+                public int CompareElements(Pointer element1, Pointer element2, IntByReference same) {
+                    Function f = Function.getFunction(vTable[UIA_COMPARE_ELEMENTS], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, element1, element2, same});
+                }
+
+                public int GetRootElement(PointerByReference root) {
+                    Function f = Function.getFunction(vTable[UIA_GET_ROOT_ELEMENT], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, root});
+                }
+
+                public int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element) {
+                    Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_HANDLE], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, hwnd, element});
+                }
+
+                public int CreatePropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_PROPERTY_CONDITION], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, propertyId, value, condition});
+                }
+
+                public int CreateAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_AND_CONDITION], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition1, condition2, condition});
+                }
+
+                public int CreateOrCondition(Pointer condition1, Pointer condition2, PointerByReference condition) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_OR_CONDITION], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition1, condition2, condition});
+                }
+
+                public int CreateTrueCondition(PointerByReference condition) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_TRUE_CONDITION], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition});
+                }
+
+                public int CreateFalseCondition(PointerByReference condition) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_FALSE_CONDITION], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition});
+                }
+
+            };
+        }
+    }
+
+}

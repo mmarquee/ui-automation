@@ -16,9 +16,6 @@
 package mmarquee.automation.condition;
 
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 26/04/2016.

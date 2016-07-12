@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.condition;
 
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
-
 /**
  * Created by inpwt on 24/02/2016.
  *

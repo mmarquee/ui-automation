@@ -16,8 +16,6 @@
 package mmarquee.automation.condition;
 
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.IUIAutomation;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

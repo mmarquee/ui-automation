@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.raw.IUIAutomationRangeValuePattern;
-
 /**
  * Created by inpwt on 01/03/2016.
  *

@@ -17,12 +17,8 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.*;
-import mmarquee.automation.cache.CacheRequest;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.eventhandlers.EventHandler;
-import mmarquee.automation.eventhandlers.FocusChange;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 

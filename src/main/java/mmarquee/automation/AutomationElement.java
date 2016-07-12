@@ -15,9 +15,7 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.Condition;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;

@@ -20,8 +20,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.condition.Condition;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 

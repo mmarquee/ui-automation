@@ -17,7 +17,6 @@ package mmarquee.automation.pattern;
 
 import com4j.Com4jObject;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 
 import java.util.ArrayList;
 import java.util.List;

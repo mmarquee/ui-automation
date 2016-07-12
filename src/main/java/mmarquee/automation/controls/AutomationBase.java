@@ -20,7 +20,6 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
 import mmarquee.automation.*;
-import mmarquee.automation.cache.CacheRequest;
 import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.pattern.Window;
