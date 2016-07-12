@@ -105,9 +105,9 @@ public interface IUIAutomationElement {
     int findAll (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
     int findFirst (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
     int getClickablePoint(WinDef.POINT clickable, IntByReference ok);
+    int get_CurrentIsPassword(IntByReference value);
 
     public static class Converter {
-
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-85 IUIAutomationElement
 
         public static IUIAutomationElement PointerToIUIAutomationElement(final PointerByReference ptr) {
@@ -156,6 +156,11 @@ public interface IUIAutomationElement {
                 public int getClickablePoint(WinDef.POINT clickable, IntByReference ok) {
                     Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, clickable, ok});
+                }
+
+                public int get_CurrentIsPassword(IntByReference value) {
+                    Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, value});
                 }
             };
         }

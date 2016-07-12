@@ -26,7 +26,6 @@ import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -191,12 +190,22 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant2.setValue(Variant.VT_BSTR, sysAllocated);
 
+        // Create the properties outside of the loop
+
+        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+
+        // First condition
+        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name, variant2);
+
+        // Second condition
+        PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType, variant1);
+
+        // And Condition
+        PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
+
         for (int loop = 0; loop < 15; loop++) {
 
-            element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
-                    this.automation.createAndCondition(
-                            this.createPropertyCondition(PropertyID.Name, variant2),
-                            this.createPropertyCondition(PropertyID.ControlType, variant1)));
+            element = this.rootElement.findFirstFromRawCondition(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
 
             if (element != null) {
                 break;
@@ -206,9 +215,16 @@ public class UIAutomation {
         return new AutomationWindow(element);
     }
 
-    private IUIAutomationCondition createPropertyCondition(PropertyID id, Variant.VARIANT.ByValue value) {
-        // this.automation.createPropertyCondition(id.getValue(), ControlType.Window)
+    private PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
+        PointerByReference pbr = new PointerByReference();
 
+        this.automation.CreateAndCondition(pCondition1, pCondition2, pbr);
+
+        // Checks ?
+        return pbr;
+    }
+
+    private PointerByReference createPropertyCondition(PropertyID id, Variant.VARIANT.ByValue value) {
         PointerByReference pCondition = new PointerByReference();
 
         int result = this.automation.CreatePropertyCondition(id.getValue(), value, pCondition);
@@ -220,7 +236,7 @@ public class UIAutomation {
 
         WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
         if (COMUtils.SUCCEEDED(result1)) {
-            return IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknown);
+            return pCondition;
         } else {
             // Or perhaps throw an exception?
             return null;
@@ -242,9 +258,11 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
+        PointerByReference pbr = this.createPropertyCondition(PropertyID.ControlType, variant);
+
         for (int loop = 0; loop < 15; loop++) {
             element = this.rootElement.findFirstFromRawCondition(new TreeScope(TreeScope.TreeScope_Descendants),
-                    this.createPropertyCondition(PropertyID.ControlType, variant));
+                    pbr);
 
             if (element != null) {
                 break;
@@ -267,58 +285,8 @@ public class UIAutomation {
         PointerByReference pTrueCondition = new PointerByReference();
 
         this.automation.CreateTrueCondition(pTrueCondition);
-/*
-        int resultAll = this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue(), pAll);
 
-        // What has come out of findAll ??
-
-        Unknown unkConditionA = new Unknown(pAll.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
-
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID_IUIAUTOMATION_ELEMENT_ARRAY);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
-
-            IntByReference ibr = new IntByReference();
-
-            collection.get_Length(ibr);
-
-            int counter = ibr.getValue();
-
-            for (int a = 0; a < counter; a++) {
-                PointerByReference pbr = new PointerByReference();
-
-                collection.GetElement(a, pbr);
-
-                // Now make a Element out of it
-
-                Unknown uElement = new Unknown(pbr.getValue());
-
-                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
-
-                WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
-
-                if (COMUtils.SUCCEEDED(result0)) {
-                    IUIAutomationElement element =
-                            IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
-
-                    PointerByReference sr = new PointerByReference();
-
-                    element.get_CurrentName(sr);
-
-                    String wideSR = sr.getValue().getWideString(0);
-
-                    String stophere = "here";
-                }
-            }
-
-*/
-//        IUIAutomationCondition condition = this.automation.createTrueCondition(pCondition);
-
-        Unknown unkConditionA = new Unknown(pAll.getValue());
+        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
@@ -330,11 +298,14 @@ public class UIAutomation {
 
             List<AutomationElement> collection = this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), condition);
 
-        for (AutomationElement element : collection) {
-            result.add(new AutomationWindow(element));
-        }
+            for (AutomationElement element : collection) {
+                result.add(new AutomationWindow(element));
+            }
 
-        return result;
+            return result;
+        } else {
+            return null; // or throw exception
+        }
     }
 
     /**

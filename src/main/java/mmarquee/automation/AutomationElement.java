@@ -15,6 +15,11 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.condition.Condition;
 import mmarquee.automation.uiautomation.*;
 
@@ -27,9 +32,6 @@ import java.util.List;
  * Wrapper for the underlying automation element.
  */
 public class AutomationElement {
-
-    private boolean isCached = false;
-
     /**
      * The underlying automation element
      *
@@ -43,12 +45,6 @@ public class AutomationElement {
      */
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;
-        this.isCached = false;
-    }
-
-    public AutomationElement(IUIAutomationElement element, boolean cached) {
-        this.element = element;
-        this.isCached = cached;
     }
 
     /**
@@ -56,9 +52,9 @@ public class AutomationElement {
      * @param propertyId The property ID to get
      * @return The property ID
      */
-    public Object getCurrentPropertyValue(int propertyId) {
-        return this.element.getCurrentPropertyValue(propertyId);
-    }
+//    public Object getCurrentPropertyValue(int propertyId) {
+//        return this.element.getCurrentPropertyValue(propertyId);
+//    }
 
 
     /**
@@ -82,7 +78,11 @@ public class AutomationElement {
      * @return The current class name
      */
     public String currentClassName() {
-        return this.element.currentClassName();
+        PointerByReference sr = new PointerByReference();
+
+        this.element.get_CurrentClassName(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
@@ -90,6 +90,10 @@ public class AutomationElement {
      * @return True if IsPassword
      */
     public Boolean currentIsPassword() {
+
+        int result = this.element.get_CurrentIsPassword(ibr);
+
+
         return this.element.currentIsPassword() == 1;
     }
 
@@ -98,12 +102,7 @@ public class AutomationElement {
      * @return The name (either cached or current)
      */
     public String getName() {
-        if (this.isCached) {
-            return this.cachedName();
-        } else {
-            return this.currentName();
-        }
-
+        return this.currentName();
     }
 
     /**
@@ -111,24 +110,24 @@ public class AutomationElement {
      * @return The name of the element
      */
     protected String currentName() {
-        return this.element.currentName();
-    }
 
-    /**
-     * Gets the cached name of the control
-     * @return The cached name of the element
-     */
-    protected String cachedName() {
-        return this.element.cachedName();
+        PointerByReference sr = new PointerByReference();
+
+        element.get_CurrentName(sr);
+
+        this.element.get_CurrentName(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Sets the name of the element
      * @param name The name to use
      */
-    public void setName(String name) {
-        this.element.setName(name);
-    }
+//    public void setName(String name) {
+//        this.element.setName(name);
+// Not sure how this worked
+//    }
 
     /**
      * Finds the first element that matches the condition
@@ -136,29 +135,49 @@ public class AutomationElement {
      * @param condition The condition
      * @return The first matching element
      */
-    public AutomationElement findFirst(TreeScope scope, Condition condition) {
-        IUIAutomationElement elem = this.element.findFirst(scope, condition.getCondition());
-
-        if (elem != null) {
-            return new AutomationElement(elem);
-        } else {
-            return null;
-        }
-    }
+//    public AutomationElement findFirst(TreeScope scope, Condition condition) /{
+//
+  //      PointerByReference pbr = new PointerByReference();
+//
+  //      int result = this.element.findFirst(scope, condition.getCondition(), pbr);
+///
+   //     Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+//
+  //      Unknown uRoot = new Unknown(pbr.getValue());
+    //
+      //  WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
+//
+  //      if (COMUtils.SUCCEEDED(result0)) {
+    //        return new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr));
+      //  } else {
+        //    return null;
+       // }
+  //  }
 
     /**
      * Finds the first element that matches the raw condition
      * @param scope Tree scope
-     * @param condition The raw condition
+     * @param pCondition The raw condition
      * @return The first matching element
      */
-    AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) {
-        IUIAutomationElement elem = this.element.findFirst(scope, condition);
+    AutomationElement findFirstFromRawCondition(TreeScope scope, PointerByReference pCondition) {
+        PointerByReference pbr = new PointerByReference();
 
-        if (elem != null) {
-            return new AutomationElement(elem);
+        this.element.findFirst(scope, pCondition.getValue(), pbr);
+
+        // See what we got
+        Unknown uElement = new Unknown(pbr.getValue());
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            IUIAutomationElement element =
+                    IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
+            return new AutomationElement(element);
         } else {
-            return null;
+            return null; // or throw exception maybe
         }
     }
 
