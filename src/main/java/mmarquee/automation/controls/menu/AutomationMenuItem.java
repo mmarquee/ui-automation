@@ -18,9 +18,6 @@ package mmarquee.automation.controls.menu;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

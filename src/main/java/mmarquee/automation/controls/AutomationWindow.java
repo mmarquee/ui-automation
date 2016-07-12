@@ -21,8 +21,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Window;
 
 import java.util.List;
 

@@ -17,8 +17,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Toggle;
 
 /**
  * Created by inpwt on 31/01/2016.

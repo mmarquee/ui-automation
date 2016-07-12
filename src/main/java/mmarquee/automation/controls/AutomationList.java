@@ -20,8 +20,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Selection;
 
 import java.util.List;
 

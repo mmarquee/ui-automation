@@ -21,8 +21,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.pattern.*;
-import mmarquee.automation.pattern.Window;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -268,9 +267,9 @@ public abstract class AutomationBase {
      * @param condition2 Second condition
      * @return The Or Condition
      */
-    public OrCondition createOrCondition(Condition condition1, Condition condition2) {
-        return new OrCondition(condition1, condition2);
-    }
+//    public OrCondition createOrCondition(Condition condition1, Condition condition2) {
+//        return new OrCondition(condition1, condition2);
+ //   }
 
     /**
      * Creates an AND condition
@@ -278,9 +277,9 @@ public abstract class AutomationBase {
      * @param condition2 Second condition
      * @return The And condition
      */
-    public AndCondition createAndCondition(Condition condition1, Condition condition2) {
-        return new AndCondition(condition1, condition2);
-    }
+//    public AndCondition createAndCondition(Condition condition1, Condition condition2) {
+//        return new AndCondition(condition1, condition2);
+//    }
 
     /**
      * Finds all of the elements that are associated with the given condition.

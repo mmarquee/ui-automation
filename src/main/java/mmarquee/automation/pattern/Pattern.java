@@ -15,6 +15,8 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.Pointer;
+
 /**
  * Created by inpwt on 28/02/2016.
  *
@@ -31,5 +33,5 @@ public interface Pattern {
      * Sets the pattern
      * @param pattern The pattern to set
      */
-    void setPattern (Com4jObject pattern);
+    void setPattern (Pointer pattern);
 }
