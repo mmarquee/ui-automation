@@ -16,7 +16,12 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.uiautomation.*;
@@ -48,8 +53,46 @@ public class UIAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-        automation = ClassFactory.createCUIAutomation();
-        rootElement = new AutomationElement(automation.getRootElement());
+//        automation = ClassFactory.createCUIAutomation();
+
+        Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
+                IUIAutomation.CLSID_CUIAutomation,
+                null,
+                WTypes.CLSCTX_SERVER,
+                IUIAutomation.IID_IUIAUTOMATION,
+                pbr);
+
+        COMUtils.checkRC(hr);
+
+        Unknown unk = new Unknown(pbr.getValue());
+
+        PointerByReference pbr1 = new PointerByReference();
+
+        Guid.REFIID refiid = new Guid.REFIID(IUIAutomation.IID_IUIAUTOMATION);
+
+        WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
+        if (COMUtils.SUCCEEDED(result)) {
+            this.automation = IUIAutomation.Converter.PointerToIUIAutomation(pbr1);
+        }
+
+        // rootElement = new AutomationElement(this.automation.getRootElement());
+        PointerByReference pRoot = new PointerByReference();
+
+        this.automation.GetRootElement(pRoot);
+
+        Unknown uRoot = new Unknown(pRoot.getValue());
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+
+        WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pRoot);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pRoot));
+        }
     }
 
     /**
@@ -63,15 +106,6 @@ public class UIAutomation {
         }
 
         return INSTANCE;
-    }
-
-    /**
-     * Create a cache request
-     *
-     * @return The created mmarquee.automation.cache request
-     */
-    public CacheRequest createCacheRequest() {
-        return new CacheRequest();
     }
 
     /**
@@ -148,12 +182,69 @@ public class UIAutomation {
     public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
         AutomationElement element = null;
 
-        for (int loop = 0; loop < 25; loop++) {
+        // Look for a window
+        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+        variant1.setValue(Variant.VT_INT, ControlType.Window);
+
+        // Look for a specific title
+        Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
+        variant2.setValue(Variant.VT_BSTR, sysAllocated);
+
+        for (int loop = 0; loop < 15; loop++) {
 
             element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
                     this.automation.createAndCondition(
-                            this.automation.createPropertyCondition(PropertyID.Name.getValue(), title),
-                            this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), ControlType.Window)));
+                            this.createPropertyCondition(PropertyID.Name, variant2),
+                            this.createPropertyCondition(PropertyID.ControlType, variant1)));
+
+            if (element != null) {
+                break;
+            }
+        }
+
+        return new AutomationWindow(element);
+    }
+
+    private IUIAutomationCondition createPropertyCondition(PropertyID id, Variant.VARIANT.ByValue value) {
+        // this.automation.createPropertyCondition(id.getValue(), ControlType.Window)
+
+        PointerByReference pCondition = new PointerByReference();
+
+        int result = this.automation.CreatePropertyCondition(id.getValue(), value, pCondition);
+
+        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+
+        Unknown unkCondition = new Unknown(pCondition.getValue());
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
+        if (COMUtils.SUCCEEDED(result1)) {
+            return IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknown);
+        } else {
+            // Or perhaps throw an exception?
+            return null;
+        }
+    }
+
+    /**
+     * Gets the desktop window associated with the title
+     *
+     * @param title Title to search for
+     * @return AutomationWindow The found window
+     * @throws ElementNotFoundException Element is not found
+     */
+    public AutomationWindow getDesktopObject(String title) throws ElementNotFoundException {
+        AutomationElement element = null;
+
+        // Look for a specific title
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        for (int loop = 0; loop < 15; loop++) {
+            element = this.rootElement.findFirstFromRawCondition(new TreeScope(TreeScope.TreeScope_Descendants),
+                    this.createPropertyCondition(PropertyID.ControlType, variant));
 
             if (element != null) {
                 break;
@@ -170,8 +261,74 @@ public class UIAutomation {
      */
     public List<AutomationWindow> getDesktopWindows() {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
-        IUIAutomationCondition condition = automation.createTrueCondition();
-        List<AutomationElement> collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
+
+        PointerByReference pAll = new PointerByReference();
+
+        PointerByReference pTrueCondition = new PointerByReference();
+
+        this.automation.CreateTrueCondition(pTrueCondition);
+/*
+        int resultAll = this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue(), pAll);
+
+        // What has come out of findAll ??
+
+        Unknown unkConditionA = new Unknown(pAll.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID_IUIAUTOMATION_ELEMENT_ARRAY);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
+
+            IntByReference ibr = new IntByReference();
+
+            collection.get_Length(ibr);
+
+            int counter = ibr.getValue();
+
+            for (int a = 0; a < counter; a++) {
+                PointerByReference pbr = new PointerByReference();
+
+                collection.GetElement(a, pbr);
+
+                // Now make a Element out of it
+
+                Unknown uElement = new Unknown(pbr.getValue());
+
+                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+
+                WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+                if (COMUtils.SUCCEEDED(result0)) {
+                    IUIAutomationElement element =
+                            IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
+
+                    PointerByReference sr = new PointerByReference();
+
+                    element.get_CurrentName(sr);
+
+                    String wideSR = sr.getValue().getWideString(0);
+
+                    String stophere = "here";
+                }
+            }
+
+*/
+//        IUIAutomationCondition condition = this.automation.createTrueCondition(pCondition);
+
+        Unknown unkConditionA = new Unknown(pAll.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationCondition condition =
+                    IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
+
+            List<AutomationElement> collection = this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), condition);
 
         for (AutomationElement element : collection) {
             result.add(new AutomationWindow(element));
@@ -186,9 +343,9 @@ public class UIAutomation {
      *
      * @return supports IUIAutomation2
      */
-    public boolean supportsAutomation2() {
-        return this.automation instanceof IUIAutomation2;
-    }
+    //public boolean supportsAutomation2() {
+    //    return this.automation instanceof IUIAutomation2;
+   // }
 
     /**
      * Does this automation object support IUIAutomation3
@@ -196,9 +353,9 @@ public class UIAutomation {
      *
      * @return supports IUIAutomation3
      */
-    public boolean supportsAutomation3() {
-        return this.automation instanceof IUIAutomation3;
-    }
+    //public boolean supportsAutomation3() {
+    //    return this.automation instanceof IUIAutomation3;
+    //}
 
     /**
      * Captures the screen.
@@ -247,17 +404,31 @@ public class UIAutomation {
      * @param condition1 Second condition
      * @return The AndCondition
      */
-    public IUIAutomationCondition CreateAndCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
-        return automation.createAndCondition(
-                condition0, condition1);
-    }
+//    public IUIAutomationCondition CreateAndCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
+//        return automation.createAndCondition(
+//                condition0, condition1);
+//    }
 
     /**
      * Creates a false Condition
      * @return The condition
      */
     public IUIAutomationCondition CreateFalseCondition () {
-        return this.automation.createFalseCondition();
+        PointerByReference pCondition = new PointerByReference();
+
+        this.automation.CreateFalseCondition(pCondition);
+
+        Unknown unkConditionA = new Unknown(pCondition.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            return IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
+        } else {
+            return null; // or throw excption
+        }
     }
 
     /**
@@ -265,18 +436,34 @@ public class UIAutomation {
      * @return The condition
      */
     public IUIAutomationCondition CreateTrueCondition () {
-        return this.automation.createTrueCondition();
+//        return this.automation.createTrueCondition();
+
+        PointerByReference pTrueCondition = new PointerByReference();
+
+        this.automation.CreateTrueCondition(pTrueCondition);
+
+        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            return IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
+        } else {
+            return null; // or throw excption
+        }
     }
 
     /**
      * Getst the raw condition
      * @return the underlying IUIAutomationCondition
      */
-    public IUIAutomationCondition CreateOrCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
-        return automation.createOrCondition(
-                condition0,
-                condition1);
-    }
+//    public IUIAutomationCondition CreateOrCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
+//        return automation.createOrCondition(
+//                condition0,
+//                condition1);
+//    }
 
     /**
      * Creates a property condition
@@ -284,11 +471,7 @@ public class UIAutomation {
      * @param value The value of the property
      * @return The property condition
      */
-    public IUIAutomationCondition CreatePropertyCondition (int property, java.lang.Object value) {
-        return automation.createPropertyCondition(property, value);
-    }
-
-    public IUIAutomationCacheRequest CreateCacheRequest() {
-        return this.automation.createCacheRequest();
-    }
+ //   public IUIAutomationCondition CreatePropertyCondition (int property, java.lang.Object value) {
+ //       return this.createPropertyCondition(property, value);
+ //   }
 }
