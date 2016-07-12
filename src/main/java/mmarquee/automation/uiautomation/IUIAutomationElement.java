@@ -100,12 +100,14 @@ public interface IUIAutomationElement {
      */
     int Release();
 
+    int setFocus();
     int get_CurrentName (/* [retval][out] */ PointerByReference sr);
     int get_CurrentClassName (/* [retval][out] */ PointerByReference sr);
     int findAll (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
     int findFirst (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
     int getClickablePoint(WinDef.POINT clickable, IntByReference ok);
     int get_CurrentIsPassword(IntByReference value);
+    int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
 
     public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-85 IUIAutomationElement
@@ -133,6 +135,11 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
+                public int setFocus() {
+                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
                 public int findFirst (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
@@ -153,14 +160,19 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer, sr});
                 }
 
+                public int get_CurrentIsPassword(IntByReference value) {
+                    Function f = Function.getFunction(vTable[35], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, value});
+                }
+
                 public int getClickablePoint(WinDef.POINT clickable, IntByReference ok) {
                     Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, clickable, ok});
                 }
 
-                public int get_CurrentIsPassword(IntByReference value) {
-                    Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, value});
+                public int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[30], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
                 }
             };
         }

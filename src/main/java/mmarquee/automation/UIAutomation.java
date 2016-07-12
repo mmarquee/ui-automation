@@ -215,6 +215,20 @@ public class UIAutomation {
         return new AutomationWindow(element);
     }
 
+    /**
+     * Compares 2 elements
+     * @param element1 First element
+     * @param element2 Second element
+     * @return Are the elememts the same
+     */
+    public boolean compareElement(Pointer element1, Pointer element2) {
+        IntByReference ibr = new IntByReference();
+
+        int result = this.automation.CompareElements(element1, element2, ibr);
+
+        return ibr.getValue() == 1;
+    }
+
     private PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
         PointerByReference pbr = new PointerByReference();
 

@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.condition.Condition;
 import mmarquee.automation.uiautomation.*;
@@ -69,9 +70,9 @@ public class AutomationElement {
      * Gets the current control type
      * @return The current control type
      */
-    public int currentControlType() {
-        return this.element.currentControlType();
-    }
+//    public int currentControlType() {
+//        return this.element.currentControlType();
+//    }
 
     /**
      * Gets the current class name of the element
@@ -90,11 +91,11 @@ public class AutomationElement {
      * @return True if IsPassword
      */
     public Boolean currentIsPassword() {
+        IntByReference ibr = new IntByReference();
 
         int result = this.element.get_CurrentIsPassword(ibr);
 
-
-        return this.element.currentIsPassword() == 1;
+        return ibr.getValue() == 1;
     }
 
     /**]
@@ -110,7 +111,6 @@ public class AutomationElement {
      * @return The name of the element
      */
     protected String currentName() {
-
         PointerByReference sr = new PointerByReference();
 
         element.get_CurrentName(sr);
@@ -200,16 +200,55 @@ public class AutomationElement {
     /**
      * Gets all of the elements that match the condition and scope
      * @param scope The scope in the element tree
-     * @param condition The condition
+     * @param pCondition The condition
      * @return List of matching elements
      */
-    public List<AutomationElement> findAll(TreeScope scope, IUIAutomationCondition condition) {
-        IUIAutomationElementArray collection = this.element.findAll(scope, condition);
+    public List<AutomationElement> findAll(TreeScope scope, PointerByReference pCondition) {
 
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
-        for (int count = 0; count < collection.length(); count++) {
-            items.add(new AutomationElement(collection.getElement(count)));
+        PointerByReference pAll = new PointerByReference();
+
+        int resultAll = this.element.findAll(scope, pCondition.getValue(), pAll);
+
+        // What has come out of findAll ??
+
+        Unknown unkConditionA = new Unknown(pAll.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID_IUIAUTOMATION_ELEMENT_ARRAY);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
+
+            IntByReference ibr = new IntByReference();
+
+            collection.get_Length(ibr);
+
+            int counter = ibr.getValue();
+
+            for (int a = 0; a < counter; a++) {
+                PointerByReference pbr = new PointerByReference();
+
+                collection.GetElement(a, pbr);
+
+                // Now make a Element out of it
+
+                Unknown uElement = new Unknown(pbr.getValue());
+
+                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+
+                WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+                if (COMUtils.SUCCEEDED(result0)) {
+                    IUIAutomationElement element =
+                            IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
+
+                    items.add(new AutomationElement(element));
+                }
+            }
         }
 
         return items;
@@ -220,7 +259,14 @@ public class AutomationElement {
      * @return String representing the ARIA role
      */
     public String getAriaRole() {
-        return element.currentAriaRole();
+        PointerByReference sr = new PointerByReference();
+
+        element.get_CurrentName(sr);
+
+        this.element.get_CurrentAriaRole(sr);
+
+        return sr.getValue().getWideString(0);
+
     }
 
     /**
