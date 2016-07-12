@@ -105,7 +105,7 @@ public interface IUIAutomationElement {
     int get_CurrentClassName (/* [retval][out] */ PointerByReference sr);
     int findAll (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
     int findFirst (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
-    int getClickablePoint(WinDef.POINT clickable, IntByReference ok);
+    int get_ClickablePoint(WinDef.POINT clickable, IntByReference ok);
     int get_CurrentIsPassword(IntByReference value);
     int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
 
@@ -165,14 +165,14 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer, value});
                 }
 
-                public int getClickablePoint(WinDef.POINT clickable, IntByReference ok) {
-                    Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, clickable, ok});
+                public int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[45], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
                 }
 
-                public int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr) {
-                    Function f = Function.getFunction(vTable[30], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, sr});
+                public int get_ClickablePoint(WinDef.POINT clickable, IntByReference ok) {
+                    Function f = Function.getFunction(vTable[52], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, clickable, ok});
                 }
             };
         }

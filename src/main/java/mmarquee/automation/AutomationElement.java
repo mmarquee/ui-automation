@@ -186,8 +186,10 @@ public class AutomationElement {
      * @param patternId What pattern to get
      * @return The pattern
      */
-    public com4j.Com4jObject getCurrentPattern(int patternId) {
-        return this.element.getCurrentPattern(patternId);
+    public PointerByReference getCurrentPattern(int patternId) {
+        PointerByReference pbr = new PointerByReference();
+
+        return this.element.get_CurrentPattern(patternId, pbr);
     }
 
     /**
@@ -273,93 +275,54 @@ public class AutomationElement {
      * Gets the current orientation
      * @return The orientation
      */
-    public OrientationType getOrientation() {
-        return element.currentOrientation();
-    }
+//    public OrientationType getOrientation() {
+//        return element.currentOrientation();
+//    }
 
     /**
      * Gets the framework ID
      * @return The framework ID
      */
-    public String getFrameworkId() {
-        return this.element.currentFrameworkId();
-    }
+//    public String getFrameworkId() {
+//        return this.element.currentFrameworkId();
+//    }
 
     /**
      * Gets the provider description
      * @return The provider description
      */
-    public String getProviderDescription() {
-        return this.element.currentProviderDescription();
-    }
+ //   public String getProviderDescription() {
+ //       return this.element.currentProviderDescription();
+ //   }
     /**
      * Get the runtime Id
      * @return The runtime ID
      */
-    public int[] getRuntimeId() {
-        return element.getRuntimeId();
-    }
+ //   public int[] getRuntimeId() {
+ //       return element.getRuntimeId();
+ //   }
 
     /**
      * Gets the process ID
      * @return The process ID
      */
-    public Object getProcessId() {
-        return element.currentProcessId();
-    }
+   // public Object getProcessId() {
+   //     return element.currentProcessId();
+   // }
 
     /**
      * Gets the current item status
      * @return The status
      */
-    public String getItemStatus() {
-        return this.element.currentItemStatus();
-    }
+ //   public String getItemStatus() {
+ //       return this.element.currentItemStatus();
+ //   }
 
     /**
      * Gets the current accelerator key associated with the element
      * @return The accelerator key
      */
-    public String getAcceleratorKey() {
-        return this.element.currentAcceleratorKey();
-    }
-
-    /**
-     * Find all, but from the cache
-     * @param treeScope The treeScope
-     * @param condition The filter condition
-     * @param cacheRequest The cache request
-     * @return The found collection of elements
-     */
-    public List<AutomationElement> findAllBuildCache (TreeScope treeScope,
-                                                      Condition condition,
-                                                      IUIAutomationCacheRequest cacheRequest) {
-        IUIAutomationElementArray collection = this.element.findAllBuildCache(treeScope, condition.getCondition(), cacheRequest);
-
-        List<AutomationElement> items = new ArrayList<AutomationElement>();
-
-        for (int count = 0; count < collection.length(); count++) {
-            items.add(new AutomationElement(collection.getElement(count), true));
-        }
-
-        return items;
-    }
-
-    /**
-     * Finds the first element that matches the condition, building the cache
-     * @param treeScope Tree scope
-     * @param condition The condition
-     * @return The first matching element
-     */
-    public AutomationElement findFirstBuildCache(TreeScope treeScope,
-                                                 Condition condition,
-                                                 IUIAutomationCacheRequest cacheRequest) {
-        IUIAutomationElement elem = this.element.findFirstBuildCache(treeScope, condition.getCondition(), cacheRequest);
-
-        if (elem != null) {
-            return new AutomationElement(elem);
-        } else {
-            return null;
-        }
-    }
+ //   public String getAcceleratorKey() {
+ //       return this.element.currentAcceleratorKey();
+ //   }
 }
