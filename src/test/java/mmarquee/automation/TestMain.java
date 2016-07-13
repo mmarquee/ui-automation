@@ -99,7 +99,11 @@ public class TestMain extends TestBase {
             AutomationCheckbox check = window.getCheckbox(0);
             check.toggle();
 
-            ToggleState state = check.getToggleState();
+            try {
+                ToggleState state = check.getToggleState();
+            } catch (Exception ex) {
+                logger.info("Failed to get toggle state");
+            }
 
             AutomationRadioButton radio = window.getRadioButton(1);
             radio.selectItem();
@@ -159,8 +163,8 @@ public class TestMain extends TestBase {
 
             String itemName = cell1.name();
             logger.info("Grid item is " + itemName);
-            cell1.setName("This");
-            logger.info("Grid item is " + cell1.name());
+//            cell1.setName("This");
+//            logger.info("Grid item is " + cell1.name());
 
             AutomationTreeView tree = window.getTreeView(0);
             try {

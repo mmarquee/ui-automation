@@ -298,9 +298,13 @@ public class AutomationElement {
      * Gets the provider description
      * @return The provider description
      */
- //   public String getProviderDescription() {
- //       return this.element.currentProviderDescription();
- //   }
+    public String getProviderDescription() {
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentProviderDescription(sr);
+
+        return sr.getValue().getWideString(0);
+    }
     /**
      * Get the runtime Id
      * @return The runtime ID

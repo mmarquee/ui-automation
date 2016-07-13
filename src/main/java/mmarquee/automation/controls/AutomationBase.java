@@ -585,9 +585,9 @@ public abstract class AutomationBase {
      * Gets the current provider description
      * @return The provider description
      */
-  //  public String getProviderDescription() {
-  //      return this.element.getProviderDescription();
-  //  }
+    public String getProviderDescription() {
+        return this.element.getProviderDescription();
+    }
 
     /**
      * Gets the current item status

@@ -97,6 +97,100 @@ public interface IUIAutomationElement {
      */
     int Release();
 
+    /*
+3        function SetFocus: HResult; stdcall;
+4    function GetRuntimeId(out runtimeId: PSafeArray): HResult; stdcall;
+5    function FindFirst(scope: TreeScope; const condition: IUIAutomationCondition;
+                       out found: IUIAutomationElement): HResult; stdcall;
+6    function FindAll(scope: TreeScope; const condition: IUIAutomationCondition;
+                     out found: IUIAutomationElementArray): HResult; stdcall;
+7    function FindFirstBuildCache(scope: TreeScope; const condition: IUIAutomationCondition;
+                                 const cacheRequest: IUIAutomationCacheRequest;
+                                 out found: IUIAutomationElement): HResult; stdcall;
+8    function FindAllBuildCache(scope: TreeScope; const condition: IUIAutomationCondition;
+                               const cacheRequest: IUIAutomationCacheRequest;
+                               out found: IUIAutomationElementArray): HResult; stdcall;
+9    function BuildUpdatedCache(const cacheRequest: IUIAutomationCacheRequest;
+                               out updatedElement: IUIAutomationElement): HResult; stdcall;
+10    function GetCurrentPropertyValue(propertyId: SYSINT; out retVal: OleVariant): HResult; stdcall;
+11    function GetCurrentPropertyValueEx(propertyId: SYSINT; ignoreDefaultValue: Integer;
+                                       out retVal: OleVariant): HResult; stdcall;
+12    function GetCachedPropertyValue(propertyId: SYSINT; out retVal: OleVariant): HResult; stdcall;
+13    function GetCachedPropertyValueEx(propertyId: SYSINT; ignoreDefaultValue: Integer;
+                                      out retVal: OleVariant): HResult; stdcall;
+14    function GetCurrentPatternAs(patternId: SYSINT; var riid: TGUID; out patternObject: Pointer): HResult; stdcall;
+ 15   function GetCachedPatternAs(patternId: SYSINT; var riid: TGUID; out patternObject: Pointer): HResult; stdcall;
+6    function GetCurrentPattern(patternId: SYSINT; out patternObject: IUnknown): HResult; stdcall;
+7    function GetCachedPattern(patternId: SYSINT; out patternObject: IUnknown): HResult; stdcall;
+8    function GetCachedParent(out parent: IUIAutomationElement): HResult; stdcall;
+9    function GetCachedChildren(out children: IUIAutomationElementArray): HResult; stdcall;
+20    function Get_CurrentProcessId(out retVal: SYSINT): HResult; stdcall;
+1    function Get_CurrentControlType(out retVal: SYSINT): HResult; stdcall;
+2    function Get_CurrentLocalizedControlType(out retVal: WideString): HResult; stdcall;
+3    function Get_CurrentName(out retVal: WideString): HResult; stdcall;
+4    function Get_CurrentAcceleratorKey(out retVal: WideString): HResult; stdcall;
+5    function Get_CurrentAccessKey(out retVal: WideString): HResult; stdcall;
+6    function Get_CurrentHasKeyboardFocus(out retVal: Integer): HResult; stdcall;
+7    function Get_CurrentIsKeyboardFocusable(out retVal: Integer): HResult; stdcall;
+8    function Get_CurrentIsEnabled(out retVal: Integer): HResult; stdcall;
+9    function Get_CurrentAutomationId(out retVal: WideString): HResult; stdcall;
+30    function Get_CurrentClassName(out retVal: WideString): HResult; stdcall;
+1    function Get_CurrentHelpText(out retVal: WideString): HResult; stdcall;
+2    function Get_CurrentCulture(out retVal: SYSINT): HResult; stdcall;
+3    function Get_CurrentIsControlElement(out retVal: Integer): HResult; stdcall;
+4    function Get_CurrentIsContentElement(out retVal: Integer): HResult; stdcall;
+5    function Get_CurrentIsPassword(out retVal: Integer): HResult; stdcall;
+6    function Get_CurrentNativeWindowHandle(out retVal: Pointer): HResult; stdcall;
+7    function Get_CurrentItemType(out retVal: WideString): HResult; stdcall;
+8    function Get_CurrentIsOffscreen(out retVal: Integer): HResult; stdcall;
+9    function Get_CurrentOrientation(out retVal: OrientationType): HResult; stdcall;
+40    function Get_CurrentFrameworkId(out retVal: WideString): HResult; stdcall;
+ 1   function Get_CurrentIsRequiredForForm(out retVal: Integer): HResult; stdcall;
+ 2   function Get_CurrentItemStatus(out retVal: WideString): HResult; stdcall;
+ 3   function Get_CurrentBoundingRectangle(out retVal: tagRECT): HResult; stdcall;
+ 4   function Get_CurrentLabeledBy(out retVal: IUIAutomationElement): HResult; stdcall;
+  5  function Get_CurrentAriaRole(out retVal: WideString): HResult; stdcall;
+6    function Get_CurrentAriaProperties(out retVal: WideString): HResult; stdcall;
+7    function Get_CurrentIsDataValidForForm(out retVal: Integer): HResult; stdcall;
+8    function Get_CurrentControllerFor(out retVal: IUIAutomationElementArray): HResult; stdcall;
+9    function Get_CurrentDescribedBy(out retVal: IUIAutomationElementArray): HResult; stdcall;
+50    function Get_CurrentFlowsTo(out retVal: IUIAutomationElementArray): HResult; stdcall;
+1    function Get_CurrentProviderDescription(out retVal: WideString): HResult; stdcall;
+2    function Get_CachedProcessId(out retVal: SYSINT): HResult; stdcall;
+3    function Get_CachedControlType(out retVal: SYSINT): HResult; stdcall;
+4    function Get_CachedLocalizedControlType(out retVal: WideString): HResult; stdcall;
+5    function Get_CachedName(out retVal: WideString): HResult; stdcall;
+6    function Get_CachedAcceleratorKey(out retVal: WideString): HResult; stdcall;
+7    function Get_CachedAccessKey(out retVal: WideString): HResult; stdcall;
+8    function Get_CachedHasKeyboardFocus(out retVal: Integer): HResult; stdcall;
+9    function Get_CachedIsKeyboardFocusable(out retVal: Integer): HResult; stdcall;
+60    function Get_CachedIsEnabled(out retVal: Integer): HResult; stdcall;
+1    function Get_CachedAutomationId(out retVal: WideString): HResult; stdcall;
+2    function Get_CachedClassName(out retVal: WideString): HResult; stdcall;
+3    function Get_CachedHelpText(out retVal: WideString): HResult; stdcall;
+4    function Get_CachedCulture(out retVal: SYSINT): HResult; stdcall;
+5    function Get_CachedIsControlElement(out retVal: Integer): HResult; stdcall;
+6    function Get_CachedIsContentElement(out retVal: Integer): HResult; stdcall;
+7    function Get_CachedIsPassword(out retVal: Integer): HResult; stdcall;
+8    function Get_CachedNativeWindowHandle(out retVal: Pointer): HResult; stdcall;
+9    function Get_CachedItemType(out retVal: WideString): HResult; stdcall;
+70    function Get_CachedIsOffscreen(out retVal: Integer): HResult; stdcall;
+ 1   function Get_CachedOrientation(out retVal: OrientationType): HResult; stdcall;
+2    function Get_CachedFrameworkId(out retVal: WideString): HResult; stdcall;
+3    function Get_CachedIsRequiredForForm(out retVal: Integer): HResult; stdcall;
+4    function Get_CachedItemStatus(out retVal: WideString): HResult; stdcall;
+5    function Get_CachedBoundingRectangle(out retVal: tagRECT): HResult; stdcall;
+6    function Get_CachedLabeledBy(out retVal: IUIAutomationElement): HResult; stdcall;
+7    function Get_CachedAriaRole(out retVal: WideString): HResult; stdcall;
+8    function Get_CachedAriaProperties(out retVal: WideString): HResult; stdcall;
+9    function Get_CachedIsDataValidForForm(out retVal: Integer): HResult; stdcall;
+80    function Get_CachedControllerFor(out retVal: IUIAutomationElementArray): HResult; stdcall;
+1    function Get_CachedDescribedBy(out retVal: IUIAutomationElementArray): HResult; stdcall;
+2    function Get_CachedFlowsTo(out retVal: IUIAutomationElementArray): HResult; stdcall;
+3    function Get_CachedProviderDescription(out retVal: WideString): HResult; stdcall;
+4    function GetClickablePoint(out clickable: tagPOINT; out gotClickable: Integer): HResult; stdcall;
+     */
+
     int setFocus();
     int get_CurrentName (/* [retval][out] */ PointerByReference sr);
     int get_CurrentClassName (/* [retval][out] */ PointerByReference sr);
@@ -108,9 +202,10 @@ public interface IUIAutomationElement {
     int get_CurrentPattern(Integer patternId, PointerByReference pbr);
     int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value);
     int get_CurrentControlType(IntByReference ipr);
+    int get_CurrentProviderDescription(PointerByReference sr);
 
     public static class Converter {
-        private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-85 IUIAutomationElement
+        private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
 
         public static IUIAutomationElement PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
@@ -182,6 +277,11 @@ public interface IUIAutomationElement {
 
                 public int get_CurrentAriaRole(/* [retval][out] */ PointerByReference sr) {
                     Function f = Function.getFunction(vTable[45], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
+                }
+
+                public int get_CurrentProviderDescription(PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[51], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, sr});
                 }
 
