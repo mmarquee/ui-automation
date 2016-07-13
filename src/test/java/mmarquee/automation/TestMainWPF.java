@@ -20,6 +20,7 @@ import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
+import mmarquee.automation.uiautomation.ToggleState;
 
 import java.util.List;
 
@@ -352,7 +353,7 @@ public class TestMainWPF extends TestBase {
             logger.info("IsPassword = " + passwd.isPassword());
             // Can't get the text out of a password control, but probably shouldn't just crash.
             //   logger.info(passwd.getValue());
-
+/*
             logger.info("Investigate the cache");
 
             CacheRequest cache = automation.createCacheRequest();
@@ -374,13 +375,13 @@ public class TestMainWPF extends TestBase {
                 logger.info(("Cached items : " + elements.size()));
 
                 // See what is actually in the cache
-                /* Currently this causes a big crash
-                */
+                // Currently this causes a big crash
                 for (AutomationElement element: elements) {
                     logger.info(": " + element.cachedName());
                 }
-                /**/
+
             }
+            */
 
             logger.info("Investigated the cache");
 

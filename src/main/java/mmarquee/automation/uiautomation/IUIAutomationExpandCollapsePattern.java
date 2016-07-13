@@ -104,7 +104,7 @@ public interface IUIAutomationExpandCollapsePattern {
     public static class Converter {
         private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationInvokePattern
 
-        public static IUIAutomationExpandCollapsePattern PointerToIUIAutomationExpandCollapsePattern(final PointerByReference ptr) {
+        public static IUIAutomationExpandCollapsePattern PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[METHODS];

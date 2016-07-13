@@ -100,9 +100,9 @@ public interface IUIAutomationGridPattern {
     int Get_CurrentColumnCount(IntByReference retVal);
 
     public static class Converter {
-        private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
+        private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationGridPattern
 
-        public static IUIAutomationGridPattern PointerToIUIAutomationGridPattern(final PointerByReference ptr) {
+        public static IUIAutomationGridPattern PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[METHODS];

@@ -44,7 +44,7 @@ public class Invoke extends BasePattern {
 
         if (COMUtils.SUCCEEDED(result0)) {
             IUIAutomationInvokePattern pattern =
-                    IUIAutomationInvokePattern.Converter.PointerToIUIAutomationInvokePattern(pbr);
+                    IUIAutomationInvokePattern.Converter.PointerToInterface(pbr);
 
             pattern.Invoke();
         }

@@ -95,7 +95,7 @@ public interface IUIAutomationItemContainerPattern {
     public static class Converter {
         private static int METHODS = 4; // 0-2 IUnknown, 3 IUIAutomationItemContainerPattern
 
-        public static IUIAutomationItemContainerPattern PointerToIUIAutomationItemContainerPattern(final PointerByReference ptr) {
+        public static IUIAutomationItemContainerPattern PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[METHODS];

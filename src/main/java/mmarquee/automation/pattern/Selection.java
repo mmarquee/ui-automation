@@ -64,7 +64,7 @@ public class Selection extends BasePattern {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
+                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
 
             return this.collectionToList(collection);
         } else {

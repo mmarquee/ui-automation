@@ -75,7 +75,7 @@ public class UIAutomation {
 
         WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomation.Converter.PointerToIUIAutomation(pbr1);
+            this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
         }
 
         // rootElement = new AutomationElement(this.automation.getRootElement());
@@ -90,7 +90,7 @@ public class UIAutomation {
         WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pRoot));
+            this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
         }
     }
 
@@ -331,7 +331,7 @@ public class UIAutomation {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationCondition condition =
-                    IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
+                    IUIAutomationCondition.Converter.PointerToInterface(pUnknownA);
 
             List<AutomationElement> collection =
                     this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue());

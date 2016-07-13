@@ -76,7 +76,7 @@ public abstract class BasePattern implements Pattern {
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement element =
-                        IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
+                        IUIAutomationElement.Converter.PointerToInterface(pbr);
 
                 list.add(new AutomationElement(element));
             }

@@ -122,7 +122,7 @@ public class AutomationDataGrid extends AutomationBase
         if (COMUtils.SUCCEEDED(result0)) {
 
             return new AutomationDataGridCell(
-                new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr)));
+                new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pbr)));
         } else {
             return null;
         }

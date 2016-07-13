@@ -105,9 +105,9 @@ public interface IUIAutomationValuePattern {
 
     public static class Converter {
 
-        private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
+        private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationValuePattern
 
-        public static IUIAutomationValuePattern PointerToIUIAutomationValuePattern(final PointerByReference ptr) {
+        public static IUIAutomationValuePattern PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[METHODS];

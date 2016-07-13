@@ -182,7 +182,7 @@ public class AutomationElement {
 
         if (COMUtils.SUCCEEDED(result0)) {
             IUIAutomationElement element =
-                    IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
+                    IUIAutomationElement.Converter.PointerToInterface(pbr);
             return new AutomationElement(element);
         } else {
             return null; // or throw exception maybe
@@ -233,7 +233,7 @@ public class AutomationElement {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
+                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
 
             IntByReference ibr = new IntByReference();
 
@@ -256,7 +256,7 @@ public class AutomationElement {
 
                 if (COMUtils.SUCCEEDED(result0)) {
                     IUIAutomationElement element =
-                            IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr);
+                            IUIAutomationElement.Converter.PointerToInterface(pbr);
 
                     items.add(new AutomationElement(element));
                 }

@@ -43,10 +43,11 @@ public class AutomationContainer extends AutomationBase {
         super(element);
     }
 
-    private AutomationElement getControlByControlType(int index, int id) {
+    protected AutomationElement getControlByControlType(int index, int id) {
         PointerByReference condition = this.automation.CreateControlTypeCondition(id);
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
+        List<AutomationElement> collection = this.findAll(
+                new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
 
         return collection.get(index);
     }

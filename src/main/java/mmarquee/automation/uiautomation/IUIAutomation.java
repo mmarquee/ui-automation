@@ -120,7 +120,7 @@ public interface IUIAutomation {
     Use this like:
     PointerByReference pbr=new PointerByReference();
     HRESULT result=SomeCOMObject.QueryInterface(IID_IUIAUTOMATION, pbr);
-    if(COMUtils.SUCCEEDED(result)) IUIAutomation iua=IUIAutomation.Converter.PointerToIUIAutomation(pbr);
+    if(COMUtils.SUCCEEDED(result)) IUIAutomation iua=IUIAutomation.Converter.PointerToInterface(pbr);
      */
 
     public static class Converter {
@@ -143,7 +143,7 @@ public interface IUIAutomation {
 
         private static Pointer myInterfacePointer;
 
-        public static IUIAutomation PointerToIUIAutomation(final PointerByReference ptr) {
+        public static IUIAutomation PointerToInterface(final PointerByReference ptr) {
             myInterfacePointer = ptr.getValue();
             Pointer vTablePointer = myInterfacePointer.getPointer(0);
 

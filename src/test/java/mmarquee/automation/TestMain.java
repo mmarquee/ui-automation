@@ -20,6 +20,7 @@ import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.AutomationDataGrid;
 import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.uiautomation.ToggleState;
 
 import java.util.List;
 

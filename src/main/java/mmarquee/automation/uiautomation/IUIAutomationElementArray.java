@@ -106,7 +106,7 @@ public interface IUIAutomationElementArray {
 
         private static int UIAutomationElementArray_Methods = 5; // 0-2 IUnknown, 3-4 IUIAutomationElement
 
-        public static IUIAutomationElementArray PointerToIUIAutomationElementArray(final PointerByReference ptr) {
+        public static IUIAutomationElementArray PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[UIAutomationElementArray_Methods];

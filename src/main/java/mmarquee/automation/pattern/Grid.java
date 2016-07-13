@@ -43,7 +43,7 @@ public class Grid extends BasePattern {
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationGridPattern.Converter.PointerToIUIAutomationGridPattern(pbr);
+            return IUIAutomationGridPattern.Converter.PointerToInterface(pbr);
         } else {
             return null; // or throw exception?
         }

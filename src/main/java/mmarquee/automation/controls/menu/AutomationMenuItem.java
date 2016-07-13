@@ -65,7 +65,7 @@ public class AutomationMenuItem extends AutomationBase {
      */
     public List<AutomationMenuItem> getItems() {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
-                this.createControlTypeCondition(ControlType.MenuItem));
+                this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 

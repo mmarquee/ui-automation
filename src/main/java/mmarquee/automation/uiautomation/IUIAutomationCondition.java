@@ -89,7 +89,7 @@ public interface IUIAutomationCondition {
     int Release();
 
     public static class Converter {
-        public static IUIAutomationCondition PointerToIUIAutomationCondition(final PointerByReference ptr) {
+        public static IUIAutomationCondition PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[85];  //  82 + 3 from IUnknown
