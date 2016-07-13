@@ -245,20 +245,20 @@ public class UIAutomation {
         return this.createPropertyCondition(PropertyID.ControlType, variant);
     }
 
-    public Pointer CreateAutomationIdPropertyCondition(String automationId) {
+    public PointerByReference CreateAutomationIdPropertyCondition(String automationId) {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        return this.createPropertyCondition(PropertyID.AutomationId, variant).getValue();
+        return this.createPropertyCondition(PropertyID.AutomationId, variant);
     }
 
-    public Pointer CreateNamePropertyCondition(String name) {
+    public PointerByReference CreateNamePropertyCondition(String name) {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        return this.createPropertyCondition(PropertyID.Name, variant).getValue();
+        return this.createPropertyCondition(PropertyID.Name, variant);
     }
 
     private PointerByReference createPropertyCondition(PropertyID id, Variant.VARIANT.ByValue value) {
@@ -422,24 +422,12 @@ public class UIAutomation {
      * Creates a false Condition
      * @return The condition
      */
-    public Pointer CreateFalseCondition () {
+    public PointerByReference CreateFalseCondition () {
         PointerByReference pCondition = new PointerByReference();
 
         this.automation.CreateFalseCondition(pCondition);
 
-/*        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
-
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            return IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
-        } else {
-            return null; // or throw excption
-        }
-*/
-        return pCondition.getValue();
+        return pCondition;
     }
 
     /**

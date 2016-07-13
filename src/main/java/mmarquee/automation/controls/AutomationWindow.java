@@ -159,10 +159,10 @@ public class AutomationWindow extends AutomationContainer {
 
         for (int count = 0; count < 10; count++) {
             try {
-                item = this.findFirst(TreeScope.TreeScope_Descendants,
+                item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                         this.createAndCondition(
-                                this.createNamePropertyCondition(title),
-                                this.createControlTypeCondition(ControlType.Window)));
+                                this.createNamePropertyCondition(title).getValue(),
+                                this.createControlTypeCondition(ControlType.Window).getValue()));
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find window");
             }

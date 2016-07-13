@@ -46,7 +46,7 @@ public class AutomationContainer extends AutomationBase {
     private AutomationElement getControlByControlType(int index, int id) {
         PointerByReference condition = this.automation.CreateControlTypeCondition(id);
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
 
         return collection.get(index);
     }
@@ -134,10 +134,10 @@ public class AutomationContainer extends AutomationBase {
      * @throws ElementNotFoundException Did not find the element
      */
     protected AutomationElement getControlByControlType(String name, int id) throws ElementNotFoundException {
-        return this.findFirst(TreeScope.TreeScope_Descendants,
+        return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(id)));
+                        this.createNamePropertyCondition(name).getValue(),
+                        this.createControlTypeCondition(id).getValue()));
     }
 
     /**
@@ -148,10 +148,10 @@ public class AutomationContainer extends AutomationBase {
      * @throws ElementNotFoundException Did not find the element
      */
     protected AutomationElement getControlByAutomationId(String automationId, int controlType) throws ElementNotFoundException {
-        return this.findFirst(TreeScope.TreeScope_Descendants,
+        return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
-                        this.createAutomationIdPropertyCondition(automationId),
-                        this.createControlTypeCondition(controlType)));
+                        this.createAutomationIdPropertyCondition(automationId).getValue(),
+                        this.createControlTypeCondition(controlType).getValue()));
     }
 
     /**

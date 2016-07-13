@@ -20,6 +20,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by inpwt on 20/02/2016.
@@ -44,10 +45,10 @@ public class AutomationTreeView extends AutomationBase {
      * @throws ElementNotFoundException when the element is not found
      */
     public AutomationTreeViewItem getItem(String name) throws ItemNotFoundException, ElementNotFoundException {
-        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(ControlType.TreeItem)));
+                        this.createNamePropertyCondition(name).getValue(),
+                        this.createControlTypeCondition(ControlType.TreeItem).getValue()));
 
         if (item != null) {
             return new AutomationTreeViewItem(item);

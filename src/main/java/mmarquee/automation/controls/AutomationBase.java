@@ -204,9 +204,9 @@ public abstract class AutomationBase {
      * @return The found AutomationElement
      * @throws ElementNotFoundException No elements found
      */
-//    protected AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
-//        return this.element.findFirst(scope, condition);
-//    }
+   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws ElementNotFoundException {
+        return this.element.findFirst(scope, condition);
+   }
 
     /**
      * Finds all of the elements that are associated with the given condition.
@@ -230,7 +230,7 @@ public abstract class AutomationBase {
      * Creates a false condition
      * @return The condition
      */
-    public Pointer createFalseCondition() {
+    public PointerByReference createFalseCondition() {
         return this.automation.CreateFalseCondition();
     }
 
@@ -239,7 +239,7 @@ public abstract class AutomationBase {
      * @param name The name to use
      * @return The condition
      */
-    public Pointer createNamePropertyCondition(String name) {
+    public PointerByReference createNamePropertyCondition(String name) {
         return this.automation.CreateNamePropertyCondition(name);
     }
 
@@ -248,7 +248,7 @@ public abstract class AutomationBase {
      * @param automationId The automation ID to use
      * @return The condition
      */
-    public Pointer createAutomationIdPropertyCondition(String automationId) {
+    public PointerByReference createAutomationIdPropertyCondition(String automationId) {
         return this.automation.CreateAutomationIdPropertyCondition(automationId);
     }
 
@@ -277,9 +277,9 @@ public abstract class AutomationBase {
      * @param condition2 Second condition
      * @return The And condition
      */
-//    public AndCondition createAndCondition(Condition condition1, Condition condition2) {
-//        return new AndCondition(condition1, condition2);
-//    }
+   public PointerByReference createAndCondition(Pointer condition1, Pointer condition2) {
+       return this.automation.createAndCondition(condition1, condition2);
+   }
 
     /**
      * Finds all of the elements that are associated with the given condition.
@@ -321,7 +321,7 @@ public abstract class AutomationBase {
         if (isSelectionItemPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -340,7 +340,7 @@ public abstract class AutomationBase {
         if (isSelectionPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -359,7 +359,7 @@ public abstract class AutomationBase {
         if (isValuePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationValuePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -378,7 +378,7 @@ public abstract class AutomationBase {
         if (isRangeValuePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.RangeValue.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationRangeValuePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -397,7 +397,7 @@ public abstract class AutomationBase {
         if (isTablePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationTablePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -416,7 +416,7 @@ public abstract class AutomationBase {
         if (isWindowPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -435,7 +435,7 @@ public abstract class AutomationBase {
         if (isExpandCollapsePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -454,7 +454,7 @@ public abstract class AutomationBase {
         if (isGridPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Grid.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -473,7 +473,7 @@ public abstract class AutomationBase {
         if (isTogglePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationTogglePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -491,7 +491,7 @@ public abstract class AutomationBase {
 
         if (isInvokePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Invoke.getValue());
-            pattern.setPattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -509,7 +509,7 @@ public abstract class AutomationBase {
 
         if (this.isTextPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Text.getValue());
-            pattern.setPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
