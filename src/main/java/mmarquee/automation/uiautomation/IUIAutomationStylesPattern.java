@@ -7,12 +7,12 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * Created by inpwt on 13/07/2016.
  */
-public interface IUIAutomationSelectionPattern {
+public interface IUIAutomationStylesPattern {
     /**
      * The interface IID for QueryInterface et al
      */
     public final static Guid.IID IID = new Guid.IID(
-            "{5ED5202E-B2AC-47A6-B638-4B0BF140D78E}");
+            "{85B5F0A2-BD79-484A-AD2B-388C9838D5FB}");
 
     /**
      *

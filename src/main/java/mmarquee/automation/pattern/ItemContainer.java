@@ -55,10 +55,12 @@ public class ItemContainer extends BasePattern {
      * @param value The value of the property
      * @return The item found
      */
-    public IUIAutomationElement findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) {
+    public Pointer findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) {
 
         PointerByReference pbr = new PointerByReference();
 
         int result = this.getPattern().FindItemByProperty(pStartAfter, propertyId, value, pbr);
+
+        return pbr.getValue();
     }
 }

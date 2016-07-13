@@ -15,7 +15,16 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -23,14 +32,35 @@ import mmarquee.automation.AutomationElement;
  * Wrapper for the Grid pattern
  */
 public class Grid extends BasePattern {
+
+    private IUIAutomationGridPattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationGridPattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationGridPattern.Converter.PointerToIUIAutomationGridPattern(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
     /**
      * Get the item associated with the given cell
      * @param x Cell X position
      * @param y Cell Y position
      * @return The item associated with the cell
      */
-    public AutomationElement getItem(int x, int y) {
-        return new AutomationElement(((IUIAutomationGridPattern)pattern).getItem(x, y));
+    public Pointer getItem(int x, int y) {
+        PointerByReference pbr = new PointerByReference();
+
+        this.getPattern().GetItem(x, y, pbr);
+
+        return pbr.getValue();
     }
 
     /**
@@ -38,7 +68,11 @@ public class Grid extends BasePattern {
      * @return The tow count
      */
     public int rowCount() {
-        return ((IUIAutomationGridPattern)pattern).currentRowCount();
+        IntByReference ibr = new IntByReference();
+
+        this.getPattern().Get_CurrentRowCount(ibr);
+
+        return ibr.getValue();
     }
 
     /**
@@ -46,6 +80,11 @@ public class Grid extends BasePattern {
      * @return The column count
      */
     public int columnCount() {
-        return ((IUIAutomationGridPattern)pattern).currentColumnCount();
+
+        IntByReference ibr = new IntByReference();
+
+        this.getPattern().Get_CurrentColumnCount(ibr);
+
+        return ibr.getValue();
     }
 }

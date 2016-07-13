@@ -15,12 +15,35 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
+
 /**
  * Created by inpwt on 01/03/2016.
  *
  * Wrapper for the range pattern.
  */
 public class Range extends BasePattern {
+    private IUIAutomationRangeValuePattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationRangeValuePattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationRangeValuePattern.Converter.PointerToIUIAutomationRangeValuePattern(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
     public void setValue (double value) {
         ((IUIAutomationRangeValuePattern)this.pattern).setValue(value);
     }
