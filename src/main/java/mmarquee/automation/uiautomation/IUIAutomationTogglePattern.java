@@ -1,7 +1,11 @@
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.Function;
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -11,8 +15,7 @@ public interface IUIAutomationTogglePattern {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID = new Guid.IID(
-            "{94CF8058-9B8D-4AB9-8BFD-4CD0A33C8C70}");
+    public final static Guid.IID IID = new Guid.IID("{94CF8058-9B8D-4AB9-8BFD-4CD0A33C8C70}");
 
     /**
      *
@@ -94,4 +97,48 @@ public interface IUIAutomationTogglePattern {
      */
     int Release();
 
+    int Toggle();
+    int Get_CurrentToggleState(IntByReference ibr);
+
+    public static class Converter {
+
+        private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
+
+        public static IUIAutomationTogglePattern PointerToInterface(final PointerByReference ptr) {
+            final Pointer interfacePointer = ptr.getValue();
+            final Pointer vTablePointer = interfacePointer.getPointer(0);
+            final Pointer[] vTable = new Pointer[METHODS];
+            vTablePointer.read(0, vTable, 0, vTable.length);
+            return new IUIAutomationTogglePattern() {
+                // IUnknown
+
+                //     @Override
+                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
+                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
+                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+                }
+
+                //   @Override
+                public int AddRef() {
+                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Release() {
+                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Toggle() {
+                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Get_CurrentToggleState(IntByReference ibr) {
+                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, ibr});
+                }
+            };
+        }
+    }
 }

@@ -3,19 +3,17 @@ package mmarquee.automation.uiautomation;
 import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
  * Created by inpwt on 13/07/2016.
  */
-public interface IUIAutomationTextPattern {
+public interface IUIAutomationTextRange {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID = new Guid.IID("{32EBA289-3583-42C9-9C59-3B6D9A1E9B6A}");
+    public final static Guid.IID IID = new Guid.IID("{A543CC6A-F4AE-494B-8239-C814481187A8}");
 
     /**
      *
@@ -97,20 +95,19 @@ public interface IUIAutomationTextPattern {
      */
     int Release();
 
-    int GetSelection(PointerByReference result);
-    int GetVisibleRanges(PointerByReference ranges);
-    int Get_DocumentRange(PointerByReference range);
+    int Select();
+    int GetText(Integer maxLength, PointerByReference sr);
 
     public static class Converter {
 
-        private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
+        private static int METHODS = 21; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
 
-        public static IUIAutomationTextPattern PointerToInterface(final PointerByReference ptr) {
+        public static IUIAutomationTextRange PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[METHODS];
             vTablePointer.read(0, vTable, 0, vTable.length);
-            return new IUIAutomationTextPattern() {
+            return new IUIAutomationTextRange() {
                 // IUnknown
 
                 //     @Override
@@ -130,22 +127,17 @@ public interface IUIAutomationTextPattern {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetSelection(PointerByReference result) {
-                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, result});
+                public int Select() {
+                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetVisibleRanges(PointerByReference ranges) {
-                    Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, ranges});
+                public int GetText(Integer maxLength, PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, maxLength, sr});
                 }
-
-                public int Get_DocumentRange(PointerByReference range) {
-                    Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, range});
-                }
-
             };
         }
     }
+
 }

@@ -19,9 +19,9 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.*;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -40,7 +40,7 @@ public class Text extends BasePattern {
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationTextPattern.Converter.PointerToIUIAutomationTextPattern(pbr);
+            return IUIAutomationTextPattern.Converter.PointerToInterface(pbr);
         } else {
             return null; // or throw exception?
         }
@@ -52,30 +52,61 @@ public class Text extends BasePattern {
      * Not functional at the moment.
      */
     public void getSelection() {
-        IUIAutomationTextRangeArray selection =
-                ((IUIAutomationTextPattern)pattern).getSelection();
+        PointerByReference pbr = new PointerByReference();
 
-        // OK, now what?
-        int len = selection.length();
+        this.getPattern().GetSelection(pbr);
 
+        Unknown unkConditionA = new Unknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationTextRangeArray.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationTextRangeArray selection =
+                    IUIAutomationTextRangeArray.Converter.PointerToInterface(pUnknownA);
+
+            // OK, now what?
+            IntByReference ibr = new IntByReference();
+            int result = selection.Get_Length(ibr);
+
+            int count = ibr.getValue();
+        }
     }
 
     /**
      * Gets the document range from the pattern.
      */
-    public void getDocumentRange () {
-        ((IUIAutomationTextPattern)pattern).getSelection();
-    }
+//    public void getDocumentRange () {
+//        ((IUIAutomationTextPattern)pattern).getSelection();
+//    }
 
     /**
      * Gets the text from the pattern.
      * @return The text.
      */
     public String getText() {
-        IUIAutomationTextRange range = ((IUIAutomationTextPattern)pattern).documentRange();
+        PointerByReference pbr = new PointerByReference();
 
-        String text = range.getText(-1);
+        this.getPattern().Get_DocumentRange(pbr);
 
-        return range.getText(-1);
+        Unknown unkConditionA = new Unknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationTextRange.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationTextRange range =
+                    IUIAutomationTextRange.Converter.PointerToInterface(pUnknownA);
+
+            PointerByReference sr = new PointerByReference();
+
+            int result = range.GetText(-1, sr);
+
+            return sr.getValue().getWideString(0);
+        } else {
+            return null;
+        }
     }
 }
