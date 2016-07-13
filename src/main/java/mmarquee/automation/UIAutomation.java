@@ -229,7 +229,7 @@ public class UIAutomation {
         return ibr.getValue() == 1;
     }
 
-    private PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
+    public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
         PointerByReference pbr = new PointerByReference();
 
         this.automation.CreateAndCondition(pCondition1, pCondition2, pbr);
@@ -238,11 +238,11 @@ public class UIAutomation {
         return pbr;
     }
 
-    public Pointer CreateControlTypeCondition(int id) {
+    public PointerByReference CreateControlTypeCondition(int id) {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id);
 
-        return this.createPropertyCondition(PropertyID.ControlType, variant).getValue();
+        return this.createPropertyCondition(PropertyID.ControlType, variant);
     }
 
     public Pointer CreateAutomationIdPropertyCondition(String automationId) {

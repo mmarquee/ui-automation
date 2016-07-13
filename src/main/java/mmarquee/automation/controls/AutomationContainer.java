@@ -16,6 +16,7 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
@@ -42,10 +43,10 @@ public class AutomationContainer extends AutomationBase {
         super(element);
     }
 
-    AutomationElement getControlByControlType(int index, int id) {
-        ControlIdCondition condition = new ControlIdCondition(id);
+    private AutomationElement getControlByControlType(int index, int id) {
+        PointerByReference condition = this.automation.CreateControlTypeCondition(id);
 
-        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
 
         return collection.get(index);
     }

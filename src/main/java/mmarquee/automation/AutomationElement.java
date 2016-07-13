@@ -168,7 +168,7 @@ public class AutomationElement {
      * @param pCondition The raw condition
      * @return The first matching element
      */
-    AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) {
+    public AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) {
         PointerByReference pbr = new PointerByReference();
 
         this.element.findFirst(scope, pCondition.getValue(), pbr);

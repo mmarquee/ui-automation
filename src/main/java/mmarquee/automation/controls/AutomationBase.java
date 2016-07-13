@@ -257,7 +257,7 @@ public abstract class AutomationBase {
      * @param id The control type to use
      * @return The condition
      */
-    public Pointer createControlTypeCondition(int id) {
+    public PointerByReference createControlTypeCondition(int id) {
         return this.automation.CreateControlTypeCondition(id);
     }
 

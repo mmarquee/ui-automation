@@ -15,11 +15,13 @@
  */
 package mmarquee.automation.controls.menu;
 
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.awt.*;
@@ -63,10 +65,11 @@ public class AutomationMainMenu extends AutomationBase {
      * @throws ElementNotFoundException Thrown when the element is not found.
      */
     public void menuItemFudge (String item0, int eventKey) throws ElementNotFoundException {
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
-                this.createAndCondition(
-                        this.createNamePropertyCondition(item0),
-                        this.createControlTypeCondition(ControlType.MenuItem)));
+        PointerByReference pbr = this.automation.createAndCondition(
+                this.createNamePropertyCondition(item0),
+                this.createControlTypeCondition(ControlType.MenuItem).getValue());
+
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pbr);
 
         if (item != null) {
             com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
