@@ -44,14 +44,31 @@ public class Selection extends BasePattern {
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationSelectionPattern.Converter.PointerToIUIAutomationSelectionPattern(pbr);
+            return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
         } else {
             return null; // or throw exception?
         }
     }
 
     public List<AutomationElement> getCurrentSelection () {
-        IUIAutomationElementArray collection = ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
-        return this.collectionToList(collection);
+
+        PointerByReference pbr = new PointerByReference();
+
+        this.getPattern().GetCurrentSelection(pbr);
+
+        Unknown unkConditionA = new Unknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
+
+            return this.collectionToList(collection);
+        } else {
+            return null;
+        }
     }
 }

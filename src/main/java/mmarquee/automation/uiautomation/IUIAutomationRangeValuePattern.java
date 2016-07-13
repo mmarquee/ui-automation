@@ -96,7 +96,7 @@ public interface IUIAutomationRangeValuePattern {
 
         private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationInvokePattern
 
-        public static IUIAutomationRangeValuePattern PointerToIUIAutomationRangeValuePattern(final PointerByReference ptr) {
+        public static IUIAutomationRangeValuePattern PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);
             final Pointer[] vTable = new Pointer[METHODS];

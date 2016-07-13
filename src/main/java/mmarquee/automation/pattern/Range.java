@@ -39,7 +39,7 @@ public class Range extends BasePattern {
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationRangeValuePattern.Converter.PointerToIUIAutomationRangeValuePattern(pbr);
+            return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);
         } else {
             return null; // or throw exception?
         }
