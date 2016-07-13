@@ -1,7 +1,10 @@
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.Function;
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -96,4 +99,49 @@ public interface IUIAutomationExpandCollapsePattern {
 
     int Expand();
     int Collapse();
+    int Get_CurrentExpandCollapseState(IntByReference retVal);
+
+    public static class Converter {
+        private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationInvokePattern
+
+        public static IUIAutomationExpandCollapsePattern PointerToIUIAutomationExpandCollapsePattern(final PointerByReference ptr) {
+            final Pointer interfacePointer = ptr.getValue();
+            final Pointer vTablePointer = interfacePointer.getPointer(0);
+            final Pointer[] vTable = new Pointer[METHODS];
+            vTablePointer.read(0, vTable, 0, vTable.length);
+            return new IUIAutomationExpandCollapsePattern() {
+
+                // IUnknown
+                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
+                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
+                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+                }
+
+                public int AddRef() {
+                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Release() {
+                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Expand() {
+                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Collapse() {
+                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Get_CurrentExpandCollapseState(IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+            };
+        }
+    }
 }

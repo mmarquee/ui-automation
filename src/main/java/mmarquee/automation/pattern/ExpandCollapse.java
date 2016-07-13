@@ -19,9 +19,9 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -65,9 +65,10 @@ public class ExpandCollapse extends BasePattern {
      * @return Is the control expanded
      */
     public boolean isExpanded() {
-        ExpandCollapseState state =
-            this.getPattern().CurrentExpandCollapseState();
+        IntByReference ibr = new IntByReference();
 
-        return state == ExpandCollapseState.ExpandCollapseState_Expanded;
+        int result = this.getPattern().Get_CurrentExpandCollapseState(ibr);
+
+        return ibr.getValue() == 1; //ExpandCollapseState.ExpandCollapseState_Expanded;
     }
 }
