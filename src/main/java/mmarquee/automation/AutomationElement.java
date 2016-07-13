@@ -74,9 +74,13 @@ public class AutomationElement {
      * Gets the current control type
      * @return The current control type
      */
-//    public int currentControlType() {
-//        return this.element.currentControlType();
-//    }
+    public int currentControlType() {
+        IntByReference ibr = new IntByReference();
+
+        int result = this.element.get_CurrentControlType(ibr);
+
+        return ibr.getValue();
+    }
 
     /**
      * Gets the current class name of the element

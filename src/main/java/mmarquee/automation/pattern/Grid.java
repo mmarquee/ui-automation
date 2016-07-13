@@ -55,12 +55,12 @@ public class Grid extends BasePattern {
      * @param y Cell Y position
      * @return The item associated with the cell
      */
-    public Pointer getItem(int x, int y) {
+    public PointerByReference getItem(int x, int y) {
         PointerByReference pbr = new PointerByReference();
 
         this.getPattern().GetItem(x, y, pbr);
 
-        return pbr.getValue();
+        return pbr;
     }
 
     /**

@@ -18,6 +18,10 @@ package mmarquee.automation.controls.menu;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +64,7 @@ public class AutomationMenuItem extends AutomationBase {
      * @return List of menu items
      */
     public List<AutomationMenuItem> getItems() {
-        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();

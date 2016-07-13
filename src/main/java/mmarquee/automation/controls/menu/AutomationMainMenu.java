@@ -20,6 +20,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @throws ElementNotFoundException Thrown when the element is not found.
      */
     public void menuItemFudge (String item0, int eventKey) throws ElementNotFoundException {
-        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(item0),
                         this.createControlTypeCondition(ControlType.MenuItem)));

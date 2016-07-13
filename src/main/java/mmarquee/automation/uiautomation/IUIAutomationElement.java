@@ -107,6 +107,7 @@ public interface IUIAutomationElement {
     int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
     int get_CurrentPattern(Integer patternId, PointerByReference pbr);
     int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value);
+    int get_CurrentControlType(IntByReference ipr);
 
     public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-85 IUIAutomationElement
@@ -157,6 +158,11 @@ public interface IUIAutomationElement {
                 public int get_CurrentPattern(Integer patternId, PointerByReference pbr) {
                     Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, patternId, pbr});
+                }
+
+                public int get_CurrentControlType(IntByReference ipr) {
+                    Function f = Function.getFunction(vTable[21], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, ipr});
                 }
 
                 public /* [propget] */ int get_CurrentName(/* [retval][out] */ PointerByReference sr) {
