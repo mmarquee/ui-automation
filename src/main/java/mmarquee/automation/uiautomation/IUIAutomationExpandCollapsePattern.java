@@ -94,6 +94,6 @@ public interface IUIAutomationExpandCollapsePattern {
      */
     int Release();
 
-    int Exoand();
+    int Expand();
     int Collapse();
 }

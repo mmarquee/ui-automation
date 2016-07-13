@@ -15,24 +15,49 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+
 /**
  * Created by inpwt on 25/02/2016.
  *
  * Wrapper for  the ExpandCollapse pattern
  */
 public class ExpandCollapse extends BasePattern {
+
+    private IUIAutomationExpandCollapsePattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationExpandCollapsePattern.Converter.PointerToIUIAutomationExpandCollapsePattern(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
     /**
      * Expands the control
      */
     public void expand() {
-        ((IUIAutomationExpandCollapsePattern)this.pattern).expand();
+        this.getPattern().Expand();
     }
 
     /**
      * Collapses the control
      */
     public void collapse() {
-        ((IUIAutomationExpandCollapsePattern)this.pattern).collapse();
+        this.getPattern().Collapse();
     }
 
     /**
@@ -41,7 +66,7 @@ public class ExpandCollapse extends BasePattern {
      */
     public boolean isExpanded() {
         ExpandCollapseState state =
-            ((IUIAutomationExpandCollapsePattern)this.pattern).currentExpandCollapseState();
+            this.getPattern().CurrentExpandCollapseState();
 
         return state == ExpandCollapseState.ExpandCollapseState_Expanded;
     }
