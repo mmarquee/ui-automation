@@ -1,6 +1,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.SelectionItem;
 
 /**
  * Created by inpwt on 20/02/2016.

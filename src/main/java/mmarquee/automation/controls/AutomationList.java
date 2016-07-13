@@ -20,6 +20,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 
@@ -56,7 +59,7 @@ public class AutomationList extends AutomationBase {
      */
     public AutomationListItem getItem(int index) throws ItemNotFoundException, ElementNotFoundException {
 
-        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.ListItem));
 
         AutomationElement item = items.get(index);

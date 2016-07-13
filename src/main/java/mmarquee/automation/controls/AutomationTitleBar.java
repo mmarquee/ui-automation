@@ -19,6 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by inpwt on 04/03/2016.
@@ -42,7 +43,7 @@ public class AutomationTitleBar extends AutomationContainer {
     public AutomationMainMenu getMenuBar() throws ElementNotFoundException {
         ControlIdCondition condition = new ControlIdCondition(ControlType.MenuBar);
 
-        AutomationElement element = this.findFirst(TreeScope.TreeScope_Descendants, condition);
+        AutomationElement element = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), condition);
 
         return new AutomationMainMenu(this.element, element);
     }

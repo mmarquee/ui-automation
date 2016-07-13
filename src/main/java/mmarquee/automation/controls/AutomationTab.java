@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class AutomationTab extends AutomationContainer {
         // Now get the list of tab items
         tabItems = new ArrayList<AutomationTabItem>();
 
-        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
         for (AutomationElement elem: collection) {
             int retVal = elem.currentControlType();

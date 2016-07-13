@@ -21,6 +21,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class AutomationContainer extends AutomationBase {
 
         AutomationElement foundElement = null;
 
-        collection = this.findAll(TreeScope.TreeScope_Descendants);
+        collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
         int counter = 0;
 
@@ -97,7 +98,7 @@ public class AutomationContainer extends AutomationBase {
 
         AutomationElement foundElement = null;
 
-        collection = this.findAll(TreeScope.TreeScope_Descendants);
+        collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
         int length = collection.size();
 
@@ -507,7 +508,7 @@ public class AutomationContainer extends AutomationBase {
     public void dumpUI() {
         logger.info("About to start dumping");
 
-        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
         for (AutomationElement element : collection) {
             String cName = element.getName();

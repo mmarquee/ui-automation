@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

@@ -17,6 +17,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
  * Created by inpwt on 26/01/2016.
@@ -48,7 +50,7 @@ public class AutomationEditBox extends AutomationBase {
      * @return True if readonly, otherwise false.
      */
     public boolean isReadOnly() {
-        return this.valuePattern.isReadOnly() == 1;
+        return this.valuePattern.isReadOnly();
     }
 
     /**
@@ -61,7 +63,7 @@ public class AutomationEditBox extends AutomationBase {
 
     /**
      * Constructor for the AutomationEditBox
-     * @param element The undelying element
+     * @param element The underlying element
      */
     public AutomationEditBox(AutomationElement element) {
         super(element);

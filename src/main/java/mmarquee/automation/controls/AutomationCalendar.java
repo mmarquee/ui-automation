@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
  * Created by inpwt on 16/02/2016.

@@ -16,6 +16,7 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.*;
 
@@ -64,7 +65,7 @@ public class AutomationDataGrid extends AutomationBase
      * @return Read only?
      */
     public boolean isReadOnly() {
-        return this.valuePattern.isReadOnly() == 1;
+        return this.valuePattern.isReadOnly();
     }
 
     /**
@@ -101,6 +102,11 @@ public class AutomationDataGrid extends AutomationBase
      * @return The GridItem at the given cell position
      */
     public AutomationDataGridCell getItem(int x, int y) {
-        return new AutomationDataGridCell(this.grid.getItem(x, y));
+
+        Pointer cell = this.grid.getItem(x, y);
+
+
+
+        return new AutomationDataGridCell();
     }
 }

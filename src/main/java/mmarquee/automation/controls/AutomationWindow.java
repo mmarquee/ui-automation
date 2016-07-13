@@ -15,12 +15,16 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 
@@ -59,9 +63,9 @@ public class AutomationWindow extends AutomationContainer {
      * @return The status bar
      */
     public AutomationStatusBar getStatusBar() {
-        TrueCondition condition = this.createTrueCondition();
+        Pointer condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
 
         AutomationStatusBar found = null;
 
