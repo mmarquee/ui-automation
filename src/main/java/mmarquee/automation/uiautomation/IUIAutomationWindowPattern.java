@@ -112,7 +112,7 @@ public interface IUIAutomationWindowPattern {
 
     int Close();
     int WaitForInputIdle(Integer milliseconds, IntByReference success);
-//    int SetWindowVisualState(state: WindowVisualState);
+    int SetWindowVisualState(Integer state);
     int Get_CurrentCanMaximize(IntByReference retVal);
     int Get_CurrentCanMinimize(IntByReference retVal);
     int Get_CurrentIsModal(IntByReference retVal);
@@ -155,6 +155,11 @@ public interface IUIAutomationWindowPattern {
                 public int WaitForInputIdle(Integer milliseconds, IntByReference success) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, milliseconds, success});
+                }
+
+                public int SetWindowVisualState(Integer state){
+                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, state});
                 }
 
                 public int Get_CurrentCanMaximize(IntByReference retVal){

@@ -21,8 +21,8 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -52,7 +52,7 @@ public class Window extends BasePattern {
      */
     public void waitForInputIdle(int timeout){
         IntByReference ibr = new IntByReference();
-        this.getPattern().WaitForInputIdle(timeout, ibr);
+        int result = this.getPattern().WaitForInputIdle(timeout, ibr);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Window extends BasePattern {
      */
     public boolean isModal () {
         IntByReference ibr = new IntByReference();
-        this.getPattern().Get_CurrentIsModal(ibr);
+        int result = this.getPattern().Get_CurrentIsModal(ibr);
 
         return (ibr.getValue()  == 1);
     }
@@ -86,7 +86,7 @@ public class Window extends BasePattern {
      */
     public boolean isTopMost () {
         IntByReference ibr = new IntByReference();
-        this.getPattern().Get_CurrentIsTopmost(ibr);
+        int result = this.getPattern().Get_CurrentIsTopmost(ibr);
 
         return (ibr.getValue()  == 1);
     }
@@ -95,7 +95,7 @@ public class Window extends BasePattern {
      * Closes the 'window'
      */
     public void close() {
-        this.getPattern().Close();
+        int result = this.getPattern().Close();
     }
 
     /**
@@ -103,6 +103,6 @@ public class Window extends BasePattern {
      * @param state The state to set
      */
     public void setWindowState(WindowVisualState state) {
-        ((IUIAutomationWindowPattern)this.pattern).setWindowVisualState(state);
+        int result = this.getPattern().SetWindowVisualState(state.getValue());
     }
 }
