@@ -16,14 +16,14 @@ public interface IUIAutomation {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID_IUIAUTOMATION = new Guid.IID(
+    public final static Guid.IID IID = new Guid.IID(
             "{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
 
 
     /**
      * The IID for the library itself
      */
-    public static final Guid.GUID CLSID_CUIAutomation = new Guid.GUID(
+    public static final Guid.GUID CLSID = new Guid.GUID(
             "{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
 
 

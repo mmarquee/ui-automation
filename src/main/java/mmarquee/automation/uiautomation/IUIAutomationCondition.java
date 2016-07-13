@@ -13,7 +13,7 @@ public interface IUIAutomationCondition {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID_IUIAUTOMATION_CONDITION = new Guid.IID(
+    public final static Guid.IID IID = new Guid.IID(
             "352FFBA8-0973-437C-A61F-F64CAFD81DF9");
 
     /**

@@ -172,7 +172,7 @@ public class AutomationElement {
         // See what we got
         Unknown uElement = new Unknown(pbr.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
 
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
@@ -224,7 +224,7 @@ public class AutomationElement {
         Unknown unkConditionA = new Unknown(pAll.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID_IUIAUTOMATION_ELEMENT_ARRAY);
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
@@ -246,7 +246,7 @@ public class AutomationElement {
 
                 Unknown uElement = new Unknown(pbr.getValue());
 
-                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
 
                 WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
@@ -269,12 +269,9 @@ public class AutomationElement {
     public String getAriaRole() {
         PointerByReference sr = new PointerByReference();
 
-        element.get_CurrentName(sr);
-
         this.element.get_CurrentAriaRole(sr);
 
         return sr.getValue().getWideString(0);
-
     }
 
     /**

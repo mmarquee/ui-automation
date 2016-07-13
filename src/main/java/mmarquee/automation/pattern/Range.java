@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
@@ -45,10 +46,14 @@ public class Range extends BasePattern {
     }
 
     public void setValue (double value) {
-        ((IUIAutomationRangeValuePattern)this.pattern).setValue(value);
+        this.getPattern().Set_Value(value);
     }
 
     public double getValue () {
-        return ((IUIAutomationRangeValuePattern)this.pattern).currentValue();
+        DoubleByReference dbr = new DoubleByReference();
+
+        int result = this.getPattern().Get_CurrentValue(dbr);
+
+        return dbr.getValue();
     }
 }

@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
@@ -39,7 +40,7 @@ public class Window extends BasePattern {
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationWindowPattern.Converter.PointerToIUIAutomationWindowPattern(pbr);
+            return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
         } else {
             return null; // or throw exception?
         }
@@ -50,7 +51,8 @@ public class Window extends BasePattern {
      * @param timeout A timeout to use
      */
     public void waitForInputIdle(int timeout){
-        ((IUIAutomationWindowPattern)this.pattern).waitForInputIdle(timeout);
+        IntByReference ibr = new IntByReference();
+        this.getPattern().WaitForInputIdle(timeout, ibr);
     }
 
     /**
@@ -72,7 +74,10 @@ public class Window extends BasePattern {
      * @return Is this control modal?
      */
     public boolean isModal () {
-        return ((IUIAutomationWindowPattern)this.pattern).currentIsModal()  == 1;
+        IntByReference ibr = new IntByReference();
+        this.getPattern().Get_CurrentIsModal(ibr);
+
+        return (ibr.getValue()  == 1);
     }
 
     /**
@@ -80,14 +85,17 @@ public class Window extends BasePattern {
      * @return Is the window topmost
      */
     public boolean isTopMost () {
-        return ((IUIAutomationWindowPattern)this.pattern).currentIsTopmost() == 1;
+        IntByReference ibr = new IntByReference();
+        this.getPattern().Get_CurrentIsTopmost(ibr);
+
+        return (ibr.getValue()  == 1);
     }
 
     /**
      * Closes the 'window'
      */
     public void close() {
-        ((IUIAutomationWindowPattern)this.pattern).close();
+        this.getPattern().Close();
     }
 
     /**

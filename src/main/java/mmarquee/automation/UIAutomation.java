@@ -59,10 +59,10 @@ public class UIAutomation {
         PointerByReference pbr = new PointerByReference();
 
         WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
-                IUIAutomation.CLSID_CUIAutomation,
+                IUIAutomation.CLSID,
                 null,
                 WTypes.CLSCTX_SERVER,
-                IUIAutomation.IID_IUIAUTOMATION,
+                IUIAutomation.IID,
                 pbr);
 
         COMUtils.checkRC(hr);
@@ -71,7 +71,7 @@ public class UIAutomation {
 
         PointerByReference pbr1 = new PointerByReference();
 
-        Guid.REFIID refiid = new Guid.REFIID(IUIAutomation.IID_IUIAUTOMATION);
+        Guid.REFIID refiid = new Guid.REFIID(IUIAutomation.IID);
 
         WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
         if (COMUtils.SUCCEEDED(result)) {
@@ -85,7 +85,7 @@ public class UIAutomation {
 
         Unknown uRoot = new Unknown(pRoot.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
 
         WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pRoot);
 
@@ -192,7 +192,7 @@ public class UIAutomation {
 
         // Create the properties outside of the loop
 
-        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
 
         // First condition
         PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name, variant2);
@@ -266,7 +266,7 @@ public class UIAutomation {
 
         int result = this.automation.CreatePropertyCondition(id.getValue(), value, pCondition);
 
-        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
 
         Unknown unkCondition = new Unknown(pCondition.getValue());
         PointerByReference pUnknown = new PointerByReference();
@@ -326,7 +326,7 @@ public class UIAutomation {
         Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID);
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {

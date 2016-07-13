@@ -15,7 +15,7 @@ public interface IUIAutomationElementArray {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID_IUIAUTOMATION_ELEMENT_ARRAY = new Guid.IID(
+    public final static Guid.IID IID = new Guid.IID(
             "{14314595-B4BC-4055-95F2-58F2E42C9855}");
 
     /**
