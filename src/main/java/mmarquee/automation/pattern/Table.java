@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 
@@ -43,7 +44,7 @@ public class Table extends BasePattern {
         WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationTablePattern.Converter.PointerToIUIAutomationTablePattern(pbr);
+            return IUIAutomationTablePattern.Converter.PointerToInterface(pbr);
         } else {
             return null; // or throw exception?
         }
@@ -54,7 +55,23 @@ public class Table extends BasePattern {
      * @return
      */
     public List<AutomationElement> getCurrentColumnHeaders() {
-        IUIAutomationElementArray collection = ((IUIAutomationTablePattern)(this.pattern)).getCurrentColumnHeaders();
-        return this.collectionToList(collection);
+        PointerByReference pbr = new PointerByReference();
+
+        int result = this.getPattern().GetCurrentColumnHeaders(pbr);
+
+        Unknown unkConditionA = new Unknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    IUIAutomationElementArray.Converter.PointerToIUIAutomationElementArray(pUnknownA);
+
+            return this.collectionToList(collection);
+        } else {
+            return null;
+        }
     }
 }

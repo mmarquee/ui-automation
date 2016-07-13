@@ -127,14 +127,14 @@ public interface IUIAutomationTextRange {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Select() {
-                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
                 public int GetText(Integer maxLength, PointerByReference sr) {
                     Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, maxLength, sr});
+                }
+
+                public int Select() {
+                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
                 }
             };
         }

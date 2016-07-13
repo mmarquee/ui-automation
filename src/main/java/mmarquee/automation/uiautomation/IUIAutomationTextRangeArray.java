@@ -102,7 +102,7 @@ public interface IUIAutomationTextRangeArray {
 
     public static class Converter {
 
-        private static int METHODS = 5; // 0-2 IUnknown, 3-4 IUIAutomationSelectionPattern
+        private static int METHODS = 5; // 0-2 IUnknown, 3-4 IUIAutomationTextRangeArray
 
         public static IUIAutomationTextRangeArray PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
