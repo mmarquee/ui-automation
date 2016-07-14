@@ -126,8 +126,8 @@ class TestExplorer extends TestBase {
                 btn0.click();
             }
 
-        } catch (ElementNotFoundException ex) {
-            logger.info("Faile to find element");
+        } catch (Exception ex) {
+            logger.info("Something went wrong");
         }
     }
 }

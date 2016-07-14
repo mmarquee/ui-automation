@@ -266,16 +266,19 @@ public class UIAutomation {
 
         int result = this.automation.CreatePropertyCondition(id, value, pCondition);
 
-        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
+        if (result == 0) {
+            Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
 
-        Unknown unkCondition = new Unknown(pCondition.getValue());
-        PointerByReference pUnknown = new PointerByReference();
+            Unknown unkCondition = new Unknown(pCondition.getValue());
+            PointerByReference pUnknown = new PointerByReference();
 
-        WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
-        if (COMUtils.SUCCEEDED(result1)) {
-            return pCondition;
+            WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
+            if (COMUtils.SUCCEEDED(result1)) {
+                return pCondition;
+            } else {
+                throw new AutomationException();
+            }
         } else {
-            // Or perhaps throw an exception?
             throw new AutomationException();
         }
     }

@@ -90,8 +90,8 @@ public class TestNotepad extends TestBase {
                 logger.info("Failed to find exit menu item");
             }
             */
-        } catch (ElementNotFoundException ex) {
-            logger.info("Element Not Found ");
+        } catch (Exception ex) {
+            logger.info("Something went wrong");
         }
     }
 }

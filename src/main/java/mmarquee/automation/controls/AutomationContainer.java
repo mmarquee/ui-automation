@@ -46,11 +46,9 @@ public class AutomationContainer extends AutomationBase {
     //    PointerByReference condition = this.automation.CreateControlTypeCondition(id);
 
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, ControlType.Window);
+        variant1.setValue(Variant.VT_INT, id);
 
-        PointerByReference condition = new PointerByReference();
-
-        condition = this.automation.createPropertyCondition(id, variant1);
+        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
         List<AutomationElement> collection = this.findAll(
                 new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());

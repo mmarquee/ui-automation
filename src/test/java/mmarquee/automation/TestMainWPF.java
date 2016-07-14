@@ -78,7 +78,6 @@ public class TestMainWPF extends TestBase {
             } catch (Exception ex) {
                 logger.info("Ouch");
             }
-            // Works to here!!!!
 
 // TODO: Fix menus
             /*
@@ -138,6 +137,9 @@ public class TestMainWPF extends TestBase {
             // Get and set an edit box by index (WPF doesn't care about control names)
 
             AutomationTab tab = window.getTab(0);
+
+            // Works to here!!!!
+
             tab.selectTabPage("Details");
 
             String text = window.getEditBox(1).getValue();
@@ -455,7 +457,7 @@ public class TestMainWPF extends TestBase {
                     handler);
 */
         } catch (Exception ex) {
-            logger.info("Something went wrong");
+            logger.info("Something went wrong - " + ex.getMessage());
         }
     }
 }
