@@ -63,14 +63,6 @@ public class AutomationElement {
     }
 
     /**
-     * Gete the processID property
-     * @return Object representing the processId
-     */
-    public Object getProcessId() {
-        return get_CurrentPropertyValue(PropertyID.ProcessId.getValue());
-    }
-
-    /**
      * Gets the current control type
      * @return The current control type
      */
@@ -338,9 +330,12 @@ public class AutomationElement {
      * Gets the process ID
      * @return The process ID
      */
-   // public Object getProcessId() {
-   //     return element.currentProcessId();
-   // }
+    public Integer getProcessId() {
+        IntByReference ibr = new IntByReference();
+        int result = this.element.get_CurrentProcessId(ibr);
+
+        return ibr.getValue();
+    }
 
     /**
      * Gets the current item status
@@ -359,8 +354,9 @@ public class AutomationElement {
      * @return The accelerator key
      */
     public String getAcceleratorKey() {
-     //   return this.element.currentAcceleratorKey();
+        PointerByReference sr = new PointerByReference();
 
-        return "Unknown";
-    }
+        int result = this.element.get_CurrentAcceleratorKey(sr);
+
+        return sr.getValue().getWideString(0);    }
 }
