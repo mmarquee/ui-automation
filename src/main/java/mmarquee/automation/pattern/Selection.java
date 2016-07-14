@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
@@ -50,7 +51,7 @@ public class Selection extends BasePattern {
         }
     }
 
-    public List<AutomationElement> getCurrentSelection () {
+    public List<AutomationElement> getCurrentSelection() throws AutomationException {
 
         PointerByReference pbr = new PointerByReference();
 
@@ -68,7 +69,7 @@ public class Selection extends BasePattern {
 
             return this.collectionToList(collection);
         } else {
-            return null;
+            throw new AutomationException();
         }
     }
 }

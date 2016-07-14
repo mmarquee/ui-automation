@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 
 /**
@@ -30,7 +31,7 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
  */
 public class ExpandCollapse extends BasePattern {
 
-    private IUIAutomationExpandCollapsePattern getPattern() {
+    private IUIAutomationExpandCollapsePattern getPattern() throws AutomationException {
         Unknown uElement = new Unknown(this.pattern);
 
         Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
@@ -42,21 +43,21 @@ public class ExpandCollapse extends BasePattern {
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Expands the control
      */
-    public void expand() {
+    public void expand() throws AutomationException {
         this.getPattern().Expand();
     }
 
     /**
      * Collapses the control
      */
-    public void collapse() {
+    public void collapse()throws AutomationException  {
         this.getPattern().Collapse();
     }
 
@@ -64,7 +65,7 @@ public class ExpandCollapse extends BasePattern {
      * Determines whether the control is expanded
      * @return Is the control expanded
      */
-    public boolean isExpanded() {
+    public boolean isExpanded() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         int result = this.getPattern().Get_CurrentExpandCollapseState(ibr);

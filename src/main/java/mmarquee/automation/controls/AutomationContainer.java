@@ -16,10 +16,12 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -44,7 +46,14 @@ public class AutomationContainer extends AutomationBase {
     }
 
     protected AutomationElement getControlByControlType(int index, int id) {
-        PointerByReference condition = this.automation.CreateControlTypeCondition(id);
+    //    PointerByReference condition = this.automation.CreateControlTypeCondition(id);
+
+        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+        variant1.setValue(Variant.VT_INT, ControlType.Window);
+
+        PointerByReference condition = new PointerByReference();
+
+        condition = this.automation.createPropertyCondition(id, variant1);
 
         List<AutomationElement> collection = this.findAll(
                 new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
@@ -170,7 +179,9 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      */
     public AutomationTab getTab(int index) {
-        return new AutomationTab(this.getControlByControlType(index, ControlType.Tab));
+        AutomationElement tab = this.getControlByControlType(index, ControlType.Tab);
+
+        return new AutomationTab(tab);
     }
 
     /**

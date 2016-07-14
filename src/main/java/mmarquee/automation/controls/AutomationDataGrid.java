@@ -23,6 +23,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 
@@ -107,7 +108,7 @@ public class AutomationDataGrid extends AutomationBase
      * @param y Y Offset
      * @return The GridItem at the given cell position
      */
-    public AutomationDataGridCell getItem(int x, int y) {
+    public AutomationDataGridCell getItem(int x, int y) throws AutomationException {
 
         PointerByReference cell = this.grid.getItem(x, y);
 
@@ -124,7 +125,7 @@ public class AutomationDataGrid extends AutomationBase
             return new AutomationDataGridCell(
                 new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pbr)));
         } else {
-            return null;
+            throw new AutomationException();
         }
     }
 }

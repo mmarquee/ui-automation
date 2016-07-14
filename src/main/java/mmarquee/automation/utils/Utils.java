@@ -18,6 +18,8 @@ package mmarquee.automation.utils;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.win32.W32APIOptions;
+import mmarquee.automation.AutomationException;
+
 import java.io.File;
 
 /**
@@ -32,8 +34,7 @@ public class Utils {
      * @return The handle
      * @throws Exception Thrown if the handle cannot be determined
      */
-    public static WinNT.HANDLE getHandleFromProcessEntry(Tlhelp32.PROCESSENTRY32.ByReference processEntry) throws Exception {
-
+    public static WinNT.HANDLE getHandleFromProcessEntry(Tlhelp32.PROCESSENTRY32.ByReference processEntry) throws AutomationException {
         WinNT.HANDLE handle = Kernel32.INSTANCE.OpenProcess (
                 0x0400 |    /* PROCESS_QUERY_INFORMATION */
                 0x0800 |    /* PROCESS_SUSPEND_RESUME */
@@ -43,7 +44,7 @@ public class Utils {
                 processEntry.th32ProcessID.intValue());
 
         if (handle == null) {
-            throw new Exception(Kernel32Util.formatMessageFromLastErrorCode(Kernel32.INSTANCE.GetLastError()));
+            throw new AutomationException();
         }
 
         return handle;

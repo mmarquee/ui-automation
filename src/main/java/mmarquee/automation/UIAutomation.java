@@ -136,14 +136,14 @@ public class UIAutomation {
      * @return The Application
      * @throws Exception If findProcessEntry throws an exception.
      */
-    public AutomationApplication findProcess(String... command) throws Exception {
+    public AutomationApplication findProcess(String... command) throws AutomationException {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
 
         boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
-            return null;
+            throw new AutomationException();
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(rootElement, handle, true);
@@ -178,7 +178,7 @@ public class UIAutomation {
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
+    public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException, AutomationException {
         AutomationElement element = null;
 
         // Look for a window
@@ -195,10 +195,10 @@ public class UIAutomation {
         Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
 
         // First condition
-        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name, variant2);
+        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
 
         // Second condition
-        PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType, variant1);
+        PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
         // And Condition
         PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
@@ -238,33 +238,33 @@ public class UIAutomation {
         return pbr;
     }
 
-    public PointerByReference CreateControlTypeCondition(int id) {
+    public PointerByReference CreateControlTypeCondition(int id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id);
 
-        return this.createPropertyCondition(PropertyID.ControlType, variant);
+        return this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
     }
 
-    public PointerByReference CreateAutomationIdPropertyCondition(String automationId) {
+    public PointerByReference CreateAutomationIdPropertyCondition(String automationId) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        return this.createPropertyCondition(PropertyID.AutomationId, variant);
+        return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
     }
 
-    public PointerByReference CreateNamePropertyCondition(String name) {
+    public PointerByReference CreateNamePropertyCondition(String name) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        return this.createPropertyCondition(PropertyID.Name, variant);
+        return this.createPropertyCondition(PropertyID.Name.getValue(), variant);
     }
 
-    private PointerByReference createPropertyCondition(PropertyID id, Variant.VARIANT.ByValue value) {
+    public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
-        int result = this.automation.CreatePropertyCondition(id.getValue(), value, pCondition);
+        int result = this.automation.CreatePropertyCondition(id, value, pCondition);
 
         Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
 
@@ -276,7 +276,7 @@ public class UIAutomation {
             return pCondition;
         } else {
             // Or perhaps throw an exception?
-            return null;
+            throw new AutomationException();
         }
     }
 
@@ -287,7 +287,7 @@ public class UIAutomation {
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopObject(String title) throws ElementNotFoundException {
+    public AutomationWindow getDesktopObject(String title) throws ElementNotFoundException, AutomationException {
         AutomationElement element = null;
 
         // Look for a specific title
@@ -295,7 +295,7 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference pbr = this.createPropertyCondition(PropertyID.ControlType, variant);
+        PointerByReference pbr = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
 
         for (int loop = 0; loop < 15; loop++) {
             element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
@@ -314,7 +314,7 @@ public class UIAutomation {
      *
      * @return List of desktop windows
      */
-    public List<AutomationWindow> getDesktopWindows() {
+    public List<AutomationWindow> getDesktopWindows() throws AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
         PointerByReference pAll = new PointerByReference();
@@ -342,7 +342,7 @@ public class UIAutomation {
 
             return result;
         } else {
-            return null; // or throw exception
+            throw new AutomationException();
         }
     }
 

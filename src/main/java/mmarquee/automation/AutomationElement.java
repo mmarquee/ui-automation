@@ -30,19 +30,20 @@ import java.util.List;
 
 /**
  * Created by inpwt on 06/03/2016.
- *
+ * <p>
  * Wrapper for the underlying automation element.
  */
 public class AutomationElement {
     /**
      * The underlying automation element
-     *
+     * <p>
      * TODO: Make this work with protected (done for EventHandler)
      */
     public IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement
+     *
      * @param element The element
      */
     public AutomationElement(IUIAutomationElement element) {
@@ -51,6 +52,7 @@ public class AutomationElement {
 
     /**
      * Gets the property associated with the passed in id
+     *
      * @param propertyId The property ID to get
      * @return The property ID
      */
@@ -64,6 +66,7 @@ public class AutomationElement {
 
     /**
      * Gets the current control type
+     *
      * @return The current control type
      */
     public int currentControlType() {
@@ -76,6 +79,7 @@ public class AutomationElement {
 
     /**
      * Gets the current class name of the element
+     *
      * @return The current class name
      */
     public String currentClassName() {
@@ -88,6 +92,7 @@ public class AutomationElement {
 
     /**
      * Gets the current IsPassword value.
+     *
      * @return True if IsPassword
      */
     public Boolean currentIsPassword() {
@@ -98,8 +103,10 @@ public class AutomationElement {
         return ibr.getValue() == 1;
     }
 
-    /**]
+    /**
+     * ]
      * Gets the name, either from the current ot cache property
+     *
      * @return The name (either cached or current)
      */
     public String getName() {
@@ -108,6 +115,7 @@ public class AutomationElement {
 
     /**
      * Gets the current name of the control
+     *
      * @return The name of the element
      */
     protected String currentName() {
@@ -137,30 +145,31 @@ public class AutomationElement {
      */
 //    public AutomationElement findFirst(TreeScope scope, Condition condition) /{
 //
-  //      PointerByReference pbr = new PointerByReference();
+    //      PointerByReference pbr = new PointerByReference();
 //
-  //      int result = this.element.findFirst(scope, condition.getCondition(), pbr);
+    //      int result = this.element.findFirst(scope, condition.getCondition(), pbr);
 ///
-   //     Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+    //     Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
 //
-  //      Unknown uRoot = new Unknown(pbr.getValue());
+    //      Unknown uRoot = new Unknown(pbr.getValue());
     //
-      //  WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
+    //  WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
 //
-  //      if (COMUtils.SUCCEEDED(result0)) {
+    //      if (COMUtils.SUCCEEDED(result0)) {
     //        return new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr));
-      //  } else {
-        //    return null;
-       // }
-  //  }
+    //  } else {
+    //    return null;
+    // }
+    //  }
 
     /**
      * Finds the first element that matches the raw condition
-     * @param scope Tree scope
+     *
+     * @param scope      Tree scope
      * @param pCondition The raw condition
      * @return The first matching element
      */
-    public AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) {
+    public AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         this.element.findFirst(scope, pCondition.getValue(), pbr);
@@ -177,12 +186,13 @@ public class AutomationElement {
                     IUIAutomationElement.Converter.PointerToInterface(pbr);
             return new AutomationElement(element);
         } else {
-            return null; // or throw exception maybe
+            throw new AutomationException();
         }
     }
 
     /**
      * Get the current pattern that matches the patternId
+     *
      * @param patternId What pattern to get
      * @return The pattern
      */
@@ -203,7 +213,8 @@ public class AutomationElement {
 
     /**
      * Gets all of the elements that match the condition and scope
-     * @param scope The scope in the element tree
+     *
+     * @param scope      The scope in the element tree
      * @param pCondition The condition
      * @return List of matching elements
      */
@@ -260,6 +271,7 @@ public class AutomationElement {
 
     /**
      * Gets the current ARIA role
+     *
      * @return String representing the ARIA role
      */
     public String getAriaRole() {
@@ -272,6 +284,7 @@ public class AutomationElement {
 
     /**
      * Gets the current orientation
+     *
      * @return The orientation
      */
     public OrientationType getOrientation() throws Exception {
@@ -296,6 +309,7 @@ public class AutomationElement {
 
     /**
      * Gets the framework ID
+     *
      * @return The framework ID
      */
     public String getFrameworkId() {
@@ -309,6 +323,7 @@ public class AutomationElement {
 
     /**
      * Gets the provider description
+     *
      * @return The provider description
      */
     public String getProviderDescription() {
@@ -322,12 +337,13 @@ public class AutomationElement {
      * Get the runtime Id
      * @return The runtime ID
      */
- //   public int[] getRuntimeId() {
- //       return element.getRuntimeId();
- //   }
+    //   public int[] getRuntimeId() {
+    //       return element.getRuntimeId();
+    //   }
 
     /**
      * Gets the process ID
+     *
      * @return The process ID
      */
     public Integer getProcessId() {
@@ -339,6 +355,7 @@ public class AutomationElement {
 
     /**
      * Gets the current item status
+     *
      * @return The status
      */
     public String getItemStatus() {
@@ -351,6 +368,7 @@ public class AutomationElement {
 
     /**
      * Gets the current accelerator key associated with the element
+     *
      * @return The accelerator key
      */
     public String getAcceleratorKey() {
@@ -358,5 +376,6 @@ public class AutomationElement {
 
         int result = this.element.get_CurrentAcceleratorKey(sr);
 
-        return sr.getValue().getWideString(0);    }
+        return sr.getValue().getWideString(0);
+    }
 }

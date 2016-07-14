@@ -6,6 +6,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
@@ -17,7 +18,7 @@ import mmarquee.automation.uiautomation.ToggleState;
  */
 public class Toggle extends BasePattern {
 
-    private IUIAutomationTogglePattern getPattern() {
+    private IUIAutomationTogglePattern getPattern() throws AutomationException {
         Unknown uElement = new Unknown(this.pattern);
 
         Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationTogglePattern.IID);
@@ -29,14 +30,14 @@ public class Toggle extends BasePattern {
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationTogglePattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Toggles the control
      */
-    public void toggle () {
+    public void toggle () throws AutomationException {
         this.getPattern().Toggle();
     }
 
@@ -44,8 +45,7 @@ public class Toggle extends BasePattern {
      * Gets the toggled state of the control
      * @return The toggled state
      */
-    public ToggleState currentToggleState() throws Exception {
-
+    public ToggleState currentToggleState() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         this.getPattern().Get_CurrentToggleState(ibr);
@@ -61,7 +61,7 @@ public class Toggle extends BasePattern {
         } else if (value == 2) {
             return ToggleState.ToggleState_Indeterminate;
         } else {
-            throw new Exception("Not a valid state");
+            throw new AutomationException();
         }
     }
 }

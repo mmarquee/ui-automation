@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
@@ -30,7 +31,7 @@ import mmarquee.automation.uiautomation.WindowVisualState;
  * Wrapper for the window pattern.
  */
 public class Window extends BasePattern {
-    private IUIAutomationWindowPattern getPattern() {
+    private IUIAutomationWindowPattern getPattern() throws AutomationException {
         Unknown uElement = new Unknown(this.pattern);
 
         Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationWindowPattern.IID);
@@ -42,7 +43,7 @@ public class Window extends BasePattern {
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
@@ -50,7 +51,7 @@ public class Window extends BasePattern {
      * Waits for the window to be idle, and allow input
      * @param timeout A timeout to use
      */
-    public void waitForInputIdle(int timeout){
+    public void waitForInputIdle(int timeout) throws AutomationException {
         IntByReference ibr = new IntByReference();
         int result = this.getPattern().WaitForInputIdle(timeout, ibr);
     }
@@ -58,14 +59,14 @@ public class Window extends BasePattern {
     /**
      * Maximize the 'window'
      */
-    public void maximize() {
+    public void maximize() throws AutomationException {
         this.setWindowState(WindowVisualState.WindowVisualState_Maximized);
     }
 
     /**
      * Minimize the 'window'
      */
-    public void minimize() {
+    public void minimize() throws AutomationException {
         this.setWindowState(WindowVisualState.WindowVisualState_Minimized);
     }
 
@@ -73,7 +74,7 @@ public class Window extends BasePattern {
      * Returns whether this control is modal
      * @return Is this control modal?
      */
-    public boolean isModal () {
+    public boolean isModal() throws AutomationException {
         IntByReference ibr = new IntByReference();
         int result = this.getPattern().Get_CurrentIsModal(ibr);
 
@@ -84,7 +85,7 @@ public class Window extends BasePattern {
      * IS this window topmost
      * @return Is the window topmost
      */
-    public boolean isTopMost () {
+    public boolean isTopMost() throws AutomationException {
         IntByReference ibr = new IntByReference();
         int result = this.getPattern().Get_CurrentIsTopmost(ibr);
 
@@ -94,7 +95,7 @@ public class Window extends BasePattern {
     /**
      * Closes the 'window'
      */
-    public void close() {
+    public void close() throws AutomationException {
         int result = this.getPattern().Close();
     }
 
@@ -102,7 +103,7 @@ public class Window extends BasePattern {
      * Sets the visual state
      * @param state The state to set
      */
-    public void setWindowState(WindowVisualState state) {
+    public void setWindowState(WindowVisualState state) throws AutomationException {
         int result = this.getPattern().SetWindowVisualState(state.getValue());
     }
 }
