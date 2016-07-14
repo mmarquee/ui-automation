@@ -1,6 +1,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
@@ -29,11 +30,11 @@ public class AutomationSlider extends AutomationBase {
         }
     }
 
-    public double getRangeValue() {
+    public double getRangeValue() throws AutomationException {
         return this.rangePattern.getValue();
     }
 
-    public void setRangeValue(double value) {
+    public void setRangeValue(double value) throws AutomationException {
         this.rangePattern.setValue(value);
     }
 }

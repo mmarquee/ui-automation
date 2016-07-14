@@ -17,6 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
@@ -35,7 +36,7 @@ public class AutomationCheckbox extends AutomationBase {
      * Invokes the toggle event for this control
      * </p>
      */
-    public void toggle () {
+    public void toggle () throws AutomationException {
         this.togglePattern.toggle();
     }
 

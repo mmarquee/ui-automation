@@ -205,7 +205,7 @@ public abstract class AutomationBase {
      * @return The found AutomationElement
      * @throws ElementNotFoundException No elements found
      */
-   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws ElementNotFoundException {
+   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws ElementNotFoundException, AutomationException {
         return this.element.findFirst(scope, condition);
    }
 
@@ -240,7 +240,7 @@ public abstract class AutomationBase {
      * @param name The name to use
      * @return The condition
      */
-    public PointerByReference createNamePropertyCondition(String name) {
+    public PointerByReference createNamePropertyCondition(String name) throws AutomationException {
         return this.automation.CreateNamePropertyCondition(name);
     }
 
@@ -249,7 +249,7 @@ public abstract class AutomationBase {
      * @param automationId The automation ID to use
      * @return The condition
      */
-    public PointerByReference createAutomationIdPropertyCondition(String automationId) {
+    public PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
         return this.automation.CreateAutomationIdPropertyCondition(automationId);
     }
 
@@ -258,7 +258,7 @@ public abstract class AutomationBase {
      * @param id The control type to use
      * @return The condition
      */
-    public PointerByReference createControlTypeCondition(int id) {
+    public PointerByReference createControlTypeCondition(int id) throws AutomationException {
         return this.automation.CreateControlTypeCondition(id);
     }
 

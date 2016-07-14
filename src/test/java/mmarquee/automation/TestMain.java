@@ -236,8 +236,8 @@ public class TestMain extends TestBase {
                 btn3.click();
             }
 
-        } catch (ElementNotFoundException ex) {
-            logger.info("Element Not Found ");
+        } catch (Exception ex) {
+            logger.info("Something went wrong");
         }
     }
 }

@@ -79,7 +79,7 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the selected item from the grid
      * @return AutomationStringGridItem
      */
-    public AutomationDataGridCell selected() {
+    public AutomationDataGridCell selected() throws AutomationException {
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
         return new AutomationDataGridCell(collection.get(0));

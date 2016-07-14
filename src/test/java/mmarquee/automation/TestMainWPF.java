@@ -53,7 +53,7 @@ public class TestMainWPF extends TestBase {
 
         try {
             window = automation.getDesktopWindow("MainWindow");
-        } catch (ElementNotFoundException ex) {
+        } catch (Exception ex) {
             logger.info("Failed to find `MainWindow`");
         }
 
@@ -71,10 +71,13 @@ public class TestMainWPF extends TestBase {
             String name = window.name();
             logger.info(name);
 
-            boolean val = window.isModal();
+            try {
+                boolean val = window.isModal();
 
-            logger.info(val);
-
+                logger.info(val);
+            } catch (Exception ex) {
+                logger.info("Ouch");
+            }
             // Works to here!!!!
 
 // TODO: Fix menus
@@ -451,8 +454,8 @@ public class TestMainWPF extends TestBase {
                     EventID.Invoke_Invoked.getValue(),
                     handler);
 */
-        } catch (ElementNotFoundException ex) {
-            logger.info("Element Not Found ");
+        } catch (Exception ex) {
+            logger.info("Something went wrong");
         }
     }
 }

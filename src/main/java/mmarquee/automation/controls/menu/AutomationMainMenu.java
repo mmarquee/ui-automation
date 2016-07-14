@@ -21,10 +21,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PatternID;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
@@ -70,7 +67,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @param eventKey Key to press
      * @throws ElementNotFoundException Thrown when the element is not found.
      */
-    public void menuItemFudge (String item0, int eventKey) throws ElementNotFoundException {
+    public void menuItemFudge (String item0, int eventKey) throws AutomationException, ElementNotFoundException {
         PointerByReference pbr = this.automation.createAndCondition(
                 this.createNamePropertyCondition(item0).getValue(),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
@@ -117,7 +114,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @return The menu item that matches the name
      * @throws ElementNotFoundException Menu element not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1) throws ElementNotFoundException {
+    public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException, ElementNotFoundException {
 
         AutomationElement foundElement = null;
 
@@ -164,7 +161,7 @@ public class AutomationMainMenu extends AutomationBase {
      * Gets the items associated with this menu control
      * @return The list of items
      */
-    public List<AutomationMenuItem> getItems() {
+    public List<AutomationMenuItem> getItems() throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 

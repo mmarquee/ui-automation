@@ -16,6 +16,7 @@
 package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.ExpandCollapse;
@@ -63,7 +64,7 @@ public class AutomationMenuItem extends AutomationBase {
      * Gets the list of items associatd with this menuitem
      * @return List of menu items
      */
-    public List<AutomationMenuItem> getItems() {
+    public List<AutomationMenuItem> getItems() throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
@@ -80,21 +81,21 @@ public class AutomationMenuItem extends AutomationBase {
      * Is the control expanded
      * @return True if expanded
      */
-    public boolean isExpanded() {
+    public boolean isExpanded() throws AutomationException {
         return collapsePattern.isExpanded();
     }
 
     /**
      * Collapses the element
      */
-    public void collapse() {
+    public void collapse() throws AutomationException {
         this.collapsePattern.collapse();
     }
 
     /**
      * Expands the element
      */
-    public void expand() {
+    public void expand() throws AutomationException {
         this.collapsePattern.expand();
     }
 }

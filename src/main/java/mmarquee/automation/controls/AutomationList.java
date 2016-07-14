@@ -16,10 +16,7 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -57,7 +54,7 @@ public class AutomationList extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationListItem getItem(int index) throws ItemNotFoundException, ElementNotFoundException {
+    public AutomationListItem getItem(int index) throws AutomationException, ItemNotFoundException, ElementNotFoundException {
 
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.ListItem).getValue());
@@ -78,7 +75,7 @@ public class AutomationList extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationListItem getItem(String name) throws ItemNotFoundException, ElementNotFoundException {
+    public AutomationListItem getItem(String name) throws AutomationException, ItemNotFoundException, ElementNotFoundException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),
@@ -95,7 +92,7 @@ public class AutomationList extends AutomationBase {
      * Gets the current selection
      * @return The current selection
      */
-    public List<AutomationElement> getCurrentSelection() {
+    public List<AutomationElement> getCurrentSelection() throws AutomationException {
         return this.selectionPattern.getCurrentSelection();
     }
 }

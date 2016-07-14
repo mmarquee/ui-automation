@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
@@ -42,7 +43,7 @@ public class AutomationTitleBar extends AutomationContainer {
      * @return The Main menu
      * @throws ElementNotFoundException When the element is not found
      */
-    public AutomationMainMenu getMenuBar() throws ElementNotFoundException {
+    public AutomationMainMenu getMenuBar() throws AutomationException, ElementNotFoundException {
         PointerByReference condition = this.automation.CreateControlTypeCondition(ControlType.MenuBar);
 
         AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
