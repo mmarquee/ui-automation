@@ -71,9 +71,12 @@ public class TestMainWPF extends TestBase {
             String name = window.name();
             logger.info(name);
 
+            boolean val = window.isModal();
+
+            logger.info(val);
+
             // Works to here!!!!
 
-            boolean val = window.isModal();
 
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu(0);
@@ -399,7 +402,13 @@ public class TestMainWPF extends TestBase {
             logger.info("Rect: " + rect);
 
             logger.info("ARIA role : " + window.getAriaRole());
-            logger.info("Orientation: " + window.getOrientation().toString());
+            try {
+                logger.info("Orientation: " + window.getOrientation().toString());
+            } catch (Exception ex) {
+                logger.info("Failed to get orientation");
+
+            }
+
             logger.info("Item Status: " + window.getItemStatus());
             logger.info("FrameworkId: " + window.getFrameworkId());
 

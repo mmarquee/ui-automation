@@ -102,7 +102,7 @@ public abstract class AutomationBase {
 
     protected boolean isWindowPatternAvailable () {
         Object value = this.element.get_CurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue());
-        return value.equals(true);
+        return !value.equals(0);
     }
 
     protected boolean isTextPatternAvailable () {
