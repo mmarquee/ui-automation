@@ -101,7 +101,8 @@ public abstract class AutomationBase {
     }
 
     protected boolean isWindowPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue());
+        return value.equals(true);
     }
 
     protected boolean isTextPatternAvailable () {
@@ -413,7 +414,7 @@ public abstract class AutomationBase {
     protected Window getWindowPattern() throws PatternNotFoundException {
         Window pattern = new Window();
 
-        if (isWindowPatternAvailable()) {
+        if (this.isWindowPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
 
             pattern.setPattern(unknown.getValue());

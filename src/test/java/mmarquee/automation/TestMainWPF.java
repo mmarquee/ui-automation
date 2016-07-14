@@ -71,6 +71,8 @@ public class TestMainWPF extends TestBase {
             String name = window.name();
             logger.info(name);
 
+            // Works to here!!!!
+
             boolean val = window.isModal();
 
             // Interact with menus
