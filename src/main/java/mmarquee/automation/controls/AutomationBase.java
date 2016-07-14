@@ -560,7 +560,7 @@ public abstract class AutomationBase {
      * The current orientation of the element
      * @return The orientation
      */
-    public OrientationType getOrientation() {
+    public OrientationType getOrientation() throws Exception{
         return this.element.getOrientation();
     }
 

@@ -282,9 +282,25 @@ public class AutomationElement {
      * Gets the current orientation
      * @return The orientation
      */
-//    public OrientationType getOrientation() {
-//        return element.currentOrientation();
-//    }
+    public OrientationType getOrientation() throws Exception {
+        IntByReference ibr = new IntByReference();
+
+        int result = this.element.get_CurrentOrientation(ibr);
+
+        // Hummm..
+
+        int value = ibr.getValue();
+
+        if (value == 0) {
+            return OrientationType.OrientationType_None;
+        } else if (value == 1) {
+            return OrientationType.OrientationType_Horizontal;
+        } else if (value == 2) {
+            return OrientationType.OrientationType_Vertical;
+        } else {
+            throw new Exception("Not a valid orientation");
+        }
+    }
 
     /**
      * Gets the framework ID
@@ -342,7 +358,9 @@ public class AutomationElement {
      * Gets the current accelerator key associated with the element
      * @return The accelerator key
      */
- //   public String getAcceleratorKey() {
- //       return this.element.currentAcceleratorKey();
- //   }
+    public String getAcceleratorKey() {
+     //   return this.element.currentAcceleratorKey();
+
+        return "Unknown";
+    }
 }

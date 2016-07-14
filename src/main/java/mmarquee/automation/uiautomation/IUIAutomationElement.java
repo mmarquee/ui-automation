@@ -111,8 +111,9 @@ public interface IUIAutomationElement {
     int get_CurrentProviderDescription(PointerByReference sr);
     int get_CurrentFrameworkId (/* [retval][out] */ PointerByReference retVal);
     int get_CurrentItemStatus (/* [retval][out] */ PointerByReference retVal);
+    int get_CurrentOrientation (/* [retval][out] */ IntByReference retVal);
 
-    public static class Converter {
+        public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
 
         public static IUIAutomationElement PointerToInterface(final PointerByReference ptr) {
