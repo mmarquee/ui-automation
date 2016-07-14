@@ -109,6 +109,8 @@ public interface IUIAutomationElement {
     int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value);
     int get_CurrentControlType(IntByReference ipr);
     int get_CurrentProviderDescription(PointerByReference sr);
+    int get_CurrentFrameworkId (/* [retval][out] */ PointerByReference retVal);
+    int get_CurrentItemStatus (/* [retval][out] */ PointerByReference retVal);
 
     public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement

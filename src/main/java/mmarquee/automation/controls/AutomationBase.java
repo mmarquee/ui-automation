@@ -560,9 +560,9 @@ public abstract class AutomationBase {
      * The current orientation of the element
      * @return The orientation
      */
-//    public OrientationType getOrientation() {
-//        return this.element.getOrientation();
-//    }
+    public OrientationType getOrientation() {
+        return this.element.getOrientation();
+    }
 
     /**
      * Gets the runtime id
@@ -578,9 +578,9 @@ public abstract class AutomationBase {
      * Gets the current framework ID for the element
      * @return The framework id
      */
-//    public String getFrameworkId() {
-//        return this.element.getFrameworkId();
-//    }
+    public String getFrameworkId() {
+        return this.element.getFrameworkId();
+    }
 
     /**
      * Gets the current provider description
@@ -594,15 +594,15 @@ public abstract class AutomationBase {
      * Gets the current item status
      * @return The item status
      */
-//    public String getItemStatus() {
-  //      return this.element.getItemStatus();
-  //  }
+    public String getItemStatus() {
+        return this.element.getItemStatus();
+    }
 
     /**
-     * Gets the current accelerator key for th element
+     * Gets the current accelerator key for the element
      * @return The key
      */
- //   public String getAcceleratorKey() {
- //       return this.element.getAcceleratorKey();
- //   }
+    public String getAcceleratorKey() {
+        return this.element.getAcceleratorKey();
+    }
 }

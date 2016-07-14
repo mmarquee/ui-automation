@@ -399,9 +399,9 @@ public class TestMainWPF extends TestBase {
             logger.info("Rect: " + rect);
 
             logger.info("ARIA role : " + window.getAriaRole());
-//            logger.info("Orientation: " + window.getOrientation().toString());
-//            logger.info("Item Status: " + window.getItemStatus());
-//            logger.info("FrameworkId: " + window.getFrameworkId());
+            logger.info("Orientation: " + window.getOrientation().toString());
+            logger.info("Item Status: " + window.getItemStatus());
+            logger.info("FrameworkId: " + window.getFrameworkId());
 
             AutomationMouse mouse = AutomationMouse.getInstance();
 

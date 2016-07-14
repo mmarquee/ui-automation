@@ -290,9 +290,14 @@ public class AutomationElement {
      * Gets the framework ID
      * @return The framework ID
      */
-//    public String getFrameworkId() {
-//        return this.element.currentFrameworkId();
-//    }
+    public String getFrameworkId() {
+
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentFrameworkId(sr);
+
+        return sr.getValue().getWideString(0);
+    }
 
     /**
      * Gets the provider description
@@ -325,9 +330,13 @@ public class AutomationElement {
      * Gets the current item status
      * @return The status
      */
- //   public String getItemStatus() {
- //       return this.element.currentItemStatus();
- //   }
+    public String getItemStatus() {
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentItemStatus(sr);
+
+        return sr.getValue().getWideString(0);
+    }
 
     /**
      * Gets the current accelerator key associated with the element
