@@ -79,8 +79,10 @@ public class TestMainWPF extends TestBase {
                 logger.info("Ouch");
             }
 
-// TODO: Fix menus
             // Interact with menus
+
+            logger.info("++ MENUS ++");
+
             AutomationMainMenu menu = window.getMainMenu(0);
 
             logger.info("Menu name " + menu.name());
@@ -134,6 +136,8 @@ public class TestMainWPF extends TestBase {
 
             // Get and set an edit box by index (WPF doesn't care about control names)
 
+            logger.info("++ TAB ++");
+
             AutomationTab tab = window.getTab(0);
 
             tab.selectTabPage("Details");
@@ -146,6 +150,8 @@ public class TestMainWPF extends TestBase {
 
             // CHECK BOX *********************************************
 
+            logger.info("++ CHECK BOX ++");
+
             AutomationCheckbox check = window.getCheckbox(0);
             check.toggle();
             try {
@@ -156,10 +162,14 @@ public class TestMainWPF extends TestBase {
 
             // RADIO BUTTON *********************************************
 
+            logger.info("++ RADIO BUTTON ++");
+
             AutomationRadioButton radio = window.getRadioButton(1);
             radio.selectItem();
 
             // TEXT BOX *********************************************
+
+            logger.info("++ TEXT BOX ++");
 
             AutomationTextBox tb0 = window.getTextBox(9);
             String tb0Text = tb0.getValue();
@@ -171,6 +181,8 @@ public class TestMainWPF extends TestBase {
 
             // PROGRESS BAR *********************************************
 
+            logger.info("++ PROGRESS BAR ++");
+
             AutomationProgressBar progress = window.getProgressBar(0);
             logger.info("Progress = " + progress.getRangeValue());
 
@@ -180,6 +192,8 @@ public class TestMainWPF extends TestBase {
 
             // SLIDER *********************************************
 
+            logger.info("++ SLIDER ++");
+
             AutomationSlider slider = window.getSlider(0);
             logger.info("Slider value = " + slider.getRangeValue());
 
@@ -188,6 +202,8 @@ public class TestMainWPF extends TestBase {
             //       logger.info("Progress is now = " + progress.getRangeValue());
 
             // Status bar *********************************************
+
+            logger.info("++ STATUS BAR ++");
 
             AutomationStatusBar statusbar = window.getStatusBar();
 
@@ -206,6 +222,8 @@ public class TestMainWPF extends TestBase {
 
             // COMBOBOX *********************************************
 
+            logger.info("++ COMBO BOX ++");
+
             try {
                 AutomationComboBox cb0 = window.getCombobox(0);
 
@@ -217,6 +235,8 @@ public class TestMainWPF extends TestBase {
             }
 
             // EDITTABLE COMBOBOX ************************************
+
+            logger.info("++ EDITTABLE COMBOBOX ++");
 
             try {
                 AutomationComboBox cb1 = window.getCombobox(1);
@@ -233,6 +253,8 @@ public class TestMainWPF extends TestBase {
             }
 
             // DATAGRIDS ***********************************************************
+
+            logger.info("++ DATAGRIDS ++");
 
             // These are entirely different beasts in WPF, but look the same to us!
 
@@ -254,6 +276,8 @@ public class TestMainWPF extends TestBase {
 
             // TREEVIEW **************************
 
+            logger.info("++ TREEVIEW ++");
+
             AutomationTreeView tree = window.getTreeView(0);
             try {
                 AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
@@ -269,6 +293,8 @@ public class TestMainWPF extends TestBase {
 
             // BUTTONS ***********************************
 
+            logger.info("++ BUTTONS ++");
+
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
             AutomationButton btnClickMe = window.getButtonByAutomationId("btnClickMe");
@@ -276,6 +302,8 @@ public class TestMainWPF extends TestBase {
             btnClickMe.click();
 
             // LISTS ****************************************
+
+            logger.info("++ LISTS ++");
 
             AutomationList list = window.getListItem(0);
             try {
@@ -295,6 +323,8 @@ public class TestMainWPF extends TestBase {
             }
 
             // HYPERLINK ***********************************
+
+            logger.info("++ HYPERLINK ++");
 
             AutomationHyperlink link = window.getHyperlink(0);
             link.click();
@@ -327,6 +357,8 @@ public class TestMainWPF extends TestBase {
 
             // CALENDAR ***********************************
 
+            logger.info("++ CALENDAR ++");
+
             tab.selectTabPage("Calendar");
 
             AutomationCalendar calendar = window.getCalendar(0);
@@ -337,26 +369,13 @@ public class TestMainWPF extends TestBase {
 
             // DOCUMENT *********************************************
 
+            logger.info("++ DOCUMENT ++");
+
             tab.selectTabPage("Document");
 
             AutomationDocument document = window.getDocument(0);
 
             logger.info("Document name is " + document.name());
-
-            // TITLEBAR ****************************************
-
-            AutomationTitleBar titleBar = window.getTitleBar();
-            logger.info("TitleBar name is " + titleBar.name());
-
-            AutomationMainMenu menuBar = titleBar.getMenuBar();
-
-            AutomationButton btnMin = titleBar.getButton(0);
-            AutomationButton btnMax = titleBar.getButton(1);
-            AutomationButton btnClose = titleBar.getButton(2);
-
-            logger.info(btnMin.name());
-            logger.info(btnMax.name());
-            logger.info(btnClose.name());
 
             // PASSWORD EDITBOX **********************************
             AutomationEditBox passwd = window.getPasswordEditBox(0);
@@ -397,6 +416,8 @@ public class TestMainWPF extends TestBase {
 
             logger.info("Investigated the cache");
 
+            logger.info("++ MISC ++");
+
             logger.info("Provider Description:" + window.getProviderDescription());
             logger.info("Handle: " + window.getNativeWindowHandle());
 
@@ -414,6 +435,29 @@ public class TestMainWPF extends TestBase {
 
             logger.info("Item Status: " + window.getItemStatus());
             logger.info("FrameworkId: " + window.getFrameworkId());
+
+            // TITLEBAR ****************************************
+
+            logger.info("++ TITLEBAR ++");
+
+            AutomationTitleBar titleBar = window.getTitleBar();
+
+            // Title bar seeems to not give back a name now
+            // logger.info("TitleBar name is " + titleBar.name());
+
+            AutomationMainMenu menuBar = titleBar.getMenuBar();
+
+            AutomationButton btnMin = titleBar.getButton(0);
+            AutomationButton btnMax = titleBar.getButton(1);
+            AutomationButton btnClose = titleBar.getButton(2);
+
+            logger.info(btnMin.name());
+            logger.info(btnMax.name());
+            logger.info(btnClose.name());
+
+            // Right-click ****************************************
+
+            logger.info("++ RIGHTCLICK ++");
 
             AutomationMouse mouse = AutomationMouse.getInstance();
 

@@ -43,8 +43,6 @@ public class AutomationContainer extends AutomationBase {
     }
 
     protected AutomationElement getControlByControlType(int index, int id) throws AutomationException {
-    //    PointerByReference condition = this.automation.CreateControlTypeCondition(id);
-
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
         variant1.setValue(Variant.VT_INT, id);
 

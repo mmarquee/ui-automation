@@ -120,9 +120,6 @@ public class AutomationElement {
      */
     protected String currentName() {
         PointerByReference sr = new PointerByReference();
-
-        element.get_CurrentName(sr);
-
         this.element.get_CurrentName(sr);
 
         return sr.getValue().getWideString(0);

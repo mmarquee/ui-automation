@@ -66,7 +66,7 @@ public class TestNotepad extends TestBase {
 
             this.rest();
 
-            window.dumpUI();
+        //    window.dumpUI();
 
 /*
             // Interact with menus
