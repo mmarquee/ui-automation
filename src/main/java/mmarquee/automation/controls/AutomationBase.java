@@ -61,43 +61,53 @@ public abstract class AutomationBase {
     }
 
     protected boolean isDockPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isExpandCollapsePatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isGridItemPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isMultipleViewPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isInvokePatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isGridPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isRangeValuePatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isScrollPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isSelectionItemPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isScrollItemPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isWindowPatternAvailable () {
@@ -106,31 +116,38 @@ public abstract class AutomationBase {
     }
 
     protected boolean isTextPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isTableItemPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isTablePatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isSelectionPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isTransformPatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isTogglePatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     protected boolean isValuePatternAvailable () {
-        return this.element.get_CurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(true);
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue());
+        return !value.equals(0);
     }
 
     /**
