@@ -456,7 +456,8 @@ public class TestMainWPF extends TestBase {
             logger.info(btnClose.name());
 
             // Right-click ****************************************
-
+// TODO: Investigate
+            /*
             logger.info("++ RIGHTCLICK ++");
 
             AutomationMouse mouse = AutomationMouse.getInstance();
@@ -474,12 +475,15 @@ public class TestMainWPF extends TestBase {
             //window.dumpUI();
 
             // Should be able to get the popup menu here
+*/
+
+            logger.info("++ NOT FOUND ++");
 
             // Window / element not found
             try {
                 AutomationWindow popupNotThere = window.getWindow("Not there");
-            } catch (ItemNotFoundException ex) {
-                logger.info("Failed to find window");
+            } catch (Exception ex) {
+                logger.info(ex.toString());
             }
 /*
             // OK, lets have a look and event handlers

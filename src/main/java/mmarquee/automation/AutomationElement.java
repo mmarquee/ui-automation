@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
@@ -374,5 +375,19 @@ public class AutomationElement {
         int result = this.element.get_CurrentAcceleratorKey(sr);
 
         return sr.getValue().getWideString(0);
+    }
+
+    public WinDef.POINT getClickablePoint() {
+        WinDef.POINT point = new WinDef.POINT();
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+        int result = this.element.get_ClickablePoint(pbr, br);
+
+        byte value = pbr.getValue().getByte(0);
+
+        return point;
     }
 }
