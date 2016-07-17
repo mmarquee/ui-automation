@@ -320,7 +320,6 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button));
     }
 
-
     /**
      * Gets the button control associated with the given index
      * @param index The index of the button

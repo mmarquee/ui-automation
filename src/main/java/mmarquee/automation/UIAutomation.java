@@ -52,8 +52,6 @@ public class UIAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-//        automation = ClassFactory.createCUIAutomation();
-
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
@@ -229,6 +227,12 @@ public class UIAutomation {
         return ibr.getValue() == 1;
     }
 
+    /**
+     * Create an and condition
+     * @param pCondition1 First condition
+     * @param pCondition2 Second condition
+     * @return The new condition
+     */
     public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
         PointerByReference pbr = new PointerByReference();
 
@@ -238,6 +242,12 @@ public class UIAutomation {
         return pbr;
     }
 
+    /**
+     * Create an or condition
+     * @param pCondition1 First condition
+     * @param pCondition2 Second condition
+     * @return The new condition
+     */
     public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) {
         PointerByReference pbr = new PointerByReference();
 
@@ -247,6 +257,12 @@ public class UIAutomation {
         return pbr;
     }
 
+    /**
+     * Creates a condition, based on control id
+     * @param id The control id
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
     public PointerByReference CreateControlTypeCondition(int id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id);
@@ -254,6 +270,12 @@ public class UIAutomation {
         return this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
     }
 
+    /**
+     * Creates a condition, based on automation id
+     * @param automationId The automation id
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
     public PointerByReference CreateAutomationIdPropertyCondition(String automationId) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
@@ -262,6 +284,12 @@ public class UIAutomation {
         return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
     }
 
+    /**
+     * Creates a condition, based on element name
+     * @param name The name
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
     public PointerByReference CreateNamePropertyCondition(String name) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
@@ -392,7 +420,6 @@ public class UIAutomation {
      * @throws AWTException Robot exception
      * @throws IOException  IO Exception
      */
-
     public void captureScreen(String filename) throws AWTException, IOException {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
