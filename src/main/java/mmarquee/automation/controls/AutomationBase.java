@@ -285,9 +285,9 @@ public abstract class AutomationBase {
      * @param condition2 Second condition
      * @return The Or Condition
      */
-//    public OrCondition createOrCondition(Condition condition1, Condition condition2) {
-//        return new OrCondition(condition1, condition2);
- //   }
+    public PointerByReference createOrCondition(Pointer condition1, Pointer condition2) {
+        return this.automation.createOrCondition(condition1, condition2);
+    }
 
     /**
      * Creates an AND condition

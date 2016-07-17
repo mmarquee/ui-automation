@@ -41,7 +41,7 @@ public class AutomationTreeView extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationTreeViewItem getItem(String name) throws AutomationException, ItemNotFoundException, ElementNotFoundException {
+    public AutomationTreeViewItem getItem(String name) throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),

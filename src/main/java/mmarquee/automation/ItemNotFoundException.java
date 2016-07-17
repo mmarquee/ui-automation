@@ -5,5 +5,5 @@ package mmarquee.automation;
  *
  * Thrown when an item is not found.
  */
-public class ItemNotFoundException extends Exception {
+public class ItemNotFoundException extends AutomationException {
 }

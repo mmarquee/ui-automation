@@ -54,7 +54,7 @@ public class AutomationList extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationListItem getItem(int index) throws AutomationException, ItemNotFoundException, ElementNotFoundException {
+    public AutomationListItem getItem(int index) throws AutomationException {
 
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.ListItem).getValue());
@@ -75,7 +75,7 @@ public class AutomationList extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationListItem getItem(String name) throws AutomationException, ItemNotFoundException, ElementNotFoundException {
+    public AutomationListItem getItem(String name) throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),
