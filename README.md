@@ -19,7 +19,7 @@ The MS UIAutomation Library is a COM control, and the classes that represent thi
 ```
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.0.2</version>
+  <version>0.1.0</version>
 ```
 
 ## Getting started
@@ -248,12 +248,6 @@ The ribbon control is a complex structure, but the tree of controls is navigable
 
 TODO: Not yet implemented
 
-```java
-  UIAutomation automation = UIAutomation.getInstance();
-  IUIAutomationCacheRequest cacheRequest = automation.createCacheRequest();
-  ...
-```
-
 ## Event Handling
 TODO: Not yet implemented
 
@@ -263,7 +257,7 @@ TODO: Not yet implemented
 To add the library as a prerequistive, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.0.2"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.1.0"
 ```
 
 ## Examples
