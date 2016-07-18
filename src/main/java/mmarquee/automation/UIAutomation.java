@@ -342,11 +342,11 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference pbr = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
+        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
 
         for (int loop = 0; loop < 15; loop++) {
             element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
-                    pbr);
+                    pCondition1);
 
             if (element != null) {
                 break;
