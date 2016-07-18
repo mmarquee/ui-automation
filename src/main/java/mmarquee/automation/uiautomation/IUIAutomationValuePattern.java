@@ -19,6 +19,7 @@ import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.IntByReference;
@@ -114,7 +115,7 @@ public interface IUIAutomationValuePattern {
      */
     int Release();
 
-    int Set_Value(Variant.VARIANT.ByValue sr);
+    int Set_Value(WTypes.BSTR sr);
     int Get_CurrentValue(PointerByReference sr);
     int Get_CurrentIsReadOnly(IntByReference ibr);
 
@@ -147,7 +148,7 @@ public interface IUIAutomationValuePattern {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Set_Value(Variant.VARIANT.ByValue sr) {
+                public int Set_Value(WTypes.BSTR sr) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, sr});
                 }

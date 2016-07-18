@@ -74,10 +74,7 @@ public class Value extends BasePattern {
      * @param value Value to use
      */
     public void setValue(String value) {
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(value);
-        variant.setValue(Variant.VT_BSTR, sysAllocated);
-
-        this.getPattern().Set_Value(variant);
+        this.getPattern().Set_Value(sysAllocated);
     }
 }
