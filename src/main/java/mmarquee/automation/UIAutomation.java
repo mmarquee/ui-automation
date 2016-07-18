@@ -52,8 +52,6 @@ public class UIAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-//        automation = ClassFactory.createCUIAutomation();
-
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
@@ -229,6 +227,12 @@ public class UIAutomation {
         return ibr.getValue() == 1;
     }
 
+    /**
+     * Create an and condition
+     * @param pCondition1 First condition
+     * @param pCondition2 Second condition
+     * @return The new condition
+     */
     public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
         PointerByReference pbr = new PointerByReference();
 
@@ -238,6 +242,27 @@ public class UIAutomation {
         return pbr;
     }
 
+    /**
+     * Create an or condition
+     * @param pCondition1 First condition
+     * @param pCondition2 Second condition
+     * @return The new condition
+     */
+    public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) {
+        PointerByReference pbr = new PointerByReference();
+
+        this.automation.CreateOrCondition(pCondition1, pCondition2, pbr);
+
+        // Checks ?
+        return pbr;
+    }
+
+    /**
+     * Creates a condition, based on control id
+     * @param id The control id
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
     public PointerByReference CreateControlTypeCondition(int id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id);
@@ -245,6 +270,12 @@ public class UIAutomation {
         return this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
     }
 
+    /**
+     * Creates a condition, based on automation id
+     * @param automationId The automation id
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
     public PointerByReference CreateAutomationIdPropertyCondition(String automationId) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
@@ -253,6 +284,12 @@ public class UIAutomation {
         return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
     }
 
+    /**
+     * Creates a condition, based on element name
+     * @param name The name
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
     public PointerByReference CreateNamePropertyCondition(String name) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
@@ -261,6 +298,13 @@ public class UIAutomation {
         return this.createPropertyCondition(PropertyID.Name.getValue(), variant);
     }
 
+    /**
+     * Creates a property condition
+     * @param id Which property to check for
+     * @param value The value of the property
+     * @return The nre condition
+     * @throws AutomationException
+     */
     public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
@@ -290,7 +334,7 @@ public class UIAutomation {
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopObject(String title) throws ElementNotFoundException, AutomationException {
+    public AutomationWindow getDesktopObject(String title) throws AutomationException {
         AutomationElement element = null;
 
         // Look for a specific title
@@ -355,9 +399,9 @@ public class UIAutomation {
      *
      * @return supports IUIAutomation2
      */
-    //public boolean supportsAutomation2() {
-    //    return this.automation instanceof IUIAutomation2;
-   // }
+    public boolean supportsAutomation2() {
+        return this.automation instanceof IUIAutomation2;
+    }
 
     /**
      * Does this automation object support IUIAutomation3
@@ -365,9 +409,9 @@ public class UIAutomation {
      *
      * @return supports IUIAutomation3
      */
-    //public boolean supportsAutomation3() {
-    //    return this.automation instanceof IUIAutomation3;
-    //}
+    public boolean supportsAutomation3() {
+        return this.automation instanceof IUIAutomation3;
+    }
 
     /**
      * Captures the screen.
@@ -376,50 +420,10 @@ public class UIAutomation {
      * @throws AWTException Robot exception
      * @throws IOException  IO Exception
      */
-
     public void captureScreen(String filename) throws AWTException, IOException {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }
-
-    /**
-     * Adds an event handler for the given event.
-     *
-     * @param sender       The sender
-     * @param eventId      The event id
-     * @param treeScope    The treeScope
-     * @param eventHandler The EventHandler to add
-     */
-    /*
-    public void addAutomationEventHandler(IUIAutomationElement sender,
-                                   int eventId,
-                                   TreeScope treeScope,
-                                   EventHandler eventHandler) {
-        this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler);
-    }
-*/
-    /**
-     * Removed the event handler from the element
-     * @param element The element
-     * @param eventId The event
-     * @param eventHandler The handler
-     */
-/*    public void removeAutomationEventHandler(IUIAutomationElement element,
-                                             int eventId,
-                                             EventHandler eventHandler) {
-        this.automation.removeAutomationEventHandler(eventId, element, eventHandler);
-    }
-*/
-    /**
-     * Creates the raw and condition
-     * @param condition0 First condition
-     * @param condition1 Second condition
-     * @return The AndCondition
-     */
-//    public IUIAutomationCondition CreateAndCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
-//        return automation.createAndCondition(
-//                condition0, condition1);
-//    }
 
     /**
      * Creates a false Condition
@@ -442,39 +446,7 @@ public class UIAutomation {
 
         this.automation.CreateTrueCondition(pTrueCondition);
 
-/*        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
-
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID_IUIAUTOMATION_CONDITION);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            return IUIAutomationCondition.Converter.PointerToIUIAutomationCondition(pUnknownA);
-        } else {
-            return null; // or throw excption
-        }
-*/
         return pTrueCondition.getValue();
 
     }
-
-    /**
-     * Getst the raw condition
-     * @return the underlying IUIAutomationCondition
-     */
-//    public IUIAutomationCondition CreateOrCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
-//        return automation.createOrCondition(
-//                condition0,
-//                condition1);
-//    }
-
-    /**
-     * Creates a property condition
-     * @param property The property to check
-     * @param value The value of the property
-     * @return The property condition
-     */
- //   public IUIAutomationCondition CreatePropertyCondition (int property, java.lang.Object value) {
- //       return this.createPropertyCondition(property, value);
- //   }
 }

@@ -67,7 +67,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @param eventKey Key to press
      * @throws ElementNotFoundException Thrown when the element is not found.
      */
-    public void menuItemFudge (String item0, int eventKey) throws AutomationException, ElementNotFoundException {
+    public void menuItemFudge (String item0, int eventKey) throws AutomationException {
         PointerByReference pbr = this.automation.createAndCondition(
                 this.createNamePropertyCondition(item0).getValue(),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
@@ -114,7 +114,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @return The menu item that matches the name
      * @throws ElementNotFoundException Menu element not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException, ElementNotFoundException {
+    public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException {
 
         AutomationElement foundElement = null;
 

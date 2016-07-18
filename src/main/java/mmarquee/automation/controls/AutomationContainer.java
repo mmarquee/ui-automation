@@ -136,7 +136,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element
      * @throws ElementNotFoundException Did not find the element
      */
-    protected AutomationElement getControlByControlType(String name, int id) throws AutomationException, ElementNotFoundException {
+    protected AutomationElement getControlByControlType(String name, int id) throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),
@@ -210,7 +210,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationProgressBar getProgressBar(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationProgressBar getProgressBar(String name) throws AutomationException {
         return new AutomationProgressBar(this.getControlByControlType(name, ControlType.ProgressBar));
     }
 
@@ -220,7 +220,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationEditBox getEditBox(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationEditBox getEditBox(String name) throws AutomationException {
         return new AutomationEditBox(this.getControlByControlType(name, ControlType.Edit));
     }
 
@@ -239,7 +239,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationSlider getSlider(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationSlider getSlider(String name) throws AutomationException {
         return new AutomationSlider(this.getControlByControlType(name, ControlType.Slider));
     }
 
@@ -286,7 +286,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationComboBox getCombobox(int index) throws AutomationException, ElementNotFoundException {
+    public AutomationComboBox getCombobox(int index) throws AutomationException {
         return new AutomationComboBox(this.getControlByControlType(index, ControlType.ComboBox));
     }
 
@@ -296,7 +296,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationComboBox getCombobox(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationComboBox getCombobox(String name) throws AutomationException {
         return new AutomationComboBox(this.getControlByControlType(name, ControlType.ComboBox));
     }
 
@@ -306,7 +306,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationButton getButton(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationButton getButton(String name) throws AutomationException {
         return new AutomationButton(this.getControlByControlType(name, ControlType.Button));
     }
 
@@ -316,10 +316,9 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationButton getButtonByAutomationId(String id) throws AutomationException, ElementNotFoundException {
+    public AutomationButton getButtonByAutomationId(String id) throws AutomationException {
         return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button));
     }
-
 
     /**
      * Gets the button control associated with the given index
@@ -382,7 +381,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationTreeView getTreeView(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationTreeView getTreeView(String name) throws AutomationException {
         return new AutomationTreeView(this.getControlByControlType(name, ControlType.Tree));
     }
 
@@ -419,7 +418,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationPanel getPanel(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationPanel getPanel(String name) throws AutomationException {
         return new AutomationPanel(this.getControlByControlType(name, ControlType.Pane));
     }
 
@@ -438,7 +437,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationToolBar
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationToolBar getToolBar(String name) throws AutomationException, ElementNotFoundException {
+    public AutomationToolBar getToolBar(String name) throws AutomationException {
         return new AutomationToolBar(this.getControlByControlType(name, ControlType.ToolBar));
     }
 
@@ -474,7 +473,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationSplitButton
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationSplitButton getSplitButton(String name) throws ElementNotFoundException, AutomationException {
+    public AutomationSplitButton getSplitButton(String name) throws AutomationException {
         return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton));
     }
 
@@ -484,7 +483,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationImage
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationImage getImage(String name) throws ElementNotFoundException, AutomationException {
+    public AutomationImage getImage(String name) throws AutomationException {
         return new AutomationImage(this.getControlByControlType(name, ControlType.Image));
     }
 
@@ -494,7 +493,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationSpinner control
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationSpinner getSpinner(String name) throws ElementNotFoundException, AutomationException {
+    public AutomationSpinner getSpinner(String name) throws AutomationException {
         return new AutomationSpinner(this.getControlByControlType(name, ControlType.Spinner));
     }
 
@@ -504,7 +503,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The AutomationCustom
      * @throws ElementNotFoundException Did not find the element
      */
-    public AutomationCustom getCustom(String name) throws ElementNotFoundException, AutomationException {
+    public AutomationCustom getCustom(String name) throws AutomationException {
         return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
     }
 

@@ -5,5 +5,5 @@ package mmarquee.automation;
  *
  * Thrown when an element is not found.
  */
-public class ElementNotFoundException extends Exception {
+public class ElementNotFoundException extends AutomationException {
 }
