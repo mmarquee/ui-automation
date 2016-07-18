@@ -15,7 +15,14 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.raw.IUIAutomationRangeValuePattern;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.DoubleByReference;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
  * Created by inpwt on 01/03/2016.
@@ -23,11 +30,31 @@ import mmarquee.automation.pattern.raw.IUIAutomationRangeValuePattern;
  * Wrapper for the range pattern.
  */
 public class Range extends BasePattern {
-    public void setValue (double value) {
-        ((IUIAutomationRangeValuePattern)this.pattern).setValue(value);
+    private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationRangeValuePattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);
+        } else {
+            throw new AutomationException();
+        }
     }
 
-    public double getValue () {
-        return ((IUIAutomationRangeValuePattern)this.pattern).currentValue();
+    public void setValue (double value) throws AutomationException {
+        this.getPattern().Set_Value(value);
+    }
+
+    public double getValue () throws AutomationException {
+        DoubleByReference dbr = new DoubleByReference();
+
+        int result = this.getPattern().Get_CurrentValue(dbr);
+
+        return dbr.getValue();
     }
 }

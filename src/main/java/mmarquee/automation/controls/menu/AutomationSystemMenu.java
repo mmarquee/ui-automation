@@ -16,11 +16,10 @@
 
 package mmarquee.automation.controls.menu;
 
+import com.sun.jna.Pointer;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.condition.Condition;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
@@ -43,10 +42,10 @@ public class AutomationSystemMenu extends AutomationBase {
 
     public AutomationMenuItem getItem(String name) throws ItemNotFoundException {
 
-        Condition condition = this.createTrueCondition();
+        Pointer condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
-                this.findAll(TreeScope.TreeScope_Descendants, condition);
+                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
 
         AutomationElement foundElement = null;
         boolean found = false;
@@ -70,10 +69,10 @@ public class AutomationSystemMenu extends AutomationBase {
     }
 
     private void getItems() {
-        Condition condition = this.createTrueCondition();
+        Pointer condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
-                this.findAll(TreeScope.TreeScope_Children, condition);
+                this.findAll(new TreeScope(TreeScope.TreeScope_Children), condition);
 
         AutomationElement element = collection.get(0);
 

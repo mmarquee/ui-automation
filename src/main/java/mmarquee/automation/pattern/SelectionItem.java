@@ -15,7 +15,14 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.raw.IUIAutomationSelectionItemPattern;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -23,11 +30,28 @@ import mmarquee.automation.pattern.raw.IUIAutomationSelectionItemPattern;
  * Wrapper for the SelectionItem pattern.
  */
 public class SelectionItem extends BasePattern {
+
+    private IUIAutomationSelectionItemPattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationSelectionItemPattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
     /**
      * Selects the given item
      */
     public void select () {
-        ((IUIAutomationSelectionItemPattern)pattern).select();
+        this.getPattern().Select();
     }
 
     /**
@@ -35,6 +59,10 @@ public class SelectionItem extends BasePattern {
      * @return True if selected
      */
     public boolean isSelected () {
-        return ((IUIAutomationSelectionItemPattern)pattern).currentIsSelected() == 1.;
+        IntByReference ibr = new IntByReference();
+
+        int result = this.getPattern().Get_CurrentIsSelected(ibr);
+
+        return (ibr.getValue() == 1);
     }
 }

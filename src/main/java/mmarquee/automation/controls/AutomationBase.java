@@ -19,12 +19,9 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.cache.CacheRequest;
-import mmarquee.automation.condition.*;
 import mmarquee.automation.pattern.*;
-import mmarquee.automation.pattern.Window;
-import mmarquee.automation.pattern.raw.*;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -63,84 +60,156 @@ public abstract class AutomationBase {
         }
     }
 
-    protected boolean isDockPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the dock pattern available
+     * @return Yes or no
+     */
+    boolean isDockPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isExpandCollapsePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(true);
+    /**
+     * Is the expand/collapse pattern available
+     * @return Yes or no
+     */
+    boolean isExpandCollapsePatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isGridItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the gird item pattern available
+     * @return Yes or no
+     */
+    boolean isGridItemPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isMultipleViewPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the multiple view pattern available
+     * @return Yes or no
+     */
+    boolean isMultipleViewPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isInvokePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(true);
+    /**
+     * Is the invoke pattern available
+     * @return Yes or no
+     */
+    boolean isInvokePatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isGridPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the grid pattern available
+     * @return Yes or no
+     */
+    boolean isGridPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isRangeValuePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(true);
+    /**
+     * Is the range value pattern available
+     * @return Yes or no
+     */
+    boolean isRangeValuePatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isScrollPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the scroll pattern available
+     * @return Yes or no
+     */
+    boolean isScrollPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isSelectionItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the selection item pattern available
+     * @return Yes or no
+     */
+    boolean isSelectionItemPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isScrollItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the scroll item pattern available
+     * @return Yes or no
+     */
+    boolean isScrollItemPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isWindowPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the window pattern available
+     * @return Yes or no
+     */
+    boolean isWindowPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isTextPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the text pattern available
+     * @return Yes or no
+     */
+    boolean isTextPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isTableItemPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the table item pattern available
+     * @return Yes or no
+     */
+    boolean isTableItemPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isTablePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(true);
+    /**
+     * Is the table pattern available
+     * @return Yes or no
+     */
+    boolean isTablePatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isSelectionPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the selection pattern available
+     * @return Yes or no
+     */
+    boolean isSelectionPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isTransformPatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(true);
+    /**
+     * Is the transform pattern available
+     * @return Yes or no
+     */
+    boolean isTransformPatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isTogglePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(true);
+    /**
+     * Is the toggle pattern available
+     * @return Yes or no
+     */
+    boolean isTogglePatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(0);
     }
 
-    protected boolean isValuePatternAvailable () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(true);
+    /**
+     * Is the value pattern available
+     * @return Yes or no
+     */
+    boolean isValuePatternAvailable () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(0);
     }
 
     /**
      * Is the control off screen?
      * @return Off screen?
      */
-    protected boolean isOffScreen () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(true);
+    boolean isOffScreen () {
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
     }
 
     /**
@@ -173,7 +242,7 @@ public abstract class AutomationBase {
      * @return The framework object (really a string)
      */
     public Object getFramework() {
-        return this.element.getCurrentPropertyValue(PropertyID.FrameworkId.getValue());
+        return this.element.get_CurrentPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
@@ -188,16 +257,16 @@ public abstract class AutomationBase {
      * Sets the name of the element
      * @param name The name to be set.
      */
-    public void setName(String name) {
-        this.element.setName(name);
-    }
+//    public void setName(String name) {
+ //       this.element.setName(name);
+ //   }
 
     /**
      * Finds all of the elements that are associated with this element
      * @return List List of elements
      */
     protected List<AutomationElement> findAll() {
-        return this.findAll(TreeScope.TreeScope_Children);
+        return this.findAll(new TreeScope(TreeScope.TreeScope_Children));
     }
 
     /**
@@ -207,9 +276,9 @@ public abstract class AutomationBase {
      * @return The found AutomationElement
      * @throws ElementNotFoundException No elements found
      */
-    protected AutomationElement findFirst(TreeScope scope, Condition condition) throws ElementNotFoundException {
+   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws ElementNotFoundException, AutomationException {
         return this.element.findFirst(scope, condition);
-    }
+   }
 
     /**
      * Finds all of the elements that are associated with the given condition.
@@ -217,7 +286,7 @@ public abstract class AutomationBase {
      * @return List list of all the elements found
      */
     protected List<AutomationElement> findAll(TreeScope scope) {
-        TrueCondition condition = this.createTrueCondition();
+        Pointer condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
 
@@ -225,16 +294,16 @@ public abstract class AutomationBase {
      * Creates a true condition
      * @return The true condition
      */
-    public TrueCondition createTrueCondition() {
-        return new TrueCondition();
+    protected Pointer createTrueCondition() {
+        return this.automation.CreateTrueCondition();
     }
 
     /**
      * Creates a false condition
      * @return The condition
      */
-    public FalseCondition createFalseCondition() {
-        return new FalseCondition();
+    protected PointerByReference createFalseCondition() {
+        return this.automation.CreateFalseCondition();
     }
 
     /**
@@ -242,8 +311,8 @@ public abstract class AutomationBase {
      * @param name The name to use
      * @return The condition
      */
-    public NameCondition createNamePropertyCondition(String name) {
-        return new NameCondition(name);
+    protected PointerByReference createNamePropertyCondition(String name) throws AutomationException {
+        return this.automation.CreateNamePropertyCondition(name);
     }
 
     /**
@@ -251,8 +320,8 @@ public abstract class AutomationBase {
      * @param automationId The automation ID to use
      * @return The condition
      */
-    public AutomationIdCondition createAutomationIdPropertyCondition(String automationId) {
-        return new AutomationIdCondition(automationId);
+    protected PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
+        return this.automation.CreateAutomationIdPropertyCondition(automationId);
     }
 
     /**
@@ -260,8 +329,8 @@ public abstract class AutomationBase {
      * @param id The control type to use
      * @return The condition
      */
-    public ControlIdCondition createControlTypeCondition(int id) {
-        return new ControlIdCondition(id);
+    protected PointerByReference createControlTypeCondition(int id) throws AutomationException {
+        return this.automation.CreateControlTypeCondition(id);
     }
 
     /**
@@ -270,8 +339,8 @@ public abstract class AutomationBase {
      * @param condition2 Second condition
      * @return The Or Condition
      */
-    public OrCondition createOrCondition(Condition condition1, Condition condition2) {
-        return new OrCondition(condition1, condition2);
+    public PointerByReference createOrCondition(Pointer condition1, Pointer condition2) {
+        return this.automation.createOrCondition(condition1, condition2);
     }
 
     /**
@@ -280,9 +349,9 @@ public abstract class AutomationBase {
      * @param condition2 Second condition
      * @return The And condition
      */
-    public AndCondition createAndCondition(Condition condition1, Condition condition2) {
-        return new AndCondition(condition1, condition2);
-    }
+   protected PointerByReference createAndCondition(Pointer condition1, Pointer condition2) {
+       return this.automation.createAndCondition(condition1, condition2);
+   }
 
     /**
      * Finds all of the elements that are associated with the given condition.
@@ -290,8 +359,8 @@ public abstract class AutomationBase {
      * @param condition The condition to check
      * @return IUIAutomationElementArray
      */
-    protected List<AutomationElement> findAll(TreeScope scope, Condition condition) {
-        return this.element.findAll(scope, condition.getCondition());
+    protected List<AutomationElement> findAll(TreeScope scope, Pointer condition) {
+        return this.element.findAll(scope, condition);
     }
 
     /**
@@ -300,8 +369,8 @@ public abstract class AutomationBase {
      * @return The pattern
      * @throws PatternNotFoundException
      */
-    private com4j.Com4jObject getPattern (int id) throws PatternNotFoundException {
-        com4j.Com4jObject unknown = this.element.getCurrentPattern(id);
+    private PointerByReference getPattern (int id) throws PatternNotFoundException {
+        PointerByReference unknown = this.element.getCurrentPattern(id);
 
         if (unknown != null) {
             return unknown;
@@ -318,13 +387,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
      * @throws PatternNotFoundException Pattern not found
      */
-    protected SelectionItem getSelectItemPattern() throws PatternNotFoundException {
+    SelectionItem getSelectItemPattern() throws PatternNotFoundException {
         SelectionItem pattern = new SelectionItem();
 
         if (isSelectionItemPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.SelectionItem.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionItemPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -337,13 +406,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
      * @throws PatternNotFoundException Pattern not found
      */
-    protected Selection getSelectionPattern() throws PatternNotFoundException {
+    Selection getSelectionPattern() throws PatternNotFoundException {
         Selection pattern = new Selection();
 
         if (isSelectionPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Selection.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationSelectionPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -356,13 +425,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Value getValuePattern() throws PatternNotFoundException {
+    Value getValuePattern() throws PatternNotFoundException {
         Value pattern = new Value();
 
         if (isValuePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Value.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationValuePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -375,13 +444,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationRangeValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Range getRangePattern() throws PatternNotFoundException {
+    Range getRangePattern() throws PatternNotFoundException {
         Range pattern = new Range();
 
         if (isRangeValuePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.RangeValue.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.RangeValue.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationRangeValuePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -394,13 +463,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTablePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Table getTablePattern() throws PatternNotFoundException {
+    Table getTablePattern() throws PatternNotFoundException {
         Table pattern = new Table();
 
         if (isTablePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Table.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationTablePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -413,13 +482,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Window getWindowPattern() throws PatternNotFoundException {
+    Window getWindowPattern() throws PatternNotFoundException {
         Window pattern = new Window();
 
-        if (isWindowPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Window.getValue());
+        if (this.isWindowPatternAvailable()) {
+            PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationWindowPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -436,9 +505,9 @@ public abstract class AutomationBase {
         ExpandCollapse pattern = new ExpandCollapse();
 
         if (isExpandCollapsePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationExpandCollapsePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -451,13 +520,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationGridPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Grid getGridPattern() throws PatternNotFoundException {
+    Grid getGridPattern() throws PatternNotFoundException {
         Grid pattern = new Grid();
 
         if (isGridPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Grid.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Grid.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationGridPattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -470,13 +539,13 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTogglePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Toggle getTogglePattern() throws PatternNotFoundException {
+    Toggle getTogglePattern() throws PatternNotFoundException {
         Toggle pattern = new Toggle();
 
         if (isTogglePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Toggle.getValue());
+            PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
 
-            pattern.setPattern(unknown.queryInterface(IUIAutomationTogglePattern.class));
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -493,8 +562,8 @@ public abstract class AutomationBase {
         Invoke pattern = new Invoke();
 
         if (isInvokePatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Invoke.getValue());
-            pattern.setPattern(unknown.queryInterface(IUIAutomationInvokePattern.class));
+            PointerByReference unknown = this.getPattern(PatternID.Invoke.getValue());
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -507,12 +576,12 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTextPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Text getTextPattern() throws PatternNotFoundException {
+    Text getTextPattern() throws PatternNotFoundException {
         Text pattern = new Text();
 
         if (this.isTextPatternAvailable()) {
-            com4j.Com4jObject unknown = this.getPattern(PatternID.Text.getValue());
-            pattern.setPattern(unknown.queryInterface(IUIAutomationTextPattern.class));
+            PointerByReference unknown = this.getPattern(PatternID.Text.getValue());
+            pattern.setPattern(unknown.getValue());
         }
 
         return pattern;
@@ -523,7 +592,7 @@ public abstract class AutomationBase {
      * @return Enabled?
      */
     public boolean isEnabled () {
-        return this.element.getCurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(true);
+        return !this.element.get_CurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(0);
     }
 
     /**
@@ -546,7 +615,7 @@ public abstract class AutomationBase {
      * @return The handle
      */
     public WinDef.HWND getNativeWindowHandle() {
-        Object value = this.element.getCurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
+        Object value = this.element.get_CurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
         return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
     }
 
@@ -562,7 +631,7 @@ public abstract class AutomationBase {
      * The current orientation of the element
      * @return The orientation
      */
-    public OrientationType getOrientation() {
+    public OrientationType getOrientation() throws Exception{
         return this.element.getOrientation();
     }
 
@@ -601,33 +670,10 @@ public abstract class AutomationBase {
     }
 
     /**
-     * Gets the current accelerator key for th element
+     * Gets the current accelerator key for the element
      * @return The key
      */
     public String getAcceleratorKey() {
         return this.element.getAcceleratorKey();
-    }
-
-    /**
-     * Find all, but from the cache
-     * @param cacheRequest The cache request
-     * @return The found collection of elements
-     */
-    public List<AutomationElement> findAllBuildCache (CacheRequest cacheRequest) {
-        return this.element.findAllBuildCache(cacheRequest.getTreeScope(),
-                cacheRequest.getTreeFilter(),
-                cacheRequest.getCacheRequest());
-    }
-
-    /**
-     * Find first, but from the cache
-     * @param cacheRequest The cache request
-     * @return The cached element
-     * @throws ElementNotFoundException Thrown if the element is not found
-     */
-    protected AutomationElement findFirstBuildCache(CacheRequest cacheRequest) throws ElementNotFoundException {
-        return this.element.findFirstBuildCache(cacheRequest.getTreeScope(),
-                cacheRequest.getTreeFilter(),
-                cacheRequest.getCacheRequest());
     }
 }

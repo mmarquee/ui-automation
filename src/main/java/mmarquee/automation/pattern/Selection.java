@@ -15,9 +15,16 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.pattern.raw.IUIAutomationSelectionPattern;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 
 import java.util.List;
 
@@ -27,8 +34,42 @@ import java.util.List;
  * Wrapper for the Selection pattern.
  */
 public class Selection extends BasePattern {
-    public List<AutomationElement> getCurrentSelection () {
-        IUIAutomationElementArray collection = ((IUIAutomationSelectionPattern)pattern).getCurrentSelection();
-        return this.collectionToList(collection);
+
+    private IUIAutomationSelectionPattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationSelectionPattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
+    public List<AutomationElement> getCurrentSelection() throws AutomationException {
+
+        PointerByReference pbr = new PointerByReference();
+
+        this.getPattern().GetCurrentSelection(pbr);
+
+        Unknown unkConditionA = new Unknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
+
+            return this.collectionToList(collection);
+        } else {
+            throw new AutomationException();
+        }
     }
 }

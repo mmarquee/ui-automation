@@ -13,886 +13,555 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.uiautomation;
 
-import com4j.*;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
-
-@IID("{D22108AA-8AC5-49A5-837B-37BBB3D7591E}")
-public interface IUIAutomationElement extends Com4jObject {
-  // Methods:
-  /**
-   */
-
-  @VTID(3)
-  void setFocus();
-
-
-  /**
-   * @return  Returns a value of type int[]
-   */
-
-  @VTID(4)
-  int[] getRuntimeId();
-
-
-  /**
-   * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-   * @param condition Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(5)
-  mmarquee.automation.uiautomation.IUIAutomationElement findFirst(
-    mmarquee.automation.uiautomation.TreeScope scope,
-    IUIAutomationCondition condition);
-
-
-  /**
-   * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-   * @param condition Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(6)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray findAll(
-    mmarquee.automation.uiautomation.TreeScope scope,
-    IUIAutomationCondition condition);
-
-
-  /**
-   * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-   * @param condition Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-   * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(7)
-  mmarquee.automation.uiautomation.IUIAutomationElement findFirstBuildCache(
-    mmarquee.automation.uiautomation.TreeScope scope,
-    IUIAutomationCondition condition,
-    mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
-
-  /**
-   * @param scope Mandatory mmarquee.automation.uiautomation.TreeScope parameter.
-   * @param condition Mandatory mmarquee.automation.uiautomation.IUIAutomationCondition parameter.
-   * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(8)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray findAllBuildCache(
-    mmarquee.automation.uiautomation.TreeScope scope,
-    IUIAutomationCondition condition,
-    mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
-
-  /**
-   * @param cacheRequest Mandatory mmarquee.automation.uiautomation.IUIAutomationCacheRequest parameter.
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(9)
-  mmarquee.automation.uiautomation.IUIAutomationElement buildUpdatedCache(
-    mmarquee.automation.uiautomation.IUIAutomationCacheRequest cacheRequest);
-
-
-  /**
-   * @param propertyId Mandatory int parameter.
-   * @return  Returns a value of type java.lang.Object
-   */
-
-  @VTID(10)
-  @ReturnValue(type=NativeType.VARIANT)
-  java.lang.Object getCurrentPropertyValue(
-    int propertyId);
-
-
-  /**
-   * @param propertyId Mandatory int parameter.
-   * @param ignoreDefaultValue Mandatory int parameter.
-   * @return  Returns a value of type java.lang.Object
-   */
-
-  @VTID(11)
-  @ReturnValue(type=NativeType.VARIANT)
-  java.lang.Object getCurrentPropertyValueEx(
-    int propertyId,
-    int ignoreDefaultValue);
-
-
-  /**
-   * @param propertyId Mandatory int parameter.
-   * @return  Returns a value of type java.lang.Object
-   */
-
-  @VTID(12)
-  @ReturnValue(type=NativeType.VARIANT)
-  java.lang.Object getCachedPropertyValue(
-    int propertyId);
-
-
-  /**
-   * @param propertyId Mandatory int parameter.
-   * @param ignoreDefaultValue Mandatory int parameter.
-   * @return  Returns a value of type java.lang.Object
-   */
-
-  @VTID(13)
-  @ReturnValue(type=NativeType.VARIANT)
-  java.lang.Object getCachedPropertyValueEx(
-    int propertyId,
-    int ignoreDefaultValue);
-
-
-  /**
-   * @param patternId Mandatory int parameter.
-   * @param riid Mandatory GUID parameter.
-   * @return  Returns a value of type java.nio.Buffer
-   */
-
-  @VTID(14)
-  java.nio.Buffer getCurrentPatternAs(
-    int patternId,
-    GUID riid);
-
-
-  /**
-   * @param patternId Mandatory int parameter.
-   * @param riid Mandatory GUID parameter.
-   * @return  Returns a value of type java.nio.Buffer
-   */
-
-  @VTID(15)
-  java.nio.Buffer getCachedPatternAs(
-    int patternId,
-    GUID riid);
-
-
-  /**
-   * @param patternId Mandatory int parameter.
-   * @return  Returns a value of type com4j.Com4jObject
-   */
-
-  @VTID(16)
-  com4j.Com4jObject getCurrentPattern(
-    int patternId);
-
-
-  /**
-   * @param patternId Mandatory int parameter.
-   * @return  Returns a value of type com4j.Com4jObject
-   */
-
-  @VTID(17)
-  com4j.Com4jObject getCachedPattern(
-    int patternId);
-
-
-  /**
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(18)
-  mmarquee.automation.uiautomation.IUIAutomationElement getCachedParent();
-
-
-  /**
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(19)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray getCachedChildren();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentProcessId"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(20)
-  int currentProcessId();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentControlType"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(21)
-  int currentControlType();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentLocalizedControlType"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(22)
-  java.lang.String currentLocalizedControlType();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentName"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(23)
-  java.lang.String currentName();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentAcceleratorKey"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(24)
-  java.lang.String currentAcceleratorKey();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentAccessKey"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(25)
-  java.lang.String currentAccessKey();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentHasKeyboardFocus"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(26)
-  int currentHasKeyboardFocus();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsKeyboardFocusable"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(27)
-  int currentIsKeyboardFocusable();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsEnabled"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(28)
-  int currentIsEnabled();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentAutomationId"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(29)
-  java.lang.String currentAutomationId();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentClassName"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(30)
-  java.lang.String currentClassName();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentHelpText"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(31)
-  java.lang.String currentHelpText();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentCulture"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(32)
-  int currentCulture();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsControlElement"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(33)
-  int currentIsControlElement();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsContentElement"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(34)
-  int currentIsContentElement();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsPassword"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(35)
-  int currentIsPassword();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentNativeWindowHandle"
-   * </p>
-   * @return  Returns a value of type java.nio.Buffer
-   */
-
-  @VTID(36)
-  java.nio.Buffer currentNativeWindowHandle();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentItemType"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(37)
-  java.lang.String currentItemType();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsOffscreen"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(38)
-  int currentIsOffscreen();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentOrientation"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.OrientationType
-   */
-
-  @VTID(39)
-  mmarquee.automation.uiautomation.OrientationType currentOrientation();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentFrameworkId"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(40)
-  java.lang.String currentFrameworkId();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsRequiredForForm"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(41)
-  int currentIsRequiredForForm();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentItemStatus"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(42)
-  java.lang.String currentItemStatus();
-
-
-  @VTID(43)
-//  @ReturnValue(type = GUID)
-  Object Get_CurrentBoundingRectangle();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentLabeledBy"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(44)
-  mmarquee.automation.uiautomation.IUIAutomationElement currentLabeledBy();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentAriaRole"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(45)
-  java.lang.String currentAriaRole();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentAriaProperties"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(46)
-  java.lang.String currentAriaProperties();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentIsDataValidForForm"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(47)
-  int currentIsDataValidForForm();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentControllerFor"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(48)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray currentControllerFor();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentDescribedBy"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(49)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray currentDescribedBy();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentFlowsTo"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(50)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray currentFlowsTo();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CurrentProviderDescription"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(51)
-  java.lang.String currentProviderDescription();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedProcessId"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(52)
-  int cachedProcessId();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedControlType"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(53)
-  int cachedControlType();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedLocalizedControlType"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(54)
-  java.lang.String cachedLocalizedControlType();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedName"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(55)
-  java.lang.String cachedName();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedAcceleratorKey"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(56)
-  java.lang.String cachedAcceleratorKey();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedAccessKey"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(57)
-  java.lang.String cachedAccessKey();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedHasKeyboardFocus"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(58)
-  int cachedHasKeyboardFocus();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsKeyboardFocusable"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(59)
-  int cachedIsKeyboardFocusable();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsEnabled"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(60)
-  int cachedIsEnabled();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedAutomationId"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(61)
-  java.lang.String cachedAutomationId();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedClassName"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(62)
-  java.lang.String cachedClassName();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedHelpText"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(63)
-  java.lang.String cachedHelpText();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedCulture"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(64)
-  int cachedCulture();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsControlElement"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(65)
-  int cachedIsControlElement();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsContentElement"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(66)
-  int cachedIsContentElement();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsPassword"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(67)
-  int cachedIsPassword();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedNativeWindowHandle"
-   * </p>
-   * @return  Returns a value of type java.nio.Buffer
-   */
-
-  @VTID(68)
-  java.nio.Buffer cachedNativeWindowHandle();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedItemType"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(69)
-  java.lang.String cachedItemType();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsOffscreen"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(70)
-  int cachedIsOffscreen();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedOrientation"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.OrientationType
-   */
-
-  @VTID(71)
-  mmarquee.automation.uiautomation.OrientationType cachedOrientation();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedFrameworkId"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(72)
-  java.lang.String cachedFrameworkId();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsRequiredForForm"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(73)
-  int cachedIsRequiredForForm();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedItemStatus"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(74)
-  java.lang.String cachedItemStatus();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedLabeledBy"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElement
-   */
-
-  @VTID(76)
-  mmarquee.automation.uiautomation.IUIAutomationElement cachedLabeledBy();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedAriaRole"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(77)
-  java.lang.String cachedAriaRole();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedAriaProperties"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(78)
-  java.lang.String cachedAriaProperties();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedIsDataValidForForm"
-   * </p>
-   * @return  Returns a value of type int
-   */
-
-  @VTID(79)
-  int cachedIsDataValidForForm();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedControllerFor"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(80)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray cachedControllerFor();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedDescribedBy"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(81)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray cachedDescribedBy();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedFlowsTo"
-   * </p>
-   * @return  Returns a value of type mmarquee.automation.uiautomation.IUIAutomationElementArray
-   */
-
-  @VTID(82)
-  mmarquee.automation.uiautomation.IUIAutomationElementArray cachedFlowsTo();
-
-
-  /**
-   * <p>
-   * Getter method for the COM property "CachedProviderDescription"
-   * </p>
-   * @return  Returns a value of type java.lang.String
-   */
-
-  @VTID(83)
-  java.lang.String cachedProviderDescription();
-
-
-    // Properties:
-  }
+import com.sun.jna.Function;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.*;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+
+/**
+ * Created by HumphreysM on 06/07/2016.
+ */
+public interface IUIAutomationElement {
+
+    /**
+     * The interface IID for QueryInterface et al
+     */
+    public final static Guid.IID IID = new Guid.IID(
+            "{D22108AA-8AC5-49A5-837B-37BBB3D7591E}");
+
+    /**
+     *
+     * Retrieves pointers to the supported interfaces on an object.
+     * This method calls IUnknown::AddRef on the pointer it returns.
+     *
+     * @param riid
+     *            The identifier of the interface being requested.
+     *
+     * @param ppvObject
+     *            The address of a pointer variable that receives the interface pointer requested in the riid parameter. Upon successful
+     *            return, *ppvObject contains the requested interface pointer to the object. If the object does not support the
+     *            interface, *ppvObject is set to NULL.
+     *
+     * @return
+     *            This method returns S_OK if the interface is supported, and E_NOINTERFACE otherwise. If ppvObject is NULL, this method returns E_POINTER.
+     *            For any one object, a specific query for the IUnknown interface on any of the object's interfaces must always return the same pointer value.
+     *            This enables a client to determine whether two pointers point to the same component by calling QueryInterfacewith IID_IUnknown
+     *            and comparing the results. It is specifically not the case that queries for interfaces other than IUnknown (even the same interface
+     *            through the same pointer) must return the same pointer value.
+     *
+     *            There are four requirements for implementations of QueryInterface (In these cases, "must succeed" means "must succeed barring
+     *            catastrophic failure."):
+     *            The set of interfaces accessible on an object through QueryInterface must be static, not dynamic. This means that if a call
+     *            toQueryInterface for a pointer to a specified interface succeeds the first time, it must succeed again, and if it fails
+     *            the first time, it must fail on all subsequent queries. 
+     *
+     *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed. 
+     *
+     *            It must be symmetric: if a client holding a pointer to one interface queries successfully for another, a query through
+     *            the obtained pointer for the first interface must succeed. 
+     *
+     *            It must be transitive: if a client holding a pointer to one interface queries successfully for a second, and through that
+     *            pointer queries successfully for a third interface, a query for the first interface through the pointer for the
+     *            third interface must succeed. 
+     *            Notes to Implementers
+     *            Implementations of QueryInterface must never check ACLs. The main reason for this rule is that COM requires that an object supporting a
+     *            particular interface always return success when queried for that interface. Another reason is that checking ACLs on QueryInterface
+     *            does not provide any real security because any client who has access to a particular interface can hand it directly to another
+     *            client without any calls back to the server. Also, because COM caches interface pointers, it does not callQueryInterface on
+     *            the server every time a client does a query.
+     */
+    WinNT.HRESULT QueryInterface(
+            Guid.REFIID riid,
+            PointerByReference ppvObject);
+
+    /**
+     *
+     * Increments the reference count for an interface on an object. This method should be called for every new copy of a pointer to an interface on an object.
+     * @return
+     *            The method returns the new reference count. This value is intended to be used only for test purposes.
+     *
+     *            Objects use a reference counting mechanism to ensure that the lifetime of the object includes the lifetime of references to it. You use AddRef
+     *            to stabilize a copy of an interface pointer. It can also be called when the life of a cloned pointer must extend beyond the
+     *            lifetime of the original pointer. The cloned pointer must be released by calling IUnknown::Release.
+     *
+     *            The internal reference counter that AddRef maintains should be a 32-bit unsigned integer.
+     *            Notes to Callers
+     *            Call this method for every new copy of an interface pointer that you make. For example, if you are passing a copy of a pointer
+     *            back from a method, you must call AddRef on that pointer. You must also call AddRef on a pointer before passing it as an in-out
+     *            parameter to a method; the method will call IUnknown::Release before copying the out-value on top of it.
+     */
+    int AddRef();
+
+    /**
+     * Decrements the reference count for an interface on an object.
+     *
+     * @return
+     *            The method returns the new reference count. This value is intended to be used only for test purposes.
+     *
+     *            When the reference count on an object reaches zero, Release must cause the interface pointer to free itself. When the released
+     *            pointer is the only existing reference to an object (whether the object supports single or multiple interfaces), the
+     *            implementation must free the object.
+     *
+     *            Note that aggregation of objects restricts the ability to recover interface pointers.
+     *            Notes to Callers
+     *            Call this method when you no longer need to use an interface pointer. If you are writing a method that takes an in-out
+     *            parameter, call Release on the pointer you are passing in before copying the out-value on top of it.
+     */
+    int Release();
+
+    int setFocus();
+    int get_CurrentName (/* [retval][out] */ PointerByReference sr);
+    int get_CurrentClassName (/* [retval][out] */ PointerByReference sr);
+    int findAll (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
+    int findFirst (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
+    int get_ClickablePoint(/* [out] */ PointerByReference clickable, /* [retval][out] */ WinDef.BOOLByReference gotClickable);
+    int get_CurrentIsPassword(IntByReference value);
+    int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
+    int get_CurrentPattern(Integer patternId, PointerByReference pbr);
+    int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value);
+    int get_CurrentControlType(IntByReference ipr);
+    int get_CurrentProviderDescription(PointerByReference sr);
+    int get_CurrentFrameworkId (/* [retval][out] */ PointerByReference retVal);
+    int get_CurrentItemStatus (/* [retval][out] */ PointerByReference retVal);
+    int get_CurrentOrientation (/* [retval][out] */ IntByReference retVal);
+    int get_CurrentAcceleratorKey (/* [retval][out] */ PointerByReference retVal);
+    int get_CurrentProcessId (/* [retval][out] */ IntByReference retVal);
+
+        public static class Converter {
+        private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
+
+        public static IUIAutomationElement PointerToInterface(final PointerByReference ptr) {
+            final Pointer interfacePointer = ptr.getValue();
+            final Pointer vTablePointer = interfacePointer.getPointer(0);
+            final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];
+            vTablePointer.read(0, vTable, 0, vTable.length);
+            return new IUIAutomationElement() {
+
+                // IUnknown
+                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
+                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
+                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+                }
+
+                public int AddRef() {
+                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int Release() {
+                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int setFocus() {
+                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int GetRuntimeId (/* [retval][out] */ /* SAFEARRAY */ PointerByReference runtimeId) {
+                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, runtimeId});
+                }
+
+                public int findFirst(TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                }
+
+                public int findAll(TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                }
+
+                public int FindFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* [retval][out] */ /* IUIAutomationElement */ PointerByReference found) {
+                    Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+                }
+
+                public int FindAllBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference found) {
+                    Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+                }
+
+                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* [retval][out] */ /* IUIAutomationElement */ PointerByReference updatedElement) {
+                    Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
+                }
+
+                public int get_CurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value) {
+                    Function f = Function.getFunction(vTable[10], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, propertyId, value});
+                }
+
+                public int GetCurrentPropertyValueEx (/* [in] */ int propertyId, /* [in] */ WinDef.BOOL ignoreDefaultValue, /* [retval][out] */ Variant.VARIANT retVal) {
+                    Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
+                }
+
+                public int GetCachedPropertyValue (/* [in] */ int propertyId, /* [retval][out] */ Variant.VARIANT retVal) {
+                    Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, propertyId, retVal});
+                }
+
+                public int GetCachedPropertyValueEx (/* [in] */ int propertyId, /* [in] */ WinDef.BOOL ignoreDefaultValue, /* [retval][out] */ Variant.VARIANT retVal) {
+                    Function f = Function.getFunction(vTable[13], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
+                }
+
+                public int GetCurrentPatternAs (/* [in] */ int patternId, /* [in] */ Guid.REFIID riid, /* [retval][iid_is][out] */ PointerByReference patternObject) {
+                    Function f = Function.getFunction(vTable[14], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
+                }
+
+                public int GetCachedPatternAs (/* [in] */ int patternId, /* [in] */ Guid.REFIID riid, /* [retval][iid_is][out] */ PointerByReference patternObject) {
+                    Function f = Function.getFunction(vTable[15], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
+                }
+
+                public int get_CurrentPattern(Integer patternId, PointerByReference pbr) {
+                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, patternId, pbr});
+                }
+
+                public int GetCachedPattern (/* [in] */ int patternId, /* [retval][out] */ PointerByReference patternObject) {
+                    Function f = Function.getFunction(vTable[17], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, patternId, patternObject});
+                }
+
+                public int GetCachedParent (/* [retval][out] */ /* IUIAutomationElement */ PointerByReference parent) {
+                    Function f = Function.getFunction(vTable[18], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, parent});
+                }
+
+                public int GetCachedChildren (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference children) {
+                    Function f = Function.getFunction(vTable[19], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, children});
+                }
+
+                public /* [propget] */ int get_CurrentProcessId (/* [retval][out] */ IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[20], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int get_CurrentControlType(IntByReference ipr) {
+                    Function f = Function.getFunction(vTable[21], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, ipr});
+                }
+
+                public /* [propget] */ int get_CurrentLocalizedControlType (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[22], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentName(/* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[23], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
+                }
+
+                public /* [propget] */ int get_CurrentAcceleratorKey (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[24], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentAccessKey (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[25], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentHasKeyboardFocus (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[26], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsKeyboardFocusable (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[27], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsEnabled (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[28], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentAutomationId (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[29], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentClassName(/* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[30], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
+                }
+
+                public /* [propget] */ int get_CurrentHelpText (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[31], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentCulture (/* [retval][out] */ IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[32], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsControlElement (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[33], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsContentElement (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[34], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int get_CurrentIsPassword(IntByReference value) {
+                    Function f = Function.getFunction(vTable[35], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, value});
+                }
+
+                public /* [propget] */ int get_CurrentNativeWindowHandle (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[36], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentItemType (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[37], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsOffscreen (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[38], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentOrientation (/* [retval][out] */ IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[39], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentFrameworkId (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[40], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsRequiredForForm (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[41], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentItemStatus (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[42], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentBoundingRectangle (/* [retval][out] */ WinDef.RECT retVal) {
+                    Function f = Function.getFunction(vTable[43], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentLabeledBy (/* [retval][out] */ /* IUIAutomationElement */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[44], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int get_CurrentAriaRole(/* [retval][out] */ PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[45], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
+                }
+
+                public /* [propget] */ int get_CurrentAriaProperties (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[46], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentIsDataValidForForm (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[47], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentControllerFor (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[48], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentDescribedBy (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[49], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CurrentFlowsTo (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[50], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int get_CurrentProviderDescription(PointerByReference sr) {
+                    Function f = Function.getFunction(vTable[51], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, sr});
+                }
+
+                public /* [propget] */ int get_CachedControlType (/* [retval][out] */ IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[53], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedLocalizedControlType (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[54], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedName (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedAcceleratorKey (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[56], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedAccessKey (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[57], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedHasKeyboardFocus (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[58], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsKeyboardFocusable (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[59], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsEnabled (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[60], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedAutomationId (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[61], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedClassName (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[62], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedHelpText (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[63], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedCulture (/* [retval][out] */ IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[64], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsControlElement (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[65], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsContentElement (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[66], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsPassword (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[67], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedNativeWindowHandle (/* [retval][out] */ WinDef.HWND retVal) {
+                    Function f = Function.getFunction(vTable[68], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedItemType (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[69], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsOffscreen (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[70], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedOrientation (/* [retval][out] */ IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[71], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedFrameworkId (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[72], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsRequiredForForm (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[73], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedItemStatus (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[74], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedBoundingRectangle (/* [retval][out] */ WinDef.RECT retVal) {
+                    Function f = Function.getFunction(vTable[75], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedLabeledBy (/* [retval][out] */ /* IUIAutomationElement */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[76], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedAriaRole (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[77], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedAriaProperties (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[78], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedIsDataValidForForm (/* [retval][out] */ WinDef.BOOLByReference retVal) {
+                    Function f = Function.getFunction(vTable[79], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedControllerFor (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[80], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedDescribedBy (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[81], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedFlowsTo (/* [retval][out] */ /* IUIAutomationElementArray */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[82], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public /* [propget] */ int get_CachedProviderDescription (/* [retval][out] */ PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[83], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int get_ClickablePoint (/* [out] */ PointerByReference clickable, /* [retval][out] */ WinDef.BOOLByReference gotClickable) {
+                    Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
+                }
+
+            };
+        }
+    }
+}

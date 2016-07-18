@@ -16,14 +16,9 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
@@ -59,10 +54,10 @@ public class AutomationList extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationListItem getItem(int index) throws ItemNotFoundException, ElementNotFoundException {
+    public AutomationListItem getItem(int index) throws AutomationException {
 
-        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
-                this.createControlTypeCondition(ControlType.ListItem));
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
+                this.createControlTypeCondition(ControlType.ListItem).getValue());
 
         AutomationElement item = items.get(index);
 
@@ -80,11 +75,11 @@ public class AutomationList extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
      */
-    public AutomationListItem getItem(String name) throws ItemNotFoundException, ElementNotFoundException {
-        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+    public AutomationListItem getItem(String name) throws AutomationException {
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(ControlType.ListItem)));
+                        this.createNamePropertyCondition(name).getValue(),
+                        this.createControlTypeCondition(ControlType.ListItem).getValue()));
 
         if (item != null) {
             return new AutomationListItem(item);
@@ -97,7 +92,7 @@ public class AutomationList extends AutomationBase {
      * Gets the current selection
      * @return The current selection
      */
-    public List<AutomationElement> getCurrentSelection() {
+    public List<AutomationElement> getCurrentSelection() throws AutomationException {
         return this.selectionPattern.getCurrentSelection();
     }
 }

@@ -15,7 +15,15 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.raw.IUIAutomationValuePattern;
+import com.sun.jna.platform.win32.*;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+
+import static com.sun.jna.platform.win32.Variant.VT_BSTR;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -23,20 +31,42 @@ import mmarquee.automation.pattern.raw.IUIAutomationValuePattern;
  * Wrapper for the value pattern.
  */
 public class Value extends BasePattern {
+    private IUIAutomationValuePattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationValuePattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationValuePattern.Converter.PointerToInterface(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
     /**
      * Get the current value of the control
      * @return The current value
      */
     public String value() {
-        return ((IUIAutomationValuePattern)pattern).currentValue();
+        PointerByReference sr = new PointerByReference();
+        this.getPattern().Get_CurrentValue(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Gets the current readonly status of the control
      * @return True if read-only
      */
-    public int isReadOnly() {
-        return ((IUIAutomationValuePattern)pattern).currentIsReadOnly();
+    public boolean isReadOnly() {
+        IntByReference ibr = new IntByReference();
+        this.getPattern().Get_CurrentIsReadOnly(ibr);
+
+        return (ibr.getValue() == 1);
     }
 
     /**
@@ -44,6 +74,7 @@ public class Value extends BasePattern {
      * @param value Value to use
      */
     public void setValue(String value) {
-        ((IUIAutomationValuePattern)pattern).setValue(value);
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(value);
+        this.getPattern().Set_Value(sysAllocated);
     }
 }

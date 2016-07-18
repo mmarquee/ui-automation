@@ -19,7 +19,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.IUIAutomation;
 
 /**
  * Created by inpwt on 31/01/2016.

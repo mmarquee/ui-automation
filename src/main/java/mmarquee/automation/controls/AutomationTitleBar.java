@@ -15,10 +15,12 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.condition.ControlIdCondition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -41,10 +43,11 @@ public class AutomationTitleBar extends AutomationContainer {
      * @return The Main menu
      * @throws ElementNotFoundException When the element is not found
      */
-    public AutomationMainMenu getMenuBar() throws ElementNotFoundException {
-        ControlIdCondition condition = new ControlIdCondition(ControlType.MenuBar);
+    public AutomationMainMenu getMenuBar() throws AutomationException {
+        PointerByReference condition = this.automation.CreateControlTypeCondition(ControlType.MenuBar);
 
-        AutomationElement element = this.findFirst(TreeScope.TreeScope_Descendants, condition);
+        AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                condition);
 
         return new AutomationMainMenu(this.element, element);
     }

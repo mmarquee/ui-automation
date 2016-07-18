@@ -15,9 +15,15 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.cache.CacheRequest;
-import mmarquee.automation.condition.Condition;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
@@ -25,112 +31,109 @@ import java.util.List;
 
 /**
  * Created by inpwt on 06/03/2016.
- *
+ * <p>
  * Wrapper for the underlying automation element.
  */
 public class AutomationElement {
-
-    private boolean isCached = false;
-
     /**
      * The underlying automation element
-     *
+     * <p>
      * TODO: Make this work with protected (done for EventHandler)
      */
     public IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement
+     *
      * @param element The element
      */
     public AutomationElement(IUIAutomationElement element) {
         this.element = element;
-        this.isCached = false;
-    }
-
-    public AutomationElement(IUIAutomationElement element, boolean cached) {
-        this.element = element;
-        this.isCached = cached;
     }
 
     /**
      * Gets the property associated with the passed in id
+     *
      * @param propertyId The property ID to get
      * @return The property ID
      */
-    public Object getCurrentPropertyValue(int propertyId) {
-        return this.element.getCurrentPropertyValue(propertyId);
+    public Object get_CurrentPropertyValue(int propertyId) {
+        Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
+
+        int result = this.element.get_CurrentPropertyValue(propertyId, value);
+
+        return value.getValue();  //??
     }
-
-
-    /**
-     * Gete the processID property
-     * @return Object representing the processId
-     */
- //   public Object getProcessId() {
- //       return getCurrentPropertyValue(PropertyID.ProcessId.getValue());
- //   }
 
     /**
      * Gets the current control type
+     *
      * @return The current control type
      */
     public int currentControlType() {
-        return this.element.currentControlType();
+        IntByReference ibr = new IntByReference();
+
+        int result = this.element.get_CurrentControlType(ibr);
+
+        return ibr.getValue();
     }
 
     /**
      * Gets the current class name of the element
+     *
      * @return The current class name
      */
     public String currentClassName() {
-        return this.element.currentClassName();
+        PointerByReference sr = new PointerByReference();
+
+        this.element.get_CurrentClassName(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Gets the current IsPassword value.
+     *
      * @return True if IsPassword
      */
     public Boolean currentIsPassword() {
-        return this.element.currentIsPassword() == 1;
+        IntByReference ibr = new IntByReference();
+
+        int result = this.element.get_CurrentIsPassword(ibr);
+
+        return ibr.getValue() == 1;
     }
 
-    /**]
+    /**
+     * ]
      * Gets the name, either from the current ot cache property
+     *
      * @return The name (either cached or current)
      */
     public String getName() {
-        if (this.isCached) {
-            return this.cachedName();
-        } else {
-            return this.currentName();
-        }
-
+        return this.currentName();
     }
 
     /**
      * Gets the current name of the control
+     *
      * @return The name of the element
      */
     protected String currentName() {
-        return this.element.currentName();
-    }
+        PointerByReference sr = new PointerByReference();
+        this.element.get_CurrentName(sr);
 
-    /**
-     * Gets the cached name of the control
-     * @return The cached name of the element
-     */
-    protected String cachedName() {
-        return this.element.cachedName();
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Sets the name of the element
      * @param name The name to use
      */
-    public void setName(String name) {
-        this.element.setName(name);
-    }
+//    public void setName(String name) {
+//        this.element.setName(name);
+// Not sure how this worked
+//    }
 
     /**
      * Finds the first element that matches the condition
@@ -138,39 +141,65 @@ public class AutomationElement {
      * @param condition The condition
      * @return The first matching element
      */
-    public AutomationElement findFirst(TreeScope scope, Condition condition) {
-        IUIAutomationElement elem = this.element.findFirst(scope, condition.getCondition());
-
-        if (elem != null) {
-            return new AutomationElement(elem);
-        } else {
-            return null;
-        }
-    }
+//    public AutomationElement findFirst(TreeScope scope, Condition condition) /{
+//
+    //      PointerByReference pbr = new PointerByReference();
+//
+    //      int result = this.element.findFirst(scope, condition.getCondition(), pbr);
+///
+    //     Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
+//
+    //      Unknown uRoot = new Unknown(pbr.getValue());
+    //
+    //  WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
+//
+    //      if (COMUtils.SUCCEEDED(result0)) {
+    //        return new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr));
+    //  } else {
+    //    return null;
+    // }
+    //  }
 
     /**
      * Finds the first element that matches the raw condition
-     * @param scope Tree scope
-     * @param condition The raw condition
+     *
+     * @param scope      Tree scope
+     * @param pCondition The raw condition
      * @return The first matching element
      */
-    AutomationElement findFirstFromRawCondition(TreeScope scope, IUIAutomationCondition condition) {
-        IUIAutomationElement elem = this.element.findFirst(scope, condition);
+    public AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
 
-        if (elem != null) {
-            return new AutomationElement(elem);
+        this.element.findFirst(scope, pCondition.getValue(), pbr);
+
+        // See what we got
+        Unknown uElement = new Unknown(pbr.getValue());
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            IUIAutomationElement element =
+                    IUIAutomationElement.Converter.PointerToInterface(pbr);
+            return new AutomationElement(element);
         } else {
-            return null;
+            throw new AutomationException();
         }
     }
 
     /**
      * Get the current pattern that matches the patternId
+     *
      * @param patternId What pattern to get
      * @return The pattern
      */
-    public com4j.Com4jObject getCurrentPattern(int patternId) {
-        return this.element.getCurrentPattern(patternId);
+    public PointerByReference getCurrentPattern(int patternId) {
+        PointerByReference pbr = new PointerByReference();
+
+        int result = this.element.get_CurrentPattern(patternId, pbr);
+
+        return pbr;
     }
 
     /**
@@ -182,17 +211,57 @@ public class AutomationElement {
 
     /**
      * Gets all of the elements that match the condition and scope
-     * @param scope The scope in the element tree
-     * @param condition The condition
+     *
+     * @param scope      The scope in the element tree
+     * @param pCondition The condition
      * @return List of matching elements
      */
-    public List<AutomationElement> findAll(TreeScope scope, IUIAutomationCondition condition) {
-        IUIAutomationElementArray collection = this.element.findAll(scope, condition);
+    public List<AutomationElement> findAll(TreeScope scope, Pointer pCondition) {
 
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
-        for (int count = 0; count < collection.length(); count++) {
-            items.add(new AutomationElement(collection.getElement(count)));
+        PointerByReference pAll = new PointerByReference();
+
+        int resultAll = this.element.findAll(scope, pCondition, pAll);
+
+        // What has come out of findAll ??
+
+        Unknown unkConditionA = new Unknown(pAll.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
+
+            IntByReference ibr = new IntByReference();
+
+            collection.get_Length(ibr);
+
+            int counter = ibr.getValue();
+
+            for (int a = 0; a < counter; a++) {
+                PointerByReference pbr = new PointerByReference();
+
+                collection.GetElement(a, pbr);
+
+                // Now make a Element out of it
+
+                Unknown uElement = new Unknown(pbr.getValue());
+
+                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
+
+                WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+                if (COMUtils.SUCCEEDED(result0)) {
+                    IUIAutomationElement element =
+                            IUIAutomationElement.Converter.PointerToInterface(pbr);
+
+                    items.add(new AutomationElement(element));
+                }
+            }
         }
 
         return items;
@@ -200,103 +269,125 @@ public class AutomationElement {
 
     /**
      * Gets the current ARIA role
+     *
      * @return String representing the ARIA role
      */
     public String getAriaRole() {
-        return element.currentAriaRole();
+        PointerByReference sr = new PointerByReference();
+
+        this.element.get_CurrentAriaRole(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Gets the current orientation
+     *
      * @return The orientation
      */
-    public OrientationType getOrientation() {
-        return element.currentOrientation();
+    public OrientationType getOrientation() throws Exception {
+        IntByReference ibr = new IntByReference();
+
+        int result = this.element.get_CurrentOrientation(ibr);
+
+        // Hummm..
+
+        int value = ibr.getValue();
+
+        if (value == 0) {
+            return OrientationType.OrientationType_None;
+        } else if (value == 1) {
+            return OrientationType.OrientationType_Horizontal;
+        } else if (value == 2) {
+            return OrientationType.OrientationType_Vertical;
+        } else {
+            throw new Exception("Not a valid orientation");
+        }
     }
 
     /**
      * Gets the framework ID
+     *
      * @return The framework ID
      */
     public String getFrameworkId() {
-        return this.element.currentFrameworkId();
+
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentFrameworkId(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Gets the provider description
+     *
      * @return The provider description
      */
     public String getProviderDescription() {
-        return this.element.currentProviderDescription();
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentProviderDescription(sr);
+
+        return sr.getValue().getWideString(0);
     }
     /**
      * Get the runtime Id
      * @return The runtime ID
      */
-    public int[] getRuntimeId() {
-        return element.getRuntimeId();
-    }
+    //   public int[] getRuntimeId() {
+    //       return element.getRuntimeId();
+    //   }
 
     /**
      * Gets the process ID
+     *
      * @return The process ID
      */
-    public Object getProcessId() {
-        return element.currentProcessId();
+    public Integer getProcessId() {
+        IntByReference ibr = new IntByReference();
+        int result = this.element.get_CurrentProcessId(ibr);
+
+        return ibr.getValue();
     }
 
     /**
      * Gets the current item status
+     *
      * @return The status
      */
     public String getItemStatus() {
-        return this.element.currentItemStatus();
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentItemStatus(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
     /**
      * Gets the current accelerator key associated with the element
+     *
      * @return The accelerator key
      */
     public String getAcceleratorKey() {
-        return this.element.currentAcceleratorKey();
+        PointerByReference sr = new PointerByReference();
+
+        int result = this.element.get_CurrentAcceleratorKey(sr);
+
+        return sr.getValue().getWideString(0);
     }
 
-    /**
-     * Find all, but from the cache
-     * @param treeScope The treeScope
-     * @param condition The filter condition
-     * @param cacheRequest The cache request
-     * @return The found collection of elements
-     */
-    public List<AutomationElement> findAllBuildCache (TreeScope treeScope,
-                                                      Condition condition,
-                                                      IUIAutomationCacheRequest cacheRequest) {
-        IUIAutomationElementArray collection = this.element.findAllBuildCache(treeScope, condition.getCondition(), cacheRequest);
+    public WinDef.POINT getClickablePoint() {
+        WinDef.POINT point = new WinDef.POINT();
 
-        List<AutomationElement> items = new ArrayList<AutomationElement>();
+        PointerByReference pbr = new PointerByReference();
 
-        for (int count = 0; count < collection.length(); count++) {
-            items.add(new AutomationElement(collection.getElement(count), true));
-        }
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-        return items;
-    }
+        int result = this.element.get_ClickablePoint(pbr, br);
 
-    /**
-     * Finds the first element that matches the condition, building the cache
-     * @param treeScope Tree scope
-     * @param condition The condition
-     * @return The first matching element
-     */
-    public AutomationElement findFirstBuildCache(TreeScope treeScope,
-                                                 Condition condition,
-                                                 IUIAutomationCacheRequest cacheRequest) {
-        IUIAutomationElement elem = this.element.findFirstBuildCache(treeScope, condition.getCondition(), cacheRequest);
+        byte value = pbr.getValue().getByte(0);
 
-        if (elem != null) {
-            return new AutomationElement(elem);
-        } else {
-            return null;
-        }
+        return point;
     }
 }

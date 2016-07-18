@@ -15,18 +15,19 @@
  */
 package mmarquee.automation.controls.menu;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.condition.TrueCondition;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.pattern.raw.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,30 +67,42 @@ public class AutomationMainMenu extends AutomationBase {
      * @param eventKey Key to press
      * @throws ElementNotFoundException Thrown when the element is not found.
      */
-    public void menuItemFudge (String item0, int eventKey) throws ElementNotFoundException {
-        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
-                this.createAndCondition(
-                        this.createNamePropertyCondition(item0),
-                        this.createControlTypeCondition(ControlType.MenuItem)));
+    public void menuItemFudge (String item0, int eventKey) throws AutomationException {
+        PointerByReference pbr = this.automation.createAndCondition(
+                this.createNamePropertyCondition(item0).getValue(),
+                this.createControlTypeCondition(ControlType.MenuItem).getValue());
+
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pbr);
 
         if (item != null) {
-            com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
-            IUIAutomationExpandCollapsePattern pattern = unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
-            pattern.expand();
+            PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
 
-            try {
-                Thread.sleep(750);
-            } catch (Exception ex) {
-                // Seems to be fine, but interrupted
-            }
+            Unknown unkConditionA = new Unknown(pElement.getValue());
+            PointerByReference pUnknownA = new PointerByReference();
 
-            // Now press the correct key
-            try {
-                Robot robot = new Robot();
-                robot.keyPress(eventKey);
-                robot.delay(500);
-            } catch (AWTException ex) {
-                // What is going to happen here?
+            Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
+
+            WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+            if (COMUtils.SUCCEEDED(resultA)) {
+                IUIAutomationExpandCollapsePattern pattern =
+                        IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
+
+                pattern.Expand();
+
+                try {
+                    Thread.sleep(750);
+                } catch (Exception ex) {
+                    // Seems to be fine, but interrupted
+                }
+
+                // Now press the correct key
+                try {
+                    Robot robot = new Robot();
+                    robot.keyPress(eventKey);
+                    robot.delay(500);
+                } catch (AWTException ex) {
+                    // What is going to happen here?
+                }
             }
         }
     }
@@ -101,33 +114,43 @@ public class AutomationMainMenu extends AutomationBase {
      * @return The menu item that matches the name
      * @throws ElementNotFoundException Menu element not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1) throws ElementNotFoundException {
+    public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException {
 
         AutomationElement foundElement = null;
 
-        AutomationElement item = this.findFirst(TreeScope.TreeScope_Descendants,
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name0),
-                        this.createControlTypeCondition(ControlType.MenuItem)));
+                        this.createNamePropertyCondition(name0).getValue(),
+                        this.createControlTypeCondition(ControlType.MenuItem).getValue()));
 
         if (!name1.isEmpty()) {
             // Needs a subitem
             if (item != null) {
-                // Find the subitem now
-                com4j.Com4jObject unknown = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
-                IUIAutomationExpandCollapsePattern pattern = unknown.queryInterface(IUIAutomationExpandCollapsePattern.class);
-                pattern.expand();
-                try {
-                    Thread.sleep(750);
-                } catch (Exception ex) {
-                    // Seems to be find
-                }
+                // Find the sub-item now
+                PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
 
-                foundElement = this.getParent().findFirst(TreeScope.TreeScope_Descendants,
+                Unknown unkConditionA = new Unknown(pElement.getValue());
+                PointerByReference pUnknownA = new PointerByReference();
+
+                Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
+
+                WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+                if (COMUtils.SUCCEEDED(resultA)) {
+                    IUIAutomationExpandCollapsePattern pattern =
+                            IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
+
+                    pattern.Expand();
+                    try {
+                        Thread.sleep(750);
+                    } catch (Exception ex) {
+                        // Seems to be find
+                    }
+
+                    foundElement = this.getParent().findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                         this.createAndCondition(
-                                this.createNamePropertyCondition(name1),
-                                this.createControlTypeCondition(ControlType.MenuItem)));
-
+                            this.createNamePropertyCondition(name1).getValue(),
+                            this.createControlTypeCondition(ControlType.MenuItem).getValue()));
+                }
             }
         }
 
@@ -138,9 +161,9 @@ public class AutomationMainMenu extends AutomationBase {
      * Gets the items associated with this menu control
      * @return The list of items
      */
-    public List<AutomationMenuItem> getItems() {
-        List<AutomationElement> items = this.findAll(TreeScope.TreeScope_Descendants,
-                this.createControlTypeCondition(ControlType.MenuItem));
+    public List<AutomationMenuItem> getItems() throws AutomationException {
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
+                this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
         

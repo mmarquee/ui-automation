@@ -15,8 +15,15 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.pattern.raw.IUIAutomationItemContainerPattern;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -25,6 +32,22 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
  */
 public class ItemContainer extends BasePattern {
 
+    private IUIAutomationItemContainerPattern getPattern() {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationItemContainerPattern.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return IUIAutomationItemContainerPattern.Converter.PointerToInterface(pbr);
+        } else {
+            return null; // or throw exception?
+        }
+    }
+
     /**
      * Finds an item by property
      * @param pStartAfter Where to start in the tree of elements
@@ -32,7 +55,12 @@ public class ItemContainer extends BasePattern {
      * @param value The value of the property
      * @return The item found
      */
-    public IUIAutomationElement findItemByProperty (IUIAutomationElement pStartAfter, int propertyId, Object value) {
-        return ((IUIAutomationItemContainerPattern)this.pattern).findItemByProperty(pStartAfter, propertyId, value);
+    public Pointer findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) {
+
+        PointerByReference pbr = new PointerByReference();
+
+        int result = this.getPattern().FindItemByProperty(pStartAfter, propertyId, value, pbr);
+
+        return pbr.getValue();
     }
 }

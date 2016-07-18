@@ -16,16 +16,16 @@
 
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
-import mmarquee.automation.cache.CacheRequest;
-import mmarquee.automation.condition.raw.IUIAutomationCondition;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.eventhandlers.EventHandler;
-import mmarquee.automation.eventhandlers.FocusChange;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -52,8 +52,44 @@ public class UIAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-        automation = ClassFactory.createCUIAutomation();
-        rootElement = new AutomationElement(automation.getRootElement());
+        Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
+                IUIAutomation.CLSID,
+                null,
+                WTypes.CLSCTX_SERVER,
+                IUIAutomation.IID,
+                pbr);
+
+        COMUtils.checkRC(hr);
+
+        Unknown unk = new Unknown(pbr.getValue());
+
+        PointerByReference pbr1 = new PointerByReference();
+
+        Guid.REFIID refiid = new Guid.REFIID(IUIAutomation.IID);
+
+        WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
+        if (COMUtils.SUCCEEDED(result)) {
+            this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
+        }
+
+        // rootElement = new AutomationElement(this.automation.getRootElement());
+        PointerByReference pRoot = new PointerByReference();
+
+        this.automation.GetRootElement(pRoot);
+
+        Unknown uRoot = new Unknown(pRoot.getValue());
+
+        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
+
+        WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pRoot);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
+        }
     }
 
     /**
@@ -67,15 +103,6 @@ public class UIAutomation {
         }
 
         return INSTANCE;
-    }
-
-    /**
-     * Create a cache request
-     *
-     * @return The created mmarquee.automation.cache request
-     */
-    public CacheRequest createCacheRequest() {
-        return new CacheRequest();
     }
 
     /**
@@ -107,14 +134,14 @@ public class UIAutomation {
      * @return The Application
      * @throws Exception If findProcessEntry throws an exception.
      */
-    public AutomationApplication findProcess(String... command) throws Exception {
+    public AutomationApplication findProcess(String... command) throws AutomationException {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
 
         boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
-            return null;
+            throw new AutomationException();
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(rootElement, handle, true);
@@ -149,15 +176,177 @@ public class UIAutomation {
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException {
+    public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException, AutomationException {
         AutomationElement element = null;
 
-        for (int loop = 0; loop < 25; loop++) {
+        // Look for a window
+        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+        variant1.setValue(Variant.VT_INT, ControlType.Window);
 
-            element = this.rootElement.findFirstFromRawCondition(TreeScope.TreeScope_Descendants,
-                    this.automation.createAndCondition(
-                            this.automation.createPropertyCondition(PropertyID.Name.getValue(), title),
-                            this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), ControlType.Window)));
+        // Look for a specific title
+        Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
+        variant2.setValue(Variant.VT_BSTR, sysAllocated);
+
+        // Create the properties outside of the loop
+
+        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
+
+        // First condition
+        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
+
+        // Second condition
+        PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+
+        // And Condition
+        PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
+
+        for (int loop = 0; loop < 15; loop++) {
+
+            element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+
+            if (element != null) {
+                break;
+            }
+        }
+
+        return new AutomationWindow(element);
+    }
+
+    /**
+     * Compares 2 elements
+     * @param element1 First element
+     * @param element2 Second element
+     * @return Are the elememts the same
+     */
+    public boolean compareElement(Pointer element1, Pointer element2) {
+        IntByReference ibr = new IntByReference();
+
+        int result = this.automation.CompareElements(element1, element2, ibr);
+
+        return ibr.getValue() == 1;
+    }
+
+    /**
+     * Create an and condition
+     * @param pCondition1 First condition
+     * @param pCondition2 Second condition
+     * @return The new condition
+     */
+    public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
+        PointerByReference pbr = new PointerByReference();
+
+        this.automation.CreateAndCondition(pCondition1, pCondition2, pbr);
+
+        // Checks ?
+        return pbr;
+    }
+
+    /**
+     * Create an or condition
+     * @param pCondition1 First condition
+     * @param pCondition2 Second condition
+     * @return The new condition
+     */
+    public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) {
+        PointerByReference pbr = new PointerByReference();
+
+        this.automation.CreateOrCondition(pCondition1, pCondition2, pbr);
+
+        // Checks ?
+        return pbr;
+    }
+
+    /**
+     * Creates a condition, based on control id
+     * @param id The control id
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
+    public PointerByReference CreateControlTypeCondition(int id) throws AutomationException {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        variant.setValue(Variant.VT_INT, id);
+
+        return this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
+    }
+
+    /**
+     * Creates a condition, based on automation id
+     * @param automationId The automation id
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
+    public PointerByReference CreateAutomationIdPropertyCondition(String automationId) throws AutomationException {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+    }
+
+    /**
+     * Creates a condition, based on element name
+     * @param name The name
+     * @return The condition
+     * @throws AutomationException Something went wrong
+     */
+    public PointerByReference CreateNamePropertyCondition(String name) throws AutomationException {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        return this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+    }
+
+    /**
+     * Creates a property condition
+     * @param id Which property to check for
+     * @param value The value of the property
+     * @return The nre condition
+     * @throws AutomationException
+     */
+    public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
+        PointerByReference pCondition = new PointerByReference();
+
+        int result = this.automation.CreatePropertyCondition(id, value, pCondition);
+
+        if (result == 0) {
+            Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
+
+            Unknown unkCondition = new Unknown(pCondition.getValue());
+            PointerByReference pUnknown = new PointerByReference();
+
+            WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
+            if (COMUtils.SUCCEEDED(result1)) {
+                return pCondition;
+            } else {
+                throw new AutomationException();
+            }
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
+     * Gets the desktop window associated with the title
+     *
+     * @param title Title to search for
+     * @return AutomationWindow The found window
+     * @throws ElementNotFoundException Element is not found
+     */
+    public AutomationWindow getDesktopObject(String title) throws AutomationException {
+        AutomationElement element = null;
+
+        // Look for a specific title
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+
+        for (int loop = 0; loop < 15; loop++) {
+            element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    pCondition1);
 
             if (element != null) {
                 break;
@@ -172,16 +361,36 @@ public class UIAutomation {
      *
      * @return List of desktop windows
      */
-    public List<AutomationWindow> getDesktopWindows() {
+    public List<AutomationWindow> getDesktopWindows() throws AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
-        IUIAutomationCondition condition = automation.createTrueCondition();
-        List<AutomationElement> collection = this.rootElement.findAll(TreeScope.TreeScope_Children, condition);
 
-        for (AutomationElement element : collection) {
-            result.add(new AutomationWindow(element));
+        PointerByReference pAll = new PointerByReference();
+
+        PointerByReference pTrueCondition = new PointerByReference();
+
+        this.automation.CreateTrueCondition(pTrueCondition);
+
+        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID);
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationCondition condition =
+                    IUIAutomationCondition.Converter.PointerToInterface(pUnknownA);
+
+            List<AutomationElement> collection =
+                    this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue());
+
+            for (AutomationElement element : collection) {
+                result.add(new AutomationWindow(element));
+            }
+
+            return result;
+        } else {
+            throw new AutomationException();
         }
-
-        return result;
     }
 
     /**
@@ -211,88 +420,33 @@ public class UIAutomation {
      * @throws AWTException Robot exception
      * @throws IOException  IO Exception
      */
-
     public void captureScreen(String filename) throws AWTException, IOException {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }
 
     /**
-     * Adds an event handler for the given event.
-     *
-     * @param sender       The sender
-     * @param eventId      The event id
-     * @param treeScope    The treeScope
-     * @param eventHandler The EventHandler to add
-     */
-    /*
-    public void addAutomationEventHandler(IUIAutomationElement sender,
-                                   int eventId,
-                                   TreeScope treeScope,
-                                   EventHandler eventHandler) {
-        this.automation.addAutomationEventHandler(eventId, sender, treeScope, null, eventHandler);
-    }
-*/
-    /**
-     * Removed the event handler from the element
-     * @param element The element
-     * @param eventId The event
-     * @param eventHandler The handler
-     */
-/*    public void removeAutomationEventHandler(IUIAutomationElement element,
-                                             int eventId,
-                                             EventHandler eventHandler) {
-        this.automation.removeAutomationEventHandler(eventId, element, eventHandler);
-    }
-*/
-    /**
-     * Creates the raw and condition
-     * @param condition0 First condition
-     * @param condition1 Second condition
-     * @return The AndCondition
-     */
-    public IUIAutomationCondition CreateAndCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
-        return automation.createAndCondition(
-                condition0, condition1);
-    }
-
-    /**
      * Creates a false Condition
      * @return The condition
      */
-    public IUIAutomationCondition CreateFalseCondition () {
-        return this.automation.createFalseCondition();
+    public PointerByReference CreateFalseCondition () {
+        PointerByReference pCondition = new PointerByReference();
+
+        this.automation.CreateFalseCondition(pCondition);
+
+        return pCondition;
     }
 
     /**
      * Creates a true Condition
      * @return The condition
      */
-    public IUIAutomationCondition CreateTrueCondition () {
-        return this.automation.createTrueCondition();
-    }
+    public Pointer CreateTrueCondition () {
+        PointerByReference pTrueCondition = new PointerByReference();
 
-    /**
-     * Getst the raw condition
-     * @return the underlying IUIAutomationCondition
-     */
-    public IUIAutomationCondition CreateOrCondition (IUIAutomationCondition condition0,IUIAutomationCondition condition1) {
-        return automation.createOrCondition(
-                condition0,
-                condition1);
-    }
+        this.automation.CreateTrueCondition(pTrueCondition);
 
-    /**
-     * Creates a property condition
-     * @param property The property to check
-     * @param value The value of the property
-     * @return The property condition
-     */
-    public IUIAutomationCondition CreatePropertyCondition (int property, java.lang.Object value) {
-        return automation.createPropertyCondition(property, value);
-    }
+        return pTrueCondition.getValue();
 
-    public IUIAutomationCacheRequest CreateCacheRequest() {
-        return this.automation.createCacheRequest();
     }
 }

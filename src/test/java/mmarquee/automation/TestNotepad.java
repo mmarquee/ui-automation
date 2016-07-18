@@ -15,16 +15,9 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
-
-import java.util.List;
 
 /**
  * Created by inpwt on 26/02/2016
@@ -73,7 +66,7 @@ public class TestNotepad extends TestBase {
 
             this.rest();
 
-            window.dumpUI();
+        //    window.dumpUI();
 
 /*
             // Interact with menus
@@ -97,8 +90,8 @@ public class TestNotepad extends TestBase {
                 logger.info("Failed to find exit menu item");
             }
             */
-        } catch (ElementNotFoundException ex) {
-            logger.info("Element Not Found ");
+        } catch (Exception ex) {
+            logger.info("Something went wrong");
         }
     }
 }

@@ -16,10 +16,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Expands the element
      */
-    public void expand() {
+    public void expand() throws AutomationException {
         this.collapsePattern.expand();
     }
 
@@ -79,14 +79,14 @@ public class AutomationComboBox extends AutomationBase {
      * Is the control expanded
      * @return True if expanded
      */
-    public boolean isExpanded() {
+    public boolean isExpanded() throws AutomationException {
         return collapsePattern.isExpanded();
     }
 
     /**
      * Collapses the element
      */
-    public void collapse() {
+    public void collapse() throws AutomationException {
         this.collapsePattern.collapse();
     }
 
@@ -99,7 +99,7 @@ public class AutomationComboBox extends AutomationBase {
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 
         List<AutomationElement> collection =
-                this.findAll(TreeScope.TreeScope_Descendants);
+                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
         for (AutomationElement element : collection) {
             int retValue = element.currentControlType();

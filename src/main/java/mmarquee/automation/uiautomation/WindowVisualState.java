@@ -13,28 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.uiautomation;
 
 /**
  */
 public enum WindowVisualState {
-  /**
-   * <p>
-   * The value of this constant is 0
-   * </p>
-   */
-  WindowVisualState_Normal, // 0
-  /**
-   * <p>
-   * The value of this constant is 1
-   * </p>
-   */
-  WindowVisualState_Maximized, // 1
-  /**
-   * <p>
-   * The value of this constant is 2
-   * </p>
-   */
-  WindowVisualState_Minimized, // 2
+    WindowVisualState_Normal(0),
+    WindowVisualState_Maximized(1),
+    WindowVisualState_Minimized(2);
+
+    private int value;
+
+    public int getValue() {
+        return this.value;
+    }
+
+    WindowVisualState (int value) {
+        this.value = value;
+    }
 }

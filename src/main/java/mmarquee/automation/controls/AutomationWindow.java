@@ -15,16 +15,12 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.condition.TrueCondition;
+import com.sun.jna.Pointer;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
@@ -64,9 +60,9 @@ public class AutomationWindow extends AutomationContainer {
      * @return The status bar
      */
     public AutomationStatusBar getStatusBar() {
-        TrueCondition condition = this.createTrueCondition();
+        Pointer condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(TreeScope.TreeScope_Descendants, condition);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
 
         AutomationStatusBar found = null;
 
@@ -95,7 +91,7 @@ public class AutomationWindow extends AutomationContainer {
      * Gets the system menu associated with this window
      * @return The system menu
      */
-    public AutomationSystemMenu getSystemMenu() {
+    public AutomationSystemMenu getSystemMenu() throws AutomationException {
         return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar)));
     }
 
@@ -104,7 +100,7 @@ public class AutomationWindow extends AutomationContainer {
      *
      * @return The main menu
      */
-    public AutomationMainMenu getMainMenu() {
+    public AutomationMainMenu getMainMenu() throws AutomationException {
         return getMainMenu(1);
     }
 
@@ -114,7 +110,7 @@ public class AutomationWindow extends AutomationContainer {
      * @param offset The menu offset to get
      * @return The main menu
      */
-    public AutomationMainMenu getMainMenu(int offset) {
+    public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
         return (new AutomationMainMenu(this.element, this.getControlByControlType(offset, ControlType.MenuBar)));
     }
 
@@ -123,7 +119,7 @@ public class AutomationWindow extends AutomationContainer {
      * @param index Index of the menu
      * @return The menu
      */
-    public AutomationMainMenu getMenu(int index) {
+    public AutomationMainMenu getMenu(int index) throws AutomationException {
         return (new AutomationMainMenu(this.element, this.getControlByControlType(0, ControlType.Menu)));
     }
 
@@ -131,21 +127,21 @@ public class AutomationWindow extends AutomationContainer {
      * Waits for this window to become idle.
      * @param timeout The timeout
      */
-    public void waitForInputIdle(int timeout) {
+    public void waitForInputIdle(int timeout) throws AutomationException {
         this.windowPattern.waitForInputIdle(timeout);
     }
 
     /**
      * Maximize the window
      */
-    public void maximize() {
+    public void maximize() throws AutomationException {
         this.windowPattern.maximize();
     }
 
     /**
      * Minimize the window
      */
-    public void minimize() {
+    public void minimize() throws AutomationException {
         this.windowPattern.minimize();
     }
 
@@ -155,15 +151,15 @@ public class AutomationWindow extends AutomationContainer {
      * @return The child window
      * @throws ItemNotFoundException when the item is not found
      */
-    public AutomationWindow getWindow(String title) throws ItemNotFoundException {
+    public AutomationWindow getWindow(String title) throws ItemNotFoundException, AutomationException {
         AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {
             try {
-                item = this.findFirst(TreeScope.TreeScope_Descendants,
+                item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                         this.createAndCondition(
-                                this.createNamePropertyCondition(title),
-                                this.createControlTypeCondition(ControlType.Window)));
+                                this.createNamePropertyCondition(title).getValue(),
+                                this.createControlTypeCondition(ControlType.Window).getValue()));
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find window");
             }
@@ -193,7 +189,7 @@ public class AutomationWindow extends AutomationContainer {
      * Whether this window is modal
      * @return True if modal
      */
-    public boolean isModal() {
+    public boolean isModal() throws AutomationException {
         return this.windowPattern.isModal();
     }
 
@@ -201,7 +197,7 @@ public class AutomationWindow extends AutomationContainer {
      * Whether this window is topmost
      * @return True if topmost
      */
-    public boolean isTopMost() {
+    public boolean isTopMost() throws AutomationException {
         return this.windowPattern.isTopMost();
     }
 
@@ -209,7 +205,7 @@ public class AutomationWindow extends AutomationContainer {
      * Get the AutomationTitleBar associated with the given name
      * @return The AutomationTitleBar
      */
-    public AutomationTitleBar getTitleBar() {
+    public AutomationTitleBar getTitleBar() throws AutomationException {
         return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar));
     }
 
