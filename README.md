@@ -13,7 +13,7 @@ The code here is used to test applications written in Delphi (specifically Delph
 
 # Developer documentation
 
-The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using JNA COM.
+The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using JNA COM (currently using 4.3.0-SNAPSHOT).
 
 ## Maven
 ```

@@ -339,10 +339,15 @@ public class TestMainWPF extends TestBase {
                 logger.info(btn1.name());
                 btn1.click();
 
+                logger.info("Clicked btn1");
+
+                this.rest();
+
                 // Now cope with the results of the click
                 try {
+                    logger.info("Looking for `New Thing`");
                     AutomationWindow popup1 = window.getWindow("New Thing");
-
+                    logger.info("Looking for `OK` btn");
                     AutomationButton okBtn = popup1.getButton("OK");
 
                     boolean val2 = popup1.isModal();
@@ -481,7 +486,9 @@ public class TestMainWPF extends TestBase {
 
             // Window / element not found
             try {
+                logger.info("Looking for `Not There`");
                 AutomationWindow popupNotThere = window.getWindow("Not there");
+                logger.info("Looked for `Not There`");
             } catch (Exception ex) {
                 logger.info(ex.toString());
             }
