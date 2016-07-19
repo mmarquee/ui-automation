@@ -36,6 +36,7 @@ public class Toggle extends BasePattern {
 
     /**
      * Toggles the control
+     * @throws AutomationException Something has gone wrong
      */
     public void toggle () throws AutomationException {
         this.getPattern().Toggle();
@@ -44,6 +45,7 @@ public class Toggle extends BasePattern {
     /**
      * Gets the toggled state of the control
      * @return The toggled state
+     * @throws AutomationException Something has gone wrong
      */
     public ToggleState currentToggleState() throws AutomationException {
         IntByReference ibr = new IntByReference();

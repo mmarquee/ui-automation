@@ -63,6 +63,7 @@ public class AutomationMenuItem extends AutomationBase {
     /**
      * Gets the list of items associatd with this menuitem
      * @return List of menu items
+     * @throws AutomationException Something has gone wrong
      */
     public List<AutomationMenuItem> getItems() throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
@@ -80,6 +81,7 @@ public class AutomationMenuItem extends AutomationBase {
     /**
      * Is the control expanded
      * @return True if expanded
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isExpanded() throws AutomationException {
         return collapsePattern.isExpanded();
@@ -87,6 +89,7 @@ public class AutomationMenuItem extends AutomationBase {
 
     /**
      * Collapses the element
+     * @throws AutomationException Something has gone wrong
      */
     public void collapse() throws AutomationException {
         this.collapsePattern.collapse();
@@ -94,6 +97,7 @@ public class AutomationMenuItem extends AutomationBase {
 
     /**
      * Expands the element
+     * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
         this.collapsePattern.expand();

@@ -31,6 +31,11 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
  */
 public class ExpandCollapse extends BasePattern {
 
+    /**
+     * Gets the pattern
+     * @return The pattern
+     * @throws AutomationException Something went wrong getting the pattern
+     */
     private IUIAutomationExpandCollapsePattern getPattern() throws AutomationException {
         Unknown uElement = new Unknown(this.pattern);
 
@@ -49,6 +54,7 @@ public class ExpandCollapse extends BasePattern {
 
     /**
      * Expands the control
+     * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
         this.getPattern().Expand();
@@ -56,6 +62,7 @@ public class ExpandCollapse extends BasePattern {
 
     /**
      * Collapses the control
+     * @throws AutomationException Something has gone wrong
      */
     public void collapse()throws AutomationException  {
         this.getPattern().Collapse();
@@ -64,6 +71,7 @@ public class ExpandCollapse extends BasePattern {
     /**
      * Determines whether the control is expanded
      * @return Is the control expanded
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isExpanded() throws AutomationException {
         IntByReference ibr = new IntByReference();

@@ -90,6 +90,7 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Gets the system menu associated with this window
      * @return The system menu
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationSystemMenu getSystemMenu() throws AutomationException {
         return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar)));
@@ -99,6 +100,7 @@ public class AutomationWindow extends AutomationContainer {
      * Gets the main menu associated with this window.
      *
      * @return The main menu
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMainMenu() throws AutomationException {
         return getMainMenu(1);
@@ -109,6 +111,7 @@ public class AutomationWindow extends AutomationContainer {
      *
      * @param offset The menu offset to get
      * @return The main menu
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
         return (new AutomationMainMenu(this.element, this.getControlByControlType(offset, ControlType.MenuBar)));
@@ -118,6 +121,7 @@ public class AutomationWindow extends AutomationContainer {
      * Gets the menu associated with this window.
      * @param index Index of the menu
      * @return The menu
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
         return (new AutomationMainMenu(this.element, this.getControlByControlType(0, ControlType.Menu)));
@@ -126,6 +130,7 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Waits for this window to become idle.
      * @param timeout The timeout
+     * @throws AutomationException Something has gone wrong
      */
     public void waitForInputIdle(int timeout) throws AutomationException {
         this.windowPattern.waitForInputIdle(timeout);
@@ -133,6 +138,7 @@ public class AutomationWindow extends AutomationContainer {
 
     /**
      * Maximize the window
+     * @throws AutomationException Something has gone wrong
      */
     public void maximize() throws AutomationException {
         this.windowPattern.maximize();
@@ -140,6 +146,7 @@ public class AutomationWindow extends AutomationContainer {
 
     /**
      * Minimize the window
+     * @throws AutomationException Something has gone wrong
      */
     public void minimize() throws AutomationException {
         this.windowPattern.minimize();
@@ -149,9 +156,9 @@ public class AutomationWindow extends AutomationContainer {
      * Finds the child window with the given title
      * @param title Title to search for
      * @return The child window
-     * @throws ItemNotFoundException when the item is not found
+     * @throws AutomationException Something has gone wrong
      */
-    public AutomationWindow getWindow(String title) throws ItemNotFoundException, AutomationException {
+    public AutomationWindow getWindow(String title) throws AutomationException {
         AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {
@@ -188,6 +195,7 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Whether this window is modal
      * @return True if modal
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isModal() throws AutomationException {
         return this.windowPattern.isModal();
@@ -196,6 +204,7 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Whether this window is topmost
      * @return True if topmost
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isTopMost() throws AutomationException {
         return this.windowPattern.isTopMost();
@@ -204,6 +213,7 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Get the AutomationTitleBar associated with the given name
      * @return The AutomationTitleBar
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationTitleBar getTitleBar() throws AutomationException {
         return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar));

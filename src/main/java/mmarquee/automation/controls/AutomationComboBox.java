@@ -69,7 +69,8 @@ public class AutomationComboBox extends AutomationBase {
     }
 
     /**
-     * Expands the element
+     * Expands the element.
+     * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
         this.collapsePattern.expand();
@@ -78,6 +79,7 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Is the control expanded
      * @return True if expanded
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isExpanded() throws AutomationException {
         return collapsePattern.isExpanded();
@@ -85,6 +87,7 @@ public class AutomationComboBox extends AutomationBase {
 
     /**
      * Collapses the element
+     * @throws AutomationException Something has gone wrong
      */
     public void collapse() throws AutomationException {
         this.collapsePattern.collapse();

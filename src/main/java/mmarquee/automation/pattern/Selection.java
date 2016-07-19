@@ -51,6 +51,11 @@ public class Selection extends BasePattern {
         }
     }
 
+    /**
+     * Gets the current selection
+     * @return The current selection
+     * @throws AutomationException Something has gone wrong
+     */
     public List<AutomationElement> getCurrentSelection() throws AutomationException {
 
         PointerByReference pbr = new PointerByReference();

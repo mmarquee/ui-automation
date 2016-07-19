@@ -35,6 +35,7 @@ public class AutomationCheckbox extends AutomationBase {
      * <p>
      * Invokes the toggle event for this control
      * </p>
+     * @throws AutomationException Something has gone wrong
      */
     public void toggle () throws AutomationException {
         this.togglePattern.toggle();
@@ -45,8 +46,9 @@ public class AutomationCheckbox extends AutomationBase {
      * Gets the toggle state of this control
      * </p>
      * @return The toggle state
+     * @throws AutomationException Something has gone wrong
      */
-    public ToggleState getToggleState () throws Exception {
+    public ToggleState getToggleState () throws AutomationException {
         return this.togglePattern.currentToggleState();
     }
 

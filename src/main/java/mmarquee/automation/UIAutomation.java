@@ -132,7 +132,7 @@ public class UIAutomation {
      *
      * @param command Command to look for
      * @return The Application
-     * @throws Exception If findProcessEntry throws an exception.
+     * @throws AutomationException If findProcessEntry throws an exception.
      */
     public AutomationApplication findProcess(String... command) throws AutomationException {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
@@ -303,7 +303,7 @@ public class UIAutomation {
      * @param id Which property to check for
      * @param value The value of the property
      * @return The nre condition
-     * @throws AutomationException
+     * @throws AutomationException Something has gone wrong
      */
     public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
@@ -360,6 +360,7 @@ public class UIAutomation {
      * Gets the list of desktop windows
      *
      * @return List of desktop windows
+     * @throws AutomationException Something has gone wrong
      */
     public List<AutomationWindow> getDesktopWindows() throws AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();

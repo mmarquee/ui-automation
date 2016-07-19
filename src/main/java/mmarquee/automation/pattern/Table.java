@@ -52,7 +52,7 @@ public class Table extends BasePattern {
 
     /**
      * Gets the column headers for the grid.
-     * @return
+     * @return The list of column headers
      */
     public List<AutomationElement> getCurrentColumnHeaders() {
         PointerByReference pbr = new PointerByReference();

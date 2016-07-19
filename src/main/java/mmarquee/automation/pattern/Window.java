@@ -50,6 +50,7 @@ public class Window extends BasePattern {
     /**
      * Waits for the window to be idle, and allow input
      * @param timeout A timeout to use
+     * @throws AutomationException Something has gone wrong
      */
     public void waitForInputIdle(int timeout) throws AutomationException {
         IntByReference ibr = new IntByReference();
@@ -58,6 +59,7 @@ public class Window extends BasePattern {
 
     /**
      * Maximize the 'window'
+     * @throws AutomationException Something has gone wrong
      */
     public void maximize() throws AutomationException {
         this.setWindowState(WindowVisualState.WindowVisualState_Maximized);
@@ -65,6 +67,7 @@ public class Window extends BasePattern {
 
     /**
      * Minimize the 'window'
+     * @throws AutomationException Something has gone wrong
      */
     public void minimize() throws AutomationException {
         this.setWindowState(WindowVisualState.WindowVisualState_Minimized);
@@ -73,6 +76,7 @@ public class Window extends BasePattern {
     /**
      * Returns whether this control is modal
      * @return Is this control modal?
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isModal() throws AutomationException {
         IntByReference ibr = new IntByReference();
@@ -84,6 +88,7 @@ public class Window extends BasePattern {
     /**
      * IS this window topmost
      * @return Is the window topmost
+     * @throws AutomationException Something has gone wrong
      */
     public boolean isTopMost() throws AutomationException {
         IntByReference ibr = new IntByReference();
@@ -102,6 +107,7 @@ public class Window extends BasePattern {
     /**
      * Sets the visual state
      * @param state The state to set
+     * @throws AutomationException Something has gone wrong
      */
     public void setWindowState(WindowVisualState state) throws AutomationException {
         int result = this.getPattern().SetWindowVisualState(state.getValue());

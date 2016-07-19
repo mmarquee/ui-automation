@@ -46,10 +46,20 @@ public class Range extends BasePattern {
         }
     }
 
+    /**
+     * Sets the value
+     * @param value The value to set
+     * @throws AutomationException Something has gone wrong
+     */
     public void setValue (double value) throws AutomationException {
         this.getPattern().Set_Value(value);
     }
 
+    /**
+     * Gets the value
+     * @return The value
+     * @throws AutomationException Something has gone wrong
+     */
     public double getValue () throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 

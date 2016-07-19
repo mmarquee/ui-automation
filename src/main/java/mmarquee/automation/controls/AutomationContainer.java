@@ -161,6 +161,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the checkbox associated with the given index
      * @param index Index of the control
      * @return AutomationCheckbox that represents the found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationCheckbox getCheckbox(int index) throws AutomationException {
         return new AutomationCheckbox(this.getControlByControlType(index, ControlType.CheckBox));
@@ -170,6 +171,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the Tab control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationTab getTab(int index) throws AutomationException {
         AutomationElement tab = this.getControlByControlType(index, ControlType.Tab);
@@ -181,6 +183,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the Editbox control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationEditBox getEditBox(int index) throws AutomationException {
         return new AutomationEditBox(this.getControlByControlType(index, ControlType.Edit));
@@ -199,6 +202,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the ProgressBar control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationProgressBar getProgressBar(int index) throws AutomationException {
         return new AutomationProgressBar(this.getControlByControlType(index, ControlType.ProgressBar));
@@ -208,7 +212,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the ProgressBar control associated with the given index
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationProgressBar getProgressBar(String name) throws AutomationException {
         return new AutomationProgressBar(this.getControlByControlType(name, ControlType.ProgressBar));
@@ -218,7 +222,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the Editbox control associated with the given name
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationEditBox getEditBox(String name) throws AutomationException {
         return new AutomationEditBox(this.getControlByControlType(name, ControlType.Edit));
@@ -228,6 +232,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the slider control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationSlider getSlider(int index) throws AutomationException {
         return new AutomationSlider(this.getControlByControlType(index, ControlType.Slider));
@@ -237,7 +242,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the slider control associated with the given index
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationSlider getSlider(String name) throws AutomationException {
         return new AutomationSlider(this.getControlByControlType(name, ControlType.Slider));
@@ -256,9 +261,9 @@ public class AutomationContainer extends AutomationBase {
      * Gets the (JHC) Masked Edit control associated with the given index
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
-    public AutomationMaskedEdit getMaskedEdit(String name) throws ElementNotFoundException {
+    public AutomationMaskedEdit getMaskedEdit(String name) throws AutomationException {
         return new AutomationMaskedEdit(this.getControlByControlType(name, ControlType.Edit, "TAutomatedMaskEdit"));
     }
 
@@ -266,6 +271,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the radio button control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationRadioButton getRadioButton(int index) throws AutomationException {
         return new AutomationRadioButton(this.getControlByControlType(index, ControlType.RadioButton));
@@ -275,6 +281,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the text box control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationTextBox getTextBox(int index) throws AutomationException {
         return new AutomationTextBox(this.getControlByControlType(index, ControlType.Text));
@@ -284,7 +291,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the combobox control associated with the given name
      * @param index Index of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationComboBox getCombobox(int index) throws AutomationException {
         return new AutomationComboBox(this.getControlByControlType(index, ControlType.ComboBox));
@@ -294,7 +301,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the combobox control associated with the given name
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationComboBox getCombobox(String name) throws AutomationException {
         return new AutomationComboBox(this.getControlByControlType(name, ControlType.ComboBox));
@@ -304,7 +311,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the button control associated with the given name
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationButton getButton(String name) throws AutomationException {
         return new AutomationButton(this.getControlByControlType(name, ControlType.Button));
@@ -314,7 +321,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the button using the automation ID
      * @param id The automation id
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationButton getButtonByAutomationId(String id) throws AutomationException {
         return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button));
@@ -324,6 +331,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the button control associated with the given index
      * @param index The index of the button
      * @return The AutomationButton
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationButton getButton(int index) throws AutomationException {
         return new AutomationButton(this.getControlByControlType(index, ControlType.Button));
@@ -343,6 +351,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the String Grid control associated with the given index
      * @param index The index to look for
      * @return The string grid
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationDataGrid getDataGrid(int index) throws AutomationException {
         return new AutomationDataGrid(this.getControlByControlType(index, ControlType.DataGrid));
@@ -352,6 +361,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the document associated with the given index
      * @param index Index of the control
      * @return The document control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationDocument getDocument(int index) throws AutomationException {
         return new AutomationDocument(this.getControlByControlType(index, ControlType.Document));
@@ -361,6 +371,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the hyperlink control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationHyperlink getHyperlink(int index) throws AutomationException {
         return new AutomationHyperlink(this.getControlByControlType(index, ControlType.Hyperlink));
@@ -370,6 +381,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the treeview control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationTreeView getTreeView(int index) throws AutomationException {
         return new AutomationTreeView(this.getControlByControlType(index, ControlType.Tree));
@@ -379,7 +391,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the treeview control associated with the given name
      * @param name Name of the control
      * @return The found control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationTreeView getTreeView(String name) throws AutomationException {
         return new AutomationTreeView(this.getControlByControlType(name, ControlType.Tree));
@@ -389,6 +401,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the list control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationList getListItem(int index) throws AutomationException {
         return new AutomationList(this.getControlByControlType(index, ControlType.List));
@@ -398,6 +411,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the calendar control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationCalendar getCalendar(int index) throws AutomationException {
         return new AutomationCalendar(this.getControlByControlType(index, ControlType.Calendar));
@@ -407,6 +421,7 @@ public class AutomationContainer extends AutomationBase {
      * Gets the panel control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationPanel getPanel(int index) throws AutomationException {
         return new AutomationPanel(this.getControlByControlType(index, ControlType.Pane));
@@ -417,6 +432,7 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationPanel getPanel(String name) throws AutomationException {
         return new AutomationPanel(this.getControlByControlType(name, ControlType.Pane));
@@ -426,6 +442,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the AppBar associated with the given index
      * @param index The index
      * @return The AutomationAppBar
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationAppBar getAppBar(int index) throws AutomationException {
         return new AutomationAppBar(this.getControlByControlType(index, ControlType.AppBar));
@@ -435,7 +452,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the ToolBar associated with the given name
      * @param name The name
      * @return The AutomationToolBar
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationToolBar getToolBar(String name) throws AutomationException {
         return new AutomationToolBar(this.getControlByControlType(name, ControlType.ToolBar));
@@ -445,6 +462,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the ToolBar associated with the given index
      * @param index The index
      * @return The AutomationToolBar
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationToolBar getToolBar(int index) throws AutomationException {
         return new AutomationToolBar(this.getControlByControlType(index, ControlType.ToolBar));
@@ -471,7 +489,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the AutomationSplitButton associated with the given name
      * @param name The name to look for
      * @return The AutomationSplitButton
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationSplitButton getSplitButton(String name) throws AutomationException {
         return new AutomationSplitButton(this.getControlByControlType(name, ControlType.SplitButton));
@@ -481,7 +499,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the AutomationImage associated with the given name
      * @param name The name to look for
      * @return The AutomationImage
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationImage getImage(String name) throws AutomationException {
         return new AutomationImage(this.getControlByControlType(name, ControlType.Image));
@@ -491,7 +509,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the AutomationSpinner element associated with the given name
      * @param name The name to look for
      * @return The AutomationSpinner control
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationSpinner getSpinner(String name) throws AutomationException {
         return new AutomationSpinner(this.getControlByControlType(name, ControlType.Spinner));
@@ -501,7 +519,7 @@ public class AutomationContainer extends AutomationBase {
      * Get the AutomationCustom element associated with the given name
      * @param name The name to look for
      * @return The AutomationCustom
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationCustom getCustom(String name) throws AutomationException {
         return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));

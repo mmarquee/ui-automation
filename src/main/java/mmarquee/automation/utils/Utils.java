@@ -32,7 +32,7 @@ public class Utils {
      * Gets the handle of a process from the process entry
      * @param processEntry The processEntry to use
      * @return The handle
-     * @throws Exception Thrown if the handle cannot be determined
+     * @throws AutomationException Thrown if the handle cannot be determined
      */
     public static WinNT.HANDLE getHandleFromProcessEntry(Tlhelp32.PROCESSENTRY32.ByReference processEntry) throws AutomationException {
         WinNT.HANDLE handle = Kernel32.INSTANCE.OpenProcess (

@@ -78,6 +78,7 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Gets the selected item from the grid
      * @return AutomationStringGridItem
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationDataGridCell selected() throws AutomationException {
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
@@ -107,6 +108,7 @@ public class AutomationDataGrid extends AutomationBase
      * @param x X Offset
      * @param y Y Offset
      * @return The GridItem at the given cell position
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationDataGridCell getItem(int x, int y) throws AutomationException {
 

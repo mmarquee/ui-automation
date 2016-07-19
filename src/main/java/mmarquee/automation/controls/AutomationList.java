@@ -51,8 +51,7 @@ public class AutomationList extends AutomationBase {
      *
      * @param index Index of element to get
      * @return The selected item
-     * @throws ItemNotFoundException when the item is not found
-     * @throws ElementNotFoundException when the element is not found
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationListItem getItem(int index) throws AutomationException {
 
@@ -72,8 +71,7 @@ public class AutomationList extends AutomationBase {
      * Gets the item associated with the name
      * @param name Name to look for
      * @return The selected item
-     * @throws ItemNotFoundException when the item is not found
-     * @throws ElementNotFoundException when the element is not found
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationListItem getItem(String name) throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
@@ -91,6 +89,7 @@ public class AutomationList extends AutomationBase {
     /**
      * Gets the current selection
      * @return The current selection
+     * @throws AutomationException Something has gone wrong
      */
     public List<AutomationElement> getCurrentSelection() throws AutomationException {
         return this.selectionPattern.getCurrentSelection();

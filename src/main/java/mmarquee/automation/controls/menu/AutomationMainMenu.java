@@ -65,7 +65,7 @@ public class AutomationMainMenu extends AutomationBase {
      * the menu item found and then pressed the 'A' key.
      * @param item0 Top level menu item
      * @param eventKey Key to press
-     * @throws ElementNotFoundException Thrown when the element is not found.
+     * @throws AutomationException Thrown when the element is not found.
      */
     public void menuItemFudge (String item0, int eventKey) throws AutomationException {
         PointerByReference pbr = this.automation.createAndCondition(
@@ -112,7 +112,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @param name0 First Name
      * @param name1 Second name
      * @return The menu item that matches the name
-     * @throws ElementNotFoundException Menu element not found
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException {
 
@@ -160,6 +160,7 @@ public class AutomationMainMenu extends AutomationBase {
     /**
      * Gets the items associated with this menu control
      * @return The list of items
+     * @throws AutomationException Something has gone wrong
      */
     public List<AutomationMenuItem> getItems() throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),

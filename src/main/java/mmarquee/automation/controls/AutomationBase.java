@@ -310,15 +310,17 @@ public abstract class AutomationBase {
      * Creates a name property condition
      * @param name The name to use
      * @return The condition
+     * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createNamePropertyCondition(String name) throws AutomationException {
         return this.automation.CreateNamePropertyCondition(name);
     }
 
     /**
-     * Creats an automation ID property condition
+     * Creates an automation ID property condition
      * @param automationId The automation ID to use
      * @return The condition
+     * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
         return this.automation.CreateAutomationIdPropertyCondition(automationId);
@@ -328,6 +330,7 @@ public abstract class AutomationBase {
      * Creates a control type property condition
      * @param id The control type to use
      * @return The condition
+     * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createControlTypeCondition(int id) throws AutomationException {
         return this.automation.CreateControlTypeCondition(id);
@@ -630,8 +633,9 @@ public abstract class AutomationBase {
     /**
      * The current orientation of the element
      * @return The orientation
+     * @throws AutomationException Something has gone wrong
      */
-    public OrientationType getOrientation() throws Exception{
+    public OrientationType getOrientation() throws AutomationException {
         return this.element.getOrientation();
     }
 

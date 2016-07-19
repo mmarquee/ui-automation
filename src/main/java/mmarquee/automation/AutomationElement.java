@@ -136,36 +136,12 @@ public class AutomationElement {
 //    }
 
     /**
-     * Finds the first element that matches the condition
-     * @param scope Tree scope
-     * @param condition The condition
-     * @return The first matching element
-     */
-//    public AutomationElement findFirst(TreeScope scope, Condition condition) /{
-//
-    //      PointerByReference pbr = new PointerByReference();
-//
-    //      int result = this.element.findFirst(scope, condition.getCondition(), pbr);
-///
-    //     Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID_IUIAUTOMATION_ELEMENT);
-//
-    //      Unknown uRoot = new Unknown(pbr.getValue());
-    //
-    //  WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
-//
-    //      if (COMUtils.SUCCEEDED(result0)) {
-    //        return new AutomationElement(IUIAutomationElement.Converter.PointerToIUIAutomationElement(pbr));
-    //  } else {
-    //    return null;
-    // }
-    //  }
-
-    /**
      * Finds the first element that matches the raw condition
      *
      * @param scope      Tree scope
      * @param pCondition The raw condition
      * @return The first matching element
+     * @throws AutomationException Something has gone wrong
      */
     public AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
@@ -224,8 +200,6 @@ public class AutomationElement {
 
         int resultAll = this.element.findAll(scope, pCondition, pAll);
 
-        // What has come out of findAll ??
-
         Unknown unkConditionA = new Unknown(pAll.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
@@ -246,8 +220,6 @@ public class AutomationElement {
                 PointerByReference pbr = new PointerByReference();
 
                 collection.GetElement(a, pbr);
-
-                // Now make a Element out of it
 
                 Unknown uElement = new Unknown(pbr.getValue());
 
@@ -284,8 +256,9 @@ public class AutomationElement {
      * Gets the current orientation
      *
      * @return The orientation
+     * @throws AutomationException Something has gone wrong
      */
-    public OrientationType getOrientation() throws Exception {
+    public OrientationType getOrientation() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         int result = this.element.get_CurrentOrientation(ibr);
@@ -301,7 +274,7 @@ public class AutomationElement {
         } else if (value == 2) {
             return OrientationType.OrientationType_Vertical;
         } else {
-            throw new Exception("Not a valid orientation");
+            throw new AutomationException();
         }
     }
 
@@ -377,6 +350,10 @@ public class AutomationElement {
         return sr.getValue().getWideString(0);
     }
 
+    /**
+     * Gets the clickable point for the control
+     * @return The clickable point
+     */
     public WinDef.POINT getClickablePoint() {
         WinDef.POINT point = new WinDef.POINT();
 
