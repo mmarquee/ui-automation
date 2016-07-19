@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation;
 
 import com.sun.jna.Pointer;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HumphreysM on 26/01/2016.
+ * Created by inpwt on 26/01/2016.
  *
  * The base automation wrapper.
  */

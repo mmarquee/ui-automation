@@ -22,7 +22,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by HumphreysM on 06/07/2016.
+ * Created by inpwt on 06/07/2016.
  */
 public interface IUIAutomationElement {
 
