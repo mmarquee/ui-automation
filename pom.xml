@@ -33,7 +33,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
- <!--   <jna.version>4.2.1</jna.version>  -->
+    <jna.version>4.3.0-SNAPSHOT</jna.version>
   </properties>
 
   <dependencies>
@@ -44,7 +44,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!--
     <dependency>
       <groupId>net.java.dev.jna</groupId>
       <artifactId>jna</artifactId>
@@ -55,7 +54,6 @@
       <artifactId>jna-platform</artifactId>
       <version>${jna.version}</version>
     </dependency>
-    -->
 
     <dependency>
       <groupId>log4j</groupId>

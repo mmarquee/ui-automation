@@ -412,9 +412,9 @@ public class TestMainWPF extends TestBase {
                 }
 
             }
-            */
 
             logger.info("Investigated the cache");
+*/
 
             logger.info("++ MISC ++");
 
