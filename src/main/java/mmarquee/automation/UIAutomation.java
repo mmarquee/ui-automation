@@ -450,4 +450,12 @@ public class UIAutomation {
         return pTrueCondition.getValue();
 
     }
+
+    /**
+     * Gets the root automation element
+     * @return The root element
+     */
+    public AutomationElement getRootElement() {
+        return this.rootElement;
+    }
 }
