@@ -93,6 +93,19 @@ public class AutomationElement {
     }
 
     /**
+     * Gets the current localized control type of the element
+     *
+     * @return The current class name
+     */
+    public String localizedControlType() {
+        PointerByReference sr = new PointerByReference();
+
+        this.element.get_CurrentLocalizedControlType(sr);
+
+        return sr.getValue().getWideString(0);
+    }
+
+    /**
      * Gets the current IsPassword value.
      *
      * @return True if IsPassword

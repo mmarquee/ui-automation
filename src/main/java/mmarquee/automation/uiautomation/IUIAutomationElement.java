@@ -130,6 +130,7 @@ public interface IUIAutomationElement {
     int get_CurrentAcceleratorKey (/* [retval][out] */ PointerByReference retVal);
     int get_CurrentProcessId (/* [retval][out] */ IntByReference retVal);
     int get_CurrentBoundingRectangle (/* [retval][out] */ RECTByReference retVal);
+    int get_CurrentLocalizedControlType (/* [retval][out] */ PointerByReference retVal);
 
         public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
