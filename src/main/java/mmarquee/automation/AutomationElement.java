@@ -36,8 +36,9 @@ import java.util.List;
  */
 public class AutomationElement {
     /**
-     * The underlying automation element
      * <p>
+     * The underlying automation element
+     * </p>
      * TODO: Make this work with protected (done for EventHandler)
      */
     public IUIAutomationElement element;
@@ -153,14 +154,21 @@ public class AutomationElement {
 
         Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        PointerByReference pResult = new PointerByReference();
 
-        if (COMUtils.SUCCEEDED(result0)) {
-            IUIAutomationElement element =
-                    IUIAutomationElement.Converter.PointerToInterface(pbr);
-            return new AutomationElement(element);
-        } else {
-            throw new AutomationException();
+        try {
+            WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pResult);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                IUIAutomationElement element =
+                        IUIAutomationElement.Converter.PointerToInterface(pResult);
+                return new AutomationElement(element);
+            } else {
+                throw new AutomationException();
+            }
+
+        } catch (NullPointerException npe) {
+            throw new ElementNotFoundException();
         }
     }
 

@@ -186,7 +186,7 @@ public class AutomationWindow extends AutomationContainer {
         }
 
         if (item == null) {
-            throw new ItemNotFoundException();
+            throw new ElementNotFoundException();
         }
 
         return new AutomationWindow(item);

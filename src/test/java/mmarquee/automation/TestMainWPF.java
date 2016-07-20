@@ -383,6 +383,9 @@ public class TestMainWPF extends TestBase {
             logger.info("Document name is " + document.name());
 
             // PASSWORD EDITBOX **********************************
+
+            logger.info("++ PASSWORD EDITBOX ++");
+
             AutomationEditBox passwd = window.getPasswordEditBox(0);
             passwd.setValue("Hello there everyone");
 
@@ -489,6 +492,8 @@ public class TestMainWPF extends TestBase {
                 logger.info("Looking for `Not There`");
                 AutomationWindow popupNotThere = window.getWindow("Not there");
                 logger.info("Looked for `Not There`");
+            } catch (ElementNotFoundException ex) {
+                logger.info("Didn't find element `Not There`");
             } catch (Exception ex) {
                 logger.info(ex.toString());
             }
@@ -507,6 +512,8 @@ public class TestMainWPF extends TestBase {
                     EventID.Invoke_Invoked.getValue(),
                     handler);
 */
+            logger.info("++ ALL DONE ++");
+
         } catch (Exception ex) {
             logger.info("Something went wrong - " + ex.getMessage());
         }
