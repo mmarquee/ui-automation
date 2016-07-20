@@ -15,13 +15,16 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.AutomationDataGrid;
 import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -204,15 +207,22 @@ public class TestMain extends TestBase {
             this.rest();
 
             /* This doesn't seem to work */
-            AutomationToolBar toolbar = window.getToolBar(0);
+            AutomationToolBar toolbar = window.getToolBar(1);
             logger.info(toolbar.name());
 
             // Looks like the button is a problem with Delphi
             AutomationButton btn0 = toolbar.getButton(0);
 
+            // For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click
+
             if (btn0.isEnabled()) {
                 logger.info("btn0 Enabled");
-                btn0.click();
+
+                WinDef.POINT point = btn0.getClickablePoint();
+
+                AutomationMouse mouse = AutomationMouse.getInstance();
+                mouse.setLocation(point.x, point.y);
+                mouse.leftClick();
             }
 
             AutomationButton btn1 = toolbar.getButton(1);

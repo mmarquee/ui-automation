@@ -220,11 +220,7 @@ public abstract class AutomationBase {
      * @return The clickable point
      */
     public WinDef.POINT getClickablePoint () {
-        WinDef.RECT rect = this.getBoundingRectangle();
-
-        WinDef.POINT point = new WinDef.POINT(
-                rect.left + (rect.right /2),
-                rect.top + (rect.bottom /2));
+        WinDef.POINT point = this.element.getClickablePoint();
 
         return point;
     }
@@ -603,14 +599,9 @@ public abstract class AutomationBase {
      * @return The bounding rectangle
      */
     public WinDef.RECT getBoundingRectangle() {
-        WinDef.RECT rect = new WinDef.RECT();
-        user32.GetWindowRect(this.handle, rect);
+        WinDef.RECT rect0 = this.element.get_CurrentBoundingRectangle();
 
-        // Adjust so that right and bottom match width and height
-        rect.right = rect.right -rect.left;
-        rect.bottom = rect.bottom -rect.top;
-
-        return rect;
+        return rect0;
     }
 
     /**

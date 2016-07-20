@@ -363,16 +363,32 @@ public class AutomationElement {
      * @return The clickable point
      */
     public WinDef.POINT getClickablePoint() {
-        WinDef.POINT point = new WinDef.POINT();
-
-        PointerByReference pbr = new PointerByReference();
+        WinDef.POINT.ByReference pbr = new WinDef.POINT.ByReference();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
         int result = this.element.get_ClickablePoint(pbr, br);
 
-        byte value = pbr.getValue().getByte(0);
+        WinDef.POINT point = new WinDef.POINT(pbr.x, pbr.y);
 
         return point;
+    }
+
+    /**
+     * Gets the boundign rectangle of the control.
+     * @return The bounding rectangle
+     */
+    public WinDef.RECT get_CurrentBoundingRectangle() {
+        RECTByReference rbp = new RECTByReference();
+
+        int result = this.element.get_CurrentBoundingRectangle(rbp);
+
+        WinDef.RECT rect = new WinDef.RECT();
+        rect.bottom = rbp.bottom;
+        rect.left = rbp.left;
+        rect.right = rbp.right;
+        rect.top = rbp.top;
+
+        return rect;
     }
 }

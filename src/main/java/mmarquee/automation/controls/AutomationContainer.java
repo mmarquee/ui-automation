@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
+import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.uiautomation.TreeScope;

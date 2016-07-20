@@ -117,7 +117,7 @@ public interface IUIAutomationElement {
     int get_CurrentClassName (/* [retval][out] */ PointerByReference sr);
     int findAll (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
     int findFirst (TreeScope scope, Pointer condition, /* [retval][out] */ PointerByReference sr);
-    int get_ClickablePoint(/* [out] */ PointerByReference clickable, /* [retval][out] */ WinDef.BOOLByReference gotClickable);
+    int get_ClickablePoint(/* [out] */ WinDef.POINT.ByReference clickable, /* [retval][out] */ WinDef.BOOLByReference gotClickable);
     int get_CurrentIsPassword(IntByReference value);
     int get_CurrentAriaRole (/* [retval][out] */ PointerByReference sr);
     int get_CurrentPattern(Integer patternId, PointerByReference pbr);
@@ -129,6 +129,7 @@ public interface IUIAutomationElement {
     int get_CurrentOrientation (/* [retval][out] */ IntByReference retVal);
     int get_CurrentAcceleratorKey (/* [retval][out] */ PointerByReference retVal);
     int get_CurrentProcessId (/* [retval][out] */ IntByReference retVal);
+    int get_CurrentBoundingRectangle (/* [retval][out] */ RECTByReference retVal);
 
         public static class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
@@ -356,7 +357,7 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public /* [propget] */ int get_CurrentBoundingRectangle (/* [retval][out] */ WinDef.RECT retVal) {
+                public /* [propget] */ int get_CurrentBoundingRectangle (/* [retval][out] */ RECTByReference retVal) {
                     Function f = Function.getFunction(vTable[43], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
@@ -556,7 +557,7 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int get_ClickablePoint (/* [out] */ PointerByReference clickable, /* [retval][out] */ WinDef.BOOLByReference gotClickable) {
+                public int get_ClickablePoint (/* [out] */ WinDef.POINT.ByReference clickable, /* [retval][out] */ WinDef.BOOLByReference gotClickable) {
                     Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
                 }
