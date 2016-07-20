@@ -534,9 +534,12 @@ public class AutomationContainer extends AutomationBase {
         List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
         for (AutomationElement element : collection) {
-            String cName = element.getName();
-
-            logger.info(".." + cName);
+            try {
+                String cName = element.getName();
+                logger.info(".." + cName);
+            } catch (NullPointerException ex) {
+                logger.info(ex.toString());
+            }
         }
 
         logger.info("All done dumping");

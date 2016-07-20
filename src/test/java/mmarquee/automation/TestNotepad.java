@@ -66,7 +66,11 @@ public class TestNotepad extends TestBase {
 
             this.rest();
 
-        //    window.dumpUI();
+            logger.info("About to start dumping UI");
+
+            window.dumpUI();
+
+            logger.info("++ All done dumping UI ++");
 
 /*
             // Interact with menus
@@ -91,7 +95,7 @@ public class TestNotepad extends TestBase {
             }
             */
         } catch (Exception ex) {
-            logger.info("Something went wrong");
+            logger.info("Something went wrong - " + ex.toString());
         }
     }
 }
