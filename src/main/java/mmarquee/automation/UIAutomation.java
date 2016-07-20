@@ -180,7 +180,7 @@ public class UIAutomation {
 
         // Look for a window
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, ControlType.Window);
+        variant1.setValue(Variant.VT_INT, ControlType.Window.getValue());
 
         // Look for a specific title
         Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
@@ -262,9 +262,9 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateControlTypeCondition(int id) throws AutomationException {
+    public PointerByReference CreateControlTypeCondition(ControlType id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-        variant.setValue(Variant.VT_INT, id);
+        variant.setValue(Variant.VT_INT, id.getValue());
 
         return this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
     }

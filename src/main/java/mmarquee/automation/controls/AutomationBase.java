@@ -328,7 +328,7 @@ public abstract class AutomationBase {
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
-    protected PointerByReference createControlTypeCondition(int id) throws AutomationException {
+    protected PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
         return this.automation.CreateControlTypeCondition(id);
     }
 
