@@ -33,19 +33,41 @@ public class AutomationElementTest extends TestCase {
 
     public void testGetCurrentName() {
         AutomationElement root = instance.getRootElement();
-
         assertTrue("root:" + root.currentName(), root.currentName().equals("Desktop"));
     }
 
     public void testGetClassName() {
         AutomationElement root = instance.getRootElement();
-
         assertTrue("root:" + root.currentClassName(), root.currentClassName().equals("#32769"));
+    }
+
+    public void testIsPassword() {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.currentIsPassword(), !root.currentIsPassword());
+    }
+
+    public void testIsControlElement() {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.currentIsControlElement(), root.currentIsControlElement().booleanValue());
+    }
+
+    public void testIsContentElement() {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.currentIsContentElement(), root.currentIsContentElement().booleanValue());
+    }
+
+    public void testIsOffScreen() {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.currentOffscreen(), !root.currentOffscreen().booleanValue());
+    }
+
+    public void testIsEnabled() {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.currentIsEnabled(), root.currentIsEnabled().booleanValue());
     }
 
     public void testLocalizedControlType() {
         AutomationElement root = instance.getRootElement();
-
         assertTrue("root:" + root.localizedControlType(), root.localizedControlType().equals("pane"));
     }
 

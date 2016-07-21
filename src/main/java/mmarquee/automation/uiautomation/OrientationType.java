@@ -18,9 +18,9 @@ package mmarquee.automation.uiautomation;
 /**
  */
 public enum OrientationType {
-    OrientationType_None(0),
-    OrientationType_Horizontal(1),
-    OrientationType_Vertical(2);
+    None(0),
+    Horizontal(1),
+    Vertical(2);
 
     private int value;
 

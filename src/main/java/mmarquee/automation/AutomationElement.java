@@ -119,6 +119,54 @@ public class AutomationElement {
     }
 
     /**
+     * Returns whether the element is off screen
+     * @return True if off screen
+     */
+    public WinDef.BOOL currentOffscreen() {
+        WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
+
+        int result = this.element.get_CurrentIsOffscreen(bbr);
+
+        return bbr.getValue();
+    }
+
+    /**
+     * Returns whether the element is a content element
+     * @return True if content element
+     */
+    public WinDef.BOOL currentIsContentElement() {
+        WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
+
+        int result = this.element.get_CurrentIsContentElement(bbr);
+
+        return bbr.getValue();
+    }
+
+    /**
+     * Returns whether the element is a control element
+     * @return True if control element
+     */
+    public WinDef.BOOL currentIsControlElement() {
+        WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
+
+        int result = this.element.get_CurrentIsControlElement(bbr);
+
+        return bbr.getValue();
+    }
+
+    /**
+     * Returns whether the element is enabled
+     * @return True if enabled
+     */
+    public WinDef.BOOL currentIsEnabled() {
+        WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
+
+        int result = this.element.get_CurrentIsEnabled(bbr);
+
+        return bbr.getValue();
+    }
+
+    /**
      * ]
      * Gets the name, either from the current ot cache property
      *
@@ -289,11 +337,11 @@ public class AutomationElement {
         int value = ibr.getValue();
 
         if (value == 0) {
-            return OrientationType.OrientationType_None;
+            return OrientationType.None;
         } else if (value == 1) {
-            return OrientationType.OrientationType_Horizontal;
+            return OrientationType.Horizontal;
         } else if (value == 2) {
-            return OrientationType.OrientationType_Vertical;
+            return OrientationType.Vertical;
         } else {
             throw new AutomationException();
         }
