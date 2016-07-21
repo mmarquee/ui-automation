@@ -477,16 +477,16 @@ public class TestMainWPF extends TestBase {
 
             WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
 
-            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.top +5, rect0.left +5);
+            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.left +5, rect0.top +5);
 
             mouse.setLocation(clickPoint1.x, clickPoint1.y);
             mouse.rightClick();
 
             this.rest();
 
-            //window.dumpUI();
+            window.dumpUI();
 
-            // Should be able to get the popup menu here
+            // Should be able to get the popup menu here, if I knew how to find it
 
             logger.info("++ NOT FOUND ++");
 
