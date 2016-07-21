@@ -65,7 +65,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isDockPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -73,7 +73,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isExpandCollapsePatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isGridItemPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -89,7 +89,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isMultipleViewPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isInvokePatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -105,7 +105,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isGridPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -113,7 +113,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isRangeValuePatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isScrollPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -129,7 +129,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isSelectionItemPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isScrollItemPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -145,7 +145,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isWindowPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -153,7 +153,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTextPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTableItemPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -169,7 +169,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTablePatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -177,7 +177,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isSelectionPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -185,7 +185,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTransformPatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -193,7 +193,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTogglePatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -201,7 +201,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isValuePatternAvailable () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(0);
     }
 
     /**
@@ -209,7 +209,7 @@ public abstract class AutomationBase {
      * @return Off screen?
      */
     boolean isOffScreen () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
     }
 
     /**
@@ -238,7 +238,7 @@ public abstract class AutomationBase {
      * @return The framework object (really a string)
      */
     public Object getFramework() {
-        return this.element.get_CurrentPropertyValue(PropertyID.FrameworkId.getValue());
+        return this.element.currentPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
@@ -591,7 +591,7 @@ public abstract class AutomationBase {
      * @return Enabled?
      */
     public boolean isEnabled () {
-        return !this.element.get_CurrentPropertyValue(PropertyID.IsEnabled.getValue()).equals(0);
+        return !this.element.currentPropertyValue(PropertyID.IsEnabled.getValue()).equals(0);
     }
 
     /**
@@ -609,7 +609,7 @@ public abstract class AutomationBase {
      * @return The handle
      */
     public WinDef.HWND getNativeWindowHandle() {
-        Object value = this.element.get_CurrentPropertyValue(PropertyID.NativeWindowHandle.getValue());
+        Object value = this.element.currentPropertyValue(PropertyID.NativeWindowHandle.getValue());
         return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
     }
 

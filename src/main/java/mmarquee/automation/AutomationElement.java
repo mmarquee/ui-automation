@@ -58,7 +58,7 @@ public class AutomationElement {
      * @param propertyId The property ID to get
      * @return The property ID
      */
-    public Object get_CurrentPropertyValue(int propertyId) {
+    public Object currentPropertyValue(int propertyId) {
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
         int result = this.element.get_CurrentPropertyValue(propertyId, value);
