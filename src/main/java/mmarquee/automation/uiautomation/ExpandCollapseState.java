@@ -18,28 +18,18 @@ package mmarquee.automation.uiautomation;
 /**
  */
 public enum ExpandCollapseState {
-    /**
-     * <p>
-     * The value of this constant is 0
-     * </p>
-     */
-    ExpandCollapseState_Collapsed, // 0
-    /**
-     * <p>
-     * The value of this constant is 1
-     * </p>
-     */
-    ExpandCollapseState_Expanded, // 1
-    /**
-     * <p>
-     * The value of this constant is 2
-     * </p>
-     */
-    ExpandCollapseState_PartiallyExpanded, // 2
-    /**
-     * <p>
-     * The value of this constant is 3
-     * </p>
-     */
-    ExpandCollapseState_LeafNode, // 3
+    ExpandCollapseState_Collapsed(0),
+    ExpandCollapseState_Expanded(1),
+    ExpandCollapseState_PartiallyExpanded(2),
+    ExpandCollapseState_LeafNode(3);
+
+    private int value;
+
+    public int getValue() {
+        return this.value;
+    }
+
+    ExpandCollapseState(int value) {
+        this.value = value;
+    }
 }
