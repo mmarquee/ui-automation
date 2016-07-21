@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by inpwt on 26/01/2016.
@@ -40,6 +41,8 @@ import java.util.List;
  */
 public class UIAutomation {
 
+    protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
+
     private static UIAutomation INSTANCE = null;
 
     private AutomationElement rootElement;
@@ -47,14 +50,18 @@ public class UIAutomation {
     // TODO: Fix this (changed for caching for now)
     protected IUIAutomation automation;
 
+    private final static int FIND_DESKTOP_ATTEMPTS = 25;
+
     /**
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
+        logger.info("Initializing ActiveX");
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
 
+        logger.info("Creating IUIAutomation instance");
         WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
                 IUIAutomation.CLSID,
                 null,
@@ -73,9 +80,11 @@ public class UIAutomation {
         WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
         if (COMUtils.SUCCEEDED(result)) {
             this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
+            logger.info("Instance successfully created");
         }
 
-        // rootElement = new AutomationElement(this.automation.getRootElement());
+        logger.info("Getting root element");
+
         PointerByReference pRoot = new PointerByReference();
 
         this.automation.GetRootElement(pRoot);
@@ -88,6 +97,7 @@ public class UIAutomation {
 
         if (COMUtils.SUCCEEDED(result0)) {
             this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
+            logger.info("Root element successfully created");
         }
     }
 
@@ -200,13 +210,17 @@ public class UIAutomation {
         // And Condition
         PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
 
-        for (int loop = 0; loop < 15; loop++) {
+        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
             element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
 
             if (element != null) {
                 break;
             }
+        }
+
+        if (element == null) {
+            logger.info("Failed to find desktop window `" + title + "`");
         }
 
         return new AutomationWindow(element);
@@ -343,13 +357,17 @@ public class UIAutomation {
 
         PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
 
-        for (int loop = 0; loop < 15; loop++) {
+        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
             element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                     pCondition1);
 
             if (element != null) {
                 break;
             }
+        }
+
+        if (element == null) {
+            logger.info("Failed to find desktop object `" + title + "`");
         }
 
         return new AutomationWindow(element);
