@@ -107,7 +107,7 @@ public class AutomationComboBox extends AutomationBase {
         for (AutomationElement element : collection) {
             int retValue = element.currentControlType();
 
-            if (retValue == ControlType.ListItem) {
+            if (retValue == ControlType.ListItem.getValue()) {
                 list.add(new AutomationListItem(element));
             }
         }

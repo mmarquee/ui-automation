@@ -20,47 +20,57 @@ package mmarquee.automation;
  *
  * Control types - see https://msdn.microsoft.com/en-us/library/windows/desktop/ee671198(v=vs.85).aspx
  */
-public final class ControlType {
-    public static final int Button      = 50000;
-    public static final int Calendar    = 50001;
-    public static final int CheckBox    = 50002;
-    public static final int ComboBox    = 50003;
-    public static final int Edit        = 50004;
-    public static final int Hyperlink   = 50005;
-    public static final int Image       = 50006;
-    public static final int ListItem    = 50007;
-    public static final int List        = 50008;
-    public static final int Menu        = 50009;
-    public static final int MenuBar     = 50010;
-    public static final int MenuItem    = 50011;
-    public static final int ProgressBar = 50012;
-    public static final int RadioButton = 50013;
-    public static final int ScrollBar   = 50014;
-    public static final int Slider      = 50015;
-    public static final int Spinner     = 50016;
-    public static final int StatusBar   = 50017;
-    public static final int Tab         = 50018;
-    public static final int TabItem     = 50019;
-    public static final int Text        = 50020;
-    public static final int ToolBar     = 50021;
-    public static final int ToolTip     = 50022;
-    public static final int Tree        = 50023;
-    public static final int TreeItem    = 50024;
-    public static final int Custom      = 50025;
-    public static final int Group       = 50026;
-    public static final int Thumb       = 50027;
-    public static final int DataGrid    = 50028;
-    public static final int DataItem    = 50029;
-    public static final int Document    = 50030;
-    public static final int SplitButton = 50031;
-    public static final int Window      = 50032;
-    public static final int Pane        = 50033;
-    public static final int Header      = 50034;
-    public static final int HeaderItem  = 50035;
-    public static final int Table       = 50036;
-    public static final int TitleBar    = 50037;
-    public static final int Separator   = 50038;
-    public static final int SemanticZoom = 50039;
-    public static final int AppBar      = 50040;
+public enum ControlType {
+    Invoke(10000),
+    Button(50000),
+    Calendar(50001),
+    CheckBox(50002),
+    ComboBox(50003),
+    Edit(50004),
+    Hyperlink(50005),
+    Image(50006),
+    ListItem(50007),
+    List(50008),
+    Menu(50009),
+    MenuBar(50010),
+    MenuItem(50011),
+    ProgressBar(50012),
+    RadioButton(50013),
+    ScrollBar(50014),
+    Slider(50015),
+    Spinner(50016),
+    StatusBar(50017),
+    Tab(50018),
+    TabItem(50019),
+    Text(50020),
+    ToolBar(50021),
+    ToolTip(50022),
+    Tree(50023),
+    TreeItem(50024),
+    Custom(50025),
+    Group(50026),
+    Thumb(50027),
+    DataGrid(50028),
+    DataItem(50029),
+    Document(50030),
+    SplitButton(50031),
+    Window(50032),
+    Pane(50033),
+    Header(50034),
+    HeaderItem(50035),
+    Table(50036),
+    TitleBar(50037),
+    Separator(50038),
+    SemanticZoom(50039),
+    AppBar(50040);
+
+    private int value;
+
+    public int getValue() {
+        return this.value;
+    }
+
+    ControlType(int value) {
+        this.value = value;
+    }
 }
- 

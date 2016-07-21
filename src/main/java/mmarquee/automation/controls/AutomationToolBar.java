@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 
 /**
  * Created by inpwt on 02/03/2016.
@@ -31,5 +33,15 @@ public class AutomationToolBar extends AutomationContainer {
      */
     public AutomationToolBar(AutomationElement element) {
         super(element);
+    }
+
+    /**
+     * Gets the button control associated with the given index
+     * @param index The index of the button
+     * @return The AutomationButton
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationToolBarButton getToolbarButton(int index) throws AutomationException {
+        return new AutomationToolBarButton(this.getControlByControlType(index, ControlType.Button));
     }
 }

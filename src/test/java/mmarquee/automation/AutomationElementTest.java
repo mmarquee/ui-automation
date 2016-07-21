@@ -18,7 +18,7 @@ package mmarquee.automation;
 import junit.framework.TestCase;
 
 /**
- * Created by Mark on 20/07/2016.
+ * Created by inpwt on 20/07/2016.
  */
 public class AutomationElementTest extends TestCase {
     static {
@@ -49,12 +49,18 @@ public class AutomationElementTest extends TestCase {
         assertTrue("root:" + root.localizedControlType(), root.localizedControlType().equals("pane"));
     }
 
+    public void testCurrentControlType() {
+        AutomationElement root = instance.getRootElement();
+
+        assertTrue("root:" + root.currentControlType(), root.currentControlType() == ControlType.Pane.getValue());
+    }
+
     public void testFrameworkID() {
         AutomationElement root = instance.getRootElement();
 
         assertTrue("root:" + root.getFrameworkId(), root.getFrameworkId().equals("Win32"));
     }
-    
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(AutomationElementTest.class);
     }

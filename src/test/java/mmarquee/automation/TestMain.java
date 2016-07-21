@@ -211,35 +211,45 @@ public class TestMain extends TestBase {
             logger.info(toolbar.name());
 
             // Looks like the button is a problem with Delphi
-            AutomationButton btn0 = toolbar.getButton(0);
-
-            // For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click
+            AutomationToolBarButton btn0 = toolbar.getToolbarButton(0);
 
             if (btn0.isEnabled()) {
                 logger.info("btn0 Enabled");
 
-                WinDef.POINT point = btn0.getClickablePoint();
+                btn0.click();
 
-                AutomationMouse mouse = AutomationMouse.getInstance();
-                mouse.setLocation(point.x, point.y);
-                mouse.leftClick();
+                AutomationWindow popup1 = window.getWindow("Project1");
+                try {
+                    AutomationButton btn1 = popup1.getButton("OK");
+                    btn1.click();
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find button");
+                }
             }
 
-            AutomationButton btn1 = toolbar.getButton(1);
+            AutomationToolBarButton btn1 = toolbar.getToolbarButton(1);
 
             if (btn1.isEnabled()) {
                 logger.info("btn1 Enabled");
                 btn1.click();
+
+                AutomationWindow popup1 = window.getWindow("Project1");
+                try {
+                    AutomationButton btnOK = popup1.getButton("OK");
+                    btnOK.click();
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find button");
+                }
             }
 
-            AutomationButton btn2 = toolbar.getButton(2);
+            AutomationToolBarButton btn2 = toolbar.getToolbarButton(2);
 
             if (btn2.isEnabled()) {
                 logger.info("btn2 Enabled");
                 btn2.click();
             }
 
-            AutomationButton btn3 = toolbar.getButton(3);
+            AutomationToolBarButton btn3 = toolbar.getToolbarButton(3);
 
             if (btn3.isEnabled()) {
                 logger.info("btn3 Enabled");

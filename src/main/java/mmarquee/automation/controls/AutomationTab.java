@@ -59,7 +59,7 @@ public class AutomationTab extends AutomationContainer {
         for (AutomationElement elem: collection) {
             int retVal = elem.currentControlType();
 
-            if (retVal == ControlType.TabItem) {
+            if (retVal == ControlType.TabItem.getValue()) {
                 this.tabItems.add(new AutomationTabItem(elem));
             }
         }

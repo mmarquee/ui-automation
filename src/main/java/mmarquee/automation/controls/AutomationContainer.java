@@ -19,7 +19,6 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -43,9 +42,9 @@ public class AutomationContainer extends AutomationBase {
         super(element);
     }
 
-    protected AutomationElement getControlByControlType(int index, int id) throws AutomationException {
+    protected AutomationElement getControlByControlType(int index, ControlType id) throws AutomationException {
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, id);
+        variant1.setValue(Variant.VT_INT, id.getValue());
 
         PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
@@ -62,7 +61,7 @@ public class AutomationContainer extends AutomationBase {
      * @param controlName The control name to use
      * @return The matching element
      */
-    protected AutomationElement getControlByControlType(int index, int id, String controlName) {
+    protected AutomationElement getControlByControlType(int index, ControlType id, String controlName) {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -98,7 +97,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element
      * @throws ElementNotFoundException Did not find the element
      */
-    protected AutomationElement getControlByControlType(String name, int id, String controlName) throws ElementNotFoundException {
+    protected AutomationElement getControlByControlType(String name, ControlType id, String controlName) throws ElementNotFoundException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -111,7 +110,7 @@ public class AutomationContainer extends AutomationBase {
             int retVal = element.currentControlType();
             String className = element.currentClassName();
 
-            if (retVal == id) {
+            if (retVal == id.getValue()) {
                 if (className.equals(controlName)) {
                     String cName = element.getName();
 
@@ -137,7 +136,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element
      * @throws ElementNotFoundException Did not find the element
      */
-    protected AutomationElement getControlByControlType(String name, int id) throws AutomationException {
+    protected AutomationElement getControlByControlType(String name, ControlType id) throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),
@@ -151,7 +150,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element
      * @throws ElementNotFoundException Did not find the element
      */
-    protected AutomationElement getControlByAutomationId(String automationId, int controlType) throws ElementNotFoundException, AutomationException {
+    protected AutomationElement getControlByAutomationId(String automationId, ControlType controlType) throws ElementNotFoundException, AutomationException {
         return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId).getValue(),
