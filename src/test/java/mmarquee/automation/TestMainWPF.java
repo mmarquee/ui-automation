@@ -49,30 +49,30 @@ public class TestMainWPF extends TestBase {
         // Sleep for WPF, to address above issue
         this.rest();
 
-        AutomationWindow window = null;
+        AutomationWindow applicationWindow = null;
 
         try {
-            window = automation.getDesktopWindow("MainWindow");
+            applicationWindow = automation.getDesktopWindow("MainWindow");
         } catch (Exception ex) {
             logger.info("Failed to find `MainWindow`");
         }
 
         try {
 
-            Object framework = window.getFramework();
+            Object framework = applicationWindow.getFramework();
             logger.info("Framework is " + framework.toString());
 
-            Object id = window.getProcessId();
+            Object id = applicationWindow.getProcessId();
             logger.info("Process = " + id.toString());
 
-            WinDef.POINT point = window.getClickablePoint();
+            WinDef.POINT point = applicationWindow.getClickablePoint();
             logger.info("Clickable point = " + point.toString());
 
-            String name = window.name();
+            String name = applicationWindow.name();
             logger.info(name);
 
             try {
-                boolean val = window.isModal();
+                boolean val = applicationWindow.isModal();
 
                 logger.info(val);
             } catch (Exception ex) {
@@ -83,7 +83,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ MENUS ++");
 
-            AutomationMainMenu menu = window.getMainMenu(0);
+            AutomationMainMenu menu = applicationWindow.getMainMenu(0);
 
             logger.info("Menu name " + menu.name());
 
@@ -93,7 +93,7 @@ public class TestMainWPF extends TestBase {
 
             // Actual program menu is a `Menu`
 
-            AutomationMainMenu mainMenu = window.getMenu(0);
+            AutomationMainMenu mainMenu = applicationWindow.getMenu(0);
             logger.info("Menu name " + mainMenu.name());
 
             logger.info(mainMenu.getItems().size() + " menu items");
@@ -114,7 +114,7 @@ public class TestMainWPF extends TestBase {
             exit.click();
 
             try {
-                AutomationWindow popup = window.getWindow("Confirm Exit");
+                AutomationWindow popup = applicationWindow.getWindow("Confirm Exit");
 
                 AutomationButton btn = popup.getButton("Cancel");
 
@@ -138,21 +138,21 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ TAB ++");
 
-            AutomationTab tab = window.getTab(0);
+            AutomationTab tab = applicationWindow.getTab(0);
 
             tab.selectTabPage("Details");
 
-            String text = window.getEditBox(1).getValue();
+            String text = applicationWindow.getEditBox(1).getValue();
             logger.info("Text for edit box 1 is " + text);
 
-            window.getEditBox(1).setValue("Hi");
-            logger.info("Text for edit box 1 is now " + window.getEditBox(1).getValue());
+            applicationWindow.getEditBox(1).setValue("Hi");
+            logger.info("Text for edit box 1 is now " + applicationWindow.getEditBox(1).getValue());
 
             // CHECK BOX *********************************************
 
             logger.info("++ CHECK BOX ++");
 
-            AutomationCheckbox check = window.getCheckbox(0);
+            AutomationCheckbox check = applicationWindow.getCheckbox(0);
             check.toggle();
             try {
                 ToggleState state = check.getToggleState();
@@ -164,18 +164,18 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ RADIO BUTTON ++");
 
-            AutomationRadioButton radio = window.getRadioButton(1);
+            AutomationRadioButton radio = applicationWindow.getRadioButton(1);
             radio.selectItem();
 
             // TEXT BOX *********************************************
 
             logger.info("++ TEXT BOX ++");
 
-            AutomationTextBox tb0 = window.getTextBox(9);
+            AutomationTextBox tb0 = applicationWindow.getTextBox(9);
             String tb0Text = tb0.getValue();
             logger.info("Text for text box 1 is " + tb0Text);
 
-            AutomationTextBox tb1 = window.getTextBox(18);
+            AutomationTextBox tb1 = applicationWindow.getTextBox(18);
             String tb1Text = tb1.getValue();
             logger.info("Text for text box 1 is " + tb1Text);
 
@@ -183,7 +183,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ PROGRESS BAR ++");
 
-            AutomationProgressBar progress = window.getProgressBar(0);
+            AutomationProgressBar progress = applicationWindow.getProgressBar(0);
             logger.info("Progress = " + progress.getRangeValue());
 
             // Looks like this does bad things
@@ -194,7 +194,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ SLIDER ++");
 
-            AutomationSlider slider = window.getSlider(0);
+            AutomationSlider slider = applicationWindow.getSlider(0);
             logger.info("Slider value = " + slider.getRangeValue());
 
             // Looks like this does bad things too
@@ -205,7 +205,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ STATUS BAR ++");
 
-            AutomationStatusBar statusbar = window.getStatusBar();
+            AutomationStatusBar statusbar = applicationWindow.getStatusBar();
 
             AutomationTextBox tb = statusbar.getTextBox(0);
 
@@ -214,7 +214,7 @@ public class TestMainWPF extends TestBase {
             logger.info("Statusbar text = " + ebText);
 
             // Now make something happen in the statusbar
-            AutomationEditBox sbeb = window.getEditBox(0);
+            AutomationEditBox sbeb = applicationWindow.getEditBox(0);
             logger.info(sbeb.getValue());
             sbeb.setValue("Some text");
 
@@ -225,7 +225,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ COMBO BOX ++");
 
             try {
-                AutomationComboBox cb0 = window.getCombobox(0);
+                AutomationComboBox cb0 = applicationWindow.getCombobox(0);
 
 // NPE thrown here
 //                String txt = cb0.text();
@@ -239,7 +239,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ EDITTABLE COMBOBOX ++");
 
             try {
-                AutomationComboBox cb1 = window.getCombobox(1);
+                AutomationComboBox cb1 = applicationWindow.getCombobox(1);
 
                 String txt = cb1.text();
 
@@ -259,7 +259,7 @@ public class TestMainWPF extends TestBase {
             // These are entirely different beasts in WPF, but look the same to us!
 
             // Now string grids
-            AutomationDataGrid grid = window.getDataGrid(0);
+            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
@@ -278,7 +278,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ TREEVIEW ++");
 
-            AutomationTreeView tree = window.getTreeView(0);
+            AutomationTreeView tree = applicationWindow.getTreeView(0);
             try {
                 AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
                 treeItem.select();
@@ -297,7 +297,7 @@ public class TestMainWPF extends TestBase {
 
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
-            AutomationButton btnClickMe = window.getButtonByAutomationId("btnClickMe");
+            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("btnClickMe");
             logger.info(btnClickMe.name());
             btnClickMe.click();
 
@@ -305,7 +305,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ LISTS ++");
 
-            AutomationList list = window.getListItem(0);
+            AutomationList list = applicationWindow.getListItem(0);
             try {
                 AutomationListItem listItem = list.getItem("Hello, Window world!");
                 listItem.select();
@@ -326,10 +326,10 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ HYPERLINK ++");
 
-            AutomationHyperlink link = window.getHyperlink(0);
+            AutomationHyperlink link = applicationWindow.getHyperlink(0);
             link.click();
 
-            AutomationToolBar toolbar = window.getToolBar(0);
+            AutomationToolBar toolbar = applicationWindow.getToolBar(0);
             logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
 
             AutomationButton btn1 = toolbar.getButton(1);
@@ -346,7 +346,7 @@ public class TestMainWPF extends TestBase {
                 // Now cope with the results of the click
                 try {
                     logger.info("Looking for `New Thing`");
-                    AutomationWindow popup1 = window.getWindow("New Thing");
+                    AutomationWindow popup1 = applicationWindow.getWindow("New Thing");
                     logger.info("Looking for `OK` btn");
                     AutomationButton okBtn = popup1.getButton("OK");
 
@@ -366,7 +366,7 @@ public class TestMainWPF extends TestBase {
 
             tab.selectTabPage("Calendar");
 
-            AutomationCalendar calendar = window.getCalendar(0);
+            AutomationCalendar calendar = applicationWindow.getCalendar(0);
 
             logger.info("Date is " + calendar.name());
 
@@ -378,7 +378,7 @@ public class TestMainWPF extends TestBase {
 
             tab.selectTabPage("Document");
 
-            AutomationDocument document = window.getDocument(0);
+            AutomationDocument document = applicationWindow.getDocument(0);
 
             logger.info("Document name is " + document.name());
 
@@ -386,7 +386,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ PASSWORD EDITBOX ++");
 
-            AutomationEditBox passwd = window.getPasswordEditBox(0);
+            AutomationEditBox passwd = applicationWindow.getPasswordEditBox(0);
             passwd.setValue("Hello there everyone");
 
             logger.info("IsPassword = " + passwd.isPassword());
@@ -426,29 +426,29 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ MISC ++");
 
-            logger.info("Provider Description:" + window.getProviderDescription());
-            logger.info("Handle: " + window.getNativeWindowHandle());
+            logger.info("Provider Description:" + applicationWindow.getProviderDescription());
+            logger.info("Handle: " + applicationWindow.getNativeWindowHandle());
 
-            WinDef.RECT rect = window.getBoundingRectangle();
+            WinDef.RECT rect = applicationWindow.getBoundingRectangle();
 
             logger.info("Rect: " + rect);
 
-            logger.info("ARIA role : " + window.getAriaRole());
+            logger.info("ARIA role : " + applicationWindow.getAriaRole());
             try {
-                logger.info("Orientation: " + window.getOrientation().toString());
+                logger.info("Orientation: " + applicationWindow.getOrientation().toString());
             } catch (Exception ex) {
                 logger.info("Failed to get orientation");
 
             }
 
-            logger.info("Item Status: " + window.getItemStatus());
-            logger.info("FrameworkId: " + window.getFrameworkId());
+            logger.info("Item Status: " + applicationWindow.getItemStatus());
+            logger.info("FrameworkId: " + applicationWindow.getFrameworkId());
 
             // TITLEBAR ****************************************
 
             logger.info("++ TITLEBAR ++");
 
-            AutomationTitleBar titleBar = window.getTitleBar();
+            AutomationTitleBar titleBar = applicationWindow.getTitleBar();
 
             // Title bar seeems to not give back a name now
             // logger.info("TitleBar name is " + titleBar.name());
@@ -469,7 +469,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationMouse mouse = AutomationMouse.getInstance();
 
-            AutomationButton rightClickBtn = window.getButton("Right-click me!");
+            AutomationButton rightClickBtn = applicationWindow.getButton("Right-click me!");
 
             // Still issues with get locations out of some controls
 
@@ -484,7 +484,7 @@ public class TestMainWPF extends TestBase {
 
             this.rest();
 
-            window.dumpUI();
+            applicationWindow.dumpUI();
 
             // Should be able to get the popup menu here, if I knew how to find it
 
@@ -493,8 +493,8 @@ public class TestMainWPF extends TestBase {
             // Window / element not found
             try {
                 logger.info("Looking for `Not There`");
-                AutomationWindow popupNotThere = window.getWindow("Not there");
-                logger.info("Looked for `Not There`");
+                AutomationWindow popupNotThere = applicationWindow.getWindow("Not there");
+                logger.info("Found `Not There` somehow!");
             } catch (ElementNotFoundException ex) {
                 logger.info("Didn't find element `Not There`");
             } catch (Exception ex) {
@@ -515,10 +515,28 @@ public class TestMainWPF extends TestBase {
                     EventID.Invoke_Invoked.getValue(),
                     handler);
 */
+            logger.info("Looking for a non-existent desktop window");
+
+            // Same for desktop window
+            try {
+                AutomationWindow desktopWindow = automation.getDesktopWindow("MainWindow99");
+            } catch (AutomationException ex) {
+                logger.info("Failed to find `MainWindow99` - " + ex.getClass());
+            }
+
+            logger.info("Looking for a non-existent desktop object");
+
+            // .. and object
+            try {
+                AutomationWindow desktopObject = automation.getDesktopWindow("MainWindow00");
+            } catch (AutomationException ex) {
+                logger.info("Failed to find `MainWindow00` - " + ex.getClass());
+            }
+
             logger.info("++ ALL DONE ++");
 
         } catch (Exception ex) {
-            logger.info("Something went wrong - " + ex.getMessage());
+            logger.info("Something went wrong - " + ex.getClass());
         }
     }
 }

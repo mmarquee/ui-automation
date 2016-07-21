@@ -197,10 +197,6 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant2.setValue(Variant.VT_BSTR, sysAllocated);
 
-        // Create the properties outside of the loop
-
-        Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
-
         // First condition
         PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
 
@@ -221,6 +217,7 @@ public class UIAutomation {
 
         if (element == null) {
             logger.info("Failed to find desktop window `" + title + "`");
+            throw new ItemNotFoundException();
         }
 
         return new AutomationWindow(element);
@@ -368,6 +365,7 @@ public class UIAutomation {
 
         if (element == null) {
             logger.info("Failed to find desktop object `" + title + "`");
+            throw new ItemNotFoundException();
         }
 
         return new AutomationWindow(element);
