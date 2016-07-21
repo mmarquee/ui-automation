@@ -34,13 +34,11 @@ public interface IUIAutomation {
     public final static Guid.IID IID = new Guid.IID(
             "{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
 
-
     /**
      * The IID for the library itself
      */
     public static final Guid.GUID CLSID = new Guid.GUID(
             "{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
-
 
     /**
      *
@@ -166,15 +164,13 @@ public interface IUIAutomation {
             vTablePointer.read(0, vTable, 0, vTable.length);
             return new IUIAutomation() {
 
-                // IUnknown
-
-          //      @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{myInterfacePointer, byValue, pointerByReference}));
                 }
 
-           //     @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer});
@@ -184,8 +180,6 @@ public interface IUIAutomation {
                     Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer});
                 }
-
-                // IUIAutomation actual (there are more obviously, not yet implemented(
 
                 public int CompareElements(Pointer element1, Pointer element2, IntByReference same) {
                     Function f = Function.getFunction(vTable[UIA_COMPARE_ELEMENTS], Function.ALT_CONVENTION);
@@ -226,9 +220,7 @@ public interface IUIAutomation {
                     Function f = Function.getFunction(vTable[UIA_CREATE_FALSE_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition});
                 }
-
             };
         }
     }
-
 }
