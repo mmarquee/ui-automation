@@ -99,6 +99,7 @@ public class Window extends BasePattern {
 
     /**
      * Closes the 'window'
+     * @throws AutomationException Something has gone wrong
      */
     public void close() throws AutomationException {
         int result = this.getPattern().Close();
