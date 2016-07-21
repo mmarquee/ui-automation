@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package demo;
 
-public class Notepad {
+public class Main {
 
 	public static void main(String[] args) {
-        TestNotepad notepad = new TestNotepad();
+        TestMain main = new TestMain();
 
-        notepad.run();
+        main.run();
 	}
 }

@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package demo;
 
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import org.apache.log4j.Logger;

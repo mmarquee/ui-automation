@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation;
+package demo;
 
 import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
