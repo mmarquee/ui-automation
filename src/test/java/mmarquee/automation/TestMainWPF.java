@@ -464,18 +464,22 @@ public class TestMainWPF extends TestBase {
             logger.info(btnClose.name());
 
             // Right-click ****************************************
-// TODO: Investigate
-            /*
+
             logger.info("++ RIGHTCLICK ++");
 
             AutomationMouse mouse = AutomationMouse.getInstance();
 
             AutomationButton rightClickBtn = window.getButton("Right-click me!");
 
-            //mouse.setLocation(1119, 896);
+            // Still issues with get locations out of some controls
+
             WinDef.POINT clickPoint = rightClickBtn.getClickablePoint();
 
-            mouse.setLocation(clickPoint.x, clickPoint.y);
+            WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
+
+            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.top +5, rect0.left +5);
+
+            mouse.setLocation(clickPoint1.x, clickPoint1.y);
             mouse.rightClick();
 
             this.rest();
@@ -483,7 +487,6 @@ public class TestMainWPF extends TestBase {
             //window.dumpUI();
 
             // Should be able to get the popup menu here
-*/
 
             logger.info("++ NOT FOUND ++");
 

@@ -129,7 +129,7 @@ public interface IUIAutomationElement {
     int get_CurrentOrientation (/* [retval][out] */ IntByReference retVal);
     int get_CurrentAcceleratorKey (/* [retval][out] */ PointerByReference retVal);
     int get_CurrentProcessId (/* [retval][out] */ IntByReference retVal);
-    int get_CurrentBoundingRectangle (/* [retval][out] */ RECTByReference retVal);
+    int get_CurrentBoundingRectangle (/* [retval][out] */ WinDef.RECT retVal);
     int get_CurrentLocalizedControlType (/* [retval][out] */ PointerByReference retVal);
 
         public static class Converter {
@@ -358,7 +358,7 @@ public interface IUIAutomationElement {
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int get_CurrentBoundingRectangle (/* [retval][out] */ RECTByReference retVal) {
+                public int get_CurrentBoundingRectangle (/* [retval][out] */ WinDef.RECT retVal) {
                     Function f = Function.getFunction(vTable[43], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

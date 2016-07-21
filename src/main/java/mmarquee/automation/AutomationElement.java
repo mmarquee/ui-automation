@@ -388,19 +388,13 @@ public class AutomationElement {
     }
 
     /**
-     * Gets the boundign rectangle of the control.
+     * Gets the bounding rectangle of the control.
      * @return The bounding rectangle
      */
     public WinDef.RECT get_CurrentBoundingRectangle() {
-        RECTByReference rbp = new RECTByReference();
-
-        int result = this.element.get_CurrentBoundingRectangle(rbp);
-
         WinDef.RECT rect = new WinDef.RECT();
-        rect.bottom = rbp.bottom;
-        rect.left = rbp.left;
-        rect.right = rbp.right;
-        rect.top = rbp.top;
+
+        int result = this.element.get_CurrentBoundingRectangle(rect);
 
         return rect;
     }
