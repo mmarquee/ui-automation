@@ -26,6 +26,12 @@ import com.sun.jna.ptr.PointerByReference;
 
 /**
  * Created by inpwt on 06/07/2016.
+ *
+ * Use this like:
+ * PointerByReference pbr=new PointerByReference();
+ * HRESULT result=SomeCOMObject.QueryInterface(IID_IUIAUTOMATION, pbr);
+ * if(COMUtils.SUCCEEDED(result)) IUIAutomation iua=IUIAutomation.Converter.PointerToInterface(pbr);
+ *
  */
 public interface IUIAutomation {
     /**
@@ -128,13 +134,8 @@ public interface IUIAutomation {
     int CreateTrueCondition(PointerByReference condition);
     int CreateFalseCondition(PointerByReference condition);
     int CompareElements(Pointer element1, Pointer element2, IntByReference same);
-
-     /*
-    Use this like:
-    PointerByReference pbr=new PointerByReference();
-    HRESULT result=SomeCOMObject.QueryInterface(IID_IUIAUTOMATION, pbr);
-    if(COMUtils.SUCCEEDED(result)) IUIAutomation iua=IUIAutomation.Converter.PointerToInterface(pbr);
-     */
+    int CreateNotCondition(Pointer condition, PointerByReference retval);
+    int Get_PatternProgrammaticName(int patternId, PointerByReference retval);
 
     public static class Converter {
 
@@ -219,6 +220,16 @@ public interface IUIAutomation {
                 public int CreateFalseCondition(PointerByReference condition) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_FALSE_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition});
+                }
+
+                public int CreateNotCondition(Pointer condition, PointerByReference retval) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_NOT_CONDITION], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition, retval});
+                }
+
+                public int Get_PatternProgrammaticName(int patternId, PointerByReference retval) {
+                    Function f = Function.getFunction(vTable[UIA_GET_PATTERN_PROGRAMMATIC_NAME], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, patternId, retval});
                 }
             };
         }

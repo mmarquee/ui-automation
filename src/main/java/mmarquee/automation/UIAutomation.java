@@ -208,7 +208,11 @@ public class UIAutomation {
 
         for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
-            element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+            try {
+                element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+            } catch (AutomationException ex) {
+                logger.info("Not found, retrying " + title);
+            }
 
             if (element != null) {
                 break;
@@ -355,8 +359,13 @@ public class UIAutomation {
         PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
 
         for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
-            element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
-                    pCondition1);
+
+            try {
+                element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                        pCondition1);
+            } catch (AutomationException ex) {
+                logger.info("Not found, retrying " + title);
+            }
 
             if (element != null) {
                 break;
@@ -407,26 +416,6 @@ public class UIAutomation {
         } else {
             throw new AutomationException();
         }
-    }
-
-    /**
-     * Does this automation object support IUIAutomation2
-     * i.e. is it Windows 8 or above?
-     *
-     * @return supports IUIAutomation2
-     */
-    public boolean supportsAutomation2() {
-        return this.automation instanceof IUIAutomation2;
-    }
-
-    /**
-     * Does this automation object support IUIAutomation3
-     * i.e. is it Windows 8.1 or above?
-     *
-     * @return supports IUIAutomation3
-     */
-    public boolean supportsAutomation3() {
-        return this.automation instanceof IUIAutomation3;
     }
 
     /**
