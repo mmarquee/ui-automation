@@ -1,4 +1,4 @@
-package demo;
+package mmarquee.demo;
 
 import mmarquee.automation.controls.AutomationBase;
 import org.apache.log4j.Logger;

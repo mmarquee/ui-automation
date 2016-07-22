@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package demo;
+package mmarquee.demo;
 
-public class MainWPF {
+public class Main {
 
 	public static void main(String[] args) {
-        TestMainWPF main = new TestMainWPF();
+        TestMain main = new TestMain();
 
         main.run();
 	}

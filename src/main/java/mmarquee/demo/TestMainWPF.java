@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package demo;
+package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;

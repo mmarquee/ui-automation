@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package demo;
+package mmarquee.demo;
 
-public class Notepad {
+public class MainWPF {
 
 	public static void main(String[] args) {
-        TestNotepad notepad = new TestNotepad();
+        TestMainWPF main = new TestMainWPF();
 
-        notepad.run();
+        main.run();
 	}
 }
