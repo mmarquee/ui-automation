@@ -384,7 +384,11 @@ public class TestMainWPF extends TestBase {
 
             AutomationDocument document = applicationWindow.getDocument(0);
 
+            document.showContextMenu();
+
             logger.info("Document name is " + document.name());
+
+            logger.info("Text is " + document.getText());
 
             // PASSWORD EDITBOX **********************************
 
@@ -468,12 +472,17 @@ public class TestMainWPF extends TestBase {
             logger.info(btnClose.name());
 
             // Right-click ****************************************
+            logger.info("++ CONTEXT MENU ++");
 
+            AutomationButton rightClickBtn = applicationWindow.getButton("Right-click me!");
+            rightClickBtn.showContextMenu();
+
+            // Right-click ****************************************
             logger.info("++ RIGHTCLICK ++");
 
             AutomationMouse mouse = AutomationMouse.getInstance();
 
-            AutomationButton rightClickBtn = applicationWindow.getButton("Right-click me!");
+            rightClickBtn = applicationWindow.getButton("Right-click me!");
 
             // Still issues with get locations out of some controls
 

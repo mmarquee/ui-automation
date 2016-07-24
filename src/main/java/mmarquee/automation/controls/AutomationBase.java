@@ -671,4 +671,12 @@ public abstract class AutomationBase {
     public String getAcceleratorKey() {
         return this.element.getAcceleratorKey();
     }
+
+    /**
+     * Shows the context menu for the control
+     * @throws AutomationException Failed to get the correct interface
+     */
+    public void showContextMenu() throws AutomationException {
+        this.element.showContextMenu();
+    }
 }

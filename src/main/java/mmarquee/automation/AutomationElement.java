@@ -446,4 +446,25 @@ public class AutomationElement {
 
         return rect;
     }
+
+    /**
+     * Shows the context menu for the element
+     * @throws AutomationException Failed to get the correct interface
+     */
+    public void showContextMenu() throws AutomationException {
+        // See whether we support the interface
+        Guid.REFIID refiidElement3 = new Guid.REFIID(IUIAutomationElement3.IID);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = this.element.QueryInterface(refiidElement3, pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            // We support this interface
+            IUIAutomationElement3 element3 = IUIAutomationElement3.Converter.PointerToInterface(pbr);
+            element3.showContextMenu();
+        } else {
+            throw new AutomationException();
+        }
+    }
 }
