@@ -63,6 +63,12 @@ public class TestMainWPF extends TestBase {
 
         try {
 
+            logger.info("++ KILLED ++");
+
+            application.quit("MainWindow");
+
+            logger.info("++ KILLED ++");
+
             Object framework = applicationWindow.getFramework();
             logger.info("Framework is " + framework.toString());
 
