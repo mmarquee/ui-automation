@@ -340,11 +340,32 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Gets the  String Grid control associated with the given index, with a specific control name
      * @param index Index of the control
-     * @param controlName*
+     * @param controlName Control Type name
      * @return The found control
      */
     public AutomationDataGrid getDataGrid(int index, String controlName) {
         return new AutomationDataGrid(this.getControlByControlType(index, ControlType.DataGrid, controlName));
+    }
+
+    /**
+     * Gets the  String Grid control associated with the given name, with a specific control name
+     * @param name Name of the control
+     * @param controlName Control Type name
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationDataGrid getDataGrid(String name, String controlName) throws AutomationException {
+        return new AutomationDataGrid(this.getControlByControlType(name, ControlType.DataGrid, controlName));
+    }
+
+    /**
+     * Gets the String Grid control associated with the given name
+     * @param name The name to look for
+     * @return The string grid
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationDataGrid getDataGrid(String name) throws AutomationException {
+        return new AutomationDataGrid(this.getControlByControlType(name, ControlType.DataGrid));
     }
 
     /**
