@@ -16,10 +16,13 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.utils.Utils;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -139,5 +142,25 @@ public class AutomationApplication extends AutomationBase {
               // Handle the error nicely
             }
         }
+    }
+
+    /**
+     * Closes the process
+     * @param title Title of the window to close
+     */
+    public void close(String title) {
+        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, title);
+
+        Utils.closeProcess(hwnd);
+    }
+
+    /**
+     * Quits the process
+     * @param title Title of the window to quit
+     */
+    public void quit(String title) {
+        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, title);
+
+        Utils.quitProcess(hwnd);
     }
 }

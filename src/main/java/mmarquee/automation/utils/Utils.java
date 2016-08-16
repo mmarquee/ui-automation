@@ -17,6 +17,7 @@ package mmarquee.automation.utils;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.win32.W32APIOptions;
 import mmarquee.automation.AutomationException;
 
@@ -92,6 +93,22 @@ public class Utils {
         ProcessBuilder pb = new ProcessBuilder(command);
 
         return pb.start();
+    }
+
+    /**
+     * Quits the given process
+     * @param handle The handle to quit
+     */
+    public static void quitProcess(WinDef.HWND handle) {
+        User32.INSTANCE.PostMessage(handle, WinUser.WM_QUIT, null, null);
+    }
+
+    /**
+     * Closes the given process
+     * @param handle The handle to close
+     */
+    public static void closeProcess(WinDef.HWND handle) {
+        User32.INSTANCE.PostMessage(handle, WinUser.WM_CLOSE, null, null);
     }
 
     /*

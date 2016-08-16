@@ -160,7 +160,7 @@ public class TestMain extends TestBase {
             }
 
             // Now string grids
-            AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
+            AutomationDataGrid grid = window.getDataGrid("AutomationStringGrid1", "TAutomationStringGrid");
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
