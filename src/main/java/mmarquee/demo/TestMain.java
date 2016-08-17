@@ -164,7 +164,7 @@ public class TestMain extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            String itemName = cell1.name();
+            String itemName = cell1.value();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());

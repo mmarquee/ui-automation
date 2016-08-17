@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
  * Created by inpwt on 04/02/2016.
@@ -24,6 +26,8 @@ import mmarquee.automation.AutomationElement;
  */
 public class AutomationDataGridCell extends AutomationBase {
 
+    private Value valuePattern;
+
     /**
      * Construct the AutomationDataGridCell
      * @param element The element
@@ -31,20 +35,20 @@ public class AutomationDataGridCell extends AutomationBase {
     public AutomationDataGridCell(AutomationElement element) {
         super(element);
 
-     //   try {
-     //       this.valuePattern = this.getValuePattern();
-     //   } catch (PatternNotFoundException ex) {
-     //       logger.info("Value pattern not found");
-     //   }
+        try {
+            this.valuePattern = this.getValuePattern();
+        } catch (PatternNotFoundException ex) {
+            logger.info("Value pattern not found");
+        }
     }
 
     /**
      * Gets the text associated with this element
      * @return The current value
      */
- //   public String value() {
- //       return valuePattern.value();
- //   }
+    public String value() {
+        return valuePattern.value();
+    }
 
  //   public boolean isReadOnly() {
  //       int value = valuePattern.isReadOnly();
