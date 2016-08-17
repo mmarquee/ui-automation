@@ -151,7 +151,9 @@ public class AutomationApplication extends AutomationBase {
     public void close(String title) {
         WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, title);
 
-        Utils.closeProcess(hwnd);
+        if (hwnd != null) {
+            Utils.closeProcess(hwnd);
+        }
     }
 
     /**
@@ -161,6 +163,8 @@ public class AutomationApplication extends AutomationBase {
     public void quit(String title) {
         WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, title);
 
-        Utils.quitProcess(hwnd);
+        if (hwnd != null) {
+            Utils.quitProcess(hwnd);
+        }
     }
 }
