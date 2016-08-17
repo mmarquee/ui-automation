@@ -130,4 +130,20 @@ public class AutomationDataGrid extends AutomationBase
             throw new AutomationException();
         }
     }
+
+    /**
+     * Gets the row count of the grid
+     * @return The row count
+     */
+    public int rowCount() {
+        return this.grid.rowCount();
+    }
+
+    /**
+     * Gets the column count of the grid
+     * @return The column count
+     */
+    public int columnCount() {
+        return this.grid.columnCount();
+    }
 }
