@@ -15,14 +15,17 @@
  */
 package mmarquee.demo;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.AutomationDataGrid;
 import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
 
 import java.util.List;
@@ -255,6 +258,20 @@ public class TestMain extends TestBase {
                 logger.info("btn3 Enabled");
                 btn3.click();
             }
+
+            // Context menus
+            WinDef.POINT point = grid.getClickablePoint();
+            AutomationMouse mouse = AutomationMouse.getInstance();
+
+            mouse.setLocation(point);
+            mouse.leftClick();
+            mouse.rightClick();
+
+            AutomationMenu context = automation.getDesktopMenu("Context");
+
+            logger.info("Found context menu");
+            AutomationMenuItem contextItem = context.getMenuItem(0);
+            contextItem.click();
 
         } catch (Exception ex) {
             logger.info("Something went wrong");

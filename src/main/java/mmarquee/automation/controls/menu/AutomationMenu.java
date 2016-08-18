@@ -17,7 +17,11 @@
 package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationBase;
+
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by inpwt on 09/02/2016.
@@ -25,11 +29,29 @@ import mmarquee.automation.controls.AutomationBase;
  * * Wrapper for the Menu control element.
  */
 public class AutomationMenu extends AutomationBase {
+    protected Logger logger = Logger.getLogger(AutomationMenu.class.getName());
+
     /**
      * Construct the AutomationMenu
      * @param element The element
      */
     public AutomationMenu(AutomationElement element) {
         super(element);
+    }
+
+    /**
+     * Gets the item associated with the index
+     * @param index The index
+     * @return The found item
+     * @throws AutomationException Something went wrong
+     */
+    public AutomationMenuItem getMenuItem (int index) throws AutomationException {
+        logger.info("Finding " + index);
+
+        List<AutomationElement> items = this.findAll();
+
+        AutomationMenuItem item = new AutomationMenuItem(items.get(index));
+
+        return item;
     }
 }

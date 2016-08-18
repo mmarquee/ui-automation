@@ -23,6 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 import javax.imageio.ImageIO;
@@ -342,7 +343,7 @@ public class UIAutomation {
     }
 
     /**
-     * Gets the desktop window associated with the title
+     * Gets the desktop object associated with the title
      *
      * @param title Title to search for
      * @return AutomationWindow The found window
@@ -378,6 +379,45 @@ public class UIAutomation {
         }
 
         return new AutomationWindow(element);
+    }
+
+    /**
+     * Gets the desktop object associated with the title
+     *
+     * @param title Title of the menu to search for
+     * @return AutomationMenu The found menu
+     * @throws ElementNotFoundException Element is not found
+     */
+    public AutomationMenu getDesktopMenu(String title) throws AutomationException {
+        AutomationElement element = null;
+
+        // Look for a specific title
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+
+        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+
+            try {
+                element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                        pCondition1);
+            } catch (AutomationException ex) {
+                logger.info("Not found, retrying " + title);
+            }
+
+            if (element != null) {
+                break;
+            }
+        }
+
+        if (element == null) {
+            logger.info("Failed to find desktop menu `" + title + "`");
+            throw new ItemNotFoundException();
+        }
+
+        return new AutomationMenu(element);
     }
 
     /**

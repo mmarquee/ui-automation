@@ -1,5 +1,6 @@
 package mmarquee.automation.controls.mouse;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.UIAutomation;
 
 import java.awt.*;
@@ -48,6 +49,14 @@ public class AutomationMouse {
      */
     public void setLocation(int x, int y) {
         robot.mouseMove(x, y);
+    }
+
+    /**
+     * Moves the mouse pointer to a given screen point
+     * @param point The point to move to.
+     */
+    public void setLocation(WinDef.POINT point) {
+        robot.mouseMove(point.x, point.y);
     }
 
     /**
