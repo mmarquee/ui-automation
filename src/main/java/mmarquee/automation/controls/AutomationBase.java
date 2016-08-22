@@ -591,7 +591,7 @@ public abstract class AutomationBase {
      * @return Enabled?
      */
     public boolean isEnabled () {
-        return !this.element.currentPropertyValue(PropertyID.IsEnabled.getValue()).equals(0);
+        return this.element.currentIsEnabled().booleanValue();
     }
 
     /**
