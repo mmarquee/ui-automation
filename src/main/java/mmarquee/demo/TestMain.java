@@ -270,11 +270,11 @@ public class TestMain extends TestBase {
             AutomationMenu context = automation.getDesktopMenu("Context");
 
             logger.info("Found context menu");
-            AutomationMenuItem contextItem = context.getMenuItem(0);
+            AutomationMenuItem contextItem = context.getMenuItem("Popup Menu ");
             contextItem.click();
 
         } catch (Exception ex) {
-            logger.info("Something went wrong");
+            logger.info("Something went wrong - " + ex.getClass());
         }
     }
 }

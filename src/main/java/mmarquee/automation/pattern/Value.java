@@ -72,9 +72,11 @@ public class Value extends BasePattern {
     /**
      * Sets the value of the control
      * @param value Value to use
+     * @throws NullPointerException When something has gone wrong
      */
-    public void setValue(String value) {
+    public void setValue(String value) throws NullPointerException {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(value);
+
         this.getPattern().Set_Value(sysAllocated);
     }
 }

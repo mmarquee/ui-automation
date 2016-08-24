@@ -16,9 +16,16 @@
 
 package mmarquee.automation.controls.menu;
 
+import com.sun.jna.platform.win32.OleAuto;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WTypes;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -46,12 +53,36 @@ public class AutomationMenu extends AutomationBase {
      * @throws AutomationException Something went wrong
      */
     public AutomationMenuItem getMenuItem (int index) throws AutomationException {
-        logger.info("Finding " + index);
-
         List<AutomationElement> items = this.findAll();
 
         AutomationMenuItem item = new AutomationMenuItem(items.get(index));
 
         return item;
+    }
+
+    /**
+     * Gets the item associated with the name
+     * @param name The name to look for
+     * @return The found item
+     * @throws AutomationException Something went wrong
+     */
+    public AutomationMenuItem getMenuItem (String name) throws AutomationException {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        AutomationElement item = null;
+
+        try {
+            PointerByReference pCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
+
+            item = this.findFirst(
+                    new TreeScope(TreeScope.TreeScope_Children),
+                    pCondition);
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+
+        return new AutomationMenuItem(item);
     }
 }

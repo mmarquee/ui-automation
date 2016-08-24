@@ -198,26 +198,30 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant2.setValue(Variant.VT_BSTR, sysAllocated);
 
-        // First condition
-        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
+        try {
+            // First condition
+            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
 
-        // Second condition
-        PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+            // Second condition
+            PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
-        // And Condition
-        PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
+            // And Condition
+            PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
 
-        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
-            try {
-                element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
-            } catch (AutomationException ex) {
-                logger.info("Not found, retrying " + title);
+                try {
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+                } catch (AutomationException ex) {
+                    logger.info("Not found, retrying " + title);
+                }
+
+                if (element != null) {
+                    break;
+                }
             }
-
-            if (element != null) {
-                break;
-            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
 
         if (element == null) {
@@ -296,7 +300,15 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+        PointerByReference pbr = null;
+
+        try {
+            pbr = this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+
+        return pbr;
     }
 
     /**
@@ -310,7 +322,15 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        return this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+        PointerByReference pbr = null;
+
+        try {
+            pbr = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+
+        return pbr;
     }
 
     /**
@@ -357,20 +377,24 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+        try {
+            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
 
-        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
-            try {
-                element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
-                        pCondition1);
-            } catch (AutomationException ex) {
-                logger.info("Not found, retrying " + title);
+                try {
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                            pCondition1);
+                } catch (AutomationException ex) {
+                    logger.info("Not found, retrying " + title);
+                }
+
+                if (element != null) {
+                    break;
+                }
             }
-
-            if (element != null) {
-                break;
-            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
 
         if (element == null) {
@@ -396,20 +420,24 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+        try {
+            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
 
-        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
-            try {
-                element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
-                        pCondition1);
-            } catch (AutomationException ex) {
-                logger.info("Not found, retrying " + title);
+                try {
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                            pCondition1);
+                } catch (AutomationException ex) {
+                    logger.info("Not found, retrying " + title);
+                }
+
+                if (element != null) {
+                    break;
+                }
             }
-
-            if (element != null) {
-                break;
-            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
 
         if (element == null) {
