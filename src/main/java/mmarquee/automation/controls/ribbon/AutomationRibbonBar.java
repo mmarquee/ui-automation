@@ -16,6 +16,7 @@
 package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationPanel;
 
@@ -36,8 +37,9 @@ public class AutomationRibbonBar extends AutomationPanel {
     /**
      * Get the RibbonCommandBar associated with this container
      * @return The AutomationRibbonBar
+     * @throws AutomationException Automation issue
      */
-    public AutomationRibbonCommandBar getRibbonCommandBar() {
+    public AutomationRibbonCommandBar getRibbonCommandBar() throws AutomationException {
         return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBar"));
     }
 }

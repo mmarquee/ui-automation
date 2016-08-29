@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.utils.Utils;
 
@@ -84,9 +85,9 @@ public class AutomationApplication extends AutomationBase {
      * Gets the window associated with the title
      * @param title The title to look for
      * @return An AutomationWindow
-     * @throws ElementNotFoundException Count find element
+     * @throws AutomationException Count find element
      */
-    public AutomationWindow getWindow(String title) throws ElementNotFoundException {
+    public AutomationWindow getWindow(String title) throws AutomationException {
 
         AutomationElement foundElement = null;
 

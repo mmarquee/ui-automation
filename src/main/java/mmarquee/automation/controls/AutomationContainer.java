@@ -60,8 +60,9 @@ public class AutomationContainer extends AutomationBase {
      * @param id Control type
      * @param controlName The control name to use
      * @return The matching element
+     * @throws AutomationException Automation issue
      */
-    protected AutomationElement getControlByControlType(int index, ControlType id, String controlName) {
+    protected AutomationElement getControlByControlType(int index, ControlType id, String controlName) throws AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -95,9 +96,9 @@ public class AutomationContainer extends AutomationBase {
      * @param id Control type
      * @param controlName The control name to use
      * @return The matching element
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getControlByControlType(String name, ControlType id, String controlName) throws ElementNotFoundException {
+    protected AutomationElement getControlByControlType(String name, ControlType id, String controlName) throws AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -193,8 +194,9 @@ public class AutomationContainer extends AutomationBase {
      * Gets the EditBox (with password marking) associated with the given index
      * @param index The index
      * @return The found control
+     * @throws AutomationException Automation issue
      */
-    public AutomationEditBox getPasswordEditBox(int index) {
+    public AutomationEditBox getPasswordEditBox(int index) throws AutomationException {
         return new AutomationEditBox(this.getControlByControlType(index, ControlType.Edit, "PasswordBox"));
     }
 
@@ -252,8 +254,9 @@ public class AutomationContainer extends AutomationBase {
      * Gets the (JHC) Masked Edit control associated with the given index
      * @param index Index of the control
      * @return The found control
+     * @throws AutomationException Automation issue
      */
-    public AutomationMaskedEdit getMaskedEdit(int index) {
+    public AutomationMaskedEdit getMaskedEdit(int index) throws AutomationException {
         return new AutomationMaskedEdit(this.getControlByControlType(index, ControlType.Edit, "TAutomationMaskEdit"));
     }
 
@@ -342,8 +345,9 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @param controlName Control Type name
      * @return The found control
+     * @throws AutomationException Automation issue
      */
-    public AutomationDataGrid getDataGrid(int index, String controlName) {
+    public AutomationDataGrid getDataGrid(int index, String controlName) throws AutomationException {
         return new AutomationDataGrid(this.getControlByControlType(index, ControlType.DataGrid, controlName));
     }
 
@@ -492,8 +496,9 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Get the RibbonBar associated this container
      * @return The AutomationRibbonBar
+     * @throws AutomationException Automation issue
      */
-    public AutomationRibbonBar getRibbonBar() {
+    public AutomationRibbonBar getRibbonBar() throws AutomationException {
         return new AutomationRibbonBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBarDock"));
     }
 
@@ -501,8 +506,9 @@ public class AutomationContainer extends AutomationBase {
      * Gets the AutomationReBar associated with this index
      * @param index The index
      * @return The control wrapper
+     * @throws AutomationException Automation issue
      */
-    public AutomationReBar getReBar(int index) {
+    public AutomationReBar getReBar(int index) throws AutomationException {
         return new AutomationReBar(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32"));
     }
 
@@ -552,17 +558,21 @@ public class AutomationContainer extends AutomationBase {
     public void dumpUI() {
         logger.info("About to start dumping");
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+        try {
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
-        for (AutomationElement element : collection) {
-            try {
-                String cName = element.getName();
-                logger.info(".." + cName);
-            } catch (NullPointerException ex) {
-                logger.info(ex.toString());
+            for (AutomationElement element : collection) {
+                try {
+                    String cName = element.getName();
+                    logger.info(".." + cName);
+                } catch (NullPointerException ex) {
+                    logger.info(ex.toString());
+                }
             }
-        }
 
-        logger.info("All done dumping");
+            logger.info("All done dumping");
+        } catch (AutomationException ex) {
+            logger.error(ex.getMessage());
+        }
     }
 }

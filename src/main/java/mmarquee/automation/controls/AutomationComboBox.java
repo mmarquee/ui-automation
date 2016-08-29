@@ -96,8 +96,9 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Gets the list of items associated with this element.
      * @return List of AutomationListItems
+     * @throws AutomationException Automation issue
      */
-    public List<AutomationListItem> getList() {
+    public List<AutomationListItem> getList() throws AutomationException {
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 

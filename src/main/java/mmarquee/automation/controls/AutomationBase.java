@@ -260,8 +260,9 @@ public abstract class AutomationBase {
     /**
      * Finds all of the elements that are associated with this element
      * @return List List of elements
+     * @throws AutomationException Something is up with automation
      */
-    protected List<AutomationElement> findAll() {
+    protected List<AutomationElement> findAll() throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.TreeScope_Children));
     }
 
@@ -280,8 +281,9 @@ public abstract class AutomationBase {
      * Finds all of the elements that are associated with the given condition.
      * @param scope The scope of where to look
      * @return List list of all the elements found
+     * @throws AutomationException Something is wrong in automation
      */
-    protected List<AutomationElement> findAll(TreeScope scope) {
+    protected List<AutomationElement> findAll(TreeScope scope) throws AutomationException {
         Pointer condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
@@ -289,16 +291,18 @@ public abstract class AutomationBase {
     /**
      * Creates a true condition
      * @return The true condition
+     * @throws AutomationException Something is up with automation
      */
-    protected Pointer createTrueCondition() {
+    protected Pointer createTrueCondition() throws AutomationException {
         return this.automation.CreateTrueCondition();
     }
 
     /**
      * Creates a false condition
      * @return The condition
+     * @throws AutomationException Error thrown in automation
      */
-    protected PointerByReference createFalseCondition() {
+    protected PointerByReference createFalseCondition() throws AutomationException {
         return this.automation.CreateFalseCondition();
     }
 
@@ -337,8 +341,9 @@ public abstract class AutomationBase {
      * @param condition1 First condition
      * @param condition2 Second condition
      * @return The Or Condition
+     * @throws AutomationException Automation has gone wrong
      */
-    public PointerByReference createOrCondition(Pointer condition1, Pointer condition2) {
+    public PointerByReference createOrCondition(Pointer condition1, Pointer condition2) throws AutomationException {
         return this.automation.createOrCondition(condition1, condition2);
     }
 
@@ -347,8 +352,9 @@ public abstract class AutomationBase {
      * @param condition1 First condition
      * @param condition2 Second condition
      * @return The And condition
+     * @throws AutomationException Error in automation
      */
-   protected PointerByReference createAndCondition(Pointer condition1, Pointer condition2) {
+   protected PointerByReference createAndCondition(Pointer condition1, Pointer condition2) throws AutomationException {
        return this.automation.createAndCondition(condition1, condition2);
    }
 

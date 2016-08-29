@@ -135,7 +135,8 @@ public interface IUIAutomation {
     int CreateFalseCondition(PointerByReference condition);
     int CompareElements(Pointer element1, Pointer element2, IntByReference same);
     int CreateNotCondition(Pointer condition, PointerByReference retval);
-    int Get_PatternProgrammaticName(int patternId, PointerByReference retval);
+    int GetPatternProgrammaticName(int patternId, PointerByReference retval);
+    int GetFocusedElement(PointerByReference element);
 
     public static class Converter {
 
@@ -192,6 +193,11 @@ public interface IUIAutomation {
                     return f.invokeInt(new Object[]{myInterfacePointer, root});
                 }
 
+                public int GetFocusedElement(PointerByReference element) {
+                    Function f = Function.getFunction(vTable[UIA_GET_FOCUSED_ELEMENT], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, element});
+                }
+
                 public int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_HANDLE], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, hwnd, element});
@@ -227,7 +233,7 @@ public interface IUIAutomation {
                     return f.invokeInt(new Object[]{myInterfacePointer, condition, retval});
                 }
 
-                public int Get_PatternProgrammaticName(int patternId, PointerByReference retval) {
+                public int GetPatternProgrammaticName(int patternId, PointerByReference retval) {
                     Function f = Function.getFunction(vTable[UIA_GET_PATTERN_PROGRAMMATIC_NAME], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, patternId, retval});
                 }

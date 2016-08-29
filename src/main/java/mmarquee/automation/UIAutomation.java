@@ -231,13 +231,18 @@ public class UIAutomation {
      * @param element1 First element
      * @param element2 Second element
      * @return Are the elememts the same
+     * @throws AutomationException
      */
-    public boolean compareElement(Pointer element1, Pointer element2) {
+    public boolean compareElement(Pointer element1, Pointer element2) throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         int result = this.automation.CompareElements(element1, element2, ibr);
 
-        return ibr.getValue() == 1;
+        if (result == 0) {
+            return ibr.getValue() == 1;
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -245,14 +250,18 @@ public class UIAutomation {
      * @param pCondition1 First condition
      * @param pCondition2 Second condition
      * @return The new condition
+     * @throws AutomationException Something is wrong
      */
-    public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) {
+    public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.automation.CreateAndCondition(pCondition1, pCondition2, pbr);
+        int result = this.automation.CreateAndCondition(pCondition1, pCondition2, pbr);
 
-        // Checks ?
-        return pbr;
+        if (result == 0) {
+            return pbr;
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -260,14 +269,18 @@ public class UIAutomation {
      * @param pCondition1 First condition
      * @param pCondition2 Second condition
      * @return The new condition
+     * @throws AutomationException Something is wrong
      */
-    public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) {
+    public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.automation.CreateOrCondition(pCondition1, pCondition2, pbr);
+        int result = this.automation.CreateOrCondition(pCondition1, pCondition2, pbr);
 
-        // Checks ?
-        return pbr;
+        if (result == 0) {
+            return pbr;
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -495,25 +508,35 @@ public class UIAutomation {
     /**
      * Creates a false Condition
      * @return The condition
+     * @throws AutomationException Something is wrong
      */
-    public PointerByReference CreateFalseCondition () {
+    public PointerByReference CreateFalseCondition () throws AutomationException{
         PointerByReference pCondition = new PointerByReference();
 
-        this.automation.CreateFalseCondition(pCondition);
+        int result = this.automation.CreateFalseCondition(pCondition);
 
-        return pCondition;
+        if (result == 0) {
+            return pCondition;
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**
      * Creates a true Condition
      * @return The condition
+     * @throws AutomationException Something has gone wrong
      */
-    public Pointer CreateTrueCondition () {
+    public Pointer CreateTrueCondition() throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
 
-        this.automation.CreateTrueCondition(pTrueCondition);
+        int result = this.automation.CreateTrueCondition(pTrueCondition);
 
-        return pTrueCondition.getValue();
+        if (result == 0) {
+            return pTrueCondition.getValue();
+        } else {
+            throw new AutomationException();
+        }
 
     }
 

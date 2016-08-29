@@ -63,7 +63,7 @@ public class AutomationElement {
 
         int result = this.element.get_CurrentPropertyValue(propertyId, value);
 
-        return value.getValue();  //??
+        return value.getValue();
     }
 
     /**
@@ -100,7 +100,7 @@ public class AutomationElement {
     public String localizedControlType() {
         PointerByReference sr = new PointerByReference();
 
-        this.element.get_CurrentLocalizedControlType(sr);
+        int result = this.element.get_CurrentLocalizedControlType(sr);
 
         return sr.getValue().getWideString(0);
     }
@@ -167,7 +167,6 @@ public class AutomationElement {
     }
 
     /**
-     * ]
      * Gets the name, either from the current ot cache property
      *
      * @return The name (either cached or current)

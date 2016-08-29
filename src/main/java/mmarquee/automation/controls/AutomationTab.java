@@ -17,6 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -54,14 +55,18 @@ public class AutomationTab extends AutomationContainer {
         // Now get the list of tab items
         tabItems = new ArrayList<AutomationTabItem>();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+        try {
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
-        for (AutomationElement elem: collection) {
-            int retVal = elem.currentControlType();
+            for (AutomationElement elem : collection) {
+                int retVal = elem.currentControlType();
 
-            if (retVal == ControlType.TabItem.getValue()) {
-                this.tabItems.add(new AutomationTabItem(elem));
+                if (retVal == ControlType.TabItem.getValue()) {
+                    this.tabItems.add(new AutomationTabItem(elem));
+                }
             }
+        } catch (AutomationException ex) {
+            logger.error(ex.getMessage());
         }
     }
 }

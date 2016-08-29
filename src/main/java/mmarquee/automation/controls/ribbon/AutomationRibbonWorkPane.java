@@ -16,6 +16,7 @@
 package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationContainer;
 
@@ -37,8 +38,9 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * Get the AutomationNUIPane associated with the given index
      * @param index The index
      * @return The AutomationNUIPane
+     * @throws AutomationException Automation issue
      */
-    public AutomationNUIPane getNUIPane(int index) {
+    public AutomationNUIPane getNUIPane(int index) throws AutomationException {
         return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"));
     }
 }

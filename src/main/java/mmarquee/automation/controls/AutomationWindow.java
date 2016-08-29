@@ -60,8 +60,9 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Gets the status bar associated with this window
      * @return The status bar
+     * @throws AutomationException Automation issue
      */
-    public AutomationStatusBar getStatusBar() {
+    public AutomationStatusBar getStatusBar() throws AutomationException {
         Pointer condition = this.createTrueCondition();
 
         List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);

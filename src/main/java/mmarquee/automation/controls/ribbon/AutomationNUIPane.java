@@ -16,6 +16,7 @@
 package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationPanel;
 
@@ -37,8 +38,9 @@ public class AutomationNUIPane extends AutomationPanel {
      * Get the AutomationNetUIHWND associated with the given index
      * @param index The index
      * @return The AutomationNetUIHWND
+     * @throws AutomationException Automation issue
      */
-    public AutomationNetUIHWND getNetUIHWND(int index) {
+    public AutomationNetUIHWND getNetUIHWND(int index) throws AutomationException {
         return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"));
     }
 }

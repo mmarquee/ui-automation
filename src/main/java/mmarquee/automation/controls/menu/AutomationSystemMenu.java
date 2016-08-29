@@ -18,6 +18,7 @@ package mmarquee.automation.controls.menu;
 
 import com.sun.jna.Pointer;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -33,14 +34,21 @@ public class AutomationSystemMenu extends AutomationBase {
     /**
      * Construct the AutomationSystemMenu
      * @param element The element
+     * @throws AutomationException Automation issue
      */
-    public AutomationSystemMenu(AutomationElement element) {
+    public AutomationSystemMenu(AutomationElement element) throws AutomationException {
         super(element);
 
         this.getItems();
     }
 
-    public AutomationMenuItem getItem(String name) throws ItemNotFoundException {
+    /**
+     * Get the item associated with the name
+     * @param name The name to look for
+     * @return The menu item
+     * @throws AutomationException Automation issue
+     */
+    public AutomationMenuItem getItem(String name) throws AutomationException {
 
         Pointer condition = this.createTrueCondition();
 
@@ -68,7 +76,14 @@ public class AutomationSystemMenu extends AutomationBase {
         }
     }
 
-    private void getItems() {
+    /**
+     * Gets the items.
+     *
+     * Not fully implemented
+     *
+     * @throws AutomationException Automation issue
+     */
+    private void getItems() throws AutomationException {
         Pointer condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
@@ -79,4 +94,3 @@ public class AutomationSystemMenu extends AutomationBase {
         String name = element.getName();
     }
 }
-
