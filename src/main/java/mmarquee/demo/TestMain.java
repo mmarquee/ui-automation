@@ -259,6 +259,8 @@ public class TestMain extends TestBase {
                 btn3.click();
             }
 
+            window.getTransparency(128);
+
             // Context menus
             WinDef.POINT point = grid.getClickablePoint();
             AutomationMouse mouse = AutomationMouse.getInstance();

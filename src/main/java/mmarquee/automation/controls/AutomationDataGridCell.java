@@ -38,7 +38,7 @@ public class AutomationDataGridCell extends AutomationBase {
         try {
             this.valuePattern = this.getValuePattern();
         } catch (PatternNotFoundException ex) {
-            logger.info("Value pattern not found");
+            logger.warn("Value pattern not found");
         }
     }
 

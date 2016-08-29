@@ -374,7 +374,7 @@ public abstract class AutomationBase {
         if (unknown != null) {
             return unknown;
         } else {
-            logger.info("Failed to find pattern");
+            logger.warn("Failed to find pattern");
             throw new PatternNotFoundException();
         }
     }

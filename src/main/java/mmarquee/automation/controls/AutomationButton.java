@@ -51,7 +51,7 @@ public class AutomationButton extends AutomationBase {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {
-            logger.info("Invoke pattern is not available");
+            logger.warn("Invoke pattern is not available");
         }
     }
 

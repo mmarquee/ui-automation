@@ -47,12 +47,12 @@ public class AutomationMenuItem extends AutomationBase {
             this.collapsePattern = this.getExpandCollapsePattern();
             this.invokePattern = this.getInvokePattern();
         } catch (PatternNotFoundException ex) {
-        //    logger.info("Failed to get patterns");
+         //   logger.warn("Failed to get patterns");
         }
     }
 
     /**
-     * Invoke the click pattern for the menu item
+     * Invoke the click pattern for the menu item.
      */
     public void click() {
         if (this.invokePattern != null) {

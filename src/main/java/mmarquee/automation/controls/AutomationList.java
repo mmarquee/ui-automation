@@ -42,7 +42,7 @@ public class AutomationList extends AutomationBase {
         try {
             this.selectionPattern = this.getSelectionPattern();
         } catch (PatternNotFoundException ex) {
-            logger.info("Could not get SelectionPattern");
+            logger.warn("Could not get SelectionPattern");
         }
     }
 

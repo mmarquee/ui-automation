@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
@@ -168,15 +170,15 @@ public class AutomationWindow extends AutomationContainer {
                                 this.createNamePropertyCondition(title).getValue(),
                                 this.createControlTypeCondition(ControlType.Window).getValue()));
             } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find window");
+                logger.warn("Failed to find window");
             }
 
             if (item != null) {
-                logger.info("Found window");
+                logger.warn("Found window");
                 break;
             } else {
                 try {
-                    logger.info("Did not find window, retrying");
+                    logger.warn("Did not find window, retrying");
                     // Wait for it
                     Thread.sleep(500);
                 } catch (InterruptedException ex) {
@@ -223,15 +225,12 @@ public class AutomationWindow extends AutomationContainer {
      * Sets transparency of the window
      * @param alpha 0..255 alpha attribute
      */
-    /*
     public void getTransparency(int alpha) {
-//        int handle = this.getNativeWindowHandle();
-//
-//        WinDef.HWND hwnd = new WinDef.HWND(handle);
-//
-//        User32 user32 = User32.INSTANCE;
-//
-//        user32.SetWindowLong(hwnd, user32.GWL_EXSTYLE, user32.WS_EX_LAYERED);
-//        user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, user32.LWA_ALPHA);
-    }*/
+        WinDef.HWND hwnd = this.getNativeWindowHandle();
+
+        User32 user32 = User32.INSTANCE;
+
+        user32.SetWindowLong(hwnd, user32.GWL_EXSTYLE, user32.WS_EX_LAYERED);
+        user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, user32.LWA_ALPHA);
+    }
 }

@@ -19,7 +19,7 @@ The MS UIAutomation Library is a COM control, and the classes that represent thi
 ```
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.1.6</version>
+  <version>0.1.7</version>
 ```
 
 ## Getting started

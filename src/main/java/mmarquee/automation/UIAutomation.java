@@ -57,12 +57,10 @@ public class UIAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-        logger.info("Initializing ActiveX");
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
 
-        logger.info("Creating IUIAutomation instance");
         WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
                 IUIAutomation.CLSID,
                 null,
@@ -81,10 +79,7 @@ public class UIAutomation {
         WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
         if (COMUtils.SUCCEEDED(result)) {
             this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
-            logger.info("Instance successfully created");
         }
-
-        logger.info("Getting root element");
 
         PointerByReference pRoot = new PointerByReference();
 
@@ -98,7 +93,6 @@ public class UIAutomation {
 
         if (COMUtils.SUCCEEDED(result0)) {
             this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
-            logger.info("Root element successfully created");
         }
     }
 
@@ -225,7 +219,7 @@ public class UIAutomation {
         }
 
         if (element == null) {
-            logger.info("Failed to find desktop window `" + title + "`");
+            logger.warning("Failed to find desktop window `" + title + "`");
             throw new ItemNotFoundException();
         }
 
@@ -398,7 +392,7 @@ public class UIAutomation {
         }
 
         if (element == null) {
-            logger.info("Failed to find desktop object `" + title + "`");
+            logger.warning("Failed to find desktop object `" + title + "`");
             throw new ItemNotFoundException();
         }
 

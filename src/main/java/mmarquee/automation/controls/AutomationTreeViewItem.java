@@ -25,13 +25,13 @@ public class AutomationTreeViewItem extends AutomationBase {
         try {
             this.selectItemPattern = this.getSelectItemPattern();
         } catch (PatternNotFoundException ex) {
-            logger.info("Failed to find selectitem pattern");
+            logger.warn("Failed to find selectitem pattern");
         }
 
         try {
             this.invokePattern = this.getInvokePattern();
         } catch (PatternNotFoundException ex) {
-            logger.info("Failed to find invoke pattern");
+            logger.warn("Failed to find invoke pattern");
         }
     }
 
@@ -49,7 +49,7 @@ public class AutomationTreeViewItem extends AutomationBase {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {
-            logger.info("Invoke pattern is not available");
+            logger.warn("Invoke pattern is not available");
         }
     }
 }
