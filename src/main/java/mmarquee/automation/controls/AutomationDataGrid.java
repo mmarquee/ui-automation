@@ -146,4 +146,51 @@ public class AutomationDataGrid extends AutomationBase
     public int columnCount() {
         return this.grid.columnCount();
     }
+
+    /**
+     * Gets the cells for the given row
+     * @param row The row
+     * @return Collection of cells for the given row
+     * @throws AutomationException Something is up
+     */
+    public List<AutomationDataGridCell> getRow(int row) throws AutomationException {
+        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+
+        for (int count = 0; count < this.rowCount(); count++) {
+            AutomationDataGridCell cell = this.getItem(row, count);
+            items.add(cell);
+        }
+
+        return items;
+    }
+
+    /**
+     * Gets the cells for the given column
+     * @param col The column
+     * @return Collection of cells for the given column
+     * @throws AutomationException Something is up
+     */
+    public List<AutomationDataGridCell> getColumn(int col) throws AutomationException {
+        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+
+        for (int count = 0; count < this.rowCount(); count++) {
+            AutomationDataGridCell cell = this.getItem(count, col);
+            items.add(cell);
+        }
+
+        return items;
+    }
+
+    /**
+     * Gets the colum header for the given column
+     * @param col The column
+     * @return The header cell
+     * @throws AutomationException Ooops, it's all gone wrong
+     */
+    public AutomationDataGridCell getColumnHeader(int col) throws AutomationException {
+        List<AutomationDataGridCell> headers = this.getColumnHeaders();
+
+        return headers.get(col);
+    }
 }
+

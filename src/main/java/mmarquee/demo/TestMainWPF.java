@@ -287,6 +287,14 @@ public class TestMainWPF extends TestBase {
                 logger.info(cell.name());
             }
 
+            logger.info(grid.getColumnHeader(1).name());
+
+            List<AutomationDataGridCell> cols = grid.getColumn(1);
+            for(AutomationDataGridCell cell : cols) {
+                logger.info("Col 1 - " + cell.name());
+            }
+
+
             // TREEVIEW **************************
 
             logger.info("++ TREEVIEW ++");
