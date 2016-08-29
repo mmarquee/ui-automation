@@ -259,7 +259,7 @@ public class TestMain extends TestBase {
                 btn3.click();
             }
 
-            window.getTransparency(128);
+            window.setTransparency(128);
 
             // Context menus
             WinDef.POINT point = grid.getClickablePoint();

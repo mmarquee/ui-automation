@@ -225,7 +225,7 @@ public class AutomationWindow extends AutomationContainer {
      * Sets transparency of the window
      * @param alpha 0..255 alpha attribute
      */
-    public void getTransparency(int alpha) {
+    public void setTransparency(int alpha) {
         WinDef.HWND hwnd = this.getNativeWindowHandle();
 
         User32 user32 = User32.INSTANCE;
