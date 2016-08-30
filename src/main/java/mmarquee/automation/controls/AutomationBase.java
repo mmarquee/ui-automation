@@ -284,8 +284,8 @@ public abstract class AutomationBase {
      * @throws AutomationException Something is wrong in automation
      */
     protected List<AutomationElement> findAll(TreeScope scope) throws AutomationException {
-        Pointer condition = this.createTrueCondition();
-        return this.findAll(scope, condition);
+        PointerByReference condition = this.createTrueCondition();
+        return this.findAll(scope, condition.getValue());
     }
 
     /**
@@ -293,8 +293,8 @@ public abstract class AutomationBase {
      * @return The true condition
      * @throws AutomationException Something is up with automation
      */
-    protected Pointer createTrueCondition() throws AutomationException {
-        return this.automation.CreateTrueCondition();
+    protected PointerByReference createTrueCondition() throws AutomationException {
+        return this.automation.createTrueCondition();
     }
 
     /**

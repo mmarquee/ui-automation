@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
@@ -63,9 +64,9 @@ public class AutomationWindow extends AutomationContainer {
      * @throws AutomationException Automation issue
      */
     public AutomationStatusBar getStatusBar() throws AutomationException {
-        Pointer condition = this.createTrueCondition();
+        PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
 
         AutomationStatusBar found = null;
 

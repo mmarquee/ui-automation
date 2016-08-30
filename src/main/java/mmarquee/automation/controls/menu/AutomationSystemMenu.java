@@ -17,12 +17,14 @@
 package mmarquee.automation.controls.menu;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.TreeScope;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,16 +46,17 @@ public class AutomationSystemMenu extends AutomationBase {
 
     /**
      * Get the item associated with the name
+     *
      * @param name The name to look for
      * @return The menu item
      * @throws AutomationException Automation issue
      */
     public AutomationMenuItem getItem(String name) throws AutomationException {
 
-        Pointer condition = this.createTrueCondition();
+        PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition);
+                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
 
         AutomationElement foundElement = null;
         boolean found = false;
@@ -79,18 +82,21 @@ public class AutomationSystemMenu extends AutomationBase {
     /**
      * Gets the items.
      *
-     * Not fully implemented
-     *
+     * @return The list of menu items
      * @throws AutomationException Automation issue
      */
-    private void getItems() throws AutomationException {
-        Pointer condition = this.createTrueCondition();
+    protected List<AutomationMenuItem> getItems() throws AutomationException {
+        PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Children), condition);
+        List<AutomationElement> items =
+                this.findAll(new TreeScope(TreeScope.TreeScope_Children), condition.getValue());
 
-        AutomationElement element = collection.get(0);
+        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
-        String name = element.getName();
+        for (AutomationElement item : items) {
+            list.add(new AutomationMenuItem(item));
+        }
+
+        return list;
     }
 }

@@ -58,9 +58,9 @@ public class UIAutomationTest extends TestCase {
         // The root element
         PointerByReference pRoot = new PointerByReference();
 
-        instance.automation.GetRootElement(pRoot);
+        instance.getRootElement(pRoot);
 
-        instance.automation.CompareElements(pRoot.getValue(), pRoot.getValue(), same);
+        instance.compareElements(pRoot.getValue(), pRoot.getValue(), same);
 
         int value = same.getValue();
 
@@ -70,21 +70,23 @@ public class UIAutomationTest extends TestCase {
     public void testCreateFalseCondtion() {
         UIAutomation instance = UIAutomation.getInstance();
 
-        PointerByReference pCondition = new PointerByReference();
-        PointerByReference first = new PointerByReference();
+        try {
+            PointerByReference condition = instance.createFalseCondition();
+            PointerByReference first = new PointerByReference();
 
-        instance.automation.CreateFalseCondition(pCondition);
+            Unknown unk = new Unknown(condition.getValue());
+            PointerByReference pUnk = new PointerByReference();
 
-        Unknown unk = new Unknown(pCondition.getValue());
-        PointerByReference pUnk = new PointerByReference();
+            Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
 
-        Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
+            PointerByReference pUnknown1 = new PointerByReference();
 
-        PointerByReference pUnknown1 = new PointerByReference();
+            WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
 
-        WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
-
-        assertTrue("Create FalseCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+            assertTrue("Create FalseCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+        } catch (AutomationException ex) {
+            assertTrue("Ouch", false);
+        }
     }
 
     public void testGetDesktopWindows() throws AutomationException {
@@ -105,7 +107,35 @@ public class UIAutomationTest extends TestCase {
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            instance.automation.CreatePropertyCondition(PropertyID.AutomationId.getValue(), variant, pCondition);
+            try {
+                pCondition = instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+
+                Unknown unk = new Unknown(pCondition.getValue());
+                PointerByReference pUnk = new PointerByReference();
+
+                Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
+
+                PointerByReference pUnknown1 = new PointerByReference();
+
+                WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+
+                assertTrue("Create FalseCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+            } catch (AutomationException ex) {
+                assertTrue("Exception", false);
+            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+
+    public void testCreateTrueCondtion() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        try {
+            PointerByReference pCondition = instance.createTrueCondition();
+            PointerByReference first = new PointerByReference();
+
+            // Check whether it is a condition
 
             Unknown unk = new Unknown(pCondition.getValue());
             PointerByReference pUnk = new PointerByReference();
@@ -116,32 +146,10 @@ public class UIAutomationTest extends TestCase {
 
             WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
 
-            assertTrue("Create FalseCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+            assertTrue("Create TrueCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+        } catch (AutomationException ex) {
+            assertTrue("Exception", false);
         }
-    }
-
-    public void testCreateTrueCondtion() {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        PointerByReference pCondition = new PointerByReference();
-        PointerByReference first = new PointerByReference();
-
-        instance.automation.CreateTrueCondition(pCondition);
-
-        // Check whether it is a condition
-
-        Unknown unk = new Unknown(pCondition.getValue());
-        PointerByReference pUnk = new PointerByReference();
-
-        Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
-
-        PointerByReference pUnknown1 = new PointerByReference();
-
-        WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
-
-        assertTrue("Create TrueCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
     }
 
     public void testCompareElementsWhenNotTheSame() throws Exception {
@@ -152,19 +160,17 @@ public class UIAutomationTest extends TestCase {
         // The root element
         PointerByReference pRoot = new PointerByReference();
 
-        instance.automation.GetRootElement(pRoot);
+        instance.getRootElement(pRoot);
 
         // Get the first descendant of the root element
         AutomationElement root = instance.getRootElement();
 
-        PointerByReference pCondition = new PointerByReference();
+        PointerByReference pCondition = instance.createTrueCondition();
         PointerByReference first = new PointerByReference();
-
-        instance.automation.CreateTrueCondition(pCondition);
 
         root.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pCondition.getValue(), first);
 
-        instance.automation.CompareElements(pRoot.getValue(), first.getValue(), same);
+        instance.compareElements(pRoot.getValue(), first.getValue(), same);
 
         int value = same.getValue();
 

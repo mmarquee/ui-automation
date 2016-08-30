@@ -49,7 +49,7 @@ public class UIAutomation {
     private AutomationElement rootElement;
 
     // TODO: Fix this (changed for caching for now)
-    protected IUIAutomation automation;
+    private IUIAutomation automation;
 
     private final static int FIND_DESKTOP_ATTEMPTS = 25;
 
@@ -83,7 +83,7 @@ public class UIAutomation {
 
         PointerByReference pRoot = new PointerByReference();
 
-        this.automation.GetRootElement(pRoot);
+        this.getRootElement(pRoot);
 
         Unknown uRoot = new Unknown(pRoot.getValue());
 
@@ -94,6 +94,26 @@ public class UIAutomation {
         if (COMUtils.SUCCEEDED(result0)) {
             this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
         }
+    }
+
+    /**
+     * Gets the root element for automation
+     * @param element Pointer to the element
+     * @return Error status
+     */
+    public int getRootElement(PointerByReference element) {
+        return this.automation.GetRootElement(element);
+    }
+
+    /**
+     * Compares 2 elements
+     * @param element1 First element
+     * @param element2 Second element
+     * @param same Are they the same?
+     * @return Error status
+     */
+    public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
+        return this.automation.CompareElements(element1, element2, same);
     }
 
     /**
@@ -464,11 +484,9 @@ public class UIAutomation {
     public List<AutomationWindow> getDesktopWindows() throws AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
-        PointerByReference pAll = new PointerByReference();
+//        PointerByReference pAll = new PointerByReference();
 
-        PointerByReference pTrueCondition = new PointerByReference();
-
-        this.automation.CreateTrueCondition(pTrueCondition);
+        PointerByReference pTrueCondition = this.createTrueCondition();
 
         Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
@@ -477,8 +495,8 @@ public class UIAutomation {
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationCondition condition =
-                    IUIAutomationCondition.Converter.PointerToInterface(pUnknownA);
+//            IUIAutomationCondition condition =
+//                    IUIAutomationCondition.Converter.PointerToInterface(pUnknownA);
 
             List<AutomationElement> collection =
                     this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue());
@@ -527,17 +545,33 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
-    public Pointer CreateTrueCondition() throws AutomationException {
+    public PointerByReference createTrueCondition() throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
 
         int result = this.automation.CreateTrueCondition(pTrueCondition);
 
         if (result == 0) {
-            return pTrueCondition.getValue();
+            return pTrueCondition;
         } else {
             throw new AutomationException();
         }
+    }
 
+    /**
+     * Creates a false Condition
+     * @return The condition
+     * @throws AutomationException Something has gone wrong
+     */
+    public PointerByReference createFalseCondition() throws AutomationException {
+        PointerByReference condition = new PointerByReference();
+
+        int result = this.automation.CreateFalseCondition(condition);
+
+        if (result == 0) {
+            return condition;
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**

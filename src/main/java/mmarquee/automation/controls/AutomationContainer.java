@@ -105,8 +105,6 @@ public class AutomationContainer extends AutomationBase {
 
         collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
 
-        int length = collection.size();
-
         for (AutomationElement element : collection) {
             int retVal = element.currentControlType();
             String className = element.currentClassName();
