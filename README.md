@@ -1,25 +1,25 @@
 # ui-automation
 
-A Java library that wraps the [MS UIAutomation library](https://msdn.microsoft.com/en-us/library/vstudio/ms753388(v=vs.100).aspx).
+ui-automation is a framework for automating (via the [MS UIAutomation library](https://msdn.microsoft.com/en-us/library/vstudio/ms753388(v=vs.100).aspx)) rich client applications based on Win32 (including Delphi), WPF and other Windows applications. It is written in Java, using the JNA library to make calls to the COM-based WIndows automation library. 
 
-ui-automation is a framework for automating rich client applications based on Win32. It is written in Java, using the jna library to provide wrappers for the native Windows type-library.
+Tests and automation programs using ui-automation can be written with Java (or other JVM based languages, like Scala) and used in any testing framework available to the JVM.
 
-Tests and automation programs using ui-automation can be written with Java and used in any testing framework available to the JVM.
-
-It provides a consistent object-oriented API, hiding the complexity of Microsoft's UIAutomation library and windows messages.
+It provides a consistent object-oriented API, hiding the complexity of Microsoft's UIAutomation library and windows messages from the user.
 
 ## A bit of history
-The code here is used to test applications written in Delphi (specifically Delphi XE5), there are assumptions about the names of classes that have been created, in order to provide automation interfaces that are not part of the standard Delphi controls.
+The code here is used to test applications written in Delphi (specifically Delphi XE5 and 10.1), there are assumptions about the names of classes that have been created, in order to provide automation interfaces that are not part of the standard Delphi controls.
 
 # Developer documentation
-
-The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using JNA COM (currently using 4.3.0-SNAPSHOT).
+The library is a programmers tool, and they will either need to have the source code of the application under test, or be able to 'explore'`the application to get the names of controls, etc.
+ 
+The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.3.0-SNAPSHOT).
 
 ## Maven
+The library is held in the Sonartype OSS repository, so is available for download via Maven (or other tools, such as SBT for Scala). 
 ```
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.1.8</version>
+  <version>0.1.9</version>
 ```
 
 ## Getting started
@@ -254,10 +254,10 @@ TODO: Not yet implemented
 # Scala
 
 ## sbt
-To add the library as a prerequistive, use the following entry in the build.sbt file
+To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.1.0"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.1.9"
 ```
 
 ## Examples
