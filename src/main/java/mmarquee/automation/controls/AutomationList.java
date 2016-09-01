@@ -21,6 +21,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.TreeScope;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,5 +94,17 @@ public class AutomationList extends AutomationBase {
      */
     public List<AutomationElement> getCurrentSelection() throws AutomationException {
         return this.selectionPattern.getCurrentSelection();
+    }
+
+    public List<AutomationListItem> getItems() throws AutomationException {
+        List<AutomationElement> items = this.findAll();
+
+        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
+
+        for (AutomationElement item: items) {
+            list.add(new AutomationListItem(item));
+        }
+
+        return list;
     }
 }
