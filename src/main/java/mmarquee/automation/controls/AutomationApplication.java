@@ -55,7 +55,7 @@ public class AutomationApplication extends AutomationBase {
      * @param timeout Timeout to wait for
      */
     public void waitForInputIdle(int timeout) {
-        user32.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
+        User32.INSTANCE.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
     }
 
     /**
@@ -78,7 +78,7 @@ public class AutomationApplication extends AutomationBase {
      * Waits for the application to accept input, i.e. not be idle, with maximum timeout
      */
     public void waitForInputIdle() {
-        user32.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
+        User32.INSTANCE.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
     }
 
     /**

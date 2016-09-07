@@ -48,7 +48,6 @@ public class UIAutomation {
 
     private AutomationElement rootElement;
 
-    // TODO: Fix this (changed for caching for now)
     private IUIAutomation automation;
 
     private final static int FIND_DESKTOP_ATTEMPTS = 25;

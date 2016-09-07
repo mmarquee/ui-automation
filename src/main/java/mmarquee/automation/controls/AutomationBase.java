@@ -16,7 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
@@ -45,8 +44,6 @@ public abstract class AutomationBase {
 
     private WinDef.HWND handle = null;
 
-    protected final User32 user32 = User32.INSTANCE;
-
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
@@ -60,12 +57,17 @@ public abstract class AutomationBase {
         }
     }
 
+    private boolean isPatternAvailable(PropertyID property) {
+        return !this.element.currentPropertyValue(property.getValue()).equals(0);
+    }
+
+
     /**
      * Is the dock pattern available
      * @return Yes or no
      */
     boolean isDockPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsDockPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsDockPatternAvailable);
     }
 
     /**
@@ -73,7 +75,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isExpandCollapsePatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsExpandCollapsePatternAvailable);
     }
 
     /**
@@ -81,7 +83,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isGridItemPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsGridItemPatternAvailable);
     }
 
     /**
@@ -89,7 +91,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isMultipleViewPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsMultipleViewPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsMultipleViewPatternAvailable);
     }
 
     /**
@@ -97,7 +99,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isInvokePatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsInvokePatternAvailable);
     }
 
     /**
@@ -105,7 +107,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isGridPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsGridPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsGridPatternAvailable);
     }
 
     /**
@@ -113,7 +115,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isRangeValuePatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsRangeValuePatternAvailable);
     }
 
     /**
@@ -121,7 +123,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isScrollPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsScrollPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsScrollPatternAvailable);
     }
 
     /**
@@ -129,7 +131,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isSelectionItemPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsSelectionItemPatternAvailable);
     }
 
     /**
@@ -137,7 +139,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isScrollItemPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsScrollItemPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsScrollItemPatternAvailable);
     }
 
     /**
@@ -145,7 +147,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isWindowPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsWindowPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsWindowPatternAvailable);
     }
 
     /**
@@ -153,7 +155,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTextPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsTextPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsTextPatternAvailable);
     }
 
     /**
@@ -161,7 +163,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTableItemPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsTableItemPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsTableItemPatternAvailable);
     }
 
     /**
@@ -169,7 +171,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTablePatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsTablePatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsTablePatternAvailable);
     }
 
     /**
@@ -177,7 +179,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isSelectionPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsSelectionPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsSelectionPatternAvailable);
     }
 
     /**
@@ -185,7 +187,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTransformPatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsTransformPatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsTransformPatternAvailable);
     }
 
     /**
@@ -193,7 +195,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isTogglePatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsTogglePatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsTogglePatternAvailable);
     }
 
     /**
@@ -201,7 +203,7 @@ public abstract class AutomationBase {
      * @return Yes or no
      */
     boolean isValuePatternAvailable () {
-        return !this.element.currentPropertyValue(PropertyID.IsValuePatternAvailable.getValue()).equals(0);
+        return isPatternAvailable(PropertyID.IsValuePatternAvailable);
     }
 
     /**
@@ -395,7 +397,7 @@ public abstract class AutomationBase {
     SelectionItem getSelectItemPattern() throws PatternNotFoundException {
         SelectionItem pattern = new SelectionItem();
 
-        if (isSelectionItemPatternAvailable()) {
+        if (this.isSelectionItemPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
 
             pattern.setPattern(unknown.getValue());
@@ -414,7 +416,7 @@ public abstract class AutomationBase {
     Selection getSelectionPattern() throws PatternNotFoundException {
         Selection pattern = new Selection();
 
-        if (isSelectionPatternAvailable()) {
+        if (this.isSelectionPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
 
             pattern.setPattern(unknown.getValue());
@@ -433,9 +435,8 @@ public abstract class AutomationBase {
     Value getValuePattern() throws PatternNotFoundException {
         Value pattern = new Value();
 
-        if (isValuePatternAvailable()) {
+        if (this.isValuePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
-
             pattern.setPattern(unknown.getValue());
         }
 

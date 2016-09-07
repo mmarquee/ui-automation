@@ -230,9 +230,7 @@ public class AutomationWindow extends AutomationContainer {
     public void setTransparency(int alpha) {
         WinDef.HWND hwnd = this.getNativeWindowHandle();
 
-        User32 user32 = User32.INSTANCE;
-
-        user32.SetWindowLong(hwnd, user32.GWL_EXSTYLE, user32.WS_EX_LAYERED);
-        user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, user32.LWA_ALPHA);
+        User32.INSTANCE.SetWindowLong(hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED);
+        User32.INSTANCE.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, User32.LWA_ALPHA);
     }
 }
