@@ -574,6 +574,24 @@ public class UIAutomation {
     }
 
     /**
+     * Create a NOT condition
+     * @param condition The condition condition
+     * @return The new condition
+     * @throws AutomationException Something is wrong
+     */
+    public PointerByReference createNotCondition (Pointer condition) throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        int result = this.automation.CreateNotCondition(condition, pbr);
+
+        if (result == 0) {
+            return pbr;
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
      * Gets the root automation element
      * @return The root element
      */

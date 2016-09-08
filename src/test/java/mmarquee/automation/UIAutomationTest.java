@@ -100,15 +100,13 @@ public class UIAutomationTest extends TestCase {
     public void testCreatePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
-        PointerByReference pCondition = new PointerByReference();
-
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString("SOMETHING");
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
             try {
-                pCondition = instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+                PointerByReference pCondition = instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
 
                 Unknown unk = new Unknown(pCondition.getValue());
                 PointerByReference pUnk = new PointerByReference();
@@ -119,7 +117,83 @@ public class UIAutomationTest extends TestCase {
 
                 WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
 
-                assertTrue("Create FalseCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+                assertTrue("CreatePropertyCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+            } catch (AutomationException ex) {
+                assertTrue("Exception", false);
+            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+
+    public void testCreateNotCondition() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString("SOMETHING");
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        try {
+            try {
+                // Create first condition to use
+                PointerByReference pCondition =
+                        instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+
+                // Create the actual condition
+                PointerByReference notCondition =
+                        instance.createNotCondition(pCondition.getValue());
+
+                // Checking
+                Unknown unk = new Unknown(notCondition.getValue());
+                PointerByReference pUnk = new PointerByReference();
+
+                Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
+
+                PointerByReference pUnknown1 = new PointerByReference();
+
+                WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+
+                assertTrue("CreateNotCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+            } catch (AutomationException ex) {
+                assertTrue("Exception", false);
+            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+
+    public void testCreateAndCondition() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString("SOMETHING");
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        try {
+            try {
+                // Create first condition to use
+                PointerByReference pCondition0 =
+                        instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+
+                // Create first condition to use
+                PointerByReference pCondition1 =
+                        instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+
+                // Create the actual condition
+                PointerByReference andCondition =
+                        instance.createAndCondition(pCondition0.getValue(), pCondition1.getValue());
+
+                // Checking
+                Unknown unk = new Unknown(andCondition.getValue());
+                PointerByReference pUnk = new PointerByReference();
+
+                Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
+
+                PointerByReference pUnknown1 = new PointerByReference();
+
+                WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+
+                assertTrue("CreateNotCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
             } catch (AutomationException ex) {
                 assertTrue("Exception", false);
             }
