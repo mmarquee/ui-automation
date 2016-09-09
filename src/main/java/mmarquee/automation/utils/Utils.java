@@ -17,10 +17,11 @@ package mmarquee.automation.utils;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.win32.W32APIOptions;
 import mmarquee.automation.AutomationException;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
@@ -61,7 +62,7 @@ public class Utils {
         File file = new File(command[0]);
         String filename = file.getName();
 
-        Kernel32 kernel32 = (Kernel32) Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
+        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
 
         WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
 
@@ -111,11 +112,12 @@ public class Utils {
         User32.INSTANCE.PostMessage(handle, WinUser.WM_CLOSE, null, null);
     }
 
-    /*
-    public BufferedImage capture(WinDef.HWND hwnd) {
-        BufferedImage image = new BufferedImage();
+    public BufferedImage capture(WinDef.HWND hwnd) throws AWTException {
+        // Get the rectangle of the window
+        Robot robot = new Robot();
 
-        return image;
+        Rectangle rect = new Rectangle();
+
+        return robot.createScreenCapture(rect);
     }
-    */
 }

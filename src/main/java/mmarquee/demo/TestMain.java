@@ -25,6 +25,7 @@ import mmarquee.automation.controls.AutomationDataGrid;
 import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.automation.utils.Utils;
 
 import java.util.List;
 
@@ -34,6 +35,10 @@ import java.util.List;
  * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestMain extends TestBase {
+
+    public void stage2() {
+        Utils.getStuffViaShellApplication();
+    }
 
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
