@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationContainer;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -28,8 +30,9 @@ public class AutomationSpinner extends AutomationBase {
     /**
      * Construct the AutomationSpinner
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationSpinner(AutomationElement element) {
+    public AutomationSpinner(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

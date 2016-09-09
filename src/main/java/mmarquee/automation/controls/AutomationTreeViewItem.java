@@ -1,6 +1,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
@@ -18,21 +19,14 @@ public class AutomationTreeViewItem extends AutomationBase {
     /**
      * Construct the AutomationTreeViewItem
      * @param element The element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem(AutomationElement element) {
+    public AutomationTreeViewItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
-        try {
-            this.selectItemPattern = this.getSelectItemPattern();
-        } catch (PatternNotFoundException ex) {
-            logger.warn("Failed to find selectitem pattern");
-        }
-
-        try {
-            this.invokePattern = this.getInvokePattern();
-        } catch (PatternNotFoundException ex) {
-            logger.warn("Failed to find invoke pattern");
-        }
+        this.selectItemPattern = this.getSelectItemPattern();
+        this.invokePattern = this.getInvokePattern();
     }
 
     /**

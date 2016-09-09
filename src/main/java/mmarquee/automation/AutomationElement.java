@@ -16,12 +16,9 @@
 package mmarquee.automation;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.Variant;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.*;
@@ -57,11 +54,14 @@ public class AutomationElement {
      *
      * @param propertyId The property ID to get
      * @return The property ID
+     * @throws AutomationException Call to Automation API failed
      */
-    public Object currentPropertyValue(int propertyId) {
+    public Object currentPropertyValue(int propertyId) throws AutomationException {
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
-        int result = this.element.get_CurrentPropertyValue(propertyId, value);
+        if (this.element.get_CurrentPropertyValue(propertyId, value) != 0) {
+            throw new AutomationException();
+        }
 
         return value.getValue();
     }
@@ -70,11 +70,14 @@ public class AutomationElement {
      * Gets the current control type
      *
      * @return The current control type
+     * @throws AutomationException Call to Automation API failed
      */
-    public int currentControlType() {
+    public int currentControlType() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.element.get_CurrentControlType(ibr);
+        if (this.element.get_CurrentControlType(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue();
     }
@@ -83,11 +86,14 @@ public class AutomationElement {
      * Gets the current class name of the element
      *
      * @return The current class name
+     * @throws AutomationException Call to Automation API failed
      */
-    public String currentClassName() {
+    public String currentClassName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        this.element.get_CurrentClassName(sr);
+        if (this.element.get_CurrentClassName(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -96,11 +102,14 @@ public class AutomationElement {
      * Gets the current localized control type of the element
      *
      * @return The current class name
+     * @throws AutomationException Call to Automation API failed
      */
-    public String localizedControlType() {
+    public String localizedControlType() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        int result = this.element.get_CurrentLocalizedControlType(sr);
+        if (this.element.get_CurrentLocalizedControlType(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -109,11 +118,14 @@ public class AutomationElement {
      * Gets the current IsPassword value.
      *
      * @return True if IsPassword
+     * @throws AutomationException Call to Automation API failed
      */
-    public Boolean currentIsPassword() {
+    public Boolean currentIsPassword() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.element.get_CurrentIsPassword(ibr);
+        if (this.element.get_CurrentIsPassword(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue() == 1;
     }
@@ -121,11 +133,14 @@ public class AutomationElement {
     /**
      * Returns whether the element is off screen
      * @return True if off screen
+     * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentOffscreen() {
+    public WinDef.BOOL currentOffscreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        int result = this.element.get_CurrentIsOffscreen(bbr);
+        if (this.element.get_CurrentIsOffscreen(bbr) != 0) {
+            throw new AutomationException();
+        }
 
         return bbr.getValue();
     }
@@ -133,11 +148,14 @@ public class AutomationElement {
     /**
      * Returns whether the element is a content element
      * @return True if content element
+     * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentIsContentElement() {
+    public WinDef.BOOL currentIsContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        int result = this.element.get_CurrentIsContentElement(bbr);
+        if (this.element.get_CurrentIsContentElement(bbr) != 0) {
+            throw new AutomationException();
+        }
 
         return bbr.getValue();
     }
@@ -145,11 +163,14 @@ public class AutomationElement {
     /**
      * Returns whether the element is a control element
      * @return True if control element
+     * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentIsControlElement() {
+    public WinDef.BOOL currentIsControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        int result = this.element.get_CurrentIsControlElement(bbr);
+        if (this.element.get_CurrentIsControlElement(bbr) != 0) {
+            throw new AutomationException();
+        }
 
         return bbr.getValue();
     }
@@ -157,11 +178,14 @@ public class AutomationElement {
     /**
      * Returns whether the element is enabled
      * @return True if enabled
+     * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentIsEnabled() {
+    public WinDef.BOOL currentIsEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        int result = this.element.get_CurrentIsEnabled(bbr);
+        if (this.element.get_CurrentIsEnabled(bbr)  != 0) {
+            throw new AutomationException();
+        }
 
         return bbr.getValue();
     }
@@ -170,8 +194,9 @@ public class AutomationElement {
      * Gets the name, either from the current ot cache property
      *
      * @return The name (either cached or current)
+     * @throws AutomationException Call to Automation API failed
      */
-    public String getName() {
+    public String getName() throws AutomationException {
         return this.currentName();
     }
 
@@ -179,18 +204,21 @@ public class AutomationElement {
      * Gets the current name of the control
      *
      * @return The name of the element
+     * @throws AutomationException Call to Automation API failed
      */
-    protected String currentName() {
+    protected String currentName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
-        this.element.get_CurrentName(sr);
+        if (this.element.get_CurrentName(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
 
-    /**
-     * Sets the name of the element
-     * @param name The name to use
-     */
+//    /**
+//     * Sets the name of the element
+//     * @param name The name to use
+//     */
 //    public void setName(String name) {
 //        this.element.setName(name);
 // Not sure how this worked
@@ -237,11 +265,14 @@ public class AutomationElement {
      *
      * @param patternId What pattern to get
      * @return The pattern
+     * @throws AutomationException Call to Automation API failed
      */
-    public PointerByReference getCurrentPattern(int patternId) {
+    public PointerByReference getCurrentPattern(int patternId) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        int result = this.element.get_CurrentPattern(patternId, pbr);
+        if (this.element.get_CurrentPattern(patternId, pbr) != 0) {
+            throw new AutomationException();
+        }
 
         return pbr;
     }
@@ -259,14 +290,17 @@ public class AutomationElement {
      * @param scope      The scope in the element tree
      * @param pCondition The condition
      * @return List of matching elements
+     * @throws AutomationException Call to Automation API failed
      */
-    public List<AutomationElement> findAll(TreeScope scope, Pointer pCondition) {
+    public List<AutomationElement> findAll(TreeScope scope, Pointer pCondition) throws AutomationException {
 
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
         PointerByReference pAll = new PointerByReference();
 
-        int resultAll = this.element.findAll(scope, pCondition, pAll);
+        if (this.element.findAll(scope, pCondition, pAll) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pAll.getValue());
         PointerByReference pUnknownA = new PointerByReference();
@@ -311,11 +345,14 @@ public class AutomationElement {
      * Gets the current ARIA role
      *
      * @return String representing the ARIA role
+     * @throws AutomationException Call to Automation API failed
      */
-    public String getAriaRole() {
+    public String getAriaRole() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        this.element.get_CurrentAriaRole(sr);
+        if (this.element.get_CurrentAriaRole(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -329,7 +366,9 @@ public class AutomationElement {
     public OrientationType getOrientation() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.element.get_CurrentOrientation(ibr);
+        if (this.element.get_CurrentOrientation(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         // Hummm..
 
@@ -350,12 +389,15 @@ public class AutomationElement {
      * Gets the framework ID
      *
      * @return The framework ID
+     * @throws AutomationException Call to Automation API failed
      */
-    public String getFrameworkId() {
+    public String getFrameworkId() throws AutomationException {
 
         PointerByReference sr = new PointerByReference();
 
-        int result = this.element.get_CurrentFrameworkId(sr);
+        if (this.element.get_CurrentFrameworkId(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -364,30 +406,38 @@ public class AutomationElement {
      * Gets the provider description
      *
      * @return The provider description
+     * @throws AutomationException Call to Automation API failed
      */
-    public String getProviderDescription() {
+    public String getProviderDescription() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        int result = this.element.get_CurrentProviderDescription(sr);
+        if (this.element.get_CurrentProviderDescription(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
-    /**
-     * Get the runtime Id
-     * @return The runtime ID
-     */
-    //   public int[] getRuntimeId() {
-    //       return element.getRuntimeId();
-    //   }
+
+//    /**
+//     * Get the runtime Id
+//     * @return The runtime ID
+//     */
+//    //   public int[] getRuntimeId() {
+//   //       return element.getRuntimeId();
+//    //   }
 
     /**
      * Gets the process ID
      *
      * @return The process ID
+     * @throws AutomationException Call to Automation API failed
      */
-    public Integer getProcessId() {
+    public Integer getProcessId() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        int result = this.element.get_CurrentProcessId(ibr);
+
+        if (this.element.get_CurrentProcessId(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue();
     }
@@ -396,11 +446,14 @@ public class AutomationElement {
      * Gets the current item status
      *
      * @return The status
+     * @throws AutomationException Call to Automation API failed
      */
-    public String getItemStatus() {
+    public String getItemStatus() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        int result = this.element.get_CurrentItemStatus(sr);
+        if (this.element.get_CurrentItemStatus(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -409,11 +462,14 @@ public class AutomationElement {
      * Gets the current accelerator key associated with the element
      *
      * @return The accelerator key
+     * @throws AutomationException Call to Automation API failed
      */
-    public String getAcceleratorKey() {
+    public String getAcceleratorKey() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        int result = this.element.get_CurrentAcceleratorKey(sr);
+        if (this.element.get_CurrentAcceleratorKey(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -421,27 +477,31 @@ public class AutomationElement {
     /**
      * Gets the clickable point for the control
      * @return The clickable point
+     * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.POINT getClickablePoint() {
+    public WinDef.POINT getClickablePoint() throws AutomationException {
         WinDef.POINT.ByReference pbr = new WinDef.POINT.ByReference();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-        int result = this.element.get_ClickablePoint(pbr, br);
+        if (this.element.get_ClickablePoint(pbr, br) != 0) {
+            throw new AutomationException();
+        }
 
-        WinDef.POINT point = new WinDef.POINT(pbr.x, pbr.y);
-
-        return point;
+        return new WinDef.POINT(pbr.x, pbr.y);
     }
 
     /**
      * Gets the bounding rectangle of the control.
      * @return The bounding rectangle
+     * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.RECT get_CurrentBoundingRectangle() {
+    public WinDef.RECT get_CurrentBoundingRectangle() throws AutomationException {
         WinDef.RECT rect = new WinDef.RECT();
 
-        int result = this.element.get_CurrentBoundingRectangle(rect);
+        if (this.element.get_CurrentBoundingRectangle(rect) != 0) {
+            throw new AutomationException();
+        }
 
         return rect;
     }

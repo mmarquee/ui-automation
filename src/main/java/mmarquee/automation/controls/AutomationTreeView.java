@@ -17,6 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.*;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -29,8 +30,9 @@ public class AutomationTreeView extends AutomationBase {
     /**
      * Construct the AutomationTreeView
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationTreeView(AutomationElement element) {
+    public AutomationTreeView(AutomationElement element) throws AutomationException {
         super(element);
     }
 
@@ -40,8 +42,9 @@ public class AutomationTreeView extends AutomationBase {
      * @return The AutomationTreeViewItem
      * @throws ItemNotFoundException when the item is not found
      * @throws ElementNotFoundException when the element is not found
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItem(String name) throws AutomationException {
+    public AutomationTreeViewItem getItem(String name) throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),

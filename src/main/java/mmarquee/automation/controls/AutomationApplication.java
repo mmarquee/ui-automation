@@ -16,10 +16,7 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.Win32Exception;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.*;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
@@ -113,8 +110,9 @@ public class AutomationApplication extends AutomationBase {
      * @param element The underlying automation element
      * @param handle The handle of this application.
      * @param attached if we attach or launch the application?
+     * @throws AutomationException Automation library error
      */
-    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached) {
+    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached) throws AutomationException  {
         super(element);
         this.handle = handle;
         this.isAttached = attached;
@@ -125,8 +123,9 @@ public class AutomationApplication extends AutomationBase {
      * @param element The underlying automation element
      * @param process The process for this application.
      * @param attached if we attach or launch the application?
+     * @throws AutomationException Automation library error
      * */
-    public AutomationApplication (AutomationElement element, Process process, boolean attached) {
+    public AutomationApplication (AutomationElement element, Process process, boolean attached) throws AutomationException {
         super(element);
         // From : http://www.golesny.de/p/code/javagetpid.
 

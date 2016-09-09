@@ -36,10 +36,6 @@ import java.util.List;
  */
 public class TestMain extends TestBase {
 
-    public void stage2() {
-        Utils.getStuffViaShellApplication();
-    }
-
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 

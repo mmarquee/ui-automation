@@ -19,6 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -37,16 +38,14 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Constructor for the AutomationComboBox.
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern(s) not found
      */
-    public AutomationComboBox(AutomationElement element) {
+    public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super (element);
 
-        try {
-            this.collapsePattern = this.getExpandCollapsePattern();
-            this.valuePattern = this.getValuePattern();
-        } catch (mmarquee.automation.pattern.PatternNotFoundException ex) {
-            logger.warn("Failed to get patterns");
-        }
+        this.collapsePattern = this.getExpandCollapsePattern();
+        this.valuePattern = this.getValuePattern();
     }
 
     /**
@@ -55,9 +54,7 @@ public class AutomationComboBox extends AutomationBase {
      */
     public String text() {
 
-        String value = valuePattern.value();
-
-        return value;
+        return valuePattern.value();
     }
 
     /**
@@ -97,8 +94,9 @@ public class AutomationComboBox extends AutomationBase {
      * Gets the list of items associated with this element.
      * @return List of AutomationListItems
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationListItem> getList() throws AutomationException {
+    public List<AutomationListItem> getList() throws PatternNotFoundException, AutomationException {
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 

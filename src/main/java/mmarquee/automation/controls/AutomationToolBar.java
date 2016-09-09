@@ -30,8 +30,9 @@ public class AutomationToolBar extends AutomationContainer {
      * Constructor for the AutomationToolBar.
      *
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
      */
-    public AutomationToolBar(AutomationElement element) {
+    public AutomationToolBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 

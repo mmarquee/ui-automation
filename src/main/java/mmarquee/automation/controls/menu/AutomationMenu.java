@@ -25,6 +25,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
@@ -41,8 +42,9 @@ public class AutomationMenu extends AutomationBase {
     /**
      * Construct the AutomationMenu
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationMenu(AutomationElement element) {
+    public AutomationMenu(AutomationElement element) throws AutomationException {
         super(element);
     }
 
@@ -51,8 +53,9 @@ public class AutomationMenu extends AutomationBase {
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (int index) throws AutomationException {
+    public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll();
 
         AutomationMenuItem item = new AutomationMenuItem(items.get(index));
@@ -65,8 +68,9 @@ public class AutomationMenu extends AutomationBase {
      * @param name The name to look for
      * @return The found item
      * @throws AutomationException Something went wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name) throws AutomationException {
+    public AutomationMenuItem getMenuItem (String name) throws PatternNotFoundException, AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);

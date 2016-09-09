@@ -42,25 +42,27 @@ public abstract class AutomationBase {
 
     protected UIAutomation automation = UIAutomation.getInstance();
 
-    private WinDef.HWND handle = null;
-
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
+     * @throws AutomationException Something is wrong in automation
      */
-    public AutomationBase (AutomationElement element) {
+    public AutomationBase (AutomationElement element) throws AutomationException {
         this.element = element;
+    }
 
-        if (element != null) {
-            // Can we get the handle (HWND) and hence the rect?
-            this.handle = this.getNativeWindowHandle();
+    /**
+     * Checks whether a pattern is available
+     * @param property pattern to search for
+     * @return True if available
+     */
+    private boolean isPatternAvailable(PropertyID property) {
+        try {
+            return !this.element.currentPropertyValue(property.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
         }
     }
-
-    private boolean isPatternAvailable(PropertyID property) {
-        return !this.element.currentPropertyValue(property.getValue()).equals(0);
-    }
-
 
     /**
      * Is the dock pattern available
@@ -211,7 +213,11 @@ public abstract class AutomationBase {
      * @return Off screen?
      */
     boolean isOffScreen () {
-        return !this.element.currentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
+        try {
+            return !this.element.currentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
+        }
     }
 
     /**
@@ -220,41 +226,43 @@ public abstract class AutomationBase {
      * This is manufactured by getting the bouning rect and finding the middle point.
      *
      * @return The clickable point
+     * @throws AutomationException Error in automation library
      */
-    public WinDef.POINT getClickablePoint () {
-        WinDef.POINT point = this.element.getClickablePoint();
-
-        return point;
+    public WinDef.POINT getClickablePoint () throws AutomationException {
+        return this.element.getClickablePoint();
     }
 
     /**
      * Gets the processID of the element
      * @return The processId for the element
+     * @throws AutomationException Error in automation library
      */
-    public Object getProcessId() {
+    public Object getProcessId() throws AutomationException {
         return this.element.getProcessId();
     }
 
     /**
      * Gets the framework used by the element
      * @return The framework object (really a string)
+     * @throws AutomationException Error in automation library
      */
-    public Object getFramework() {
+    public Object getFramework() throws AutomationException {
         return this.element.currentPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
      * Gets the name associated with this element
      * @return The name of the element
+     * @throws AutomationException Error in automation library
      */
-    public String name () {
+    public String name () throws AutomationException {
         return this.element.getName();
     }
 
-    /**
-     * Sets the name of the element
-     * @param name The name to be set.
-     */
+//    /**
+ //    * Sets the name of the element
+//     * @param name The name to be set.
+//     */
 //    public void setName(String name) {
  //       this.element.setName(name);
  //   }
@@ -365,8 +373,9 @@ public abstract class AutomationBase {
      * @param scope The scope of where to look
      * @param condition The condition to check
      * @return IUIAutomationElementArray
+     * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(TreeScope scope, Pointer condition) {
+    protected List<AutomationElement> findAll(TreeScope scope, Pointer condition) throws AutomationException {
         return this.element.findAll(scope, condition);
     }
 
@@ -374,9 +383,10 @@ public abstract class AutomationBase {
      * Gets the underlying automation pattern
      * @param id The control id to look for
      * @return The pattern
-     * @throws PatternNotFoundException
+     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Error in automation library
      */
-    private PointerByReference getPattern (int id) throws PatternNotFoundException {
+    private PointerByReference getPattern (int id) throws PatternNotFoundException, AutomationException {
         PointerByReference unknown = this.element.getCurrentPattern(id);
 
         if (unknown != null) {
@@ -393,8 +403,9 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
      * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Error in automation library
      */
-    SelectionItem getSelectItemPattern() throws PatternNotFoundException {
+    SelectionItem getSelectItemPattern() throws PatternNotFoundException, AutomationException {
         SelectionItem pattern = new SelectionItem();
 
         if (this.isSelectionItemPatternAvailable()) {
@@ -413,7 +424,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
      * @throws PatternNotFoundException Pattern not found
      */
-    Selection getSelectionPattern() throws PatternNotFoundException {
+    Selection getSelectionPattern() throws PatternNotFoundException, AutomationException {
         Selection pattern = new Selection();
 
         if (this.isSelectionPatternAvailable()) {
@@ -432,7 +443,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Value getValuePattern() throws PatternNotFoundException {
+    Value getValuePattern() throws PatternNotFoundException, AutomationException {
         Value pattern = new Value();
 
         if (this.isValuePatternAvailable()) {
@@ -450,7 +461,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationRangeValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Range getRangePattern() throws PatternNotFoundException {
+    Range getRangePattern() throws PatternNotFoundException, AutomationException {
         Range pattern = new Range();
 
         if (isRangeValuePatternAvailable()) {
@@ -469,7 +480,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTablePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Table getTablePattern() throws PatternNotFoundException {
+    Table getTablePattern() throws PatternNotFoundException, AutomationException {
         Table pattern = new Table();
 
         if (isTablePatternAvailable()) {
@@ -488,7 +499,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Window getWindowPattern() throws PatternNotFoundException {
+    Window getWindowPattern() throws PatternNotFoundException, AutomationException {
         Window pattern = new Window();
 
         if (this.isWindowPatternAvailable()) {
@@ -507,7 +518,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected ExpandCollapse getExpandCollapsePattern() throws PatternNotFoundException {
+    protected ExpandCollapse getExpandCollapsePattern() throws PatternNotFoundException, AutomationException {
         ExpandCollapse pattern = new ExpandCollapse();
 
         if (isExpandCollapsePatternAvailable()) {
@@ -526,7 +537,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationGridPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Grid getGridPattern() throws PatternNotFoundException {
+    Grid getGridPattern() throws PatternNotFoundException, AutomationException {
         Grid pattern = new Grid();
 
         if (isGridPatternAvailable()) {
@@ -545,7 +556,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTogglePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Toggle getTogglePattern() throws PatternNotFoundException {
+    Toggle getTogglePattern() throws PatternNotFoundException, AutomationException {
         Toggle pattern = new Toggle();
 
         if (isTogglePatternAvailable()) {
@@ -564,7 +575,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    protected Invoke getInvokePattern() throws PatternNotFoundException {
+    protected Invoke getInvokePattern() throws PatternNotFoundException, AutomationException {
         Invoke pattern = new Invoke();
 
         if (isInvokePatternAvailable()) {
@@ -582,7 +593,7 @@ public abstract class AutomationBase {
      * @return  Returns ths IUIAutomationTextPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      */
-    Text getTextPattern() throws PatternNotFoundException {
+    Text getTextPattern() throws PatternNotFoundException, AutomationException {
         Text pattern = new Text();
 
         if (this.isTextPatternAvailable()) {
@@ -596,26 +607,27 @@ public abstract class AutomationBase {
     /**
      * Is the control enabled
      * @return Enabled?
+     * @throws AutomationException Something is wrong in automation
      */
-    public boolean isEnabled () {
+    public boolean isEnabled () throws AutomationException {
         return this.element.currentIsEnabled().booleanValue();
     }
 
     /**
      * Gets the bounding rectangle of the control
      * @return The bounding rectangle
+     * @throws AutomationException Something is wrong in automation
      */
-    public WinDef.RECT getBoundingRectangle() {
-        WinDef.RECT rect0 = this.element.get_CurrentBoundingRectangle();
-
-        return rect0;
+    public WinDef.RECT getBoundingRectangle() throws AutomationException {
+        return this.element.get_CurrentBoundingRectangle();
     }
 
     /**
      * Get the native window handle
      * @return The handle
+     * @throws AutomationException Something is wrong in automation
      */
-    public WinDef.HWND getNativeWindowHandle() {
+    public WinDef.HWND getNativeWindowHandle() throws AutomationException {
         Object value = this.element.currentPropertyValue(PropertyID.NativeWindowHandle.getValue());
         return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
     }
@@ -623,8 +635,9 @@ public abstract class AutomationBase {
     /**
      * Gets the ARIA role of the element
      * @return The ARIA role
+     * @throws AutomationException Something is wrong in automation
      */
-    public String getAriaRole() {
+    public String getAriaRole() throws AutomationException {
         return this.element.getAriaRole();
     }
 
@@ -650,32 +663,36 @@ public abstract class AutomationBase {
     /**
      * Gets the current framework ID for the element
      * @return The framework id
+     * @throws AutomationException Something is wrong in automation
      */
-    public String getFrameworkId() {
+    public String getFrameworkId() throws AutomationException {
         return this.element.getFrameworkId();
     }
 
     /**
      * Gets the current provider description
      * @return The provider description
+     * @throws AutomationException Something is wrong in automation
      */
-    public String getProviderDescription() {
+    public String getProviderDescription() throws AutomationException {
         return this.element.getProviderDescription();
     }
 
     /**
      * Gets the current item status
      * @return The item status
+     * @throws AutomationException Something is wrong in automation
      */
-    public String getItemStatus() {
+    public String getItemStatus() throws AutomationException {
         return this.element.getItemStatus();
     }
 
     /**
      * Gets the current accelerator key for the element
      * @return The key
+     * @throws AutomationException Something is wrong in automation
      */
-    public String getAcceleratorKey() {
+    public String getAcceleratorKey() throws AutomationException {
         return this.element.getAcceleratorKey();
     }
 

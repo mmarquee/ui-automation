@@ -33,8 +33,9 @@ public class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
      */
-    public AutomationTitleBar(AutomationElement element) {
+    public AutomationTitleBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 

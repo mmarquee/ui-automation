@@ -39,16 +39,13 @@ public class AutomationMenuItem extends AutomationBase {
     /**
      * Construct the AutomationMenuItem
      * @param element The element
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation error
      */
-    public AutomationMenuItem(AutomationElement element) {
+    public AutomationMenuItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.collapsePattern = this.getExpandCollapsePattern();
-            this.invokePattern = this.getInvokePattern();
-        } catch (PatternNotFoundException ex) {
-         //   logger.warn("Failed to get patterns");
-        }
+        this.collapsePattern = this.getExpandCollapsePattern();
+        this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -64,8 +61,9 @@ public class AutomationMenuItem extends AutomationBase {
      * Gets the list of items associatd with this menuitem
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws AutomationException {
+    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 

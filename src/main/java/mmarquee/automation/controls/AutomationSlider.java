@@ -19,21 +19,28 @@ public class AutomationSlider extends AutomationBase {
     /**
      * Construct the AutomationSlider
      * @param element The element
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation library error
      */
-    public AutomationSlider(AutomationElement element) {
+    public AutomationSlider(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.rangePattern = this.getRangePattern();
-        } catch (PatternNotFoundException ex) {
-            logger.warn("RangeValue pattern not found");
-        }
+        this.rangePattern = this.getRangePattern();
     }
 
+    /**
+     * Gets the range value
+     * @return The range value
+     * @throws AutomationException Error in automation library
+     */
     public double getRangeValue() throws AutomationException {
         return this.rangePattern.getValue();
     }
 
+    /**
+     * Sets the range value
+     * @param value The value to set
+     * @throws AutomationException Error in automation library
+     */
     public void setRangeValue(double value) throws AutomationException {
         this.rangePattern.setValue(value);
     }

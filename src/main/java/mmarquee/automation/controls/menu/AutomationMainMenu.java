@@ -23,6 +23,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -52,8 +53,9 @@ public class AutomationMainMenu extends AutomationBase {
      * Constructor for AutomationMainMenu
      * @param parent Parent of the element
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationMainMenu(AutomationElement parent, AutomationElement element) {
+    public AutomationMainMenu(AutomationElement parent, AutomationElement element) throws AutomationException {
         super(element);
         this.parent = parent;
     }
@@ -113,8 +115,9 @@ public class AutomationMainMenu extends AutomationBase {
      * @param name1 Second name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException {
+    public AutomationMenuItem getMenuItem (String name0, String name1) throws PatternNotFoundException, AutomationException {
 
         AutomationElement foundElement = null;
 
@@ -161,8 +164,9 @@ public class AutomationMainMenu extends AutomationBase {
      * Gets the items associated with this menu control
      * @return The list of items
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws AutomationException {
+    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 

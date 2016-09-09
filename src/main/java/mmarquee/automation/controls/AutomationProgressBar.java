@@ -32,8 +32,9 @@ public class AutomationProgressBar extends AutomationBase {
     /**
      * Construct the AutomationPanel
      * @param element The element
+     * @throws AutomationException Error in automation library
      */
-    public AutomationProgressBar(AutomationElement element) {
+    public AutomationProgressBar(AutomationElement element) throws AutomationException {
         super(element);
 
         try {
@@ -43,10 +44,20 @@ public class AutomationProgressBar extends AutomationBase {
         }
     }
 
+    /**
+     * Gets the range value
+     * @return The range value
+     * @throws AutomationException Error in automation library
+     */
     public double getRangeValue() throws AutomationException {
         return this.rangePattern.getValue();
     }
 
+    /**
+     * Sets the range value
+     * @param value The value to set
+     * @throws AutomationException Error in automation library
+     */
     public void setRangeValue(double value) throws AutomationException {
         this.rangePattern.setValue(value);
     }

@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 
 /**
  * Created by inpwt on 08/03/2016.
@@ -26,8 +27,9 @@ public class AutomationCustom extends AutomationBase {
     /**
      * Constructor for the AutomationCustom
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationCustom (AutomationElement element) {
+    public AutomationCustom (AutomationElement element) throws AutomationException {
         super(element);
     }
 }

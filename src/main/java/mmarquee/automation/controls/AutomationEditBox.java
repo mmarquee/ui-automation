@@ -17,6 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -56,22 +57,20 @@ public class AutomationEditBox extends AutomationBase {
     /**
      * Whether the element is a password
      * @return True if it's a password, otherwise false.
+     * @throws AutomationException Automation error
      */
-    public boolean isPassword() {
+    public boolean isPassword() throws AutomationException {
         return this.element.currentIsPassword();
     }
 
     /**
      * Constructor for the AutomationEditBox
      * @param element The underlying element
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation error
      */
-    public AutomationEditBox(AutomationElement element) {
+    public AutomationEditBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.valuePattern = this.getValuePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.valuePattern = this.getValuePattern();
     }
 }

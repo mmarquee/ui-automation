@@ -29,8 +29,9 @@ public class AutomationRibbonBar extends AutomationPanel {
     /**
      * Construct the AutomationRibbonBar
      * @param element The element
+     * @throws AutomationException Something is wrong in automation
      */
-    public AutomationRibbonBar(AutomationElement element) {
+    public AutomationRibbonBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 

@@ -1,6 +1,7 @@
 package mmarquee.automation.controls.rebar;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationContainer;
 
 /**
@@ -12,8 +13,9 @@ public class AutomationReBar extends AutomationContainer {
     /**
      * Construct the AutomationReBar
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationReBar(AutomationElement element) {
+    public AutomationReBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -30,15 +31,12 @@ public class AutomationHyperlink extends AutomationBase {
     /**
      * Constructor for the AutomationHyperlink
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationHyperlink(AutomationElement element) {
+    public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.invokePattern = this.getInvokePattern();
-        } catch (PatternNotFoundException ex) {
-            // Smother, really?
-        }
+        this.invokePattern = this.getInvokePattern();
     }
 
     /**

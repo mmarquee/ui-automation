@@ -42,7 +42,7 @@ public class UIAutomationTest extends TestCase {
         assertTrue("instance:" + instance.toString(), instance != null);
     }
 
-    public void testGetRootElement() {
+    public void testGetRootElement() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
         AutomationElement root = instance.getRootElement();

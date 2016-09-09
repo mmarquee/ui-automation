@@ -29,8 +29,9 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
     /**
      * Construct the AutomationRibbonWorkPane
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationRibbonWorkPane(AutomationElement element) {
+    public AutomationRibbonWorkPane(AutomationElement element) throws AutomationException {
         super(element);
     }
 

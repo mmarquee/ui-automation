@@ -16,6 +16,7 @@
 package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationPanel;
 
 /**
@@ -27,8 +28,9 @@ public class AutomationNetUIHWND extends AutomationPanel {
     /**
      * Construct the AutomationNetUIHWND
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationNetUIHWND(AutomationElement element) {
+    public AutomationNetUIHWND(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

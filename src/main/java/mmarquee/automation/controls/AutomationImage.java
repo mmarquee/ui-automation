@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationContainer;
 import mmarquee.automation.uiautomation.*;
 
@@ -28,8 +29,9 @@ public class AutomationImage extends AutomationBase {
     /**
      * Construct the AutomationImage
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationImage(AutomationElement element) {
+    public AutomationImage(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

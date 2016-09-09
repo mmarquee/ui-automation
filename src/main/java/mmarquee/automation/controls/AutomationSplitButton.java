@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by inpwt on 03/03/2016.
@@ -26,8 +28,9 @@ public class AutomationSplitButton extends AutomationButton {
     /**
      * Construct the AutomationSplitButton
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationSplitButton(AutomationElement element) {
+    public AutomationSplitButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
     }
 }

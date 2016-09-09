@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -31,15 +32,13 @@ public class AutomationButton extends AutomationBase {
     /**
      * Constructor for the AutomationButton
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationButton(AutomationElement element) {
-        super (element);
+    public AutomationButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
+        super(element);
 
-        try {
-            this.invokePattern = this.getInvokePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.invokePattern = this.getInvokePattern();
     }
 
     /**

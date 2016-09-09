@@ -17,6 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 
@@ -33,18 +34,19 @@ public class AutomationDocument extends AutomationBase {
     /**
      * Constructor for the AutomationDocument
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDocument(AutomationElement element) {
+    public AutomationDocument(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
-        try {
-            this.textPattern = this.getTextPattern();
-        } catch (PatternNotFoundException ex) {
-            // Smother - really???
-        }
-    //    this.valuePattern = this.getValuePattern();
+        this.textPattern = this.getTextPattern();
     }
 
+    /**
+     * Gets the text for the document
+     * @return The document's text
+     */
     public String getText() {
         return this.textPattern.getText();
     }

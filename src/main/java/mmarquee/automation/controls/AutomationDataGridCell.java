@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -31,15 +32,12 @@ public class AutomationDataGridCell extends AutomationBase {
     /**
      * Construct the AutomationDataGridCell
      * @param element The element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell(AutomationElement element) {
+    public AutomationDataGridCell(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.valuePattern = this.getValuePattern();
-        } catch (PatternNotFoundException ex) {
-            logger.warn("Value pattern not found");
-        }
+        this.valuePattern = this.getValuePattern();
     }
 
     /**
@@ -55,10 +53,10 @@ public class AutomationDataGridCell extends AutomationBase {
  //       return (value == 1);
  //   }
 
-    /**
-     * Sets the value
-     * @param value The value to set
-     */
+ //   /**
+ //    * Sets the value
+ //    * @param value The value to set
+ //    */
  //   public void setValue(String value) {
  //       this.valuePattern.setValue(value);
  //   }

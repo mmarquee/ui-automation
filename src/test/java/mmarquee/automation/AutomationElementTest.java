@@ -31,53 +31,53 @@ public class AutomationElementTest extends TestCase {
         instance = UIAutomation.getInstance();
     }
 
-    public void testGetCurrentName() {
+    public void testGetCurrentName() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentName(), root.currentName().equals("Desktop"));
     }
 
-    public void testGetClassName() {
+    public void testGetClassName() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentClassName(), root.currentClassName().equals("#32769"));
     }
 
-    public void testIsPassword() {
+    public void testIsPassword() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentIsPassword(), !root.currentIsPassword());
     }
 
-    public void testIsControlElement() {
+    public void testIsControlElement() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentIsControlElement(), root.currentIsControlElement().booleanValue());
     }
 
-    public void testIsContentElement() {
+    public void testIsContentElement() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentIsContentElement(), root.currentIsContentElement().booleanValue());
     }
 
-    public void testIsOffScreen() {
+    public void testIsOffScreen() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentOffscreen(), !root.currentOffscreen().booleanValue());
     }
 
-    public void testIsEnabled() {
+    public void testIsEnabled() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.currentIsEnabled(), root.currentIsEnabled().booleanValue());
     }
 
-    public void testLocalizedControlType() {
+    public void testLocalizedControlType() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.localizedControlType(), root.localizedControlType().equals("pane"));
     }
 
-    public void testCurrentControlType() {
+    public void testCurrentControlType() throws AutomationException {
         AutomationElement root = instance.getRootElement();
 
         assertTrue("root:" + root.currentControlType(), root.currentControlType() == ControlType.Pane.getValue());
     }
 
-    public void testFrameworkID() {
+    public void testFrameworkID() throws AutomationException {
         AutomationElement root = instance.getRootElement();
 
         assertTrue("root:" + root.getFrameworkId(), root.getFrameworkId().equals("Win32"));
