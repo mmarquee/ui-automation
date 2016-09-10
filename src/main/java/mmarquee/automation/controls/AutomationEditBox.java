@@ -33,24 +33,27 @@ public class AutomationEditBox extends AutomationBase {
     /**
      * Gets the value of the control
      * @return The string value of the control
+     * @throws AutomationException Something has gone wrong
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return valuePattern.value();
     }
 
     /**
      * Sets the value of the edit box
      * @param value The value to set
+     * @throws AutomationException Something has gone wrong
      */
-    public void setValue(String value) {
+    public void setValue(String value) throws AutomationException {
         this.valuePattern.setValue(value);
     }
 
     /**
      * Whether the element is read only
      * @return True if readonly, otherwise false.
+     * @throws AutomationException Something has gone wrong
      */
-    public boolean isReadOnly() {
+    public boolean isReadOnly()throws AutomationException {
         return this.valuePattern.isReadOnly();
     }
 

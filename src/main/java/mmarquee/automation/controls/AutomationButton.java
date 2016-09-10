@@ -45,8 +45,9 @@ public class AutomationButton extends AutomationBase {
      * <p>
      * Invokes the click event for this control
      * </p>
+     * @throws AutomationException Error in the automation library
      */
-    public void click() {
+    public void click() throws AutomationException{
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {

@@ -42,9 +42,10 @@ public class AutomationRadioButton extends AutomationBase {
     }
 
     /**
-     * Selects this element
+     * Selects this element.
+     * @throws AutomationException Something has gone wrong
      */
-    public void selectItem() {
+    public void selectItem() throws AutomationException {
         this.selectItemPattern.select();
     }
 }

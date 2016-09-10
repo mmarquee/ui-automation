@@ -42,9 +42,10 @@ public class AutomationTabItem extends AutomationBase {
     }
 
     /**
-     * Selects this item
+     * Selects this item.
+     * @throws AutomationException Something has gone wrong
      */
-    public void selectItem() {
+    public void selectItem() throws AutomationException {
         this.selectItemPattern.select();
     }
 }

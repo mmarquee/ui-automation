@@ -24,6 +24,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 
 import java.util.List;
@@ -35,19 +36,22 @@ import java.util.List;
  */
 public class Selection extends BasePattern {
 
-    private IUIAutomationSelectionPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public Selection() {
+        this.IID = IUIAutomationSelectionPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationSelectionPattern.IID);
-
+    private IUIAutomationSelectionPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 

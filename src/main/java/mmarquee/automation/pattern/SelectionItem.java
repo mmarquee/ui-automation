@@ -21,8 +21,10 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 
 /**
  * Created by inpwt on 25/02/2016.
@@ -31,34 +33,39 @@ import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
  */
 public class SelectionItem extends BasePattern {
 
-    private IUIAutomationSelectionItemPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public SelectionItem() {
+        this.IID = IUIAutomationSelectionItemPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationSelectionItemPattern.IID);
-
+    private IUIAutomationSelectionItemPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Selects the given item
+     * @throws AutomationException Something has gone wrong
      */
-    public void select () {
+    public void select() throws AutomationException {
         this.getPattern().Select();
     }
 
     /**
      * Is the control selected
      * @return True if selected
+     * @throws AutomationException Something has gone wrong
      */
-    public boolean isSelected () {
+    public boolean isSelected() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         int result = this.getPattern().Get_CurrentIsSelected(ibr);

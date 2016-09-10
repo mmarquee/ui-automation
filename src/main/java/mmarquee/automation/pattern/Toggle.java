@@ -8,6 +8,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
 
@@ -17,15 +18,17 @@ import mmarquee.automation.uiautomation.ToggleState;
  * Wrapper for the toggle pattern.
  */
 public class Toggle extends BasePattern {
+    /**
+     * Constructor for the value pattern
+     */
+    public Toggle() {
+        this.IID = IUIAutomationTogglePattern.IID;
+    }
 
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationTogglePattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationTogglePattern.Converter.PointerToInterface(pbr);

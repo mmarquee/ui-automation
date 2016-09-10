@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
@@ -31,14 +32,17 @@ import mmarquee.automation.uiautomation.WindowVisualState;
  * Wrapper for the window pattern.
  */
 public class Window extends BasePattern {
+    /**
+     * Constructor for the value pattern
+     */
+    public Window() {
+        this.IID = IUIAutomationWindowPattern.IID;
+    }
+
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationWindowPattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);

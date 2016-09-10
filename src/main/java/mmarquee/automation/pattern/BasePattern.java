@@ -23,7 +23,6 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.PatternID;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 
@@ -36,6 +35,11 @@ import java.util.List;
  * Base for the pattern wrappers
  */
 public abstract class BasePattern implements Pattern {
+
+    /**
+     * The guid of the pattern.
+     */
+    protected Guid.IID IID;
 
     /**
      * The underlying automation pattern
@@ -100,5 +104,18 @@ public abstract class BasePattern implements Pattern {
      */
     public boolean isAvailable () {
         return (pattern == null);
+    }
+
+    /**
+     * Gets the raw pointer to the pattern
+     * @param pbr The raw pointer
+     * @return Result of the call.
+     */
+    protected WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
+        Unknown uElement = new Unknown(this.pattern);
+
+        Guid.REFIID refiidElement = new Guid.REFIID();
+
+        return uElement.QueryInterface(refiidElement, pbr);
     }
 }

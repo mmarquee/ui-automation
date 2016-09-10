@@ -41,8 +41,9 @@ public class AutomationHyperlink extends AutomationBase {
 
     /**
      * Fires the click event associated with this element.
+     * @throws AutomationException Something has gone wrong
      **/
-    public void click() {
+    public void click() throws AutomationException {
         this.invokePattern.invoke();
     }
 }

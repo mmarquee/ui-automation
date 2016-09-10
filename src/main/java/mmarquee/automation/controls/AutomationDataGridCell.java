@@ -43,8 +43,9 @@ public class AutomationDataGridCell extends AutomationBase {
     /**
      * Gets the text associated with this element
      * @return The current value
+     * @throws AutomationException Something has gone wrong
      */
-    public String value() {
+    public String value() throws AutomationException {
         return valuePattern.value();
     }
 

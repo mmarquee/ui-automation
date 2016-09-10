@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
 
 /**
@@ -30,19 +31,22 @@ import mmarquee.automation.uiautomation.*;
  */
 public class Text extends BasePattern {
 
-    private IUIAutomationTextPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public Text() {
+        this.IID = IUIAutomationTextPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationTextPattern.IID);
-
+    private IUIAutomationTextPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationTextPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
@@ -50,8 +54,9 @@ public class Text extends BasePattern {
      * Gets the selection.
      *
      * Not functional at the moment.
+     * @throws AutomationException Something has gone wrong
      */
-    public void getSelection() {
+    public void getSelection() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         this.getPattern().GetSelection(pbr);
@@ -84,8 +89,9 @@ public class Text extends BasePattern {
     /**
      * Gets the text from the pattern.
      * @return The text.
+     * @throws AutomationException Something has gone wrong
      */
-    public String getText() {
+    public String getText() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         this.getPattern().Get_DocumentRange(pbr);

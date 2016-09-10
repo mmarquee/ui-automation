@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
@@ -30,14 +31,18 @@ import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
  * Wrapper for the range pattern.
  */
 public class Range extends BasePattern {
+
+    /**
+     * Constructor for the value pattern
+     */
+    public Range() {
+        this.IID = IUIAutomationRangeValuePattern.IID;
+    }
+
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationRangeValuePattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);

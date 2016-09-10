@@ -51,17 +51,18 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Gets the text associated with this element
      * @return The current value
+     * @throws AutomationException Something has gone wrong
      */
-    public String text() {
-
+    public String text() throws AutomationException {
         return valuePattern.value();
     }
 
     /**
      * Sets the text associated with this element
-     * @param text The value to be set
+     * @param text The value to be set.
+     * @throws AutomationException Something has gone wrong
      */
-    public void setText(String text) {
+    public void setText(String text) throws AutomationException {
         valuePattern.setValue(text);
     }
 

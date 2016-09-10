@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 
@@ -31,27 +32,36 @@ import static com.sun.jna.platform.win32.Variant.VT_BSTR;
  * Wrapper for the value pattern.
  */
 public class Value extends BasePattern {
-    private IUIAutomationValuePattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationValuePattern.IID);
+    /**
+     * Constructor for the value pattern
+     */
+    public Value() {
+        this.IID = IUIAutomationValuePattern.IID;
+    }
 
+    /**
+     * Gets the pattern
+     * @return The actual pattern itself
+     */
+    private IUIAutomationValuePattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationValuePattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Get the current value of the control
      * @return The current value
+     * @throws AutomationException Something has gone wrong
      */
-    public String value() {
+    public String value() throws AutomationException {
         PointerByReference sr = new PointerByReference();
         this.getPattern().Get_CurrentValue(sr);
 
@@ -61,8 +71,9 @@ public class Value extends BasePattern {
     /**
      * Gets the current readonly status of the control
      * @return True if read-only
+     * @throws AutomationException Something has gone wrong
      */
-    public boolean isReadOnly() {
+    public boolean isReadOnly() throws AutomationException {
         IntByReference ibr = new IntByReference();
         this.getPattern().Get_CurrentIsReadOnly(ibr);
 
@@ -73,8 +84,9 @@ public class Value extends BasePattern {
      * Sets the value of the control
      * @param value Value to use
      * @throws NullPointerException When something has gone wrong
+     * @throws AutomationException Something has gone wrong
      */
-    public void setValue(String value) throws NullPointerException {
+    public void setValue(String value) throws AutomationException, NullPointerException {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(value);
 
         this.getPattern().Set_Value(sysAllocated);

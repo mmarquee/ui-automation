@@ -50,15 +50,16 @@ public class AutomationMenuItem extends AutomationBase {
 
     /**
      * Invoke the click pattern for the menu item.
+     * @throws AutomationException Something has gone wrong
      */
-    public void click() {
+    public void click() throws AutomationException {
         if (this.invokePattern != null) {
             this.invokePattern.invoke();
         }
     }
 
     /**
-     * Gets the list of items associatd with this menuitem
+     * Gets the list of items associated with this menu item
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found

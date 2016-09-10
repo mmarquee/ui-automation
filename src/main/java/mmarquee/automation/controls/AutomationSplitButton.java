@@ -29,6 +29,7 @@ public class AutomationSplitButton extends AutomationButton {
      * Construct the AutomationSplitButton
      * @param element The element
      * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find expected pattern
      */
     public AutomationSplitButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);

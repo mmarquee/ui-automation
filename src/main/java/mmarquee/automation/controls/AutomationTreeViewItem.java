@@ -31,15 +31,17 @@ public class AutomationTreeViewItem extends AutomationBase {
 
     /**
      * Select the item
+     * @throws AutomationException Automation library issue
      */
-    public void select() {
+    public void select() throws AutomationException {
         this.selectItemPattern.select();
     }
 
     /**
      * Click the item
+     * @throws AutomationException Automation library issue
      */
-    public void click() {
+    public void click() throws AutomationException {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {

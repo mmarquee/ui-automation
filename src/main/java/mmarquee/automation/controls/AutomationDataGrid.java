@@ -60,16 +60,18 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Gets the text associated with the active cell of this element
      * @return The value of the item
+     * @throws AutomationException Something has gone wrong
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return this.valuePattern.value();
     }
 
     /**
      * Whether the grid is read only
      * @return Read only?
+     * @throws AutomationException Something has gone wrong
      */
-    public boolean isReadOnly() {
+    public boolean isReadOnly() throws AutomationException {
         return this.valuePattern.isReadOnly();
     }
 
@@ -136,16 +138,18 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Gets the row count of the grid
      * @return The row count
+     * @throws AutomationException Something has gone wrong
      */
-    public int rowCount() {
+    public int rowCount() throws AutomationException {
         return this.grid.rowCount();
     }
 
     /**
      * Gets the column count of the grid
      * @return The column count
+     * @throws AutomationException Something has gone wrong
      */
-    public int columnCount() {
+    public int columnCount() throws AutomationException {
         return this.grid.columnCount();
     }
 

@@ -118,6 +118,7 @@ public class Utils {
      * Captures the window.
      *
      * @param hwnd The window to capture
+     * @param filename Name to save the output into
      * @throws AWTException Robot exception
      * @throws IOException IO Exception
      */

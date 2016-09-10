@@ -346,6 +346,7 @@ public class AutomationContainer extends AutomationBase {
      * @param id The automation id
      * @return The found control
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button));

@@ -31,7 +31,7 @@ public class AutomationListItem extends AutomationBase {
     private SelectionItem selectItemPattern;
 
     /**
-     * Constructor for the AuyomationListItem
+     * Constructor for the AutomationListItem
      * @param element The underlying automation element
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
@@ -42,9 +42,10 @@ public class AutomationListItem extends AutomationBase {
     }
 
     /**
-     * Selects this item
+     * Selects this item.
+     * @throws AutomationException Something has gone wrong
      */
-    public void select() {
+    public void select() throws AutomationException {
         this.selectItemPattern.select();
     }
 

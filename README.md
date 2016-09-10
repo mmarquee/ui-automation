@@ -15,7 +15,7 @@ The library is a programmers tool, and they will either need to have the source 
 The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.3.0-SNAPSHOT).
 
 ## Maven
-The library is held in the Sonartype OSS repository, so is available for download via Maven (or other tools, such as SBT for Scala). 
+The library is held in the Sonatype OSS repository, so is available for download via Maven (or other tools, such as SBT for Scala). 
 ```
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
@@ -239,6 +239,7 @@ The ribbon control is a complex structure, but the tree of controls is navigable
 
   AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
 
+  AutomationToolBar panes = panel.getToolBar("Panes");
   AutomationToolBar panes = panel.getToolBar("Panes");
 
   panes.getButton("Preview pane").click();

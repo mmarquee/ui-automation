@@ -43,9 +43,10 @@ public class AutomationCalendar extends AutomationBase {
 
     /**
      * Gets the current value of the control
-     * @return The current value
+     * @return The current value.
+     * @throws AutomationException Something has gone wrong
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return this.valuePattern.value();
     }
 }

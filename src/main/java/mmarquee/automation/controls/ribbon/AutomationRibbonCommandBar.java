@@ -38,7 +38,7 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
     /**
      * Get the RibbonWorkPane associated with the container
      * @return The AutomationRibbonWorkPane
-     * @throws AutomationException
+     * @throws AutomationException Something is wrong in automation
      */
     public AutomationRibbonWorkPane getRibbonWorkPane() throws AutomationException {
         return new AutomationRibbonWorkPane(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane"));

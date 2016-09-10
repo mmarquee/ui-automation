@@ -21,8 +21,10 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 
 import java.util.List;
@@ -34,27 +36,31 @@ import java.util.List;
  */
 public class Table extends BasePattern {
 
-    private IUIAutomationTablePattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public Table() {
+        this.IID = IUIAutomationTablePattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationTablePattern.IID);
-
+    private IUIAutomationTablePattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationTablePattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Gets the column headers for the grid.
-     * @return The list of column headers
+     * @return The list of column header
+     * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getCurrentColumnHeaders() {
+    public List<AutomationElement> getCurrentColumnHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         int result = this.getPattern().GetCurrentColumnHeaders(pbr);

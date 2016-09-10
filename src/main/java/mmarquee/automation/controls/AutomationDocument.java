@@ -46,8 +46,9 @@ public class AutomationDocument extends AutomationBase {
     /**
      * Gets the text for the document
      * @return The document's text
+     * @throws AutomationException Something has gone wrong
      */
-    public String getText() {
+    public String getText() throws AutomationException {
         return this.textPattern.getText();
     }
 }

@@ -423,6 +423,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationSelectionPattern associated with this control
      * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Error in automation library
      */
     Selection getSelectionPattern() throws PatternNotFoundException, AutomationException {
         Selection pattern = new Selection();
@@ -442,6 +443,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Value getValuePattern() throws PatternNotFoundException, AutomationException {
         Value pattern = new Value();
@@ -460,6 +462,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationRangeValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Range getRangePattern() throws PatternNotFoundException, AutomationException {
         Range pattern = new Range();
@@ -479,6 +482,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTablePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Table getTablePattern() throws PatternNotFoundException, AutomationException {
         Table pattern = new Table();
@@ -498,6 +502,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationWindowPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Window getWindowPattern() throws PatternNotFoundException, AutomationException {
         Window pattern = new Window();
@@ -517,6 +522,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     protected ExpandCollapse getExpandCollapsePattern() throws PatternNotFoundException, AutomationException {
         ExpandCollapse pattern = new ExpandCollapse();
@@ -536,6 +542,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationGridPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Grid getGridPattern() throws PatternNotFoundException, AutomationException {
         Grid pattern = new Grid();
@@ -555,6 +562,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTogglePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Toggle getTogglePattern() throws PatternNotFoundException, AutomationException {
         Toggle pattern = new Toggle();
@@ -574,6 +582,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationInvokePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     protected Invoke getInvokePattern() throws PatternNotFoundException, AutomationException {
         Invoke pattern = new Invoke();
@@ -592,6 +601,7 @@ public abstract class AutomationBase {
      * </p>
      * @return  Returns ths IUIAutomationTextPattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
      */
     Text getTextPattern() throws PatternNotFoundException, AutomationException {
         Text pattern = new Text();

@@ -16,8 +16,6 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
@@ -32,18 +30,21 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 public class ExpandCollapse extends BasePattern {
 
     /**
+     * Constructor for the pattern
+     */
+    public ExpandCollapse() {
+        this.IID = IUIAutomationExpandCollapsePattern.IID;
+    }
+
+    /**
      * Gets the pattern
      * @return The pattern
      * @throws AutomationException Something went wrong getting the pattern
      */
     private IUIAutomationExpandCollapsePattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
