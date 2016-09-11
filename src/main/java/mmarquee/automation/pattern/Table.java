@@ -63,7 +63,9 @@ public class Table extends BasePattern {
     public List<AutomationElement> getCurrentColumnHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        int result = this.getPattern().GetCurrentColumnHeaders(pbr);
+        if (this.getPattern().GetCurrentColumnHeaders(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();

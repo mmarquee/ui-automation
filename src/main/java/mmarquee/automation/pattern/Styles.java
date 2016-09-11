@@ -16,14 +16,10 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 
 /**
@@ -60,7 +56,9 @@ public class Styles extends BasePattern {
     public String getStyleName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        int result = this.getPattern().Get_CurrentStyleName(sr);
+        if (this.getPattern().Get_CurrentStyleName(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -73,7 +71,9 @@ public class Styles extends BasePattern {
     public int getStyleId() throws AutomationException {
         IntByReference ipr = new IntByReference();
 
-        int result = this.getPattern().Get_CurrentStyleId(ipr);
+        if (this.getPattern().Get_CurrentStyleId(ipr) != 0) {
+            throw new AutomationException();
+        }
 
         return ipr.getValue();
     }

@@ -63,7 +63,10 @@ public class ItemContainer extends BasePattern {
      */
     public Pointer findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
-        int result = this.getPattern().FindItemByProperty(pStartAfter, propertyId, value, pbr);
+        if (this.getPattern().FindItemByProperty(pStartAfter, propertyId, value, pbr) != 0) {
+            throw new AutomationException();
+        }
+
         return pbr.getValue();
     }
 }

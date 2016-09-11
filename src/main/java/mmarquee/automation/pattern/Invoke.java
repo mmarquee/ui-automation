@@ -54,8 +54,11 @@ public class Invoke extends BasePattern {
 
     /**
      * Invokes the pattern on the control
+     * @throws AutomationException Something went wrong getting the pattern
      */
-    public void invoke()throws AutomationException {
-        this.getPattern().Invoke();
+    public void invoke() throws AutomationException {
+        if (this.getPattern().Invoke() != 0) {
+            throw new AutomationException();
+        }
     }
 }

@@ -16,13 +16,10 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
@@ -57,7 +54,9 @@ public class Range extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setValue (double value) throws AutomationException {
-        this.getPattern().Set_Value(value);
+        if (this.getPattern().Set_Value(value) != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -68,7 +67,9 @@ public class Range extends BasePattern {
     public double getValue () throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 
-        int result = this.getPattern().Get_CurrentValue(dbr);
+        if (this.getPattern().Get_CurrentValue(dbr) != 0) {
+            throw new AutomationException();
+        }
 
         return dbr.getValue();
     }

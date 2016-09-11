@@ -94,7 +94,9 @@ public class Text extends BasePattern {
     public String getText() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().Get_DocumentRange(pbr);
+        if (this.getPattern().Get_DocumentRange(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
@@ -108,7 +110,9 @@ public class Text extends BasePattern {
 
             PointerByReference sr = new PointerByReference();
 
-            int result = range.GetText(-1, sr);
+            if (range.GetText(-1, sr) != 0) {
+                throw new AutomationException();
+            }
 
             return sr.getValue().getWideString(0);
         } else {

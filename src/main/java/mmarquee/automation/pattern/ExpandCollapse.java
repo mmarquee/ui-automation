@@ -58,7 +58,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
-        this.getPattern().Expand();
+        if (this.getPattern().Expand() != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -66,7 +68,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void collapse()throws AutomationException  {
-        this.getPattern().Collapse();
+        if (this.getPattern().Collapse() != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -77,7 +81,9 @@ public class ExpandCollapse extends BasePattern {
     public boolean isExpanded() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.getPattern().Get_CurrentExpandCollapseState(ibr);
+        if (this.getPattern().Get_CurrentExpandCollapseState(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue() == 1; //ExpandCollapseState.ExpandCollapseState_Expanded;
     }

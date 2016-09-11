@@ -23,8 +23,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 
 import java.util.List;
@@ -64,7 +62,9 @@ public class Selection extends BasePattern {
 
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().GetCurrentSelection(pbr);
+        if (this.getPattern().GetCurrentSelection(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();

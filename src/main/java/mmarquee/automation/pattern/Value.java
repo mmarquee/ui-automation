@@ -63,7 +63,10 @@ public class Value extends BasePattern {
      */
     public String value() throws AutomationException {
         PointerByReference sr = new PointerByReference();
-        this.getPattern().Get_CurrentValue(sr);
+
+        if (this.getPattern().Get_CurrentValue(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -75,7 +78,9 @@ public class Value extends BasePattern {
      */
     public boolean isReadOnly() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        this.getPattern().Get_CurrentIsReadOnly(ibr);
+        if (this.getPattern().Get_CurrentIsReadOnly(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return (ibr.getValue() == 1);
     }
@@ -89,6 +94,12 @@ public class Value extends BasePattern {
     public void setValue(String value) throws AutomationException, NullPointerException {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(value);
 
-        this.getPattern().Set_Value(sysAllocated);
+        try {
+            if (this.getPattern().Set_Value(sysAllocated) != 0) {
+                throw new AutomationException();
+            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
     }
 }
