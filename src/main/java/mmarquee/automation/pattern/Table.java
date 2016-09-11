@@ -23,14 +23,12 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 
 import java.util.List;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the table pattern
  */
@@ -79,7 +77,7 @@ public class Table extends BasePattern {
 
             return this.collectionToList(collection);
         } else {
-            return null;
+            throw new AutomationException();
         }
     }
 }

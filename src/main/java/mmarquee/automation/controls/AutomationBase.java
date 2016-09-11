@@ -27,7 +27,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 
 /**
- * Created by inpwt on 26/01/2016.
+ * Created by Mark Humphreys on 26/01/2016.
  *
  * The base for automation.
  */
@@ -223,7 +223,7 @@ public abstract class AutomationBase {
     /**
      * Gets a clickable point for the control
      *
-     * This is manufactured by getting the bouning rect and finding the middle point.
+     * This is manufactured by getting the bounding rect and finding the middle point.
      *
      * @return The clickable point
      * @throws AutomationException Error in automation library
@@ -281,9 +281,9 @@ public abstract class AutomationBase {
      * @param scope The scope of where to look
      * @param condition The condition to use
      * @return The found AutomationElement
-     * @throws ElementNotFoundException No elements found
+     * @throws AutomationException An error has occurred in automation
      */
-   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws ElementNotFoundException, AutomationException {
+   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws AutomationException {
         return this.element.findFirst(scope, condition);
    }
 

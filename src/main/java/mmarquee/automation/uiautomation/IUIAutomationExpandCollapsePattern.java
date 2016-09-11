@@ -23,7 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 13/07/2016.
+ * Created by Mark Humphreys on 13/07/2016.
  */
 public interface IUIAutomationExpandCollapsePattern {
     /**
@@ -56,7 +56,7 @@ public interface IUIAutomationExpandCollapsePattern {
      *            catastrophic failure."):
      *            The set of interfaces accessible on an object through QueryInterface must be static, not dynamic. This means that if a call
      *            toQueryInterface for a pointer to a specified interface succeeds the first time, it must succeed again, and if it fails
-     *            the first time, it must fail on all subsequent queries. 
+     *            the first time, it must fail on all subsequent queries 
      *
      *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed. 
      *

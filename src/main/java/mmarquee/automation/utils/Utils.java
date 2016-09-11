@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by inpwt on 18/03/2016.
+ * Created by Mark Humphreys on 18/03/2016.
  *
  * Utility methods used in the project
  */

@@ -20,7 +20,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by inpwt on 03/03/2016.
+ * Created by Mark Humphreys on 03/03/2016.
  *
  * Wrapper for the SplitButton element.
  */

@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 24/07/2016.
+ * Created by Mark Humphreys on 24/07/2016.
  *
  * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
  *

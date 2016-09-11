@@ -16,7 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 03/02/2016.
+ * Created by Mark Humphreys on 03/02/2016.
  *
  * Wrapper around the Delphi automated string grid
  */
@@ -190,10 +189,10 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
-     * Gets the colum header for the given column
+     * Gets the column headers for the given column
      * @param col The column
      * @return The header cell
-     * @throws AutomationException Ooops, it's all gone wrong in automation
+     * @throws AutomationException Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell getColumnHeader(int col) throws PatternNotFoundException, AutomationException {

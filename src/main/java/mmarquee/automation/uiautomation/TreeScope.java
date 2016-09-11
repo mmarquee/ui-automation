@@ -19,14 +19,6 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.sun.jna.*;
-import com.sun.jna.platform.win32.*;
-import com.sun.jna.platform.win32.WinNT.*;
-import com.sun.jna.platform.win32.OaIdl.*;
-import com.sun.jna.platform.win32.WinDef.*;
-import com.sun.jna.platform.win32.Variant.VARIANT;
-import com.sun.jna.platform.win32.WTypes.*;
-import com.sun.jna.platform.win32.COM.*;
-import com.sun.jna.platform.win32.Guid.*;
 
 /**
  * uuid({00000000-0000-0000-0000-000000000000})

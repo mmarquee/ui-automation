@@ -21,7 +21,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
- * Created by inpwt on 04/02/2016.
+ * Created by Mark Humphreys on 04/02/2016.
  *
  * Wrapper around the 'virtual' cell element in the automated Delphi string grid
  */

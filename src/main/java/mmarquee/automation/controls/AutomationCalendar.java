@@ -21,7 +21,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
- * Created by inpwt on 16/02/2016.
+ * Created by Mark Humphreys on 16/02/2016.
  *
  * Wrapper for the Calendar element.
  *

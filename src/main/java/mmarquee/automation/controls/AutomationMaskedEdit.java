@@ -5,7 +5,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by inpwt on 15/02/2016.
+ * Created by Mark Humphreys on 15/02/2016.
  *
  * Wrapper around the MaskedEdit control - specifically the automated version.
  */

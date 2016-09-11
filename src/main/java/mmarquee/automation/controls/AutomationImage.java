@@ -17,11 +17,9 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.controls.AutomationContainer;
-import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Wrapper for the Image control element.
  */

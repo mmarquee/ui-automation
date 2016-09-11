@@ -5,7 +5,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationContainer;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
  *
  * Specialised type of pane, with a specific control name
  */

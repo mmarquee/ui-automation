@@ -21,7 +21,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationContainer;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
  *
  * Specialist pane that represents the RibbonCommandBar
  */

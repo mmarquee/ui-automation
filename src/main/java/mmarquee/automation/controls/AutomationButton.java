@@ -21,7 +21,7 @@ import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by inpwt on 02/02/2016.
+ * Created by Mark Humphreys on 02/02/2016.
  *
  * Wrapper around the Button element.
  */

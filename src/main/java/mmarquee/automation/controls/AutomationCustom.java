@@ -19,7 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 08/03/2016.
+ * Created by Mark Humphreys on 08/03/2016.
  *
  * Wrapper for the Custom ControlId
  */

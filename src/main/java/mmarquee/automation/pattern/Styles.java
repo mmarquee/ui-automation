@@ -23,7 +23,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 
 /**
- * Created by inpwt on 01/03/2016.
+ * Created by Mark Humphreys on 01/03/2016.
  *
  * Wrapper around the styles pattern.
  */

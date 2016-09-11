@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
@@ -24,7 +23,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -33,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 09/02/2016.
+ * Created by Mark Humphreys on 09/02/2016.
  *
  * Wrapper for the MainMenu element.
  */
@@ -127,7 +125,7 @@ public class AutomationMainMenu extends AutomationBase {
                         this.createControlTypeCondition(ControlType.MenuItem).getValue()));
 
         if (!name1.isEmpty()) {
-            // Needs a subitem
+            // Needs a sub-item
             if (item != null) {
                 // Find the sub-item now
                 PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());

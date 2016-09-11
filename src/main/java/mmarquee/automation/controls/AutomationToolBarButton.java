@@ -21,7 +21,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 
 /**
- * Created by inpwt on 20/07/2016.
+ * Created by Mark Humphreys on 20/07/2016.
  *
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */

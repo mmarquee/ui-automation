@@ -269,7 +269,7 @@ This class encapsulates some simple automation of the Notepad program, starting 
   class NotepadAutomation {
     private var automation = UIAutomation.getElement
     private var application: AutomationApplication = null
-    private var window: AutomationWindow = null
+    private var window: AutomationWindow = _
 
     def launch(): Unit = {
         this.application = this.automation.launch("notepad.exe")

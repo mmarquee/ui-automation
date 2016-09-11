@@ -22,13 +22,13 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 08/07/2016.
+ * Created by Mark Humphreys on 08/07/2016.
  */
 public interface IUIAutomationCondition {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID = new Guid.IID(
+    Guid.IID IID = new Guid.IID(
             "352FFBA8-0973-437C-A61F-F64CAFD81DF9");
 
     /**
@@ -103,7 +103,7 @@ public interface IUIAutomationCondition {
      */
     int Release();
 
-    public static class Converter {
+    class Converter {
         public static IUIAutomationCondition PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
             final Pointer vTablePointer = interfacePointer.getPointer(0);

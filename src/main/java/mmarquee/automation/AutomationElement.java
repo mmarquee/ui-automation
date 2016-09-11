@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 06/03/2016.
+ * Created by Mark Humphreys on 06/03/2016.
  * <p>
  * Wrapper for the underlying automation element.
  */
@@ -135,7 +135,7 @@ public class AutomationElement {
      * @return True if off screen
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentOffscreen() throws AutomationException {
+    public WinDef.BOOL currentOffScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         if (this.element.get_CurrentIsOffscreen(bbr) != 0) {
@@ -370,7 +370,7 @@ public class AutomationElement {
             throw new AutomationException();
         }
 
-        // Hummm..
+        // TODO: Fix the horrid conversion
 
         int value = ibr.getValue();
 

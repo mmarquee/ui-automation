@@ -25,7 +25,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the text pattern
  */
@@ -79,9 +79,9 @@ public class Text extends BasePattern {
         }
     }
 
-    /**
-     * Gets the document range from the pattern.
-     */
+//    /**`
+//     * Gets the document range from the pattern.
+//     */
 //    public void getDocumentRange () {
 //        ((IUIAutomationTextPattern)pattern).getSelection();
 //    }
@@ -116,7 +116,7 @@ public class Text extends BasePattern {
 
             return sr.getValue().getWideString(0);
         } else {
-            return null;
+            throw new AutomationException();
         }
     }
 }

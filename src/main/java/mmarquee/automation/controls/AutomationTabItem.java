@@ -22,7 +22,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by inpwt on 28/01/2016.
+ * Created by Mark Humphreys on 28/01/2016.
  *
  * Wrapper for the TabItem element.
  */

@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 13/07/2016.
+ * Created by Mark Humphreys on 13/07/2016.
  */
 public interface IUIAutomationInvokePattern {
     /**

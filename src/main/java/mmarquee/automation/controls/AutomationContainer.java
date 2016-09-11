@@ -27,9 +27,9 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * Created by inpwt on 28/01/2016.
+ * Created by Mark Humphreys on 28/01/2016.
  *
- * Encapsulates the functionality of 'containers' i.e. elemenst that
+ * Encapsulates the functionality of 'containers' i.e. elements that
  * host other elements
  */
 public class AutomationContainer extends AutomationBase {
@@ -156,9 +156,9 @@ public class AutomationContainer extends AutomationBase {
      * @param automationId Name to use
      * @param controlType Control type
      * @return The matching element
-     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException An error has occurred in automation
      */
-    protected AutomationElement getControlByAutomationId(String automationId, ControlType controlType) throws ElementNotFoundException, AutomationException {
+    protected AutomationElement getControlByAutomationId(String automationId, ControlType controlType) throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId).getValue(),

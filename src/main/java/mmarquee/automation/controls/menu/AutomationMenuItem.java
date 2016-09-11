@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 10/02/2016.
+ * Created by Mark Humphreys on 10/02/2016.
  *
  * Wrapper for the MenuItem element.
  */

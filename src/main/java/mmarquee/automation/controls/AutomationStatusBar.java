@@ -20,7 +20,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 01/02/2016.
+ * Created by Mark Humphreys on 01/02/2016.
  *
  * Wrapper for the StatusBar element.
  */

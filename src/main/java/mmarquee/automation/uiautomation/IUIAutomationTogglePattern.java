@@ -18,13 +18,12 @@ package mmarquee.automation.uiautomation;
 import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 13/07/2016.
+ * Created by Mark Humphreys on 13/07/2016.
  */
 public interface IUIAutomationTogglePattern {
     /**

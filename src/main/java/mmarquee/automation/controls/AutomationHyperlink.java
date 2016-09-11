@@ -21,7 +21,7 @@ import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by inpwt on 03/02/2016.
+ * Created by Mark Humphreys on 03/02/2016.
  *
  * Wrapper for the Hyperlink element.
  */

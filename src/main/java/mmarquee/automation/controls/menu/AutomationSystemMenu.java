@@ -16,7 +16,6 @@
 
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 19/02/2016.
+ * Created by Mark Humphreys on 19/02/2016.
  *
  * Wrapper for the SystemMenu control element.
  */

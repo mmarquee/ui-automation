@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
@@ -25,7 +24,7 @@ import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by inpwt on 04/03/2016.
+ * Created by Mark Humphreys on 04/03/2016.
  *
  * Wrapper for the TitleBar element.
  */

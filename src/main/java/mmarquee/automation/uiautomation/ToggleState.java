@@ -16,7 +16,7 @@
 package mmarquee.automation.uiautomation;
 
 /**
- * Created by inpwt on 13/07/2016.
+ * Created by Mark Humphreys on 13/07/2016.
  */
 public enum ToggleState {
     ToggleState_Off(0),

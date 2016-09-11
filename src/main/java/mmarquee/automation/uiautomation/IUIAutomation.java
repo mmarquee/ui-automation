@@ -25,7 +25,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 06/07/2016.
+ * Created by Mark Humphreys on 06/07/2016.
  *
  * Use this like:
  * PointerByReference pbr=new PointerByReference();
@@ -37,13 +37,13 @@ public interface IUIAutomation {
     /**
      * The interface IID for QueryInterface et al
      */
-    public final static Guid.IID IID = new Guid.IID(
+    Guid.IID IID = new Guid.IID(
             "{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
 
     /**
      * The IID for the library itself
      */
-    public static final Guid.GUID CLSID = new Guid.GUID(
+    Guid.GUID CLSID = new Guid.GUID(
             "{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
 
     /**
@@ -70,16 +70,16 @@ public interface IUIAutomation {
      *            catastrophic failure."):
      *            The set of interfaces accessible on an object through QueryInterface must be static, not dynamic. This means that if a call
      *            toQueryInterface for a pointer to a specified interface succeeds the first time, it must succeed again, and if it fails
-     *            the first time, it must fail on all subsequent queries. 
+     *            the first time, it must fail on all subsequent queries 
      *
-     *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed. 
+     *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed 
      *
      *            It must be symmetric: if a client holding a pointer to one interface queries successfully for another, a query through
-     *            the obtained pointer for the first interface must succeed. 
+     *            the obtained pointer for the first interface must succeed 
      *
      *            It must be transitive: if a client holding a pointer to one interface queries successfully for a second, and through that
      *            pointer queries successfully for a third interface, a query for the first interface through the pointer for the
-     *            third interface must succeed. 
+     *            third interface must succeed 
      *            Notes to Implementers
      *            Implementations of QueryInterface must never check ACLs. The main reason for this rule is that COM requires that an object supporting a
      *            particular interface always return success when queried for that interface. Another reason is that checking ACLs on QueryInterface
@@ -138,7 +138,7 @@ public interface IUIAutomation {
     int GetPatternProgrammaticName(int patternId, PointerByReference retval);
     int GetFocusedElement(PointerByReference element);
 
-    public static class Converter {
+    class Converter {
 
         private static int UIA_COMPARE_ELEMENTS = 3;
         private static int UIA_COMPARE_RUNTIME_IDS = 4;

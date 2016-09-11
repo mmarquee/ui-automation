@@ -21,16 +21,13 @@ import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.AutomationDataGrid;
-import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
-import mmarquee.automation.utils.Utils;
 
 import java.util.List;
 
 /**
- * Created by inpwt on 26/02/2016
+ * Created by Mark Humphreys on 26/02/2016
  *  *
  * Test the automation wrapper on a Delphi VCL application.
  */
@@ -47,8 +44,12 @@ public class TestMain extends TestBase {
             logger.warn("Failed to find application", ex);
         }
 
-        // Wait for the process to start
-        application.waitForInputIdle(5000);
+        try {
+            // Wait for the process to start
+            application.waitForInputIdle(5000);
+        } catch (Throwable ex) {
+            logger.error("Failed to wait properly");
+        }
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Form1");

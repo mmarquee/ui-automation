@@ -18,7 +18,7 @@ package mmarquee.automation;
 import junit.framework.TestCase;
 
 /**
- * Created by inpwt on 20/07/2016.
+ * Created by Mark Humphreys on 20/07/2016.
  */
 public class AutomationElementTest extends TestCase {
     static {
@@ -58,7 +58,7 @@ public class AutomationElementTest extends TestCase {
 
     public void testIsOffScreen() throws AutomationException {
         AutomationElement root = instance.getRootElement();
-        assertTrue("root:" + root.currentOffscreen(), !root.currentOffscreen().booleanValue());
+        assertTrue("root:" + root.currentOffScreen(), !root.currentOffScreen().booleanValue());
     }
 
     public void testIsEnabled() throws AutomationException {

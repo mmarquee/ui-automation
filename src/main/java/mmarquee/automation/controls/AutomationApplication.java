@@ -26,7 +26,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
- * Created by inpwt on 26/01/2016.
+ * Created by Mark Humphreys on 26/01/2016.
  *
  * Wrapper around the Application element
  */
@@ -120,6 +120,8 @@ public class AutomationApplication extends AutomationBase {
 
     /**
      * Constructor for the AutomationApplication.
+     * Detection of already running application is taken from:
+     *   http://www.golesny.de/p/code/javagetpid.
      * @param element The underlying automation element
      * @param process The process for this application.
      * @param attached if we attach or launch the application?
@@ -127,7 +129,6 @@ public class AutomationApplication extends AutomationBase {
      * */
     public AutomationApplication (AutomationElement element, Process process, boolean attached) throws AutomationException {
         super(element);
-        // From : http://www.golesny.de/p/code/javagetpid.
 
         this.isAttached = attached;
 

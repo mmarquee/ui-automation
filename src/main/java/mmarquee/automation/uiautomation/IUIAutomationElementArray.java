@@ -23,7 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by inpwt on 12/07/2016.
+ * Created by Mark Humphreys on 12/07/2016.
  */
 public interface IUIAutomationElementArray {
 
@@ -57,22 +57,22 @@ public interface IUIAutomationElementArray {
      *            catastrophic failure."):
      *            The set of interfaces accessible on an object through QueryInterface must be static, not dynamic. This means that if a call
      *            toQueryInterface for a pointer to a specified interface succeeds the first time, it must succeed again, and if it fails
-     *            the first time, it must fail on all subsequent queries. 
+     *            the first time, it must fail on all subsequent queries 
      *
-     *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed. 
+     *            It must be reflexive: if a client holds a pointer to an interface on an object, and queries for that interface, the call must succeed 
      *
      *            It must be symmetric: if a client holding a pointer to one interface queries successfully for another, a query through
-     *            the obtained pointer for the first interface must succeed. 
+     *            the obtained pointer for the first interface must succeed 
      *
      *            It must be transitive: if a client holding a pointer to one interface queries successfully for a second, and through that
      *            pointer queries successfully for a third interface, a query for the first interface through the pointer for the
-     *            third interface must succeed. 
+     *            third interface must succeed 
      *            Notes to Implementers
      *            Implementations of QueryInterface must never check ACLs. The main reason for this rule is that COM requires that an object supporting a
      *            particular interface always return success when queried for that interface. Another reason is that checking ACLs on QueryInterface
      *            does not provide any real security because any client who has access to a particular interface can hand it directly to another
      *            client without any calls back to the server. Also, because COM caches interface pointers, it does not callQueryInterface on
-     *            the server every time a client does a query.
+     *            the server every time a client does a query
      */
     WinNT.HRESULT QueryInterface(
             Guid.REFIID riid,

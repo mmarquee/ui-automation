@@ -16,7 +16,9 @@
 package mmarquee.automation;
 
 /**
- * Created by inpwt on 14/07/2016.
+ * Created by Mark Humphreys on 14/07/2016.
+ *
+ * An exception thrown when there is an error returned by the underlying automation library
  */
 public class AutomationException extends Exception {
 }

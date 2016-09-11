@@ -23,7 +23,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for  the ExpandCollapse pattern
  */

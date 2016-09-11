@@ -28,7 +28,7 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * Created by inpwt on 19/07/2016.
+ * Created by Mark Humphreys on 19/07/2016.
  */
 public class UIAutomationTest extends TestCase {
 

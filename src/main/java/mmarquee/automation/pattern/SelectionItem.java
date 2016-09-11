@@ -23,7 +23,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the SelectionItem pattern.
  */
@@ -64,7 +64,9 @@ public class SelectionItem extends BasePattern {
     public boolean isSelected() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.getPattern().Get_CurrentIsSelected(ibr);
+        if (this.getPattern().Get_CurrentIsSelected(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return (ibr.getValue() == 1);
     }

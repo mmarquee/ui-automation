@@ -30,7 +30,7 @@ import mmarquee.automation.utils.Utils;
 import java.util.List;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Test the automation wrapper on a WPF application.
  */

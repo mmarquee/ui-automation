@@ -22,7 +22,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 
 /**
- * Created by inpwt on 16/02/2016.
+ * Created by Mark Humphreys on 16/02/2016.
  *
  * Wrapper for the Document element.
  *

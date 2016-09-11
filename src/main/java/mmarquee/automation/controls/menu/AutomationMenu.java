@@ -22,7 +22,6 @@ import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -32,7 +31,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Created by inpwt on 09/02/2016.
+ * Created by Mark Humphreys on 09/02/2016.
  *
  * * Wrapper for the Menu control element.
  */

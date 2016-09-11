@@ -16,7 +16,7 @@
 package mmarquee.automation;
 
 /**
- * Created by inpwt on 28/01/2016.
+ * Created by Mark Humphreys on 28/01/2016.
  *
  * Automation Property Identifiers
  * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee684017(v=vs.85).aspx
