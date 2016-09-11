@@ -35,10 +35,7 @@ public abstract class AutomationBase {
 
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
-    /**
-     * TODO: Make this work with protected (done for EventHandler)
-     */
-    public AutomationElement element;
+    protected AutomationElement element;
 
     protected UIAutomation automation = UIAutomation.getInstance();
 

@@ -65,7 +65,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void maximize() throws AutomationException {
-        this.setWindowState(WindowVisualState.WindowVisualState_Maximized);
+        this.setWindowState(WindowVisualState.Maximized);
     }
 
     /**
@@ -73,7 +73,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void minimize() throws AutomationException {
-        this.setWindowState(WindowVisualState.WindowVisualState_Minimized);
+        this.setWindowState(WindowVisualState.Minimized);
     }
 
     /**

@@ -55,18 +55,6 @@ public class Toggle extends BasePattern {
             throw new AutomationException();
         }
 
-        // Hummm..
-
-        int value = ibr.getValue();
-
-        if (value == 0) {
-            return ToggleState.ToggleState_Off;
-        } else if (value == 1) {
-            return ToggleState.ToggleState_On;
-        } else if (value == 2) {
-            return ToggleState.ToggleState_Indeterminate;
-        } else {
-            throw new AutomationException();
-        }
+        return ToggleState.fromInt(ibr.getValue());
     }
 }

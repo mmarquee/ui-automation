@@ -36,9 +36,8 @@ public class AutomationElement {
      * <p>
      * The underlying automation element
      * </p>
-     * TODO: Make this work with protected (done for EventHandler)
      */
-    public IUIAutomationElement element;
+    protected IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement
@@ -370,19 +369,7 @@ public class AutomationElement {
             throw new AutomationException();
         }
 
-        // TODO: Fix the horrid conversion
-
-        int value = ibr.getValue();
-
-        if (value == 0) {
-            return OrientationType.None;
-        } else if (value == 1) {
-            return OrientationType.Horizontal;
-        } else if (value == 2) {
-            return OrientationType.Vertical;
-        } else {
-            throw new AutomationException();
-        }
+        return OrientationType.fromInt(ibr.getValue());
     }
 
     /**
