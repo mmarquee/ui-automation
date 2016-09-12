@@ -72,7 +72,7 @@ public class AutomationMainMenu extends AutomationBase {
                 this.createNamePropertyCondition(item0).getValue(),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pbr);
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants), pbr);
 
         if (item != null) {
             PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
@@ -119,7 +119,7 @@ public class AutomationMainMenu extends AutomationBase {
 
         AutomationElement foundElement = null;
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name0).getValue(),
                         this.createControlTypeCondition(ControlType.MenuItem).getValue()));
@@ -147,7 +147,7 @@ public class AutomationMainMenu extends AutomationBase {
                         // Seems to be find
                     }
 
-                    foundElement = this.getParent().findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    foundElement = this.getParent().findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
                             this.createNamePropertyCondition(name1).getValue(),
                             this.createControlTypeCondition(ControlType.MenuItem).getValue()));
@@ -165,7 +165,7 @@ public class AutomationMainMenu extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();

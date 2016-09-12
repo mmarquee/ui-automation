@@ -42,9 +42,8 @@ public abstract class AutomationBase {
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
-     * @throws AutomationException Something is wrong in automation
      */
-    public AutomationBase (AutomationElement element) throws AutomationException {
+    public AutomationBase (AutomationElement element) {
         this.element = element;
     }
 
@@ -270,7 +269,7 @@ public abstract class AutomationBase {
      * @throws AutomationException Something is up with automation
      */
     protected List<AutomationElement> findAll() throws AutomationException {
-        return this.findAll(new TreeScope(TreeScope.TreeScope_Children));
+        return this.findAll(new TreeScope(TreeScope.Children));
     }
 
     /**

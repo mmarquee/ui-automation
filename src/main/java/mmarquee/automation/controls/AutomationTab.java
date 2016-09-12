@@ -60,7 +60,7 @@ public class AutomationTab extends AutomationContainer {
         tabItems = new ArrayList<AutomationTabItem>();
 
         try {
-            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
             for (AutomationElement elem : collection) {
                 int retVal = elem.currentControlType();

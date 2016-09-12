@@ -65,7 +65,7 @@ public class AutomationMenuItem extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();

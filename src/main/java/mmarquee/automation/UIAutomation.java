@@ -115,7 +115,7 @@ public class UIAutomation {
      *
      * @return the instance of the ui automation library
      */
-    public final static UIAutomation getInstance() {
+    public static UIAutomation getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new UIAutomation();
         }
@@ -221,7 +221,7 @@ public class UIAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
                 }
@@ -390,7 +390,7 @@ public class UIAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
                             pCondition1);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
@@ -433,7 +433,7 @@ public class UIAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
                             pCondition1);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
@@ -474,7 +474,7 @@ public class UIAutomation {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             List<AutomationElement> collection =
-                    this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue());
+                    this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());
 
             for (AutomationElement element : collection) {
                 result.add(new AutomationWindow(element));

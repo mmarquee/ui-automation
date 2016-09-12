@@ -45,7 +45,7 @@ public class AutomationTreeView extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationTreeViewItem getItem(String name) throws PatternNotFoundException, AutomationException {
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),
                         this.createControlTypeCondition(ControlType.TreeItem).getValue()));

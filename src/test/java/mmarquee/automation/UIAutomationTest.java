@@ -242,7 +242,7 @@ public class UIAutomationTest extends TestCase {
         PointerByReference pCondition = instance.createTrueCondition();
         PointerByReference first = new PointerByReference();
 
-        root.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pCondition.getValue(), first);
+        root.element.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
 
         instance.compareElements(pRoot.getValue(), first.getValue(), same);
 

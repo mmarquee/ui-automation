@@ -404,9 +404,14 @@ public class TestMainWPF extends TestBase {
 
             document.showContextMenu();
 
-            logger.info("Document name is " + document.name());
+            logger.info("Document name is `" + document.name() + "`");
 
             logger.info("Text is " + document.getText());
+
+
+            String result = document.getSelection();
+
+            logger.info("Selection is " + result);
 
             // PASSWORD EDITBOX **********************************
 

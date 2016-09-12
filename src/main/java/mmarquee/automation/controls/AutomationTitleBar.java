@@ -46,7 +46,7 @@ public class AutomationTitleBar extends AutomationContainer {
     public AutomationMainMenu getMenuBar() throws AutomationException {
         PointerByReference condition = this.automation.CreateControlTypeCondition(ControlType.MenuBar);
 
-        AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
                 condition);
 
         return new AutomationMainMenu(this.element, element);

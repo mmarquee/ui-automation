@@ -58,7 +58,7 @@ public class AutomationSystemMenu extends AutomationBase {
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
+                this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
 
         AutomationElement foundElement = null;
         boolean found = false;
@@ -92,7 +92,7 @@ public class AutomationSystemMenu extends AutomationBase {
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Children), condition.getValue());
+                this.findAll(new TreeScope(TreeScope.Children), condition.getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 

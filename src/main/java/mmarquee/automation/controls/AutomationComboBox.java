@@ -102,7 +102,7 @@ public class AutomationComboBox extends AutomationBase {
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 
         List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+                this.findAll(new TreeScope(TreeScope.Descendants));
 
         for (AutomationElement element : collection) {
             int retValue = element.currentControlType();

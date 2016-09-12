@@ -68,7 +68,7 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationStatusBar getStatusBar() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
 
         AutomationStatusBar found = null;
 
@@ -170,7 +170,7 @@ public class AutomationWindow extends AutomationContainer {
 
         for (int count = 0; count < 10; count++) {
             try {
-                item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                item = this.findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
                                 this.createNamePropertyCondition(title).getValue(),
                                 this.createControlTypeCondition(ControlType.Window).getValue()));

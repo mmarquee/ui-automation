@@ -57,9 +57,7 @@ public class AutomationMenu extends AutomationBase {
     public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll();
 
-        AutomationMenuItem item = new AutomationMenuItem(items.get(index));
-
-        return item;
+        return new AutomationMenuItem(items.get(index));
     }
 
     /**
@@ -80,7 +78,7 @@ public class AutomationMenu extends AutomationBase {
             PointerByReference pCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
 
             item = this.findFirst(
-                    new TreeScope(TreeScope.TreeScope_Children),
+                    new TreeScope(TreeScope.Children),
                     pCondition);
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);

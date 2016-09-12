@@ -32,7 +32,7 @@ public class AutomationMouse {
      *
      * @return the instance of the ui automation library
      */
-    public final static AutomationMouse getInstance() {
+    public static AutomationMouse getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new AutomationMouse();
         }

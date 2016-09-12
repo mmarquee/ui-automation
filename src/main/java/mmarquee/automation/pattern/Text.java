@@ -53,18 +53,22 @@ public class Text extends BasePattern {
     /**
      * Gets the selection.
      *
-     * Not functional at the moment.
+     * @return String of the selection
      * @throws AutomationException Something has gone wrong
      */
-    public void getSelection() throws AutomationException {
+    public String getSelection() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().GetSelection(pbr);
+        if (this.getPattern().GetSelection(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationTextRangeArray.IID);
+
+        String selectionResult = "";
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
@@ -73,18 +77,53 @@ public class Text extends BasePattern {
 
             // OK, now what?
             IntByReference ibr = new IntByReference();
-            int result = selection.Get_Length(ibr);
+            if (selection.Get_Length(ibr) != 0) {
+                throw new AutomationException();
+            }
 
             int count = ibr.getValue();
+
+            for (int i = 0; i < count; i++) {
+                PointerByReference pbr0 = new PointerByReference();
+
+                if (selection.GetElement(i, pbr0) != 0) {
+                    throw new AutomationException();
+                }
+
+                Unknown unknown = new Unknown(pbr0.getValue());
+                PointerByReference pUnknown = new PointerByReference();
+
+                Guid.REFIID refiid = new Guid.REFIID(IUIAutomationTextRange.IID);
+
+                WinNT.HRESULT result = unknown.QueryInterface(refiid, pUnknown);
+                if (COMUtils.SUCCEEDED(result)) {
+                    IUIAutomationTextRange range =
+                            IUIAutomationTextRange.Converter.PointerToInterface(pUnknown);
+
+                    PointerByReference sr = new PointerByReference();
+
+                    if (range.GetText(-1, sr) != 0) {
+                        throw new AutomationException();
+                    }
+
+                    selectionResult = sr.getValue().getWideString(0);
+                } else {
+                    throw new AutomationException();
+                }
+            }
         }
+
+        return selectionResult;
     }
 
-//    /**`
-//     * Gets the document range from the pattern.
-//     */
-//    public void getDocumentRange () {
+    /**`
+     * Gets the document range from the pattern.
+     */
+    public void getDocumentRange () {
 //        ((IUIAutomationTextPattern)pattern).getSelection();
-//    }
+
+        // TODO: Get it working
+    }
 
     /**
      * Gets the text from the pattern.

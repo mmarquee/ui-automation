@@ -129,7 +129,7 @@ public class Utils {
             throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
         }
 
-        Rectangle rectangle = new Rectangle(rect.top, rect.left, rect.right -rect.left, rect.bottom -rect.top);
+        Rectangle rectangle = new Rectangle(rect.left, rect.top, rect.right -rect.left, rect.bottom -rect.top);
 
         BufferedImage image = new Robot().createScreenCapture(rectangle);
 

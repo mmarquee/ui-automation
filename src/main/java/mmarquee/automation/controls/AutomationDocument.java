@@ -51,4 +51,14 @@ public class AutomationDocument extends AutomationBase {
     public String getText() throws AutomationException {
         return this.textPattern.getText();
     }
+
+    /**
+     * Gets the selection
+     *
+     * @return String of text that is selected
+     * @throws AutomationException Something has gone wrong
+     */
+    public String getSelection() throws AutomationException {
+        return this.textPattern.getSelection();
+    }
 }

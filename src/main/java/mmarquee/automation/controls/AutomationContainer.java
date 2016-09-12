@@ -58,7 +58,7 @@ public class AutomationContainer extends AutomationBase {
         PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
         List<AutomationElement> collection = this.findAll(
-                new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
+                new TreeScope(TreeScope.Descendants), condition.getValue());
 
         return collection.get(index);
     }
@@ -76,7 +76,7 @@ public class AutomationContainer extends AutomationBase {
 
         AutomationElement foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+        collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
         int counter = 0;
 
@@ -112,7 +112,7 @@ public class AutomationContainer extends AutomationBase {
 
         AutomationElement foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+        collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
         for (AutomationElement element : collection) {
             int retVal = element.currentControlType();
@@ -145,7 +145,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws ElementNotFoundException Did not find the element
      */
     protected AutomationElement getControlByControlType(String name, ControlType id) throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        return this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name).getValue(),
                         this.createControlTypeCondition(id).getValue()));
@@ -159,7 +159,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException An error has occurred in automation
      */
     protected AutomationElement getControlByAutomationId(String automationId, ControlType controlType) throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        return this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId).getValue(),
                         this.createControlTypeCondition(controlType).getValue()));
@@ -216,9 +216,8 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationProgressBar getProgressBar(int index) throws PatternNotFoundException, AutomationException {
+    public AutomationProgressBar getProgressBar(int index) throws AutomationException {
         return new AutomationProgressBar(this.getControlByControlType(index, ControlType.ProgressBar));
     }
 
@@ -591,7 +590,7 @@ public class AutomationContainer extends AutomationBase {
         logger.info("About to start dumping");
 
         try {
-            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
             for (AutomationElement element : collection) {
                 try {

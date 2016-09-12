@@ -33,8 +33,7 @@ public interface IUIAutomationElement3 extends IUnknown {
     /**
      * The interface IID for QueryInterface et al
      */
-    Guid.IID IID = new Guid.IID(
-            "{8471DF34-AEE0-4A01-A7DE-7DB9AF12C296}");
+    Guid.IID IID = new Guid.IID("{8471DF34-AEE0-4A01-A7DE-7DB9AF12C296}");
 
     int showContextMenu();
 
