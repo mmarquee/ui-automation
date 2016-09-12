@@ -38,21 +38,13 @@ public interface IUIAutomation extends IUnknown {
     /**
      * The interface IID for QueryInterface et al
      */
-    Guid.IID IID = new Guid.IID(
-            "{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
+    Guid.IID IID = new Guid.IID("{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
 
     /**
      * The IID for the library itself
      */
-    Guid.GUID CLSID = new Guid.GUID(
-            "{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
-/*
-    WinNT.HRESULT QueryInterface(
-            Guid.REFIID riid,
-            PointerByReference ppvObject);
-    int AddRef();
-    int Release();
-*/
+    Guid.GUID CLSID = new Guid.GUID("{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
+
     int GetRootElement(PointerByReference root);
     int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element);
     int CreateAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
@@ -66,7 +58,6 @@ public interface IUIAutomation extends IUnknown {
     int GetFocusedElement(PointerByReference element);
 
     class Converter {
-
         private static int UIA_COMPARE_ELEMENTS = 3;
         private static int UIA_COMPARE_RUNTIME_IDS = 4;
         private static int UIA_GET_ROOT_ELEMENT = 5;

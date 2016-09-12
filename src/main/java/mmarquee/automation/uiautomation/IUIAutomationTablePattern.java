@@ -20,6 +20,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -34,6 +35,7 @@ public interface IUIAutomationTablePattern extends IUnknown {
 
     int GetCurrentRowHeaders(PointerByReference retVal);
     int GetCurrentColumnHeaders(PointerByReference retVal);
+    int Get_CurrentRowOrColumnMajor(IntByReference retVal);
 
     class Converter {
         private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTablePattern
@@ -70,6 +72,11 @@ public interface IUIAutomationTablePattern extends IUnknown {
 
                 public int GetCurrentColumnHeaders(PointerByReference retVal){
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int Get_CurrentRowOrColumnMajor(IntByReference retVal) {
+                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
             };

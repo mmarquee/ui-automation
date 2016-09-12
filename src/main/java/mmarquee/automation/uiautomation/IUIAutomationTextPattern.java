@@ -46,13 +46,13 @@ public interface IUIAutomationTextPattern extends IUnknown {
             return new IUIAutomationTextPattern() {
                 // IUnknown
 
-                //     @Override
+                //@Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                //@Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
@@ -77,7 +77,6 @@ public interface IUIAutomationTextPattern extends IUnknown {
                     Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, range});
                 }
-
             };
         }
     }

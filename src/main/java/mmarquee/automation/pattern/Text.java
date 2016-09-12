@@ -116,15 +116,6 @@ public class Text extends BasePattern {
         return selectionResult;
     }
 
-    /**`
-     * Gets the document range from the pattern.
-     */
-    public void getDocumentRange () {
-//        ((IUIAutomationTextPattern)pattern).getSelection();
-
-        // TODO: Get it working
-    }
-
     /**
      * Gets the text from the pattern.
      * @return The text.
