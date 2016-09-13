@@ -23,7 +23,7 @@ import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.*;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Test the automation library on a non-Delphi, non-WPF application, and see
  * whether we can get to all the bits of the UI
@@ -44,7 +44,11 @@ class TestExplorer extends TestBase {
             logger.error("Failed to launch or attach");
         }
 
-        application.waitForInputIdle(5000);
+        try {
+            application.waitForInputIdle(5000);
+        } catch (Throwable ex) {
+            logger.error("Failed to wait for input idle for some reason");
+        }
 
         // Get the main explorer window
         try {

@@ -17,11 +17,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by inpwt on 09/02/2016.
+ * Created by Mark Humphreys on 09/02/2016.
  *
  * Wrapper for the ListItem element.
  */
@@ -30,23 +31,21 @@ public class AutomationListItem extends AutomationBase {
     private SelectionItem selectItemPattern;
 
     /**
-     * Constructor for the AuyomationListItem
+     * Constructor for the AutomationListItem
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationListItem(AutomationElement element) {
+    public AutomationListItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.selectItemPattern = this.getSelectItemPattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.selectItemPattern = this.getSelectItemPattern();
     }
 
     /**
-     * Selects this item
+     * Selects this item.
+     * @throws AutomationException Something has gone wrong
      */
-    public void select() {
+    public void select() throws AutomationException {
         this.selectItemPattern.select();
     }
 

@@ -16,11 +16,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.AutomationContainer;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Wrapper for the Image control element.
  */
@@ -28,8 +27,9 @@ public class AutomationImage extends AutomationBase {
     /**
      * Construct the AutomationImage
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationImage(AutomationElement element) {
+    public AutomationImage(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

@@ -1,13 +1,12 @@
 package mmarquee.automation.controls.mouse;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.UIAutomation;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Wrapper for Robot, used if no other option is available.
  */
@@ -33,7 +32,7 @@ public class AutomationMouse {
      *
      * @return the instance of the ui automation library
      */
-    public final static AutomationMouse getInstance() {
+    public static AutomationMouse getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new AutomationMouse();
         }

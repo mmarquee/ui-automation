@@ -25,11 +25,12 @@ import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.automation.utils.Utils;
 
 import java.util.List;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Test the automation wrapper on a WPF application.
  */
@@ -136,7 +137,7 @@ public class TestMainWPF extends TestBase {
                 logger.info("Modal? " + val1);
 
                 try {
-                    automation.captureScreen("TestMainWPF.png");
+                    Utils.captureScreen("TestMainWPF.png");
                 } catch (Exception ex) {
                     // Should capture each exception
                     logger.info("Failed to capture screen for some reason");
@@ -403,9 +404,14 @@ public class TestMainWPF extends TestBase {
 
             document.showContextMenu();
 
-            logger.info("Document name is " + document.name());
+            logger.info("Document name is `" + document.name() + "`");
 
             logger.info("Text is " + document.getText());
+
+
+            String result = document.getSelection();
+
+            logger.info("Selection is " + result);
 
             // PASSWORD EDITBOX **********************************
 

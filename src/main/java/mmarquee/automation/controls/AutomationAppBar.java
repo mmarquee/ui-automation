@@ -16,9 +16,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
  *
  * Wrapper for the AppBar element
  */
@@ -29,8 +30,9 @@ public class AutomationAppBar extends AutomationBase {
      * This element seems to be undocumented by Microsoft
      *
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
      */
-    public AutomationAppBar(AutomationElement element) {
+    public AutomationAppBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

@@ -17,11 +17,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
- * Created by inpwt on 26/01/2016.
+ * Created by Mark Humphreys on 26/01/2016.
  *
  * Wrapper around the edit box element
  */
@@ -32,46 +33,47 @@ public class AutomationEditBox extends AutomationBase {
     /**
      * Gets the value of the control
      * @return The string value of the control
+     * @throws AutomationException Something has gone wrong
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return valuePattern.value();
     }
 
     /**
      * Sets the value of the edit box
      * @param value The value to set
+     * @throws AutomationException Something has gone wrong
      */
-    public void setValue(String value) {
+    public void setValue(String value) throws AutomationException {
         this.valuePattern.setValue(value);
     }
 
     /**
      * Whether the element is read only
      * @return True if readonly, otherwise false.
+     * @throws AutomationException Something has gone wrong
      */
-    public boolean isReadOnly() {
+    public boolean isReadOnly()throws AutomationException {
         return this.valuePattern.isReadOnly();
     }
 
     /**
      * Whether the element is a password
      * @return True if it's a password, otherwise false.
+     * @throws AutomationException Automation error
      */
-    public boolean isPassword() {
+    public boolean isPassword() throws AutomationException {
         return this.element.currentIsPassword();
     }
 
     /**
      * Constructor for the AutomationEditBox
      * @param element The underlying element
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation error
      */
-    public AutomationEditBox(AutomationElement element) {
+    public AutomationEditBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.valuePattern = this.getValuePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.valuePattern = this.getValuePattern();
     }
 }

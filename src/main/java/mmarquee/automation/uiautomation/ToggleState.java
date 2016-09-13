@@ -15,13 +15,16 @@
  */
 package mmarquee.automation.uiautomation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Created by inpwt on 13/07/2016.
+ * Created by Mark Humphreys on 13/07/2016.
  */
 public enum ToggleState {
-    ToggleState_Off(0),
-    ToggleState_On(1),
-    ToggleState_Indeterminate(2);
+    Off(0),
+    On(1),
+    Indeterminate(2);
 
     private int value;
 
@@ -31,5 +34,24 @@ public enum ToggleState {
 
     ToggleState (int value) {
         this.value = value;
+    }
+
+    private static final Map<Integer, ToggleState> intToTypeMap = new HashMap<Integer, ToggleState>();
+    static {
+        for (ToggleState type : ToggleState.values()) {
+            intToTypeMap.put(type.value, type);
+        }
+    }
+
+    /**
+     * Gets the enumeration from the given integer
+     * @param i The given integer
+     * @return The value (as an ToggleState)
+     */
+    public static ToggleState fromInt(int i) {
+        ToggleState type = intToTypeMap.get(Integer.valueOf(i));
+        if (type == null)
+            return ToggleState.Off;
+        return type;
     }
 }

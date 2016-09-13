@@ -21,45 +21,54 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the text pattern
  */
 public class Text extends BasePattern {
 
-    private IUIAutomationTextPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public Text() {
+        this.IID = IUIAutomationTextPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationTextPattern.IID);
-
+    private IUIAutomationTextPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationTextPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Gets the selection.
      *
-     * Not functional at the moment.
+     * @return String of the selection
+     * @throws AutomationException Something has gone wrong
      */
-    public void getSelection() {
+    public String getSelection() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().GetSelection(pbr);
+        if (this.getPattern().GetSelection(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationTextRangeArray.IID);
+
+        String selectionResult = "";
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
@@ -68,27 +77,56 @@ public class Text extends BasePattern {
 
             // OK, now what?
             IntByReference ibr = new IntByReference();
-            int result = selection.Get_Length(ibr);
+            if (selection.Get_Length(ibr) != 0) {
+                throw new AutomationException();
+            }
 
             int count = ibr.getValue();
-        }
-    }
 
-    /**
-     * Gets the document range from the pattern.
-     */
-//    public void getDocumentRange () {
-//        ((IUIAutomationTextPattern)pattern).getSelection();
-//    }
+            for (int i = 0; i < count; i++) {
+                PointerByReference pbr0 = new PointerByReference();
+
+                if (selection.GetElement(i, pbr0) != 0) {
+                    throw new AutomationException();
+                }
+
+                Unknown unknown = new Unknown(pbr0.getValue());
+                PointerByReference pUnknown = new PointerByReference();
+
+                Guid.REFIID refiid = new Guid.REFIID(IUIAutomationTextRange.IID);
+
+                WinNT.HRESULT result = unknown.QueryInterface(refiid, pUnknown);
+                if (COMUtils.SUCCEEDED(result)) {
+                    IUIAutomationTextRange range =
+                            IUIAutomationTextRange.Converter.PointerToInterface(pUnknown);
+
+                    PointerByReference sr = new PointerByReference();
+
+                    if (range.GetText(-1, sr) != 0) {
+                        throw new AutomationException();
+                    }
+
+                    selectionResult = sr.getValue().getWideString(0);
+                } else {
+                    throw new AutomationException();
+                }
+            }
+        }
+
+        return selectionResult;
+    }
 
     /**
      * Gets the text from the pattern.
      * @return The text.
+     * @throws AutomationException Something has gone wrong
      */
-    public String getText() {
+    public String getText() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().Get_DocumentRange(pbr);
+        if (this.getPattern().Get_DocumentRange(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
@@ -102,11 +140,13 @@ public class Text extends BasePattern {
 
             PointerByReference sr = new PointerByReference();
 
-            int result = range.GetText(-1, sr);
+            if (range.GetText(-1, sr) != 0) {
+                throw new AutomationException();
+            }
 
             return sr.getValue().getWideString(0);
         } else {
-            return null;
+            throw new AutomationException();
         }
     }
 }

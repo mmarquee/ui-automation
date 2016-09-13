@@ -21,7 +21,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationContainer;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
  *
  * Specialist pane that represents the RibbonCommandBar
  */
@@ -29,15 +29,16 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
     /**
      * Construct the AutomationRibbonCommandBar
      * @param element The element
+     * @throws AutomationException Something is wrong in automation
      */
-    public AutomationRibbonCommandBar(AutomationElement element) {
+    public AutomationRibbonCommandBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 
     /**
      * Get the RibbonWorkPane associated with the container
      * @return The AutomationRibbonWorkPane
-     * @throws AutomationException
+     * @throws AutomationException Something is wrong in automation
      */
     public AutomationRibbonWorkPane getRibbonWorkPane() throws AutomationException {
         return new AutomationRibbonWorkPane(this.getControlByControlType(0, ControlType.Pane, "UIRibbonWorkPane"));

@@ -16,8 +16,6 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
@@ -25,19 +23,23 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
- * Created by inpwt on 01/03/2016.
+ * Created by Mark Humphreys on 01/03/2016.
  *
  * Wrapper for the range pattern.
  */
 public class Range extends BasePattern {
+
+    /**
+     * Constructor for the value pattern
+     */
+    public Range() {
+        this.IID = IUIAutomationRangeValuePattern.IID;
+    }
+
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationRangeValuePattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);
@@ -52,7 +54,9 @@ public class Range extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setValue (double value) throws AutomationException {
-        this.getPattern().Set_Value(value);
+        if (this.getPattern().Set_Value(value) != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -63,7 +67,9 @@ public class Range extends BasePattern {
     public double getValue () throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 
-        int result = this.getPattern().Get_CurrentValue(dbr);
+        if (this.getPattern().Get_CurrentValue(dbr) != 0) {
+            throw new AutomationException();
+        }
 
         return dbr.getValue();
     }

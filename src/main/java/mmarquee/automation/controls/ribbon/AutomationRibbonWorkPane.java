@@ -21,7 +21,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationContainer;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
  *
  * * Specialist pane that represents the RibbonWorkPane of the MS Ribbon control.
  */
@@ -29,8 +29,9 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
     /**
      * Construct the AutomationRibbonWorkPane
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationRibbonWorkPane(AutomationElement element) {
+    public AutomationRibbonWorkPane(AutomationElement element) throws AutomationException {
         super(element);
     }
 

@@ -16,8 +16,6 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
@@ -26,19 +24,22 @@ import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the window pattern.
  */
 public class Window extends BasePattern {
+    /**
+     * Constructor for the value pattern
+     */
+    public Window() {
+        this.IID = IUIAutomationWindowPattern.IID;
+    }
+
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationWindowPattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
@@ -54,7 +55,9 @@ public class Window extends BasePattern {
      */
     public void waitForInputIdle(int timeout) throws AutomationException {
         IntByReference ibr = new IntByReference();
-        int result = this.getPattern().WaitForInputIdle(timeout, ibr);
+        if (this.getPattern().WaitForInputIdle(timeout, ibr) != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -62,7 +65,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void maximize() throws AutomationException {
-        this.setWindowState(WindowVisualState.WindowVisualState_Maximized);
+        this.setWindowState(WindowVisualState.Maximized);
     }
 
     /**
@@ -70,7 +73,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void minimize() throws AutomationException {
-        this.setWindowState(WindowVisualState.WindowVisualState_Minimized);
+        this.setWindowState(WindowVisualState.Minimized);
     }
 
     /**
@@ -80,7 +83,9 @@ public class Window extends BasePattern {
      */
     public boolean isModal() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        int result = this.getPattern().Get_CurrentIsModal(ibr);
+        if (this.getPattern().Get_CurrentIsModal(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return (ibr.getValue()  == 1);
     }
@@ -92,7 +97,9 @@ public class Window extends BasePattern {
      */
     public boolean isTopMost() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        int result = this.getPattern().Get_CurrentIsTopmost(ibr);
+        if (this.getPattern().Get_CurrentIsTopmost(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return (ibr.getValue()  == 1);
     }
@@ -102,7 +109,9 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void close() throws AutomationException {
-        int result = this.getPattern().Close();
+        if (this.getPattern().Close() != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -111,6 +120,8 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setWindowState(WindowVisualState state) throws AutomationException {
-        int result = this.getPattern().SetWindowVisualState(state.getValue());
+        if (this.getPattern().SetWindowVisualState(state.getValue()) != 0) {
+            throw new AutomationException();
+        }
     }
 }

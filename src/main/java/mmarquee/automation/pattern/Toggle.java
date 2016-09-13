@@ -1,31 +1,30 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the toggle pattern.
  */
 public class Toggle extends BasePattern {
+    /**
+     * Constructor for the value pattern
+     */
+    public Toggle() {
+        this.IID = IUIAutomationTogglePattern.IID;
+    }
 
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationTogglePattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationTogglePattern.Converter.PointerToInterface(pbr);
@@ -39,7 +38,9 @@ public class Toggle extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void toggle () throws AutomationException {
-        this.getPattern().Toggle();
+        if (this.getPattern().Toggle() != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -50,20 +51,10 @@ public class Toggle extends BasePattern {
     public ToggleState currentToggleState() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        this.getPattern().Get_CurrentToggleState(ibr);
-
-        // Hummm..
-
-        int value = ibr.getValue();
-
-        if (value == 0) {
-            return ToggleState.ToggleState_Off;
-        } else if (value == 1) {
-            return ToggleState.ToggleState_On;
-        } else if (value == 2) {
-            return ToggleState.ToggleState_Indeterminate;
-        } else {
+        if (this.getPattern().Get_CurrentToggleState(ibr) != 0) {
             throw new AutomationException();
         }
+
+        return ToggleState.fromInt(ibr.getValue());
     }
 }

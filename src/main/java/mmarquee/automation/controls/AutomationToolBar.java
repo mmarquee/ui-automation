@@ -20,7 +20,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
 
  * Wrapper for the Toolbar element.
  * IDockProvider, IExpandCollapse,
@@ -30,8 +30,9 @@ public class AutomationToolBar extends AutomationContainer {
      * Constructor for the AutomationToolBar.
      *
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
      */
-    public AutomationToolBar(AutomationElement element) {
+    public AutomationToolBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 

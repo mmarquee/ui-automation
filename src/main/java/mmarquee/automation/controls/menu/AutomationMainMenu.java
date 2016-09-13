@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
@@ -23,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 09/02/2016.
+ * Created by Mark Humphreys on 09/02/2016.
  *
  * Wrapper for the MainMenu element.
  */
@@ -52,8 +51,9 @@ public class AutomationMainMenu extends AutomationBase {
      * Constructor for AutomationMainMenu
      * @param parent Parent of the element
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationMainMenu(AutomationElement parent, AutomationElement element) {
+    public AutomationMainMenu(AutomationElement parent, AutomationElement element) throws AutomationException {
         super(element);
         this.parent = parent;
     }
@@ -72,7 +72,7 @@ public class AutomationMainMenu extends AutomationBase {
                 this.createNamePropertyCondition(item0).getValue(),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pbr);
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants), pbr);
 
         if (item != null) {
             PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
@@ -113,18 +113,19 @@ public class AutomationMainMenu extends AutomationBase {
      * @param name1 Second name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1) throws AutomationException {
+    public AutomationMenuItem getMenuItem (String name0, String name1) throws PatternNotFoundException, AutomationException {
 
         AutomationElement foundElement = null;
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name0).getValue(),
                         this.createControlTypeCondition(ControlType.MenuItem).getValue()));
 
         if (!name1.isEmpty()) {
-            // Needs a subitem
+            // Needs a sub-item
             if (item != null) {
                 // Find the sub-item now
                 PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
@@ -146,7 +147,7 @@ public class AutomationMainMenu extends AutomationBase {
                         // Seems to be find
                     }
 
-                    foundElement = this.getParent().findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    foundElement = this.getParent().findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
                             this.createNamePropertyCondition(name1).getValue(),
                             this.createControlTypeCondition(ControlType.MenuItem).getValue()));
@@ -161,9 +162,10 @@ public class AutomationMainMenu extends AutomationBase {
      * Gets the items associated with this menu control
      * @return The list of items
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
+    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();

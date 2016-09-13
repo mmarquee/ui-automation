@@ -16,19 +16,19 @@
 
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 19/02/2016.
+ * Created by Mark Humphreys on 19/02/2016.
  *
  * Wrapper for the SystemMenu control element.
  */
@@ -37,8 +37,9 @@ public class AutomationSystemMenu extends AutomationBase {
      * Construct the AutomationSystemMenu
      * @param element The element
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSystemMenu(AutomationElement element) throws AutomationException {
+    public AutomationSystemMenu(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
         this.getItems();
@@ -50,13 +51,14 @@ public class AutomationSystemMenu extends AutomationBase {
      * @param name The name to look for
      * @return The menu item
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getItem(String name) throws AutomationException {
+    public AutomationMenuItem getItem(String name) throws PatternNotFoundException, AutomationException {
 
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
+                this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
 
         AutomationElement foundElement = null;
         boolean found = false;
@@ -84,12 +86,13 @@ public class AutomationSystemMenu extends AutomationBase {
      *
      * @return The list of menu items
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    protected List<AutomationMenuItem> getItems() throws AutomationException {
+    protected List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Children), condition.getValue());
+                this.findAll(new TreeScope(TreeScope.Children), condition.getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 

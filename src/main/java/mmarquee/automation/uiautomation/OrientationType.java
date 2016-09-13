@@ -15,6 +15,9 @@
  */
 package mmarquee.automation.uiautomation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  */
 public enum OrientationType {
@@ -30,5 +33,24 @@ public enum OrientationType {
 
     OrientationType (int value) {
         this.value = value;
+    }
+
+    private static final Map<Integer, OrientationType> intToTypeMap = new HashMap<Integer, OrientationType>();
+    static {
+        for (OrientationType type : OrientationType.values()) {
+            intToTypeMap.put(type.value, type);
+        }
+    }
+
+    /**
+     * Gets the enumeration from the given integer
+     * @param i The given integer
+     * @return The value (as an OrientationType)
+     */
+    public static OrientationType fromInt(int i) {
+        OrientationType type = intToTypeMap.get(Integer.valueOf(i));
+        if (type == null)
+            return OrientationType.None;
+        return type;
     }
 }

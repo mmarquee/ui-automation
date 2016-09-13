@@ -17,9 +17,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 01/02/2016.
+ * Created by Mark Humphreys on 01/02/2016.
  *
  * Wrapper for the TextBox element.
  */
@@ -27,16 +28,18 @@ public class AutomationTextBox extends AutomationBase {
     /**
      * Construct the AutomationTextBox
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationTextBox(AutomationElement element) {
+    public AutomationTextBox(AutomationElement element) throws AutomationException {
         super(element);
     }
 
     /**
      * Gets the text associated with this element
      * @return The current text
+     * @throws AutomationException Automation library error
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return this.element.getName();
     }
 }

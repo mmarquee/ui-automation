@@ -15,8 +15,9 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
@@ -29,7 +30,7 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * Created by inpwt on 26/01/2016.
+ * Created by Mark Humphreys on 26/01/2016.
  *
  * Encapsulates the 'window' element
  */
@@ -47,8 +48,9 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Constructor for the AutomationWindow
      * @param element The underlying element
+     * @throws AutomationException Something is wrong in automation
      */
-    public AutomationWindow (AutomationElement element) {
+    public AutomationWindow (AutomationElement element) throws AutomationException {
         super(element);
 
         try {
@@ -66,7 +68,7 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationStatusBar getStatusBar() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants), condition.getValue());
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
 
         AutomationStatusBar found = null;
 
@@ -95,8 +97,9 @@ public class AutomationWindow extends AutomationContainer {
      * Gets the system menu associated with this window
      * @return The system menu
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSystemMenu getSystemMenu() throws AutomationException {
+    public AutomationSystemMenu getSystemMenu() throws PatternNotFoundException, AutomationException {
         return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar)));
     }
 
@@ -167,7 +170,7 @@ public class AutomationWindow extends AutomationContainer {
 
         for (int count = 0; count < 10; count++) {
             try {
-                item = this.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                item = this.findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
                                 this.createNamePropertyCondition(title).getValue(),
                                 this.createControlTypeCondition(ControlType.Window).getValue()));
@@ -226,11 +229,18 @@ public class AutomationWindow extends AutomationContainer {
     /**
      * Sets transparency of the window
      * @param alpha 0..255 alpha attribute
+     * @throws Win32Exception WIN32 call has failed
+     * @throws AutomationException Something is wrong in automation
      */
-    public void setTransparency(int alpha) {
+    public void setTransparency(int alpha) throws Win32Exception, AutomationException {
         WinDef.HWND hwnd = this.getNativeWindowHandle();
 
-        User32.INSTANCE.SetWindowLong(hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED);
-        User32.INSTANCE.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, User32.LWA_ALPHA);
+        if (User32.INSTANCE.SetWindowLong(hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED) == 0) {
+            throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
+        }
+
+        if (!User32.INSTANCE.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, User32.LWA_ALPHA)) {
+            throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
+        }
     }
 }

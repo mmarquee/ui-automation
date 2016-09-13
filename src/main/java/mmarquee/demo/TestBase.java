@@ -4,7 +4,7 @@ import mmarquee.automation.controls.AutomationBase;
 import org.apache.log4j.Logger;
 
 /**
- * Created by inpwt on 19/05/2016.
+ * Created by Mark Humphreys on 19/05/2016.
  */
 public class TestBase {
 

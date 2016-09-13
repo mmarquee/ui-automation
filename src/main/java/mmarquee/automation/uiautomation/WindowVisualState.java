@@ -15,12 +15,15 @@
  */
 package mmarquee.automation.uiautomation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  */
 public enum WindowVisualState {
-    WindowVisualState_Normal(0),
-    WindowVisualState_Maximized(1),
-    WindowVisualState_Minimized(2);
+    Normal(0),
+    Maximized(1),
+    Minimized(2);
 
     private int value;
 
@@ -31,4 +34,24 @@ public enum WindowVisualState {
     WindowVisualState (int value) {
         this.value = value;
     }
+
+    private static final Map<Integer, WindowVisualState> intToTypeMap = new HashMap<Integer, WindowVisualState>();
+    static {
+        for (WindowVisualState type : WindowVisualState.values()) {
+            intToTypeMap.put(type.value, type);
+        }
+    }
+
+    /**
+     * Gets the enumeration from the given integer
+     * @param i The given integer
+     * @return The value (as an WindowVisualState)
+     */
+    public static WindowVisualState fromInt(int i) {
+        WindowVisualState type = intToTypeMap.get(Integer.valueOf(i));
+        if (type == null)
+            return WindowVisualState.Normal;
+        return type;
+    }
+
 }
