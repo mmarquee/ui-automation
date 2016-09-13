@@ -19,14 +19,6 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.sun.jna.*;
-import com.sun.jna.platform.win32.*;
-import com.sun.jna.platform.win32.WinNT.*;
-import com.sun.jna.platform.win32.OaIdl.*;
-import com.sun.jna.platform.win32.WinDef.*;
-import com.sun.jna.platform.win32.Variant.VARIANT;
-import com.sun.jna.platform.win32.WTypes.*;
-import com.sun.jna.platform.win32.COM.*;
-import com.sun.jna.platform.win32.Guid.*;
 
 /**
  * uuid({00000000-0000-0000-0000-000000000000})
@@ -53,17 +45,17 @@ public class TreeScope extends Structure {
     }
 
     //TreeScope_Element
-    public static final int TreeScope_Element = 1;
+    public static final int Element = 1;
     //TreeScope_Children
-    public static final int TreeScope_Children = 2;
+    public static final int Children = 2;
     //TreeScope_Descendants
-    public static final int TreeScope_Descendants = 4;
+    public static final int Descendants = 4;
     //TreeScope_Parent
-    public static final int TreeScope_Parent = 8;
-    //TreeScope_Ancestors
-    public static final int TreeScope_Ancestors = 16;
+    public static final int Parent = 8;
     //TreeScope_Subtree
-    public static final int TreeScope_Subtree = 7;
+    public static final int Subtree = 7;
+    //TreeScope_Ancestors
+    public static final int Ancestors = 16;
 
     @Override
     protected List<String> getFieldOrder() {

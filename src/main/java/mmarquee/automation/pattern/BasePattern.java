@@ -23,7 +23,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.PatternID;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 
@@ -31,11 +31,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 29/02/2016.
+ * Created by Mark Humphreys on 29/02/2016.
  *
  * Base for the pattern wrappers
  */
 public abstract class BasePattern implements Pattern {
+
+    /**
+     * The guid of the pattern.
+     */
+    protected Guid.IID IID;
 
     /**
      * The underlying automation pattern
@@ -54,12 +59,15 @@ public abstract class BasePattern implements Pattern {
      *
      * @param collection The ElementArray.
      * @return The List
+     * @throws AutomationException Error in the automation library
      */
-    List<AutomationElement> collectionToList(IUIAutomationElementArray collection) {
+    List<AutomationElement> collectionToList(IUIAutomationElementArray collection) throws AutomationException {
 
         IntByReference ibr = new IntByReference();
 
-        int result = collection.get_Length(ibr);
+        if (collection.get_Length(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         List<AutomationElement> list = new ArrayList<AutomationElement>();
 
@@ -67,7 +75,9 @@ public abstract class BasePattern implements Pattern {
 
             PointerByReference pbr = new PointerByReference();
 
-            int res = collection.GetElement(count, pbr);
+            if (collection.GetElement(count, pbr) != 0) {
+                throw new AutomationException();
+            }
 
             Unknown uElement = new Unknown(pbr.getValue());
 
@@ -100,5 +110,15 @@ public abstract class BasePattern implements Pattern {
      */
     public boolean isAvailable () {
         return (pattern == null);
+    }
+
+    /**
+     * Gets the raw pointer to the pattern
+     * @param pbr The raw pointer
+     * @return Result of the call.
+     */
+    protected WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
+        Unknown uElement = new Unknown(this.pattern);
+        return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }
 }

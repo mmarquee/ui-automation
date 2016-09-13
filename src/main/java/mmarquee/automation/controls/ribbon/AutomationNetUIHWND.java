@@ -16,10 +16,11 @@
 package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationPanel;
 
 /**
- * Created by inpwt on 02/03/2016.
+ * Created by Mark Humphreys on 02/03/2016.
  *
  * Specialist pane that represents the NetUIHWND (part of the MS ribbon controls)
  */
@@ -27,8 +28,9 @@ public class AutomationNetUIHWND extends AutomationPanel {
     /**
      * Construct the AutomationNetUIHWND
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationNetUIHWND(AutomationElement element) {
+    public AutomationNetUIHWND(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

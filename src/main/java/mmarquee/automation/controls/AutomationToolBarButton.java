@@ -17,10 +17,11 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 
 /**
- * Created by inpwt on 20/07/2016.
+ * Created by Mark Humphreys on 20/07/2016.
  *
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
@@ -29,8 +30,9 @@ public class AutomationToolBarButton extends AutomationBase {
     /**
      * Constructor for the AutomationToolBarButton
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
      */
-    public AutomationToolBarButton(AutomationElement element) {
+    public AutomationToolBarButton(AutomationElement element) throws AutomationException {
         super (element);
     }
 
@@ -40,8 +42,9 @@ public class AutomationToolBarButton extends AutomationBase {
      * </p>
      *
      * Actual manufactures the click, as the toolbar buttons do not seem behave properly
+     * @throws AutomationException Automation library error
      */
-    public void click() {
+    public void click() throws AutomationException {
         WinDef.POINT point = this.element.getClickablePoint();
 
         AutomationMouse mouse = AutomationMouse.getInstance();

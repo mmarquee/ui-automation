@@ -16,7 +16,7 @@
 package mmarquee.automation;
 
 /**
- * Created by inpwt on 24/05/2016.
+ * Created by Mark Humphreys on 24/05/2016.
  *
  * Automation Event Identifiers
  */

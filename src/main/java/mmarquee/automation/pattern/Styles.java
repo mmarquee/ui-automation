@@ -16,45 +16,49 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 
 /**
- * Created by inpwt on 01/03/2016.
+ * Created by Mark Humphreys on 01/03/2016.
  *
  * Wrapper around the styles pattern.
  */
 public class Styles extends BasePattern {
 
-    private IUIAutomationStylesPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public Styles() {
+        this.IID = IUIAutomationStylesPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationStylesPattern.IID);
-
+    private IUIAutomationStylesPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationStylesPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
     /**
      * Gets the style by name
      * @return The style name.
+     * @throws AutomationException Something has gone wrong
      */
-    public String getStyleName () {
+    public String getStyleName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        int result = this.getPattern().Get_CurrentStyleName(sr);
+        if (this.getPattern().Get_CurrentStyleName(sr) != 0) {
+            throw new AutomationException();
+        }
 
         return sr.getValue().getWideString(0);
     }
@@ -62,11 +66,14 @@ public class Styles extends BasePattern {
     /**
      * Gets the style id.
      * @return The style id.
+     * @throws AutomationException Something has gone wrong
      */
-    public int getStyleId () {
+    public int getStyleId() throws AutomationException {
         IntByReference ipr = new IntByReference();
 
-        int result = this.getPattern().Get_CurrentStyleId(ipr);
+        if (this.getPattern().Get_CurrentStyleId(ipr) != 0) {
+            throw new AutomationException();
+        }
 
         return ipr.getValue();
     }

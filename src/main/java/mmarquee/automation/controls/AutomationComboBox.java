@@ -19,6 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 01/02/2016.
+ * Created by Mark Humphreys on 01/02/2016.
  *
  * Wrapper for the ComboBoc element.
  */
@@ -37,34 +38,31 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Constructor for the AutomationComboBox.
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern(s) not found
      */
-    public AutomationComboBox(AutomationElement element) {
+    public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super (element);
 
-        try {
-            this.collapsePattern = this.getExpandCollapsePattern();
-            this.valuePattern = this.getValuePattern();
-        } catch (mmarquee.automation.pattern.PatternNotFoundException ex) {
-            logger.warn("Failed to get patterns");
-        }
+        this.collapsePattern = this.getExpandCollapsePattern();
+        this.valuePattern = this.getValuePattern();
     }
 
     /**
      * Gets the text associated with this element
      * @return The current value
+     * @throws AutomationException Something has gone wrong
      */
-    public String text() {
-
-        String value = valuePattern.value();
-
-        return value;
+    public String text() throws AutomationException {
+        return valuePattern.value();
     }
 
     /**
      * Sets the text associated with this element
-     * @param text The value to be set
+     * @param text The value to be set.
+     * @throws AutomationException Something has gone wrong
      */
-    public void setText(String text) {
+    public void setText(String text) throws AutomationException {
         valuePattern.setValue(text);
     }
 
@@ -97,13 +95,14 @@ public class AutomationComboBox extends AutomationBase {
      * Gets the list of items associated with this element.
      * @return List of AutomationListItems
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationListItem> getList() throws AutomationException {
+    public List<AutomationListItem> getList() throws PatternNotFoundException, AutomationException {
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 
         List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+                this.findAll(new TreeScope(TreeScope.Descendants));
 
         for (AutomationElement element : collection) {
             int retValue = element.currentControlType();

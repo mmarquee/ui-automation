@@ -16,11 +16,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
- * Created by inpwt on 16/02/2016.
+ * Created by Mark Humphreys on 16/02/2016.
  *
  * Wrapper for the Calendar element.
  *
@@ -32,21 +33,20 @@ public class AutomationCalendar extends AutomationBase {
     /**
      * Constructor for the AutomationCalendar.
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCalendar(AutomationElement element) {
+    public AutomationCalendar(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        try {
-            this.valuePattern = this.getValuePattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.valuePattern = this.getValuePattern();
     }
 
     /**
      * Gets the current value of the control
-     * @return The current value
+     * @return The current value.
+     * @throws AutomationException Something has gone wrong
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return this.valuePattern.value();
     }
 }

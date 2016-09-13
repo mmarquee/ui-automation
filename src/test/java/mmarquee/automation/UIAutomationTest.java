@@ -28,7 +28,7 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * Created by inpwt on 19/07/2016.
+ * Created by Mark Humphreys on 19/07/2016.
  */
 public class UIAutomationTest extends TestCase {
 
@@ -42,7 +42,7 @@ public class UIAutomationTest extends TestCase {
         assertTrue("instance:" + instance.toString(), instance != null);
     }
 
-    public void testGetRootElement() {
+    public void testGetRootElement() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
         AutomationElement root = instance.getRootElement();
@@ -242,7 +242,7 @@ public class UIAutomationTest extends TestCase {
         PointerByReference pCondition = instance.createTrueCondition();
         PointerByReference first = new PointerByReference();
 
-        root.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pCondition.getValue(), first);
+        root.element.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
 
         instance.compareElements(pRoot.getValue(), first.getValue(), same);
 

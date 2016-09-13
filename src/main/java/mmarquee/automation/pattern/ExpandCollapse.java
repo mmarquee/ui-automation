@@ -16,8 +16,6 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
@@ -25,11 +23,18 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for  the ExpandCollapse pattern
  */
 public class ExpandCollapse extends BasePattern {
+
+    /**
+     * Constructor for the pattern
+     */
+    public ExpandCollapse() {
+        this.IID = IUIAutomationExpandCollapsePattern.IID;
+    }
 
     /**
      * Gets the pattern
@@ -37,13 +42,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something went wrong getting the pattern
      */
     private IUIAutomationExpandCollapsePattern getPattern() throws AutomationException {
-        Unknown uElement = new Unknown(this.pattern);
-
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
@@ -57,7 +58,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
-        this.getPattern().Expand();
+        if (this.getPattern().Expand() != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -65,7 +68,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void collapse()throws AutomationException  {
-        this.getPattern().Collapse();
+        if (this.getPattern().Collapse() != 0) {
+            throw new AutomationException();
+        }
     }
 
     /**
@@ -76,7 +81,9 @@ public class ExpandCollapse extends BasePattern {
     public boolean isExpanded() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.getPattern().Get_CurrentExpandCollapseState(ibr);
+        if (this.getPattern().Get_CurrentExpandCollapseState(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue() == 1; //ExpandCollapseState.ExpandCollapseState_Expanded;
     }

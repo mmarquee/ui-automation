@@ -17,14 +17,17 @@ package mmarquee.automation.utils;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.*;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.win32.W32APIOptions;
 import mmarquee.automation.AutomationException;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
- * Created by inpwt on 18/03/2016.
+ * Created by Mark Humphreys on 18/03/2016.
  *
  * Utility methods used in the project
  */
@@ -61,7 +64,7 @@ public class Utils {
         File file = new File(command[0]);
         String filename = file.getName();
 
-        Kernel32 kernel32 = (Kernel32) Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
+        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
 
         WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
 
@@ -111,11 +114,37 @@ public class Utils {
         User32.INSTANCE.PostMessage(handle, WinUser.WM_CLOSE, null, null);
     }
 
-    /*
-    public BufferedImage capture(WinDef.HWND hwnd) {
-        BufferedImage image = new BufferedImage();
+    /**
+     * Captures the window.
+     *
+     * @param hwnd The window to capture
+     * @param filename Name to save the output into
+     * @throws AWTException Robot exception
+     * @throws IOException IO Exception
+     */
+    public static void capture(WinDef.HWND hwnd, String filename) throws AWTException, IOException, Win32Exception {
+        WinDef.RECT rect = new WinDef.RECT();
 
-        return image;
+        if (!User32.INSTANCE.GetWindowRect(hwnd, rect)) {
+            throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
+        }
+
+        Rectangle rectangle = new Rectangle(rect.left, rect.top, rect.right -rect.left, rect.bottom -rect.top);
+
+        BufferedImage image = new Robot().createScreenCapture(rectangle);
+
+        ImageIO.write(image, "png", new File(filename));
     }
-    */
+
+    /**
+     * Captures the screen.
+     *
+     * @param filename The filename
+     * @throws AWTException Robot exception
+     * @throws IOException IO Exception
+     */
+    public static void captureScreen(String filename) throws AWTException, IOException {
+        BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        ImageIO.write(image, "png", new File(filename));
+    }
 }

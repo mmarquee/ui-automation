@@ -17,9 +17,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 01/02/2016.
+ * Created by Mark Humphreys on 01/02/2016.
  *
  * Wrapper for the StatusBar element.
  */
@@ -27,8 +28,9 @@ public class AutomationStatusBar extends AutomationContainer {
     /**
      * Constructor for AutomationStatusBar
      * @param element The underlying element
+     * @throws AutomationException Automation library error
      */
-    public AutomationStatusBar(AutomationElement element) {
+    public AutomationStatusBar(AutomationElement element) throws AutomationException{
         super(element);
     }
 }

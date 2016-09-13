@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 10/02/2016.
+ * Created by Mark Humphreys on 10/02/2016.
  *
  * Wrapper for the MenuItem element.
  */
@@ -39,34 +39,33 @@ public class AutomationMenuItem extends AutomationBase {
     /**
      * Construct the AutomationMenuItem
      * @param element The element
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation error
      */
-    public AutomationMenuItem(AutomationElement element) {
+    public AutomationMenuItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            this.collapsePattern = this.getExpandCollapsePattern();
-            this.invokePattern = this.getInvokePattern();
-        } catch (PatternNotFoundException ex) {
-         //   logger.warn("Failed to get patterns");
-        }
+        this.collapsePattern = this.getExpandCollapsePattern();
+        this.invokePattern = this.getInvokePattern();
     }
 
     /**
      * Invoke the click pattern for the menu item.
+     * @throws AutomationException Something has gone wrong
      */
-    public void click() {
+    public void click() throws AutomationException {
         if (this.invokePattern != null) {
             this.invokePattern.invoke();
         }
     }
 
     /**
-     * Gets the list of items associatd with this menuitem
+     * Gets the list of items associated with this menu item
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants),
+    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem).getValue());
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();

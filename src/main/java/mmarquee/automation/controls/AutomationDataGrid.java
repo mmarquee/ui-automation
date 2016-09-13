@@ -16,7 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 03/02/2016.
+ * Created by Mark Humphreys on 03/02/2016.
  *
  * Wrapper around the Delphi automated string grid
  */
@@ -45,33 +44,33 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Construct the AutomationDataGrid
      * @param element The element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGrid(AutomationElement element) {
+    public AutomationDataGrid(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
-        try {
-            this.valuePattern = this.getValuePattern();
-            this.grid = this.getGridPattern();
-            this.tablePattern = this.getTablePattern();
-            this.selectionPattern = this.getSelectionPattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        this.valuePattern = this.getValuePattern();
+        this.grid = this.getGridPattern();
+        this.tablePattern = this.getTablePattern();
+        this.selectionPattern = this.getSelectionPattern();
     }
 
     /**
      * Gets the text associated with the active cell of this element
      * @return The value of the item
+     * @throws AutomationException Something has gone wrong
      */
-    public String getValue() {
+    public String getValue() throws AutomationException {
         return this.valuePattern.value();
     }
 
     /**
      * Whether the grid is read only
      * @return Read only?
+     * @throws AutomationException Something has gone wrong
      */
-    public boolean isReadOnly() {
+    public boolean isReadOnly() throws AutomationException {
         return this.valuePattern.isReadOnly();
     }
 
@@ -79,8 +78,9 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the selected item from the grid
      * @return AutomationStringGridItem
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell selected() throws AutomationException {
+    public AutomationDataGridCell selected() throws PatternNotFoundException, AutomationException  {
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
         return new AutomationDataGridCell(collection.get(0));
@@ -89,8 +89,10 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Gets the list of the column headers
      * @return List of GridItems
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getColumnHeaders () {
+    public List<AutomationDataGridCell> getColumnHeaders () throws PatternNotFoundException, AutomationException  {
 
         List<AutomationElement> collection = tablePattern.getCurrentColumnHeaders();
 
@@ -109,8 +111,9 @@ public class AutomationDataGrid extends AutomationBase
      * @param y Y Offset
      * @return The GridItem at the given cell position
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell getItem(int x, int y) throws AutomationException {
+    public AutomationDataGridCell getItem(int x, int y) throws PatternNotFoundException, AutomationException  {
 
         PointerByReference cell = this.grid.getItem(x, y);
 
@@ -134,16 +137,18 @@ public class AutomationDataGrid extends AutomationBase
     /**
      * Gets the row count of the grid
      * @return The row count
+     * @throws AutomationException Something has gone wrong
      */
-    public int rowCount() {
+    public int rowCount() throws AutomationException {
         return this.grid.rowCount();
     }
 
     /**
      * Gets the column count of the grid
      * @return The column count
+     * @throws AutomationException Something has gone wrong
      */
-    public int columnCount() {
+    public int columnCount() throws AutomationException {
         return this.grid.columnCount();
     }
 
@@ -151,9 +156,10 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the cells for the given row
      * @param row The row
      * @return Collection of cells for the given row
-     * @throws AutomationException Something is up
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getRow(int row) throws AutomationException {
+    public List<AutomationDataGridCell> getRow(int row) throws PatternNotFoundException, AutomationException {
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (int count = 0; count < this.rowCount(); count++) {
@@ -168,9 +174,10 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the cells for the given column
      * @param col The column
      * @return Collection of cells for the given column
-     * @throws AutomationException Something is up
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getColumn(int col) throws AutomationException {
+    public List<AutomationDataGridCell> getColumn(int col) throws PatternNotFoundException, AutomationException {
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (int count = 0; count < this.rowCount(); count++) {
@@ -182,12 +189,13 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
-     * Gets the colum header for the given column
+     * Gets the column headers for the given column
      * @param col The column
      * @return The header cell
-     * @throws AutomationException Ooops, it's all gone wrong
+     * @throws AutomationException Error in automation library
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell getColumnHeader(int col) throws AutomationException {
+    public AutomationDataGridCell getColumnHeader(int col) throws PatternNotFoundException, AutomationException {
         List<AutomationDataGridCell> headers = this.getColumnHeaders();
 
         return headers.get(col);

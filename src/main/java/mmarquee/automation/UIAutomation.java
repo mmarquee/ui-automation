@@ -26,17 +26,12 @@ import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Created by inpwt on 26/01/2016.
+ * Created by Mark Humphreys on 26/01/2016.
  *
  * The base automation wrapper.
  */
@@ -120,7 +115,7 @@ public class UIAutomation {
      *
      * @return the instance of the ui automation library
      */
-    public final static UIAutomation getInstance() {
+    public static UIAutomation getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new UIAutomation();
         }
@@ -134,8 +129,9 @@ public class UIAutomation {
      * @param command The command to be called
      * @return AutomationApplication that represents the application
      * @throws java.io.IOException Cannot start application?
+     * @throws AutomationException Automation library error
      */
-    public AutomationApplication launch(String... command) throws java.io.IOException {
+    public AutomationApplication launch(String... command) throws java.io.IOException, AutomationException {
         Process process = Utils.startProcess(command);
         return new AutomationApplication(rootElement, process, false);
     }
@@ -145,8 +141,9 @@ public class UIAutomation {
      *
      * @param process Process to attach to
      * @return AutomationApplication that represents the application
+     * @throws AutomationException Automation library error
      */
-    public AutomationApplication attach(Process process) {
+    public AutomationApplication attach(Process process) throws AutomationException {
         return new AutomationApplication(rootElement, process, true);
     }
 
@@ -199,7 +196,7 @@ public class UIAutomation {
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopWindow(String title) throws ElementNotFoundException, AutomationException {
+    public AutomationWindow getDesktopWindow(String title) throws AutomationException {
         AutomationElement element = null;
 
         // Look for a window
@@ -224,7 +221,7 @@ public class UIAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants), pAndCondition);
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
                 }
@@ -250,17 +247,15 @@ public class UIAutomation {
      * @param element1 First element
      * @param element2 Second element
      * @return Are the elememts the same
-     * @throws AutomationException
+     * @throws AutomationException Automation library error
      */
     public boolean compareElement(Pointer element1, Pointer element2) throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        int result = this.automation.CompareElements(element1, element2, ibr);
-
-        if (result == 0) {
-            return ibr.getValue() == 1;
-        } else {
+        if (this.automation.CompareElements(element1, element2, ibr) != 0) {
             throw new AutomationException();
+        } else {
+            return ibr.getValue() == 1;
         }
     }
 
@@ -274,9 +269,7 @@ public class UIAutomation {
     public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        int result = this.automation.CreateAndCondition(pCondition1, pCondition2, pbr);
-
-        if (result == 0) {
+        if (this.automation.CreateAndCondition(pCondition1, pCondition2, pbr) == 0) {
             return pbr;
         } else {
             throw new AutomationException();
@@ -293,9 +286,7 @@ public class UIAutomation {
     public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        int result = this.automation.CreateOrCondition(pCondition1, pCondition2, pbr);
-
-        if (result == 0) {
+        if (this.automation.CreateOrCondition(pCondition1, pCondition2, pbr) == 0) {
             return pbr;
         } else {
             throw new AutomationException();
@@ -326,15 +317,11 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference pbr = null;
-
         try {
-            pbr = this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+            return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
-
-        return pbr;
     }
 
     /**
@@ -348,15 +335,11 @@ public class UIAutomation {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference pbr = null;
-
         try {
-            pbr = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+            return this.createPropertyCondition(PropertyID.Name.getValue(), variant);
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
-
-        return pbr;
     }
 
     /**
@@ -369,9 +352,7 @@ public class UIAutomation {
     public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
-        int result = this.automation.CreatePropertyCondition(id, value, pCondition);
-
-        if (result == 0) {
+        if (this.automation.CreatePropertyCondition(id, value, pCondition) == 0) {
             Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
 
             Unknown unkCondition = new Unknown(pCondition.getValue());
@@ -409,7 +390,7 @@ public class UIAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
                             pCondition1);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
@@ -452,7 +433,7 @@ public class UIAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
                             pCondition1);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
@@ -483,8 +464,6 @@ public class UIAutomation {
     public List<AutomationWindow> getDesktopWindows() throws AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
-//        PointerByReference pAll = new PointerByReference();
-
         PointerByReference pTrueCondition = this.createTrueCondition();
 
         Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
@@ -494,11 +473,8 @@ public class UIAutomation {
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-//            IUIAutomationCondition condition =
-//                    IUIAutomationCondition.Converter.PointerToInterface(pUnknownA);
-
             List<AutomationElement> collection =
-                    this.rootElement.findAll(new TreeScope(TreeScope.TreeScope_Children), pTrueCondition.getValue());
+                    this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());
 
             for (AutomationElement element : collection) {
                 result.add(new AutomationWindow(element));
@@ -511,18 +487,6 @@ public class UIAutomation {
     }
 
     /**
-     * Captures the screen.
-     *
-     * @param filename The filename
-     * @throws AWTException Robot exception
-     * @throws IOException  IO Exception
-     */
-    public void captureScreen(String filename) throws AWTException, IOException {
-        BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        ImageIO.write(image, "png", new File(filename));
-    }
-
-    /**
      * Creates a false Condition
      * @return The condition
      * @throws AutomationException Something is wrong
@@ -530,9 +494,7 @@ public class UIAutomation {
     public PointerByReference CreateFalseCondition () throws AutomationException{
         PointerByReference pCondition = new PointerByReference();
 
-        int result = this.automation.CreateFalseCondition(pCondition);
-
-        if (result == 0) {
+        if (this.automation.CreateFalseCondition(pCondition) == 0) {
             return pCondition;
         } else {
             throw new AutomationException();
@@ -547,9 +509,7 @@ public class UIAutomation {
     public PointerByReference createTrueCondition() throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
 
-        int result = this.automation.CreateTrueCondition(pTrueCondition);
-
-        if (result == 0) {
+        if (this.automation.CreateTrueCondition(pTrueCondition) == 0) {
             return pTrueCondition;
         } else {
             throw new AutomationException();
@@ -564,9 +524,7 @@ public class UIAutomation {
     public PointerByReference createFalseCondition() throws AutomationException {
         PointerByReference condition = new PointerByReference();
 
-        int result = this.automation.CreateFalseCondition(condition);
-
-        if (result == 0) {
+        if (this.automation.CreateFalseCondition(condition) == 0) {
             return condition;
         } else {
             throw new AutomationException();
@@ -582,9 +540,7 @@ public class UIAutomation {
     public PointerByReference createNotCondition (Pointer condition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        int result = this.automation.CreateNotCondition(condition, pbr);
-
-        if (result == 0) {
+        if (this.automation.CreateNotCondition(condition, pbr) == 0) {
             return pbr;
         } else {
             throw new AutomationException();
@@ -595,7 +551,7 @@ public class UIAutomation {
      * Gets the root automation element
      * @return The root element
      */
-    public AutomationElement getRootElement() {
+    AutomationElement getRootElement() {
         return this.rootElement;
     }
 }

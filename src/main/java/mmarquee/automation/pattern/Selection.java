@@ -23,31 +23,33 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 
 import java.util.List;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the Selection pattern.
  */
 public class Selection extends BasePattern {
 
-    private IUIAutomationSelectionPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the value pattern
+     */
+    public Selection() {
+        this.IID = IUIAutomationSelectionPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationSelectionPattern.IID);
-
+    private IUIAutomationSelectionPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
@@ -60,7 +62,9 @@ public class Selection extends BasePattern {
 
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().GetCurrentSelection(pbr);
+        if (this.getPattern().GetCurrentSelection(pbr) != 0) {
+            throw new AutomationException();
+        }
 
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();

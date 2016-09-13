@@ -16,9 +16,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Wrapper for the Panel element.
  */
@@ -26,8 +27,9 @@ public class AutomationPanel extends AutomationContainer {
     /**
      * Construct the AutomationPanel
      * @param element The element
+     * @throws AutomationException Something is wrong in automation
      */
-    public AutomationPanel(AutomationElement element) {
+    public AutomationPanel(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

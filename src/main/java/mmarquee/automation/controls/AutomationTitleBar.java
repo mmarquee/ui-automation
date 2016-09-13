@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
@@ -25,7 +24,7 @@ import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by inpwt on 04/03/2016.
+ * Created by Mark Humphreys on 04/03/2016.
  *
  * Wrapper for the TitleBar element.
  */
@@ -33,8 +32,9 @@ public class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
      * @param element The underlying automation element
+     * @throws AutomationException Automation library error
      */
-    public AutomationTitleBar(AutomationElement element) {
+    public AutomationTitleBar(AutomationElement element) throws AutomationException {
         super(element);
     }
 
@@ -46,7 +46,7 @@ public class AutomationTitleBar extends AutomationContainer {
     public AutomationMainMenu getMenuBar() throws AutomationException {
         PointerByReference condition = this.automation.CreateControlTypeCondition(ControlType.MenuBar);
 
-        AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.TreeScope_Descendants),
+        AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
                 condition);
 
         return new AutomationMainMenu(this.element, element);

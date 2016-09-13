@@ -15,37 +15,36 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 
 /**
- * Created by inpwt on 25/02/2016.
+ * Created by Mark Humphreys on 25/02/2016.
  *
  * Wrapper for the Grid pattern
  */
 public class Grid extends BasePattern {
 
-    private IUIAutomationGridPattern getPattern() {
-        Unknown uElement = new Unknown(this.pattern);
+    /**
+     * Constructor for the pattern
+     */
+    public Grid() {
+        this.IID = IUIAutomationGridPattern.IID;
+    }
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationGridPattern.IID);
-
+    private IUIAutomationGridPattern getPattern() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return IUIAutomationGridPattern.Converter.PointerToInterface(pbr);
         } else {
-            return null; // or throw exception?
+            throw new AutomationException();
         }
     }
 
@@ -54,11 +53,14 @@ public class Grid extends BasePattern {
      * @param x Cell X position
      * @param y Cell Y position
      * @return The item associated with the cell
+     * @throws AutomationException Error thrown in automation library
      */
-    public PointerByReference getItem(int x, int y) {
+    public PointerByReference getItem(int x, int y) throws AutomationException{
         PointerByReference pbr = new PointerByReference();
 
-        this.getPattern().GetItem(x, y, pbr);
+        if (this.getPattern().GetItem(x, y, pbr) != 0) {
+            throw new AutomationException();
+        }
 
         return pbr;
     }
@@ -66,24 +68,30 @@ public class Grid extends BasePattern {
     /**
      * Gets the row count
      * @return The tow count
+     * @throws AutomationException Error thrown in automation library
      */
-    public int rowCount() {
+    public int rowCount() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        this.getPattern().Get_CurrentRowCount(ibr);
+        if (this.getPattern().Get_CurrentRowCount(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue();
     }
 
     /**
-     * Gets the coloumn count
+     * Gets the colomn count
      * @return The column count
+     * @throws AutomationException Error thrown in automation library
      */
-    public int columnCount() {
+    public int columnCount() throws AutomationException {
 
         IntByReference ibr = new IntByReference();
 
-        this.getPattern().Get_CurrentColumnCount(ibr);
+        if (this.getPattern().Get_CurrentColumnCount(ibr) != 0) {
+            throw new AutomationException();
+        }
 
         return ibr.getValue();
     }

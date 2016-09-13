@@ -16,11 +16,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.AutomationContainer;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.AutomationException;
 
 /**
- * Created by inpwt on 26/02/2016.
+ * Created by Mark Humphreys on 26/02/2016.
  *
  * Wrapper for the Spinner element.
  */
@@ -28,8 +27,9 @@ public class AutomationSpinner extends AutomationBase {
     /**
      * Construct the AutomationSpinner
      * @param element The element
+     * @throws AutomationException Automation library error
      */
-    public AutomationSpinner(AutomationElement element) {
+    public AutomationSpinner(AutomationElement element) throws AutomationException {
         super(element);
     }
 }

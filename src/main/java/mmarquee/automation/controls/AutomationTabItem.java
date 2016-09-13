@@ -17,11 +17,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by inpwt on 28/01/2016.
+ * Created by Mark Humphreys on 28/01/2016.
  *
  * Wrapper for the TabItem element.
  */
@@ -32,21 +33,19 @@ public class AutomationTabItem extends AutomationBase {
     /**
      * Construct the AutomationTabItem
      * @param element The element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTabItem(AutomationElement element) {
+    public AutomationTabItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
-        try {
-            selectItemPattern = this.getSelectItemPattern();
-        } catch (PatternNotFoundException ex) {
-            // Handle this nicely somehow
-        }
+        selectItemPattern = this.getSelectItemPattern();
     }
 
     /**
-     * Selects this item
+     * Selects this item.
+     * @throws AutomationException Something has gone wrong
      */
-    public void selectItem() {
+    public void selectItem() throws AutomationException {
         this.selectItemPattern.select();
     }
 }

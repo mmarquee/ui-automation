@@ -19,13 +19,14 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by inpwt on 26/01/2016.
+ * Created by Mark Humphreys on 26/01/2016.
  *
  * Wrapper for the Tab element.
  */
@@ -36,8 +37,9 @@ public class AutomationTab extends AutomationContainer {
     /**
      * Selects the tab with the given name
      * @param name The name of the tab to select
+     * @throws AutomationException Automation library error
      */
-    public void selectTabPage(String name) {
+    public void selectTabPage(String name) throws AutomationException {
         for(AutomationTabItem item: tabItems) {
             if (name.equals(item.name())) {
                 item.selectItem();
@@ -48,15 +50,17 @@ public class AutomationTab extends AutomationContainer {
     /**
      * Constructor for the AutomationTab
      * @param element The underlying element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTab (AutomationElement element) {
+    public AutomationTab (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
         // Now get the list of tab items
         tabItems = new ArrayList<AutomationTabItem>();
 
         try {
-            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.TreeScope_Descendants));
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
             for (AutomationElement elem : collection) {
                 int retVal = elem.currentControlType();
