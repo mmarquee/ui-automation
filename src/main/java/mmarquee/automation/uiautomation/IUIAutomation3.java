@@ -28,7 +28,7 @@ public interface IUIAutomation3 extends IUnknown {
         // 0-2 IUnknown, 3-57 IUIAutomation, 58-63 = IUIAutomation2, 64-65 = IUIAutomation3
         private static Pointer myInterfacePointer;
 
-        public static IUIAutomation PointerToInterface(final PointerByReference ptr) {
+        public static IUIAutomation3 PointerToInterface(final PointerByReference ptr) {
             myInterfacePointer = ptr.getValue();
             Pointer vTablePointer = myInterfacePointer.getPointer(0);
 

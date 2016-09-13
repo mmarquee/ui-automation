@@ -19,7 +19,7 @@ The library is held in the Sonatype OSS repository, so is available for download
 ```
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.1.10</version>
+  <version>0.2.0</version>
 ```
 
 ## Getting started
