@@ -59,6 +59,8 @@ public class TestMainWPF extends TestBase {
 
         try {
             applicationWindow = automation.getDesktopWindow("MainWindow");
+
+            applicationWindow = automation.get<AutomationWindow>("MainWindow");
         } catch (Exception ex) {
             logger.info("Failed to find `MainWindow`");
         }

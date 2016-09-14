@@ -190,6 +190,29 @@ public class UIAutomation {
     }
 
     /**
+     * Try and make a generic version of the getXXXX methods
+     */
+    public <T> get<T> (String title) throws AutomationException {
+
+        // Look for a window
+        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+        variant1.setValue(Variant.VT_INT, T.getValue());
+
+        // Look for a specific title
+        Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
+        variant2.setValue(Variant.VT_BSTR, sysAllocated);
+
+        try {
+
+            // Do the search
+
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+
+    /**
      * Gets the desktop window associated with the title
      *
      * @param title Title to search for
