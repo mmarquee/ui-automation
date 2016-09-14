@@ -39,6 +39,12 @@ public abstract class AutomationBase {
 
     protected UIAutomation automation = UIAutomation.getInstance();
 
+    protected static ControlType controlType = ControlType.None;
+
+    public static ControlType getControlType() {
+        return controlType;
+    }
+
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use

@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 
@@ -41,6 +42,8 @@ public class AutomationDocument extends AutomationBase {
         super(element);
 
         this.textPattern = this.getTextPattern();
+
+        controlType = ControlType.Document;
     }
 
     /**

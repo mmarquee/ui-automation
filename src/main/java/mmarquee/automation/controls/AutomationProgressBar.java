@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
@@ -34,7 +35,8 @@ public class AutomationProgressBar extends AutomationBase {
      * @param element The element
      * @throws AutomationException Error in automation library
      */
-    public AutomationProgressBar(AutomationElement element) throws AutomationException {
+    public AutomationProgressBar(AutomationElement element)
+            throws AutomationException {
         super(element);
 
         try {
@@ -42,6 +44,8 @@ public class AutomationProgressBar extends AutomationBase {
         } catch (PatternNotFoundException ex) {
             logger.warn("RangeValue pattern not found");
         }
+
+        controlType = ControlType.ProgressBar;
     }
 
     /**

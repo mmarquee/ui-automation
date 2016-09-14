@@ -23,6 +23,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
@@ -55,6 +56,8 @@ public class AutomationDataGrid extends AutomationBase
         this.gridPattern = this.getGridPattern();
         this.tablePattern = this.getTablePattern();
         this.selectionPattern = this.getSelectionPattern();
+
+        controlType = ControlType.DataGrid;
     }
 
     /**

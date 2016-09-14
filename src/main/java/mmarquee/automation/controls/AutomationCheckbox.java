@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
@@ -60,7 +61,7 @@ public class AutomationCheckbox extends AutomationBase {
      */
     public AutomationCheckbox (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-
         togglePattern = this.getTogglePattern();
+        controlType = ControlType.CheckBox;
     }
 }

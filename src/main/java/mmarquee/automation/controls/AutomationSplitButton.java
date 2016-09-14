@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -33,5 +34,6 @@ public class AutomationSplitButton extends AutomationButton {
      */
     public AutomationSplitButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        controlType = ControlType.SplitButton;
     }
 }

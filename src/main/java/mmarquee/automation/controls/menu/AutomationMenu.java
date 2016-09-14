@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -43,8 +44,10 @@ public class AutomationMenu extends AutomationBase {
      * @param element The element
      * @throws AutomationException Automation library error
      */
-    public AutomationMenu(AutomationElement element) throws AutomationException {
+    public AutomationMenu(AutomationElement element)
+            throws AutomationException {
         super(element);
+        controlType = ControlType.Menu;
     }
 
     /**

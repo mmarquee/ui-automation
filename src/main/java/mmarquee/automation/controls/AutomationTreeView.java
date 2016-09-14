@@ -32,8 +32,10 @@ public class AutomationTreeView extends AutomationBase {
      * @param element The element
      * @throws AutomationException Automation library error
      */
-    public AutomationTreeView(AutomationElement element) throws AutomationException {
+    public AutomationTreeView(AutomationElement element)
+            throws AutomationException {
         super(element);
+        controlType = ControlType.Tree;
     }
 
     /**

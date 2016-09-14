@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
@@ -36,9 +37,11 @@ public class AutomationTabItem extends AutomationBase {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTabItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationTabItem(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         selectItemPattern = this.getSelectItemPattern();
+        controlType = ControlType.TabItem;
     }
 
     /**

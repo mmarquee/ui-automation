@@ -2,6 +2,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
@@ -22,11 +23,14 @@ public class AutomationTreeViewItem extends AutomationBase {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
 
         this.selectItemPattern = this.getSelectItemPattern();
         this.invokePattern = this.getInvokePattern();
+
+        controlType = ControlType.TreeItem;
     }
 
     /**

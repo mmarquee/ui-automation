@@ -46,6 +46,8 @@ public class AutomationComboBox extends AutomationBase {
 
         this.collapsePattern = this.getExpandCollapsePattern();
         this.valuePattern = this.getValuePattern();
+
+        controlType = ControlType.ComboBox;
     }
 
     /**

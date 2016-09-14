@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.
@@ -29,7 +30,9 @@ public class AutomationSpinner extends AutomationBase {
      * @param element The element
      * @throws AutomationException Automation library error
      */
-    public AutomationSpinner(AutomationElement element) throws AutomationException {
+    public AutomationSpinner(AutomationElement element)
+            throws AutomationException {
         super(element);
+        controlType = ControlType.Spinner;
     }
 }

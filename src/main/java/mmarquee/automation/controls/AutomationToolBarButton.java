@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 
 /**
@@ -32,8 +33,10 @@ public class AutomationToolBarButton extends AutomationBase {
      * @param element The underlying automation element
      * @throws AutomationException Automation library error
      */
-    public AutomationToolBarButton(AutomationElement element) throws AutomationException {
+    public AutomationToolBarButton(AutomationElement element)
+            throws AutomationException {
         super (element);
+        controlType = ControlType.Button;
     }
 
     /**

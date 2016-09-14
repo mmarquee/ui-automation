@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.
@@ -31,5 +32,6 @@ public class AutomationImage extends AutomationBase {
      */
     public AutomationImage(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Image;
     }
 }

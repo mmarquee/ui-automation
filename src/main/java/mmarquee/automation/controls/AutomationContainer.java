@@ -42,6 +42,7 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationContainer(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.None;
     }
 
     /**

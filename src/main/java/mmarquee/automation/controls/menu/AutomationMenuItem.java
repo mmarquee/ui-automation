@@ -42,10 +42,12 @@ public class AutomationMenuItem extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation error
      */
-    public AutomationMenuItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         this.collapsePattern = this.getExpandCollapsePattern();
         this.invokePattern = this.getInvokePattern();
+        controlType = ControlType.MenuItem;
     }
 
     /**

@@ -22,8 +22,10 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 import java.util.ArrayList;
@@ -192,11 +194,13 @@ public class UIAutomation {
     /**
      * Try and make a generic version of the getXXXX methods
      */
-    public <T> get<T> (String title) throws AutomationException {
+/*
+     public <T extends AutomationBase> T get (Class<T> theClass, String title) throws AutomationException {
+        AutomationElement element = null;
 
         // Look for a window
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, T.getValue());
+        variant1.setValue(Variant.VT_INT, T.getControlType());
 
         // Look for a specific title
         Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
@@ -204,13 +208,39 @@ public class UIAutomation {
         variant2.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
+            // First condition
+            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
 
-            // Do the search
+            // Second condition
+            PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
+            // And Condition
+            PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
+
+            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+
+                try {
+                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
+                } catch (AutomationException ex) {
+                    logger.info("Not found, retrying " + title);
+                }
+
+                if (element != null) {
+                    break;
+                }
+            }
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
+
+        if (element == null) {
+            logger.warning("Failed to find desktop window `" + title + "`");
+            throw new ItemNotFoundException();
+        }
+
+        return new T(element);
     }
+    */
 
     /**
      * Gets the desktop window associated with the title
@@ -218,8 +248,10 @@ public class UIAutomation {
      * @param title Title to search for
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getDesktopWindow(String title) throws AutomationException {
+    public AutomationWindow getDesktopWindow(String title)
+            throws PatternNotFoundException, AutomationException {
         AutomationElement element = null;
 
         // Look for a window
@@ -398,8 +430,10 @@ public class UIAutomation {
      * @param title Title to search for
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getDesktopObject(String title) throws AutomationException {
+    public AutomationWindow getDesktopObject(String title)
+            throws PatternNotFoundException, AutomationException {
         AutomationElement element = null;
 
         // Look for a specific title
@@ -483,8 +517,10 @@ public class UIAutomation {
      *
      * @return List of desktop windows
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationWindow> getDesktopWindows() throws AutomationException {
+    public List<AutomationWindow> getDesktopWindows()
+            throws PatternNotFoundException, AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
         PointerByReference pTrueCondition = this.createTrueCondition();

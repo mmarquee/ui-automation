@@ -21,6 +21,7 @@ package mmarquee.automation;
  * Control types - see https://msdn.microsoft.com/en-us/library/windows/desktop/ee671198(v=vs.85).aspx
  */
 public enum ControlType {
+    None(00000),
     Invoke(10000),
     Button(50000),
     Calendar(50001),

@@ -22,6 +22,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -89,7 +90,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
-    public void testGetDesktopWindows() throws AutomationException {
+    public void testGetDesktopWindows() throws PatternNotFoundException, AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
         List<AutomationWindow> windows = instance.getDesktopWindows();

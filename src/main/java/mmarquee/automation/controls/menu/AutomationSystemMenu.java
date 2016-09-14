@@ -19,6 +19,7 @@ package mmarquee.automation.controls.menu;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -39,10 +40,11 @@ public class AutomationSystemMenu extends AutomationBase {
      * @throws AutomationException Automation issue
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSystemMenu(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationSystemMenu(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
-
         this.getItems();
+        controlType = ControlType.Menu;
     }
 
     /**

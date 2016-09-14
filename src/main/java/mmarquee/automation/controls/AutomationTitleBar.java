@@ -36,6 +36,7 @@ public class AutomationTitleBar extends AutomationContainer {
      */
     public AutomationTitleBar(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.TitleBar;
     }
 
     /**

@@ -17,6 +17,7 @@ package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationPanel;
 
 /**

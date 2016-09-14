@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -37,6 +38,7 @@ public class AutomationHyperlink extends AutomationBase {
     public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.invokePattern = this.getInvokePattern();
+        controlType = ControlType.Hyperlink;
     }
 
     /**

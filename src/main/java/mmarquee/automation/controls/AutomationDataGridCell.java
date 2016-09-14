@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -38,6 +39,8 @@ public class AutomationDataGridCell extends AutomationBase {
     public AutomationDataGridCell(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
+
+        controlType = ControlType.DataItem; // TODO: Check this
     }
 
     /**
