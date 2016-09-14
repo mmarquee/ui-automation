@@ -258,7 +258,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.1.10"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.2.0"
 ```
 
 ## Examples
@@ -268,7 +268,7 @@ This class encapsulates some simple automation of the Notepad program, starting 
 ```scala
   class NotepadAutomation {
     private var automation = UIAutomation.getElement
-    private var application: AutomationApplication = null
+    private var application: AutomationApplication = _
     private var window: AutomationWindow = _
 
     def launch(): Unit = {
@@ -278,7 +278,7 @@ This class encapsulates some simple automation of the Notepad program, starting 
     }
 
     def addText(text: String): Unit = {
-        val editor = this.window.getEditBoc(0)
+        val editor = this.window.getEditBox("Edit1")
         editor.setValue(text)
     }
 

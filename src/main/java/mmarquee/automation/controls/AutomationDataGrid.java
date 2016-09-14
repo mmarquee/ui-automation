@@ -25,6 +25,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +33,12 @@ import java.util.List;
 /**
  * Created by Mark Humphreys on 03/02/2016.
  *
- * Wrapper around the Delphi automated string grid
+ * Wrapper around the Delphi automated string gridPattern
  */
 public class AutomationDataGrid extends AutomationBase
 {
     private Value valuePattern;
-    private Grid grid;
+    private Grid gridPattern;
     private Table tablePattern;
     private Selection selectionPattern;
 
@@ -51,7 +52,7 @@ public class AutomationDataGrid extends AutomationBase
         super(element);
 
         this.valuePattern = this.getValuePattern();
-        this.grid = this.getGridPattern();
+        this.gridPattern = this.getGridPattern();
         this.tablePattern = this.getTablePattern();
         this.selectionPattern = this.getSelectionPattern();
     }
@@ -66,7 +67,7 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
-     * Whether the grid is read only
+     * Whether the gridPattern is read only
      * @return Read only?
      * @throws AutomationException Something has gone wrong
      */
@@ -75,7 +76,7 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
-     * Gets the selected item from the grid
+     * Gets the selected item from the gridPattern
      * @return AutomationStringGridItem
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
@@ -115,7 +116,7 @@ public class AutomationDataGrid extends AutomationBase
      */
     public AutomationDataGridCell getItem(int x, int y) throws PatternNotFoundException, AutomationException  {
 
-        PointerByReference cell = this.grid.getItem(x, y);
+        PointerByReference cell = this.gridPattern.getItem(x, y);
 
         Unknown uRoot = new Unknown(cell.getValue());
 
@@ -135,21 +136,21 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
-     * Gets the row count of the grid
+     * Gets the row count of the gridPattern
      * @return The row count
      * @throws AutomationException Something has gone wrong
      */
     public int rowCount() throws AutomationException {
-        return this.grid.rowCount();
+        return this.gridPattern.rowCount();
     }
 
     /**
-     * Gets the column count of the grid
+     * Gets the column count of the gridPattern
      * @return The column count
      * @throws AutomationException Something has gone wrong
      */
     public int columnCount() throws AutomationException {
-        return this.grid.columnCount();
+        return this.gridPattern.columnCount();
     }
 
     /**
@@ -199,6 +200,15 @@ public class AutomationDataGrid extends AutomationBase
         List<AutomationDataGridCell> headers = this.getColumnHeaders();
 
         return headers.get(col);
+    }
+
+    /**
+     * Returns whether the grid has column or row headers
+     * @return RowOrColumnMajor Row or column
+     * @throws AutomationException Error thrown from automation library
+     */
+    public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException {
+        return this.tablePattern.getRowOrColumnMajor();
     }
 }
 
