@@ -36,7 +36,6 @@ public class AutomationToolBarButton extends AutomationBase {
     public AutomationToolBarButton(AutomationElement element)
             throws AutomationException {
         super (element);
-        controlType = ControlType.Button;
     }
 
     /**

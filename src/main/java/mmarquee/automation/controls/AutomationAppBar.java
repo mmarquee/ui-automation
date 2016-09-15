@@ -35,6 +35,5 @@ public class AutomationAppBar extends AutomationBase {
      */
     public AutomationAppBar(AutomationElement element) throws AutomationException {
         super(element);
-        controlType = ControlType.AppBar;
     }
 }

@@ -47,7 +47,6 @@ public class AutomationMenuItem extends AutomationBase {
         super(element);
         this.collapsePattern = this.getExpandCollapsePattern();
         this.invokePattern = this.getInvokePattern();
-        controlType = ControlType.MenuItem;
     }
 
     /**

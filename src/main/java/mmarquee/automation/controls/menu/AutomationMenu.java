@@ -47,7 +47,6 @@ public class AutomationMenu extends AutomationBase {
     public AutomationMenu(AutomationElement element)
             throws AutomationException {
         super(element);
-        controlType = ControlType.Menu;
     }
 
     /**

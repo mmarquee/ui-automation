@@ -44,8 +44,6 @@ public class AutomationProgressBar extends AutomationBase {
         } catch (PatternNotFoundException ex) {
             logger.warn("RangeValue pattern not found");
         }
-
-        controlType = ControlType.ProgressBar;
     }
 
     /**

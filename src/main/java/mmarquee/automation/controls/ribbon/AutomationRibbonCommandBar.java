@@ -33,7 +33,6 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
      */
     public AutomationRibbonCommandBar(AutomationElement element) throws AutomationException {
         super(element);
-        controlType = ControlType.Pane;
     }
 
     /**

@@ -41,7 +41,6 @@ public class AutomationTabItem extends AutomationBase {
             throws PatternNotFoundException, AutomationException {
         super(element);
         selectItemPattern = this.getSelectItemPattern();
-        controlType = ControlType.TabItem;
     }
 
     /**

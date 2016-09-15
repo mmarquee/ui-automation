@@ -56,7 +56,6 @@ public class AutomationMainMenu extends AutomationBase {
     public AutomationMainMenu(AutomationElement parent, AutomationElement element) throws AutomationException {
         super(element);
         this.parent = parent;
-        controlType = ControlType.MenuBar;
     }
 
     /**

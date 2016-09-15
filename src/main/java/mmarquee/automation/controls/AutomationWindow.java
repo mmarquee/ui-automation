@@ -54,7 +54,6 @@ public class AutomationWindow extends AutomationContainer {
     public AutomationWindow (AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        controlType = ControlType.Window;
 
         this.windowPattern = this.getWindowPattern();
     }

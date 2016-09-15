@@ -120,7 +120,6 @@ public class AutomationApplication extends AutomationBase {
         super(element);
         this.handle = handle;
         this.isAttached = attached;
-        controlType = ControlType.None;
     }
 
     /**
@@ -136,7 +135,6 @@ public class AutomationApplication extends AutomationBase {
         super(element);
 
         this.isAttached = attached;
-        controlType = ControlType.None;
 
         if (process.getClass().getName().equals("java.lang.Wind32Process") ||
                 process.getClass().getName().equals("java.lang.ProcessImpl")) {

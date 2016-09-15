@@ -56,8 +56,6 @@ public class AutomationDataGrid extends AutomationBase
         this.gridPattern = this.getGridPattern();
         this.tablePattern = this.getTablePattern();
         this.selectionPattern = this.getSelectionPattern();
-
-        controlType = ControlType.DataGrid;
     }
 
     /**

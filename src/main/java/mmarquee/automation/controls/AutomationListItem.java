@@ -40,7 +40,6 @@ public class AutomationListItem extends AutomationBase {
     public AutomationListItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.selectItemPattern = this.getSelectItemPattern();
-        controlType = ControlType.ListItem;
     }
 
     /**
