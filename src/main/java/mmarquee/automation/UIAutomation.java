@@ -192,15 +192,19 @@ public class UIAutomation {
     }
 
     /**
-     * Try and make a generic version of the getXXXX methods
+     * Gets the desktop objecy associated with the title
+     *
+     * @param title Title to search for
+     * @return AutomationWindow The found 'element'
+     * @throws ElementNotFoundException Element is not found
      */
-/*
-     public <T extends AutomationBase> T get (Class<T> theClass, String title) throws AutomationException {
+    private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
+            throws AutomationException  {
         AutomationElement element = null;
 
         // Look for a window
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, T.getControlType());
+        variant1.setValue(Variant.VT_INT, controlType.getValue());
 
         // Look for a specific title
         Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
@@ -217,7 +221,7 @@ public class UIAutomation {
             // And Condition
             PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
 
-            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+            for (int loop = 0; loop < numberOfRetries; loop++) {
 
                 try {
                     element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
@@ -238,12 +242,11 @@ public class UIAutomation {
             throw new ItemNotFoundException();
         }
 
-        return new T(element);
+        return element;
     }
-    */
 
     /**
-     * Gets the desktop window associated with the title
+     * Gets the desktop 'window' associated with the title
      *
      * @param title Title to search for
      * @return AutomationWindow The found window
@@ -252,49 +255,7 @@ public class UIAutomation {
      */
     public AutomationWindow getDesktopWindow(String title)
             throws PatternNotFoundException, AutomationException {
-        AutomationElement element = null;
-
-        // Look for a window
-        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, ControlType.Window.getValue());
-
-        // Look for a specific title
-        Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
-        variant2.setValue(Variant.VT_BSTR, sysAllocated);
-
-        try {
-            // First condition
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
-
-            // Second condition
-            PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
-
-            // And Condition
-            PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
-
-            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
-
-                try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
-                } catch (AutomationException ex) {
-                    logger.info("Not found, retrying " + title);
-                }
-
-                if (element != null) {
-                    break;
-                }
-            }
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
-        }
-
-        if (element == null) {
-            logger.warning("Failed to find desktop window `" + title + "`");
-            throw new ItemNotFoundException();
-        }
-
-        return new AutomationWindow(element);
+        return new AutomationWindow(this.get(ControlType.Window, title, FIND_DESKTOP_ATTEMPTS));
     }
 
     /**
@@ -434,39 +395,7 @@ public class UIAutomation {
      */
     public AutomationWindow getDesktopObject(String title)
             throws PatternNotFoundException, AutomationException {
-        AutomationElement element = null;
-
-        // Look for a specific title
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
-        variant.setValue(Variant.VT_BSTR, sysAllocated);
-
-        try {
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
-
-            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
-
-                try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
-                            pCondition1);
-                } catch (AutomationException ex) {
-                    logger.info("Not found, retrying " + title);
-                }
-
-                if (element != null) {
-                    break;
-                }
-            }
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
-        }
-
-        if (element == null) {
-            logger.warning("Failed to find desktop object `" + title + "`");
-            throw new ItemNotFoundException();
-        }
-
-        return new AutomationWindow(element);
+        return new AutomationWindow(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
     }
 
     /**
