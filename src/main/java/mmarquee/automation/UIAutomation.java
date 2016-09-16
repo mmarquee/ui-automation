@@ -70,9 +70,7 @@ public class UIAutomation {
 
         PointerByReference pbr1 = new PointerByReference();
 
-        Guid.REFIID refiid = new Guid.REFIID(IUIAutomation.IID);
-
-        WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
+        WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
             this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
         }
@@ -83,9 +81,7 @@ public class UIAutomation {
 
         Unknown uRoot = new Unknown(pRoot.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
-        WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pRoot);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
             this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
@@ -369,12 +365,10 @@ public class UIAutomation {
         PointerByReference pCondition = new PointerByReference();
 
         if (this.automation.CreatePropertyCondition(id, value, pCondition) == 0) {
-            Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
-
             Unknown unkCondition = new Unknown(pCondition.getValue());
             PointerByReference pUnknown = new PointerByReference();
 
-            WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
+            WinNT.HRESULT result1 = unkCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown);
             if (COMUtils.SUCCEEDED(result1)) {
                 return pCondition;
             } else {
@@ -457,9 +451,7 @@ public class UIAutomation {
         Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             List<AutomationElement> collection =
                     this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());

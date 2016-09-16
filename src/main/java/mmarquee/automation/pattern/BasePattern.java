@@ -81,9 +81,7 @@ public abstract class BasePattern implements Pattern {
 
             Unknown uElement = new Unknown(pbr.getValue());
 
-            Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
-            WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement element =

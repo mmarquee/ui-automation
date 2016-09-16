@@ -121,11 +121,9 @@ public class AutomationDataGrid extends AutomationBase
 
         Unknown uRoot = new Unknown(cell.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
 

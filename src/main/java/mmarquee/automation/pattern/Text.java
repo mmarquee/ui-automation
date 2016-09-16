@@ -66,11 +66,9 @@ public class Text extends BasePattern {
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationTextRangeArray.IID);
-
         String selectionResult = "";
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTextRangeArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationTextRangeArray selection =
                     IUIAutomationTextRangeArray.Converter.PointerToInterface(pUnknownA);
@@ -93,9 +91,7 @@ public class Text extends BasePattern {
                 Unknown unknown = new Unknown(pbr0.getValue());
                 PointerByReference pUnknown = new PointerByReference();
 
-                Guid.REFIID refiid = new Guid.REFIID(IUIAutomationTextRange.IID);
-
-                WinNT.HRESULT result = unknown.QueryInterface(refiid, pUnknown);
+                WinNT.HRESULT result = unknown.QueryInterface(new Guid.REFIID(IUIAutomationTextRange.IID), pUnknown);
                 if (COMUtils.SUCCEEDED(result)) {
                     IUIAutomationTextRange range =
                             IUIAutomationTextRange.Converter.PointerToInterface(pUnknown);
@@ -131,9 +127,7 @@ public class Text extends BasePattern {
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationTextRange.IID);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTextRange.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationTextRange range =
                     IUIAutomationTextRange.Converter.PointerToInterface(pUnknownA);

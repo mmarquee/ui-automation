@@ -239,12 +239,10 @@ public class AutomationElement {
         // See what we got
         Unknown uElement = new Unknown(pbr.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
         PointerByReference pResult = new PointerByReference();
 
         try {
-            WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pResult);
+            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pResult);
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement element =
@@ -304,9 +302,8 @@ public class AutomationElement {
         Unknown unkConditionA = new Unknown(pAll.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID),
+                pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
                     IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
@@ -324,9 +321,7 @@ public class AutomationElement {
 
                 Unknown uElement = new Unknown(pbr.getValue());
 
-                Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
-                WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+                WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
                 if (COMUtils.SUCCEEDED(result0)) {
                     IUIAutomationElement element =
@@ -499,11 +494,9 @@ public class AutomationElement {
      */
     public void showContextMenu() throws AutomationException {
         // See whether we support the interface
-        Guid.REFIID refiidElement3 = new Guid.REFIID(IUIAutomationElement3.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = this.element.QueryInterface(refiidElement3, pbr);
+        WinNT.HRESULT result0 = this.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             // We support this interface

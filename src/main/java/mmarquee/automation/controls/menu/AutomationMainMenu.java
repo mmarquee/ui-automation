@@ -80,9 +80,7 @@ public class AutomationMainMenu extends AutomationBase {
             Unknown unkConditionA = new Unknown(pElement.getValue());
             PointerByReference pUnknownA = new PointerByReference();
 
-            Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
-
-            WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+            WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
             if (COMUtils.SUCCEEDED(resultA)) {
                 IUIAutomationExpandCollapsePattern pattern =
                         IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
@@ -133,9 +131,7 @@ public class AutomationMainMenu extends AutomationBase {
                 Unknown unkConditionA = new Unknown(pElement.getValue());
                 PointerByReference pUnknownA = new PointerByReference();
 
-                Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
-
-                WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+                WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
                 if (COMUtils.SUCCEEDED(resultA)) {
                     IUIAutomationExpandCollapsePattern pattern =
                             IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
