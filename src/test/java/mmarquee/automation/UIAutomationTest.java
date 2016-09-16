@@ -111,7 +111,7 @@ public class UIAutomationTest extends TestCase {
 
                 PointerByReference pUnknown1 = new PointerByReference();
 
-                WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID);, pUnknown1);
+                WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
 
                 assertTrue("CreatePropertyCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
             } catch (AutomationException ex) {
