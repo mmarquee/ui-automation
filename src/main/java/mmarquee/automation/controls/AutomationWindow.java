@@ -34,7 +34,7 @@ import java.util.List;
  *
  * Encapsulates the 'window' element
  */
-public class AutomationWindow extends AutomationContainer {
+public class AutomationWindow extends AutomationContainer implements Focusable {
 
     private Window windowPattern;
 
