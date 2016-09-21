@@ -12,7 +12,7 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the TreeViewItem element.
  */
-public class AutomationTreeViewItem extends AutomationBase {
+public class AutomationTreeViewItem extends AutomationBase implements Selectable {
 
     private SelectionItem selectItemPattern;
     private Invoke invokePattern;

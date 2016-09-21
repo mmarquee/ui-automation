@@ -27,7 +27,7 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the ListItem element.
  */
-public class AutomationListItem extends AutomationBase {
+public class AutomationListItem extends AutomationBase implements Selectable {
 
     private SelectionItem selectItemPattern;
 
@@ -50,5 +50,4 @@ public class AutomationListItem extends AutomationBase {
     public void select() throws AutomationException {
         this.selectItemPattern.select();
     }
-
 }

@@ -28,16 +28,11 @@ import javax.naming.ldap.Control;
  *
  * Wrapper around the Button element.
  */
-public class AutomationButton extends AutomationBase {
+public class AutomationButton extends AutomationBase implements Clickable {
 
     private Invoke invokePattern = null;
 
     public static ControlType getControlType() { return ControlType.Button; }
-
-    public static AutomationButton createAutomationButton(AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        return new AutomationButton(element);
-    }
 
     /**
      * Constructor for the AutomationButton
@@ -58,7 +53,7 @@ public class AutomationButton extends AutomationBase {
      * </p>
      * @throws AutomationException Error in the automation library
      */
-    public void click() throws AutomationException{
+    public void click() throws AutomationException {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {
