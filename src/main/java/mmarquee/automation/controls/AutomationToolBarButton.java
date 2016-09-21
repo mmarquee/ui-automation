@@ -26,7 +26,7 @@ import mmarquee.automation.controls.mouse.AutomationMouse;
  *
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
-public class AutomationToolBarButton extends AutomationBase {
+public class AutomationToolBarButton extends AutomationBase implements Clickable {
 
     /**
      * Constructor for the AutomationToolBarButton

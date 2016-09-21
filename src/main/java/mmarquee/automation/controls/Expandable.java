@@ -21,7 +21,8 @@ import mmarquee.automation.AutomationException;
 /**
  * Created by inpwt on 21/09/2016.
  */
-public interface Selectable {
-    void select() throws AutomationException;
-    boolean isSelected() throws AutomationException;
+public interface Expandable {
+    void expand() throws AutomationException;
+    void collapse() throws AutomationException;
+    boolean isExpanded() throws AutomationException;
 }

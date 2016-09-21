@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  *
  * Wrapper for the Hyperlink element.
  */
-public class AutomationHyperlink extends AutomationBase {
+public class AutomationHyperlink extends AutomationBase implements Clickable {
     private Invoke invokePattern;
 
     /**

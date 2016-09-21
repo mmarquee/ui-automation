@@ -50,4 +50,13 @@ public class AutomationListItem extends AutomationBase implements Selectable {
     public void select() throws AutomationException {
         this.selectItemPattern.select();
     }
+
+    /**
+     * Is this item selected?
+     * @return True if selected
+     * @throws AutomationException Automation library issue
+     */
+    public boolean isSelected() throws AutomationException {
+        return this.selectItemPattern.isSelected();
+    }
 }

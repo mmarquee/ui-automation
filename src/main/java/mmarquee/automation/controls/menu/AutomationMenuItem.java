@@ -19,6 +19,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.controls.Clickable;
+import mmarquee.automation.controls.Expandable;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -32,7 +34,7 @@ import java.util.List;
  *
  * Wrapper for the MenuItem element.
  */
-public class AutomationMenuItem extends AutomationBase {
+public class AutomationMenuItem extends AutomationBase implements Clickable, Expandable {
     private Invoke invokePattern;
     private ExpandCollapse collapsePattern;
 
