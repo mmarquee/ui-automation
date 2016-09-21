@@ -19,5 +19,6 @@ public class AutomationMaskedEdit extends AutomationEditBox {
      */
     public AutomationMaskedEdit(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        controlType = ControlType.Edit; // TODO: Distinguish between button?
     }
 }

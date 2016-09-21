@@ -35,6 +35,7 @@ public class AutomationTreeView extends AutomationBase {
     public AutomationTreeView(AutomationElement element)
             throws AutomationException {
         super(element);
+        controlType = ControlType.Tree;
     }
 
     /**

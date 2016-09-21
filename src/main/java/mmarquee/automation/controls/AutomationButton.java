@@ -32,9 +32,7 @@ public class AutomationButton extends AutomationBase {
 
     private Invoke invokePattern = null;
 
-    // TODO: Partially implementation for generics experiment
     public static ControlType getControlType() { return ControlType.Button; }
-
 
     public static AutomationButton createAutomationButton(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
@@ -51,6 +49,7 @@ public class AutomationButton extends AutomationBase {
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.invokePattern = this.getInvokePattern();
+        controlType = ControlType.Button;
     }
 
     /**

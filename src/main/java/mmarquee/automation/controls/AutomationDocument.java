@@ -41,6 +41,7 @@ public class AutomationDocument extends AutomationBase {
     public AutomationDocument(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.textPattern = this.getTextPattern();
+        controlType = ControlType.Document;
     }
 
     /**

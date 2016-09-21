@@ -34,5 +34,6 @@ public class AutomationSplitButton extends AutomationButton {
      */
     public AutomationSplitButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        controlType = ControlType.SplitButton;
     }
 }

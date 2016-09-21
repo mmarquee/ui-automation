@@ -32,5 +32,6 @@ public class AutomationImage extends AutomationBase {
      */
     public AutomationImage(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Image;
     }
 }

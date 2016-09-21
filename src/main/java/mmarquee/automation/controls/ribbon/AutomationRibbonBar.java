@@ -33,6 +33,7 @@ public class AutomationRibbonBar extends AutomationPanel {
      */
     public AutomationRibbonBar(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Pane;
     }
 
     /**

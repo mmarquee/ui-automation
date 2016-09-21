@@ -16,7 +16,10 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.javafx.fxml.PropertyNotFoundException;
+import com.sun.jna.platform.win32.OleAuto;
 import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.rebar.AutomationReBar;
@@ -217,8 +220,9 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationProgressBar getProgressBar(int index) throws AutomationException {
+    public AutomationProgressBar getProgressBar(int index) throws AutomationException, PatternNotFoundException {
         return new AutomationProgressBar(this.getControlByControlType(index, ControlType.ProgressBar));
     }
 
@@ -227,8 +231,9 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationProgressBar getProgressBar(String name) throws AutomationException {
+    public AutomationProgressBar getProgressBar(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationProgressBar(this.getControlByControlType(name, ControlType.ProgressBar));
     }
 
@@ -366,23 +371,31 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Generic list of controls, determined by passed in type
      */
-    public <T extends AutomationButton> T get(Class<T> type, String name)
+    public <T extends AutomationBase> T get(Class<T> type, String name)
             throws PatternNotFoundException, AutomationException {
 
+        int t = T.getControlType().getValue();
+
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, ControlType.Button.getValue()); //T.getControlType().getValue());  // TODO: Get this from the class?????
+        variant1.setValue(Variant.VT_INT, T.getControlType().getValue());
 
-        // TODO: all wrong from here
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+        try {
+            PointerByReference propertyCondition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
-        List<AutomationElement> elements = this.findAll(
-                new TreeScope(TreeScope.Descendants), condition.getValue());
+            PointerByReference nameCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
+            PointerByReference condition = this.automation.createAndCondition(nameCondition.getValue(), propertyCondition.getValue());
 
-        // TODO: Get this from the class
-        T item = type.cast(T.createAutomationButton(element));
+            AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
 
-        return item;
+            return type.cast(AutomationControlFactory.get(T.getControlType(), elem));
+
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
     }
 
     /**
@@ -627,6 +640,24 @@ public class AutomationContainer extends AutomationBase {
             logger.info("All done dumping");
         } catch (AutomationException ex) {
             logger.error(ex.getMessage());
+        }
+    }
+
+    static private class AutomationControlFactory {
+        public static IAutomationBase get(ControlType controlType, AutomationElement element)
+                throws AutomationException, PatternNotFoundException {
+
+            if (controlType == ControlType.None) {
+                throw new AutomationException();
+            } else if (controlType == ControlType.Button) {
+                return new AutomationButton(element);
+            } else if (controlType == ControlType.TitleBar) {
+                return new AutomationTitleBar(element);
+            }
+
+            // TODO: Get more to work like this.
+
+            return null;
         }
     }
 }

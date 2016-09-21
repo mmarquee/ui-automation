@@ -73,8 +73,10 @@ public class AutomationEditBox extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation error
      */
-    public AutomationEditBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationEditBox(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
+        controlType = ControlType.Edit;
     }
 }

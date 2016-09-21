@@ -33,5 +33,6 @@ public class AutomationStatusBar extends AutomationContainer {
      */
     public AutomationStatusBar(AutomationElement element) throws AutomationException{
         super(element);
+        controlType = ControlType.StatusBar;
     }
 }

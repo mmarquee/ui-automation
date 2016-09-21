@@ -34,16 +34,15 @@ public class AutomationProgressBar extends AutomationBase {
      * Construct the AutomationPanel
      * @param element The element
      * @throws AutomationException Error in automation library
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationProgressBar(AutomationElement element)
-            throws AutomationException {
+            throws AutomationException, PatternNotFoundException {
         super(element);
 
-        try {
-            this.rangePattern = this.getRangePattern();
-        } catch (PatternNotFoundException ex) {
-            logger.warn("RangeValue pattern not found");
-        }
+        this.rangePattern = this.getRangePattern();
+
+        controlType = ControlType.ProgressBar;
     }
 
     /**

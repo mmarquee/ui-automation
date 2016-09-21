@@ -40,6 +40,7 @@ public class AutomationCalendar extends AutomationBase {
     public AutomationCalendar(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
+        controlType = ControlType.Calendar;
     }
 
     /**

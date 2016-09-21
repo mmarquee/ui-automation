@@ -34,6 +34,7 @@ public class AutomationTextBox extends AutomationBase {
     public AutomationTextBox(AutomationElement element)
             throws AutomationException {
         super(element);
+        controlType = ControlType.Text;
     }
 
     /**

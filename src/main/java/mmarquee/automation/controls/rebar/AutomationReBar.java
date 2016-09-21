@@ -19,5 +19,6 @@ public class AutomationReBar extends AutomationPanel {
      */
     public AutomationReBar(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Pane;
     }
 }

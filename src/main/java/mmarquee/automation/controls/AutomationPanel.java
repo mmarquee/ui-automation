@@ -32,5 +32,6 @@ public class AutomationPanel extends AutomationContainer {
      */
     public AutomationPanel(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Pane;
     }
 }

@@ -33,5 +33,6 @@ public class AutomationSpinner extends AutomationBase {
     public AutomationSpinner(AutomationElement element)
             throws AutomationException {
         super(element);
+        controlType = ControlType.Spinner;
     }
 }

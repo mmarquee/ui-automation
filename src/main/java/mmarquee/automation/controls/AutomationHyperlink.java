@@ -38,6 +38,7 @@ public class AutomationHyperlink extends AutomationBase {
     public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.invokePattern = this.getInvokePattern();
+        controlType = ControlType.Hyperlink;
     }
 
     /**

@@ -56,6 +56,8 @@ public class AutomationWindow extends AutomationContainer {
         super(element);
 
         this.windowPattern = this.getWindowPattern();
+
+        controlType = ControlType.Window;
     }
 
     /**

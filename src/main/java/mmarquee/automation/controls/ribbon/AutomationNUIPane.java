@@ -33,6 +33,7 @@ public class AutomationNUIPane extends AutomationPanel {
      */
     public AutomationNUIPane(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Pane;
     }
 
     /**

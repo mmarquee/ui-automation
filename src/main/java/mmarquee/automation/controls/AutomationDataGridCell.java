@@ -39,6 +39,7 @@ public class AutomationDataGridCell extends AutomationBase {
     public AutomationDataGridCell(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
+        controlType = ControlType.DataItem; // TODO: Maybe not
     }
 
     /**

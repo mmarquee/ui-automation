@@ -27,6 +27,7 @@ public class AutomationSlider extends AutomationBase {
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.rangePattern = this.getRangePattern();
+        controlType = ControlType.Slider;
     }
 
     /**

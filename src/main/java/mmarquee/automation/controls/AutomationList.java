@@ -42,6 +42,7 @@ public class AutomationList extends AutomationBase {
     public AutomationList(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         this.selectionPattern = this.getSelectionPattern();
+        controlType = ControlType.List;
     }
 
     /**

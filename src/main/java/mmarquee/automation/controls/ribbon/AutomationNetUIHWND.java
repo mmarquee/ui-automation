@@ -33,5 +33,6 @@ public class AutomationNetUIHWND extends AutomationPanel {
      */
     public AutomationNetUIHWND(AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Pane;
     }
 }

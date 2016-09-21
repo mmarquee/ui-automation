@@ -31,7 +31,7 @@ import java.util.List;
  *
  * The base for automation.
  */
-public abstract class AutomationBase {
+public abstract class AutomationBase implements IAutomationBase {
 
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
@@ -45,6 +45,17 @@ public abstract class AutomationBase {
      */
     public AutomationBase (AutomationElement element) {
         this.element = element;
+    }
+
+    public static ControlType controlType = ControlType.None;
+
+    public static ControlType getControlType() {
+        return controlType;
+    }
+
+    public static AutomationBase create(AutomationElement element)
+            throws AutomationException {
+        throw new AutomationException();
     }
 
     /**

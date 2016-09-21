@@ -32,5 +32,6 @@ public class AutomationCustom extends AutomationBase {
      */
     public AutomationCustom (AutomationElement element) throws AutomationException {
         super(element);
+        controlType = ControlType.Custom;
     }
 }
