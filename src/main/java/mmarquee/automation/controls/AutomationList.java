@@ -91,7 +91,7 @@ public class AutomationList extends AutomationBase {
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getCurrentSelection() throws AutomationException {
+    public List<AutomationElement> getSelection() throws AutomationException {
         return this.selectionPattern.getCurrentSelection();
     }
 

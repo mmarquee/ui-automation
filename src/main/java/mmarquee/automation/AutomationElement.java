@@ -264,7 +264,7 @@ public class AutomationElement {
      * @return The pattern
      * @throws AutomationException Call to Automation API failed
      */
-    public PointerByReference getCurrentPattern(int patternId) throws AutomationException {
+    public PointerByReference getPattern(int patternId) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         if (this.element.get_CurrentPattern(patternId, pbr) != 0) {

@@ -287,7 +287,7 @@ public class TestMainWPF extends TestBase {
 
             RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
 
-            logger.info(rowOrColumn);
+            logger.info("Row or Column: " + rowOrColumn);
 
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
@@ -301,7 +301,6 @@ public class TestMainWPF extends TestBase {
             for(AutomationDataGridCell cell : cols) {
                 logger.info("Col 1 - " + cell.name());
             }
-
 
             // TREEVIEW **************************
 
@@ -493,13 +492,17 @@ public class TestMainWPF extends TestBase {
 
             AutomationMainMenu menuBar = titleBar.getMenuBar();
 
-            AutomationButton btnMin = titleBar.getButton(0);
-            AutomationButton btnMax = titleBar.getButton(1);
-            AutomationButton btnClose = titleBar.getButton(2);
+    //        AutomationButton btnMin = titleBar.getButton("Minimize");
+    //        AutomationButton btnMax = titleBar.getButton(1);
+    //        AutomationButton btnClose = titleBar.getButton(2);
 
-            logger.info(btnMin.name());
-            logger.info(btnMax.name());
-            logger.info(btnClose.name());
+            AutomationButton genericButton = titleBar.get(AutomationButton.class, "Minimize");
+
+            logger.info(genericButton.name());
+
+     //       logger.info(btnMin.name());
+      //      logger.info(btnMax.name());
+      //      logger.info(btnClose.name());
 
             // Right-click ****************************************
             logger.info("++ CONTEXT MENU ++");

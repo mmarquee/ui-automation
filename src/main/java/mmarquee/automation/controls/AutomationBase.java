@@ -48,6 +48,14 @@ public abstract class AutomationBase {
     }
 
     /**
+     * Gets the underlying automation element
+     * @return The automation element
+     */
+    public AutomationElement getElement() {
+        return this.element;
+    }
+
+    /**
      * Checks whether a pattern is available
      * @param property pattern to search for
      * @return True if available
@@ -383,7 +391,7 @@ public abstract class AutomationBase {
      * @throws AutomationException Error in automation library
      */
     private PointerByReference getPattern (int id) throws PatternNotFoundException, AutomationException {
-        PointerByReference unknown = this.element.getCurrentPattern(id);
+        PointerByReference unknown = this.element.getPattern(id);
 
         if (unknown != null) {
             return unknown;

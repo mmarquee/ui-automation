@@ -24,6 +24,7 @@ import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -363,6 +364,28 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Generic list of controls, determined by passed in type
+     */
+    public <T extends AutomationButton> T get(Class<T> type, String name)
+            throws PatternNotFoundException, AutomationException {
+
+        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+        variant1.setValue(Variant.VT_INT, ControlType.Button.getValue()); //T.getControlType().getValue());  // TODO: Get this from the class?????
+
+        // TODO: all wrong from here
+
+        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+
+        List<AutomationElement> elements = this.findAll(
+                new TreeScope(TreeScope.Descendants), condition.getValue());
+
+        // TODO: Get this from the class
+        T item = type.cast(T.createAutomationButton(element));
+
+        return item;
+    }
+
+    /**
      * Gets the  String Grid control associated with the given index, with a specific control name
      * @param index Index of the control
      * @param controlName Control Type name
@@ -595,7 +618,7 @@ public class AutomationContainer extends AutomationBase {
             for (AutomationElement element : collection) {
                 try {
                     String cName = element.getName();
-                    logger.info(".." + cName);
+                    logger.info(".." + cName + "|" + element.currentClassName());
                 } catch (NullPointerException ex) {
                     logger.info(ex.toString());
                 }

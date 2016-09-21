@@ -75,7 +75,7 @@ public class AutomationMainMenu extends AutomationBase {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants), pbr);
 
         if (item != null) {
-            PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
+            PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
 
             Unknown unkConditionA = new Unknown(pElement.getValue());
             PointerByReference pUnknownA = new PointerByReference();
@@ -126,7 +126,7 @@ public class AutomationMainMenu extends AutomationBase {
             // Needs a sub-item
             if (item != null) {
                 // Find the sub-item now
-                PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
+                PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
 
                 Unknown unkConditionA = new Unknown(pElement.getValue());
                 PointerByReference pUnknownA = new PointerByReference();

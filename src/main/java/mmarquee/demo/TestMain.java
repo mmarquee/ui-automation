@@ -59,20 +59,12 @@ public class TestMain extends TestBase {
             Object framework = window.getFramework();
             logger.info("Framework is " + framework.toString());
 
-            boolean val = window.isModal();
+            logger.info("Model? :" + window.isModal());
 
             java.lang.Object rect = window.getBoundingRectangle();
 
-       //     WinDef.HWND handle = window.getNativeWindowHandle();
-
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();
-//		List<AutomationMenuItem> items = menu.getItems();
-
-//		AutomationMenuItem item = items.get(0);
-//		item.expand();
-
-//		String name1 = item.name();
 
             try {
                 AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
@@ -107,6 +99,7 @@ public class TestMain extends TestBase {
 
             try {
                 ToggleState state = check.getToggleState();
+                logger.info("State: " + state);
             } catch (Exception ex) {
                 logger.info("Failed to get toggle state");
             }
@@ -114,15 +107,13 @@ public class TestMain extends TestBase {
             AutomationRadioButton radio = window.getRadioButton(1);
             radio.selectItem();
 
-            AutomationStatusBar statusbar = window.getStatusBar();
+            AutomationStatusBar statusBar = window.getStatusBar();
 
-            // AutomationTextBox tb0 = statusbar.getTextBox(0);
-            AutomationTextBox tb1 = statusbar.getTextBox(1);
+            AutomationTextBox tb1 = statusBar.getTextBox(1);
 
-            // String eb0Text = statusbar.getTextBox(0).getValue();
             String eb1Text = tb1.getValue();
 
-            logger.info("Statusbar text = " + eb1Text);
+            logger.info("Status Bar text = " + eb1Text);
 
             try {
                 AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");

@@ -21,6 +21,8 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
+import javax.naming.ldap.Control;
+
 /**
  * Created by Mark Humphreys on 02/02/2016.
  *
@@ -30,13 +32,23 @@ public class AutomationButton extends AutomationBase {
 
     private Invoke invokePattern = null;
 
+    // TODO: Partially implementation for generics experiment
+    public static ControlType getControlType() { return ControlType.Button; }
+
+
+    public static AutomationButton createAutomationButton(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationButton(element);
+    }
+
     /**
      * Constructor for the AutomationButton
      * @param element The underlying automation element
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationButton(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         this.invokePattern = this.getInvokePattern();
     }
