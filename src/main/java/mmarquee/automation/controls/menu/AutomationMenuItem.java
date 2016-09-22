@@ -49,9 +49,9 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
         super(element);
         this.collapsePattern = this.getExpandCollapsePattern();
         this.invokePattern = this.getInvokePattern();
-
-        controlType = ControlType.MenuItem;
     }
+
+    public static ControlType controlType = ControlType.MenuItem;
 
     /**
      * Invoke the click pattern for the menu item.

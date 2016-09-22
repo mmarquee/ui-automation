@@ -56,8 +56,6 @@ public class AutomationTab extends AutomationContainer {
     public AutomationTab (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
-        controlType = ControlType.Tab;
-
         // Now get the list of tab items
         tabItems = new ArrayList<AutomationTabItem>();
 
@@ -74,5 +72,6 @@ public class AutomationTab extends AutomationContainer {
         } catch (AutomationException ex) {
             logger.error(ex.getMessage());
         }
+
     }
 }

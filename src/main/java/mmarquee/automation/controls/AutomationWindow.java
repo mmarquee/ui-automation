@@ -56,8 +56,6 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         super(element);
 
         this.windowPattern = this.getWindowPattern();
-
-        controlType = ControlType.Window;
     }
 
     /**

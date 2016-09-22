@@ -47,6 +47,8 @@ public class AutomationMainMenu extends AutomationBase {
         return this.parent;
     }
 
+    public static ControlType controlType = ControlType.MenuBar;
+
     /**
      * Constructor for AutomationMainMenu
      * @param parent Parent of the element
@@ -56,7 +58,6 @@ public class AutomationMainMenu extends AutomationBase {
     public AutomationMainMenu(AutomationElement parent, AutomationElement element) throws AutomationException {
         super(element);
         this.parent = parent;
-        controlType = ControlType.MenuBar;
     }
 
     /**

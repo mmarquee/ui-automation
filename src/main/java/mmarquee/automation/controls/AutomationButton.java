@@ -32,7 +32,7 @@ public class AutomationButton extends AutomationBase implements Clickable {
 
     private Invoke invokePattern = null;
 
-    public static ControlType getControlType() { return ControlType.Button; }
+    public static ControlType controlType = ControlType.Button;
 
     /**
      * Constructor for the AutomationButton
@@ -44,7 +44,6 @@ public class AutomationButton extends AutomationBase implements Clickable {
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.invokePattern = this.getInvokePattern();
-        controlType = ControlType.Button;
     }
 
     /**

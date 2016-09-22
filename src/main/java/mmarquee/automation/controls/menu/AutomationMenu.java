@@ -47,8 +47,9 @@ public class AutomationMenu extends AutomationBase {
     public AutomationMenu(AutomationElement element)
             throws AutomationException {
         super(element);
-        controlType = ControlType.Menu;
     }
+
+    public static ControlType controlType = ControlType.Menu;
 
     /**
      * Gets the item associated with the index

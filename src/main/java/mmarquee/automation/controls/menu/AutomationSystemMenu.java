@@ -44,8 +44,9 @@ public class AutomationSystemMenu extends AutomationBase {
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.getItems();
-        controlType = ControlType.Menu;
     }
+
+    public static ControlType controlType = ControlType.Menu;
 
     /**
      * Get the item associated with the name

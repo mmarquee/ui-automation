@@ -56,8 +56,6 @@ public class AutomationDataGrid extends AutomationBase
         this.gridPattern = this.getGridPattern();
         this.tablePattern = this.getTablePattern();
         this.selectionPattern = this.getSelectionPattern();
-
-        controlType = ControlType.DataGrid;
     }
 
     /**
@@ -102,7 +100,7 @@ public class AutomationDataGrid extends AutomationBase
 
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
-        for(AutomationElement item : collection) {
+        for (AutomationElement item : collection) {
             items.add(new AutomationDataGridCell(item));
         }
 

@@ -62,6 +62,5 @@ public class AutomationCheckbox extends AutomationBase {
     public AutomationCheckbox (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         togglePattern = this.getTogglePattern();
-        controlType = ControlType.CheckBox;
     }
 }

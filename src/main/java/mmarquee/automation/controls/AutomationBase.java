@@ -47,17 +47,6 @@ public abstract class AutomationBase implements Automatable {
         this.element = element;
     }
 
-    public static ControlType controlType = ControlType.None;
-
-    public static ControlType getControlType() {
-        return controlType;
-    }
-
-    public static AutomationBase create(AutomationElement element)
-            throws AutomationException {
-        throw new AutomationException();
-    }
-
     /**
      * Gets the underlying automation element
      * @return The automation element

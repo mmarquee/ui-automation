@@ -44,8 +44,6 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
 
         this.selectItemPattern = this.getSelectItemPattern();
         this.invokePattern = this.getInvokePattern();
-
-        controlType = ControlType.TreeItem;
     }
 
     /**

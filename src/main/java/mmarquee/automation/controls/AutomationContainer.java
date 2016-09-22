@@ -54,10 +54,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Error in the Automation library
      */
     protected AutomationElement getControlByControlType(int index, ControlType id) throws AutomationException {
-        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, id.getValue());
-
-        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
+                this.createIntegerVariant(id.getValue()));
 
         List<AutomationElement> collection = this.findAll(
                 new TreeScope(TreeScope.Descendants), condition.getValue());
@@ -366,34 +364,40 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationButton(this.getControlByControlType(index, ControlType.Button));
     }
 
+    private Variant.VARIANT.ByValue createIntegerVariant(int value) {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        variant.setValue(Variant.VT_INT, value);
+
+        return variant;
+    }
+
     /**
      * Get a control, based on the class and the name
      * @param type Class to return / check for
+     * @param controlType The control type to look for
      * @param name Name to be looked for
      * @param <T> The Type of the class
      * @return Founnd element
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Raised from automation library
      */
-    public <T extends AutomationBase> T get(Class<T> type, String name)
+    public <T extends AutomationBase> T get(Class<T> type, ControlType controlType, String name)
             throws PatternNotFoundException, AutomationException {
-
-        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, T.getControlType().getValue());
 
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            PointerByReference propertyCondition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+            PointerByReference propertyCondition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
+                    this.createIntegerVariant(controlType.getValue()));
 
             PointerByReference nameCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
-            PointerByReference condition = this.automation.createAndCondition(nameCondition.getValue(), propertyCondition.getValue());
+            PointerByReference condition = this.createAndCondition(propertyCondition.getValue(), nameCondition.getValue());
 
             AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
 
-            return type.cast(AutomationControlFactory.get(T.getControlType(), elem));
+            return type.cast(AutomationControlFactory.get(controlType, elem));
 
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);

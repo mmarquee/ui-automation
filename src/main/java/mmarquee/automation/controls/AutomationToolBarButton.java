@@ -36,7 +36,6 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
     public AutomationToolBarButton(AutomationElement element)
             throws AutomationException {
         super (element);
-        controlType = ControlType.Button;
     }
 
     /**

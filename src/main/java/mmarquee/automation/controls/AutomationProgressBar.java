@@ -41,8 +41,6 @@ public class AutomationProgressBar extends AutomationBase {
         super(element);
 
         this.rangePattern = this.getRangePattern();
-
-        controlType = ControlType.ProgressBar;
     }
 
     /**

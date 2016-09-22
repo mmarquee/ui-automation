@@ -16,10 +16,7 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
@@ -496,7 +493,7 @@ public class TestMainWPF extends TestBase {
     //        AutomationButton btnMax = titleBar.getButton(1);
     //        AutomationButton btnClose = titleBar.getButton(2);
 
-            AutomationButton genericButton = titleBar.get(AutomationButton.class, "Minimize");
+            AutomationButton genericButton = titleBar.get(AutomationButton.class, ControlType.Button, "Minimize");
 
             logger.info(genericButton.name());
 

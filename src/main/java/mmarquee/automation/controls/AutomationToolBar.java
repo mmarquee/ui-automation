@@ -34,7 +34,6 @@ public class AutomationToolBar extends AutomationContainer {
      */
     public AutomationToolBar(AutomationElement element) throws AutomationException {
         super(element);
-        controlType = ControlType.ToolBar;
     }
 
     /**

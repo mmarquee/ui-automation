@@ -77,6 +77,5 @@ public class AutomationEditBox extends AutomationBase {
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
-        controlType = ControlType.Edit;
     }
 }
