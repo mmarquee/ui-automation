@@ -367,12 +367,16 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Generic list of controls, determined by passed in type
+     * Get a control, based on the class and the name
+     * @param type Class to return / check for
+     * @param name Name to be looked for
+     * @param <T> The Type of the class
+     * @return Founnd element
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Raised from automation library
      */
     public <T extends AutomationBase> T get(Class<T> type, String name)
             throws PatternNotFoundException, AutomationException {
-
-        int t = T.getControlType().getValue();
 
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
         variant1.setValue(Variant.VT_INT, T.getControlType().getValue());
