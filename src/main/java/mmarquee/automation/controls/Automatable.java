@@ -21,5 +21,5 @@ package mmarquee.automation.controls;
  *
  * The basic definition of an Automation control
  */
-public interface IAutomationBase {
+public interface Automatable {
 }

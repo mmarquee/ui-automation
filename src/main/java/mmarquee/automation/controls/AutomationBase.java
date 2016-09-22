@@ -31,7 +31,7 @@ import java.util.List;
  *
  * The base for automation.
  */
-public abstract class AutomationBase implements IAutomationBase {
+public abstract class AutomationBase implements Automatable {
 
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 

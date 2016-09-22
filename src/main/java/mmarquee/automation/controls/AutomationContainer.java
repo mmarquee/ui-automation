@@ -16,7 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.javafx.fxml.PropertyNotFoundException;
 import com.sun.jna.platform.win32.OleAuto;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WTypes;
@@ -27,7 +26,6 @@ import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -644,7 +642,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     static private class AutomationControlFactory {
-        public static IAutomationBase get(ControlType controlType, AutomationElement element)
+        public static Automatable get(ControlType controlType, AutomationElement element)
                 throws AutomationException, PatternNotFoundException {
 
             if (controlType == ControlType.None) {
