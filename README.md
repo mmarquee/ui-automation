@@ -22,7 +22,7 @@ The library is held in the Sonatype OSS repository, so is available for download
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.SNAPSHOT</version>
 <dependencies>  
 ```
 
@@ -262,7 +262,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.2.0"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.SNAPSHOT"
 ```
 
 ## Examples
