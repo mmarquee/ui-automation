@@ -15,22 +15,9 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-
 /**
- * Created by Mark Humphreys on 26/02/2016.
- *
- * Wrapper for the Image control element.
+ * Created by inpwt on 21/09/2016.
  */
-public class AutomationImage extends AutomationBase {
-    /**
-     * Construct the AutomationImage
-     * @param element The element
-     * @throws AutomationException Automation library error
-     */
-    public AutomationImage(AutomationElement element) throws AutomationException {
-        super(element);
-    }
+public interface Focusable {
+    void focus();
 }

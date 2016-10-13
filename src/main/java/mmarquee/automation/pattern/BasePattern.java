@@ -81,9 +81,7 @@ public abstract class BasePattern implements Pattern {
 
             Unknown uElement = new Unknown(pbr.getValue());
 
-            Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
-            WinNT.HRESULT result0 = uElement.QueryInterface(refiidElement, pbr);
+            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement element =
@@ -115,7 +113,7 @@ public abstract class BasePattern implements Pattern {
     /**
      * Gets the raw pointer to the pattern
      * @param pbr The raw pointer
-     * @return Result of the call.
+     * @return Result of the call from the COM library
      */
     protected WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
         Unknown uElement = new Unknown(this.pattern);

@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
@@ -26,7 +27,7 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the ListItem element.
  */
-public class AutomationListItem extends AutomationBase {
+public class AutomationListItem extends AutomationBase implements Selectable {
 
     private SelectionItem selectItemPattern;
 
@@ -49,4 +50,12 @@ public class AutomationListItem extends AutomationBase {
         this.selectItemPattern.select();
     }
 
+    /**
+     * Is this item selected?
+     * @return True if selected
+     * @throws AutomationException Automation library issue
+     */
+    public boolean isSelected() throws AutomationException {
+        return this.selectItemPattern.isSelected();
+    }
 }

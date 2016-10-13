@@ -31,7 +31,7 @@ import java.util.List;
  *
  * The base for automation.
  */
-public abstract class AutomationBase {
+public abstract class AutomationBase implements Automatable {
 
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
@@ -45,6 +45,14 @@ public abstract class AutomationBase {
      */
     public AutomationBase (AutomationElement element) {
         this.element = element;
+    }
+
+    /**
+     * Gets the underlying automation element
+     * @return The automation element
+     */
+    public AutomationElement getElement() {
+        return this.element;
     }
 
     /**
@@ -383,7 +391,7 @@ public abstract class AutomationBase {
      * @throws AutomationException Error in automation library
      */
     private PointerByReference getPattern (int id) throws PatternNotFoundException, AutomationException {
-        PointerByReference unknown = this.element.getCurrentPattern(id);
+        PointerByReference unknown = this.element.getPattern(id);
 
         if (unknown != null) {
             return unknown;

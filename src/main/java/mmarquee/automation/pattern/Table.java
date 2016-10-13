@@ -70,9 +70,7 @@ public class Table extends BasePattern {
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
                     IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
@@ -113,9 +111,7 @@ public class Table extends BasePattern {
         Unknown unkConditionA = new Unknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationElementArray.IID);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
                     IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);

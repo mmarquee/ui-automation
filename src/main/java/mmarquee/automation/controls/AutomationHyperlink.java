@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -25,7 +26,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  *
  * Wrapper for the Hyperlink element.
  */
-public class AutomationHyperlink extends AutomationBase {
+public class AutomationHyperlink extends AutomationBase implements Clickable {
     private Invoke invokePattern;
 
     /**

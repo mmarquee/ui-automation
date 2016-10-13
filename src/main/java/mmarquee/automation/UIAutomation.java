@@ -22,8 +22,10 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 import java.util.ArrayList;
@@ -68,9 +70,7 @@ public class UIAutomation {
 
         PointerByReference pbr1 = new PointerByReference();
 
-        Guid.REFIID refiid = new Guid.REFIID(IUIAutomation.IID);
-
-        WinNT.HRESULT result = unk.QueryInterface(refiid, pbr1);
+        WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
             this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
         }
@@ -81,9 +81,7 @@ public class UIAutomation {
 
         Unknown uRoot = new Unknown(pRoot.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
-        WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pRoot);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
             this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
@@ -190,18 +188,19 @@ public class UIAutomation {
     }
 
     /**
-     * Gets the desktop window associated with the title
+     * Gets the desktop objecy associated with the title
      *
      * @param title Title to search for
-     * @return AutomationWindow The found window
+     * @return AutomationWindow The found 'element'
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopWindow(String title) throws AutomationException {
+    private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
+            throws AutomationException  {
         AutomationElement element = null;
 
         // Look for a window
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, ControlType.Window.getValue());
+        variant1.setValue(Variant.VT_INT, controlType.getValue());
 
         // Look for a specific title
         Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
@@ -218,7 +217,7 @@ public class UIAutomation {
             // And Condition
             PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
 
-            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+            for (int loop = 0; loop < numberOfRetries; loop++) {
 
                 try {
                     element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
@@ -239,7 +238,20 @@ public class UIAutomation {
             throw new ItemNotFoundException();
         }
 
-        return new AutomationWindow(element);
+        return element;
+    }
+
+    /**
+     * Gets the desktop 'window' associated with the title
+     *
+     * @param title Title to search for
+     * @return AutomationWindow The found window
+     * @throws ElementNotFoundException Element is not found
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationWindow getDesktopWindow(String title)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.get(ControlType.Window, title, FIND_DESKTOP_ATTEMPTS));
     }
 
     /**
@@ -353,12 +365,10 @@ public class UIAutomation {
         PointerByReference pCondition = new PointerByReference();
 
         if (this.automation.CreatePropertyCondition(id, value, pCondition) == 0) {
-            Guid.REFIID refiid1 = new Guid.REFIID(IUIAutomationCondition.IID);
-
             Unknown unkCondition = new Unknown(pCondition.getValue());
             PointerByReference pUnknown = new PointerByReference();
 
-            WinNT.HRESULT result1 = unkCondition.QueryInterface(refiid1, pUnknown);
+            WinNT.HRESULT result1 = unkCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown);
             if (COMUtils.SUCCEEDED(result1)) {
                 return pCondition;
             } else {
@@ -375,41 +385,11 @@ public class UIAutomation {
      * @param title Title to search for
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getDesktopObject(String title) throws AutomationException {
-        AutomationElement element = null;
-
-        // Look for a specific title
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
-        variant.setValue(Variant.VT_BSTR, sysAllocated);
-
-        try {
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
-
-            for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
-
-                try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
-                            pCondition1);
-                } catch (AutomationException ex) {
-                    logger.info("Not found, retrying " + title);
-                }
-
-                if (element != null) {
-                    break;
-                }
-            }
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
-        }
-
-        if (element == null) {
-            logger.warning("Failed to find desktop object `" + title + "`");
-            throw new ItemNotFoundException();
-        }
-
-        return new AutomationWindow(element);
+    public AutomationWindow getDesktopObject(String title)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
     }
 
     /**
@@ -460,8 +440,10 @@ public class UIAutomation {
      *
      * @return List of desktop windows
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationWindow> getDesktopWindows() throws AutomationException {
+    public List<AutomationWindow> getDesktopWindows()
+            throws PatternNotFoundException, AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
         PointerByReference pTrueCondition = this.createTrueCondition();
@@ -469,9 +451,7 @@ public class UIAutomation {
         Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationCondition.IID);
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             List<AutomationElement> collection =
                     this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());

@@ -19,7 +19,9 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
 import java.lang.reflect.Field;
@@ -82,9 +84,11 @@ public class AutomationApplication extends AutomationBase {
      * Gets the window associated with the title
      * @param title The title to look for
      * @return An AutomationWindow
-     * @throws AutomationException Count find element
+     * @throws AutomationException Cannot find element
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getWindow(String title) throws AutomationException {
+    public AutomationWindow getWindow(String title)
+            throws PatternNotFoundException, AutomationException {
 
         AutomationElement foundElement = null;
 

@@ -55,6 +55,10 @@ class TestExplorer extends TestBase {
             AutomationWindow window = automation.getDesktopWindow("File Explorer");
             window.focus();
 
+            logger.info("Dump start");
+            window.dumpUI();
+            logger.info("Dump done");
+
             // Get the ribbon, work our way down and click the "Preview Button"
             AutomationRibbonBar ribbon = window.getRibbonBar();
             AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
@@ -89,32 +93,40 @@ class TestExplorer extends TestBase {
 
             this.rest();
 
+            logger.info("+++ Rebar +++");
+
             AutomationReBar rebar = window.getReBar(0);
             try {
                 AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
 
-                //   logger.info("Toolbar = " + toolbar.name());
-                //   AutomationButton upButton = toolbar.getButton(0);
-                //   upButton.click();
+                logger.info("Toolbar = " + toolbar.name());
+                AutomationButton upButton = toolbar.getButton(0);
+                logger.info("Rebar button is `" + upButton.name() + "`");
+             //   upButton.click();
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find element");
             }
 
+            logger.info("+++ Interact with the panel now +++ ");
+
             try {
                 // Now try and get to the list of items in explorer
                 AutomationPanel explorer = window.getPanel("File Explorer");
-                logger.info(explorer.name());
+                logger.info("." + explorer.name());
                 AutomationPanel pane0 = explorer.getPanel("Control Host");
-                logger.info(pane0.name());
+                logger.info(".." + pane0.name());
                 AutomationTreeView treeView = pane0.getTreeView(0);
-                logger.info(treeView.name());
+                logger.info("..." + treeView.name());
                 try {
                     AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
-                    logger.info(treeItem.name());
+                    logger.info("...." + treeItem.name());
 
                     this.rest();
 
+                    logger.info("Here");
+                    // Get an issue here, not sure whether this previously existed
                     treeItem.click();
+                    logger.info("Here...");
                 } catch (ItemNotFoundException ex) {
                     logger.info("Didn't find the item");
                 }
@@ -122,18 +134,21 @@ class TestExplorer extends TestBase {
                 logger.info("Failed to find element");
             }
 
+            logger.info("Getting toolbar");
             AutomationToolBar toolbar = window.getToolBar(0);
-            logger.info(toolbar.name());
+            logger.info("Got toolbar");
+            logger.info("....." + toolbar.name());
 
             // Looks like the button is a problem with Delphi
             AutomationButton btn0 = toolbar.getButton(0);
-            logger.info(btn0.name());
+            logger.info("....." + btn0.name());
             if (btn0.isEnabled()) {
                 btn0.click();
             }
 
         } catch (Exception ex) {
             logger.info("Something went wrong");
+            ex.printStackTrace();
         }
     }
 }

@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 
 /**
@@ -25,14 +26,15 @@ import mmarquee.automation.controls.mouse.AutomationMouse;
  *
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
-public class AutomationToolBarButton extends AutomationBase {
+public class AutomationToolBarButton extends AutomationBase implements Clickable {
 
     /**
      * Constructor for the AutomationToolBarButton
      * @param element The underlying automation element
      * @throws AutomationException Automation library error
      */
-    public AutomationToolBarButton(AutomationElement element) throws AutomationException {
+    public AutomationToolBarButton(AutomationElement element)
+            throws AutomationException {
         super (element);
     }
 

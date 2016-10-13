@@ -47,6 +47,8 @@ public class AutomationMainMenu extends AutomationBase {
         return this.parent;
     }
 
+    public static ControlType controlType = ControlType.MenuBar;
+
     /**
      * Constructor for AutomationMainMenu
      * @param parent Parent of the element
@@ -75,14 +77,12 @@ public class AutomationMainMenu extends AutomationBase {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants), pbr);
 
         if (item != null) {
-            PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
+            PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
 
             Unknown unkConditionA = new Unknown(pElement.getValue());
             PointerByReference pUnknownA = new PointerByReference();
 
-            Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
-
-            WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+            WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
             if (COMUtils.SUCCEEDED(resultA)) {
                 IUIAutomationExpandCollapsePattern pattern =
                         IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
@@ -128,14 +128,12 @@ public class AutomationMainMenu extends AutomationBase {
             // Needs a sub-item
             if (item != null) {
                 // Find the sub-item now
-                PointerByReference pElement = item.getCurrentPattern(PatternID.ExpandCollapse.getValue());
+                PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
 
                 Unknown unkConditionA = new Unknown(pElement.getValue());
                 PointerByReference pUnknownA = new PointerByReference();
 
-                Guid.REFIID refiidA = new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID);
-
-                WinNT.HRESULT resultA = unkConditionA.QueryInterface(refiidA, pUnknownA);
+                WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
                 if (COMUtils.SUCCEEDED(resultA)) {
                     IUIAutomationExpandCollapsePattern pattern =
                             IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);

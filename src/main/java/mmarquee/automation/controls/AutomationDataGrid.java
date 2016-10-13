@@ -23,6 +23,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
@@ -99,7 +100,7 @@ public class AutomationDataGrid extends AutomationBase
 
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
-        for(AutomationElement item : collection) {
+        for (AutomationElement item : collection) {
             items.add(new AutomationDataGridCell(item));
         }
 
@@ -120,11 +121,9 @@ public class AutomationDataGrid extends AutomationBase
 
         Unknown uRoot = new Unknown(cell.getValue());
 
-        Guid.REFIID refiidElement = new Guid.REFIID(IUIAutomationElement.IID);
-
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uRoot.QueryInterface(refiidElement, pbr);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
 

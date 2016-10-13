@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -72,7 +73,8 @@ public class AutomationEditBox extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation error
      */
-    public AutomationEditBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationEditBox(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
     }

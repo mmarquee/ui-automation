@@ -1,0 +1,214 @@
+/*
+ * Copyright 2016 inpwtepydjuf@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package mmarquee.automation.uiautomation;
+
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Ole32;
+import com.sun.jna.platform.win32.WTypes;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+import junit.framework.TestCase;
+import mmarquee.automation.controls.AutomationBase;
+import org.apache.log4j.Logger;
+
+/**
+ * Created by inpwt on 13/10/2016.
+ */
+public class IUIAutomationTest extends TestCase {
+
+    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+
+    static {
+        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(IUIAutomationTest.class);
+    }
+
+    private IUIAutomation automation;
+
+    protected void setUp() throws Exception {
+        // Initialise COM
+        Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_MULTITHREADED);
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
+                IUIAutomation.CLSID,
+                null,
+                WTypes.CLSCTX_SERVER,
+                IUIAutomation.IID,
+                pbr);
+
+        COMUtils.checkRC(hr);
+
+        Unknown unk = new Unknown(pbr.getValue());
+
+        PointerByReference pbr1 = new PointerByReference();
+
+        WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
+        if (COMUtils.SUCCEEDED(result)) {
+            this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
+        }
+    }
+
+    public void testGetRootElement() {
+        PointerByReference root = new PointerByReference();
+        automation.GetRootElement(root);
+
+        Unknown uRoot = new Unknown(root.getValue());
+
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+
+        assertTrue("RootElement", COMUtils.SUCCEEDED(result));
+    }
+
+    public void testCompareElementsWhenElementsAreTheSame() {
+        PointerByReference root = new PointerByReference();
+        automation.GetRootElement(root);
+
+        IntByReference same = new IntByReference();
+
+        automation.CompareElements(root.getValue(), root.getValue(), same);
+
+        assertTrue("Compare", same.getValue() != 0);
+    }
+
+    public void testCreateTrueCondition() {
+        PointerByReference pbr = new PointerByReference();
+        automation.CreateTrueCondition(pbr);
+
+        Unknown uRoot = new Unknown(pbr.getValue());
+
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
+
+        assertTrue("TrueCondition", COMUtils.SUCCEEDED(result));
+    }
+
+    public void testCreateFalseCondition() {
+        PointerByReference pbr = new PointerByReference();
+        automation.CreateFalseCondition(pbr);
+
+        Unknown uRoot = new Unknown(pbr.getValue());
+
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
+
+        assertTrue("FalseCondition", COMUtils.SUCCEEDED(result));
+    }
+
+    public void testGetPatternProgrammaticNameForInvoke () {
+        PointerByReference sr = new PointerByReference();
+
+        automation.GetPatternProgrammaticName(10000, sr);
+
+        String name = sr.getValue().getWideString(0);
+
+        assertTrue("GetPatternProgrammticName", name.equals("InvokePattern"));
+    }
+
+    public void testGetPatternProgrammaticNameForCustomNavigation () {
+        PointerByReference sr = new PointerByReference();
+
+        automation.GetPatternProgrammaticName(10033, sr);
+
+        String name = sr.getValue().getWideString(0);
+
+        assertTrue("GetPatternProgrammticName", name.equals("CustomNavigationPattern"));
+    }
+
+    public void testOrCondition() {
+        PointerByReference condition1 = new PointerByReference();
+        PointerByReference condition2 = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
+
+        automation.CreateTrueCondition(condition1);
+        automation.CreateTrueCondition(condition2);
+
+        automation.CreateOrCondition(condition1.getValue(), condition2.getValue(), pbr);
+        Unknown uCondition = new Unknown(pbr.getValue());
+
+        WinNT.HRESULT result = uCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
+
+        assertTrue("OrCondition", COMUtils.SUCCEEDED(result));
+    }
+
+    public void testAndCondition() {
+        PointerByReference condition1 = new PointerByReference();
+        PointerByReference condition2 = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
+
+        automation.CreateTrueCondition(condition1);
+        automation.CreateTrueCondition(condition2);
+
+        automation.CreateAndCondition(condition1.getValue(), condition2.getValue(), pbr);
+        Unknown uCondition = new Unknown(pbr.getValue());
+
+        WinNT.HRESULT result = uCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
+
+        assertTrue("AndCondition", COMUtils.SUCCEEDED(result));
+    }
+
+    public void testCreateNotCondition() {
+        PointerByReference condition = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
+
+        automation.CreateTrueCondition(condition);
+
+        automation.CreateNotCondition(condition.getValue(), pbr);
+        Unknown uCondition = new Unknown(pbr.getValue());
+
+        WinNT.HRESULT result = uCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
+
+        assertTrue("NotCondition", COMUtils.SUCCEEDED(result));
+    }
+
+//    public void testCompareElementsWhenElementsAreDifferent() {
+//        PointerByReference root = new PointerByReference();
+//        automation.GetRootElement(root)/;
+//
+//        // Get first descendant for the root element
+//        PointerByReference pbr = new PointerByReference();
+//        automation.CreateTrueCondition(pbr);
+//        PointerByReference first = new PointerByReference()/;
+//
+//        root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+//
+ //       IntByReference same = new IntByReference();
+//
+//        automation.CompareElements(root.getValue(), root.getValue(), same);
+//
+ //       assertTrue("Compare", same.getValue() == 0);
+ //   }
+
+
+//    public void testGetCurrentName() {
+//        PointerByReference pbr = new PointerByReference();
+//        automation.GetRootElement(pbr);
+//
+//    }
+
+//    public void testGetClassName() {
+//        PointerByReference pbr = new PointerByReference();
+//        automation.GetRootElement(pbr);
+//
+//        assertTrue("root:" + root.currentClassName(), root.currentClassName().equals("#32769"));
+//    }
+}

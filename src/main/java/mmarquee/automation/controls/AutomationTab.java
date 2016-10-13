@@ -72,5 +72,6 @@ public class AutomationTab extends AutomationContainer {
         } catch (AutomationException ex) {
             logger.error(ex.getMessage());
         }
+
     }
 }

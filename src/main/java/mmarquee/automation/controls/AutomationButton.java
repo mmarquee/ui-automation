@@ -17,17 +17,22 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
+
+import javax.naming.ldap.Control;
 
 /**
  * Created by Mark Humphreys on 02/02/2016.
  *
  * Wrapper around the Button element.
  */
-public class AutomationButton extends AutomationBase {
+public class AutomationButton extends AutomationBase implements Clickable {
 
     private Invoke invokePattern = null;
+
+    public static ControlType controlType = ControlType.Button;
 
     /**
      * Constructor for the AutomationButton
@@ -35,9 +40,9 @@ public class AutomationButton extends AutomationBase {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationButton(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
-
         this.invokePattern = this.getInvokePattern();
     }
 
@@ -47,7 +52,7 @@ public class AutomationButton extends AutomationBase {
      * </p>
      * @throws AutomationException Error in the automation library
      */
-    public void click() throws AutomationException{
+    public void click() throws AutomationException {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {

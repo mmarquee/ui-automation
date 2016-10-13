@@ -15,14 +15,18 @@
  */
 package mmarquee.demo;
 
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import org.apache.log4j.Logger;
 
 /**
  * Created by Mark Humphreys on 26/02/2016
- *  *
+ *
  * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestNotepad extends TestBase {
@@ -60,20 +64,8 @@ public class TestNotepad extends TestBase {
             window.focus();
             window.maximize();
 
-            // Now do a popup?
-            AutomationMouse mouse = AutomationMouse.getInstance();
-            mouse.setLocation(500,250);
-            mouse.rightClick();
-
             this.rest();
 
-            logger.info("About to start dumping UI");
-
-            window.dumpUI();
-
-            logger.info("++ All done dumping UI ++");
-
-/*
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();
 
@@ -94,7 +86,6 @@ public class TestNotepad extends TestBase {
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find exit menu item");
             }
-            */
         } catch (Exception ex) {
             logger.info("Something went wrong - " + ex.toString());
         }

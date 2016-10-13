@@ -22,6 +22,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -77,11 +78,9 @@ public class UIAutomationTest extends TestCase {
             Unknown unk = new Unknown(condition.getValue());
             PointerByReference pUnk = new PointerByReference();
 
-            Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
-
             PointerByReference pUnknown1 = new PointerByReference();
 
-            WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+            WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
 
             assertTrue("Create FalseCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
         } catch (AutomationException ex) {
@@ -89,7 +88,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
-    public void testGetDesktopWindows() throws AutomationException {
+    public void testGetDesktopWindows() throws PatternNotFoundException, AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
         List<AutomationWindow> windows = instance.getDesktopWindows();
@@ -109,13 +108,10 @@ public class UIAutomationTest extends TestCase {
                 PointerByReference pCondition = instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
 
                 Unknown unk = new Unknown(pCondition.getValue());
-                PointerByReference pUnk = new PointerByReference();
-
-                Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
 
                 PointerByReference pUnknown1 = new PointerByReference();
 
-                WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+                WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
 
                 assertTrue("CreatePropertyCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
             } catch (AutomationException ex) {
@@ -145,13 +141,10 @@ public class UIAutomationTest extends TestCase {
 
                 // Checking
                 Unknown unk = new Unknown(notCondition.getValue());
-                PointerByReference pUnk = new PointerByReference();
-
-                Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
 
                 PointerByReference pUnknown1 = new PointerByReference();
 
-                WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+                WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
 
                 assertTrue("CreateNotCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
             } catch (AutomationException ex) {
@@ -187,11 +180,9 @@ public class UIAutomationTest extends TestCase {
                 Unknown unk = new Unknown(andCondition.getValue());
                 PointerByReference pUnk = new PointerByReference();
 
-                Guid.REFIID refiid3 = new Guid.REFIID(IUIAutomationCondition.IID);
-
                 PointerByReference pUnknown1 = new PointerByReference();
 
-                WinNT.HRESULT result = unk.QueryInterface(refiid3, pUnknown1);
+                WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
 
                 assertTrue("CreateNotCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
             } catch (AutomationException ex) {

@@ -13,24 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * Created by inpwt on 21/09/2016.
  *
- * Wrapper for the Image control element.
+ * The basic definition of an Automation control
  */
-public class AutomationImage extends AutomationBase {
-    /**
-     * Construct the AutomationImage
-     * @param element The element
-     * @throws AutomationException Automation library error
-     */
-    public AutomationImage(AutomationElement element) throws AutomationException {
-        super(element);
-    }
+public interface Automatable {
 }

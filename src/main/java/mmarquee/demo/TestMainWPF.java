@@ -16,10 +16,7 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
@@ -59,6 +56,8 @@ public class TestMainWPF extends TestBase {
 
         try {
             applicationWindow = automation.getDesktopWindow("MainWindow");
+
+//            applicationWindow = automation.get("MainWindow");
         } catch (Exception ex) {
             logger.info("Failed to find `MainWindow`");
         }
@@ -175,6 +174,14 @@ public class TestMainWPF extends TestBase {
                 logger.info("Failed to get toggle state");
             }
 
+            AutomationCheckbox cb = applicationWindow.get(AutomationCheckbox.class, ControlType.CheckBox, "Enable feature WWW");
+            cb.toggle();
+            try {
+                ToggleState state = cb.getToggleState();
+            } catch (Exception ex) {
+                logger.info("Failed to get toggle state");
+            }
+
             // RADIO BUTTON *********************************************
 
             logger.info("++ RADIO BUTTON ++");
@@ -285,7 +292,7 @@ public class TestMainWPF extends TestBase {
 
             RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
 
-            logger.info(rowOrColumn);
+            logger.info("Row or Column: " + rowOrColumn);
 
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
@@ -299,7 +306,6 @@ public class TestMainWPF extends TestBase {
             for(AutomationDataGridCell cell : cols) {
                 logger.info("Col 1 - " + cell.name());
             }
-
 
             // TREEVIEW **************************
 
@@ -350,11 +356,14 @@ public class TestMainWPF extends TestBase {
             }
 
             // HYPERLINK ***********************************
-
+/*
             logger.info("++ HYPERLINK ++");
 
             AutomationHyperlink link = applicationWindow.getHyperlink(0);
             link.click();
+*/
+
+            // TOOLBAR ***********************************
 
             AutomationToolBar toolbar = applicationWindow.getToolBar(0);
             logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
@@ -486,18 +495,22 @@ public class TestMainWPF extends TestBase {
 
             AutomationTitleBar titleBar = applicationWindow.getTitleBar();
 
-            // Title bar seeems to not give back a name now
+            // Title bar seems to not give back a name now
             // logger.info("TitleBar name is " + titleBar.name());
 
-            AutomationMainMenu menuBar = titleBar.getMenuBar();
+//            AutomationMainMenu menuBar = titleBar.getMenuBar();
 
-            AutomationButton btnMin = titleBar.getButton(0);
-            AutomationButton btnMax = titleBar.getButton(1);
-            AutomationButton btnClose = titleBar.getButton(2);
+//            AutomationButton btnMin = titleBar.getButton("Minimize");
+    //        AutomationButton btnMax = titleBar.getButton(1);
+    //        AutomationButton btnClose = titleBar.getButton(2);
 
-            logger.info(btnMin.name());
-            logger.info(btnMax.name());
-            logger.info(btnClose.name());
+//            AutomationButton genericButton = titleBar.get1(AutomationButton.class, ControlType.Button, "Minimize");
+
+//            logger.info("`Generic` " + genericButton.name());
+
+  //          logger.info("`Specific` " + btnMin.name());
+      //      logger.info(btnMax.name());
+      //      logger.info(btnClose.name());
 
             // Right-click ****************************************
             logger.info("++ CONTEXT MENU ++");

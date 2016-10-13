@@ -34,7 +34,7 @@ import java.util.List;
  *
  * Encapsulates the 'window' element
  */
-public class AutomationWindow extends AutomationContainer {
+public class AutomationWindow extends AutomationContainer implements Focusable {
 
     private Window windowPattern;
 
@@ -49,15 +49,13 @@ public class AutomationWindow extends AutomationContainer {
      * Constructor for the AutomationWindow
      * @param element The underlying element
      * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow (AutomationElement element) throws AutomationException {
+    public AutomationWindow (AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
 
-        try {
-            this.windowPattern = this.getWindowPattern();
-        } catch (PatternNotFoundException ex) {
-            // log this
-        }
+        this.windowPattern = this.getWindowPattern();
     }
 
     /**
@@ -164,8 +162,9 @@ public class AutomationWindow extends AutomationContainer {
      * @param title Title to search for
      * @return The child window
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getWindow(String title) throws AutomationException {
+    public AutomationWindow getWindow(String title) throws PatternNotFoundException, AutomationException {
         AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {

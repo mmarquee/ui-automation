@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
@@ -36,9 +37,10 @@ public class AutomationRadioButton extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation library error
      */
-    public AutomationRadioButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationRadioButton(AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
-            selectItemPattern = this.getSelectItemPattern();
+        selectItemPattern = this.getSelectItemPattern();
     }
 
     /**
