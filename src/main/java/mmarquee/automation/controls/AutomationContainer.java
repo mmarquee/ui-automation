@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
+import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -381,19 +382,21 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Raised from automation library
      */
-    public <T extends AutomationBase> T get(Class<T> type, ControlType controlType, String name)
+    public <T extends AutomationBase> T get1(Class<T> type, ControlType controlType, String name)
             throws PatternNotFoundException, AutomationException {
+
+        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+        variant1.setValue(Variant.VT_INT, controlType.getValue());
 
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            PointerByReference propertyCondition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
-                    this.createIntegerVariant(controlType.getValue()));
+            PointerByReference propertyCondition = this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
             PointerByReference nameCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
-            PointerByReference condition = this.createAndCondition(propertyCondition.getValue(), nameCondition.getValue());
+            PointerByReference condition = this.automation.createAndCondition(nameCondition.getValue(), propertyCondition.getValue());
 
             AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
 
@@ -402,6 +405,64 @@ public class AutomationContainer extends AutomationBase {
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
+    }
+
+    public <T extends AutomationBase> T get(Class<T> type, ControlType controlType, String name)
+            throws PatternNotFoundException, AutomationException {
+
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        Variant.VARIANT.ByValue variantInt = new Variant.VARIANT.ByValue();
+        variantInt.setValue(Variant.VT_INT, ControlType.Button.getValue());
+
+        try {
+            PointerByReference iCondition = this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variantInt);
+            PointerByReference pCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
+
+            PointerByReference condition =
+                    this.automation.createAndCondition(
+                            pCondition.getValue(),
+                            iCondition.getValue()
+                    );
+
+            AutomationElement item = this.findFirst(
+                    new TreeScope(TreeScope.Children),
+                    condition);
+
+            return type.cast(AutomationControlFactory.get(ControlType.Button, item));
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+
+        /*
+        Variant.VARIANT.ByValue variantInt = new Variant.VARIANT.ByValue();
+        variantInt.setValue(Variant.VT_INT, ControlType.Button.getValue());
+
+        Variant.VARIANT.ByValue variantString = new Variant.VARIANT.ByValue();
+
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+
+        try {
+            variantString.setValue(Variant.VT_BSTR, sysAllocated);
+
+            PointerByReference propertyCondition = this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
+                    variantInt);
+
+            PointerByReference nameCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(),
+                    variantString);
+
+            PointerByReference condition = this.automation.createAndCondition(nameCondition.getValue(),
+                    propertyCondition.getValue());
+
+            AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
+
+            return type.cast(AutomationControlFactory.get(ControlType.Button, elem));
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+        */
     }
 
     /**

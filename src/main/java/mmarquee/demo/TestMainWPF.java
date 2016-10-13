@@ -174,6 +174,14 @@ public class TestMainWPF extends TestBase {
                 logger.info("Failed to get toggle state");
             }
 
+            AutomationCheckbox cb = applicationWindow.get(AutomationCheckbox.class, ControlType.CheckBox, "Enable feature WWW");
+            cb.toggle();
+            try {
+                ToggleState state = cb.getToggleState();
+            } catch (Exception ex) {
+                logger.info("Failed to get toggle state");
+            }
+
             // RADIO BUTTON *********************************************
 
             logger.info("++ RADIO BUTTON ++");
@@ -348,11 +356,14 @@ public class TestMainWPF extends TestBase {
             }
 
             // HYPERLINK ***********************************
-
+/*
             logger.info("++ HYPERLINK ++");
 
             AutomationHyperlink link = applicationWindow.getHyperlink(0);
             link.click();
+*/
+
+            // TOOLBAR ***********************************
 
             AutomationToolBar toolbar = applicationWindow.getToolBar(0);
             logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
@@ -484,20 +495,20 @@ public class TestMainWPF extends TestBase {
 
             AutomationTitleBar titleBar = applicationWindow.getTitleBar();
 
-            // Title bar seeems to not give back a name now
+            // Title bar seems to not give back a name now
             // logger.info("TitleBar name is " + titleBar.name());
 
-            AutomationMainMenu menuBar = titleBar.getMenuBar();
+//            AutomationMainMenu menuBar = titleBar.getMenuBar();
 
-    //        AutomationButton btnMin = titleBar.getButton("Minimize");
+//            AutomationButton btnMin = titleBar.getButton("Minimize");
     //        AutomationButton btnMax = titleBar.getButton(1);
     //        AutomationButton btnClose = titleBar.getButton(2);
 
-            AutomationButton genericButton = titleBar.get(AutomationButton.class, ControlType.Button, "Minimize");
+//            AutomationButton genericButton = titleBar.get1(AutomationButton.class, ControlType.Button, "Minimize");
 
-            logger.info(genericButton.name());
+//            logger.info("`Generic` " + genericButton.name());
 
-     //       logger.info(btnMin.name());
+  //          logger.info("`Specific` " + btnMin.name());
       //      logger.info(btnMax.name());
       //      logger.info(btnClose.name());
 
