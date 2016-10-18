@@ -196,4 +196,44 @@ public class IUIAutomationElementTest extends TestCase {
             assertTrue("Exception", false);
         }
     }
+
+    public void testIsContentElementForRootElement() {
+
+        try {
+            IUIAutomationElement root = this.getRootElement();
+
+            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+            if (root.get_CurrentIsContentElement(br) != 0) {
+                assertTrue("Failed to get_CurrentIsContentElement", false);
+            }
+
+            WinDef.BOOL isEnabled = br.getValue();
+
+            assertTrue("get_CurrentIsContentElement", isEnabled.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testIsControlElementForRootElement() {
+
+        try {
+            IUIAutomationElement root = this.getRootElement();
+
+            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+            if (root.get_CurrentIsControlElement(br) != 0) {
+                assertTrue("Failed to get_CurrentIsControlElement", false);
+            }
+
+            WinDef.BOOL isEnabled = br.getValue();
+
+            assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
 }
