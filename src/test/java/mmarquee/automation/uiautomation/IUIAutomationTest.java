@@ -16,15 +16,14 @@
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.Ole32;
-import com.sun.jna.platform.win32.WTypes;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationBase;
 import org.apache.log4j.Logger;
 
@@ -180,35 +179,90 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("NotCondition", COMUtils.SUCCEEDED(result));
     }
 
-//    public void testCompareElementsWhenElementsAreDifferent() {
-//        PointerByReference root = new PointerByReference();
-//        automation.GetRootElement(root)/;
-//
-//        // Get first descendant for the root element
-//        PointerByReference pbr = new PointerByReference();
-//        automation.CreateTrueCondition(pbr);
-//        PointerByReference first = new PointerByReference()/;
-//
-//        root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
-//
- //       IntByReference same = new IntByReference();
-//
-//        automation.CompareElements(root.getValue(), root.getValue(), same);
-//
- //       assertTrue("Compare", same.getValue() == 0);
- //   }
+    public void testElementFromHandle() {
+        PointerByReference pbr = new PointerByReference();
 
+        WinDef.HWND hwnd = new WinDef.HWND();
 
-//    public void testGetCurrentName() {
-//        PointerByReference pbr = new PointerByReference();
-//        automation.GetRootElement(pbr);
-//
-//    }
+        automation.ElementFromHandle(hwnd, pbr);
 
-//    public void testGetClassName() {
-//        PointerByReference pbr = new PointerByReference();
-//        automation.GetRootElement(pbr);
-//
-//        assertTrue("root:" + root.currentClassName(), root.currentClassName().equals("#32769"));
-//    }
+        assertTrue("ElementFromHandle", pbr != null);
+    }
+
+    public void testElementFromHandleGivesRootElement() {
+        PointerByReference pbr = new PointerByReference();
+        PointerByReference root = new PointerByReference();
+
+        WinDef.HWND hwnd = new WinDef.HWND();
+
+        automation.ElementFromHandle(hwnd, pbr);
+        automation.GetRootElement(root);
+
+        IntByReference same = new IntByReference();
+
+        automation.CompareElements(root.getValue(), pbr.getValue(), same);
+
+        assertTrue("Compare", same.getValue() == 0);
+    }
+
+    public void testCompareElementsWhenElementsAreDifferent() {
+        PointerByReference root = new PointerByReference();
+        automation.GetRootElement(root);
+
+        Unknown uRoot = new Unknown(root.getValue());
+
+        IUIAutomationElement rootElement = null;
+
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        if (COMUtils.SUCCEEDED(result)) {
+            rootElement = IUIAutomationElement.Converter.PointerToInterface(root);
+
+            // Get first descendant for the root element
+            PointerByReference pCondition = new PointerByReference();
+            automation.CreateTrueCondition(pCondition);
+            PointerByReference first = new PointerByReference();
+
+            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+
+            IntByReference same = new IntByReference();
+
+            automation.CompareElements(root.getValue(), first.getValue(), same);
+
+            assertTrue("Compare", same.getValue() == 0);
+        } else {
+            assertTrue("Compare", false);
+        }
+    }
+
+    public void testGetFocusedElement() {
+        PointerByReference pbr = new PointerByReference();
+
+        this.automation.GetFocusedElement(pbr);
+
+        assertTrue("GetFocusedElement", pbr.getValue() != null);
+    }
+
+/*    This test is wrong, needs fixing
+    public void testCreatePropertyCondition() {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString("ID");
+
+        try {
+            variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+            PointerByReference pbr = new PointerByReference();
+
+            automation.CreatePropertyCondition(0,
+                    variant,
+                    pbr);
+
+            Unknown uRoot = new Unknown(pbr.getValue());
+
+            WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
+            assertTrue("FalseCondition", COMUtils.SUCCEEDED(result));
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+    */
 }
