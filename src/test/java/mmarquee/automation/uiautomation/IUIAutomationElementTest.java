@@ -42,7 +42,7 @@ public class IUIAutomationElementTest extends TestCase {
 
     private IUIAutomation automation;
 
-    protected IUIAutomationElement getRootElement() throws Exception {
+    private IUIAutomationElement getRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
         automation.GetRootElement(root);
 
@@ -52,6 +52,35 @@ public class IUIAutomationElementTest extends TestCase {
         if (COMUtils.SUCCEEDED(result)) {
             return IUIAutomationElement.Converter.PointerToInterface(root);
         } else {
+            throw new Exception("Failed to get root element");
+        }
+    }
+
+    private IUIAutomationElement getChildOfRootElement() throws Exception {
+        PointerByReference root = new PointerByReference();
+        automation.GetRootElement(root);
+
+        Unknown uRoot = new Unknown(root.getValue());
+
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement rootElement = IUIAutomationElement.Converter.PointerToInterface(root);
+
+            // Get first descendant for the root element
+            PointerByReference pCondition = new PointerByReference();
+            automation.CreateTrueCondition(pCondition);
+            PointerByReference first = new PointerByReference();
+
+            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+
+            Unknown uElement = new Unknown(first.getValue());
+
+            PointerByReference element = new PointerByReference();
+
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+
+            return IUIAutomationElement.Converter.PointerToInterface(element);
+           } else {
             throw new Exception("Failed to get root element");
         }
     }
@@ -218,7 +247,6 @@ public class IUIAutomationElementTest extends TestCase {
     }
 
     public void testIsControlElementForRootElement() {
-
         try {
             IUIAutomationElement root = this.getRootElement();
 
@@ -231,6 +259,192 @@ public class IUIAutomationElementTest extends TestCase {
             WinDef.BOOL isEnabled = br.getValue();
 
             assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testClassNameForNonRootElement() {
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            PointerByReference sr = new PointerByReference();
+
+            if (root.get_CurrentClassName(sr) != 0) {
+                assertTrue("Failed to get_CurrentClassName", false);
+            }
+
+            String name = sr.getValue().getWideString(0);
+
+            // Actual name will vary depending on the environment
+            assertTrue(!name.isEmpty());
+
+        } catch (Throwable error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testNameForNonRootElementDoesntReturnError() {
+        try {
+            IUIAutomationElement element = this.getChildOfRootElement();
+
+            PointerByReference sr = new PointerByReference();
+
+            assertTrue("CurrentName", element.get_CurrentName(sr) == 0);
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testIsPasswordForNonRootElement() {
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            IntByReference ir = new IntByReference();
+
+            if (root.get_CurrentIsPassword(ir) != 0) {
+                assertTrue("Failed to get_CurrentIsPassword", false);
+            }
+
+            int isPassword = ir.getValue();
+
+            assertTrue("CurrentIsPassword", isPassword == 0);
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testGetControlTypeForNonRootElement() {
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            IntByReference ir = new IntByReference();
+
+            if (root.get_CurrentControlType(ir) != 0) {
+                assertTrue("Failed to get_CurrentControlType", false);
+            }
+
+            int controlType = ir.getValue();
+
+            assertTrue("get_CurrentControlType", controlType == ControlType.Pane.getValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testIsOffScreenForNonRootElement() {
+
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+            if (root.get_CurrentIsOffscreen(br) != 0) {
+                assertTrue("Failed to get_CurrentIsOffscreen", false);
+            }
+
+            WinDef.BOOL isOffScreen = br.getValue();
+
+            assertFalse("CurrentIsPassword", isOffScreen.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testIsEnabledForNonRootElement() {
+
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+            if (root.get_CurrentIsEnabled(br) != 0) {
+                assertTrue("Failed to get_CurrentIsEnabled", false);
+            }
+
+            WinDef.BOOL isEnabled = br.getValue();
+
+            assertTrue("CurrentIsEnabled", isEnabled.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testIsContentElementForNonRootElement() {
+
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+            if (root.get_CurrentIsContentElement(br) != 0) {
+                assertTrue("Failed to get_CurrentIsContentElement", false);
+            }
+
+            WinDef.BOOL isEnabled = br.getValue();
+
+            assertTrue("get_CurrentIsContentElement", isEnabled.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testIsControlElementForNonRootElement() {
+        try {
+            IUIAutomationElement root = this.getChildOfRootElement();
+
+            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+
+            if (root.get_CurrentIsControlElement(br) != 0) {
+                assertTrue("Failed to get_CurrentIsControlElement", false);
+            }
+
+            WinDef.BOOL isEnabled = br.getValue();
+
+            assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testFindFirst() {
+        try {
+            IUIAutomationElement root = this.getRootElement();
+
+            // Get first descendant for the root element
+            PointerByReference pCondition = new PointerByReference();
+            automation.CreateTrueCondition(pCondition);
+            PointerByReference first = new PointerByReference();
+
+            root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+
+            Unknown uElement = new Unknown(first.getValue());
+
+            PointerByReference element = new PointerByReference();
+
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+
+            IUIAutomationElement elem = IUIAutomationElement.Converter.PointerToInterface(element);
+
+            PointerByReference sr = new PointerByReference();
+
+            if (elem.get_CurrentName(sr) != 0) {
+                assertTrue("Failed to get_CurrentName", false);
+            }
+
+            String name = sr.getValue().getWideString(0);
+
+            logger.info(name);
+
+            assertTrue("findFirst", !name.equals("Desktop"));
 
         } catch (Exception error) {
             assertTrue("Exception", false);
