@@ -15,7 +15,11 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
+import mmarquee.automation.uiautomation.TreeScope;
+
+import java.util.List;
 
 /**
  * Created by Mark Humphreys on 20/07/2016.
@@ -93,21 +97,48 @@ public class AutomationElementTest extends TestCase {
         assertTrue("root:" + root.getAriaRole(), root.getAriaRole().equals(""));
     }
 
+    public void testFindFirst() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        PointerByReference condition = instance.createTrueCondition();
+
+        AutomationElement element = root.findFirst(new TreeScope(TreeScope.Descendants), condition);
+
+        assertTrue("root:" + element.currentName(), !element.currentName().equals(root.currentName()));
+    }
+
+    public void testFindAll() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        PointerByReference condition = instance.createTrueCondition();
+
+        List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
+
+        assertTrue("findAll:" + elements.size(), elements.size() != 0);
+    }
+
+    public void testProviderDescriptionForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.getProviderDescription(), !root.getProviderDescription().equals(""));
+    }
+
+    public void testgetProcessIdForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.getProcessId(), root.getProcessId() != -1);
+    }
+
+
     /*
     currentPropertyValue
-    findFirst
     getPattern
     setFocus
     getOrientation
-    getProcessId
-    getProviderDescription
     getItemStatus
     getAcceleratorKey
     getClickablePoint
     getCurrentBoundingRectangle
     showContextMenu
      */
-
 
     public static void main(String[] args) {
         junit.textui.TestRunner.run(AutomationElementTest.class);

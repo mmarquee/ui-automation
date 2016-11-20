@@ -173,7 +173,8 @@ public class TestMainWPF extends TestBase {
             } catch (Exception ex) {
                 logger.info("Failed to get toggle state");
             }
-/* Only works on one PC at the moment.
+/* Only works on one PC at the moment. */
+/*
             AutomationCheckbox cb = applicationWindow.get(AutomationCheckbox.class, ControlType.CheckBox, "Enable feature WWW");
             cb.toggle();
             try {

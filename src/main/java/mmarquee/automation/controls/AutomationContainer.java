@@ -425,7 +425,7 @@ public class AutomationContainer extends AutomationBase {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
     }
-
+/*
     public <T extends AutomationBase> T get(Class<T> type, ControlType controlType, String name)
             throws PatternNotFoundException, AutomationException {
 
@@ -454,7 +454,7 @@ public class AutomationContainer extends AutomationBase {
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
-
+*/
         /*
         Variant.VARIANT.ByValue variantInt = new Variant.VARIANT.ByValue();
         variantInt.setValue(Variant.VT_INT, ControlType.Button.getValue());
@@ -482,7 +482,7 @@ public class AutomationContainer extends AutomationBase {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
         */
-    }
+  /*  } */
 
     /**
      * Gets the  String Grid control associated with the given index, with a specific control name
