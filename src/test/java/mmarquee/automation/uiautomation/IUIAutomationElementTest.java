@@ -442,9 +442,65 @@ public class IUIAutomationElementTest extends TestCase {
 
             String name = sr.getValue().getWideString(0);
 
-            logger.info(name);
-
             assertTrue("findFirst", !name.equals("Desktop"));
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testFindAllDoesntReturnError() {
+        try {
+            IUIAutomationElement root = this.getRootElement();
+
+            // Get first descendant for the root element
+            PointerByReference pCondition = new PointerByReference();
+            automation.CreateTrueCondition(pCondition);
+            PointerByReference first = new PointerByReference();
+
+            root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+
+            Unknown uElement = new Unknown(first.getValue());
+
+            PointerByReference element = new PointerByReference();
+
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+
+            IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
+
+            IntByReference ibr = new IntByReference();
+
+            assertTrue("findAll", elements.get_Length(ibr) == 0);
+
+        } catch (Exception error) {
+            assertTrue("Exception", false);
+        }
+    }
+
+    public void testFindAllGetValidList() {
+        try {
+            IUIAutomationElement root = this.getRootElement();
+
+            // Get first descendant for the root element
+            PointerByReference pCondition = new PointerByReference();
+            automation.CreateTrueCondition(pCondition);
+            PointerByReference first = new PointerByReference();
+
+            root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+
+            Unknown uElement = new Unknown(first.getValue());
+
+            PointerByReference element = new PointerByReference();
+
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+
+            IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
+
+            IntByReference ibr = new IntByReference();
+
+            elements.get_Length(ibr);
+
+            assertTrue("findAll", ibr.getValue() != 0);
 
         } catch (Exception error) {
             assertTrue("Exception", false);

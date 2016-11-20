@@ -344,13 +344,32 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the button control associated with the given name
+     * @param name Name of the control
+     * @param searchType Whether to search by name or id (or both).
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationButton getButton(String name, NameSearchType searchType) throws PatternNotFoundException, AutomationException {
+        if (searchType == NameSearchType.Name) {
+            return getButton(name);
+        } else if (searchType == NameSearchType.AutomationId) {
+            return getButtonByAutomationId(name);
+        } else {
+            // Need to make sure it works with both
+            return getButtonByAutomationId(name);
+        }
+    }
+
+    /**
      * Gets the button using the automation ID
      * @param id The automation id
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    protected AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button));
     }
 

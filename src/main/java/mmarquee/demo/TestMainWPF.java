@@ -173,7 +173,7 @@ public class TestMainWPF extends TestBase {
             } catch (Exception ex) {
                 logger.info("Failed to get toggle state");
             }
-
+/* Only works on one PC at the moment.
             AutomationCheckbox cb = applicationWindow.get(AutomationCheckbox.class, ControlType.CheckBox, "Enable feature WWW");
             cb.toggle();
             try {
@@ -181,7 +181,7 @@ public class TestMainWPF extends TestBase {
             } catch (Exception ex) {
                 logger.info("Failed to get toggle state");
             }
-
+*/
             // RADIO BUTTON *********************************************
 
             logger.info("++ RADIO BUTTON ++");
@@ -330,7 +330,7 @@ public class TestMainWPF extends TestBase {
 
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
-            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("btnClickMe");
+            AutomationButton btnClickMe = applicationWindow.getButton("btnClickMe", NameSearchType.AutomationId);
             logger.info(btnClickMe.name());
             btnClickMe.click();
 
