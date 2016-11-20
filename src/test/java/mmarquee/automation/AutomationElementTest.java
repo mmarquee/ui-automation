@@ -83,6 +83,32 @@ public class AutomationElementTest extends TestCase {
         assertTrue("root:" + root.getFrameworkId(), root.getFrameworkId().equals("Win32"));
     }
 
+    public void testNameForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.getName(), root.getName().equals("Desktop"));
+    }
+
+    public void testAriaRoleForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.getAriaRole(), root.getAriaRole().equals(""));
+    }
+
+    /*
+    currentPropertyValue
+    findFirst
+    getPattern
+    setFocus
+    getOrientation
+    getProcessId
+    getProviderDescription
+    getItemStatus
+    getAcceleratorKey
+    getClickablePoint
+    getCurrentBoundingRectangle
+    showContextMenu
+     */
+
+
     public static void main(String[] args) {
         junit.textui.TestRunner.run(AutomationElementTest.class);
     }

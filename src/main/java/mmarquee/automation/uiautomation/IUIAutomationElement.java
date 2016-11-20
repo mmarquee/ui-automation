@@ -59,6 +59,10 @@ public interface IUIAutomationElement extends IUnknown {
     int get_CurrentIsControlElement (WinDef.BOOLByReference retVal);
     int get_CurrentIsContentElement (WinDef.BOOLByReference retVal);
 
+    int get_RuntimeId(PointerByReference runtimeId);
+    int get_CurrentAutomationId(PointerByReference retVal);
+    int get_CurrentCulture (IntByReference retVal);
+
     class Converter {
         private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
 
@@ -90,7 +94,7 @@ public interface IUIAutomationElement extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetRuntimeId (/* SAFEARRAY */ PointerByReference runtimeId) {
+                public int get_RuntimeId (/* SAFEARRAY */ PointerByReference runtimeId) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, runtimeId});
                 }

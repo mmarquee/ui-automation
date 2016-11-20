@@ -188,12 +188,13 @@ public class UIAutomation {
     }
 
     /**
-     * Gets the desktop objecy associated with the title
+     * Gets the desktop object associated with the title
      *
      * @param title Title to search for
      * @return AutomationWindow The found 'element'
      * @throws ElementNotFoundException Element is not found
      */
+
     private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
             throws AutomationException  {
         AutomationElement element = null;

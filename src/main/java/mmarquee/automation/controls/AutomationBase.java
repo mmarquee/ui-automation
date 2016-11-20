@@ -633,7 +633,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something is wrong in automation
      */
     public WinDef.RECT getBoundingRectangle() throws AutomationException {
-        return this.element.get_CurrentBoundingRectangle();
+        return this.element.getCurrentBoundingRectangle();
     }
 
     /**

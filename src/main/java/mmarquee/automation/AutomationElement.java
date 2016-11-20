@@ -478,7 +478,7 @@ public class AutomationElement {
      * @return The bounding rectangle
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.RECT get_CurrentBoundingRectangle() throws AutomationException {
+    public WinDef.RECT getCurrentBoundingRectangle() throws AutomationException {
         WinDef.RECT rect = new WinDef.RECT();
 
         if (this.element.get_CurrentBoundingRectangle(rect) != 0) {
