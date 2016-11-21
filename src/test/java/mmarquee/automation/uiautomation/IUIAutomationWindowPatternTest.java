@@ -16,14 +16,13 @@
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.Ole32;
-import com.sun.jna.platform.win32.WTypes;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomationTest;
 import org.apache.log4j.Logger;
 
@@ -55,7 +54,7 @@ public class IUIAutomationWindowPatternTest extends TestCase {
     }
 
     public static void main(String[] args) {
-        junit.textui.TestRunner.run(UIAutomationTest.class);
+        junit.textui.TestRunner.run(IUIAutomationWindowPatternTest.class);
     }
 
     protected void setUp() throws Exception {
@@ -83,12 +82,86 @@ public class IUIAutomationWindowPatternTest extends TestCase {
         }
     }
 
-    public void testXYZ() {
+    private IUIAutomationElement getWindowChildOfRootElement() throws Exception {
+        PointerByReference root = new PointerByReference();
+        automation.GetRootElement(root);
+
+        Unknown uRoot = new Unknown(root.getValue());
+
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement rootElement = IUIAutomationElement.Converter.PointerToInterface(root);
+
+            Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+            variant.setValue(Variant.VT_INT, ControlType.Window.getValue());
+
+            // Get first descendant for the root element, that is a window
+            PointerByReference pCondition = new PointerByReference();
+            automation.CreatePropertyCondition(PropertyID.ControlType.getValue(), variant, pCondition);
+            PointerByReference first = new PointerByReference();
+
+            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+
+            Unknown uElement = new Unknown(first.getValue());
+
+            PointerByReference element = new PointerByReference();
+
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+
+            return IUIAutomationElement.Converter.PointerToInterface(element);
+        } else {
+            throw new Exception("Failed to get root element");
+        }
+    }
+
+    public void testGetWindowPatternFailsForRootElement() {
         try {
-            IUIAutomationElement root = this.getRootElement();
+            // Get the pattern
+            IUIAutomationElement element = this.getRootElement();
+
+            PointerByReference pbr = new PointerByReference();
+
+            if (element.get_CurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
+                assertTrue("Successfully failed to get window pattern for element", true);
+            }
 
         } catch (Throwable error) {
-            assertTrue("Exception", false);
+            assertTrue("Exception thrown - " + error.getMessage(), false);
+        }
+    }
+
+    public void testGetWindowPatternSucceedsForWindowElement() {
+        try {
+            // Get the pattern
+            IUIAutomationElement element = this.getWindowChildOfRootElement();
+
+            logger.info("Got window to start with");
+
+            PointerByReference pbr = new PointerByReference();
+
+            logger.info(element == null);
+
+            if (element.get_CurrentPattern(ControlType.Window.getValue(), pbr) != 0) {
+                assertTrue("Failed to get window pattern for element", false);
+            }
+
+            logger.info("Got pattern");
+
+            Unknown unkConditionA = new Unknown(pbr.getValue());
+            PointerByReference pUnknownA = new PointerByReference();
+
+            logger.info("About to query interface");
+
+            WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationWindowPattern.IID), pUnknownA);
+            if (COMUtils.SUCCEEDED(resultA)) {
+                IUIAutomationWindowPattern pattern =
+                        IUIAutomationWindowPattern.Converter.PointerToInterface(pUnknownA);
+            } else {
+                assertTrue("Failed to get WindowPattern", false);
+            }
+
+        } catch (Throwable error) {
+            assertTrue("Exception thrown - " + error.getMessage(), false);
         }
     }
 }

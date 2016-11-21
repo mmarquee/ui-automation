@@ -199,7 +199,7 @@ public class UIAutomation {
             throws AutomationException  {
         AutomationElement element = null;
 
-        // Look for a window
+        // Look for a control type
         Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
         variant1.setValue(Variant.VT_INT, controlType.getValue());
 
