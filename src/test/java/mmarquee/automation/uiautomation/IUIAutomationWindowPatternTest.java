@@ -21,9 +21,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.UIAutomationTest;
+import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 
 /**
@@ -100,7 +98,7 @@ public class IUIAutomationWindowPatternTest extends TestCase {
             automation.CreatePropertyCondition(PropertyID.ControlType.getValue(), variant, pCondition);
             PointerByReference first = new PointerByReference();
 
-            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+            rootElement.findFirst(new TreeScope(TreeScope.Children), pCondition.getValue(), first);
 
             Unknown uElement = new Unknown(first.getValue());
 
@@ -130,22 +128,33 @@ public class IUIAutomationWindowPatternTest extends TestCase {
         }
     }
 
+    // This fails for some reason
+
+    /*
+            if (this.isWindowPatternAvailable()) {
+            PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
+
+            pattern.setPattern(unknown.getValue());
+        }
+
+     */
+
     public void testGetWindowPatternSucceedsForWindowElement() {
         try {
             // Get the pattern
             IUIAutomationElement element = this.getWindowChildOfRootElement();
 
-            logger.info("Got window to start with");
+//            PointerByReference pb = new PointerByReference();
+
+//            element.get_CurrentName(pb);
+
+//            String name = pb.getValue().getWideString(0);
 
             PointerByReference pbr = new PointerByReference();
 
-            logger.info(element == null);
-
-            if (element.get_CurrentPattern(ControlType.Window.getValue(), pbr) != 0) {
-                assertTrue("Failed to get window pattern for element", false);
+            if (element.get_CurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
+                assertTrue("Failed to get current pattern", false);
             }
-
-            logger.info("Got pattern");
 
             Unknown unkConditionA = new Unknown(pbr.getValue());
             PointerByReference pUnknownA = new PointerByReference();
