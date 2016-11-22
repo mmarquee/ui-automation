@@ -30,7 +30,12 @@ public enum NameSearchType {
     AutomationId,
 
     /**
+     * Search by class name
+     */
+    ClassName,
+
+    /**
      * Search by both name AND automation Id only
      */
-    Either
+    All
 }
