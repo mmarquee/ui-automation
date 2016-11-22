@@ -28,7 +28,7 @@ import mmarquee.automation.controls.AutomationBase;
 import org.apache.log4j.Logger;
 
 /**
- * Created by inpwt on 13/10/2016.
+ * Created by Mark Humphreys on 13/10/2016.
  */
 public class IUIAutomationTest extends TestCase {
 

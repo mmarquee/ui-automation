@@ -25,7 +25,7 @@ import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 
 /**
- * Created by inpwt on 20/11/2016.
+ * Created by Mark Humphreys on 20/11/2016.
  */
 public class IUIAutomationWindowPatternTest extends TestCase {
 

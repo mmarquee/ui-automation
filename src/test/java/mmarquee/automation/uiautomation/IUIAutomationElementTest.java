@@ -26,7 +26,7 @@ import mmarquee.automation.ControlType;
 import org.apache.log4j.Logger;
 
 /**
- * Created by inpwt on 18/10/2016.
+ * Created by Mark Humphreys on 18/10/2016.
  */
 public class IUIAutomationElementTest extends TestCase {
 
