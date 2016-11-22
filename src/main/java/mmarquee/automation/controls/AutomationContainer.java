@@ -698,11 +698,19 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Get the AutomationCustom element associated with the given name
      * @param name The name to look for
+     * @param searchType Whether to search for name or id (or both)
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationCustom getCustom(String name) throws AutomationException {
-        return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
+    public AutomationCustom getCustom(String name, NameSearchType searchType) throws AutomationException {
+        if (searchType == NameSearchType.Name) {
+            return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
+        } else if (searchType == NameSearchType.AutomationId) {
+            return new AutomationCustom(this.getControlByAutomationId(name, ControlType.Custom));
+        } else {
+            // Need to make sure it works with both
+            return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
+        }
     }
 
     /**

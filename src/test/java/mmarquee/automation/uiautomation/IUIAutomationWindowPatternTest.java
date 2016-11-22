@@ -130,25 +130,10 @@ public class IUIAutomationWindowPatternTest extends TestCase {
 
     // This fails for some reason
 
-    /*
-            if (this.isWindowPatternAvailable()) {
-            PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
-
-            pattern.setPattern(unknown.getValue());
-        }
-
-     */
-
     public void testGetWindowPatternSucceedsForWindowElement() {
         try {
             // Get the pattern
             IUIAutomationElement element = this.getWindowChildOfRootElement();
-
-//            PointerByReference pb = new PointerByReference();
-
-//            element.get_CurrentName(pb);
-
-//            String name = pb.getValue().getWideString(0);
 
             PointerByReference pbr = new PointerByReference();
 

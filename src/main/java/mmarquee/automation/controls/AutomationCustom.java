@@ -22,9 +22,9 @@ import mmarquee.automation.ControlType;
 /**
  * Created by Mark Humphreys on 08/03/2016.
  *
- * Wrapper for the Custom ControlId
+ * Wrapper for the Custom ControlId, which is usually a container.
  */
-public class AutomationCustom extends AutomationBase {
+public class AutomationCustom extends AutomationContainer {
     /**
      * Constructor for the AutomationCustom
      * @param element The element

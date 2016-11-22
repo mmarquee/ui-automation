@@ -16,7 +16,7 @@
 package mmarquee.automation.controls;
 
 /**
- * Created by inpwt on 21/09/2016.
+ * Created by Mark Humphreys on 21/09/2016.
  */
 public interface Focusable {
     void focus();
