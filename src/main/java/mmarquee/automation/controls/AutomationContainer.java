@@ -708,8 +708,8 @@ public class AutomationContainer extends AutomationBase {
         } else if (searchType == NameSearchType.AutomationId) {
             return new AutomationCustom(this.getControlByAutomationId(name, ControlType.Custom));
         } else if (searchType == NameSearchType.ClassName) {
-            // At the moment, just get teh first element.
-            return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, "name"));
+            // At the moment, just get the first first element.
+            return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, name));
         } else {
             // Need to make sure it works with all
             return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
