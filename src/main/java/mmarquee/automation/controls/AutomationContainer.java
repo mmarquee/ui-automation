@@ -246,6 +246,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the Editbox control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationEditBox getEditBoxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationEditBox(this.getControlByAutomationId(id, ControlType.Edit));
+    }
+
+    /**
      * Gets the slider control associated with the given index
      * @param index Index of the control
      * @return The found control
@@ -311,7 +322,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the combobox control associated with the given name
+     * Gets the combobox control associated with the given index
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -333,6 +344,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the combobox control associated with the given automtion id
+     * @param id Automtion id of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationComboBox getComboboxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationComboBox(this.getControlByAutomationId(id, ControlType.ComboBox));
+    }
+
+    /**
      * Gets the button control associated with the given name
      * @param name Name of the control
      * @return The found control
@@ -344,32 +366,13 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the button control associated with the given name
-     * @param name Name of the control
-     * @param searchType Whether to search by name or id (or both).
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationButton getButton(String name, NameSearchType searchType) throws PatternNotFoundException, AutomationException {
-        if (searchType == NameSearchType.Name) {
-            return getButton(name);
-        } else if (searchType == NameSearchType.AutomationId) {
-            return getButtonByAutomationId(name);
-        } else {
-            // Need to make sure it works with both
-            return getButtonByAutomationId(name);
-        }
-    }
-
-    /**
      * Gets the button using the automation ID
      * @param id The automation id
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    protected AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    public AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationButton(this.getControlByAutomationId(id, ControlType.Button));
     }
 
@@ -497,7 +500,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the  String Grid control associated with the given name, with a specific control name
+     * Gets the String Grid control associated with the given name, with a specific control name
      * @param name Name of the control
      * @param controlName Control Type name
      * @return The found control
@@ -616,6 +619,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the panel control associated with the automation id
+     * @param id Automaton id of the control
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationPanel getPanelByAutomationId(String id) throws AutomationException {
+        return new AutomationPanel(this.getControlByAutomationId(id, ControlType.Pane));
+    }
+
+    /**
      * Get the AppBar associated with the given index
      * @param index The index
      * @return The AutomationAppBar
@@ -698,22 +712,36 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Get the AutomationCustom element associated with the given name
      * @param name The name to look for
-     * @param searchType Whether to search for name or id (or both)
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationCustom getCustom(String name, NameSearchType searchType) throws AutomationException {
-        if (searchType == NameSearchType.Name) {
-            return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
-        } else if (searchType == NameSearchType.AutomationId) {
-            return new AutomationCustom(this.getControlByAutomationId(name, ControlType.Custom));
-        } else if (searchType == NameSearchType.ClassName) {
-            // At the moment, just get the first first element.
-            return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, name));
-        } else {
-            // Need to make sure it works with all
-            return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
-        }
+    public AutomationCustom getCustom(String name) throws AutomationException {
+        return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
+    }
+
+    /**
+     * Get the AutomationCustom element associated with the given automation id
+     * @param id The id to look for
+     * @return The AutomationCustom
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationCustom getCustomByAutomationId(String id) throws AutomationException {
+        return new AutomationCustom(this.getControlByAutomationId(id, ControlType.Custom));
+    }
+
+    /**
+     * <p>
+     * Get the AutomationCustom element associated with the given control type
+     * </p>
+     * <p>
+     * At the moment, just get the first first element.
+     * </p>
+     * @param name The control type to look for
+     * @return The AutomationCustom
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationCustom getCustomByControlType(String name) throws AutomationException {
+        return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, name));
     }
 
     /**

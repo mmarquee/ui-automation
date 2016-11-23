@@ -331,7 +331,7 @@ public class TestMainWPF extends TestBase {
 
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
-            AutomationButton btnClickMe = applicationWindow.getButton("btnClickMe", NameSearchType.AutomationId);
+            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("btnClickMe");
             logger.info(btnClickMe.name());
             btnClickMe.click();
 
