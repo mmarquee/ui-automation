@@ -22,7 +22,7 @@ The library is held in the Sonatype OSS repository, so is available for download
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
 <dependencies>  
 ```
 
@@ -105,6 +105,7 @@ The currently supported controls are ...
 * Toolbar (Delphi Toolbars do not seem to be like other ToolBars)
 * ProgressBar
 * MaskedEdit (see below)
+* Custom (in progress as of 0.3.3)
 
 ## TAutomatedDataGrid
 
@@ -262,7 +263,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.2"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.3"
 ```
 
 ## Examples
