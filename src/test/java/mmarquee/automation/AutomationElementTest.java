@@ -15,8 +15,10 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
+import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
@@ -97,6 +99,17 @@ public class AutomationElementTest extends TestCase {
         assertTrue("root:" + root.getAriaRole(), root.getAriaRole().equals(""));
     }
 
+    public void testOrientationForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.getOrientation(), root.getOrientation() == OrientationType.None);
+    }
+
+    public void testItemStatusForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        assertTrue("root:" + root.getItemStatus(), root.getItemStatus().equals(""));
+    }
+
     public void testFindFirst() throws AutomationException {
         AutomationElement root = instance.getRootElement();
 
@@ -127,16 +140,31 @@ public class AutomationElementTest extends TestCase {
         assertTrue("root:" + root.getProcessId(), root.getProcessId() != -1);
     }
 
+    public void testgetAcceleratorKeyForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+        assertTrue("root:" + root.getAcceleratorKey(), root.getAcceleratorKey().equals(""));
+    }
+
+    public void testGetClickablePointForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        WinDef.POINT empty = new WinDef.POINT(0, 0);
+
+        assertTrue("root:" + root.getClickablePoint(), root.getClickablePoint().dataEquals(empty));
+    }
+
+    public void testGetCurrentBoundingRectangleForDesktop() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        WinDef.RECT empty = new WinDef.RECT();
+
+        assertTrue("root:" + root.getCurrentBoundingRectangle(), !root.getCurrentBoundingRectangle().dataEquals(empty));
+    }
 
     /*
     currentPropertyValue
     getPattern
     setFocus
-    getOrientation
-    getItemStatus
-    getAcceleratorKey
-    getClickablePoint
-    getCurrentBoundingRectangle
     showContextMenu
      */
 

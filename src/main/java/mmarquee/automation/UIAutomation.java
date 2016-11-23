@@ -256,23 +256,6 @@ public class UIAutomation {
     }
 
     /**
-     * Compares 2 elements
-     * @param element1 First element
-     * @param element2 Second element
-     * @return Are the elememts the same
-     * @throws AutomationException Automation library error
-     */
-    public boolean compareElement(Pointer element1, Pointer element2) throws AutomationException {
-        IntByReference ibr = new IntByReference();
-
-        if (this.automation.CompareElements(element1, element2, ibr) != 0) {
-            throw new AutomationException();
-        } else {
-            return ibr.getValue() == 1;
-        }
-    }
-
-    /**
      * Create an and condition
      * @param pCondition1 First condition
      * @param pCondition2 Second condition

@@ -73,10 +73,8 @@ public class UIAutomationTest extends TestCase {
 
         try {
             PointerByReference condition = instance.createFalseCondition();
-            PointerByReference first = new PointerByReference();
 
             Unknown unk = new Unknown(condition.getValue());
-            PointerByReference pUnk = new PointerByReference();
 
             PointerByReference pUnknown1 = new PointerByReference();
 
