@@ -22,7 +22,7 @@ The library is held in the Sonatype OSS repository, so is available for download
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.4</version>
+  <version>0.3.5</version>
 <dependencies>  
 ```
 
@@ -65,7 +65,7 @@ This will find (it is there) a window that has the given title, and set focus to
 
 ### Finding a control
 
-Each control contained in a window can be identified by the index of that control OR sometimes (this depends on the control type) by the text associated with it. For example, in order to get the textbox associated with the connection window (and assuming that it is the 1st Edit box on the window), the following code will find the editbox, and change the text to be USER1.
+Each control contained in a window can be identified by the index of that control, sometimes (this depends on the control type) by the text associated with it, OR by the Automation Id. For example, in order to get the textbox associated with the connection window (and assuming that it is the 1st Edit box on the window), the following code will find the editbox, and change the text to be USER1.
 
 ```java
   AutomationEditBox user = window.getEditBoxByIndex(0);
@@ -77,7 +77,20 @@ Each control contained in a window can be identified by the index of that contro
 In order to click the 'OK' button associated with the connection window, it can be found by the text associated with the button, the following code will find the button, and call the click event.
 
 ```java
-  AutomationButton button1 = window.getButtonByName("OK");
+  // Get button by index
+  AutomationButton button1 = window.getButton(0);
+  button1.click();
+```
+
+```java
+  // Get button by name
+  AutomationButton button1 = window.getButton("OK");
+  button1.click();
+```
+
+```java
+  // Get button by automation id
+  AutomationButton button1 = window.getButtonByAutomationId("OK");
   button1.click();
 ```
 
@@ -105,7 +118,7 @@ The currently supported controls are ...
 * Toolbar (Delphi Toolbars do not seem to be like other ToolBars)
 * ProgressBar
 * MaskedEdit (see below)
-* Custom (in progress as of 0.3.3)
+* Custom (in progress as of 0.3.5 onwards)
 
 ## TAutomatedDataGrid
 
@@ -263,7 +276,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.4"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.5"
 ```
 
 ## Examples

@@ -22,6 +22,10 @@ public interface IUIAutomation3 extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     class Converter {
 
         private static int UIAutomation3_Methods  = 66;

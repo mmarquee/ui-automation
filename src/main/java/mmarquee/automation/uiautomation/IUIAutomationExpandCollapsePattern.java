@@ -32,13 +32,11 @@ public interface IUIAutomationExpandCollapsePattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID(
             "{619BE086-1F4E-4EE4-BAFA-210128738730}");
-/*
-    WinNT.HRESULT QueryInterface(
-            Guid.REFIID riid,
-            PointerByReference ppvObject);
+
     int AddRef();
     int Release();
-*/
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int Expand();
     int Collapse();
     int Get_CurrentExpandCollapseState(IntByReference retVal);
@@ -54,11 +52,13 @@ public interface IUIAutomationExpandCollapsePattern extends IUnknown {
             return new IUIAutomationExpandCollapsePattern() {
 
                 // IUnknown
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

@@ -34,6 +34,10 @@ public interface IUIAutomationValuePattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{A94CD8B1-0844-4CD6-9D2D-640537AB39E9}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int Set_Value(WTypes.BSTR sr);
     int Get_CurrentValue(PointerByReference sr);
     int Get_CurrentIsReadOnly(IntByReference ibr);
@@ -49,13 +53,13 @@ public interface IUIAutomationValuePattern extends IUnknown {
             return new IUIAutomationValuePattern() {
                 // IUnknown
 
-                //     @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

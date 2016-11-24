@@ -32,6 +32,10 @@ public interface IUIAutomationInvokePattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{FB377FBE-8EA6-46D5-9C73-6499642D3059}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int Invoke();
 
     class Converter {
@@ -45,11 +49,13 @@ public interface IUIAutomationInvokePattern extends IUnknown {
             return new IUIAutomationInvokePattern() {
 
                 // IUnknown
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

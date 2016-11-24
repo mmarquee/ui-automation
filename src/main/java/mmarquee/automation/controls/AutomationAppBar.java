@@ -26,10 +26,12 @@ import mmarquee.automation.ControlType;
  */
 public class AutomationAppBar extends AutomationBase {
     /**
+     * <p>
      * Constructor for the AutomationAppBar.
-     *
+     * </p>
+     * <p>
      * This element seems to be undocumented by Microsoft
-     *
+     * </p>
      * @param element The underlying automation element
      * @throws AutomationException Automation library error
      */

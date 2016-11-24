@@ -45,6 +45,10 @@ public interface IUIAutomation extends IUnknown {
      */
     Guid.GUID CLSID = new Guid.GUID("{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int GetRootElement(PointerByReference root);
     int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element);
     int CreateAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition);

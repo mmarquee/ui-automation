@@ -32,6 +32,10 @@ public interface IUIAutomationCondition extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "352FFBA8-0973-437C-A61F-F64CAFD81DF9");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     class Converter {
         public static IUIAutomationCondition PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
@@ -41,14 +45,13 @@ public interface IUIAutomationCondition extends IUnknown {
             return new IUIAutomationCondition() {
 
                 // IUnknown
-
-                //     @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
@@ -58,7 +61,6 @@ public interface IUIAutomationCondition extends IUnknown {
                     Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
-
             };
         }
     }

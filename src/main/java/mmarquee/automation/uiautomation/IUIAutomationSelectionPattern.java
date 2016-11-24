@@ -32,6 +32,10 @@ public interface IUIAutomationSelectionPattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{5ED5202E-B2AC-47A6-B638-4B0BF140D78E}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int GetCurrentSelection(PointerByReference retVal);
 
     class Converter {
@@ -45,13 +49,13 @@ public interface IUIAutomationSelectionPattern extends IUnknown {
             return new IUIAutomationSelectionPattern() {
                 // IUnknown
 
-                //     @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

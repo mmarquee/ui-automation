@@ -33,6 +33,10 @@ public interface IUIAutomationTextRangeArray extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{CE4AE76A-E717-4C98-81EA-47371D028EB6}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int Get_Length(IntByReference ibr);
     int GetElement(Integer index, PointerByReference element);
 
@@ -47,13 +51,13 @@ public interface IUIAutomationTextRangeArray extends IUnknown {
             return new IUIAutomationTextRangeArray() {
                 // IUnknown
 
-                //     @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

@@ -32,6 +32,10 @@ public interface IUIAutomationTogglePattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{94CF8058-9B8D-4AB9-8BFD-4CD0A33C8C70}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int Toggle();
     int Get_CurrentToggleState(IntByReference ibr);
 
@@ -46,13 +50,13 @@ public interface IUIAutomationTogglePattern extends IUnknown {
             return new IUIAutomationTogglePattern() {
                 // IUnknown
 
-                //     @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

@@ -31,6 +31,10 @@ public interface IUIAutomationTextPattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{32EBA289-3583-42C9-9C59-3B6D9A1E9B6A}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int GetSelection(PointerByReference result);
     int GetVisibleRanges(PointerByReference ranges);
     int Get_DocumentRange(PointerByReference range);
@@ -46,13 +50,13 @@ public interface IUIAutomationTextPattern extends IUnknown {
             return new IUIAutomationTextPattern() {
                 // IUnknown
 
-                //@Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //@Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

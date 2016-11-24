@@ -35,6 +35,10 @@ public interface IUIAutomationElement extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{D22108AA-8AC5-49A5-837B-37BBB3D7591E}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int setFocus();
     int get_CurrentName (PointerByReference sr);
     int get_CurrentClassName (PointerByReference sr);
@@ -74,11 +78,13 @@ public interface IUIAutomationElement extends IUnknown {
             return new IUIAutomationElement() {
 
                 // IUnknown
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});

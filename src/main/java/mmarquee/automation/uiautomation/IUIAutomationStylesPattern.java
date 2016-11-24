@@ -33,6 +33,10 @@ public interface IUIAutomationStylesPattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{85B5F0A2-BD79-484A-AD2B-388C9838D5FB}");
 
+    int AddRef();
+    int Release();
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
     int Get_CurrentStyleId(IntByReference retVal);
     int Get_CurrentStyleName(PointerByReference retVal);
 
@@ -47,13 +51,13 @@ public interface IUIAutomationStylesPattern extends IUnknown {
             return new IUIAutomationStylesPattern() {
                 // IUnknown
 
-                //     @Override
+                @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
                     return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
                 }
 
-                //   @Override
+                @Override
                 public int AddRef() {
                     Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
