@@ -515,7 +515,7 @@ public class UIAutomation {
      * Gets the root automation element
      * @return The root element
      */
-    AutomationElement getRootElement() {
+    public AutomationElement getRootElement() {
         return this.rootElement;
     }
 }

@@ -54,7 +54,6 @@ public interface IUIAutomationWindowPattern extends IUnknown {
             vTablePointer.read(0, vTable, 0, vTable.length);
             return new IUIAutomationWindowPattern() {
                 // IUnknown
-
                 @Override
                 public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                     Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
