@@ -21,11 +21,13 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
+import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -238,6 +240,37 @@ public class UIAutomationTest extends TestCase {
         int value = same.getValue();
 
         assertTrue("Compare Element:" + value, value != -1);
+    }
+
+    public void testLaunch_Fails_When_No_executable() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        try {
+            instance.launch("notepad99.exe");
+        } catch (Throwable ex) {
+            assertTrue("textLaunch succeeded somehow", true);
+        }
+
+        assertFalse("textLaunch succeeded somehow", false);
+    }
+
+    public void testLaunch_Succeeds_When_executable() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = null;
+
+        try {
+
+            try {
+                app = instance.launch("notepad.exe");
+            } catch (Throwable ex) {
+                assertTrue("textLaunch succeeded somehow", true);
+            }
+
+            assertFalse("textLaunch succeeded somehow", false);
+        } finally {
+            app.quit("Untitled - Notepad");
+        }
     }
 
     public static void main(String[] args) {
