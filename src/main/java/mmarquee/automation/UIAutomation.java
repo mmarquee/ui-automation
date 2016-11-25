@@ -146,27 +146,6 @@ public class UIAutomation {
     }
 
     /**
-     * Finds the given process
-     *
-     * @param command Command to look for
-     * @return The Application
-     * @throws AutomationException If findProcessEntry throws an exception.
-     */
-    public AutomationApplication findProcess(String... command) throws AutomationException {
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-                new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        boolean found = Utils.findProcessEntry(processEntry, command);
-
-        if (!found) {
-            throw new AutomationException();
-        } else {
-            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
-        }
-    }
-
-    /**
      * Attaches or launches the application
      *
      * @param command Command to be started
@@ -445,21 +424,6 @@ public class UIAutomation {
             }
 
             return result;
-        } else {
-            throw new AutomationException();
-        }
-    }
-
-    /**
-     * Creates a false Condition
-     * @return The condition
-     * @throws AutomationException Something is wrong
-     */
-    public PointerByReference CreateFalseCondition () throws AutomationException{
-        PointerByReference pCondition = new PointerByReference();
-
-        if (this.automation.CreateFalseCondition(pCondition) == 0) {
-            return pCondition;
         } else {
             throw new AutomationException();
         }

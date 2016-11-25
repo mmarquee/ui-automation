@@ -317,7 +317,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Error thrown in automation
      */
     protected PointerByReference createFalseCondition() throws AutomationException {
-        return this.automation.CreateFalseCondition();
+        return this.automation.createFalseCondition();
     }
 
     /**

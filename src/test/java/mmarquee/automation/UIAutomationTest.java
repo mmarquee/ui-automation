@@ -184,7 +184,45 @@ public class UIAutomationTest extends TestCase {
 
                 WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
 
-                assertTrue("CreateNotCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+                assertTrue("CreateAndCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
+            } catch (AutomationException ex) {
+                assertTrue("Exception", false);
+            }
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+
+    public void testCreateOrCondition() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString("SOMETHING");
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        try {
+            try {
+                // Create first condition to use
+                PointerByReference pCondition0 =
+                        instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+
+                // Create first condition to use
+                PointerByReference pCondition1 =
+                        instance.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+
+                // Create the actual condition
+                PointerByReference condition =
+                        instance.createOrCondition(pCondition0.getValue(), pCondition1.getValue());
+
+                // Checking
+                Unknown unk = new Unknown(condition.getValue());
+                PointerByReference pUnk = new PointerByReference();
+
+                PointerByReference pUnknown1 = new PointerByReference();
+
+                WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown1);
+
+                assertTrue("CreateOrCondition:" + COMUtils.SUCCEEDED(result), COMUtils.SUCCEEDED(result));
             } catch (AutomationException ex) {
                 assertTrue("Exception", false);
             }
@@ -263,6 +301,106 @@ public class UIAutomationTest extends TestCase {
 
             try {
                 app = instance.launch("notepad.exe");
+            } catch (Throwable ex) {
+                assertTrue("textLaunch succeeded somehow", true);
+            }
+
+            assertFalse("textLaunch succeeded somehow", false);
+        } finally {
+            app.quit("Untitled - Notepad");
+        }
+    }
+
+    public void testCreateNamePropertyCondition() {
+        UIAutomation instance = UIAutomation.getInstance();
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+
+        try {
+            // Create first condition to use
+            PointerByReference condition =
+                    instance.CreateNamePropertyCondition("ID");
+        } catch (AutomationException ex) {
+            assertTrue(false);
+        }
+
+        assertTrue(true);
+    }
+
+    public void testCreateAutomationIdPropertyCondition() {
+        UIAutomation instance = UIAutomation.getInstance();
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+
+        try {
+            // Create first condition to use
+            PointerByReference condition =
+                    instance.CreateAutomationIdPropertyCondition("ID");
+        } catch (AutomationException ex) {
+            assertTrue(false);
+        }
+
+        assertTrue(true);
+    }
+
+    public void testCreateControlTypeCondition() {
+        UIAutomation instance = UIAutomation.getInstance();
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+
+        try {
+            // Create first condition to use
+            PointerByReference condition =
+                    instance.CreateControlTypeCondition(ControlType.Button);
+        } catch (AutomationException ex) {
+            assertTrue(false);
+        }
+
+        assertTrue(true);
+    }
+
+    // test launchorAttach - 1- launch, 2-attach, 3-not an exe
+
+    public void testLaunchOrAttach_Fails_When_No_executable() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        try {
+            instance.launchOrAttach("notepad99.exe");
+        } catch (Throwable ex) {
+            assertTrue("textLaunch succeeded somehow", true);
+        }
+
+        assertFalse("textLaunch succeeded somehow", false);
+    }
+
+    public void testLaunchOrAttach_Succeeds_When_Not_Running() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        try {
+            instance.launchOrAttach("notepad.exe");
+        } catch (Throwable ex) {
+            assertTrue("textLaunch succeeded somehow", true);
+        }
+
+        assertFalse("textLaunch succeeded somehow", false);
+    }
+
+    private void andRest() {
+        // Must be a better way of doing this????
+        try {
+            Thread.sleep(500);
+        } catch (Throwable ex) {
+            // interrupted
+        }
+    }
+
+    public void testLaunchOrAttach_Succeeds_When_Already_Running() throws IOException, AutomationException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            this.andRest();
+
+            try {
+                instance.launchOrAttach("notepad.exe");
             } catch (Throwable ex) {
                 assertTrue("textLaunch succeeded somehow", true);
             }

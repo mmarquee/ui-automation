@@ -20,10 +20,7 @@ import java.io.IOException;
 import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT;
 import junit.framework.TestCase;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.controls.AutomationApplication;
 
 /**
  * Created by Mark Humphreys on 24/11/2016.
