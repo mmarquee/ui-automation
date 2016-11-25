@@ -26,6 +26,10 @@ import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
+//import org.mockito.Mock;
+//import org.mockito.Mockito;
+//import static org.mockito.ArgumentMatchers.isA;
+//import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.List;
@@ -410,6 +414,24 @@ public class UIAutomationTest extends TestCase {
             app.quit("Untitled - Notepad");
         }
     }
+
+    /*
+    public void testCreateTrueCondition_Fails_When_Automation_Returns_False() {
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        when(mocked_automation.CreateTrueCondition(isA(PointerByReference.class))).thenReturn(-1);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        try {
+            instance.createTrueCondition();
+        } catch (AutomationException ex){
+            assertTrue("Should be false", true);
+        }
+
+        assertTrue("Should have been be false", false);
+    }
+    */
 
     public static void main(String[] args) {
         junit.textui.TestRunner.run(UIAutomationTest.class);

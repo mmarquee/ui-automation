@@ -50,6 +50,14 @@ public class UIAutomation {
     private final static int FIND_DESKTOP_ATTEMPTS = 25;
 
     /**
+     * Created for test, to allow mocking
+     * @param automation The automation object to use.
+     */
+    public UIAutomation(IUIAutomation automation) {
+        this.automation = automation;
+    }
+
+    /**
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
