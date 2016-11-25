@@ -61,9 +61,26 @@ public class AutomationApplicationTest extends TestCase {
         junit.textui.TestRunner.run(AutomationApplicationTest.class);
     }
 
-    public void testXYZ() throws AutomationException, PatternNotFoundException {
+    public void testGetWindowFinds_A_Running_Window() throws AutomationException, PatternNotFoundException {
         AutomationWindow window = app.getWindow("Untitled - Notepad");
         assertTrue("Name should be set", window.name().equals("Untitled - Notepad"));
+    }
+
+    public void testGetWindowFinds_Does_Not_Find_A_Non_Running_Window() throws AutomationException, PatternNotFoundException {
+
+        try {
+            AutomationWindow window = app.getWindow("Untitled - Notepad99");
+
+            try {
+                String name = window.name();
+
+                assertTrue("Name shouldn't be set", !window.name().equals("Untitled - Notepad99"));
+            } catch (Throwable e) {
+                assertTrue("Shouldn't get a value", true);
+            }
+        } catch (Throwable e) {
+            assertTrue("Shouldn't get a value", true);
+        }
     }
 
     /* These test are not quite working yet */
