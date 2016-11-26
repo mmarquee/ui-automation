@@ -21,23 +21,22 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import junit.framework.TestCase;
 import mmarquee.automation.ControlType;
 import org.apache.log4j.Logger;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 18/10/2016.
  */
-public class IUIAutomationElementTest extends TestCase {
+public class IUIAutomationElementTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IUIAutomationTest.class);
     }
 
     private IUIAutomation automation;
@@ -85,7 +84,8 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         // Initialise COM
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_MULTITHREADED);
 
@@ -110,6 +110,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testClassNameForRootElement() {
         try {
             IUIAutomationElement root = this.getRootElement();
@@ -129,6 +130,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testNameForRootElement() {
         try {
             IUIAutomationElement root = this.getRootElement();
@@ -148,6 +150,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsPasswordForRootElement() {
         try {
             IUIAutomationElement root = this.getRootElement();
@@ -167,6 +170,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetControlTypeForRootElement() {
         try {
             IUIAutomationElement root = this.getRootElement();
@@ -186,6 +190,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsOffScreenForRootElement() {
 
         try {
@@ -206,6 +211,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsEnabledForRootElement() {
 
         try {
@@ -226,6 +232,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsContentElementForRootElement() {
 
         try {
@@ -246,6 +253,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsControlElementForRootElement() {
         try {
             IUIAutomationElement root = this.getRootElement();
@@ -265,6 +273,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testClassNameForNonRootElement() {
         try {
             IUIAutomationElement root = this.getChildOfRootElement();
@@ -285,6 +294,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testNameForNonRootElementDoesntReturnError() {
         try {
             IUIAutomationElement element = this.getChildOfRootElement();
@@ -298,6 +308,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsPasswordForNonRootElement() {
         try {
             IUIAutomationElement root = this.getChildOfRootElement();
@@ -317,6 +328,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetControlTypeForNonRootElement() {
         try {
             IUIAutomationElement root = this.getChildOfRootElement();
@@ -336,6 +348,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsOffScreenForNonRootElement() {
 
         try {
@@ -356,6 +369,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsEnabledForNonRootElement() {
 
         try {
@@ -376,6 +390,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsContentElementForNonRootElement() {
 
         try {
@@ -396,6 +411,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsControlElementForNonRootElement() {
         try {
             IUIAutomationElement root = this.getChildOfRootElement();
@@ -415,6 +431,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testFindFirst() {
         try {
             IUIAutomationElement root = this.getRootElement();
@@ -449,7 +466,8 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
-    public void testFindAllDoesntReturnError() {
+    @Test
+    public void testFindAllDoes_Not_ReturnError() {
         try {
             IUIAutomationElement root = this.getRootElement();
 
@@ -477,6 +495,7 @@ public class IUIAutomationElementTest extends TestCase {
         }
     }
 
+    @Test
     public void testFindAllGetValidList() {
         try {
             IUIAutomationElement root = this.getRootElement();

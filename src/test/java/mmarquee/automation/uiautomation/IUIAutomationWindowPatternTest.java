@@ -23,11 +23,15 @@ import com.sun.jna.ptr.PointerByReference;
 import junit.framework.TestCase;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 20/11/2016.
  */
-public class IUIAutomationWindowPatternTest extends TestCase {
+public class IUIAutomationWindowPatternTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
@@ -51,11 +55,8 @@ public class IUIAutomationWindowPatternTest extends TestCase {
         }
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IUIAutomationWindowPatternTest.class);
-    }
-
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         // Initialise COM
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_MULTITHREADED);
 
@@ -112,6 +113,7 @@ public class IUIAutomationWindowPatternTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetWindowPatternFailsForRootElement() {
         try {
             // Get the pattern

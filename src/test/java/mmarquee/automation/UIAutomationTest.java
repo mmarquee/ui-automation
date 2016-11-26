@@ -20,35 +20,42 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import junit.framework.TestCase;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import static org.mockito.ArgumentMatchers.isA;
-//import static org.mockito.Mockito.when;
+import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.when;
+import org.junit.After;
+import org.junit.Before;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by Mark Humphreys on 19/07/2016.
  */
-public class UIAutomationTest extends TestCase {
+public class UIAutomationTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
+    @Test
     public void testGetInstance() {
         UIAutomation instance = UIAutomation.getInstance();
 
         assertTrue("instance:" + instance.toString(), instance != null);
     }
 
+    @Test
     public void testGetRootElement() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -57,6 +64,7 @@ public class UIAutomationTest extends TestCase {
         assertTrue("root:" + root.currentName(), root.currentName().equals("Desktop"));
     }
 
+    @Test
     public void testCompareElementsWhenTheSame() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -74,6 +82,7 @@ public class UIAutomationTest extends TestCase {
         assertTrue("Compare Element:" + value, value != 0);
     }
 
+    @Test
     public void testCreateFalseCondtion() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -92,6 +101,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetDesktopWindows() throws PatternNotFoundException, AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -100,6 +110,7 @@ public class UIAutomationTest extends TestCase {
         assertFalse("DesktopWindows" + windows.size(), windows.size() == 0);
     }
 
+    @Test
     public void testCreatePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -126,6 +137,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testCreateNotCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -159,6 +171,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testCreateAndCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -197,6 +210,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testCreateOrCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -235,7 +249,8 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
-    public void testCreateTrueCondtion() {
+    @Test
+    public void testCreateTrueCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
         try {
@@ -259,6 +274,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testCompareElementsWhenNotTheSame() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -284,7 +300,8 @@ public class UIAutomationTest extends TestCase {
         assertTrue("Compare Element:" + value, value != -1);
     }
 
-    public void testLaunch_Fails_When_No_executable() {
+    @Test
+    public void testLaunch_Fails_When_No_executable() throws IOException {
         UIAutomation instance = UIAutomation.getInstance();
 
         try {
@@ -296,6 +313,7 @@ public class UIAutomationTest extends TestCase {
         assertFalse("textLaunch succeeded somehow", false);
     }
 
+    @Test
     public void testLaunch_Succeeds_When_executable() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -315,6 +333,7 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testCreateNamePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -330,6 +349,7 @@ public class UIAutomationTest extends TestCase {
         assertTrue(true);
     }
 
+    @Test
     public void testCreateAutomationIdPropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -345,6 +365,7 @@ public class UIAutomationTest extends TestCase {
         assertTrue(true);
     }
 
+    @Test
     public void testCreateControlTypeCondition() {
         UIAutomation instance = UIAutomation.getInstance();
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -360,30 +381,26 @@ public class UIAutomationTest extends TestCase {
         assertTrue(true);
     }
 
-    // test launchorAttach - 1- launch, 2-attach, 3-not an exe
-
+    @Test
     public void testLaunchOrAttach_Fails_When_No_executable() {
         UIAutomation instance = UIAutomation.getInstance();
 
+        boolean failure = false;
+
         try {
             instance.launchOrAttach("notepad99.exe");
-        } catch (Throwable ex) {
-            assertTrue("textLaunch succeeded somehow", true);
+        } catch (Throwable e) {
+            failure = true;
         }
 
-        assertFalse("textLaunch succeeded somehow", false);
+        assertTrue("Should have failed", failure);
     }
 
-    public void testLaunchOrAttach_Succeeds_When_Not_Running() {
+    @Test
+    public void testLaunchOrAttach_Succeeds_When_Not_Running() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
-        try {
-            instance.launchOrAttach("notepad.exe");
-        } catch (Throwable ex) {
-            assertTrue("textLaunch succeeded somehow", true);
-        }
-
-        assertFalse("textLaunch succeeded somehow", false);
+        instance.launchOrAttach("notepad.exe");
     }
 
     private void andRest() {
@@ -395,7 +412,8 @@ public class UIAutomationTest extends TestCase {
         }
     }
 
-    public void testLaunchOrAttach_Succeeds_When_Already_Running() throws IOException, AutomationException {
+    @Test
+    public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
         AutomationApplication app = instance.launch("notepad.exe");
@@ -403,37 +421,36 @@ public class UIAutomationTest extends TestCase {
         try {
             this.andRest();
 
-            try {
-                instance.launchOrAttach("notepad.exe");
-            } catch (Throwable ex) {
-                assertTrue("textLaunch succeeded somehow", true);
-            }
+            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
 
-            assertFalse("textLaunch succeeded somehow", false);
+            assertTrue("Should be the same name", launched.name().equals(app.name()));
+
         } finally {
             app.quit("Untitled - Notepad");
         }
     }
 
-    /*
-    public void testCreateTrueCondition_Fails_When_Automation_Returns_False() {
+    @Test
+    public void testCreateTrueCondition_Succeeds_When_Automation_Returns_True()
+            throws AutomationException {
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        when(mocked_automation.CreateTrueCondition(isA(PointerByReference.class))).thenReturn(0);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        instance.createTrueCondition();
+    }
+
+    @Test(expected=AutomationException.class)
+    public void testCreateTrueCondition_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         when(mocked_automation.CreateTrueCondition(isA(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        try {
-            instance.createTrueCondition();
-        } catch (AutomationException ex){
-            assertTrue("Should be false", true);
-        }
-
-        assertTrue("Should have been be false", false);
-    }
-    */
-
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UIAutomationTest.class);
+        instance.createTrueCondition();
     }
 }

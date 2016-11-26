@@ -2,16 +2,21 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
-import junit.framework.TestCase;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 25/11/2016.
  */
-public class AutomationApplicationTest extends TestCase {
+public class AutomationApplicationTest {
     private void andRest() {
         // Must be a better way of doing this????
         try {
@@ -28,8 +33,8 @@ public class AutomationApplicationTest extends TestCase {
     private UIAutomation instance;
     private AutomationApplication app;
 
-    @Override
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         // Notepad _MIGHT_ still be running, so close it if it is
         WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
 
@@ -44,8 +49,8 @@ public class AutomationApplicationTest extends TestCase {
         app.waitForInputIdle();
     }
 
-    @Override
-    protected void tearDown() {
+    @After
+    public void tearDown() {
         // Must be a better way of doing this????
         this.andRest();
 
@@ -57,16 +62,16 @@ public class AutomationApplicationTest extends TestCase {
         }
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AutomationApplicationTest.class);
-    }
-
-    public void testGetWindowFinds_A_Running_Window() throws AutomationException, PatternNotFoundException {
+    @Test
+    public void testGetWindowFinds_A_Running_Window()
+            throws AutomationException, PatternNotFoundException {
         AutomationWindow window = app.getWindow("Untitled - Notepad");
         assertTrue("Name should be set", window.name().equals("Untitled - Notepad"));
     }
 
-    public void testGetWindowFinds_Does_Not_Find_A_Non_Running_Window() throws AutomationException, PatternNotFoundException {
+    @Test
+    public void testGetWindowFinds_Does_Not_Find_A_Non_Running_Window()
+            throws AutomationException, PatternNotFoundException {
 
         try {
             AutomationWindow window = app.getWindow("Untitled - Notepad99");
@@ -74,7 +79,7 @@ public class AutomationApplicationTest extends TestCase {
             try {
                 String name = window.name();
 
-                assertTrue("Name shouldn't be set", !window.name().equals("Untitled - Notepad99"));
+                assertFalse("Name should be equal", window.name().equals("Untitled - Notepad99"));
             } catch (Throwable e) {
                 assertTrue("Shouldn't get a value", true);
             }
@@ -85,6 +90,7 @@ public class AutomationApplicationTest extends TestCase {
 
     /* These test are not quite working yet */
 /*
+    @Test
     public void testClose_Works() {
         app.close("Untitled - Notepad");
 

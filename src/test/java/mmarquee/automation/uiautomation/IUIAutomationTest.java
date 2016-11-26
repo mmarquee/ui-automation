@@ -21,16 +21,15 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import junit.framework.TestCase;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.controls.AutomationBase;
 import org.apache.log4j.Logger;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 13/10/2016.
  */
-public class IUIAutomationTest extends TestCase {
+public class IUIAutomationTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
@@ -38,13 +37,10 @@ public class IUIAutomationTest extends TestCase {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IUIAutomationTest.class);
-    }
-
     private IUIAutomation automation;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         // Initialise COM
         Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_MULTITHREADED);
 
@@ -69,6 +65,7 @@ public class IUIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetRootElement() {
         PointerByReference root = new PointerByReference();
         automation.GetRootElement(root);
@@ -80,6 +77,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("RootElement", COMUtils.SUCCEEDED(result));
     }
 
+    @Test
     public void testCompareElementsWhenElementsAreTheSame() {
         PointerByReference root = new PointerByReference();
         automation.GetRootElement(root);
@@ -91,6 +89,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("Compare", same.getValue() != 0);
     }
 
+    @Test
     public void testCreateTrueCondition() {
         PointerByReference pbr = new PointerByReference();
         automation.CreateTrueCondition(pbr);
@@ -102,6 +101,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("TrueCondition", COMUtils.SUCCEEDED(result));
     }
 
+    @Test
     public void testCreateFalseCondition() {
         PointerByReference pbr = new PointerByReference();
         automation.CreateFalseCondition(pbr);
@@ -113,6 +113,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("FalseCondition", COMUtils.SUCCEEDED(result));
     }
 
+    @Test
     public void testGetPatternProgrammaticNameForInvoke () {
         PointerByReference sr = new PointerByReference();
 
@@ -123,6 +124,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("GetPatternProgrammticName", name.equals("InvokePattern"));
     }
 
+    @Test
     public void testGetPatternProgrammaticNameForCustomNavigation () {
         PointerByReference sr = new PointerByReference();
 
@@ -133,6 +135,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("GetPatternProgrammticName", name.equals("CustomNavigationPattern"));
     }
 
+    @Test
     public void testOrCondition() {
         PointerByReference condition1 = new PointerByReference();
         PointerByReference condition2 = new PointerByReference();
@@ -149,6 +152,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("OrCondition", COMUtils.SUCCEEDED(result));
     }
 
+    @Test
     public void testAndCondition() {
         PointerByReference condition1 = new PointerByReference();
         PointerByReference condition2 = new PointerByReference();
@@ -165,6 +169,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("AndCondition", COMUtils.SUCCEEDED(result));
     }
 
+    @Test
     public void testCreateNotCondition() {
         PointerByReference condition = new PointerByReference();
         PointerByReference pbr = new PointerByReference();
@@ -179,6 +184,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("NotCondition", COMUtils.SUCCEEDED(result));
     }
 
+    @Test
     public void testElementFromHandle() {
         PointerByReference pbr = new PointerByReference();
 
@@ -189,6 +195,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("ElementFromHandle", pbr != null);
     }
 
+    @Test
     public void testElementFromHandleGivesRootElement() {
         PointerByReference pbr = new PointerByReference();
         PointerByReference root = new PointerByReference();
@@ -205,6 +212,7 @@ public class IUIAutomationTest extends TestCase {
         assertTrue("Compare", same.getValue() == 0);
     }
 
+    @Test
     public void testCompareElementsWhenElementsAreDifferent() {
         PointerByReference root = new PointerByReference();
         automation.GetRootElement(root);
@@ -234,6 +242,7 @@ public class IUIAutomationTest extends TestCase {
         }
     }
 
+    @Test
     public void testGetFocusedElement() {
         PointerByReference pbr = new PointerByReference();
 
