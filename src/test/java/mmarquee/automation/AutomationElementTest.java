@@ -16,11 +16,11 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.ByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -206,4 +206,33 @@ public class AutomationElementTest {
     setFocus
     showContextMenu
      */
+
+    @Test(expected = AutomationException.class)
+    public void testGetClickablePoint_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
+        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+        when(mocked.get_ClickablePoint(isA(WinDef.POINT.ByReference.class),isA(WinDef.BOOLByReference.class))).thenReturn(-1);
+
+        WinDef.POINT point = new WinDef.POINT();
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        point = element.getClickablePoint();
+    }
+
+    @Test(expected = AutomationException.class)
+    public void testGetCurrentBoundingRectangle_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
+        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+        when(mocked.get_CurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
+
+        WinDef.RECT rect = new WinDef.RECT();
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        rect = element.getCurrentBoundingRectangle();
+    }
+
 }
