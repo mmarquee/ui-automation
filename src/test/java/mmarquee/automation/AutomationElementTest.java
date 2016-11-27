@@ -17,12 +17,17 @@ package mmarquee.automation;
 
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -184,6 +189,15 @@ public class AutomationElementTest {
         WinDef.RECT empty = new WinDef.RECT();
 
         assertTrue("root:" + root.getCurrentBoundingRectangle(), !root.getCurrentBoundingRectangle().dataEquals(empty));
+    }
+
+    @Test
+    public void testCurrentPropertyValue_Suceeds_When_No_Error() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        Object value = root.currentPropertyValue(PropertyID.FrameworkId.getValue());
+
+        assertTrue(!value.toString().isEmpty());
     }
 
     /*

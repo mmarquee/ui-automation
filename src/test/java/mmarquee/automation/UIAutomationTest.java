@@ -15,6 +15,7 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
@@ -26,6 +27,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -442,15 +444,77 @@ public class UIAutomationTest {
         instance.createTrueCondition();
     }
 
-    @Test(expected=AutomationException.class)
+    @Test(expected = AutomationException.class)
     public void testCreateTrueCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         when(mocked_automation.CreateTrueCondition(isA(PointerByReference.class))).thenReturn(-1);
 
-        UIAutomation instance = new UIAutomation(mocked_automation);
+        UIAutomation local_instance = new UIAutomation(mocked_automation);
 
-        instance.createTrueCondition();
+        local_instance.createTrueCondition();
+    }
+
+    @Test(expected = AutomationException.class)
+    @Ignore
+    public void testCreateNotCondition_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        when(mocked_automation.CreateNotCondition(isA(Pointer.class), isA(PointerByReference.class))).thenReturn(-1);
+
+        UIAutomation local_instance = new UIAutomation(mocked_automation);
+
+        PointerByReference pbr = new PointerByReference();
+
+        local_instance.createNotCondition(pbr.getValue());
+    }
+
+    @Test(expected = AutomationException.class)
+    public void testCreateFalseCondition_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        when(mocked_automation.CreateFalseCondition(isA(PointerByReference.class))).thenReturn(-1);
+
+        UIAutomation local_instance = new UIAutomation(mocked_automation);
+
+        local_instance.createFalseCondition();
+    }
+
+    @Test(expected = AutomationException.class)
+    @Ignore
+    public void testCreateAndCondition_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
+        IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
+
+        when(mocked.CreateAndCondition(isA(Pointer.class), isA(Pointer.class), isA(PointerByReference.class))).thenReturn(-1);
+
+        UIAutomation instanceWithMocking = new UIAutomation(mocked);
+
+        instanceWithMocking.createAndCondition(new PointerByReference().getValue(),
+                new PointerByReference().getValue());
+    }
+
+    @Test
+    public void testGetDesktopWindow_Succeeds_When_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            AutomationWindow window = instance.getDesktopWindow("Untitled - Notepad");
+
+            assertTrue("Should be the same name", window.name().equals("Untitled - Notepad"));
+        } finally {
+            app.quit("Untitled - Notepad");
+        }
+    }
+
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetDesktopWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation instance = UIAutomation.getInstance();
+        instance.getDesktopWindow("Untitled - Notepad99");
     }
 }
