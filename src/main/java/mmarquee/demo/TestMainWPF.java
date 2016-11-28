@@ -539,8 +539,6 @@ public class TestMainWPF extends TestBase {
 
             this.rest();
 
-            applicationWindow.dumpUI();
-
             // Should be able to get the popup menu here, if I knew how to find it
 
             logger.info("++ NOT FOUND ++");

@@ -19,10 +19,8 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationTest;
-import mmarquee.automation.uiautomation.OrientationType;
+import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -30,7 +28,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationBaseTest {
+public class AutomationDataGridTest {
+
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
@@ -45,18 +44,12 @@ public class AutomationBaseTest {
         }
     }
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws PatternNotFoundException, AutomationException {
-    }
-
     private AutomationApplication application = null;
     private AutomationWindow applicationWindow = null;
 
     private void loadApplication(String appName, String windowName) throws Exception {
+        this.rest();
+
         UIAutomation automation = UIAutomation.getInstance();
 
         application = automation.launchOrAttach(appName);
@@ -72,41 +65,52 @@ public class AutomationBaseTest {
     }
 
     private void closeApplication() throws PatternNotFoundException, AutomationException {
-        AutomationButton btnClickMe = applicationWindow.getButton("Press Me");
-        assertTrue(btnClickMe.name().equals("Press Me"));
-
-        btnClickMe.click();
-
-        AutomationWindow popup = applicationWindow.getWindow("Confirmation");
-
-        AutomationButton btn = popup.getButton("Yes");
-        btn.click();
-
-        this.rest();
+        application.quit("Form1");
     }
 
     @Test
-    public void testGetAriaRole_For_Window() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetName_For_DataGrid() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            String m = applicationWindow.getAriaRole();
+            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
 
-            assertTrue(m.equals(""));
+            String name = grid.name();
+            assertTrue(name.equals("AutomationStringGrid1"));
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void testGetOrientation_For_Window() throws  Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetRowOrColumn_For_DataGrid() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
 
         try {
+            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
 
-            OrientationType m = applicationWindow.getOrientation();
+            AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            assertTrue(m == OrientationType.None);
+            String itemName = cell1.name();
+
+            assertTrue(itemName.equals("Row 1, Col 1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetCell_For_DataGrid() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+
+            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+
+            RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
+
+            assertTrue(rowOrColumn == RowOrColumnMajor.RowMajor);
         } finally {
             closeApplication();
         }

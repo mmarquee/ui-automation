@@ -55,10 +55,6 @@ class TestExplorer extends TestBase {
             AutomationWindow window = automation.getDesktopWindow("File Explorer");
             window.focus();
 
-            logger.info("Dump start");
-            window.dumpUI();
-            logger.info("Dump done");
-
             // Get the ribbon, work our way down and click the "Preview Button"
             AutomationRibbonBar ribbon = window.getRibbonBar();
             AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
