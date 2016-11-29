@@ -23,6 +23,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -103,9 +104,8 @@ public class AutomationApplicationTest {
         }
     }
 
-    /* These test are not quite working yet */
-/*
     @Test
+    @Ignore
     public void testClose_Works() {
         app.close("Untitled - Notepad");
 
@@ -116,6 +116,8 @@ public class AutomationApplicationTest {
         assertTrue("Notepad won't have closed", hwnd != null);
     }
 
+    @Test
+    @Ignore
     public void testQuit_Works() {
         app.quit("Untitled - Notepad");
 
@@ -125,5 +127,4 @@ public class AutomationApplicationTest {
 
         assertTrue("Notepad should have quit", hwnd == null);
     }
-*/
 }

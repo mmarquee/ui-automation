@@ -19,16 +19,16 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationTest;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
 import org.junit.Test;
-
+import java.util.List;
+import static java.awt.SystemColor.text;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * Created by Mark Humphreys on 29/11/2016.
  */
-public class AutomationDataGridTest {
+public class AutomationComboboxTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
@@ -69,65 +69,77 @@ public class AutomationDataGridTest {
     }
 
     @Test
-    public void testGetName_For_DataGrid() throws Exception {
+    public void testGetCombobox_Get_Name() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
 
-            String name = grid.name();
-            assertTrue(name.equals("AutomationStringGrid1"));
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox2"));
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void testGetCell_For_DataGrid() throws Exception {
+    public void testGetCombobox_Get_Text() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+            String text = cb1.text();
 
-            String itemName = cell1.name();
+            logger.info(text);
 
-            logger.info(itemName);
-
-            assertTrue(itemName.equals("Row 1, Col 1"));
+            assertTrue(text.equals("Second"));
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void testGetValue_For_DataGrid() throws Exception {
+    public void testGetCombobox_Get_List_Gets_Correct_Size_Of_List() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
 
-            String value = grid.getValue();
+            List<AutomationListItem> elements = cb1.getList();
 
-            assertTrue(value.equals("Row 1, Col 1"));
+            int count = elements.size();
+
+            logger.info(count);
+
+            assertTrue(count == 0);
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void testGetRowOrColumn_For_DataGrid() throws Exception {
+    public void testGetCombobox_Get_List_Gets_Correct_Size_Of_List_When_Expanded() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
 
-            RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
+            cb1.expand();
 
-            assertTrue(rowOrColumn == RowOrColumnMajor.RowMajor);
+            List<AutomationListItem> elements = cb1.getList();
+
+            int count = elements.size();
+
+            logger.info(count);
+
+            assertTrue(count == 3);
         } finally {
             closeApplication();
         }
     }
+
 }

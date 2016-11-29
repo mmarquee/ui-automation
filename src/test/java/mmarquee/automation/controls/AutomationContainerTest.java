@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -167,4 +168,166 @@ public class AutomationContainerTest {
             closeApplication();
         }
     }
+
+    @Test
+    public void testGetCombobox_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
+
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox2"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test (expected=IndexOutOfBoundsException.class)
+    public void testGetCombobox_By_Index_Errors_When_Too_Big() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = applicationWindow.getCombobox(99);
+
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox2"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetCombobox_By_Automation_Id() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = applicationWindow.getComboboxByAutomationId("AutomatedCombobox1");
+
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetCombobox_By_Name() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = applicationWindow.getCombobox("AutomatedCombobox1");
+
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test (expected=IndexOutOfBoundsException.class)
+    public void testGetCheckBox_By_Index_Fails_When_Index_No_Present() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationCheckbox cb1 = applicationWindow.getCheckbox(99);
+
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetCheckBox_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationCheckbox cb1 = applicationWindow.getCheckbox(0);
+
+            String name = cb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("Second"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test (expected=IndexOutOfBoundsException.class)
+    public void testGetRadioButton_By_Index_Fails_When_Index_No_Present() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationRadioButton rb1 = applicationWindow.getRadioButton(99);
+
+            String name = rb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetRadioButton_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationRadioButton rb1 = applicationWindow.getRadioButton(0);
+
+            String name = rb1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("Radio 2"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetListItem_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationList li1 = applicationWindow.getListItem(0);
+
+            AutomationListItem item = li1.getItem("First (List)");
+
+            String name = item.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("First (List)"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+
+
+    /*
+     * Calendar
+     * RadioButton
+     */
 }

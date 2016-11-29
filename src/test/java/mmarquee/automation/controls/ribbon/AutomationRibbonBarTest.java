@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls;
+package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationTest;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationDataGridTest {
+public class AutomationRibbonBarTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
@@ -69,63 +70,32 @@ public class AutomationDataGridTest {
     }
 
     @Test
-    public void testGetName_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetRibbonBar() throws Exception {
+        loadApplication("explorer", "File Explorer");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationRibbonBar ribbon = applicationWindow.getRibbonBar();
 
-            String name = grid.name();
-            assertTrue(name.equals("AutomationStringGrid1"));
+            String name = ribbon.name();
+
+            assertTrue(name.equals("UIRibbonDockTop"));
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void testGetCell_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetRibbonCommandBar() throws Exception {
+        loadApplication("explorer", "File Explorer");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationRibbonBar ribbon = applicationWindow.getRibbonBar();
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
 
-            String itemName = cell1.name();
+            String name = commandBar.name();
 
-            logger.info(itemName);
-
-            assertTrue(itemName.equals("Row 1, Col 1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetValue_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
-
-            String value = grid.getValue();
-
-            assertTrue(value.equals("Row 1, Col 1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetRowOrColumn_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
-
-            RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
-
-            assertTrue(rowOrColumn == RowOrColumnMajor.RowMajor);
+            assertTrue(name.equals("Ribbon"));
         } finally {
             closeApplication();
         }

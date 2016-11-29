@@ -74,9 +74,11 @@ public class AutomationDataGridCellTest {
         try {
             AutomationDataGrid grid = applicationWindow.getDataGrid(0);
 
-            AutomationDataGridCell cell1 = grid.getItem(2, 2);
+            AutomationDataGridCell cell1 = grid.getItem(1, 2);
 
             String value = cell1.value();
+
+            assertTrue(value.equals("Row 1, Col 2"));
         } finally {
             closeApplication();
         }
@@ -89,12 +91,13 @@ public class AutomationDataGridCellTest {
         try {
             AutomationDataGrid grid = applicationWindow.getDataGrid(0);
 
-            AutomationDataGridCell cell1 = grid.getItem(2, 2);
+            AutomationDataGridCell cell1 = grid.getItem(1, 2);
 
             String itemName = cell1.name();
+
             logger.info(itemName);
 
-            assertTrue(itemName.equals("AutomationStringGrid1"));
+            assertTrue(itemName.equals("Row 1, Col 2"));
         } finally {
             closeApplication();
         }
