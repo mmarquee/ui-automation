@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationTest;
@@ -30,59 +31,25 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationBaseTest {
+public class AutomationBaseTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    protected void rest() {
-        try {
-            Thread.sleep(1500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
-    }
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws PatternNotFoundException, AutomationException {
-    }
-
-    private AutomationApplication application = null;
-    private AutomationWindow applicationWindow = null;
-
-    private void loadApplication(String appName, String windowName) throws Exception {
-        UIAutomation automation = UIAutomation.getInstance();
-
-        application = automation.launchOrAttach(appName);
-
-        // Wait for the process to start
-        // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
-
-        // Sleep for WPF, to address above issue
-        this.rest();
-
-        applicationWindow = automation.getDesktopWindow(windowName);
-    }
-
-    private void closeApplication() throws PatternNotFoundException, AutomationException {
-        AutomationButton btnClickMe = applicationWindow.getButton("Press Me");
+    protected void closeApplication() throws PatternNotFoundException, AutomationException {
+        AutomationButton btnClickMe = window.getButton("Press Me");
         assertTrue(btnClickMe.name().equals("Press Me"));
 
         btnClickMe.click();
 
-        AutomationWindow popup = applicationWindow.getWindow("Confirmation");
+        AutomationWindow popup = window.getWindow("Confirmation");
 
         AutomationButton btn = popup.getButton("Yes");
         btn.click();
 
-        this.rest();
+        this.andRest();
     }
 
     @Test
@@ -90,7 +57,7 @@ public class AutomationBaseTest {
         loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
 
         try {
-            String m = applicationWindow.getAriaRole();
+            String m = window.getAriaRole();
 
             assertTrue(m.equals(""));
         } finally {
@@ -103,8 +70,7 @@ public class AutomationBaseTest {
         loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
 
         try {
-
-            OrientationType m = applicationWindow.getOrientation();
+            OrientationType m = window.getOrientation();
 
             assertTrue(m == OrientationType.None);
         } finally {

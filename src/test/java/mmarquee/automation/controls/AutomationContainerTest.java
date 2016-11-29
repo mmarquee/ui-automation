@@ -16,57 +16,25 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationContainerTest {
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+public class AutomationContainerTest extends BaseAutomationTest {
+    protected Logger logger = Logger.getLogger(AutomationContainerTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    protected void rest() {
-        try {
-            Thread.sleep(1500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
-    }
-
-    private AutomationApplication application = null;
-    private AutomationWindow applicationWindow = null;
-
-    private void loadApplication(String appName, String windowName) throws Exception {
-        this.rest();
-
-        UIAutomation automation = UIAutomation.getInstance();
-
-        application = automation.launchOrAttach(appName);
-
-        // Wait for the process to start
-        // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
-
-        // Sleep for WPF, to address above issue
-        this.rest();
-
-        applicationWindow = automation.getDesktopWindow(windowName);
-    }
-
-    private void closeApplication() throws PatternNotFoundException, AutomationException {
-        application.quit("Form1");
     }
 
     @Test
@@ -74,7 +42,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationTab tab = applicationWindow.getTab(0);
+            AutomationTab tab = window.getTab(0);
 
             String m = tab.name();
 
@@ -89,7 +57,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationEditBox tab = applicationWindow.getEditBox(0);
+            AutomationEditBox tab = window.getEditBox(0);
 
             String m = tab.getValue();
 
@@ -105,7 +73,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationEditBox tab = applicationWindow.getEditBox("Edit1");
+            AutomationEditBox tab = window.getEditBox("Edit1");
 
             String m = tab.getValue();
 
@@ -120,7 +88,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(0);
 
             String name = grid.name();
             assertTrue(name.equals("AutomationStringGrid1"));
@@ -134,7 +102,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(1);
+            AutomationDataGrid grid = window.getDataGrid(1);
         } finally {
             closeApplication();
         }
@@ -145,7 +113,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationToolBar toolbar = applicationWindow.getToolBar(0);
+            AutomationToolBar toolbar = window.getToolBar(0);
 
             String name = toolbar.name();
             assertTrue(name.equals("ToolBar1"));
@@ -159,7 +127,7 @@ public class AutomationContainerTest {
         loadApplication("explorer", "File Explorer");
 
         try {
-            AutomationRibbonBar ribbon = applicationWindow.getRibbonBar();
+            AutomationRibbonBar ribbon = window.getRibbonBar();
 
             String name = ribbon.name();
 
@@ -174,7 +142,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
+            AutomationComboBox cb1 = window.getCombobox(0);
 
             String name = cb1.name();
 
@@ -191,7 +159,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox(99);
+            AutomationComboBox cb1 = window.getCombobox(99);
 
             String name = cb1.name();
 
@@ -208,7 +176,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getComboboxByAutomationId("AutomatedCombobox1");
+            AutomationComboBox cb1 = window.getComboboxByAutomationId("AutomatedCombobox1");
 
             String name = cb1.name();
 
@@ -225,7 +193,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox("AutomatedCombobox1");
+            AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
 
             String name = cb1.name();
 
@@ -242,7 +210,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationCheckbox cb1 = applicationWindow.getCheckbox(99);
+            AutomationCheckbox cb1 = window.getCheckbox(99);
 
             String name = cb1.name();
 
@@ -259,7 +227,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationCheckbox cb1 = applicationWindow.getCheckbox(0);
+            AutomationCheckbox cb1 = window.getCheckbox(0);
 
             String name = cb1.name();
 
@@ -276,7 +244,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationRadioButton rb1 = applicationWindow.getRadioButton(99);
+            AutomationRadioButton rb1 = window.getRadioButton(99);
 
             String name = rb1.name();
 
@@ -293,7 +261,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationRadioButton rb1 = applicationWindow.getRadioButton(0);
+            AutomationRadioButton rb1 = window.getRadioButton(0);
 
             String name = rb1.name();
 
@@ -310,7 +278,7 @@ public class AutomationContainerTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationList li1 = applicationWindow.getListItem(0);
+            AutomationList li1 = window.getListItem(0);
 
             AutomationListItem item = li1.getItem("First (List)");
 
@@ -324,10 +292,84 @@ public class AutomationContainerTest {
         }
     }
 
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testgetCalendar_By_Index_Throws_Exception_Whwn_Not_Found() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
+        try {
+            AutomationCalendar cal = window.getCalendar(0);
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    @Ignore
+    public void testGetCalendar_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTab tab = window.getTab(0);
+
+            tab.selectTabPage("Calendar");
+
+            AutomationCalendar calendar = window.getCalendar(0);
+
+            String name = calendar.name();
+
+            logger.info(name);
+
+            assertFalse(name.equals(""));
+
+//            AutomationCalendar cal = applicationWindow.getCalendar(0);
+//
+//            String name = cal.name();
+//
+//            logger.info(name)/;
+//
+//            assertTrue(name.equals("Calendar1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetTab_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTab tab = window.getTab(0);
+
+            String name = tab.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetTab_By_Index_When_Not_Present() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTab tab = window.getTab(99);
+
+            String name = tab.name();
+
+            logger.info(name);
+
+            assertFalse(name.equals(""));
+
+        } finally {
+            closeApplication();
+        }
+    }
 
     /*
      * Calendar
-     * RadioButton
      */
 }

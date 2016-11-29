@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationTest;
 import org.apache.log4j.Logger;
@@ -25,20 +26,12 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationButtonTest {
+public class AutomationButtonTest extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationButtonTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    protected void rest() {
-        try {
-            Thread.sleep(1500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
     }
 
     @Test
@@ -54,7 +47,7 @@ public class AutomationButtonTest {
             application.waitForInputIdle(5000);
 
             // Sleep for WPF, to address above issue
-            this.rest();
+            this.andRest();
 
             AutomationWindow applicationWindow =
                     automation.getDesktopWindow("MainWindow");
@@ -69,7 +62,7 @@ public class AutomationButtonTest {
             AutomationButton btn = popup.getButton("Yes");
             btn.click();
         } finally {
-            this.rest();
+            this.andRest();
         }
     }
 
@@ -86,7 +79,7 @@ public class AutomationButtonTest {
             application.waitForInputIdle(5000);
 
             // Sleep for WPF, to address above issue
-            this.rest();
+            this.andRest();
 
             AutomationWindow applicationWindow =
                     automation.getDesktopWindow("MainWindow");
@@ -101,7 +94,7 @@ public class AutomationButtonTest {
             AutomationButton btn = popup.getButton("Yes");
             btn.click();
         } finally {
-            this.rest();
+            this.andRest();
         }
     }
 
@@ -118,7 +111,7 @@ public class AutomationButtonTest {
             application.waitForInputIdle(5000);
 
             // Sleep for WPF, to address above issue
-            this.rest();
+            this.andRest();
 
             AutomationWindow applicationWindow =
                     automation.getDesktopWindow("MainWindow");
@@ -134,7 +127,7 @@ public class AutomationButtonTest {
             AutomationButton btn = popup.getButton("Yes");
             btn.click();
         } finally {
-            this.rest();
+            this.andRest();
         }
     }
 }

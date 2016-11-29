@@ -16,6 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationTest;
@@ -28,44 +29,12 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationDataGridTest {
+public class AutomationDataGridTest extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationDataGridTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    protected void rest() {
-        try {
-            Thread.sleep(1500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
-    }
-
-    private AutomationApplication application = null;
-    private AutomationWindow applicationWindow = null;
-
-    private void loadApplication(String appName, String windowName) throws Exception {
-        this.rest();
-
-        UIAutomation automation = UIAutomation.getInstance();
-
-        application = automation.launchOrAttach(appName);
-
-        // Wait for the process to start
-        // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
-
-        // Sleep for WPF, to address above issue
-        this.rest();
-
-        applicationWindow = automation.getDesktopWindow(windowName);
-    }
-
-    private void closeApplication() throws PatternNotFoundException, AutomationException {
-        application.quit("Form1");
     }
 
     @Test
@@ -73,7 +42,7 @@ public class AutomationDataGridTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(0);
 
             String name = grid.name();
             assertTrue(name.equals("AutomationStringGrid1"));
@@ -87,7 +56,7 @@ public class AutomationDataGridTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(0);
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
@@ -106,7 +75,7 @@ public class AutomationDataGridTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(0);
 
             String value = grid.getValue();
 
@@ -121,7 +90,7 @@ public class AutomationDataGridTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = applicationWindow.getDataGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(0);
 
             RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
 

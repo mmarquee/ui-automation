@@ -15,57 +15,42 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * Created by Mark Humphreys on 29/11/2016.
  */
-public class AutomationDataGridCellTest extends BaseAutomationTest {
+public class AutomationTabText extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(AutomationDataGridCellTest.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationTabText.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testValue() throws Exception {
+    public void testGetTabPage_By_Index() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+            AutomationTab tab = window.getTab(0);
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 2);
-
-            String value = cell1.value();
-
-            assertTrue(value.equals("Row 1, Col 2"));
-        } finally {
+            tab.selectTabPage("Calendar");
+       } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void testGetCellName() throws Exception {
+    public void testSelectTabePage_Not_Present() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+            AutomationTab tab = window.getTab(0);
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 2);
-
-            String itemName = cell1.name();
-
-            logger.info(itemName);
-
-            assertTrue(itemName.equals("Row 1, Col 2"));
+            tab.selectTabPage("ERROR");
         } finally {
             closeApplication();
         }

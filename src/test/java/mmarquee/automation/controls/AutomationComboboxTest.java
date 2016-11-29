@@ -16,56 +16,23 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import java.util.List;
-import static java.awt.SystemColor.text;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
  */
-public class AutomationComboboxTest {
+public class AutomationComboboxTest extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationComboboxTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    protected void rest() {
-        try {
-            Thread.sleep(1500);
-        } catch (Exception ex) {
-            logger.info("Interrupted");
-        }
-    }
-
-    private AutomationApplication application = null;
-    private AutomationWindow applicationWindow = null;
-
-    private void loadApplication(String appName, String windowName) throws Exception {
-        this.rest();
-
-        UIAutomation automation = UIAutomation.getInstance();
-
-        application = automation.launchOrAttach(appName);
-
-        // Wait for the process to start
-        // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
-
-        // Sleep for WPF, to address above issue
-        this.rest();
-
-        applicationWindow = automation.getDesktopWindow(windowName);
-    }
-
-    private void closeApplication() throws PatternNotFoundException, AutomationException {
-        application.quit("Form1");
     }
 
     @Test
@@ -73,7 +40,7 @@ public class AutomationComboboxTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
+            AutomationComboBox cb1 = window.getCombobox(0);
 
             String name = cb1.name();
 
@@ -90,7 +57,7 @@ public class AutomationComboboxTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
+            AutomationComboBox cb1 = window.getCombobox(0);
 
             String text = cb1.text();
 
@@ -107,7 +74,7 @@ public class AutomationComboboxTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
+            AutomationComboBox cb1 = window.getCombobox(0);
 
             List<AutomationListItem> elements = cb1.getList();
 
@@ -126,7 +93,7 @@ public class AutomationComboboxTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = applicationWindow.getCombobox(0);
+            AutomationComboBox cb1 = window.getCombobox(0);
 
             cb1.expand();
 
