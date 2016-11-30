@@ -386,7 +386,7 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("AutomatedCombobox1"));
+            assertTrue(name.equals("This is a link"));
         } finally {
             closeApplication();
         }

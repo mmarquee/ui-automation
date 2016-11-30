@@ -30,14 +30,13 @@ public class AutomationHyperlinkTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("AutomatedCombobox1"));
+            assertTrue(name.equals("This is a link"));
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    @Ignore
     public void testClick() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
