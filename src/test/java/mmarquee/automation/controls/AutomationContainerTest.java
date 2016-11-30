@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
@@ -387,6 +389,74 @@ public class AutomationContainerTest extends BaseAutomationTest {
             logger.info(name);
 
             assertTrue(name.equals("This is a link"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testList_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationList hl1 = window.getListItem(99);
+
+            String name = hl1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("This is a link"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testListItem_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTreeView li1 = window.getTreeView(0);
+
+            String name = li1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected= ElementNotFoundException.class)
+    public void testTreeView_By_Name_Throws_Exception_When_Not_found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTreeView hl1 = window.getTreeView("Not there");
+
+            String name = hl1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("Never gets here anyway"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testTreeView_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTreeView tv1 = window.getTreeView(0);
+
+            String name = tv1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
         } finally {
             closeApplication();
         }
