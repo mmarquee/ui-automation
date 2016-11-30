@@ -15,9 +15,9 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
@@ -496,4 +496,78 @@ public class AutomationContainerTest extends BaseAutomationTest {
             closeApplication();
         }
     }
+
+    @Test
+    @Ignore
+    public void testGetProgress_By_Index() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        try {
+            AutomationProgressBar progressBar = window.getProgressBar(0);
+
+            String name = progressBar.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("ToolBar1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetDocument_By_Index() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        try {
+            AutomationTab tab = window.getTab(0);
+
+            tab.selectTabPage("Document");
+
+            AutomationDocument doc = window.getDocument(0);
+
+            String name = doc.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected=AutomationException.class)
+    public void testGetProgress_By_Name_Fails_When_Not_Found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationProgressBar pb = window.getProgressBar("NotThere");
+
+            String name = pb.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("ProgressBar1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetProgress_By_Index_Throws_Exception_When_Not_Found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationProgressBar pbar = window.getProgressBar(99);
+
+            String name = pbar.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("ToolBar1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
 }

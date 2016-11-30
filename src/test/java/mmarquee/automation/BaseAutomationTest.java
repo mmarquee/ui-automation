@@ -26,6 +26,7 @@ public class BaseAutomationTest {
     protected UIAutomation instance;
     protected AutomationApplication application;
     protected AutomationWindow window;
+    protected String windowName;
 
     protected void andRest() {
         // Must be a better way of doing this????
@@ -39,6 +40,8 @@ public class BaseAutomationTest {
     protected void loadApplication(String appName, String windowName) throws Exception {
         this.andRest();
 
+        this.windowName = windowName;
+
         UIAutomation automation = UIAutomation.getInstance();
 
         application = automation.launchOrAttach(appName);
@@ -50,11 +53,10 @@ public class BaseAutomationTest {
         // Sleep for WPF, to address above issue
         this.andRest();
 
-        window = automation.getDesktopWindow(windowName);
+        window = automation.getDesktopWindow(this.windowName);
     }
 
     protected void closeApplication() throws PatternNotFoundException, AutomationException {
-        application.quit("Form1");
+        application.quit(this.windowName);
     }
-
 }
