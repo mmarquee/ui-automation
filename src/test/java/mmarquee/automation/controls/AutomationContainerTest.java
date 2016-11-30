@@ -461,4 +461,40 @@ public class AutomationContainerTest extends BaseAutomationTest {
             closeApplication();
         }
     }
+
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetToolbar_By_Index_Fails_When_Not_Found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationToolBar toolbar = window.getToolBar(99);
+
+            String name = toolbar.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("This is a link"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetToolbar_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationToolBar toolbar = window.getToolBar(1);
+
+            String name = toolbar.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("Toolbar1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
 }

@@ -211,7 +211,6 @@ public class TestMain extends TestBase {
 
             this.rest();
 
-            /* This doesn't seem to work */
             AutomationToolBar toolbar = window.getToolBar(1);
             logger.info(toolbar.name());
 
