@@ -15,10 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 

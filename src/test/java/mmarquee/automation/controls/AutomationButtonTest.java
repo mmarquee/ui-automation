@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 

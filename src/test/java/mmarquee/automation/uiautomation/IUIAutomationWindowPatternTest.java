@@ -20,10 +20,8 @@ import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
-import junit.framework.TestCase;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
@@ -33,7 +31,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class IUIAutomationWindowPatternTest {
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    protected Logger logger = Logger.getLogger(IUIAutomationWindowPatternTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

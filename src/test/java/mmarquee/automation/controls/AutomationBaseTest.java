@@ -32,7 +32,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Mark Humphreys on 28/11/2016.
  */
 public class AutomationBaseTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationBaseTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
