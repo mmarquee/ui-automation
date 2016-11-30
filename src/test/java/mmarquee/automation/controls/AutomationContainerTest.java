@@ -491,10 +491,9 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("Toolbar1"));
+            assertTrue(name.equals("ToolBar1"));
         } finally {
             closeApplication();
         }
     }
-
 }

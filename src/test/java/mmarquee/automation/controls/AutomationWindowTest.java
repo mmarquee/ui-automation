@@ -22,6 +22,7 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,9 @@ public class AutomationWindowTest extends BaseAutomationTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
+
+    protected Logger logger = Logger.getLogger(AutomationWindowTest.class.getName());
+
 
     @After
     public void tearDown() {
@@ -70,7 +74,26 @@ public class AutomationWindowTest extends BaseAutomationTest {
     public void testGetWindowName_Matches_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
         AutomationWindow window = application.getWindow("Untitled - Notepad");
+
         assertTrue("Name should match", window.name().equals("Untitled - Notepad"));
+    }
+
+    @Test
+    public void testGetStatusBar() throws Exception {
+
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationStatusBar sb = window.getStatusBar();
+
+            String name = sb.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
     }
 
     @Test
