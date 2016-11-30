@@ -77,4 +77,34 @@ public class AutomationBaseTest extends BaseAutomationTest {
             closeApplication();
         }
     }
+
+    @Test
+    public void testGetFramework_For_Window() throws  Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            String m = window.getFramework().toString();
+
+            logger.info(m);
+
+            assertTrue(m.equals("WPF"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetFrameworkId_For_Window() throws  Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            String m = window.getFrameworkId();
+
+            logger.info(m);
+
+            assertTrue(m.equals("WPF"));
+        } finally {
+            closeApplication();
+        }
+    }
 }

@@ -317,14 +317,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
             logger.info(name);
 
             assertFalse(name.equals(""));
-
-//            AutomationCalendar cal = applicationWindow.getCalendar(0);
-//
-//            String name = cal.name();
-//
-//            logger.info(name)/;
-//
-//            assertTrue(name.equals("Calendar1"));
         } finally {
             closeApplication();
         }
@@ -366,7 +358,37 @@ public class AutomationContainerTest extends BaseAutomationTest {
         }
     }
 
-    /*
-     * Calendar
-     */
+    @Test (expected=IndexOutOfBoundsException.class)
+    public void testGetHyperlink_By_Index_Fails_When_Index_No_Present() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationHyperlink hl1 = window.getHyperlink(99);
+
+            String name = hl1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetHyperlink_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationHyperlink hl1 = window.getHyperlink(0);
+
+            String name = hl1.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("AutomatedCombobox1"));
+        } finally {
+            closeApplication();
+        }
+    }
 }

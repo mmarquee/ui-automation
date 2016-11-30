@@ -50,4 +50,13 @@ public class AutomationRadioButton extends AutomationBase {
     public void selectItem() throws AutomationException {
         this.selectItemPattern.select();
     }
+
+    /**
+     * Gets the selection state
+     * @return The selection state
+     * @throws AutomationException Error in the automation library
+     */
+    public boolean isSelected() throws AutomationException {
+        return this.selectItemPattern.isSelected();
+    }
 }
