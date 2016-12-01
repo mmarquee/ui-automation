@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.*;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -199,6 +200,8 @@ public class AutomationElement {
         return this.currentName();
     }
 
+    protected Logger logger = Logger.getLogger(AutomationElement.class.getName());
+
     /**
      * Gets the current name of the control
      *
@@ -207,11 +210,16 @@ public class AutomationElement {
      */
     protected String currentName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
+
         if (this.element.get_CurrentName(sr) != 0) {
             throw new AutomationException();
         }
 
-        return sr.getValue().getWideString(0);
+        if (sr.getValue() == null) {
+            return "";
+        } else {
+            return sr.getValue().getWideString(0);
+        }
     }
 
 //    /**

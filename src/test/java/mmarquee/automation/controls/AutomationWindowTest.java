@@ -25,6 +25,7 @@ import mmarquee.automation.utils.Utils;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -85,6 +86,43 @@ public class AutomationWindowTest extends BaseAutomationTest {
 
         try {
             AutomationStatusBar sb = window.getStatusBar();
+
+            String name = sb.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetTitleBar_By_Index() throws Exception {
+
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTitleBar sb = window.getTitleBar();
+
+            String name = sb.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    @Ignore
+    public void testGetAppBar_By_Index() throws Exception {
+        // Needs a different application to test against
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationAppBar sb = window.getAppBar(0);
 
             String name = sb.name();
 

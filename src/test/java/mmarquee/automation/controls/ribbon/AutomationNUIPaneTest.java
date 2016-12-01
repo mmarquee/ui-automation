@@ -22,35 +22,18 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
+public class AutomationNUIPaneTest extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(AutomationRibbonCommandBarTest.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationRibbonWorkPaneTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
-        loadApplication("explorer", "File Explorer");
-
-        try {
-            AutomationRibbonBar ribbon = window.getRibbonBar();
-
-            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
-
-            String name = commandBar.name();
-
-            assertTrue(name.equals("Ribbon"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetRibbonCommandBar_Gets_WorkPane() throws Exception {
+    public void testName_Is_Blank() throws Exception {
         loadApplication("explorer", "File Explorer");
 
         try {
@@ -60,9 +43,12 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
 
             AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
-            String name = workPane.name();
+            AutomationNUIPane uiPane = workPane.getNUIPane(0);
+            logger.info("First NUIPane is " + uiPane.name());
 
-            assertTrue(name.equals("Ribbon"));
+            String name = uiPane.name();
+
+            assertTrue(name.equals(""));
         } finally {
             closeApplication();
         }

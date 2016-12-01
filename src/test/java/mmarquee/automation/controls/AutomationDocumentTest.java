@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Mark Humphreys on 30/11/2016.
  */
 public class AutomationDocumentTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationDocument.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationDocumentTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
