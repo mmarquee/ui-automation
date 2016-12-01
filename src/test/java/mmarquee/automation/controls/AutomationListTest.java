@@ -19,59 +19,45 @@ import mmarquee.automation.BaseAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Mark Humphreys on 30/11/2016.
+ * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationRadioButtonTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
+public class AutomationListTest extends BaseAutomationTest {
+    protected Logger logger = Logger.getLogger(AutomationListTest.class.getName());
 
     @Test
     public void testName() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationRadioButton rb1 = window.getRadioButton(0);
+            AutomationList li1 = window.getListItem(0);
 
-            String name = rb1.name();
+            String name = li1.name();
 
             logger.info(name);
 
-            assertTrue(name.equals("Radio 2"));
+            assertTrue(name.equals(""));
         } finally {
             closeApplication();
         }
     }
 
     @Test
-    public void test_isSelected() throws Exception {
+    public void testGetItems() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationRadioButton rb1 = window.getRadioButton(0);
+            AutomationList li1 = window.getListItem(0);
 
-            boolean selected = rb1.isSelected();
+            List<AutomationListItem> items = li1.getItems();
 
-            assertTrue(selected == false);
-        } finally {
-            closeApplication();
-        }
-    }
+            logger.info(items.size());
 
-    @Test
-    public void testSelect() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationRadioButton rb1 = window.getRadioButton(0);
-
-            rb1.selectItem();
-
-            boolean selected = rb1.isSelected();
-
-            assertTrue(selected);
+            assertTrue(items.size() == 5);
         } finally {
             closeApplication();
         }
