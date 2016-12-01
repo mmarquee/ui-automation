@@ -44,7 +44,6 @@ public class AutomationNUIPaneTest extends BaseAutomationTest {
             AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
             AutomationNUIPane uiPane = workPane.getNUIPane(0);
-            logger.info("First NUIPane is " + uiPane.name());
 
             String name = uiPane.name();
 

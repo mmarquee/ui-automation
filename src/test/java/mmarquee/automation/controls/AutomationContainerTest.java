@@ -303,9 +303,8 @@ public class AutomationContainerTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore
     public void testGetCalendar_By_Index() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
         try {
             AutomationTab tab = window.getTab(0);
@@ -318,7 +317,7 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertFalse(name.equals(""));
+            assertTrue(name.equals(""));
         } finally {
             closeApplication();
         }
@@ -498,7 +497,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore
     public void testGetProgress_By_Index() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
@@ -509,7 +507,7 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("ToolBar1"));
+            assertTrue(name.equals(""));
         } finally {
             closeApplication();
         }
