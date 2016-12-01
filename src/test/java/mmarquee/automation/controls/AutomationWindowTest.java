@@ -20,6 +20,8 @@ import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.rebar.AutomationReBar;
+import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 import org.apache.log4j.Logger;
@@ -69,6 +71,21 @@ public class AutomationWindowTest extends BaseAutomationTest {
         application = instance.launch("notepad.exe");
 
         application.waitForInputIdle();
+    }
+
+    @Test
+    public void testGetRebar_By_Index() throws Exception {
+
+        loadApplication("explorer", "File Explorer");
+
+        try {
+            AutomationReBar rebar = window.getReBar(0);
+            AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
+
+            assertTrue(toolbar.name().equals("Up band toolbar"));
+        } finally {
+            closeApplication();
+        }
     }
 
     @Test

@@ -497,6 +497,23 @@ public class AutomationContainerTest extends BaseAutomationTest {
     }
 
     @Test
+    public void testGetSlider_By_Index() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        try {
+            AutomationSlider slider = window.getSlider(0);
+
+            String name = slider.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
     public void testGetProgress_By_Index() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
