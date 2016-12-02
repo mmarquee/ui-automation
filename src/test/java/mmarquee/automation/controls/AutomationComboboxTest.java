@@ -19,6 +19,8 @@ import mmarquee.automation.BaseAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import java.util.List;
+
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -106,4 +108,67 @@ public class AutomationComboboxTest extends BaseAutomationTest {
         }
     }
 
+    @Test
+    public void testGetCombobox_GetExpanded_False_When_Expanded() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = window.getCombobox(0);
+
+            assertFalse(cb1.isExpanded());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetCombobox_GetExpanded_True_When_Expanded() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = window.getCombobox(0);
+
+            cb1.expand();
+
+            assertTrue(cb1.isExpanded());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetCombobox_GetExpanded_False_When_Expanded_Then_Collapsed() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = window.getCombobox(0);
+
+            cb1.expand();
+            this.andRest();
+            cb1.collapse();
+
+            assertFalse(cb1.isExpanded());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testSetText() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationComboBox cb1 = window.getCombobox("AutomatedMaskEdit1");
+
+            cb1.setText("**VALUE**");
+
+            String text = cb1.text();
+
+            logger.info(text);
+
+            assertFalse(text.equals("**VALUE**"));
+        } finally {
+            closeApplication();
+        }
+    }
 }

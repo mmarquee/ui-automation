@@ -20,6 +20,7 @@ import mmarquee.automation.UIAutomation;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -127,6 +128,21 @@ public class AutomationButtonTest extends BaseAutomationTest {
             btn.click();
         } finally {
             this.andRest();
+        }
+    }
+
+    @Test
+    public void testSetFocus() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationButton cb1 = window.getButton(0);
+
+            cb1.focus();
+
+            // Not quite sure how to check this
+        } finally {
+            closeApplication();
         }
     }
 }

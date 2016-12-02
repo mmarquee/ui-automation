@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by inpwt on 30/11/2016.
+ * Created by Mark Humphreys on 30/11/2016.
  */
 public class AutomationHyperlinkTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationHyperlinkTest.class.getName());

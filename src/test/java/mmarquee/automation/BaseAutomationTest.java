@@ -53,7 +53,7 @@ public class BaseAutomationTest {
         // Sleep for WPF, to address above issue
         this.andRest();
 
-        window = automation.getDesktopWindow(this.windowName);
+        window = automation.getDesktopWindow(windowName);
     }
 
     protected void closeApplication() throws PatternNotFoundException, AutomationException {

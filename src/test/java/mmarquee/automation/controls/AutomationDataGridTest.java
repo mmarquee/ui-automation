@@ -20,6 +20,9 @@ import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import java.util.List;
+
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -95,4 +98,151 @@ public class AutomationDataGridTest extends BaseAutomationTest {
             closeApplication();
         }
     }
+
+    @Test
+    public void testGetColumnHeaders_Returns_Correct_Size() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            List<AutomationDataGridCell> list = grid.getColumnHeaders();
+
+            logger.info(list.size());
+
+            assertTrue(list.size() == 5);
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetColumnHeader() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            AutomationDataGridCell item = grid.getColumnHeader(3);
+
+            logger.info(item.value());
+
+            assertTrue(item.value().equals("Title 4"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetColumnHeaders_Returns_Size_As_ColumnCount() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            List<AutomationDataGridCell> list = grid.getColumnHeaders();
+
+            logger.info(list.size());
+            logger.info(grid.columnCount());
+
+            assertTrue(list.size() == grid.columnCount());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testIsReadOnly() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            assertFalse(grid.isReadOnly());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testSelected() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            AutomationDataGridCell selected = grid.selected();
+
+            assertTrue(selected.value().equals("Row 1, Col 1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetColumns_Returns_Size_As_RowCount() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            List<AutomationDataGridCell> list = grid.getColumn(1);
+
+            logger.info(list.size());
+            logger.info(grid.rowCount());
+
+            assertTrue(list.size() == grid.rowCount());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetRows_Returns_Size_As_ColumnCount() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            List<AutomationDataGridCell> list = grid.getRow(1);
+
+            logger.info(list.size());
+            logger.info(grid.columnCount());
+
+            assertTrue(list.size() == grid.columnCount());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetRow() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            List<AutomationDataGridCell> items = grid.getRow(3);
+
+            assertTrue(items.size() == 5);
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetColumn() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationDataGrid grid = window.getDataGrid(0);
+
+            List<AutomationDataGridCell> items = grid.getColumn(3);
+
+            assertTrue(items.size() == 5);
+        } finally {
+            closeApplication();
+        }
+    }
+
 }
