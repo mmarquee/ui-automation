@@ -30,7 +30,7 @@ import javax.naming.ldap.Control;
  */
 public class AutomationButton extends AutomationBase implements Clickable {
 
-    private Invoke invokePattern = null;
+    protected Invoke invokePattern = null;
 
     public static ControlType controlType = ControlType.Button;
 
@@ -51,12 +51,13 @@ public class AutomationButton extends AutomationBase implements Clickable {
      * Invokes the click event for this control
      * </p>
      * @throws AutomationException Error in the automation library
+     * @throws PatternNotFoundException Could not find the invoke pattern
      */
-    public void click() throws AutomationException {
+    public void click() throws AutomationException, PatternNotFoundException {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {
-            logger.warn("Invoke pattern is not available");
+            throw new PatternNotFoundException();
         }
     }
 

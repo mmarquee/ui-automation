@@ -16,10 +16,11 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 21/09/2016.
  */
 public interface Clickable {
-    void click() throws AutomationException;
+    void click() throws AutomationException, PatternNotFoundException;
 }

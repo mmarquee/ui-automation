@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -63,7 +62,6 @@ public class AutomationCheckBoxTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore
     public void testToggle() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
