@@ -52,4 +52,28 @@ public class AutomationNUIPaneTest extends BaseAutomationTest {
             closeApplication();
         }
     }
+
+    @Test
+    public void testGetNetUIHWND() throws Exception {
+        loadApplication("explorer", "File Explorer");
+
+        try {
+            AutomationRibbonBar ribbon = window.getRibbonBar();
+
+            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+
+            AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+
+            AutomationNUIPane uiPane = workPane.getNUIPane(0);
+
+            AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+
+            logger.info(uiHWND.name());
+
+            assertTrue(uiHWND.name().equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
 }

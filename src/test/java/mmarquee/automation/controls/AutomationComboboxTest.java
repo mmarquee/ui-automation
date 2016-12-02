@@ -158,7 +158,7 @@ public class AutomationComboboxTest extends BaseAutomationTest {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
-            AutomationComboBox cb1 = window.getCombobox("AutomatedMaskEdit1");
+            AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
 
             cb1.setText("**VALUE**");
 
@@ -166,7 +166,7 @@ public class AutomationComboboxTest extends BaseAutomationTest {
 
             logger.info(text);
 
-            assertFalse(text.equals("**VALUE**"));
+            assertTrue(text.equals("**VALUE**"));
         } finally {
             closeApplication();
         }
