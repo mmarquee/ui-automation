@@ -18,9 +18,11 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -32,15 +34,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 25/11/2016.
  */
-public class AutomationApplicationTest {
-    private void andRest() {
-        // Must be a better way of doing this????
-        try {
-            Thread.sleep(500);
-        } catch (Throwable ex) {
-            // interrupted
-        }
-    }
+public class AutomationApplicationTest extends BaseAutomationTest {
+    protected Logger logger = Logger.getLogger(AutomationApplicationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -127,4 +122,26 @@ public class AutomationApplicationTest {
 
         assertTrue("Notepad should have quit", hwnd == null);
     }
+
+    @Test
+    public void testIsAttached() {
+        logger.info(app.getIsAttached());
+
+        assertFalse(app.getIsAttached());
+    }
+
+    @Test
+    public void testSetAttached_Set_To_False() {
+        app.setIsAttached(false);
+
+        assertFalse(app.getIsAttached());
+    }
+
+    @Test
+    public void testSetAttached_Set_To_True() {
+        app.setIsAttached(true);
+
+        assertTrue(app.getIsAttached());
+    }
+
 }

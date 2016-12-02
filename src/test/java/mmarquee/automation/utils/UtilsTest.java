@@ -15,33 +15,30 @@
  */
 package mmarquee.automation.utils;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
-import junit.framework.TestCase;
+import mmarquee.automation.BaseAutomationTest;
+import org.junit.After;
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 24/11/2016.
  */
-public class UtilsTest extends TestCase {
-
-    private void andRest() {
-        // Must be a better way of doing this????
-        try {
-            Thread.sleep(500);
-        } catch (Throwable ex) {
-            // interrupted
-        }
-    }
+public class UtilsTest extends BaseAutomationTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    @Override
-    protected void tearDown() {
+    @After
+    public void tearDown() {
         // Must be a better way of doing this????
         this.andRest();
 
@@ -52,10 +49,7 @@ public class UtilsTest extends TestCase {
         }
     }
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UtilsTest.class);
-    }
-
+    @Test
     public void testStartProcess_Starts_Notepad() {
         try {
             Utils.startProcess("notepad.exe");
@@ -72,6 +66,7 @@ public class UtilsTest extends TestCase {
         assertTrue("startProcess", true);
     }
 
+    @Test
     public void testQuitProcess_Quits_Notepad() {
         try {
             Utils.startProcess("notepad.exe");
@@ -88,6 +83,7 @@ public class UtilsTest extends TestCase {
         assertTrue("quitProcess", true);
     }
 
+    @Test
     public void testStartProcess_Throws_Exception_When_not_found() {
         try {
             Utils.startProcess("notepad99.exe");
@@ -98,6 +94,7 @@ public class UtilsTest extends TestCase {
         assertFalse("startProcess", false);
     }
 
+    @Test
     public void testFindProcessEntry_When_Not_found() {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
@@ -107,6 +104,7 @@ public class UtilsTest extends TestCase {
         assertFalse(found);
     }
 
+    @Test
     public void testFindProcessEntry_When_found() throws IOException {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
@@ -119,4 +117,29 @@ public class UtilsTest extends TestCase {
 
         assertTrue(found);
     }
+
+    @Test
+    public void testCaptureScreen_Writes_to_File() throws Exception {
+        Utils.captureScreen("test.png");
+
+        File f = new File("test.png");
+
+        assertTrue(f.exists());
+    }
+
+    @Test
+    public void testCapture_Writes_to_File() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            Utils.capture(window.getNativeWindowHandle(), "test.png");
+
+            File f = new File("test.png");
+
+            assertTrue(f.exists());
+        } finally {
+            closeApplication();
+        }
+    }
+
 }

@@ -70,7 +70,7 @@ public class AutomationNUIPaneTest extends BaseAutomationTest {
 
             logger.info(uiHWND.name());
 
-            assertTrue(uiHWND.name().equals(""));
+            assertTrue(uiHWND.name().equals("Ribbon"));
         } finally {
             closeApplication();
         }

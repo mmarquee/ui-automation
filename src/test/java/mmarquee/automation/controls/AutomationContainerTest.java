@@ -615,4 +615,19 @@ public class AutomationContainerTest extends BaseAutomationTest {
             this.closeApplication();
         }
     }
+
+    @Test
+    public void testGetPasswordEditBox() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        try {
+            AutomationEditBox passwd = window.getPasswordEditBox(0);
+            //passwd.setValue("Hello there everyone");
+            String name = passwd.name();
+            logger.info(name);
+            assertTrue(name.equals(""));
+        } finally {
+            this.closeApplication();
+        }
+    }
 }

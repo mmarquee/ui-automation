@@ -52,6 +52,4 @@ public class AutomationTreeViewTest extends BaseAutomationTest {
             closeApplication();
         }
     }
-
-    ;
 }
