@@ -170,7 +170,7 @@ public class AutomationButtonTest extends BaseAutomationTest {
     }
 
     @Test(expected=PatternNotFoundException.class)
-    @Ignore // Need to work out how to mock this properly.
+    @Ignore // Need to work out how to mock behaviour this properly.
     public void testClick_Throws_PatternNotFoundException_When_Pattern_Not_Foud() throws Exception {
         AutomationButton mocked_button =
                 Mockito.mock(AutomationButton.class);

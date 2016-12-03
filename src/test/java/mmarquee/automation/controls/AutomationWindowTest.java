@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -109,6 +110,23 @@ public class AutomationWindowTest extends BaseAutomationTest {
             logger.info(name);
 
             assertTrue(name.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void test_getSystemMenu() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationSystemMenu sm = window.getSystemMenu();
+
+            String name = sm.name();
+
+            logger.info(name);
+
+            assertTrue(name.equals("System"));
         } finally {
             closeApplication();
         }
