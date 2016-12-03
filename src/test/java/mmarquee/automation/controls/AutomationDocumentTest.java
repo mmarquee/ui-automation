@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -54,9 +55,10 @@ public class AutomationDocumentTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore
     public void testGetText() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        this.andRest();  // Just in case
 
         try {
             AutomationTab tab = window.getTab(0);
@@ -69,7 +71,7 @@ public class AutomationDocumentTest extends BaseAutomationTest {
 
             logger.info(text);
 
-            assertTrue(text.equals(""));
+            assertFalse(text.equals(""));
         } finally {
             closeApplication();
         }
