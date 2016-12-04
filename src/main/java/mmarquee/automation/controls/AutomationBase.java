@@ -184,7 +184,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the selection pattern available
      * @return Yes or no
      */
-    boolean isSelectionPatternAvailable () {
+    private boolean isSelectionPatternAvailable () {
         return isPatternAvailable(PropertyID.IsSelectionPatternAvailable);
     }
 
@@ -192,7 +192,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the transform pattern available
      * @return Yes or no
      */
-    boolean isTransformPatternAvailable () {
+    private boolean isTransformPatternAvailable () {
         return isPatternAvailable(PropertyID.IsTransformPatternAvailable);
     }
 
@@ -200,15 +200,23 @@ public abstract class AutomationBase implements Automatable {
      * Is the toggle pattern available
      * @return Yes or no
      */
-    boolean isTogglePatternAvailable () {
+    private boolean isTogglePatternAvailable () {
         return isPatternAvailable(PropertyID.IsTogglePatternAvailable);
+    }
+
+    /**
+     * Is the item container pattern available
+     * @return Yes or no
+     */
+    private boolean isItemContainerPatternAvailable() {
+        return isPatternAvailable(PropertyID.IsItemContainerPatternAvailablePropertyId);
     }
 
     /**
      * Is the value pattern available
      * @return Yes or no
      */
-    boolean isValuePatternAvailable () {
+    private boolean isValuePatternAvailable () {
         return isPatternAvailable(PropertyID.IsValuePatternAvailable);
     }
 
@@ -573,6 +581,18 @@ public abstract class AutomationBase implements Automatable {
 
         if (isTogglePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
+
+            pattern.setPattern(unknown.getValue());
+        }
+
+        return pattern;
+    }
+
+    ItemContainer getItemContainerPattern() throws PatternNotFoundException, AutomationException {
+        ItemContainer pattern = new ItemContainer();
+
+        if (isItemContainerPatternAvailable()) {
+            PointerByReference unknown = this.getPattern(PatternID.ItemContainer.getValue());
 
             pattern.setPattern(unknown.getValue());
         }

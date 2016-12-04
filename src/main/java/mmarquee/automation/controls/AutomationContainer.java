@@ -24,6 +24,7 @@ import mmarquee.automation.*;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -37,14 +38,18 @@ import java.util.List;
  */
 public class AutomationContainer extends AutomationBase {
 
+    private ItemContainer itemContainerPattern;
+
     /**
      * Constructor for AutomationContainer
      *
      * @param element The underlying element
      * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationContainer(AutomationElement element) throws AutomationException {
+    public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        itemContainerPattern = this.getItemContainerPattern();
     }
 
     /**
@@ -549,8 +554,9 @@ public class AutomationContainer extends AutomationBase {
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationPanel getPanel(int index) throws AutomationException {
+    public AutomationPanel getPanel(int index) throws AutomationException, PatternNotFoundException {
         return new AutomationPanel(this.getControlByControlType(index, ControlType.Pane));
     }
 
@@ -560,8 +566,9 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationPanel getPanel(String name) throws AutomationException {
+    public AutomationPanel getPanel(String name) throws AutomationException, PatternNotFoundException {
         return new AutomationPanel(this.getControlByControlType(name, ControlType.Pane));
     }
 
@@ -571,8 +578,9 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationPanel getPanelByAutomationId(String id) throws AutomationException {
+    public AutomationPanel getPanelByAutomationId(String id) throws AutomationException, PatternNotFoundException {
         return new AutomationPanel(this.getControlByAutomationId(id, ControlType.Pane));
     }
 
@@ -591,8 +599,9 @@ public class AutomationContainer extends AutomationBase {
      * @param name The name
      * @return The AutomationToolBar
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationToolBar getToolBar(String name) throws AutomationException {
+    public AutomationToolBar getToolBar(String name) throws AutomationException, PatternNotFoundException {
         return new AutomationToolBar(this.getControlByControlType(name, ControlType.ToolBar));
     }
 
@@ -601,8 +610,9 @@ public class AutomationContainer extends AutomationBase {
      * @param index The index
      * @return The AutomationToolBar
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationToolBar getToolBar(int index) throws AutomationException {
+    public AutomationToolBar getToolBar(int index) throws AutomationException, PatternNotFoundException {
         return new AutomationToolBar(this.getControlByControlType(index, ControlType.ToolBar));
     }
 
@@ -610,8 +620,9 @@ public class AutomationContainer extends AutomationBase {
      * Get the RibbonBar associated this container
      * @return The AutomationRibbonBar
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationRibbonBar getRibbonBar() throws AutomationException {
+    public AutomationRibbonBar getRibbonBar() throws AutomationException, PatternNotFoundException {
         return new AutomationRibbonBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBarDock"));
     }
 
@@ -620,8 +631,9 @@ public class AutomationContainer extends AutomationBase {
      * @param index The index
      * @return The control wrapper
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationReBar getReBar(int index) throws AutomationException {
+    public AutomationReBar getReBar(int index) throws PatternNotFoundException, AutomationException {
         return new AutomationReBar(this.getControlByControlType(index, ControlType.Pane, "ReBarWindow32"));
     }
 
@@ -661,8 +673,9 @@ public class AutomationContainer extends AutomationBase {
      * @param name The name to look for
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationCustom getCustom(String name) throws AutomationException {
+    public AutomationCustom getCustom(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
     }
 
@@ -671,8 +684,9 @@ public class AutomationContainer extends AutomationBase {
      * @param id The id to look for
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationCustom getCustomByAutomationId(String id) throws AutomationException {
+    public AutomationCustom getCustomByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationCustom(this.getControlByAutomationId(id, ControlType.Custom));
     }
 
@@ -686,8 +700,9 @@ public class AutomationContainer extends AutomationBase {
      * @param name The control type to look for
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationCustom getCustomByControlType(String name) throws AutomationException {
+    public AutomationCustom getCustomByControlType(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, name));
     }
 

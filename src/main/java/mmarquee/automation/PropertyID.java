@@ -76,6 +76,7 @@ public enum PropertyID {
     DescribedBy(30105),
     FlowsTo(30106),
     ProviderDescription(30107),
+    IsItemContainerPatternAvailablePropertyId(30108),
     LiveSetting(30135);
 
     private int value;

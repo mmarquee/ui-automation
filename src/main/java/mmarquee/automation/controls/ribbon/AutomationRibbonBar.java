@@ -19,6 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationPanel;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 02/03/2016.
@@ -30,8 +31,9 @@ public class AutomationRibbonBar extends AutomationPanel {
      * Construct the AutomationRibbonBar
      * @param element The element
      * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationRibbonBar(AutomationElement element) throws AutomationException {
+    public AutomationRibbonBar(AutomationElement element) throws AutomationException, PatternNotFoundException {
         super(element);
     }
 
@@ -39,8 +41,9 @@ public class AutomationRibbonBar extends AutomationPanel {
      * Get the RibbonCommandBar associated with this container
      * @return The AutomationRibbonBar
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationRibbonCommandBar getRibbonCommandBar() throws AutomationException {
+    public AutomationRibbonCommandBar getRibbonCommandBar() throws PatternNotFoundException, AutomationException {
         return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBar"));
     }
 }

@@ -62,8 +62,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Gets the status bar associated with this window
      * @return The status bar
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Did not find the pattern
      */
-    public AutomationStatusBar getStatusBar() throws AutomationException {
+    public AutomationStatusBar getStatusBar() throws AutomationException, PatternNotFoundException {
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
@@ -220,8 +221,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Get the AutomationTitleBar associated with the given name
      * @return The AutomationTitleBar
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationTitleBar getTitleBar() throws AutomationException {
+    public AutomationTitleBar getTitleBar() throws AutomationException, PatternNotFoundException {
         return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar));
     }
 

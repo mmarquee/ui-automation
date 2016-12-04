@@ -27,7 +27,6 @@ import mmarquee.automation.pattern.Text;
  *
  * Wrapper for the Document element.
  *
- * Needs work to get working
  */
 public class AutomationDocument extends AutomationBase {
     private Text textPattern;

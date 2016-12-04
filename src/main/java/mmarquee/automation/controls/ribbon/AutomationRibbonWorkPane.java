@@ -19,6 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationContainer;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 02/03/2016.
@@ -30,8 +31,9 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * Construct the AutomationRibbonWorkPane
      * @param element The element
      * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Patter not found
      */
-    public AutomationRibbonWorkPane(AutomationElement element) throws AutomationException {
+    public AutomationRibbonWorkPane(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
@@ -40,8 +42,9 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @param index The index
      * @return The AutomationNUIPane
      * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationNUIPane getNUIPane(int index) throws AutomationException {
+    public AutomationNUIPane getNUIPane(int index) throws PatternNotFoundException, AutomationException {
         return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"));
     }
 }

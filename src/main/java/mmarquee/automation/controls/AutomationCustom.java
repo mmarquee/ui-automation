@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 08/03/2016.
@@ -29,8 +30,9 @@ public class AutomationCustom extends AutomationContainer {
      * Constructor for the AutomationCustom
      * @param element The element
      * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationCustom (AutomationElement element) throws AutomationException {
+    public AutomationCustom (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
     }
 }
