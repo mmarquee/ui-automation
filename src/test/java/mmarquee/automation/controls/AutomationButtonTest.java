@@ -163,7 +163,9 @@ public class AutomationButtonTest extends BaseAutomationTest {
             AutomationButton btn = popup.getButton("Yes");
             btn.click();
 
-            assertTrue(btn.name().equals("Yes"));
+            String name = btn.name();
+
+            assertTrue(name.equals("Yes"));
         } finally {
             closeApplication();
         }

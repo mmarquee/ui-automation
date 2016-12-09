@@ -17,13 +17,9 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationTest;
 import mmarquee.automation.uiautomation.OrientationType;
 import org.apache.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

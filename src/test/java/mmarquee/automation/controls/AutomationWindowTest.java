@@ -20,6 +20,8 @@ import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
@@ -30,6 +32,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -174,6 +179,27 @@ public class AutomationWindowTest extends BaseAutomationTest {
             throws AutomationException, PatternNotFoundException {
         AutomationWindow window = application.getWindow("Untitled - Notepad");
         assertFalse("Notepad isn't modal!", window.isModal());
+    }
+
+    @Test
+    public void testGetMenuItem() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTitleBar sb = window.getTitleBar();
+
+            AutomationMainMenu menu = sb.getMenuBar();
+
+            List<AutomationMenuItem> items = menu.getItems();
+
+
+
+            logger.info(menu.getItems().get(0).name());
+
+            assertTrue(items.size() == 1);
+        } finally {
+            closeApplication();
+        }
     }
 }
 
