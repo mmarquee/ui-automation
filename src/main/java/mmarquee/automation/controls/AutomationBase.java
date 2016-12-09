@@ -184,7 +184,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the selection pattern available
      * @return Yes or no
      */
-    private boolean isSelectionPatternAvailable () {
+    boolean isSelectionPatternAvailable () {
         return isPatternAvailable(PropertyID.IsSelectionPatternAvailable);
     }
 
@@ -192,7 +192,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the transform pattern available
      * @return Yes or no
      */
-    private boolean isTransformPatternAvailable () {
+    boolean isTransformPatternAvailable () {
         return isPatternAvailable(PropertyID.IsTransformPatternAvailable);
     }
 
@@ -200,7 +200,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the toggle pattern available
      * @return Yes or no
      */
-    private boolean isTogglePatternAvailable () {
+    boolean isTogglePatternAvailable () {
         return isPatternAvailable(PropertyID.IsTogglePatternAvailable);
     }
 
@@ -320,15 +320,6 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Creates a false condition
-     * @return The condition
-     * @throws AutomationException Error thrown in automation
-     */
-    protected PointerByReference createFalseCondition() throws AutomationException {
-        return this.automation.createFalseCondition();
-    }
-
-    /**
      * Creates a name property condition
      * @param name The name to use
      * @return The condition
@@ -356,17 +347,6 @@ public abstract class AutomationBase implements Automatable {
      */
     protected PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
         return this.automation.CreateControlTypeCondition(id);
-    }
-
-    /**
-     * Creates an OR condition
-     * @param condition1 First condition
-     * @param condition2 Second condition
-     * @return The Or Condition
-     * @throws AutomationException Automation has gone wrong
-     */
-    public PointerByReference createOrCondition(Pointer condition1, Pointer condition2) throws AutomationException {
-        return this.automation.createOrCondition(condition1, condition2);
     }
 
     /**

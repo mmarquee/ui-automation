@@ -15,12 +15,15 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.OrientationType;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.junit.Assert.assertTrue;
 
@@ -99,6 +102,141 @@ public class AutomationBaseTest extends BaseAutomationTest {
             logger.info(m);
 
             assertTrue(m.equals("WPF"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testIsMultipleViewPatternAvailable () throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isMultipleViewPatternAvailable ());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisScrollPatternAvailable() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isScrollPatternAvailable ());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisOffScreen() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isOffScreen());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisTableItemPatternAvailable() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isTableItemPatternAvailable());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisScrollItemPatternAvailable () throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isScrollItemPatternAvailable ());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisTransformPatternAvailable() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isTransformPatternAvailable());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisGridItemPatternAvailable() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isGridItemPatternAvailable());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testIsDockPatternPatternAvailable() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isDockPatternAvailable());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected = NotImplementedException.class)
+    public void testgetRuntimeIdThrowsException() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            int[] result = window.getRuntimeId();
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testgetProviderDescription() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            String result = window.getProviderDescription();
+            assertTrue(result.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testgetAcceleratorKey() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            String result = window.getAcceleratorKey();
+            assertTrue(result.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testgetItemStatus() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            String result = window.getItemStatus();
+            assertTrue(result.equals(""));
         } finally {
             closeApplication();
         }
