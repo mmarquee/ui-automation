@@ -66,6 +66,36 @@ public class AutomationContainerTest extends BaseAutomationTest {
         }
     }
 
+    @Test(expected=AutomationException.class)
+    public void testGetEditBox_By_Name_Throws_Exception_When_Not_Found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationEditBox tab = window.getEditBox("Edit99");
+
+            String m = tab.getValue();
+
+            assertTrue(m.equals("Edit1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test(expected=AutomationException.class)
+    public void testGetEditBox_By_AutomationID_Throws_Exception_When_Not_Found() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationEditBox tab = window.getEditBoxByAutomationId("Edit99");
+
+            String m = tab.getValue();
+
+            assertTrue(m.equals("Edit1"));
+        } finally {
+            closeApplication();
+        }
+    }
+
     @Test
     @Ignore
     public void testGetEditBox_By_Name() throws Exception {
@@ -624,6 +654,52 @@ public class AutomationContainerTest extends BaseAutomationTest {
             AutomationEditBox passwd = window.getPasswordEditBox(0);
             //passwd.setValue("Hello there everyone");
             String name = passwd.name();
+            logger.info(name);
+            assertTrue(name.equals(""));
+        } finally {
+            this.closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetPanel_By_Index() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationPanel panel = window.getPanel(0);
+
+            String name = panel.name();
+            logger.info(name);
+            assertTrue(name.equals(""));
+        } finally {
+            this.closeApplication();
+        }
+
+    }
+
+    @Test(expected=AutomationException.class)
+    public void testGetPanel_By_Name_Fails_When_not_Found() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        try {
+            AutomationPanel panel = window.getPanel("PANEL99");
+
+            String name = panel.name();
+            logger.info(name);
+            assertTrue(name.equals(""));
+        } finally {
+            this.closeApplication();
+        }
+    }
+
+    @Test(expected=AutomationException.class)
+    public void testGetPanel_By_AutomationId_Fails_When_not_Found() throws Exception {
+        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+
+        try {
+            AutomationPanel panel = window.getPanelByAutomationId("9999");
+
+            String name = panel.name();
             logger.info(name);
             assertTrue(name.equals(""));
         } finally {

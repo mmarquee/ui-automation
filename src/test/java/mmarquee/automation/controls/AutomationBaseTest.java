@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -25,6 +27,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -207,12 +210,28 @@ public class AutomationBaseTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testgetProviderDescription() throws Exception {
+    public void testgetProviderDescription_starts_with_correct_string() throws Exception {
         loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
 
         try {
             String result = window.getProviderDescription();
-            assertTrue(result.equals(""));
+
+            logger.info(result);
+
+            assertTrue(result.startsWith("[pid:"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetElement() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            AutomationElement result = window.getElement();
+
+            assertTrue(result != null);
         } finally {
             closeApplication();
         }
@@ -237,6 +256,49 @@ public class AutomationBaseTest extends BaseAutomationTest {
         try {
             String result = window.getItemStatus();
             assertTrue(result.equals(""));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testisEnabled() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            assertTrue(window.isEnabled());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    @Ignore // Need to work out what the values should be
+    public void testGetProcessId_Equals_Application_Id() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            Object obj = window.getProcessId();
+
+            logger.info(obj);
+            logger.info(application.getProcessId());
+
+            assertTrue(obj.equals(application.getProcessId()));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testGetProcessId() throws Exception {
+        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+
+        try {
+            Object obj = window.getProcessId();
+
+            logger.info(obj);
+
+            assertTrue(obj != null);
         } finally {
             closeApplication();
         }

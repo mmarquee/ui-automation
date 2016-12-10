@@ -29,6 +29,7 @@ import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 import java.io.IOException;
@@ -37,8 +38,6 @@ import java.util.List;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
-import org.junit.After;
-import org.junit.Before;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -484,12 +483,12 @@ public class UIAutomationTest {
     }
 
     @Test(expected = AutomationException.class)
-    @Ignore
+    @Ignore // Mocking not quite working
     public void testCreateAndCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
         IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
 
-        when(mocked.CreateAndCondition(isA(Pointer.class), isA(Pointer.class), isA(PointerByReference.class))).thenReturn(-1);
+        when(mocked.CreateAndCondition(Matchers.isA(Pointer.class), Matchers.isA(Pointer.class), Matchers.isA(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
@@ -516,5 +515,20 @@ public class UIAutomationTest {
     public void testGetDesktopWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
         UIAutomation instance = UIAutomation.getInstance();
         instance.getDesktopWindow("Untitled - Notepad99");
+    }
+
+    @Test(expected=AutomationException.class)
+    public void testGetDesktopObject_Fails_When_Window_Not_Present() throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            AutomationWindow window = instance.getDesktopObject("xxUntitled - Notepad");
+
+            assertTrue("Should be the same name", window.name().equals("Untitled - Notepad"));
+        } finally {
+            app.quit("Untitled - Notepad");
+        }
     }
 }
