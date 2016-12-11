@@ -436,7 +436,7 @@ public class UIAutomationTest {
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.CreateTrueCondition(isA(PointerByReference.class))).thenReturn(0);
+        when(mocked_automation.createTrueCondition(isA(PointerByReference.class))).thenReturn(0);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
@@ -448,7 +448,7 @@ public class UIAutomationTest {
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.CreateTrueCondition(isA(PointerByReference.class))).thenReturn(-1);
+        when(mocked_automation.createTrueCondition(isA(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation local_instance = new UIAutomation(mocked_automation);
 
@@ -461,7 +461,7 @@ public class UIAutomationTest {
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.CreateNotCondition(isA(Pointer.class), isA(PointerByReference.class))).thenReturn(-1);
+        when(mocked_automation.createNotCondition(isA(Pointer.class), isA(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation local_instance = new UIAutomation(mocked_automation);
 
@@ -475,7 +475,7 @@ public class UIAutomationTest {
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.CreateFalseCondition(isA(PointerByReference.class))).thenReturn(-1);
+        when(mocked_automation.createFalseCondition(isA(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation local_instance = new UIAutomation(mocked_automation);
 
@@ -487,7 +487,7 @@ public class UIAutomationTest {
             throws AutomationException {
         IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
 
-        when(mocked.CreateAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(-1);
+        when(mocked.createAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 

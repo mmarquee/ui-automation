@@ -33,7 +33,7 @@ public class AutomationProgressBarTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // Fails for some reason
+//    @Ignore // Fails for some reason
     public void testName_Equals_Blank() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
@@ -68,7 +68,7 @@ public class AutomationProgressBarTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // setValue throws an exception
+//    @Ignore // setValue throws an exception
     public void testSetRangeValue() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 

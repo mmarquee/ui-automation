@@ -102,7 +102,7 @@ public class UIAutomation {
      * @return Error status
      */
     public int getRootElement(PointerByReference element) {
-        return this.automation.GetRootElement(element);
+        return this.automation.getRootElement(element);
     }
 
     /**
@@ -113,7 +113,7 @@ public class UIAutomation {
      * @return Error status
      */
     public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
-        return this.automation.CompareElements(element1, element2, same);
+        return this.automation.compareElements(element1, element2, same);
     }
 
     /**
@@ -252,7 +252,7 @@ public class UIAutomation {
     public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.CreateAndCondition(pCondition1, pCondition2, pbr) == 0) {
+        if (this.automation.createAndCondition(pCondition1, pCondition2, pbr) == 0) {
             return pbr;
         } else {
             throw new AutomationException();
@@ -269,7 +269,7 @@ public class UIAutomation {
     public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.CreateOrCondition(pCondition1, pCondition2, pbr) == 0) {
+        if (this.automation.createOrCondition(pCondition1, pCondition2, pbr) == 0) {
             return pbr;
         } else {
             throw new AutomationException();
@@ -335,7 +335,7 @@ public class UIAutomation {
     public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
-        if (this.automation.CreatePropertyCondition(id, value, pCondition) == 0) {
+        if (this.automation.createPropertyCondition(id, value, pCondition) == 0) {
             Unknown unkCondition = new Unknown(pCondition.getValue());
             PointerByReference pUnknown = new PointerByReference();
 
@@ -445,7 +445,7 @@ public class UIAutomation {
     public PointerByReference createTrueCondition() throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
 
-        if (this.automation.CreateTrueCondition(pTrueCondition) == 0) {
+        if (this.automation.createTrueCondition(pTrueCondition) == 0) {
             return pTrueCondition;
         } else {
             throw new AutomationException();
@@ -460,7 +460,7 @@ public class UIAutomation {
     public PointerByReference createFalseCondition() throws AutomationException {
         PointerByReference condition = new PointerByReference();
 
-        if (this.automation.CreateFalseCondition(condition) == 0) {
+        if (this.automation.createFalseCondition(condition) == 0) {
             return condition;
         } else {
             throw new AutomationException();
@@ -476,7 +476,7 @@ public class UIAutomation {
     public PointerByReference createNotCondition (Pointer condition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.CreateNotCondition(condition, pbr) == 0) {
+        if (this.automation.createNotCondition(condition, pbr) == 0) {
             return pbr;
         } else {
             throw new AutomationException();

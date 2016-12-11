@@ -212,7 +212,7 @@ public class AutomationElementTest {
             throws AutomationException {
         IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
 
-        when(mocked.get_ClickablePoint(isA(WinDef.POINT.ByReference.class),isA(WinDef.BOOLByReference.class))).thenReturn(-1);
+        when(mocked.getClickablePoint(isA(WinDef.POINT.ByReference.class),isA(WinDef.BOOLByReference.class))).thenReturn(-1);
 
         WinDef.POINT point = new WinDef.POINT();
 
@@ -226,7 +226,7 @@ public class AutomationElementTest {
             throws AutomationException {
         IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
 
-        when(mocked.get_CurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
+        when(mocked.getCurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
 
         WinDef.RECT rect = new WinDef.RECT();
 

@@ -156,7 +156,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore
+  //  @Ignore
     public void testGetAppBar_By_Index() throws Exception {
         // Needs a different application to test against
         loadApplication("apps\\Project1.exe", "Form1");

@@ -31,6 +31,7 @@ import java.util.List;
  * Created by Mark Humphreys on 06/03/2016.
  * <p>
  * Wrapper for the underlying automation element.
+ * </p>
  */
 public class AutomationElement {
     /**
@@ -59,7 +60,7 @@ public class AutomationElement {
     public Object currentPropertyValue(int propertyId) throws AutomationException {
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
-        if (this.element.get_CurrentPropertyValue(propertyId, value) != 0) {
+        if (this.element.getCurrentPropertyValue(propertyId, value) != 0) {
             throw new AutomationException();
         }
 
@@ -75,7 +76,7 @@ public class AutomationElement {
     public int currentControlType() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.get_CurrentControlType(ibr) != 0) {
+        if (this.element.getCurrentControlType(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -91,7 +92,7 @@ public class AutomationElement {
     public String currentClassName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentClassName(sr) != 0) {
+        if (this.element.getCurrentClassName(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -107,7 +108,7 @@ public class AutomationElement {
     public String localizedControlType() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentLocalizedControlType(sr) != 0) {
+        if (this.element.getCurrentLocalizedControlType(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -123,7 +124,7 @@ public class AutomationElement {
     public Boolean currentIsPassword() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.get_CurrentIsPassword(ibr) != 0) {
+        if (this.element.getCurrentIsPassword(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -138,7 +139,7 @@ public class AutomationElement {
     public WinDef.BOOL currentOffScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.get_CurrentIsOffscreen(bbr) != 0) {
+        if (this.element.getCurrentIsOffscreen(bbr) != 0) {
             throw new AutomationException();
         }
 
@@ -153,7 +154,7 @@ public class AutomationElement {
     public WinDef.BOOL currentIsContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.get_CurrentIsContentElement(bbr) != 0) {
+        if (this.element.getCurrentIsContentElement(bbr) != 0) {
             throw new AutomationException();
         }
 
@@ -168,7 +169,7 @@ public class AutomationElement {
     public WinDef.BOOL currentIsControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.get_CurrentIsControlElement(bbr) != 0) {
+        if (this.element.getCurrentIsControlElement(bbr) != 0) {
             throw new AutomationException();
         }
 
@@ -183,7 +184,7 @@ public class AutomationElement {
     public WinDef.BOOL currentIsEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.get_CurrentIsEnabled(bbr)  != 0) {
+        if (this.element.getCurrentIsEnabled(bbr)  != 0) {
             throw new AutomationException();
         }
 
@@ -211,7 +212,7 @@ public class AutomationElement {
     protected String currentName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentName(sr) != 0) {
+        if (this.element.getCurrentName(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -275,7 +276,7 @@ public class AutomationElement {
     public PointerByReference getPattern(int patternId) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.element.get_CurrentPattern(patternId, pbr) != 0) {
+        if (this.element.getCurrentPattern(patternId, pbr) != 0) {
             throw new AutomationException();
         }
 
@@ -352,7 +353,7 @@ public class AutomationElement {
     public String getAriaRole() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentAriaRole(sr) != 0) {
+        if (this.element.getCurrentAriaRole(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -368,7 +369,7 @@ public class AutomationElement {
     public OrientationType getOrientation() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.get_CurrentOrientation(ibr) != 0) {
+        if (this.element.getCurrentOrientation(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -385,7 +386,7 @@ public class AutomationElement {
 
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentFrameworkId(sr) != 0) {
+        if (this.element.getCurrentFrameworkId(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -401,7 +402,7 @@ public class AutomationElement {
     public String getProviderDescription() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentProviderDescription(sr) != 0) {
+        if (this.element.getCurrentProviderDescription(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -425,7 +426,7 @@ public class AutomationElement {
     public Integer getProcessId() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.get_CurrentProcessId(ibr) != 0) {
+        if (this.element.getCurrentProcessId(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -441,7 +442,7 @@ public class AutomationElement {
     public String getItemStatus() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentItemStatus(sr) != 0) {
+        if (this.element.getCurrentItemStatus(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -457,7 +458,7 @@ public class AutomationElement {
     public String getAcceleratorKey() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.get_CurrentAcceleratorKey(sr) != 0) {
+        if (this.element.getCurrentAcceleratorKey(sr) != 0) {
             throw new AutomationException();
         }
 
@@ -474,7 +475,7 @@ public class AutomationElement {
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-        if (this.element.get_ClickablePoint(pbr, br) != 0) {
+        if (this.element.getClickablePoint(pbr, br) != 0) {
             throw new AutomationException();
         }
 
@@ -489,7 +490,7 @@ public class AutomationElement {
     public WinDef.RECT getCurrentBoundingRectangle() throws AutomationException {
         WinDef.RECT rect = new WinDef.RECT();
 
-        if (this.element.get_CurrentBoundingRectangle(rect) != 0) {
+        if (this.element.getCurrentBoundingRectangle(rect) != 0) {
             throw new AutomationException();
         }
 

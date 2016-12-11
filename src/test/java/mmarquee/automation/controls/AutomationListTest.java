@@ -31,7 +31,7 @@ public class AutomationListTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationListTest.class.getName());
 
     @Test
-    @Ignore
+  //  @Ignore
     public void testName() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 

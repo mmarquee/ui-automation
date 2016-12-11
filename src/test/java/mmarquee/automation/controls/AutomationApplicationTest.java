@@ -112,7 +112,7 @@ public class AutomationApplicationTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore
+   // @Ignore
     public void testQuit_Works() {
         app.quit("Untitled - Notepad");
 

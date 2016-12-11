@@ -41,7 +41,7 @@ public class IUIAutomationWindowPatternTest {
 
     private IUIAutomationElement getRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
@@ -81,7 +81,7 @@ public class IUIAutomationWindowPatternTest {
 
     private IUIAutomationElement getWindowChildOfRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
@@ -94,7 +94,7 @@ public class IUIAutomationWindowPatternTest {
 
             // Get first descendant for the root element, that is a window
             PointerByReference pCondition = new PointerByReference();
-            automation.CreatePropertyCondition(PropertyID.ControlType.getValue(), variant, pCondition);
+            automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant, pCondition);
             PointerByReference first = new PointerByReference();
 
             rootElement.findFirst(new TreeScope(TreeScope.Children), pCondition.getValue(), first);
@@ -119,7 +119,7 @@ public class IUIAutomationWindowPatternTest {
 
             PointerByReference pbr = new PointerByReference();
 
-            if (element.get_CurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
+            if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
                 assertTrue("Successfully failed to get window pattern for element", true);
             }
 

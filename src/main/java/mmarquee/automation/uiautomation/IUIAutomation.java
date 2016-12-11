@@ -49,17 +49,17 @@ public interface IUIAutomation extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int GetRootElement(PointerByReference root);
-    int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element);
-    int CreateAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
-    int CreatePropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition);
-    int CreateOrCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
-    int CreateTrueCondition(PointerByReference condition);
-    int CreateFalseCondition(PointerByReference condition);
-    int CompareElements(Pointer element1, Pointer element2, IntByReference same);
-    int CreateNotCondition(Pointer condition, PointerByReference retval);
-    int GetPatternProgrammaticName(int patternId, PointerByReference retval);
-    int GetFocusedElement(PointerByReference element);
+    int getRootElement(PointerByReference root);
+    int getElementFromHandle(WinDef.HWND hwnd, PointerByReference element);
+    int createAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
+    int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition);
+    int createOrCondition(Pointer condition1, Pointer condition2, PointerByReference condition);
+    int createTrueCondition(PointerByReference condition);
+    int createFalseCondition(PointerByReference condition);
+    int compareElements(Pointer element1, Pointer element2, IntByReference same);
+    int createNotCondition(Pointer condition, PointerByReference retval);
+    int getPatternProgrammaticName(int patternId, PointerByReference retval);
+    int getFocusedElement(PointerByReference element);
 
     class Converter {
         private static int UIA_COMPARE_ELEMENTS = 3;
@@ -105,57 +105,57 @@ public interface IUIAutomation extends IUnknown {
                     return f.invokeInt(new Object[]{myInterfacePointer});
                 }
 
-                public int CompareElements(Pointer element1, Pointer element2, IntByReference same) {
+                public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
                     Function f = Function.getFunction(vTable[UIA_COMPARE_ELEMENTS], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, element1, element2, same});
                 }
 
-                public int GetRootElement(PointerByReference root) {
+                public int getRootElement(PointerByReference root) {
                     Function f = Function.getFunction(vTable[UIA_GET_ROOT_ELEMENT], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, root});
                 }
 
-                public int GetFocusedElement(PointerByReference element) {
+                public int getFocusedElement(PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_FOCUSED_ELEMENT], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, element});
                 }
 
-                public int ElementFromHandle(WinDef.HWND hwnd, PointerByReference element) {
+                public int getElementFromHandle(WinDef.HWND hwnd, PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_HANDLE], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, hwnd, element});
                 }
 
-                public int CreatePropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {
+                public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_PROPERTY_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, propertyId, value, condition});
                 }
 
-                public int CreateAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition) {
+                public int createAndCondition(Pointer condition1, Pointer condition2, PointerByReference condition) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_AND_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition1, condition2, condition});
                 }
 
-                public int CreateOrCondition(Pointer condition1, Pointer condition2, PointerByReference condition) {
+                public int createOrCondition(Pointer condition1, Pointer condition2, PointerByReference condition) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_OR_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition1, condition2, condition});
                 }
 
-                public int CreateTrueCondition(PointerByReference condition) {
+                public int createTrueCondition(PointerByReference condition) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_TRUE_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition});
                 }
 
-                public int CreateFalseCondition(PointerByReference condition) {
+                public int createFalseCondition(PointerByReference condition) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_FALSE_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition});
                 }
 
-                public int CreateNotCondition(Pointer condition, PointerByReference retval) {
+                public int createNotCondition(Pointer condition, PointerByReference retval) {
                     Function f = Function.getFunction(vTable[UIA_CREATE_NOT_CONDITION], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, condition, retval});
                 }
 
-                public int GetPatternProgrammaticName(int patternId, PointerByReference retval) {
+                public int getPatternProgrammaticName(int patternId, PointerByReference retval) {
                     Function f = Function.getFunction(vTable[UIA_GET_PATTERN_PROGRAMMATIC_NAME], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, patternId, retval});
                 }

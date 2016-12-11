@@ -31,7 +31,6 @@ public class AutomationCalendarTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationCalendarTest.class.getName());
 
     @Test
-    @Ignore
     public void testName() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
@@ -52,15 +51,16 @@ public class AutomationCalendarTest extends BaseAutomationTest {
         }
     }
 
-    @Test
-    @Ignore
-    public void testGetValue() throws Exception {
+    @Test(expected=Exception.class)
+    public void testGetValue_Throws_Exception() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
         try {
             AutomationTab tab = window.getTab(0);
 
             tab.selectTabPage("Calendar");
+
+            this.andRest();
 
             AutomationCalendar calendar = window.getCalendar(0);
 

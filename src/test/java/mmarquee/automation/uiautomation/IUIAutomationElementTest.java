@@ -43,7 +43,7 @@ public class IUIAutomationElementTest {
 
     private IUIAutomationElement getRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
@@ -57,7 +57,7 @@ public class IUIAutomationElementTest {
 
     private IUIAutomationElement getChildOfRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
@@ -67,7 +67,7 @@ public class IUIAutomationElementTest {
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
-            automation.CreateTrueCondition(pCondition);
+            automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
             rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
@@ -117,7 +117,7 @@ public class IUIAutomationElementTest {
 
             PointerByReference sr = new PointerByReference();
 
-            if (root.get_CurrentClassName(sr) != 0) {
+            if (root.getCurrentClassName(sr) != 0) {
                 assertTrue("Failed to get_CurrentClassName", false);
             }
 
@@ -137,7 +137,7 @@ public class IUIAutomationElementTest {
 
             PointerByReference sr = new PointerByReference();
 
-            if (root.get_CurrentName(sr) != 0) {
+            if (root.getCurrentName(sr) != 0) {
                 assertTrue("Failed to get_CurrentName", false);
             }
 
@@ -157,7 +157,7 @@ public class IUIAutomationElementTest {
 
             IntByReference ir = new IntByReference();
 
-            if (root.get_CurrentIsPassword(ir) != 0) {
+            if (root.getCurrentIsPassword(ir) != 0) {
                 assertTrue("Failed to get_CurrentIsPassword", false);
             }
 
@@ -177,7 +177,7 @@ public class IUIAutomationElementTest {
 
             IntByReference ir = new IntByReference();
 
-            if (root.get_CurrentControlType(ir) != 0) {
+            if (root.getCurrentControlType(ir) != 0) {
                 assertTrue("Failed to get_CurrentControlType", false);
             }
 
@@ -198,7 +198,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsOffscreen(br) != 0) {
+            if (root.getCurrentIsOffscreen(br) != 0) {
                 assertTrue("Failed to get_CurrentIsOffscreen", false);
             }
 
@@ -219,7 +219,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsEnabled(br) != 0) {
+            if (root.getCurrentIsEnabled(br) != 0) {
                 assertTrue("Failed to get_CurrentIsEnabled", false);
             }
 
@@ -240,7 +240,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsContentElement(br) != 0) {
+            if (root.getCurrentIsContentElement(br) != 0) {
                 assertTrue("Failed to get_CurrentIsContentElement", false);
             }
 
@@ -260,7 +260,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsControlElement(br) != 0) {
+            if (root.getCurrentIsControlElement(br) != 0) {
                 assertTrue("Failed to get_CurrentIsControlElement", false);
             }
 
@@ -280,7 +280,7 @@ public class IUIAutomationElementTest {
 
             PointerByReference sr = new PointerByReference();
 
-            if (root.get_CurrentClassName(sr) != 0) {
+            if (root.getCurrentClassName(sr) != 0) {
                 assertTrue("Failed to get_CurrentClassName", false);
             }
 
@@ -301,7 +301,7 @@ public class IUIAutomationElementTest {
 
             PointerByReference sr = new PointerByReference();
 
-            assertTrue("CurrentName", element.get_CurrentName(sr) == 0);
+            assertTrue("CurrentName", element.getCurrentName(sr) == 0);
 
         } catch (Exception error) {
             assertTrue("Exception", false);
@@ -315,7 +315,7 @@ public class IUIAutomationElementTest {
 
             IntByReference ir = new IntByReference();
 
-            if (root.get_CurrentIsPassword(ir) != 0) {
+            if (root.getCurrentIsPassword(ir) != 0) {
                 assertTrue("Failed to get_CurrentIsPassword", false);
             }
 
@@ -335,7 +335,7 @@ public class IUIAutomationElementTest {
 
             IntByReference ir = new IntByReference();
 
-            if (root.get_CurrentControlType(ir) != 0) {
+            if (root.getCurrentControlType(ir) != 0) {
                 assertTrue("Failed to get_CurrentControlType", false);
             }
 
@@ -356,7 +356,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsOffscreen(br) != 0) {
+            if (root.getCurrentIsOffscreen(br) != 0) {
                 assertTrue("Failed to get_CurrentIsOffscreen", false);
             }
 
@@ -377,7 +377,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsEnabled(br) != 0) {
+            if (root.getCurrentIsEnabled(br) != 0) {
                 assertTrue("Failed to get_CurrentIsEnabled", false);
             }
 
@@ -398,7 +398,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsContentElement(br) != 0) {
+            if (root.getCurrentIsContentElement(br) != 0) {
                 assertTrue("Failed to get_CurrentIsContentElement", false);
             }
 
@@ -418,7 +418,7 @@ public class IUIAutomationElementTest {
 
             WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.get_CurrentIsControlElement(br) != 0) {
+            if (root.getCurrentIsControlElement(br) != 0) {
                 assertTrue("Failed to get_CurrentIsControlElement", false);
             }
 
@@ -438,7 +438,7 @@ public class IUIAutomationElementTest {
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
-            automation.CreateTrueCondition(pCondition);
+            automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
             root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
@@ -453,7 +453,7 @@ public class IUIAutomationElementTest {
 
             PointerByReference sr = new PointerByReference();
 
-            if (elem.get_CurrentName(sr) != 0) {
+            if (elem.getCurrentName(sr) != 0) {
                 assertTrue("Failed to get_CurrentName", false);
             }
 
@@ -473,7 +473,7 @@ public class IUIAutomationElementTest {
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
-            automation.CreateTrueCondition(pCondition);
+            automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
             root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
@@ -502,7 +502,7 @@ public class IUIAutomationElementTest {
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
-            automation.CreateTrueCondition(pCondition);
+            automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
             root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);

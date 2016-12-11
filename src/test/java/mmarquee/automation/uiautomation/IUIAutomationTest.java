@@ -68,7 +68,7 @@ public class IUIAutomationTest {
     @Test
     public void testGetRootElement() {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
@@ -80,11 +80,11 @@ public class IUIAutomationTest {
     @Test
     public void testCompareElementsWhenElementsAreTheSame() {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         IntByReference same = new IntByReference();
 
-        automation.CompareElements(root.getValue(), root.getValue(), same);
+        automation.compareElements(root.getValue(), root.getValue(), same);
 
         assertTrue("Compare", same.getValue() != 0);
     }
@@ -92,7 +92,7 @@ public class IUIAutomationTest {
     @Test
     public void testCreateTrueCondition() {
         PointerByReference pbr = new PointerByReference();
-        automation.CreateTrueCondition(pbr);
+        automation.createTrueCondition(pbr);
 
         Unknown uRoot = new Unknown(pbr.getValue());
 
@@ -104,7 +104,7 @@ public class IUIAutomationTest {
     @Test
     public void testCreateFalseCondition() {
         PointerByReference pbr = new PointerByReference();
-        automation.CreateFalseCondition(pbr);
+        automation.createFalseCondition(pbr);
 
         Unknown uRoot = new Unknown(pbr.getValue());
 
@@ -117,7 +117,7 @@ public class IUIAutomationTest {
     public void testGetPatternProgrammaticNameForInvoke () {
         PointerByReference sr = new PointerByReference();
 
-        automation.GetPatternProgrammaticName(10000, sr);
+        automation.getPatternProgrammaticName(10000, sr);
 
         String name = sr.getValue().getWideString(0);
 
@@ -128,7 +128,7 @@ public class IUIAutomationTest {
     public void testGetPatternProgrammaticNameForCustomNavigation () {
         PointerByReference sr = new PointerByReference();
 
-        automation.GetPatternProgrammaticName(10033, sr);
+        automation.getPatternProgrammaticName(10033, sr);
 
         String name = sr.getValue().getWideString(0);
 
@@ -141,10 +141,10 @@ public class IUIAutomationTest {
         PointerByReference condition2 = new PointerByReference();
         PointerByReference pbr = new PointerByReference();
 
-        automation.CreateTrueCondition(condition1);
-        automation.CreateTrueCondition(condition2);
+        automation.createTrueCondition(condition1);
+        automation.createTrueCondition(condition2);
 
-        automation.CreateOrCondition(condition1.getValue(), condition2.getValue(), pbr);
+        automation.createOrCondition(condition1.getValue(), condition2.getValue(), pbr);
         Unknown uCondition = new Unknown(pbr.getValue());
 
         WinNT.HRESULT result = uCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
@@ -158,10 +158,10 @@ public class IUIAutomationTest {
         PointerByReference condition2 = new PointerByReference();
         PointerByReference pbr = new PointerByReference();
 
-        automation.CreateTrueCondition(condition1);
-        automation.CreateTrueCondition(condition2);
+        automation.createTrueCondition(condition1);
+        automation.createTrueCondition(condition2);
 
-        automation.CreateAndCondition(condition1.getValue(), condition2.getValue(), pbr);
+        automation.createAndCondition(condition1.getValue(), condition2.getValue(), pbr);
         Unknown uCondition = new Unknown(pbr.getValue());
 
         WinNT.HRESULT result = uCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
@@ -174,9 +174,9 @@ public class IUIAutomationTest {
         PointerByReference condition = new PointerByReference();
         PointerByReference pbr = new PointerByReference();
 
-        automation.CreateTrueCondition(condition);
+        automation.createTrueCondition(condition);
 
-        automation.CreateNotCondition(condition.getValue(), pbr);
+        automation.createNotCondition(condition.getValue(), pbr);
         Unknown uCondition = new Unknown(pbr.getValue());
 
         WinNT.HRESULT result = uCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
@@ -190,7 +190,7 @@ public class IUIAutomationTest {
 
         WinDef.HWND hwnd = new WinDef.HWND();
 
-        automation.ElementFromHandle(hwnd, pbr);
+        automation.getElementFromHandle(hwnd, pbr);
 
         assertTrue("ElementFromHandle", pbr != null);
     }
@@ -202,12 +202,12 @@ public class IUIAutomationTest {
 
         WinDef.HWND hwnd = new WinDef.HWND();
 
-        automation.ElementFromHandle(hwnd, pbr);
-        automation.GetRootElement(root);
+        automation.getElementFromHandle(hwnd, pbr);
+        automation.getRootElement(root);
 
         IntByReference same = new IntByReference();
 
-        automation.CompareElements(root.getValue(), pbr.getValue(), same);
+        automation.compareElements(root.getValue(), pbr.getValue(), same);
 
         assertTrue("Compare", same.getValue() == 0);
     }
@@ -215,7 +215,7 @@ public class IUIAutomationTest {
     @Test
     public void testCompareElementsWhenElementsAreDifferent() {
         PointerByReference root = new PointerByReference();
-        automation.GetRootElement(root);
+        automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
@@ -227,14 +227,14 @@ public class IUIAutomationTest {
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
-            automation.CreateTrueCondition(pCondition);
+            automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
             rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
 
             IntByReference same = new IntByReference();
 
-            automation.CompareElements(root.getValue(), first.getValue(), same);
+            automation.compareElements(root.getValue(), first.getValue(), same);
 
             assertTrue("Compare", same.getValue() == 0);
         } else {
@@ -246,7 +246,7 @@ public class IUIAutomationTest {
     public void testGetFocusedElement() {
         PointerByReference pbr = new PointerByReference();
 
-        this.automation.GetFocusedElement(pbr);
+        this.automation.getFocusedElement(pbr);
 
         assertTrue("GetFocusedElement", pbr.getValue() != null);
     }
@@ -274,4 +274,5 @@ public class IUIAutomationTest {
         }
     }
     */
+
 }
