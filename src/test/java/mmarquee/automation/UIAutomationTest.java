@@ -29,13 +29,13 @@ import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Matchers;
 import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertTrue;
@@ -483,12 +483,11 @@ public class UIAutomationTest {
     }
 
     @Test(expected = AutomationException.class)
-    @Ignore // Mocking not quite working
     public void testCreateAndCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
         IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
 
-        when(mocked.CreateAndCondition(Matchers.isA(Pointer.class), Matchers.isA(Pointer.class), Matchers.isA(PointerByReference.class))).thenReturn(-1);
+        when(mocked.CreateAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
