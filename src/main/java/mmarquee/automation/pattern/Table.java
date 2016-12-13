@@ -63,7 +63,7 @@ public class Table extends BasePattern {
     public List<AutomationElement> getCurrentColumnHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().GetCurrentColumnHeaders(pbr) != 0) {
+        if (this.getPattern().getCurrentColumnHeaders(pbr) != 0) {
             throw new AutomationException();
         }
 
@@ -89,7 +89,7 @@ public class Table extends BasePattern {
     public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().Get_CurrentRowOrColumnMajor(ibr) != 0) {
+        if (this.getPattern().getCurrentRowOrColumnMajor(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -104,7 +104,7 @@ public class Table extends BasePattern {
     public List<AutomationElement> getCurrentRowHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().GetCurrentRowHeaders(pbr) != 0) {
+        if (this.getPattern().getCurrentRowHeaders(pbr) != 0) {
             throw new AutomationException();
         }
 

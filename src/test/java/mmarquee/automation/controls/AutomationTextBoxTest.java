@@ -28,7 +28,7 @@ public class AutomationTextBoxTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("Second"));
+            assertTrue(name.equals(""));
         } finally {
             closeApplication();
         }
@@ -46,7 +46,7 @@ public class AutomationTextBoxTest extends BaseAutomationTest {
 
             logger.info(value);
 
-            assertTrue(value.equals("Second"));
+            assertTrue(value.equals(""));
         } finally {
             closeApplication();
         }

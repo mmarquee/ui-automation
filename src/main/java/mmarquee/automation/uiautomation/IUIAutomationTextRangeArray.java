@@ -37,8 +37,8 @@ public interface IUIAutomationTextRangeArray extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Get_Length(IntByReference ibr);
-    int GetElement(Integer index, PointerByReference element);
+    int getLength(IntByReference ibr);
+    int getElement(Integer index, PointerByReference element);
 
     class Converter {
         private static int METHODS = 5; // 0-2 IUnknown, 3-4 IUIAutomationTextRangeArray
@@ -68,12 +68,12 @@ public interface IUIAutomationTextRangeArray extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Get_Length(IntByReference ibr) {
+                public int getLength(IntByReference ibr) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, ibr});
                 }
 
-                public int GetElement(Integer index, PointerByReference element) {
+                public int getElement(Integer index, PointerByReference element) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, index, element});
                 }

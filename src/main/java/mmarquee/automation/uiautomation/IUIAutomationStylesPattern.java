@@ -37,8 +37,8 @@ public interface IUIAutomationStylesPattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Get_CurrentStyleId(IntByReference retVal);
-    int Get_CurrentStyleName(PointerByReference retVal);
+    int getCurrentStyleId(IntByReference retVal);
+    int getCurrentStyleName(PointerByReference retVal);
 
     class Converter {
         private static int METHODS = 19; // 0-2 IUnknown, 3-18 IUIAutomationStylesPattern
@@ -68,12 +68,12 @@ public interface IUIAutomationStylesPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Get_CurrentStyleId(IntByReference retVal) {
+                public int getCurrentStyleId(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int Get_CurrentStyleName(PointerByReference retVal) {
+                public int getCurrentStyleName(PointerByReference retVal) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

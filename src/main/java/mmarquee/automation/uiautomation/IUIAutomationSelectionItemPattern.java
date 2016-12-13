@@ -37,8 +37,8 @@ public interface IUIAutomationSelectionItemPattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Select();
-    int Get_CurrentIsSelected(IntByReference ibr);
+    int select();
+    int getCurrentIsSelected(IntByReference ibr);
 
     class Converter {
 
@@ -69,12 +69,12 @@ public interface IUIAutomationSelectionItemPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Select() {
+                public int select() {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Get_CurrentIsSelected(IntByReference ibr) {
+                public int getCurrentIsSelected(IntByReference ibr) {
                     Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, ibr});
                 }

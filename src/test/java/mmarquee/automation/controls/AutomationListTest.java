@@ -31,7 +31,6 @@ public class AutomationListTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationListTest.class.getName());
 
     @Test
-  //  @Ignore
     public void testName() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
@@ -43,7 +42,7 @@ public class AutomationListTest extends BaseAutomationTest {
             logger.info(name);
 
             // The value that comes back here seems very wrong
-            assertTrue(name.equals(""));
+            assertTrue(name.equals("<a href=\"http://www.google.co.uk\">This is a link</a>"));
         } finally {
             closeApplication();
         }

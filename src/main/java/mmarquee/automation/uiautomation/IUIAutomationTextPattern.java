@@ -35,9 +35,9 @@ public interface IUIAutomationTextPattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int GetSelection(PointerByReference result);
-    int GetVisibleRanges(PointerByReference ranges);
-    int Get_DocumentRange(PointerByReference range);
+    int getSelection(PointerByReference result);
+    int getVisibleRanges(PointerByReference ranges);
+    int getDocumentRange(PointerByReference range);
 
     class Converter {
         private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
@@ -67,17 +67,17 @@ public interface IUIAutomationTextPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetSelection(PointerByReference result) {
+                public int getSelection(PointerByReference result) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, result});
                 }
 
-                public int GetVisibleRanges(PointerByReference ranges) {
+                public int getVisibleRanges(PointerByReference ranges) {
                     Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, ranges});
                 }
 
-                public int Get_DocumentRange(PointerByReference range) {
+                public int getDocumentRange(PointerByReference range) {
                     Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, range});
                 }

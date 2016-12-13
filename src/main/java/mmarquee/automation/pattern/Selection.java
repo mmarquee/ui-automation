@@ -62,7 +62,7 @@ public class Selection extends BasePattern {
 
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().GetCurrentSelection(pbr) != 0) {
+        if (this.getPattern().getCurrentSelection(pbr) != 0) {
             throw new AutomationException();
         }
 

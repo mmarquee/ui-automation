@@ -38,7 +38,7 @@ public class Toggle extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void toggle () throws AutomationException {
-        if (this.getPattern().Toggle() != 0) {
+        if (this.getPattern().toggle() != 0) {
             throw new AutomationException();
         }
     }
@@ -51,7 +51,7 @@ public class Toggle extends BasePattern {
     public ToggleState currentToggleState() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().Get_CurrentToggleState(ibr) != 0) {
+        if (this.getPattern().getCurrentToggleState(ibr) != 0) {
             throw new AutomationException();
         }
 

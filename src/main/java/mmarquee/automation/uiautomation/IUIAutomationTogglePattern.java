@@ -36,8 +36,8 @@ public interface IUIAutomationTogglePattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Toggle();
-    int Get_CurrentToggleState(IntByReference ibr);
+    int toggle();
+    int getCurrentToggleState(IntByReference ibr);
 
     class Converter {
         private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
@@ -67,12 +67,12 @@ public interface IUIAutomationTogglePattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Toggle() {
+                public int toggle() {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Get_CurrentToggleState(IntByReference ibr) {
+                public int getCurrentToggleState(IntByReference ibr) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, ibr});
                 }

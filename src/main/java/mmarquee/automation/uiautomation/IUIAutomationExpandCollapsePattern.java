@@ -37,9 +37,9 @@ public interface IUIAutomationExpandCollapsePattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Expand();
-    int Collapse();
-    int Get_CurrentExpandCollapseState(IntByReference retVal);
+    int expand();
+    int collapse();
+    int getCurrentExpandCollapseState(IntByReference retVal);
 
     class Converter {
         private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationInvokePattern
@@ -69,17 +69,17 @@ public interface IUIAutomationExpandCollapsePattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Expand() {
+                public int expand() {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Collapse() {
+                public int collapse() {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Get_CurrentExpandCollapseState(IntByReference retVal) {
+                public int getCurrentExpandCollapseState(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

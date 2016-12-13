@@ -59,7 +59,7 @@ public class Text extends BasePattern {
     public String getSelection() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().GetSelection(pbr) != 0) {
+        if (this.getPattern().getSelection(pbr) != 0) {
             throw new AutomationException();
         }
 
@@ -75,7 +75,7 @@ public class Text extends BasePattern {
 
             // OK, now what?
             IntByReference ibr = new IntByReference();
-            if (selection.Get_Length(ibr) != 0) {
+            if (selection.getLength(ibr) != 0) {
                 throw new AutomationException();
             }
 
@@ -84,7 +84,7 @@ public class Text extends BasePattern {
             for (int i = 0; i < count; i++) {
                 PointerByReference pbr0 = new PointerByReference();
 
-                if (selection.GetElement(i, pbr0) != 0) {
+                if (selection.getElement(i, pbr0) != 0) {
                     throw new AutomationException();
                 }
 
@@ -98,7 +98,7 @@ public class Text extends BasePattern {
 
                     PointerByReference sr = new PointerByReference();
 
-                    if (range.GetText(-1, sr) != 0) {
+                    if (range.getText(-1, sr) != 0) {
                         throw new AutomationException();
                     }
 
@@ -120,7 +120,7 @@ public class Text extends BasePattern {
     public String getText() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().Get_DocumentRange(pbr) != 0) {
+        if (this.getPattern().getDocumentRange(pbr) != 0) {
             throw new AutomationException();
         }
 
@@ -134,7 +134,7 @@ public class Text extends BasePattern {
 
             PointerByReference sr = new PointerByReference();
 
-            if (range.GetText(-1, sr) != 0) {
+            if (range.getText(-1, sr) != 0) {
                 throw new AutomationException();
             }
 

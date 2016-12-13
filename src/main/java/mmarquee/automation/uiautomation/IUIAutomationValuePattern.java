@@ -38,9 +38,9 @@ public interface IUIAutomationValuePattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Set_Value(WTypes.BSTR sr);
-    int Get_CurrentValue(PointerByReference sr);
-    int Get_CurrentIsReadOnly(IntByReference ibr);
+    int setValue(WTypes.BSTR sr);
+    int getValue(PointerByReference sr);
+    int getCurrentIsReadOnly(IntByReference ibr);
 
     class Converter {
         private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationValuePattern
@@ -70,17 +70,17 @@ public interface IUIAutomationValuePattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Set_Value(WTypes.BSTR sr) {
+                public int setValue(WTypes.BSTR sr) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, sr});
                 }
 
-                public int Get_CurrentValue(PointerByReference sr) {
+                public int getValue(PointerByReference sr) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, sr});
                 }
 
-                public int Get_CurrentIsReadOnly(IntByReference ibr) {
+                public int getCurrentIsReadOnly(IntByReference ibr) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, ibr});
                 }

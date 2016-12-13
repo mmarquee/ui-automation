@@ -58,7 +58,7 @@ public class Grid extends BasePattern {
     public PointerByReference getItem(int x, int y) throws AutomationException{
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().GetItem(x, y, pbr) != 0) {
+        if (this.getPattern().getItem(x, y, pbr) != 0) {
             throw new AutomationException();
         }
 
@@ -73,7 +73,7 @@ public class Grid extends BasePattern {
     public int rowCount() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().Get_CurrentRowCount(ibr) != 0) {
+        if (this.getPattern().getCurrentRowCount(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -89,7 +89,7 @@ public class Grid extends BasePattern {
 
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().Get_CurrentColumnCount(ibr) != 0) {
+        if (this.getPattern().getCurrentColumnCount(ibr) != 0) {
             throw new AutomationException();
         }
 

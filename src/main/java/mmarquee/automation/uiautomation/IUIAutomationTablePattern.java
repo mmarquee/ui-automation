@@ -37,9 +37,9 @@ public interface IUIAutomationTablePattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int GetCurrentRowHeaders(PointerByReference retVal);
-    int GetCurrentColumnHeaders(PointerByReference retVal);
-    int Get_CurrentRowOrColumnMajor(IntByReference retVal);
+    int getCurrentRowHeaders(PointerByReference retVal);
+    int getCurrentColumnHeaders(PointerByReference retVal);
+    int getCurrentRowOrColumnMajor(IntByReference retVal);
 
     class Converter {
         private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTablePattern
@@ -69,17 +69,17 @@ public interface IUIAutomationTablePattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetCurrentRowHeaders(PointerByReference retVal){
+                public int getCurrentRowHeaders(PointerByReference retVal){
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int GetCurrentColumnHeaders(PointerByReference retVal){
+                public int getCurrentColumnHeaders(PointerByReference retVal){
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int Get_CurrentRowOrColumnMajor(IntByReference retVal) {
+                public int getCurrentRowOrColumnMajor(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

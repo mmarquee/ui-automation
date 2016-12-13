@@ -38,7 +38,7 @@ public interface IUIAutomationItemContainerPattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
+    int findItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
 
     class Converter {
         private static int METHODS = 4; // 0-2 IUnknown, 3 IUIAutomationItemContainerPattern
@@ -68,7 +68,7 @@ public interface IUIAutomationItemContainerPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found) {
+                public int findItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, startAfter, propertyId, value, found});
                 }

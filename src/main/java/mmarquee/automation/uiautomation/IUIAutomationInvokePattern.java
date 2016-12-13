@@ -36,7 +36,7 @@ public interface IUIAutomationInvokePattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Invoke();
+    int invoke();
 
     class Converter {
         private static int UIAutomationInvokePattern_Methods = 4; // 0-2 IUnknown, 3 IUIAutomationInvokePattern
@@ -66,7 +66,7 @@ public interface IUIAutomationInvokePattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Invoke() {
+                public int invoke() {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }

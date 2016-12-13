@@ -37,8 +37,8 @@ public interface IUIAutomationRangeValuePattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Set_Value(Double val);
-    int Get_CurrentValue(DoubleByReference retVal);
+    int setValue(Double val);
+    int getValue(DoubleByReference retVal);
 
     class Converter {
         private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationInvokePattern
@@ -67,12 +67,12 @@ public interface IUIAutomationRangeValuePattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Set_Value(Double val) {
+                public int setValue(Double val) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, val});
                 }
 
-                public int Get_CurrentValue(DoubleByReference retVal) {
+                public int getValue(DoubleByReference retVal) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

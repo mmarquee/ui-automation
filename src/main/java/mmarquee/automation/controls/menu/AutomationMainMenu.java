@@ -87,7 +87,7 @@ public class AutomationMainMenu extends AutomationBase {
                 IUIAutomationExpandCollapsePattern pattern =
                         IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
 
-                pattern.Expand();
+                pattern.expand();
 
                 try {
                     Thread.sleep(750);
@@ -138,7 +138,7 @@ public class AutomationMainMenu extends AutomationBase {
                     IUIAutomationExpandCollapsePattern pattern =
                             IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
 
-                    pattern.Expand();
+                    pattern.expand();
                     try {
                         Thread.sleep(750);
                     } catch (Exception ex) {

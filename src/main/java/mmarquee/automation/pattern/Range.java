@@ -54,7 +54,7 @@ public class Range extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setValue (double value) throws AutomationException {
-        if (this.getPattern().Set_Value(value) != 0) {
+        if (this.getPattern().setValue(value) != 0) {
             throw new AutomationException();
         }
     }
@@ -67,7 +67,7 @@ public class Range extends BasePattern {
     public double getValue () throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 
-        if (this.getPattern().Get_CurrentValue(dbr) != 0) {
+        if (this.getPattern().getValue(dbr) != 0) {
             throw new AutomationException();
         }
 

@@ -35,8 +35,8 @@ public interface IUIAutomationTextRange extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Select();
-    int GetText(Integer maxLength, PointerByReference sr);
+    int select();
+    int getText(Integer maxLength, PointerByReference sr);
 
     class Converter {
         private static int METHODS = 21; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
@@ -66,12 +66,12 @@ public interface IUIAutomationTextRange extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetText(Integer maxLength, PointerByReference sr) {
+                public int getText(Integer maxLength, PointerByReference sr) {
                     Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, maxLength, sr});
                 }
 
-                public int Select() {
+                public int select() {
                     Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }

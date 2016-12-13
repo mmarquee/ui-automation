@@ -37,9 +37,9 @@ public interface IUIAutomationGridPattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int GetItem(int row, int column, PointerByReference item);
-    int Get_CurrentRowCount(IntByReference retVal);
-    int Get_CurrentColumnCount(IntByReference retVal);
+    int getItem(int row, int column, PointerByReference item);
+    int getCurrentRowCount(IntByReference retVal);
+    int getCurrentColumnCount(IntByReference retVal);
 
     class Converter {
         private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationGridPattern
@@ -69,17 +69,17 @@ public interface IUIAutomationGridPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int GetItem(int row, int column, PointerByReference item) {
+                public int getItem(int row, int column, PointerByReference item) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, row, column, item});
                 }
 
-                public int Get_CurrentRowCount(IntByReference retVal) {
+                public int getCurrentRowCount(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int Get_CurrentColumnCount(IntByReference retVal) {
+                public int getCurrentColumnCount(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

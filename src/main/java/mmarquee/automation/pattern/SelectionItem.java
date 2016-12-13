@@ -53,7 +53,7 @@ public class SelectionItem extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void select() throws AutomationException {
-        this.getPattern().Select();
+        this.getPattern().select();
     }
 
     /**
@@ -64,7 +64,7 @@ public class SelectionItem extends BasePattern {
     public boolean isSelected() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().Get_CurrentIsSelected(ibr) != 0) {
+        if (this.getPattern().getCurrentIsSelected(ibr) != 0) {
             throw new AutomationException();
         }
 

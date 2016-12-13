@@ -36,13 +36,13 @@ public interface IUIAutomationWindowPattern extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int Close();
-    int WaitForInputIdle(Integer milliseconds, IntByReference success);
-    int SetWindowVisualState(Integer state);
-    int Get_CurrentCanMaximize(IntByReference retVal);
-    int Get_CurrentCanMinimize(IntByReference retVal);
-    int Get_CurrentIsModal(IntByReference retVal);
-    int Get_CurrentIsTopmost(IntByReference retVal);
+    int close();
+    int waitForInputIdle(Integer milliseconds, IntByReference success);
+    int setWindowVisualState(Integer state);
+    int getCurrentCanMaximize(IntByReference retVal);
+    int getCurrentCanMinimize(IntByReference retVal);
+    int getCurrentIsModal(IntByReference retVal);
+    int getCurrentIsTopmost(IntByReference retVal);
 
     class Converter {
         private static int METHODS = 18; // 0-2 IUnknown, 3-17 IUIAutomationInvokePattern
@@ -71,37 +71,37 @@ public interface IUIAutomationWindowPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int Close() {
+                public int close() {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int WaitForInputIdle(Integer milliseconds, IntByReference success) {
+                public int waitForInputIdle(Integer milliseconds, IntByReference success) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, milliseconds, success});
                 }
 
-                public int SetWindowVisualState(Integer state){
+                public int setWindowVisualState(Integer state){
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, state});
                 }
 
-                public int Get_CurrentCanMaximize(IntByReference retVal){
+                public int getCurrentCanMaximize(IntByReference retVal){
                     Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int Get_CurrentCanMinimize(IntByReference retVal){
+                public int getCurrentCanMinimize(IntByReference retVal){
                     Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int Get_CurrentIsModal(IntByReference retVal) {
+                public int getCurrentIsModal(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int Get_CurrentIsTopmost(IntByReference retVal) {
+                public int getCurrentIsTopmost(IntByReference retVal) {
                     Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }

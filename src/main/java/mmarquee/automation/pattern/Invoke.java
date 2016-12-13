@@ -57,7 +57,7 @@ public class Invoke extends BasePattern {
      * @throws AutomationException Something went wrong getting the pattern
      */
     public void invoke() throws AutomationException {
-        if (this.getPattern().Invoke() != 0) {
+        if (this.getPattern().invoke() != 0) {
             throw new AutomationException();
         }
     }

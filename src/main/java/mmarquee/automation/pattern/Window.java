@@ -55,7 +55,7 @@ public class Window extends BasePattern {
      */
     public void waitForInputIdle(int timeout) throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().WaitForInputIdle(timeout, ibr) != 0) {
+        if (this.getPattern().waitForInputIdle(timeout, ibr) != 0) {
             throw new AutomationException();
         }
     }
@@ -83,7 +83,7 @@ public class Window extends BasePattern {
      */
     public boolean isModal() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().Get_CurrentIsModal(ibr) != 0) {
+        if (this.getPattern().getCurrentIsModal(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -97,7 +97,7 @@ public class Window extends BasePattern {
      */
     public boolean isTopMost() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().Get_CurrentIsTopmost(ibr) != 0) {
+        if (this.getPattern().getCurrentIsTopmost(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -109,7 +109,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void close() throws AutomationException {
-        if (this.getPattern().Close() != 0) {
+        if (this.getPattern().close() != 0) {
             throw new AutomationException();
         }
     }
@@ -120,7 +120,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setWindowState(WindowVisualState state) throws AutomationException {
-        if (this.getPattern().SetWindowVisualState(state.getValue()) != 0) {
+        if (this.getPattern().setWindowVisualState(state.getValue()) != 0) {
             throw new AutomationException();
         }
     }

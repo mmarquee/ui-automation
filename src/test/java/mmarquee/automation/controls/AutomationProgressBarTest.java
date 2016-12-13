@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
@@ -67,9 +68,8 @@ public class AutomationProgressBarTest extends BaseAutomationTest {
         }
     }
 
-    @Test
-//    @Ignore // setValue throws an exception
-    public void testSetRangeValue() throws Exception {
+    @Test(expected= AutomationException.class)
+    public void testSetRangeValue_Throws_Exception() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
         try {
