@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
@@ -138,6 +139,30 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
             assertTrue("Notepad should have quit", hwnd == null);
 
+        } finally {
+            // Should be closed already
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+
+            if (hwnd != null) {
+                closeApplication();
+            }
+        }
+    }
+
+    @Test
+    public void testMenuFudge() throws Exception {
+        loadApplication("notepad.exe", "Untitled - Notepad");
+
+        try {
+            AutomationMainMenu menu = window.getMainMenu();
+
+            menu.menuItemFudge("File", KeyEvent.VK_X);
+
+            this.andRest();
+
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+
+            assertTrue("Notepad should have quit", hwnd == null);
         } finally {
             // Should be closed already
             WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
