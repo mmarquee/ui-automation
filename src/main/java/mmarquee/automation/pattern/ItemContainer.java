@@ -21,33 +21,33 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+//import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
  *
- * Wrapper for the ItemContainer pattern
  */
 public class ItemContainer extends BasePattern {
 
     /**
      * Constructor for the value pattern
      */
-    public ItemContainer() {
-        this.IID = IUIAutomationItemContainerPattern.IID;
+    public ItemContainer() throws AutomationException {
+//        this.IID = IUIAutomationItemContainerPattern.IID;
+//        IUIAutomationItemContainerPattern pattern = this.getPattern();
     }
 
-    private IUIAutomationItemContainerPattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationItemContainerPattern.Converter.PointerToInterface(pbr);
-        } else {
-            throw new AutomationException();
-        }
-    }
+//    private IUIAutomationItemContainerPattern getPattern() throws AutomationException {
+//        PointerByReference pbr = new PointerByReference();
+//
+//        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+//
+//        if (COMUtils.SUCCEEDED(result0)) {
+//            return IUIAutomationItemContainerPattern.Converter.PointerToInterface(pbr);
+//        } else {
+//            throw new AutomationException();
+//        }
+//    }
 
     /**
      * Finds an item by property
@@ -57,12 +57,12 @@ public class ItemContainer extends BasePattern {
      * @return The item found
      * @throws AutomationException Error from Automation library
      */
-    public Pointer findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-        if (this.getPattern().findItemByProperty(pStartAfter, propertyId, value, pbr) != 0) {
-            throw new AutomationException();
-        }
-
-        return pbr.getValue();
-    }
+//    public Pointer findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) throws AutomationException {/
+//        PointerByReference pbr = new PointerByReference();
+//        if (this.getPattern().FindItemByProperty(pStartAfter, propertyId, value, pbr) != 0) {
+//            throw new AutomationException();
+//        }
+//
+  //      return pbr.getValue();
+ //   }
 }
