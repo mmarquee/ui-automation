@@ -17,11 +17,14 @@ package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.controls.AutomationTitleBar;
+import mmarquee.automation.controls.AutomationToolbarButtonTest;
+import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -29,8 +32,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class AutomationMenuItemTest extends BaseAutomationTest {
 
+    protected Logger logger = Logger.getLogger(AutomationToolbarButtonTest.class.getName());
+
     @Test
-    @Ignore // Still working on this
     public void testGetMenuItem() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
@@ -46,4 +50,73 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
             closeApplication();
         }
     }
+
+    @Test
+    public void testGetName() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTitleBar sb = window.getTitleBar();
+
+            AutomationMainMenu menu = sb.getMenuBar();
+
+            List<AutomationMenuItem> items = menu.getItems();
+
+            AutomationMenuItem item = items.get(0);
+
+            logger.info(item.name());
+
+            assertTrue(item.name().equals("System"));
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    public void testIsExpanded_Is_False_When_Not_Expanded() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTitleBar sb = window.getTitleBar();
+
+            AutomationMainMenu menu = sb.getMenuBar();
+
+            List<AutomationMenuItem> items = menu.getItems();
+
+            AutomationMenuItem item = items.get(0);
+
+            logger.info(item.isExpanded());
+
+            assertFalse(item.isExpanded());
+        } finally {
+            closeApplication();
+        }
+    }
+
+    @Test
+    @Ignore // Should choose a different menu item
+    public void testIsExpanded_Is_True_When_Expanded() throws Exception {
+        loadApplication("apps\\Project1.exe", "Form1");
+
+        try {
+            AutomationTitleBar sb = window.getTitleBar();
+
+            AutomationMainMenu menu = sb.getMenuBar();
+
+            List<AutomationMenuItem> items = menu.getItems();
+
+            AutomationMenuItem item = items.get(0);
+
+            item.expand();
+
+            window.waitForInputIdle(5000);
+
+            logger.info(item.isExpanded());
+
+            assertTrue(item.isExpanded());
+        } finally {
+            closeApplication();
+        }
+    }
+
 }
