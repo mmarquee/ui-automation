@@ -15,6 +15,8 @@
  */
 package mmarquee.automation.controls.menu;
 
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.controls.AutomationTitleBar;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
@@ -119,4 +121,30 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         }
     }
 
+    @Test
+    public void testClick() throws Exception {
+        loadApplication("notepad.exe", "Untitled - Notepad");
+
+        try {
+            AutomationMainMenu menu = window.getMainMenu();
+
+            AutomationMenuItem item = menu.getMenuItem("File", "Exit");
+
+            item.click();
+
+            this.andRest();
+
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+
+            assertTrue("Notepad should have quit", hwnd == null);
+
+        } finally {
+            // Should be closed already
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+
+            if (hwnd != null) {
+                closeApplication();
+            }
+        }
+    }
 }
