@@ -33,12 +33,12 @@ public class AutomationSliderTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // Fails for some reason
+    @Ignore // Doesn't find control
     public void testName_Equals_Blank() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
         try {
-            AutomationSlider slider = window.getSlider(0);
+            AutomationSlider slider = window.getSlider("slValue");
 
             String name = slider.name();
 

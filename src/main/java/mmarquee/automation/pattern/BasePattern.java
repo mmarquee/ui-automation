@@ -65,7 +65,7 @@ public abstract class BasePattern implements Pattern {
 
         IntByReference ibr = new IntByReference();
 
-        if (collection.get_Length(ibr) != 0) {
+        if (collection.getLength(ibr) != 0) {
             throw new AutomationException();
         }
 
@@ -75,7 +75,7 @@ public abstract class BasePattern implements Pattern {
 
             PointerByReference pbr = new PointerByReference();
 
-            if (collection.GetElement(count, pbr) != 0) {
+            if (collection.getElement(count, pbr) != 0) {
                 throw new AutomationException();
             }
 

@@ -291,9 +291,20 @@ public class AutomationElement {
     }
 
     /**
+     * Gets all of the descendant elements that match the condition
+     *
+     * @param pCondition The condition
+     * @return List of matching elements
+     * @throws AutomationException Call to Automation API failed
+     */
+    public List<AutomationElement> findAllDescendants(Pointer pCondition) throws AutomationException {
+        return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
+    }
+
+    /**
      * Gets all of the elements that match the condition and scope
      *
-     * @param scope      The scope in the element tree
+     * @param scope The scope in the element tree
      * @param pCondition The condition
      * @return List of matching elements
      * @throws AutomationException Call to Automation API failed
@@ -319,14 +330,14 @@ public class AutomationElement {
 
             IntByReference ibr = new IntByReference();
 
-            collection.get_Length(ibr);
+            collection.getLength(ibr);
 
             int counter = ibr.getValue();
 
             for (int a = 0; a < counter; a++) {
                 PointerByReference pbr = new PointerByReference();
 
-                collection.GetElement(a, pbr);
+                collection.getElement(a, pbr);
 
                 Unknown uElement = new Unknown(pbr.getValue());
 
@@ -383,7 +394,6 @@ public class AutomationElement {
      * @throws AutomationException Call to Automation API failed
      */
     public String getFrameworkId() throws AutomationException {
-
         PointerByReference sr = new PointerByReference();
 
         if (this.element.getCurrentFrameworkId(sr) != 0) {

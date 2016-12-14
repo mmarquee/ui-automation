@@ -41,10 +41,13 @@ public class UIAutomation {
 
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
-    private static UIAutomation INSTANCE = null;
+    protected static UIAutomation INSTANCE = null;
 
-    private AutomationElement rootElement;
+    protected AutomationElement rootElement;
 
+    /**
+     * Main automation interface
+     */
     private IUIAutomation automation;
 
     private final static int FIND_DESKTOP_ATTEMPTS = 25;

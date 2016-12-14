@@ -38,8 +38,8 @@ public interface IUIAutomationElementArray extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int get_Length(IntByReference length); // 3
-    int GetElement(int index, PointerByReference element); // 4
+    int getLength(IntByReference length); // 3
+    int getElement(int index, PointerByReference element); // 4
 
     class Converter {
         private static int UIAutomationElementArray_Methods = 5; // 0-2 IUnknown, 3-4 IUIAutomationElement
@@ -68,12 +68,12 @@ public interface IUIAutomationElementArray extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int get_Length(IntByReference length) {
+                public int getLength(IntByReference length) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, length});
                 }
 
-                public int GetElement(int index, PointerByReference element) {
+                public int getElement(int index, PointerByReference element) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, index, element});
                 }

@@ -488,7 +488,7 @@ public class IUIAutomationElementTest {
 
             IntByReference ibr = new IntByReference();
 
-            assertTrue("findAll", elements.get_Length(ibr) == 0);
+            assertTrue("findAll", elements.getLength(ibr) == 0);
 
         } catch (Exception error) {
             assertTrue("Exception", false);
@@ -517,7 +517,7 @@ public class IUIAutomationElementTest {
 
             IntByReference ibr = new IntByReference();
 
-            elements.get_Length(ibr);
+            elements.getLength(ibr);
 
             assertTrue("findAll", ibr.getValue() != 0);
 

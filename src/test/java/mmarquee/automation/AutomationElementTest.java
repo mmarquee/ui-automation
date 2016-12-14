@@ -156,6 +156,17 @@ public class AutomationElementTest {
     }
 
     @Test
+    public void testFindAllDescendants() throws AutomationException {
+        AutomationElement root = instance.getRootElement();
+
+        PointerByReference condition = instance.createTrueCondition();
+
+        List<AutomationElement> elements = root.findAllDescendants(condition.getValue());
+
+        assertTrue("findAll:" + elements.size(), elements.size() != 0);
+    }
+
+    @Test
     public void testProviderDescriptionForDesktop() throws AutomationException {
         AutomationElement root = instance.getRootElement();
         assertTrue("root:" + root.getProviderDescription(), !root.getProviderDescription().equals(""));
