@@ -23,6 +23,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
@@ -128,8 +129,8 @@ public class IUIAutomationWindowPatternTest {
         }
     }
 
-    // This fails for some reason
-/*
+    @Test
+    @Ignore // This fails for some reason
     public void testGetWindowPatternSucceedsForWindowElement() {
         try {
             // Get the pattern
@@ -137,7 +138,7 @@ public class IUIAutomationWindowPatternTest {
 
             PointerByReference pbr = new PointerByReference();
 
-            if (element.get_CurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
+            if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
                 assertTrue("Failed to get current pattern", false);
             }
 
@@ -158,5 +159,4 @@ public class IUIAutomationWindowPatternTest {
             assertTrue("Exception thrown - " + error.getMessage(), false);
         }
     }
-    */
 }

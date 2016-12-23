@@ -69,7 +69,7 @@ public class AutomationProgressBarTest extends BaseAutomationTest {
         }
     }
 
-    @Test
+    @Test(expected=AutomationException.class)
     public void testSetRangeValue_Throws_Exception() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
