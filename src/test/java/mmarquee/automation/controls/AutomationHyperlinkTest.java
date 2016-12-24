@@ -3,8 +3,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 

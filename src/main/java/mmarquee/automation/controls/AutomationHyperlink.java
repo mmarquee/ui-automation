@@ -41,10 +41,28 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
     }
 
     /**
+     * Constructor for the AutomationHyperlink
+     * @param element The underlying automation element
+     * @param pattern Invoke pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationHyperlink(AutomationElement element, Invoke pattern) {
+        super(element);
+        this.invokePattern = pattern;
+    }
+
+    /**
      * Fires the click event associated with this element.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Did not find the pattern
      **/
-    public void click() throws AutomationException {
-        this.invokePattern.invoke();
+    public void click() throws AutomationException, PatternNotFoundException {
+        if (this.isInvokePatternAvailable()) {
+            this.invokePattern.invoke();
+        } else {
+            throw new PatternNotFoundException();
+        }
     }
 }
+
