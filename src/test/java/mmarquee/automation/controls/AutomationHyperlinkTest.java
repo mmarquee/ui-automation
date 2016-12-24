@@ -1,58 +1,65 @@
 package mmarquee.automation.controls;
 
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 30/11/2016.
  */
-public class AutomationHyperlinkTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationHyperlinkTest.class.getName());
-
+public class AutomationHyperlinkTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationHyperlink hl1 = window.getHyperlink(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = hl1.name();
+        AutomationHyperlink link = new AutomationHyperlink(element, pattern);
 
-            logger.info(name);
+        String name = link.name();
 
-            assertTrue(name.equals("This is a link"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void testClick() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testClick_Called_Once_When_Invoke_Pattern_Available() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationHyperlink hl1 = window.getHyperlink(0);
+        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
-            hl1.click();
+        AutomationHyperlink link = new AutomationHyperlink(element, pattern);
 
-            this.andRest(); // Wait for it??
+        link.click();
 
-            // This should show a popup dialog
-            AutomationWindow popup1 = window.getWindow("Project1");
-            AutomationButton btn1 = popup1.getButton("OK");
-            btn1.click();
-        } finally {
-            closeApplication();
-        }
+        verify(pattern, times(1)).invoke();
+    }
+
+    @Test(expected=PatternNotFoundException.class)
+    public void testClick_Throws_PatternNotFoundException_When_Invoke_Pattern_Not_Available() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
+
+        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
+
+        AutomationHyperlink link = new AutomationHyperlink(element, pattern);
+
+        link.click();
+
+        verify(pattern, times(1)).invoke();
     }
 }
