@@ -88,16 +88,4 @@ public class AutomationButtonTest {
 
         verify(pattern, times(0)).invoke();
     }
-
-    @Test(expected=PatternNotFoundException.class)
-    public void testClick_Throws_PatternNotFoundException_When_Pattern_Not_Found() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Invoke pattern = Mockito.mock(Invoke.class);
-
-        AutomationButton button = new AutomationButton(element, pattern);
-
-        button.click();
-
-        verify(pattern, times(1)).invoke();
-    }
 }
