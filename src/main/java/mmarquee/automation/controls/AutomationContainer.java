@@ -53,13 +53,26 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Constructor for AutomationContainer
+     *
+     * @param element The underlying element
+     * @param element The Container pattern
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    public AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
+        super(element);
+        itemContainerPattern = pattern;
+    }
+
+    /**
      * Gets a control by control type
      * @param index The nth item that matches
      * @param id The control type
      * @return The matching element
      * @throws AutomationException Error in the Automation library
      */
-    protected AutomationElement getControlByControlType(int index, ControlType id) throws AutomationException {
+    AutomationElement getControlByControlType(int index, ControlType id) throws AutomationException {
         PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
                 this.createIntegerVariant(id.getValue()));
 

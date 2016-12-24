@@ -15,75 +15,64 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Range;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationSliderTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationSliderTest.class.getName());
+public class AutomationSliderTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    @Ignore // Doesn't find control
-    public void testName_Equals_Blank() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Range pattern = Mockito.mock(Range.class);
 
-        try {
-            AutomationSlider slider = window.getSlider("slValue");
+        when(element.getName()).thenReturn("NAME");
 
-            String name = slider.name();
+        AutomationSlider slider = new AutomationSlider(element, pattern);
 
-            logger.info(name);
+        String name = slider.name();
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void testGetRangeValue() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testGetRangeValue_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Range pattern = Mockito.mock(Range.class);
 
-        try {
-            AutomationSlider slider = window.getSlider(0);
+        when(pattern.getValue()).thenReturn(79.0);
 
-            double value = slider.getRangeValue();
+        AutomationSlider slider = new AutomationSlider(element, pattern);
 
-            logger.info(value);
+        double value = slider.getRangeValue();
 
-            assertTrue(value == 0.0);
-        } finally {
-            closeApplication();
-        }
+        assertTrue(value == 79.0);
     }
 
     @Test
-    @Ignore // Fails to find the control
-    public void testSetRangeValue() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testSetRangeValue_Calls_setValue_From_Element_Once() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Range pattern = Mockito.mock(Range.class);
 
-        try {
-            AutomationSlider slider = window.getSlider(0);
+        AutomationSlider slider = new AutomationSlider(element, pattern);
 
-            slider.setRangeValue(76);
+        slider.setRangeValue(99.0);
 
-            double value = slider.getRangeValue();
-
-            logger.info(value);
-
-            assertTrue(value == 76);
-        } finally {
-            closeApplication();
-        }
+        verify(pattern, times(1)).setValue(99.0);
     }
 }

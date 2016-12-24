@@ -15,178 +15,89 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.*;
+import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationButtonTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationButtonTest.class.getName());
+public class AutomationButtonTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testGetButtonByAutomationId() throws Exception {
-
-        UIAutomation automation = UIAutomation.getInstance();
-
-        try {
-            AutomationApplication application
-                    = automation.launchOrAttach("apps\\WpfApplicationWithAutomationIds.exe");
-
-            // Wait for the process to start
-            // This doesn't seem to wait for WPF examples
-            application.waitForInputIdle(5000);
-
-            // Sleep for WPF, to address above issue
-            this.andRest();
-
-            AutomationWindow applicationWindow =
-                    automation.getDesktopWindow("MainWindow");
-
-            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("idBtn1");
-            logger.info(btnClickMe.name());
-            btnClickMe.click();
-
-            AutomationWindow popup = applicationWindow.getWindow("Confirmation");
-
-            assertTrue(popup.name().equals("Confirmation"));
-            AutomationButton btn = popup.getButton("Yes");
-            btn.click();
-        } finally {
-            this.andRest();
-        }
-    }
-
-    @Test
-    public void testGetButtonByName() throws Exception {
-        UIAutomation automation = UIAutomation.getInstance();
-
-        try {
-            AutomationApplication application
-                    = automation.launchOrAttach("apps\\WpfApplicationWithAutomationIds.exe");
-
-            // Wait for the process to start
-            // This doesn't seem to wait for WPF examples
-            application.waitForInputIdle(5000);
-
-            // Sleep for WPF, to address above issue
-            this.andRest();
-
-            AutomationWindow applicationWindow =
-                    automation.getDesktopWindow("MainWindow");
-
-            AutomationButton btnClickMe = applicationWindow.getButton("Press Me");
-            assertTrue(btnClickMe.name().equals("Press Me"));
-
-            btnClickMe.click();
-
-            AutomationWindow popup = applicationWindow.getWindow("Confirmation");
-
-            AutomationButton btn = popup.getButton("Yes");
-            btn.click();
-        } finally {
-            this.andRest();
-        }
-    }
-
-    @Test
-    @Ignore // Not working, fails to find the window
     public void testGetName_For_Button() throws Exception {
-        UIAutomation automation = UIAutomation.getInstance();
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationApplication application =
-                    automation.launchOrAttach("apps\\WpfApplicationWithAutomationIds.exe");
+        when(element.getName()).thenReturn("NAME");
 
-            // Wait for the process to start
-            // This doesn't seem to wait for WPF examples
-            application.waitForInputIdle(5000);
+        AutomationButton button = new AutomationButton(element, pattern);
 
-            // Sleep for WPF, to address above issue
-            this.andRest();
+        String name = button.name();
 
-            AutomationWindow applicationWindow =
-                    automation.getDesktopWindow("MainWindow");
-
-            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("idBtn1");
-            assertTrue(btnClickMe.name().equals("Press Me"));
-
-            // Cleanup
-            btnClickMe.click();
-
-            AutomationWindow popup = applicationWindow.getWindow("Confirmation");
-
-            AutomationButton btn = popup.getButton("Yes");
-            btn.click();
-        } finally {
-            this.andRest();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void testSetFocus() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testSetFocus_Calls_setFocus_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationButton cb1 = window.getButton(0);
+        AutomationButton button = new AutomationButton(element, pattern);
 
-            cb1.focus();
+        button.focus();
 
-            // Not quite sure how to check this
-        } finally {
-            closeApplication();
-        }
+        verify(element, times(1)).setFocus();
     }
 
     @Test
-    @Ignore // Not working, needs fixing
-    public void testClick() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testClick_Calls_Invoke_Once_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationButton btnClickMe = window.getButtonByAutomationId("idBtn1");
+        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
-            btnClickMe.click();
+        AutomationButton button = new AutomationButton(element, pattern);
 
-            AutomationWindow popup = window.getWindow("Confirmation");
+        button.click();
 
-            AutomationButton btn = popup.getButton("Yes");
-            btn.click();
-
-            String name = btn.name();
-
-            assertTrue(name.equals("Yes"));
-        } finally {
-            closeApplication();
-        }
+        verify(pattern, times(1)).invoke();
     }
 
     @Test(expected=PatternNotFoundException.class)
-    @Ignore // Need to work out how to mock behaviour this properly.
-    public void testClick_Throws_PatternNotFoundException_When_Pattern_Not_Foud() throws Exception {
-        AutomationButton mocked_button =
-                Mockito.mock(AutomationButton.class);
+    public void testClick_Calls_Throws_PatternNotFoundException_When_Pattern_Not_Available() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
 
-        when(mocked_button.isInvokePatternAvailable()).thenReturn(false);
+        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
-        mocked_button.click();
+        AutomationButton button = new AutomationButton(element, pattern);
+
+        button.click();
+
+        verify(pattern, times(0)).invoke();
+    }
+
+    @Test(expected=PatternNotFoundException.class)
+    public void testClick_Throws_PatternNotFoundException_When_Pattern_Not_Found() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke pattern = Mockito.mock(Invoke.class);
+
+        AutomationButton button = new AutomationButton(element, pattern);
+
+        button.click();
+
+        verify(pattern, times(1)).invoke();
     }
 }

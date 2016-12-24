@@ -49,6 +49,20 @@ public class AutomationComboBox extends AutomationBase {
     }
 
     /**
+     * Constructor for the AutomationComboBox.
+     * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern(s) not found
+     */
+    public AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value)
+            throws PatternNotFoundException, AutomationException {
+        super (element);
+
+        this.collapsePattern = collapse;
+        this.valuePattern = value;
+    }
+
+    /**
      * Gets the text associated with this element
      * @return The current value
      * @throws AutomationException Something has gone wrong

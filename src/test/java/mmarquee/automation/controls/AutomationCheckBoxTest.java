@@ -15,27 +15,20 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.ToggleState;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 30/11/2016.
  */
 public class AutomationCheckBoxTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationCheckBoxTest.class.getName());
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {

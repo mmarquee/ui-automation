@@ -15,11 +15,16 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.Range;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 02/12/2016.
@@ -28,21 +33,17 @@ public class AutomationStatusBarTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
 
     @Test
-    public void testName() throws Exception {
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
-        loadApplication("apps\\Project1.exe", "Form1");
+        when(element.getName()).thenReturn("NAME");
 
-        try {
-            AutomationStatusBar sb = window.getStatusBar();
+        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
-            String name = sb.name();
+        String name = statusBar.name();
 
-            logger.info(name);
-
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test

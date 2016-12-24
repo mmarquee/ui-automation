@@ -47,6 +47,19 @@ public class AutomationButton extends AutomationBase implements Clickable {
     }
 
     /**
+     * Constructor for the AutomationButton
+     * @param element The underlying automation element
+     * @param pattern The pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationButton(AutomationElement element, Invoke pattern)
+            throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.invokePattern = pattern;
+    }
+
+    /**
      * <p>
      * Invokes the click event for this control
      * </p>

@@ -30,6 +30,19 @@ public class AutomationSlider extends AutomationBase {
     }
 
     /**
+     * Construct the AutomationSlider
+     * @param element The element
+     * @param pattern The range pattern
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation library error
+     */
+    public AutomationSlider(AutomationElement element, Range pattern)
+            throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.rangePattern = pattern;
+    }
+
+    /**
      * Gets the range value
      * @return The range value
      * @throws AutomationException Error in automation library

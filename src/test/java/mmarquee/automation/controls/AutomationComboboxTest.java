@@ -15,13 +15,20 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Text;
+import mmarquee.automation.pattern.Value;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
+
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
@@ -36,36 +43,32 @@ public class AutomationComboboxTest extends BaseAutomationTest {
 
     @Test
     public void testGetCombobox_Get_Name() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
 
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = cb1.name();
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-            logger.info(name);
+        String name = combo.name();
 
-            assertTrue(name.equals("AutomatedCombobox2"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
     public void testGetCombobox_Get_Text() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
 
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
+        when(value.value()).thenReturn("NAME");
 
-            String text = cb1.text();
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-            logger.info(text);
+        String name = combo.text();
 
-            assertTrue(text.equals("Second"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test

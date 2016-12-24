@@ -15,66 +15,66 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.Text;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 30/11/2016.
  */
-public class AutomationDocumentTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationDocumentTest.class.getName());
-
+public class AutomationDocumentTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testGetName() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testGetName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Text pattern = Mockito.mock(Text.class);
 
-        try {
-            AutomationTab tab = window.getTab(0);
+        when(element.getName()).thenReturn("NAME");
 
-            tab.selectTabPage("Document");
+        AutomationDocument document = new AutomationDocument(element, pattern);
 
-            AutomationDocument doc = window.getDocument(0);
+        String name = document.name();
 
-            String name = doc.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    @Ignore // Failed to find tabs
-    public void testGetText() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testGetSelection_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Text pattern = Mockito.mock(Text.class);
 
-        this.andRest();  // Just in case
+        when(pattern.getSelection()).thenReturn("SELECTION");
 
-        try {
-            AutomationTab tab = window.getTab(0);
+        AutomationDocument document = new AutomationDocument(element, pattern);
 
-            tab.selectTabPage("Document");
+        String name = document.getSelection();
 
-            AutomationDocument doc = window.getDocument(0);
+        assertTrue(name.equals("SELECTION"));
+    }
 
-            String text = doc.getText();
+    @Test
+    public void testGetText_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Text pattern = Mockito.mock(Text.class);
 
-            logger.info(text);
+        when(pattern.getText()).thenReturn("NAME");
 
-            assertFalse(text.equals(""));
-        } finally {
-            closeApplication();
-        }
+        AutomationDocument document = new AutomationDocument(element, pattern);
+
+        String name = document.getText();
+
+        assertTrue(name.equals("NAME"));
     }
 }

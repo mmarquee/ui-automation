@@ -43,6 +43,16 @@ public class AutomationDocument extends AutomationBase {
     }
 
     /**
+     * Constructor for the AutomationDocument
+     * @param element The underlying automation element
+     * @param pattern The Text pattern
+     */
+    public AutomationDocument(AutomationElement element, Text pattern) {
+        super(element);
+        this.textPattern = pattern;
+    }
+
+    /**
      * Gets the text for the document
      * @return The document's text
      * @throws AutomationException Something has gone wrong
