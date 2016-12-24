@@ -15,12 +15,20 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 30/11/2016.
@@ -30,53 +38,40 @@ public class AutomationCheckBoxTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationCheckBoxTest.class.getName());
 
     @Test
-    public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testName_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Toggle pattern = Mockito.mock(Toggle.class);
 
-        try {
-            AutomationCheckbox cb1 = window.getCheckbox(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = cb1.name();
+        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
 
-            logger.info(name);
+        String name = checkbox.name();
 
-            assertTrue(name.equals("Second"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void test_getToggleState() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void test_getToggleState_Gets_Value_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Toggle pattern = Mockito.mock(Toggle.class);
 
-        try {
-            AutomationCheckbox cb1 = window.getCheckbox(0);
+        when(pattern.currentToggleState()).thenReturn(ToggleState.On);
 
-            ToggleState state = cb1.getToggleState();
+        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
 
-            assertTrue(state == ToggleState.Off);
-        } finally {
-            closeApplication();
-        }
+        ToggleState state = checkbox.getToggleState();
+
+        assertTrue(state == ToggleState.On);
     }
 
     @Test
-    public void testToggle() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testToggle() throws AutomationException {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Toggle pattern = Mockito.mock(Toggle.class);
 
-        try {
-            AutomationCheckbox cb1 = window.getCheckbox(0);
+        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
 
-            ToggleState state = cb1.getToggleState();
-
-            cb1.toggle();
-
-            ToggleState stateAfter = cb1.getToggleState();
-
-            assertTrue(stateAfter != state);
-        } finally {
-            closeApplication();
-        }
+        checkbox.toggle();
     }
 }

@@ -556,4 +556,114 @@ public class IUIAutomationElementTest {
 
         element.currentPropertyValue(PropertyID.ProcessId.getValue());
     }
+
+    @Test (expected=AutomationException.class)
+    public void testGetAcceleratorKey_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentAcceleratorKey(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.getAcceleratorKey();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testGetCurrentProcessId_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentProcessId(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        int value = element.getProcessId();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testGetAriaRole_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentAriaRole(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.getAriaRole();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testCurrentClassName_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentClassName(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.currentClassName();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testCurrentIsPassword_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentIsPassword(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        boolean value = element.currentIsPassword();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testLocalizedControlType_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentLocalizedControlType(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.localizedControlType();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testGetOrientationType_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentOrientation(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        OrientationType value = element.getOrientation();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testGetProviderDescription_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentProviderDescription(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.getProviderDescription();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testGetFrameworkId_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentFrameworkId(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.getFrameworkId();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testGetItemStatus_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentItemStatus(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        String value = element.getItemStatus();
+    }
 }

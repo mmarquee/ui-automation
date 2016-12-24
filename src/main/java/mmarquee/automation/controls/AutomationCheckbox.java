@@ -63,4 +63,14 @@ public class AutomationCheckbox extends AutomationBase {
         super(element);
         togglePattern = this.getTogglePattern();
     }
+
+    /**
+     * Constructor for the AutomationCheckbox
+     * @param element The element
+     * @param pattern The pattern
+     */
+    public AutomationCheckbox(AutomationElement element, Toggle pattern) {
+        super(element);
+        togglePattern = pattern;
+    }
 }
