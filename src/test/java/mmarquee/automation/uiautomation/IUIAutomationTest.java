@@ -24,6 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -274,5 +275,4 @@ public class IUIAutomationTest {
         }
     }
     */
-
 }

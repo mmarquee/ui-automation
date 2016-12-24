@@ -23,6 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
@@ -36,6 +37,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertTrue;
@@ -62,7 +64,7 @@ public class UIAutomationTest {
 
         AutomationElement root = instance.getRootElement();
 
-        assertTrue("root:" + root.currentName(), root.currentName().equals("Desktop"));
+        assertTrue("root:" + root.currentName(), root.currentName().startsWith("Desktop"));
     }
 
     @Test
@@ -493,6 +495,43 @@ public class UIAutomationTest {
 
         instanceWithMocking.createAndCondition(new PointerByReference().getValue(),
                 new PointerByReference().getValue());
+    }
+
+    @Test(expected = AutomationException.class)
+    public void testCreateOrCondition_Throws_Exception_When_Automation_Returns_False()
+            throws AutomationException {
+        IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
+
+        when(mocked.createOrCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(-1);
+
+        UIAutomation instanceWithMocking = new UIAutomation(mocked);
+
+        instanceWithMocking.createOrCondition(new PointerByReference().getValue(),
+                new PointerByReference().getValue());
+    }
+
+    @Test
+    public void test_GetDesktopWindows()
+            throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        List<AutomationWindow> items = instance.getDesktopWindows();
+
+        assertTrue(items.size() != 0);
+    }
+
+    @Test (expected = ItemNotFoundException.class)
+    public void test_GetDesktopMenu_Throws_Exception_When_Not_Found()
+            throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            AutomationMenu menu = instance.getDesktopMenu("Menu");
+        } finally {
+            app.quit("Untitled - Notepad");
+        }
     }
 
     @Test

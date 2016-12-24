@@ -49,7 +49,7 @@ public class AutomationElementTest {
     @Test
     public void testGetCurrentName() throws AutomationException {
         AutomationElement root = instance.getRootElement();
-        assertTrue("root:" + root.currentName(), root.currentName().equals("Desktop"));
+        assertTrue("root:" + root.currentName(), root.currentName().startsWith("Desktop"));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class AutomationElementTest {
     @Test
     public void testNameForDesktop() throws AutomationException {
         AutomationElement root = instance.getRootElement();
-        assertTrue("root:" + root.getName(), root.getName().equals("Desktop"));
+        assertTrue("root:" + root.getName(), root.getName().startsWith("Desktop"));
     }
 
     @Test
@@ -203,7 +203,7 @@ public class AutomationElementTest {
     }
 
     @Test
-    public void testCurrentPropertyValue_Suceeds_When_No_Error() throws AutomationException {
+    public void testCurrentPropertyValue_Succeeds_When_No_Error() throws AutomationException {
         AutomationElement root = instance.getRootElement();
 
         Object value = root.currentPropertyValue(PropertyID.FrameworkId.getValue());

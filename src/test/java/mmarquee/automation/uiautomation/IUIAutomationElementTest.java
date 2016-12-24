@@ -21,12 +21,19 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.PropertyID;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 18/10/2016.
@@ -143,7 +150,9 @@ public class IUIAutomationElementTest {
 
             String name = sr.getValue().getWideString(0);
 
-            assertTrue("CurrentName", name.equals("Desktop"));
+            logger.info(name);
+
+            assertTrue("CurrentName", name.startsWith("Desktop"));
 
         } catch (Exception error) {
             assertTrue("Exception", false);
@@ -524,5 +533,27 @@ public class IUIAutomationElementTest {
         } catch (Exception error) {
             assertTrue("Exception", false);
         }
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testcurrentControlType_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentControlType(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        int value = element.currentControlType();
+    }
+
+    @Test (expected=AutomationException.class)
+    public void testcurrentPropertyValue_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+
+        when(mockedElement.getCurrentPropertyValue(anyInt(), anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        element.currentPropertyValue(PropertyID.ProcessId.getValue());
     }
 }

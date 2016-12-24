@@ -15,7 +15,10 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import org.apache.log4j.Logger;
@@ -24,6 +27,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
@@ -39,6 +44,7 @@ public class AutomationButtonTest extends BaseAutomationTest {
 
     @Test
     public void testGetButtonByAutomationId() throws Exception {
+
         UIAutomation automation = UIAutomation.getInstance();
 
         try {
