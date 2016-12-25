@@ -15,13 +15,18 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.Value;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 02/12/2016.
@@ -31,47 +36,30 @@ public class AutomationCalendarTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationCalendarTest.class.getName());
 
     @Test
-    @Ignore // Failed to find tabs
-    public void testName() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value pattern = Mockito.mock(Value.class);
 
-        try {
-            AutomationTab tab = window.getTab(0);
+        when(element.getName()).thenReturn("NAME");
 
-            tab.selectTabPage("Calendar");
+        AutomationCalendar calendar = new AutomationCalendar(element, pattern);
 
-            AutomationCalendar calendar = window.getCalendar(0);
+        String name = calendar.name();
 
-            String name = calendar.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
-    @Test(expected=Exception.class)
+    @Test
     public void testGetValue_Throws_Exception() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value pattern = Mockito.mock(Value.class);
 
-        try {
-            AutomationTab tab = window.getTab(0);
+        when(pattern.value()).thenReturn("VALUE");
 
-            tab.selectTabPage("Calendar");
+        AutomationCalendar calendar = new AutomationCalendar(element, pattern);
 
-            this.andRest();
+        String value = calendar.getValue();
 
-            AutomationCalendar calendar = window.getCalendar(0);
-
-            String value = calendar.getValue();
-
-            logger.info(value);
-
-            assertFalse(value.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(value.equals("VALUE"));
     }
 }

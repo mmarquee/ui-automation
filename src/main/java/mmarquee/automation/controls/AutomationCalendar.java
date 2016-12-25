@@ -43,6 +43,16 @@ public class AutomationCalendar extends AutomationBase {
     }
 
     /**
+     * Constructor for the AutomationCalendar.
+     * @param element The underlying automation element
+     * @param pattern Value pattern
+     */
+    public AutomationCalendar(AutomationElement element, Value pattern) {
+        super(element);
+        this.valuePattern = pattern;
+    }
+
+    /**
      * Gets the current value of the control
      * @return The current value.
      * @throws AutomationException Something has gone wrong
