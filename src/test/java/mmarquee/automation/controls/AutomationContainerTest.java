@@ -546,7 +546,7 @@ public class AutomationContainerTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // Still fails to find the window!
+    @Ignore("Still fails to find the window")
     public void testGetSlider_By_Index() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
@@ -564,7 +564,7 @@ public class AutomationContainerTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // Fails for some reason
+    @Ignore("Fails for some reason")
     public void testGetProgress_By_Index() throws Exception {
         loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
 
@@ -651,7 +651,7 @@ public class AutomationContainerTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // Fails for unexplained reasons
+    @Ignore("Fails for unexplained reasons")
     public void testGetMaskedEdit_By_Index() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 

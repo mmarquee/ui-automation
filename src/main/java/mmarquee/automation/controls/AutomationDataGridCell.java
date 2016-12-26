@@ -42,6 +42,18 @@ public class AutomationDataGridCell extends AutomationBase {
     }
 
     /**
+     * Construct the AutomationDataGridCell
+     * @param element The element
+     * @param value The Value pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationDataGridCell(AutomationElement element, Value value) throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.valuePattern = value;
+    }
+
+    /**
      * Gets the text associated with this element
      * @return The current value
      * @throws AutomationException Something has gone wrong

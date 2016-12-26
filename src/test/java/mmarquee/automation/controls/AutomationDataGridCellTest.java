@@ -15,11 +15,18 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.Value;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
@@ -34,37 +41,29 @@ public class AutomationDataGridCellTest extends BaseAutomationTest {
 
     @Test
     public void testValue() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        when(value.value()).thenReturn("VALUE");
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 2);
+        AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
 
-            String value = cell1.value();
+        String val = cell.value();
 
-            assertTrue(value.equals("Row 1, Col 2"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(val.equals("VALUE"));
     }
 
     @Test
     public void testGetCellName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        when(element.getName()).thenReturn("NAME");
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 2);
+        AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
 
-            String itemName = cell1.name();
+        String val = cell.name();
 
-            logger.info(itemName);
-
-            assertTrue(itemName.equals("Row 1, Col 2"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(val.equals("NAME"));
     }
 }
