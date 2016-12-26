@@ -16,10 +16,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Text;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -28,6 +30,9 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -71,8 +76,29 @@ public class AutomationComboboxTest extends BaseAutomationTest {
         assertTrue(name.equals("NAME"));
     }
 
+    @Test (expected=AutomationException.class)
+    public void testGetList_Gets_Correct_Size_Of_List_When_Empty()
+            throws AutomationException, PatternNotFoundException {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
+
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+        when(elem.findAll(anyObject(), anyObject(), anyObject())).thenReturn(-1);
+
+        element.element = elem;
+
+        AutomationComboBox cb1 = new AutomationComboBox(element, collapse, value);
+
+        List<AutomationListItem> elements = cb1.getList();
+
+        assertTrue(elements.size() == 0);
+    }
+
     @Test
-    public void testGetCombobox_Get_List_Gets_Correct_Size_Of_List() throws Exception {
+    public void testGetList_Gets_Correct_Size_Of_List() throws Exception {
+
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
@@ -113,6 +139,7 @@ public class AutomationComboboxTest extends BaseAutomationTest {
 
     @Test
     public void testGetCombobox_GetExpanded_False_When_Expanded() throws Exception {
+
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
@@ -157,21 +184,15 @@ public class AutomationComboboxTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testSetText() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testSetText_Calls_setValue_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
 
-        try {
-            AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-            cb1.setText("**VALUE**");
+        combo.setText("Test");
 
-            String text = cb1.text();
-
-            logger.info(text);
-
-            assertTrue(text.equals("**VALUE**"));
-        } finally {
-            closeApplication();
-        }
+        verify(value, times(1)).setValue("Test");
     }
 }

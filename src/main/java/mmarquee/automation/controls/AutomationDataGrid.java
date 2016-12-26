@@ -59,6 +59,23 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
+     * Construct the AutomationDataGrid
+     * @param element The element
+     * @param value Value pattern
+     * @param grid Grid pattern
+     * @param table Table pattern
+     * @param selection Selection pattern
+     */
+    public AutomationDataGrid(AutomationElement element, Value value, Grid grid, Table table, Selection selection) {
+        super(element);
+
+        this.valuePattern = value;
+        this.gridPattern = grid;
+        this.tablePattern = table;
+        this.selectionPattern = selection;
+    }
+
+    /**
      * Gets the text associated with the active cell of this element
      * @return The value of the item
      * @throws AutomationException Something has gone wrong

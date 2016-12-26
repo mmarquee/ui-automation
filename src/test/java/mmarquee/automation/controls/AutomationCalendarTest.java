@@ -50,7 +50,7 @@ public class AutomationCalendarTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetValue_Throws_Exception() throws Exception {
+    public void testGetValue_Gets_Value_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value pattern = Mockito.mock(Value.class);
 

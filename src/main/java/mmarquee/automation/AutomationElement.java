@@ -39,7 +39,7 @@ public class AutomationElement {
      * The underlying automation element
      * </p>
      */
-    protected IUIAutomationElement element;
+    public IUIAutomationElement element;
 
     /**
      * Constructor of AutomationElement

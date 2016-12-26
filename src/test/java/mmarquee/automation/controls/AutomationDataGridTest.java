@@ -15,15 +15,23 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
@@ -37,40 +45,24 @@ public class AutomationDataGridTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetName_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetName_Get_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = grid.name();
-            assertTrue(name.equals("AutomationStringGrid1"));
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        String name = dataGrid.name();
+
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
     public void testGetCell_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
-
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
-
-            String itemName = cell1.name();
-
-            logger.info(itemName);
-
-            assertTrue(itemName.equals("Row 1, Col 1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetValue_For_DataGrid() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {
@@ -85,18 +77,53 @@ public class AutomationDataGridTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetRowOrColumn_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    @Ignore // Requires lots of mocking
+    public void testGetCell_For_DataGrid_Gets_Value_From_Grid_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        when(element.getName()).thenReturn("NAME");
 
-            RowOrColumnMajor rowOrColumn = grid.getRowOrColumnMajor();
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
 
-            assertTrue(rowOrColumn == RowOrColumnMajor.RowMajor);
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGridCell cell = dataGrid.getItem(1,1);
+    }
+
+    @Test
+    public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
+
+        when(value.value()).thenReturn("VALUE");
+
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        String name = dataGrid.getValue();
+
+        assertTrue(name.equals("VALUE"));
+    }
+
+    @Test
+    public void testGetRowOrColumn_Gets_Value_From_Grid_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
+
+        when(table.getRowOrColumnMajor()).thenReturn(RowOrColumnMajor.RowMajor);
+
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        RowOrColumnMajor val = dataGrid.getRowOrColumnMajor();
+
+        assertTrue(val == RowOrColumnMajor.RowMajor);
     }
 
     @Test
@@ -152,16 +179,20 @@ public class AutomationDataGridTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testIsReadOnly() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testIsReadOnly_Gets_Result_From_Value_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        when(value.isReadOnly()).thenReturn(true);
 
-            assertFalse(grid.isReadOnly());
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        boolean val = dataGrid.isReadOnly();
+
+        assertTrue(val);
     }
 
     @Test
