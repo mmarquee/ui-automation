@@ -76,7 +76,7 @@ public class AutomationComboboxTest extends BaseAutomationTest {
         assertTrue(name.equals("NAME"));
     }
 
-    @Test (expected=AutomationException.class)
+    @Test
     public void testGetList_Gets_Correct_Size_Of_List_When_Empty()
             throws AutomationException, PatternNotFoundException {
         AutomationElement element = Mockito.mock(AutomationElement.class);

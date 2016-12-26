@@ -15,76 +15,66 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.Range;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationProgressBarTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationProgressBarTest.class.getName());
-
+public class AutomationProgressBarTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-//    @Ignore // Fails for some reason
-    public void testName_Equals_Blank() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Range range = Mockito.mock(Range.class);
 
-        try {
-            AutomationProgressBar progressBar = window.getProgressBar(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = progressBar.name();
+        AutomationProgressBar bar = new AutomationProgressBar(element, range);
 
-            logger.info(name);
+        String name = bar.name();
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    @Ignore // Failed to find element
-    public void testGetRangeValue() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+    public void testGetRangeValue_Gets_Value_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Range range = Mockito.mock(Range.class);
 
-        try {
-            AutomationProgressBar progressBar = window.getProgressBar(0);
+        when(range.getValue()).thenReturn(99.9);
 
-            double value = progressBar.getRangeValue();
+        AutomationProgressBar bar = new AutomationProgressBar(element, range);
 
-            logger.info(value);
+        double value = bar.getRangeValue();
 
-            assertTrue(value == 75);
-        } finally {
-            closeApplication();
-        }
+        assertTrue(value == 99.9);
     }
 
-    @Test(expected=AutomationException.class)
+    @Test
     public void testSetRangeValue_Throws_Exception() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Range range = Mockito.mock(Range.class);
 
-        try {
-            AutomationProgressBar progressBar = window.getProgressBar(0);
+        AutomationProgressBar bar = new AutomationProgressBar(element, range);
 
-            progressBar.setRangeValue(76);
+        bar.setRangeValue(18.99);
 
-            double value = progressBar.getRangeValue();
-
-            logger.info(value);
-
-            assertTrue(value == 76);
-        } finally {
-            closeApplication();
-        }
+        verify(range, atLeast(1)).setValue(18.99);
     }
 }

@@ -49,7 +49,6 @@ public class AutomationWindowTest extends BaseAutomationTest {
 
     protected Logger logger = Logger.getLogger(AutomationWindowTest.class.getName());
 
-
     @After
     public void tearDown() {
         // Must be a better way of doing this????

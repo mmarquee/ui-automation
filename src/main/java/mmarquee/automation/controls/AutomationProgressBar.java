@@ -44,6 +44,17 @@ public class AutomationProgressBar extends AutomationBase {
     }
 
     /**
+     * Construct the AutomationPanel
+     * @param element The element
+     * @param range Range pattern
+     */
+    public AutomationProgressBar(AutomationElement element, Range range) {
+        super(element);
+
+        this.rangePattern = range;
+    }
+
+    /**
      * Gets the range value
      * @return The range value
      * @throws AutomationException Error in automation library

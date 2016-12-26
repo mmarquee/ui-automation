@@ -15,16 +15,21 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.Window;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
@@ -34,6 +39,19 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    @Test
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(element.getName()).thenReturn("NAME");
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        assertTrue(window.name().equals("NAME"));
     }
 
     @Test

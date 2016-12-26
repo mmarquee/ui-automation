@@ -23,6 +23,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -56,6 +57,21 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         super(element);
 
         this.windowPattern = this.getWindowPattern();
+    }
+
+    /**
+     * Constructor for the AutomationWindow
+     * @param element The underlying element
+     * @param window The Window pattern
+     * @param container The Container pattern
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationWindow (AutomationElement element, Window window, ItemContainer container)
+            throws PatternNotFoundException, AutomationException {
+        super(element, container);
+
+        this.windowPattern = window;
     }
 
     /**
