@@ -20,15 +20,22 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
@@ -81,55 +88,63 @@ public class AutomationBaseTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetFramework_For_Window() throws  Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetFramework_Gets_Value_From_Element() throws  Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            String m = window.getFramework().toString();
+        when(element.currentPropertyValue(anyInt())).thenReturn(new String("FRAMEWORK"));
 
-            logger.info(m);
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-            assertTrue(m.equals("WPF"));
-        } finally {
-            closeApplication();
-        }
+        Object object = window.getFramework();
+
+        assertTrue(object.toString().equals("FRAMEWORK"));
     }
 
     @Test
-    public void testGetFrameworkId_For_Window() throws  Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetFrameworkId_Gets_Value_From_Element() throws  Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            String m = window.getFrameworkId();
+        when(element.getFrameworkId()).thenReturn("FRAMEWORK");
 
-            logger.info(m);
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-            assertTrue(m.equals("WPF"));
-        } finally {
-            closeApplication();
-        }
+        String name = window.getFrameworkId();
+
+        assertTrue(name.equals("FRAMEWORK"));
     }
 
     @Test
     public void testIsMultipleViewPatternAvailable () throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isMultipleViewPatternAvailable ());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isMultipleViewPatternAvailable();
+
+        assertTrue(value);
     }
 
     @Test
     public void testisScrollPatternAvailable() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isScrollPatternAvailable ());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isScrollPatternAvailable();
+
+        assertTrue(value);
     }
 
     @Test
@@ -145,57 +160,92 @@ public class AutomationBaseTest extends BaseAutomationTest {
 
     @Test
     public void testisTableItemPatternAvailable() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isTableItemPatternAvailable());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(0);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isMultipleViewPatternAvailable();
+
+        assertFalse(value);
     }
 
     @Test
     public void testisScrollItemPatternAvailable () throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isScrollItemPatternAvailable ());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isScrollItemPatternAvailable();
+
+        assertTrue(value);
     }
 
     @Test
     public void testisTransformPatternAvailable() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isTransformPatternAvailable());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isTransformPatternAvailable();
+
+        assertTrue(value);
     }
 
     @Test
     public void testisGridItemPatternAvailable() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isGridItemPatternAvailable());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isGridItemPatternAvailable();
+
+        assertTrue(value);
     }
 
     @Test
-    public void testIsDockPatternPatternAvailable() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testisGridItemPatternAvailable_Returns_False_When_Property_Is_Zero() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isDockPatternAvailable());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(0);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isGridItemPatternAvailable();
+
+        assertFalse(value);
+    }
+
+    @Test
+    public void testIsDockPatternPatternAvailable_Returns_True_When_Value_Is_One() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isDockPatternAvailable();
+
+        assertTrue(value);
     }
 
     @Test(expected = NotImplementedException.class)
@@ -273,20 +323,18 @@ public class AutomationBaseTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore // Need to work out what the values should be
     public void testGetProcessId_Equals_Application_Id() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            Object obj = window.getProcessId();
+        when(element.getProcessId()).thenReturn(99);
 
-            logger.info(obj);
-            logger.info(application.getProcessId());
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-            assertTrue(obj.equals(application.getProcessId()));
-        } finally {
-            closeApplication();
-        }
+        Object object = window.getProcessId();
+
+        assertTrue(object.equals(99));
     }
 
     @Test
