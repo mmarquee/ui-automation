@@ -31,6 +31,8 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -63,33 +65,17 @@ public class AutomationDataGridTest extends BaseAutomationTest {
 
     @Test
     public void testGetCell_For_DataGrid() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
-
-            String value = grid.getValue();
-
-            assertTrue(value.equals("Row 1, Col 1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    @Ignore // Requires lots of mocking
-    public void testGetCell_For_DataGrid_Gets_Value_From_Grid_Pattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        when(element.getName()).thenReturn("NAME");
-
         AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
 
-        AutomationDataGridCell cell = dataGrid.getItem(1,1);
+        AutomationDataGridCell cell = dataGrid.getItem(0,0);
+
+        verify(grid, times(1)).getItem(0, 0);
     }
 
     @Test

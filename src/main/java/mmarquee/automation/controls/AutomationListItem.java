@@ -39,14 +39,29 @@ public class AutomationListItem extends AutomationBase implements Selectable {
      */
     public AutomationListItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        this.selectItemPattern = this.getSelectItemPattern();
+    }
+
+    /**
+     * Constructor for the AutomationListItem
+     * @param element The underlying automation element
+     * @param selection The SelectionItem pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationListItem(AutomationElement element, SelectionItem selection) throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.selectItemPattern = selection;
     }
 
     /**
      * Selects this item.
      * @throws AutomationException Something has gone wrong
      */
-    public void select() throws AutomationException {
+    public void select() throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            this.selectItemPattern = this.getSelectItemPattern();
+        }
+
         this.selectItemPattern.select();
     }
 
@@ -55,7 +70,11 @@ public class AutomationListItem extends AutomationBase implements Selectable {
      * @return True if selected
      * @throws AutomationException Automation library issue
      */
-    public boolean isSelected() throws AutomationException {
+    public boolean isSelected() throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            this.selectItemPattern = this.getSelectItemPattern();
+        }
+
         return this.selectItemPattern.isSelected();
     }
 }

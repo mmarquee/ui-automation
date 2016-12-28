@@ -38,7 +38,7 @@ public class AutomationDataGridCell extends AutomationBase {
      */
     public AutomationDataGridCell(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        this.valuePattern = this.getValuePattern();
+       // this.valuePattern = this.getValuePattern();
     }
 
     /**
@@ -57,8 +57,13 @@ public class AutomationDataGridCell extends AutomationBase {
      * Gets the text associated with this element
      * @return The current value
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public String value() throws AutomationException {
+    public String value() throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
         return valuePattern.value();
     }
 

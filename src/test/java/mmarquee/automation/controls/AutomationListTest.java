@@ -16,13 +16,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -36,8 +31,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationListTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationListTest.class.getName());
+public class AutomationListTest {
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
@@ -70,8 +64,7 @@ public class AutomationListTest extends BaseAutomationTest {
         list.getItem(1);
     }
 
-    @Test(expected=NullPointerException.class)
-    // Throws this as I can't inject a constructor for AutomationListItem
+    @Test
     public void testGetItems_By_Index_Mocked() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Selection selection = Mockito.mock(Selection.class);
@@ -86,22 +79,26 @@ public class AutomationListTest extends BaseAutomationTest {
         AutomationList list = new AutomationList(element, selection);
 
         AutomationListItem item = list.getItem(0);
+
+        assertTrue(item != null);
     }
 
     @Test
     public void testGetItems() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationList li1 = window.getListItem(0);
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-            List<AutomationListItem> items = li1.getItems();
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
 
-            logger.info(items.size());
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
 
-            assertTrue(items.size() == 5);
-        } finally {
-            closeApplication();
-        }
+        AutomationList list = new AutomationList(element, selection);
+
+        List<AutomationListItem> items = list.getItems();
+
+        assertTrue(items.size() == 1);
     }
 }

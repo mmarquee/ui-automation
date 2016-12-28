@@ -16,11 +16,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 21/09/2016.
  */
 public interface Selectable {
-    void select() throws AutomationException;
-    boolean isSelected() throws AutomationException;
+    void select() throws AutomationException, PatternNotFoundException;
+    boolean isSelected() throws AutomationException, PatternNotFoundException;
 }

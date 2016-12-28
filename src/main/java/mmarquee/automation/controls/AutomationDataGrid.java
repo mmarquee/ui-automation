@@ -134,21 +134,9 @@ public class AutomationDataGrid extends AutomationBase
      */
     public AutomationDataGridCell getItem(int x, int y) throws PatternNotFoundException, AutomationException  {
 
-        PointerByReference cell = this.gridPattern.getItem(x, y);
+        AutomationElement element = this.gridPattern.getItem(x, y);
 
-        Unknown uRoot = new Unknown(cell.getValue());
-
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-
-            return new AutomationDataGridCell(
-                new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pbr)));
-        } else {
-            throw new AutomationException();
-        }
+        return new AutomationDataGridCell(element);
     }
 
     /**

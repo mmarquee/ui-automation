@@ -16,10 +16,15 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 
 /**
@@ -55,7 +60,7 @@ public class Grid extends BasePattern {
      * @return The item associated with the cell
      * @throws AutomationException Error thrown in automation library
      */
-    public PointerByReference getItem(int x, int y) throws AutomationException{
+    protected PointerByReference getRawItem(int x, int y) throws AutomationException{
         PointerByReference pbr = new PointerByReference();
 
         if (this.getPattern().getItem(x, y, pbr) != 0) {
@@ -63,6 +68,29 @@ public class Grid extends BasePattern {
         }
 
         return pbr;
+    }
+
+    /**
+     * Gets the element associated with the grid cell
+     * @param x X position
+     * @param y Y position
+     * @return The Element from the grid
+     * @throws AutomationException Something amiss with automation
+     */
+    public AutomationElement getItem(int x, int y) throws AutomationException {
+        PointerByReference cell = this.getRawItem(x, y);
+
+        Unknown uRoot = new Unknown(cell.getValue());
+
+        PointerByReference pbr = new PointerByReference();
+
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
+
+        if (COMUtils.SUCCEEDED(result0)) {
+            return new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pbr));
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**
