@@ -1,56 +1,48 @@
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Selection;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 11/12/2016.
  */
-public class AutomationTextBoxTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationTextBoxTest.class.getName());
-
+public class AutomationTextBoxTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testName_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTextBox cb1 = window.getTextBox(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = cb1.name();
+        AutomationTextBox ctrl = new AutomationTextBox(element);
 
-            logger.info(name);
+        String name = ctrl.name();
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
-
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void testGetValue() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetValue_Gets_Value_From_Element_Name() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTextBox cb1 = window.getTextBox(0);
+        when(element.getName()).thenReturn("VALUE");
 
-            String value = cb1.getValue();
+        AutomationTextBox ctrl = new AutomationTextBox(element);
 
-            logger.info(value);
+        String name = ctrl.getValue();
 
-            assertTrue(value.equals(""));
-        } finally {
-            closeApplication();
-        }
-
+        assertTrue(name.equals("VALUE"));
     }
 
 }

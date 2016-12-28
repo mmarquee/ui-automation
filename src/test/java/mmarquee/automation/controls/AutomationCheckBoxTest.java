@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.junit.Test;
@@ -28,7 +27,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 30/11/2016.
  */
-public class AutomationCheckBoxTest extends BaseAutomationTest {
+public class AutomationCheckBoxTest {
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {

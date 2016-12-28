@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import mmarquee.automation.AutomationElement;
@@ -76,15 +77,17 @@ public class AutomationBaseTest extends BaseAutomationTest {
 
     @Test
     public void testGetOrientation_For_Window() throws  Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            OrientationType m = window.getOrientation();
+        when(element.getOrientation()).thenReturn(OrientationType.Horizontal);
 
-            assertTrue(m == OrientationType.None);
-        } finally {
-            closeApplication();
-        }
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        OrientationType value = window.getOrientation();
+
+        assertTrue(value == OrientationType.Horizontal);
     }
 
     @Test
@@ -148,14 +151,18 @@ public class AutomationBaseTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testisOffScreen() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testisOffScreen_Get_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isOffScreen());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isOffScreen();
+
+        assertTrue(value);
     }
 
     @Test
@@ -250,28 +257,30 @@ public class AutomationBaseTest extends BaseAutomationTest {
 
     @Test(expected = NotImplementedException.class)
     public void testgetRuntimeIdThrowsException() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            int[] result = window.getRuntimeId();
-        } finally {
-            closeApplication();
-        }
+        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        int[] value = window.getRuntimeId();
     }
 
     @Test
-    public void testgetProviderDescription_starts_with_correct_string() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetProviderDescription_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            String result = window.getProviderDescription();
+        when(element.getProviderDescription()).thenReturn("DESCRIPTION");
 
-            logger.info(result);
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-            assertTrue(result.startsWith("[pid:"));
-        } finally {
-            closeApplication();
-        }
+        String value = window.getProviderDescription();
+
+        assertTrue(value.equals("DESCRIPTION"));
     }
 
     @Test
@@ -288,42 +297,53 @@ public class AutomationBaseTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testgetAcceleratorKey() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetAcceleratorKey_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            String result = window.getAcceleratorKey();
-            assertTrue(result.equals(""));
-        } finally {
-            closeApplication();
-        }
+        when(element.getAcceleratorKey()).thenReturn("KEY");
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        String value = window.getAcceleratorKey();
+
+        assertTrue(value.equals("KEY"));
     }
 
     @Test
-    public void testgetItemStatus() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testgetItemStatus_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            String result = window.getItemStatus();
-            assertTrue(result.equals(""));
-        } finally {
-            closeApplication();
-        }
+        when(element.getItemStatus()).thenReturn("STATUS");
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        String value = window.getItemStatus();
+
+        assertTrue(value.equals("STATUS"));
     }
 
     @Test
-    public void testisEnabled() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testisEnabled_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            assertTrue(window.isEnabled());
-        } finally {
-            closeApplication();
-        }
+        when(element.currentIsEnabled()).thenReturn(new WinDef.BOOL(true));
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        boolean value = window.isEnabled();
+
+        assertTrue(value);
+
     }
 
     @Test
-    public void testGetProcessId_Equals_Application_Id() throws Exception {
+    public void testGetProcessId_Gets_Value_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
@@ -335,20 +355,5 @@ public class AutomationBaseTest extends BaseAutomationTest {
         Object object = window.getProcessId();
 
         assertTrue(object.equals(99));
-    }
-
-    @Test
-    public void testGetProcessId() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
-
-        try {
-            Object obj = window.getProcessId();
-
-            logger.info(obj);
-
-            assertTrue(obj != null);
-        } finally {
-            closeApplication();
-        }
     }
 }

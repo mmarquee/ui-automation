@@ -44,7 +44,7 @@ public class AutomationTabText extends BaseAutomationTest {
     }
 
     @Test
-    public void testSelectTabePage_Not_Present() throws Exception {
+    public void testSelectTabPage_Not_Present() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
 
         try {

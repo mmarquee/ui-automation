@@ -15,15 +15,19 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.pattern.ItemContainer;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 03/12/2016.
@@ -32,21 +36,18 @@ public class AutomationTitleBarTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationTitleBarTest.class.getName());
 
     @Test
-    public void testName_Returns_Blanks() throws Exception {
+    public void testName_Returns_Name_From_Element() throws Exception {
 
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        when(element.getName()).thenReturn("NAME");
 
-            String name = sb.name();
+        AutomationTitleBar ctrl = new AutomationTitleBar(element, container);
 
-            logger.info(name);
+        String name = ctrl.name();
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test

@@ -45,6 +45,18 @@ public class AutomationList extends AutomationBase {
     }
 
     /**
+     * Constructor for the AutomationList
+     * @param element The underlying automation element
+     * @param selection The Selection pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationList(AutomationElement element, Selection selection) throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.selectionPattern = selection;
+    }
+
+    /**
      * Gets the item associated with the index
      *
      * @param index Index of element to get

@@ -15,14 +15,19 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.Toggle;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
@@ -31,21 +36,17 @@ public class AutomationListTest extends BaseAutomationTest {
     protected Logger logger = Logger.getLogger(AutomationListTest.class.getName());
 
     @Test
-    public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testName_Gets_Value_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationList li1 = window.getListItem(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = li1.name();
+        AutomationList list = new AutomationList(element, selection);
 
-            logger.info(name);
+        String name = list.name();
 
-            // The value that comes back here seems very wrong
-            assertTrue(name.equals("<a href=\"http://www.google.co.uk\">This is a link</a>"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test

@@ -15,11 +15,15 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.pattern.ItemContainer;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
@@ -33,20 +37,16 @@ public class AutomationToolbarTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetName_Returns_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationToolBar tbar = window.getToolBar(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = tbar.name();
+        AutomationToolBarButton ctrl = new AutomationToolBarButton(element);
 
-            logger.info(name);
+        String name = ctrl.name();
 
-            assertTrue(name.equals("ToolBar1"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test

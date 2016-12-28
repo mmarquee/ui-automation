@@ -16,24 +16,16 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.Value;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 02/12/2016.
  */
-public class AutomationCalendarTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationCalendarTest.class.getName());
+public class AutomationCalendarTest {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {

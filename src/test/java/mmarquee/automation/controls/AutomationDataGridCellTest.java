@@ -16,12 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.pattern.Grid;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.Table;
 import mmarquee.automation.pattern.Value;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -31,10 +26,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationDataGridCellTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationDataGridCellTest.class.getName());
-
+public class AutomationDataGridCellTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }

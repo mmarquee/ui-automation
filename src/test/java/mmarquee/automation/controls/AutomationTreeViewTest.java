@@ -1,10 +1,13 @@
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark on 30/11/2016.
@@ -19,20 +22,15 @@ public class AutomationTreeViewTest extends BaseAutomationTest {
 
     @Test
     public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTreeView tv1 = window.getTreeView(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = tv1.name();
+        AutomationTreeView ctrl = new AutomationTreeView(element);
 
-            logger.info(name);
+        String name = ctrl.name();
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
-    }
+        assertTrue(name.equals("NAME"));    }
 
     @Test
     public void testGetItem_When_Item_Present() throws Exception {
