@@ -28,6 +28,7 @@ import mmarquee.automation.PropertyID;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
@@ -38,6 +39,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 18/10/2016.
  */
+@Category(mmarquee.WindowsOnlyTests.class)
 public class IUIAutomationElementTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());

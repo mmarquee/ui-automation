@@ -25,11 +25,14 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 20/11/2016.
  */
+@Category(mmarquee.WindowsOnlyTests.class)
 public class IUIAutomationWindowPatternTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationWindowPatternTest.class.getName());

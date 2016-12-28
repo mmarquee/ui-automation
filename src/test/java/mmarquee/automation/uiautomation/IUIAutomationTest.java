@@ -24,12 +24,14 @@ import com.sun.jna.ptr.PointerByReference;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 13/10/2016.
  */
+@Category(mmarquee.WindowsOnlyTests.class)
 public class IUIAutomationTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
