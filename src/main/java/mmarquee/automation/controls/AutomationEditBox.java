@@ -78,4 +78,14 @@ public class AutomationEditBox extends AutomationBase {
         super(element);
         this.valuePattern = this.getValuePattern();
     }
+
+    /**
+     * Constructor for the AutomationEditBox
+     * @param element The underlying element
+     * @param value The Value pattern
+     */
+    public AutomationEditBox(AutomationElement element, Value value) {
+        super(element);
+        this.valuePattern = value;
+    }
 }
