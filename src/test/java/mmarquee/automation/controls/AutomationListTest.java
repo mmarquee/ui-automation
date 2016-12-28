@@ -17,16 +17,20 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 /**
@@ -47,6 +51,41 @@ public class AutomationListTest extends BaseAutomationTest {
         String name = list.name();
 
         assertTrue(name.equals("NAME"));
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetItems_By_Index_Throws_Exception_When_Not_Found() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Selection selection = Mockito.mock(Selection.class);
+
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        list.getItem(1);
+    }
+
+    @Test(expected=NullPointerException.class)
+    // Throws this as I can't inject a constructor for AutomationListItem
+    public void testGetItems_By_Index_Mocked() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Selection selection = Mockito.mock(Selection.class);
+
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        AutomationListItem item = list.getItem(0);
     }
 
     @Test
