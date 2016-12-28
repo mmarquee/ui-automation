@@ -16,42 +16,29 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Value;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 02/12/2016.
+ * Created by inpwt on 28/12/2016.
  */
-public class AutomationMaskedEditTest {
+public class AutomationAppBarTest {
     @Test
-    public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
+    public void testGetName_Gets_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        Value value = Mockito.mock(Value.class);
 
-        when(value.value()).thenReturn("VALUE");
+        when(element.getName()).thenReturn("NAME");
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+        AutomationAppBar ctrl = new AutomationAppBar(element);
 
-        String val = control.getValue();
+        String name = ctrl.name();
 
-        assertTrue(val.equals("VALUE"));
+        assertTrue(name.equals("NAME"));
     }
 
-    @Test
-    public void testSetValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Value value = Mockito.mock(Value.class);
-
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
-
-        control.setValue("VALUE");
-
-        verify(value, atLeast(1)).setValue("VALUE");
-    }
 }

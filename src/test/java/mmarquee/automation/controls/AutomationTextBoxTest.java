@@ -44,5 +44,4 @@ public class AutomationTextBoxTest {
 
         assertTrue(name.equals("VALUE"));
     }
-
 }

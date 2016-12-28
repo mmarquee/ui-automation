@@ -17,15 +17,15 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.SelectionItem;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 02/12/2016.
@@ -55,35 +55,61 @@ public class AutomationTreeViewItemTest extends BaseAutomationTest {
 
     @Test
     public void testSelect() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationTreeView tv1 = window.getTreeView(0);
+        when(element.getName()).thenReturn("NAME");
 
-            AutomationTreeViewItem treeItem = tv1.getItem("Sub-SubItem");
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
 
-            treeItem.select();
+        ctrl.select();
 
-            assertTrue(treeItem.isSelected());
-        } finally {
-            closeApplication();
-        }
+        verify(selection, atLeastOnce()).select();
     }
 
     @Test
-    public void testIsSelected_When_True() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testClick_When_Pattern_Is_Available() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-        try {
-            AutomationTreeView tv1 = window.getTreeView(0);
+        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
-            AutomationTreeViewItem treeItem = tv1.getItem("Sub-SubItem");
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
 
-            treeItem.select();
+        ctrl.click();
 
-            assertTrue(treeItem.isSelected());
-        } finally {
-            closeApplication();
-        }
+        verify(invoke, atLeastOnce()).invoke();
+    }
+
+    @Test
+    public void testClick_When_Pattern_Is_NOT_Available() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
+
+        ctrl.click();
+
+        verify(invoke, never()).invoke();
+    }
+
+    @Test
+    public void testIsSelected_Gets_Value_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(selection.isSelected()).thenReturn(true);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
+
+        boolean selected = ctrl.isSelected();
+
+        assertTrue(selected);
     }
 }

@@ -37,7 +37,6 @@ public class AutomationTitleBarTest extends BaseAutomationTest {
 
     @Test
     public void testName_Returns_Name_From_Element() throws Exception {
-
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 

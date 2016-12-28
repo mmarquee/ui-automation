@@ -15,8 +15,10 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.SelectionItem;
 import org.apache.log4j.Logger;
@@ -24,7 +26,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
@@ -50,18 +52,15 @@ public class AutomationToolbarButtonTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testClick() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testClick_Never_Calls_Invoke_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+        when(element.getClickablePoint()).thenReturn(new WinDef.POINT(0,0));
 
-        try {
-            AutomationToolBar tbar = window.getToolBar(0);
+        AutomationToolBarButton ctrl = new AutomationToolBarButton(element, invoke);
 
-            AutomationToolBarButton btn = tbar.getToolbarButton(0);
+        ctrl.click();
 
-            btn.click();
-        } finally {
-            closeApplication();
-        }
+        verify(invoke, never()).invoke();
     }
-
 }

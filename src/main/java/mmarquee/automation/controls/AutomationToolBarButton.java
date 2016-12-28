@@ -20,6 +20,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.mouse.AutomationMouse;
+import mmarquee.automation.pattern.Invoke;
 
 /**
  * Created by Mark Humphreys on 20/07/2016.
@@ -27,6 +28,8 @@ import mmarquee.automation.controls.mouse.AutomationMouse;
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
 public class AutomationToolBarButton extends AutomationBase implements Clickable {
+
+    private Invoke invokePattern;
 
     /**
      * Constructor for the AutomationToolBarButton
@@ -39,11 +42,23 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
     }
 
     /**
+     * Constructor for the AutomationToolBarButton
+     * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     */
+    public AutomationToolBarButton(AutomationElement element, Invoke invoke)
+            throws AutomationException {
+        super (element);
+        this.invokePattern = invoke;
+    }
+
+    /**
      * <p>
      * Invokes the click event for this control
      * </p>
-     *
-     * Actual manufactures the click, as the toolbar buttons do not seem behave properly
+     * <p>
+     * Actually manufactures the click, as the toolbar buttons do not seem behave properly
+     * </p>
      * @throws AutomationException Automation library error
      */
     public void click() throws AutomationException {
