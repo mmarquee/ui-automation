@@ -16,8 +16,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Value;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -25,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by inpwt on 28/12/2016.
+ * Created by Mark Humphreys on 28/12/2016.
  */
 public class AutomationAppBarTest {
     @Test

@@ -16,21 +16,22 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.ItemContainer;
-import org.apache.log4j.Logger;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationToolbarTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationToolbarTest.class.getName());
+public class AutomationToolbarTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -39,10 +40,10 @@ public class AutomationToolbarTest extends BaseAutomationTest {
     @Test
     public void testGetName_Returns_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-
+        ItemContainer container = Mockito.mock(ItemContainer.class);
         when(element.getName()).thenReturn("NAME");
 
-        AutomationToolBarButton ctrl = new AutomationToolBarButton(element);
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
         String name = ctrl.name();
 
@@ -50,21 +51,36 @@ public class AutomationToolbarTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetToolbarButton() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetToolbarButton_Gets_Button_When_Within_Bounds() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            AutomationToolBar tbar = window.getToolBar(0);
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-            AutomationToolBarButton btn = tbar.getToolbarButton(0);
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
 
-            String name = btn.name();
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
 
-            logger.info(name);
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        AutomationToolBarButton btn = ctrl.getToolbarButton(0);
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetToolbarButton_Throws_Exception_When_Out_Of_Bounds() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+
+        AutomationToolBarButton btn = ctrl.getToolbarButton(1);
     }
 }

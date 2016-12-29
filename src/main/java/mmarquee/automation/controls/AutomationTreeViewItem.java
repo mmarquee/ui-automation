@@ -18,10 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.pattern.*;
 
 /**
  * Created by Mark Humphreys on 20/02/2016.
@@ -43,8 +40,8 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
             throws PatternNotFoundException, AutomationException {
         super(element);
 
-        this.selectItemPattern = this.getSelectItemPattern();
-        this.invokePattern = this.getInvokePattern();
+//        this.selectItemPattern = this.getSelectItemPattern();
+//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -66,8 +63,12 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     /**
      * Select the item
      * @throws AutomationException Automation library issue
+     * @throws PatternNotFoundException Pattern not found
      */
-    public void select() throws AutomationException {
+    public void select() throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            this.selectItemPattern = this.getSelectItemPattern();
+        }
         this.selectItemPattern.select();
     }
 
@@ -76,15 +77,24 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
      * @return True if selected
      * @throws AutomationException Automation library issue
      */
-    public boolean isSelected() throws AutomationException {
+    public boolean isSelected() throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            this.selectItemPattern = this.getSelectItemPattern();
+        }
+
         return this.selectItemPattern.isSelected();
     }
 
     /**
      * Click the item
      * @throws AutomationException Automation library issue
+     * @throws PatternNotFoundException Pattern not found
      */
-    public void click() throws AutomationException {
+    public void click() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            this.invokePattern = this.getInvokePattern();
+        }
+
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {

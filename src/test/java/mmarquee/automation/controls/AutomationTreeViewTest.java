@@ -1,20 +1,20 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import org.apache.log4j.Logger;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark on 30/11/2016.
  */
-public class AutomationTreeViewTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationTabText.class.getName());
+public class AutomationTreeViewTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -34,20 +34,17 @@ public class AutomationTreeViewTest extends BaseAutomationTest {
 
     @Test
     public void testGetItem_When_Item_Present() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTreeView tv1 = window.getTreeView(0);
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-            AutomationTreeViewItem treeItem = tv1.getItem("Sub-SubItem");
+        AutomationElement result = new AutomationElement(listElement);
 
-            String name = treeItem.name();
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(result);
+        when(element.currentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
 
-            logger.info(name);
+        AutomationTreeView ctrl = new AutomationTreeView(element);
 
-            assertTrue(name.equals("Sub-SubItem"));
-        } finally {
-            closeApplication();
-        }
+        AutomationTreeViewItem treeItem = ctrl.getItem("SubItem");
     }
 }
