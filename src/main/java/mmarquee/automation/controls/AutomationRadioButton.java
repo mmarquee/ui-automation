@@ -34,6 +34,19 @@ public class AutomationRadioButton extends AutomationBase {
     /**
      * Construct the AutomationRadioButton
      * @param element The element
+     * @param selection The item selection pattern
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Automation library error
+     */
+    public AutomationRadioButton(AutomationElement element, SelectionItem selection)
+            throws PatternNotFoundException, AutomationException {
+        super(element);
+        selectItemPattern = selection;
+    }
+
+    /**
+     * Construct the AutomationRadioButton
+     * @param element The element
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation library error
      */

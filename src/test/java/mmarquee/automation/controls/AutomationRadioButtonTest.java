@@ -15,65 +15,60 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.BaseAutomationTest;
-import org.apache.log4j.Logger;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.SelectionItem;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 30/11/2016.
  */
-public class AutomationRadioButtonTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
+public class AutomationRadioButtonTest {
 
     @Test
-    public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testName_Gets_Name_From_Element() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
 
-        try {
-            AutomationRadioButton rb1 = window.getRadioButton(0);
+        when(element.getName()).thenReturn("NAME");
 
-            String name = rb1.name();
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
 
-            logger.info(name);
+        String name = rb1.name();
 
-            assertTrue(name.equals("Radio 2"));
-        } finally {
-            closeApplication();
-        }
+        assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void test_isSelected() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void test_isSelected_Gets_Value_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
 
-        try {
-            AutomationRadioButton rb1 = window.getRadioButton(0);
+        when(selection.isSelected()).thenReturn(true);
 
-            boolean selected = rb1.isSelected();
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
 
-            assertTrue(selected == false);
-        } finally {
-            closeApplication();
-        }
+        boolean value = rb1.isSelected();
+
+        assertTrue(value);
     }
 
     @Test
     public void testSelect() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        SelectionItem selection = Mockito.mock(SelectionItem.class);
 
-        try {
-            AutomationRadioButton rb1 = window.getRadioButton(0);
+        when(selection.isSelected()).thenReturn(true);
 
-            rb1.selectItem();
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
 
-            boolean selected = rb1.isSelected();
+        rb1.selectItem();
 
-            assertTrue(selected);
-        } finally {
-            closeApplication();
-        }
+        verify(selection, atLeastOnce()).select();
     }
 }

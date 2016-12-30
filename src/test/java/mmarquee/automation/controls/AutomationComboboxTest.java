@@ -17,31 +17,23 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
  */
-public class AutomationComboboxTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationComboboxTest.class.getName());
-
+public class AutomationComboboxTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
@@ -97,90 +89,42 @@ public class AutomationComboboxTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetList_Gets_Correct_Size_Of_List() throws Exception {
+    public void testGetList_Gets_Correct_Size_Of_List_When_findAll_Returns_No_Entries()
+            throws AutomationException, PatternNotFoundException {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
 
-        loadApplication("apps\\Project1.exe", "Form1");
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
+        when(elem.findAll(anyObject(), anyObject(), anyObject())).thenReturn(0);
 
-            List<AutomationListItem> elements = cb1.getList();
+        element.element = elem;
 
-            int count = elements.size();
+        AutomationComboBox cb1 = new AutomationComboBox(element, collapse, value);
 
-            logger.info(count);
+        List<AutomationListItem> elements = cb1.getList();
 
-            assertTrue(count == 0);
-        } finally {
-            closeApplication();
-        }
+        assertTrue(elements.size() == 0);
     }
 
     @Test
-    public void testGetCombobox_Get_List_Gets_Correct_Size_Of_List_When_Expanded() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetCombobox_GetExpanded_Gets_Result_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
 
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-            cb1.expand();
+        when(collapse.isExpanded()).thenReturn(true);
 
-            List<AutomationListItem> elements = cb1.getList();
+        element.element = elem;
 
-            int count = elements.size();
+        AutomationComboBox cb1 = new AutomationComboBox(element, collapse, value);
 
-            logger.info(count);
+        boolean result = cb1.isExpanded();
 
-            assertTrue(count == 3);
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetCombobox_GetExpanded_False_When_Expanded() throws Exception {
-
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
-
-            assertFalse(cb1.isExpanded());
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetCombobox_GetExpanded_True_When_Expanded() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
-
-            cb1.expand();
-
-            assertTrue(cb1.isExpanded());
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetCombobox_GetExpanded_False_When_Expanded_Then_Collapsed() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationComboBox cb1 = window.getCombobox(0);
-
-            cb1.expand();
-            this.andRest();
-            cb1.collapse();
-
-            assertFalse(cb1.isExpanded());
-        } finally {
-            closeApplication();
-        }
+        assertTrue(result);
     }
 
     @Test
@@ -195,4 +139,35 @@ public class AutomationComboboxTest extends BaseAutomationTest {
 
         verify(value, times(1)).setValue("Test");
     }
+
+    @Test
+    public void testExpand_Calls_Expand_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
+
+        when(element.getName()).thenReturn("NAME");
+
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
+
+        combo.expand();
+
+        verify(collapse, atLeast(1)).expand();
+    }
+
+    @Test
+    public void testExpand_Calls_Collapse_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
+
+        when(element.getName()).thenReturn("NAME");
+
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
+
+        combo.collapse();
+
+        verify(collapse, atLeast(1)).collapse();
+    }
+
 }

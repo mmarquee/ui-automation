@@ -46,5 +46,7 @@ public class AutomationTreeViewTest {
         AutomationTreeView ctrl = new AutomationTreeView(element);
 
         AutomationTreeViewItem treeItem = ctrl.getItem("SubItem");
+
+        // Need to verify something
     }
 }

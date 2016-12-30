@@ -16,20 +16,25 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.Range;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 02/12/2016.
  */
-public class AutomationStatusBarTest extends BaseAutomationTest {
+public class AutomationStatusBarTest {
     protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
 
     @Test
@@ -46,21 +51,38 @@ public class AutomationStatusBarTest extends BaseAutomationTest {
         assertTrue(name.equals("NAME"));
     }
 
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetTextBox_Throws_IndexOutOfBoundsException_When_Index_Out_Of_Bounds() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer pattern = Mockito.mock(ItemContainer.class);
+
+        when(element.getName()).thenReturn("NAME");
+
+        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+
+        AutomationTextBox textBox = statusBar.getTextBox(0);
+
+        verify(element, times(1)).findAll(anyObject(), anyObject());
+    }
+
     @Test
-    public void testGetTextBox() throws Exception {
+    public void testGetTextBox_Calls_Find_All_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
-        loadApplication("apps\\Project1.exe", "Form1");
+        when(element.getName()).thenReturn("NAME");
 
-        try {
-            AutomationStatusBar sb = window.getStatusBar();
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-            AutomationTextBox tb1 = sb.getTextBox(1);
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
 
-            logger.info(tb1.getValue());
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
 
-            assertTrue(tb1.getValue().equals("Statusbar Text"));
-        } finally {
-            closeApplication();
-        }
+        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+
+        AutomationTextBox textBox = statusBar.getTextBox(0);
+
+        verify(element, times(1)).findAll(anyObject(), anyObject());
     }
 }

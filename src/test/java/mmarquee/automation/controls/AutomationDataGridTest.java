@@ -23,13 +23,11 @@ import mmarquee.automation.pattern.Table;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
