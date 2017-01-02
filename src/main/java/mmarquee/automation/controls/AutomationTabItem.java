@@ -40,14 +40,30 @@ public class AutomationTabItem extends AutomationBase {
     public AutomationTabItem(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        selectItemPattern = this.getSelectItemPattern();
+        //selectItemPattern = this.getSelectItemPattern();
+    }
+
+    /**
+     * Construct the AutomationTabItem
+     * @param element The element
+     * @param pattern The SelectionItem pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationTabItem(AutomationElement element, SelectionItem pattern)
+            throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.selectItemPattern = pattern;
     }
 
     /**
      * Selects this item.
      * @throws AutomationException Something has gone wrong
      */
-    public void selectItem() throws AutomationException {
+    public void selectItem() throws AutomationException, PatternNotFoundException  {
+        if (this.selectItemPattern == null) {
+            selectItemPattern = this.getSelectItemPattern();
+        }
         this.selectItemPattern.select();
     }
 }

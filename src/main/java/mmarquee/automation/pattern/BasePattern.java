@@ -115,7 +115,7 @@ public abstract class BasePattern implements Pattern {
      * @param pbr The raw pointer
      * @return Result of the call from the COM library
      */
-    protected WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
+    public WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
         Unknown uElement = new Unknown(this.pattern);
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }

@@ -402,7 +402,6 @@ public abstract class AutomationBase implements Automatable {
 
         if (this.isSelectionItemPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
-
             pattern.setPattern(unknown.getValue());
         }
 

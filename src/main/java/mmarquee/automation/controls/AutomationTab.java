@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -32,15 +33,35 @@ import java.util.List;
  */
 public class AutomationTab extends AutomationContainer {
 
-    private List<AutomationTabItem> tabItems;
+    public List<AutomationTabItem> getTabItems() throws PatternNotFoundException {
+        // Now get the list of tab items
+        List<AutomationTabItem> tabItems = new ArrayList<>();
+
+        try {
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
+
+            for (AutomationElement elem : collection) {
+                int retVal = elem.currentControlType();
+
+                if (retVal == ControlType.TabItem.getValue()) {
+                    tabItems.add(new AutomationTabItem(elem));
+                }
+            }
+        } catch (AutomationException ex) {
+            logger.error(ex.getMessage());
+        }
+
+        return tabItems;
+    }
 
     /**
      * Selects the tab with the given name
      * @param name The name of the tab to select
      * @throws AutomationException Automation library error
      */
-    public void selectTabPage(String name) throws AutomationException {
-        for(AutomationTabItem item: tabItems) {
+    public void selectTabPage(String name) throws AutomationException, PatternNotFoundException {
+
+        for(AutomationTabItem item: this.getTabItems()) {
             if (name.equals(item.name())) {
                 item.selectItem();
             }
@@ -55,23 +76,16 @@ public class AutomationTab extends AutomationContainer {
      */
     public AutomationTab (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+    }
 
-        // Now get the list of tab items
-        tabItems = new ArrayList<AutomationTabItem>();
-
-        try {
-            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
-
-            for (AutomationElement elem : collection) {
-                int retVal = elem.currentControlType();
-
-                if (retVal == ControlType.TabItem.getValue()) {
-                    this.tabItems.add(new AutomationTabItem(elem));
-                }
-            }
-        } catch (AutomationException ex) {
-            logger.error(ex.getMessage());
-        }
-
+    /**
+     * Constructor for the AutomationTab
+     * @param element The underlying element
+     * @param container The ItemContainer pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationTab (AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
+        super(element, container);
     }
 }

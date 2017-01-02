@@ -32,7 +32,7 @@ import static org.mockito.Mockito.*;
  */
 public class AutomationTreeViewItemTest extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(AutomationTabText.class.getName());
+    protected Logger logger = Logger.getLogger(AutomationTreeViewItemTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
