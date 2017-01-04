@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.COM.IUnknown;
-import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
@@ -31,8 +29,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -47,7 +43,7 @@ public class AutomationTabTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore("Need to get the correct mocking setup")
+   // @Ignore("Need to get the correct mocking setup")
     public void testGetTabPage_By_Index() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
