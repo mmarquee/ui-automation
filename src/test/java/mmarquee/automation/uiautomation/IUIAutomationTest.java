@@ -27,6 +27,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Created by Mark Humphreys on 13/10/2016.
@@ -241,7 +242,7 @@ public class IUIAutomationTest {
 
             assertTrue("Compare", same.getValue() == 0);
         } else {
-            assertTrue("Compare", false);
+            fail("Compare");
         }
     }
 

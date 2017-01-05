@@ -27,7 +27,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Created by Mark Humphreys on 20/11/2016.
@@ -123,12 +123,12 @@ public class IUIAutomationWindowPatternTest {
 
             PointerByReference pbr = new PointerByReference();
 
-            if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
-                assertTrue("Successfully failed to get window pattern for element", true);
+            if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) != 0) {
+                fail("Successfully failed to get window pattern for element");
             }
 
         } catch (Throwable error) {
-            assertTrue("Exception thrown - " + error.getMessage(), false);
+            fail("Exception thrown - " + error.getMessage());
         }
     }
 
@@ -142,7 +142,7 @@ public class IUIAutomationWindowPatternTest {
             PointerByReference pbr = new PointerByReference();
 
             if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
-                assertTrue("Failed to get current pattern", false);
+                fail("Failed to get current pattern");
             }
 
             Unknown unkConditionA = new Unknown(pbr.getValue());
@@ -155,11 +155,11 @@ public class IUIAutomationWindowPatternTest {
                 IUIAutomationWindowPattern pattern =
                         IUIAutomationWindowPattern.Converter.PointerToInterface(pUnknownA);
             } else {
-                assertTrue("Failed to get WindowPattern", false);
+                fail("Failed to get WindowPattern");
             }
 
         } catch (Throwable error) {
-            assertTrue("Exception thrown - " + error.getMessage(), false);
+            fail("Exception thrown - " + error.getMessage());
         }
     }
 }

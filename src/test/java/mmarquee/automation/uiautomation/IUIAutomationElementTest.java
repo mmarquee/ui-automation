@@ -33,6 +33,7 @@ import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
@@ -120,148 +121,114 @@ public class IUIAutomationElementTest {
     }
 
     @Test
-    public void testClassNameForRootElement() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testClassNameForRootElement() throws Exception {
 
-            PointerByReference sr = new PointerByReference();
+        IUIAutomationElement root = this.getRootElement();
 
-            if (root.getCurrentClassName(sr) != 0) {
-                assertTrue("Failed to get_CurrentClassName", false);
-            }
+        PointerByReference sr = new PointerByReference();
 
-            String name = sr.getValue().getWideString(0);
-
-            assertTrue(name.equals("#32769"));
-
-        } catch (Throwable error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentClassName(sr) != 0) {
+            fail("Failed to get_CurrentClassName");
         }
+
+        String name = sr.getValue().getWideString(0);
+
+        assertTrue(name.equals("#32769"));
     }
 
     @Test
-    public void testNameForRootElement() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testNameForRootElement() throws Exception {
+        IUIAutomationElement root = this.getRootElement();
 
-            PointerByReference sr = new PointerByReference();
+        PointerByReference sr = new PointerByReference();
 
-            if (root.getCurrentName(sr) != 0) {
-                assertTrue("Failed to get_CurrentName", false);
-            }
-
-            String name = sr.getValue().getWideString(0);
-
-            logger.info(name);
-
-            assertTrue("CurrentName", name.startsWith("Desktop"));
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentName(sr) != 0) {
+            fail("Failed to get_CurrentName");
         }
+
+        String name = sr.getValue().getWideString(0);
+
+        logger.info(name);
+
+        assertTrue("CurrentName", name.startsWith("Desktop"));
     }
 
     @Test
-    public void testIsPasswordForRootElement() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testIsPasswordForRootElement() throws Exception {
+        IUIAutomationElement root = this.getRootElement();
 
-            IntByReference ir = new IntByReference();
+        IntByReference ir = new IntByReference();
 
-            if (root.getCurrentIsPassword(ir) != 0) {
-                assertTrue("Failed to get_CurrentIsPassword", false);
-            }
-
-            int isPassword = ir.getValue();
-
-            assertTrue("CurrentIsPassword", isPassword == 0);
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsPassword(ir) != 0) {
+            fail("Failed to get_CurrentIsPassword");
         }
+
+        int isPassword = ir.getValue();
+
+        assertTrue("CurrentIsPassword", isPassword == 0);
     }
 
     @Test
-    public void testGetControlTypeForRootElement() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testGetControlTypeForRootElement() throws Exception {
 
-            IntByReference ir = new IntByReference();
+        IUIAutomationElement root = this.getRootElement();
 
-            if (root.getCurrentControlType(ir) != 0) {
-                assertTrue("Failed to get_CurrentControlType", false);
-            }
+        IntByReference ir = new IntByReference();
 
-            int controlType = ir.getValue();
-
-            assertTrue("get_CurrentControlType", controlType == ControlType.Pane.getValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentControlType(ir) != 0) {
+            fail("Failed to get_CurrentControlType");
         }
+
+        int controlType = ir.getValue();
+
+        assertTrue("get_CurrentControlType", controlType == ControlType.Pane.getValue());
     }
 
     @Test
-    public void testIsOffScreenForRootElement() {
+    public void testIsOffScreenForRootElement() throws Exception {
+        IUIAutomationElement root = this.getRootElement();
 
-        try {
-            IUIAutomationElement root = this.getRootElement();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
-
-            if (root.getCurrentIsOffscreen(br) != 0) {
-                assertTrue("Failed to get_CurrentIsOffscreen", false);
-            }
-
-            WinDef.BOOL isOffScreen = br.getValue();
-
-            assertFalse("CurrentIsPassword", isOffScreen.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsOffscreen(br) != 0) {
+            fail("Failed to get_CurrentIsOffscreen");
         }
+
+        WinDef.BOOL isOffScreen = br.getValue();
+
+        assertFalse("CurrentIsPassword", isOffScreen.booleanValue());
     }
 
     @Test
-    public void testIsEnabledForRootElement() {
+    public void testIsEnabledForRootElement() throws Exception {
 
-        try {
-            IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement root = this.getRootElement();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.getCurrentIsEnabled(br) != 0) {
-                assertTrue("Failed to get_CurrentIsEnabled", false);
-            }
-
-            WinDef.BOOL isEnabled = br.getValue();
-
-            assertTrue("CurrentIsEnabled", isEnabled.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsEnabled(br) != 0) {
+            fail("Failed to get_CurrentIsEnabled");
         }
+
+        WinDef.BOOL isEnabled = br.getValue();
+
+        assertTrue("CurrentIsEnabled", isEnabled.booleanValue());
     }
 
     @Test
-    public void testIsContentElementForRootElement() {
+    public void testIsContentElementForRootElement() throws Exception {
 
-        try {
-            IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement root = this.getRootElement();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.getCurrentIsContentElement(br) != 0) {
-                assertTrue("Failed to get_CurrentIsContentElement", false);
-            }
-
-            WinDef.BOOL isEnabled = br.getValue();
-
-            assertTrue("get_CurrentIsContentElement", isEnabled.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsContentElement(br) != 0) {
+            fail("Failed to get_CurrentIsContentElement");
         }
+
+        WinDef.BOOL isEnabled = br.getValue();
+
+        assertTrue("get_CurrentIsContentElement", isEnabled.booleanValue());
     }
 
     @Test
@@ -315,7 +282,7 @@ public class IUIAutomationElementTest {
             assertTrue("CurrentName", element.getCurrentName(sr) == 0);
 
         } catch (Exception error) {
-            assertTrue("Exception", false);
+            fail("Exception");
         }
     }
 
