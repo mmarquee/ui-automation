@@ -58,6 +58,7 @@ public class AutomationTab extends AutomationContainer {
      * Selects the tab with the given name
      * @param name The name of the tab to select
      * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Pattern not found
      */
     public void selectTabPage(String name) throws AutomationException, PatternNotFoundException {
 

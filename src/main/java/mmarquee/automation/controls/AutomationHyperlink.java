@@ -44,8 +44,6 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * Constructor for the AutomationHyperlink
      * @param element The underlying automation element
      * @param pattern Invoke pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationHyperlink(AutomationElement element, Invoke pattern) {
         super(element);

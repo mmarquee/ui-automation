@@ -44,6 +44,7 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
     /**
      * Constructor for the AutomationToolBarButton
      * @param element The underlying automation element
+     * @param invoke The Invoke pattern
      * @throws AutomationException Automation library error
      */
     public AutomationToolBarButton(AutomationElement element, Invoke invoke)

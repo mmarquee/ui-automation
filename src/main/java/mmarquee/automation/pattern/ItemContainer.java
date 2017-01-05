@@ -21,7 +21,6 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-//import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -32,37 +31,6 @@ public class ItemContainer extends BasePattern {
     /**
      * Constructor for the value pattern
      */
-    public ItemContainer() throws AutomationException {
-//        this.IID = IUIAutomationItemContainerPattern.IID;
-//        IUIAutomationItemContainerPattern pattern = this.getPattern();
+    public ItemContainer() {
     }
-
-//    private IUIAutomationItemContainerPattern getPattern() throws AutomationException {
-//        PointerByReference pbr = new PointerByReference();
-//
-//        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-//
-//        if (COMUtils.SUCCEEDED(result0)) {
-//            return IUIAutomationItemContainerPattern.Converter.PointerToInterface(pbr);
-//        } else {
-//            throw new AutomationException();
-//        }
-//    }
-
-    /**
-     * Finds an item by property
-     * @param pStartAfter Where to start in the tree of elements
-     * @param propertyId The property id to find
-     * @param value The value of the property
-     * @return The item found
-     * @throws AutomationException Error from Automation library
-     */
-//    public Pointer findItemByProperty (Pointer pStartAfter, int propertyId, Variant.VARIANT.ByValue value) throws AutomationException {/
-//        PointerByReference pbr = new PointerByReference();
-//        if (this.getPattern().FindItemByProperty(pStartAfter, propertyId, value, pbr) != 0) {
-//            throw new AutomationException();
-//        }
-//
-  //      return pbr.getValue();
- //   }
 }

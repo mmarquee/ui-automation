@@ -59,6 +59,7 @@ public class AutomationTabItem extends AutomationBase {
     /**
      * Selects this item.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
     public void selectItem() throws AutomationException, PatternNotFoundException  {
         if (this.selectItemPattern == null) {

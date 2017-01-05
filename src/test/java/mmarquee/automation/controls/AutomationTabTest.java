@@ -43,7 +43,7 @@ public class AutomationTabTest extends BaseAutomationTest {
     }
 
     @Test
-   // @Ignore("Need to get the correct mocking setup")
+    @Ignore("Need to get the correct mocking setup")
     public void testGetTabPage_By_Index() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);

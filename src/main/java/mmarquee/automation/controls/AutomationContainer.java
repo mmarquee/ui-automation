@@ -56,7 +56,7 @@ public class AutomationContainer extends AutomationBase {
      * Constructor for AutomationContainer
      *
      * @param element The underlying element
-     * @param element The Container pattern
+     * @param pattern The Container pattern
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */

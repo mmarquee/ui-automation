@@ -146,6 +146,19 @@ public class UIAutomation {
     }
 
     /**
+     * Launches the application
+     *
+     * @param command The command to be called
+     * @return AutomationApplication that represents the application
+     * @throws java.io.IOException Cannot start application?
+     * @throws AutomationException Automation library error
+     */
+    public AutomationApplication launchWithDirectory(String... command) throws java.io.IOException, AutomationException {
+        Process process = Utils.startProcessWithWorkingDirectory(command);
+        return new AutomationApplication(rootElement, process, false);
+    }
+
+    /**
      * Attaches to the application process
      *
      * @param process Process to attach to
@@ -171,6 +184,27 @@ public class UIAutomation {
 
         if (!found) {
             return this.launch(command);
+        } else {
+            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
+            return new AutomationApplication(rootElement, handle, true);
+        }
+    }
+
+    /**
+     * Attaches or launches the application
+     *
+     * @param command Command to be started
+     * @return AutomationApplication that represents the application
+     * @throws java.lang.Exception Unable to find process
+     */
+    public AutomationApplication launchWithWorkingDirectoryOrAttach(String... command) throws Exception {
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+                new Tlhelp32.PROCESSENTRY32.ByReference();
+
+        boolean found = Utils.findProcessEntry(processEntry, command);
+
+        if (!found) {
+            return this.launchWithDirectory(command);
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(rootElement, handle, true);

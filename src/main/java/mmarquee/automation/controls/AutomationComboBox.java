@@ -51,6 +51,8 @@ public class AutomationComboBox extends AutomationBase {
     /**
      * Constructor for the AutomationComboBox.
      * @param element The underlying automation element
+     * @param collapse The collapse pattern
+     * @param value The value pattern
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern(s) not found
      */
