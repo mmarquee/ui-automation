@@ -16,16 +16,17 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Table;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -36,7 +37,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationDataGridTest extends BaseAutomationTest {
+public class AutomationDataGridTest {
 
     protected Logger logger = Logger.getLogger(AutomationDataGridTest.class.getName());
 
@@ -112,54 +113,82 @@ public class AutomationDataGridTest extends BaseAutomationTest {
 
     @Test
     public void testGetColumnHeaders_Returns_Correct_Size() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        List<AutomationElement> elementList = new ArrayList<>();
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            List<AutomationDataGridCell> list = grid.getColumnHeaders();
+        elementList.add(element1);
+        elementList.add(element2);
 
-            logger.info(list.size());
+        when(table.getCurrentColumnHeaders()).thenReturn(elementList);
 
-            assertTrue(list.size() == 5);
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        List<AutomationDataGridCell> list = dataGrid.getColumnHeaders();
+
+        assertTrue(list.size() == 2);
     }
 
     @Test
+    @Ignore("Needs to mock the datagridcell properly")
     public void testGetColumnHeader() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        List<AutomationElement> elementList = new ArrayList<>();
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            AutomationDataGridCell item = grid.getColumnHeader(3);
+        when(element1.getName()).thenReturn("CELL-01");
+        when(element2.getName()).thenReturn("CELL-02");
 
-            logger.info(item.value());
+        elementList.add(element1);
+        elementList.add(element2);
 
-            assertTrue(item.value().equals("Title 4"));
-        } finally {
-            closeApplication();
-        }
+        when(table.getCurrentColumnHeaders()).thenReturn(elementList);
+        when(grid.columnCount()).thenReturn(elementList.size());
+
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        AutomationDataGridCell item = dataGrid.getColumnHeader(0);
+
+        logger.info(item.value());
+
+        assertTrue(item.value().equals("CELL-01"));
     }
 
     @Test
     public void testGetColumnHeaders_Returns_Size_As_ColumnCount() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        List<AutomationElement> elementList = new ArrayList<>();
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            List<AutomationDataGridCell> list = grid.getColumnHeaders();
+        elementList.add(element1);
+        elementList.add(element2);
 
-            logger.info(list.size());
-            logger.info(grid.columnCount());
+        when(table.getCurrentColumnHeaders()).thenReturn(elementList);
+        when(grid.columnCount()).thenReturn(elementList.size());
 
-            assertTrue(list.size() == grid.columnCount());
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        List<AutomationDataGridCell> list = dataGrid.getColumnHeaders();
+
+        assertTrue(list.size() == dataGrid.columnCount());
     }
 
     @Test
@@ -180,84 +209,119 @@ public class AutomationDataGridTest extends BaseAutomationTest {
     }
 
     @Test
+    @Ignore("Needs proper mocking")
     public void testSelected() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        List<AutomationElement> elementList = new ArrayList<>();
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            AutomationDataGridCell selected = grid.selected();
+        elementList.add(element1);
+        elementList.add(element2);
 
-            assertTrue(selected.value().equals("Row 1, Col 1"));
-        } finally {
-            closeApplication();
-        }
+        when(element1.getName()).thenReturn("CELL-01");
+        when(element2.getName()).thenReturn("CELL-02");
+
+        when(table.getCurrentColumnHeaders()).thenReturn(elementList);
+        when(grid.columnCount()).thenReturn(elementList.size());
+
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        AutomationDataGridCell cell = dataGrid.selected();
+
+        assertTrue(cell.value().equals("CELL-01"));
     }
 
     @Test
-    public void testGetColumns_Returns_Size_As_RowCount() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetColumn_Returns_Size_As_RowCount() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            List<AutomationDataGridCell> list = grid.getColumn(1);
+        when(grid.getItem(0,1)).thenReturn(element1);
+        when(grid.getItem(1,1)).thenReturn(element2);
+        when(grid.rowCount()).thenReturn(2);
 
-            logger.info(list.size());
-            logger.info(grid.rowCount());
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
 
-            assertTrue(list.size() == grid.rowCount());
-        } finally {
-            closeApplication();
-        }
+        List<AutomationDataGridCell> list = dataGrid.getColumn(1);
+
+        assertTrue(list.size() == grid.rowCount());
     }
 
     @Test
-    public void testGetRows_Returns_Size_As_ColumnCount() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetRows_Returns_Size_As_RowCount() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            List<AutomationDataGridCell> list = grid.getRow(1);
+        when(grid.getItem(0,1)).thenReturn(element1);
+        when(grid.getItem(1,1)).thenReturn(element2);
+        when(grid.rowCount()).thenReturn(2);
 
-            logger.info(list.size());
-            logger.info(grid.columnCount());
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
 
-            assertTrue(list.size() == grid.columnCount());
-        } finally {
-            closeApplication();
-        }
+        List<AutomationDataGridCell> list = dataGrid.getRow(1);
+
+        assertTrue(list.size() == grid.rowCount());
     }
 
     @Test
     public void testGetRow() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            List<AutomationDataGridCell> items = grid.getRow(3);
+        when(grid.getItem(0,1)).thenReturn(element1);
+        when(grid.getItem(1,1)).thenReturn(element2);
+        when(grid.rowCount()).thenReturn(2);
 
-            assertTrue(items.size() == 5);
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        List<AutomationDataGridCell> list = dataGrid.getRow(1);
+
+        assertTrue(list.size() == 2);
     }
 
     @Test
     public void testGetColumn() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Value value = Mockito.mock(Value.class);
+        Grid grid = Mockito.mock(Grid.class);
+        Table table = Mockito.mock(Table.class);
+        Selection selection = Mockito.mock(Selection.class);
 
-        try {
-            AutomationDataGrid grid = window.getDataGrid(0);
+        AutomationElement element1 = Mockito.mock(AutomationElement.class);
+        AutomationElement element2 = Mockito.mock(AutomationElement.class);
 
-            List<AutomationDataGridCell> items = grid.getColumn(3);
+        when(grid.getItem(0,1)).thenReturn(element1);
+        when(grid.getItem(1,1)).thenReturn(element2);
+        when(grid.rowCount()).thenReturn(2);
 
-            assertTrue(items.size() == 5);
-        } finally {
-            closeApplication();
-        }
+        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
+
+        List<AutomationDataGridCell> list = dataGrid.getRow(1);
+
+        assertTrue(list.size() == 2);
     }
-
 }
