@@ -99,6 +99,22 @@ public class Utils {
     }
 
     /**
+     * Starts the given command, setting the working directory
+     * @param command The command to start
+     * @return The process
+     * @throws java.io.IOException something has gone wrong
+     */
+    public static Process startProcessWithWorkingDirectory(String... command) throws java.io.IOException {
+        ProcessBuilder pb = new ProcessBuilder(command);
+
+        String directory = new File(command[0]).getParent();
+
+        pb.directory(new File(directory));
+
+        return pb.start();
+    }
+
+    /**
      * Quits the given process
      * @param handle The handle to quit
      */
