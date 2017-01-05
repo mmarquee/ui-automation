@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 inpwtepydjuf@gmail.com
+ * Copyright 2016-17 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ public class IUIAutomationElementTest {
             WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
             return IUIAutomationElement.Converter.PointerToInterface(element);
-           } else {
+        } else {
             throw new Exception("Failed to get root element");
         }
     }
@@ -232,276 +232,214 @@ public class IUIAutomationElementTest {
     }
 
     @Test
-    public void testIsControlElementForRootElement() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testIsControlElementForRootElement() throws Exception {
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+        IUIAutomationElement root = this.getRootElement();
 
-            if (root.getCurrentIsControlElement(br) != 0) {
-                assertTrue("Failed to get_CurrentIsControlElement", false);
-            }
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            WinDef.BOOL isEnabled = br.getValue();
-
-            assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsControlElement(br) != 0) {
+            fail("Failed to get_CurrentIsControlElement");
         }
+
+        WinDef.BOOL isEnabled = br.getValue();
+
+        assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
     }
 
     @Test
-    public void testClassNameForNonRootElement() {
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+    public void testClassNameForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-            PointerByReference sr = new PointerByReference();
+        PointerByReference sr = new PointerByReference();
 
-            if (root.getCurrentClassName(sr) != 0) {
-                assertTrue("Failed to get_CurrentClassName", false);
-            }
-
-            String name = sr.getValue().getWideString(0);
-
-            // Actual name will vary depending on the environment
-            assertTrue(!name.isEmpty());
-
-        } catch (Throwable error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentClassName(sr) != 0) {
+            fail("Failed to get_CurrentClassName");
         }
+
+        String name = sr.getValue().getWideString(0);
+
+        // Actual name will vary depending on the environment
+        assertTrue(!name.isEmpty());
     }
 
     @Test
-    public void testNameForNonRootElementDoesntReturnError() {
-        try {
-            IUIAutomationElement element = this.getChildOfRootElement();
+    public void testNameForNonRootElementDoesntReturnError() throws Exception {
+        IUIAutomationElement element = this.getChildOfRootElement();
 
-            PointerByReference sr = new PointerByReference();
+        PointerByReference sr = new PointerByReference();
 
-            assertTrue("CurrentName", element.getCurrentName(sr) == 0);
-
-        } catch (Exception error) {
-            fail("Exception");
-        }
+        assertTrue("CurrentName", element.getCurrentName(sr) == 0);
     }
 
     @Test
-    public void testIsPasswordForNonRootElement() {
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+    public void testIsPasswordForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-            IntByReference ir = new IntByReference();
+        IntByReference ir = new IntByReference();
 
-            if (root.getCurrentIsPassword(ir) != 0) {
-                assertTrue("Failed to get_CurrentIsPassword", false);
-            }
-
-            int isPassword = ir.getValue();
-
-            assertTrue("CurrentIsPassword", isPassword == 0);
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsPassword(ir) != 0) {
+            fail("Failed to get_CurrentIsPassword");
         }
+
+        int isPassword = ir.getValue();
+
+        assertTrue("CurrentIsPassword", isPassword == 0);
     }
 
     @Test
-    public void testGetControlTypeForNonRootElement() {
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+    public void testGetControlTypeForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-            IntByReference ir = new IntByReference();
+        IntByReference ir = new IntByReference();
 
-            if (root.getCurrentControlType(ir) != 0) {
-                assertTrue("Failed to get_CurrentControlType", false);
-            }
-
-            int controlType = ir.getValue();
-
-            assertTrue("get_CurrentControlType", controlType == ControlType.Pane.getValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentControlType(ir) != 0) {
+            fail("Failed to get_CurrentControlType");
         }
+
+        int controlType = ir.getValue();
+
+        assertTrue("get_CurrentControlType", controlType == ControlType.Pane.getValue());
     }
 
     @Test
-    public void testIsOffScreenForNonRootElement() {
+    public void testIsOffScreenForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
-
-            if (root.getCurrentIsOffscreen(br) != 0) {
-                assertTrue("Failed to get_CurrentIsOffscreen", false);
-            }
-
-            WinDef.BOOL isOffScreen = br.getValue();
-
-            assertFalse("CurrentIsPassword", isOffScreen.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsOffscreen(br) != 0) {
+            fail("Failed to get_CurrentIsOffscreen");
         }
+
+        WinDef.BOOL isOffScreen = br.getValue();
+
+        assertFalse("CurrentIsPassword", isOffScreen.booleanValue());
     }
 
     @Test
-    public void testIsEnabledForNonRootElement() {
+    public void testIsEnabledForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
-
-            if (root.getCurrentIsEnabled(br) != 0) {
-                assertTrue("Failed to get_CurrentIsEnabled", false);
-            }
-
-            WinDef.BOOL isEnabled = br.getValue();
-
-            assertTrue("CurrentIsEnabled", isEnabled.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsEnabled(br) != 0) {
+            fail("Failed to get_CurrentIsEnabled");
         }
+
+        WinDef.BOOL isEnabled = br.getValue();
+
+        assertTrue("CurrentIsEnabled", isEnabled.booleanValue());
     }
 
     @Test
-    public void testIsContentElementForNonRootElement() {
+    public void testIsContentElementForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
-
-            if (root.getCurrentIsContentElement(br) != 0) {
-                assertTrue("Failed to get_CurrentIsContentElement", false);
-            }
-
-            WinDef.BOOL isEnabled = br.getValue();
-
-            assertTrue("get_CurrentIsContentElement", isEnabled.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsContentElement(br) != 0) {
+            fail("Failed to get_CurrentIsContentElement");
         }
+
+        WinDef.BOOL isEnabled = br.getValue();
+
+        assertTrue("get_CurrentIsContentElement", isEnabled.booleanValue());
     }
 
     @Test
-    public void testIsControlElementForNonRootElement() {
-        try {
-            IUIAutomationElement root = this.getChildOfRootElement();
+    public void testIsControlElementForNonRootElement() throws Exception {
+        IUIAutomationElement root = this.getChildOfRootElement();
 
-            WinDef.BOOLByReference br = new WinDef.BOOLByReference();
+        WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-            if (root.getCurrentIsControlElement(br) != 0) {
-                assertTrue("Failed to get_CurrentIsControlElement", false);
-            }
-
-            WinDef.BOOL isEnabled = br.getValue();
-
-            assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (root.getCurrentIsControlElement(br) != 0) {
+            fail("Failed to get_CurrentIsControlElement");
         }
+
+        WinDef.BOOL isEnabled = br.getValue();
+
+        assertTrue("get_CurrentIsControlElement", isEnabled.booleanValue());
     }
 
     @Test
-    public void testFindFirst() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testFindFirst() throws Exception {
+        IUIAutomationElement root = this.getRootElement();
 
-            // Get first descendant for the root element
-            PointerByReference pCondition = new PointerByReference();
-            automation.createTrueCondition(pCondition);
-            PointerByReference first = new PointerByReference();
+        // Get first descendant for the root element
+        PointerByReference pCondition = new PointerByReference();
+        automation.createTrueCondition(pCondition);
+        PointerByReference first = new PointerByReference();
 
-            root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
 
-            Unknown uElement = new Unknown(first.getValue());
+        Unknown uElement = new Unknown(first.getValue());
 
-            PointerByReference element = new PointerByReference();
+        PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
-            IUIAutomationElement elem = IUIAutomationElement.Converter.PointerToInterface(element);
+        IUIAutomationElement elem = IUIAutomationElement.Converter.PointerToInterface(element);
 
-            PointerByReference sr = new PointerByReference();
+        PointerByReference sr = new PointerByReference();
 
-            if (elem.getCurrentName(sr) != 0) {
-                assertTrue("Failed to get_CurrentName", false);
-            }
-
-            String name = sr.getValue().getWideString(0);
-
-            assertTrue("findFirst", !name.equals("Desktop"));
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
+        if (elem.getCurrentName(sr) != 0) {
+            fail("Failed to get_CurrentName");
         }
+
+        String name = sr.getValue().getWideString(0);
+
+        assertTrue("findFirst", !name.equals("Desktop"));
     }
 
     @Test
-    public void testFindAllDoes_Not_ReturnError() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testFindAllDoes_Not_ReturnError() throws Exception {
+        IUIAutomationElement root = this.getRootElement();
 
-            // Get first descendant for the root element
-            PointerByReference pCondition = new PointerByReference();
-            automation.createTrueCondition(pCondition);
-            PointerByReference first = new PointerByReference();
+        // Get first descendant for the root element
+        PointerByReference pCondition = new PointerByReference();
+        automation.createTrueCondition(pCondition);
+        PointerByReference first = new PointerByReference();
 
-            root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
 
-            Unknown uElement = new Unknown(first.getValue());
+        Unknown uElement = new Unknown(first.getValue());
 
-            PointerByReference element = new PointerByReference();
+        PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
-            IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
+        IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
 
-            IntByReference ibr = new IntByReference();
+        IntByReference ibr = new IntByReference();
 
-            assertTrue("findAll", elements.getLength(ibr) == 0);
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
-        }
+        assertTrue("findAll", elements.getLength(ibr) == 0);
     }
 
     @Test
-    public void testFindAllGetValidList() {
-        try {
-            IUIAutomationElement root = this.getRootElement();
+    public void testFindAllGetValidList() throws Exception {
+        IUIAutomationElement root = this.getRootElement();
 
-            // Get first descendant for the root element
-            PointerByReference pCondition = new PointerByReference();
-            automation.createTrueCondition(pCondition);
-            PointerByReference first = new PointerByReference();
+        // Get first descendant for the root element
+        PointerByReference pCondition = new PointerByReference();
+        automation.createTrueCondition(pCondition);
+        PointerByReference first = new PointerByReference();
 
-            root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
 
-            Unknown uElement = new Unknown(first.getValue());
+        Unknown uElement = new Unknown(first.getValue());
 
-            PointerByReference element = new PointerByReference();
+        PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
-            IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
+        IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
 
-            IntByReference ibr = new IntByReference();
+        IntByReference ibr = new IntByReference();
 
-            elements.getLength(ibr);
+        elements.getLength(ibr);
 
-            assertTrue("findAll", ibr.getValue() != 0);
-
-        } catch (Exception error) {
-            assertTrue("Exception", false);
-        }
+        assertTrue("findAll", ibr.getValue() != 0);
     }
 
     @Test (expected=AutomationException.class)
@@ -512,7 +450,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        int value = element.currentControlType();
+        element.currentControlType();
     }
 
     @Test (expected=AutomationException.class)
@@ -534,7 +472,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.getAcceleratorKey();
+        element.getAcceleratorKey();
     }
 
     @Test (expected=AutomationException.class)
@@ -545,7 +483,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        int value = element.getProcessId();
+        element.getProcessId();
     }
 
     @Test (expected=AutomationException.class)
@@ -556,7 +494,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.getAriaRole();
+        element.getAriaRole();
     }
 
     @Test (expected=AutomationException.class)
@@ -567,7 +505,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.currentClassName();
+        element.currentClassName();
     }
 
     @Test (expected=AutomationException.class)
@@ -578,7 +516,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        boolean value = element.currentIsPassword();
+        element.currentIsPassword();
     }
 
     @Test (expected=AutomationException.class)
@@ -589,7 +527,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.localizedControlType();
+        element.localizedControlType();
     }
 
     @Test (expected=AutomationException.class)
@@ -600,7 +538,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        OrientationType value = element.getOrientation();
+        element.getOrientation();
     }
 
     @Test (expected=AutomationException.class)
@@ -611,7 +549,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.getProviderDescription();
+        element.getProviderDescription();
     }
 
     @Test (expected=AutomationException.class)
@@ -622,7 +560,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.getFrameworkId();
+        element.getFrameworkId();
     }
 
     @Test (expected=AutomationException.class)
@@ -633,6 +571,6 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        String value = element.getItemStatus();
+        element.getItemStatus();
     }
 }
