@@ -116,50 +116,40 @@ public class IUIAutomationWindowPatternTest {
     }
 
     @Test
-    public void testGetWindowPatternFailsForRootElement() {
-        try {
-            // Get the pattern
-            IUIAutomationElement element = this.getRootElement();
+    public void testGetWindowPatternFailsForRootElement() throws Exception {
+        // Get the pattern
+        IUIAutomationElement element = this.getRootElement();
 
-            PointerByReference pbr = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
 
-            if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) != 0) {
-                fail("Successfully failed to get window pattern for element");
-            }
-
-        } catch (Throwable error) {
-            fail("Exception thrown - " + error.getMessage());
+        if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) != 0) {
+            fail("Successfully failed to get window pattern for element");
         }
     }
 
     @Test
     @Ignore // This fails for some reason
-    public void testGetWindowPatternSucceedsForWindowElement() {
-        try {
-            // Get the pattern
-            IUIAutomationElement element = this.getWindowChildOfRootElement();
+    public void testGetWindowPatternSucceedsForWindowElement() throws Exception {
+        // Get the pattern
+        IUIAutomationElement element = this.getWindowChildOfRootElement();
 
-            PointerByReference pbr = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
 
-            if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
-                fail("Failed to get current pattern");
-            }
+        if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0) {
+            fail("Failed to get current pattern");
+        }
 
-            Unknown unkConditionA = new Unknown(pbr.getValue());
-            PointerByReference pUnknownA = new PointerByReference();
+        Unknown unkConditionA = new Unknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
 
-            logger.info("About to query interface");
+        logger.info("About to query interface");
 
-            WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationWindowPattern.IID), pUnknownA);
-            if (COMUtils.SUCCEEDED(resultA)) {
-                IUIAutomationWindowPattern pattern =
-                        IUIAutomationWindowPattern.Converter.PointerToInterface(pUnknownA);
-            } else {
-                fail("Failed to get WindowPattern");
-            }
-
-        } catch (Throwable error) {
-            fail("Exception thrown - " + error.getMessage());
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationWindowPattern.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationWindowPattern pattern =
+                    IUIAutomationWindowPattern.Converter.PointerToInterface(pUnknownA);
+        } else {
+            fail("Failed to get WindowPattern");
         }
     }
 }
