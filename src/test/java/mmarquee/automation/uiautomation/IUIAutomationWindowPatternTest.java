@@ -27,10 +27,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 /**
  * Created by Mark Humphreys on 20/11/2016.
+ *
+ * Tests for the IUIAutomationWindowPattern code.
  */
 @Category(mmarquee.WindowsOnlyTests.class)
 public class IUIAutomationWindowPatternTest {
@@ -122,9 +125,8 @@ public class IUIAutomationWindowPatternTest {
 
         PointerByReference pbr = new PointerByReference();
 
-        if (element.getCurrentPattern(ControlType.Window.getValue(), pbr) != 0) {
-            fail("Successfully failed to get window pattern for element");
-        }
+        assertFalse("Successfully failed to get window pattern for element",
+                element.getCurrentPattern(ControlType.Window.getValue(), pbr) == 0);
     }
 
     @Test
