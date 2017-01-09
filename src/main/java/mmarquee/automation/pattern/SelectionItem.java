@@ -36,15 +36,31 @@ public class SelectionItem extends BasePattern {
         this.IID = IUIAutomationSelectionItemPattern.IID;
     }
 
+    private IUIAutomationSelectionItemPattern rawPattern;
+
+    /**
+     * Constructor for the value pattern
+     * @param rawPattern The raw pattern
+     */
+    public SelectionItem(IUIAutomationSelectionItemPattern rawPattern) {
+        this.IID = IUIAutomationSelectionItemPattern.IID;
+
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationSelectionItemPattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 
@@ -64,9 +80,13 @@ public class SelectionItem extends BasePattern {
     public boolean isSelected() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
+        int result = this.getPattern().getCurrentIsSelected(ibr);
+
         if (this.getPattern().getCurrentIsSelected(ibr) != 0) {
             throw new AutomationException();
         }
+
+        int value = ibr.getValue();
 
         return (ibr.getValue() == 1);
     }
