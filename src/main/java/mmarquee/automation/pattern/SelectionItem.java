@@ -79,14 +79,9 @@ public class SelectionItem extends BasePattern {
      */
     public boolean isSelected() throws AutomationException {
         IntByReference ibr = new IntByReference();
-
-        int result = this.getPattern().getCurrentIsSelected(ibr);
-
         if (this.getPattern().getCurrentIsSelected(ibr) != 0) {
             throw new AutomationException();
         }
-
-        int value = ibr.getValue();
 
         return (ibr.getValue() == 1);
     }
