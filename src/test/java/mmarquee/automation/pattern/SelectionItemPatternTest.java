@@ -56,20 +56,16 @@ public class SelectionItemPatternTest {
     public void testIsSelected_Returns_True_When_COM_Returns_Zero() throws Exception {
         IntByReference ibr = new IntByReference(1);
 
-//        when(rawPattern.getCurrentIsSelected(anyObject())).thenReturn(0);
-
-        doAnswer(new Answer<IntByReference>() {
+        doAnswer(new Answer() {
             @Override
-            public IntByReference answer(InvocationOnMock invocation) throws Throwable {
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
 
                 Object[] args = invocation.getArguments();
                 IntByReference reference = (IntByReference)args[0];
 
                 reference = new IntByReference(1);
 
-                // Need to do somethingnot very clever here
-
-                return reference;
+                return 0;
             }
         }).when(rawPattern).getCurrentIsSelected(anyObject());
 
