@@ -29,8 +29,7 @@ import org.mockito.stubbing.Answer;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 09/01/2017.
@@ -48,14 +47,16 @@ public class SelectionItemPatternTest {
     }
 
     @Test
-    public void testSelect() {
+    public void testSelect_Calls_Select_From_Pattern() throws Exception {
+        SelectionItem item = new SelectionItem(rawPattern);
 
+        item.select();
+
+        verify(rawPattern, atLeastOnce()).select();
     }
 
     @Test
-    public void testIsSelected_Returns_True_When_COM_Returns_Zero() throws Exception {
-        IntByReference ibr = new IntByReference(1);
-
+    public void testIsSelected_Returns_False_When_COM_Returns_One() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -63,7 +64,7 @@ public class SelectionItemPatternTest {
                 Object[] args = invocation.getArguments();
                 IntByReference reference = (IntByReference)args[0];
 
-                reference = new IntByReference(1);
+                reference.setValue(0);
 
                 return 0;
             }
@@ -74,6 +75,28 @@ public class SelectionItemPatternTest {
         boolean selected = item.isSelected();
 
         assertFalse(selected);
+    }
+
+    @Test
+    public void testIsSelected_Returns_True_When_COM_Returns_Zero() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(1);
+
+                return 0;
+            }
+        }).when(rawPattern).getCurrentIsSelected(anyObject());
+
+        SelectionItem item = new SelectionItem(rawPattern);
+
+        boolean selected = item.isSelected();
+
+        assertTrue(selected);
     }
 
     @Test(expected=AutomationException.class)

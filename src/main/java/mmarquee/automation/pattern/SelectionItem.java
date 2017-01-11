@@ -83,6 +83,8 @@ public class SelectionItem extends BasePattern {
             throw new AutomationException();
         }
 
+        int val = ibr.getValue();
+
         return (ibr.getValue() == 1);
     }
 }
