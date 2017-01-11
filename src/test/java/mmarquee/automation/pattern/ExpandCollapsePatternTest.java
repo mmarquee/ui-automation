@@ -15,13 +15,21 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.ptr.IntByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -57,4 +65,97 @@ public class ExpandCollapsePatternTest {
         verify(rawPattern, atLeastOnce()).collapse();
     }
 
+    @Test
+    public void testIsExpanded_Returns_True_When_COM_Returns_One() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(1);
+
+                return 0;
+            }
+        }).when(rawPattern).getCurrentExpandCollapseState(anyObject());
+
+        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+
+        boolean selected = pattern.isExpanded();
+
+        assertTrue(selected);
+    }
+
+    @Test(expected= AutomationException.class)
+    public void testIsExpanded_Throws_Exception_When_COM_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(0);
+
+                return 1;
+            }
+        }).when(rawPattern).getCurrentExpandCollapseState(anyObject());
+
+        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+
+        boolean selected = pattern.isExpanded();
+
+        assertFalse(selected);
+    }
+
+    @Test
+    public void testIsExpanded_Returns_False_When_COM_Returns_One() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(0);
+
+                return 0;
+            }
+        }).when(rawPattern).getCurrentExpandCollapseState(anyObject());
+
+        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+
+        boolean selected = pattern.isExpanded();
+
+        assertFalse(selected);
+    }
+
+    @Test(expected= AutomationException.class)
+    public void testCollapse_Throws_Exception_When_COM_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+                return 1;
+            }
+        }).when(rawPattern).collapse();
+
+        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+
+        pattern.collapse();
+    }
+
+    @Test(expected= AutomationException.class)
+    public void testExpand_Throws_Exception_When_COM_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+                return 1;
+            }
+        }).when(rawPattern).expand();
+
+        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+
+        pattern.expand();
+    }
 }

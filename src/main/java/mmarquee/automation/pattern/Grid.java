@@ -41,15 +41,26 @@ public class Grid extends BasePattern {
         this.IID = IUIAutomationGridPattern.IID;
     }
 
+    private IUIAutomationGridPattern rawPattern;
+
+    public Grid(IUIAutomationGridPattern rawPattern) {
+        this.IID = IUIAutomationGridPattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationGridPattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationGridPattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationGridPattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 
