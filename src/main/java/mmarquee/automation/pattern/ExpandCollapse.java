@@ -21,6 +21,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -36,20 +37,32 @@ public class ExpandCollapse extends BasePattern {
         this.IID = IUIAutomationExpandCollapsePattern.IID;
     }
 
+    private IUIAutomationExpandCollapsePattern rawPattern;
+
+    public ExpandCollapse(IUIAutomationExpandCollapsePattern rawPattern) {
+        this.IID = IUIAutomationExpandCollapsePattern.IID;
+
+        this.rawPattern = rawPattern;
+    }
+
     /**
      * Gets the pattern
      * @return The pattern
      * @throws AutomationException Something went wrong getting the pattern
      */
     private IUIAutomationExpandCollapsePattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 
