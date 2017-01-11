@@ -78,7 +78,7 @@ public class TogglePatternTest {
     }
 
     @Test
-    public void test_getCurrentToggleState_Returns_Off_When_COM_Returns_Two() throws Exception {
+    public void test_getCurrentToggleState_Returns_Off_When_COM_Returns_Zero() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -100,7 +100,7 @@ public class TogglePatternTest {
     }
 
     @Test
-    public void test_getCurrentToggleState_Returns_Intermediate_When_COM_Returns_Three() throws Exception {
+    public void test_getCurrentToggleState_Returns_Intermediate_When_COM_Returns_Two() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -108,7 +108,7 @@ public class TogglePatternTest {
                 Object[] args = invocation.getArguments();
                 IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(3);
+                reference.setValue(2);
 
                 return 0;
             }
