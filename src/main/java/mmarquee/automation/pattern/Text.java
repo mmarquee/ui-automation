@@ -38,15 +38,26 @@ public class Text extends BasePattern {
         this.IID = IUIAutomationTextPattern.IID;
     }
 
+    private IUIAutomationTextPattern rawPattern;
+
+    public Text(IUIAutomationTextPattern rawPattern) {
+        this.IID = IUIAutomationTextPattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationTextPattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationTextPattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationTextPattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 

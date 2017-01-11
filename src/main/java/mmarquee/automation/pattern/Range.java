@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
@@ -36,15 +37,26 @@ public class Range extends BasePattern {
         this.IID = IUIAutomationRangeValuePattern.IID;
     }
 
+    private IUIAutomationRangeValuePattern rawPattern;
+
+    public Range(IUIAutomationRangeValuePattern rawPattern) {
+        this.IID = IUIAutomationRangeValuePattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 

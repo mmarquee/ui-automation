@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 
 /**
@@ -36,19 +37,30 @@ public class Value extends BasePattern {
         this.IID = IUIAutomationValuePattern.IID;
     }
 
+    private IUIAutomationValuePattern rawPattern;
+
+    public Value(IUIAutomationValuePattern rawPattern) {
+        this.IID = IUIAutomationValuePattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     /**
      * Gets the pattern
      * @return The actual pattern itself
      */
     private IUIAutomationValuePattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationValuePattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationValuePattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 
