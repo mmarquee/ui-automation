@@ -49,7 +49,7 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        itemContainerPattern = this.getItemContainerPattern();
+       // itemContainerPattern = this.getItemContainerPattern();
     }
 
     /**

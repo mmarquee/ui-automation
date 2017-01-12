@@ -15,14 +15,21 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.automation.uiautomation.WindowVisualState;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -53,5 +60,131 @@ public class WindowPatternTest {
         boolean value = pattern.isModal();
 
         verify(rawPattern, atLeastOnce()).getCurrentIsModal(anyObject());
+    }
+
+    @Test(expected= AutomationException.class)
+    public void test_isTopMost_Throws_Exception_When_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).getCurrentIsTopmost(anyObject());
+
+        Window pattern = new Window(rawPattern);
+
+        boolean value = pattern.isTopMost();
+
+        verify(rawPattern, atLeastOnce()).getCurrentIsTopmost(anyObject());
+    }
+
+    @Test(expected= AutomationException.class)
+    public void test_isModal_Throws_Exception_When_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).getCurrentIsModal(anyObject());
+
+        Window pattern = new Window(rawPattern);
+
+        boolean value = pattern.isModal();
+
+        verify(rawPattern, atLeastOnce()).getCurrentIsModal(anyObject());
+    }
+
+    @Test
+    public void test_Close_Calls_Close_From_Pattern() throws Exception {
+        Window pattern = new Window(rawPattern);
+
+        pattern.close();
+
+        verify(rawPattern, atLeastOnce()).close();
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_Close_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).close();
+
+        Window pattern = new Window(rawPattern);
+
+        pattern.close();
+
+        verify(rawPattern, atLeastOnce()).close();
+    }
+
+    @Test
+    public void test_Maximize_Calls_SetWindowState_From_Pattern() throws Exception {
+        Window pattern = new Window(rawPattern);
+
+        pattern.maximize();
+
+        verify(rawPattern, atLeastOnce()).setWindowVisualState(1);
+    }
+
+    @Test
+    public void test_Minimize_Calls_SetWindowState_From_Pattern() throws Exception {
+        Window pattern = new Window(rawPattern);
+
+        pattern.minimize();
+
+        verify(rawPattern, atLeastOnce()).setWindowVisualState(2);
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_SetWindowVisualState_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).setWindowVisualState(anyObject());
+
+        Window pattern = new Window(rawPattern);
+
+        pattern.setWindowState(WindowVisualState.Maximized);
+
+        verify(rawPattern, atLeastOnce()).setWindowVisualState(1);
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_waitForInputIdle_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).waitForInputIdle(anyInt(), anyObject());
+
+        Window pattern = new Window(rawPattern);
+
+        pattern.waitForInputIdle(100);
+
+        verify(rawPattern, atLeastOnce()).setWindowVisualState(1);
+    }
+
+    @Test
+    public void test_waitForInputIdle_Calls_waitForInputIdle_From_Pattern() throws Exception {
+
+        Window pattern = new Window(rawPattern);
+
+        pattern.waitForInputIdle(100);
+
+        verify(rawPattern, atLeastOnce()).waitForInputIdle(anyInt(), anyObject());
     }
 }

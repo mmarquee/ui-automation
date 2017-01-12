@@ -157,4 +157,36 @@ public class ValuePatternTest {
 
         assertTrue(state);
     }
+
+    @Test(expected=AutomationException.class)
+    public void test_SetValue_Throws_Exception_When_COM_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).setValue(anyObject());
+
+        Value pattern = new Value(rawPattern);
+
+        pattern.setValue("VALUE-01");
+    }
+
+    @Test
+    public void test_SetValue_Calls_SetValue_From_Pattern() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 0;
+            }
+        }).when(rawPattern).setValue(anyObject());
+
+        Value pattern = new Value(rawPattern);
+
+        pattern.setValue("VALUE-01");
+
+        verify(rawPattern, atLeastOnce()).setValue(anyObject());
+    }
 }

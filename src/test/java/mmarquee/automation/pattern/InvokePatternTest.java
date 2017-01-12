@@ -41,7 +41,7 @@ public class InvokePatternTest {
     }
 
     @Test
-    public void test_isTopMost_Calls_getCurrentIsTopmost_From_Pattern() throws Exception {
+    public void test_Invoke_Calls_getCurrentIsTopmost_From_Pattern() throws Exception {
         Invoke pattern = new Invoke(rawPattern);
 
         pattern.invoke();

@@ -98,6 +98,6 @@ public class ExpandCollapse extends BasePattern {
             throw new AutomationException();
         }
 
-        return ibr.getValue() == 1; //ExpandCollapseState.ExpandCollapseState_Expanded;
+        return ibr.getValue() == 1;
     }
 }

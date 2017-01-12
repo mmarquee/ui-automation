@@ -142,4 +142,26 @@ public class TogglePatternTest {
 
         assertTrue(state == ToggleState.Indeterminate);
     }
+
+    @Test(expected=AutomationException.class)
+    public void test_toggle_Throws_Exception_When_COM_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(2);
+
+                return 1;
+            }
+        }).when(rawPattern).getCurrentToggleState(anyObject());
+
+        Toggle pattern = new Toggle(rawPattern);
+
+        ToggleState state = pattern.currentToggleState();
+
+        assertTrue(state == ToggleState.Indeterminate);
+    }
 }

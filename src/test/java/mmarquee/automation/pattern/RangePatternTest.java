@@ -54,8 +54,25 @@ public class RangePatternTest {
         verify(rawPattern, atLeastOnce()).setValue(10.0);
     }
 
+    @Test(expected=AutomationException.class)
+    public void test_setValue_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).setValue(anyObject());
+
+        Range pattern = new Range(rawPattern);
+
+        pattern.setValue(10.0);
+
+        verify(rawPattern, atLeastOnce()).setValue(10.0);
+    }
+
     @Test
-    public void testgetValue_Calls_getValue_From_Pattern() throws Exception {
+    public void test_GetValue_Calls_getValue_From_Pattern() throws Exception {
         Range pattern = new Range(rawPattern);
 
         double value = pattern.getValue();
@@ -64,7 +81,7 @@ public class RangePatternTest {
     }
 
     @Test(expected= AutomationException.class)
-    public void testGetValue_Throws_Exception_When_COM_Call_fails() throws Exception {
+    public void test_GetValue_Throws_Exception_When_COM_Call_fails() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -86,7 +103,7 @@ public class RangePatternTest {
     }
 
     @Test
-    public void testGetValue_Gets_Value_From_Pattern() throws Exception {
+    public void test_GetValue_Gets_Value_From_Pattern() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -106,5 +123,4 @@ public class RangePatternTest {
 
         assertTrue(count == 4);
     }
-
 }

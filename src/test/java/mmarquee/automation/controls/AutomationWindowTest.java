@@ -78,44 +78,11 @@ public class AutomationWindowTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetRebar_By_Index() throws Exception {
-
-        loadApplication("explorer", "File Explorer");
-
-        try {
-            AutomationReBar rebar = window.getReBar(0);
-            AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
-
-            assertTrue(toolbar.name().equals("Up band toolbar"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
     public void testGetWindowName_Matches_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
         AutomationWindow window = application.getWindow("Untitled - Notepad");
 
         assertTrue("Name should match", window.name().equals("Untitled - Notepad"));
-    }
-
-    @Test
-    public void testGetStatusBar() throws Exception {
-
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationStatusBar sb = window.getStatusBar();
-
-            String name = sb.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
     }
 
     @Test
@@ -136,7 +103,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testGetTitleBar_By_Index() throws Exception {
+    public void testGetTitleBar() throws Exception {
 
         loadApplication("apps\\Project1.exe", "Form1");
 

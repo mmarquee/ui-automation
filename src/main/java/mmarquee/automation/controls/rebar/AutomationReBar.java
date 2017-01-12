@@ -5,6 +5,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.AutomationContainer;
 import mmarquee.automation.controls.AutomationPanel;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -21,5 +22,16 @@ public class AutomationReBar extends AutomationPanel {
      */
     public AutomationReBar(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+    }
+
+    /**
+     * Construct the AutomationReBar
+     * @param element The element
+     * @param containerPattern The container Pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationReBar(AutomationElement element, ItemContainer containerPattern)  throws PatternNotFoundException, AutomationException {
+        super(element, containerPattern);
     }
 }

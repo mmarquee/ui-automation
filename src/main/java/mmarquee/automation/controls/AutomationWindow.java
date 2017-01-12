@@ -39,6 +39,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
 
     private Window windowPattern;
 
+    private User32 user32;
+
     /**
      * Focuses this control.
      */
@@ -56,6 +58,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
             throws PatternNotFoundException, AutomationException {
         super(element);
 
+        this.user32 = User32.INSTANCE;
         this.windowPattern = this.getWindowPattern();
     }
 
@@ -71,6 +74,24 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
             throws PatternNotFoundException, AutomationException {
         super(element, container);
 
+        this.user32 = User32.INSTANCE;
+        this.windowPattern = window;
+    }
+
+    /**
+     * Constructor for the AutomationWindow
+     * @param element The underlying element
+     * @param window The Window pattern
+     * @param container The Container pattern
+     * @param user32 The user32 instance
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationWindow (AutomationElement element, Window window, ItemContainer container, User32 user32)
+            throws PatternNotFoundException, AutomationException {
+        super(element, container);
+
+        this.user32 = user32;
         this.windowPattern = window;
     }
 
@@ -252,11 +273,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     public void setTransparency(int alpha) throws Win32Exception, AutomationException {
         WinDef.HWND hwnd = this.getNativeWindowHandle();
 
-        if (User32.INSTANCE.SetWindowLong(hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED) == 0) {
+        if (user32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED) == 0) {
             throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
         }
 
-        if (!User32.INSTANCE.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, User32.LWA_ALPHA)) {
+        if (!user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, User32.LWA_ALPHA)) {
             throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
         }
     }

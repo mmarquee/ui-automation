@@ -88,4 +88,22 @@ public class TextPatternTest {
         assertTrue(text.equals(""));
     }
 
+    @Test
+    @Ignore("Needs more work")
+    public void test_GetSelection_When() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 0;
+            }
+        }).when(rawPattern).getSelection(anyObject());
+
+        Text pattern = new Text(rawPattern);
+
+        String text = pattern.getSelection();
+
+        assertTrue(text.equals(""));
+    }
+
 }
