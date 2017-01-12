@@ -16,7 +16,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by Mark on 12/01/2017.
+ * Created by Mark Humphreys on 12/01/2017.
  */
 public class StylesPatternTest {
     @Mock

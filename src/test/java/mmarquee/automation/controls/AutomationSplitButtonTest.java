@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark on 12/01/2017.
+ * Created by Mark Humphreys on 12/01/2017.
  */
 public class AutomationSplitButtonTest {
     static {

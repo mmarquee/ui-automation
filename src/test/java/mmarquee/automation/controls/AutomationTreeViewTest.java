@@ -12,7 +12,7 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark on 30/11/2016.
+ * Created by Mark Humphreys on 30/11/2016.
  */
 public class AutomationTreeViewTest {
 
