@@ -43,7 +43,7 @@ public class AutomationButton extends AutomationBase implements Clickable {
     public AutomationButton(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        this.invokePattern = this.getInvokePattern();
+//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -67,6 +67,10 @@ public class AutomationButton extends AutomationBase implements Clickable {
      * @throws PatternNotFoundException Could not find the invoke pattern
      */
     public void click() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            this.invokePattern = this.getInvokePattern();
+        }
+
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {

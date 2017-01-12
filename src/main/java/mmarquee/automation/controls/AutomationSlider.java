@@ -26,7 +26,7 @@ public class AutomationSlider extends AutomationBase {
     public AutomationSlider(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        this.rangePattern = this.getRangePattern();
+//        this.rangePattern = this.getRangePattern();
     }
 
     /**
@@ -46,8 +46,13 @@ public class AutomationSlider extends AutomationBase {
      * Gets the range value
      * @return The range value
      * @throws AutomationException Error in automation library
+     * @throws PatternNotFoundException Cannot find pattern
      */
-    public double getRangeValue() throws AutomationException {
+    public double getRangeValue() throws AutomationException, PatternNotFoundException {
+        if (this.rangePattern == null) {
+            this.rangePattern = this.getRangePattern();
+        }
+
         return this.rangePattern.getValue();
     }
 
@@ -55,8 +60,13 @@ public class AutomationSlider extends AutomationBase {
      * Sets the range value
      * @param value The value to set
      * @throws AutomationException Error in automation library
+     * @throws PatternNotFoundException Cannot find pattern
      */
-    public void setRangeValue(double value) throws AutomationException {
+    public void setRangeValue(double value) throws AutomationException, PatternNotFoundException {
+        if (this.rangePattern == null) {
+            this.rangePattern = this.getRangePattern();
+        }
+
         this.rangePattern.setValue(value);
     }
 }

@@ -35,8 +35,13 @@ public class AutomationEditBox extends AutomationBase {
      * Gets the value of the control
      * @return The string value of the control
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public String getValue() throws AutomationException {
+    public String getValue() throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
         return valuePattern.value();
     }
 
@@ -44,8 +49,12 @@ public class AutomationEditBox extends AutomationBase {
      * Sets the value of the edit box
      * @param value The value to set
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public void setValue(String value) throws AutomationException {
+    public void setValue(String value) throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
         this.valuePattern.setValue(value);
     }
 
@@ -53,8 +62,13 @@ public class AutomationEditBox extends AutomationBase {
      * Whether the element is read only
      * @return True if readonly, otherwise false.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public boolean isReadOnly()throws AutomationException {
+    public boolean isReadOnly()throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
         return this.valuePattern.isReadOnly();
     }
 
@@ -76,7 +90,7 @@ public class AutomationEditBox extends AutomationBase {
     public AutomationEditBox(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        this.valuePattern = this.getValuePattern();
+//        this.valuePattern = this.getValuePattern();
     }
 
     /**

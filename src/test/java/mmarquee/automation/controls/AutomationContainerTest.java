@@ -15,21 +15,14 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.Window;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
@@ -39,19 +32,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    @Test
-    public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Window pattern = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        when(element.getName()).thenReturn("NAME");
-
-        AutomationWindow window = new AutomationWindow(element, pattern, container);
-
-        assertTrue(window.name().equals("NAME"));
     }
 
     @Test
@@ -75,52 +55,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
         try {
             AutomationEditBox tab = window.getEditBox(0);
-
-            String m = tab.getValue();
-
-            assertTrue(m.equals("Edit1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test(expected=AutomationException.class)
-    public void testGetEditBox_By_Name_Throws_Exception_When_Not_Found() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationEditBox tab = window.getEditBox("Edit99");
-
-            String m = tab.getValue();
-
-            assertTrue(m.equals("Edit1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test(expected=AutomationException.class)
-    public void testGetEditBox_By_AutomationID_Throws_Exception_When_Not_Found() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationEditBox tab = window.getEditBoxByAutomationId("Edit99");
-
-            String m = tab.getValue();
-
-            assertTrue(m.equals("Edit1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    @Ignore
-    public void testGetEditBox_By_Name() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationEditBox tab = window.getEditBox("Edit1");
 
             String m = tab.getValue();
 
@@ -213,40 +147,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
             logger.info(name);
 
             assertTrue(name.equals("AutomatedCombobox2"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetCombobox_By_Automation_Id() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationComboBox cb1 = window.getComboboxByAutomationId("AutomatedCombobox1");
-
-            String name = cb1.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals("AutomatedCombobox1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetCombobox_By_Name() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
-
-            String name = cb1.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals("AutomatedCombobox1"));
         } finally {
             closeApplication();
         }
@@ -476,23 +376,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
         }
     }
 
-    @Test(expected= ElementNotFoundException.class)
-    public void testTreeView_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationTreeView hl1 = window.getTreeView("Not there");
-
-            String name = hl1.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals("Never gets here anyway"));
-        } finally {
-            closeApplication();
-        }
-    }
-
     @Test
     public void testTreeView_By_Index() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
@@ -602,23 +485,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
         }
     }
 
-    @Test(expected=AutomationException.class)
-    public void testGetProgress_By_Name_Fails_When_Not_Found() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationProgressBar pb = window.getProgressBar("NotThere");
-
-            String name = pb.name();
-
-            logger.info(name);
-
-            assertTrue(name.equals("ProgressBar1"));
-        } finally {
-            closeApplication();
-        }
-    }
-
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetProgress_By_Index_Throws_Exception_When_Not_Found() throws Exception {
         loadApplication("apps\\Project1.exe", "Form1");
@@ -633,20 +499,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
             assertTrue(name.equals("ToolBar1"));
         } finally {
             closeApplication();
-        }
-    }
-
-    @Test
-    public void testGetMaskedEdit_By_Name() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
-            String value = me0.getValue();
-            logger.info("value");
-            assertTrue(value.equals("  /  /  "));
-        } finally {
-            this.closeApplication();
         }
     }
 
@@ -686,37 +538,6 @@ public class AutomationContainerTest extends BaseAutomationTest {
 
         try {
             AutomationPanel panel = window.getPanel(0);
-
-            String name = panel.name();
-            logger.info(name);
-            assertTrue(name.equals(""));
-        } finally {
-            this.closeApplication();
-        }
-
-    }
-
-    @Test(expected=AutomationException.class)
-    public void testGetPanel_By_Name_Fails_When_not_Found() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
-
-        try {
-            AutomationPanel panel = window.getPanel("PANEL99");
-
-            String name = panel.name();
-            logger.info(name);
-            assertTrue(name.equals(""));
-        } finally {
-            this.closeApplication();
-        }
-    }
-
-    @Test(expected=AutomationException.class)
-    public void testGetPanel_By_AutomationId_Fails_When_not_Found() throws Exception {
-        loadApplication("apps\\SampleWpfApplication.exe", "MainWindow");
-
-        try {
-            AutomationPanel panel = window.getPanelByAutomationId("9999");
 
             String name = panel.name();
             logger.info(name);

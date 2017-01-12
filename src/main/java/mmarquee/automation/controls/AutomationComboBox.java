@@ -44,8 +44,8 @@ public class AutomationComboBox extends AutomationBase {
     public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super (element);
 
-        this.collapsePattern = this.getExpandCollapsePattern();
-        this.valuePattern = this.getValuePattern();
+     //   this.collapsePattern = this.getExpandCollapsePattern();
+     //   this.valuePattern = this.getValuePattern();
     }
 
     /**
@@ -68,8 +68,13 @@ public class AutomationComboBox extends AutomationBase {
      * Gets the text associated with this element
      * @return The current value
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public String text() throws AutomationException {
+    public String text() throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
         return valuePattern.value();
     }
 
@@ -77,16 +82,26 @@ public class AutomationComboBox extends AutomationBase {
      * Sets the text associated with this element
      * @param text The value to be set.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public void setText(String text) throws AutomationException {
+    public void setText(String text) throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
         valuePattern.setValue(text);
     }
 
     /**
      * Expands the element.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public void expand() throws AutomationException {
+    public void expand() throws AutomationException, PatternNotFoundException {
+        if (this.collapsePattern == null) {
+            this.collapsePattern = this.getExpandCollapsePattern();
+        }
+
         this.collapsePattern.expand();
     }
 
@@ -94,16 +109,25 @@ public class AutomationComboBox extends AutomationBase {
      * Is the control expanded
      * @return True if expanded
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public boolean isExpanded() throws AutomationException {
+    public boolean isExpanded() throws AutomationException, PatternNotFoundException {
+        if (this.collapsePattern == null) {
+            this.collapsePattern = this.getExpandCollapsePattern();
+        }
+
         return collapsePattern.isExpanded();
     }
 
     /**
      * Collapses the element
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
      */
-    public void collapse() throws AutomationException {
+    public void collapse() throws AutomationException, PatternNotFoundException {
+        if (this.collapsePattern == null) {
+            this.collapsePattern = this.getExpandCollapsePattern();
+        }
         this.collapsePattern.collapse();
     }
 
