@@ -24,6 +24,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 
 import java.util.List;
 
@@ -41,15 +42,26 @@ public class Selection extends BasePattern {
         this.IID = IUIAutomationSelectionPattern.IID;
     }
 
+    private IUIAutomationSelectionPattern rawPattern;
+
+    public Selection(IUIAutomationSelectionPattern rawPattern) {
+        this.IID = IUIAutomationSelectionPattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationSelectionPattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 

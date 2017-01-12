@@ -15,13 +15,10 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
-import mmarquee.automation.uiautomation.ToggleState;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

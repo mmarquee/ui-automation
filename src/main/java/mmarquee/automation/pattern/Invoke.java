@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -35,20 +36,31 @@ public class Invoke extends BasePattern {
         this.IID = IUIAutomationInvokePattern.IID;
     }
 
+    private IUIAutomationInvokePattern rawPattern;
+
+    public Invoke(IUIAutomationInvokePattern rawPattern) {
+        this.IID = IUIAutomationInvokePattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     /**
      * Gets the pattern
      * @return The pattern
      * @throws AutomationException Something went wrong getting the pattern
      */
     private IUIAutomationInvokePattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationInvokePattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationInvokePattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 

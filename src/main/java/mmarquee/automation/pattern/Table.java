@@ -24,6 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
@@ -43,15 +44,26 @@ public class Table extends BasePattern {
         this.IID = IUIAutomationTablePattern.IID;
     }
 
+    private IUIAutomationTablePattern rawPattern;
+
+    public Table(IUIAutomationTablePattern rawPattern) {
+        this.IID = IUIAutomationTablePattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationTablePattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationTablePattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationTablePattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 

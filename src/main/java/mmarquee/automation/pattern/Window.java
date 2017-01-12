@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
@@ -36,15 +37,26 @@ public class Window extends BasePattern {
         this.IID = IUIAutomationWindowPattern.IID;
     }
 
+    private IUIAutomationWindowPattern rawPattern;
+
+    public Window(IUIAutomationWindowPattern rawPattern) {
+        this.IID = IUIAutomationWindowPattern.IID;
+        this.rawPattern = rawPattern;
+    }
+
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
+        if (this.rawPattern != null) {
+            return this.rawPattern;
         } else {
-            throw new AutomationException();
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
+            } else {
+                throw new AutomationException();
+            }
         }
     }
 

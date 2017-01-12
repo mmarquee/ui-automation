@@ -55,7 +55,7 @@ public abstract class BasePattern implements Pattern {
     }
 
     /**
-     * Turns a collection (array) of automation elements, it to a collection.
+     * Turns a collection (array) of automation elements, into a collection.
      *
      * @param collection The ElementArray.
      * @return The List

@@ -29,7 +29,6 @@ public class Toggle extends BasePattern {
         this.rawPattern = rawPattern;
     }
 
-
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;

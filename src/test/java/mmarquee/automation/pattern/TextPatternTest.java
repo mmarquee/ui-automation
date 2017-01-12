@@ -15,16 +15,20 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.ptr.IntByReference;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doAnswer;
 
 /**
  * Created by Mark Humphreys on 11/01/2017.
@@ -42,7 +46,7 @@ public class TextPatternTest {
 
     @Test
     @Ignore("Needs more work")
-    public void testToggle_Calls_Toggle_From_Pattern() throws Exception {
+    public void test_GetText_Calls_Toggle_From_Pattern() throws Exception {
         Text pattern = new Text(rawPattern);
 
         String text = pattern.getText();
@@ -50,5 +54,38 @@ public class TextPatternTest {
         assertTrue(text.equals(""));
     }
 
+    @Test(expected= AutomationException.class)
+    public void test_GetText_Throws_Exception_When_getDocumentRange_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).getDocumentRange(anyObject());
+
+        Text pattern = new Text(rawPattern);
+
+        String text = pattern.getText();
+
+        assertTrue(text.equals(""));
+    }
+
+    @Test(expected= AutomationException.class)
+    public void test_GetSelection_Throws_Exception_When_getSelection_Returns_Error() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return 1;
+            }
+        }).when(rawPattern).getSelection(anyObject());
+
+        Text pattern = new Text(rawPattern);
+
+        String text = pattern.getSelection();
+
+        assertTrue(text.equals(""));
+    }
 
 }
