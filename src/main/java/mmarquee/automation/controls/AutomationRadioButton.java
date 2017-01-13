@@ -53,14 +53,18 @@ public class AutomationRadioButton extends AutomationBase {
     public AutomationRadioButton(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        selectItemPattern = this.getSelectItemPattern();
+//        selectItemPattern = this.getSelectItemPattern();
     }
 
     /**
      * Selects this element.
      * @throws AutomationException Something has gone wrong
      */
-    public void selectItem() throws AutomationException {
+    public void selectItem() throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            selectItemPattern = this.getSelectItemPattern();
+        }
+
         this.selectItemPattern.select();
     }
 
@@ -69,7 +73,11 @@ public class AutomationRadioButton extends AutomationBase {
      * @return The selection state
      * @throws AutomationException Error in the automation library
      */
-    public boolean isSelected() throws AutomationException {
+    public boolean isSelected() throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            selectItemPattern = this.getSelectItemPattern();
+        }
+
         return this.selectItemPattern.isSelected();
     }
 }

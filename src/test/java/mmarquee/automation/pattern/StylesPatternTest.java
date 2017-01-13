@@ -30,7 +30,6 @@ public class StylesPatternTest {
     @Test
     public void test_getStyleId_Calls_getCurrentStyleId_From_Pattern() throws Exception {
         Styles pattern = new Styles(rawPattern);
-
         pattern.getStyleId();
 
         verify(rawPattern, atLeastOnce()).getCurrentStyleId(anyObject());
@@ -55,7 +54,6 @@ public class StylesPatternTest {
     @Ignore("Needs further work")
     public void test_getStyleName_Calls_getCurrentStyleName_From_Pattern() throws Exception {
         Styles pattern = new Styles(rawPattern);
-
         pattern.getStyleName();
 
         verify(rawPattern, atLeastOnce()).getCurrentStyleName(anyObject());

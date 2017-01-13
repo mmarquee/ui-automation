@@ -58,7 +58,7 @@ public class AutomationCheckBoxTest {
     }
 
     @Test
-    public void testToggle() throws AutomationException {
+    public void testToggle() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
 

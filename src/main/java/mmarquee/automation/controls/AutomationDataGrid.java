@@ -52,10 +52,10 @@ public class AutomationDataGrid extends AutomationBase
     public AutomationDataGrid(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 
-        this.valuePattern = this.getValuePattern();
-        this.gridPattern = this.getGridPattern();
-        this.tablePattern = this.getTablePattern();
-        this.selectionPattern = this.getSelectionPattern();
+//        this.valuePattern = this.getValuePattern();
+//        this.gridPattern = this.getGridPattern();
+//        this.tablePattern = this.getTablePattern();
+//        this.selectionPattern = this.getSelectionPattern();
     }
 
     /**
@@ -80,7 +80,10 @@ public class AutomationDataGrid extends AutomationBase
      * @return The value of the item
      * @throws AutomationException Something has gone wrong
      */
-    public String getValue() throws AutomationException {
+    public String getValue() throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
         return this.valuePattern.value();
     }
 
@@ -89,7 +92,10 @@ public class AutomationDataGrid extends AutomationBase
      * @return Read only?
      * @throws AutomationException Something has gone wrong
      */
-    public boolean isReadOnly() throws AutomationException {
+    public boolean isReadOnly() throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
         return this.valuePattern.isReadOnly();
     }
 
@@ -144,7 +150,10 @@ public class AutomationDataGrid extends AutomationBase
      * @return The row count
      * @throws AutomationException Something has gone wrong
      */
-    public int rowCount() throws AutomationException {
+    public int rowCount() throws AutomationException, PatternNotFoundException {
+        if (this.gridPattern == null) {
+            this.gridPattern = this.getGridPattern();
+        }
         return this.gridPattern.rowCount();
     }
 
@@ -153,7 +162,10 @@ public class AutomationDataGrid extends AutomationBase
      * @return The column count
      * @throws AutomationException Something has gone wrong
      */
-    public int columnCount() throws AutomationException {
+    public int columnCount() throws AutomationException, PatternNotFoundException {
+        if (this.gridPattern == null) {
+            this.gridPattern = this.getGridPattern();
+        }
         return this.gridPattern.columnCount();
     }
 
@@ -211,7 +223,11 @@ public class AutomationDataGrid extends AutomationBase
      * @return RowOrColumnMajor Row or column
      * @throws AutomationException Error thrown from automation library
      */
-    public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException {
+    public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException, PatternNotFoundException {
+        if (this.tablePattern == null) {
+            this.tablePattern = this.getTablePattern();
+        }
+        
         return this.tablePattern.getRowOrColumnMajor();
     }
 }

@@ -37,7 +37,7 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      */
     public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        this.invokePattern = this.getInvokePattern();
+//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -56,6 +56,10 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * @throws PatternNotFoundException Did not find the pattern
      **/
     public void click() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            this.invokePattern = this.getInvokePattern();
+        }
+
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {

@@ -38,7 +38,11 @@ public class AutomationCheckbox extends AutomationBase {
      * </p>
      * @throws AutomationException Something has gone wrong
      */
-    public void toggle () throws AutomationException {
+    public void toggle () throws AutomationException, PatternNotFoundException {
+        if (this.togglePattern == null) {
+            togglePattern = this.getTogglePattern();
+        }
+
         this.togglePattern.toggle();
     }
 
@@ -49,7 +53,11 @@ public class AutomationCheckbox extends AutomationBase {
      * @return The toggle state
      * @throws AutomationException Something has gone wrong
      */
-    public ToggleState getToggleState () throws AutomationException {
+    public ToggleState getToggleState () throws AutomationException, PatternNotFoundException {
+        if (this.togglePattern == null) {
+            togglePattern = this.getTogglePattern();
+        }
+
         return this.togglePattern.currentToggleState();
     }
 
@@ -61,7 +69,7 @@ public class AutomationCheckbox extends AutomationBase {
      */
     public AutomationCheckbox (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        togglePattern = this.getTogglePattern();
+//        togglePattern = this.getTogglePattern();
     }
 
     /**

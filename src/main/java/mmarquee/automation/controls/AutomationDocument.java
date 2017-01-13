@@ -39,7 +39,7 @@ public class AutomationDocument extends AutomationBase {
      */
     public AutomationDocument(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        this.textPattern = this.getTextPattern();
+//        this.textPattern = this.getTextPattern();
     }
 
     /**
@@ -57,7 +57,10 @@ public class AutomationDocument extends AutomationBase {
      * @return The document's text
      * @throws AutomationException Something has gone wrong
      */
-    public String getText() throws AutomationException {
+    public String getText() throws AutomationException, PatternNotFoundException {
+        if (this.textPattern == null) {
+            this.textPattern = this.getTextPattern();
+        }
         return this.textPattern.getText();
     }
 
@@ -67,7 +70,11 @@ public class AutomationDocument extends AutomationBase {
      * @return String of text that is selected
      * @throws AutomationException Something has gone wrong
      */
-    public String getSelection() throws AutomationException {
+    public String getSelection() throws AutomationException, PatternNotFoundException {
+        if (this.textPattern == null) {
+            this.textPattern = this.getTextPattern();
+        }
+
         return this.textPattern.getSelection();
     }
 }
