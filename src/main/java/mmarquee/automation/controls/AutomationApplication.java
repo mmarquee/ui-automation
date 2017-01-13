@@ -44,6 +44,8 @@ public class AutomationApplication extends AutomationBase {
      */
     private boolean isAttached = false;
 
+    private User32 user32;
+
     /**
      * A very, very long timeout
      */
@@ -54,7 +56,10 @@ public class AutomationApplication extends AutomationBase {
      * @param timeout Timeout to wait for
      */
     public void waitForInputIdle(int timeout) {
-        User32.INSTANCE.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
+        if (user32 == null) {
+            user32 = User32.INSTANCE;
+        }
+        user32.WaitForInputIdle(this.handle, new WinDef.DWORD(timeout));
     }
 
     /**
@@ -77,7 +82,10 @@ public class AutomationApplication extends AutomationBase {
      * Waits for the application to accept input, i.e. not be idle, with maximum timeout
      */
     public void waitForInputIdle() {
-        User32.INSTANCE.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
+        if (user32 == null) {
+            user32 = User32.INSTANCE;
+        }
+        user32.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
     }
 
     /**
@@ -122,6 +130,13 @@ public class AutomationApplication extends AutomationBase {
         this.isAttached = attached;
     }
 
+    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached, User32 user32) throws AutomationException  {
+        super(element);
+        this.handle = handle;
+        this.isAttached = attached;
+        this.user32 = user32;
+    }
+
     /**
      * Constructor for the AutomationApplication.
      * Detection of already running application is taken from:
@@ -154,7 +169,11 @@ public class AutomationApplication extends AutomationBase {
      * @param title Title of the window to close
      */
     public void close(String title) {
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, title);
+        if (user32 == null) {
+            user32 = User32.INSTANCE;
+        }
+
+        WinDef.HWND hwnd = user32.FindWindow(null, title);
 
         if (hwnd != null) {
             Utils.closeProcess(hwnd);
@@ -166,7 +185,11 @@ public class AutomationApplication extends AutomationBase {
      * @param title Title of the window to quit
      */
     public void quit(String title) {
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, title);
+        if (user32 == null) {
+            user32 = User32.INSTANCE;
+        }
+
+        WinDef.HWND hwnd = user32.FindWindow(null, title);
 
         if (hwnd != null) {
             Utils.quitProcess(hwnd);

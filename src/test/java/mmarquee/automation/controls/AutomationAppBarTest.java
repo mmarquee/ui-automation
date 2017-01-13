@@ -24,6 +24,8 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/12/2016.
+ *
+ * Tests for the appbar
  */
 public class AutomationAppBarTest {
     @Test

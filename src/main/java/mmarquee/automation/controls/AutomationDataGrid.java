@@ -227,7 +227,7 @@ public class AutomationDataGrid extends AutomationBase
         if (this.tablePattern == null) {
             this.tablePattern = this.getTablePattern();
         }
-        
+
         return this.tablePattern.getRowOrColumnMajor();
     }
 }

@@ -1,147 +1,122 @@
-/*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinNT;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.utils.Utils;
-import org.apache.log4j.Logger;
-import org.junit.After;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 25/11/2016.
+ * Created by Mark Humphreys on 13/01/2017.
+ *
+ * Mocked tests for AutomationApplication
  */
-public class AutomationApplicationTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationApplicationTest.class.getName());
-
-    static {
-        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
-
-    private UIAutomation instance;
-    private AutomationApplication app;
-
+public class AutomationApplicationTest {
     @Before
-    public void setUp() throws Exception {
-        // Notepad _MIGHT_ still be running, so close it if it is
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
-        }
-
-        instance = UIAutomation.getInstance();
-
-        app = instance.launch("notepad.exe");
-
-        app.waitForInputIdle();
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
-    @After
-    public void tearDown() {
-        // Must be a better way of doing this????
-        this.andRest();
+    @Mock
+    AutomationElement element;
 
-        // Notepad _MIGHT_ still be running, so close it if it is
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+    @Mock
+    Window window;
 
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
-        }
-    }
+    @Mock
+    ItemContainer container;
 
-    @Test
-    public void testGetWindowFinds_A_Running_Window()
+    @Mock
+    WinNT.HANDLE handle;
+
+    @InjectMocks
+    UIAutomation automation;
+
+    @Test(expected= ElementNotFoundException.class)
+    public void testGetWindow_Returns_Exception_When_Element_Not_Found()
             throws AutomationException, PatternNotFoundException {
+
+        AutomationApplication app = new AutomationApplication(element, handle, false);
+
         AutomationWindow window = app.getWindow("Untitled - Notepad");
-        assertTrue("Name should be set", window.name().equals("Untitled - Notepad"));
+
+        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
 
     @Test
-    public void testGetWindowFinds_Does_Not_Find_A_Non_Running_Window()
+    @Ignore("Need to mock the elem getting a name")
+    public void testGetWindow_Calls_FindAll_From_Element()
             throws AutomationException, PatternNotFoundException {
+        List<AutomationElement> list = new ArrayList<>();
 
-        try {
-            AutomationWindow window = app.getWindow("Untitled - Notepad99");
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-            try {
-                String name = window.name();
+        list.add(new AutomationElement(elem));
 
-                assertFalse("Name should be equal", window.name().equals("Untitled - Notepad99"));
-            } catch (Throwable e) {
-                assertTrue("Shouldn't get a value", true);
-            }
-        } catch (Throwable e) {
-            assertTrue("Shouldn't get a value", true);
-        }
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationApplication app = new AutomationApplication(element, handle, false);
+
+        AutomationWindow window = app.getWindow("Untitled - Notepad");
+
+        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
 
     @Test
-    @Ignore
-    public void testClose_Works() {
-        app.close("Untitled - Notepad");
-
-        this.andRest();
-
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        assertTrue("Notepad won't have closed", hwnd != null);
-    }
-
-    @Test
-    @Ignore // passes when run individually
-    public void testQuit_Works() {
-        app.quit("Untitled - Notepad");
-
-        this.andRest();
-
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        assertTrue("Notepad should have quit", hwnd == null);
-    }
-
-    @Test
-    public void testIsAttached() {
-        logger.info(app.getIsAttached());
+    public void testSetAttached_Set_To_False() throws Exception {
+        AutomationApplication app = new AutomationApplication(element, handle, false);
 
         assertFalse(app.getIsAttached());
     }
 
     @Test
-    public void testSetAttached_Set_To_False() {
-        app.setIsAttached(false);
-
-        assertFalse(app.getIsAttached());
-    }
-
-    @Test
-    public void testSetAttached_Set_To_True() {
-        app.setIsAttached(true);
+    public void testSetAttached_Set_To_True() throws Exception {
+        AutomationApplication app = new AutomationApplication(element, handle, true);
 
         assertTrue(app.getIsAttached());
+    }
+
+    @Test
+    public void testClose_Calls_FindWindow() throws Exception {
+        User32 user32 = Mockito.mock(User32.class);
+
+        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+
+        app.close("Untitled - Notepad");
+
+        verify(user32, atLeastOnce()).FindWindow(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testQuit_Calls_FindWindow() throws Exception {
+        User32 user32 = Mockito.mock(User32.class);
+
+        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+
+        app.quit("Untitled - Notepad");
+
+        verify(user32, atLeastOnce()).FindWindow(anyObject(), anyObject());
     }
 
 }
