@@ -16,18 +16,11 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.ptr.PointerByReference;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -35,44 +28,50 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
+ *
+ * Tests for AutomationBase class
  */
-public class AutomationBaseTest extends BaseAutomationTest {
+public class AutomationBaseTest {
     protected Logger logger = Logger.getLogger(AutomationBaseTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    protected void closeApplication() throws PatternNotFoundException, AutomationException {
-        AutomationButton btnClickMe = window.getButton("Press Me");
-        assertTrue(btnClickMe.name().equals("Press Me"));
+    @Test
+    public void testGetAriaRole_For_Window() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        btnClickMe.click();
+        when(element.getOrientation()).thenReturn(OrientationType.Horizontal);
 
-        AutomationWindow popup = window.getWindow("Confirmation");
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-        AutomationButton btn = popup.getButton("Yes");
-        btn.click();
+        window.getAriaRole();
 
-        this.andRest();
+        verify(element, atLeastOnce()).getAriaRole();
     }
 
     @Test
-    public void testGetAriaRole_For_Window() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
+    public void testGetElement() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            String m = window.getAriaRole();
+        when(element.getOrientation()).thenReturn(OrientationType.Horizontal);
 
-            assertTrue(m.equals(""));
-        } finally {
-            closeApplication();
-        }
+        AutomationWindow window = new AutomationWindow(element, pattern, container);
+
+        AutomationElement result = window.getElement();
+
+        assertTrue(result == element);
     }
 
     @Test
@@ -96,7 +95,7 @@ public class AutomationBaseTest extends BaseAutomationTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(new String("FRAMEWORK"));
+        when(element.currentPropertyValue(anyInt())).thenReturn("FRAMEWORK");
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -265,7 +264,7 @@ public class AutomationBaseTest extends BaseAutomationTest {
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-        int[] value = window.getRuntimeId();
+        window.getRuntimeId();
     }
 
     @Test
@@ -281,19 +280,6 @@ public class AutomationBaseTest extends BaseAutomationTest {
         String value = window.getProviderDescription();
 
         assertTrue(value.equals("DESCRIPTION"));
-    }
-
-    @Test
-    public void testGetElement() throws Exception {
-        loadApplication("apps\\WpfApplicationWithAutomationIds.exe", "MainWindow");
-
-        try {
-            AutomationElement result = window.getElement();
-
-            assertTrue(result != null);
-        } finally {
-            closeApplication();
-        }
     }
 
     @Test

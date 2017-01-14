@@ -31,8 +31,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationToolbarButtonTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationToolbarButtonTest.class.getName());
+public class AutomationToolbarButtonTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

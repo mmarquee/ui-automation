@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.WindowsOnlyTests;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ import static org.junit.Assert.fail;
 /**
  * Created by Mark Humphreys on 13/10/2016.
  */
-@Category(mmarquee.WindowsOnlyTests.class)
+@Category(WindowsOnlyTests.class)
 public class IUIAutomationTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());

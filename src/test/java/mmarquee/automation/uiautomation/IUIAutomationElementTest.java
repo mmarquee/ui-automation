@@ -21,10 +21,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.PropertyID;
+import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +37,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 18/10/2016.
  */
-@Category(mmarquee.WindowsOnlyTests.class)
+@Category(WindowsOnlyTests.class)
 public class IUIAutomationElementTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());

@@ -41,7 +41,7 @@ public class AutomationList extends AutomationBase {
      */
     public AutomationList(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-        this.selectionPattern = this.getSelectionPattern();
+//        this.selectionPattern = this.getSelectionPattern();
     }
 
     /**
@@ -103,7 +103,10 @@ public class AutomationList extends AutomationBase {
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getSelection() throws AutomationException {
+    public List<AutomationElement> getSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
         return this.selectionPattern.getCurrentSelection();
     }
 

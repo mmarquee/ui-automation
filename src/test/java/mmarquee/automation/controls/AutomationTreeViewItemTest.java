@@ -30,9 +30,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Mark Humphreys on 02/12/2016.
  */
-public class AutomationTreeViewItemTest extends BaseAutomationTest {
-
-    protected Logger logger = Logger.getLogger(AutomationTreeViewItemTest.class.getName());
+public class AutomationTreeViewItemTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
