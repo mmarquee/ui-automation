@@ -21,9 +21,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 28/12/2016.
@@ -76,13 +74,13 @@ public class AutomationEditBoxTest {
     public void testIsReadOnly_Gets_Value_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
-        when(element.currentIsPassword()).thenReturn(true);
+        when(value.isReadOnly()).thenReturn(true);
 
         AutomationEditBox ctrl = new AutomationEditBox(element, value);
 
-        boolean result = ctrl.isPassword();
+        boolean result = ctrl.isReadOnly();
 
-        assertTrue(result);
+        verify(value, atLeastOnce()).isReadOnly();
     }
 
     @Test

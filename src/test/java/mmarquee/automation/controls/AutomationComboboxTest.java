@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.ExpandCollapse;
@@ -23,7 +24,10 @@ import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -170,4 +174,57 @@ public class AutomationComboboxTest {
         verify(collapse, atLeast(1)).collapse();
     }
 
+    @Test
+    public void test_text_Calls_Value_From_Pattern() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
+
+        when(element.getName()).thenReturn("NAME");
+
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
+
+        combo.text();
+
+        verify(value, atLeast(1)).value();
+
+    }
+
+    @Test
+    public void test_GetList_Calls_Value_From_Pattern() throws Exception {
+
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+//        when(elem.getCurrentControlType())
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(50007);
+
+                return 0;
+            }
+        }).when(elem).getCurrentControlType(anyObject());
+
+        list.add(new AutomationElement(elem));
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Value value = Mockito.mock(Value.class);
+
+        when(element.getName()).thenReturn("NAME");
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
+
+        combo.getList();
+
+        verify(element, atLeast(1)).findAll(anyObject(), anyObject());
+    }
 }

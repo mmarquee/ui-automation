@@ -78,7 +78,7 @@ public class AutomationEditBox extends AutomationBase {
      * @throws AutomationException Automation error
      */
     public boolean isPassword() throws AutomationException {
-        return this.element.currentIsPassword();
+        return this.element.isPassword();
     }
 
     /**

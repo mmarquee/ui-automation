@@ -121,7 +121,7 @@ public class AutomationElement {
      * @return True if IsPassword
      * @throws AutomationException Call to Automation API failed
      */
-    public Boolean currentIsPassword() throws AutomationException {
+    public Boolean isPassword() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         if (this.element.getCurrentIsPassword(ibr) != 0) {
@@ -136,7 +136,7 @@ public class AutomationElement {
      * @return True if off screen
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentOffScreen() throws AutomationException {
+    public WinDef.BOOL offScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         if (this.element.getCurrentIsOffscreen(bbr) != 0) {
@@ -151,7 +151,7 @@ public class AutomationElement {
      * @return True if content element
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentIsContentElement() throws AutomationException {
+    public WinDef.BOOL isContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         if (this.element.getCurrentIsContentElement(bbr) != 0) {
@@ -166,7 +166,7 @@ public class AutomationElement {
      * @return True if control element
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentIsControlElement() throws AutomationException {
+    public WinDef.BOOL isControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         if (this.element.getCurrentIsControlElement(bbr) != 0) {

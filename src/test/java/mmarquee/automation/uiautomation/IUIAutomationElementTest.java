@@ -513,7 +513,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        element.currentIsPassword();
+        element.isPassword();
     }
 
     @Test (expected=AutomationException.class)

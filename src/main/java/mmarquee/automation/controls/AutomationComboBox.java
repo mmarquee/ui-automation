@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by Mark Humphreys on 01/02/2016.
  *
- * Wrapper for the ComboBoc element.
+ * Wrapper for the ComboBox element.
  */
 public class AutomationComboBox extends AutomationBase {
     private ExpandCollapse collapsePattern;

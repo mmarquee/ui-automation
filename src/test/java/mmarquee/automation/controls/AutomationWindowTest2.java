@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -348,5 +349,54 @@ public class AutomationWindowTest2 {
         AutomationTitleBar bar = wndw.getTitleBar();
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test(expected= ElementNotFoundException.class)
+    public void testGetWindow_Throws_Exception_When_Not_Found() throws Exception {
+        AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
+
+        AutomationWindow w = wndw.getWindow("WINDOW-01");
+
+        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testGetWindow_Calls_FindFirst_10_Times_When_Not_Found() throws Exception {
+        AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
+
+        try {
+            AutomationWindow w = wndw.getWindow("WINDOW-01");
+        } catch (Throwable t) {
+            // Catch exception to allow verify to work
+        }
+
+        verify(element, times(10)).findFirst(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testGetWindow() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public AutomationElement answer(InvocationOnMock invocation) throws Throwable {
+//                Object[] args = invocation.getArguments();
+                // Set the 2nd parameter
+//                Object reference = (Object)args[1];
+
+                IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+//                reference = new AutomationElement(elem);
+
+                return new AutomationElement(elem);
+            }
+        }).when(element).findFirst(anyObject(), anyObject());
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
+
+        try {
+            AutomationWindow w = wndw.getWindow("WINDOW-01");
+        } catch (Throwable t) {
+            // Catch exception so test can continue
+        }
+
+        verify(element, times(1)).findFirst(anyObject(), anyObject());
     }
 }

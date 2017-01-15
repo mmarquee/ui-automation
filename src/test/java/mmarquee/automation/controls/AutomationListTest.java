@@ -30,6 +30,8 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
+ *
+ * Tests for AutomationList
  */
 public class AutomationListTest {
 
