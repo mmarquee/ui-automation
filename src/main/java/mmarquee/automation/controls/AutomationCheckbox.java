@@ -37,6 +37,7 @@ public class AutomationCheckbox extends AutomationBase {
      * Invokes the toggle event for this control
      * </p>
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public void toggle () throws AutomationException, PatternNotFoundException {
         if (this.togglePattern == null) {
@@ -52,6 +53,7 @@ public class AutomationCheckbox extends AutomationBase {
      * </p>
      * @return The toggle state
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public ToggleState getToggleState () throws AutomationException, PatternNotFoundException {
         if (this.togglePattern == null) {

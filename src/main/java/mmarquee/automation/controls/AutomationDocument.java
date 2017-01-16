@@ -56,6 +56,7 @@ public class AutomationDocument extends AutomationBase {
      * Gets the text for the document
      * @return The document's text
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public String getText() throws AutomationException, PatternNotFoundException {
         if (this.textPattern == null) {
@@ -69,6 +70,7 @@ public class AutomationDocument extends AutomationBase {
      *
      * @return String of text that is selected
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public String getSelection() throws AutomationException, PatternNotFoundException {
         if (this.textPattern == null) {

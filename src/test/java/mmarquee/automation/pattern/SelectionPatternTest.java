@@ -15,17 +15,25 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
@@ -40,7 +48,7 @@ public class SelectionPatternTest {
     }
 
     @Test(expected= AutomationException.class)
-    public void test_getCurrentSelection_Throws_Execption_When_Pattern_Returns_Error() throws Exception {
+    public void test_getCurrentSelection_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {

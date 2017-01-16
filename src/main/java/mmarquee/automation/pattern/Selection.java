@@ -78,7 +78,7 @@ public class Selection extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = new Unknown(pbr.getValue());
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);

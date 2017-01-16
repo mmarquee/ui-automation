@@ -119,4 +119,16 @@ public abstract class BasePattern implements Pattern {
         Unknown uElement = new Unknown(this.pattern);
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }
+
+    /**
+     * Creates an Unknown object from the pointer.
+     *
+     * Allows Mockito to be used to create Unknown objects
+     *
+     * @param pvInstance The pointer to use
+     * @return An Unknown object
+     */
+    public Unknown makeUnknown(Pointer pvInstance) {
+        return new Unknown(pvInstance);
+    }
 }

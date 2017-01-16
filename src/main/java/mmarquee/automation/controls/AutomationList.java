@@ -102,6 +102,7 @@ public class AutomationList extends AutomationBase {
      * Gets the current selection
      * @return The current selection
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public List<AutomationElement> getSelection() throws AutomationException, PatternNotFoundException {
         if (this.selectionPattern == null) {

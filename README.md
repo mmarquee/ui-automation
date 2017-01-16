@@ -12,17 +12,24 @@ The code here is used to test applications written in Delphi (specifically Delph
 # Developer documentation
 The library is a programmers tool, and they will either need to have the source code of the application under test, or be able to 'explore'`the application to get the names of controls, etc.
  
-The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.3.0-SNAPSHOT).
+The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.3.0).
 
 ## Maven
+<!--
 The library is held in the Sonatype OSS repository, so is available for download via Maven (or other tools, such as SBT for Scala). As the library depends on the 4.3.0-SNAPSHOT, then don't specify the JNA library version in YOUR dependencies, the library will guide the dependencies and bring down the correct version. You will also need to allow the download of snapshots in Maven, so look ([read the this Stack Overflow question and answer to find out how to do this ](http://stackoverflow.com/questions/7715321/how-to-download-snapshot-version-from-maven-snapshot-repository)). 
+-->
+The library is held in the Sonatype OSS repository, so is 
+available for download via Maven (or other tools, 
+such as SBT for Scala). 
+
+As the library depends on jna version 4.3.0, then don't specify the JNA library version in YOUR dependencies, the library will guide the dependencies and bring down the correct version. 
 
 ```
 <dependencies>
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.5</version>
+  <version>0.3.6</version>
 <dependencies>  
 ```
 
@@ -276,7 +283,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.5"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.6"
 ```
 
 ## Examples

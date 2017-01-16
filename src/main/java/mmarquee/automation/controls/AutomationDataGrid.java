@@ -79,6 +79,7 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the text associated with the active cell of this element
      * @return The value of the item
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -91,6 +92,7 @@ public class AutomationDataGrid extends AutomationBase
      * Whether the gridPattern is read only
      * @return Read only?
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public boolean isReadOnly() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -149,6 +151,7 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the row count of the gridPattern
      * @return The row count
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public int rowCount() throws AutomationException, PatternNotFoundException {
         if (this.gridPattern == null) {
@@ -161,6 +164,7 @@ public class AutomationDataGrid extends AutomationBase
      * Gets the column count of the gridPattern
      * @return The column count
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public int columnCount() throws AutomationException, PatternNotFoundException {
         if (this.gridPattern == null) {
@@ -222,6 +226,7 @@ public class AutomationDataGrid extends AutomationBase
      * Returns whether the grid has column or row headers
      * @return RowOrColumnMajor Row or column
      * @throws AutomationException Error thrown from automation library
+     * @throws PatternNotFoundException Failed to find pattern
      */
     public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException, PatternNotFoundException {
         if (this.tablePattern == null) {
