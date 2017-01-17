@@ -221,7 +221,6 @@ public class UIAutomation {
      * @return AutomationWindow The found 'element'
      * @throws ElementNotFoundException Element is not found
      */
-
     private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
             throws AutomationException {
         AutomationElement element = null;
@@ -283,7 +282,22 @@ public class UIAutomation {
     }
 
     /**
-     * Create an and condition
+     * Gets the desktop 'window' associated with the title, with a variable
+     * number of retries.
+     *
+     * @param title Title to search for
+     * @param retries Number of retries
+     * @return AutomationWindow The found window
+     * @throws ElementNotFoundException Element is not found
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationWindow getDeskttopWindow(String title, int retries)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.get(ControlType.Window, title, retries));
+    }
+
+    /**
+     * Create an 'and' condition
      *
      * @param pCondition1 First condition
      * @param pCondition2 Second condition
@@ -301,7 +315,7 @@ public class UIAutomation {
     }
 
     /**
-     * Create an or condition
+     * Create an 'or' condition
      *
      * @param pCondition1 First condition
      * @param pCondition2 Second condition

@@ -3,6 +3,7 @@ package mmarquee.automation.pattern;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -36,22 +37,14 @@ public class SelectionPatternTest2 {
     }
 
     @Spy
-    Unknown mockUnknown;
+    private Unknown mockUnknown;
 
     @Test
-    @Ignore("Unsure how to mock this")
     public void test_getCurrentSelection() throws Exception {
 
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                //   Object[] args = invocation.getArguments();
-                //   IntByReference reference = (IntByReference)args[0];
-//
-                //              // Simulate a pointer
-                //            reference.setValue(12345);
-
                 return 0;
             }
         }).when(rawPattern).getCurrentSelection(anyObject());
@@ -59,13 +52,6 @@ public class SelectionPatternTest2 {
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-
-                //   Object[] args = invocation.getArguments();
-                //   IntByReference reference = (IntByReference)args[0];
-//
-                //              // Simulate a pointer
-                //            reference.setValue(12345);
-
                 return new WinNT.HRESULT(0);
             }
         }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
@@ -77,6 +63,12 @@ public class SelectionPatternTest2 {
         doReturn(mockUnknown)
                 .when(spyPattern)
                 .makeUnknown(anyObject());
+
+        IUIAutomationElementArray mockArray = Mockito.mock(IUIAutomationElementArray.class);
+
+        doReturn(mockArray)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
 
         spyPattern.getCurrentSelection();
     }

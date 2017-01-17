@@ -83,12 +83,20 @@ public class Selection extends BasePattern {
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
-
+            IUIAutomationElementArray collection = convertPointerToInterface(pUnknownA);
             return this.collectionToList(collection);
         } else {
             throw new AutomationException();
         }
+    }
+
+    /**
+     * Convert the unknown pointer to an array.
+     *
+     * @param pUnknown The unknown pointer
+     * @return IUIAutomationElementArray the converted pointer
+     */
+    public IUIAutomationElementArray convertPointerToInterface(PointerByReference pUnknown) {
+        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
     }
 }
