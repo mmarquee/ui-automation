@@ -54,6 +54,7 @@ public class UIAutomation {
 
     /**
      * Created for test, to allow mocking
+     *
      * @param automation The automation object to use.
      */
     public UIAutomation(IUIAutomation automation) {
@@ -101,6 +102,7 @@ public class UIAutomation {
 
     /**
      * Gets the root element for automation
+     *
      * @param element Pointer to the element
      * @return Error status
      */
@@ -110,9 +112,10 @@ public class UIAutomation {
 
     /**
      * Compares 2 elements
+     *
      * @param element1 First element
      * @param element2 Second element
-     * @param same Are they the same?
+     * @param same     Are they the same?
      * @return Error status
      */
     public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
@@ -220,7 +223,7 @@ public class UIAutomation {
      */
 
     private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
-            throws AutomationException  {
+            throws AutomationException {
         AutomationElement element = null;
 
         // Look for a control type
@@ -281,12 +284,13 @@ public class UIAutomation {
 
     /**
      * Create an and condition
+     *
      * @param pCondition1 First condition
      * @param pCondition2 Second condition
      * @return The new condition
      * @throws AutomationException Something is wrong
      */
-    public PointerByReference createAndCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
+    public PointerByReference createAndCondition(Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         if (this.automation.createAndCondition(pCondition1, pCondition2, pbr) == 0) {
@@ -298,12 +302,13 @@ public class UIAutomation {
 
     /**
      * Create an or condition
+     *
      * @param pCondition1 First condition
      * @param pCondition2 Second condition
      * @return The new condition
      * @throws AutomationException Something is wrong
      */
-    public PointerByReference createOrCondition (Pointer pCondition1, Pointer pCondition2) throws AutomationException {
+    public PointerByReference createOrCondition(Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         if (this.automation.createOrCondition(pCondition1, pCondition2, pbr) == 0) {
@@ -315,6 +320,7 @@ public class UIAutomation {
 
     /**
      * Creates a condition, based on control id
+     *
      * @param id The control id
      * @return The condition
      * @throws AutomationException Something went wrong
@@ -328,6 +334,7 @@ public class UIAutomation {
 
     /**
      * Creates a condition, based on automation id
+     *
      * @param automationId The automation id
      * @return The condition
      * @throws AutomationException Something went wrong
@@ -346,6 +353,7 @@ public class UIAutomation {
 
     /**
      * Creates a condition, based on element name
+     *
      * @param name The name
      * @return The condition
      * @throws AutomationException Something went wrong
@@ -364,7 +372,8 @@ public class UIAutomation {
 
     /**
      * Creates a property condition
-     * @param id Which property to check for
+     *
+     * @param id    Which property to check for
      * @param value The value of the property
      * @return The nre condition
      * @throws AutomationException Something has gone wrong
@@ -447,7 +456,7 @@ public class UIAutomation {
      * Gets the list of desktop windows
      *
      * @return List of desktop windows
-     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException      Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationWindow> getDesktopWindows()
@@ -476,6 +485,7 @@ public class UIAutomation {
 
     /**
      * Creates a true Condition
+     *
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
@@ -491,6 +501,7 @@ public class UIAutomation {
 
     /**
      * Creates a false Condition
+     *
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
@@ -506,11 +517,12 @@ public class UIAutomation {
 
     /**
      * Create a NOT condition
+     *
      * @param condition The condition condition
      * @return The new condition
      * @throws AutomationException Something is wrong
      */
-    public PointerByReference createNotCondition (Pointer condition) throws AutomationException {
+    public PointerByReference createNotCondition(Pointer condition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         if (this.automation.createNotCondition(condition, pbr) == 0) {
@@ -522,9 +534,32 @@ public class UIAutomation {
 
     /**
      * Gets the root automation element
+     *
      * @return The root element
      */
     public AutomationElement getRootElement() {
         return this.rootElement;
+    }
+
+    /**
+     * Finds the given process
+     *
+     * @param command Command to look for
+     * @return The Application
+     * @throws AutomationException If findProcessEntry throws an exception.
+     */
+    public AutomationApplication findProcess(String... command) throws AutomationException {
+
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+            new Tlhelp32.PROCESSENTRY32.ByReference();
+
+        boolean found = Utils.findProcessEntry(processEntry, command);
+
+        if (!found) {
+            throw new AutomationException();
+        } else {
+            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
+            return new AutomationApplication(rootElement, handle, true);
+        }
     }
 }
