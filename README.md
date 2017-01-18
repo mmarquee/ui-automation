@@ -29,7 +29,7 @@ As the library depends on jna version 4.3.0, then don't specify the JNA library 
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.8</version>
+  <version>0.3.9</version>
 <dependencies>  
 ```
 
@@ -132,7 +132,7 @@ The currently supported controls are ...
 ### WFP
 ```java
   AutomationDataGrid grid = window.getDataGrid(0);
-  AutomationDataGridItem item = grid.getCell(0,0);
+  AutomationDataGridCell cell = grid.getCell(0,0);
   String itemName = item.name();
 ```
 
@@ -142,7 +142,7 @@ The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation)
 
 ```java
   AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
-  AutomationDataGridItem item = grid.getCell(0,0);
+  AutomationDataGridCell item = grid.getCell(0,0);
   String itemName = item.name();
 ```
 
@@ -283,7 +283,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.8"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.9"
 ```
 
 ## Examples
