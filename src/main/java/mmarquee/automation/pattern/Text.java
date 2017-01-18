@@ -61,6 +61,10 @@ public class Text extends BasePattern {
         }
     }
 
+    public IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
+        return IUIAutomationTextRangeArray.Converter.PointerToInterface(pUnknownA);
+    }
+
     /**
      * Gets the selection.
      *
@@ -82,7 +86,7 @@ public class Text extends BasePattern {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTextRangeArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationTextRangeArray selection =
-                    IUIAutomationTextRangeArray.Converter.PointerToInterface(pUnknownA);
+                    convertPointerToArrayInterface(pUnknownA);
 
             // OK, now what?
             IntByReference ibr = new IntByReference();
@@ -105,7 +109,7 @@ public class Text extends BasePattern {
                 WinNT.HRESULT result = unknown.QueryInterface(new Guid.REFIID(IUIAutomationTextRange.IID), pUnknown);
                 if (COMUtils.SUCCEEDED(result)) {
                     IUIAutomationTextRange range =
-                            IUIAutomationTextRange.Converter.PointerToInterface(pUnknown);
+                            convertPointerToInterface(pUnknown);
 
                     PointerByReference sr = new PointerByReference();
 
@@ -118,6 +122,8 @@ public class Text extends BasePattern {
                     throw new AutomationException();
                 }
             }
+        } else {
+            throw new AutomationException();
         }
 
         return selectionResult;
