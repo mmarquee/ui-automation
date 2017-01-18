@@ -291,7 +291,7 @@ public class UIAutomation {
      * @throws ElementNotFoundException Element is not found
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getDeskttopWindow(String title, int retries)
+    public AutomationWindow getDesktopWindow(String title, int retries)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.get(ControlType.Window, title, retries));
     }
