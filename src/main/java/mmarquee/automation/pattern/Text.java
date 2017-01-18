@@ -74,7 +74,7 @@ public class Text extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = new Unknown(pbr.getValue());
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         String selectionResult = "";
@@ -99,7 +99,7 @@ public class Text extends BasePattern {
                     throw new AutomationException();
                 }
 
-                Unknown unknown = new Unknown(pbr0.getValue());
+                Unknown unknown = makeUnknown(pbr0.getValue());
                 PointerByReference pUnknown = new PointerByReference();
 
                 WinNT.HRESULT result = unknown.QueryInterface(new Guid.REFIID(IUIAutomationTextRange.IID), pUnknown);
@@ -125,6 +125,7 @@ public class Text extends BasePattern {
 
     /**
      * Gets the text from the pattern.
+     *
      * @return The text.
      * @throws AutomationException Something has gone wrong
      */
@@ -135,13 +136,12 @@ public class Text extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = new Unknown(pbr.getValue());
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTextRange.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationTextRange range =
-                    IUIAutomationTextRange.Converter.PointerToInterface(pUnknownA);
+            IUIAutomationTextRange range = convertPointerToInterface(pUnknownA);
 
             PointerByReference sr = new PointerByReference();
 
@@ -153,5 +153,9 @@ public class Text extends BasePattern {
         } else {
             throw new AutomationException();
         }
+    }
+
+    public IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationTextRange.Converter.PointerToInterface(pUnknownA);
     }
 }
