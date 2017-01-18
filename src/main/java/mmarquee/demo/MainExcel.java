@@ -18,7 +18,7 @@ package mmarquee.demo;
 public class MainExcel {
 
 	public static void main(String[] args) {
-        TestMain main = new TestMain();
+        TestMainExcel main = new TestMainExcel();
 
         main.run();
 	}

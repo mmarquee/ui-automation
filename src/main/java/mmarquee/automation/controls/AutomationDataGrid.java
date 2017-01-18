@@ -24,6 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
@@ -108,6 +109,9 @@ public class AutomationDataGrid extends AutomationBase
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell selected() throws PatternNotFoundException, AutomationException  {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
         return new AutomationDataGridCell(collection.get(0));
@@ -120,6 +124,9 @@ public class AutomationDataGrid extends AutomationBase
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationDataGridCell> getColumnHeaders () throws PatternNotFoundException, AutomationException  {
+        if (this.tablePattern == null) {
+            this.tablePattern = this.getTablePattern();
+        }
 
         List<AutomationElement> collection = tablePattern.getCurrentColumnHeaders();
 
@@ -141,7 +148,9 @@ public class AutomationDataGrid extends AutomationBase
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell getItem(int x, int y) throws PatternNotFoundException, AutomationException  {
-
+        if (this.gridPattern == null) {
+            this.gridPattern = this.getGridPattern();
+        }
         AutomationElement element = this.gridPattern.getItem(x, y);
 
         return new AutomationDataGridCell(element);

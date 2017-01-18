@@ -1,9 +1,11 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -114,5 +116,13 @@ public class GridPatternTest {
         int count = item.rowCount();
 
         assertTrue(count == 99);
+    }
+
+    @Test
+    @Ignore("Need to build up the mocking")
+    public void test_getItem_Throws_Exception_When_Pattern_Returns_Error_From_GetItem() throws Exception {
+        Grid item = new Grid(rawPattern);
+
+        AutomationElement element = item.getItem(0,0);
     }
 }

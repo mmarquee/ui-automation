@@ -17,9 +17,9 @@ package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.*;
+
+import java.util.List;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.
@@ -34,13 +34,41 @@ public class TestMainExcel extends TestBase {
         AutomationApplication application = null;
 
         try {
+            // 0. Load excel
+            try {
+                // Start the application
+                application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE");
+            } catch (Throwable ex) {
+                // Smother
+                logger.error("Failed to launch or attach");
+            }
+
             // 1. Load a file in excel
 
             // 2. Get the sheet
+            AutomationWindow window = application.getWindow("Book1 - Excel");
+            logger.info(window.name());
+
+            AutomationPanel panel = window.getPanel(10);
+            logger.info(panel.name());
+            logger.info(panel.getClassName());
+
+            AutomationTab tab = panel.getTab(0);
+            logger.info(tab.name());
+            AutomationDataGrid grid = tab.getDataGrid(0);
+            logger.info(grid.name());
 
             // 3. Get some data
+            AutomationDataGridCell cell = grid.getItem(0,0);
+            logger.info(cell.name());
+            logger.info(cell.value());
 
             // 4. Set some data
+            List<AutomationDataGridCell> headers = grid.getColumnHeaders();
+
+            for(AutomationDataGridCell header : headers) {
+                logger.info(header.value());
+            }
 
             logger.info("++ ALL DONE ++");
 

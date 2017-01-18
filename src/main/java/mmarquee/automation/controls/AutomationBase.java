@@ -663,6 +663,10 @@ public abstract class AutomationBase implements Automatable {
         return this.element.getOrientation();
     }
 
+    public String getClassName() throws AutomationException {
+        return this.element.currentClassName();
+    }
+
     /**
      * Gets the runtime id
      * @return The runtime id
