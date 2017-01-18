@@ -29,7 +29,7 @@ As the library depends on jna version 4.3.0, then don't specify the JNA library 
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.7</version>
+  <version>0.3.8</version>
 <dependencies>  
 ```
 
@@ -283,7 +283,7 @@ TODO: Not yet implemented
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.7"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.8"
 ```
 
 ## Examples
