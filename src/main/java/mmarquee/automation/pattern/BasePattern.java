@@ -116,7 +116,7 @@ public abstract class BasePattern implements Pattern {
      * @return Result of the call from the COM library
      */
     public WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
-        Unknown uElement = new Unknown(this.pattern);
+        Unknown uElement = makeUnknown(this.pattern);
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }
 
@@ -130,5 +130,23 @@ public abstract class BasePattern implements Pattern {
      */
     public Unknown makeUnknown(Pointer pvInstance) {
         return new Unknown(pvInstance);
+    }
+
+    /**
+     * Converts the unknown value to a IUIAutomationElement
+     * @param pUnknownA The Unknown pointer
+     * @return The pattern
+     */
+    public IUIAutomationElement convertPointerToElementInterface(PointerByReference pUnknownA) {
+        return IUIAutomationElement.Converter.PointerToInterface(pUnknownA);
+    }
+
+    /**
+     * Converts the unknown value to a IUIAutomationElementArray
+     * @param pUnknownA The Unknown pointer
+     * @return The pattern
+     */
+    public IUIAutomationElementArray convertPointerToElementArrayInterface(PointerByReference pUnknownA) {
+        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
     }
 }

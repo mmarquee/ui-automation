@@ -20,7 +20,6 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 
 /**
@@ -57,7 +56,7 @@ public class Value extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationValuePattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -109,5 +108,9 @@ public class Value extends BasePattern {
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
+    }
+
+    public IUIAutomationValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationValuePattern.Converter.PointerToInterface(pUnknownA);
     }
 }

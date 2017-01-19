@@ -23,10 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
+import mmarquee.automation.uiautomation.*;
 
 import java.util.List;
 
@@ -60,7 +57,7 @@ public class Table extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationTablePattern.Converter.PointerToInterface(pbr);
+                return convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -79,13 +76,13 @@ public class Table extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = new Unknown(pbr.getValue());
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
+                    this.convertPointerToElementArrayInterface(pUnknownA);
 
             return this.collectionToList(collection);
         } else {
@@ -120,17 +117,26 @@ public class Table extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = new Unknown(pbr.getValue());
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
+                    convertPointerToElementArrayInterface(pUnknownA);
 
             return this.collectionToList(collection);
         } else {
             throw new AutomationException();
         }
+    }
+
+    /**
+     * Converts the unknown value to a IUIAutomationTablePattern
+     * @param pUnknownA The Unknown pointer
+     * @return The pattern
+     */
+    public IUIAutomationTablePattern convertPointerToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationTablePattern.Converter.PointerToInterface(pUnknownA);
     }
 }

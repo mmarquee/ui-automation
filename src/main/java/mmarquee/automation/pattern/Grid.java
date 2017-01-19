@@ -26,6 +26,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -57,7 +58,7 @@ public class Grid extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationGridPattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -91,14 +92,14 @@ public class Grid extends BasePattern {
     public AutomationElement getItem(int x, int y) throws AutomationException {
         PointerByReference cell = this.getRawItem(x, y);
 
-        Unknown uRoot = new Unknown(cell.getValue());
+        Unknown uRoot = makeUnknown(cell.getValue());
 
         PointerByReference pbr = new PointerByReference();
 
         WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pbr));
+            return new AutomationElement(convertPointerToElementInterface(pbr));
         } else {
             throw new AutomationException();
         }
@@ -133,5 +134,9 @@ public class Grid extends BasePattern {
         }
 
         return ibr.getValue();
+    }
+
+    public IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationGridPattern.Converter.PointerToInterface(pUnknownA);
     }
 }

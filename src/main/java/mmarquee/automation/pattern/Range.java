@@ -22,6 +22,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 
 /**
  * Created by Mark Humphreys on 01/03/2016.
@@ -44,6 +45,10 @@ public class Range extends BasePattern {
         this.rawPattern = rawPattern;
     }
 
+    public IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pUnknownA);
+    }
+
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;
@@ -53,7 +58,7 @@ public class Range extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }

@@ -158,7 +158,7 @@ There does not seem to be an equivalent WPF control.
   try {
     AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
 
-    // Get the current vslue
+    // Get the current value
     String value = me0.getValue();
 
     // Set the value
