@@ -212,7 +212,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
                                 this.createNamePropertyCondition(title).getValue(),
                                 this.createControlTypeCondition(ControlType.Window).getValue()));
             } catch (ElementNotFoundException ex) {
-                logger.warn("Failed to find window");
+                logger.warn("Failed to find `" + title + "` window");
             }
 
             if (item != null) {
@@ -220,7 +220,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
                 break;
             } else {
                 try {
-                    logger.warn("Did not find window, retrying");
+                    logger.warn("Did not find `" + title + "` window, retrying");
                     // Wait for it
                     Thread.sleep(500);
                 } catch (InterruptedException ex) {
