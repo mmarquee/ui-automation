@@ -9,7 +9,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -64,14 +63,13 @@ public class StylesPatternTest {
     }
 
     @Test
-//    @Ignore("Needs further work")
     public void test_getStyleName_Calls_getCurrentStyleName_From_Pattern() throws Exception {
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
                 Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[1];
+                PointerByReference reference = (PointerByReference)args[0];
 
                 String value = "Hello";
                 Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
@@ -154,7 +152,7 @@ public class StylesPatternTest {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
                 Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[1];
+                PointerByReference reference = (PointerByReference)args[0];
 
                 String value = "Hello";
                 Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
