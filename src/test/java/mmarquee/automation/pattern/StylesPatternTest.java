@@ -141,10 +141,6 @@ public class StylesPatternTest {
             }
         }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
 
-        Styles pattern = new Styles();
-
-        Styles spyPattern = Mockito.spy(pattern);
-
         IUIAutomationStylesPattern mockPattern = Mockito.mock(IUIAutomationStylesPattern.class);
 
         doAnswer(new Answer() {
@@ -163,6 +159,10 @@ public class StylesPatternTest {
                 return 0;
             }
         }).when(rawPattern).getCurrentStyleName(anyObject());
+
+        Styles pattern = new Styles(rawPattern);
+
+        Styles spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
