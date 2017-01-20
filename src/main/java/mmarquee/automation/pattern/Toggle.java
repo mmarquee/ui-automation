@@ -5,7 +5,6 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
 
@@ -38,7 +37,7 @@ public class Toggle extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationTogglePattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -68,5 +67,9 @@ public class Toggle extends BasePattern {
         }
 
         return ToggleState.fromInt(ibr.getValue());
+    }
+
+    public IUIAutomationTogglePattern convertPointerToInterface(PointerByReference pUnknown) {
+        return IUIAutomationTogglePattern.Converter.PointerToInterface(pUnknown);
     }
 }

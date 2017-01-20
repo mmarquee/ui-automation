@@ -133,9 +133,24 @@ public class GridPatternTest {
     @Test
     @Ignore("Need to build up the mocking")
     public void test_getItem_Throws_Exception_When_Pattern_Returns_Error_From_GetItem() throws Exception {
-        Grid item = new Grid(rawPattern);
+        Grid pattern = new Grid(rawPattern);
 
-        AutomationElement element = item.getItem(0,0);
+        Grid spyPattern = Mockito.spy(pattern);
+
+        doAnswer(new Answer(){
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        IUIAutomationGridPattern mockGrid = Mockito.mock(IUIAutomationGridPattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        AutomationElement element = spyPattern.getItem(0,0);
     }
 
     @Test(expected=AutomationException.class)

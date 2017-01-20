@@ -15,25 +15,36 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class InvokePatternTest {
     @Mock
     IUIAutomationInvokePattern rawPattern;
+
+    @Spy
+    private Unknown mockUnknown;
 
     @Before
     public void setup() {
@@ -62,5 +73,63 @@ public class InvokePatternTest {
         Invoke pattern = new Invoke(rawPattern);
 
         pattern.invoke();
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(-1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Invoke pattern = new Invoke();
+
+        Invoke spyPattern = Mockito.spy(new Invoke());
+
+        IUIAutomationInvokePattern mockRange = Mockito.mock(IUIAutomationInvokePattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.invoke();
+
+        verify(mockRange, atLeastOnce()).invoke();
+    }
+
+    @Test
+    public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Invoke pattern = new Invoke();
+
+        Invoke spyPattern = Mockito.spy(new Invoke());
+
+        IUIAutomationInvokePattern mockRange = Mockito.mock(IUIAutomationInvokePattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.invoke();
+
+        verify(mockRange, atLeastOnce()).invoke();
     }
 }

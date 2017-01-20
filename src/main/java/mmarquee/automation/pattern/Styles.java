@@ -21,6 +21,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 
 /**
  * Created by Mark Humphreys on 01/03/2016.
@@ -54,7 +55,7 @@ public class Styles extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationStylesPattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -89,5 +90,9 @@ public class Styles extends BasePattern {
         }
 
         return ipr.getValue();
+    }
+
+    public IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
+        return IUIAutomationStylesPattern.Converter.PointerToInterface(pUnknown);
     }
 }

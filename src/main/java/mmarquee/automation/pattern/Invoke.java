@@ -57,7 +57,7 @@ public class Invoke extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationInvokePattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -72,5 +72,9 @@ public class Invoke extends BasePattern {
         if (this.getPattern().invoke() != 0) {
             throw new AutomationException();
         }
+    }
+
+    public IUIAutomationInvokePattern convertPointerToInterface(PointerByReference pUnknown) {
+        return IUIAutomationInvokePattern.Converter.PointerToInterface(pUnknown);
     }
 }

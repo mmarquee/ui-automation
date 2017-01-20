@@ -15,31 +15,41 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
 
 /**
  * Created by Mark Humphreys on 11/01/2017.
  *
  * Tests of the Toggle pattern
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TogglePatternTest {
     @Mock
     IUIAutomationTogglePattern rawPattern;
+
+    @Spy
+    private Unknown mockUnknown;
 
     @Before
     public void setup() {
@@ -163,5 +173,63 @@ public class TogglePatternTest {
         ToggleState state = pattern.currentToggleState();
 
         assertTrue(state == ToggleState.Indeterminate);
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(-1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Toggle pattern = new Toggle();
+
+        Toggle spyPattern = Mockito.spy(new Toggle());
+
+        IUIAutomationTogglePattern mockRange = Mockito.mock(IUIAutomationTogglePattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.toggle();
+
+        verify(spyPattern, atLeastOnce()).toggle();
+    }
+
+    @Test
+    public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Toggle pattern = new Toggle();
+
+        Toggle spyPattern = Mockito.spy(new Toggle());
+
+        IUIAutomationTogglePattern mockRange = Mockito.mock(IUIAutomationTogglePattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.toggle();
+
+        verify(spyPattern, atLeastOnce()).toggle();
     }
 }

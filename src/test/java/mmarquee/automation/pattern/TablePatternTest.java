@@ -15,30 +15,41 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 11/01/2017.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TablePatternTest {
     @Mock
     IUIAutomationTablePattern rawPattern;
+
+    @Spy
+    private Unknown mockUnknown;
 
     @Before
     public void setup() {
@@ -161,5 +172,133 @@ public class TablePatternTest {
         Table pattern = new Table(rawPattern);
 
         List<AutomationElement> elements = pattern.getCurrentRowHeaders();
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(-1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Table pattern = new Table();
+
+        Table spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationTablePattern mockRange = Mockito.mock(IUIAutomationTablePattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.getRowOrColumnMajor();
+
+        verify(mockRange, atLeastOnce()).getCurrentRowOrColumnMajor(anyObject());
+    }
+
+    @Test
+    public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Table pattern = new Table();
+
+        Table spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationTablePattern mockRange = Mockito.mock(IUIAutomationTablePattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.getRowOrColumnMajor();
+
+        verify(mockRange, atLeastOnce()).getCurrentRowOrColumnMajor(anyObject());
+    }
+
+    @Test
+    public void test_getColumnsHeaders_Calls_getColumnHeaders_From_Pattern() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Table pattern = new Table();
+
+        Table spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationTablePattern mockRange = Mockito.mock(IUIAutomationTablePattern.class);
+
+        IUIAutomationElementArray mockArray = Mockito.mock(IUIAutomationElementArray.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        doReturn(mockArray)
+                .when(spyPattern)
+                .convertPointerToElementArrayInterface(anyObject());
+
+        spyPattern.getCurrentColumnHeaders();
+
+        verify(mockRange, atLeastOnce()).getCurrentColumnHeaders(anyObject());
+    }
+
+    @Test
+    public void test_getRowHeaders_Calls_getColumnHeaders_From_Pattern() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Table pattern = new Table();
+
+        Table spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationTablePattern mockRange = Mockito.mock(IUIAutomationTablePattern.class);
+
+        IUIAutomationElementArray mockArray = Mockito.mock(IUIAutomationElementArray.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockRange)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        doReturn(mockArray)
+                .when(spyPattern)
+                .convertPointerToElementArrayInterface(anyObject());
+
+        spyPattern.getCurrentRowHeaders();
+
+        verify(mockRange, atLeastOnce()).getCurrentRowHeaders(anyObject());
     }
 }
