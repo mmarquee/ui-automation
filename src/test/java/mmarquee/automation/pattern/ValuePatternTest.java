@@ -58,7 +58,6 @@ public class ValuePatternTest {
     }
 
     @Test
-    @Ignore("Needs further work")
     public void test_Value_Calls_getValue_From_Pattern() throws Exception {
         doAnswer(new Answer() {
             @Override
@@ -67,7 +66,11 @@ public class ValuePatternTest {
                 Object[] args = invocation.getArguments();
                 PointerByReference reference = (PointerByReference)args[0];
 
-//                reference.setValue("VALUE-01");
+                String value = "Hello";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
 
                 return 0;
             }
@@ -76,6 +79,8 @@ public class ValuePatternTest {
         Value pattern = new Value(rawPattern);
 
         String text = pattern.value();
+
+        assertTrue(text.equals("Hello"));
 
         verify(rawPattern, atLeastOnce()).getValue(anyObject());
     }

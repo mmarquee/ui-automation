@@ -15,14 +15,20 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertFalse;
@@ -35,10 +41,14 @@ import static org.mockito.Mockito.*;
  *
  * Test for the SelectionItem pattern.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class SelectionItemPatternTest {
 
     @Mock
     IUIAutomationSelectionItemPattern rawPattern;
+
+    @Spy
+    private Unknown mockUnknown;
 
     @Before
     public void setup() {
@@ -107,5 +117,63 @@ public class SelectionItemPatternTest {
         boolean selected = item.isSelected();
 
         assertFalse(selected);
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(-1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        SelectionItem pattern = new SelectionItem();
+
+        SelectionItem spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockPattern)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.select();
+
+        verify(spyPattern, atLeastOnce()).select();
+    }
+
+    @Test
+    public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        SelectionItem pattern = new SelectionItem();
+
+        SelectionItem spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockPattern)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.select();
+
+        verify(spyPattern, atLeastOnce()).select();
     }
 }

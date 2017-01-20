@@ -68,7 +68,7 @@ public class SelectionPatternTest2 {
 
         doReturn(mockArray)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToElementArray(anyObject());
 
         spyPattern.getCurrentSelection();
     }

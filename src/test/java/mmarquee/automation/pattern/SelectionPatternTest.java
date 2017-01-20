@@ -20,27 +20,36 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class SelectionPatternTest {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
+
+    @Spy
+    private Unknown mockUnknown;
 
     @Before
     public void setup() {
@@ -60,5 +69,68 @@ public class SelectionPatternTest {
         Selection pattern = new Selection(rawPattern);
 
         pattern.getCurrentSelection();
+    }
+
+    @Test(expected=AutomationException.class)
+    public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(-1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Selection pattern = new Selection();
+
+        Selection spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationSelectionPattern mockPattern = Mockito.mock(IUIAutomationSelectionPattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockPattern)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.getCurrentSelection();
+
+        verify(spyPattern, atLeastOnce()).getCurrentSelection();
+    }
+
+    @Test
+    public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Selection pattern = new Selection();
+
+        Selection spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationSelectionPattern mockPattern = Mockito.mock(IUIAutomationSelectionPattern.class);
+
+        IUIAutomationElementArray mockArray = Mockito.mock(IUIAutomationElementArray.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockPattern)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        doReturn(mockArray)
+                .when(spyPattern)
+                .convertPointerToElementArray(anyObject());
+
+        spyPattern.getCurrentSelection();
+
+        verify(spyPattern, atLeastOnce()).getCurrentSelection();
     }
 }

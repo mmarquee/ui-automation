@@ -58,7 +58,7 @@ public class Selection extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationSelectionPattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -83,7 +83,7 @@ public class Selection extends BasePattern {
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationElementArray collection = convertPointerToInterface(pUnknownA);
+            IUIAutomationElementArray collection = convertPointerToElementArray(pUnknownA);
             return this.collectionToList(collection);
         } else {
             throw new AutomationException();
@@ -91,12 +91,22 @@ public class Selection extends BasePattern {
     }
 
     /**
+     * Convert the unknown pointer to selection pattern
+     *
+     * @param pUnknown The unknown pointer
+     * @return IUIAutomationSelectionPattern the converted pointer
+     */
+    public IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
+        return IUIAutomationSelectionPattern.Converter.PointerToInterface(pUnknown);
+    }
+
+    /**
      * Convert the unknown pointer to an array.
      *
      * @param pUnknown The unknown pointer
-     * @return IUIAutomationElementArray the converted pointer
+     * @return IUIAutomationSelectionPattern the converted pointer
      */
-    public IUIAutomationElementArray convertPointerToInterface(PointerByReference pUnknown) {
+    public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
         return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
     }
 }

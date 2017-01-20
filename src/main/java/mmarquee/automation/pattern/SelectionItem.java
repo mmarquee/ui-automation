@@ -57,7 +57,7 @@ public class SelectionItem extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(pbr);
+                return convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException();
             }
@@ -86,5 +86,9 @@ public class SelectionItem extends BasePattern {
         int val = ibr.getValue();
 
         return (ibr.getValue() == 1);
+    }
+
+    public IUIAutomationSelectionItemPattern convertPointerToInterface(PointerByReference ref) {
+        return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(ref);
     }
 }
