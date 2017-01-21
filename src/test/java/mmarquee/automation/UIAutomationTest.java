@@ -36,9 +36,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.isA;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertTrue;
 
@@ -458,12 +456,11 @@ public class UIAutomationTest {
     }
 
     @Test(expected = AutomationException.class)
-    @Ignore
     public void testCreateNotCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.createNotCondition(isA(Pointer.class), isA(PointerByReference.class))).thenReturn(-1);
+        when(mocked_automation.createNotCondition(anyObject(), anyObject())).thenReturn(-1);
 
         UIAutomation local_instance = new UIAutomation(mocked_automation);
 

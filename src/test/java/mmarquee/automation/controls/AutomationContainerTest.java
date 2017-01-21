@@ -1,5 +1,9 @@
 package mmarquee.automation.controls;
 
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
@@ -12,15 +16,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by inpwt on 12/01/2017.
@@ -545,13 +549,31 @@ public class AutomationContainerTest {
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Need to mock currentClassName")
     public void testGetMaskedEdit_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        list.add(new AutomationElement(elem));
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[1];
+
+                String value = "TAutomationMaskEdit";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -562,13 +584,31 @@ public class AutomationContainerTest {
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Need to mock currentClassName")
     public void testGetMaskedEdit_By_Index_Throws_Exception_When_Not_found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        list.add(new AutomationElement(elem));
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[1];
+
+                String value = "TAutomationMaskEdit";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -579,11 +619,30 @@ public class AutomationContainerTest {
     }
 
     @Test
-    @Ignore("Need to mock currentClassName")
+    @Ignore("Still fails")
     public void testGetRibbonBar() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[1];
+
+                String value = "UIRibbonCommandBarDock";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
 
         list.add(new AutomationElement(elem));
 
