@@ -27,7 +27,6 @@ import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

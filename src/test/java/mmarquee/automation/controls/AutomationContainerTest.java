@@ -22,12 +22,11 @@ import org.mockito.stubbing.Answer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by inpwt on 12/01/2017.
+ * Created by Mark Humphreys on 12/01/2017.
  */
 public class AutomationContainerTest {
     @Before
@@ -619,7 +618,6 @@ public class AutomationContainerTest {
     }
 
     @Test
-    @Ignore("Still fails")
     public void testGetRibbonBar() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
@@ -632,7 +630,7 @@ public class AutomationContainerTest {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
                 Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[1];
+                PointerByReference reference = (PointerByReference)args[0];
 
                 String value = "UIRibbonCommandBarDock";
                 Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
@@ -644,14 +642,17 @@ public class AutomationContainerTest {
             }
         }).when(spyElem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(elem));
+        AutomationElement el = Mockito.mock(AutomationElement.class);
+        el.element = spyElem;
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        list.add(new AutomationElement(spyElem));
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        when(el.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(el, window, container);
         wndw.getRibbonBar();
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(el, atLeastOnce()).findAll(anyObject(), anyObject());
     }
 
     @Test
