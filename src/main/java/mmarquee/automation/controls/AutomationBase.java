@@ -208,7 +208,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the item container pattern available
      * @return Yes or no
      */
-    private boolean isItemContainerPatternAvailable() {
+    boolean isItemContainerPatternAvailable() {
         return isPatternAvailable(PropertyID.IsItemContainerPatternAvailablePropertyId);
     }
 
@@ -216,7 +216,7 @@ public abstract class AutomationBase implements Automatable {
      * Is the value pattern available
      * @return Yes or no
      */
-    private boolean isValuePatternAvailable () {
+    boolean isValuePatternAvailable () {
         return isPatternAvailable(PropertyID.IsValuePatternAvailable);
     }
 
@@ -378,7 +378,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
-    private PointerByReference getPattern (int id) throws PatternNotFoundException, AutomationException {
+    PointerByReference getPattern (int id) throws PatternNotFoundException, AutomationException {
         PointerByReference unknown = this.element.getPattern(id);
 
         if (unknown != null) {

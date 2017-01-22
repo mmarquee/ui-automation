@@ -21,22 +21,24 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -309,8 +311,8 @@ public class AutomationWindowTest2 {
         verify(element, atLeastOnce()).currentPropertyValue(anyInt());
     }
 
-    @Test
-    public void test_GetRebar_By_Index() throws Exception {
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetRebar_By_Index_Throws_Exception_When_Not_Found() throws Exception {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
@@ -330,10 +332,59 @@ public class AutomationWindowTest2 {
     }
 
     @Test
-    @Ignore("Better mocks required")
+    public void test_GetStatusBar_By_Index_Check_ControlType_When() throws Exception {
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
+
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(ControlType.StatusBar.getValue());
+
+                return 0;
+            }
+        }).when(listElement).getCurrentControlType(anyObject());
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+
+        AutomationStatusBar bar = wndw.getStatusBar();
+
+        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test
     public void test_GetAppBar_By_Index() throws Exception {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
+
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(ControlType.AppBar.getValue());
+
+                return 0;
+            }
+        }).when(listElement).getCurrentControlType(anyObject());
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
 
         AutomationAppBar bar = wndw.getAppBar(0);
 
@@ -341,10 +392,29 @@ public class AutomationWindowTest2 {
     }
 
     @Test
-    @Ignore("Better mocks required")
     public void test_GetTitleBar_By_Index() throws Exception {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
+
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(ControlType.TitleBar.getValue());
+
+                return 0;
+            }
+        }).when(listElement).getCurrentControlType(anyObject());
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
 
         AutomationTitleBar bar = wndw.getTitleBar();
 

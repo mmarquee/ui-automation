@@ -3,14 +3,16 @@ package mmarquee.automation.controls;
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,9 +21,11 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
@@ -143,9 +147,11 @@ public class AutomationContainerTest {
         AutomationTab tab = wndw.getTab(0);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+
+        assertTrue(tab != null);
     }
 
-    @Test (expected=IndexOutOfBoundsException.class)
+    @Test(expected=IndexOutOfBoundsException.class)
     public void testGetTab_By_Index_Errors_When_Too_Big() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
@@ -157,6 +163,8 @@ public class AutomationContainerTest {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationTab tab = wndw.getTab(99);
+
+        assertTrue(tab != null);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -514,13 +522,31 @@ public class AutomationContainerTest {
     }
 
     @Test
-    @Ignore("Need to mock currentClassName")
     public void testGetPasswordEditBox() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        list.add(new AutomationElement(elem));
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[0];
+
+                String value = "PasswordBox";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -530,19 +556,37 @@ public class AutomationContainerTest {
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
 
-    @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Need to mock currentClassName")
+    @Test(expected=ElementNotFoundException.class)
     public void testGetPasswordEditBox_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        list.add(new AutomationElement(elem));
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[0];
+
+                String value = "PasswordBox";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getPasswordEditBox(99);
+        AutomationEditBox box = wndw.getPasswordEditBox(99);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -598,6 +642,177 @@ public class AutomationContainerTest {
                 PointerByReference reference = (PointerByReference)args[1];
 
                 String value = "TAutomationMaskEdit";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getMaskedEdit(99);
+
+        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testGetMaskedEdit_By_Name_Calls_FindFirst_Once() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[0];
+
+                String value = "TAutomatedMaskEdit";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(ControlType.Edit.getValue());
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentControlType(anyObject());
+
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[0];
+
+                String value = "SMITH-01";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getMaskedEdit("SMITH-01");
+
+        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void testGetMaskedEdit_By_Name_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[1];
+
+                String value = "TAutomationMaskEdit";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
+
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(null);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getMaskedEdit("SMITH-01");
+
+        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void test_PasswordBox_By_Index() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[1];
+
+                String value = "PasswordBox";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        }).when(spyElem).getCurrentClassName(anyObject());
+
+        list.add(new AutomationElement(spyElem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getMaskedEdit(0);
+
+        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void test_PasswordBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+        IUIAutomationElement spyElem = Mockito.spy(elem);
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[1];
+
+                String value = "PasswordBox";
                 Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
                 pointer.setWideString(0, value);
 

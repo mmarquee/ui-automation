@@ -168,7 +168,6 @@ public class TextPatternTest {
     }
 
     @Test
-//    @Ignore("Needs more work")
     public void test_GetSelection_When_() throws Exception {
         doAnswer(new Answer() {
             @Override

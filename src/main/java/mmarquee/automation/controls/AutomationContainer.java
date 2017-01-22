@@ -89,8 +89,9 @@ public class AutomationContainer extends AutomationBase {
      * @param controlName The control name to use
      * @return The matching element
      * @throws AutomationException Automation issue
+     * @throws ElementNotFoundException Failed to find element
      */
-    protected AutomationElement getControlByControlType(int index, ControlType id, String controlName) throws AutomationException {
+    protected AutomationElement getControlByControlType(int index, ControlType id, String controlName) throws AutomationException, ElementNotFoundException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -110,6 +111,10 @@ public class AutomationContainer extends AutomationBase {
                     counter++;
                 }
             }
+        }
+
+        if (foundElement == null) {
+            throw new ElementNotFoundException();
         }
 
         return foundElement;

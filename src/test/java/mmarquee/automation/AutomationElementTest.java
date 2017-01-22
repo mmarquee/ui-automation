@@ -22,6 +22,7 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
