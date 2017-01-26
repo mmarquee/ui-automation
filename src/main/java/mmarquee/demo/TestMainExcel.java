@@ -49,11 +49,11 @@ public class TestMainExcel extends TestBase {
             AutomationWindow window = application.getWindow("Book1 - Excel");
             logger.info(window.name());
 
-            AutomationPanel panel = window.getPanel(10);
-            logger.info(panel.name());
-            logger.info(panel.getClassName());
+            AutomationPanel panelX = window.getPanelByClassName(0, "XLDESK");
+            logger.info(panelX.name());
+            logger.info(panelX.getClassName());
 
-            AutomationTab tab = panel.getTab(0);
+            AutomationTab tab = panelX.getTab(0);
             logger.info(tab.name());
             AutomationDataGrid grid = tab.getDataGrid(0);
             logger.info(grid.name());
