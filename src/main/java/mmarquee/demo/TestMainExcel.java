@@ -46,17 +46,41 @@ public class TestMainExcel extends TestBase {
             // 1. Load a file in excel
 
             // 2. Get the sheet
-            AutomationWindow window = application.getWindow("Book1 - Excel");
-            logger.info(window.name());
 
-            AutomationPanel panel = window.getPanel(10);
-            logger.info(panel.name());
-            logger.info(panel.getClassName());
+            // window - "Book1 - Excel"
+            // . Panel (classname = XLDESK)
+            // - Panel ("Book1")
+            // -- panel("Sheet Navigation Bar")
+            // ---- tab (0)
+            //
+
+
+            AutomationWindow window = application.getWindow("Book1 - Excel");
+            logger.info("Window - " + window.name());
+
+            AutomationPanel panel10 = window.getPanel(10);
+            logger.info("Panel10 - " + panel10.getClassName());
+
+            AutomationPanel panelBook1 = panel10.getPanel("Book1");
+
+            logger.info("PanelBook1 - " + panelBook1.name());
+            logger.info("PanelBook1 - " + panelBook1.getClassName());
+
+            AutomationCustom panel = panelBook1.getCustom("Sheet Navigation Bar");
+            logger.info("Panel - " + panel.name());
+            logger.info("Panel - " + panel.getClassName());
 
             AutomationTab tab = panel.getTab(0);
-            logger.info(tab.name());
-            AutomationDataGrid grid = tab.getDataGrid(0);
-            logger.info(grid.name());
+            logger.info("Tab - " + tab.name());
+
+            AutomationTabItem tabItem = tab.getTabItems().get(0);
+            logger.info("TabItem - " + tabItem.name());
+            logger.info("TabItem - " + tabItem.getClassName());
+
+            tabItem.selectItem();
+
+            AutomationDataGrid grid = panelBook1.getDataGrid(0);
+            logger.info("Grid - " + grid.name());
 
             // 3. Get some data
             AutomationDataGridCell cell = grid.getItem(0,0);

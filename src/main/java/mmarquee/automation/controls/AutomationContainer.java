@@ -77,7 +77,7 @@ public class AutomationContainer extends AutomationBase {
                 this.createIntegerVariant(id.getValue()));
 
         List<AutomationElement> collection = this.findAll(
-                new TreeScope(TreeScope.Descendants), condition.getValue());
+                new TreeScope(TreeScope.Subtree), condition.getValue());
 
         return collection.get(index);
     }

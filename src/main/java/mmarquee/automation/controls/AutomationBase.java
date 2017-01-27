@@ -432,7 +432,7 @@ public abstract class AutomationBase implements Automatable {
      * <p>
      * Gets the value pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationValuePattern associated with this control
+     * @return Returns ths IUIAutomationValuePattern associated with this control
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
@@ -441,6 +441,25 @@ public abstract class AutomationBase implements Automatable {
 
         if (this.isValuePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
+            pattern.setPattern(unknown.getValue());
+        }
+
+        return pattern;
+    }
+
+    /**
+     * <p>
+     * Gets the gridItem pattern for this control
+     * </p>
+     * @return Returns ths IUIAutomationGridItemPattern associated with this control
+     * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
+     */
+    GridItem getGridItemPattern() throws PatternNotFoundException, AutomationException {
+        GridItem pattern = new GridItem();
+
+        if (this.isGridItemPatternAvailable()) {
+            PointerByReference unknown = this.getPattern(PatternID.GridItem.getValue());
             pattern.setPattern(unknown.getValue());
         }
 

@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -29,6 +30,7 @@ import mmarquee.automation.pattern.Value;
 public class AutomationDataGridCell extends AutomationBase {
 
     private Value valuePattern;
+    private GridItem gridItemPattern;
 
     /**
      * Construct the AutomationDataGridCell
@@ -67,7 +69,35 @@ public class AutomationDataGridCell extends AutomationBase {
         return valuePattern.value();
     }
 
- //   public boolean isReadOnly() {
+    /**
+     * Gets the current row for this element
+     * @return The row
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public int getRow() throws AutomationException, PatternNotFoundException {
+        if (this.gridItemPattern == null) {
+            this.gridItemPattern = this.getGridItemPattern();
+        }
+
+        return this.gridItemPattern.getRow();
+    }
+
+    /**
+     * Gets the current column for this element
+     * @return The column
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public int getColumn() throws AutomationException, PatternNotFoundException {
+        if (this.gridItemPattern == null) {
+            this.gridItemPattern = this.getGridItemPattern();
+        }
+
+        return this.gridItemPattern.getColumn();
+    }
+
+    //   public boolean isReadOnly() {
  //       int value = valuePattern.isReadOnly();
  //       return (value == 1);
  //   }
