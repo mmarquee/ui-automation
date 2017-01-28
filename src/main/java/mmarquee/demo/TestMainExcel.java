@@ -34,7 +34,8 @@ public class TestMainExcel extends TestBase {
         AutomationApplication application = null;
 
         try {
-            // 0. Load excel
+            // 0. Load excel - this works for Excel 2013, but not for Excel 2015,as the control hierarchy is different.
+
             try {
                 // Start the application
                 application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE");
@@ -62,6 +63,24 @@ public class TestMainExcel extends TestBase {
             AutomationDataGridCell cell = grid.getItem(0,0);
             logger.info(cell.name());
             logger.info(cell.value());
+            logger.info(cell.getColumn());
+            logger.info(cell.getRow());
+
+            AutomationDataGridCell cell1 = grid.getItem(1,1);
+            logger.info(cell1.name());
+            logger.info(cell1.value());
+            logger.info(cell1.getColumn());
+            logger.info(cell1.getRow());
+
+            AutomationDataGridCell cell2 = grid.getItem(2,2);
+            logger.info(cell2.name());
+            logger.info(cell2.value());
+            logger.info(cell2.getColumn());
+            logger.info(cell2.getRow());
+
+            // 3.5 Set some data
+            cell2.setValue("XYZ");
+            logger.info(cell2.value());
 
             // 4. Set some data
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();

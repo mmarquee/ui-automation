@@ -69,6 +69,20 @@ public class AutomationDataGridCell extends AutomationBase {
     }
 
     /**
+     * Sets the text associated with this element
+     * @param value The value to set
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public void setValue(String value) throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
+        valuePattern.setValue(value);
+    }
+
+    /**
      * Gets the current row for this element
      * @return The row
      * @throws AutomationException Something has gone wrong
