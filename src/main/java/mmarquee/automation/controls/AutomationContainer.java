@@ -603,6 +603,20 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the panel control associated with the given index, with a specific class name
+     * @param index Index of the control
+     * @param className The specific classname
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationPanel getPanelByClassName(int index, String className) throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.getControlByControlType(index, ControlType.Pane, className));
+    }
+
+
+    /**
      * Get the AppBar associated with the given index
      * @param index The index
      * @return The AutomationAppBar
