@@ -19,8 +19,12 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
+import mmarquee.automation.uiautomation.TreeScope;
+
+import java.util.List;
 
 /**
  * Created by Mark Humphreys on 16/02/2016.
@@ -78,5 +82,13 @@ public class AutomationDocument extends AutomationBase {
         }
 
         return this.textPattern.getSelection();
+    }
+
+    public AutomationDocumentPage getPage(int index) throws PatternNotFoundException, AutomationException {
+        List<AutomationElement> items = this.findAll(
+                new TreeScope(TreeScope.Descendants),
+                this.createControlTypeCondition(ControlType.Custom).getValue());
+
+        return new AutomationDocumentPage(items.get(index));
     }
 }

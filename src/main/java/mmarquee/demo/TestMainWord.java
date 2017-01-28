@@ -15,7 +15,6 @@
  */
 package mmarquee.demo;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
@@ -26,7 +25,7 @@ import java.util.List;
  *
  * Test the automation wrapper on Excel.
  */
-public class TestMainExcel extends TestBase {
+public class TestMainWord extends TestBase {
 
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
@@ -34,21 +33,40 @@ public class TestMainExcel extends TestBase {
         AutomationApplication application = null;
 
         try {
-            // 0. Load excel
+            // 0. Load Word
             try {
                 // Start the application
-                application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE");
+                application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
             } catch (Throwable ex) {
                 // Smother
                 logger.error("Failed to launch or attach");
             }
 
-            // 1. Load a file in excel
+            // 1. Load a file in Word
 
             // 2. Get the sheet
-            AutomationWindow window = application.getWindow("Book1 - Excel");
+            AutomationWindow window = application.getWindow("Document1 - Word");
             logger.info(window.name());
 
+            AutomationPanel pane = window.getPanel("Document1");
+            logger.info(pane.name());
+            logger.info(pane.getClassName());
+            AutomationPanel pane1 = pane.getPanel(0);
+            logger.info(pane1.name());
+
+            AutomationDocument doc = pane1.getDocument(0);
+            logger.info(doc.name());
+
+            AutomationDocumentPage page0 = doc.getPage(0);
+            logger.info(page0.name());
+
+            AutomationEditBox edit = page0.getEditBox(0);
+            logger.info(edit.name());
+
+            String text = edit.getText();
+            logger.info("Text = " + text);
+
+/*
             AutomationPanel panelX = window.getPanelByClassName(0, "XLDESK");
             logger.info(panelX.name());
             logger.info(panelX.getClassName());
@@ -75,7 +93,7 @@ public class TestMainExcel extends TestBase {
             for(AutomationDataGridCell header : headers) {
                 logger.info(header.value());
             }
-
+*/
             logger.info("++ ALL DONE ++");
 
         } catch (Exception ex) {
