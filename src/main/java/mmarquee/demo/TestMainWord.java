@@ -64,36 +64,8 @@ public class TestMainWord extends TestBase {
             logger.info(edit.name());
 
             String text = edit.getText();
-            logger.info("Text = " + text);
+            logger.info("Text = " + text.substring(0,10));
 
-/*
-            AutomationPanel panelX = window.getPanelByClassName(0, "XLDESK");
-            logger.info(panelX.name());
-            logger.info(panelX.getClassName());
-
-            AutomationTab tab = panelX.getTab(0);
-            logger.info(tab.name());
-            AutomationDataGrid grid = tab.getDataGrid(0);
-            logger.info(grid.name());
-
-            // 3. Get some data
-            AutomationDataGridCell cell = grid.getItem(0,0);
-            logger.info(cell.name());
-            logger.info(cell.value());
-
-            // 3.4 More data
-            List<AutomationDataGridCell> cols = grid.getColumn(0);
-            for(AutomationDataGridCell col : cols) {
-                logger.info(col.value());
-            }
-
-            // 4. Set some extra data
-            List<AutomationDataGridCell> headers = grid.getColumnHeaders();
-
-            for(AutomationDataGridCell header : headers) {
-                logger.info(header.value());
-            }
-*/
             logger.info("++ ALL DONE ++");
 
         } catch (Exception ex) {
