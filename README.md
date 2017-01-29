@@ -149,3 +149,5 @@ See LICENCE.txt for details.
 * [TestStack.White](https://github.com/TestStack/White)
 * [UI Automation - A wrapper around Microsoft's UI Automation libraries.](https://github.com/vijayakumarsuraj/UIAutomation)
 
+* [Functional GUI Testing Automation Patterns](https://www.infoq.com/articles/gui-automation-patterns)
+
