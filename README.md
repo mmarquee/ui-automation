@@ -75,7 +75,7 @@ This will find (it is there) a window that has the given title, and set focus to
 Each control contained in a window can be identified by the index of that control, sometimes (this depends on the control type) by the text associated with it, OR by the Automation Id. For example, in order to get the textbox associated with the connection window (and assuming that it is the 1st Edit box on the window), the following code will find the editbox, and change the text to be USER1.
 
 ```java
-  AutomationEditBox user = window.getEditBoxByIndex(0);
+  AutomationEditBox user = window.getEditBox(0);
   user.setText("USER1");
 ```
 
