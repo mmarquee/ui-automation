@@ -103,7 +103,7 @@ In order to click the 'OK' button associated with the connection window, it can 
 
 # Current supported controls
 
-The currently supported controls are ...
+The controls that have been implemented reflect the requirements for automating the applications that we are testing ourselves, so some controls have not been implemented, or only partially. The currently supported controls are ...
 
 * Button
 * CheckBox
@@ -112,20 +112,20 @@ The currently supported controls are ...
 * RadioButton
 * ToggleButton
 * StatusBar
-* DataGrid and DataGridCell (see below)
+* DataGrid
 * PageControl
 * Tab
 * TextBox
-* TreeView and TreeViewItem
+* TreeView 
 * Menu and MenuItem
-* SplitButton (partially)
-* Some Ribbon implementations (see below)
+* SplitButton
+* Ribbon
 * Hyperlink
 * Panel
-* Toolbar (Delphi Toolbars do not seem to be like other ToolBars)
+* Toolbar 
 * ProgressBar
-* MaskedEdit (see below)
-* Custom (in progress as of 0.3.5 onwards)
+* MaskedEdit 
+* Custom
 
 ## Caching
 
