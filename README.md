@@ -129,10 +129,10 @@ The controls that have been implemented reflect the requirements for automating 
 
 ## Caching
 
-TODO: Not yet implemented
+[See wiki](https://github.com/mmarquee/ui-automation/wiki/caching)
 
 ## Event Handling
-TODO: Not yet implemented
+[See wiki](https://github.com/mmarquee/ui-automation/wiki/events)
 
 # Contributors
 [Mark Humphreys](https://github.com/mmarquee)
