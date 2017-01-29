@@ -20,6 +20,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Value;
 
 /**
@@ -30,6 +31,7 @@ import mmarquee.automation.pattern.Value;
 public class AutomationEditBox extends AutomationBase {
 
     private Value valuePattern;
+    private Text textPattern;
 
     /**
      * Gets the value of the control
@@ -46,6 +48,20 @@ public class AutomationEditBox extends AutomationBase {
     }
 
     /**
+     * Gets the text of the control
+     * @return The string value of the control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public String getText() throws AutomationException, PatternNotFoundException {
+        if (this.textPattern == null) {
+            this.textPattern = this.getTextPattern();
+        }
+
+        return textPattern.getText();
+    }
+
+    /**
      * Sets the value of the edit box
      * @param value The value to set
      * @throws AutomationException Something has gone wrong
@@ -55,6 +71,7 @@ public class AutomationEditBox extends AutomationBase {
         if (this.valuePattern == null) {
             this.valuePattern = this.getValuePattern();
         }
+
         this.valuePattern.setValue(value);
     }
 

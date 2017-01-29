@@ -128,7 +128,7 @@ public class AutomationDataGrid extends AutomationBase
             this.tablePattern = this.getTablePattern();
         }
 
-        List<AutomationElement> collection = tablePattern.getCurrentColumnHeaders();
+        List<AutomationElement> collection = this.tablePattern.getCurrentColumnHeaders();
 
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 

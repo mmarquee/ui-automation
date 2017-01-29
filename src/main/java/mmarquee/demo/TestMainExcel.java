@@ -82,7 +82,13 @@ public class TestMainExcel extends TestBase {
             cell2.setValue("XYZ");
             logger.info(cell2.value());
 
-            // 4. Set some data
+            // 3.4 More data
+            List<AutomationDataGridCell> cols = grid.getColumn(0);
+            for(AutomationDataGridCell col : cols) {
+                logger.info(col.value());
+            }
+
+            // 4. Set some extra data
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
             for(AutomationDataGridCell header : headers) {
