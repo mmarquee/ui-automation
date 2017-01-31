@@ -682,6 +682,11 @@ public abstract class AutomationBase implements Automatable {
         return this.element.getOrientation();
     }
 
+    /**
+     * Gets the current class name
+     * @return The class name
+     * @throws AutomationException Something has gone wrong
+     */
     public String getClassName() throws AutomationException {
         return this.element.currentClassName();
     }

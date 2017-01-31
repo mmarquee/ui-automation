@@ -201,6 +201,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the checkbox associated with the given name
+     * @param name Name of the control
+     * @return AutomationCheckbox that represents the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationCheckbox getCheckbox(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationCheckbox(this.getControlByControlType(name, ControlType.CheckBox));
+    }
+
+    /**
      * Gets the Tab control associated with the given index
      * @param index Index of the control
      * @return The found control
@@ -368,7 +379,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the combobox control associated with the given automtion id
-     * @param id Automtion id of the control
+     * @param id Automation id of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
@@ -410,6 +421,11 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationButton(this.getControlByControlType(index, ControlType.Button));
     }
 
+    /**
+     * Creates an integer variant
+     * @param value The value to set
+     * @return ByValue variant
+     */
     private Variant.VARIANT.ByValue createIntegerVariant(int value) {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, value);
@@ -426,7 +442,7 @@ public class AutomationContainer extends AutomationBase {
      * @param controlType The control type to look for
      * @param name Name to be looked for
      * @param <T> The Type of the class
-     * @return Founnd element
+     * @return Found element
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Raised from automation library
      */

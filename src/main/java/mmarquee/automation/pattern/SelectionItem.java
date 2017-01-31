@@ -83,9 +83,23 @@ public class SelectionItem extends BasePattern {
             throw new AutomationException();
         }
 
-        int val = ibr.getValue();
-
         return (ibr.getValue() == 1);
+    }
+
+    /**
+     * Adds the item to the current selection
+     * @throws AutomationException Something went wrong in the automation library
+     */
+    public void addToSelection() throws AutomationException {
+        this.getPattern().addToSelection();
+    }
+
+    /**
+     * Removes the item from the current selection
+     * @throws AutomationException Something went wrong in the automation library
+     */
+    public void removeFromSelection() throws AutomationException {
+        this.getPattern().removeFromSelection();
     }
 
     public IUIAutomationSelectionItemPattern convertPointerToInterface(PointerByReference ref) {
