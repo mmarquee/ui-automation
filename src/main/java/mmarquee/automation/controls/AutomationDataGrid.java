@@ -244,5 +244,13 @@ public class AutomationDataGrid extends AutomationBase
 
         return this.tablePattern.getRowOrColumnMajor();
     }
+
+    public List<AutomationElement> getSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+
+        return this.selectionPattern.getSelection();
+    }
 }
 

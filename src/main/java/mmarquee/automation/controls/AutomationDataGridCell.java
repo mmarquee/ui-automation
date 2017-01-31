@@ -115,12 +115,43 @@ public class AutomationDataGridCell extends AutomationBase {
         return this.gridItemPattern.getColumn();
     }
 
+    /**
+     * Selects the cell
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
     public void select() throws AutomationException, PatternNotFoundException {
         if (this.selectionItemPattern == null) {
             this.selectionItemPattern = this.getSelectItemPattern();
         }
 
         this.selectionItemPattern.select();
+    }
+
+    /**
+     * Adds to the selection.
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public void addToSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionItemPattern == null) {
+            this.selectionItemPattern = this.getSelectItemPattern();
+        }
+
+        this.selectionItemPattern.addToSelection();
+    }
+
+    /**
+     * Removes the cell from the selection.
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public void removeFromSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionItemPattern == null) {
+            this.selectionItemPattern = this.getSelectItemPattern();
+        }
+
+        this.selectionItemPattern.removeFromSelection();
     }
 
     //   public boolean isReadOnly() {

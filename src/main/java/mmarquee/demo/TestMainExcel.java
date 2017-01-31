@@ -16,6 +16,7 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
@@ -63,17 +64,46 @@ public class TestMainExcel extends TestBase {
             logger.info(cell.name());
             logger.info(cell.value());
 
+            AutomationDataGridCell cell2 = grid.getItem(1,1);
+            logger.info(cell2.name());
+            logger.info(cell2.value());
+
+            AutomationDataGridCell cell3 = grid.getItem(2,2);
+            logger.info(cell3.name());
+            logger.info(cell3.value());
+
+            // Play with selection
+            cell.addToSelection();
+            cell2.addToSelection();
+            cell3.addToSelection();
+
+            // something
+            List<AutomationElement> items0 = grid.getSelection();
+            logger.info(items0.size());
+
+            cell2.removeFromSelection();
+
+            // something again - should be different
+            List<AutomationElement> items1 = grid.getSelection();
+            logger.info(items1.size());
+            
             // 3.4 More data
             List<AutomationDataGridCell> cols = grid.getColumn(0);
             for(AutomationDataGridCell col : cols) {
                 logger.info(col.value());
             }
 
-            // 4. Set some extra data
-            List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
-            for(AutomationDataGridCell header : headers) {
-                logger.info(header.value());
+
+            // 4. Set some extra data - excel doesn't seem to implement the correct pattern
+            try {
+                List<AutomationDataGridCell> headers = grid.getColumnHeaders();
+
+                for (AutomationDataGridCell header : headers) {
+                    logger.info(header.value());
+                }
+            } catch (NullPointerException ex) {
+                logger.info ("Not supported in Excel");
             }
 
             logger.info("++ ALL DONE ++");

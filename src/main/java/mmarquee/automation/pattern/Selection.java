@@ -109,4 +109,31 @@ public class Selection extends BasePattern {
     public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
         return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
     }
+
+    /**
+     * Gets the current selection
+     * @return List of selected items
+     * @throws AutomationException Something has gone wrong
+     */
+    public List<AutomationElement> getSelection() throws AutomationException {
+
+        PointerByReference pbr = new PointerByReference();
+
+        if (this.getPattern().getCurrentSelection(pbr) != 0) {
+            throw new AutomationException();
+        }
+
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    this.convertPointerToElementArrayInterface(pUnknownA);
+
+            return this.collectionToList(collection);
+        } else {
+            throw new AutomationException();
+        }
+    }
 }
