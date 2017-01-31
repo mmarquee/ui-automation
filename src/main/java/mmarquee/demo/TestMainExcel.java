@@ -72,21 +72,26 @@ public class TestMainExcel extends TestBase {
             logger.info(cell3.name());
             logger.info(cell3.value());
 
-            // Play with selection
-            cell.addToSelection();
-            cell2.addToSelection();
-            cell3.addToSelection();
+            if (grid.canSelectMultiple()) {
 
-            // something
-            List<AutomationElement> items0 = grid.getSelection();
-            logger.info(items0.size());
+                // Play with selection
+                cell.addToSelection();
+                cell2.addToSelection();
+                cell3.addToSelection();
 
-            cell2.removeFromSelection();
+                // something
+                List<AutomationElement> items0 = grid.getSelection();
+                logger.info(items0.size());
 
-            // something again - should be different
-            List<AutomationElement> items1 = grid.getSelection();
-            logger.info(items1.size());
-            
+                cell2.removeFromSelection();
+
+                // something again - should be different
+                List<AutomationElement> items1 = grid.getSelection();
+                logger.info(items1.size());
+            } else {
+                logger.info("Multiple selection not allowed");
+            }
+
             // 3.4 More data
             List<AutomationDataGridCell> cols = grid.getColumn(0);
             for(AutomationDataGridCell col : cols) {
