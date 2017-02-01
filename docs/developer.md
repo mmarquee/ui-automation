@@ -118,6 +118,9 @@ The controls that have been implemented reflect the requirements for automating 
 * [Document](document)
 * [Slider](slider)
 
+## Real world examples
+* [Real word examples](docs/examples.md)
+
 ## Caching
 [Caching](https://github.com/mmarquee/ui-automation/wiki/caching)
 
