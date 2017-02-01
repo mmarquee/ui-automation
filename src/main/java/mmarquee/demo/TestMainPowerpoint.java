@@ -67,12 +67,13 @@ public class TestMainPowerpoint extends TestBase {
             AutomationPowerpointSlide slide = panel2.getPowerpointSlide("Slide 1 - This is text");
             logger.info(slide.name());
 
-            // Oddly enough this is an image control - go figure!!
-            AutomationTextBox text = slide.getTextBox(0);
+            // Oddly enough this is an image control, and has text in it's selection
+            AutomationImage image = slide.getImage("Title TextBox");
+            image.selected();
 
-            logger.info(text.getValue());
+           // logger.info(text.getValue());
 
-            AutomationImage image = slide.getImage(0);
+            AutomationImage image1 = slide.getImage(0);
 
             logger.info("++ ALL DONE ++");
 

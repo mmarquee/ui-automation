@@ -18,6 +18,10 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Selection;
+
+import java.util.List;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.
@@ -32,5 +36,18 @@ public class AutomationImage extends AutomationBase {
      */
     public AutomationImage(AutomationElement element) throws AutomationException {
         super(element);
+    }
+
+    // Powerpoint weirdness, probably needs it's own class in the end
+
+    private Selection selectionPattern;
+
+    public void selected() throws PatternNotFoundException, AutomationException  {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+        List<AutomationElement> collection = selectionPattern.getCurrentSelection();
+
+        logger.info("Items = " + collection.size());
     }
 }

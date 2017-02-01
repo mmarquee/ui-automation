@@ -1,10 +1,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.pattern.Selection;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
