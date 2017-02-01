@@ -1,9 +1,9 @@
 ## Real World Examples
 ### These applications have examples in the demo directory
-* [Excel](docs/excel.md)
-* [Word](docs/word.md)
-* [Powerpoint](docs/powerpoint.md)
+* [Excel](excel.md)
+* [Word](word.md)
+* [Powerpoint](powerpoint.md)
 
 ### These do not (yet)
-* [Chrome](docs/chrome.md)
-* [Swing](docs/swing.md)
+* [Chrome](chrome.md)
+* [Swing](swing.md)
