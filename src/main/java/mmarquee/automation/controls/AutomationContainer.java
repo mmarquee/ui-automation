@@ -707,6 +707,16 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Get the AutomationImage associated with the given index
+     * @param index The index to look for
+     * @return The AutomationImage
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationImage getImage(int index) throws AutomationException {
+        return new AutomationImage(this.getControlByControlType(index, ControlType.Image));
+    }
+
+    /**
      * Get the AutomationSpinner element associated with the given name
      * @param name The name to look for
      * @return The AutomationSpinner control
@@ -725,6 +735,17 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationCustom getCustom(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
+    }
+
+    /**
+     * Get the AutomationPowerpointSlide element associated with the given name
+     * @param name The name to look for
+     * @return The AutomationCustom
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationPowerpointSlide getPowerpointSlide(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationPowerpointSlide(this.getControlByControlType(name, ControlType.Custom));
     }
 
     /**
@@ -751,7 +772,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationCustom getCustomByControlType(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, name));
+        return new AutomationCustom(this.getControlByControlType(0, ControlType.Custom, name));
     }
 
     /*

@@ -35,12 +35,4 @@ public class AutomationDocumentPage extends AutomationCustom {
     public AutomationDocumentPage (AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
         super(element, container);
     }
-
-//    AutomationEditBox getEditBox() throws AutomationException, PatternNotFoundException {
-//        AutomationElement element = this.findFirst(new TreeScope(TreeScope.Descendants),
-//                this.createTrueCondition());
-//
-//        return new AutomationEditBox(element);
-//    }
-
 }
