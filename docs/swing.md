@@ -1,0 +1,1 @@
+Unfortunately it looks like Swing is largely opaque to the automation APIs.

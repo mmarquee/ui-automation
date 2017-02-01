@@ -122,7 +122,10 @@ The controls that have been implemented reflect the requirements for automating 
 * [Real word examples](examples.md)
 
 ## Caching
-[Caching](https://github.com/mmarquee/ui-automation/wiki/caching)
+* [Caching](caching.md)
 
 ## Event Handling
-[Events](https://github.com/mmarquee/ui-automation/wiki/events)
+* [Events](events.md)
+
+## Other languages
+* [Scala](scala.md)
