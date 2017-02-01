@@ -20,6 +20,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.SelectionItem;
 
 import java.util.List;
 
@@ -40,14 +41,16 @@ public class AutomationImage extends AutomationBase {
 
     // Powerpoint weirdness, probably needs it's own class in the end
 
-    private Selection selectionPattern;
+    private SelectionItem selectionItemPattern;
 
-    public void selected() throws PatternNotFoundException, AutomationException  {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
+    public AutomationElement getSelectionContainer() throws PatternNotFoundException, AutomationException {
+        if (this.selectionItemPattern == null) {
+            this.selectionItemPattern = this.getSelectItemPattern();
         }
-        List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        logger.info("Items = " + collection.size());
+        AutomationElement element
+                = selectionItemPattern.getSelectionContainer();
+
+        return element;
     }
 }

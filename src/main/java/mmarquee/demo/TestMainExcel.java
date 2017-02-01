@@ -73,7 +73,6 @@ public class TestMainExcel extends TestBase {
             logger.info(cell3.value());
 
             if (grid.canSelectMultiple()) {
-
                 // Play with selection
                 cell.addToSelection();
                 cell2.addToSelection();
@@ -97,8 +96,6 @@ public class TestMainExcel extends TestBase {
             for(AutomationDataGridCell col : cols) {
                 logger.info(col.value());
             }
-
-
 
             // 4. Set some extra data - excel doesn't seem to implement the correct pattern
             try {

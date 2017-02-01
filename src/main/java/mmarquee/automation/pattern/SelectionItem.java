@@ -16,10 +16,15 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 
 /**
@@ -92,6 +97,29 @@ public class SelectionItem extends BasePattern {
      */
     public void addToSelection() throws AutomationException {
         this.getPattern().addToSelection();
+    }
+
+    /**
+     * Gets the selection container
+     * @return The selection container
+     * @throws AutomationException Something has gone wrong in automation
+     */
+    public AutomationElement getSelectionContainer() throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        if (this.getPattern().getCurrentSelectionContainer(pbr) != 0) {
+            throw new AutomationException();
+        }
+
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            return new AutomationElement(convertPointerToElementInterface(pUnknownA));
+        } else {
+            throw new AutomationException();
+        }
     }
 
     /**

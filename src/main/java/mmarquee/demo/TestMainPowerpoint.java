@@ -69,7 +69,7 @@ public class TestMainPowerpoint extends TestBase {
 
             // Oddly enough this is an image control, and has text in it's selection
             AutomationImage image = slide.getImage("Title TextBox");
-            image.selected();
+            image.getSelectionContainer();
 
            // logger.info(text.getValue());
 
