@@ -15,6 +15,7 @@
  */
 package mmarquee.demo;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
@@ -69,7 +70,7 @@ public class TestMainPowerpoint extends TestBase {
 
             // Oddly enough this is an image control, and has text in it's selection
             AutomationImage image = slide.getImage("Title TextBox");
-            image.getSelectionContainer();
+            AutomationElement element = image.getSelectionContainer();
 
            // logger.info(text.getValue());
 
