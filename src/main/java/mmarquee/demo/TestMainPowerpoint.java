@@ -49,14 +49,6 @@ public class TestMainPowerpoint extends TestBase {
             AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
             logger.info(window.name());
 
-            // pane "" (MDIClient)
-            // pane "Powerpoint Edit View - [This is text.pptx]"
-            // pane "Slide"
-            // slide "Slide 1 - This is text" (custom)
-            // textbox - Title TextBox
-            // textbox - TextBox
-            // image ""
-
             AutomationPanel panelX = window.getPanelByClassName(0, "MDIClient");
             logger.info(panelX.name());
             logger.info(panelX.getClassName());
@@ -72,7 +64,7 @@ public class TestMainPowerpoint extends TestBase {
             AutomationImage image = slide.getImage("Title TextBox");
             AutomationElement element = image.getSelectionContainer();
 
-           // logger.info(text.getValue());
+            // logger.info(text.getValue());
 
             AutomationImage image1 = slide.getImage(0);
 

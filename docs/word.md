@@ -1,6 +1,6 @@
 Word has a nice control hierarchy, and uses 'Pages' which are Custom controls.
 
-![UISpy for Word](https://github.com/mmarquee/ui-automation/blob/gh-pages/word.png)
+![UISpy for Word](images/word.png)
 
 ```java
 AutomationWindow window = application.getWindow("Document1 - Word");

@@ -1,6 +1,6 @@
 Powerpoint has a control hierarchy, and uses 'Slides' which are Custom controls. There is some weirdness associated with the contents of each page, as they appear to be Images, even though they are actually text on the screen. 
 
-![UISpy for Powerpoint](https://github.com/mmarquee/ui-automation/blob/gh-pages/powerpoint.png)
+![UISpy for Powerpoint](images/powerpoint.png)
 
 ```java
   AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
