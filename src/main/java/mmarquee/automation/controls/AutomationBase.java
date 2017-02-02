@@ -326,7 +326,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createNamePropertyCondition(String name) throws AutomationException {
-        return this.automation.CreateNamePropertyCondition(name);
+        return this.automation.createNamePropertyCondition(name);
     }
 
     /**
@@ -336,7 +336,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
-        return this.automation.CreateAutomationIdPropertyCondition(automationId);
+        return this.automation.createAutomationIdPropertyCondition(automationId);
     }
 
     /**
@@ -346,7 +346,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
-        return this.automation.CreateControlTypeCondition(id);
+        return this.automation.createControlTypeCondition(id);
     }
 
     /**

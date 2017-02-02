@@ -341,7 +341,7 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateControlTypeCondition(ControlType id) throws AutomationException {
+    public PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id.getValue());
 
@@ -355,7 +355,7 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateAutomationIdPropertyCondition(String automationId) throws AutomationException {
+    public PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
@@ -374,7 +374,7 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateNamePropertyCondition(String name) throws AutomationException {
+    public PointerByReference createNamePropertyCondition(String name) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
