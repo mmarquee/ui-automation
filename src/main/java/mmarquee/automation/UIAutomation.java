@@ -28,6 +28,8 @@ import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
+import mmarquee.demo.TreeWalker;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -574,6 +576,30 @@ public class UIAutomation {
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(rootElement, handle, true);
+        }
+    }
+
+    /**
+     * Gets the control view walker
+     * @return The tree walker object
+     */
+    public AutomationTreeWalker getControlViewWalker() throws AutomationException {
+        PointerByReference pbrWalker = new PointerByReference();
+
+        this.automation.getControlViewWalker(pbrWalker);
+
+        Unknown unkConditionA = new Unknown(pbrWalker.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTreeWalker.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+
+            IUIAutomationTreeWalker walker =
+                    IUIAutomationTreeWalker.Converter.PointerToInterface(pUnknownA);
+
+            return new AutomationTreeWalker(walker);
+        } else {
+            throw new AutomationException();
         }
     }
 }

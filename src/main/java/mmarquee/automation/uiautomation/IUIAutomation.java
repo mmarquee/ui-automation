@@ -60,6 +60,8 @@ public interface IUIAutomation extends IUnknown {
     int createNotCondition(Pointer condition, PointerByReference retval);
     int getPatternProgrammaticName(int patternId, PointerByReference retval);
     int getFocusedElement(PointerByReference element);
+    int createTreeWalker(PointerByReference condition, PointerByReference walker);
+    int getControlViewWalker(PointerByReference walker);
 
     class Converter {
         private static int UIA_COMPARE_ELEMENTS = 3;
@@ -67,6 +69,8 @@ public interface IUIAutomation extends IUnknown {
         private static int UIA_GET_ROOT_ELEMENT = 5;
         private static int UIA_GET_ELEMENT_FROM_HANDLE = 6;
         private static int UIA_GET_FOCUSED_ELEMENT = 8;
+        private static int UIA_CREATE_TREE_WALKER = 11;
+        private static int UIA_GET_CONTROL_VIEW_WALKER = 12;
         private static int UIA_CREATE_TRUE_CONDITION = 21;
         private static int UIA_CREATE_FALSE_CONDITION = 22;
         private static int UIA_CREATE_PROPERTY_CONDITION = 23;
@@ -159,6 +163,17 @@ public interface IUIAutomation extends IUnknown {
                     Function f = Function.getFunction(vTable[UIA_GET_PATTERN_PROGRAMMATIC_NAME], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, patternId, retval});
                 }
+
+                public int createTreeWalker(PointerByReference condition, PointerByReference walker) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_TREE_WALKER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition, walker});
+                }
+
+                public int getControlViewWalker(PointerByReference walker) {
+                    Function f = Function.getFunction(vTable[UIA_GET_CONTROL_VIEW_WALKER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, walker});
+                }
+
             };
         }
     }
