@@ -20,7 +20,6 @@ package mmarquee.automation;
  *
  * Automation Event Identifiers
  */
-/*
 public enum EventID {
     ToolTipOpened(20000),
     ToolTipClosed(20001),
@@ -56,4 +55,3 @@ public enum EventID {
         this.value = value;
     }
 }
-*/
