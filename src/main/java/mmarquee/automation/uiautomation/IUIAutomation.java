@@ -77,6 +77,8 @@ public interface IUIAutomation extends IUnknown {
         private static int UIA_CREATE_AND_CONDITION = 25;
         private static int UIA_CREATE_OR_CONDITION = 28;
         private static int UIA_CREATE_NOT_CONDITION = 31;
+        private static int UIA_ADD_AUTOMATION_EVENT_HANDLER = 32;
+        private static int UIA_REMOVE_AUTOMATION_EVENT_HANDLER = 33;
         private static int UIA_GET_PATTERN_PROGRAMMATIC_NAME = 50;
         private static int UIA_ELEMENT_FROM_IACCESSIBLE = 56;
 
@@ -174,6 +176,15 @@ public interface IUIAutomation extends IUnknown {
                     return f.invokeInt(new Object[]{myInterfacePointer, walker});
                 }
 
+                public int addAutomationEventHandler(IntByReference eventId, TreeScope scope, PointerByReference element, PointerByReference cacheRequest, PointerByReference handler) {
+                    Function f = Function.getFunction(vTable[UIA_ADD_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, scope, cacheRequest, handler});
+                }
+
+                public int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler) {
+                    Function f = Function.getFunction(vTable[UIA_REMOVE_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, handler});
+                }
             };
         }
     }

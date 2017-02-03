@@ -21,7 +21,6 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 
 /**
  * Created by Mark Humphreys on 01/03/2016.
