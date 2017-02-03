@@ -15,23 +15,39 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
 /**
  * Created by Mark Humphreys on 02/02/2017.
+ *
+ * Wrapper for the AutomationTreeWalker.
  */
 public class AutomationTreeWalker {
     IUIAutomationTreeWalker walker = null;
 
-    public AutomationTreeWalker (IUIAutomationTreeWalker walker) {
+    public AutomationTreeWalker(IUIAutomationTreeWalker walker) {
         this.walker = walker;
     }
 
-    public AutomationElement getFirstChildElement(IUIAutomationElement element, AutomationElement child) {
+    public AutomationElement getFirstChildElement(IUIAutomationElement element, AutomationElement child) throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        this.walker.getFirstChildElement(element, pChild);
+        PointerByReference pElement = new PointerByReference();
+
+        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        if (!COMUtils.SUCCEEDED(result1)) {
+            throw new AutomationException();
+        }
+
+        this.walker.getFirstChildElement(pElement, pChild);
+
+        IUIAutomationElement childElement =
+                IUIAutomationElement.Converter.PointerToInterface(pChild);
+        return new AutomationElement(childElement);
     }
 }

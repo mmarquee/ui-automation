@@ -69,8 +69,8 @@ public interface IUIAutomation extends IUnknown {
         private static int UIA_GET_ROOT_ELEMENT = 5;
         private static int UIA_GET_ELEMENT_FROM_HANDLE = 6;
         private static int UIA_GET_FOCUSED_ELEMENT = 8;
-        private static int UIA_CREATE_TREE_WALKER = 11;
-        private static int UIA_GET_CONTROL_VIEW_WALKER = 12;
+        private static int UIA_CREATE_TREE_WALKER = 13;
+        private static int UIA_GET_CONTROL_VIEW_WALKER = 14;
         private static int UIA_CREATE_TRUE_CONDITION = 21;
         private static int UIA_CREATE_FALSE_CONDITION = 22;
         private static int UIA_CREATE_PROPERTY_CONDITION = 23;
