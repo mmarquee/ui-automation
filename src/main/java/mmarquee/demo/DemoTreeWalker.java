@@ -26,8 +26,12 @@ public class DemoTreeWalker extends TestBase {
             AutomationTreeWalker walker = automation.getControlViewWalker();
 
             AutomationElement root = automation.getRootElement();
-            AutomationElement child = null;
-            walker.getFirstChildElement(root.element, child);
+
+            AutomationElement child = walker.getFirstChildElement(root.element);
+
+            logger.info(child.getName());
+            logger.info(child.getClassName());
+            logger.info(child.getControlType());
 
         } catch (Throwable ex) {
             // Smother

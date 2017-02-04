@@ -76,13 +76,13 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentClassName()).thenReturn("CLASS-01");
+        when(element.getClassName()).thenReturn("CLASS-01");
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
         window.getClassName();
 
-        verify(element, atLeastOnce()).currentClassName();
+        verify(element, atLeastOnce()).getClassName();
     }
 
     @Test
@@ -121,7 +121,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn("FRAMEWORK");
+        when(element.getPropertyValue(anyInt())).thenReturn("FRAMEWORK");
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -151,7 +151,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -166,7 +166,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -181,7 +181,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -196,7 +196,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -211,7 +211,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -226,7 +226,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -241,7 +241,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -256,7 +256,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -271,7 +271,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -286,7 +286,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -301,7 +301,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -316,7 +316,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -331,7 +331,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -346,7 +346,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -361,7 +361,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(0);
+        when(element.getPropertyValue(anyInt())).thenReturn(0);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -376,7 +376,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -391,7 +391,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -406,7 +406,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -421,7 +421,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(0);
+        when(element.getPropertyValue(anyInt())).thenReturn(0);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -436,7 +436,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -451,7 +451,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentPropertyValue(anyInt())).thenReturn(1);
+        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -509,7 +509,7 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.currentIsEnabled()).thenReturn(new WinDef.BOOL(true));
+        when(element.isEnabled()).thenReturn(new WinDef.BOOL(true));
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -560,7 +560,7 @@ public class AutomationBaseTest {
 
         doThrow(AutomationException.class)
                 .when(element)
-                .currentPropertyValue(anyObject());
+                .getPropertyValue(anyObject());
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -594,7 +594,7 @@ public class AutomationBaseTest {
 
         WinDef.RECT rect = window.getBoundingRectangle();
 
-        verify(element, atLeastOnce()).getCurrentBoundingRectangle();
+        verify(element, atLeastOnce()).getBoundingRectangle();
     }
 
     @Test
@@ -625,6 +625,6 @@ public class AutomationBaseTest {
 
         window.getSelectItemPattern();
 
-        verify(element, atLeastOnce()).getCurrentBoundingRectangle();
+        verify(element, atLeastOnce()).getBoundingRectangle();
     }
 }

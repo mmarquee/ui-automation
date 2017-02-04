@@ -16,6 +16,8 @@
 package mmarquee.automation;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.IUnknown;
+import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
@@ -34,7 +36,8 @@ public class AutomationTreeWalker {
         this.walker = walker;
     }
 
-    public AutomationElement getFirstChildElement(IUIAutomationElement element, AutomationElement child) throws AutomationException {
+    public AutomationElement getFirstChildElement(IUIAutomationElement element)
+            throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
         PointerByReference pElement = new PointerByReference();
@@ -44,7 +47,7 @@ public class AutomationTreeWalker {
             throw new AutomationException();
         }
 
-        this.walker.getFirstChildElement(pElement, pChild);
+        this.walker.getFirstChildElement(pElement.getValue(), pChild);
 
         IUIAutomationElement childElement =
                 IUIAutomationElement.Converter.PointerToInterface(pChild);

@@ -57,7 +57,7 @@ public class AutomationElement {
      * @return The property ID
      * @throws AutomationException Call to Automation API failed
      */
-    public Object currentPropertyValue(int propertyId) throws AutomationException {
+    public Object getPropertyValue(int propertyId) throws AutomationException {
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
         if (this.element.getCurrentPropertyValue(propertyId, value) != 0) {
@@ -73,7 +73,7 @@ public class AutomationElement {
      * @return The current control type
      * @throws AutomationException Call to Automation API failed
      */
-    public int currentControlType() throws AutomationException {
+    public int getControlType() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         if (this.element.getCurrentControlType(ibr) != 0) {
@@ -89,7 +89,7 @@ public class AutomationElement {
      * @return The current class name
      * @throws AutomationException Call to Automation API failed
      */
-    public String currentClassName() throws AutomationException {
+    public String getClassName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         if (this.element.getCurrentClassName(sr) != 0) {
@@ -181,7 +181,7 @@ public class AutomationElement {
      * @return True if enabled
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.BOOL currentIsEnabled() throws AutomationException {
+    public WinDef.BOOL isEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         if (this.element.getCurrentIsEnabled(bbr)  != 0) {
@@ -497,7 +497,7 @@ public class AutomationElement {
      * @return The bounding rectangle
      * @throws AutomationException Call to Automation API failed
      */
-    public WinDef.RECT getCurrentBoundingRectangle() throws AutomationException {
+    public WinDef.RECT getBoundingRectangle() throws AutomationException {
         WinDef.RECT rect = new WinDef.RECT();
 
         if (this.element.getCurrentBoundingRectangle(rect) != 0) {

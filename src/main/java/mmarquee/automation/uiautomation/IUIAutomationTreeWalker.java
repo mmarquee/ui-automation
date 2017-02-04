@@ -19,9 +19,7 @@ import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -38,13 +36,13 @@ public interface IUIAutomationTreeWalker extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-/*3*/    int getParentElement(PointerByReference element, PointerByReference parent);
-    /*4*/    int getFirstChildElement(PointerByReference element, PointerByReference first);
-    /*5*/int getLastChildElement(PointerByReference element, PointerByReference last);
-    /*6*/int getNextSiblingElement(PointerByReference element, PointerByReference next);
-    /*7*/int getPreviousSiblingElement(PointerByReference element, PointerByReference previous);
+    int getParentElement(PointerByReference element, PointerByReference parent);
+    int getFirstChildElement(Pointer element, PointerByReference first);
+    int getLastChildElement(PointerByReference element, PointerByReference last);
+    int getNextSiblingElement(PointerByReference element, PointerByReference next);
+    int getPreviousSiblingElement(PointerByReference element, PointerByReference previous);
 /* 8-14 cache equivalents */
-    /*15*/ int getCondition(PointerByReference condition);
+    int getCondition(PointerByReference condition);
 
     class Converter {
         private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationTreeWalker
@@ -79,7 +77,7 @@ public interface IUIAutomationTreeWalker extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer, element, parent});
                 }
 
-                public int getFirstChildElement(PointerByReference element, PointerByReference first) {
+                public int getFirstChildElement(Pointer element, PointerByReference first) {
                     Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, element, first});
                 }

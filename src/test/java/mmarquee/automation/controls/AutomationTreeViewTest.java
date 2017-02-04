@@ -41,7 +41,7 @@ public class AutomationTreeViewTest {
         AutomationElement result = new AutomationElement(listElement);
 
         when(element.findFirst(anyObject(), anyObject())).thenReturn(result);
-        when(element.currentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
+        when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
 
         AutomationTreeView ctrl = new AutomationTreeView(element);
 
