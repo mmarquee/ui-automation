@@ -70,6 +70,7 @@ public interface IUIAutomation extends IUnknown {
         private static int UIA_COMPARE_RUNTIME_IDS = 4;
         private static int UIA_GET_ROOT_ELEMENT = 5;
         private static int UIA_GET_ELEMENT_FROM_HANDLE = 6;
+        private static int UIA_GET_ELEMENT_FROM_POINT = 7;
         private static int UIA_GET_FOCUSED_ELEMENT = 8;
         private static int UIA_CREATE_TREE_WALKER = 13;
         private static int UIA_GET_CONTROL_VIEW_WALKER = 14;
@@ -131,6 +132,11 @@ public interface IUIAutomation extends IUnknown {
                 public int getElementFromHandle(WinDef.HWND hwnd, PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_HANDLE], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, hwnd, element});
+                }
+
+                public int elementFromPoint(WinDef.POINT pt, PointerByReference element) {
+                    Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_POINT], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, pt, element});
                 }
 
                 public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {

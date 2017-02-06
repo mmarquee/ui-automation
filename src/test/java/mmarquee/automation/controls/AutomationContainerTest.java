@@ -11,7 +11,7 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -55,7 +55,7 @@ public class AutomationContainerTest {
 
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -71,7 +71,7 @@ public class AutomationContainerTest {
     public void test_getEditBox_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -88,7 +88,7 @@ public class AutomationContainerTest {
 
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -105,7 +105,7 @@ public class AutomationContainerTest {
 
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -121,7 +121,7 @@ public class AutomationContainerTest {
     public void test_getButton_By_Index_Calls_findFirst_From_Element() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -137,7 +137,7 @@ public class AutomationContainerTest {
     public void testGetTab_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -155,7 +155,7 @@ public class AutomationContainerTest {
     public void testGetTab_By_Index_Errors_When_Too_Big() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -173,7 +173,7 @@ public class AutomationContainerTest {
     public void testGetEditBox_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -189,7 +189,7 @@ public class AutomationContainerTest {
     public void testGetToolBar_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -205,7 +205,7 @@ public class AutomationContainerTest {
     public void testGetCombobox_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -221,7 +221,7 @@ public class AutomationContainerTest {
     public void testGetCombobox_By_Index_Errors_When_Too_Big() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -237,7 +237,7 @@ public class AutomationContainerTest {
     public void testGetCheckBox_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -253,7 +253,7 @@ public class AutomationContainerTest {
     public void testGetRadioButton_By_Index_Fails_When_Index_No_Present() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -269,7 +269,7 @@ public class AutomationContainerTest {
     public void testGetRadioButton_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -285,7 +285,7 @@ public class AutomationContainerTest {
     public void testGetPanel_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -301,7 +301,7 @@ public class AutomationContainerTest {
     public void testGetDocument_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -317,7 +317,7 @@ public class AutomationContainerTest {
     public void testGetProgress_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -333,7 +333,7 @@ public class AutomationContainerTest {
     public void testGetHyperlink_By_Index_Fails_When_Index_No_Present() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -349,7 +349,7 @@ public class AutomationContainerTest {
     public void testGetHyperlink_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -365,7 +365,7 @@ public class AutomationContainerTest {
     public void testGetToolbar_By_Index_Fails_When_Not_Found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -381,7 +381,7 @@ public class AutomationContainerTest {
     public void testGetToolbar_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -397,7 +397,7 @@ public class AutomationContainerTest {
     public void testGetSlider_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -413,7 +413,7 @@ public class AutomationContainerTest {
     public void testGetProgress_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -429,7 +429,7 @@ public class AutomationContainerTest {
     public void testGetCalendar_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -445,7 +445,7 @@ public class AutomationContainerTest {
     public void testGetCalendar_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -461,7 +461,7 @@ public class AutomationContainerTest {
     public void testGetDataGrid_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -477,7 +477,7 @@ public class AutomationContainerTest {
     public void testGetDataGrid_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -493,7 +493,7 @@ public class AutomationContainerTest {
     public void testTreeView_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -509,7 +509,7 @@ public class AutomationContainerTest {
     public void testTreeView_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -525,9 +525,9 @@ public class AutomationContainerTest {
     public void testGetPasswordEditBox() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -560,9 +560,9 @@ public class AutomationContainerTest {
     public void testGetPasswordEditBox_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -595,9 +595,9 @@ public class AutomationContainerTest {
     public void testGetMaskedEdit_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -630,9 +630,9 @@ public class AutomationContainerTest {
     public void testGetMaskedEdit_By_Index_Throws_Exception_When_Not_found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -665,9 +665,9 @@ public class AutomationContainerTest {
     public void testGetMaskedEdit_By_Name_Calls_FindFirst_Once() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -731,9 +731,9 @@ public class AutomationContainerTest {
     public void testGetMaskedEdit_By_Name_Throws_Exception_When_Not_found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -766,9 +766,9 @@ public class AutomationContainerTest {
     public void test_PasswordBox_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -801,9 +801,9 @@ public class AutomationContainerTest {
     public void test_PasswordBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -836,9 +836,9 @@ public class AutomationContainerTest {
     public void testGetRibbonBar() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement spyElem = Mockito.spy(elem);
+        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -874,7 +874,7 @@ public class AutomationContainerTest {
     public void testList_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 
@@ -890,7 +890,7 @@ public class AutomationContainerTest {
     public void testList_By_Index_Throws_Exception_When_Not_found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 

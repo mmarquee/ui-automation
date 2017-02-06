@@ -24,7 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationDataGridCell;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
@@ -96,7 +96,7 @@ public class Grid extends BasePattern {
 
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
             return new AutomationElement(convertPointerToElementInterface(pbr));

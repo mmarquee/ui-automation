@@ -23,7 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 
@@ -114,7 +114,7 @@ public class SelectionItem extends BasePattern {
         Unknown unkConditionA = makeUnknown(pbr.getValue());
         PointerByReference pUnknownA = new PointerByReference();
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             return new AutomationElement(convertPointerToElementInterface(pUnknownA));
         } else {

@@ -95,10 +95,10 @@ public class UIAutomation {
 
         Unknown uRoot = new Unknown(pRoot.getValue());
 
-        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pRoot);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            this.rootElement = new AutomationElement(IUIAutomationElement.Converter.PointerToInterface(pRoot));
+            this.rootElement = new AutomationElement(IUIAutomationElement3.Converter.PointerToInterface(pRoot));
         }
     }
 
@@ -631,7 +631,7 @@ public class UIAutomation {
 
         PointerByReference pElement = new PointerByReference();
 
-        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
         if (COMUtils.SUCCEEDED(resultA)) {
             throw new AutomationException();
         }

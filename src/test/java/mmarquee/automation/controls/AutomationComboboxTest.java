@@ -21,7 +21,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -79,7 +79,7 @@ public class AutomationComboboxTest {
         ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
         Value value = Mockito.mock(Value.class);
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         when(elem.findAll(anyObject(), anyObject(), anyObject())).thenReturn(-1);
 
@@ -99,7 +99,7 @@ public class AutomationComboboxTest {
         ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
         Value value = Mockito.mock(Value.class);
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         when(elem.findAll(anyObject(), anyObject(), anyObject())).thenReturn(0);
 
@@ -118,7 +118,7 @@ public class AutomationComboboxTest {
         ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
         Value value = Mockito.mock(Value.class);
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         when(collapse.isExpanded()).thenReturn(true);
 
@@ -195,7 +195,7 @@ public class AutomationComboboxTest {
 
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
 //        when(elem.getCurrentControlType())
 

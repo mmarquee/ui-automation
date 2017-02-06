@@ -71,7 +71,7 @@ public interface IUIAutomationGridItemPattern extends IUnknown {
                 }
 
                 /*
-        3            function Get_CurrentContainingGrid(out retVal: IUIAutomationElement): HResult; stdcall;
+        3            function Get_CurrentContainingGrid(out retVal: IUIAutomationElement3): HResult; stdcall;
                  */
 
                 public int getCurrentRow(IntByReference retVal) {

@@ -17,7 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -54,7 +54,7 @@ public class AutomationListTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
@@ -71,7 +71,7 @@ public class AutomationListTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
@@ -90,7 +90,7 @@ public class AutomationListTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));

@@ -39,14 +39,14 @@ public class AutomationElement {
      * The underlying automation element
      * </p>
      */
-    public IUIAutomationElement element;
+    public IUIAutomationElement3 element;
 
     /**
      * Constructor of AutomationElement
      *
      * @param element The element
      */
-    public AutomationElement(IUIAutomationElement element) {
+    public AutomationElement(IUIAutomationElement3 element) {
         this.element = element;
     }
 
@@ -251,11 +251,11 @@ public class AutomationElement {
         PointerByReference pResult = new PointerByReference();
 
         try {
-            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pResult);
+            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pResult);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                IUIAutomationElement element =
-                        IUIAutomationElement.Converter.PointerToInterface(pResult);
+                IUIAutomationElement3 element =
+                        IUIAutomationElement3.Converter.PointerToInterface(pResult);
                 return new AutomationElement(element);
             } else {
                 throw new AutomationException();
@@ -341,11 +341,11 @@ public class AutomationElement {
 
                 Unknown uElement = new Unknown(pbr.getValue());
 
-                WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
+                WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
 
                 if (COMUtils.SUCCEEDED(result0)) {
-                    IUIAutomationElement element =
-                            IUIAutomationElement.Converter.PointerToInterface(pbr);
+                    IUIAutomationElement3 element =
+                            IUIAutomationElement3.Converter.PointerToInterface(pbr);
 
                     items.add(new AutomationElement(element));
                 }

@@ -28,7 +28,7 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.OrientationType;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
@@ -600,7 +600,7 @@ public class AutomationBaseTest {
     @Test
     @Ignore("Need to mock variants somehow")
     public void test_getSelectItemPattern() throws Exception {
-        IUIAutomationElement el = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 el = Mockito.mock(IUIAutomationElement3.class);
 
         AutomationElement element = Mockito.mock(AutomationElement.class);
         element.element = el;

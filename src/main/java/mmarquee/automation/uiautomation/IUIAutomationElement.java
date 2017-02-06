@@ -25,7 +25,7 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * Created by Mark Humphreys on 06/07/2016.
  *
- * Wrapper for the IUIAutomationElement automation interface
+ * Wrapper for the IUIAutomationElement3 automation interface
  */
 public interface IUIAutomationElement extends IUnknown {
 
@@ -67,7 +67,7 @@ public interface IUIAutomationElement extends IUnknown {
     int getCurrentCulture (IntByReference retVal);
 
     class Converter {
-        private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement
+        private static int UIAutomationElement_Methods  = 85; // 0-2 IUnknown, 3-84 IUIAutomationElement3
 
         public static IUIAutomationElement PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();
@@ -114,7 +114,7 @@ public interface IUIAutomationElement extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
                 }
 
-//                public int FindFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference found) {
+//                public int FindFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement3 */ PointerByReference found) {
 //                    Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
 //                }
@@ -124,7 +124,7 @@ public interface IUIAutomationElement extends IUnknown {
 //                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
 //                }
 
-//                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference updatedElement) {
+//                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement3 */ PointerByReference updatedElement) {
 //                    Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
 //                }
@@ -169,7 +169,7 @@ public interface IUIAutomationElement extends IUnknown {
 //                    return f.invokeInt(new Object[]{interfacePointer, patternId, patternObject});
 //                }
 
-//                public int GetCachedParent (/* IUIAutomationElement */ PointerByReference parent) {
+//                public int GetCachedParent (/* IUIAutomationElement3 */ PointerByReference parent) {
 //                    Function f = Function.getFunction(vTable[18], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, parent});
 //                }
@@ -299,7 +299,7 @@ public interface IUIAutomationElement extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
 
-                public int getCurrentLabeledBy (/* IUIAutomationElement */ PointerByReference retVal) {
+                public int getCurrentLabeledBy (/* IUIAutomationElement3 */ PointerByReference retVal) {
                     Function f = Function.getFunction(vTable[44], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
@@ -454,7 +454,7 @@ public interface IUIAutomationElement extends IUnknown {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-//                public int get_CachedLabeledBy (/* IUIAutomationElement */ PointerByReference retVal) {
+//                public int get_CachedLabeledBy (/* IUIAutomationElement3 */ PointerByReference retVal) {
 //                    Function f = Function.getFunction(vTable[76], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }

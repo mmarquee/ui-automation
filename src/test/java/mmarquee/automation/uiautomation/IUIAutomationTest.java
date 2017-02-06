@@ -77,7 +77,7 @@ public class IUIAutomationTest {
 
         Unknown uRoot = new Unknown(root.getValue());
 
-        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
 
         assertTrue("RootElement", COMUtils.SUCCEEDED(result));
     }
@@ -224,11 +224,11 @@ public class IUIAutomationTest {
 
         Unknown uRoot = new Unknown(root.getValue());
 
-        IUIAutomationElement rootElement = null;
+        IUIAutomationElement3 rootElement = null;
 
-        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            rootElement = IUIAutomationElement.Converter.PointerToInterface(root);
+            rootElement = IUIAutomationElement3.Converter.PointerToInterface(root);
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();

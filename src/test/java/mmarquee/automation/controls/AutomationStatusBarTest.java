@@ -17,7 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -72,7 +72,7 @@ public class AutomationStatusBarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));

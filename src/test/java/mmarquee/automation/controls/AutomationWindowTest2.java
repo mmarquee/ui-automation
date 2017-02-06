@@ -27,7 +27,7 @@ import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -178,7 +178,7 @@ public class AutomationWindowTest2 {
     @Ignore("Needs further work to make meaningful")
     public void test_windowHandle_Throws_Exception_When_currentPropertyValue_Returns_Error() throws Exception {
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         doAnswer(new Answer() {
             @Override
@@ -336,7 +336,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         doAnswer(new Answer() {
             @Override
@@ -366,7 +366,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         doAnswer(new Answer() {
             @Override
@@ -396,7 +396,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
-        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
         doAnswer(new Answer() {
             @Override
@@ -452,7 +452,7 @@ public class AutomationWindowTest2 {
                 // Set the 2nd parameter
 //                Object reference = (Object)args[1];
 
-                IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+                IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 //                reference = new AutomationElement(elem);
 
                 return new AutomationElement(elem);

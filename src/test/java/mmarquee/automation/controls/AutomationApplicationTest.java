@@ -10,7 +10,7 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -70,7 +70,7 @@ public class AutomationApplicationTest {
             throws AutomationException, PatternNotFoundException {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         list.add(new AutomationElement(elem));
 

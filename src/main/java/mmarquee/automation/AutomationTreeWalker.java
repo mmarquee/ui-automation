@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
 /**
@@ -36,39 +36,39 @@ public class AutomationTreeWalker {
         this.walker = walker;
     }
 
-    public AutomationElement getNextSiblingElement (IUIAutomationElement element)
+    public AutomationElement getNextSiblingElement (IUIAutomationElement3 element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
         PointerByReference pElement = new PointerByReference();
 
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
         if (!COMUtils.SUCCEEDED(result1)) {
             throw new AutomationException();
         }
 
         this.walker.getNextSiblingElement(pElement.getValue(), pChild);
 
-        IUIAutomationElement childElement =
-                IUIAutomationElement.Converter.PointerToInterface(pChild);
+        IUIAutomationElement3 childElement =
+                IUIAutomationElement3.Converter.PointerToInterface(pChild);
         return new AutomationElement(childElement);
     }
 
-    public AutomationElement getFirstChildElement(IUIAutomationElement element)
+    public AutomationElement getFirstChildElement(IUIAutomationElement3 element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
         PointerByReference pElement = new PointerByReference();
 
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
         if (!COMUtils.SUCCEEDED(result1)) {
             throw new AutomationException();
         }
 
         this.walker.getFirstChildElement(pElement.getValue(), pChild);
 
-        IUIAutomationElement childElement =
-                IUIAutomationElement.Converter.PointerToInterface(pChild);
+        IUIAutomationElement3 childElement =
+                IUIAutomationElement3.Converter.PointerToInterface(pChild);
         return new AutomationElement(childElement);
     }
 }

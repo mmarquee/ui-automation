@@ -42,7 +42,7 @@ public interface IUIAutomationElementArray extends IUnknown {
     int getElement(int index, PointerByReference element); // 4
 
     class Converter {
-        private static int UIAutomationElementArray_Methods = 5; // 0-2 IUnknown, 3-4 IUIAutomationElement
+        private static int UIAutomationElementArray_Methods = 5; // 0-2 IUnknown, 3-4 IUIAutomationElement3
 
         public static IUIAutomationElementArray PointerToInterface(final PointerByReference ptr) {
             final Pointer interfacePointer = ptr.getValue();

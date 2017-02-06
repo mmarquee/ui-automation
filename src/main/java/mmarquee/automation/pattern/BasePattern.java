@@ -24,7 +24,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 
 import java.util.ArrayList;
@@ -81,11 +81,11 @@ public abstract class BasePattern implements Pattern {
 
             Unknown uElement = new Unknown(pbr.getValue());
 
-            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
+            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                IUIAutomationElement element =
-                        IUIAutomationElement.Converter.PointerToInterface(pbr);
+                IUIAutomationElement3 element =
+                        IUIAutomationElement3.Converter.PointerToInterface(pbr);
 
                 list.add(new AutomationElement(element));
             }
@@ -133,12 +133,12 @@ public abstract class BasePattern implements Pattern {
     }
 
     /**
-     * Converts the unknown value to a IUIAutomationElement
+     * Converts the unknown value to a IUIAutomationElement3
      * @param pUnknownA The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationElement convertPointerToElementInterface(PointerByReference pUnknownA) {
-        return IUIAutomationElement.Converter.PointerToInterface(pUnknownA);
+    public IUIAutomationElement3 convertPointerToElementInterface(PointerByReference pUnknownA) {
+        return IUIAutomationElement3.Converter.PointerToInterface(pUnknownA);
     }
 
     /**

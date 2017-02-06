@@ -18,7 +18,7 @@ package mmarquee.automation;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.ByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.Before;
@@ -226,7 +226,7 @@ public class AutomationElementTest {
     @Test(expected = AutomationException.class)
     public void testGetClickablePoint_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getClickablePoint(isA(WinDef.POINT.ByReference.class),isA(WinDef.BOOLByReference.class))).thenReturn(-1);
 
@@ -240,7 +240,7 @@ public class AutomationElementTest {
     @Test(expected = AutomationException.class)
     public void testGetCurrentBoundingRectangle_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
 
@@ -253,7 +253,7 @@ public class AutomationElementTest {
 
     @Test
     public void test_SetFocus_Calls_SetFocus_From_Element() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
         AutomationElement element = new AutomationElement(mocked);
 
         element.setFocus();
@@ -263,7 +263,7 @@ public class AutomationElementTest {
 
     @Test(expected=AutomationException.class)
     public void test_GetPattern_Throws_Exception_When_Element_Returns_Error() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentPattern(anyInt(), anyObject())).thenReturn(-1);
 
@@ -276,7 +276,7 @@ public class AutomationElementTest {
 
     @Test
     public void test_GetPattern_Calls_GetCurrentPattern_From_ELement() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
         AutomationElement element = new AutomationElement(mocked);
 
         element.getPattern(1);
@@ -286,7 +286,7 @@ public class AutomationElementTest {
 
     @Test(expected=AutomationException.class)
     public void test_GetName_Throws_Exception_When_Element_Returns_Error() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentName(anyObject())).thenReturn(-1);
 
@@ -299,7 +299,7 @@ public class AutomationElementTest {
 
     @Test(expected=AutomationException.class)
     public void test_currentIsContentElement_Throws_Exception_When_Element_Returns_Error() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentIsContentElement(anyObject())).thenReturn(-1);
 
@@ -312,7 +312,7 @@ public class AutomationElementTest {
 
     @Test(expected=AutomationException.class)
     public void test_currentIsControlElement_Throws_Exception_When_Element_Returns_Error() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentIsControlElement(anyObject())).thenReturn(-1);
 
@@ -325,7 +325,7 @@ public class AutomationElementTest {
 
     @Test(expected=AutomationException.class)
     public void test_currentOffScreen_Throws_Exception_When_Element_Returns_Error() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentIsOffscreen(anyObject())).thenReturn(-1);
 
@@ -338,7 +338,7 @@ public class AutomationElementTest {
 
     @Test(expected=AutomationException.class)
     public void test_currentIsEnabled_Throws_Exception_When_Element_Returns_Error() throws Exception {
-        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
         when(mocked.getCurrentIsEnabled(anyObject())).thenReturn(-1);
 
