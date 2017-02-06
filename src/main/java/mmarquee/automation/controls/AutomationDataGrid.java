@@ -133,7 +133,13 @@ public class AutomationDataGrid extends AutomationBase
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (AutomationElement item : collection) {
-            items.add(new AutomationDataGridCell(item));
+            try {
+                items.add(new AutomationDataGridCell(item));
+            } catch (NullPointerException ex) {
+                // Try and add am empty cell
+                AutomationDataGridCell cell = new AutomationDataGridCell(null);
+                items.add(cell);
+            }
         }
 
         return items;
@@ -211,8 +217,14 @@ public class AutomationDataGrid extends AutomationBase
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (int count = 0; count < this.rowCount(); count++) {
-            AutomationDataGridCell cell = this.getItem(count, col);
-            items.add(cell);
+            try {
+                AutomationDataGridCell cell = this.getItem(count, col);
+                items.add(cell);
+            } catch (NullPointerException ex) {
+                // Try and add am empty cell
+                AutomationDataGridCell cell = new AutomationDataGridCell(null);
+                items.add(cell);
+            }
         }
 
         return items;

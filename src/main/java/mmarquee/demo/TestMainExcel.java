@@ -83,16 +83,12 @@ public class TestMainExcel extends TestBase {
             cell2.setValue("XYZ");
             logger.info(cell2.value());
 
-            AutomationDataGridCell cell2 = grid.getItem(1,1);
-            logger.info(cell2.name());
-            logger.info(cell2.value());
-
-            AutomationDataGridCell cell3 = grid.getItem(2,2);
+            AutomationDataGridCell cell3 = grid.getItem(3,3);
             logger.info(cell3.name());
             logger.info(cell3.value());
 
             if (grid.canSelectMultiple()) {
-                // Play with selection
+                // Play with selection - doesn't seem to be working yet
                 cell.addToSelection();
                 cell2.addToSelection();
                 cell3.addToSelection();
@@ -111,6 +107,10 @@ public class TestMainExcel extends TestBase {
             }
 
             // 3.4 More data
+
+            logger.info("Rows = " + grid.rowCount());
+            logger.info("Cols = " + grid.columnCount());
+
             List<AutomationDataGridCell> cols = grid.getColumn(0);
             for(AutomationDataGridCell col : cols) {
                 logger.info(col.value());

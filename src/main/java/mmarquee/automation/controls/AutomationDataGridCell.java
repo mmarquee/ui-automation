@@ -81,10 +81,18 @@ public class AutomationDataGridCell extends AutomationBase {
      */
     public String value() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
+            try {
+                this.valuePattern = this.getValuePattern();
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
         }
 
-        return valuePattern.value();
+        try {
+            return valuePattern.value();
+        } catch (NullPointerException ex) {
+            return "<Empty>";
+        }
     }
 
     /**
