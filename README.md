@@ -1,6 +1,6 @@
 # ui-automation
 
-ui-automation is a framework for automating (via the [MS UIAutomation library](https://msdn.microsoft.com/en-us/library/vstudio/ms753388(v=vs.100).aspx)) rich client applications based on Win32 (including Delphi), WPF and other Windows applications. It is written in Java, using the JNA library to make calls to the COM-based WIndows automation library. 
+ui-automation is a framework for automating (via the [MS UIAutomation library](https://msdn.microsoft.com/en-us/library/vstudio/ms753388(v=vs.100).aspx)) rich client applications based on Win32 (including Delphi), WPF and other Windows applications ((including Java SWT)). It is written in Java, using the JNA library to make calls to the COM-based WIndows automation library. 
 
 Tests and automation programs using ui-automation can be written with Java (or other JVM based languages, like Scala) and used in any testing framework available to the JVM.
 
