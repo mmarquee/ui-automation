@@ -62,6 +62,8 @@ public interface IUIAutomation extends IUnknown {
     int getFocusedElement(PointerByReference element);
     int createTreeWalker(PointerByReference condition, PointerByReference walker);
     int getControlViewWalker(PointerByReference walker);
+    int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler);
+    int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler);
 
     class Converter {
         private static int UIA_COMPARE_ELEMENTS = 3;
@@ -176,7 +178,7 @@ public interface IUIAutomation extends IUnknown {
                     return f.invokeInt(new Object[]{myInterfacePointer, walker});
                 }
 
-                public int addAutomationEventHandler(IntByReference eventId, TreeScope scope, PointerByReference element, PointerByReference cacheRequest, PointerByReference handler) {
+                public int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler) {
                     Function f = Function.getFunction(vTable[UIA_ADD_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, scope, cacheRequest, handler});
                 }

@@ -38,9 +38,9 @@ public interface IUIAutomationTreeWalker extends IUnknown {
 
     int getParentElement(PointerByReference element, PointerByReference parent);
     int getFirstChildElement(Pointer element, PointerByReference first);
-    int getLastChildElement(PointerByReference element, PointerByReference last);
-    int getNextSiblingElement(PointerByReference element, PointerByReference next);
-    int getPreviousSiblingElement(PointerByReference element, PointerByReference previous);
+    int getLastChildElement(Pointer element, PointerByReference last);
+    int getNextSiblingElement(Pointer element, PointerByReference next);
+    int getPreviousSiblingElement(Pointer element, PointerByReference previous);
 /* 8-14 cache equivalents */
     int getCondition(PointerByReference condition);
 
@@ -82,17 +82,17 @@ public interface IUIAutomationTreeWalker extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer, element, first});
                 }
 
-                public int getLastChildElement(PointerByReference element, PointerByReference last) {
+                public int getLastChildElement(Pointer element, PointerByReference last) {
                     Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, element, last});
                 }
 
-                public int getNextSiblingElement(PointerByReference element, PointerByReference next) {
+                public int getNextSiblingElement(Pointer element, PointerByReference next) {
                     Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, element, next});
                 }
 
-                public int getPreviousSiblingElement(PointerByReference element, PointerByReference previous) {
+                public int getPreviousSiblingElement(Pointer element, PointerByReference previous) {
                     Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, element, previous});
                 }

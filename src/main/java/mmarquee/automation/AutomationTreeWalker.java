@@ -36,6 +36,24 @@ public class AutomationTreeWalker {
         this.walker = walker;
     }
 
+    public AutomationElement getNextSiblingElement (IUIAutomationElement element)
+            throws AutomationException {
+        PointerByReference pChild = new PointerByReference();
+
+        PointerByReference pElement = new PointerByReference();
+
+        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        if (!COMUtils.SUCCEEDED(result1)) {
+            throw new AutomationException();
+        }
+
+        this.walker.getNextSiblingElement(pElement.getValue(), pChild);
+
+        IUIAutomationElement childElement =
+                IUIAutomationElement.Converter.PointerToInterface(pChild);
+        return new AutomationElement(childElement);
+    }
+
     public AutomationElement getFirstChildElement(IUIAutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();

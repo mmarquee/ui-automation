@@ -602,4 +602,56 @@ public class UIAutomation {
             throw new AutomationException();
         }
     }
+
+    /**
+     * Adds an automation event handler.
+     *
+     IntByReference eventId,
+     TreeScope scope,
+     Pointer element,
+     PointerByReference cacheRequest,
+     PointerByReference handler
+     *
+     * @param event The identifier of the event that the method handles.
+     * @param scope The scope of events to be handled; that is, whether they are on the element itself, or on its ancestors and descendants.
+     * @param element The UI Automation element to associate with the event handler.
+     * @param handler The object that handles the event.
+     * @throws AutomationException
+     */
+/*
+    public void addAutomationEventHandler(EventID event,
+                                          TreeScope scope,
+                                          AutomationElement element,
+                                          AutomationHandler handler) throws AutomationException {
+
+        IntByReference ibr = new IntByReference();
+        ibr.setValue(event.getValue());
+
+        PointerByReference handlerRef = new PointerByReference();
+
+        PointerByReference pElement = new PointerByReference();
+
+        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            throw new AutomationException();
+        }
+
+        if (automation.addAutomationEventHandler(ibr, scope, pElement.getValue(), null, handler) != 0) {
+            throw new AutomationException();
+        }
+    }
+*/
+          /*
+        IntByReference eventId, PointerByReference element, PointerByReference handler
+         */
+  /*
+    public void removeAutomationEventHandler(EventID event) {
+
+        IntByReference ibr = new IntByReference();
+        ibr.setValue(event.getValue());
+
+
+        automation.removeAutomationEventHandler(ibr);
+    }
+*/
 }

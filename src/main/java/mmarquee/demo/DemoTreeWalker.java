@@ -1,7 +1,6 @@
 package mmarquee.demo;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.AutomationTreeWalker;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.AutomationApplication;
@@ -33,11 +32,22 @@ public class DemoTreeWalker extends TestBase {
             logger.info(child.getClassName());
             logger.info(child.getControlType());
 
+    //        AutomationWindow window = application.getWindow("File Explorer");
+
+            AutomationElement element = child;
+
+            // This crashes at some point
+
+            while (element.element != null) {
+                element = walker.getNextSiblingElement(element.element);
+                logger.info(element.getName());
+                logger.info(element.getClassName());
+                logger.info(element.getControlType());
+            }
+
         } catch (Throwable ex) {
             // Smother
-            logger.error("Failed to launch or attach");
+            logger.error("Exception thrown - " + ex.toString());
         }
-
-
     }
 }
