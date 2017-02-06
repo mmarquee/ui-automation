@@ -144,13 +144,13 @@ public class AutomationWindowTest2 {
 
                 return 1234;
             }
-        }).when(element).currentPropertyValue(anyInt());
+        }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
         wndw.setTransparency(100);
 
-        verify(element, atLeastOnce()).currentPropertyValue(anyInt());
+        verify(element, atLeastOnce()).getPropertyValue(anyInt());
     }
 
     @Test
@@ -165,13 +165,13 @@ public class AutomationWindowTest2 {
 
                 return 1234;
             }
-        }).when(element).currentPropertyValue(anyInt());
+        }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
         WinDef.HWND handle = wndw.getNativeWindowHandle();
 
-        verify(element, atLeastOnce()).currentPropertyValue(anyInt());
+        verify(element, atLeastOnce()).getPropertyValue(anyInt());
     }
 
     @Test(expected=AutomationException.class)
@@ -230,13 +230,13 @@ public class AutomationWindowTest2 {
 
                 return 1234;
             }
-        }).when(element).currentPropertyValue(anyInt());
+        }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
         wndw.setTransparency(100);
 
-        verify(element, atLeastOnce()).currentPropertyValue(anyInt());
+        verify(element, atLeastOnce()).getPropertyValue(anyInt());
     }
 
     @Test(expected = Win32Exception.class)
@@ -266,13 +266,13 @@ public class AutomationWindowTest2 {
 
                 return 1234;
             }
-        }).when(element).currentPropertyValue(anyInt());
+        }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
         wndw.setTransparency(100);
 
-        verify(element, atLeastOnce()).currentPropertyValue(anyInt());
+        verify(element, atLeastOnce()).getPropertyValue(anyInt());
     }
 
     @Test(expected = Win32Exception.class)
@@ -302,13 +302,13 @@ public class AutomationWindowTest2 {
 
                 return 1234;
             }
-        }).when(element).currentPropertyValue(anyInt());
+        }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
         wndw.setTransparency(100);
 
-        verify(element, atLeastOnce()).currentPropertyValue(anyInt());
+        verify(element, atLeastOnce()).getPropertyValue(anyInt());
     }
 
     @Test(expected=ElementNotFoundException.class)

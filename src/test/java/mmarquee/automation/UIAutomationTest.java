@@ -342,7 +342,7 @@ public class UIAutomationTest {
         try {
             // Create first condition to use
             PointerByReference condition =
-                    instance.CreateNamePropertyCondition("ID");
+                    instance.createNamePropertyCondition("ID");
         } catch (AutomationException ex) {
             assertTrue(false);
         }
@@ -358,7 +358,7 @@ public class UIAutomationTest {
         try {
             // Create first condition to use
             PointerByReference condition =
-                    instance.CreateAutomationIdPropertyCondition("ID");
+                    instance.createAutomationIdPropertyCondition("ID");
         } catch (AutomationException ex) {
             assertTrue(false);
         }
@@ -374,7 +374,7 @@ public class UIAutomationTest {
         try {
             // Create first condition to use
             PointerByReference condition =
-                    instance.CreateControlTypeCondition(ControlType.Button);
+                    instance.createControlTypeCondition(ControlType.Button);
         } catch (AutomationException ex) {
             assertTrue(false);
         }

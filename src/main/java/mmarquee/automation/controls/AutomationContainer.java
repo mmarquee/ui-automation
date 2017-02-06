@@ -101,7 +101,7 @@ public class AutomationContainer extends AutomationBase {
         int counter = 0;
 
         for (AutomationElement element : collection) {
-            String cName = element.currentClassName();
+            String cName = element.getClassName();
 
             if (cName.equals(controlName)) {
                 if (counter == index) {
@@ -139,8 +139,8 @@ public class AutomationContainer extends AutomationBase {
         collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
         for (AutomationElement element : collection) {
-            int retVal = element.currentControlType();
-            String className = element.currentClassName();
+            int retVal = element.getControlType();
+            String className = element.getClassName();
 
             if (retVal == id.getValue()) {
                 if (className.equals(controlName)) {
@@ -198,6 +198,17 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationCheckbox getCheckbox(int index) throws PatternNotFoundException, AutomationException {
         return new AutomationCheckbox(this.getControlByControlType(index, ControlType.CheckBox));
+    }
+
+    /**
+     * Gets the checkbox associated with the given name
+     * @param name Name of the control
+     * @return AutomationCheckbox that represents the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationCheckbox getCheckbox(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationCheckbox(this.getControlByControlType(name, ControlType.CheckBox));
     }
 
     /**
@@ -368,7 +379,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * Gets the combobox control associated with the given automtion id
-     * @param id Automtion id of the control
+     * @param id Automation id of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
@@ -410,6 +421,11 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationButton(this.getControlByControlType(index, ControlType.Button));
     }
 
+    /**
+     * Creates an integer variant
+     * @param value The value to set
+     * @return ByValue variant
+     */
     private Variant.VARIANT.ByValue createIntegerVariant(int value) {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, value);
@@ -426,7 +442,7 @@ public class AutomationContainer extends AutomationBase {
      * @param controlType The control type to look for
      * @param name Name to be looked for
      * @param <T> The Type of the class
-     * @return Founnd element
+     * @return Found element
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Raised from automation library
      */
@@ -691,6 +707,16 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Get the AutomationImage associated with the given index
+     * @param index The index to look for
+     * @return The AutomationImage
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationImage getImage(int index) throws AutomationException {
+        return new AutomationImage(this.getControlByControlType(index, ControlType.Image));
+    }
+
+    /**
      * Get the AutomationSpinner element associated with the given name
      * @param name The name to look for
      * @return The AutomationSpinner control
@@ -709,6 +735,17 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationCustom getCustom(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationCustom(this.getControlByControlType(name, ControlType.Custom));
+    }
+
+    /**
+     * Get the AutomationPowerpointSlide element associated with the given name
+     * @param name The name to look for
+     * @return The AutomationCustom
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationPowerpointSlide getPowerpointSlide(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationPowerpointSlide(this.getControlByControlType(name, ControlType.Custom));
     }
 
     /**
@@ -735,7 +772,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationCustom getCustomByControlType(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getControlByControlType(0, ControlType.Edit, name));
+        return new AutomationCustom(this.getControlByControlType(0, ControlType.Custom, name));
     }
 
     /*

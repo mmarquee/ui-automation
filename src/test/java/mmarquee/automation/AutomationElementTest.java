@@ -60,7 +60,7 @@ public class AutomationElementTest {
     @Test
     public void testGetClassName() throws AutomationException {
         AutomationElement root = instance.getRootElement();
-        assertTrue("root:" + root.currentClassName(), root.currentClassName().equals("#32769"));
+        assertTrue("root:" + root.getClassName(), root.getClassName().equals("#32769"));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class AutomationElementTest {
     @Test
     public void testIsEnabled() throws AutomationException {
         AutomationElement root = instance.getRootElement();
-        assertTrue("root:" + root.currentIsEnabled(), root.currentIsEnabled().booleanValue());
+        assertTrue("root:" + root.isEnabled(), root.isEnabled().booleanValue());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class AutomationElementTest {
     public void testCurrentControlType() throws AutomationException {
         AutomationElement root = instance.getRootElement();
 
-        assertTrue("root:" + root.currentControlType(), root.currentControlType() == ControlType.Pane.getValue());
+        assertTrue("root:" + root.getControlType(), root.getControlType() == ControlType.Pane.getValue());
     }
 
     @Test
@@ -204,14 +204,14 @@ public class AutomationElementTest {
 
         WinDef.RECT empty = new WinDef.RECT();
 
-        assertTrue("root:" + root.getCurrentBoundingRectangle(), !root.getCurrentBoundingRectangle().dataEquals(empty));
+        assertTrue("root:" + root.getBoundingRectangle(), !root.getBoundingRectangle().dataEquals(empty));
     }
 
     @Test
     public void testCurrentPropertyValue_Succeeds_When_No_Error() throws AutomationException {
         AutomationElement root = instance.getRootElement();
 
-        Object value = root.currentPropertyValue(PropertyID.FrameworkId.getValue());
+        Object value = root.getPropertyValue(PropertyID.FrameworkId.getValue());
 
         assertTrue(!value.toString().isEmpty());
     }
@@ -248,7 +248,7 @@ public class AutomationElementTest {
 
         AutomationElement element = new AutomationElement(mocked);
 
-        rect = element.getCurrentBoundingRectangle();
+        rect = element.getBoundingRectangle();
     }
 
     @Test
@@ -344,7 +344,7 @@ public class AutomationElementTest {
 
         AutomationElement element = new AutomationElement(mocked);
 
-        element.currentIsEnabled();
+        element.isEnabled();
 
         verify(mocked, atLeastOnce()).getCurrentIsEnabled(anyObject());
     }

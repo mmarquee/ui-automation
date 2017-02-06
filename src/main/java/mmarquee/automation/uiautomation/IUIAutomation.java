@@ -60,6 +60,10 @@ public interface IUIAutomation extends IUnknown {
     int createNotCondition(Pointer condition, PointerByReference retval);
     int getPatternProgrammaticName(int patternId, PointerByReference retval);
     int getFocusedElement(PointerByReference element);
+    int createTreeWalker(PointerByReference condition, PointerByReference walker);
+    int getControlViewWalker(PointerByReference walker);
+    int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler);
+    int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler);
 
     class Converter {
         private static int UIA_COMPARE_ELEMENTS = 3;
@@ -67,12 +71,16 @@ public interface IUIAutomation extends IUnknown {
         private static int UIA_GET_ROOT_ELEMENT = 5;
         private static int UIA_GET_ELEMENT_FROM_HANDLE = 6;
         private static int UIA_GET_FOCUSED_ELEMENT = 8;
+        private static int UIA_CREATE_TREE_WALKER = 13;
+        private static int UIA_GET_CONTROL_VIEW_WALKER = 14;
         private static int UIA_CREATE_TRUE_CONDITION = 21;
         private static int UIA_CREATE_FALSE_CONDITION = 22;
         private static int UIA_CREATE_PROPERTY_CONDITION = 23;
         private static int UIA_CREATE_AND_CONDITION = 25;
         private static int UIA_CREATE_OR_CONDITION = 28;
         private static int UIA_CREATE_NOT_CONDITION = 31;
+        private static int UIA_ADD_AUTOMATION_EVENT_HANDLER = 32;
+        private static int UIA_REMOVE_AUTOMATION_EVENT_HANDLER = 33;
         private static int UIA_GET_PATTERN_PROGRAMMATIC_NAME = 50;
         private static int UIA_ELEMENT_FROM_IACCESSIBLE = 56;
 
@@ -158,6 +166,26 @@ public interface IUIAutomation extends IUnknown {
                 public int getPatternProgrammaticName(int patternId, PointerByReference retval) {
                     Function f = Function.getFunction(vTable[UIA_GET_PATTERN_PROGRAMMATIC_NAME], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{myInterfacePointer, patternId, retval});
+                }
+
+                public int createTreeWalker(PointerByReference condition, PointerByReference walker) {
+                    Function f = Function.getFunction(vTable[UIA_CREATE_TREE_WALKER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, condition, walker});
+                }
+
+                public int getControlViewWalker(PointerByReference walker) {
+                    Function f = Function.getFunction(vTable[UIA_GET_CONTROL_VIEW_WALKER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, walker});
+                }
+
+                public int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler) {
+                    Function f = Function.getFunction(vTable[UIA_ADD_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, scope, cacheRequest, handler});
+                }
+
+                public int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler) {
+                    Function f = Function.getFunction(vTable[UIA_REMOVE_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, handler});
                 }
             };
         }

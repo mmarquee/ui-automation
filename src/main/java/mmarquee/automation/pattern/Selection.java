@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
@@ -44,11 +45,20 @@ public class Selection extends BasePattern {
 
     private IUIAutomationSelectionPattern rawPattern;
 
+    /**
+     * Constructor for the value pattern
+     * @param rawPattern The raw pattern to use
+     */
     public Selection(IUIAutomationSelectionPattern rawPattern) {
         this.IID = IUIAutomationSelectionPattern.IID;
         this.rawPattern = rawPattern;
     }
 
+    /**
+     * Gets the pointer
+     * @return Underlying pointer
+     * @throws AutomationException Automation has gone wrong
+     */
     private IUIAutomationSelectionPattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;
@@ -108,5 +118,47 @@ public class Selection extends BasePattern {
      */
     public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
         return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
+    }
+
+    /**
+     * Gets the current selection
+     * @return List of selected items
+     * @throws AutomationException Something has gone wrong
+     */
+    public List<AutomationElement> getSelection() throws AutomationException {
+
+        PointerByReference pbr = new PointerByReference();
+
+        if (this.getPattern().getCurrentSelection(pbr) != 0) {
+            throw new AutomationException();
+        }
+
+        Unknown unkConditionA = makeUnknown(pbr.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationElementArray collection =
+                    this.convertPointerToElementArrayInterface(pUnknownA);
+
+            return this.collectionToList(collection);
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
+     * Returns whether the selection supports multiple selection
+     * @return Value from automation
+     * @throws AutomationException Something has gone wrong
+     */
+    public boolean canSelectMultiple() throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        if (this.getPattern().getCurrentCanSelectMultiple(ibr) != 0) {
+            throw new AutomationException();
+        }
+
+        return (ibr.getValue() == 1);
     }
 }

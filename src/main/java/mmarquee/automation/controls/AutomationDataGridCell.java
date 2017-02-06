@@ -19,6 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.pattern.Value;
 
 /**
@@ -30,6 +31,7 @@ public class AutomationDataGridCell extends AutomationBase {
 
     private Value valuePattern;
     private GridItem gridItemPattern;
+    private SelectionItem selectionItemPattern;
 
     /**
      * Construct the AutomationDataGridCell
@@ -52,6 +54,23 @@ public class AutomationDataGridCell extends AutomationBase {
     public AutomationDataGridCell(AutomationElement element, Value value) throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = value;
+    }
+
+    /**
+     /**
+     * Construct the AutomationDataGridCell
+     * @param element The element
+     * @param value The Value pattern
+     * @param grid The GridItem pattern
+     * @param selectionItem The SelectionItem pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationDataGridCell(AutomationElement element, Value value, GridItem grid, SelectionItem selectionItem) throws PatternNotFoundException, AutomationException {
+        super(element);
+        this.valuePattern = value;
+        this.gridItemPattern = grid;
+        this.selectionItemPattern = selectionItem;
     }
 
     /**
@@ -108,6 +127,45 @@ public class AutomationDataGridCell extends AutomationBase {
         }
 
         return this.gridItemPattern.getColumn();
+    }
+
+    /**
+     * Selects the cell
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public void select() throws AutomationException, PatternNotFoundException {
+        if (this.selectionItemPattern == null) {
+            this.selectionItemPattern = this.getSelectItemPattern();
+        }
+
+        this.selectionItemPattern.select();
+    }
+
+    /**
+     * Adds to the selection.
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public void addToSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionItemPattern == null) {
+            this.selectionItemPattern = this.getSelectItemPattern();
+        }
+
+        this.selectionItemPattern.addToSelection();
+    }
+
+    /**
+     * Removes the cell from the selection.
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public void removeFromSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionItemPattern == null) {
+            this.selectionItemPattern = this.getSelectItemPattern();
+        }
+
+        this.selectionItemPattern.removeFromSelection();
     }
 
     //   public boolean isReadOnly() {

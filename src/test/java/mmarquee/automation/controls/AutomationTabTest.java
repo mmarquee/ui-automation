@@ -52,8 +52,8 @@ public class AutomationTabTest extends BaseAutomationTest {
         AutomationElement testElem = Mockito.mock(AutomationElement.class);
 
         when(testElem.getName()).thenReturn("TEST");
-        when(testElem.currentControlType()).thenReturn(ControlType.TabItem.getValue());
-        when(testElem.currentPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
+        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
+        when(testElem.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
 
         // Need to get the selectItem pattern to work correctly
         SelectionItem selectItem = Mockito.mock(SelectionItem.class);

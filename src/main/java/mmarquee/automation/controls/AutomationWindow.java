@@ -109,7 +109,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         AutomationStatusBar found = null;
 
         for(AutomationElement element: collection) {
-            int retVal = element.currentControlType();
+            int retVal = element.getControlType();
 
             if (retVal == ControlType.StatusBar.getValue()) {
                 found = new AutomationStatusBar(element);

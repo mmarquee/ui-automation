@@ -447,7 +447,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        element.currentControlType();
+        element.getControlType();
     }
 
     @Test (expected=AutomationException.class)
@@ -458,7 +458,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        element.currentPropertyValue(PropertyID.ProcessId.getValue());
+        element.getPropertyValue(PropertyID.ProcessId.getValue());
     }
 
     @Test (expected=AutomationException.class)
@@ -502,7 +502,7 @@ public class IUIAutomationElementTest {
 
         AutomationElement element = new AutomationElement(mockedElement);
 
-        element.currentClassName();
+        element.getClassName();
     }
 
     @Test (expected=AutomationException.class)

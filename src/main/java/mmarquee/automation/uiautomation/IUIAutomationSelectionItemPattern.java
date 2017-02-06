@@ -39,6 +39,9 @@ public interface IUIAutomationSelectionItemPattern extends IUnknown {
 
     int select();
     int getCurrentIsSelected(IntByReference ibr);
+    int addToSelection();
+    int removeFromSelection();
+    int getCurrentSelectionContainer(PointerByReference pbr);
 
     class Converter {
 
@@ -74,9 +77,24 @@ public interface IUIAutomationSelectionItemPattern extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
+                public int addToSelection() {
+                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
+                public int removeFromSelection() {
+                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer});
+                }
+
                 public int getCurrentIsSelected(IntByReference ibr) {
                     Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, ibr});
+                }
+
+                public int getCurrentSelectionContainer(PointerByReference pbr) {
+                    Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, pbr});
                 }
             };
         }

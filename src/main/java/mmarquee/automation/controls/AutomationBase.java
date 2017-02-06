@@ -62,7 +62,7 @@ public abstract class AutomationBase implements Automatable {
      */
     private boolean isPatternAvailable(PropertyID property) {
         try {
-            return !this.element.currentPropertyValue(property.getValue()).equals(0);
+            return !this.element.getPropertyValue(property.getValue()).equals(0);
         } catch (AutomationException ex) {
             return false;
         }
@@ -226,7 +226,7 @@ public abstract class AutomationBase implements Automatable {
      */
     boolean isOffScreen () {
         try {
-            return !this.element.currentPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
+            return !this.element.getPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
         } catch (AutomationException ex) {
             return false;
         }
@@ -259,7 +259,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Error in automation library
      */
     public Object getFramework() throws AutomationException {
-        return this.element.currentPropertyValue(PropertyID.FrameworkId.getValue());
+        return this.element.getPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
@@ -326,7 +326,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createNamePropertyCondition(String name) throws AutomationException {
-        return this.automation.CreateNamePropertyCondition(name);
+        return this.automation.createNamePropertyCondition(name);
     }
 
     /**
@@ -336,7 +336,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
-        return this.automation.CreateAutomationIdPropertyCondition(automationId);
+        return this.automation.createAutomationIdPropertyCondition(automationId);
     }
 
     /**
@@ -346,7 +346,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something has gone wrong
      */
     protected PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
-        return this.automation.CreateControlTypeCondition(id);
+        return this.automation.createControlTypeCondition(id);
     }
 
     /**
@@ -642,7 +642,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something is wrong in automation
      */
     public boolean isEnabled () throws AutomationException {
-        return this.element.currentIsEnabled().booleanValue();
+        return this.element.isEnabled().booleanValue();
     }
 
     /**
@@ -651,7 +651,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something is wrong in automation
      */
     public WinDef.RECT getBoundingRectangle() throws AutomationException {
-        return this.element.getCurrentBoundingRectangle();
+        return this.element.getBoundingRectangle();
     }
 
     /**
@@ -660,7 +660,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Something is wrong in automation
      */
     public WinDef.HWND getNativeWindowHandle() throws AutomationException {
-        Object value = this.element.currentPropertyValue(PropertyID.NativeWindowHandle.getValue());
+        Object value = this.element.getPropertyValue(PropertyID.NativeWindowHandle.getValue());
         return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
     }
 
@@ -682,8 +682,13 @@ public abstract class AutomationBase implements Automatable {
         return this.element.getOrientation();
     }
 
+    /**
+     * Gets the current class name
+     * @return The class name
+     * @throws AutomationException Something has gone wrong
+     */
     public String getClassName() throws AutomationException {
-        return this.element.currentClassName();
+        return this.element.getClassName();
     }
 
     /**

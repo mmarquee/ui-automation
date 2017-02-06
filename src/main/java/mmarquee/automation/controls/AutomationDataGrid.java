@@ -244,5 +244,27 @@ public class AutomationDataGrid extends AutomationBase
 
         return this.tablePattern.getRowOrColumnMajor();
     }
+
+    /**
+     * Is multiple selection allowed
+     * @return True is multiple selection is allowed
+     * @throws AutomationException Error thrown from automation library
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    public boolean canSelectMultiple() throws AutomationException, PatternNotFoundException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+
+        return this.selectionPattern.canSelectMultiple();
+    }
+
+    public List<AutomationElement> getSelection() throws AutomationException, PatternNotFoundException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+
+        return this.selectionPattern.getSelection();
+    }
 }
 

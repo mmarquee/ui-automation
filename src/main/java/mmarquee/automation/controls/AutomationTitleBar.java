@@ -58,7 +58,7 @@ public class AutomationTitleBar extends AutomationContainer {
      * @throws ElementNotFoundException When the element is not found
      */
     public AutomationMainMenu getMenuBar() throws AutomationException {
-        PointerByReference condition = this.automation.CreateControlTypeCondition(ControlType.MenuBar);
+        PointerByReference condition = this.automation.createControlTypeCondition(ControlType.MenuBar);
 
         AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
                 condition);

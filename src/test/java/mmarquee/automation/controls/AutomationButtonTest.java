@@ -66,7 +66,7 @@ public class AutomationButtonTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
-        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
+        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
         AutomationButton button = new AutomationButton(element, pattern);
 
@@ -80,7 +80,7 @@ public class AutomationButtonTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
-        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
+        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
         AutomationButton button = new AutomationButton(element, pattern);
 

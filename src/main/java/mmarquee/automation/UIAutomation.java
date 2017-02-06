@@ -28,6 +28,8 @@ import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
+import mmarquee.demo.TreeWalker;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -339,7 +341,7 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateControlTypeCondition(ControlType id) throws AutomationException {
+    public PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id.getValue());
 
@@ -353,7 +355,7 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateAutomationIdPropertyCondition(String automationId) throws AutomationException {
+    public PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
@@ -372,7 +374,7 @@ public class UIAutomation {
      * @return The condition
      * @throws AutomationException Something went wrong
      */
-    public PointerByReference CreateNamePropertyCondition(String name) throws AutomationException {
+    public PointerByReference createNamePropertyCondition(String name) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
@@ -576,4 +578,80 @@ public class UIAutomation {
             return new AutomationApplication(rootElement, handle, true);
         }
     }
+
+    /**
+     * Gets the control view walker
+     * @return The tree walker object
+     */
+    public AutomationTreeWalker getControlViewWalker() throws AutomationException {
+        PointerByReference pbrWalker = new PointerByReference();
+
+        this.automation.getControlViewWalker(pbrWalker);
+
+        Unknown unkConditionA = new Unknown(pbrWalker.getValue());
+        PointerByReference pUnknownA = new PointerByReference();
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTreeWalker.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+
+            IUIAutomationTreeWalker walker =
+                    IUIAutomationTreeWalker.Converter.PointerToInterface(pUnknownA);
+
+            return new AutomationTreeWalker(walker);
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
+     * Adds an automation event handler.
+     *
+     IntByReference eventId,
+     TreeScope scope,
+     Pointer element,
+     PointerByReference cacheRequest,
+     PointerByReference handler
+     *
+     * @param event The identifier of the event that the method handles.
+     * @param scope The scope of events to be handled; that is, whether they are on the element itself, or on its ancestors and descendants.
+     * @param element The UI Automation element to associate with the event handler.
+     * @param handler The object that handles the event.
+     * @throws AutomationException
+     */
+/*
+    public void addAutomationEventHandler(EventID event,
+                                          TreeScope scope,
+                                          AutomationElement element,
+                                          AutomationHandler handler) throws AutomationException {
+
+        IntByReference ibr = new IntByReference();
+        ibr.setValue(event.getValue());
+
+        PointerByReference handlerRef = new PointerByReference();
+
+        PointerByReference pElement = new PointerByReference();
+
+        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            throw new AutomationException();
+        }
+
+        if (automation.addAutomationEventHandler(ibr, scope, pElement.getValue(), null, handler) != 0) {
+            throw new AutomationException();
+        }
+    }
+*/
+          /*
+        IntByReference eventId, PointerByReference element, PointerByReference handler
+         */
+  /*
+    public void removeAutomationEventHandler(EventID event) {
+
+        IntByReference ibr = new IntByReference();
+        ibr.setValue(event.getValue());
+
+
+        automation.removeAutomationEventHandler(ibr);
+    }
+*/
 }

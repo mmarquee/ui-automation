@@ -72,7 +72,7 @@ public class AutomationTreeViewItemTest {
         SelectionItem selection = Mockito.mock(SelectionItem.class);
         Invoke invoke = Mockito.mock(Invoke.class);
 
-        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
+        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
         AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
 
@@ -87,7 +87,7 @@ public class AutomationTreeViewItemTest {
         SelectionItem selection = Mockito.mock(SelectionItem.class);
         Invoke invoke = Mockito.mock(Invoke.class);
 
-        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
+        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
         AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
 

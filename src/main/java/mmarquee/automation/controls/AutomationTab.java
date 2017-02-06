@@ -41,7 +41,7 @@ public class AutomationTab extends AutomationContainer {
             List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
             for (AutomationElement elem : collection) {
-                int retVal = elem.currentControlType();
+                int retVal = elem.getControlType();
 
                 if (retVal == ControlType.TabItem.getValue()) {
                     tabItems.add(new AutomationTabItem(elem));

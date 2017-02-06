@@ -20,6 +20,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -37,6 +38,7 @@ public interface IUIAutomationSelectionPattern extends IUnknown {
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int getCurrentSelection(PointerByReference retVal);
+    int getCurrentCanSelectMultiple(IntByReference retval);
 
     class Converter {
         private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationSelectionPattern
@@ -69,6 +71,12 @@ public interface IUIAutomationSelectionPattern extends IUnknown {
                 public int getCurrentSelection(PointerByReference retVal)
                 {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
+
+                public int getCurrentCanSelectMultiple(IntByReference retVal)
+                {
+                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, retVal});
                 }
             };

@@ -38,7 +38,7 @@ public class AutomationHyperlinkTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
-        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
+        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
         AutomationHyperlink link = new AutomationHyperlink(element, pattern);
 
@@ -52,7 +52,7 @@ public class AutomationHyperlinkTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
-        when(element.currentPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
+        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
         AutomationHyperlink link = new AutomationHyperlink(element, pattern);
 
