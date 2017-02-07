@@ -19,6 +19,8 @@ import mmarquee.automation.uiautomation.IUIAutomationEventHandler;
 
 /**
  * Created by Mark Humphreys on 05/02/2017.
+ *
+ * Wrapper for event handling
  */
 public class AutomationEventHandler  {
     private IUIAutomationEventHandler handler;
