@@ -27,6 +27,8 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import static mmarquee.automation.utils.Converters.getAutomationElementFromReference;
+
 /**
  * Created by Mark Humphreys on 06/03/2016.
  * <p>
@@ -245,22 +247,9 @@ public class AutomationElement {
 
         this.element.findFirst(scope, pCondition.getValue(), pbr);
 
-        // See what we got
-        Unknown uElement = new Unknown(pbr.getValue());
-
-        PointerByReference pResult = new PointerByReference();
-
         try {
-            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pResult);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                IUIAutomationElement3 element =
-                        IUIAutomationElement3.Converter.PointerToInterface(pResult);
-                return new AutomationElement(element);
-            } else {
-                throw new AutomationException();
-            }
-
+            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+            return new AutomationElement(element);
         } catch (NullPointerException npe) {
             throw new ElementNotFoundException();
         }
@@ -339,16 +328,10 @@ public class AutomationElement {
 
                 collection.getElement(a, pbr);
 
-                Unknown uElement = new Unknown(pbr.getValue());
+                IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
 
-                WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
+                items.add(new AutomationElement(element));
 
-                if (COMUtils.SUCCEEDED(result0)) {
-                    IUIAutomationElement3 element =
-                            IUIAutomationElement3.Converter.PointerToInterface(pbr);
-
-                    items.add(new AutomationElement(element));
-                }
             }
         }
 
@@ -512,16 +495,7 @@ public class AutomationElement {
      * @throws AutomationException Failed to get the correct interface
      */
     public void showContextMenu() throws AutomationException {
-        // See whether we support the interface
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT result0 = this.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
-
-        if (COMUtils.SUCCEEDED(result0)) {
-            // We support this interface
-            IUIAutomationElement3 element3 = IUIAutomationElement3.Converter.PointerToInterface(pbr);
-            element3.showContextMenu();
-        } else {
+        if (this.element.showContextMenu() != 0) {
             throw new AutomationException();
         }
     }

@@ -29,6 +29,8 @@ import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 
 import java.util.List;
 
+import static mmarquee.automation.utils.Converters.collectionToList;
+
 /**
  * Created by Mark Humphreys on 25/02/2016.
  *
@@ -94,7 +96,7 @@ public class Selection extends BasePattern {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationElementArray collection = convertPointerToElementArray(pUnknownA);
-            return this.collectionToList(collection);
+            return collectionToList(collection);
         } else {
             throw new AutomationException();
         }
@@ -141,7 +143,7 @@ public class Selection extends BasePattern {
             IUIAutomationElementArray collection =
                     this.convertPointerToElementArrayInterface(pUnknownA);
 
-            return this.collectionToList(collection);
+            return collectionToList(collection);
         } else {
             throw new AutomationException();
         }

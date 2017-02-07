@@ -16,19 +16,12 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Mark Humphreys on 29/02/2016.
@@ -52,46 +45,6 @@ public abstract class BasePattern implements Pattern {
      */
     public BasePattern () {
         this.pattern = null;
-    }
-
-    /**
-     * Turns a collection (array) of automation elements, into a collection.
-     *
-     * @param collection The ElementArray.
-     * @return The List
-     * @throws AutomationException Error in the automation library
-     */
-    List<AutomationElement> collectionToList(IUIAutomationElementArray collection) throws AutomationException {
-
-        IntByReference ibr = new IntByReference();
-
-        if (collection.getLength(ibr) != 0) {
-            throw new AutomationException();
-        }
-
-        List<AutomationElement> list = new ArrayList<AutomationElement>();
-
-        for (int count = 0; count < ibr.getValue(); count++) {
-
-            PointerByReference pbr = new PointerByReference();
-
-            if (collection.getElement(count, pbr) != 0) {
-                throw new AutomationException();
-            }
-
-            Unknown uElement = new Unknown(pbr.getValue());
-
-            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                IUIAutomationElement3 element =
-                        IUIAutomationElement3.Converter.PointerToInterface(pbr);
-
-                list.add(new AutomationElement(element));
-            }
-        }
-
-        return list;
     }
 
     /**

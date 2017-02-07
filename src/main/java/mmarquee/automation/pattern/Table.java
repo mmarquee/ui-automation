@@ -27,6 +27,8 @@ import mmarquee.automation.uiautomation.*;
 
 import java.util.List;
 
+import static mmarquee.automation.utils.Converters.collectionToList;
+
 /**
  * Created by Mark Humphreys on 25/02/2016.
  *
@@ -84,7 +86,7 @@ public class Table extends BasePattern {
             IUIAutomationElementArray collection =
                     this.convertPointerToElementArrayInterface(pUnknownA);
 
-            return this.collectionToList(collection);
+            return collectionToList(collection);
         } else {
             throw new AutomationException();
         }
@@ -125,7 +127,7 @@ public class Table extends BasePattern {
             IUIAutomationElementArray collection =
                     convertPointerToElementArrayInterface(pUnknownA);
 
-            return this.collectionToList(collection);
+            return collectionToList(collection);
         } else {
             throw new AutomationException();
         }
