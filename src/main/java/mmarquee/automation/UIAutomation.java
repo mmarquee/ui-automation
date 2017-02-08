@@ -481,22 +481,14 @@ public class UIAutomation {
 
         PointerByReference pTrueCondition = this.createTrueCondition();
 
-        Unknown unkConditionA = new Unknown(pTrueCondition.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
+        List<AutomationElement> collection =
+                this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            List<AutomationElement> collection =
-                    this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());
-
-            for (AutomationElement element : collection) {
-                result.add(new AutomationWindow(element));
-            }
-
-            return result;
-        } else {
-            throw new AutomationException();
+        for (AutomationElement element : collection) {
+            result.add(new AutomationWindow(element));
         }
+
+        return result;
     }
 
     /**

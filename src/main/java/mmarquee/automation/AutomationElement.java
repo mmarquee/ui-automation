@@ -17,8 +17,6 @@ package mmarquee.automation;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.*;
@@ -27,15 +25,13 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-import static mmarquee.automation.utils.Converters.getAutomationElementFromReference;
-
 /**
  * Created by Mark Humphreys on 06/03/2016.
  * <p>
  * Wrapper for the underlying automation element.
  * </p>
  */
-public class AutomationElement {
+public class AutomationElement extends BaseAutomation {
     /**
      * <p>
      * The underlying automation element
@@ -308,31 +304,23 @@ public class AutomationElement {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = new Unknown(pAll.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
+        IUIAutomationElementArray collection = getAutomationElementArrayFromReference(pAll);
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID),
-                pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationElementArray collection =
-                    IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
+        IntByReference ibr = new IntByReference();
 
-            IntByReference ibr = new IntByReference();
+        collection.getLength(ibr);
 
-            collection.getLength(ibr);
+        int counter = ibr.getValue();
 
-            int counter = ibr.getValue();
+        for (int a = 0; a < counter; a++) {
+            PointerByReference pbr = new PointerByReference();
 
-            for (int a = 0; a < counter; a++) {
-                PointerByReference pbr = new PointerByReference();
+            collection.getElement(a, pbr);
 
-                collection.getElement(a, pbr);
+            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
 
-                IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+            items.add(new AutomationElement(element));
 
-                items.add(new AutomationElement(element));
-
-            }
         }
 
         return items;

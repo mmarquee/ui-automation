@@ -40,6 +40,7 @@ public class SelectionPatternTest2 {
     private Unknown mockUnknown;
 
     @Test
+    @Ignore("Needs better tests")
     public void test_getCurrentSelection() throws Exception {
 
         doAnswer(new Answer() {

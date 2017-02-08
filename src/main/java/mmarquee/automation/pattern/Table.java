@@ -27,8 +27,6 @@ import mmarquee.automation.uiautomation.*;
 
 import java.util.List;
 
-import static mmarquee.automation.utils.Converters.collectionToList;
-
 /**
  * Created by Mark Humphreys on 25/02/2016.
  *
@@ -78,18 +76,7 @@ public class Table extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = makeUnknown(pbr.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationElementArray collection =
-                    this.convertPointerToElementArrayInterface(pUnknownA);
-
-            return collectionToList(collection);
-        } else {
-            throw new AutomationException();
-        }
+        return collectionToList(getAutomationElementArrayFromReference(pbr));
     }
 
     /**
@@ -119,18 +106,7 @@ public class Table extends BasePattern {
             throw new AutomationException();
         }
 
-        Unknown unkConditionA = makeUnknown(pbr.getValue());
-        PointerByReference pUnknownA = new PointerByReference();
-
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknownA);
-        if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationElementArray collection =
-                    convertPointerToElementArrayInterface(pUnknownA);
-
-            return collectionToList(collection);
-        } else {
-            throw new AutomationException();
-        }
+        return collectionToList(getAutomationElementArrayFromReference(pbr));
     }
 
     /**

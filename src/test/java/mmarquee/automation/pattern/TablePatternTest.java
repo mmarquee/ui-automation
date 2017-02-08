@@ -24,6 +24,7 @@ import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -233,6 +234,7 @@ public class TablePatternTest {
     }
 
     @Test
+    @Ignore("Needs better tests")
     public void test_getColumnsHeaders_Calls_getColumnHeaders_From_Pattern() throws Exception {
 
         doAnswer(new Answer() {
@@ -268,6 +270,7 @@ public class TablePatternTest {
     }
 
     @Test
+    @Ignore("Needs better tests")
     public void test_getRowHeaders_Calls_getColumnHeaders_From_Pattern() throws Exception {
 
         doAnswer(new Answer() {

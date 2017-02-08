@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.BaseAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 
@@ -28,7 +29,7 @@ import mmarquee.automation.uiautomation.IUIAutomationElementArray;
  *
  * Base for the pattern wrappers
  */
-public abstract class BasePattern implements Pattern {
+public abstract class BasePattern extends BaseAutomation implements Pattern {
 
     /**
      * The guid of the pattern.
@@ -71,18 +72,6 @@ public abstract class BasePattern implements Pattern {
     public WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
         Unknown uElement = makeUnknown(this.pattern);
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
-    }
-
-    /**
-     * Creates an Unknown object from the pointer.
-     *
-     * Allows Mockito to be used to create Unknown objects
-     *
-     * @param pvInstance The pointer to use
-     * @return An Unknown object
-     */
-    public Unknown makeUnknown(Pointer pvInstance) {
-        return new Unknown(pvInstance);
     }
 
     /**

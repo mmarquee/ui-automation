@@ -15,5 +15,7 @@
 
 The above example shows getting a button from the toolbar, and checking for status, etc.
 
-A caveat here is that the buttons associated with the Delphi VCL toolbar don't seem to implement the invoke pattern correctly, and so don't fire the event in the underlying control. The same functionality works for WPF.
+When a Delphi toolbar has not imagelist associated with it, then the buttons show in automation as menu items, and will correctly call the Invoke pattern's Invoke method, but when the toolbar as images associated with it, then they show as Buttons, but don't seem to implement the Invoke pattern correctly, and so don't fire the event in the underlying control. The same functionality works for WPF.
 This appears not to be a library issue as it also does not work from UISpy.
+
+Delphi TToolbarButton controls 
