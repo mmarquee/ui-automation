@@ -31,7 +31,7 @@ The ui-automation library is a wrapper for the UIAutomationClient library, which
 
 In order to get access to the automation API, an UIAutomation instance needs to be created, this is done as follows.
 
-```java
+```
   UIAutomation automation = UIAutomation.getInstance();
 ```
 
@@ -45,7 +45,7 @@ The AutomationApplication class provides functionality to start and attach to an
 
 The snippet below will check whether Project1.exe is running, attaching to it if it is, or launch it if not.
 
-```java
+```
   AutomationApplication application = automation.launchOrAttach("...\\Project1.exe");
 ```
 
@@ -53,7 +53,7 @@ The snippet below will check whether Project1.exe is running, attaching to it if
 
 To get a 'desktop' window (i.e. one that appears in the Windows tasks bar), then the AutomationDesktop class provides a class function that returns a AutomationWindow object.
 
-```java
+```
   AutomationWindow window = automation.getDesktopWindow("Form1");
   window.focus();
 ```
@@ -64,7 +64,7 @@ This will find (if it is there) a window that has the given title, and set focus
 
 Each control contained in a container (such as a window or panel) can be identified by the index of that control, sometimes (this depends on the control type), by the text associated with it, OR by the Automation Id. For example, in order to get the textbox associated with the connection window (and assuming that it is the 1st Edit box on the window), the following code will find the editbox, and change the text to be USER1.
 
-```java
+```
   AutomationEditBox user = window.getEditBox(0);
   user.setText("USER1");
 ```
@@ -73,19 +73,19 @@ Each control contained in a container (such as a window or panel) can be identif
 
 In order to click the 'OK' button associated with a given window, it can be found by the text associated with the button, the following examples will all find the same button, and call the click event for it.
 
-```java
+```
   // Get button by index
   AutomationButton button1 = window.getButton(0);
   button1.click();
 ```
 
-```java
+```
   // Get button by name
   AutomationButton button1 = window.getButton("OK");
   button1.click();
 ```
 
-```java
+```
   // Get button by automation id
   AutomationButton button1 = window.getButtonByAutomationId("btnOK");
   button1.click();

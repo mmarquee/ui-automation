@@ -1,4 +1,4 @@
-```java
+```
 AutomationCheckbox check = window.getCheckbox(0);
 check.toggle();
 

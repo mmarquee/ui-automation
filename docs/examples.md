@@ -6,6 +6,7 @@ These applications have example code to show then working, in the mmarquee.demo 
 * [Word](word.md)
 * [Powerpoint](powerpoint.md)
 * [Notepad](notepad.md)
+* [Explorer](explorer.md)
 
 
 ### These do not yet have examples

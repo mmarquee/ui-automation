@@ -1,6 +1,6 @@
 Notepad is quite a simple application, and the following code is adapted from the demo program.
 
-```java
+```
   application = automation.launchOrAttach("notepad.exe");
      
   // Wait for the process to start

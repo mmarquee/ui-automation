@@ -2,7 +2,7 @@ Word has a nice control hierarchy, and uses 'Pages' which are Custom controls.
 
 ![UISpy for Word](images/word.png)
 
-```java
+```
 AutomationWindow window = application.getWindow("Document1 - Word");
 logger.info(window.name());
 

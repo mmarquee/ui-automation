@@ -6,7 +6,7 @@ VCL menus are rather tricky, as they need to be expanded and collapsed before th
 
 The example below shows the current (as of 25/04/2016) support for 2 level menus. If either of these text items are not found the ElementNotFoundException exception will be thrown.
 
-```java
+```
   try {
     AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
     exit.click();
@@ -18,14 +18,14 @@ The example below shows the current (as of 25/04/2016) support for 2 level menus
 #### Menu fudge
 There has been one odd menu that we have found in our applications, and at the moment this is encapsulated in a fudge method, as shown below. This finds the menu and clicks it, as here doesn't seem to be a nice way of doing this with the other methods.
 
-```java
+```
   // Find the Help | About and click it
   menu.menuClickFudge("Help", KeyEvent.VK_A);
 ```
 
 ### WPF Menus
 
-```java
+```
   AutomationMainMenu mainMenu = window.getMenu(0);
 
   // Get the first menu item (i.e. "File")
@@ -48,7 +48,7 @@ There has been one odd menu that we have found in our applications, and at the m
 ## Popup Menus
 A popup menu is just another menu, and can be accessed in the same manner. In the WPF example, there is a button that has an associated context menu, the code below illustrates how to get at this menu and associated menu items
 
-```java
+```
   AutomationMouse mouse = new AutomationMouse();
   mouse.setLocation(1119, 896);
   mouse.rightClick();

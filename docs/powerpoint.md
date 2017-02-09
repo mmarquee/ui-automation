@@ -2,7 +2,7 @@ Powerpoint has a control hierarchy, and uses 'Slides' which are Custom controls.
 
 ![UISpy for Powerpoint](images/powerpoint.png)
 
-```java
+```
   AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
   logger.info(window.name());
 

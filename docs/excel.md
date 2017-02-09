@@ -1,6 +1,6 @@
 Assuming that the application has already been started, the following code shows how to get data out of cells. 
 
-```java            
+```            
 AutomationWindow window = application.getWindow("Book1 - Excel");
 logger.info(window.name());
 

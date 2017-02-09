@@ -1,4 +1,4 @@
-```java
+```
   AutomationProgressBar progress = applicationWindow.getProgressBar(0);
   logger.info("Progress = " + progress.getRangeValue());
 

@@ -2,7 +2,7 @@ The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation)
 
 There does not seem to be an equivalent WPF control.
 
-```java
+```
   try {
     AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
 

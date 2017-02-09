@@ -26,25 +26,7 @@ public class DemoTreeWalker extends TestBase {
 
             AutomationElement root = automation.getRootElement();
 
-            AutomationElement child = walker.getFirstChildElement(root.element);
-
-            logger.info(child.getName());
-            logger.info(child.getClassName());
-            logger.info(child.getControlType());
-
-    //        AutomationWindow window = application.getWindow("File Explorer");
-
-            AutomationElement element = child;
-
-            // This crashes at some point
-
-            while (element.element != null) {
-                element = walker.getNextSiblingElement(element.element);
-                logger.info(element.getName());
-                logger.info(element.getClassName());
-                logger.info(element.getControlType());
-            }
-
+            walker.walk(root.element);
         } catch (Throwable ex) {
             // Smother
             logger.error("Exception thrown - " + ex.toString());

@@ -1,4 +1,4 @@
-```java
+```
   AutomationStatusBar statusBar = window.getStatusBar();
   AutomationTextBox tb1 = statusBar.getTextBox(1);
 

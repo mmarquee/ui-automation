@@ -1,4 +1,4 @@
-```java
+```
   AutomationSlider slider = applicationWindow.getSlider(0);
   logger.info("Slider value = " + slider.getRangeValue());
 
