@@ -4,8 +4,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
-import sun.reflect.generics.tree.Tree;
 
 /**
  * Created by Mark Humphreys on 28/01/2017.

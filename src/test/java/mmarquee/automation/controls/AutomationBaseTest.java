@@ -36,7 +36,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -445,7 +444,7 @@ public class AutomationBaseTest {
         assertTrue(value);
     }
 
-    @Test(expected = NotImplementedException.class)
+    @Test(expected = AutomationException.class)
     public void testgetRuntimeIdThrowsException() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Window pattern = Mockito.mock(Window.class);

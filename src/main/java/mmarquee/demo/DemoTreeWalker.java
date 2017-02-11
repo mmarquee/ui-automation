@@ -30,6 +30,7 @@ public class DemoTreeWalker extends TestBase {
         } catch (Throwable ex) {
             // Smother
             logger.error("Exception thrown - " + ex.toString());
+            ex.printStackTrace();
         }
     }
 }

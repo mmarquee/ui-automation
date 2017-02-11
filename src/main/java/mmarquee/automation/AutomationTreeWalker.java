@@ -106,7 +106,11 @@ public class AutomationTreeWalker {
 
         this.walker.getNextSiblingElement(pElement.getValue(), pChild);
 
-        return IUIAutomationElement3.Converter.PointerToInterface(pChild);
+        try {
+            return IUIAutomationElement3.Converter.PointerToInterface(pChild);
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     /**
@@ -122,14 +126,18 @@ public class AutomationTreeWalker {
 
         logger.info(childElement.getName());
         logger.info(childElement.getClassName());
-        IUIAutomationElement3 element = child;
 
-        while (element != null) {
-            element = this.getRawNextSiblingElement(element);
-            AutomationElement childElem = new AutomationElement(child);
+        while (child != null) {
+            try {
+                child = this.getRawNextSiblingElement(child);
 
-            logger.info(childElem.getName());
-            logger.info(childElem.getClassName());
+                AutomationElement childElem = new AutomationElement(child);
+
+                logger.info(childElem.getName());
+                logger.info(childElem.getClassName());
+            } catch (Throwable ex) {
+                logger.info("++DONE?++");
+            }
         }
     }
 }

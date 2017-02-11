@@ -23,7 +23,6 @@ import mmarquee.automation.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
 import org.apache.log4j.Logger;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 
 /**
@@ -694,11 +693,11 @@ public abstract class AutomationBase implements Automatable {
     /**
      * Gets the runtime id
      * @return The runtime id
-     * @throws NotImplementedException Throws big error, so not implemented
+     * @throws AutomationException Throws big error, so not implemented
      */
-    public int[] getRuntimeId() throws NotImplementedException {
+    public int[] getRuntimeId() throws AutomationException {
 //        return this.element.getRuntimeId();
-        throw new NotImplementedException();
+        throw new AutomationException();
     }
 
     /**
