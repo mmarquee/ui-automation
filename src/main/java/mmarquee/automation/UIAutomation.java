@@ -39,7 +39,7 @@ import java.util.logging.Logger;
  *
  * The base automation wrapper.
  */
-public class UIAutomation {
+public class UIAutomation extends BaseAutomation {
 
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
@@ -535,6 +535,41 @@ public class UIAutomation {
 
         if (this.automation.createNotCondition(condition, pbr) == 0) {
             return pbr;
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
+     * Gets the element from the supplied tag
+     * @param pt The point
+     * @return The actual element under the tag
+     * @throws AutomationException The automation library returned an error
+     */
+    public AutomationElement getElementFromPoint(WinDef.POINT pt) throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        if (this.automation.elementFromPoint(pt, pbr) == 0) {
+            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+
+            return new AutomationElement(element);
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
+     * Gets the focused element
+     * @return The focused element
+     * @throws AutomationException Automation returned an error
+     */
+    public AutomationElement getFocusedElement() throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        if (this.automation.getFocusedElement(pbr) == 0) {
+            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+
+            return new AutomationElement(element);
         } else {
             throw new AutomationException();
         }
