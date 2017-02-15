@@ -124,4 +124,15 @@ public abstract class BaseAutomation {
 
         return list;
     }
+
+    protected Pointer getPointerFromElement(IUIAutomationElement3 element) throws AutomationException {
+        PointerByReference pElement = new PointerByReference();
+
+        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
+        if (!COMUtils.SUCCEEDED(result1)) {
+            throw new AutomationException();
+        }
+
+        return pElement.getValue();
+    }
 }

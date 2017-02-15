@@ -15,12 +15,14 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
@@ -32,43 +34,82 @@ import java.util.logging.Logger;
  *
  * Wrapper for the AutomationTreeWalker.
  */
-public class AutomationTreeWalker {
+public class AutomationTreeWalker extends BaseAutomation {
     IUIAutomationTreeWalker walker = null;
 
     public AutomationTreeWalker(IUIAutomationTreeWalker walker) {
         this.walker = walker;
     }
 
+    /**
+     * Gets the next sibling element
+     * @param element The element
+     * @return The sibling element
+     * @throws AutomationException Something is up in automation
+     */
     public AutomationElement getNextSiblingElement (IUIAutomationElement3 element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        PointerByReference pElement = new PointerByReference();
+        Pointer pElement = this.getPointerFromElement(element);
 
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
-        if (!COMUtils.SUCCEEDED(result1)) {
-            throw new AutomationException();
-        }
-
-        this.walker.getNextSiblingElement(pElement.getValue(), pChild);
+        this.walker.getNextSiblingElement(pElement, pChild);
 
         IUIAutomationElement3 childElement =
                 IUIAutomationElement3.Converter.PointerToInterface(pChild);
         return new AutomationElement(childElement);
     }
 
+    /**
+     * Gets the previous sibling element
+     * @param element The element
+     * @return The previous sibling element
+     * @throws AutomationException Something is up in automation
+     */
+    public AutomationElement getPreviousSiblingElement (IUIAutomationElement3 element)
+            throws AutomationException {
+        PointerByReference pChild = new PointerByReference();
+
+        Pointer pElement = this.getPointerFromElement(element);
+
+        this.walker.getPreviousSiblingElement(pElement, pChild);
+
+        IUIAutomationElement3 childElement =
+                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+        return new AutomationElement(childElement);
+    }
+
+    /**
+     * Gets the last child element of the supplied element
+     * @param element The element
+     * @return The last child of the element
+     * @throws AutomationException Automation has returned an error
+     */
+    public AutomationElement getLastChildElement(IUIAutomationElement3 element)
+            throws AutomationException {
+        PointerByReference pChild = new PointerByReference();
+
+        Pointer pElement = this.getPointerFromElement(element);
+
+        this.walker.getLastChildElement(pElement, pChild);
+
+        IUIAutomationElement3 childElement =
+                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+        return new AutomationElement(childElement);
+    }
+
+    /**
+     * Gets the first child element of the supplied element
+     * @param element The element
+     * @return The first child of the element
+     * @throws AutomationException Automation has returned an error
+     */
     public AutomationElement getFirstChildElement(IUIAutomationElement3 element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        PointerByReference pElement = new PointerByReference();
-
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
-        if (!COMUtils.SUCCEEDED(result1)) {
-            throw new AutomationException();
-        }
-
-        this.walker.getFirstChildElement(pElement.getValue(), pChild);
+        Pointer pElement = this.getPointerFromElement(element);
+        this.walker.getFirstChildElement(pElement, pChild);
 
         IUIAutomationElement3 childElement =
                 IUIAutomationElement3.Converter.PointerToInterface(pChild);
@@ -81,14 +122,9 @@ public class AutomationTreeWalker {
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        PointerByReference pElement = new PointerByReference();
+        Pointer pElement = this.getPointerFromElement(element);
 
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
-        if (!COMUtils.SUCCEEDED(result1)) {
-            throw new AutomationException();
-        }
-
-        this.walker.getFirstChildElement(pElement.getValue(), pChild);
+        this.walker.getFirstChildElement(pElement, pChild);
 
         return IUIAutomationElement3.Converter.PointerToInterface(pChild);
     }
@@ -97,14 +133,9 @@ public class AutomationTreeWalker {
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        PointerByReference pElement = new PointerByReference();
+        Pointer pElement = this.getPointerFromElement(element);
 
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
-        if (!COMUtils.SUCCEEDED(result1)) {
-            throw new AutomationException();
-        }
-
-        this.walker.getNextSiblingElement(pElement.getValue(), pChild);
+        this.walker.getNextSiblingElement(pElement, pChild);
 
         try {
             return IUIAutomationElement3.Converter.PointerToInterface(pChild);
