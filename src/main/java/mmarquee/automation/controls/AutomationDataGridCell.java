@@ -17,10 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.GridItem;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.pattern.Value;
+import mmarquee.automation.pattern.*;
 
 /**
  * Created by Mark Humphreys on 04/02/2016.
@@ -32,6 +29,7 @@ public class AutomationDataGridCell extends AutomationBase {
     private Value valuePattern;
     private GridItem gridItemPattern;
     private SelectionItem selectionItemPattern;
+    private Invoke invokePattern;
 
     /**
      * Construct the AutomationDataGridCell
@@ -93,6 +91,18 @@ public class AutomationDataGridCell extends AutomationBase {
         } catch (NullPointerException ex) {
             return "<Empty>";
         }
+    }
+
+    public void invoke() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            try {
+                this.invokePattern = this.getInvokePattern();
+            } catch (NullPointerException ex) {
+                logger.info("No invoke pattern available");
+            }
+        }
+
+        invokePattern.invoke();
     }
 
     /**

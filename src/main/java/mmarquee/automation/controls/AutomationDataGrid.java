@@ -103,6 +103,35 @@ public class AutomationDataGrid extends AutomationBase
     }
 
     /**
+     * Gets the selected row from the gridPattern
+     * @return List of AutomationStringGridItem
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public List<AutomationDataGridCell> selectedRow() throws PatternNotFoundException, AutomationException  {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+
+        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
+
+        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+
+        for (AutomationElement item : collection) {
+            try {
+                items.add(new AutomationDataGridCell(item));
+            } catch (NullPointerException ex) {
+                // Try and add am empty cell
+                AutomationDataGridCell cell = new AutomationDataGridCell(null);
+                items.add(cell);
+            }
+        }
+
+        return items;
+    }
+
+
+    /**
      * Gets the selected item from the gridPattern
      * @return AutomationStringGridItem
      * @throws AutomationException Something has gone wrong
