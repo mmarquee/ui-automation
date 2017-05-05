@@ -47,11 +47,11 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The sibling element, or null if not found
      * @throws AutomationException Something is up in automation
      */
-    public AutomationElement getNextSiblingElement (IUIAutomationElement3 element)
+    public AutomationElement getNextSiblingElement (AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element);
+        Pointer pElement = this.getPointerFromElement(element.element);
 
         this.walker.getNextSiblingElement(pElement, pChild);
 
@@ -70,11 +70,11 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The previous sibling element, or null if not found
      * @throws AutomationException Something is up in automation
      */
-    public AutomationElement getPreviousSiblingElement (IUIAutomationElement3 element)
+    public AutomationElement getPreviousSiblingElement (AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element);
+        Pointer pElement = this.getPointerFromElement(element.element);
 
         this.walker.getPreviousSiblingElement(pElement, pChild);
 
@@ -93,11 +93,11 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The last child of the element, or null if not found
      * @throws AutomationException Automation has returned an error
      */
-    public AutomationElement getLastChildElement(IUIAutomationElement3 element)
+    public AutomationElement getLastChildElement(AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element);
+        Pointer pElement = this.getPointerFromElement(element.element);
 
         this.walker.getLastChildElement(pElement, pChild);
 
@@ -116,11 +116,11 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The first child of the element, or null if not found
      * @throws AutomationException Automation has returned an error
      */
-    public AutomationElement getFirstChildElement(IUIAutomationElement3 element)
+    public AutomationElement getFirstChildElement(AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element);
+        Pointer pElement = this.getPointerFromElement(element.element);
         this.walker.getFirstChildElement(pElement, pChild);
         
         try {
