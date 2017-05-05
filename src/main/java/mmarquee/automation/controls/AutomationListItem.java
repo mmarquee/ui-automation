@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
@@ -27,9 +28,10 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the ListItem element.
  */
-public class AutomationListItem extends AutomationBase implements Selectable {
+public class AutomationListItem extends AutomationBase implements Selectable, Clickable {
 
-    private SelectionItem selectItemPattern;
+    SelectionItem selectItemPattern;
+    Invoke invokePattern = null;
 
     /**
      * Constructor for the AutomationListItem
@@ -39,18 +41,6 @@ public class AutomationListItem extends AutomationBase implements Selectable {
      */
     public AutomationListItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-    }
-
-    /**
-     * Constructor for the AutomationListItem
-     * @param element The underlying automation element
-     * @param selection The SelectionItem pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationListItem(AutomationElement element, SelectionItem selection) throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.selectItemPattern = selection;
     }
 
     /**
@@ -77,4 +67,23 @@ public class AutomationListItem extends AutomationBase implements Selectable {
 
         return this.selectItemPattern.isSelected();
     }
+
+    /**
+     * Clicks the item
+     * 
+     * @throws AutomationException Error in the automation library
+     * @throws PatternNotFoundException Could not find the invoke pattern
+     */
+    public void click() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            this.invokePattern = this.getInvokePattern();
+        }
+
+        if (this.isInvokePatternAvailable()) {
+            this.invokePattern.invoke();
+        } else {
+            throw new PatternNotFoundException();
+        }
+    }
+
 }
