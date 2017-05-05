@@ -881,7 +881,7 @@ public class AutomationContainerTest {
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItem(0);
+        wndw.getList(0);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -897,7 +897,7 @@ public class AutomationContainerTest {
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItem(99);
+        wndw.getList(99);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -911,7 +911,7 @@ public class AutomationContainerTest {
         when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItem("myName");
+        wndw.getList("myName");
 
         verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
     }
@@ -921,7 +921,7 @@ public class AutomationContainerTest {
         when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItem("unknownName");
+        wndw.getList("unknownName");
 
     }
     
@@ -934,7 +934,7 @@ public class AutomationContainerTest {
         when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItemByAutomationId("myID");
+        wndw.getListByAutomationId("myID");
 
         verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
     }
@@ -944,7 +944,7 @@ public class AutomationContainerTest {
         when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItemByAutomationId("unknownID");
+        wndw.getListByAutomationId("unknownID");
 
     }
 }

@@ -339,7 +339,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ LISTS ++");
 
-            AutomationList list = applicationWindow.getListItem(0);
+            AutomationList list = applicationWindow.getList(0);
             try {
                 AutomationListItem listItem = list.getItem("Hello, Window world!");
                 listItem.select();
