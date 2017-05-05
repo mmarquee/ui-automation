@@ -44,7 +44,7 @@ public class AutomationTreeWalker extends BaseAutomation {
     /**
      * Gets the next sibling element
      * @param element The element
-     * @return The sibling element
+     * @return The sibling element, or null if not found
      * @throws AutomationException Something is up in automation
      */
     public AutomationElement getNextSiblingElement (IUIAutomationElement3 element)
@@ -55,15 +55,19 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         this.walker.getNextSiblingElement(pElement, pChild);
 
-        IUIAutomationElement3 childElement =
-                IUIAutomationElement3.Converter.PointerToInterface(pChild);
-        return new AutomationElement(childElement);
+        try {
+	        IUIAutomationElement3 childElement =
+	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	        return new AutomationElement(childElement);
+        } catch (NullPointerException ex) {
+        	return null;
+        }
     }
 
     /**
      * Gets the previous sibling element
      * @param element The element
-     * @return The previous sibling element
+     * @return The previous sibling element, or null if not found
      * @throws AutomationException Something is up in automation
      */
     public AutomationElement getPreviousSiblingElement (IUIAutomationElement3 element)
@@ -74,15 +78,19 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         this.walker.getPreviousSiblingElement(pElement, pChild);
 
-        IUIAutomationElement3 childElement =
-                IUIAutomationElement3.Converter.PointerToInterface(pChild);
-        return new AutomationElement(childElement);
+        try {
+	        IUIAutomationElement3 childElement =
+	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	        return new AutomationElement(childElement);
+        } catch (NullPointerException ex) {
+        	return null;
+        }
     }
 
     /**
      * Gets the last child element of the supplied element
      * @param element The element
-     * @return The last child of the element
+     * @return The last child of the element, or null if not found
      * @throws AutomationException Automation has returned an error
      */
     public AutomationElement getLastChildElement(IUIAutomationElement3 element)
@@ -93,15 +101,19 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         this.walker.getLastChildElement(pElement, pChild);
 
-        IUIAutomationElement3 childElement =
-                IUIAutomationElement3.Converter.PointerToInterface(pChild);
-        return new AutomationElement(childElement);
+        try {
+	        IUIAutomationElement3 childElement =
+	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	        return new AutomationElement(childElement);
+        } catch (NullPointerException ex) {
+        	return null;
+        }
     }
 
     /**
      * Gets the first child element of the supplied element
      * @param element The element
-     * @return The first child of the element
+     * @return The first child of the element, or null if not found
      * @throws AutomationException Automation has returned an error
      */
     public AutomationElement getFirstChildElement(IUIAutomationElement3 element)
@@ -110,10 +122,14 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         Pointer pElement = this.getPointerFromElement(element);
         this.walker.getFirstChildElement(pElement, pChild);
-
-        IUIAutomationElement3 childElement =
-                IUIAutomationElement3.Converter.PointerToInterface(pChild);
-        return new AutomationElement(childElement);
+        
+        try {
+	        IUIAutomationElement3 childElement =
+	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	        return new AutomationElement(childElement);
+        } catch (NullPointerException ex) {
+        	return null;
+        }
     }
 
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
