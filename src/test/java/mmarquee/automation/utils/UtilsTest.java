@@ -42,7 +42,7 @@ public class UtilsTest extends BaseAutomationTest {
         // Must be a better way of doing this????
         this.andRest();
 
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, getLocal("notepad.title"));
 
         if (hwnd != null) {
             Utils.quitProcess(hwnd);
@@ -56,7 +56,7 @@ public class UtilsTest extends BaseAutomationTest {
 
             this.andRest();
 
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, getLocal("notepad.title"));
 
             assertTrue("startProcess - no process", hwnd != null);
         } catch (IOException io) {
@@ -71,7 +71,7 @@ public class UtilsTest extends BaseAutomationTest {
         try {
             Utils.startProcess("notepad.exe");
 
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, getLocal("notepad.title"));
 
             if (hwnd != null) {
                 Utils.quitProcess(hwnd);

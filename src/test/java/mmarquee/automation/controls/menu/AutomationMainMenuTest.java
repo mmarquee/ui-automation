@@ -19,10 +19,10 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 import java.util.logging.Logger;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 13/12/2016.
@@ -40,7 +40,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
             String name = menu.name();
 
-            assertTrue(name.equals("Application"));
+            assertEquals(getLocal("appmenu.name"),name);
         } finally {
             closeApplication();
         }
@@ -65,16 +65,16 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
     @Test
     public void testGetMenuItem() throws Exception {
-        loadApplication("notepad.exe", "Untitled - Notepad");
+        loadApplication("notepad.exe", getLocal("notepad.title"));
 
         try {
             AutomationMainMenu menu = window.getMainMenu();
 
-            AutomationMenuItem item = menu.getMenuItem("File", "Exit");
+            AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
 
             logger.info(item.name());
 
-            assertTrue(item.name().equals("Exit"));
+            assertEquals(getLocal("menu.exit"),item.name());
         } finally {
             closeApplication();
         }

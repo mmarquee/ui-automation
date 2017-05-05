@@ -15,6 +15,8 @@
  */
 package mmarquee.automation;
 
+import java.util.ResourceBundle;
+
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -23,6 +25,12 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Created by Mark Humphreys on 29/11/2016.
  */
 public class BaseAutomationTest {
+	
+	static ResourceBundle locals = ResourceBundle.getBundle("locals");
+	static {
+		UIAutomation.FIND_DESKTOP_ATTEMPTS = 2; // speed up tests
+	}
+	
     protected UIAutomation instance;
     protected AutomationApplication application;
     protected AutomationWindow window;
@@ -57,6 +65,15 @@ public class BaseAutomationTest {
     }
 
     protected void closeApplication() throws PatternNotFoundException, AutomationException {
-        application.quit(this.windowName);
+        application.close(this.windowName);
     }
+
+	/**
+	 * Get the localized String for a given key
+	 * @param key the key to get the string for
+	 * @return the localized string;
+	 */
+	public static String getLocal(String key) {
+		return locals.getString(key);
+	}
 }

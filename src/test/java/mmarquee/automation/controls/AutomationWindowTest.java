@@ -32,10 +32,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.List;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
 
 /**
  * Created by Mark Humphreys on 25/11/2016.
@@ -80,9 +79,9 @@ public class AutomationWindowTest extends BaseAutomationTest {
     @Test
     public void testGetWindowName_Matches_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
-        AutomationWindow window = application.getWindow("Untitled - Notepad");
+        AutomationWindow window = application.getWindow(getLocal("notepad.title"));
 
-        assertTrue("Name should match", window.name().equals("Untitled - Notepad"));
+        assertEquals(getLocal("notepad.title"), window.name());
     }
 
     @Test
@@ -96,7 +95,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("System"));
+            assertEquals(getLocal("systemmenu.name"),name);
         } finally {
             closeApplication();
         }
@@ -142,7 +141,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
     @Test
     public void testIsModal_Is_False_For_Non_Modal_Window()
             throws AutomationException, PatternNotFoundException {
-        AutomationWindow window = application.getWindow("Untitled - Notepad");
+        AutomationWindow window = application.getWindow(getLocal("notepad.title"));
         assertFalse("Notepad isn't modal!", window.isModal());
     }
 

@@ -15,12 +15,30 @@
  */
 package mmarquee.automation;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.*;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.OleAuto;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WTypes;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
@@ -28,26 +46,15 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.io.IOException;
-import java.util.List;
-
-import static org.junit.Assert.assertFalse;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.when;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
  */
-public class UIAutomationTest {
+public class UIAutomationTest extends BaseAutomationTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-    }
+	}
 
     @Test
     public void testGetInstance() {
@@ -330,7 +337,7 @@ public class UIAutomationTest {
 
             assertFalse("textLaunch succeeded somehow", false);
         } finally {
-            app.quit("Untitled - Notepad");
+            app.quit(getLocal("notepad.title"));
         }
     }
 
@@ -404,15 +411,6 @@ public class UIAutomationTest {
         instance.launchOrAttach("notepad.exe");
     }
 
-    private void andRest() {
-        // Must be a better way of doing this????
-        try {
-            Thread.sleep(500);
-        } catch (Throwable ex) {
-            // interrupted
-        }
-    }
-
     @Test
     public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
@@ -427,7 +425,7 @@ public class UIAutomationTest {
             assertTrue("Should be the same name", launched.name().equals(app.name()));
 
         } finally {
-            app.quit("Untitled - Notepad");
+            app.quit(getLocal("notepad.title"));
         }
     }
 
@@ -527,7 +525,7 @@ public class UIAutomationTest {
         try {
             AutomationMenu menu = instance.getDesktopMenu("Menu");
         } finally {
-            app.quit("Untitled - Notepad");
+            app.quit(getLocal("notepad.title"));
         }
     }
 
@@ -538,11 +536,11 @@ public class UIAutomationTest {
         AutomationApplication app = instance.launch("notepad.exe");
 
         try {
-            AutomationWindow window = instance.getDesktopWindow("Untitled - Notepad");
+            AutomationWindow window = instance.getDesktopWindow(getLocal("notepad.title"));
 
-            assertTrue("Should be the same name", window.name().equals("Untitled - Notepad"));
+            assertTrue("Should be the same name", window.name().equals(getLocal("notepad.title")));
         } finally {
-            app.quit("Untitled - Notepad");
+            app.quit(getLocal("notepad.title"));
         }
     }
 
@@ -561,9 +559,9 @@ public class UIAutomationTest {
         try {
             AutomationWindow window = instance.getDesktopObject("xxUntitled - Notepad");
 
-            assertTrue("Should be the same name", window.name().equals("Untitled - Notepad"));
+            assertTrue("Should be the same name", window.name().equals(getLocal("notepad.title")));
         } finally {
-            app.quit("Untitled - Notepad");
+            app.quit(getLocal("notepad.title"));
         }
     }
 }
