@@ -26,7 +26,7 @@ public class DemoTreeWalker extends TestBase {
 
             AutomationElement root = automation.getRootElement();
 
-            walker.walk(root.element);
+            walker.walk(root);
         } catch (Throwable ex) {
             // Smother
             logger.error("Exception thrown - " + ex.toString());

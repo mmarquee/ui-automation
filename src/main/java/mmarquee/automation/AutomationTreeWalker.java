@@ -15,19 +15,13 @@
  */
 package mmarquee.automation;
 
+import java.util.logging.Logger;
+
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.IUnknown;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
-
-import java.util.logging.Logger;
 
 /**
  * Created by Mark Humphreys on 02/02/2017.
@@ -134,54 +128,24 @@ public class AutomationTreeWalker extends BaseAutomation {
 
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
-    private IUIAutomationElement3 getRawFirstChildElement(IUIAutomationElement3 element)
-            throws AutomationException {
-        PointerByReference pChild = new PointerByReference();
-
-        Pointer pElement = this.getPointerFromElement(element);
-
-        this.walker.getFirstChildElement(pElement, pChild);
-
-        return IUIAutomationElement3.Converter.PointerToInterface(pChild);
-    }
-
-    private IUIAutomationElement3 getRawNextSiblingElement(IUIAutomationElement3 element)
-            throws AutomationException {
-        PointerByReference pChild = new PointerByReference();
-
-        Pointer pElement = this.getPointerFromElement(element);
-
-        this.walker.getNextSiblingElement(pElement, pChild);
-
-        try {
-            return IUIAutomationElement3.Converter.PointerToInterface(pChild);
-        } catch (NullPointerException ex) {
-            return null;
-        }
-    }
-
     /**
      * Sample walker implementation
      * @param root The root element
      * @throws AutomationException Exception in the automation library
      */
-    public void walk(IUIAutomationElement3 root) throws AutomationException {
+    public void walk(AutomationElement root) throws AutomationException {
 
-        IUIAutomationElement3 child = this.getRawFirstChildElement(root);
-
-        AutomationElement childElement = new AutomationElement(child);
+        AutomationElement childElement = this.getFirstChildElement(root);
 
         logger.info(childElement.getName());
         logger.info(childElement.getClassName());
 
-        while (child != null) {
+        while (childElement != null) {
             try {
-                child = this.getRawNextSiblingElement(child);
+            	childElement = this.getNextSiblingElement(childElement);
 
-                AutomationElement childElem = new AutomationElement(child);
-
-                logger.info(childElem.getName());
-                logger.info(childElem.getClassName());
+                logger.info(childElement.getName());
+                logger.info(childElement.getClassName());
             } catch (Throwable ex) {
                 logger.info("++DONE?++");
             }
