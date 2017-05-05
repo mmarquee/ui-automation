@@ -901,5 +901,32 @@ public class AutomationContainerTest {
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
+
+    @Test
+    public void testList_By_AutomationId() throws Exception {
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement child = new AutomationElement(elem);
+
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getListItemByAutomationId("myID");
+
+        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void testList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement child = new AutomationElement(elem);
+
+        when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getListItemByAutomationId("unknownID");
+
+    }
 }
 

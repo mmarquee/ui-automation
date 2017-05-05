@@ -573,6 +573,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the list control associated with the given automation ID
+     * @param automationId Automation id of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationList getListItemByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getControlByAutomationId(automationId, ControlType.List));
+    }
+
+    /**
      * Gets the calendar control associated with the given index
      * @param index Index of the control
      * @return The found control
