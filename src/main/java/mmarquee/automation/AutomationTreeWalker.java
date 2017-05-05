@@ -15,8 +15,6 @@
  */
 package mmarquee.automation;
 
-import java.util.logging.Logger;
-
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 
@@ -126,29 +124,38 @@ public class AutomationTreeWalker extends BaseAutomation {
         }
     }
 
-    protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
-
     /**
-     * Sample walker implementation
-     * @param root The root element
+     * A generic walker algorithm
+     * @param visitor The visitor to call on each element
+     * @param root The root element (of which the children are walked)
      * @throws AutomationException Exception in the automation library
      */
-    public void walk(AutomationElement root) throws AutomationException {
+    public void walk(AutomationElementVisitor visitor, AutomationElement root) throws AutomationException {
 
+    	assert visitor != null;
+    	assert root != null;
+    	
         AutomationElement childElement = this.getFirstChildElement(root);
 
-        logger.info(childElement.getName());
-        logger.info(childElement.getClassName());
-
         while (childElement != null) {
-            try {
-            	childElement = this.getNextSiblingElement(childElement);
-
-                logger.info(childElement.getName());
-                logger.info(childElement.getClassName());
-            } catch (Throwable ex) {
-                logger.info("++DONE?++");
-            }
+        	boolean cont = visitor.visit(this, childElement);
+        	if (! cont) break;
+        	
+        	childElement = this.getNextSiblingElement(childElement);
         }
+    }
+    
+    /**
+     * A visitor as used by {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)}
+     *
+     */
+    public static interface AutomationElementVisitor {
+    	/**
+    	 * Visits an element during an 
+    	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run
+    	 * @param element The currently visited element
+    	 * @return true to continue walking the elements siblings, false otherwise
+    	 */
+    	boolean visit(AutomationTreeWalker walker, AutomationElement element) throws AutomationException;
     }
 }
