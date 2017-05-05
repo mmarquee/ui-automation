@@ -16,10 +16,11 @@
 package mmarquee.automation.controls.ribbon;
 
 import mmarquee.automation.BaseAutomationTest;
+
+import static org.junit.Assert.*;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
@@ -34,7 +35,7 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
 
     @Test
     public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
-        loadApplication("explorer", "File Explorer");
+        loadApplication("explorer", getLocal("explorer.title"));
 
         try {
             AutomationRibbonBar ribbon = window.getRibbonBar();
@@ -43,7 +44,7 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
 
             String name = commandBar.name();
 
-            assertTrue(name.equals("Ribbon"));
+            assertEquals("Ribbon",name);
         } finally {
             closeApplication();
         }
@@ -51,7 +52,7 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
 
     @Test
     public void testGetRibbonCommandBar_Gets_WorkPane() throws Exception {
-        loadApplication("explorer", "File Explorer");
+        loadApplication("explorer", getLocal("explorer.title"));
 
         try {
             AutomationRibbonBar ribbon = window.getRibbonBar();
@@ -62,7 +63,7 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
 
             String name = workPane.name();
 
-            assertTrue(name.equals("Ribbon"));
+            assertEquals("Ribbon",name);
         } finally {
             closeApplication();
         }

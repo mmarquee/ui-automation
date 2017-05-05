@@ -18,10 +18,11 @@ package mmarquee.automation.controls.menu;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
+
+import static org.junit.Assert.*;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark Humphreys on 03/12/2016.
@@ -40,7 +41,7 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
 
             logger.info(name);
 
-            assertTrue(name.equals("System"));
+            assertEquals(getLocal("systemmenu.name"),name);
         } finally {
             closeApplication();
         }
@@ -70,11 +71,11 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
         try {
             AutomationSystemMenu sm = window.getSystemMenu();
 
-            AutomationMenuItem item = sm.getItem("System");
+            AutomationMenuItem item = sm.getItem(getLocal("systemmenu.name"));
 
             logger.info(item.name());
 
-            assertTrue(item.name().equals("System"));
+            assertEquals(getLocal("systemmenu.name"),item.name());
         } finally {
             closeApplication();
         }

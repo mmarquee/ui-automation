@@ -27,6 +27,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public class BaseAutomationTest {
 	
 	static ResourceBundle locals = ResourceBundle.getBundle("locals");
+	static {
+		UIAutomation.FIND_DESKTOP_ATTEMPTS = 2; // speed up tests
+	}
+	
     protected UIAutomation instance;
     protected AutomationApplication application;
     protected AutomationWindow window;
@@ -61,7 +65,7 @@ public class BaseAutomationTest {
     }
 
     protected void closeApplication() throws PatternNotFoundException, AutomationException {
-        application.quit(this.windowName);
+        application.close(this.windowName);
     }
 
 	/**

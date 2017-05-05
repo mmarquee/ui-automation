@@ -28,7 +28,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Mark Humphreys on 04/12/2016.
@@ -69,7 +69,7 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
             logger.info(item.name());
 
-            assertTrue(item.name().equals("System"));
+            assertEquals(getLocal("systemmenu.name"),item.name());
         } finally {
             closeApplication();
         }
@@ -124,24 +124,24 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testClick() throws Exception {
-        loadApplication("notepad.exe", "Untitled - Notepad");
+        loadApplication("notepad.exe", getLocal("notepad.title"));
 
         try {
             AutomationMainMenu menu = window.getMainMenu();
 
-            AutomationMenuItem item = menu.getMenuItem("File", "Exit");
+            AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
 
             item.click();
 
             this.andRest();
 
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
 
             assertTrue("Notepad should have quit", hwnd == null);
 
         } finally {
             // Should be closed already
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
 
             if (hwnd != null) {
                 closeApplication();
@@ -151,21 +151,22 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testMenuFudge() throws Exception {
-        loadApplication("notepad.exe", "Untitled - Notepad");
+        loadApplication("notepad.exe", getLocal("notepad.title"));
 
         try {
             AutomationMainMenu menu = window.getMainMenu();
 
-            menu.menuItemFudge("File", KeyEvent.VK_X);
+            int keyCode = KeyEvent.getExtendedKeyCodeForChar(getLocal("menu.exit.acc").toCharArray()[0]);
+            menu.menuItemFudge(getLocal("menu.file"), keyCode);
 
             this.andRest();
 
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
 
             assertTrue("Notepad should have quit", hwnd == null);
         } finally {
             // Should be closed already
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
 
             if (hwnd != null) {
                 closeApplication();

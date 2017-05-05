@@ -40,7 +40,7 @@ public class AutomationRibbonBarTest extends BaseAutomationTest {
 
     @Test
     public void testGetRibbonBar() throws Exception {
-        loadApplication("explorer", "File Explorer");
+        loadApplication("explorer", getLocal("explorer.title"));
 
         try {
             AutomationRibbonBar ribbon = window.getRibbonBar();
@@ -55,7 +55,7 @@ public class AutomationRibbonBarTest extends BaseAutomationTest {
 
     @Test
     public void testGetRibbonCommandBar() throws Exception {
-        loadApplication("explorer", "File Explorer");
+        loadApplication("explorer", getLocal("explorer.title"));
 
         try {
             AutomationRibbonBar ribbon = window.getRibbonBar();
