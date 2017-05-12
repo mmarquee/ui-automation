@@ -65,6 +65,17 @@ public class AutomationElementTest extends BaseAutomationTest {
 	}
 
 	@Test
+	public void testGetAutomationId() throws AutomationException {
+		// Using mock since desktop does not provide an automation ID
+		AutomationElement element = getMocketAutomationElement();
+		
+        when(element.element.getCurrentAutomationId(anyObject()))
+        .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
+
+        assertEquals("myAutomationId", element.getAutomationId());
+	}
+	
+	@Test
 	public void testIsPassword() throws AutomationException {
 		AutomationElement root = instance.getRootElement();
 		assertTrue("root:" + root.isPassword(), !root.isPassword());

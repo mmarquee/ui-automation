@@ -98,6 +98,22 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
+     * Gets the current automation id of the element
+     *
+     * @return The current automation id
+     * @throws AutomationException Call to Automation API failed
+     */
+    public String getAutomationId() throws AutomationException {
+        PointerByReference sr = new PointerByReference();
+
+        if (this.element.getCurrentAutomationId(sr) != 0) {
+            throw new AutomationException();
+        }
+
+        return sr.getValue().getWideString(0);
+    }
+
+    /**
      * Gets the current localized control type of the element
      *
      * @return The current class name

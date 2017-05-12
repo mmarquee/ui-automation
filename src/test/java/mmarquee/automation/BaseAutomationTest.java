@@ -17,9 +17,19 @@ package mmarquee.automation;
 
 import java.util.ResourceBundle;
 
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
@@ -76,4 +86,24 @@ public class BaseAutomationTest {
 	public static String getLocal(String key) {
 		return locals.getString(key);
 	}
+	
+	
+	protected AutomationElement getMocketAutomationElement() {
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
+        return new AutomationElement(mockedElement);
+	}
+	
+	protected Answer<Integer> answerWithSetPointerReferenceToWideString(final String expectedString) {
+		return new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+              PointerByReference pr = invocation.getArgumentAt(0, PointerByReference.class);
+              Pointer m = new Memory(Native.WCHAR_SIZE * (expectedString.length() + 1));
+              m.setWideString(0, expectedString);
+              pr.setValue(m);
+              return 0;
+            }
+          };
+	}
+
 }
