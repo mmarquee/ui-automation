@@ -173,7 +173,7 @@ public class TestMain extends TestBase {
                 // Not found
             }
 
-            AutomationList list = window.getListItem(0);
+            AutomationList list = window.getList(0);
             try {
                 AutomationListItem listItem = list.getItem("First (List)");
                 listItem.select();

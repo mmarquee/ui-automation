@@ -16,19 +16,21 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.OleAuto;
+import java.util.List;
+
 import com.sun.jna.platform.win32.Variant;
-import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.List;
 
 /**
  * Created by Mark Humphreys on 28/01/2016.
@@ -560,7 +562,15 @@ public class AutomationContainer extends AutomationBase {
     public AutomationTreeView getTreeView(String name) throws AutomationException {
         return new AutomationTreeView(this.getControlByControlType(name, ControlType.Tree));
     }
-
+    
+    /**
+     * Deprecated. use {@link #getList(int)} instead.
+     */
+    @Deprecated
+    public AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
+    	return getList(index);
+    }
+    
     /**
      * Gets the list control associated with the given index
      * @param index Index of the control
@@ -568,8 +578,30 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
+    public AutomationList getList(int index) throws PatternNotFoundException, AutomationException {
         return new AutomationList(this.getControlByControlType(index, ControlType.List));
+    }
+
+    /**
+     * Gets the list control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationList getList(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getControlByControlType(name, ControlType.List));
+    }
+
+    /**
+     * Gets the list control associated with the given automation ID
+     * @param automationId Automation id of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationList getListByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getControlByAutomationId(automationId, ControlType.List));
     }
 
     /**

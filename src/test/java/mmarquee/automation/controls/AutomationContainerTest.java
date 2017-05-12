@@ -881,7 +881,7 @@ public class AutomationContainerTest {
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItem(0);
+        wndw.getList(0);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -897,9 +897,55 @@ public class AutomationContainerTest {
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getListItem(99);
+        wndw.getList(99);
 
         verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testList_By_Name() throws Exception {
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement child = new AutomationElement(elem);
+
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getList("myName");
+
+        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void testList_By_Name_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getList("unknownName");
+
+    }
+    
+    @Test
+    public void testList_By_AutomationId() throws Exception {
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement child = new AutomationElement(elem);
+
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getListByAutomationId("myID");
+
+        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void testList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getListByAutomationId("unknownID");
+
     }
 }
 
