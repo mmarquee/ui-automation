@@ -188,7 +188,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ RADIO BUTTON ++");
 
             AutomationRadioButton radio = applicationWindow.getRadioButton(1);
-            radio.selectItem();
+            radio.select();
 
             // TEXT BOX *********************************************
 
@@ -264,12 +264,12 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationComboBox cb1 = applicationWindow.getCombobox(1);
 
-                String txt = cb1.text();
+                String txt = cb1.getValue();
 
                 logger.info("Text for Combobox is `" + txt + "`");
 
                 cb1.setText("Here we are");
-                logger.info("Text for Combobox is now `" + cb1.text() + "`");
+                logger.info("Text for Combobox is now `" + cb1.getValue() + "`");
 
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find element");

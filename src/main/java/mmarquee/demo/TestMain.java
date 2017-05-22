@@ -105,7 +105,7 @@ public class TestMain extends TestBase {
             }
 
             AutomationRadioButton radio = window.getRadioButton(1);
-            radio.selectItem();
+            radio.select();
 
             AutomationStatusBar statusBar = window.getStatusBar();
 
@@ -118,7 +118,7 @@ public class TestMain extends TestBase {
             try {
                 AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
                 cb1.setText("Replacements");
-                String txt = cb1.text();
+                String txt = cb1.getValue();
 
                 cb1.getClickablePoint();
 
@@ -158,7 +158,7 @@ public class TestMain extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            String itemName = cell1.value();
+            String itemName = cell1.getValue();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());

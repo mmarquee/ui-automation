@@ -28,7 +28,7 @@ import mmarquee.automation.uiautomation.ToggleState;
  *
  * Wrapper for the CheckBox element.
  */
-public class AutomationCheckbox extends AutomationBase {
+public class AutomationCheckbox extends AutomationBase implements Toggleable {
 
     private Toggle togglePattern;
 

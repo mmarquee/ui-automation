@@ -81,14 +81,14 @@ public class DemoGrid extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            logger.info("value: " + cell1.value());
+            logger.info("value: " + cell1.getValue());
 
             List<AutomationDataGridCell> cells = grid.selectedRow();
 
             logger.info("size: " + cells.size());
 
             if (cells.size() != 0) {
-                logger.info("value is " + cells.get(1).value());
+                logger.info("value is " + cells.get(1).getValue());
             }
 
             AutomationDataGridCell cell3 = grid.getItem(3, 3);
@@ -96,7 +96,7 @@ public class DemoGrid extends TestBase {
 
             List<AutomationDataGridCell> cells0 = grid.selectedRow();
 
-            logger.info("value is now " + cells0.get(1).value());
+            logger.info("value is now " + cells0.get(1).getValue());
 
             logger.info("++ ALL DONE ++");
 

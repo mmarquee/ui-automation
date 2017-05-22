@@ -17,11 +17,12 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.ToggleState;
 
 /**
- * Created by Mark Humphreys on 21/09/2016.
+ * Created by Mark Humphreys on 19/05/2017.
  */
-public interface Selectable extends Automatable {
-    void select() throws AutomationException, PatternNotFoundException;
-    boolean isSelected() throws AutomationException, PatternNotFoundException;
+public interface Toggleable extends Automatable {
+    void toggle () throws AutomationException, PatternNotFoundException;
+    ToggleState getToggleState () throws AutomationException, PatternNotFoundException;
 }

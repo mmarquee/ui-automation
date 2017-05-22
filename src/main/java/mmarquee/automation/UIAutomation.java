@@ -151,7 +151,7 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Launches the application
+     * Launches the application, from a given directory.
      *
      * @param command The command to be called
      * @return AutomationApplication that represents the application

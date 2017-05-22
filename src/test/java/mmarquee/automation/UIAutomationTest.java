@@ -25,7 +25,9 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
 
+import mmarquee.automation.utils.Utils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import com.sun.jna.Pointer;
@@ -46,10 +48,15 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Utils.class })
 public class UIAutomationTest extends BaseAutomationTest {
 
     static {
@@ -312,6 +319,10 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testLaunch_Fails_When_No_executable() throws IOException {
         UIAutomation instance = UIAutomation.getInstance();
 
+        PowerMockito.mockStatic(Utils.class);
+
+        Mockito.when(Utils.startProcess("notepad99.exe")).thenThrow(java.io.IOException.class);
+
         try {
             instance.launch("notepad99.exe");
         } catch (Throwable ex) {
@@ -328,7 +339,6 @@ public class UIAutomationTest extends BaseAutomationTest {
         AutomationApplication app = null;
 
         try {
-
             try {
                 app = instance.launch("notepad.exe");
             } catch (Throwable ex) {
@@ -344,7 +354,6 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void testCreateNamePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
 
         try {
             // Create first condition to use
@@ -358,9 +367,8 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testCreateAutomationIdPropertyCondition() {
+    public void testCreateAutomationIdPropertyCondition_Does_Not_Throw_Exception() {
         UIAutomation instance = UIAutomation.getInstance();
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
 
         try {
             // Create first condition to use
@@ -374,9 +382,8 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testCreateControlTypeCondition() {
-        UIAutomation instance = UIAutomation.getInstance();
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+    public void testCreateControlTypeCondition_Does_Not_Throw_Exception() {
+        UIAutomation instance = UIAutomation.getInstance();;
 
         try {
             // Create first condition to use

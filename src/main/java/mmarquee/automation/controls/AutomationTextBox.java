@@ -25,7 +25,7 @@ import mmarquee.automation.ControlType;
  *
  * Wrapper for the TextBox element.
  */
-public class AutomationTextBox extends AutomationBase {
+public class AutomationTextBox extends AutomationBase implements Valueable {
     /**
      * Construct the AutomationTextBox
      * @param element The element

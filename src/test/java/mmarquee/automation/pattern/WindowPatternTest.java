@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;

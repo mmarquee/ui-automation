@@ -37,8 +37,7 @@ import java.util.List;
  *
  * Wrapper around the Delphi automated string gridPattern
  */
-public class AutomationDataGrid extends AutomationBase
-{
+public class AutomationDataGrid extends AutomationBase implements Valueable {
     private Value valuePattern;
     private Grid gridPattern;
     private Table tablePattern;

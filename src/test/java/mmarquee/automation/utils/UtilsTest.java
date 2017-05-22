@@ -31,6 +31,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Mark Humphreys on 24/11/2016.
  */
+
 public class UtilsTest extends BaseAutomationTest {
 
     static {

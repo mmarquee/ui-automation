@@ -20,13 +20,17 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
  * Created by Mark Humphreys on 08/03/2016.
  *
  * Wrapper for the Custom ControlId, which is usually a container.
  */
-public class AutomationCustom extends AutomationContainer {
+public class AutomationCustom extends AutomationContainer implements Valueable {
+
+    private Value valuePattern;
+
     /**
      * Constructor for the AutomationCustom
      * @param element The element
@@ -35,6 +39,34 @@ public class AutomationCustom extends AutomationContainer {
      */
     public AutomationCustom (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+    }
+
+    /**
+     * Constructor for the AutomationCustom
+     * @param element The element
+     * @param container ItemContainer pattern
+     * @param value The Value pattern to use
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationCustom (AutomationElement element, ItemContainer container, Value value) throws PatternNotFoundException, AutomationException {
+        super(element, container);
+
+        this.valuePattern = value;
+    }
+
+    /**
+     * Gets the value text associated with this element
+     * @return The value of the item
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    public String getValue() throws AutomationException, PatternNotFoundException {
+        if (this.valuePattern == null) {
+            this.valuePattern = this.getValuePattern();
+        }
+
+        return this.valuePattern.value();
     }
 
     /**

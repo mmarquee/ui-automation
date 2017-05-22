@@ -67,7 +67,7 @@ public class AutomationRadioButtonTest {
 
         AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
 
-        rb1.selectItem();
+        rb1.select();
 
         verify(selection, atLeastOnce()).select();
     }

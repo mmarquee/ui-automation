@@ -24,7 +24,7 @@ import mmarquee.automation.pattern.*;
  *
  * Wrapper around the 'virtual' cell element in the automated Delphi string grid
  */
-public class AutomationDataGridCell extends AutomationBase {
+public class AutomationDataGridCell extends AutomationBase implements Valueable {
 
     private Value valuePattern;
     private GridItem gridItemPattern;
@@ -77,7 +77,7 @@ public class AutomationDataGridCell extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Pattern not found
      */
-    public String value() throws AutomationException, PatternNotFoundException {
+    public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
             try {
                 this.valuePattern = this.getValuePattern();

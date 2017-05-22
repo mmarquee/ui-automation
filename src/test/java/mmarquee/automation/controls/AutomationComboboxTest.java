@@ -67,7 +67,7 @@ public class AutomationComboboxTest {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-        String name = combo.text();
+        String name = combo.getValue();
 
         assertTrue(name.equals("NAME"));
     }
@@ -184,7 +184,7 @@ public class AutomationComboboxTest {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-        combo.text();
+        combo.getValue();
 
         verify(value, atLeast(1)).value();
 
