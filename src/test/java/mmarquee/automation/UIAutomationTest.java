@@ -17,17 +17,13 @@ package mmarquee.automation;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.isA;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.List;
 
-import mmarquee.automation.utils.Utils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import com.sun.jna.Pointer;
@@ -48,15 +44,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ Utils.class })
 public class UIAutomationTest extends BaseAutomationTest {
 
     static {
@@ -316,42 +307,6 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testLaunch_Fails_When_No_executable() throws IOException {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        PowerMockito.mockStatic(Utils.class);
-
-        Mockito.when(Utils.startProcess("notepad99.exe")).thenThrow(java.io.IOException.class);
-
-        try {
-            instance.launch("notepad99.exe");
-        } catch (Throwable ex) {
-            assertTrue("textLaunch succeeded somehow", true);
-        }
-
-        assertFalse("textLaunch succeeded somehow", false);
-    }
-
-    @Test
-    public void testLaunch_Succeeds_When_executable() {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        AutomationApplication app = null;
-
-        try {
-            try {
-                app = instance.launch("notepad.exe");
-            } catch (Throwable ex) {
-                assertTrue("textLaunch succeeded somehow", true);
-            }
-
-            assertFalse("textLaunch succeeded somehow", false);
-        } finally {
-            app.quit(getLocal("notepad.title"));
-        }
-    }
-
-    @Test
     public void testCreateNamePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -394,28 +349,6 @@ public class UIAutomationTest extends BaseAutomationTest {
         }
 
         assertTrue(true);
-    }
-
-    @Test
-    public void testLaunchOrAttach_Fails_When_No_executable() {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        boolean failure = false;
-
-        try {
-            instance.launchOrAttach("notepad99.exe");
-        } catch (Throwable e) {
-            failure = true;
-        }
-
-        assertTrue("Should have failed", failure);
-    }
-
-    @Test
-    public void testLaunchOrAttach_Succeeds_When_Not_Running() throws Exception {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        instance.launchOrAttach("notepad.exe");
     }
 
     @Test
