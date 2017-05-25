@@ -19,10 +19,12 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.utils.Utils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -40,6 +42,11 @@ import static org.mockito.Matchers.anyString;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Utils.class })
 public class UIAutomationTest2 {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test(expected = IOException.class)
     public void testLaunch_Throws_Exception_When_startProcess_Fails() throws Exception {
