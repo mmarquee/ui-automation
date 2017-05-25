@@ -18,12 +18,10 @@ package mmarquee.automation.controls.ribbon;
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 
-import static com.sun.javaws.JnlpxArgs.verify;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
@@ -31,8 +29,6 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -56,8 +52,6 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }
-
-    protected Logger logger = Logger.getLogger(AutomationRibbonCommandBarTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -98,8 +92,6 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
         List<AutomationElement> collection = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-//        when(elem.getCurrentClassName()).thenReturn(0);
 
         doAnswer(new Answer() {
             @Override
