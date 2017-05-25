@@ -38,6 +38,8 @@ import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
+ *
+ * Tests for Combobox functionality
  */
 public class AutomationComboboxTest {
     static {

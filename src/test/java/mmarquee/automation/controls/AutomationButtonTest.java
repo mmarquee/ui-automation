@@ -42,7 +42,6 @@ public class AutomationButtonTest {
         MockitoAnnotations.initMocks(this);
     }
 
-
     @Test
     public void testGetName_For_Button() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
