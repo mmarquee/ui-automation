@@ -47,8 +47,8 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     public AutomationMenuItem(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-        this.collapsePattern = this.getExpandCollapsePattern();
-        this.invokePattern = this.getInvokePattern();
+       // this.collapsePattern = this.getExpandCollapsePattern();
+       // this.invokePattern = this.getInvokePattern();
     }
 
     /**

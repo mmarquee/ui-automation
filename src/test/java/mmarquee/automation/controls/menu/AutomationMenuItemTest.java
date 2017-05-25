@@ -44,23 +44,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    protected Logger logger = Logger.getLogger(AutomationToolbarButtonTest.class.getName());
-
-    /* Not really a test of menuitem, check it is called elsewhere
-    @Test
-    public void testGetMenuItem() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
-            AutomationMainMenu menu = sb.getMenuBar();
-            List<AutomationMenuItem> items = menu.getItems();
-            assertTrue(items.size() == 1);
-        } finally {
-            closeApplication();
-        }
-    }
-*/
     @Test
     public void testGetName() throws Exception {
         AutomationElement mocked_element =
@@ -126,31 +109,4 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
         verify(invoke, atLeastOnce()).invoke();
     }
-
-    /* Make sure this being called elsewhere
-    @Test
-    public void testMenuFudge() throws Exception {
-        loadApplication("notepad.exe", getLocal("notepad.title"));
-
-        try {
-            AutomationMainMenu menu = window.getMainMenu();
-
-            int keyCode = KeyEvent.getExtendedKeyCodeForChar(getLocal("menu.exit.acc").toCharArray()[0]);
-            menu.menuItemFudge(getLocal("menu.file"), keyCode);
-
-            this.andRest();
-
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
-
-            assertTrue("Notepad should have quit", hwnd == null);
-        } finally {
-            // Should be closed already
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
-
-            if (hwnd != null) {
-                closeApplication();
-            }
-        }
-    }
-    */
 }

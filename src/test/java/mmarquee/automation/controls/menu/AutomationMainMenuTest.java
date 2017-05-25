@@ -15,68 +15,170 @@
  */
 package mmarquee.automation.controls.menu;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.when;
 
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
  * Created by Mark Humphreys on 13/12/2016.
+ *
+ * Tests for MainMenu.
  */
 public class AutomationMainMenuTest extends BaseAutomationTest {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     protected Logger logger = Logger.getLogger(AutomationToolbarButtonTest.class.getName());
 
     @Test
     public void testName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
 
-        try {
-            AutomationMainMenu menu = window.getMainMenu();
+        AutomationElement element =
+                Mockito.mock(AutomationElement.class);
 
-            String name = menu.name();
+        AutomationElement parent =
+                Mockito.mock(AutomationElement.class);
 
-            assertEquals(getLocal("appmenu.name"),name);
-        } finally {
-            closeApplication();
-        }
+        when(element.getName()).thenReturn("MENU-01");
+
+        AutomationMainMenu item =
+                new AutomationMainMenu(parent, element);
+
+        assertEquals("MENU-01", item.name());
     }
 
     @Test
     public void testGetItems() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationMainMenu menu = window.getMainMenu();
+        AutomationElement parent =
+                Mockito.mock(AutomationElement.class);
 
-            List<AutomationMenuItem> items = menu.getItems();
+        when(element.getName()).thenReturn("MENU-01");
 
-            int n = items.size();
+        List<AutomationElement> collection = new ArrayList<>();
 
-            assertTrue(n == 2);
-        } finally {
-            closeApplication();
-        }
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        collection.add(new AutomationElement(elem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        List<AutomationMenuItem> items = menu.getItems();
+
+        int n = items.size();
+
+        assertTrue(n == 1);
     }
 
     @Test
-    public void testGetMenuItem() throws Exception {
-        loadApplication("notepad.exe", getLocal("notepad.title"));
+    public void testGetMenuItem_With_Both_Parameters() throws Exception {
+        AutomationElement element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationMainMenu menu = window.getMainMenu();
+        AutomationElement parent =
+                Mockito.mock(AutomationElement.class);
 
-            AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
+        when(element.getName()).thenReturn("MENU-01");
 
-            logger.info(item.name());
+        List<AutomationElement> collection = new ArrayList<>();
 
-            assertEquals(getLocal("menu.exit"),item.name());
-        } finally {
-            closeApplication();
-        }
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        collection.add(new AutomationElement(elem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
+
+        // Not quite sure what to test for here - has it worked at all?
+
+      //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testGetMenuItem_With_First_Parameter_Only() throws Exception {
+        AutomationElement element =
+                Mockito.mock(AutomationElement.class);
+
+        AutomationElement parent =
+                Mockito.mock(AutomationElement.class);
+
+        when(element.getName()).thenReturn("MENU-01");
+
+        List<AutomationElement> collection = new ArrayList<>();
+
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        collection.add(new AutomationElement(elem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), "");
+
+        // Not quite sure what to test for here - has it worked at all?
+
+        //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+    }
+
+    @Test
+    public void testMenuFudge() throws Exception {
+        AutomationElement element =
+                Mockito.mock(AutomationElement.class);
+
+        AutomationElement parent =
+                Mockito.mock(AutomationElement.class);
+
+        when(element.getName()).thenReturn("MENU-01");
+
+        List<AutomationElement> collection = new ArrayList<>();
+
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        collection.add(new AutomationElement(elem));
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        int keyCode = KeyEvent.getExtendedKeyCodeForChar(getLocal("menu.exit.acc").toCharArray()[0]);
+
+        menu.menuItemFudge(getLocal("menu.file"), keyCode);
+
+        // Not quite sure what to test for here - has it worked at all?
+
+        //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
 }

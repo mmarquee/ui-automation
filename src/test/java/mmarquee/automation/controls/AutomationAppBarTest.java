@@ -40,5 +40,4 @@ public class AutomationAppBarTest {
 
         assertTrue(name.equals("NAME"));
     }
-
 }

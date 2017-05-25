@@ -109,9 +109,9 @@ public class AutomationRibbonBarTest extends BaseAutomationTest {
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
 
-        AutomationRibbonBar workPane = new AutomationRibbonBar(element);
+        AutomationRibbonBar bar = new AutomationRibbonBar(element);
 
-        AutomationRibbonCommandBar uiPane = workPane.getRibbonCommandBar();
+        AutomationRibbonCommandBar uiPane = bar.getRibbonCommandBar();
 
         Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
