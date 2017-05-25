@@ -15,28 +15,19 @@
  */
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.controls.AutomationTitleBar;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.apache.log4j.Logger;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.awt.event.KeyEvent;
-import java.util.List;
-
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -115,7 +106,7 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         AutomationMenuItem item =
                 new AutomationMenuItem(mocked_element, collapse, invoke);
 
-        assertFalse(item.isExpanded());
+        assertTrue(item.isExpanded());
     }
 
     @Test

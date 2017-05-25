@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
  */
 public class AutomationCalendarTest {
 
+
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);

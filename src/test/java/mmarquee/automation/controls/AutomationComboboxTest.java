@@ -22,8 +22,10 @@ import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -40,6 +42,11 @@ import static org.mockito.Mockito.*;
 public class AutomationComboboxTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test

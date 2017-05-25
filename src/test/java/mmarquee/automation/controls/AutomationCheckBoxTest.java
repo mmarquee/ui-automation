@@ -19,8 +19,11 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +31,11 @@ import static org.mockito.Mockito.when;
  * Created by Mark Humphreys on 30/11/2016.
  */
 public class AutomationCheckBoxTest {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
