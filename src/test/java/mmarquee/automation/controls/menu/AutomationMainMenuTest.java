@@ -96,6 +96,8 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         assertTrue(n == 1);
     }
 
+    /* Need to validate these tests */
+
     @Test
     public void testGetMenuItem_With_Both_Parameters() throws Exception {
         AutomationElement element =
@@ -106,13 +108,9 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         when(element.getName()).thenReturn("MENU-01");
 
-        List<AutomationElement> collection = new ArrayList<>();
-
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        collection.add(new AutomationElement(elem));
-
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(new AutomationElement(elem));
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
