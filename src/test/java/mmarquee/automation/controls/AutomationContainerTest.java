@@ -527,8 +527,6 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -544,9 +542,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -562,8 +560,6 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -579,9 +575,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -597,8 +593,6 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -614,9 +608,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -632,8 +626,6 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -649,9 +641,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -666,8 +658,6 @@ public class AutomationContainerTest {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -684,7 +674,7 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
         doAnswer(new Answer() {
             @Override
@@ -697,7 +687,7 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentControlType(anyObject());
+        }).when(elem).getCurrentControlType(anyObject());
 
 
         doAnswer(new Answer() {
@@ -715,9 +705,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentName(anyObject());
+        }).when(elem).getCurrentName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -732,8 +722,6 @@ public class AutomationContainerTest {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -750,9 +738,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findFirst(anyObject(), anyObject())).thenReturn(null);
 
@@ -768,8 +756,6 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -785,9 +771,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -803,8 +789,6 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -820,9 +804,9 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
@@ -837,8 +821,6 @@ public class AutomationContainerTest {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
 
         doAnswer(new Answer() {
             @Override
@@ -855,12 +837,12 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(anyObject());
 
         AutomationElement el = Mockito.mock(AutomationElement.class);
-        el.element = spyElem;
+        el.element = elem;
 
-        list.add(new AutomationElement(spyElem));
+        list.add(new AutomationElement(elem));
 
         when(el.findAll(anyObject(), anyObject())).thenReturn(list);
 
