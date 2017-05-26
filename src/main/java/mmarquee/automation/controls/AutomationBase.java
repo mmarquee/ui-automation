@@ -16,6 +16,7 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
@@ -742,5 +743,17 @@ public abstract class AutomationBase implements Automatable {
      */
     public void showContextMenu() throws AutomationException {
         this.element.showContextMenu();
+    }
+
+    /**
+     * Creates an Unknown object from the pointer.
+     *
+     * Allows Mockito to be used to create Unknown objects
+     *
+     * @param pvInstance The pointer to use
+     * @return An Unknown object
+     */
+    public Unknown makeUnknown(Pointer pvInstance) {
+        return new Unknown(pvInstance);
     }
 }

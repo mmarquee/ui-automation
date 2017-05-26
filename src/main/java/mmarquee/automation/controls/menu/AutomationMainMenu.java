@@ -79,7 +79,8 @@ public class AutomationMainMenu extends AutomationBase {
         if (item != null) {
             PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
 
-            Unknown unkConditionA = new Unknown(pElement.getValue());
+            Unknown unkConditionA = makeUnknown(pElement.getValue());
+
             PointerByReference pUnknownA = new PointerByReference();
 
             WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
@@ -104,6 +105,8 @@ public class AutomationMainMenu extends AutomationBase {
                     // What is going to happen here?
                 }
             }
+        } else {
+            throw new ItemNotFoundException();
         }
     }
 
@@ -115,7 +118,8 @@ public class AutomationMainMenu extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItem (String name0, String name1)
+            throws PatternNotFoundException, AutomationException {
 
         AutomationElement foundElement = null;
 
@@ -151,6 +155,12 @@ public class AutomationMainMenu extends AutomationBase {
                             this.createControlTypeCondition(ControlType.MenuItem).getValue()));
                 }
             }
+        } else {
+            foundElement = item;
+        }
+
+        if (foundElement == null) {
+            throw new ItemNotFoundException();
         }
 
         return new AutomationMenuItem(foundElement);
