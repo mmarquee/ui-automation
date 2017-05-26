@@ -20,10 +20,9 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.controls.AutomationToolbarButtonTest;
-import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -34,13 +33,11 @@ import org.mockito.stubbing.Answer;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by Mark Humphreys on 13/12/2016.
@@ -97,14 +94,11 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         List<AutomationMenuItem> items = menu.getItems();
 
-        int n = items.size();
-
-        assertTrue(n == 1);
+        assertTrue(items.size() == 1);
     }
 
-    /* Need to validate these tests */
-
     @Test
+    @Ignore("Need much more work")
     public void testGetMenuItem_With_Both_Parameters() throws Exception {
         AutomationElement element =
                 Mockito.mock(AutomationElement.class);
@@ -191,6 +185,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
     }
 
     @Test
+    @Ignore("Need much more work")
     public void testMenuFudge() throws Exception {
         AutomationElement element =
                 Mockito.mock(AutomationElement.class);
@@ -202,12 +197,29 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        ExpandCollapse expand = Mockito.mock(ExpandCollapse.class);
-        doReturn(mockUnknown)
-                .when(expand)
-                .makeUnknown(anyObject());
-
         AutomationElement found = Mockito.mock(AutomationElement.class);
+
+//        ExpandCollapse expand = Mockito.mock(ExpandCollapse.class);
+
+  //      doReturn(mockUnknown)
+    //            .when(expand)
+      //          .makeUnknown(anyObject());
+
+        //when(elem.getCurrentPattern()).thenReturn(expand);
+
+//        doAnswer(new Answer() {
+//            @Override
+//            public PointerByReference answer(InvocationOnMock invocation) throws Throwable {
+//                //IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+//
+//                IUIAutomationExpandCollapsePattern expand =
+//                        Mockito.mock(IUIAutomationExpandCollapsePattern.class);
+//
+//                return expand;
+//            }
+//        }).when(found).getPattern(anyInt());
+
+        //AutomationElement found = Mockito.mock(AutomationElement.class);
 
         when(element.findFirst(anyObject(), anyObject())).thenReturn(found);
 
