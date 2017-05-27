@@ -65,14 +65,15 @@ public class AutomationApplicationTest {
     }
 
     @Test
-    @Ignore("Need to mock the elem getting a name")
     public void testGetWindow_Calls_FindAll_From_Element()
             throws AutomationException, PatternNotFoundException {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-        list.add(new AutomationElement(elem));
+        when(elem.getName()).thenReturn("Untitled - Notepad");
+
+        list.add(elem);
 
         when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
