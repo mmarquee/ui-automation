@@ -18,34 +18,32 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import org.apache.log4j.Logger;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
-import static org.powermock.api.mockito.PowerMockito.when;
-
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyObject;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 /**
  * Created by Mark Humphreys on 25/11/2016.
+ *
+ * Tests for AutomatedWindow class
  */
 public class AutomationWindowTest extends BaseAutomationTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
-
-    protected Logger logger = Logger.getLogger(AutomationWindowTest.class.getName());
 
     @Before
     public void setup() {
@@ -85,57 +83,84 @@ public class AutomationWindowTest extends BaseAutomationTest {
     }
 
     @Test
-    public void test_getSystemMenu() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void test_getSystemMenu_Does_Not_Throw_Exception() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationSystemMenu sm = window.getSystemMenu();
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-            String name = sm.getName();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            logger.info(name);
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(elem);
 
-            assertEquals(getLocal("systemmenu.name"),name);
-        } finally {
-            closeApplication();
-        }
+        Mockito.when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        List<AutomationElement> menus = new ArrayList<>();
+
+        AutomationElement item = Mockito.mock(AutomationElement.class);
+
+        menus.add(item);
+
+        Mockito.when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        windw.getSystemMenu();
     }
 
     @Test
-    public void testGetTitleBar() throws Exception {
+    public void testGetTitleBar_Does_Not_Throw_Exception() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        loadApplication("apps\\Project1.exe", "Form1");
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            String name = sb.getName();
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(elem);
 
-            logger.info(name);
+        Mockito.when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        List<AutomationElement> menus = new ArrayList<>();
+
+        AutomationElement item = Mockito.mock(AutomationElement.class);
+
+        menus.add(item);
+
+        Mockito.when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        windw.getTitleBar();
     }
 
     @Test
-    @Ignore // Fails to find appbar
-    public void testGetAppBar_By_Index() throws Exception {
-        // Needs a different application to test against
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetAppBar_By_Index_Does_Not_Throw_Exception() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationAppBar sb = window.getAppBar(0);
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-            String name = sb.getName();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            logger.info(name);
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(elem);
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        Mockito.when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        List<AutomationElement> menus = new ArrayList<>();
+
+        AutomationElement item = Mockito.mock(AutomationElement.class);
+
+        menus.add(item);
+
+        Mockito.when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        windw.getAppBar(0);
     }
 
     @Test
@@ -168,25 +193,6 @@ public class AutomationWindowTest extends BaseAutomationTest {
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
         assertFalse(windw.isModal());
-    }
-
-    @Test
-    public void testGetMenuItem() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
-
-            AutomationMainMenu menu = sb.getMenuBar();
-
-            List<AutomationMenuItem> items = menu.getItems();
-
-            logger.info(menu.getItems().get(0).getName());
-
-            assertTrue(items.size() == 1);
-        } finally {
-            closeApplication();
-        }
     }
 }
 
