@@ -61,7 +61,7 @@ public class AutomationComboboxTest {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-        String name = combo.name();
+        String name = combo.getName();
 
         assertTrue(name.equals("NAME"));
     }

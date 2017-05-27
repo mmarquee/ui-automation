@@ -63,7 +63,7 @@ public class AutomationRibbonWorkPaneTest extends BaseAutomationTest {
         when(element.getName()).thenReturn("NAME");
         AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(element);
 
-        String name = pane.name();
+        String name = pane.getName();
 
         assertTrue(name.equals("NAME"));
     }

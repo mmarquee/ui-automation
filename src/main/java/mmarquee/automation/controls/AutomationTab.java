@@ -63,7 +63,7 @@ public class AutomationTab extends AutomationContainer {
     public void selectTabPage(String name) throws AutomationException, PatternNotFoundException {
 
         for(AutomationTabItem item: this.getTabItems()) {
-            if (name.equals(item.name())) {
+            if (name.equals(item.getName())) {
                 item.selectItem();
             }
         }

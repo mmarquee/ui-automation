@@ -46,7 +46,7 @@ public class AutomationCheckBoxTest {
 
         AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
 
-        String name = checkbox.name();
+        String name = checkbox.getName();
 
         assertTrue(name.equals("NAME"));
     }

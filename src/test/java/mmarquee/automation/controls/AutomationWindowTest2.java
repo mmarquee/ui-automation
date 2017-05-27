@@ -91,7 +91,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        String name = wndw.name();
+        String name = wndw.getName();
 
         assertTrue(name.equals("NAME"));
     }

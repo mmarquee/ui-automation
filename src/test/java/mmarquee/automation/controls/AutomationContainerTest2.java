@@ -44,7 +44,7 @@ public class AutomationContainerTest2 {
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-        assertTrue(window.name().equals("NAME"));
+        assertTrue(window.getName().equals("NAME"));
     }
 
     @Test

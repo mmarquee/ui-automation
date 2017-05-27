@@ -51,7 +51,7 @@ public class AutomationButtonTest {
 
         AutomationButton button = new AutomationButton(element, pattern);
 
-        String name = button.name();
+        String name = button.getName();
 
         assertTrue(name.equals("NAME"));
     }

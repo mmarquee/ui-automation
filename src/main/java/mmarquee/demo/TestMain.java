@@ -53,7 +53,7 @@ public class TestMain extends TestBase {
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Form1");
-            String name = window.name();
+            String name = window.getName();
             logger.info(name);
 
             Object framework = window.getFramework();
@@ -187,7 +187,7 @@ public class TestMain extends TestBase {
                 List<AutomationListItem> items = list.getItems();
 
                 for(AutomationListItem item: items) {
-                    logger.info(" *" +item.name());
+                    logger.info(" *" +item.getName());
                 }
 
             } catch (AutomationException ex) {
@@ -212,7 +212,7 @@ public class TestMain extends TestBase {
             this.rest();
 
             AutomationToolBar toolbar = window.getToolBar(1);
-            logger.info(toolbar.name());
+            logger.info(toolbar.getName());
 
             // Looks like the button is a problem with Delphi
             AutomationToolBarButton btn0 = toolbar.getToolbarButton(0);

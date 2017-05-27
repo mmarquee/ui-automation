@@ -61,7 +61,7 @@ public class DemoGrid extends TestBase {
             Object id = applicationWindow.getProcessId();
             logger.info("Process = " + id.toString());
 
-            String name = applicationWindow.name();
+            String name = applicationWindow.getName();
             logger.info(name);
 
             try {
@@ -74,7 +74,7 @@ public class DemoGrid extends TestBase {
 
             // GRIDS ***********************************
             AutomationDataGrid grid = applicationWindow.getDataGrid("grdDemoGrid", "TJHCGrid");
-            logger.info(grid.name());
+            logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids
          //   grid.showContextMenu();

@@ -65,7 +65,7 @@ public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
 
         AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
 
-        String name = commandBar.name();
+        String name = commandBar.getName();
 
         assertTrue(name.equals("NAME"));
     }

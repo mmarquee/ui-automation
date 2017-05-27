@@ -57,7 +57,7 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         AutomationMenuItem item =
                 new AutomationMenuItem(mocked_element, collapse, invoke);
 
-        assertEquals("NAME", item.name());
+        assertEquals("NAME", item.getName());
     }
 
     @Test

@@ -61,7 +61,7 @@ public class AutomationRibbonBarTest extends BaseAutomationTest {
 
         AutomationRibbonBar bar = new AutomationRibbonBar(element);
 
-        String name = bar.name();
+        String name = bar.getName();
 
         assertTrue(name.equals("RIBBON-01"));
     }

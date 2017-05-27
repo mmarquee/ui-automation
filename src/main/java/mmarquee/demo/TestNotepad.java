@@ -49,7 +49,7 @@ public class TestNotepad extends TestBase {
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
-            String name = window.name();
+            String name = window.getName();
             logger.info(name);
 
             Object framework = window.getFramework();

@@ -15,24 +15,24 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.controls.rebar.AutomationReBar;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.utils.Utils;
+import mmarquee.automation.pattern.Window;
 import org.apache.log4j.Logger;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 import java.util.List;
 
@@ -47,41 +47,41 @@ public class AutomationWindowTest extends BaseAutomationTest {
 
     protected Logger logger = Logger.getLogger(AutomationWindowTest.class.getName());
 
-    @After
-    public void tearDown() {
-        // Must be a better way of doing this????
-        this.andRest();
-
-        // Notepad _MIGHT_ still be running, so close it if it is
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
-        }
-    }
-
     @Before
-    public void setUp() throws Exception {
-        // Notepad _MIGHT_ still be running, so close it if it is
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
-        }
-
-        instance = UIAutomation.getInstance();
-
-        application = instance.launch("notepad.exe");
-
-        application.waitForInputIdle();
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetWindowName_Matches_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
-        AutomationWindow window = application.getWindow(getLocal("notepad.title"));
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        when(element.getName()).thenReturn("Name-01");
 
-        assertEquals(getLocal("notepad.title"), window.name());
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(window.isModal()).thenReturn(true);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        assertEquals("Name-01", windw.getName());
+    }
+
+    @Test
+    public void testGetWindowName_Does_Not_Match_Searched_For_Name()
+            throws AutomationException, PatternNotFoundException {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        when(element.getName()).thenReturn("Name-01");
+
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(window.isModal()).thenReturn(true);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        assertNotEquals("Wrong-01", windw.getName());
     }
 
     @Test
@@ -91,7 +91,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
         try {
             AutomationSystemMenu sm = window.getSystemMenu();
 
-            String name = sm.name();
+            String name = sm.getName();
 
             logger.info(name);
 
@@ -109,7 +109,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
         try {
             AutomationTitleBar sb = window.getTitleBar();
 
-            String name = sb.name();
+            String name = sb.getName();
 
             logger.info(name);
 
@@ -128,7 +128,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
         try {
             AutomationAppBar sb = window.getAppBar(0);
 
-            String name = sb.name();
+            String name = sb.getName();
 
             logger.info(name);
 
@@ -139,10 +139,35 @@ public class AutomationWindowTest extends BaseAutomationTest {
     }
 
     @Test
+    public void testIsModal_Is_True_For_Modal_Window()
+            throws AutomationException, PatternNotFoundException {
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(window.isModal()).thenReturn(true);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        assertTrue(windw.isModal());
+    }
+
+    @Test
     public void testIsModal_Is_False_For_Non_Modal_Window()
             throws AutomationException, PatternNotFoundException {
-        AutomationWindow window = application.getWindow(getLocal("notepad.title"));
-        assertFalse("Notepad isn't modal!", window.isModal());
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(window.isModal()).thenReturn(false);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        assertFalse(windw.isModal());
     }
 
     @Test
@@ -156,9 +181,7 @@ public class AutomationWindowTest extends BaseAutomationTest {
 
             List<AutomationMenuItem> items = menu.getItems();
 
-
-
-            logger.info(menu.getItems().get(0).name());
+            logger.info(menu.getItems().get(0).getName());
 
             assertTrue(items.size() == 1);
         } finally {

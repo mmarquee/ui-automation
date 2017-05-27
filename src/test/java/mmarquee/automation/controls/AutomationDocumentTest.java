@@ -45,7 +45,7 @@ public class AutomationDocumentTest {
 
         AutomationDocument document = new AutomationDocument(element, pattern);
 
-        String name = document.name();
+        String name = document.getName();
 
         assertTrue(name.equals("NAME"));
     }

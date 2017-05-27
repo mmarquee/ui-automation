@@ -28,7 +28,7 @@ public class AutomationTreeViewTest {
 
         AutomationTreeView ctrl = new AutomationTreeView(element);
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));    }
 

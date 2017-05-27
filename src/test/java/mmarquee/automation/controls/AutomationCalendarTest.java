@@ -37,7 +37,7 @@ public class AutomationCalendarTest {
 
         AutomationCalendar calendar = new AutomationCalendar(element, pattern);
 
-        String name = calendar.name();
+        String name = calendar.getName();
 
         assertTrue(name.equals("NAME"));
     }

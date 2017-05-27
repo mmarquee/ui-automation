@@ -65,7 +65,7 @@ public class AutomationNUIPaneTest extends BaseAutomationTest {
 
         AutomationNUIPane pane = new AutomationNUIPane(element);
 
-        String name = pane.name();
+        String name = pane.getName();
 
         assertTrue(name.isEmpty());
     }

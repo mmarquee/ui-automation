@@ -267,7 +267,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The name of the element
      * @throws AutomationException Error in automation library
      */
-    public String name () throws AutomationException {
+    public String getName () throws AutomationException {
         return this.element.getName();
     }
 

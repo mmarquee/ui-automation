@@ -68,7 +68,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         AutomationMainMenu item =
                 new AutomationMainMenu(parent, element);
 
-        assertEquals("MENU-01", item.name());
+        assertEquals("MENU-01", item.getName());
     }
 
     @Test

@@ -45,7 +45,7 @@ public class AutomationToolbarTest {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));
     }

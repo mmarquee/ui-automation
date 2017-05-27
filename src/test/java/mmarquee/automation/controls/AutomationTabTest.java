@@ -73,7 +73,7 @@ public class AutomationTabTest extends BaseAutomationTest {
 
         ctrl.selectTabPage("TEST");
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("TEST"));
     }

@@ -44,7 +44,7 @@ public class AutomationTitleBarTest extends BaseAutomationTest {
 
         AutomationTitleBar ctrl = new AutomationTitleBar(element, container);
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));
     }

@@ -60,7 +60,7 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
 
         AutomationSystemMenu item = new AutomationSystemMenu(element);
 
-        assertEquals("MENU-01", item.name());
+        assertEquals("MENU-01", item.getName());
     }
 
     @Test

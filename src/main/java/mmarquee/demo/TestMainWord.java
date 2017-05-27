@@ -46,22 +46,22 @@ public class TestMainWord extends TestBase {
 
             // 2. Get the sheet
             AutomationWindow window = application.getWindow("Document1 - Word");
-            logger.info(window.name());
+            logger.info(window.getName());
 
             AutomationPanel pane = window.getPanel("Document1");
-            logger.info(pane.name());
+            logger.info(pane.getName());
             logger.info(pane.getClassName());
             AutomationPanel pane1 = pane.getPanel(0);
-            logger.info(pane1.name());
+            logger.info(pane1.getName());
 
             AutomationDocument doc = pane1.getDocument(0);
-            logger.info(doc.name());
+            logger.info(doc.getName());
 
             AutomationDocumentPage page0 = doc.getPage(0);
-            logger.info(page0.name());
+            logger.info(page0.getName());
 
             AutomationEditBox edit = page0.getEditBox(0);
-            logger.info(edit.name());
+            logger.info(edit.getName());
 
             String text = edit.getText();
             logger.info("Text = " + text.substring(0,10));

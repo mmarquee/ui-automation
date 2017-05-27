@@ -57,7 +57,7 @@ public class AutomationDataGridTest {
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
 
-        String name = dataGrid.name();
+        String name = dataGrid.getName();
 
         assertTrue(name.equals("NAME"));
     }

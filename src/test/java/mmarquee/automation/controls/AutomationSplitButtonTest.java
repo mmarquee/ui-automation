@@ -29,7 +29,7 @@ public class AutomationSplitButtonTest {
 
         AutomationSplitButton button = new AutomationSplitButton(element, pattern);
 
-        String name = button.name();
+        String name = button.getName();
 
         assertTrue(name.equals("NAME"));
     }

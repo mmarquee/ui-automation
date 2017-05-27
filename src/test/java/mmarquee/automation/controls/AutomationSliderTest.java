@@ -45,7 +45,7 @@ public class AutomationSliderTest {
 
         AutomationSlider slider = new AutomationSlider(element, pattern);
 
-        String name = slider.name();
+        String name = slider.getName();
 
         assertTrue(name.equals("NAME"));
     }
