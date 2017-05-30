@@ -17,6 +17,7 @@ package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
@@ -26,11 +27,12 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 04/12/2016.
@@ -108,5 +110,84 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         item.click();
 
         verify(invoke, atLeastOnce()).invoke();
+    }
+
+    @Test
+    public void test_GetItems_Returns_Items_When_List_Not_Empty() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
+
+        List<AutomationElement> elements = new ArrayList<>();
+        elements.add(elem);
+
+        when(mocked_element.findAll(anyObject(), anyObject())).thenReturn(elements);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        List<AutomationMenuItem> list = item.getItems();
+
+        assertEquals(elements.size(), list.size());
+    }
+
+    @Test
+    public void test_GetItems_Returns_No_Items_When_List_Empty() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        List<AutomationMenuItem> list = item.getItems();
+
+        assertEquals(0, 0);
+    }
+
+    @Test
+    public void test_Expand_Calls_Expand_From_Pattern() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        item.expand();
+
+        Mockito.verify(collapse, atLeastOnce()).expand();
+    }
+
+    @Test
+    public void test_Collapse_Calls_Collapse_From_Pattern() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        item.collapse();
+
+        Mockito.verify(collapse, atLeastOnce()).collapse();
     }
 }

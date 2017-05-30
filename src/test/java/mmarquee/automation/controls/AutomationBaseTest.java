@@ -550,7 +550,7 @@ public class AutomationBaseTest {
 
     @Test
     @Ignore("Throws odd exception")
-    public void test_isOffScreen_returns_False_When_Element_Throws_Exeception() throws Exception {
+    public void test_isOffScreen_returns_False_When_Element_Throws_Exception() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
@@ -601,12 +601,6 @@ public class AutomationBaseTest {
     public void test_getSelectItemPattern() throws Exception {
         IUIAutomationElement3 el = Mockito.mock(IUIAutomationElement3.class);
 
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        element.element = el;
-
-        Window pattern = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -619,6 +613,13 @@ public class AutomationBaseTest {
                 return 0;
             }
         }).when(el).getCurrentPropertyValue(anyObject(), anyObject());
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        element.element = el;
+
+        Window pattern = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 

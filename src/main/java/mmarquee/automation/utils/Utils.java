@@ -93,9 +93,18 @@ public class Utils {
      * @throws java.io.IOException something has gone wrong
      */
     public static Process startProcess(String... command) throws java.io.IOException {
-        ProcessBuilder pb = new ProcessBuilder(command);
+        ProcessBuilder pb = createProcessBuilder(command);
 
         return pb.start();
+    }
+
+    /**
+     * Wrapper around creation of ProcessBuilder object.
+     * @param command The command line to use
+     * @return The created ProcessBuilder object.
+     */
+    public static ProcessBuilder createProcessBuilder (String... command) {
+        return new ProcessBuilder(command);
     }
 
     /**
@@ -105,7 +114,7 @@ public class Utils {
      * @throws java.io.IOException something has gone wrong
      */
     public static Process startProcessWithWorkingDirectory(String... command) throws java.io.IOException {
-        ProcessBuilder pb = new ProcessBuilder(command);
+        ProcessBuilder pb = createProcessBuilder(command);
 
         String directory = new File(command[0]).getParent();
 

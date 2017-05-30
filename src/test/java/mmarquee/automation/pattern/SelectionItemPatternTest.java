@@ -176,4 +176,60 @@ public class SelectionItemPatternTest {
 
         verify(spyPattern, atLeastOnce()).select();
     }
+
+    @Test
+    public void test_addToSelection_Adds_To_Selection() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        SelectionItem pattern = new SelectionItem();
+
+        SelectionItem spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockPattern)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.addToSelection();
+
+        verify(mockPattern, atLeastOnce()).addToSelection();
+    }
+
+    @Test
+    public void test_removeFromSelection_Calls_Method_From_Pattern() throws Exception {
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        SelectionItem pattern = new SelectionItem();
+
+        SelectionItem spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        doReturn(mockPattern)
+                .when(spyPattern)
+                .convertPointerToInterface(anyObject());
+
+        spyPattern.removeFromSelection();
+
+        verify(mockPattern, atLeastOnce()).removeFromSelection();
+    }
 }
