@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -41,9 +42,7 @@ public class AutomationTab extends AutomationContainer {
             List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
 
             for (AutomationElement elem : collection) {
-                int retVal = elem.getControlType();
-
-                if (retVal == ControlType.TabItem.getValue()) {
+                if (elem.getControlType() == ControlType.TabItem.getValue()) {
                     tabItems.add(new AutomationTabItem(elem));
                 }
             }
@@ -62,10 +61,17 @@ public class AutomationTab extends AutomationContainer {
      */
     public void selectTabPage(String name) throws AutomationException, PatternNotFoundException {
 
+        boolean found = false;
+
         for(AutomationTabItem item: this.getTabItems()) {
             if (name.equals(item.getName())) {
+                found = true;
                 item.selectItem();
             }
+        }
+
+        if (!found) {
+            throw new ElementNotFoundException();
         }
     }
 
