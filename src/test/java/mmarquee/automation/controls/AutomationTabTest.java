@@ -15,28 +15,31 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.SelectionItem;
-import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
  */
-public class AutomationTabTest extends BaseAutomationTest {
+public class AutomationTabTest {
 
-    protected Logger logger = Logger.getLogger(AutomationTabTest.class.getName());
+    @Spy
+    private Unknown mockUnknown;
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -44,7 +47,52 @@ public class AutomationTabTest extends BaseAutomationTest {
 
     @Test
     @Ignore("Need to get the correct mocking setup")
-    public void testGetTabPage_By_Index() throws Exception {
+    public void testGetTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        // For .findAll
+        ArrayList<AutomationElement> list = new ArrayList<>();
+        AutomationElement testElem = Mockito.mock(AutomationElement.class);
+
+        when(testElem.getName()).thenReturn("TEST");
+        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
+        when(testElem.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
+
+
+        // Need to get the selectItem pattern to work correctly
+        SelectionItem selectItem = Mockito.mock(SelectionItem.class);
+
+        doReturn(mockUnknown)
+                .when(selectItem)
+                .makeUnknown(anyObject());
+
+        // Needs to get the selection item that we've mocked
+
+        PointerByReference pbr = new PointerByReference();
+
+        selectItem.convertPointerToInterface(pbr);
+
+        when(testElem.getPattern(anyInt())).thenReturn(pbr);
+
+//        when(testElem.getSelectItemPattern()).thenReturn(selectItem);
+
+        list.add(testElem);
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationTab ctrl = new AutomationTab(element, container);
+
+        ctrl.selectTabPage("TEST");
+
+//        String name = ctrl.getName();
+
+ //       assertTrue(name.equals("TEST"));
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    @Ignore("Need to get the correct mocking setup")
+    public void testGetTabPage_By_Name_Throws_Exception_When_Tab_Not_Present() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
@@ -59,9 +107,9 @@ public class AutomationTabTest extends BaseAutomationTest {
         SelectionItem selectItem = Mockito.mock(SelectionItem.class);
 
         PointerByReference pbr = new PointerByReference();
-      //  IUnknown unknown = new IUnknown(selectItem);
+        //  IUnknown unknown = new IUnknown(selectItem);
 
-      //  pbr.setValue(selectItem.asPointer());
+        //  pbr.setValue(selectItem.asPointer());
         selectItem.getRawPatternPointer(pbr);
 
         when(testElem.getPattern(anyInt())).thenReturn(pbr);
@@ -79,15 +127,38 @@ public class AutomationTabTest extends BaseAutomationTest {
     }
 
     @Test
+    @Ignore("Needs proper mocking setup")
     public void testSelectTabPage_Not_Present() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            AutomationTab tab = window.getTab(0);
+        ArrayList<AutomationElement> list = new ArrayList<>();
+        AutomationElement testElem = Mockito.mock(AutomationElement.class);
 
-            tab.selectTabPage("ERROR");
-        } finally {
-            closeApplication();
-        }
+        when(testElem.getName()).thenReturn("TEST");
+        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
+        when(testElem.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
+
+        // Need to get the selectItem pattern to work correctly
+        SelectionItem selectItem = Mockito.mock(SelectionItem.class);
+
+        PointerByReference pbr = new PointerByReference();
+        //  IUnknown unknown = new IUnknown(selectItem);
+
+        //  pbr.setValue(selectItem.asPointer());
+        selectItem.getRawPatternPointer(pbr);
+
+        when(testElem.getPattern(anyInt())).thenReturn(pbr);
+        list.add(testElem);
+
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+
+        AutomationTab ctrl = new AutomationTab(element, container);
+
+        ctrl.selectTabPage("TEST");
+
+        String name = ctrl.getName();
+
+        assertTrue(name.equals("TEST"));
     }
 }

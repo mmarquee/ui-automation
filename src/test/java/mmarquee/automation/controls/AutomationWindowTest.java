@@ -17,11 +17,9 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -39,7 +37,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
  *
  * Tests for AutomatedWindow class
  */
-public class AutomationWindowTest extends BaseAutomationTest {
+public class AutomationWindowTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

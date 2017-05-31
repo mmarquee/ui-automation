@@ -16,11 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.SelectionItem;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 

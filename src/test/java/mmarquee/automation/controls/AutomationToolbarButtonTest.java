@@ -17,11 +17,7 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.SelectionItem;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 

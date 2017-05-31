@@ -397,7 +397,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
-    SelectionItem getSelectItemPattern() throws PatternNotFoundException, AutomationException {
+    public SelectionItem getSelectItemPattern() throws PatternNotFoundException, AutomationException {
         SelectionItem pattern = new SelectionItem();
 
         if (this.isSelectionItemPatternAvailable()) {
