@@ -20,7 +20,6 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
@@ -42,7 +41,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 28/11/2016.
  */
-public class AutomationRibbonBarTest extends BaseAutomationTest {
+public class AutomationRibbonBarTest {
 
     @Before
     public void setup() {

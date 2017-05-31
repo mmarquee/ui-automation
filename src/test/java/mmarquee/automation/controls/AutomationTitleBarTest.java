@@ -16,25 +16,23 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.pattern.ItemContainer;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.List;
-
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 03/12/2016.
+ *
+ * Tests for AutomationTitleBar.
  */
-public class AutomationTitleBarTest extends BaseAutomationTest {
-    protected Logger logger = Logger.getLogger(AutomationTitleBarTest.class.getName());
-
+public class AutomationTitleBarTest {
     @Test
     public void testName_Returns_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
@@ -51,18 +49,19 @@ public class AutomationTitleBarTest extends BaseAutomationTest {
 
     @Test
     public void testGetMenu() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        when(element.getName()).thenReturn("NAME");
 
-            AutomationMainMenu menu = sb.getMenuBar();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            List<AutomationMenuItem> items = menu.getItems();
+        when(element.findFirst(anyObject(), anyObject())).thenReturn(elem);
 
-            assertTrue(items.size() == 1);
-        } finally {
-            closeApplication();
-        }
+        AutomationTitleBar tb = new AutomationTitleBar(element, container);
+
+        AutomationMainMenu menu = tb.getMenuBar();
+
+        verify(element, atLeastOnce()).findFirst(anyObject(),anyObject());
     }
 }

@@ -163,6 +163,41 @@ public class SelectionPatternTest2 {
         assertFalse(value);
     }
 
+    @Test(expected = AutomationException.class)
+    public void test_canSelectMultiple_Throws_Exception_When_Interface_Returns_Error() throws Exception {
+
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+                reference.setValue(0);
+
+                return -1;
+            }
+        }).when(rawPattern).getCurrentCanSelectMultiple(anyObject());
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(-1);
+            }
+        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+
+        Selection pattern = new Selection(rawPattern);
+
+        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(anyObject());
+
+        Boolean value = pattern.canSelectMultiple();
+
+        assertFalse(value);
+    }
+
     public void test_canSelectMultiple_Returns_True_When_Interface_Returns_True() throws Exception {
 
         doAnswer(new Answer() {

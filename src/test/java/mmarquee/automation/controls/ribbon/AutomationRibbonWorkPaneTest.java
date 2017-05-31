@@ -20,7 +20,6 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
@@ -30,7 +29,6 @@ import static org.mockito.Mockito.when;
 
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -46,7 +44,7 @@ import java.util.List;
  *
  * Tests for RibbonWorkPane controls
  */
-public class AutomationRibbonWorkPaneTest extends BaseAutomationTest {
+public class AutomationRibbonWorkPaneTest {
 
     @Before
     public void setup() {

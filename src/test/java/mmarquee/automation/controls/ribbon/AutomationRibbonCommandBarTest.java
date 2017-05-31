@@ -20,7 +20,6 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
@@ -46,7 +45,7 @@ import java.util.List;
  *
  * Tests for RibbonCommandBar
  */
-public class AutomationRibbonCommandBarTest extends BaseAutomationTest {
+public class AutomationRibbonCommandBarTest {
 
     @Before
     public void setup() {
