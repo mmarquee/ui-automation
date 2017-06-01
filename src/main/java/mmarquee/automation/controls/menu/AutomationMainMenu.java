@@ -61,6 +61,31 @@ public class AutomationMainMenu extends AutomationBase {
     }
 
     /**
+     * Gets the raw pattern from the given element
+     * @param item The Element
+     * @return The raw collapse pattern
+     * @throws AutomationException Failed to get pattern
+     */
+    public IUIAutomationExpandCollapsePattern getExpandCollapsePatternFromItem(AutomationElement item)
+                        throws AutomationException {
+        PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
+
+        Unknown unkConditionA = makeUnknown(pElement.getValue());
+
+        PointerByReference pUnknownA = new PointerByReference();
+
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            IUIAutomationExpandCollapsePattern pattern =
+                    IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
+
+            return pattern;
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
      * Get the menu item associated with the hierarchy of names.
      * This is to get around an odd menu when testing in the Delphi application that
      * is used as a primary testbed for this library - it looks for "Help" and the expands
@@ -77,36 +102,27 @@ public class AutomationMainMenu extends AutomationBase {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants), pbr);
 
         if (item != null) {
-            PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
+            IUIAutomationExpandCollapsePattern pattern =
+                    this.getExpandCollapsePatternFromItem(item);
 
-            Unknown unkConditionA = makeUnknown(pElement.getValue());
+            pattern.expand();
 
-            PointerByReference pUnknownA = new PointerByReference();
+            try {
+                Thread.sleep(750);
+            } catch (Exception ex) {
+                // Seems to be fine, but interrupted
+            }
 
-            WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
-            if (COMUtils.SUCCEEDED(resultA)) {
-                IUIAutomationExpandCollapsePattern pattern =
-                        IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
-
-                pattern.expand();
-
-                try {
-                    Thread.sleep(750);
-                } catch (Exception ex) {
-                    // Seems to be fine, but interrupted
-                }
-
-                // Now press the correct key
-                try {
-                    Robot robot = new Robot();
-                    robot.keyPress(eventKey);
-                    robot.delay(500);
-                } catch (AWTException ex) {
-                    // What is going to happen here?
-                }
+            // Now press the correct key
+            try {
+                Robot robot = new Robot();
+                robot.keyPress(eventKey);
+                robot.delay(500);
+            } catch (AWTException ex) {
+                // What is going to happen here?
             }
         } else {
-            throw new ItemNotFoundException();
+            throw new ElementNotFoundException();
         }
     }
 
@@ -132,28 +148,21 @@ public class AutomationMainMenu extends AutomationBase {
             // Needs a sub-item
             if (item != null) {
                 // Find the sub-item now
-                PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
+                IUIAutomationExpandCollapsePattern pattern =
+                        this.getExpandCollapsePatternFromItem(item);
 
-                Unknown unkConditionA = new Unknown(pElement.getValue());
-                PointerByReference pUnknownA = new PointerByReference();
+                pattern.expand();
 
-                WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
-                if (COMUtils.SUCCEEDED(resultA)) {
-                    IUIAutomationExpandCollapsePattern pattern =
-                            IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
-
-                    pattern.expand();
-                    try {
-                        Thread.sleep(750);
-                    } catch (Exception ex) {
-                        // Seems to be find
-                    }
-
-                    foundElement = this.getParent().findFirst(new TreeScope(TreeScope.Descendants),
-                        this.createAndCondition(
-                            this.createNamePropertyCondition(name1).getValue(),
-                            this.createControlTypeCondition(ControlType.MenuItem).getValue()));
+                try {
+                    Thread.sleep(750);
+                } catch (Exception ex) {
+                    // Seems to be fine
                 }
+
+                foundElement = this.getParent().findFirst(new TreeScope(TreeScope.Descendants),
+                        this.createAndCondition(
+                                this.createNamePropertyCondition(name1).getValue(),
+                                this.createControlTypeCondition(ControlType.MenuItem).getValue()));
             }
         } else {
             foundElement = item;
