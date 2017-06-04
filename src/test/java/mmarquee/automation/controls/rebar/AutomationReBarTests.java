@@ -51,7 +51,7 @@ public class AutomationReBarTests {
 
         String name = pane.getName();
 
-        assertEquals("REBAR-01", "REBAR-01");
+        assertEquals("REBAR-01", name);
     }
 
     @Test
@@ -66,7 +66,6 @@ public class AutomationReBarTests {
 
         String name = pane.getName();
 
-        assertEquals("REBAR-01", "REBAR-01");
+        assertEquals("REBAR-01", name);
     }
-
 }

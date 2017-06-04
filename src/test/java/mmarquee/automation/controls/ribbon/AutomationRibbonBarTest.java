@@ -26,20 +26,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
+ *
+ * Tests for AutomationRibbonBar.
  */
 public class AutomationRibbonBarTest {
 
@@ -62,7 +61,7 @@ public class AutomationRibbonBarTest {
 
         String name = bar.getName();
 
-        assertTrue(name.equals("RIBBON-01"));
+        assertEquals(name, "RIBBON-01");
     }
 
     @Test(expected = ElementNotFoundException.class)
@@ -75,7 +74,7 @@ public class AutomationRibbonBarTest {
 
         AutomationRibbonBar workPane = new AutomationRibbonBar(element);
 
-        AutomationRibbonCommandBar uiPane = workPane.getRibbonCommandBar();
+        workPane.getRibbonCommandBar();
 
         Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -88,21 +87,20 @@ public class AutomationRibbonBarTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference) args[0];
+        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    PointerByReference reference = (PointerByReference) args[0];
 
-                String value = "UIRibbonCommandBar";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
-                pointer.setWideString(0, value);
+                    String value = "UIRibbonCommandBar";
+                    Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
+                    pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+                    reference.setValue(pointer);
 
-                return 0;
-            }
-        }).when(elem).getCurrentClassName(anyObject());
+                    return 0;
+                }
+        );
 
         collection.add(new AutomationElement(elem));
 
@@ -110,7 +108,7 @@ public class AutomationRibbonBarTest {
 
         AutomationRibbonBar bar = new AutomationRibbonBar(element);
 
-        AutomationRibbonCommandBar uiPane = bar.getRibbonCommandBar();
+        bar.getRibbonCommandBar();
 
         Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }

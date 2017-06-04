@@ -26,8 +26,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,7 +194,6 @@ public class AutomationComboboxTest {
         combo.getValue();
 
         verify(value, atLeast(1)).value();
-
     }
 
     @Test
@@ -206,20 +203,15 @@ public class AutomationComboboxTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-//        when(elem.getCurrentControlType())
+        Mockito.when(elem.getCurrentControlType(anyObject())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    IntByReference reference = (IntByReference)args[0];
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+                    reference.setValue(50007);
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
-
-                reference.setValue(50007);
-
-                return 0;
-            }
-        }).when(elem).getCurrentControlType(anyObject());
+                    return 0;
+                });
 
         list.add(new AutomationElement(elem));
 

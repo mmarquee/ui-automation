@@ -24,18 +24,14 @@ import mmarquee.automation.AutomationElement;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +75,7 @@ public class AutomationNUIPaneTest {
 
         AutomationNUIPane workPane = new AutomationNUIPane(element);
 
-        AutomationNetUIHWND uiPane = workPane.getNetUIHWND(0);
+        workPane.getNetUIHWND(0);
 
         Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
@@ -92,9 +88,8 @@ public class AutomationNUIPaneTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+            invocation -> {
                 Object[] args = invocation.getArguments();
                 PointerByReference reference = (PointerByReference) args[0];
 
@@ -106,7 +101,7 @@ public class AutomationNUIPaneTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentClassName(anyObject());
+        );
 
         collection.add(new AutomationElement(elem));
 
@@ -114,7 +109,7 @@ public class AutomationNUIPaneTest {
 
         AutomationNUIPane workPane = new AutomationNUIPane(element);
 
-        AutomationNetUIHWND uiPane = workPane.getNetUIHWND(0);
+        workPane.getNetUIHWND(0);
 
         Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }

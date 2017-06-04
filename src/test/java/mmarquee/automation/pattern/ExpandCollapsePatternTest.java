@@ -87,14 +87,14 @@ public class ExpandCollapsePatternTest {
     public void testIsExpanded_Throws_Exception_When_COM_Returns_Error() throws Exception {
 
         Mockito.when(rawPattern.getCurrentExpandCollapseState(anyObject())).thenAnswer(
-                invocation -> {
-                    Object[] args = invocation.getArguments();
-                    IntByReference reference = (IntByReference)args[0];
+            invocation -> {
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference) args[0];
 
-                    reference.setValue(0);
+                reference.setValue(0);
 
-                    return 1;
-                }
+                return 1;
+            }
         );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
@@ -127,7 +127,7 @@ public class ExpandCollapsePatternTest {
     @Test(expected= AutomationException.class)
     public void testCollapse_Throws_Exception_When_COM_Returns_Error() throws Exception {
         Mockito.when(rawPattern.collapse()).thenAnswer(
-                invocation -> 1
+            invocation -> 1
         );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);

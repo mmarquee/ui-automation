@@ -16,7 +16,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.junit.Before;
@@ -29,6 +28,8 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 30/11/2016.
+ *
+ * Tests of the AutomationCheckBox class.
  */
 public class AutomationCheckBoxTest {
 

@@ -31,14 +31,17 @@ import org.mockito.Mockito;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 18/10/2016.
+ * Created by Mark Humphreys on 01/06/2017.
+ *
+ * Tests for the IUIAutomationElement3 class
  */
 @Category(WindowsOnlyTests.class)
-public class IUIAutomationElementTest {
+public class IUIAutomationElement3Test {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
@@ -48,29 +51,29 @@ public class IUIAutomationElementTest {
 
     private IUIAutomation automation;
 
-    private IUIAutomationElement getRootElement() throws Exception {
+    private IUIAutomationElement3 getRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
         automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
-        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement.Converter.PointerToInterface(root);
+            return IUIAutomationElement3.Converter.PointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
     }
 
-    private IUIAutomationElement getChildOfRootElement() throws Exception {
+    private IUIAutomationElement3 getChildOfRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
         automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
-        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement rootElement = IUIAutomationElement.Converter.PointerToInterface(root);
+            IUIAutomationElement3 rootElement = IUIAutomationElement3.Converter.PointerToInterface(root);
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
@@ -83,9 +86,9 @@ public class IUIAutomationElementTest {
 
             PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
-            return IUIAutomationElement.Converter.PointerToInterface(element);
+            return IUIAutomationElement3.Converter.PointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -120,7 +123,7 @@ public class IUIAutomationElementTest {
     @Test
     public void testClassNameForRootElement() throws Exception {
 
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         PointerByReference sr = new PointerByReference();
 
@@ -135,7 +138,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testNameForRootElement() throws Exception {
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         PointerByReference sr = new PointerByReference();
 
@@ -152,7 +155,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsPasswordForRootElement() throws Exception {
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         IntByReference ir = new IntByReference();
 
@@ -168,7 +171,7 @@ public class IUIAutomationElementTest {
     @Test
     public void testGetControlTypeForRootElement() throws Exception {
 
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         IntByReference ir = new IntByReference();
 
@@ -183,7 +186,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsOffScreenForRootElement() throws Exception {
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -199,7 +202,7 @@ public class IUIAutomationElementTest {
     @Test
     public void testIsEnabledForRootElement() throws Exception {
 
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -215,7 +218,7 @@ public class IUIAutomationElementTest {
     @Test
     public void testIsContentElementForRootElement() throws Exception {
 
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -231,7 +234,7 @@ public class IUIAutomationElementTest {
     @Test
     public void testIsControlElementForRootElement() throws Exception {
 
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -246,7 +249,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testClassNameForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         PointerByReference sr = new PointerByReference();
 
@@ -262,7 +265,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testNameForNonRootElementDoesntReturnError() throws Exception {
-        IUIAutomationElement element = this.getChildOfRootElement();
+        IUIAutomationElement3 element = this.getChildOfRootElement();
 
         PointerByReference sr = new PointerByReference();
 
@@ -271,7 +274,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsPasswordForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         IntByReference ir = new IntByReference();
 
@@ -286,7 +289,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testGetControlTypeForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         IntByReference ir = new IntByReference();
 
@@ -301,7 +304,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsOffScreenForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -316,7 +319,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsEnabledForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -331,7 +334,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsContentElementForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -346,7 +349,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testIsControlElementForNonRootElement() throws Exception {
-        IUIAutomationElement root = this.getChildOfRootElement();
+        IUIAutomationElement3 root = this.getChildOfRootElement();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
@@ -361,7 +364,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testFindFirst() throws Exception {
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         // Get first descendant for the root element
         PointerByReference pCondition = new PointerByReference();
@@ -374,9 +377,9 @@ public class IUIAutomationElementTest {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
-        IUIAutomationElement elem = IUIAutomationElement.Converter.PointerToInterface(element);
+        IUIAutomationElement3 elem = IUIAutomationElement3.Converter.PointerToInterface(element);
 
         PointerByReference sr = new PointerByReference();
 
@@ -391,7 +394,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testFindAllDoes_Not_ReturnError() throws Exception {
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         // Get first descendant for the root element
         PointerByReference pCondition = new PointerByReference();
@@ -415,7 +418,7 @@ public class IUIAutomationElementTest {
 
     @Test
     public void testFindAllGetValidList() throws Exception {
-        IUIAutomationElement root = this.getRootElement();
+        IUIAutomationElement3 root = this.getRootElement();
 
         // Get first descendant for the root element
         PointerByReference pCondition = new PointerByReference();
@@ -438,10 +441,10 @@ public class IUIAutomationElementTest {
 
         assertTrue("findAll", ibr.getValue() != 0);
     }
-/*
+
     @Test (expected=AutomationException.class)
     public void testcurrentControlType_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentControlType(anyObject())).thenReturn(-1);
 
@@ -452,7 +455,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testcurrentPropertyValue_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentPropertyValue(anyInt(), anyObject())).thenReturn(-1);
 
@@ -463,7 +466,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testGetAcceleratorKey_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentAcceleratorKey(anyObject())).thenReturn(-1);
 
@@ -474,7 +477,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testGetCurrentProcessId_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentProcessId(anyObject())).thenReturn(-1);
 
@@ -485,7 +488,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testGetAriaRole_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentAriaRole(anyObject())).thenReturn(-1);
 
@@ -496,7 +499,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testCurrentClassName_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentClassName(anyObject())).thenReturn(-1);
 
@@ -507,7 +510,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testCurrentIsPassword_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentIsPassword(anyObject())).thenReturn(-1);
 
@@ -518,7 +521,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testLocalizedControlType_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentLocalizedControlType(anyObject())).thenReturn(-1);
 
@@ -529,7 +532,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testGetOrientationType_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentOrientation(anyObject())).thenReturn(-1);
 
@@ -540,7 +543,7 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testGetProviderDescription_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentProviderDescription(anyObject())).thenReturn(-1);
 
@@ -550,8 +553,19 @@ public class IUIAutomationElementTest {
     }
 
     @Test (expected=AutomationException.class)
+    public void testGetCulture_Fails_When_Element_Call_Fails() throws AutomationException {
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
+
+        when(mockedElement.getCurrentCulture(anyObject())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mockedElement);
+
+        element.getCulture();
+    }
+
+    @Test (expected=AutomationException.class)
     public void testGetFrameworkId_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentFrameworkId(anyObject())).thenReturn(-1);
 
@@ -562,12 +576,12 @@ public class IUIAutomationElementTest {
 
     @Test (expected=AutomationException.class)
     public void testGetItemStatus_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
         when(mockedElement.getCurrentItemStatus(anyObject())).thenReturn(-1);
 
         AutomationElement element = new AutomationElement(mockedElement);
 
         element.getItemStatus();
-    }*/
+    }
 }

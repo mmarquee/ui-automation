@@ -375,6 +375,22 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
+     * Gets the current culture
+     *
+     * @return The culture
+     * @throws AutomationException Something has gone wrong
+     */
+    public Integer getCulture() throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        if (this.element.getCurrentCulture(ibr) != 0) {
+            throw new AutomationException();
+        }
+
+        return ibr.getValue();
+    }
+
+    /**
      * Gets the framework ID
      *
      * @return The framework ID

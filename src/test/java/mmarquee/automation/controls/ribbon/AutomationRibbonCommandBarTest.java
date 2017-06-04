@@ -24,18 +24,14 @@ import mmarquee.automation.AutomationElement;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,21 +88,20 @@ public class AutomationRibbonCommandBarTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    PointerByReference reference = (PointerByReference) args[0];
 
-                String value = "UIRibbonWorkPane";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+                    String value = "UIRibbonWorkPane";
+                    Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
+                    pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+                    reference.setValue(pointer);
 
-                return 0;
-            }
-        }).when(elem).getCurrentClassName(anyObject());
+                    return 0;
+                }
+        );
 
         collection.add(new AutomationElement(elem));
 

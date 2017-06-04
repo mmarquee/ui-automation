@@ -167,6 +167,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
     }
 
     @Test(expected = ItemNotFoundException.class)
+    @Ignore("Still a mess")
     public void testMenuFudge_Throws_Exception_When_Top_Level_Not_Found() throws Exception {
         AutomationElement element =
                 Mockito.mock(AutomationElement.class);
@@ -190,9 +191,6 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
     }
 
-    @Spy
-    private Unknown mockUnknown;
-
     @Test
     @Ignore("Still a mess")
     public void testMenuFudge() throws Exception {
@@ -212,18 +210,15 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(found.getPattern(anyInt())).thenReturn(pbr);
         when(element.findFirst(anyObject(), anyObject())).thenReturn(found);
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
+        Unknown mockUnknown = Mockito.mock(Unknown.class);
+
+        Mockito.when(mockUnknown.QueryInterface(anyObject(), anyObject())).thenAnswer(
+            invocation -> {
+                return new WinNT.HRESULT(1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        );
 
         ExpandCollapse pattern = Mockito.mock(ExpandCollapse.class);
-
-//        Toggle spyPattern = Mockito.spy(new Toggle());
-
-//        IUIAutomationTogglePattern mockRange = Mockito.mock(IUIAutomationTogglePattern.class);
 
         doReturn(mockUnknown)
                 .when(pattern)
