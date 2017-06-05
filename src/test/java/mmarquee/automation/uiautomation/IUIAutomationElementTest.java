@@ -26,16 +26,15 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 18/10/2016.
+ *
+ * Tests of the IUIAutomationElement interface.
  */
 @Category(WindowsOnlyTests.class)
 public class IUIAutomationElementTest {
@@ -83,7 +82,7 @@ public class IUIAutomationElementTest {
 
             PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+            uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
             return IUIAutomationElement.Converter.PointerToInterface(element);
         } else {
@@ -374,7 +373,7 @@ public class IUIAutomationElementTest {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
         IUIAutomationElement elem = IUIAutomationElement.Converter.PointerToInterface(element);
 
@@ -404,7 +403,7 @@ public class IUIAutomationElementTest {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
         IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
 
@@ -428,7 +427,7 @@ public class IUIAutomationElementTest {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
         IUIAutomationElementArray elements = IUIAutomationElementArray.Converter.PointerToInterface(element);
 
