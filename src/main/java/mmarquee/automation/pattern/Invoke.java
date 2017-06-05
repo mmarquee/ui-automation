@@ -20,6 +20,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 
 /**
@@ -75,6 +76,6 @@ public class Invoke extends BasePattern {
     }
 
     public IUIAutomationInvokePattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationInvokePattern.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationInvokePatternConverter.PointerToInterface(pUnknown);
     }
 }

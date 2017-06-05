@@ -21,6 +21,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -106,6 +107,6 @@ public class ExpandCollapse extends BasePattern {
      * @return The pattern
      */
     public IUIAutomationExpandCollapsePattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknown);
     }
 }

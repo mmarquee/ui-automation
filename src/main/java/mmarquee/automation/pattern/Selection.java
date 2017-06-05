@@ -22,7 +22,9 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 
 import java.util.List;
 
@@ -95,7 +97,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     public IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationSelectionPattern.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationSelectionPatternConverter.PointerToInterface(pUnknown);
     }
 
     /**
@@ -105,7 +107,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
-        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
     }
 
     /**

@@ -23,7 +23,9 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public abstract class BaseAutomation {
             throw new AutomationException();
         }
 
-        return IUIAutomationElement3.Converter.PointerToInterface(pbr);
+        return IUIAutomationElement3Converter.PointerToInterface(pbr);
     }
 
     /**
@@ -82,7 +84,7 @@ public abstract class BaseAutomation {
             throw new AutomationException();
         }
 
-        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
     }
 
     /**
@@ -116,7 +118,7 @@ public abstract class BaseAutomation {
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement3 element =
-                        IUIAutomationElement3.Converter.PointerToInterface(pbr);
+                        IUIAutomationElement3Converter.PointerToInterface(pbr);
 
                 list.add(new AutomationElement(element));
             }

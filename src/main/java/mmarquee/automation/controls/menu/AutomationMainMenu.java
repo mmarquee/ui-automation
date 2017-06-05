@@ -24,6 +24,7 @@ import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.awt.*;
@@ -77,7 +78,7 @@ public class AutomationMainMenu extends AutomationBase {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationExpandCollapsePattern pattern =
-                    IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pUnknownA);
+                    IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknownA);
 
             return pattern;
         } else {

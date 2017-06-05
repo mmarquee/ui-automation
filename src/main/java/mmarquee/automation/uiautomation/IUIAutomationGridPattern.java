@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Function;
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
@@ -40,51 +38,5 @@ public interface IUIAutomationGridPattern extends IUnknown {
     int getItem(int row, int column, PointerByReference item);
     int getCurrentRowCount(IntByReference retVal);
     int getCurrentColumnCount(IntByReference retVal);
-
-    class Converter {
-        private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationGridPattern
-
-        public static IUIAutomationGridPattern PointerToInterface(final PointerByReference ptr) {
-            final Pointer interfacePointer = ptr.getValue();
-            final Pointer vTablePointer = interfacePointer.getPointer(0);
-            final Pointer[] vTable = new Pointer[METHODS];
-            vTablePointer.read(0, vTable, 0, vTable.length);
-            return new IUIAutomationGridPattern() {
-
-                // IUnknown
-                @Override
-                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
-                }
-
-                @Override
-                public int AddRef() {
-                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int Release() {
-                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int getItem(int row, int column, PointerByReference item) {
-                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, row, column, item});
-                }
-
-                public int getCurrentRowCount(IntByReference retVal) {
-                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
-
-                public int getCurrentColumnCount(IntByReference retVal) {
-                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
-
-            };
-        }
-    }
 }
+

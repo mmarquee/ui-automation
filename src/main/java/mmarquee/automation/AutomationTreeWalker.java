@@ -18,7 +18,8 @@ package mmarquee.automation;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
 /**
@@ -49,7 +50,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
 	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	                IUIAutomationElement3Converter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -72,7 +73,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
 	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	                IUIAutomationElement3Converter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -95,7 +96,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
 	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	                IUIAutomationElement3Converter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -117,7 +118,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         
         try {
 	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3.Converter.PointerToInterface(pChild);
+	                IUIAutomationElement3Converter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
