@@ -23,6 +23,8 @@ import com.sun.jna.ptr.PointerByReference;
 
 /**
  * Created by Mark Humphreys on 05/06/2017.
+ *
+ * Converter for the IUIAutomationCondition.
  */
 public class IUIAutomationConditionConverter {
     public static IUIAutomationCondition PointerToInterface(final PointerByReference ptr) {

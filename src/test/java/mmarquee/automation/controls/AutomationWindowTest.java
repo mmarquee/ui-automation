@@ -30,7 +30,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyObject;
-import static org.powermock.api.mockito.PowerMockito.when;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 25/11/2016.
@@ -92,7 +92,7 @@ public class AutomationWindowTest {
         List<AutomationElement> list = new ArrayList<>();
         list.add(elem);
 
-        Mockito.when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         List<AutomationElement> menus = new ArrayList<>();
 
@@ -100,7 +100,7 @@ public class AutomationWindowTest {
 
         menus.add(item);
 
-        Mockito.when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+        when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -119,7 +119,7 @@ public class AutomationWindowTest {
         List<AutomationElement> list = new ArrayList<>();
         list.add(elem);
 
-        Mockito.when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         List<AutomationElement> menus = new ArrayList<>();
 
@@ -127,7 +127,7 @@ public class AutomationWindowTest {
 
         menus.add(item);
 
-        Mockito.when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+        when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -146,7 +146,7 @@ public class AutomationWindowTest {
         List<AutomationElement> list = new ArrayList<>();
         list.add(elem);
 
-        Mockito.when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
 
         List<AutomationElement> menus = new ArrayList<>();
 
@@ -154,7 +154,7 @@ public class AutomationWindowTest {
 
         menus.add(item);
 
-        Mockito.when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+        when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 

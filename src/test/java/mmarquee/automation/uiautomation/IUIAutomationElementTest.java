@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
@@ -26,16 +27,25 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.atLeastOnce;
 
 /**
  * Created by Mark Humphreys on 18/10/2016.
  *
  * Tests of the IUIAutomationElement interface.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({IUIAutomationElementConverter.class})
 @Category(WindowsOnlyTests.class)
 public class IUIAutomationElementTest {
 
@@ -481,18 +491,32 @@ public class IUIAutomationElementTest {
 
         element.getProcessId();
     }
+*/
 
-    @Test (expected=AutomationException.class)
-    public void testGetAriaRole_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
+    @Test
+    public void testGetAriaRole_Calls_PointerToInterface_From_Convertor() throws Exception {
+        IUIAutomationElement root = getRootElement();
 
-        when(mockedElement.getCurrentAriaRole(anyObject())).thenReturn(-1);
+        IUIAutomationElement mocked_element = //this.getRootElement();
+                Mockito.mock(IUIAutomationElement.class);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        PowerMockito.mockStatic(IUIAutomationElementConverter.class);
 
-        element.getAriaRole();
+        //Function mocked_function = Mockito.mock(Function.class);
+
+        //Mockito.when(mocked_function.invokeInt(anyObject())).thenReturn(-1);
+
+        PowerMockito.when(IUIAutomationElementConverter.PointerToInterface(anyObject())).thenReturn(mocked_element);
+
+//        PowerMockito.when(Function.getFunction(anyObject(), anyObject())).thenReturn(mocked_function);
+
+        PointerByReference pbr = new PointerByReference();
+
+        root.getCurrentAriaRole(pbr);
+
+        Mockito.verify(mocked_element, atLeastOnce()).getCurrentAriaRole((anyObject()));
     }
-
+/*
     @Test (expected=AutomationException.class)
     public void testCurrentClassName_Fails_When_Element_Call_Fails() throws AutomationException {
         IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);

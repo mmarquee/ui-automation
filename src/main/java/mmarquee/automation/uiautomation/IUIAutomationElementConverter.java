@@ -39,41 +39,45 @@ class IUIAutomationElementConverter {
         vTablePointer.read(0, vTable, 0, vTable.length);
         return new IUIAutomationElement() {
 
+            private Function getFunction(int offset) {
+                return Function.getFunction(vTable[offset], Function.ALT_CONVENTION);
+            }
+
             // IUnknown
             @Override
             public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
+                Function f = getFunction(0);
                 return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = this.getFunction(1);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = this.getFunction(2);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int setFocus() {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                Function f = this.getFunction(3);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int getRuntimeId (/* SAFEARRAY */ PointerByReference runtimeId) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                Function f = this.getFunction(4);
                 return f.invokeInt(new Object[]{interfacePointer, runtimeId});
             }
 
             public int findFirst(TreeScope scope, Pointer condition, PointerByReference sr) {
-                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
+                Function f = this.getFunction(5);
                 return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
             }
 
             public int findAll(TreeScope scope, Pointer condition, PointerByReference sr) {
-                Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
+                Function f = this.getFunction(6);
                 return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
             }
 
@@ -93,12 +97,12 @@ class IUIAutomationElementConverter {
 //                }
 
             public int getCurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value) {
-                Function f = Function.getFunction(vTable[10], Function.ALT_CONVENTION);
+                Function f = this.getFunction(10);
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, value});
             }
 
             public int getCurrentPropertyValueEx (/* [in] */ int propertyId, /* [in] */ WinDef.BOOL ignoreDefaultValue, Variant.VARIANT retVal) {
-                Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
+                Function f = this.getFunction(11);
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
             }
 
@@ -113,7 +117,7 @@ class IUIAutomationElementConverter {
 //                }
 
             public int getCurrentPatternAs (/* [in] */ int patternId, /* [in] */ Guid.REFIID riid, /* [retval][iid_is][out] */ PointerByReference patternObject) {
-                Function f = Function.getFunction(vTable[14], Function.ALT_CONVENTION);
+                Function f = this.getFunction(14);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
             }
 
@@ -123,7 +127,7 @@ class IUIAutomationElementConverter {
 //                }
 
             public int getCurrentPattern(Integer patternId, PointerByReference pbr) {
-                Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
+                Function f = this.getFunction(16);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, pbr});
             }
 
@@ -143,162 +147,162 @@ class IUIAutomationElementConverter {
 //                }
 
             public int getCurrentProcessId (IntByReference retVal) {
-                Function f = Function.getFunction(vTable[20], Function.ALT_CONVENTION);
+                Function f = this.getFunction(20);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentControlType(IntByReference ipr) {
-                Function f = Function.getFunction(vTable[21], Function.ALT_CONVENTION);
+                Function f = this.getFunction(21);
                 return f.invokeInt(new Object[]{interfacePointer, ipr});
             }
 
             public int getCurrentLocalizedControlType (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[22], Function.ALT_CONVENTION);
+                Function f = this.getFunction(22);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentName(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[23], Function.ALT_CONVENTION);
+                Function f = this.getFunction(23);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
             public int getCurrentAcceleratorKey (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[24], Function.ALT_CONVENTION);
+                Function f = this.getFunction(24);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentAccessKey (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[25], Function.ALT_CONVENTION);
+                Function f = this.getFunction(25);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentHasKeyboardFocus (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[26], Function.ALT_CONVENTION);
+                Function f = this.getFunction(26);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsKeyboardFocusable (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[27], Function.ALT_CONVENTION);
+                Function f = this.getFunction(27);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsEnabled (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[28], Function.ALT_CONVENTION);
+                Function f = this.getFunction(28);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentAutomationId (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[29], Function.ALT_CONVENTION);
+                Function f = this.getFunction(29);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentClassName(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[30], Function.ALT_CONVENTION);
+                Function f = this.getFunction(30);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
             public int getCurrentHelpText (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[31], Function.ALT_CONVENTION);
+                Function f = this.getFunction(31);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentCulture (IntByReference retVal) {
-                Function f = Function.getFunction(vTable[32], Function.ALT_CONVENTION);
+                Function f = this.getFunction(32);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsControlElement (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[33], Function.ALT_CONVENTION);
+                Function f = this.getFunction(33);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsContentElement (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[34], Function.ALT_CONVENTION);
+                Function f = this.getFunction(34);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsPassword(IntByReference value) {
-                Function f = Function.getFunction(vTable[35], Function.ALT_CONVENTION);
+                Function f = this.getFunction(35);
                 return f.invokeInt(new Object[]{interfacePointer, value});
             }
 
             public int getCurrentNativeWindowHandle (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[36], Function.ALT_CONVENTION);
+                Function f = this.getFunction(36);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentItemType (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[37], Function.ALT_CONVENTION);
+                Function f = this.getFunction(37);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsOffscreen (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[38], Function.ALT_CONVENTION);
+                Function f = this.getFunction(38);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentOrientation (IntByReference retVal) {
-                Function f = Function.getFunction(vTable[39], Function.ALT_CONVENTION);
+                Function f = this.getFunction(39);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentFrameworkId (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[40], Function.ALT_CONVENTION);
+                Function f = this.getFunction(40);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsRequiredForForm (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[41], Function.ALT_CONVENTION);
+                Function f = this.getFunction(41);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentItemStatus (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[42], Function.ALT_CONVENTION);
+                Function f = this.getFunction(42);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentBoundingRectangle (WinDef.RECT retVal) {
-                Function f = Function.getFunction(vTable[43], Function.ALT_CONVENTION);
+                Function f = this.getFunction(43);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentLabeledBy (/* IUIAutomationElement3 */ PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[44], Function.ALT_CONVENTION);
+            public int getCurrentLabeledBy (PointerByReference retVal) {
+                Function f = this.getFunction(44);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentAriaRole(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[45], Function.ALT_CONVENTION);
+                Function f = this.getFunction(45);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
             public int getCurrentAriaProperties (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[46], Function.ALT_CONVENTION);
+                Function f = this.getFunction(46);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsDataValidForForm (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[47], Function.ALT_CONVENTION);
+                Function f = this.getFunction(47);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentControllerFor (/* IUIAutomationElementArray */ PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[48], Function.ALT_CONVENTION);
+                Function f = this.getFunction(48);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentDescribedBy (/* IUIAutomationElementArray */ PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[49], Function.ALT_CONVENTION);
+                Function f = this.getFunction(49);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentFlowsTo (/* IUIAutomationElementArray */ PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[50], Function.ALT_CONVENTION);
+                Function f = this.getFunction(50);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentProviderDescription(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[51], Function.ALT_CONVENTION);
+                Function f = this.getFunction(51);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
@@ -457,8 +461,8 @@ class IUIAutomationElementConverter {
             //                   return f.invokeInt(new Object[]{interfacePointer, retVal});
 ///                }
 
-            public int getClickablePoint (/* [out] */ WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable) {
-                Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
+            public int getClickablePoint (WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable) {
+                Function f = this.getFunction(84);
                 return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
             }
 
