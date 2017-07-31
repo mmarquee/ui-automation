@@ -16,19 +16,17 @@
 package mmarquee.automation;
 
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
-import mmarquee.demo.TreeWalker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -550,6 +548,25 @@ public class UIAutomation extends BaseAutomation {
         PointerByReference pbr = new PointerByReference();
 
         if (this.automation.elementFromPoint(pt, pbr) == 0) {
+            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+
+            return new AutomationElement(element);
+        } else {
+            throw new AutomationException();
+        }
+    }
+
+    /**
+     * Gets the element from the native handle
+     *
+     * @param hwnd Native Handle
+     * @return The actual element under the handle
+     * @throws AutomationException The automation library returned an error
+     */
+    public AutomationElement getElementFromHandle(WinDef.HWND hwnd) throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        if (this.automation.getElementFromHandle(hwnd, pbr) == 0) {
             IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
 
             return new AutomationElement(element);
