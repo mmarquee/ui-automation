@@ -16,6 +16,7 @@
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.Function;
+import com.sun.jna.NativeLong;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
@@ -24,6 +25,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.structure.PointNativeLong;
 
 /**
  * Created by Mark Humphreys on 06/07/2016.
@@ -137,7 +139,13 @@ public interface IUIAutomation extends IUnknown {
 
                 public int elementFromPoint(WinDef.POINT pt, PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_POINT], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{myInterfacePointer, pt, element});
+
+                    PointNativeLong nativeDouble = new PointNativeLong(pt.x, pt.y);
+                    PointNativeLong.ByValue byVal = nativeDouble.new ByValue(nativeDouble.getPointer());
+                    byVal.x = new NativeLong(pt.x);
+                    byVal.y = new NativeLong(pt.y);
+
+                    return f.invokeInt(new Object[]{myInterfacePointer, byVal, element});
                 }
 
                 public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {
