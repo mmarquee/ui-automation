@@ -17,7 +17,6 @@ package mmarquee.automation;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
@@ -121,6 +120,29 @@ public class AutomationTreeWalker extends BaseAutomation {
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
+        }
+    }
+
+    /**
+     * Gets the parent child element of the supplied element
+     *
+     * @param element The element
+     * @return The parent of the element, or null if not found
+     * @throws AutomationException Automation has returned an error
+     */
+    public AutomationElement getParentElement(AutomationElement element)
+            throws AutomationException {
+        PointerByReference pParent = new PointerByReference();
+
+        Pointer pElement = this.getPointerFromElement(element.element);
+        this.walker.getParentElement(pElement, pParent);
+
+        try {
+            IUIAutomationElement3 parentElement =
+                    IUIAutomationElement3.Converter.PointerToInterface(pParent);
+            return new AutomationElement(parentElement);
+        } catch (NullPointerException ex) {
+            return null;
         }
     }
 

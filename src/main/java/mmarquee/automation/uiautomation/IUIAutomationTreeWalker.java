@@ -36,7 +36,7 @@ public interface IUIAutomationTreeWalker extends IUnknown {
     int Release();
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
-    int getParentElement(PointerByReference element, PointerByReference parent);
+    int getParentElement(Pointer element, PointerByReference parent);
     int getFirstChildElement(Pointer element, PointerByReference first);
     int getLastChildElement(Pointer element, PointerByReference last);
     int getNextSiblingElement(Pointer element, PointerByReference next);
@@ -72,7 +72,7 @@ public interface IUIAutomationTreeWalker extends IUnknown {
                     return f.invokeInt(new Object[]{interfacePointer});
                 }
 
-                public int getParentElement(PointerByReference element, PointerByReference parent) {
+                public int getParentElement(Pointer element, PointerByReference parent) {
                     Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                     return f.invokeInt(new Object[]{interfacePointer, element, parent});
                 }
