@@ -3,7 +3,7 @@
 ### WFP
 ```
   AutomationDataGrid grid = window.getDataGrid(0);
-  AutomationDataGridCell cell = grid.getCell(0,0);
+  AutomationDataGridCell cell = grid.getItem(0,0);
   String itemName = item.name();
 ```
 
@@ -13,7 +13,7 @@ The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation)
 
 ```
   AutomationDataGrid grid = window.getDataGrid(0, "TAutomationStringGrid");
-  AutomationDataGridCell item = grid.getCell(0,0);
+  AutomationDataGridCell item = grid.getItem(0,0);
   String itemName = item.name();
 ```
 
