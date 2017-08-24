@@ -55,7 +55,7 @@ public class Window extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -67,8 +67,9 @@ public class Window extends BasePattern {
      */
     public void waitForInputIdle(int timeout) throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().waitForInputIdle(timeout, ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().waitForInputIdle(timeout, ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -95,8 +96,9 @@ public class Window extends BasePattern {
      */
     public boolean isModal() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().getCurrentIsModal(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentIsModal(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return (ibr.getValue()  == 1);
@@ -109,8 +111,9 @@ public class Window extends BasePattern {
      */
     public boolean isTopMost() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().getCurrentIsTopmost(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentIsTopmost(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return (ibr.getValue()  == 1);
@@ -121,8 +124,9 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void close() throws AutomationException {
-        if (this.getPattern().close() != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().close();
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -132,8 +136,9 @@ public class Window extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setWindowState(WindowVisualState state) throws AutomationException {
-        if (this.getPattern().setWindowVisualState(state.getValue()) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().setWindowVisualState(state.getValue());
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 }

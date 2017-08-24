@@ -80,7 +80,7 @@ public class AutomationSystemMenu extends AutomationBase {
             return new AutomationMenuItem(foundElement);
         } else {
             // Throw an exception
-            throw  new ItemNotFoundException();
+            throw  new ItemNotFoundException(name);
         }
     }
 

@@ -21,4 +21,40 @@ package mmarquee.automation;
  * An exception thrown when there is an error returned by the underlying automation library
  */
 public class AutomationException extends Exception {
+
+    private static final long serialVersionUID = -3074432505437414359L;
+
+    final int errorcode;
+
+    public AutomationException(String message)
+    {
+        super(message);
+        this.errorcode = 0;
+    }
+
+    public AutomationException(int errorcode)
+    {
+        super(createErrorString(errorcode));
+        this.errorcode = errorcode;
+    }
+
+    private static String createErrorString(int errorcode)
+    {
+        return "Error: 0x" + Integer.toHexString(errorcode);
+    }
+
+    /**
+     * Returns the error code, if available, 0 otherwise
+     * <p>
+     * For Microsoft error codes, see:
+     * <ul>
+     * <li>https://msdn.microsoft.com/de-de/library/windows/desktop/ee671218(v=vs.85).aspx
+     * <li>https://support.symantec.com/en_US/article.TECH12638.html
+     * </ul>
+     *
+     * @return the errorcode
+     */
+    public int getErrorcode() {
+        return errorcode;
+    }
 }

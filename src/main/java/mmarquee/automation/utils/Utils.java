@@ -48,7 +48,7 @@ public class Utils {
                 processEntry.th32ProcessID.intValue());
 
         if (handle == null) {
-            throw new AutomationException();
+            throw new AutomationException("OpenProcess failed");
         }
 
         return handle;

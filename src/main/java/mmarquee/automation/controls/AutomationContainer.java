@@ -116,7 +116,7 @@ public class AutomationContainer extends AutomationBase {
         }
 
         if (foundElement == null) {
-            throw new ElementNotFoundException();
+            throw new ElementNotFoundException(controlName);
         }
 
         return foundElement;
@@ -157,7 +157,7 @@ public class AutomationContainer extends AutomationBase {
         }
 
         if (foundElement == null) {
-            throw new ElementNotFoundException();
+            throw new ElementNotFoundException(controlName);
         }
 
         return foundElement;
@@ -562,7 +562,7 @@ public class AutomationContainer extends AutomationBase {
     public AutomationTreeView getTreeView(String name) throws AutomationException {
         return new AutomationTreeView(this.getControlByControlType(name, ControlType.Tree));
     }
-    
+
     /**
      * Deprecated. use {@link #getList(int)} instead.
      */
@@ -570,7 +570,7 @@ public class AutomationContainer extends AutomationBase {
     public AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
     	return getList(index);
     }
-    
+
     /**
      * Gets the list control associated with the given index
      * @param index Index of the control

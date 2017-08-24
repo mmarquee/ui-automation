@@ -63,7 +63,7 @@ public class SelectionItem extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -83,8 +83,9 @@ public class SelectionItem extends BasePattern {
      */
     public boolean isSelected() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().getCurrentIsSelected(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentIsSelected(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return (ibr.getValue() == 1);
@@ -106,8 +107,9 @@ public class SelectionItem extends BasePattern {
     public AutomationElement getSelectionContainer() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getCurrentSelectionContainer(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentSelectionContainer(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         Unknown unkConditionA = makeUnknown(pbr.getValue());
@@ -117,7 +119,7 @@ public class SelectionItem extends BasePattern {
         if (COMUtils.SUCCEEDED(resultA)) {
             return new AutomationElement(convertPointerToElementInterface(pUnknownA));
         } else {
-            throw new AutomationException();
+            throw new AutomationException(resultA.intValue());
         }
     }
 

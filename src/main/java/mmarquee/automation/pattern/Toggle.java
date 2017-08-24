@@ -39,7 +39,7 @@ public class Toggle extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -49,8 +49,9 @@ public class Toggle extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void toggle () throws AutomationException {
-        if (this.getPattern().toggle() != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().toggle();
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -62,8 +63,9 @@ public class Toggle extends BasePattern {
     public ToggleState currentToggleState() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentToggleState(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentToggleState(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ToggleState.fromInt(ibr.getValue());

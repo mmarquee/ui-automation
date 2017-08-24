@@ -74,7 +74,7 @@ public class AutomationList extends AutomationBase {
         if (item != null) {
             return new AutomationListItem(item);
         } else {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(index);
         }
     }
 
@@ -94,7 +94,7 @@ public class AutomationList extends AutomationBase {
         if (item != null) {
             return new AutomationListItem(item);
         } else {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(name);
         }
     }
 

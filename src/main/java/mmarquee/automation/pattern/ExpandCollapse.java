@@ -61,7 +61,7 @@ public class ExpandCollapse extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -71,8 +71,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
-        if (this.getPattern().expand() != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().expand();
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -81,8 +82,9 @@ public class ExpandCollapse extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void collapse()throws AutomationException  {
-        if (this.getPattern().collapse() != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().collapse();
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -94,8 +96,9 @@ public class ExpandCollapse extends BasePattern {
     public boolean isExpanded() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentExpandCollapseState(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentExpandCollapseState(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue() == 1;

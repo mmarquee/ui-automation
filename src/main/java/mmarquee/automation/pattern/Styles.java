@@ -56,7 +56,7 @@ public class Styles extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -69,8 +69,9 @@ public class Styles extends BasePattern {
     public String getStyleName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.getPattern().getCurrentStyleName(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentStyleName(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -84,8 +85,9 @@ public class Styles extends BasePattern {
     public int getStyleId() throws AutomationException {
         IntByReference ipr = new IntByReference();
 
-        if (this.getPattern().getCurrentStyleId(ipr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentStyleId(ipr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ipr.getValue();
