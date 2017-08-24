@@ -25,14 +25,17 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.OleAuto;
+import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WTypes;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
@@ -46,6 +49,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.utils.Utils;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
@@ -408,7 +412,15 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testLaunchOrAttach_Succeeds_When_Not_Running() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
-        instance.launchOrAttach("notepad.exe");
+        AutomationApplication app = null;
+        try {
+        	app = instance.launchOrAttach("notepad.exe");
+        } finally {
+        	if (app != null) {
+                this.andRest();
+        		app.quit(getLocal("notepad.title"));
+        	}
+        }
     }
 
     @Test
