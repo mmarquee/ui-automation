@@ -82,7 +82,7 @@ public class AutomationMainMenu extends AutomationBase {
 
             return pattern;
         } else {
-            throw new AutomationException();
+            throw new AutomationException("QueryInterface failed");
         }
     }
 
@@ -120,7 +120,7 @@ public class AutomationMainMenu extends AutomationBase {
                 robot.keyPress(eventKey);
                 robot.delay(500);
             } catch (AWTException ex) {
-                // What is going to happen here?
+                throw new AutomationException(ex.getMessage());
             }
         } else {
             throw new ElementNotFoundException();
@@ -170,7 +170,7 @@ public class AutomationMainMenu extends AutomationBase {
         }
 
         if (foundElement == null) {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException("Failed to find element");
         }
 
         return new AutomationMenuItem(foundElement);

@@ -398,8 +398,10 @@ public class AutomationElement extends BaseAutomation {
     public Integer getCulture() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.getCurrentCulture(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentCulture(ibr);
+
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();

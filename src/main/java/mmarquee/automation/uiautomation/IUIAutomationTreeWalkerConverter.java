@@ -52,7 +52,7 @@ public class IUIAutomationTreeWalkerConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getParentElement(PointerByReference element, PointerByReference parent) {
+            public int getParentElement(Pointer element, PointerByReference parent) {
                 Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, element, parent});
             }

@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
 
+import mmarquee.automation.controls.AutomationApplication;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
@@ -394,7 +395,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
             AutomationApplication launched = instance.launchOrAttach("notepad.exe");
 
-            assertTrue("Should be the same name", launched.name().equals(app.name()));
+            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
 
         } finally {
             app.quit(getLocal("notepad.title"));
