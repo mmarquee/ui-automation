@@ -698,7 +698,7 @@ public abstract class AutomationBase implements Automatable {
      */
     public int[] getRuntimeId() throws AutomationException {
 //        return this.element.getRuntimeId();
-        throw new AutomationException();
+        throw new AutomationException("Not supported");
     }
 
     /**

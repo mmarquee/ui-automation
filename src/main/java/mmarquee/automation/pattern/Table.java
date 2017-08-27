@@ -59,7 +59,7 @@ public class Table extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -72,8 +72,9 @@ public class Table extends BasePattern {
     public List<AutomationElement> getCurrentColumnHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getCurrentColumnHeaders(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentColumnHeaders(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return collectionToList(getAutomationElementArrayFromReference(pbr));
@@ -87,8 +88,9 @@ public class Table extends BasePattern {
     public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentRowOrColumnMajor(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentRowOrColumnMajor(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return RowOrColumnMajor.fromInt(ibr.getValue());
@@ -102,8 +104,9 @@ public class Table extends BasePattern {
     public List<AutomationElement> getCurrentRowHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getCurrentRowHeaders(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentRowHeaders(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return collectionToList(getAutomationElementArrayFromReference(pbr));

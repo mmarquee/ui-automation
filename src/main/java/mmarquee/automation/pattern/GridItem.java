@@ -58,7 +58,7 @@ public class GridItem extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -75,8 +75,9 @@ public class GridItem extends BasePattern {
     public int getColumn() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentColumn(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentColumn(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();
@@ -90,8 +91,9 @@ public class GridItem extends BasePattern {
     public int getRow() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentRow(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentRow(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();

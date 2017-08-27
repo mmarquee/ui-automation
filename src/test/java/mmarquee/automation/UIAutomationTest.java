@@ -26,14 +26,17 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.After;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.OleAuto;
+import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WTypes;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
@@ -45,6 +48,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.utils.Utils;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
@@ -338,6 +342,63 @@ public class UIAutomationTest extends BaseAutomationTest {
         UIAutomation instance = UIAutomation.getInstance();
 
         instance.createControlTypeCondition(ControlType.Button);
+        try {
+            // Create first condition to use
+            PointerByReference condition =
+                    instance.createControlTypeCondition(ControlType.Button);
+        } catch (AutomationException ex) {
+            assertTrue(false);
+        }
+
+        assertTrue(true);
+    }
+
+    @Test
+    public void testLaunchOrAttach_Fails_When_No_executable() {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        boolean failure = false;
+
+        try {
+            instance.launchOrAttach("notepad99.exe");
+        } catch (Throwable e) {
+            failure = true;
+        }
+
+        assertTrue("Should have failed", failure);
+    }
+
+    @Test
+    public void testLaunchOrAttach_Succeeds_When_Not_Running() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = null;
+        try {
+        	app = instance.launchOrAttach("notepad.exe");
+        } finally {
+        	if (app != null) {
+                this.andRest();
+        		app.quit(getLocal("notepad.title"));
+        	}
+        }
+    }
+
+    @Test
+    public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            this.andRest();
+
+            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
+
+            assertTrue("Should be the same name", launched.name().equals(app.name()));
+
+        } finally {
+            app.quit(getLocal("notepad.title"));
+        }
     }
 
     @Test

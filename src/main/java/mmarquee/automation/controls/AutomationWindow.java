@@ -234,7 +234,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         }
 
         if (item == null) {
-            throw new ElementNotFoundException();
+            throw new ElementNotFoundException(title);
         }
 
         return new AutomationWindow(item);

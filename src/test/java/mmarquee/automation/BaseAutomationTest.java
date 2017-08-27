@@ -17,6 +17,7 @@ package mmarquee.automation;
 
 import java.util.ResourceBundle;
 
+import org.junit.After;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -24,12 +25,15 @@ import org.mockito.stubbing.Answer;
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.utils.Utils;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
@@ -106,4 +110,17 @@ public class BaseAutomationTest {
           };
 	}
 
+
+    @After
+    public void cleanUp() {
+    	
+    	while (true) {
+    		WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, getLocal("notepad.title"));
+    		if (hwnd == null) {
+    			break;
+    		}
+            Utils.closeProcess(hwnd);
+    	}
+    }
+    
 }

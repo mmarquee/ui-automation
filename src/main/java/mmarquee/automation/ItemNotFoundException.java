@@ -21,4 +21,14 @@ package mmarquee.automation;
  * Thrown when an item is not found.
  */
 public class ItemNotFoundException extends AutomationException {
+
+    private static final long serialVersionUID = -7175159800746711939L;
+
+    public ItemNotFoundException(String name) {
+        super("Item " + name + " not found");
+    }
+
+    public ItemNotFoundException(int index) {
+        super("Item " + index + " not found");
+    }
 }

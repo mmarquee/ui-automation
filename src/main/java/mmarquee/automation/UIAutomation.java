@@ -16,19 +16,17 @@
 package mmarquee.automation;
 
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.*;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
-import mmarquee.demo.TreeWalker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -264,7 +262,7 @@ public class UIAutomation extends BaseAutomation {
 
         if (element == null) {
             logger.warning("Failed to find desktop window `" + title + "`");
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(title);
         }
 
         return element;
@@ -309,10 +307,11 @@ public class UIAutomation extends BaseAutomation {
     public PointerByReference createAndCondition(Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.createAndCondition(pCondition1, pCondition2, pbr) == 0) {
+        final int res = this.automation.createAndCondition(pCondition1, pCondition2, pbr);
+        if (res == 0) {
             return pbr;
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -327,10 +326,11 @@ public class UIAutomation extends BaseAutomation {
     public PointerByReference createOrCondition(Pointer pCondition1, Pointer pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.createOrCondition(pCondition1, pCondition2, pbr) == 0) {
+        final int res = this.automation.createOrCondition(pCondition1, pCondition2, pbr);
+        if (res == 0) {
             return pbr;
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -397,7 +397,8 @@ public class UIAutomation extends BaseAutomation {
     public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
-        if (this.automation.createPropertyCondition(id, value, pCondition) == 0) {
+        final int res = this.automation.createPropertyCondition(id, value, pCondition);
+        if (res == 0) {
             Unknown unkCondition = new Unknown(pCondition.getValue());
             PointerByReference pUnknown = new PointerByReference();
 
@@ -405,10 +406,10 @@ public class UIAutomation extends BaseAutomation {
             if (COMUtils.SUCCEEDED(result1)) {
                 return pCondition;
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result1.intValue());
             }
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -462,7 +463,7 @@ public class UIAutomation extends BaseAutomation {
 
         if (element == null) {
             logger.info("Failed to find desktop menu `" + title + "`");
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(title);
         }
 
         return new AutomationMenu(element);
@@ -500,10 +501,11 @@ public class UIAutomation extends BaseAutomation {
     public PointerByReference createTrueCondition() throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
 
-        if (this.automation.createTrueCondition(pTrueCondition) == 0) {
+        final int res = this.automation.createTrueCondition(pTrueCondition);
+        if (res == 0) {
             return pTrueCondition;
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -516,10 +518,11 @@ public class UIAutomation extends BaseAutomation {
     public PointerByReference createFalseCondition() throws AutomationException {
         PointerByReference condition = new PointerByReference();
 
-        if (this.automation.createFalseCondition(condition) == 0) {
+        final int res = this.automation.createFalseCondition(condition);
+        if (res == 0) {
             return condition;
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -533,10 +536,11 @@ public class UIAutomation extends BaseAutomation {
     public PointerByReference createNotCondition(Pointer condition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.createNotCondition(condition, pbr) == 0) {
+        final int res = this.automation.createNotCondition(condition, pbr);
+        if (res == 0) {
             return pbr;
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -549,12 +553,33 @@ public class UIAutomation extends BaseAutomation {
     public AutomationElement getElementFromPoint(WinDef.POINT pt) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.elementFromPoint(pt, pbr) == 0) {
+        final int res = this.automation.elementFromPoint(pt, pbr);
+        if (res == 0) {
             IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
 
             return new AutomationElement(element);
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
+        }
+    }
+
+    /**
+     * Gets the element from the native handle
+     *
+     * @param hwnd Native Handle
+     * @return The actual element under the handle
+     * @throws AutomationException The automation library returned an error
+     */
+    public AutomationElement getElementFromHandle(WinDef.HWND hwnd) throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        final int res = this.automation.getElementFromHandle(hwnd, pbr);
+        if (res == 0) {
+            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+
+            return new AutomationElement(element);
+        } else {
+            throw new AutomationException(res);
         }
     }
 
@@ -566,12 +591,13 @@ public class UIAutomation extends BaseAutomation {
     public AutomationElement getFocusedElement() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.automation.getFocusedElement(pbr) == 0) {
+        final int res = this.automation.getFocusedElement(pbr);
+        if (res == 0) {
             IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
 
             return new AutomationElement(element);
         } else {
-            throw new AutomationException();
+            throw new AutomationException(res);
         }
     }
 
@@ -599,7 +625,7 @@ public class UIAutomation extends BaseAutomation {
         boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
-            throw new AutomationException();
+            throw new AutomationException("Process " + command + " not found.");
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(rootElement, handle, true);
@@ -626,7 +652,7 @@ public class UIAutomation extends BaseAutomation {
 
             return new AutomationTreeWalker(walker);
         } else {
-            throw new AutomationException();
+            throw new AutomationException(resultA.intValue());
         }
     }
 

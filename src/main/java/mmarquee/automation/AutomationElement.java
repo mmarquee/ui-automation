@@ -58,8 +58,9 @@ public class AutomationElement extends BaseAutomation {
     public Object getPropertyValue(int propertyId) throws AutomationException {
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
-        if (this.element.getCurrentPropertyValue(propertyId, value) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentPropertyValue(propertyId, value);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return value.getValue();
@@ -74,8 +75,9 @@ public class AutomationElement extends BaseAutomation {
     public int getControlType() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.getCurrentControlType(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentControlType(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();
@@ -90,8 +92,9 @@ public class AutomationElement extends BaseAutomation {
     public String getClassName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentClassName(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentClassName(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -106,8 +109,9 @@ public class AutomationElement extends BaseAutomation {
     public String getAutomationId() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentAutomationId(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentAutomationId(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -122,8 +126,9 @@ public class AutomationElement extends BaseAutomation {
     public String localizedControlType() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentLocalizedControlType(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentLocalizedControlType(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -138,8 +143,9 @@ public class AutomationElement extends BaseAutomation {
     public Boolean isPassword() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.getCurrentIsPassword(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentIsPassword(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue() == 1;
@@ -153,8 +159,9 @@ public class AutomationElement extends BaseAutomation {
     public WinDef.BOOL offScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.getCurrentIsOffscreen(bbr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentIsOffscreen(bbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return bbr.getValue();
@@ -168,8 +175,9 @@ public class AutomationElement extends BaseAutomation {
     public WinDef.BOOL isContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.getCurrentIsContentElement(bbr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentIsContentElement(bbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return bbr.getValue();
@@ -183,8 +191,9 @@ public class AutomationElement extends BaseAutomation {
     public WinDef.BOOL isControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.getCurrentIsControlElement(bbr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentIsControlElement(bbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return bbr.getValue();
@@ -198,8 +207,9 @@ public class AutomationElement extends BaseAutomation {
     public WinDef.BOOL isEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
-        if (this.element.getCurrentIsEnabled(bbr)  != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentIsEnabled(bbr);
+        if (res  != 0) {
+            throw new AutomationException(res);
         }
 
         return bbr.getValue();
@@ -226,8 +236,9 @@ public class AutomationElement extends BaseAutomation {
     protected String currentName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentName(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentName(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         if (sr.getValue() == null) {
@@ -277,8 +288,9 @@ public class AutomationElement extends BaseAutomation {
     public PointerByReference getPattern(int patternId) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.element.getCurrentPattern(patternId, pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentPattern(patternId, pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return pbr;
@@ -316,8 +328,9 @@ public class AutomationElement extends BaseAutomation {
 
         PointerByReference pAll = new PointerByReference();
 
-        if (this.element.findAll(scope, pCondition, pAll) != 0) {
-            throw new AutomationException();
+        final int res = this.element.findAll(scope, pCondition, pAll);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         IUIAutomationElementArray collection = getAutomationElementArrayFromReference(pAll);
@@ -351,8 +364,9 @@ public class AutomationElement extends BaseAutomation {
     public String getAriaRole() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentAriaRole(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentAriaRole(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -367,8 +381,9 @@ public class AutomationElement extends BaseAutomation {
     public OrientationType getOrientation() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.getCurrentOrientation(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentOrientation(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return OrientationType.fromInt(ibr.getValue());
@@ -399,8 +414,9 @@ public class AutomationElement extends BaseAutomation {
     public String getFrameworkId() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentFrameworkId(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentFrameworkId(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -415,8 +431,9 @@ public class AutomationElement extends BaseAutomation {
     public String getProviderDescription() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentProviderDescription(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentProviderDescription(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -439,8 +456,9 @@ public class AutomationElement extends BaseAutomation {
     public Integer getProcessId() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.element.getCurrentProcessId(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentProcessId(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();
@@ -455,8 +473,9 @@ public class AutomationElement extends BaseAutomation {
     public String getItemStatus() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentItemStatus(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentItemStatus(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -471,8 +490,9 @@ public class AutomationElement extends BaseAutomation {
     public String getAcceleratorKey() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.element.getCurrentAcceleratorKey(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentAcceleratorKey(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -488,8 +508,9 @@ public class AutomationElement extends BaseAutomation {
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
 
-        if (this.element.getClickablePoint(pbr, br) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getClickablePoint(pbr, br);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return new WinDef.POINT(pbr.x, pbr.y);
@@ -503,8 +524,9 @@ public class AutomationElement extends BaseAutomation {
     public WinDef.RECT getBoundingRectangle() throws AutomationException {
         WinDef.RECT rect = new WinDef.RECT();
 
-        if (this.element.getCurrentBoundingRectangle(rect) != 0) {
-            throw new AutomationException();
+        final int res = this.element.getCurrentBoundingRectangle(rect);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return rect;
@@ -515,8 +537,9 @@ public class AutomationElement extends BaseAutomation {
      * @throws AutomationException Failed to get the correct interface
      */
     public void showContextMenu() throws AutomationException {
-        if (this.element.showContextMenu() != 0) {
-            throw new AutomationException();
+        final int res = this.element.showContextMenu();
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 }

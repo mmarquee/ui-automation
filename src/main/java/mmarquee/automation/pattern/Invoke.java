@@ -60,7 +60,7 @@ public class Invoke extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -70,8 +70,9 @@ public class Invoke extends BasePattern {
      * @throws AutomationException Something went wrong getting the pattern
      */
     public void invoke() throws AutomationException {
-        if (this.getPattern().invoke() != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().invoke();
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 

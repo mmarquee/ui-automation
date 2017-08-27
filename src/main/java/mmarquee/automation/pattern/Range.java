@@ -61,7 +61,7 @@ public class Range extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -72,8 +72,9 @@ public class Range extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public void setValue (double value) throws AutomationException {
-        if (this.getPattern().setValue(value) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().setValue(value);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -85,8 +86,9 @@ public class Range extends BasePattern {
     public double getValue () throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 
-        if (this.getPattern().getValue(dbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getValue(dbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return dbr.getValue();

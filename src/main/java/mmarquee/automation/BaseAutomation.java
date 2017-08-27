@@ -61,7 +61,7 @@ public abstract class BaseAutomation {
         WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pbr);
 
         if (COMUtils.FAILED(result0)) {
-            throw new AutomationException();
+            throw new AutomationException(result0.intValue());
         }
 
         return IUIAutomationElement3Converter.PointerToInterface(pbr);
@@ -81,7 +81,7 @@ public abstract class BaseAutomation {
         WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknown);
 
         if (COMUtils.FAILED(result0)) {
-            throw new AutomationException();
+            throw new AutomationException(result0.intValue());
         }
 
         return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
@@ -98,8 +98,9 @@ public abstract class BaseAutomation {
 
         IntByReference ibr = new IntByReference();
 
-        if (collection.getLength(ibr) != 0) {
-            throw new AutomationException();
+        final int res = collection.getLength(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         List<AutomationElement> list = new ArrayList<AutomationElement>();
@@ -108,8 +109,9 @@ public abstract class BaseAutomation {
 
             PointerByReference pbr = new PointerByReference();
 
-            if (collection.getElement(count, pbr) != 0) {
-                throw new AutomationException();
+            final int res1 = collection.getElement(count, pbr);
+            if (res1 != 0) {
+                throw new AutomationException(res1);
             }
 
             Unknown uElement = new Unknown(pbr.getValue());
@@ -132,7 +134,7 @@ public abstract class BaseAutomation {
 
         WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
         if (!COMUtils.SUCCEEDED(result1)) {
-            throw new AutomationException();
+            throw new AutomationException(result1.intValue());
         }
 
         return pElement.getValue();

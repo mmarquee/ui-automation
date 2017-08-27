@@ -69,7 +69,7 @@ public class Selection extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -83,8 +83,9 @@ public class Selection extends BasePattern {
 
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getCurrentSelection(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentSelection(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return collectionToList(getAutomationElementArrayFromReference(pbr));
@@ -119,8 +120,9 @@ public class Selection extends BasePattern {
 
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getCurrentSelection(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentSelection(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return collectionToList(getAutomationElementArrayFromReference(pbr));
@@ -134,8 +136,9 @@ public class Selection extends BasePattern {
     public boolean canSelectMultiple() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentCanSelectMultiple(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentCanSelectMultiple(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return (ibr.getValue() == 1);

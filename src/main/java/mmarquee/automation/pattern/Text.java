@@ -56,7 +56,7 @@ public class Text extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return IUIAutomationTextPatternConverter.PointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -74,8 +74,9 @@ public class Text extends BasePattern {
     public String getSelection() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getSelection(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getSelection(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         Unknown unkConditionA = makeUnknown(pbr.getValue());
@@ -90,8 +91,9 @@ public class Text extends BasePattern {
 
             // OK, now what?
             IntByReference ibr = new IntByReference();
-            if (selection.getLength(ibr) != 0) {
-                throw new AutomationException();
+            final int res1 = selection.getLength(ibr);
+            if (res1 != 0) {
+                throw new AutomationException(res1);
             }
 
             int count = ibr.getValue();
@@ -99,8 +101,9 @@ public class Text extends BasePattern {
             for (int i = 0; i < count; i++) {
                 PointerByReference pbr0 = new PointerByReference();
 
-                if (selection.getElement(i, pbr0) != 0) {
-                    throw new AutomationException();
+                final int res2 = selection.getElement(i, pbr0);
+                if (res2 != 0) {
+                    throw new AutomationException(res2);
                 }
 
                 Unknown unknown = makeUnknown(pbr0.getValue());
@@ -113,17 +116,18 @@ public class Text extends BasePattern {
 
                     PointerByReference sr = new PointerByReference();
 
-                    if (range.getText(-1, sr) != 0) {
-                        throw new AutomationException();
+                    final int res3 = range.getText(-1, sr);
+                    if (res3 != 0) {
+                        throw new AutomationException(res3);
                     }
 
                     selectionResult = sr.getValue().getWideString(0);
                 } else {
-                    throw new AutomationException();
+                    throw new AutomationException(result.intValue());
                 }
             }
         } else {
-            throw new AutomationException();
+            throw new AutomationException(resultA.intValue());
         }
 
         return selectionResult;
@@ -138,8 +142,9 @@ public class Text extends BasePattern {
     public String getText() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getDocumentRange(pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getDocumentRange(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         Unknown unkConditionA = makeUnknown(pbr.getValue());
@@ -151,13 +156,14 @@ public class Text extends BasePattern {
 
             PointerByReference sr = new PointerByReference();
 
-            if (range.getText(-1, sr) != 0) {
-                throw new AutomationException();
+            final int res1 = range.getText(-1, sr);
+            if (res1 != 0) {
+                throw new AutomationException(res1);
             }
 
             return sr.getValue().getWideString(0);
         } else {
-            throw new AutomationException();
+            throw new AutomationException(resultA.intValue());
         }
     }
 

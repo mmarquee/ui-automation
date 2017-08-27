@@ -61,7 +61,7 @@ public class Grid extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -76,8 +76,9 @@ public class Grid extends BasePattern {
     protected PointerByReference getRawItem(int x, int y) throws AutomationException{
         PointerByReference pbr = new PointerByReference();
 
-        if (this.getPattern().getItem(x, y, pbr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getItem(x, y, pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return pbr;
@@ -102,7 +103,7 @@ public class Grid extends BasePattern {
         if (COMUtils.SUCCEEDED(result0)) {
             return new AutomationElement(convertPointerToElementInterface(pbr));
         } else {
-            throw new AutomationException();
+            throw new AutomationException(result0.intValue());
         }
     }
 
@@ -114,8 +115,9 @@ public class Grid extends BasePattern {
     public int rowCount() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentRowCount(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentRowCount(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();
@@ -130,8 +132,9 @@ public class Grid extends BasePattern {
 
         IntByReference ibr = new IntByReference();
 
-        if (this.getPattern().getCurrentColumnCount(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentColumnCount(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return ibr.getValue();
