@@ -25,8 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
@@ -60,12 +63,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getEditBox(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -76,12 +79,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getEditBox(1);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -93,12 +96,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getAppBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -110,12 +113,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getSlider(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -126,12 +129,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getButton(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -142,12 +145,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         AutomationTab tab = automatedWindow.getTab(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
 
         assertTrue(tab != null);
     }
@@ -160,14 +163,14 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         AutomationTab tab = automatedWindow.getTab(99);
 
         assertTrue(tab != null);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -178,12 +181,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getEditBox(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -194,12 +197,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getToolBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -210,12 +213,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getCombobox(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test (expected=IndexOutOfBoundsException.class)
@@ -226,12 +229,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getCombobox(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -242,12 +245,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getCheckbox(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test (expected=IndexOutOfBoundsException.class)
@@ -258,12 +261,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getRadioButton(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -274,12 +277,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getRadioButton(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -290,12 +293,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getPanel(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -306,12 +309,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getDocument(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -322,12 +325,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getProgressBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test (expected=IndexOutOfBoundsException.class)
@@ -338,12 +341,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getHyperlink(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -354,12 +357,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getHyperlink(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -370,12 +373,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getHyperlink(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -386,12 +389,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getToolBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -402,12 +405,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getSlider(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -418,12 +421,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getProgressBar(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -434,12 +437,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getProgressBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -450,12 +453,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getProgressBar(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -466,12 +469,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getDataGrid(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -482,12 +485,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getDataGrid(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -498,12 +501,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getTreeView(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -514,12 +517,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getTreeView(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -528,7 +531,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -544,12 +547,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getPasswordEditBox(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -558,7 +561,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -574,12 +577,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getPasswordEditBox(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -588,7 +591,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -604,12 +607,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getMaskedEdit(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -618,7 +621,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -634,12 +637,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getMaskedEdit(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -663,7 +666,7 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentClassName(anyObject());
+        }).when(elem).getCurrentClassName(any());
 
         doAnswer(new Answer() {
             @Override
@@ -676,7 +679,7 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentControlType(anyObject());
+        }).when(elem).getCurrentControlType(any());
 
 
         doAnswer(new Answer() {
@@ -694,16 +697,16 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentName(anyObject());
+        }).when(elem).getCurrentName(any());
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit("SMITH-01");
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -712,7 +715,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -728,12 +731,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(null);
+        when(element.findFirst(any(), any())).thenReturn(null);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getMaskedEdit("SMITH-01");
 
-        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -742,7 +745,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -758,12 +761,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getMaskedEdit(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -772,7 +775,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -788,12 +791,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getMaskedEdit(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -802,7 +805,7 @@ public class AutomationContainerTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference)args[0];
@@ -821,12 +824,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(el.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(el.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow wndw = new AutomationWindow(el, window, container);
         wndw.getRibbonBar();
 
-        verify(el, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(el, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -837,12 +840,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getList(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -853,12 +856,12 @@ public class AutomationContainerTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getList(99);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -867,17 +870,17 @@ public class AutomationContainerTest {
 
         AutomationElement child = new AutomationElement(elem);
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
+        when(element.findFirst(any(), any())).thenReturn(child);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getList("myName");
 
-        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
     public void testList_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getList("unknownName");
@@ -890,17 +893,17 @@ public class AutomationContainerTest {
 
         AutomationElement child = new AutomationElement(elem);
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(child);
+        when(element.findFirst(any(), any())).thenReturn(child);
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getListByAutomationId("myID");
 
-        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
     public void testList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(anyObject(), anyObject())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
         AutomationWindow automatedWindow = new AutomationWindow(element, window, container);
         automatedWindow.getListByAutomationId("unknownID");

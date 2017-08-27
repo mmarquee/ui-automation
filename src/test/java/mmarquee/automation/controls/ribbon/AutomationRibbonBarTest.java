@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
 
@@ -70,13 +70,13 @@ public class AutomationRibbonBarTest {
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonBar workPane = new AutomationRibbonBar(element);
 
         workPane.getRibbonCommandBar();
 
-        Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class AutomationRibbonBarTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        Mockito.when(elem.getCurrentClassName(anyObject())).thenAnswer(
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference) args[0];
@@ -104,12 +104,12 @@ public class AutomationRibbonBarTest {
 
         collection.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonBar bar = new AutomationRibbonBar(element);
 
         bar.getRibbonCommandBar();
 
-        Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 }

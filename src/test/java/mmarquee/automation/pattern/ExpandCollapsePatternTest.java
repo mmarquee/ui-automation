@@ -26,7 +26,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
@@ -65,7 +65,7 @@ public class ExpandCollapsePatternTest {
 
     @Test
     public void testIsExpanded_Returns_True_When_COM_Returns_One() throws Exception {
-        Mockito.when(rawPattern.getCurrentExpandCollapseState(anyObject())).thenAnswer(
+        Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
                 invocation -> {
                     Object[] args = invocation.getArguments();
                     IntByReference reference = (IntByReference)args[0];
@@ -86,7 +86,7 @@ public class ExpandCollapsePatternTest {
     @Test(expected= AutomationException.class)
     public void testIsExpanded_Throws_Exception_When_COM_Returns_Error() throws Exception {
 
-        Mockito.when(rawPattern.getCurrentExpandCollapseState(anyObject())).thenAnswer(
+        Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
             invocation -> {
                 Object[] args = invocation.getArguments();
                 IntByReference reference = (IntByReference) args[0];
@@ -106,7 +106,7 @@ public class ExpandCollapsePatternTest {
 
     @Test
     public void testIsExpanded_Returns_False_When_COM_Returns_One() throws Exception {
-        Mockito.when(rawPattern.getCurrentExpandCollapseState(anyObject())).thenAnswer(
+        Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
            invocation -> {
                Object[] args = invocation.getArguments();
                IntByReference reference = (IntByReference) args[0];

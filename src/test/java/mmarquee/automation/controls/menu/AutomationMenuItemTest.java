@@ -122,7 +122,7 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         List<AutomationElement> elements = new ArrayList<>();
         elements.add(elem);
 
-        when(mocked_element.findAll(anyObject(), anyObject())).thenReturn(elements);
+        when(mocked_element.findAll(any(), any())).thenReturn(elements);
 
         ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
         Invoke invoke = Mockito.mock(Invoke.class);

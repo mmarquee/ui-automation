@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -92,7 +92,7 @@ public class AutomationWindowTest {
         List<AutomationElement> list = new ArrayList<>();
         list.add(elem);
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         List<AutomationElement> menus = new ArrayList<>();
 
@@ -100,7 +100,7 @@ public class AutomationWindowTest {
 
         menus.add(item);
 
-        when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+        when(elem.findAll(any(), any())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -119,7 +119,7 @@ public class AutomationWindowTest {
         List<AutomationElement> list = new ArrayList<>();
         list.add(elem);
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         List<AutomationElement> menus = new ArrayList<>();
 
@@ -127,7 +127,7 @@ public class AutomationWindowTest {
 
         menus.add(item);
 
-        when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+        when(elem.findAll(any(), any())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -146,7 +146,7 @@ public class AutomationWindowTest {
         List<AutomationElement> list = new ArrayList<>();
         list.add(elem);
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         List<AutomationElement> menus = new ArrayList<>();
 
@@ -154,7 +154,7 @@ public class AutomationWindowTest {
 
         menus.add(item);
 
-        when(elem.findAll(anyObject(), anyObject())).thenReturn(menus);
+        when(elem.findAll(any(), any())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 

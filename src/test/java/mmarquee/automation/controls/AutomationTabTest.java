@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -54,7 +54,7 @@ public class AutomationTabTest {
 
         list.add(testElem);
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationTab ctrl = new AutomationTab(element, container);
 
@@ -77,7 +77,7 @@ public class AutomationTabTest {
 
         list.add(testElem);
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
         AutomationTab ctrl = new AutomationTab(element, container);

@@ -24,7 +24,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
@@ -49,7 +49,7 @@ public class GridItemPatternTest {
 
         pattern.getColumn();
 
-        verify(rawPattern, atLeastOnce()).getCurrentColumn(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentColumn(any());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class GridItemPatternTest {
 
         pattern.getRow();
 
-        verify(rawPattern, atLeastOnce()).getCurrentRow(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentRow(any());
     }
 
     @Test(expected=AutomationException.class)
@@ -70,13 +70,13 @@ public class GridItemPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentColumn(anyObject());
+        }).when(rawPattern).getCurrentColumn(any());
 
         GridItem pattern = new GridItem(rawPattern);
 
         Integer value = pattern.getColumn();
 
-        verify(rawPattern, atLeastOnce()).getCurrentColumn(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentColumn(any());
     }
 
     @Test(expected=AutomationException.class)
@@ -88,13 +88,13 @@ public class GridItemPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentRow(anyObject());
+        }).when(rawPattern).getCurrentRow(any());
 
         GridItem pattern = new GridItem(rawPattern);
 
         Integer value = pattern.getRow();
 
-        verify(rawPattern, atLeastOnce()).getCurrentRow(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentRow(any());
     }
 
 }

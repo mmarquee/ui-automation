@@ -24,7 +24,7 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ItemNotFoundException;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
@@ -74,7 +74,7 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
 
         collection.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationSystemMenu item = new AutomationSystemMenu(element);
         List<AutomationMenuItem> items = item.getItems();
@@ -105,11 +105,11 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentName(anyObject());
+        }).when(elem).getCurrentName(any());
 
         collection.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationSystemMenu menu = new AutomationSystemMenu(element);
 
@@ -139,11 +139,11 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentName(anyObject());
+        }).when(elem).getCurrentName(any());
 
         collection.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationSystemMenu menu = new AutomationSystemMenu(element);
 

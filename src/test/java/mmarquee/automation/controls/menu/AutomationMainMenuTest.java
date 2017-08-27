@@ -38,8 +38,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
@@ -93,7 +93,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         collection.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(collection);
+        when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
@@ -116,7 +116,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(new AutomationElement(elem));
+        when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
@@ -125,7 +125,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         // Not quite sure what to test for here - has it worked at all?
 
-      //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+      //  Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected = ItemNotFoundException.class)
@@ -138,7 +138,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         when(element.getName()).thenReturn("NOT MENU-01");
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(null);
+        when(element.findFirst(any(), any())).thenReturn(null);
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
@@ -158,7 +158,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(new AutomationElement(elem));
+        when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
@@ -177,7 +177,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         when(element.getName()).thenReturn("NOT MENU-01");
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(null);
+        when(element.findFirst(any(), any())).thenReturn(null);
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
@@ -188,7 +188,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         // Not quite sure what to test for here - has it worked at all?
 
-        //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        //  Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -208,11 +208,11 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         PointerByReference pbr = new PointerByReference();
 
         when(found.getPattern(anyInt())).thenReturn(pbr);
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(found);
+        when(element.findFirst(any(), any())).thenReturn(found);
 
         Unknown mockUnknown = Mockito.mock(Unknown.class);
 
-        Mockito.when(mockUnknown.QueryInterface(anyObject(), anyObject())).thenAnswer(
+        Mockito.when(mockUnknown.QueryInterface(any(), any())).thenAnswer(
             invocation -> {
                 return new WinNT.HRESULT(1);
             }
@@ -222,7 +222,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         doReturn(mockUnknown)
                 .when(pattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         int keyCode = KeyEvent.getExtendedKeyCodeForChar(getLocal("menu.exit.acc").toCharArray()[0]);
 
@@ -230,6 +230,6 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
         // Not quite sure what to test for here - has it worked at all?
 
-        //  Mockito.verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        //  Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 }

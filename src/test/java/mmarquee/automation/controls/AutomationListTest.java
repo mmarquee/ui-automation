@@ -15,9 +15,11 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -59,7 +61,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
@@ -76,7 +78,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
@@ -95,7 +97,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 

@@ -39,7 +39,6 @@ import org.mockito.stubbing.Answer;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
 /**
@@ -559,7 +558,7 @@ public class AutomationBaseTest {
 
         doThrow(AutomationException.class)
                 .when(element)
-                .getPropertyValue(anyObject());
+                .getPropertyValue(any());
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -612,7 +611,7 @@ public class AutomationBaseTest {
 
                 return 0;
             }
-        }).when(el).getCurrentPropertyValue(anyObject(), anyObject());
+        }).when(el).getCurrentPropertyValue(any(), any());
 
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
