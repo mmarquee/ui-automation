@@ -25,10 +25,10 @@ public class ElementNotFoundException extends AutomationException {
     private static final long serialVersionUID = 5575725853478222085L;
 
     public ElementNotFoundException() {
-        super("Element not fund");
+        super("Element not found");
     }
 
     public ElementNotFoundException(String name) {
-        super("Element " + name +" not fund");
+        super("Element " + name +" not found");
     }
 }
