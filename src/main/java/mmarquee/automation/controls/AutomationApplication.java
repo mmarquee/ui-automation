@@ -113,7 +113,7 @@ public class AutomationApplication extends AutomationBase {
         if (foundElement != null) {
             return new AutomationWindow(foundElement);
         } else {
-            throw new ElementNotFoundException();
+            throw new ElementNotFoundException(title);
         }
     }
 

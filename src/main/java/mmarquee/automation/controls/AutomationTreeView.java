@@ -54,7 +54,7 @@ public class AutomationTreeView extends AutomationBase {
         if (item != null) {
             return new AutomationTreeViewItem(item);
         } else {
-            throw new ItemNotFoundException();
+            throw new ItemNotFoundException(name);
         }
     }
 }

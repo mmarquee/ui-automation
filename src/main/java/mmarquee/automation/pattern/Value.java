@@ -58,7 +58,7 @@ public class Value extends BasePattern {
             if (COMUtils.SUCCEEDED(result0)) {
                 return this.convertPointerToInterface(pbr);
             } else {
-                throw new AutomationException();
+                throw new AutomationException(result0.intValue());
             }
         }
     }
@@ -71,8 +71,9 @@ public class Value extends BasePattern {
     public String value() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
-        if (this.getPattern().getValue(sr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getValue(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return sr.getValue().getWideString(0);
@@ -85,8 +86,9 @@ public class Value extends BasePattern {
      */
     public boolean isReadOnly() throws AutomationException {
         IntByReference ibr = new IntByReference();
-        if (this.getPattern().getCurrentIsReadOnly(ibr) != 0) {
-            throw new AutomationException();
+        final int res = this.getPattern().getCurrentIsReadOnly(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
         }
 
         return (ibr.getValue() == 1);
@@ -102,8 +104,9 @@ public class Value extends BasePattern {
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(value);
 
         try {
-            if (this.getPattern().setValue(sysAllocated) != 0) {
-                throw new AutomationException();
+            final int res = this.getPattern().setValue(sysAllocated);
+            if (res != 0) {
+                throw new AutomationException(res);
             }
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
