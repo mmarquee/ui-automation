@@ -33,7 +33,7 @@ import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -77,7 +77,7 @@ public class SelectionItemPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentIsSelected(anyObject());
+        }).when(rawPattern).getCurrentIsSelected(any());
 
         SelectionItem item = new SelectionItem(rawPattern);
 
@@ -99,7 +99,7 @@ public class SelectionItemPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentIsSelected(anyObject());
+        }).when(rawPattern).getCurrentIsSelected(any());
 
         SelectionItem item = new SelectionItem(rawPattern);
 
@@ -110,7 +110,7 @@ public class SelectionItemPatternTest {
 
     @Test(expected=AutomationException.class)
     public void testIsSelected_Throws_Exception_When_COM_Returns_One() throws Exception {
-        when(rawPattern.getCurrentIsSelected(anyObject())).thenReturn(1);
+        when(rawPattern.getCurrentIsSelected(any())).thenReturn(1);
 
         SelectionItem item = new SelectionItem(rawPattern);
 
@@ -127,7 +127,7 @@ public class SelectionItemPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         SelectionItem pattern = new SelectionItem();
 
@@ -137,11 +137,11 @@ public class SelectionItemPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.select();
 
@@ -156,7 +156,7 @@ public class SelectionItemPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         SelectionItem pattern = new SelectionItem();
 
@@ -166,11 +166,11 @@ public class SelectionItemPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.select();
 

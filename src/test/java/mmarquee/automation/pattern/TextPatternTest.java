@@ -38,7 +38,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 
@@ -68,7 +68,7 @@ public class TextPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getDocumentRange(anyObject());
+        }).when(rawPattern).getDocumentRange(any());
 
         Text pattern = new Text(rawPattern);
 
@@ -85,7 +85,7 @@ public class TextPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         Text pattern = new Text(rawPattern);
 
@@ -102,14 +102,14 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Text pattern = new Text(rawPattern);
 
@@ -117,7 +117,7 @@ public class TextPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         String text = spyPattern.getSelection();
 
@@ -132,14 +132,14 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Text pattern = new Text(rawPattern);
 
@@ -147,7 +147,7 @@ public class TextPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         IUIAutomationTextRangeArray mockRangeArray = Mockito.mock(IUIAutomationTextRangeArray.class);
 
@@ -156,11 +156,11 @@ public class TextPatternTest {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
                 return 1;
             }
-        }).when(mockRangeArray).getLength(anyObject());
+        }).when(mockRangeArray).getLength(any());
 
         doReturn(mockRangeArray)
                 .when(spyPattern)
-                .convertPointerToArrayInterface(anyObject());
+                .convertPointerToArrayInterface(any());
 
         String text = spyPattern.getSelection();
 
@@ -175,14 +175,14 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Text pattern = new Text(rawPattern);
 
@@ -190,7 +190,7 @@ public class TextPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         IUIAutomationTextRangeArray mockRangeArray = Mockito.mock(IUIAutomationTextRangeArray.class);
 
@@ -204,7 +204,7 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(mockRangeArray).getLength(anyObject());
+        }).when(mockRangeArray).getLength(any());
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
@@ -223,15 +223,15 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(mockRange).getText(anyObject(), anyObject());
+        }).when(mockRange).getText(any(), any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         doReturn(mockRangeArray)
                 .when(spyPattern)
-                .convertPointerToArrayInterface(anyObject());
+                .convertPointerToArrayInterface(any());
 
         String text = spyPattern.getSelection();
 
@@ -247,14 +247,14 @@ public class TextPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Text pattern = new Text(rawPattern);
 
@@ -262,17 +262,17 @@ public class TextPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
         doReturn(1)
                 .when(mockRange)
-                .getText(anyObject(), anyObject());
+                .getText(any(), any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         String text = spyPattern.getText();
 
@@ -288,14 +288,14 @@ public class TextPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Text pattern = new Text(rawPattern);
 
@@ -303,7 +303,7 @@ public class TextPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
@@ -322,15 +322,15 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(mockRange).getText(anyObject(), anyObject());
+        }).when(mockRange).getText(any(), any());
 
 //        doReturn(0)
 //                .when(mockRange)
-//                .getText(anyObject(), anyObject());
+//                .getText(any(), any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         String text = spyPattern.getText();
 
@@ -346,14 +346,14 @@ public class TextPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getSelection(anyObject());
+        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Text pattern = new Text(rawPattern);
 
@@ -361,17 +361,17 @@ public class TextPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
         doReturn(1)
                 .when(mockRange)
-                .getText(anyObject(), anyObject());
+                .getText(any(), any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         String text = spyPattern.getText();
 

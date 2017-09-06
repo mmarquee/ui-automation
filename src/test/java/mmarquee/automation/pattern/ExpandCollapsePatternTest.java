@@ -27,7 +27,7 @@ import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
@@ -78,7 +78,7 @@ public class ExpandCollapsePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentExpandCollapseState(anyObject());
+        }).when(rawPattern).getCurrentExpandCollapseState(any());
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 
@@ -100,7 +100,7 @@ public class ExpandCollapsePatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentExpandCollapseState(anyObject());
+        }).when(rawPattern).getCurrentExpandCollapseState(any());
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 
@@ -122,7 +122,7 @@ public class ExpandCollapsePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentExpandCollapseState(anyObject());
+        }).when(rawPattern).getCurrentExpandCollapseState(any());
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 

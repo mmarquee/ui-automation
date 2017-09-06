@@ -25,7 +25,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -36,7 +35,6 @@ import org.mockito.stubbing.Answer;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
 /**
@@ -74,7 +72,7 @@ public class ValuePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getValue(anyObject());
+        }).when(rawPattern).getValue(any());
 
         Value pattern = new Value(rawPattern);
 
@@ -82,7 +80,7 @@ public class ValuePatternTest {
 
         assertTrue(text.equals("Hello"));
 
-        verify(rawPattern, atLeastOnce()).getValue(anyObject());
+        verify(rawPattern, atLeastOnce()).getValue(any());
     }
 
     @Test(expected=AutomationException.class)
@@ -98,13 +96,13 @@ public class ValuePatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getValue(anyObject());
+        }).when(rawPattern).getValue(any());
 
         Value pattern = new Value(rawPattern);
 
         String text = pattern.value();
 
-        verify(rawPattern, atLeastOnce()).getValue(anyObject());
+        verify(rawPattern, atLeastOnce()).getValue(any());
     }
 
     @Test(expected= AutomationException.class)
@@ -120,7 +118,7 @@ public class ValuePatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentIsReadOnly(anyObject());
+        }).when(rawPattern).getCurrentIsReadOnly(any());
 
         Value pattern = new Value(rawPattern);
 
@@ -142,7 +140,7 @@ public class ValuePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentIsReadOnly(anyObject());
+        }).when(rawPattern).getCurrentIsReadOnly(any());
 
         Value pattern = new Value(rawPattern);
 
@@ -164,7 +162,7 @@ public class ValuePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentIsReadOnly(anyObject());
+        }).when(rawPattern).getCurrentIsReadOnly(any());
 
         Value pattern = new Value(rawPattern);
 
@@ -181,7 +179,7 @@ public class ValuePatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).setValue(anyObject());
+        }).when(rawPattern).setValue(any());
 
         Value pattern = new Value(rawPattern);
 
@@ -196,13 +194,13 @@ public class ValuePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).setValue(anyObject());
+        }).when(rawPattern).setValue(any());
 
         Value pattern = new Value(rawPattern);
 
         pattern.setValue("VALUE-01");
 
-        verify(rawPattern, atLeastOnce()).setValue(anyObject());
+        verify(rawPattern, atLeastOnce()).setValue(any());
     }
 
     @Test(expected=AutomationException.class)
@@ -213,7 +211,7 @@ public class ValuePatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Value pattern = new Value();
 
@@ -223,15 +221,15 @@ public class ValuePatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.value();
 
-        verify(mockPattern, atLeastOnce()).getValue(anyObject());
+        verify(mockPattern, atLeastOnce()).getValue(any());
     }
 
     @Test
@@ -241,7 +239,7 @@ public class ValuePatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Value pattern = new Value();
 
@@ -264,18 +262,18 @@ public class ValuePatternTest {
 
                 return 0;
             }
-        }).when(mockPattern).getValue(anyObject());
+        }).when(mockPattern).getValue(any());
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.value();
 
-        verify(mockPattern, atLeastOnce()).getValue(anyObject());
+        verify(mockPattern, atLeastOnce()).getValue(any());
     }
 }

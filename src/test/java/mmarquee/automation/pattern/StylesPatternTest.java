@@ -19,7 +19,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.doReturn;
 
@@ -44,7 +43,7 @@ public class StylesPatternTest {
         Styles pattern = new Styles(rawPattern);
         pattern.getStyleId();
 
-        verify(rawPattern, atLeastOnce()).getCurrentStyleId(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentStyleId(any());
     }
 
     @Test(expected= AutomationException.class)
@@ -55,7 +54,7 @@ public class StylesPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentStyleId(anyObject());
+        }).when(rawPattern).getCurrentStyleId(any());
 
         Styles pattern = new Styles(rawPattern);
 
@@ -79,12 +78,12 @@ public class StylesPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentStyleName(anyObject());
+        }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(rawPattern);
         pattern.getStyleName();
 
-        verify(rawPattern, atLeastOnce()).getCurrentStyleName(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentStyleName(any());
     }
 
     @Test(expected= AutomationException.class)
@@ -95,7 +94,7 @@ public class StylesPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentStyleName(anyObject());
+        }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(rawPattern);
 
@@ -110,7 +109,7 @@ public class StylesPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Styles pattern = new Styles();
 
@@ -120,11 +119,11 @@ public class StylesPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.getStyleName();
 
@@ -139,7 +138,7 @@ public class StylesPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         IUIAutomationStylesPattern mockPattern = Mockito.mock(IUIAutomationStylesPattern.class);
 
@@ -158,7 +157,7 @@ public class StylesPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentStyleName(anyObject());
+        }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(rawPattern);
 
@@ -166,11 +165,11 @@ public class StylesPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.getStyleName();
 

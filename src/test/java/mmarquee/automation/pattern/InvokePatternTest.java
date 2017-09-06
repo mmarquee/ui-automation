@@ -31,7 +31,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.doReturn;
 
@@ -83,7 +83,7 @@ public class InvokePatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Invoke pattern = new Invoke();
 
@@ -93,11 +93,11 @@ public class InvokePatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.invoke();
 
@@ -112,7 +112,7 @@ public class InvokePatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Invoke pattern = new Invoke();
 
@@ -122,11 +122,11 @@ public class InvokePatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.invoke();
 

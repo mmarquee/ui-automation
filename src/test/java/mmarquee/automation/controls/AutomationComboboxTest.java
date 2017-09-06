@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
 /**
@@ -81,7 +80,7 @@ public class AutomationComboboxTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        when(elem.findAll(anyObject(), anyObject(), anyObject())).thenReturn(-1);
+        when(elem.findAll(any(), any(), any())).thenReturn(-1);
 
         element.element = elem;
 
@@ -101,7 +100,7 @@ public class AutomationComboboxTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-        when(elem.findAll(anyObject(), anyObject(), anyObject())).thenReturn(0);
+        when(elem.findAll(any(), any(), any())).thenReturn(0);
 
         element.element = elem;
 
@@ -210,7 +209,7 @@ public class AutomationComboboxTest {
 
                 return 0;
             }
-        }).when(elem).getCurrentControlType(anyObject());
+        }).when(elem).getCurrentControlType(any());
 
         list.add(new AutomationElement(elem));
 
@@ -219,12 +218,12 @@ public class AutomationComboboxTest {
         Value value = Mockito.mock(Value.class);
 
         when(element.getName()).thenReturn("NAME");
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
         combo.getList();
 
-        verify(element, atLeast(1)).findAll(anyObject(), anyObject());
+        verify(element, atLeast(1)).findAll(any(), any());
     }
 }

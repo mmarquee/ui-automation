@@ -32,7 +32,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
@@ -61,7 +61,7 @@ public class SelectionPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentSelection(anyObject());
+        }).when(rawPattern).getCurrentSelection(any());
 
         Selection pattern = new Selection(rawPattern);
 
@@ -76,7 +76,7 @@ public class SelectionPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Selection pattern = new Selection();
 
@@ -86,11 +86,11 @@ public class SelectionPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.getCurrentSelection();
 
@@ -105,7 +105,7 @@ public class SelectionPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Selection pattern = new Selection();
 
@@ -117,15 +117,15 @@ public class SelectionPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         doReturn(mockArray)
                 .when(spyPattern)
-                .convertPointerToElementArray(anyObject());
+                .convertPointerToElementArray(any());
 
         spyPattern.getCurrentSelection();
 

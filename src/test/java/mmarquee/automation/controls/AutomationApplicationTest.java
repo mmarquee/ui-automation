@@ -60,7 +60,7 @@ public class AutomationApplicationTest {
 
         AutomationWindow window = app.getWindow("Untitled - Notepad");
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -73,13 +73,13 @@ public class AutomationApplicationTest {
 
         list.add(new AutomationElement(elem));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(list);
+        when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationApplication app = new AutomationApplication(element, handle, false);
 
         AutomationWindow window = app.getWindow("Untitled - Notepad");
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class AutomationApplicationTest {
 
         app.close("Untitled - Notepad");
 
-        verify(user32, atLeastOnce()).FindWindow(anyObject(), anyObject());
+        verify(user32, atLeastOnce()).FindWindow(any(), any());
     }
 
     @Test
@@ -115,7 +115,7 @@ public class AutomationApplicationTest {
 
         app.quit("Untitled - Notepad");
 
-        verify(user32, atLeastOnce()).FindWindow(anyObject(), anyObject());
+        verify(user32, atLeastOnce()).FindWindow(any(), any());
     }
 
 }

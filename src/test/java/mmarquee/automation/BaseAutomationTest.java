@@ -101,7 +101,9 @@ public class BaseAutomationTest {
 		return new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
-              PointerByReference pr = invocation.getArgumentAt(0, PointerByReference.class);
+              Object[] args = invocation.getArguments();
+              PointerByReference pr = (PointerByReference)args[0];
+
               Pointer m = new Memory(Native.WCHAR_SIZE * (expectedString.length() + 1));
               m.setWideString(0, expectedString);
               pr.setValue(m);

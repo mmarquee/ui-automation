@@ -559,7 +559,7 @@ public class AutomationBaseTest {
 
         doThrow(AutomationException.class)
                 .when(element)
-                .getPropertyValue(anyObject());
+                .getPropertyValue(any());
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
@@ -618,7 +618,7 @@ public class AutomationBaseTest {
 
                 return 0;
             }
-        }).when(el).getCurrentPropertyValue(anyObject(), anyObject());
+        }).when(el).getCurrentPropertyValue(any(), any());
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 

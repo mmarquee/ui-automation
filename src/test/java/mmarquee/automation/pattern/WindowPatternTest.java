@@ -26,8 +26,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
@@ -50,7 +49,7 @@ public class WindowPatternTest {
 
         boolean value = pattern.isTopMost();
 
-        verify(rawPattern, atLeastOnce()).getCurrentIsTopmost(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentIsTopmost(any());
     }
 
     @Test
@@ -59,7 +58,7 @@ public class WindowPatternTest {
 
         boolean value = pattern.isModal();
 
-        verify(rawPattern, atLeastOnce()).getCurrentIsModal(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentIsModal(any());
     }
 
     @Test(expected= AutomationException.class)
@@ -71,13 +70,13 @@ public class WindowPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentIsTopmost(anyObject());
+        }).when(rawPattern).getCurrentIsTopmost(any());
 
         Window pattern = new Window(rawPattern);
 
         boolean value = pattern.isTopMost();
 
-        verify(rawPattern, atLeastOnce()).getCurrentIsTopmost(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentIsTopmost(any());
     }
 
     @Test(expected= AutomationException.class)
@@ -88,13 +87,13 @@ public class WindowPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentIsModal(anyObject());
+        }).when(rawPattern).getCurrentIsModal(any());
 
         Window pattern = new Window(rawPattern);
 
         boolean value = pattern.isModal();
 
-        verify(rawPattern, atLeastOnce()).getCurrentIsModal(anyObject());
+        verify(rawPattern, atLeastOnce()).getCurrentIsModal(any());
     }
 
     @Test
@@ -151,7 +150,7 @@ public class WindowPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).setWindowVisualState(anyObject());
+        }).when(rawPattern).setWindowVisualState(any());
 
         Window pattern = new Window(rawPattern);
 
@@ -169,7 +168,7 @@ public class WindowPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).waitForInputIdle(anyInt(), anyObject());
+        }).when(rawPattern).waitForInputIdle(any(), any());
 
         Window pattern = new Window(rawPattern);
 
@@ -185,6 +184,6 @@ public class WindowPatternTest {
 
         pattern.waitForInputIdle(100);
 
-        verify(rawPattern, atLeastOnce()).waitForInputIdle(anyInt(), anyObject());
+        verify(rawPattern, atLeastOnce()).waitForInputIdle(any(), any());
     }
 }

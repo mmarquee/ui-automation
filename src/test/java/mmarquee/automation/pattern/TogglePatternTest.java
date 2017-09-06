@@ -34,7 +34,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.doReturn;
 
@@ -78,7 +77,7 @@ public class TogglePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentToggleState(anyObject());
+        }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
 
@@ -100,7 +99,7 @@ public class TogglePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentToggleState(anyObject());
+        }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
 
@@ -122,7 +121,7 @@ public class TogglePatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentToggleState(anyObject());
+        }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
 
@@ -144,7 +143,7 @@ public class TogglePatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentToggleState(anyObject());
+        }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
 
@@ -166,7 +165,7 @@ public class TogglePatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentToggleState(anyObject());
+        }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
 
@@ -183,7 +182,7 @@ public class TogglePatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Toggle pattern = new Toggle();
 
@@ -193,11 +192,11 @@ public class TogglePatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.toggle();
 
@@ -212,7 +211,7 @@ public class TogglePatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Toggle pattern = new Toggle();
 
@@ -222,11 +221,11 @@ public class TogglePatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockRange)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.toggle();
 

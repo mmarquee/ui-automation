@@ -7,7 +7,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,7 +20,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
 
 /**
@@ -55,7 +53,7 @@ public class GridPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentRowCount(anyObject());
+        }).when(rawPattern).getCurrentRowCount(any());
 
         Grid item = new Grid(rawPattern);
 
@@ -77,7 +75,7 @@ public class GridPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getCurrentColumnCount(anyObject());
+        }).when(rawPattern).getCurrentColumnCount(any());
 
         Grid item = new Grid(rawPattern);
 
@@ -99,7 +97,7 @@ public class GridPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentColumnCount(anyObject());
+        }).when(rawPattern).getCurrentColumnCount(any());
 
         Grid item = new Grid(rawPattern);
 
@@ -121,7 +119,7 @@ public class GridPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentRowCount(anyObject());
+        }).when(rawPattern).getCurrentRowCount(any());
 
         Grid item = new Grid(rawPattern);
 
@@ -142,13 +140,13 @@ public class GridPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         IUIAutomationGridPattern mockGrid = Mockito.mock(IUIAutomationGridPattern.class);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         AutomationElement element = spyPattern.getItem(0,0);
     }
@@ -161,7 +159,7 @@ public class GridPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Grid pattern = new Grid();
 
@@ -171,15 +169,15 @@ public class GridPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockGrid)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         spyPattern.getItem(0,0);
 
-        verify(mockGrid, atLeastOnce()).getItem(anyObject(), anyObject(),anyObject());
+        verify(mockGrid, atLeastOnce()).getItem(any(), any(),any());
     }
 
     @Test
@@ -191,7 +189,7 @@ public class GridPatternTest {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(), any());
 
         Grid pattern = new Grid();
 
@@ -201,20 +199,20 @@ public class GridPatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         doReturn(mockGrid)
                 .when(spyPattern)
-                .convertPointerToInterface(anyObject());
+                .convertPointerToInterface(any());
 
         IUIAutomationElement3 mockElement = Mockito.mock(IUIAutomationElement3.class);
 
         doReturn(mockElement)
                 .when(spyPattern)
-                .convertPointerToElementInterface(anyObject());
+                .convertPointerToElementInterface(any());
 
         spyPattern.getItem(0,0);
 
-        verify(mockGrid, atLeastOnce()).getItem(anyObject(), anyObject(),anyObject());
+        verify(mockGrid, atLeastOnce()).getItem(any(), any(),any());
     }
 }

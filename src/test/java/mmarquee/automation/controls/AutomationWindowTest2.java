@@ -190,7 +190,7 @@ public class AutomationWindowTest2 {
 
                 return 1;
             }
-        }).when(elem).getCurrentPropertyValue(anyInt(), anyObject());
+        }).when(elem).getCurrentPropertyValue(anyInt(), any());
 
         AutomationElement localElement = Mockito.mock(AutomationElement.class);
 
@@ -200,7 +200,7 @@ public class AutomationWindowTest2 {
 
         WinDef.HWND handle = wndw.getNativeWindowHandle();
 
-        verify(elem, atLeastOnce()).getCurrentPropertyValue(anyInt(), anyObject());
+        verify(elem, atLeastOnce()).getCurrentPropertyValue(anyInt(), any());
     }
 
     @Test
@@ -211,14 +211,14 @@ public class AutomationWindowTest2 {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
                 return 1;
             }
-        }).when(user32).SetWindowLong(anyObject(), anyInt(), anyInt());
+        }).when(user32).SetWindowLong(any(), anyInt(), anyInt());
 
         doAnswer(new Answer() {
             @Override
             public Boolean answer(InvocationOnMock invocation) throws Throwable {
                 return true;
             }
-        }).when(user32).SetLayeredWindowAttributes(anyObject(), anyInt(), anyByte(), anyInt());
+        }).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
 
         doAnswer(new Answer() {
             @Override
@@ -247,14 +247,14 @@ public class AutomationWindowTest2 {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
                 return 0;
             }
-        }).when(user32).SetWindowLong(anyObject(), anyInt(), anyInt());
+        }).when(user32).SetWindowLong(any(), anyInt(), anyInt());
 
         doAnswer(new Answer() {
             @Override
             public Boolean answer(InvocationOnMock invocation) throws Throwable {
                 return true;
             }
-        }).when(user32).SetLayeredWindowAttributes(anyObject(), anyInt(), anyByte(), anyInt());
+        }).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
 
         doAnswer(new Answer() {
             @Override
@@ -283,14 +283,14 @@ public class AutomationWindowTest2 {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
                 return 1;
             }
-        }).when(user32).SetWindowLong(anyObject(), anyInt(), anyInt());
+        }).when(user32).SetWindowLong(any(), anyInt(), anyInt());
 
         doAnswer(new Answer() {
             @Override
             public Boolean answer(InvocationOnMock invocation) throws Throwable {
                 return false;
             }
-        }).when(user32).SetLayeredWindowAttributes(anyObject(), anyInt(), anyByte(), anyInt());
+        }).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
 
         doAnswer(new Answer() {
             @Override
@@ -318,7 +318,7 @@ public class AutomationWindowTest2 {
 
         AutomationReBar rebar = wndw.getReBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -328,7 +328,7 @@ public class AutomationWindowTest2 {
 
         AutomationStatusBar bar = wndw.getStatusBar();
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -349,16 +349,16 @@ public class AutomationWindowTest2 {
 
                 return 0;
             }
-        }).when(listElement).getCurrentControlType(anyObject());
+        }).when(listElement).getCurrentControlType(any());
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(), any())).thenReturn(result);
 
         AutomationStatusBar bar = wndw.getStatusBar();
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -379,16 +379,16 @@ public class AutomationWindowTest2 {
 
                 return 0;
             }
-        }).when(listElement).getCurrentControlType(anyObject());
+        }).when(listElement).getCurrentControlType(any());
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(), any())).thenReturn(result);
 
         AutomationAppBar bar = wndw.getAppBar(0);
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -409,16 +409,16 @@ public class AutomationWindowTest2 {
 
                 return 0;
             }
-        }).when(listElement).getCurrentControlType(anyObject());
+        }).when(listElement).getCurrentControlType(any());
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(), any())).thenReturn(result);
 
         AutomationTitleBar bar = wndw.getTitleBar();
 
-        verify(element, atLeastOnce()).findAll(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected= ElementNotFoundException.class)
@@ -427,7 +427,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow w = wndw.getWindow("WINDOW-01");
 
-        verify(element, atLeastOnce()).findFirst(anyObject(), anyObject());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
@@ -440,7 +440,7 @@ public class AutomationWindowTest2 {
             // Catch exception to allow verify to work
         }
 
-        verify(element, times(10)).findFirst(anyObject(), anyObject());
+        verify(element, times(10)).findFirst(any(), any());
     }
 
     @Test
@@ -457,7 +457,7 @@ public class AutomationWindowTest2 {
 
                 return new AutomationElement(elem);
             }
-        }).when(element).findFirst(anyObject(), anyObject());
+        }).when(element).findFirst(any(), any());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
@@ -467,6 +467,6 @@ public class AutomationWindowTest2 {
             // Catch exception so test can continue
         }
 
-        verify(element, times(1)).findFirst(anyObject(), anyObject());
+        verify(element, times(1)).findFirst(any(), any());
     }
 }
