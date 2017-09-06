@@ -2,13 +2,12 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -40,7 +39,7 @@ public class AutomationTreeViewTest {
 
         AutomationElement result = new AutomationElement(listElement);
 
-        when(element.findFirst(anyObject(), anyObject())).thenReturn(result);
+        when(element.findFirst(any(), any())).thenReturn(result);
         when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
 
         AutomationTreeView ctrl = new AutomationTreeView(element);

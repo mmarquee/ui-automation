@@ -17,9 +17,8 @@ package mmarquee.automation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.isA;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -69,7 +68,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 		// Using mock since desktop does not provide an automation ID
 		AutomationElement element = getMocketAutomationElement();
 		
-        when(element.element.getCurrentAutomationId(anyObject()))
+        when(element.element.getCurrentAutomationId(any()))
         .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
 
         assertEquals("myAutomationId", element.getAutomationId());
@@ -274,13 +273,13 @@ public class AutomationElementTest extends BaseAutomationTest {
 	public void test_GetPattern_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentPattern(anyInt(), anyObject())).thenReturn(-1);
+		when(mocked.getCurrentPattern(any(), any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.getPattern(1);
 
-		verify(mocked, atLeastOnce()).getCurrentPattern(anyInt(), anyObject());
+		verify(mocked, atLeastOnce()).getCurrentPattern(any(), any());
 	}
 
 	@Test
@@ -290,71 +289,71 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		element.getPattern(1);
 
-		verify(mocked, atLeastOnce()).getCurrentPattern(anyInt(), anyObject());
+		verify(mocked, atLeastOnce()).getCurrentPattern(any(), any());
 	}
 
 	@Test(expected = AutomationException.class)
 	public void test_GetName_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentName(anyObject())).thenReturn(-1);
+		when(mocked.getCurrentName(any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.getName();
 
-		verify(mocked, atLeastOnce()).getCurrentName(anyObject());
+		verify(mocked, atLeastOnce()).getCurrentName(any());
 	}
 
 	@Test(expected = AutomationException.class)
 	public void test_currentIsContentElement_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentIsContentElement(anyObject())).thenReturn(-1);
+		when(mocked.getCurrentIsContentElement(any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.isContentElement();
 
-		verify(mocked, atLeastOnce()).getCurrentIsContentElement(anyObject());
+		verify(mocked, atLeastOnce()).getCurrentIsContentElement(any());
 	}
 
 	@Test(expected = AutomationException.class)
 	public void test_currentIsControlElement_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentIsControlElement(anyObject())).thenReturn(-1);
+		when(mocked.getCurrentIsControlElement(any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.isControlElement();
 
-		verify(mocked, atLeastOnce()).getCurrentIsControlElement(anyObject());
+		verify(mocked, atLeastOnce()).getCurrentIsControlElement(any());
 	}
 
 	@Test(expected = AutomationException.class)
 	public void test_currentOffScreen_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentIsOffscreen(anyObject())).thenReturn(-1);
+		when(mocked.getCurrentIsOffscreen(any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.offScreen();
 
-		verify(mocked, atLeastOnce()).getCurrentIsOffscreen(anyObject());
+		verify(mocked, atLeastOnce()).getCurrentIsOffscreen(any());
 	}
 
 	@Test(expected = AutomationException.class)
 	public void test_currentIsEnabled_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentIsEnabled(anyObject())).thenReturn(-1);
+		when(mocked.getCurrentIsEnabled(any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.isEnabled();
 
-		verify(mocked, atLeastOnce()).getCurrentIsEnabled(anyObject());
+		verify(mocked, atLeastOnce()).getCurrentIsEnabled(any());
 	}
 }

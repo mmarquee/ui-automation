@@ -1,7 +1,9 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
@@ -14,10 +16,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import static org.mockito.Matchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 
@@ -48,14 +50,14 @@ public class SelectionPatternTest2 {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
                 return 0;
             }
-        }).when(rawPattern).getCurrentSelection(anyObject());
+        }).when(rawPattern).getCurrentSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Selection pattern = new Selection(rawPattern);
 
@@ -63,13 +65,13 @@ public class SelectionPatternTest2 {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         IUIAutomationElementArray mockArray = Mockito.mock(IUIAutomationElementArray.class);
 
         doReturn(mockArray)
                 .when(spyPattern)
-                .convertPointerToElementArray(anyObject());
+                .convertPointerToElementArray(any());
 
         spyPattern.getCurrentSelection();
     }
@@ -82,14 +84,14 @@ public class SelectionPatternTest2 {
             public Integer answer(InvocationOnMock invocation) throws Throwable {
                 return 0;
             }
-        }).when(rawPattern).getCurrentSelection(anyObject());
+        }).when(rawPattern).getCurrentSelection(any());
 
         doAnswer(new Answer() {
             @Override
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(-1);
             }
-        }).when(mockUnknown).QueryInterface(anyObject(), anyObject());
+        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Selection pattern = new Selection(rawPattern);
 
@@ -97,7 +99,7 @@ public class SelectionPatternTest2 {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(anyObject());
+                .makeUnknown(any());
 
         spyPattern.getCurrentSelection();
     }
