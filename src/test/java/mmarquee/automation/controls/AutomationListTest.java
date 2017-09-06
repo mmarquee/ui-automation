@@ -95,7 +95,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(anyObject(), anyObject())).thenReturn(result);
+        when(element.findAll(any(), any())).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
