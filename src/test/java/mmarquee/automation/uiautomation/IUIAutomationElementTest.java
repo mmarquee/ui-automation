@@ -32,6 +32,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 /**
@@ -454,7 +455,7 @@ public class IUIAutomationElementTest {
     public void testcurrentPropertyValue_Fails_When_Element_Call_Fails() throws AutomationException {
         IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
 
-        when(mockedElement.getCurrentPropertyValue(any(), any())).thenReturn(-1);
+        when(mockedElement.getCurrentPropertyValue(anyInt(), any())).thenReturn(-1);
 
         AutomationElement element = new AutomationElement(mockedElement);
 
