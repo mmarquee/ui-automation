@@ -30,7 +30,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -50,7 +49,7 @@ public class SelectionItemPatternTest {
     @Mock
     IUIAutomationSelectionItemPattern rawPattern;
 
-    @Spy
+    @Mock
     private Unknown mockUnknown;
 
     @Before
@@ -112,9 +111,7 @@ public class SelectionItemPatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("unnecessary Mockito stubbings")
     public void testIsSelected_Throws_Exception_When_COM_Returns_One() throws Exception {
-        when(rawPattern.getCurrentIsSelected(any(IntByReference.class))).thenReturn(1);
         when(rawPattern.getCurrentIsSelected(any())).thenReturn(1);
 
         SelectionItem item = new SelectionItem(rawPattern);
@@ -155,16 +152,7 @@ public class SelectionItemPatternTest {
     }
 
     @Test
-    @Ignore("unnecessary Mockito stubbings")
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
-
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
-
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
         SelectionItem pattern = new SelectionItem(mockPattern);
@@ -175,26 +163,8 @@ public class SelectionItemPatternTest {
     }
 
     @Test
-    @Ignore("unnecessary Mockito stubbings")
     public void test_addToSelection_Adds_To_Selection() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
-
-        SelectionItem pattern = Mockito.mock(SelectionItem.class);
-
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
-
-        doReturn(mockUnknown)
-                .when(pattern)
-                .makeUnknown(any(Pointer.class));
-
-        doReturn(mockPattern)
-                .when(pattern)
-                .convertPointerToInterface(any(PointerByReference.class));
 
         mockPattern.addToSelection();
 
@@ -202,15 +172,7 @@ public class SelectionItemPatternTest {
     }
 
     @Test
-    @Ignore("unnecessary Mockito stubbings")
     public void test_removeFromSelection_Calls_Method_From_Pattern() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
-
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
         SelectionItem pattern = new SelectionItem(mockPattern);

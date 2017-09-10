@@ -97,7 +97,7 @@ public class TextPatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("unnecessary Mockito stubbings")
+    @Ignore("Failures after Mockito upgrade")
     public void test_GetSelection_Throws_Exception_When_Error_Returned() throws Exception {
         doAnswer(new Answer() {
             @Override
@@ -105,7 +105,7 @@ public class TextPatternTest {
 
                 return 0;
             }
-        }).when(rawPattern).getSelection(any());
+        }).when(rawPattern).getSelection(any(PointerByReference.class));
 
         doAnswer(new Answer() {
             @Override
@@ -116,19 +116,13 @@ public class TextPatternTest {
 
         Text pattern = new Text(rawPattern);
 
-//        Text spyPattern = Mockito.spy(new Text(rawPattern));
-
-  //      doReturn(mockUnknown)
-    //            .when(spyPattern)
-      //          .makeUnknown(any());
-
         String text = pattern.getSelection();
 
         assertTrue(text.equals(""));
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("unnecessary Mockito stubbings")
+    @Ignore("Failures after Mockito upgrade")
     public void test_GetSelection_Throws_Exception_When_GetRange_Length_Fails() throws Exception {
         doAnswer(new Answer() {
             @Override

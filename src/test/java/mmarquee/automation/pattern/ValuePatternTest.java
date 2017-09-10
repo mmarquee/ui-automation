@@ -224,11 +224,11 @@ public class ValuePatternTest {
 
         doReturn(mockUnknown)
                 .when(spyPattern)
-                .makeUnknown(any());
+                .makeUnknown(any(Pointer.class));
 
         doReturn(mockPattern)
                 .when(spyPattern)
-                .convertPointerToInterface(any());
+                .convertPointerToInterface(any(PointerByReference.class));
 
         spyPattern.value();
 
