@@ -39,7 +39,7 @@ public class AutomationEditBoxTest {
 
         AutomationEditBox ctrl = new AutomationEditBox(element, value);
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));
     }

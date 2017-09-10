@@ -15,24 +15,37 @@
  */
 package mmarquee.automation.controls.ribbon;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationTest;
-import org.apache.log4j.Logger;
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
+ *
+ * Tests for AutomationRibbonBar.
  */
-public class AutomationRibbonBarTest extends BaseAutomationTest {
+public class AutomationRibbonBarTest {
 
-    protected Logger logger = Logger.getLogger(AutomationRibbonBarTest.class.getName());
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -40,33 +53,63 @@ public class AutomationRibbonBarTest extends BaseAutomationTest {
 
     @Test
     public void testGetRibbonBar() throws Exception {
-        loadApplication("explorer", getLocal("explorer.title"));
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationRibbonBar ribbon = window.getRibbonBar();
+        when(element.getName()).thenReturn("RIBBON-01");
 
-            String name = ribbon.name();
+        AutomationRibbonBar bar = new AutomationRibbonBar(element);
 
-            assertTrue(name.equals("UIRibbonDockTop"));
-        } finally {
-            closeApplication();
-        }
+        String name = bar.getName();
+
+        assertEquals(name, "RIBBON-01");
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void testGetRibbonCommandBar_Throws_Exception_When_Not_Found() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        List<AutomationElement> collection = new ArrayList<>();
+
+        when(element.findAll(any(), any())).thenReturn(collection);
+
+        AutomationRibbonBar workPane = new AutomationRibbonBar(element);
+
+        workPane.getRibbonCommandBar();
+
+        Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
-    public void testGetRibbonCommandBar() throws Exception {
-        loadApplication("explorer", getLocal("explorer.title"));
+    public void testGetRibbonCommandBar_When_Element_Is_Found() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationRibbonBar ribbon = window.getRibbonBar();
+        List<AutomationElement> collection = new ArrayList<>();
 
-            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-            String name = commandBar.name();
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    PointerByReference reference = (PointerByReference) args[0];
 
-            assertTrue(name.equals("Ribbon"));
-        } finally {
-            closeApplication();
-        }
+                    String value = "UIRibbonCommandBar";
+                    Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
+                    pointer.setWideString(0, value);
+
+                    reference.setValue(pointer);
+
+                    return 0;
+                }
+        );
+
+        collection.add(new AutomationElement(elem));
+
+        when(element.findAll(any(), any())).thenReturn(collection);
+
+        AutomationRibbonBar bar = new AutomationRibbonBar(element);
+
+        bar.getRibbonCommandBar();
+
+        Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 }

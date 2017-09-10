@@ -27,7 +27,7 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the RadioButton element.
  */
-public class AutomationRadioButton extends AutomationBase {
+public class AutomationRadioButton extends AutomationBase implements Selectable {
 
     private SelectionItem selectItemPattern;
 
@@ -61,7 +61,7 @@ public class AutomationRadioButton extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public void selectItem() throws AutomationException, PatternNotFoundException {
+    public void select() throws AutomationException, PatternNotFoundException {
         if (this.selectItemPattern == null) {
             selectItemPattern = this.getSelectItemPattern();
         }

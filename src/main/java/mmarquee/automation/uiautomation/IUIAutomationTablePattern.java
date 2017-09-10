@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Function;
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
@@ -30,8 +28,7 @@ public interface IUIAutomationTablePattern extends IUnknown {
     /**
      * The interface IID for QueryInterface et al
      */
-    Guid.IID IID = new Guid.IID(
-            "{620E691C-EA96-4710-A850-754B24CE2417}");
+    Guid.IID IID = new Guid.IID("{620E691C-EA96-4710-A850-754B24CE2417}");
 
     int AddRef();
     int Release();
@@ -40,50 +37,4 @@ public interface IUIAutomationTablePattern extends IUnknown {
     int getCurrentRowHeaders(PointerByReference retVal);
     int getCurrentColumnHeaders(PointerByReference retVal);
     int getCurrentRowOrColumnMajor(IntByReference retVal);
-
-    class Converter {
-        private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTablePattern
-
-        public static IUIAutomationTablePattern PointerToInterface(final PointerByReference ptr) {
-            final Pointer interfacePointer = ptr.getValue();
-            final Pointer vTablePointer = interfacePointer.getPointer(0);
-            final Pointer[] vTable = new Pointer[METHODS];
-            vTablePointer.read(0, vTable, 0, vTable.length);
-            return new IUIAutomationTablePattern() {
-                // IUnknown
-
-                @Override
-                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
-                }
-
-                @Override
-                public int AddRef() {
-                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int Release() {
-                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int getCurrentRowHeaders(PointerByReference retVal){
-                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
-
-                public int getCurrentColumnHeaders(PointerByReference retVal){
-                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
-
-                public int getCurrentRowOrColumnMajor(IntByReference retVal) {
-                    Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
-            };
-        }
-    }
 }

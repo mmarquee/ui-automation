@@ -53,7 +53,7 @@ public class TestMain extends TestBase {
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Form1");
-            String name = window.name();
+            String name = window.getName();
             logger.info(name);
 
             Object framework = window.getFramework();
@@ -105,7 +105,7 @@ public class TestMain extends TestBase {
             }
 
             AutomationRadioButton radio = window.getRadioButton(1);
-            radio.selectItem();
+            radio.select();
 
             AutomationStatusBar statusBar = window.getStatusBar();
 
@@ -118,7 +118,7 @@ public class TestMain extends TestBase {
             try {
                 AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
                 cb1.setText("Replacements");
-                String txt = cb1.text();
+                String txt = cb1.getValue();
 
                 cb1.getClickablePoint();
 
@@ -158,7 +158,7 @@ public class TestMain extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            String itemName = cell1.value();
+            String itemName = cell1.getValue();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());
@@ -187,7 +187,7 @@ public class TestMain extends TestBase {
                 List<AutomationListItem> items = list.getItems();
 
                 for(AutomationListItem item: items) {
-                    logger.info(" *" +item.name());
+                    logger.info(" *" +item.getName());
                 }
 
             } catch (AutomationException ex) {
@@ -212,7 +212,7 @@ public class TestMain extends TestBase {
             this.rest();
 
             AutomationToolBar toolbar = window.getToolBar(1);
-            logger.info(toolbar.name());
+            logger.info(toolbar.getName());
 
             // Looks like the button is a problem with Delphi
             AutomationToolBarButton btn0 = toolbar.getToolbarButton(0);

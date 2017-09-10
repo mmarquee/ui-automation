@@ -1,6 +1,8 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
 import org.junit.Before;
@@ -10,6 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
@@ -18,6 +23,8 @@ import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
+ *
+ * AutomationContainer tests.
  */
 public class AutomationContainerTest2 {
     @Before
@@ -44,7 +51,7 @@ public class AutomationContainerTest2 {
 
         AutomationWindow window = new AutomationWindow(element, pattern, container);
 
-        assertTrue(window.name().equals("NAME"));
+        assertTrue(window.getName().equals("NAME"));
     }
 
     @Test
@@ -81,12 +88,25 @@ public class AutomationContainerTest2 {
     }
 
     @Test
-    @Ignore("Need to mock more of the element, etc.")
     public void testGetMaskedEdit_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getMaskedEdit("PANEL-01");
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-        verify(element, atLeastOnce()).findFirst(any(), any());
+        List<AutomationElement> list = new ArrayList<>();
+
+        AutomationElement elm = Mockito.mock(AutomationElement.class);
+
+        Mockito.when(elm.getControlType()).thenReturn(ControlType.Edit.getValue());
+        Mockito.when(elm.getClassName()).thenReturn("TAutomatedMaskEdit");
+        Mockito.when(elm.getName()).thenReturn("AutomatedMaskEdit1");
+
+        list.add(elm);
+
+        Mockito.when(elem.findAll(any(), any())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        wndw.getMaskedEdit("AutomatedMaskEdit1");
+
+        verify(elem, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
@@ -146,9 +166,31 @@ public class AutomationContainerTest2 {
     }
 
     @Test
-    @Ignore("Need to mock findall")
-    public void testGetCustom_By_ControlType_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+    public void testGetCustom_By_ControlType_Calls_findAll_From_Element() throws Exception {
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
+
+        List<AutomationElement> list = new ArrayList<>();
+
+        AutomationElement elm = Mockito.mock(AutomationElement.class);
+
+        Mockito.when(elm.getName()).thenReturn("PANEL-01");
+        Mockito.when(elm.getClassName()).thenReturn("CUSTOM-PANEL");
+
+        list.add(elm);
+
+        Mockito.when(elem.findAll(any(), any())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        wndw.getCustomByControlType("CUSTOM-PANEL");
+
+        verify(elem, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void testGetCustom_By_ControlType_Throws_Exception_When_No_Found() throws Exception {
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
+
+        AutomationWindow wndw = new AutomationWindow(elem, window, container);
         wndw.getCustomByControlType("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -203,12 +245,25 @@ public class AutomationContainerTest2 {
     }
 
     @Test
-    @Ignore("Needs further mocking")
     public void testgetMaskedEdit_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getMaskedEdit("AutomatedMaskEdit1");
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-        verify(element, atLeastOnce()).findFirst(any(), any());
+        List<AutomationElement> list = new ArrayList<>();
+
+        AutomationElement elm = Mockito.mock(AutomationElement.class);
+
+        Mockito.when(elm.getControlType()).thenReturn(ControlType.Edit.getValue());
+        Mockito.when(elm.getClassName()).thenReturn("TAutomationMaskEdit");
+        Mockito.when(elm.getName()).thenReturn("AutomatedMaskEdit1");
+
+        list.add(elm);
+
+        Mockito.when(elem.findAll(any(), any())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        wndw.getMaskedEdit(0);
+
+        verify(elem, atLeastOnce()).findAll(any(), any());
     }
 
     @Test

@@ -42,7 +42,7 @@ public class AutomationProgressBarTest {
 
         AutomationProgressBar bar = new AutomationProgressBar(element, range);
 
-        String name = bar.name();
+        String name = bar.getName();
 
         assertTrue(name.equals("NAME"));
     }

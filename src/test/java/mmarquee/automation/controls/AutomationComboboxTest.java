@@ -22,10 +22,10 @@ import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +35,17 @@ import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
+ *
+ * Tests for Combobox functionality
  */
 public class AutomationComboboxTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
@@ -51,7 +58,7 @@ public class AutomationComboboxTest {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-        String name = combo.name();
+        String name = combo.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -66,7 +73,7 @@ public class AutomationComboboxTest {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-        String name = combo.text();
+        String name = combo.getValue();
 
         assertTrue(name.equals("NAME"));
     }
@@ -183,10 +190,9 @@ public class AutomationComboboxTest {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value);
 
-        combo.text();
+        combo.getValue();
 
         verify(value, atLeast(1)).value();
-
     }
 
     @Test
@@ -196,20 +202,15 @@ public class AutomationComboboxTest {
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-//        when(elem.getCurrentControlType())
+        Mockito.when(elem.getCurrentControlType(any())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    IntByReference reference = (IntByReference)args[0];
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+                    reference.setValue(50007);
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
-
-                reference.setValue(50007);
-
-                return 0;
-            }
-        }).when(elem).getCurrentControlType(any());
+                    return 0;
+                });
 
         list.add(new AutomationElement(elem));
 

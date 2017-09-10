@@ -20,8 +20,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,6 +32,8 @@ import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.atLeastOnce;
@@ -40,8 +41,11 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
+ *
+ * Tests for the Selection pattern.
  */
 @RunWith(MockitoJUnitRunner.class)
+@PrepareForTest(IUIAutomationSelectionItemPatternConverter.class)
 public class SelectionPatternTest {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
@@ -54,7 +58,20 @@ public class SelectionPatternTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test(expected= AutomationException.class)
+/*
+    Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
+           invocation -> {
+               Object[] args = invocation.getArguments();
+               IntByReference reference = (IntByReference) args[0];
+
+               reference.setValue(0);
+
+               return 0;
+           }
+        );
+     */
+
+    @Test(expected=AutomationException.class)
     public void test_getCurrentSelection_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
         doAnswer(new Answer() {
             @Override
@@ -132,5 +149,67 @@ public class SelectionPatternTest {
         spyPattern.getCurrentSelection();
 
         verify(spyPattern, atLeastOnce()).getCurrentSelection();
+    }
+
+    @Test(expected = AutomationException.class)
+    public void test_getSelection_Calls_getCurrentSelection_From_rawPattern_Throws_Exception_When_Error_Returned() throws AutomationException {
+        doAnswer(new Answer() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                return -1;
+            }
+        }).when(rawPattern).getCurrentSelection(any());
+
+        Selection pattern = new Selection(rawPattern);
+
+        pattern.getSelection();
+
+        Mockito.verify(rawPattern, atLeastOnce()).getCurrentSelection(any());
+    }
+
+    @Test
+    @Ignore("More a work in progress")
+    public void test_getSelection_Calls_getCurrentSelection_From_rawPattern() throws AutomationException {
+        Mockito.when(rawPattern.getCurrentSelection(any())).thenAnswer(
+                invocation -> {
+                    return 0;
+                }
+        );
+
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(any(), any());
+
+        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+
+//        Unknown unk = Mockito.mock(Unknown.class);
+
+  //      Mockito.when(unk.QueryInterface(any(), any())).thenReturn(new WinNT.HRESULT(0));
+//
+  //      doReturn(unk)
+    //            .when(spyPattern)
+      //          .makeUnknown(any());
+
+//        List<AutomationElement> list = new ArrayList<>();
+
+  //      doReturn(list)
+    //        .when(spyPattern)
+      //      .collectionToList(any());
+
+        PowerMockito.mockStatic(IUIAutomationSelectionItemPatternConverter.class);
+
+        IUIAutomationSelectionItemPattern rawPattern
+                = Mockito.mock(IUIAutomationSelectionItemPattern.class);
+
+        Mockito.when(IUIAutomationSelectionItemPatternConverter.PointerToInterface(any()))
+                .thenReturn(rawPattern);
+
+        spyPattern.getSelection();
+
+//        Mockito.verify(rawPattern, atLeastOnce()).getCurrentSelection(any());
     }
 }

@@ -26,6 +26,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
+import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
@@ -140,6 +141,6 @@ public class Grid extends BasePattern {
     }
 
     public IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridPattern.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationGridPatternConverter.PointerToInterface(pUnknownA);
     }
 }

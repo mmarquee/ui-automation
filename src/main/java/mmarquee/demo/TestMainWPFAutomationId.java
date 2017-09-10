@@ -70,7 +70,7 @@ public class TestMainWPFAutomationId extends TestBase {
             WinDef.POINT point = applicationWindow.getClickablePoint();
             logger.info("Clickable point = " + point.toString());
 
-            String name = applicationWindow.name();
+            String name = applicationWindow.getName();
             logger.info(name);
 
             try {
@@ -88,7 +88,7 @@ public class TestMainWPFAutomationId extends TestBase {
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
             AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("idBtn1");
-            logger.info(btnClickMe.name());
+            logger.info(btnClickMe.getName());
             btnClickMe.click();
 
             logger.info("++ ALL DONE ++");

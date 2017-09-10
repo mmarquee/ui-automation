@@ -16,15 +16,10 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.Text;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -45,7 +40,7 @@ public class AutomationDocumentTest {
 
         AutomationDocument document = new AutomationDocument(element, pattern);
 
-        String name = document.name();
+        String name = document.getName();
 
         assertTrue(name.equals("NAME"));
     }

@@ -39,7 +39,7 @@ public class AutomationRadioButtonTest {
 
         AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
 
-        String name = rb1.name();
+        String name = rb1.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -67,7 +67,7 @@ public class AutomationRadioButtonTest {
 
         AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
 
-        rb1.selectItem();
+        rb1.select();
 
         verify(selection, atLeastOnce()).select();
     }

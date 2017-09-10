@@ -54,7 +54,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3.Converter.PointerToInterface(root);
+            return IUIAutomationElement3Converter.PointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -82,7 +82,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
+            this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
         }
     }
 
@@ -94,7 +94,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement3 rootElement = IUIAutomationElement3.Converter.PointerToInterface(root);
+            IUIAutomationElement3 rootElement = IUIAutomationElement3Converter.PointerToInterface(root);
 
             Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
             variant.setValue(Variant.VT_INT, ControlType.Window.getValue());
@@ -112,7 +112,7 @@ public class IUIAutomationWindowPatternTest {
 
             WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
-            return IUIAutomationElement3.Converter.PointerToInterface(element);
+            return IUIAutomationElement3Converter.PointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -149,7 +149,7 @@ public class IUIAutomationWindowPatternTest {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationWindowPattern.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationWindowPattern pattern =
-                    IUIAutomationWindowPattern.Converter.PointerToInterface(pUnknownA);
+                    IUIAutomationWindowPatternConverter.PointerToInterface(pUnknownA);
         } else {
             fail("Failed to get WindowPattern");
         }

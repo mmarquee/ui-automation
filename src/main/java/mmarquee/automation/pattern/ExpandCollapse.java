@@ -21,7 +21,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -59,7 +59,7 @@ public class ExpandCollapse extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationExpandCollapsePattern.Converter.PointerToInterface(pbr);
+                return this.convertPointerToInterface(pbr);
             } else {
                 throw new AutomationException(result0.intValue());
             }
@@ -102,5 +102,14 @@ public class ExpandCollapse extends BasePattern {
         }
 
         return ibr.getValue() == 1;
+    }
+
+    /**
+     * Gets the interface from the raw PointerByReference
+     * @param pUnknown The Unknown pointer
+     * @return The pattern
+     */
+    public IUIAutomationExpandCollapsePattern convertPointerToInterface(PointerByReference pUnknown) {
+        return IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknown);
     }
 }

@@ -59,7 +59,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         super(element);
 
         this.user32 = User32.INSTANCE;
-        this.windowPattern = this.getWindowPattern();
+//        this.windowPattern = this.getWindowPattern();
     }
 
     /**
@@ -165,8 +165,13 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Waits for this window to become idle.
      * @param timeout The timeout
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
-    public void waitForInputIdle(int timeout) throws AutomationException {
+    public void waitForInputIdle(int timeout) throws AutomationException, PatternNotFoundException {
+        if (this.windowPattern == null) {
+            this.windowPattern = this.getWindowPattern();
+        }
+
         this.windowPattern.waitForInputIdle(timeout);
     }
 
@@ -174,7 +179,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Maximize the window
      * @throws AutomationException Something has gone wrong
      */
-    public void maximize() throws AutomationException {
+    public void maximize() throws AutomationException, PatternNotFoundException {
+        if (this.windowPattern == null) {
+            this.windowPattern = this.getWindowPattern();
+        }
+
         this.windowPattern.maximize();
     }
 
@@ -182,7 +191,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Minimize the window
      * @throws AutomationException Something has gone wrong
      */
-    public void minimize() throws AutomationException {
+    public void minimize() throws AutomationException, PatternNotFoundException {
+        if (this.windowPattern == null) {
+            this.windowPattern = this.getWindowPattern();
+        }
+
         this.windowPattern.minimize();
     }
 
@@ -232,7 +245,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @return True if modal
      * @throws AutomationException Something has gone wrong
      */
-    public boolean isModal() throws AutomationException {
+    public boolean isModal() throws AutomationException, PatternNotFoundException {
+        if (this.windowPattern == null) {
+            this.windowPattern = this.getWindowPattern();
+        }
+
         return this.windowPattern.isModal();
     }
 
@@ -241,7 +258,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @return True if topmost
      * @throws AutomationException Something has gone wrong
      */
-    public boolean isTopMost() throws AutomationException {
+    public boolean isTopMost() throws AutomationException, PatternNotFoundException {
+        if (this.windowPattern == null) {
+            this.windowPattern = this.getWindowPattern();
+        }
+
         return this.windowPattern.isTopMost();
     }
 

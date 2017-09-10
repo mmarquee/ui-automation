@@ -65,6 +65,7 @@ public class AutomationTabItem extends AutomationContainer {
         if (this.selectItemPattern == null) {
             selectItemPattern = this.getSelectItemPattern();
         }
+
         this.selectItemPattern.select();
     }
 }

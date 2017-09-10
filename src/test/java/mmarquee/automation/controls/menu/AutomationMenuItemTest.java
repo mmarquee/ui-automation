@@ -15,162 +15,179 @@
  */
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.controls.AutomationTitleBar;
+import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Invoke;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by Mark Humphreys on 04/12/2016.
+ *
+ * Tests for menu item functionality
  */
 public class AutomationMenuItemTest extends BaseAutomationTest {
 
-    protected Logger logger = Logger.getLogger(AutomationToolbarButtonTest.class.getName());
-
-    @Test
-    public void testGetMenuItem() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
-
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
-
-            AutomationMainMenu menu = sb.getMenuBar();
-
-            List<AutomationMenuItem> items = menu.getItems();
-
-            assertTrue(items.size() == 1);
-        } finally {
-            closeApplication();
-        }
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetName() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-            AutomationMainMenu menu = sb.getMenuBar();
+        when(mocked_element.getName()).thenReturn("NAME");
 
-            List<AutomationMenuItem> items = menu.getItems();
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
 
-            AutomationMenuItem item = items.get(0);
-
-            logger.info(item.name());
-
-            assertEquals(getLocal("systemmenu.name"),item.name());
-        } finally {
-            closeApplication();
-        }
+        assertEquals("NAME", item.getName());
     }
 
     @Test
     public void testIsExpanded_Is_False_When_Not_Expanded() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-            AutomationMainMenu menu = sb.getMenuBar();
+        when(collapse.isExpanded()).thenReturn(false);
 
-            List<AutomationMenuItem> items = menu.getItems();
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
 
-            AutomationMenuItem item = items.get(0);
-
-            logger.info(item.isExpanded());
-
-            assertFalse(item.isExpanded());
-        } finally {
-            closeApplication();
-        }
+        assertFalse(item.isExpanded());
     }
 
     @Test
-    @Ignore // Should choose a different menu item
     public void testIsExpanded_Is_True_When_Expanded() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-            AutomationMainMenu menu = sb.getMenuBar();
+        when(collapse.isExpanded()).thenReturn(true);
 
-            List<AutomationMenuItem> items = menu.getItems();
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
 
-            AutomationMenuItem item = items.get(0);
-
-            item.expand();
-
-            window.waitForInputIdle(5000);
-
-            logger.info(item.isExpanded());
-
-            assertTrue(item.isExpanded());
-        } finally {
-            closeApplication();
-        }
+        assertTrue(item.isExpanded());
     }
 
     @Test
     public void testClick() throws Exception {
-        loadApplication("notepad.exe", getLocal("notepad.title"));
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationMainMenu menu = window.getMainMenu();
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-            AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
+        when(collapse.isExpanded()).thenReturn(true);
 
-            item.click();
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
 
-            this.andRest();
+        item.click();
 
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
-
-            assertTrue("Notepad should have quit", hwnd == null);
-
-        } finally {
-            // Should be closed already
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
-
-            if (hwnd != null) {
-                closeApplication();
-            }
-        }
+        verify(invoke, atLeastOnce()).invoke();
     }
 
     @Test
-    public void testMenuFudge() throws Exception {
-        loadApplication("notepad.exe", getLocal("notepad.title"));
+    public void test_GetItems_Returns_Items_When_List_Not_Empty() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationMainMenu menu = window.getMainMenu();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            int keyCode = KeyEvent.getExtendedKeyCodeForChar(getLocal("menu.exit.acc").toCharArray()[0]);
-            menu.menuItemFudge(getLocal("menu.file"), keyCode);
+        List<AutomationElement> elements = new ArrayList<>();
+        elements.add(elem);
 
-            this.andRest();
+        when(mocked_element.findAll(any(), any())).thenReturn(elements);
 
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
 
-            assertTrue("Notepad should have quit", hwnd == null);
-        } finally {
-            // Should be closed already
-            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, this.windowName);
+        when(collapse.isExpanded()).thenReturn(true);
 
-            if (hwnd != null) {
-                closeApplication();
-            }
-        }
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        List<AutomationMenuItem> list = item.getItems();
+
+        assertEquals(elements.size(), list.size());
+    }
+
+    @Test
+    public void test_GetItems_Returns_No_Items_When_List_Empty() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        List<AutomationMenuItem> list = item.getItems();
+
+        assertEquals(0, 0);
+    }
+
+    @Test
+    public void test_Expand_Calls_Expand_From_Pattern() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        item.expand();
+
+        Mockito.verify(collapse, atLeastOnce()).expand();
+    }
+
+    @Test
+    public void test_Collapse_Calls_Collapse_From_Pattern() throws Exception {
+        AutomationElement mocked_element =
+                Mockito.mock(AutomationElement.class);
+
+        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
+        Invoke invoke = Mockito.mock(Invoke.class);
+
+        when(collapse.isExpanded()).thenReturn(true);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        item.collapse();
+
+        Mockito.verify(collapse, atLeastOnce()).collapse();
     }
 }

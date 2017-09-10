@@ -15,19 +15,38 @@
  */
 package mmarquee.automation.controls.ribbon;
 
-import mmarquee.automation.BaseAutomationTest;
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationElement;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.when;
 
-import org.apache.log4j.Logger;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Mark Humphreys on 01/12/2016.
+ *
+ * Tests for RibbonWorkPane controls
  */
-public class AutomationRibbonWorkPaneTest extends BaseAutomationTest {
+public class AutomationRibbonWorkPaneTest {
 
-    protected Logger logger = Logger.getLogger(AutomationRibbonWorkPaneTest.class.getName());
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -35,43 +54,60 @@ public class AutomationRibbonWorkPaneTest extends BaseAutomationTest {
 
     @Test
     public void testName() throws Exception {
-        loadApplication("explorer", getLocal("explorer.title"));
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        when(element.getName()).thenReturn("NAME");
+        AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(element);
 
-        try {
-            AutomationRibbonBar ribbon = window.getRibbonBar();
+        String name = pane.getName();
 
-            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+        assertTrue(name.equals("NAME"));
+    }
 
-            AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+    @Test(expected = ElementNotFoundException.class)
+    public void testGetNUIPane_Throws_Exception_When_NUIPane_Not_Found() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-            String name = workPane.name();
+        List<AutomationElement> collection = new ArrayList<>();
 
-            assertEquals("Ribbon",name);
-        } finally {
-            closeApplication();
-        }
+        when(element.findAll(any(), any())).thenReturn(collection);
+
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
+
+        workPane.getNUIPane(0);
+
+        Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
-    public void testGetNUIPane() throws Exception {
-        loadApplication("explorer", getLocal("explorer.title"));
+    public void testGetNUIPane_When_NUIPane_Is_Found() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationRibbonBar ribbon = window.getRibbonBar();
+        List<AutomationElement> collection = new ArrayList<>();
 
-            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
-            AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    PointerByReference reference = (PointerByReference) args[0];
 
-            AutomationNUIPane uiPane = workPane.getNUIPane(0);
-            logger.info("First NUIPane is " + uiPane.name());
+                    String value = "NUIPane";
+                    Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
+                    pointer.setWideString(0, value);
 
-            String name = uiPane.name();
+                    reference.setValue(pointer);
 
-            assertEquals("",name);
-        } finally {
-            closeApplication();
-        }
+                    return 0;
+                });
+
+        collection.add(new AutomationElement(elem));
+
+        when(element.findAll(any(), any())).thenReturn(collection);
+
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
+
+        workPane.getNUIPane(0);
+
+        Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
-
 }

@@ -28,7 +28,7 @@ import mmarquee.automation.pattern.Value;
  *
  * Wrapper around the edit box element
  */
-public class AutomationEditBox extends AutomationBase {
+public class AutomationEditBox extends AutomationBase implements Valueable {
 
     private Value valuePattern;
     private Text textPattern;

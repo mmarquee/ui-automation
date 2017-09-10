@@ -38,6 +38,8 @@ import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 20/07/2016.
+ *
+ * Tests for the AutomationElement class behaviour.
  */
 public class AutomationElementTest extends BaseAutomationTest {
 	static {
@@ -242,7 +244,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		AutomationElement element = new AutomationElement(mocked);
 
-		point = element.getClickablePoint();
+		element.getClickablePoint();
 	}
 
 	@Test(expected = AutomationException.class)
@@ -252,11 +254,9 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
 
-		WinDef.RECT rect = new WinDef.RECT();
-
 		AutomationElement element = new AutomationElement(mocked);
 
-		rect = element.getBoundingRectangle();
+		element.getBoundingRectangle();
 	}
 
 	@Test

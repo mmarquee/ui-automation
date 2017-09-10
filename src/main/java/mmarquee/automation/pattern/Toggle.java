@@ -6,6 +6,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
+import mmarquee.automation.uiautomation.IUIAutomationTogglePatternConverter;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**
@@ -72,6 +73,6 @@ public class Toggle extends BasePattern {
     }
 
     public IUIAutomationTogglePattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationTogglePattern.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationTogglePatternConverter.PointerToInterface(pUnknown);
     }
 }

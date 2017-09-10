@@ -31,7 +31,7 @@ import java.util.List;
  *
  * Wrapper for the ComboBox element.
  */
-public class AutomationComboBox extends AutomationBase {
+public class AutomationComboBox extends AutomationBase implements Expandable, Valueable {
     private ExpandCollapse collapsePattern;
     private Value valuePattern;
 
@@ -70,7 +70,7 @@ public class AutomationComboBox extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Pattern not found
      */
-    public String text() throws AutomationException, PatternNotFoundException {
+    public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
             this.valuePattern = this.getValuePattern();
         }

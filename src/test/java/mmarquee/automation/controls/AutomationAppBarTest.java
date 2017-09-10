@@ -36,9 +36,8 @@ public class AutomationAppBarTest {
 
         AutomationAppBar ctrl = new AutomationAppBar(element);
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));
     }
-
 }

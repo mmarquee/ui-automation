@@ -84,7 +84,7 @@ public class UIAutomation extends BaseAutomation {
 
         WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
+            this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
         }
 
         PointerByReference pRoot = new PointerByReference();
@@ -96,7 +96,7 @@ public class UIAutomation extends BaseAutomation {
         WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            this.rootElement = new AutomationElement(IUIAutomationElement3.Converter.PointerToInterface(pRoot));
+            this.rootElement = new AutomationElement(IUIAutomationElement3Converter.PointerToInterface(pRoot));
         }
     }
 
@@ -149,7 +149,7 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Launches the application
+     * Launches the application, from a given directory.
      *
      * @param command The command to be called
      * @return AutomationApplication that represents the application
@@ -648,7 +648,7 @@ public class UIAutomation extends BaseAutomation {
         if (COMUtils.SUCCEEDED(resultA)) {
 
             IUIAutomationTreeWalker walker =
-                    IUIAutomationTreeWalker.Converter.PointerToInterface(pUnknownA);
+                    IUIAutomationTreeWalkerConverter.PointerToInterface(pUnknownA);
 
             return new AutomationTreeWalker(walker);
         } else {

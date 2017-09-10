@@ -16,12 +16,13 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 21/09/2016.
  */
-public interface Expandable {
-    void expand() throws AutomationException;
-    void collapse() throws AutomationException;
-    boolean isExpanded() throws AutomationException;
+public interface Expandable extends Automatable {
+    void expand() throws AutomationException, PatternNotFoundException;
+    void collapse() throws AutomationException, PatternNotFoundException;
+    boolean isExpanded() throws AutomationException, PatternNotFoundException;
 }

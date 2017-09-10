@@ -46,7 +46,7 @@ public class AutomationStatusBarTest {
 
         AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
-        String name = statusBar.name();
+        String name = statusBar.getName();
 
         assertTrue(name.equals("NAME"));
     }

@@ -16,9 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.pattern.Range;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -45,7 +43,7 @@ public class AutomationSliderTest {
 
         AutomationSlider slider = new AutomationSlider(element, pattern);
 
-        String name = slider.name();
+        String name = slider.getName();
 
         assertTrue(name.equals("NAME"));
     }

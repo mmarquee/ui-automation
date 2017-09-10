@@ -25,6 +25,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
 
 /**
  * Created by Mark Humphreys on 25/02/2016.
@@ -132,6 +133,6 @@ public class SelectionItem extends BasePattern {
     }
 
     public IUIAutomationSelectionItemPattern convertPointerToInterface(PointerByReference ref) {
-        return IUIAutomationSelectionItemPattern.Converter.PointerToInterface(ref);
+        return IUIAutomationSelectionItemPatternConverter.PointerToInterface(ref);
     }
 }

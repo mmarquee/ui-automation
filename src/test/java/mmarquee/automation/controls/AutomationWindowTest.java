@@ -15,155 +15,182 @@
  */
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.User32;
-import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.controls.rebar.AutomationReBar;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.utils.Utils;
-import org.apache.log4j.Logger;
-import org.junit.After;
+import mmarquee.automation.pattern.Window;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 25/11/2016.
+ *
+ * Tests for AutomatedWindow class
  */
-public class AutomationWindowTest extends BaseAutomationTest {
+public class AutomationWindowTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    protected Logger logger = Logger.getLogger(AutomationWindowTest.class.getName());
-
-    @After
-    public void tearDown() {
-        // Must be a better way of doing this????
-        this.andRest();
-
-        // Notepad _MIGHT_ still be running, so close it if it is
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
-        }
-    }
-
     @Before
-    public void setUp() throws Exception {
-        // Notepad _MIGHT_ still be running, so close it if it is
-        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, "Untitled - Notepad");
-
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
-        }
-
-        instance = UIAutomation.getInstance();
-
-        application = instance.launch("notepad.exe");
-
-        application.waitForInputIdle();
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetWindowName_Matches_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
-        AutomationWindow window = application.getWindow(getLocal("notepad.title"));
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        when(element.getName()).thenReturn("Name-01");
 
-        assertEquals(getLocal("notepad.title"), window.name());
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(window.isModal()).thenReturn(true);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        assertEquals("Name-01", windw.getName());
     }
 
     @Test
-    public void test_getSystemMenu() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetWindowName_Does_Not_Match_Searched_For_Name()
+            throws AutomationException, PatternNotFoundException {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        when(element.getName()).thenReturn("Name-01");
 
-        try {
-            AutomationSystemMenu sm = window.getSystemMenu();
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-            String name = sm.name();
+        when(window.isModal()).thenReturn(true);
 
-            logger.info(name);
+        AutomationWindow windw = new AutomationWindow(element, window, container);
 
-            assertEquals(getLocal("systemmenu.name"),name);
-        } finally {
-            closeApplication();
-        }
+        assertNotEquals("Wrong-01", windw.getName());
     }
 
     @Test
-    public void testGetTitleBar() throws Exception {
+    public void test_getSystemMenu_Does_Not_Throw_Exception() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        loadApplication("apps\\Project1.exe", "Form1");
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            String name = sb.name();
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(elem);
 
-            logger.info(name);
+        when(element.findAll(any(), any())).thenReturn(list);
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        List<AutomationElement> menus = new ArrayList<>();
+
+        AutomationElement item = Mockito.mock(AutomationElement.class);
+
+        menus.add(item);
+
+        when(elem.findAll(any(), any())).thenReturn(menus);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        windw.getSystemMenu();
     }
 
     @Test
-    @Ignore // Fails to find appbar
-    public void testGetAppBar_By_Index() throws Exception {
-        // Needs a different application to test against
-        loadApplication("apps\\Project1.exe", "Form1");
+    public void testGetTitleBar_Does_Not_Throw_Exception() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationAppBar sb = window.getAppBar(0);
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-            String name = sb.name();
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-            logger.info(name);
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(elem);
 
-            assertTrue(name.equals(""));
-        } finally {
-            closeApplication();
-        }
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        List<AutomationElement> menus = new ArrayList<>();
+
+        AutomationElement item = Mockito.mock(AutomationElement.class);
+
+        menus.add(item);
+
+        when(elem.findAll(any(), any())).thenReturn(menus);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        windw.getTitleBar();
+    }
+
+    @Test
+    public void testGetAppBar_By_Index_Does_Not_Throw_Exception() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        AutomationElement elem = Mockito.mock(AutomationElement.class);
+
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(elem);
+
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        List<AutomationElement> menus = new ArrayList<>();
+
+        AutomationElement item = Mockito.mock(AutomationElement.class);
+
+        menus.add(item);
+
+        when(elem.findAll(any(), any())).thenReturn(menus);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        windw.getAppBar(0);
+    }
+
+    @Test
+    public void testIsModal_Is_True_For_Modal_Window()
+            throws AutomationException, PatternNotFoundException {
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        when(window.isModal()).thenReturn(true);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container);
+
+        assertTrue(windw.isModal());
     }
 
     @Test
     public void testIsModal_Is_False_For_Non_Modal_Window()
             throws AutomationException, PatternNotFoundException {
-        AutomationWindow window = application.getWindow(getLocal("notepad.title"));
-        assertFalse("Notepad isn't modal!", window.isModal());
-    }
 
-    @Test
-    public void testGetMenuItem() throws Exception {
-        loadApplication("apps\\Project1.exe", "Form1");
+        AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        try {
-            AutomationTitleBar sb = window.getTitleBar();
+        Window window = Mockito.mock(Window.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-            AutomationMainMenu menu = sb.getMenuBar();
+        when(window.isModal()).thenReturn(false);
 
-            List<AutomationMenuItem> items = menu.getItems();
+        AutomationWindow windw = new AutomationWindow(element, window, container);
 
-
-
-            logger.info(menu.getItems().get(0).name());
-
-            assertTrue(items.size() == 1);
-        } finally {
-            closeApplication();
-        }
+        assertFalse(windw.isModal());
     }
 }
 

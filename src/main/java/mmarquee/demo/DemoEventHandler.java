@@ -36,7 +36,7 @@ public class DemoEventHandler extends TestBase {
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Form1");
-            String name = window.name();
+            String name = window.getName();
             logger.info(name);
 
             AutomationButton button = window.getButton("OK");

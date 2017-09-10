@@ -47,18 +47,18 @@ public class TestMainPowerpoint extends TestBase {
 
             // 2. Get the sheet
             AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
-            logger.info(window.name());
+            logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanelByClassName(0, "MDIClient");
-            logger.info(panelX.name());
+            logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
             AutomationPanel panel1 = panelX.getPanel("PowerPoint Edit View - [This is text.pptx]");
-            logger.info(panelX.name());
+            logger.info(panelX.getName());
             AutomationPanel panel2 = panel1.getPanel("Slide");
-            logger.info(panel2.name());
+            logger.info(panel2.getName());
             AutomationPowerpointSlide slide = panel2.getPowerpointSlide("Slide 1 - This is text");
-            logger.info(slide.name());
+            logger.info(slide.getName());
 
             // Oddly enough this is an image control, and has text in it's selection
             AutomationImage image = slide.getImage("Title TextBox");

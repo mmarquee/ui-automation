@@ -49,43 +49,43 @@ public class TestMainExcel extends TestBase {
 
             // 2. Get the sheet
             AutomationWindow window = application.getWindow("Book1 - Excel");
-            logger.info(window.name());
+            logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanelByClassName(0, "XLDESK");
-            logger.info(panelX.name());
+            logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
             AutomationTab tab = panelX.getTab(0);
-            logger.info(tab.name());
+            logger.info(tab.getName());
             AutomationDataGrid grid = tab.getDataGrid(0);
-            logger.info(grid.name());
+            logger.info(grid.getName());
 
             // 3. Get some data
             AutomationDataGridCell cell = grid.getItem(0,0);
-            logger.info(cell.name());
-            logger.info(cell.value());
+            logger.info(cell.getName());
+            logger.info(cell.getValue());
             logger.info(cell.getColumn());
             logger.info(cell.getRow());
 
             AutomationDataGridCell cell1 = grid.getItem(1,1);
-            logger.info(cell1.name());
-            logger.info(cell1.value());
+            logger.info(cell1.getName());
+            logger.info(cell1.getValue());
             logger.info(cell1.getColumn());
             logger.info(cell1.getRow());
 
             AutomationDataGridCell cell2 = grid.getItem(2,2);
-            logger.info(cell2.name());
-            logger.info(cell2.value());
+            logger.info(cell2.getName());
+            logger.info(cell2.getValue());
             logger.info(cell2.getColumn());
             logger.info(cell2.getRow());
 
             // 3.5 Set some data
             cell2.setValue("XYZ");
-            logger.info(cell2.value());
+            logger.info(cell2.getValue());
 
             AutomationDataGridCell cell3 = grid.getItem(3,3);
-            logger.info(cell3.name());
-            logger.info(cell3.value());
+            logger.info(cell3.getName());
+            logger.info(cell3.getValue());
 
             if (grid.canSelectMultiple()) {
                 // Play with selection - doesn't seem to be working yet
@@ -113,7 +113,7 @@ public class TestMainExcel extends TestBase {
 
             List<AutomationDataGridCell> cols = grid.getColumn(0);
             for(AutomationDataGridCell col : cols) {
-                logger.info(col.value());
+                logger.info(col.getValue());
             }
 
             // 4. Set some extra data - excel doesn't seem to implement the correct pattern
@@ -121,7 +121,7 @@ public class TestMainExcel extends TestBase {
                 List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
                 for (AutomationDataGridCell header : headers) {
-                    logger.info(header.value());
+                    logger.info(header.getValue());
                 }
             } catch (NullPointerException ex) {
                 logger.info ("Not supported in Excel");

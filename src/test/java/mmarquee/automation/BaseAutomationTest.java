@@ -37,18 +37,19 @@ import mmarquee.automation.utils.Utils;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
+ *
+ * Tests for the BaseAutomation claess.
  */
 public class BaseAutomationTest {
 	
-	static ResourceBundle locals = ResourceBundle.getBundle("locals");
+	private static ResourceBundle locals = ResourceBundle.getBundle("locals");
 	static {
 		UIAutomation.FIND_DESKTOP_ATTEMPTS = 2; // speed up tests
 	}
-	
-    protected UIAutomation instance;
-    protected AutomationApplication application;
+
+    private AutomationApplication application;
     protected AutomationWindow window;
-    protected String windowName;
+    private String windowName;
 
     protected void andRest() {
         // Must be a better way of doing this????
@@ -87,11 +88,10 @@ public class BaseAutomationTest {
 	 * @param key the key to get the string for
 	 * @return the localized string;
 	 */
-	public static String getLocal(String key) {
+	protected static String getLocal(String key) {
 		return locals.getString(key);
 	}
-	
-	
+
 	protected AutomationElement getMocketAutomationElement() {
         IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
         return new AutomationElement(mockedElement);

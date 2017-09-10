@@ -91,7 +91,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        String name = wndw.name();
+        String name = wndw.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -448,12 +448,7 @@ public class AutomationWindowTest2 {
         doAnswer(new Answer() {
             @Override
             public AutomationElement answer(InvocationOnMock invocation) throws Throwable {
-//                Object[] args = invocation.getArguments();
-                // Set the 2nd parameter
-//                Object reference = (Object)args[1];
-
                 IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-//                reference = new AutomationElement(elem);
 
                 return new AutomationElement(elem);
             }

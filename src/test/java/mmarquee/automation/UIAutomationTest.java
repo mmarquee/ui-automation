@@ -20,10 +20,12 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -46,15 +48,28 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.utils.Utils;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
  */
 public class UIAutomationTest extends BaseAutomationTest {
 
+    @Spy
+    private Unknown mockUnknown;
+
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
 	}
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testGetInstance() {
@@ -309,75 +324,24 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testLaunch_Fails_When_No_executable() throws IOException {
+    public void testCreateNamePropertyCondition() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
-        try {
-            instance.launch("notepad99.exe");
-        } catch (Throwable ex) {
-            assertTrue("textLaunch succeeded somehow", true);
-        }
-
-        assertFalse("textLaunch succeeded somehow", false);
+        instance.createNamePropertyCondition("ID");
     }
 
     @Test
-    public void testLaunch_Succeeds_When_executable() {
+    public void testCreateAutomationIdPropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
-        AutomationApplication app = null;
-
-        try {
-
-            try {
-                app = instance.launch("notepad.exe");
-            } catch (Throwable ex) {
-                assertTrue("textLaunch succeeded somehow", true);
-            }
-
-            assertFalse("textLaunch succeeded somehow", false);
-        } finally {
-            app.quit(getLocal("notepad.title"));
-        }
+        instance.createAutomationIdPropertyCondition("ID");
     }
 
     @Test
-    public void testCreateNamePropertyCondition() {
+    public void testCreateControlTypeCondition_Does_Not_Throw_Exception() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
 
-        try {
-            // Create first condition to use
-            PointerByReference condition =
-                    instance.createNamePropertyCondition("ID");
-        } catch (AutomationException ex) {
-            assertTrue(false);
-        }
-
-        assertTrue(true);
-    }
-
-    @Test
-    public void testCreateAutomationIdPropertyCondition() {
-        UIAutomation instance = UIAutomation.getInstance();
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-
-        try {
-            // Create first condition to use
-            PointerByReference condition =
-                    instance.createAutomationIdPropertyCondition("ID");
-        } catch (AutomationException ex) {
-            assertTrue(false);
-        }
-
-        assertTrue(true);
-    }
-
-    @Test
-    public void testCreateControlTypeCondition() {
-        UIAutomation instance = UIAutomation.getInstance();
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-
+        instance.createControlTypeCondition(ControlType.Button);
         try {
             // Create first condition to use
             PointerByReference condition =
@@ -430,7 +394,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
             AutomationApplication launched = instance.launchOrAttach("notepad.exe");
 
-            assertTrue("Should be the same name", launched.name().equals(app.name()));
+            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
 
         } finally {
             app.quit(getLocal("notepad.title"));
@@ -466,7 +430,7 @@ public class UIAutomationTest extends BaseAutomationTest {
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.createNotCondition(any(), any())).thenReturn(-1);
+        when(mocked_automation.createNotCondition(any(), any(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation local_instance = new UIAutomation(mocked_automation);
 
@@ -488,7 +452,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test(expected = AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
+    @Ignore("Mocking fails - needs investigation")
     public void testCreateAndCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
         IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
@@ -502,7 +466,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test(expected = AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
+    @Ignore("Mocking seems to fail - needs investigation")
     public void testCreateOrCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
         IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
@@ -528,50 +492,34 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test (expected = ItemNotFoundException.class)
     public void test_GetDesktopMenu_Throws_Exception_When_Not_Found()
             throws IOException, AutomationException, PatternNotFoundException {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        AutomationApplication app = instance.launch("notepad.exe");
-
-        try {
-            AutomationMenu menu = instance.getDesktopMenu("Menu");
-        } finally {
-            app.quit(getLocal("notepad.title"));
-        }
+        UIAutomation.getInstance().getDesktopMenu("Menu");
     }
 
     @Test
     public void testGetDesktopWindow_Succeeds_When_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
-        UIAutomation instance = UIAutomation.getInstance();
+        IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
 
-        AutomationApplication app = instance.launch("notepad.exe");
+        doAnswer(new Answer() {
+            @Override
+            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
+                return new WinNT.HRESULT(0);
+            }
+        }).when(mockUnknown).QueryInterface(any(), any());
 
-        try {
-            AutomationWindow window = instance.getDesktopWindow(getLocal("notepad.title"));
+        when(mocked.createAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(0);
+        when(mocked.createPropertyCondition(any(Integer.class), any(Variant.VARIANT.ByValue.class), any(PointerByReference.class))).thenReturn(0);
 
-            assertTrue("Should be the same name", window.name().equals(getLocal("notepad.title")));
-        } finally {
-            app.quit(getLocal("notepad.title"));
-        }
+        UIAutomation local_instance = Mockito.mock(UIAutomation.class);
+
+        doReturn(mockUnknown)
+                .when(local_instance)
+                .makeUnknown(any(Pointer.class));
+
+        local_instance.getDesktopWindow(getLocal("notepad.title"));
     }
 
     @Test(expected = ItemNotFoundException.class)
     public void testGetDesktopWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
-        UIAutomation instance = UIAutomation.getInstance();
-        instance.getDesktopWindow("Untitled - Notepad99");
-    }
-
-    @Test(expected=AutomationException.class)
-    public void testGetDesktopObject_Fails_When_Window_Not_Present() throws IOException, AutomationException, PatternNotFoundException {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        AutomationApplication app = instance.launch("notepad.exe");
-
-        try {
-            AutomationWindow window = instance.getDesktopObject("xxUntitled - Notepad");
-
-            assertTrue("Should be the same name", window.name().equals(getLocal("notepad.title")));
-        } finally {
-            app.quit(getLocal("notepad.title"));
-        }
+        UIAutomation.getInstance().getDesktopWindow("Untitled - Notepad99");
     }
 }

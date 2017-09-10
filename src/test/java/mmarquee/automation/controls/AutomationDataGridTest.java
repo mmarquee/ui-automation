@@ -57,7 +57,7 @@ public class AutomationDataGridTest {
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection);
 
-        String name = dataGrid.name();
+        String name = dataGrid.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -161,9 +161,9 @@ public class AutomationDataGridTest {
 
         AutomationDataGridCell item = dataGrid.getColumnHeader(0);
 
-        logger.info(item.value());
+        logger.info(item.getValue());
 
-        assertTrue(item.value().equals("CELL-01"));
+        assertTrue(item.getValue().equals("CELL-01"));
     }
 
     @Test
@@ -234,7 +234,7 @@ public class AutomationDataGridTest {
 
         AutomationDataGridCell cell = dataGrid.selected();
 
-        assertTrue(cell.value().equals("CELL-01"));
+        assertTrue(cell.getValue().equals("CELL-01"));
     }
 
     @Test

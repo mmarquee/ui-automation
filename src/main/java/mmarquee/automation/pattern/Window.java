@@ -22,6 +22,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
@@ -53,7 +54,7 @@ public class Window extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationWindowPattern.Converter.PointerToInterface(pbr);
+                return IUIAutomationWindowPatternConverter.PointerToInterface(pbr);
             } else {
                 throw new AutomationException(result0.intValue());
             }

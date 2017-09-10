@@ -82,7 +82,7 @@ public class TestMainWPF extends TestBase {
             WinDef.POINT point = applicationWindow.getClickablePoint();
             logger.info("Clickable point = " + point.toString());
 
-            String name = applicationWindow.name();
+            String name = applicationWindow.getName();
             logger.info(name);
 
             try {
@@ -99,20 +99,20 @@ public class TestMainWPF extends TestBase {
 
             AutomationMainMenu menu = applicationWindow.getMainMenu(0);
 
-            logger.info("Menu name " + menu.name());
+            logger.info("Menu name " + menu.getName());
 
             logger.info(menu.getItems().size() + " menu items");
 
-            logger.info(menu.getItems().get(0).name());
+            logger.info(menu.getItems().get(0).getName());
 
             // Actual program menu is a `Menu`
 
             AutomationMainMenu mainMenu = applicationWindow.getMenu(0);
-            logger.info("Menu name " + mainMenu.name());
+            logger.info("Menu name " + mainMenu.getName());
 
             logger.info(mainMenu.getItems().size() + " menu items");
 
-            logger.info(mainMenu.getItems().get(0).name());
+            logger.info(mainMenu.getItems().get(0).getName());
 
 //            AutomationMainMenu menu = window.getMenu();   // WPF menus seem to be different from Delphi VCL windows
 
@@ -188,7 +188,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ RADIO BUTTON ++");
 
             AutomationRadioButton radio = applicationWindow.getRadioButton(1);
-            radio.selectItem();
+            radio.select();
 
             // TEXT BOX *********************************************
 
@@ -264,12 +264,12 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationComboBox cb1 = applicationWindow.getCombobox(1);
 
-                String txt = cb1.text();
+                String txt = cb1.getValue();
 
                 logger.info("Text for Combobox is `" + txt + "`");
 
                 cb1.setText("Here we are");
-                logger.info("Text for Combobox is now `" + cb1.text() + "`");
+                logger.info("Text for Combobox is now `" + cb1.getValue() + "`");
 
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find element");
@@ -286,7 +286,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            String itemName = cell1.name();
+            String itemName = cell1.getName();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());
@@ -298,14 +298,14 @@ public class TestMainWPF extends TestBase {
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
             for(AutomationDataGridCell cell : headers) {
-                logger.info(cell.name());
+                logger.info(cell.getName());
             }
 
-            logger.info(grid.getColumnHeader(1).name());
+            logger.info(grid.getColumnHeader(1).getName());
 
             List<AutomationDataGridCell> cols = grid.getColumn(1);
             for(AutomationDataGridCell cell : cols) {
-                logger.info("Col 1 - " + cell.name());
+                logger.info("Col 1 - " + cell.getName());
             }
 
             // TREEVIEW **************************
@@ -317,7 +317,7 @@ public class TestMainWPF extends TestBase {
                 AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
                 treeItem.select();
 
-                logger.info("Item is " + treeItem.name());
+                logger.info("Item is " + treeItem.getName());
 
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find item");
@@ -332,7 +332,7 @@ public class TestMainWPF extends TestBase {
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
             AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("btnClickMe");
-            logger.info(btnClickMe.name());
+            logger.info(btnClickMe.getName());
             btnClickMe.click();
 
             // LISTS ****************************************
@@ -343,12 +343,12 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationListItem listItem = list.getItem("Hello, Window world!");
                 listItem.select();
-                logger.info(listItem.name());
+                logger.info(listItem.getName());
 
                 // Now find by index
                 AutomationListItem listItem0 = list.getItem(0);
                 listItem0.select();
-                logger.info("0th element is " + listItem0.name());
+                logger.info("0th element is " + listItem0.getName());
 
             } catch (ItemNotFoundException ex) {
                 logger.info("Didn't find item");
@@ -367,13 +367,13 @@ public class TestMainWPF extends TestBase {
             // TOOLBAR ***********************************
 
             AutomationToolBar toolbar = applicationWindow.getToolBar(0);
-            logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
+            logger.info("Toolbar name is " + toolbar.getName()); // Blank in default WPF
 
             AutomationButton btn1 = toolbar.getButton(1);
 
             if (btn1.isEnabled()) {
                 logger.info("btn0 Enabled");
-                logger.info(btn1.name());
+                logger.info(btn1.getName());
                 btn1.click();
 
                 logger.info("Clicked btn1");
@@ -405,7 +405,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationCalendar calendar = applicationWindow.getCalendar(0);
 
-            logger.info("Date is " + calendar.name());
+            logger.info("Date is " + calendar.getName());
 
             // Not sure what we can get out of a calendar
 
@@ -419,7 +419,7 @@ public class TestMainWPF extends TestBase {
 
             document.showContextMenu();
 
-            logger.info("Document name is `" + document.name() + "`");
+            logger.info("Document name is `" + document.getName() + "`");
 
             logger.info("Text is " + document.getText());
 

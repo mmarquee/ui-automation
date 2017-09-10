@@ -28,7 +28,7 @@ import javax.naming.ldap.Control;
  *
  * Wrapper around the Button element.
  */
-public class AutomationButton extends AutomationBase implements Clickable {
+public class AutomationButton extends AutomationBase implements Clickable, Focusable {
 
     protected Invoke invokePattern = null;
 

@@ -18,8 +18,10 @@ package mmarquee.automation.controls;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
@@ -35,6 +37,11 @@ public class AutomationButtonTest {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
     public void testGetName_For_Button() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
@@ -44,7 +51,7 @@ public class AutomationButtonTest {
 
         AutomationButton button = new AutomationButton(element, pattern);
 
-        String name = button.name();
+        String name = button.getName();
 
         assertTrue(name.equals("NAME"));
     }

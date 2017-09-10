@@ -28,7 +28,7 @@ public class AutomationHyperlinkTest {
 
         AutomationHyperlink link = new AutomationHyperlink(element, pattern);
 
-        String name = link.name();
+        String name = link.getName();
 
         assertTrue(name.equals("NAME"));
     }

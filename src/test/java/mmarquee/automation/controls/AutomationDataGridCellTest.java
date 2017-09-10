@@ -40,7 +40,7 @@ public class AutomationDataGridCellTest {
 
         AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
 
-        String val = cell.value();
+        String val = cell.getValue();
 
         assertTrue(val.equals("VALUE"));
     }
@@ -54,7 +54,7 @@ public class AutomationDataGridCellTest {
 
         AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
 
-        String val = cell.name();
+        String val = cell.getName();
 
         assertTrue(val.equals("NAME"));
     }
