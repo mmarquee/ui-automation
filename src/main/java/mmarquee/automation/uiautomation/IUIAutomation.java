@@ -139,13 +139,7 @@ public interface IUIAutomation extends IUnknown {
 
                 public int elementFromPoint(WinDef.POINT pt, PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_POINT], Function.ALT_CONVENTION);
-
-                    PointNativeLong nativeDouble = new PointNativeLong(pt.x, pt.y);
-                    PointNativeLong.ByValue byVal = nativeDouble.new ByValue(nativeDouble.getPointer());
-                    byVal.x = new NativeLong(pt.x);
-                    byVal.y = new NativeLong(pt.y);
-
-                    return f.invokeInt(new Object[]{myInterfacePointer, byVal, element});
+                    return f.invokeInt(new Object[]{myInterfacePointer, new PointNativeLong(pt.x, pt.y), element});
                 }
 
                 public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {

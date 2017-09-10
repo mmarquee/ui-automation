@@ -46,7 +46,7 @@ public class AutomationListTest {
 
         AutomationList list = new AutomationList(element, selection);
 
-        String name = list.getName();
+        String name = list.name();
 
         assertTrue(name.equals("NAME"));
     }

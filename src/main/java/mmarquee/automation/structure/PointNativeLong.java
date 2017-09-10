@@ -23,7 +23,7 @@ import com.sun.jna.Structure;
 
 import java.util.List;
 
-public class PointNativeLong extends Structure implements Structure.ByReference {
+public class PointNativeLong extends Structure implements Structure.ByValue {
     public static final List<String> FIELDS = createFieldsOrder(new String[]{"x", "y"});
     public NativeLong x;
     public NativeLong y;
@@ -45,10 +45,8 @@ public class PointNativeLong extends Structure implements Structure.ByReference 
         return FIELDS;
     }
 
-    public class ByValue extends PointNativeLong implements Structure.ByValue {
-        public ByValue(Pointer pointer) {
-            super(pointer);
-            this.read();
+    public class ByReference extends PointNativeLong implements Structure.ByReference {
+        public ByReference() {
         }
     }
 }

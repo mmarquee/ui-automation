@@ -18,7 +18,6 @@ package mmarquee.automation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
@@ -72,7 +71,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 		AutomationElement element = getMocketAutomationElement();
 		
         when(element.element.getCurrentAutomationId(any()))
-            .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
+        .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
 
         assertEquals("myAutomationId", element.getAutomationId());
 	}
@@ -241,6 +240,8 @@ public class AutomationElementTest extends BaseAutomationTest {
 		when(mocked.getClickablePoint(isA(WinDef.POINT.ByReference.class), isA(WinDef.BOOLByReference.class)))
 				.thenReturn(-1);
 
+		WinDef.POINT point = new WinDef.POINT();
+
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.getClickablePoint();
@@ -272,13 +273,13 @@ public class AutomationElementTest extends BaseAutomationTest {
 	public void test_GetPattern_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
 
-		when(mocked.getCurrentPattern(anyInt(), any())).thenReturn(-1);
+		when(mocked.getCurrentPattern(any(), any())).thenReturn(-1);
 
 		AutomationElement element = new AutomationElement(mocked);
 
 		element.getPattern(1);
 
-		verify(mocked, atLeastOnce()).getCurrentPattern(anyInt(), any());
+		verify(mocked, atLeastOnce()).getCurrentPattern(any(), any());
 	}
 
 	@Test
@@ -288,7 +289,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		element.getPattern(1);
 
-		verify(mocked, atLeastOnce()).getCurrentPattern(anyInt(), any());
+		verify(mocked, atLeastOnce()).getCurrentPattern(any(), any());
 	}
 
 	@Test(expected = AutomationException.class)

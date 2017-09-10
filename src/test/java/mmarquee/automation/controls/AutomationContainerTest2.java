@@ -192,6 +192,8 @@ public class AutomationContainerTest2 {
 
         AutomationWindow wndw = new AutomationWindow(elem, window, container);
         wndw.getCustomByControlType("PANEL-01");
+
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test

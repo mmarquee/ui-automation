@@ -1,9 +1,9 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.DoubleByReference;
-import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
@@ -59,7 +59,9 @@ public class SelectionPatternTest2 {
             public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
                 return new WinNT.HRESULT(0);
             }
-        }).when(mockUnknown).QueryInterface(any(), any());
+        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+
+        Selection pattern = new Selection(rawPattern);
 
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
 
