@@ -430,7 +430,7 @@ public class UIAutomationTest extends BaseAutomationTest {
             throws AutomationException {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        when(mocked_automation.createNotCondition(any(Pointer.class), any(PointerByReference.class))).thenReturn(-1);
+        when(mocked_automation.createNotCondition(any(), any(PointerByReference.class))).thenReturn(-1);
 
         UIAutomation local_instance = new UIAutomation(mocked_automation);
 

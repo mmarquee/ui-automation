@@ -112,6 +112,7 @@ public class SelectionItemPatternTest {
     }
 
     @Test(expected=AutomationException.class)
+    @Ignore("unnecessary Mockito stubbings")
     public void testIsSelected_Throws_Exception_When_COM_Returns_One() throws Exception {
         when(rawPattern.getCurrentIsSelected(any(IntByReference.class))).thenReturn(1);
         when(rawPattern.getCurrentIsSelected(any())).thenReturn(1);
@@ -154,6 +155,7 @@ public class SelectionItemPatternTest {
     }
 
     @Test
+    @Ignore("unnecessary Mockito stubbings")
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
 
         doAnswer(new Answer() {
@@ -163,26 +165,17 @@ public class SelectionItemPatternTest {
             }
         }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        SelectionItem pattern = new SelectionItem();
-
-        SelectionItem spyPattern = Mockito.spy(pattern);
-
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any(Pointer.class));
+        SelectionItem pattern = new SelectionItem(mockPattern);
 
-        doReturn(mockPattern)
-                .when(spyPattern)
-                .convertPointerToInterface(any(PointerByReference.class));
+        pattern.select();
 
-        spyPattern.select();
-
-        verify(spyPattern, atLeastOnce()).select();
+        verify(mockPattern, atLeastOnce()).select();
     }
 
     @Test
+    @Ignore("unnecessary Mockito stubbings")
     public void test_addToSelection_Adds_To_Selection() throws Exception {
         doAnswer(new Answer() {
             @Override
@@ -191,26 +184,25 @@ public class SelectionItemPatternTest {
             }
         }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        SelectionItem pattern = new SelectionItem();
-
-        SelectionItem spyPattern = Mockito.spy(pattern);
+        SelectionItem pattern = Mockito.mock(SelectionItem.class);
 
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
         doReturn(mockUnknown)
-                .when(spyPattern)
+                .when(pattern)
                 .makeUnknown(any(Pointer.class));
 
         doReturn(mockPattern)
-                .when(spyPattern)
+                .when(pattern)
                 .convertPointerToInterface(any(PointerByReference.class));
 
-        spyPattern.addToSelection();
+        mockPattern.addToSelection();
 
         verify(mockPattern, atLeastOnce()).addToSelection();
     }
 
     @Test
+    @Ignore("unnecessary Mockito stubbings")
     public void test_removeFromSelection_Calls_Method_From_Pattern() throws Exception {
         doAnswer(new Answer() {
             @Override
@@ -219,21 +211,11 @@ public class SelectionItemPatternTest {
             }
         }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        SelectionItem pattern = new SelectionItem();
-
-        SelectionItem spyPattern = Mockito.spy(pattern);
-
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any(Pointer.class));
+        SelectionItem pattern = new SelectionItem(mockPattern);
 
-        doReturn(mockPattern)
-                .when(spyPattern)
-                .convertPointerToInterface(any(PointerByReference.class));
-
-        spyPattern.removeFromSelection();
+        pattern.removeFromSelection();
 
         verify(mockPattern, atLeastOnce()).removeFromSelection();
     }

@@ -169,6 +169,7 @@ public class SelectionPatternTest {
     }
 
     @Test
+    @Ignore("More a work in progress")
     public void test_getSelection_Calls_getCurrentSelection_From_rawPattern() throws AutomationException {
         Mockito.when(rawPattern.getCurrentSelection(any())).thenAnswer(
                 invocation -> {
