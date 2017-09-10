@@ -103,7 +103,6 @@ public class SelectionItemPatternTest {
                 return 0;
             }
         }).when(rawPattern).getCurrentIsSelected(any(IntByReference.class));
-        }).when(rawPattern).getCurrentIsSelected(any());
 
         SelectionItem item = new SelectionItem(rawPattern);
 

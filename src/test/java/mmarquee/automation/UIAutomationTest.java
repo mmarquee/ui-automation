@@ -17,15 +17,15 @@ package mmarquee.automation;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.isA;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -507,7 +507,7 @@ public class UIAutomationTest extends BaseAutomationTest {
         }).when(mockUnknown).QueryInterface(any(), any());
 
         when(mocked.createAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(0);
-        when(mocked.createPropertyCondition(anyInt(), any(Variant.VARIANT.ByValue.class), any(PointerByReference.class))).thenReturn(0);
+        when(mocked.createPropertyCondition(any(Integer.class), any(Variant.VARIANT.ByValue.class), any(PointerByReference.class))).thenReturn(0);
 
         UIAutomation local_instance = Mockito.mock(UIAutomation.class);
 
