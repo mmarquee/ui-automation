@@ -358,6 +358,17 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
+     * Gets the text box control associated with the given index
+     * @param name Name of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationTextBox getTextBox(String name) throws AutomationException {
+        return new AutomationTextBox(this.getControlByControlType(name, ControlType.Text));
+    }
+
+
+    /**
      * Gets the combobox control associated with the given index
      * @param index Index of the control
      * @return The found control
