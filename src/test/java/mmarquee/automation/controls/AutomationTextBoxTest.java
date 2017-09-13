@@ -1,6 +1,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.pattern.Value;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -29,15 +30,16 @@ public class AutomationTextBoxTest {
     }
 
     @Test
-    public void testGetValue_Gets_Value_From_Element_Name() throws Exception {
+    public void testGetValue_Gets_Value_From_Element_Value() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getName()).thenReturn("VALUE");
+        Value value = Mockito.mock(Value.class);
+        when(value.value()).thenReturn("NAME");
 
-        AutomationTextBox ctrl = new AutomationTextBox(element);
+        AutomationTextBox ctrl = new AutomationTextBox(element, value);
 
         String name = ctrl.getValue();
 
-        assertTrue(name.equals("VALUE"));
+        assertTrue(name.equals("NAME"));
     }
 }

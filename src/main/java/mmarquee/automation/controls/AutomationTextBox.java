@@ -19,6 +19,8 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
  * Created by Mark Humphreys on 01/02/2016.
@@ -26,6 +28,8 @@ import mmarquee.automation.ControlType;
  * Wrapper for the TextBox element.
  */
 public class AutomationTextBox extends AutomationBase implements Valueable {
+    private Value valuePattern;
+
     /**
      * Construct the AutomationTextBox
      * @param element The element
@@ -37,11 +41,34 @@ public class AutomationTextBox extends AutomationBase implements Valueable {
     }
 
     /**
+     * Construct the AutomationTextBox
+     * @param element The element
+     * @throws AutomationException Automation library error
+     */
+    public AutomationTextBox(AutomationElement element, Value value) throws AutomationException {
+        super(element);
+        this.valuePattern = value;
+    }
+
+    /**
      * Gets the text associated with this element
      * @return The current text
      * @throws AutomationException Automation library error
      */
-    public String getValue() throws AutomationException {
-        return this.element.getName();
+    public String getValue() throws PatternNotFoundException, AutomationException {
+//        return this.element.getName();
+        if (this.valuePattern == null) {
+            try {
+                this.valuePattern = this.getValuePattern();
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
+        }
+
+        try {
+            return valuePattern.value();
+        } catch (NullPointerException ex) {
+            return "<Empty>";
+        }
     }
 }
