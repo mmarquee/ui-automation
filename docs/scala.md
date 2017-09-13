@@ -2,7 +2,7 @@
 To add the library as a prerequisite, use the following entry in the build.sbt file
 
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.11"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.3.12"
 ```
 
 ## Examples

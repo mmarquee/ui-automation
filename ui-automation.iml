@@ -14,22 +14,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-module-junit4:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-module-junit4-common:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-reflect:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-core:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.javassist:javassist:3.21.0-GA" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-api-mockito2:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-api-mockito-common:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-api-support:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-module-junit4:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-module-junit4-common:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-reflect:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-core:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.javassist:javassist:3.21.0-GA" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-api-mockito2:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-api-mockito-common:1.7.0RC4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.powermock:powermock-api-support:1.7.0RC4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.3.0" level="project" />
