@@ -28,9 +28,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
@@ -299,7 +297,7 @@ public class IUIAutomationElement3Test {
 
         int controlType = ir.getValue();
 
-        assertTrue("get_CurrentControlType", controlType == ControlType.Pane.getValue());
+        assertEquals("get_CurrentControlType", ControlType.Pane.getValue(), controlType);
     }
 
     @Test

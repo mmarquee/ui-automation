@@ -56,6 +56,7 @@ public class AutomationNUIPaneTest {
     public void testName_Is_Blank() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
         when(element.getName()).thenReturn("");
 
         AutomationNUIPane pane = new AutomationNUIPane(element);
@@ -69,6 +70,7 @@ public class AutomationNUIPaneTest {
     public void testGetNetUIHWND_Throws_Exception_When_NetUIHWND_Not_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         when(element.findAll(any(), any())).thenReturn(collection);
@@ -84,6 +86,7 @@ public class AutomationNUIPaneTest {
     public void testGetNetUIHWND_When_NetUIHWND_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);

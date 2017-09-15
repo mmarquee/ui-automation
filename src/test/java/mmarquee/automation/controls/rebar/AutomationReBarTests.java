@@ -45,6 +45,7 @@ public class AutomationReBarTests {
     public void testName_Is_Returned_From_The_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
         when(element.getName()).thenReturn("REBAR-01");
 
         AutomationReBar pane = new AutomationReBar(element);
@@ -58,6 +59,7 @@ public class AutomationReBarTests {
     public void testName_Is_Returned_From_The_Element_Alternative_Constructor() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
         when(element.getName()).thenReturn("REBAR-01");
 
         ItemContainer container = Mockito.mock(ItemContainer.class);

@@ -55,6 +55,7 @@ public class AutomationRibbonWorkPaneTest {
     @Test
     public void testName() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
+        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
         AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(element);
 
@@ -69,6 +70,7 @@ public class AutomationRibbonWorkPaneTest {
 
         List<AutomationElement> collection = new ArrayList<>();
 
+        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
@@ -102,6 +104,7 @@ public class AutomationRibbonWorkPaneTest {
 
         collection.add(new AutomationElement(elem));
 
+        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);

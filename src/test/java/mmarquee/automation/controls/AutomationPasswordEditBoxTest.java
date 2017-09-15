@@ -25,20 +25,17 @@ import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Mark Humphreys on 02/12/2016.
- */
-public class AutomationMaskedEditTest {
+public class AutomationPasswordEditBoxTest {
     @Test
     public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
         
-        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
+        when(element.getClassName()).thenReturn(AutomationPasswordEditBox.CLASS_NAME);
 
         when(value.value()).thenReturn("VALUE");
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+        AutomationPasswordEditBox control = new AutomationPasswordEditBox(element, value);
 
         String val = control.getValue();
 
@@ -49,10 +46,10 @@ public class AutomationMaskedEditTest {
     public void testSetValue() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
-
-        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
         
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+        when(element.getClassName()).thenReturn(AutomationPasswordEditBox.CLASS_NAME);
+
+        AutomationPasswordEditBox control = new AutomationPasswordEditBox(element, value);
 
         control.setValue("VALUE");
 

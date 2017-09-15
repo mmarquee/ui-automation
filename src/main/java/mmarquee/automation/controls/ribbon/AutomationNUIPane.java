@@ -27,6 +27,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Specialist pane that represents the NUIPane (part of the MS ribbon controls)
  */
 public class AutomationNUIPane extends AutomationPanel {
+	
+	public final static String CLASS_NAME = "NUIPane";
+	
     /**
      * Construct the AutomationNUIPane
      * @param element The element
@@ -35,6 +38,7 @@ public class AutomationNUIPane extends AutomationPanel {
      */
     public AutomationNUIPane(AutomationElement element) throws AutomationException, PatternNotFoundException {
         super(element);
+        assertClassName(CLASS_NAME);
     }
 
     /**
@@ -45,6 +49,6 @@ public class AutomationNUIPane extends AutomationPanel {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationNetUIHWND getNetUIHWND(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, "NetUIHWND"));
+        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, AutomationNetUIHWND.CLASS_NAME));
     }
 }

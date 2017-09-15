@@ -27,6 +27,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * * Specialist pane that represents the RibbonWorkPane of the MS Ribbon control.
  */
 public class AutomationRibbonWorkPane extends AutomationContainer {
+	
+	public final static String CLASS_NAME = "UIRibbonWorkPane";
+	
     /**
      * Construct the AutomationRibbonWorkPane
      * @param element The element
@@ -35,6 +38,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      */
     public AutomationRibbonWorkPane(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        assertClassName(CLASS_NAME);
     }
 
     /**
@@ -45,7 +49,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationNUIPane getNUIPane(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, "NUIPane"));
+        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, AutomationNUIPane.CLASS_NAME));
     }
 }
 
