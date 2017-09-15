@@ -872,8 +872,14 @@ public class AutomationContainerTest {
         verify(el, atLeastOnce()).findAll(any(), any());
     }
 
+    /************************************************************************************
+     *
+     *          getList
+     *
+     ***********************************************************************************/
+
     @Test
-    public void testList_By_Index() throws Exception {
+    public void test_GetList_By_Index() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
@@ -889,7 +895,7 @@ public class AutomationContainerTest {
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    public void testList_By_Index_Throws_Exception_When_Not_found() throws Exception {
+    public void test_GetList_By_Index_Throws_Exception_When_Not_found() throws Exception {
         List<AutomationElement> list = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
@@ -905,7 +911,7 @@ public class AutomationContainerTest {
     }
 
     @Test
-    public void testList_By_Name() throws Exception {
+    public void test_GetList_By_Name() throws Exception {
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         AutomationElement child = new AutomationElement(elem);
@@ -919,16 +925,16 @@ public class AutomationContainerTest {
     }
 
     @Test(expected=ElementNotFoundException.class)
-    public void testList_By_Name_Throws_Exception_When_Not_found() throws Exception {
+    public void test_GetList_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getList("unknownName");
 
     }
-    
+
     @Test
-    public void testList_By_AutomationId() throws Exception {
+    public void test_GetList_By_AutomationId() throws Exception {
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         AutomationElement child = new AutomationElement(elem);
@@ -942,7 +948,7 @@ public class AutomationContainerTest {
     }
 
     @Test(expected=ElementNotFoundException.class)
-    public void testList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+    public void test_GetList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
         AutomationWindow wndw = new AutomationWindow(element, window, container);
