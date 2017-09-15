@@ -26,6 +26,7 @@ import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.utils.Canalizer;
 import mmarquee.automation.utils.Utils;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class UIAutomation extends BaseAutomation {
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
     protected static UIAutomation INSTANCE = null;
+    private static final Ole32 CANALIZED_OLE32_INSTANCE = Canalizer.canalize(com.sun.jna.platform.win32.Ole32.INSTANCE);
+
 
     protected AutomationElement rootElement;
 
@@ -65,11 +68,11 @@ public class UIAutomation extends BaseAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-        Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
+        CANALIZED_OLE32_INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance(
+        WinNT.HRESULT hr = CANALIZED_OLE32_INSTANCE.CoCreateInstance(
                 IUIAutomation.CLSID,
                 null,
                 WTypes.CLSCTX_SERVER,
