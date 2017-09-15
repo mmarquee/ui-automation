@@ -18,7 +18,6 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
@@ -32,6 +31,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
@@ -80,6 +80,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationEditBox edit = wndw.getEditBox(0);
+        assertEquals(targetElement,edit.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -89,8 +90,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationEditBox edit = wndw.getEditBox(1);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        assertEquals(targetElement,edit.getElement());
     }
 
     @Test
@@ -98,6 +98,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationAppBar appBar = wndw.getAppBar(0);
+        assertEquals(targetElement,appBar.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -107,6 +108,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationSlider slider = wndw.getSlider(0);
+        assertEquals(targetElement,slider.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -116,6 +118,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationButton btn = wndw.getButton(0);
+        assertEquals(targetElement,btn.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -126,20 +129,17 @@ public class AutomationContainerTest {
 
         AutomationTab tab = wndw.getTab(0);
 
-        verify(element, atLeastOnce()).findAll(any(), any());
-
         assertTrue(tab != null);
+        assertEquals(targetElement,tab.getElement());
+        
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetTab_By_Index_Errors_When_Too_Big() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationTab tab = wndw.getTab(99);
-
-        assertTrue(tab != null);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getTab(99);
     }
 
     @Test
@@ -147,6 +147,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationEditBox editBox = wndw.getEditBox(0);
+        assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -156,6 +157,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationToolBar editBox = wndw.getToolBar(0);
+        assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -165,6 +167,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox editBox = wndw.getCombobox(0);
+        assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -173,9 +176,7 @@ public class AutomationContainerTest {
     public void testGetCombobox_By_Index_Errors_When_Too_Big() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationComboBox editBox = wndw.getCombobox(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getCombobox(99);
     }
 
     @Test
@@ -183,6 +184,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationCheckbox radio = wndw.getCheckbox(0);
+        assertEquals(targetElement,radio.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -191,9 +193,7 @@ public class AutomationContainerTest {
     public void testGetRadioButton_By_Index_Fails_When_Index_No_Present() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationRadioButton radio = wndw.getRadioButton(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getRadioButton(99);
     }
 
     @Test
@@ -201,6 +201,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationRadioButton radio = wndw.getRadioButton(0);
+        assertEquals(targetElement,radio.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -210,6 +211,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationPanel panel = wndw.getPanel(0);
+        assertEquals(targetElement,panel.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -219,6 +221,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationDocument doc = wndw.getDocument(0);
+        assertEquals(targetElement,doc.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -228,6 +231,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationProgressBar progress = wndw.getProgressBar(0);
+        assertEquals(targetElement,progress.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -236,9 +240,7 @@ public class AutomationContainerTest {
     public void testGetHyperlink_By_Index_Fails_When_Index_No_Present() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationHyperlink link = wndw.getHyperlink(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getHyperlink(99);
     }
 
     @Test
@@ -246,6 +248,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationHyperlink link = wndw.getHyperlink(0);
+        assertEquals(targetElement,link.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -255,15 +258,14 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getHyperlink(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testGetToolbar_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getToolBar(0);
+        AutomationToolBar toolBar = wndw.getToolBar(0);
+        assertEquals(targetElement,toolBar.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -273,8 +275,6 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getSlider(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -282,15 +282,14 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getProgressBar(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testGetCalendar_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getProgressBar(0);
+        AutomationProgressBar progressBar = wndw.getProgressBar(0);
+        assertEquals(targetElement,progressBar.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -300,26 +299,23 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getProgressBar(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testGetDataGrid_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getDataGrid(0);
+        AutomationDataGrid dataGrid = wndw.getDataGrid(0);
+        assertEquals(targetElement,dataGrid.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
-    @Test
+    @Test(expected=IndexOutOfBoundsException.class)
     public void testGetDataGrid_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getDataGrid(0);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getDataGrid(99);
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -327,22 +323,21 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getTreeView(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testTreeView_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getTreeView(0);
+        AutomationTreeView treeView = wndw.getTreeView(0);
+        assertEquals(targetElement,treeView.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testGetPasswordEditBox() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -361,15 +356,15 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getPasswordEditBox(0);
+        AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(0);
+        assertEquals(targetElement,passwordEditBox.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
-    @Ignore("Throwing Mockito exception")
     public void testGetPasswordEditBox_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -388,15 +383,12 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationEditBox box = wndw.getPasswordEditBox(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getPasswordEditBox(99);
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Mockito exception thrown")
     public void testGetMaskedEdit_By_Index() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -415,15 +407,15 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getMaskedEdit(0);
+        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(0);
+        assertEquals(targetElement,maskedEdit.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Throws Mockito exception now")
     public void testGetMaskedEdit_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -443,14 +435,11 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getMaskedEdit(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
-    @Ignore("Throws a Mockito exception now")
     public void testGetMaskedEdit_By_Name_Calls_FindFirst_Once() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -467,7 +456,7 @@ public class AutomationContainerTest {
             }
         }).when(elem).getCurrentClassName(any());
 
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -480,7 +469,7 @@ public class AutomationContainerTest {
             }
         }).when(elem).getCurrentControlType(any());
 
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -499,15 +488,15 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getMaskedEdit("SMITH-01");
+        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit("SMITH-01");
+        assertEquals(targetElement,maskedEdit.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
-    @Ignore("Throws a Mockito exception now")
     public void testGetMaskedEdit_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -527,14 +516,11 @@ public class AutomationContainerTest {
         when(element.findFirst(any(), any())).thenReturn(null);
 
         wndw.getMaskedEdit("SMITH-01");
-
-        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Throws Mockito exception now")
     public void test_PasswordBox_By_Index() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -553,15 +539,15 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getMaskedEdit(0);
+        AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(0);
+        assertEquals(targetElement,passwordEditBox.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("Throws Mockito exception now")
     public void test_PasswordBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -580,14 +566,12 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getMaskedEdit(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
+        wndw.getPasswordEditBox(0);
     }
 
     @Test
     public void testGetRibbonBar() throws Exception {
-        doAnswer(new Answer() {
+        doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
 
@@ -610,7 +594,8 @@ public class AutomationContainerTest {
         when(el.findAll(any(), any())).thenReturn(list);
         
         AutomationWindow wndw = new AutomationWindow(el, window, container);
-        wndw.getRibbonBar();
+        AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
+        assertEquals(targetElement,ribbonBar.element);
 
         verify(el, atLeastOnce()).findAll(any(), any());
     }
@@ -625,7 +610,8 @@ public class AutomationContainerTest {
     public void test_GetList_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getList(0);
+        AutomationList list = wndw.getList(0);
+        assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -635,15 +621,14 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         wndw.getList(99);
-
-        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void test_GetList_By_Name() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        wndw.getList("myName");
+        AutomationList list = wndw.getList("myName");
+        assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -659,7 +644,8 @@ public class AutomationContainerTest {
     public void test_GetList_By_AutomationId() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        wndw.getListByAutomationId("myID");
+        AutomationList list = wndw.getListByAutomationId("myID");
+        assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -668,9 +654,7 @@ public class AutomationContainerTest {
     public void test_GetList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getListByAutomationId("unknownID");
-
     }
 
     /************************************************************************************
@@ -738,7 +722,6 @@ public class AutomationContainerTest {
     /***************************************
      * Special Matchers
      ***************************************/
-
 
 	TreeScope isTreeScope(int expectedValue) {
 		return argThat(new TreeScopeMatcher(expectedValue));
