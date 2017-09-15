@@ -369,6 +369,16 @@ public class AutomationContainer extends AutomationBase {
 
 
     /**
+     * Gets the text box control associated with the given automation id
+     * @param id Automation id of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationTextBox getTextBoxByAutomationId(String id) throws AutomationException {
+        return new AutomationTextBox(this.getControlByAutomationId(id, ControlType.Text));
+    }
+
+    /**
      * Gets the combobox control associated with the given index
      * @param index Index of the control
      * @return The found control
@@ -391,7 +401,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the combobox control associated with the given automtion id
+     * Gets the combobox control associated with the given automation id
      * @param id Automation id of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -439,7 +449,7 @@ public class AutomationContainer extends AutomationBase {
      * @param value The value to set
      * @return ByValue variant
      */
-    private Variant.VARIANT.ByValue createIntegerVariant(int value) {
+    Variant.VARIANT.ByValue createIntegerVariant(int value) {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, value);
 

@@ -1,20 +1,26 @@
 package mmarquee.automation.controls;
 
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -22,11 +28,14 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
@@ -954,6 +963,116 @@ public class AutomationContainerTest {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getListByAutomationId("unknownID");
 
+    }
+
+    /************************************************************************************
+     *
+     *          getTextBox
+     *
+     ***********************************************************************************/
+
+    @Test
+    public void test_GetTextBox_By_Index() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        list.add(new AutomationElement(elem));
+
+        when(element.findAll(isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
+
+        AutomationWindow wndw = Mockito.spy(new AutomationWindow(element, window, container));
+        wndw.getTextBox(0);
+
+        verify(wndw).createIntegerVariant(ControlType.Text.getValue());
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void test_GetTextBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement boxElement = new AutomationElement(elem);
+		list.add(boxElement);
+
+        when(element.findAll(isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getTextBox(0);
+    }
+
+    @Test
+    public void test_GetTextBox_By_Name() throws Exception {
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement boxElement = new AutomationElement(elem);
+
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(boxElement);
+
+        AutomationWindow wndw = Mockito.spy(new AutomationWindow(element, window, container));
+        AutomationTextBox textBox = wndw.getTextBox("myName");
+        assertEquals(boxElement,textBox.getElement());
+
+        verify(wndw).createNamePropertyCondition("myName");
+        verify(wndw).createControlTypeCondition(ControlType.Text);
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetTextBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getTextBox("unknownName");
+    }
+
+    @Test
+    public void test_GetTextBox_By_AutomationId() throws Exception {
+        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        AutomationWindow wndw = Mockito.spy(new AutomationWindow(element, window, container));
+
+        AutomationElement boxElement = new AutomationElement(elem);
+
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(boxElement);
+
+        AutomationTextBox textBox = wndw.getTextBoxByAutomationId("myID");
+        assertEquals(boxElement,textBox.getElement());
+
+        verify(wndw).createAutomationIdPropertyCondition("myID");
+        verify(wndw).createControlTypeCondition(ControlType.Text);
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetTextBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        wndw.getTextBoxByAutomationId("unknownID");
+
+    }
+    
+    /***************************************
+     * Special Matchers
+     ***************************************/
+
+
+	TreeScope isTreeScope(int expectedValue) {
+		return argThat(new TreeScopeMatcher(expectedValue));
+	}
+	
+    class TreeScopeMatcher implements ArgumentMatcher<TreeScope> {
+    	final int expectedValue;
+    	
+    	TreeScopeMatcher(int expectedValue) {
+    		this.expectedValue = expectedValue;
+    	}
+    	
+        public boolean matches(TreeScope list) {
+            return list.value == expectedValue;
+        }
     }
 }
 
