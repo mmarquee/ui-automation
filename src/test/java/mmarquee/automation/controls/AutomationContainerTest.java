@@ -42,8 +42,17 @@ import mmarquee.automation.uiautomation.TreeScope;
  */
 public class AutomationContainerTest {
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        wndw = new AutomationWindow(element, window, container);
+        spyWndw = Mockito.spy(wndw);
+        
+        elem = Mockito.mock(IUIAutomationElement3.class);
+        
+        list = new ArrayList<>();
+        targetElement = new AutomationElement(elem);
+        list.add(targetElement);
     }
 
     @Mock
@@ -57,19 +66,19 @@ public class AutomationContainerTest {
 
     @InjectMocks
     UIAutomation automation;
-
+    
+    AutomationWindow wndw;
+    AutomationWindow spyWndw;
+    
+    IUIAutomationElement3 elem;
+    
+    List<AutomationElement> list;
+    AutomationElement targetElement;
+    
     @Test
     public void test_getEditBox_By_Index_Calls_findFirst_From_Element() throws Exception {
-
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationEditBox edit = wndw.getEditBox(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -77,15 +86,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_getEditBox_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationEditBox edit = wndw.getEditBox(1);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -93,16 +95,8 @@ public class AutomationContainerTest {
 
     @Test
     public void test_getAppBar_By_Index_Calls_findFirst_From_Element() throws Exception {
-
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationAppBar appBar = wndw.getAppBar(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -110,16 +104,8 @@ public class AutomationContainerTest {
 
     @Test
     public void test_getSlider_By_Index_Calls_findFirst_From_Element() throws Exception {
-
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationSlider slider = wndw.getSlider(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -127,15 +113,8 @@ public class AutomationContainerTest {
 
     @Test
     public void test_getButton_By_Index_Calls_findFirst_From_Element() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationButton btn = wndw.getButton(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -143,15 +122,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetTab_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationTab tab = wndw.getTab(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -161,15 +133,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetTab_By_Index_Errors_When_Too_Big() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationTab tab = wndw.getTab(99);
 
         assertTrue(tab != null);
@@ -179,15 +144,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetEditBox_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationEditBox editBox = wndw.getEditBox(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -195,15 +153,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetToolBar_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationToolBar editBox = wndw.getToolBar(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -211,15 +162,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetCombobox_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationComboBox editBox = wndw.getCombobox(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -227,15 +171,8 @@ public class AutomationContainerTest {
 
     @Test (expected=IndexOutOfBoundsException.class)
     public void testGetCombobox_By_Index_Errors_When_Too_Big() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationComboBox editBox = wndw.getCombobox(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -243,15 +180,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetCheckBox_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationCheckbox radio = wndw.getCheckbox(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -259,15 +189,8 @@ public class AutomationContainerTest {
 
     @Test (expected=IndexOutOfBoundsException.class)
     public void testGetRadioButton_By_Index_Fails_When_Index_No_Present() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationRadioButton radio = wndw.getRadioButton(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -275,15 +198,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetRadioButton_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationRadioButton radio = wndw.getRadioButton(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -291,15 +207,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetPanel_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationPanel panel = wndw.getPanel(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -307,15 +216,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetDocument_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationDocument doc = wndw.getDocument(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -323,15 +225,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetProgress_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationProgressBar progress = wndw.getProgressBar(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -339,15 +234,8 @@ public class AutomationContainerTest {
 
     @Test (expected=IndexOutOfBoundsException.class)
     public void testGetHyperlink_By_Index_Fails_When_Index_No_Present() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationHyperlink link = wndw.getHyperlink(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -355,15 +243,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetHyperlink_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationHyperlink link = wndw.getHyperlink(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -371,15 +252,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetToolbar_By_Index_Fails_When_Not_Found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getHyperlink(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -387,15 +261,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetToolbar_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getToolBar(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -403,15 +270,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetSlider_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getSlider(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -419,15 +279,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetProgress_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getProgressBar(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -435,15 +288,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetCalendar_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getProgressBar(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -451,15 +297,8 @@ public class AutomationContainerTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetCalendar_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getProgressBar(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -467,15 +306,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetDataGrid_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getDataGrid(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -483,15 +315,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetDataGrid_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getDataGrid(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -499,15 +324,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testTreeView_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getTreeView(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -515,15 +333,8 @@ public class AutomationContainerTest {
 
     @Test
     public void testTreeView_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getTreeView(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -531,10 +342,6 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetPasswordEditBox() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -552,11 +359,8 @@ public class AutomationContainerTest {
             }
         }).when(elem).getCurrentClassName(any());
 
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getPasswordEditBox(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -565,12 +369,6 @@ public class AutomationContainerTest {
     @Test(expected=ElementNotFoundException.class)
     @Ignore("Throwing Mockito exception")
     public void testGetPasswordEditBox_Throws_Exception_When_Out_Of_Bounds() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -586,13 +384,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentClassName(any());
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         AutomationEditBox box = wndw.getPasswordEditBox(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -601,12 +396,6 @@ public class AutomationContainerTest {
     @Test(expected=IndexOutOfBoundsException.class)
     @Ignore("Mockito exception thrown")
     public void testGetMaskedEdit_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -622,13 +411,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentClassName(any());
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -637,12 +423,6 @@ public class AutomationContainerTest {
     @Test(expected=IndexOutOfBoundsException.class)
     @Ignore("Throws Mockito exception now")
     public void testGetMaskedEdit_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -658,13 +438,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentClassName(any());
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -673,12 +450,6 @@ public class AutomationContainerTest {
     @Test
     @Ignore("Throws a Mockito exception now")
     public void testGetMaskedEdit_By_Name_Calls_FindFirst_Once() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -694,7 +465,7 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
+        }).when(elem).getCurrentClassName(any());
 
         doAnswer(new Answer() {
             @Override
@@ -707,8 +478,7 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentControlType(any());
-
+        }).when(elem).getCurrentControlType(any());
 
         doAnswer(new Answer() {
             @Override
@@ -725,13 +495,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentName(any());
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit("SMITH-01");
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -740,12 +507,6 @@ public class AutomationContainerTest {
     @Test(expected=ElementNotFoundException.class)
     @Ignore("Throws a Mockito exception now")
     public void testGetMaskedEdit_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -761,13 +522,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentClassName(any());
 
         when(element.findFirst(any(), any())).thenReturn(null);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit("SMITH-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -776,12 +534,6 @@ public class AutomationContainerTest {
     @Test(expected=IndexOutOfBoundsException.class)
     @Ignore("Throws Mockito exception now")
     public void test_PasswordBox_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -797,13 +549,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentClassName(any());
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -812,12 +561,6 @@ public class AutomationContainerTest {
     @Test(expected=IndexOutOfBoundsException.class)
     @Ignore("Throws Mockito exception now")
     public void test_PasswordBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        IUIAutomationElement3 spyElem = Mockito.spy(elem);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -833,13 +576,10 @@ public class AutomationContainerTest {
 
                 return 0;
             }
-        }).when(spyElem).getCurrentClassName(any());
-
-        list.add(new AutomationElement(spyElem));
+        }).when(elem).getCurrentClassName(any());
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getMaskedEdit(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -847,10 +587,6 @@ public class AutomationContainerTest {
 
     @Test
     public void testGetRibbonBar() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
         doAnswer(new Answer() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -871,10 +607,8 @@ public class AutomationContainerTest {
         AutomationElement el = Mockito.mock(AutomationElement.class);
         el.element = elem;
 
-        list.add(new AutomationElement(elem));
-
         when(el.findAll(any(), any())).thenReturn(list);
-
+        
         AutomationWindow wndw = new AutomationWindow(el, window, container);
         wndw.getRibbonBar();
 
@@ -889,15 +623,8 @@ public class AutomationContainerTest {
 
     @Test
     public void test_GetList_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getList(0);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -905,15 +632,8 @@ public class AutomationContainerTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_GetList_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getList(99);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -921,13 +641,8 @@ public class AutomationContainerTest {
 
     @Test
     public void test_GetList_By_Name() throws Exception {
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationElement child = new AutomationElement(elem);
-
-        when(element.findFirst(any(), any())).thenReturn(child);
-
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getList("myName");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -937,20 +652,13 @@ public class AutomationContainerTest {
     public void test_GetList_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getList("unknownName");
-
     }
 
     @Test
     public void test_GetList_By_AutomationId() throws Exception {
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationElement child = new AutomationElement(elem);
-
-        when(element.findFirst(any(), any())).thenReturn(child);
-
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getListByAutomationId("myID");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -973,50 +681,31 @@ public class AutomationContainerTest {
 
     @Test
     public void test_GetTextBox_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
         when(element.findAll(isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationWindow wndw = Mockito.spy(new AutomationWindow(element, window, container));
-        wndw.getTextBox(0);
+        AutomationTextBox textBox = spyWndw.getTextBox(0);
+        assertEquals(targetElement,textBox.element);
 
-        verify(wndw).createIntegerVariant(ControlType.Text.getValue());
+        verify(spyWndw).createIntegerVariant(ControlType.Text.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_GetTextBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        AutomationElement boxElement = new AutomationElement(elem);
-		list.add(boxElement);
-
         when(element.findAll(isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getTextBox(0);
+        wndw.getTextBox(99);
     }
 
     @Test
     public void test_GetTextBox_By_Name() throws Exception {
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationElement boxElement = new AutomationElement(elem);
+        AutomationTextBox textBox = spyWndw.getTextBox("myName");
+        assertEquals(targetElement,textBox.getElement());
 
-        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(boxElement);
-
-        AutomationWindow wndw = Mockito.spy(new AutomationWindow(element, window, container));
-        AutomationTextBox textBox = wndw.getTextBox("myName");
-        assertEquals(boxElement,textBox.getElement());
-
-        verify(wndw).createNamePropertyCondition("myName");
-        verify(wndw).createControlTypeCondition(ControlType.Text);
+        verify(spyWndw).createNamePropertyCondition("myName");
+        verify(spyWndw).createControlTypeCondition(ControlType.Text);
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
@@ -1024,24 +713,18 @@ public class AutomationContainerTest {
     public void test_GetTextBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getTextBox("unknownName");
     }
 
     @Test
     public void test_GetTextBox_By_AutomationId() throws Exception {
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-        AutomationWindow wndw = Mockito.spy(new AutomationWindow(element, window, container));
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationElement boxElement = new AutomationElement(elem);
+        AutomationTextBox textBox = spyWndw.getTextBoxByAutomationId("myID");
+        assertEquals(targetElement,textBox.getElement());
 
-        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(boxElement);
-
-        AutomationTextBox textBox = wndw.getTextBoxByAutomationId("myID");
-        assertEquals(boxElement,textBox.getElement());
-
-        verify(wndw).createAutomationIdPropertyCondition("myID");
-        verify(wndw).createControlTypeCondition(ControlType.Text);
+        verify(spyWndw).createAutomationIdPropertyCondition("myID");
+        verify(spyWndw).createControlTypeCondition(ControlType.Text);
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
@@ -1049,9 +732,7 @@ public class AutomationContainerTest {
     public void test_GetTextBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
         wndw.getTextBoxByAutomationId("unknownID");
-
     }
     
     /***************************************
