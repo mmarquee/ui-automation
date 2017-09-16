@@ -2,8 +2,7 @@ package mmarquee.automation.controls.rebar;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.controls.AutomationContainer;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -14,6 +13,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Specialised type of pane, with a specific control name
  */
 public class AutomationReBar extends AutomationPanel {
+	
+	public final static String CLASS_NAME = "ReBarWindow32";
+	
     /**
      * Construct the AutomationReBar
      * @param element The element
@@ -22,6 +24,7 @@ public class AutomationReBar extends AutomationPanel {
      */
     public AutomationReBar(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        assertClassName(CLASS_NAME);
     }
 
     /**
@@ -33,5 +36,6 @@ public class AutomationReBar extends AutomationPanel {
      */
     public AutomationReBar(AutomationElement element, ItemContainer containerPattern)  throws PatternNotFoundException, AutomationException {
         super(element, containerPattern);
+        assertClassName(CLASS_NAME);
     }
 }

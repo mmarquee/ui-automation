@@ -55,6 +55,7 @@ public class AutomationRibbonBarTest {
     public void testGetRibbonBar() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
         when(element.getName()).thenReturn("RIBBON-01");
 
         AutomationRibbonBar bar = new AutomationRibbonBar(element);
@@ -70,6 +71,7 @@ public class AutomationRibbonBarTest {
 
         List<AutomationElement> collection = new ArrayList<>();
 
+        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonBar workPane = new AutomationRibbonBar(element);
@@ -83,6 +85,7 @@ public class AutomationRibbonBarTest {
     public void testGetRibbonCommandBar_When_Element_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);

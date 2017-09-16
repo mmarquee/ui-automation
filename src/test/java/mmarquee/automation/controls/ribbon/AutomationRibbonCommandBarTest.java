@@ -56,6 +56,7 @@ public class AutomationRibbonCommandBarTest {
     public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
 
         AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
@@ -71,6 +72,7 @@ public class AutomationRibbonCommandBarTest {
 
         List<AutomationElement> collection = new ArrayList<>();
 
+        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
@@ -105,6 +107,7 @@ public class AutomationRibbonCommandBarTest {
 
         collection.add(new AutomationElement(elem));
 
+        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);

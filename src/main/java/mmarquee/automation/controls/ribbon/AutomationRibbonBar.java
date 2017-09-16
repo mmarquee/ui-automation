@@ -27,6 +27,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Specialist pane that represents the RibbonBar
  */
 public class AutomationRibbonBar extends AutomationPanel {
+	
+	public final static String CLASS_NAME = "UIRibbonCommandBarDock";
+	
     /**
      * Construct the AutomationRibbonBar
      * @param element The element
@@ -35,6 +38,7 @@ public class AutomationRibbonBar extends AutomationPanel {
      */
     public AutomationRibbonBar(AutomationElement element) throws AutomationException, PatternNotFoundException {
         super(element);
+        assertClassName(CLASS_NAME);
     }
 
     /**
@@ -44,6 +48,6 @@ public class AutomationRibbonBar extends AutomationPanel {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationRibbonCommandBar getRibbonCommandBar() throws PatternNotFoundException, AutomationException {
-        return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, "UIRibbonCommandBar"));
+        return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, AutomationRibbonCommandBar.CLASS_NAME));
     }
 }

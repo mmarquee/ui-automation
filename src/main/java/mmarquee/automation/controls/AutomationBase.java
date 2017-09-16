@@ -54,6 +54,23 @@ public abstract class AutomationBase implements Automatable {
     public AutomationElement getElement() {
         return this.element;
     }
+    
+
+    /**
+     * Throws an exception if the element's class name does not equal the expected one
+     * 
+     * @param expectedClassName the expected className
+     * @throws AutomationException if automation access failed
+     * @throws ElementNotFoundException if the className was inconsistent
+     */
+	protected void assertClassName(String expectedClassName) throws AutomationException, ElementNotFoundException {
+        String cName = element.getClassName();
+		if ((cName == null && expectedClassName == null)
+				|| (cName != null && cName.equals(expectedClassName))) {
+			return;
+		}
+		throw new ElementNotFoundException(expectedClassName + "(instead: " + cName + ")");
+	}
 
     /**
      * Checks whether a pattern is available
