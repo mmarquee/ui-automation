@@ -287,7 +287,19 @@ public class AutomationContainerTest {
         AutomationCheckbox checkBox = wndw.getCheckbox(0);
         assertEquals(targetElement,checkBox.getElement());
 
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(PointerByReference.class));
+    }
+
+    @Test
+    public void test_GetCheckBox_By_Name() throws Exception {
+        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+
+        AutomationCheckbox checkBox = spyWndw.getCheckbox("name");
+        assertEquals(targetElement,checkBox.getElement());
+
+        verify(spyWndw).createNamePropertyCondition("name");
+        verify(spyWndw).createControlTypeCondition(ControlType.CheckBox);
+        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(PointerByReference.class));
     }
     
     @Test
