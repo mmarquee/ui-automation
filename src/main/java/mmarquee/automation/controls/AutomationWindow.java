@@ -127,7 +127,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationSystemMenu getSystemMenu() throws PatternNotFoundException, AutomationException {
-        return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar)));
+        return (new AutomationSystemMenu(this.getElementByControlType(0, ControlType.MenuBar)));
     }
 
     /**
@@ -148,7 +148,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(offset, ControlType.MenuBar)));
+        return (new AutomationMainMenu(this.element, this.getElementByControlType(offset, ControlType.MenuBar)));
     }
 
     /**
@@ -158,7 +158,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(0, ControlType.Menu)));
+        return (new AutomationMainMenu(this.element, this.getElementByControlType(0, ControlType.Menu)));
     }
 
     /**
@@ -273,7 +273,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationTitleBar getTitleBar() throws AutomationException, PatternNotFoundException {
-        return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar));
+        return new AutomationTitleBar(this.getElementByControlType(0, ControlType.TitleBar));
     }
 
     /**

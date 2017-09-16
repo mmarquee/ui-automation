@@ -58,6 +58,6 @@ public class AutomationToolBar extends AutomationContainer {
      * @throws AutomationException Something has gone wrong
      */
     public AutomationToolBarButton getToolbarButton(int index) throws AutomationException {
-        return new AutomationToolBarButton(this.getControlByControlType(index, ControlType.Button));
+        return new AutomationToolBarButton(this.getElementByControlType(index, ControlType.Button));
     }
 }

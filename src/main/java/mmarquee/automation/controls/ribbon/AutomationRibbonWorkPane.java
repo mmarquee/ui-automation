@@ -49,7 +49,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationNUIPane getNUIPane(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationNUIPane(this.getControlByControlType(index, ControlType.Pane, AutomationNUIPane.CLASS_NAME));
+        return new AutomationNUIPane(this.getElementByControlType(index, ControlType.Pane, AutomationNUIPane.CLASS_NAME));
     }
 }
 
