@@ -27,7 +27,6 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 import mmarquee.automation.uiautomation.TreeScope;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,47 +82,6 @@ public class AutomationMainMenu extends AutomationBase {
             return pattern;
         } else {
             throw new AutomationException("QueryInterface failed");
-        }
-    }
-
-    /**
-     * Get the menu item associated with the hierarchy of names.
-     * This is to get around an odd menu when testing in the Delphi application that
-     * is used as a primary testbed for this library - it looks for "Help" and the expands
-     * the menu item found and then pressed the 'A' key.
-     * @param item0 Top level menu item
-     * @param eventKey Key to press
-     * @throws AutomationException Thrown when the element is not found.
-     */
-    public void menuItemFudge (String item0, int eventKey) throws AutomationException {
-        PointerByReference pbr = this.automation.createAndCondition(
-                this.createNamePropertyCondition(item0).getValue(),
-                this.createControlTypeCondition(ControlType.MenuItem).getValue());
-
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants), pbr);
-
-        if (item != null) {
-            IUIAutomationExpandCollapsePattern pattern =
-                    this.getExpandCollapsePatternFromItem(item);
-
-            pattern.expand();
-
-            try {
-                Thread.sleep(750);
-            } catch (Exception ex) {
-                // Seems to be fine, but interrupted
-            }
-
-            // Now press the correct key
-            try {
-                Robot robot = new Robot();
-                robot.keyPress(eventKey);
-                robot.delay(500);
-            } catch (AWTException ex) {
-                throw new AutomationException(ex.getMessage());
-            }
-        } else {
-            throw new ElementNotFoundException();
         }
     }
 

@@ -19,7 +19,7 @@ As the library depends on jna version 4.3.0, then don't specify the JNA library 
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.13</version>
+  <version>0.3.14</version>
 <dependencies>  
 ```
 
