@@ -12,6 +12,7 @@ It provides a consistent object-oriented API, hiding the complexity of Microsoft
 # Contributors
 * [Mark Humphreys](https://github.com/mmarquee)
 * [Pascal Bihler](https://github.com/pbi-qfs)
+* [Filipe Dias Lewandowski](https://github.com/diasf)
 
 # License
 Apache Version 2.0 Copyright (C) 2016
