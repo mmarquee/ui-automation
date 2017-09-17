@@ -10,7 +10,9 @@ It provides a consistent object-oriented API, hiding the complexity of Microsoft
 * [Start here](docs/developer.md)
 
 # Continuous Builds
-The build is built (for PRs and master) via [travis-ci](https://travis-ci.org/mmarquee/ui-automation). Failed builds cannot be merged 
+The build is built (for PRs and master) via [travis-ci](https://travis-ci.org/mmarquee/ui-automation). Failed builds cannot be merged.
+
+![build status](https://travis-ci.org/mmarquee/ui-automation.svg?branch=master)
 
 # Contributors
 * [Mark Humphreys](https://github.com/mmarquee)
