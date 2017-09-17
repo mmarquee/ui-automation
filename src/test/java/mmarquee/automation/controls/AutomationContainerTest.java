@@ -287,7 +287,7 @@ public class AutomationContainerTest {
         AutomationCheckbox checkBox = wndw.getCheckbox(0);
         assertEquals(targetElement,checkBox.getElement());
 
-        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(Pointer.class));
     }
 
     @Test
