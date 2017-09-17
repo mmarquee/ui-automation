@@ -9,6 +9,9 @@ It provides a consistent object-oriented API, hiding the complexity of Microsoft
 # Developer documentation
 * [Start here](docs/developer.md)
 
+# Continuous Builds
+The build is built (for PRs and master) via [travis-ci](https://travis-ci.org/mmarquee/ui-automation). Failed builds cannot be merged 
+
 # Contributors
 * [Mark Humphreys](https://github.com/mmarquee)
 * [Pascal Bihler](https://github.com/pbi-qfs)
