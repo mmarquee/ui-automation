@@ -15,17 +15,25 @@
  */
 package mmarquee.automation;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doAnswer;
+
 import java.util.ResourceBundle;
 
 import org.junit.After;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.Stubber;
 
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 
@@ -33,6 +41,7 @@ import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
 
 /**
@@ -123,6 +132,70 @@ public class BaseAutomationTest {
     		}
             Utils.closeProcess(hwnd);
     	}
+    }
+    
+
+    /***************************************
+     * Special Matchers & Helpers
+     ***************************************/
+
+    public static void setElementClassName(IUIAutomationElement3 elem, String className) {
+		answerStringByReference(className).when(elem).getCurrentClassName(any());
+	}
+
+	public static void setElementCurrentName(IUIAutomationElement3 elem, String name) {
+		answerStringByReference(name).when(elem).getCurrentName(any());
+	}
+
+	private static Stubber answerStringByReference(String value) {
+		return doAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[0];
+
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        });
+	}
+	
+	public static void setElementPropertyValue(IUIAutomationElement3 elem, PropertyID property, int vartype, Object propertyValue) {
+		doAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                Variant.VARIANT.ByReference reference = (Variant.VARIANT.ByReference)args[1];
+
+				reference.setValue(vartype, propertyValue);
+
+                return 0;
+            }
+        })
+        .when(elem)
+        .getCurrentPropertyValue(eq(property.getValue()),any());
+	}
+	
+	public static TreeScope isTreeScope(int expectedValue) {
+		return argThat(new TreeScopeMatcher(expectedValue));
+	}
+	
+    static class TreeScopeMatcher implements ArgumentMatcher<TreeScope> {
+    	final int expectedValue;
+    	
+    	TreeScopeMatcher(int expectedValue) {
+    		this.expectedValue = expectedValue;
+    	}
+    	
+        public boolean matches(TreeScope list) {
+            return list.value == expectedValue;
+        }
     }
     
 }
