@@ -87,7 +87,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      */
     public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
-                this.createControlTypeCondition(ControlType.MenuItem).getValue());
+                this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 

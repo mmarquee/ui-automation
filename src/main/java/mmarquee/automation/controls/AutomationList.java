@@ -67,7 +67,7 @@ public class AutomationList extends AutomationBase {
     public AutomationListItem getItem(int index) throws PatternNotFoundException, AutomationException {
 
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
-                this.createControlTypeCondition(ControlType.ListItem).getValue());
+                this.createControlTypeCondition(ControlType.ListItem));
 
         AutomationElement item = items.get(index);
 
@@ -88,8 +88,8 @@ public class AutomationList extends AutomationBase {
     public AutomationListItem getItem(String name) throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name).getValue(),
-                        this.createControlTypeCondition(ControlType.ListItem).getValue()));
+                        this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
             return new AutomationListItem(item);

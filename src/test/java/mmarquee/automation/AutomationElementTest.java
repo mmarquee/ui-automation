@@ -168,7 +168,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
+		List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition);
 
 		assertTrue("findAll:" + elements.size(), elements.size() != 0);
 	}
@@ -179,7 +179,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		List<AutomationElement> elements = root.findAllDescendants(condition.getValue());
+		List<AutomationElement> elements = root.findAllDescendants(condition);
 
 		assertTrue("findAll:" + elements.size(), elements.size() != 0);
 	}

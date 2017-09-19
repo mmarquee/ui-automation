@@ -100,8 +100,8 @@ public class AutomationMainMenu extends AutomationBase {
 
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name0).getValue(),
-                        this.createControlTypeCondition(ControlType.MenuItem).getValue()));
+                        this.createNamePropertyCondition(name0),
+                        this.createControlTypeCondition(ControlType.MenuItem)));
 
         if (!name1.isEmpty()) {
             // Needs a sub-item
@@ -120,8 +120,8 @@ public class AutomationMainMenu extends AutomationBase {
 
                 foundElement = this.getParent().findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
-                                this.createNamePropertyCondition(name1).getValue(),
-                                this.createControlTypeCondition(ControlType.MenuItem).getValue()));
+                                this.createNamePropertyCondition(name1),
+                                this.createControlTypeCondition(ControlType.MenuItem)));
             }
         } else {
             foundElement = item;
@@ -142,7 +142,7 @@ public class AutomationMainMenu extends AutomationBase {
      */
     public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
-                this.createControlTypeCondition(ControlType.MenuItem).getValue());
+                this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
         

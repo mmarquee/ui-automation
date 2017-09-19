@@ -65,7 +65,7 @@ public class AutomationPanel extends AutomationContainer {
     public AutomationWindow getMDIWindow(int index) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> list =
                 this.findAll(new TreeScope(TreeScope.Descendants),
-                    this.createControlTypeCondition(ControlType.Window).getValue());
+                    this.createControlTypeCondition(ControlType.Window));
 
         AutomationElement item = list.get(index);
 

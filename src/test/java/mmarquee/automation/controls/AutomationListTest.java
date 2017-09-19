@@ -16,6 +16,8 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
@@ -61,7 +63,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
@@ -78,7 +80,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
@@ -97,7 +99,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 

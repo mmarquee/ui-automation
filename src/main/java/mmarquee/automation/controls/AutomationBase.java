@@ -324,7 +324,7 @@ public abstract class AutomationBase implements Automatable {
      */
     protected List<AutomationElement> findAll(TreeScope scope) throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
-        return this.findAll(scope, condition.getValue());
+        return this.findAll(scope, condition);
     }
 
     /**
@@ -373,7 +373,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The And condition
      * @throws AutomationException Error in automation
      */
-   protected PointerByReference createAndCondition(Pointer condition1, Pointer condition2) throws AutomationException {
+   protected PointerByReference createAndCondition(PointerByReference condition1, PointerByReference condition2) throws AutomationException {
        return this.automation.createAndCondition(condition1, condition2);
    }
 
@@ -384,7 +384,7 @@ public abstract class AutomationBase implements Automatable {
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(TreeScope scope, Pointer condition) throws AutomationException {
+    protected List<AutomationElement> findAll(TreeScope scope, PointerByReference condition) throws AutomationException {
         return this.element.findAll(scope, condition);
     }
 

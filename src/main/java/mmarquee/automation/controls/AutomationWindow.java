@@ -104,7 +104,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     public AutomationStatusBar getStatusBar() throws AutomationException, PatternNotFoundException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
 
         AutomationStatusBar found = null;
 
@@ -213,8 +213,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
             try {
                 item = this.findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
-                                this.createNamePropertyCondition(title).getValue(),
-                                this.createControlTypeCondition(ControlType.Window).getValue()));
+                                this.createNamePropertyCondition(title),
+                                this.createControlTypeCondition(ControlType.Window)));
             } catch (ElementNotFoundException ex) {
                 logger.warn("Failed to find `" + title + "` window");
             }

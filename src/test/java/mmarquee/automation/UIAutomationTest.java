@@ -176,7 +176,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
                 // Create the actual condition
                 PointerByReference notCondition =
-                        instance.createNotCondition(pCondition.getValue());
+                        instance.createNotCondition(pCondition);
 
                 // Checking
                 Unknown unk = new Unknown(notCondition.getValue());
@@ -214,7 +214,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
                 // Create the actual condition
                 PointerByReference andCondition =
-                        instance.createAndCondition(pCondition0.getValue(), pCondition1.getValue());
+                        instance.createAndCondition(pCondition0, pCondition1);
 
                 // Checking
                 Unknown unk = new Unknown(andCondition.getValue());
@@ -253,7 +253,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
                 // Create the actual condition
                 PointerByReference condition =
-                        instance.createOrCondition(pCondition0.getValue(), pCondition1.getValue());
+                        instance.createOrCondition(pCondition0, pCondition1);
 
                 // Checking
                 Unknown unk = new Unknown(condition.getValue());
@@ -436,7 +436,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         PointerByReference pbr = new PointerByReference();
 
-        local_instance.createNotCondition(pbr.getValue());
+        local_instance.createNotCondition(pbr);
     }
 
     @Test(expected = AutomationException.class)
@@ -461,8 +461,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
-        instanceWithMocking.createAndCondition(new PointerByReference().getValue(),
-                new PointerByReference().getValue());
+        instanceWithMocking.createAndCondition(new PointerByReference(), new PointerByReference());
     }
 
     @Test(expected = AutomationException.class)
@@ -475,8 +474,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
-        instanceWithMocking.createOrCondition(new PointerByReference().getValue(),
-                new PointerByReference().getValue());
+        instanceWithMocking.createOrCondition(new PointerByReference(), new PointerByReference());
     }
 
     @Test

@@ -245,7 +245,7 @@ public class UIAutomation extends BaseAutomation {
             PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
 
             // And Condition
-            PointerByReference pAndCondition = this.createAndCondition(pCondition1.getValue(), pCondition2.getValue());
+            PointerByReference pAndCondition = this.createAndCondition(pCondition1, pCondition2);
 
             for (int loop = 0; loop < numberOfRetries; loop++) {
 
@@ -307,10 +307,10 @@ public class UIAutomation extends BaseAutomation {
      * @return The new condition
      * @throws AutomationException Something is wrong
      */
-    public PointerByReference createAndCondition(Pointer pCondition1, Pointer pCondition2) throws AutomationException {
+    public PointerByReference createAndCondition(PointerByReference pCondition1, PointerByReference pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createAndCondition(pCondition1, pCondition2, pbr);
+        final int res = this.automation.createAndCondition(pCondition1.getValue(), pCondition2.getValue(), pbr);
         if (res == 0) {
             return pbr;
         } else {
@@ -326,10 +326,10 @@ public class UIAutomation extends BaseAutomation {
      * @return The new condition
      * @throws AutomationException Something is wrong
      */
-    public PointerByReference createOrCondition(Pointer pCondition1, Pointer pCondition2) throws AutomationException {
+    public PointerByReference createOrCondition(PointerByReference pCondition1, PointerByReference pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createOrCondition(pCondition1, pCondition2, pbr);
+        final int res = this.automation.createOrCondition(pCondition1.getValue(), pCondition2.getValue(), pbr);
         if (res == 0) {
             return pbr;
         } else {
@@ -483,10 +483,7 @@ public class UIAutomation extends BaseAutomation {
             throws PatternNotFoundException, AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
-        PointerByReference pTrueCondition = this.createTrueCondition();
-
-        List<AutomationElement> collection =
-                this.rootElement.findAll(new TreeScope(TreeScope.Children), pTrueCondition.getValue());
+        List<AutomationElement> collection = getRootChildren(ControlType.Window);
 
         for (AutomationElement element : collection) {
             result.add(new AutomationWindow(element));
@@ -536,10 +533,10 @@ public class UIAutomation extends BaseAutomation {
      * @return The new condition
      * @throws AutomationException Something is wrong
      */
-    public PointerByReference createNotCondition(Pointer condition) throws AutomationException {
+    public PointerByReference createNotCondition(PointerByReference condition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createNotCondition(condition, pbr);
+        final int res = this.automation.createNotCondition(condition.getValue(), pbr);
         if (res == 0) {
             return pbr;
         } else {
@@ -659,7 +656,7 @@ public class UIAutomation extends BaseAutomation {
         }
     }
 
-    /**
+    /*
      * Adds an automation event handler.
      *
      IntByReference eventId,

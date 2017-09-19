@@ -79,7 +79,7 @@ public class AutomationContainer extends AutomationBase {
                 this.createIntegerVariant(id.getValue()));
 
         List<AutomationElement> collection = this.findAll(
-                new TreeScope(TreeScope.Subtree), condition.getValue());
+                new TreeScope(TreeScope.Subtree), condition);
 
         return collection.get(index);
     }
@@ -102,7 +102,7 @@ public class AutomationContainer extends AutomationBase {
 
         AutomationElement foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
+        collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
 
         int counter = 0;
 
@@ -136,12 +136,12 @@ public class AutomationContainer extends AutomationBase {
     protected AutomationElement getElementByControlType(String name, ControlType id) throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name).getValue(),
-                        this.createControlTypeCondition(id).getValue()));
+                        this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(id)));
     }
 
     /**
-     * Gets the element by the control type, for s given control index.
+     * Gets the element by the control type, for s given control name.
      *
      * There is probably a much better way of doing this
      *
@@ -158,8 +158,8 @@ public class AutomationContainer extends AutomationBase {
 
         collection = this.findAll(new TreeScope(TreeScope.Descendants),
         		this.createAndCondition(
-                        this.createNamePropertyCondition(name).getValue(),
-                        this.createControlTypeCondition(id).getValue()).getValue());
+                        this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(id)));
 
         for (AutomationElement element : collection) {
             String cName = element.getClassName();
@@ -191,8 +191,8 @@ public class AutomationContainer extends AutomationBase {
     protected AutomationElement getElementByAutomationId(String automationId, ControlType controlType) throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
-                        this.createAutomationIdPropertyCondition(automationId).getValue(),
-                        this.createControlTypeCondition(controlType).getValue()));
+                        this.createAutomationIdPropertyCondition(automationId),
+                        this.createControlTypeCondition(controlType)));
     }
 
 

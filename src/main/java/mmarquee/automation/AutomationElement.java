@@ -310,7 +310,7 @@ public class AutomationElement extends BaseAutomation {
      * @return List of matching elements
      * @throws AutomationException Call to Automation API failed
      */
-    public List<AutomationElement> findAllDescendants(Pointer pCondition) throws AutomationException {
+    public List<AutomationElement> findAllDescendants(PointerByReference pCondition) throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
     }
 
@@ -322,13 +322,13 @@ public class AutomationElement extends BaseAutomation {
      * @return List of matching elements
      * @throws AutomationException Call to Automation API failed
      */
-    public List<AutomationElement> findAll(TreeScope scope, Pointer pCondition) throws AutomationException {
+    public List<AutomationElement> findAll(TreeScope scope, PointerByReference pCondition) throws AutomationException {
 
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
         PointerByReference pAll = new PointerByReference();
 
-        final int res = this.element.findAll(scope, pCondition, pAll);
+        final int res = this.element.findAll(scope, pCondition.getValue(), pAll);
         if (res != 0) {
             throw new AutomationException(res);
         }
