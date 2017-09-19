@@ -35,7 +35,6 @@ import java.util.List;
  * Wrapper for the MenuItem element.
  */
 public class AutomationMenuItem extends AutomationBase implements Clickable, Expandable {
-    private Invoke invokePattern;
     private ExpandCollapse collapsePattern;
 
     /**
@@ -47,8 +46,6 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     public AutomationMenuItem(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-       // this.collapsePattern = this.getExpandCollapsePattern();
-       // this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -60,7 +57,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      * @throws PatternNotFoundException Pattern eas not found
      * @throws AutomationException Error in the automation library
      */
-    public AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
+    AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.collapsePattern = collapse;
@@ -72,11 +69,10 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     /**
      * Invoke the click pattern for the menu item.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException 
      */
-    public void click() throws AutomationException {
-        if (this.invokePattern != null) {
-            this.invokePattern.invoke();
-        }
+    public void click() throws AutomationException, PatternNotFoundException {
+    	this.invoke();
     }
 
     /**

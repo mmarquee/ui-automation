@@ -39,6 +39,8 @@ public abstract class AutomationBase implements Automatable {
 
     protected UIAutomation automation = UIAutomation.getInstance();
 
+    protected Invoke invokePattern = null;
+
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
@@ -47,6 +49,19 @@ public abstract class AutomationBase implements Automatable {
         this.element = element;
     }
 
+    /**
+     * Constructor for the AutomationBase
+     * @param element The underlying automation element
+     * @param pattern The pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase(AutomationElement element, Invoke pattern)
+            throws PatternNotFoundException, AutomationException {
+        this(element);
+        this.invokePattern = pattern;
+    }
+    
     /**
      * Gets the underlying automation element
      * @return The automation element
@@ -773,4 +788,26 @@ public abstract class AutomationBase implements Automatable {
     public Unknown makeUnknown(Pointer pvInstance) {
         return new Unknown(pvInstance);
     }
+    
+
+    /**
+     * <p>
+     * Invokes the click event for this control
+     * </p>
+     * @throws AutomationException Error in the automation library
+     * @throws PatternNotFoundException Could not find the invoke pattern
+     */
+    public void invoke() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            this.invokePattern = this.getInvokePattern();
+        }
+
+        if (this.isInvokePatternAvailable()) {
+            this.invokePattern.invoke();
+        } else {
+            throw new PatternNotFoundException();
+        }
+    }
+    
+
 }

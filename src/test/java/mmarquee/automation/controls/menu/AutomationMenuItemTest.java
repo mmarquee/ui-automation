@@ -17,15 +17,20 @@ package mmarquee.automation.controls.menu;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationToolbarButtonTest;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import com.sun.jna.platform.win32.Variant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,8 +101,11 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testClick() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
+
+    	IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsInvokePatternAvailable, Variant.VT_INT, 1);
+        
+        AutomationElement mocked_element = new AutomationElement(elem);
 
         ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
         Invoke invoke = Mockito.mock(Invoke.class);
