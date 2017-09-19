@@ -253,7 +253,7 @@ public class AutomationContainerTest2 {
         AutomationElement elm = Mockito.mock(AutomationElement.class);
 
         Mockito.when(elm.getControlType()).thenReturn(ControlType.Edit.getValue());
-        Mockito.when(elm.getClassName()).thenReturn("TAutomationMaskEdit");
+        Mockito.when(elm.getClassName()).thenReturn("TAutomatedMaskEdit");
         Mockito.when(elm.getName()).thenReturn("AutomatedMaskEdit1");
 
         list.add(elm);

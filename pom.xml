@@ -34,7 +34,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jna.version>4.3.0</jna.version>
-    <powermock.version>1.7.0RC4</powermock.version>
+    <powermock.version>1.7.3</powermock.version>
     <mockito.version>2.2.26</mockito.version>
   </properties>
 

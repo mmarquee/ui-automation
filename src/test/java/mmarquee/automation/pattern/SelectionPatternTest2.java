@@ -89,18 +89,7 @@ public class SelectionPatternTest2 {
             }
         }).when(rawPattern).getCurrentCanSelectMultiple(any());
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
-
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
-
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any());
 
         spyPattern.canSelectMultiple();
     }
@@ -115,18 +104,7 @@ public class SelectionPatternTest2 {
             }
         }).when(rawPattern).getCurrentSelection(any());
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
-
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
-
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any());
 
         spyPattern.getCurrentSelection();
     }
@@ -180,20 +158,9 @@ public class SelectionPatternTest2 {
             }
         }).when(rawPattern).getCurrentCanSelectMultiple(any());
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
-
         Selection pattern = new Selection(rawPattern);
 
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
-
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any());
 
         Boolean value = pattern.canSelectMultiple();
 
