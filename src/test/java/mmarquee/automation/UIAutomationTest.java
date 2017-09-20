@@ -15,8 +15,7 @@
  */
 package mmarquee.automation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
@@ -86,6 +85,16 @@ public class UIAutomationTest extends BaseAutomationTest {
         AutomationElement root = instance.getRootElement();
 
         assertTrue("root:" + root.currentName(), root.currentName().startsWith("Desktop"));
+    }
+
+    @Test
+    public void testGetDesktop() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationPanel desktop = instance.getDesktop();
+        
+        assertEquals(instance.getRootElement(),desktop.getElement());
+        assertTrue("desktop is correct: " + desktop.getName(), desktop.getName().startsWith("Desktop"));
     }
 
     @Test
@@ -520,4 +529,5 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetDesktopWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
         UIAutomation.getInstance().getDesktopWindow("Untitled - Notepad99");
     }
+
 }

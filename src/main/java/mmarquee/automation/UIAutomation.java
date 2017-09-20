@@ -418,8 +418,17 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the desktop object associated with the title
+     * Gets the main desktop object
      *
+     * @return AutomationPanel The found object
+     * @throws ElementNotFoundException Element is not found
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationPanel getDesktop()
+            throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.rootElement);
+    }
+
     /**
      * Gets the desktop object associated with the title
      *
