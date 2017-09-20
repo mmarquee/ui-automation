@@ -42,6 +42,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -130,9 +131,18 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         List<AutomationWindow> windows = instance.getDesktopWindows();
 
-        assertFalse("DesktopWindows" + windows.size(), windows.size() == 0);
+        assertFalse("getDesktopWindows finds more than one window", windows.size() == 0);
     }
 
+    @Test
+    public void testGetDesktopObjects() throws PatternNotFoundException, AutomationException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        List<AutomationPanel> objects = instance.getDesktopObjects();
+
+        assertFalse("getDesktopObjects finds more than one object", objects.size() == 0);
+    }
+    
     @Test
     public void testCreatePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
@@ -475,16 +485,6 @@ public class UIAutomationTest extends BaseAutomationTest {
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
         instanceWithMocking.createOrCondition(new PointerByReference(), new PointerByReference());
-    }
-
-    @Test
-    public void test_GetDesktopWindows()
-            throws IOException, AutomationException, PatternNotFoundException {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        List<AutomationWindow> items = instance.getDesktopWindows();
-
-        assertTrue(items.size() != 0);
     }
 
     @Test (expected = ItemNotFoundException.class)

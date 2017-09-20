@@ -497,6 +497,35 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
+     * Gets the list of desktop objects
+     *
+     * @return List of desktop object
+     * @throws AutomationException      Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public List<AutomationPanel> getDesktopObjects()
+            throws PatternNotFoundException, AutomationException {
+        List<AutomationPanel> result = new ArrayList<AutomationPanel>();
+
+        List<AutomationElement> collection = getRootChildren(ControlType.Pane);
+
+        for (AutomationElement element : collection) {
+            result.add(new AutomationPanel(element));
+        }
+
+        return result;
+    }
+
+
+	private List<AutomationElement> getRootChildren(ControlType controlType) throws AutomationException {
+        PointerByReference pCondition = this.createControlTypeCondition(controlType);
+
+        List<AutomationElement> collection =
+                this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
+		return collection;
+	}
+
+    /**
      * Creates a true Condition
      *
      * @return The condition
