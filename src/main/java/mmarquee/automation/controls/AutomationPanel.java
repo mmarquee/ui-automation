@@ -18,12 +18,8 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.List;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.
@@ -61,14 +57,48 @@ public class AutomationPanel extends AutomationContainer {
      * @return The found window
      * @throws PatternNotFoundException Failed to find the right pattern
      * @throws AutomationException Something went really wrong.
+     * @deprecated Use getWindow(int) instead
      */
     public AutomationWindow getMDIWindow(int index) throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> list =
-                this.findAll(new TreeScope(TreeScope.Descendants),
-                    this.createControlTypeCondition(ControlType.Window));
-
-        AutomationElement item = list.get(index);
-
-        return new AutomationWindow(item);
+        return getWindow(index);
     }
+
+    /**
+     * Gets a window from the panel
+     *
+     * @param index The nth element
+     * @return The found window
+     * @throws PatternNotFoundException Failed to find the right pattern
+     * @throws AutomationException Something went really wrong.
+     * TODO: Test
+     */
+    public AutomationWindow getWindow(int index) throws PatternNotFoundException, AutomationException {
+    	return new AutomationWindow(this.getElementByControlType(index, ControlType.Window));
+    }
+
+    /**
+     * Gets a window from the panel
+     *
+     * @param name Name of the control
+     * @return The found window
+     * @throws PatternNotFoundException Failed to find the right pattern
+     * @throws AutomationException Something went really wrong.
+     * TODO: Test
+     */
+    public AutomationWindow getWindow(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.getElementByControlType(name, ControlType.Window));
+    }
+
+    /**
+     * Gets the window associated with the given automation id
+     * @param id The id to use
+     * @return The found window
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     * TODO: Test
+      */
+    public AutomationWindow getWindowByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.getElementByAutomationId(id, ControlType.Window));
+    }
+    
 }
