@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -419,14 +420,17 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Gets the desktop object associated with the title
      *
+    /**
+     * Gets the desktop object associated with the title
+     *
      * @param title Title to search for
-     * @return AutomationWindow The found window
+     * @return AutomationPanel The found object
      * @throws ElementNotFoundException Element is not found
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getDesktopObject(String title)
+    public AutomationPanel getDesktopObject(String title)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
+        return new AutomationPanel(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
     }
 
     /**
