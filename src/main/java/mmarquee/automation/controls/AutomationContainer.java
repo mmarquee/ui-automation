@@ -845,6 +845,10 @@ public class AutomationContainer extends AutomationBase {
     
     /**
      * Deprecated. use {@link #getList(int)} instead.
+     * @param index the index of the item
+     * @return the List
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException if something goes wrong
      */
     @Deprecated
     public AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
@@ -1246,6 +1250,7 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Gets the Custom control associated with this index
      * @param index The index
+     * @param className The expected class name of the control
      * @return The control wrapper
      * @throws AutomationException Automation issue
      * @throws PatternNotFoundException Pattern not found
@@ -1257,6 +1262,7 @@ public class AutomationContainer extends AutomationBase {
     /**
      * Gets the Custom associated with the given name
      * @param name Name of the control
+     * @param className The expected class name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found

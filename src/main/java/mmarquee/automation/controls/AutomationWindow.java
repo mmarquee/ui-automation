@@ -178,6 +178,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Maximize the window
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void maximize() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -190,6 +191,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Minimize the window
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void minimize() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -244,6 +246,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Whether this window is modal
      * @return True if modal
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isModal() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -257,6 +260,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Whether this window is topmost
      * @return True if topmost
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isTopMost() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {

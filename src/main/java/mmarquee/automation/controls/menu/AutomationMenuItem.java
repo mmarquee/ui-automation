@@ -73,7 +73,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     /**
      * Invoke the click pattern for the menu item.
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException 
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void click() throws AutomationException, PatternNotFoundException {
     	this.invoke();
@@ -204,7 +204,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      * Is the control expanded
      * @return True if expanded
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException 
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isExpanded() throws AutomationException, PatternNotFoundException {
     	if (this.collapsePattern == null) {
@@ -219,7 +219,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     /**
      * Collapses the element
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException 
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void collapse() throws AutomationException, PatternNotFoundException {
     	if (this.collapsePattern == null) {
@@ -235,7 +235,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     /**
      * Expands the element
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException 
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void expand() throws AutomationException, PatternNotFoundException {
     	if (this.collapsePattern == null) {

@@ -176,8 +176,10 @@ public class AutomationTreeWalker extends BaseAutomation {
     	/**
     	 * Visits an element during an 
     	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run
+    	 * @param walker The walker to use
     	 * @param element The currently visited element
     	 * @return true to continue walking the elements siblings, false otherwise
+    	 * @throws AutomationException if something goes wrong
     	 */
     	boolean visit(AutomationTreeWalker walker, AutomationElement element) throws AutomationException;
     }

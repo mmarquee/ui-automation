@@ -677,6 +677,7 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Gets the control view walker
      * @return The tree walker object
+     * @throws AutomationException if something goes wrong
      */
     public AutomationTreeWalker getControlViewWalker() throws AutomationException {
         PointerByReference pbrWalker = new PointerByReference();

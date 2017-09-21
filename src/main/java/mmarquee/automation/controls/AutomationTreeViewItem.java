@@ -104,7 +104,7 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
      * Is the control expanded
      * @return True if expanded
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isExpanded() throws AutomationException, PatternNotFoundException {
         if (this.expandCollapsePattern == null) {
@@ -119,7 +119,7 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     /**
      * Collapses the element
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void collapse() throws AutomationException, PatternNotFoundException {
         if (this.expandCollapsePattern == null) {
@@ -135,7 +135,7 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     /**
      * Expands the element
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void expand() throws AutomationException, PatternNotFoundException {
         if (this.expandCollapsePattern == null) {
