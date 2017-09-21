@@ -177,11 +177,90 @@ public class AutomationContainer extends AutomationBase {
             String cName = element.getClassName();
 
             if (cName.equals(className)) {
-                String elementName = element.getName();
+                foundElement = element;
+                break;
+            }
+        }
 
-                if (elementName.equals(name)) {
+        if (foundElement == null) {
+            throw new ElementNotFoundException(className);
+        }
+
+        return foundElement;
+    }
+
+    /**
+     * Gets the element by the name
+     *
+     * @param name Name of the element
+     * @return The matching element
+     * @throws AutomationException Did not find the element
+     */
+    protected AutomationElement getElementByName(String name) throws AutomationException {
+        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        		this.createNamePropertyCondition(name));
+    }
+    
+    /**
+     * Gets the element by the name
+     *
+     * @param name Name of the element
+     * @param className The className to look for
+     * @return The matching element
+     * @throws AutomationException Did not find the element
+     */
+    protected AutomationElement getElementByName(String name, String className) throws AutomationException {
+        List<AutomationElement> collection;
+
+        AutomationElement foundElement = null;
+
+        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        		this.createNamePropertyCondition(name));
+
+        for (AutomationElement element : collection) {
+            String cName = element.getClassName();
+
+            if (cName.equals(className)) {
+                foundElement = element;
+                break;
+            }
+        }
+
+        if (foundElement == null) {
+            throw new ElementNotFoundException(className);
+        }
+
+        return foundElement;
+    }
+
+
+    /**
+     * Gets the element by the given control index
+     * 
+     * @param index Index of the element
+     * @param className The className to look for
+     * @return The matching element
+     * @throws AutomationException Automation issue
+     * @throws ElementNotFoundException Failed to find element
+     */
+    protected AutomationElement getElementByIndex(int index, String className) throws AutomationException, ElementNotFoundException {
+        List<AutomationElement> collection;
+
+        AutomationElement foundElement = null;
+
+        collection = this.findAll(new TreeScope(TreeScope.Descendants), this.createTrueCondition());
+
+        int counter = 0;
+
+        for (AutomationElement element : collection) {
+            String cName = element.getClassName();
+
+            if (cName.equals(className)) {
+                if (counter == index) {
                     foundElement = element;
                     break;
+                } else {
+                    counter++;
                 }
             }
         }
@@ -205,6 +284,16 @@ public class AutomationContainer extends AutomationBase {
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(controlType)));
+    }
+
+    /**
+     * Gets the control by the automation ID
+     * @param automationId Name to use
+     * @return The matching element
+     * @throws AutomationException An error has occurred in automation
+     */
+    protected AutomationElement getElementByAutomationId(String automationId) throws AutomationException {
+        return this.findFirst(new TreeScope(TreeScope.Descendants),this.createAutomationIdPropertyCondition(automationId));
     }
 
 
@@ -1209,71 +1298,143 @@ public class AutomationContainer extends AutomationBase {
     public AutomationPowerpointSlide getPowerpointSlideByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationPowerpointSlide(this.getElementByAutomationId(id, ControlType.Custom));
     }
+
+    //// Generic getters
     
+    /**
+     * Gets a control by control type
+     * @param index The nth item that matches
+     * @param id The control type
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByControlType(int index, ControlType id) throws AutomationException, PatternNotFoundException {
+    	AutomationElement el = this.getElementByControlType(index, id);
+    	return AutomationControlFactory.get(this, el);
+    }
+
+    /**
+     * Gets a control by control type
+     * @param index The nth item that matches
+     * @param id The control type
+     * @param className The className to look for
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByControlType(int index, ControlType id, String className) throws AutomationException, PatternNotFoundException {
+    	AutomationElement el = this.getElementByControlType(index, id, className);
+    	return AutomationControlFactory.get(this, el);
+    }
+    
+    /**
+     * Gets the control by the control type
+     * @param name Name to use
+     * @param id Control type
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByControlType(String name, ControlType id) throws AutomationException, PatternNotFoundException {
+    	AutomationElement el = this.getElementByControlType(name, id);
+    	return AutomationControlFactory.get(this, el);
+    }
+    
+    /**
+     * Gets the control by the control type
+     * @param name Name to use
+     * @param id Control type
+     * @param className The className to look for
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByControlType(String name, ControlType id, String className) throws AutomationException, PatternNotFoundException {
+    	AutomationElement el = this.getElementByControlType(name, id, className);
+    	return AutomationControlFactory.get(this, el);
+    }
+
+    /**
+     * Gets the control by the name
+     *
+     * @param name Name of the element
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException Did not find the element
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByName(String name) throws AutomationException, PatternNotFoundException {
+		AutomationElement el = this.getElementByName(name);
+		return AutomationControlFactory.get(this, el);
+	}
+	
+    /**
+     * Gets the control by the name
+     *
+     * @param name Name of the element
+     * @param className The className to look for
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+	public AutomationBase getControlByClassName(String name, String className) throws AutomationException, PatternNotFoundException {
+		AutomationElement el = this.getElementByName(name, className);
+		return AutomationControlFactory.get(this, el);
+	}
+    
+    /**
+     * Gets the control associated with the given automation id
+     * @param automationId The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByAutomationId(String automationId) throws AutomationException, PatternNotFoundException {
+    	AutomationElement el = this.getElementByAutomationId(automationId);
+    	return AutomationControlFactory.get(this, el);
+    }
+
     
     /////////////////// Heap /////////////////////////////7
 
-    /**
-     * Get a control, based on the class and the name
-     *
-     * Not currently used, as it only seems to work on one PC!
-     *
-     * @param type Class to return / check for
-     * @param controlType The control type to look for
-     * @param name Name to be looked for
-     * @param <T> The Type of the class
-     * @return Found element
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Raised from automation library
-     */
-/*
-    public <T extends AutomationBase> T get1(Class<T> type, ControlType controlType, String name)
-            throws PatternNotFoundException, AutomationException {
-
-        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, controlType.getValue());
-
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
-        variant.setValue(Variant.VT_BSTR, sysAllocated);
-
-        try {
-            PointerByReference propertyCondition = this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
-
-            PointerByReference nameCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
-            PointerByReference condition = this.automation.createAndCondition(nameCondition.getValue(), propertyCondition.getValue());
-
-            AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
-
-            return type.cast(AutomationControlFactory.get(controlType, elem));
-
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
-        }
-    }
-*/
-    /*
-    
-    public AutomationControl getByName(String name) {
-    	
-    }
-    static private class AutomationControlFactory {
-        public static AutomationControl get(ControlType controlType, AutomationElement element)
-                throws AutomationException, PatternNotFoundException {
-
-            if (controlType == ControlType.None) {
-                throw new AutomationException();
-            } else if (controlType == ControlType.Button) {
-                return new AutomationButton(element);
-            } else if (controlType == ControlType.TitleBar) {
-                return new AutomationTitleBar(element);
-            }
-
-            // TODO: Get more to work like this.
-
-            return null;
-        }
-    }
-    */
+//    /**
+//     * Get a control, based on the class and the name
+//     *
+//     * Not currently used, as it only seems to work on one PC!
+//     *
+//     * @param type Class to return / check for
+//     * @param controlType The control type to look for
+//     * @param name Name to be looked for
+//     * @param <T> The Type of the class
+//     * @return Found element
+//     * @throws PatternNotFoundException Expected pattern not found
+//     * @throws AutomationException Raised from automation library
+//     */
+//
+//    public <T extends AutomationBase> T get1(Class<T> type, ControlType controlType, String name)
+//            throws PatternNotFoundException, AutomationException {
+//
+//        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
+//        variant1.setValue(Variant.VT_INT, controlType.getValue());
+//
+//        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+//        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
+//        variant.setValue(Variant.VT_BSTR, sysAllocated);
+//
+//        try {
+//            PointerByReference propertyCondition = this.automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
+//
+//            PointerByReference nameCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
+//            PointerByReference condition = this.automation.createAndCondition(nameCondition.getValue(), propertyCondition.getValue());
+//
+//            AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
+//
+//            return type.cast(AutomationControlFactory.get(controlType, elem));
+//
+//        } finally {
+//            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+//        }
+//    }
     
 }

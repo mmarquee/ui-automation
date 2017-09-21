@@ -1506,5 +1506,158 @@ public class AutomationContainerTest {
         wndw.getPowerpointSlideByAutomationId("unknownID");
     }
 
+    @Test
+    public void getControlByControlType_By_Index() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
+        setElementTypeAndClassName(elem, ControlType.Slider, "");
+
+        AutomationBase custom = spyWndw.getControlByControlType(0, ControlType.Slider);
+        assertEquals(targetElement,custom.element);
+        assertEquals(AutomationSlider.class,custom.getClass());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void getControlByControlType_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
+
+        wndw.getControlByControlType(99,  ControlType.Slider);
+    }
+
+    @Test
+    public void getControlByControlType_By_Index_and_ClassName() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        setElementTypeAndClassName(elem, ControlType.Hyperlink, "FooBar");
+
+        AutomationBase custom = spyWndw.getControlByControlType(0, ControlType.Hyperlink, "FooBar");
+        assertEquals(targetElement,custom.element);
+        assertEquals(AutomationHyperlink.class,custom.getClass());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByControlType_By_Index_and_ClassName_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        setElementTypeAndClassName(elem, ControlType.Hyperlink, "FooBar");
+
+        wndw.getControlByControlType(99,  ControlType.Hyperlink, "FooBar");
+    }
+
+    @Test
+    public void getControlByControlType_By_Name() throws Exception {
+    	BaseAutomationTest.setElementCurrentName(elem, "myName");
+        setElementTypeAndClassName(elem, ControlType.Edit, "");
+
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+
+        AutomationBase bar = spyWndw.getControlByControlType("myName",ControlType.Edit);
+        assertEquals(targetElement,bar.getElement());
+        assertEquals(AutomationEditBox.class,bar.getClass());
+
+        verify(spyWndw).createNamePropertyCondition("myName");
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByControlType_By_Name_Throws_Exception_When_Not_found() throws Exception {
+    	BaseAutomationTest.setElementClassName(elem, "BlaBla");
+    	BaseAutomationTest.setElementCurrentName(elem, "myName");
+
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByControlType("unknownName",ControlType.Button);
+    }
+
+    @Test
+    public void getControlByControlType_By_Name_and_ClassName() throws Exception {
+    	BaseAutomationTest.setElementCurrentName(elem, "myName");
+        setElementTypeAndClassName(elem, ControlType.Button, "Blubber");
+
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationBase bar = spyWndw.getControlByControlType("myName",ControlType.Button, "Blubber");
+        assertEquals(targetElement,bar.getElement());
+        assertEquals(AutomationButton.class,bar.getClass());
+
+        verify(spyWndw).createNamePropertyCondition("myName");
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByControlType_By_Name_and_ClassName_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByControlType("unknownName",ControlType.Calendar, "Blubber");
+    }
+    @Test
+    public void getControlByAutomationId() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        setElementTypeAndClassName(elem, ControlType.Custom, "");
+
+        AutomationBase custom = spyWndw.getControlByAutomationId("myID");
+        assertEquals(targetElement,custom.getElement());
+        assertEquals(AutomationCustom.class,custom.getClass());
+
+        verify(spyWndw).createAutomationIdPropertyCondition("myID");
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByAutomationId_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByAutomationId("unknownID");
+    }
+
+    @Test
+    public void getControlByName() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        setElementTypeAndClassName(elem, ControlType.Document, "");
+
+        AutomationBase custom = spyWndw.getControlByName("myName");
+        assertEquals(targetElement,custom.getElement());
+        assertEquals(AutomationDocument.class,custom.getClass());
+
+        verify(spyWndw).createNamePropertyCondition("myName");
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByName_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByName("unknownName");
+    }
+    @Test
+    public void getControlByClassName_By_Name() throws Exception {
+    	BaseAutomationTest.setElementCurrentName(elem, "myName");
+        setElementTypeAndClassName(elem, ControlType.AppBar, "BlaBla");
+
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationBase bar = spyWndw.getControlByClassName("myName","BlaBla");
+        assertEquals(targetElement,bar.getElement());
+        assertEquals(AutomationAppBar.class,bar.getClass());
+
+        verify(spyWndw).createNamePropertyCondition("myName");
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByClassName_By_Name_Throws_Exception_When_Not_found() throws Exception {
+    	BaseAutomationTest.setElementClassName(elem, "BlaBla");
+    	BaseAutomationTest.setElementCurrentName(elem, "myName");
+
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByClassName("unknownName","BlaBla");
+    }
+
+	private void setElementTypeAndClassName(IUIAutomationElement3 elem, ControlType controlType, String className) {
+		BaseAutomationTest.answerIntByReference(controlType.getValue()).when(elem).getCurrentControlType(any());
+		BaseAutomationTest.answerStringByReference(className).when(elem).getCurrentClassName(any());
+	}
 }
 
