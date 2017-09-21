@@ -864,7 +864,7 @@ public abstract class AutomationBase implements Automatable {
         if (this.isInvokePatternAvailable()) {
             this.invokePattern.invoke();
         } else {
-            throw new PatternNotFoundException();
+            throw new PatternNotFoundException("Invoke could not be called");
         }
     }
     
