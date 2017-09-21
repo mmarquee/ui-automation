@@ -39,8 +39,8 @@ public class ExpandCollapse extends BasePattern {
 
     private IUIAutomationExpandCollapsePattern rawPattern;
 
-    public ExpandCollapse(IUIAutomationExpandCollapsePattern rawPattern) {
-        this.IID = IUIAutomationExpandCollapsePattern.IID;
+    ExpandCollapse(IUIAutomationExpandCollapsePattern rawPattern) {
+        this();
 
         this.rawPattern = rawPattern;
     }

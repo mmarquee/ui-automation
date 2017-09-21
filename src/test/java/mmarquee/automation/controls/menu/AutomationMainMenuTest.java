@@ -15,38 +15,37 @@
  */
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.PointerByReference;
 
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 13/12/2016.
@@ -55,20 +54,17 @@ import java.util.List;
  */
 public class AutomationMainMenuTest extends BaseAutomationTest {
 
-    @Before
+    @Mock private AutomationElement element;
+	@Mock private AutomationElement parent;
+	@Mock IUIAutomationElement3 elem;
+
+	@Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testName() throws Exception {
-
-        AutomationElement element =
-                Mockito.mock(AutomationElement.class);
-
-        AutomationElement parent =
-                Mockito.mock(AutomationElement.class);
-
         when(element.getName()).thenReturn("MENU-01");
 
         AutomationMainMenu item =
@@ -79,17 +75,9 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
     @Test
     public void testGetItems() throws Exception {
-        AutomationElement element =
-                Mockito.mock(AutomationElement.class);
-
-        AutomationElement parent =
-                Mockito.mock(AutomationElement.class);
-
         when(element.getName()).thenReturn("MENU-01");
 
         List<AutomationElement> collection = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         collection.add(new AutomationElement(elem));
 
@@ -104,38 +92,29 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
     }
 
     @Test
-    @Ignore("Need much more work")
     public void testGetMenuItem_With_Both_Parameters() throws Exception {
-        AutomationElement element =
-                Mockito.mock(AutomationElement.class);
+        when(element.getName()).thenReturn(getLocal("menu.file"));
+        
 
-        AutomationElement parent =
-                Mockito.mock(AutomationElement.class);
+        AutomationElement menuItemElement1 = Mockito.mock(AutomationElement.class);
+        ExpandCollapse expandCollapsePattern = BaseAutomationTest.mockExpandCollapsePattern(menuItemElement1);
+		when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(menuItemElement1);
 
-        when(element.getName()).thenReturn("MENU-01");
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
+        AutomationElement menuItemElement2 = Mockito.mock(AutomationElement.class);
+        
+        when(menuItemElement1.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(menuItemElement2);
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
 
         AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
-
-        // Not quite sure what to test for here - has it worked at all?
-
-      //  Mockito.verify(element, atLeastOnce()).findAll(any(), any());
+        
+        verify(expandCollapsePattern, atLeastOnce()).expand();
+        assertEquals(menuItemElement2,item.getElement());
     }
 
     @Test(expected = ItemNotFoundException.class)
     public void testGetMenuItem_With_First_Parameter_Only_Throws_Exception_When_Not_Found() throws Exception {
-        AutomationElement element =
-                Mockito.mock(AutomationElement.class);
-
-        AutomationElement parent =
-                Mockito.mock(AutomationElement.class);
-
         when(element.getName()).thenReturn("NOT MENU-01");
 
         when(element.findFirst(any(), any())).thenReturn(null);
@@ -143,26 +122,90 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
 
-        AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), "");
+        menu.getMenuItem(getLocal("menu.file"), "");
     }
 
     @Test
     public void testGetMenuItem_With_First_Parameter_Only_Does_Not_Throws_Exception_When_Found() throws Exception {
-        AutomationElement element =
-                Mockito.mock(AutomationElement.class);
-
-        AutomationElement parent =
-                Mockito.mock(AutomationElement.class);
-
         when(element.getName()).thenReturn("MENU-01");
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
 
         AutomationMainMenu menu =
                 new AutomationMainMenu(parent, element);
 
-        AutomationMenuItem item = menu.getMenuItem("MENU-01", "");
+        menu.getMenuItem("MENU-01", "");
+    }
+
+    @Test
+    public void testGetMenuItem_With_One_Parameter_Does_Not_Throws_Exception_When_Found() throws Exception {
+        when(element.getName()).thenReturn("MENU-01");
+
+        when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        menu.getMenuItem("MENU-01");
+    }
+
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetMenuItem_With_One_Parameter_Throws_Exception_When_Not_Found() throws Exception {
+        when(element.getName()).thenReturn("NOT MENU-01");
+
+        when(element.findFirst(any(), any())).thenReturn(null);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        menu.getMenuItem(getLocal("menu.file"));
+    }
+
+    @Test
+    public void test_GetMenuItem_By_Index() throws Exception {
+        AutomationElement menuItemElement = Mockito.mock(AutomationElement.class);
+        
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(menuItemElement);
+        
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+
+		AutomationMenu menu = new AutomationMenu(element);
+		
+		AutomationMenuItem item = menu.getMenuItem(0);
+        assertEquals(menuItemElement,item.getElement());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void test_GetMenuItem_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+
+		AutomationMenu menu = new AutomationMenu(element);
+		menu.getMenuItem(99);
+    }
+
+    @Test
+    public void test_GetMenuItem_By_AutomationId() throws Exception {
+        AutomationElement menuItemElement = Mockito.mock(AutomationElement.class);
+        
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(menuItemElement);
+
+        AutomationMainMenu menu = Mockito.spy(new AutomationMainMenu(parent, element));
+
+        AutomationMenuItem item = menu.getMenuItemByAutomationId("myID");
+        assertEquals(menuItemElement,item.getElement());
+
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetMenuItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        AutomationMainMenu menu = Mockito.spy(new AutomationMainMenu(parent, element));
+
+        menu.getMenuItemByAutomationId("unknownID");
     }
 }

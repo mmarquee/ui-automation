@@ -19,6 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 import java.util.ResourceBundle;
 
@@ -39,10 +40,13 @@ import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
+import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
  * Created by Mark Humphreys on 29/11/2016.
@@ -197,5 +201,28 @@ public class BaseAutomationTest {
             return list.value == expectedValue;
         }
     }
+
+    static abstract class PointerByReferenceWithPattern extends PointerByReference implements PatternProvider { 	
+    }
+
+	static public void setPatternForElementMock(AutomationElement automationElementMock, PatternID patternId,
+			PropertyID patternAvailablePropertyID, BasePattern pattern) throws AutomationException {
+		when(automationElementMock.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
+        
+		when(automationElementMock.getPattern(patternId.getValue())).thenReturn(new PointerByReferenceWithPattern(){
+			@Override
+			public BasePattern getPattern() {
+				return pattern;
+			}});
+	}
+	
+	static public ExpandCollapse mockExpandCollapsePattern(AutomationElement automationElementMock) throws AutomationException {
+		 PatternID patternId = PatternID.ExpandCollapse;
+	     PropertyID patternAvailablePropertyID = PropertyID.IsExpandCollapsePatternAvailable;
+	     ExpandCollapse expandCollapsePattern = Mockito.mock(ExpandCollapse.class);
+	     setPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
+	     
+	     return expandCollapsePattern;
+	}
     
 }

@@ -23,6 +23,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.utils.providers.PatternProvider;
+
 import org.apache.log4j.Logger;
 import java.util.List;
 
@@ -434,6 +436,11 @@ public abstract class AutomationBase implements Automatable {
 
         if (this.isSelectionItemPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (SelectionItem)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -454,6 +461,10 @@ public abstract class AutomationBase implements Automatable {
         if (this.isSelectionPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Selection)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -473,6 +484,11 @@ public abstract class AutomationBase implements Automatable {
 
         if (this.isValuePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Value)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -492,6 +508,11 @@ public abstract class AutomationBase implements Automatable {
 
         if (this.isGridItemPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.GridItem.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (GridItem)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -512,6 +533,10 @@ public abstract class AutomationBase implements Automatable {
         if (isRangeValuePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.RangeValue.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Range)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -532,6 +557,10 @@ public abstract class AutomationBase implements Automatable {
         if (isTablePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Table)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -552,6 +581,10 @@ public abstract class AutomationBase implements Automatable {
         if (this.isWindowPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Window)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -571,6 +604,10 @@ public abstract class AutomationBase implements Automatable {
 
         if (isExpandCollapsePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
+            
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (ExpandCollapse)((PatternProvider) unknown).getPattern();
+            }
 
             pattern.setPattern(unknown.getValue());
         }
@@ -592,6 +629,10 @@ public abstract class AutomationBase implements Automatable {
         if (isGridPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Grid.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Grid)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -612,6 +653,10 @@ public abstract class AutomationBase implements Automatable {
         if (isTogglePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Toggle)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -624,6 +669,10 @@ public abstract class AutomationBase implements Automatable {
         if (isItemContainerPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.ItemContainer.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (ItemContainer)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -643,6 +692,11 @@ public abstract class AutomationBase implements Automatable {
 
         if (isInvokePatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Invoke.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Invoke)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -662,6 +716,11 @@ public abstract class AutomationBase implements Automatable {
 
         if (this.isTextPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.Text.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Text)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
