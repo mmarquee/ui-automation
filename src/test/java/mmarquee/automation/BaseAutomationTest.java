@@ -36,6 +36,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.controls.AutomationApplication;
@@ -151,7 +152,7 @@ public class BaseAutomationTest {
 		answerStringByReference(name).when(elem).getCurrentName(any());
 	}
 
-	private static Stubber answerStringByReference(String value) {
+	public static Stubber answerStringByReference(String value) {
 		return doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {
@@ -163,6 +164,21 @@ public class BaseAutomationTest {
                 pointer.setWideString(0, value);
 
                 reference.setValue(pointer);
+
+                return 0;
+            }
+        });
+	}
+
+	public static Stubber answerIntByReference(int value) {
+		return doAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+				reference.setValue(value);
 
                 return 0;
             }
