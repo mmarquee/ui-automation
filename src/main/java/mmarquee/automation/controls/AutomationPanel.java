@@ -70,7 +70,6 @@ public class AutomationPanel extends AutomationContainer {
      * @return The found window
      * @throws PatternNotFoundException Failed to find the right pattern
      * @throws AutomationException Something went really wrong.
-     * TODO: Test
      */
     public AutomationWindow getWindow(int index) throws PatternNotFoundException, AutomationException {
     	return new AutomationWindow(this.getElementByControlType(index, ControlType.Window));
@@ -83,7 +82,6 @@ public class AutomationPanel extends AutomationContainer {
      * @return The found window
      * @throws PatternNotFoundException Failed to find the right pattern
      * @throws AutomationException Something went really wrong.
-     * TODO: Test
      */
     public AutomationWindow getWindow(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.getElementByControlType(name, ControlType.Window));
@@ -95,7 +93,6 @@ public class AutomationPanel extends AutomationContainer {
      * @return The found window
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
-     * TODO: Test
       */
     public AutomationWindow getWindowByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.getElementByAutomationId(id, ControlType.Window));
