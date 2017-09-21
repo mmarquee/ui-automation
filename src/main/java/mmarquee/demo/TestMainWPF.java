@@ -166,7 +166,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ CHECK BOX ++");
 
-            AutomationCheckbox check = applicationWindow.getCheckbox(0);
+            AutomationCheckBox check = applicationWindow.getCheckBox(0);
             check.toggle();
             try {
                 ToggleState state = check.getToggleState();
@@ -175,7 +175,7 @@ public class TestMainWPF extends TestBase {
             }
 /* Only works on one PC at the moment. */
 /*
-            AutomationCheckbox cb = applicationWindow.get(AutomationCheckbox.class, ControlType.CheckBox, "Enable feature WWW");
+            AutomationCheckBox cb = applicationWindow.get(AutomationCheckBox.class, ControlType.CheckBox, "Enable feature WWW");
             cb.toggle();
             try {
                 ToggleState state = cb.getToggleState();

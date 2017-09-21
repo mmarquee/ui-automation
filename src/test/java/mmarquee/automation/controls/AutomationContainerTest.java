@@ -281,7 +281,7 @@ public class AutomationContainerTest {
     public void testGetCheckBox_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationCheckbox checkBox = wndw.getCheckbox(0);
+        AutomationCheckBox checkBox = wndw.getCheckBox(0);
         assertEquals(targetElement,checkBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(PointerByReference.class));
@@ -289,9 +289,9 @@ public class AutomationContainerTest {
 
     @Test
     public void test_GetCheckBox_By_Name() throws Exception {
-        when(element.findFirst(isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCheckbox checkBox = spyWndw.getCheckbox("name");
+        AutomationCheckBox checkBox = spyWndw.getCheckBox("name");
         assertEquals(targetElement,checkBox.getElement());
 
         verify(spyWndw).createNamePropertyCondition("name");
@@ -303,7 +303,7 @@ public class AutomationContainerTest {
     public void test_GetCheckBox_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCheckbox checkBox = spyWndw.getCheckboxByAutomationId("myID");
+        AutomationCheckBox checkBox = spyWndw.getCheckBoxByAutomationId("myID");
         assertEquals(targetElement,checkBox.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -315,7 +315,7 @@ public class AutomationContainerTest {
     public void test_GetCheckBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCheckboxByAutomationId("unknownID");
+        wndw.getCheckBoxByAutomationId("unknownID");
     }
     
 

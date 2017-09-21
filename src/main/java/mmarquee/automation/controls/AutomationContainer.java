@@ -313,36 +313,36 @@ public class AutomationContainer extends AutomationBase {
     
     
     /**
-     * Gets the Checkbox associated with the given index
+     * Gets the CheckBox associated with the given index
      * @param index Index of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCheckbox getCheckbox(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationCheckbox(this.getElementByControlType(index, ControlType.CheckBox));
+    public AutomationCheckBox getCheckBox(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationCheckBox(this.getElementByControlType(index, ControlType.CheckBox));
     }
 
     /**
-     * Gets the Checkbox associated with the given name
+     * Gets the CheckBox associated with the given name
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCheckbox getCheckbox(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationCheckbox(this.getElementByControlType(name, ControlType.CheckBox));
+    public AutomationCheckBox getCheckBox(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationCheckBox(this.getElementByControlType(name, ControlType.CheckBox));
     }
     
     /**
-     * Gets the Checkbox control associated with the given automation id
+     * Gets the CheckBox control associated with the given automation id
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
       */
-    public AutomationCheckbox getCheckboxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationCheckbox(this.getElementByAutomationId(id, ControlType.CheckBox));
+    public AutomationCheckBox getCheckBoxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationCheckBox(this.getElementByAutomationId(id, ControlType.CheckBox));
     }
     
 

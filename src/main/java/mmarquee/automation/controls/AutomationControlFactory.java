@@ -59,7 +59,7 @@ public class AutomationControlFactory {
     	case Calendar:
     		return new AutomationCalendar(element);
     	case CheckBox:
-    		return new AutomationCheckbox(element);
+    		return new AutomationCheckBox(element);
     	case ComboBox:
     		return new AutomationComboBox(element);
     	case Edit:

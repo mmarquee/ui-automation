@@ -92,8 +92,8 @@ public class AutomationControlFactoryTest {
     }
 
     @Test
-    public void get_returns_AutomationCheckbox_on_CheckBox() throws Exception {
-        testGet(ControlType.CheckBox, AutomationCheckbox.class);
+    public void get_returns_AutomationCheckBox_on_CheckBox() throws Exception {
+        testGet(ControlType.CheckBox, AutomationCheckBox.class);
     }
 
     @Test

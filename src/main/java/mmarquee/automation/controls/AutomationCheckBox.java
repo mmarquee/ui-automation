@@ -28,7 +28,7 @@ import mmarquee.automation.uiautomation.ToggleState;
  *
  * Wrapper for the CheckBox element.
  */
-public class AutomationCheckbox extends AutomationBase implements Toggleable {
+public class AutomationCheckBox extends AutomationBase implements Toggleable {
 
     private Toggle togglePattern;
 
@@ -64,22 +64,22 @@ public class AutomationCheckbox extends AutomationBase implements Toggleable {
     }
 
     /**
-     * Constructor for the AutomationCheckbox
+     * Constructor for the AutomationCheckBox
      * @param element The element
      * @throws AutomationException Automation exception
      * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationCheckbox (AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationCheckBox (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
 //        togglePattern = this.getTogglePattern();
     }
 
     /**
-     * Constructor for the AutomationCheckbox
+     * Constructor for the AutomationCheckBox
      * @param element The element
      * @param pattern The pattern
      */
-    public AutomationCheckbox(AutomationElement element, Toggle pattern) {
+    public AutomationCheckBox(AutomationElement element, Toggle pattern) {
         super(element);
         togglePattern = pattern;
     }

@@ -528,7 +528,7 @@ public class AutomationBaseTest {
 
         assertEquals(list.size(), children.size());
         assertEquals(targetElement, children.get(0).getElement());
-        assertEquals(AutomationCheckbox.class, children.get(0).getClass());
+        assertEquals(AutomationCheckBox.class, children.get(0).getClass());
 
         verify(element).findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any());
     }

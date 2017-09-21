@@ -4,7 +4,7 @@
 
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.14</version>
+  <version>0.4.0</version>
   <packaging>jar</packaging>
 
   <name>ui-automation</name>
