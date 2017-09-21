@@ -27,7 +27,7 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the ListItem element.
  */
-public class AutomationListItem extends AutomationBase implements Selectable, Clickable {
+public class AutomationListItem extends AutomationContainer implements Selectable, Clickable {
 
     SelectionItem selectItemPattern;
 

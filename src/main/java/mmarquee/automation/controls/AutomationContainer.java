@@ -28,6 +28,7 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.rebar.AutomationReBar;
 import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
+import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -51,7 +52,6 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-       // itemContainerPattern = this.getItemContainerPattern();
     }
 
     /**
@@ -62,11 +62,23 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
+    AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
         super(element);
         itemContainerPattern = pattern;
     }
 
+    /**
+     * Constructor for AutomationContainer
+     *
+     * @param element The underlying element
+     * @param pattern The Invoke pattern
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    AutomationContainer(AutomationElement element, Invoke pattern) throws PatternNotFoundException, AutomationException {
+        super(element, pattern);
+    }
+    
     /**
      * Gets a element by control type
      * @param index The nth item that matches
@@ -127,7 +139,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the control type
+     * Gets the element by the control type
      * @param name Name to use
      * @param id Control type
      * @return The matching element
