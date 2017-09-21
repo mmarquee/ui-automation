@@ -26,7 +26,6 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import java.util.List;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
@@ -889,4 +888,57 @@ public abstract class AutomationBase implements Automatable {
     }
     
 
+    /**
+     * Gets child Elements
+     *
+     * @param deep set to true to get also children of children
+     * @return The matching element
+     * @throws AutomationException Did not find the element
+     */
+    protected List<AutomationElement> getChildElements(boolean deep) throws AutomationException {
+        return this.findAll(new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
+        		this.createTrueCondition());
+    }
+    
+ // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+//    /**
+//     * Gets the parent element
+//     *
+//     * @return The matching element
+//     * @throws AutomationException Did not find the element
+//     */
+//    protected AutomationElement getParentElement() throws AutomationException {
+//        return this.findFirst(new TreeScope(TreeScope.Parent), this.createTrueCondition());
+//    }
+
+    /**
+     * Gets child controls
+     *
+     * @param deep set to true to get also children of children
+     * @return The matching element
+     * @throws AutomationException Did not find the element
+     * @throws PatternNotFoundException Expected pattern not found 
+     */
+    public List<AutomationBase> getChildren(boolean deep) throws AutomationException, PatternNotFoundException {
+        List<AutomationElement> elements = this.getChildElements(deep);
+        List<AutomationBase> collection = new LinkedList<AutomationBase>();
+        
+        for (AutomationElement el: elements) {
+        	collection.add(AutomationControlFactory.get(this, el));
+        }
+        return collection;
+    }
+
+// TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+//    /**
+//     * Gets the parent control
+//     *
+//     * @return The matching element
+//     * @throws AutomationException Did not find the element
+//     * @throws PatternNotFoundException Expected pattern not found 
+//     */
+//    public AutomationBase getParent() throws AutomationException, PatternNotFoundException {
+//    	AutomationElement el = this.getParentElement();
+//    	return AutomationControlFactory.get(this, el);
+//    }
 }
