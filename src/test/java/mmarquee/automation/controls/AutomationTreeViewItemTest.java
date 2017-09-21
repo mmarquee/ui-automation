@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -79,7 +80,7 @@ public class AutomationTreeViewItemTest {
         verify(invoke, atLeastOnce()).invoke();
     }
 
-    @Test
+    @Test(expected=PatternNotFoundException.class)
     public void testClick_When_Pattern_Is_NOT_Available() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
@@ -90,8 +91,6 @@ public class AutomationTreeViewItemTest {
         AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, invoke);
 
         ctrl.click();
-
-        verify(invoke, never()).invoke();
     }
 
     @Test

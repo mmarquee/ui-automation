@@ -28,7 +28,6 @@ import mmarquee.automation.pattern.*;
 public class AutomationTreeViewItem extends AutomationBase implements Selectable, Clickable {
 
     private SelectionItem selectItemPattern;
-    private Invoke invokePattern;
 
     /**
      * Construct the AutomationTreeViewItem
@@ -39,9 +38,6 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     public AutomationTreeViewItem(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-
-//        this.selectItemPattern = this.getSelectItemPattern();
-//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
@@ -54,10 +50,9 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
      */
     public AutomationTreeViewItem(AutomationElement element, SelectionItem selection, Invoke invoke)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(element,invoke);
 
         this.selectItemPattern = selection;
-        this.invokePattern = invoke;
     }
 
     /**
@@ -82,7 +77,10 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
             this.selectItemPattern = this.getSelectItemPattern();
         }
 
-        return this.selectItemPattern.isSelected();
+        if (this.selectItemPattern != null) {
+        	return this.selectItemPattern.isSelected();
+        }
+        throw new PatternNotFoundException("Select state cannot be determined");
     }
 
     /**
@@ -91,14 +89,10 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
      * @throws PatternNotFoundException Pattern not found
      */
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
+        super.invoke();
+    }
         }
 
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
-        } else {
-            logger.warn("Invoke pattern is not available");
         }
     }
 }
