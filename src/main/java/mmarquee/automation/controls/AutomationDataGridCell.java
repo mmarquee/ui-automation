@@ -39,7 +39,6 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      */
     public AutomationDataGridCell(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-       // this.valuePattern = this.getValuePattern();
     }
 
     /**
@@ -49,7 +48,7 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell(AutomationElement element, Value value) throws PatternNotFoundException, AutomationException {
+    AutomationDataGridCell(AutomationElement element, Value value) throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = value;
     }
@@ -64,7 +63,7 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell(AutomationElement element, Value value, GridItem grid, SelectionItem selectionItem) throws PatternNotFoundException, AutomationException {
+    AutomationDataGridCell(AutomationElement element, Value value, GridItem grid, SelectionItem selectionItem) throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = value;
         this.gridItemPattern = grid;
@@ -94,15 +93,7 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     }
 
     public void invoke() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            try {
-                this.invokePattern = this.getInvokePattern();
-            } catch (NullPointerException ex) {
-                logger.info("No invoke pattern available");
-            }
-        }
-
-        invokePattern.invoke();
+        super.invoke();
     }
 
     /**
