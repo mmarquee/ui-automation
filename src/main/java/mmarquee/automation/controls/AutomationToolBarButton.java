@@ -21,6 +21,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 20/07/2016.
@@ -28,8 +29,6 @@ import mmarquee.automation.pattern.Invoke;
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
 public class AutomationToolBarButton extends AutomationBase implements Clickable {
-
-    private Invoke invokePattern;
 
     /**
      * Constructor for the AutomationToolBarButton
@@ -46,11 +45,11 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
      * @param element The underlying automation element
      * @param invoke The Invoke pattern
      * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException  Ppatern not found
      */
-    public AutomationToolBarButton(AutomationElement element, Invoke invoke)
-            throws AutomationException {
-        super (element);
-        this.invokePattern = invoke;
+    AutomationToolBarButton(AutomationElement element, Invoke invoke)
+            throws AutomationException, PatternNotFoundException {
+        super (element, invoke);
     }
 
     /**

@@ -49,6 +49,6 @@ public class AutomationNUIPane extends AutomationPanel {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationNetUIHWND getNetUIHWND(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationNetUIHWND(this.getControlByControlType(index, ControlType.Pane, AutomationNetUIHWND.CLASS_NAME));
+        return new AutomationNetUIHWND(this.getElementByControlType(index, ControlType.Pane, AutomationNetUIHWND.CLASS_NAME));
     }
 }

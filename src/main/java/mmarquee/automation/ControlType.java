@@ -74,4 +74,13 @@ public enum ControlType {
     ControlType(int value) {
         this.value = value;
     }
+
+	public static ControlType fromValue(int controlTypeValue) {
+		for(ControlType type: values()) {
+			if (type.getValue() == controlTypeValue) {
+				return type;
+			}
+		}
+		return None;
+	}
 }

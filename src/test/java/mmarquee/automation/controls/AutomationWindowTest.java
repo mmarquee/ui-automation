@@ -22,7 +22,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -39,6 +39,14 @@ import static org.mockito.Mockito.when;
  */
 public class AutomationWindowTest {
 
+	@Mock AutomationElement element;
+	@Mock Window window;
+	@Mock ItemContainer container;
+	@Mock AutomationElement targetElement;
+	@Mock AutomationElement item;
+	List<AutomationElement> list = new ArrayList<>();
+	List<AutomationElement> menus = new ArrayList<>();
+	
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
@@ -46,16 +54,14 @@ public class AutomationWindowTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        list.add(targetElement);
+        menus.add(item);
     }
 
     @Test
     public void testGetWindowName_Matches_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
         when(element.getName()).thenReturn("Name-01");
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
 
         when(window.isModal()).thenReturn(true);
 
@@ -67,11 +73,7 @@ public class AutomationWindowTest {
     @Test
     public void testGetWindowName_Does_Not_Match_Searched_For_Name()
             throws AutomationException, PatternNotFoundException {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
         when(element.getName()).thenReturn("Name-01");
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
 
         when(window.isModal()).thenReturn(true);
 
@@ -82,25 +84,9 @@ public class AutomationWindowTest {
 
     @Test
     public void test_getSystemMenu_Does_Not_Throw_Exception() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
-
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(elem);
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        List<AutomationElement> menus = new ArrayList<>();
-
-        AutomationElement item = Mockito.mock(AutomationElement.class);
-
-        menus.add(item);
-
-        when(elem.findAll(any(), any())).thenReturn(menus);
+        when(targetElement.findAll(any(), any())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -109,25 +95,9 @@ public class AutomationWindowTest {
 
     @Test
     public void testGetTitleBar_Does_Not_Throw_Exception() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
-
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(elem);
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        List<AutomationElement> menus = new ArrayList<>();
-
-        AutomationElement item = Mockito.mock(AutomationElement.class);
-
-        menus.add(item);
-
-        when(elem.findAll(any(), any())).thenReturn(menus);
+        when(targetElement.findAll(any(), any())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -136,25 +106,9 @@ public class AutomationWindowTest {
 
     @Test
     public void testGetAppBar_By_Index_Does_Not_Throw_Exception() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
-
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(elem);
-
         when(element.findAll(any(), any())).thenReturn(list);
 
-        List<AutomationElement> menus = new ArrayList<>();
-
-        AutomationElement item = Mockito.mock(AutomationElement.class);
-
-        menus.add(item);
-
-        when(elem.findAll(any(), any())).thenReturn(menus);
+        when(targetElement.findAll(any(), any())).thenReturn(menus);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
@@ -164,12 +118,6 @@ public class AutomationWindowTest {
     @Test
     public void testIsModal_Is_True_For_Modal_Window()
             throws AutomationException, PatternNotFoundException {
-
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
         when(window.isModal()).thenReturn(true);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
@@ -180,12 +128,6 @@ public class AutomationWindowTest {
     @Test
     public void testIsModal_Is_False_For_Non_Modal_Window()
             throws AutomationException, PatternNotFoundException {
-
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-
-        Window window = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
         when(window.isModal()).thenReturn(false);
 
         AutomationWindow windw = new AutomationWindow(element, window, container);

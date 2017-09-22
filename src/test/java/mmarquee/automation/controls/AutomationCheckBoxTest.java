@@ -45,7 +45,7 @@ public class AutomationCheckBoxTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern);
 
         String name = checkbox.getName();
 
@@ -59,7 +59,7 @@ public class AutomationCheckBoxTest {
 
         when(pattern.currentToggleState()).thenReturn(ToggleState.On);
 
-        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern);
 
         ToggleState state = checkbox.getToggleState();
 
@@ -71,7 +71,7 @@ public class AutomationCheckBoxTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
 
-        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern);
 
         checkbox.toggle();
     }

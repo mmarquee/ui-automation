@@ -87,7 +87,7 @@ public class AutomationDocument extends AutomationBase {
     public AutomationDocumentPage getPage(int index) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(
                 new TreeScope(TreeScope.Descendants),
-                this.createControlTypeCondition(ControlType.Custom).getValue());
+                this.createControlTypeCondition(ControlType.Custom));
 
         return new AutomationDocumentPage(items.get(index));
     }

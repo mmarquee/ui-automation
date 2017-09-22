@@ -4,7 +4,7 @@
 
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.3.14</version>
+  <version>0.4.0</version>
   <packaging>jar</packaging>
 
   <name>ui-automation</name>
@@ -34,7 +34,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jna.version>4.3.0</jna.version>
-    <powermock.version>1.7.0RC4</powermock.version>
+    <powermock.version>1.7.3</powermock.version>
     <mockito.version>2.2.26</mockito.version>
   </properties>
 
@@ -169,6 +169,18 @@
           </execution>
         </executions>
       </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+      
     </plugins>
   </build>
 </project>

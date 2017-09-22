@@ -94,7 +94,7 @@ public class TestMain extends TestBase {
             String text = tab.getEditBox(0).getValue();
             logger.info("Text for editBox1 is " + text);
 
-            AutomationCheckbox check = window.getCheckbox(0);
+            AutomationCheckBox check = window.getCheckBox(0);
             check.toggle();
 
             try {

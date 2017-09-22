@@ -21,17 +21,12 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
-import javax.naming.ldap.Control;
-
 /**
  * Created by Mark Humphreys on 02/02/2016.
  *
  * Wrapper around the Button element.
  */
 public class AutomationButton extends AutomationBase implements Clickable, Focusable {
-
-    protected Invoke invokePattern = null;
-
     public static ControlType controlType = ControlType.Button;
 
     /**
@@ -55,8 +50,7 @@ public class AutomationButton extends AutomationBase implements Clickable, Focus
      */
     public AutomationButton(AutomationElement element, Invoke pattern)
             throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.invokePattern = pattern;
+        super(element, pattern);
     }
 
     /**
@@ -67,15 +61,7 @@ public class AutomationButton extends AutomationBase implements Clickable, Focus
      * @throws PatternNotFoundException Could not find the invoke pattern
      */
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
-
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
-        } else {
-            throw new PatternNotFoundException();
-        }
+        this.invoke();
     }
 
     /**

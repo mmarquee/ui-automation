@@ -16,20 +16,16 @@
 
 package mmarquee.automation.controls.menu;
 
-import com.sun.jna.platform.win32.OleAuto;
-import com.sun.jna.platform.win32.Variant;
-import com.sun.jna.platform.win32.WTypes;
-import com.sun.jna.ptr.PointerByReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by Mark Humphreys on 09/02/2016.
@@ -51,6 +47,27 @@ public class AutomationMenu extends AutomationBase {
 
     public static ControlType controlType = ControlType.Menu;
 
+
+    /**
+     * Gets the list of items associated with this menu item
+     * @return List of menu items
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    	
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
+                this.createControlTypeCondition(ControlType.MenuItem));
+
+        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
+
+        for (AutomationElement item : items) {
+            list.add(new AutomationMenuItem(item));
+        }
+
+        return list;
+    }
+    
     /**
      * Gets the item associated with the index
      * @param index The index
@@ -59,7 +76,7 @@ public class AutomationMenu extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> items = this.findAll();
+        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
 
         return new AutomationMenuItem(items.get(index));
     }
@@ -72,21 +89,29 @@ public class AutomationMenu extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItem (String name) throws PatternNotFoundException, AutomationException {
-        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
-        variant.setValue(Variant.VT_BSTR, sysAllocated);
 
-        AutomationElement item = null;
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Children),
+                this.createAndCondition(
+                        this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(ControlType.MenuItem)));
 
-        try {
-            PointerByReference pCondition = this.automation.createPropertyCondition(PropertyID.Name.getValue(), variant);
+        return new AutomationMenuItem(item);
+    }
 
-            item = this.findFirst(
-                    new TreeScope(TreeScope.Children),
-                    pCondition);
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
-        }
+    /**
+     * Get the menu item associated with the automationID
+     * @param automationId The automation ID to look for
+     * @return The menu item that matches the name
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationMenuItem getMenuItemByAutomationId (String automationId)
+            throws PatternNotFoundException, AutomationException {
+    	
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
+                this.createAndCondition(
+                        this.createAutomationIdPropertyCondition(automationId),
+                        this.createControlTypeCondition(ControlType.MenuItem)));
 
         return new AutomationMenuItem(item);
     }

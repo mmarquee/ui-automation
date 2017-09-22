@@ -15,24 +15,34 @@
  */
 package mmarquee.automation.controls.menu;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationToolbarButtonTest;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Invoke;
-import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import com.sun.jna.platform.win32.Variant;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 04/12/2016.
@@ -41,6 +51,11 @@ import static org.mockito.Mockito.*;
  */
 public class AutomationMenuItemTest extends BaseAutomationTest {
 
+	@Mock AutomationElement mocked_element;
+	@Mock AutomationElement targetElement;
+	@Mock ExpandCollapse collapse;
+	@Mock Invoke invoke;
+	
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -48,12 +63,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testGetName() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
-
         when(mocked_element.getName()).thenReturn("NAME");
 
         AutomationMenuItem item =
@@ -64,12 +73,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testIsExpanded_Is_False_When_Not_Expanded() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
-
         when(collapse.isExpanded()).thenReturn(false);
 
         AutomationMenuItem item =
@@ -80,12 +83,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testIsExpanded_Is_True_When_Expanded() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
-
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
@@ -96,11 +93,11 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void testClick() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
 
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
+    	IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsInvokePatternAvailable, Variant.VT_INT, 1);
+        
+        mocked_element = new AutomationElement(elem);
 
         when(collapse.isExpanded()).thenReturn(true);
 
@@ -114,55 +111,170 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void test_GetItems_Returns_Items_When_List_Not_Empty() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(targetElement);
 
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
-
-        List<AutomationElement> elements = new ArrayList<>();
-        elements.add(elem);
-
-        when(mocked_element.findAll(any(), any())).thenReturn(elements);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
+        when(mocked_element.findAll(any(), any())).thenReturn(list);
 
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
                 new AutomationMenuItem(mocked_element, collapse, invoke);
 
-        List<AutomationMenuItem> list = item.getItems();
+        List<AutomationMenuItem> items = item.getItems();
 
-        assertEquals(elements.size(), list.size());
+        assertEquals(list.size(), items.size());
+        assertEquals(targetElement, items.get(0).getElement());
     }
 
     @Test
     public void test_GetItems_Returns_No_Items_When_List_Empty() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
-
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
                 new AutomationMenuItem(mocked_element, collapse, invoke);
 
-        List<AutomationMenuItem> list = item.getItems();
+        List<AutomationMenuItem> items = item.getItems();
 
-        assertEquals(0, 0);
+        assertEquals(0, items.size());
+    }
+
+    @Test
+    public void test_GetItems_Returns_MainMenuItems_When_ParentIsMainMenu() throws Exception {
+    	AutomationMenuItem item =
+    			new AutomationMenuItem(mocked_element, collapse, invoke);
+    	
+    	List<AutomationElement> list = new ArrayList<>();
+    	list.add(targetElement);
+    	
+    	enableMainMenuReference(item, list);
+
+        List<AutomationMenuItem> items = item.getItems();
+
+        assertEquals(list.size(), items.size());
+        assertEquals(targetElement, items.get(0).getElement());
+    }
+    
+    @Test
+    public void test_GetMenuItem_By_Index() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(targetElement);
+        
+        when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+		
+		AutomationMenuItem subItem = item.getMenuItem(0);
+        assertEquals(targetElement,subItem.getElement());
+
+        verify(mocked_element, atLeastOnce()).findAll(any(), any());
+    }
+    
+    @Test
+    public void test_GetMenuItem_By_Index_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(targetElement);
+
+        AutomationMenuItem item =
+        		new AutomationMenuItem(mocked_element, collapse, invoke);
+        
+    	enableMainMenuReference(item, list);
+
+		AutomationMenuItem subItem = item.getMenuItem(0);
+        assertEquals(targetElement,subItem.getElement());
+    }
+    
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void test_GetMenuItem_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+        when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+        
+        item.getMenuItem(99);
+    }
+
+    @Test
+    public void test_GetMenuItem_By_Name() throws Exception {
+        when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(targetElement);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+		AutomationMenuItem subItem = item.getMenuItem("myName");
+        assertEquals(targetElement,subItem.getElement());
+
+        verify(mocked_element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test
+    public void test_GetMenuItem_By_Name_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(targetElement);
+        
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+    	enableMainMenuReference(item, list);
+    	
+        when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(targetElement);
+    	
+		AutomationMenuItem subItem = item.getMenuItem("myName");
+        assertEquals(targetElement,subItem.getElement());
+
+    }
+    
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetMenuItem_By_Name_Throws_Exception_When_Not_found() throws Exception {
+        when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+		
+        item.getMenuItem("unknownName");
+    }
+
+    @Test
+    public void test_GetMenuItem_By_AutomationId() throws Exception {
+        when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        AutomationMenuItem subItem = item.getMenuItemByAutomationId("myID");
+        assertEquals(targetElement,subItem.getElement());
+
+        verify(mocked_element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test
+    public void test_GetMenuItem_By_AutomationId_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
+        List<AutomationElement> list = new ArrayList<>();
+        list.add(targetElement);
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+    	enableMainMenuReference(item, list);
+    	
+        AutomationMenuItem subItem = item.getMenuItemByAutomationId("myID");
+        assertEquals(targetElement,subItem.getElement());
+    }
+    
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetMenuItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+        when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+        item.getMenuItemByAutomationId("unknownID");
     }
 
     @Test
     public void test_Expand_Calls_Expand_From_Pattern() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
-
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
@@ -175,12 +287,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void test_Collapse_Calls_Collapse_From_Pattern() throws Exception {
-        AutomationElement mocked_element =
-                Mockito.mock(AutomationElement.class);
-
-        ExpandCollapse collapse = Mockito.mock(ExpandCollapse.class);
-        Invoke invoke = Mockito.mock(Invoke.class);
-
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
@@ -190,4 +296,21 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
         Mockito.verify(collapse, atLeastOnce()).collapse();
     }
+    
+
+
+	private AutomationElement enableMainMenuReference(AutomationMenuItem item, List<AutomationElement> childElements)
+			throws AutomationException {
+		AutomationElement mainMenuParent =  Mockito.mock(AutomationElement.class);
+    	AutomationElement mainMenu =  Mockito.mock(AutomationElement.class);
+    	
+        when(mainMenuParent.findFirst(any(), any())).thenReturn(mainMenu);
+        when(mainMenu.findAll(any(), any())).thenReturn(childElements);
+        when(mainMenu.findFirst(any(), any())).thenReturn(childElements.size() > 0 ? childElements.get(0) : null);
+        
+        item.parentMenuName = "bla";
+        item.mainMenuParentElement = mainMenuParent;
+        
+        return mainMenu;
+	}
 }

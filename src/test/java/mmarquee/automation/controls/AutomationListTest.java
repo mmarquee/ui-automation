@@ -16,18 +16,29 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
+import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -37,11 +48,19 @@ import static org.mockito.Mockito.when;
  */
 public class AutomationListTest {
 
+    @Mock AutomationElement element;
+    @Mock AutomationElement targetElement;
+    @Mock Selection selection;
+
+    @Mock IUIAutomationElement3 listElement;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Selection selection = Mockito.mock(Selection.class);
-
         when(element.getName()).thenReturn("NAME");
 
         AutomationList list = new AutomationList(element, selection);
@@ -53,15 +72,10 @@ public class AutomationListTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetItems_By_Index_Throws_Exception_When_Not_Found() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Selection selection = Mockito.mock(Selection.class);
-
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
-
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
@@ -70,15 +84,10 @@ public class AutomationListTest {
 
     @Test
     public void testGetItems_By_Index_Mocked() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Selection selection = Mockito.mock(Selection.class);
-
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
-
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
@@ -89,20 +98,133 @@ public class AutomationListTest {
 
     @Test
     public void testGetItems() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Selection selection = Mockito.mock(Selection.class);
-
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
-
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(Pointer.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(element, selection);
 
         List<AutomationListItem> items = list.getItems();
 
         assertTrue(items.size() == 1);
+    }
+
+    @Test
+    public void test_GetItem_By_Index() throws Exception {
+        List<AutomationElement> items = new ArrayList<>();
+        items.add(targetElement);
+        
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        AutomationListItem item = list.getItem(0);
+        assertEquals(targetElement,item.getElement());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+    
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void test_GetItem_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> items = new ArrayList<>();
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        list.getItem(99);
+    }
+
+    @Test
+    public void test_GetItem_By_Name() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        AutomationListItem item = list.getItem("myName");
+        assertEquals(targetElement,item.getElement());
+
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetItem_By_Name_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationList list = new AutomationList(element, selection);
+
+        list.getItem("unknownName");
+    }
+
+    @Test
+    public void test_GetItem_By_AutomationId() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        AutomationListItem item = list.getItemByAutomationId("myID");
+        assertEquals(targetElement,item.getElement());
+
+        verify(element, atLeastOnce()).findFirst(any(), any());
+    }
+    
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationList list = new AutomationList(element, selection);
+
+       list.getItemByAutomationId("unknownID");
+    }
+
+    @Test
+    public void test_GetSelectedItems_Returns_Items_When_List_Not_Empty() throws Exception {
+        List<AutomationElement> mockItems = new ArrayList<>();
+        mockItems.add(targetElement);
+
+        when(selection.getCurrentSelection()).thenReturn(mockItems);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        List<AutomationListItem> items = list.getSelectedItems();
+
+        assertEquals(mockItems.size(), items.size());
+        assertEquals(targetElement, items.get(0).getElement());
+    }
+
+    @Test
+    public void test_GetSelectedItems_Returns_No_Items_When_List_Empty() throws Exception {
+        List<AutomationElement> mockItems = new ArrayList<>();
+        when(selection.getCurrentSelection()).thenReturn(mockItems);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        List<AutomationListItem> items = list.getSelectedItems();
+
+        assertEquals(0, items.size());
+    }
+
+    @Test
+    public void test_GetSelectedItem_Returns_Item_When_List_Not_Empty() throws Exception {
+        List<AutomationElement> mockItems = new ArrayList<>();
+        mockItems.add(targetElement);
+
+        when(selection.getCurrentSelection()).thenReturn(mockItems);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        AutomationListItem item = list.getSelectedItem();
+
+        assertEquals(targetElement, item.getElement());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetSelectedItem_ThrowsException_When_List_Empty() throws Exception {
+        List<AutomationElement> mockItems = new ArrayList<>();
+        when(selection.getCurrentSelection()).thenReturn(mockItems);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        list.getSelectedItem();
     }
 }

@@ -43,9 +43,10 @@ public class AutomationTextBox extends AutomationBase implements Valueable {
     /**
      * Construct the AutomationTextBox
      * @param element The element
+     * @param value The value pattern
      * @throws AutomationException Automation library error
      */
-    public AutomationTextBox(AutomationElement element, Value value) throws AutomationException {
+    AutomationTextBox(AutomationElement element, Value value) throws AutomationException {
         super(element);
         this.valuePattern = value;
     }
@@ -54,6 +55,7 @@ public class AutomationTextBox extends AutomationBase implements Valueable {
      * Gets the text associated with this element
      * @return The current text
      * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public String getValue() throws PatternNotFoundException, AutomationException {
 //        return this.element.getName();

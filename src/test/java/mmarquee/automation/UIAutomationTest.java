@@ -15,8 +15,7 @@
  */
 package mmarquee.automation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
@@ -42,6 +41,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -88,6 +88,16 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
+    public void testGetDesktop() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationPanel desktop = instance.getDesktop();
+        
+        assertEquals(instance.getRootElement(),desktop.getElement());
+        assertTrue("desktop is correct: " + desktop.getName(), desktop.getName().startsWith("Desktop"));
+    }
+
+    @Test
     public void testCompareElementsWhenTheSame() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -130,9 +140,18 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         List<AutomationWindow> windows = instance.getDesktopWindows();
 
-        assertFalse("DesktopWindows" + windows.size(), windows.size() == 0);
+        assertFalse("getDesktopWindows finds more than one window", windows.size() == 0);
     }
 
+    @Test
+    public void testGetDesktopObjects() throws PatternNotFoundException, AutomationException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        List<AutomationPanel> objects = instance.getDesktopObjects();
+
+        assertFalse("getDesktopObjects finds more than one object", objects.size() == 0);
+    }
+    
     @Test
     public void testCreatePropertyCondition() {
         UIAutomation instance = UIAutomation.getInstance();
@@ -176,7 +195,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
                 // Create the actual condition
                 PointerByReference notCondition =
-                        instance.createNotCondition(pCondition.getValue());
+                        instance.createNotCondition(pCondition);
 
                 // Checking
                 Unknown unk = new Unknown(notCondition.getValue());
@@ -214,7 +233,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
                 // Create the actual condition
                 PointerByReference andCondition =
-                        instance.createAndCondition(pCondition0.getValue(), pCondition1.getValue());
+                        instance.createAndCondition(pCondition0, pCondition1);
 
                 // Checking
                 Unknown unk = new Unknown(andCondition.getValue());
@@ -253,7 +272,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
                 // Create the actual condition
                 PointerByReference condition =
-                        instance.createOrCondition(pCondition0.getValue(), pCondition1.getValue());
+                        instance.createOrCondition(pCondition0, pCondition1);
 
                 // Checking
                 Unknown unk = new Unknown(condition.getValue());
@@ -436,7 +455,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         PointerByReference pbr = new PointerByReference();
 
-        local_instance.createNotCondition(pbr.getValue());
+        local_instance.createNotCondition(pbr);
     }
 
     @Test(expected = AutomationException.class)
@@ -461,8 +480,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
-        instanceWithMocking.createAndCondition(new PointerByReference().getValue(),
-                new PointerByReference().getValue());
+        instanceWithMocking.createAndCondition(new PointerByReference(), new PointerByReference());
     }
 
     @Test(expected = AutomationException.class)
@@ -475,18 +493,7 @@ public class UIAutomationTest extends BaseAutomationTest {
 
         UIAutomation instanceWithMocking = new UIAutomation(mocked);
 
-        instanceWithMocking.createOrCondition(new PointerByReference().getValue(),
-                new PointerByReference().getValue());
-    }
-
-    @Test
-    public void test_GetDesktopWindows()
-            throws IOException, AutomationException, PatternNotFoundException {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        List<AutomationWindow> items = instance.getDesktopWindows();
-
-        assertTrue(items.size() != 0);
+        instanceWithMocking.createOrCondition(new PointerByReference(), new PointerByReference());
     }
 
     @Test (expected = ItemNotFoundException.class)
@@ -522,4 +529,5 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetDesktopWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
         UIAutomation.getInstance().getDesktopWindow("Untitled - Notepad99");
     }
+
 }

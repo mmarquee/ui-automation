@@ -104,7 +104,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     public AutomationStatusBar getStatusBar() throws AutomationException, PatternNotFoundException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
+        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
 
         AutomationStatusBar found = null;
 
@@ -127,7 +127,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationSystemMenu getSystemMenu() throws PatternNotFoundException, AutomationException {
-        return (new AutomationSystemMenu(this.getControlByControlType(0, ControlType.MenuBar)));
+        return (new AutomationSystemMenu(this.getElementByControlType(0, ControlType.MenuBar)));
     }
 
     /**
@@ -148,7 +148,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(offset, ControlType.MenuBar)));
+        return (new AutomationMainMenu(this.element, this.getElementByControlType(offset, ControlType.MenuBar)));
     }
 
     /**
@@ -158,7 +158,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
-        return (new AutomationMainMenu(this.element, this.getControlByControlType(0, ControlType.Menu)));
+        return (new AutomationMainMenu(this.element, this.getElementByControlType(0, ControlType.Menu)));
     }
 
     /**
@@ -178,6 +178,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Maximize the window
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void maximize() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -190,6 +191,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Minimize the window
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void minimize() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -213,8 +215,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
             try {
                 item = this.findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
-                                this.createNamePropertyCondition(title).getValue(),
-                                this.createControlTypeCondition(ControlType.Window).getValue()));
+                                this.createNamePropertyCondition(title),
+                                this.createControlTypeCondition(ControlType.Window)));
             } catch (ElementNotFoundException ex) {
                 logger.warn("Failed to find `" + title + "` window");
             }
@@ -244,6 +246,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Whether this window is modal
      * @return True if modal
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isModal() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -257,6 +260,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Whether this window is topmost
      * @return True if topmost
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isTopMost() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -273,7 +277,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationTitleBar getTitleBar() throws AutomationException, PatternNotFoundException {
-        return new AutomationTitleBar(this.getControlByControlType(0, ControlType.TitleBar));
+        return new AutomationTitleBar(this.getElementByControlType(0, ControlType.TitleBar));
     }
 
     /**

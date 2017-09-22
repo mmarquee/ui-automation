@@ -16,15 +16,40 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.Pointer;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.*;
-import mmarquee.automation.pattern.*;
-import mmarquee.automation.uiautomation.*;
-import org.apache.log4j.Logger;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.GridItem;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Range;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.Text;
+import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.OrientationType;
+import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
  * Created by Mark Humphreys on 26/01/2016.
@@ -39,6 +64,8 @@ public abstract class AutomationBase implements Automatable {
 
     protected UIAutomation automation = UIAutomation.getInstance();
 
+    protected Invoke invokePattern = null;
+
     /**
      * Constructor for the AutomationBase class
      * @param element Element to use
@@ -47,6 +74,19 @@ public abstract class AutomationBase implements Automatable {
         this.element = element;
     }
 
+    /**
+     * Constructor for the AutomationBase
+     * @param element The underlying automation element
+     * @param pattern The pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase(AutomationElement element, Invoke pattern)
+            throws PatternNotFoundException, AutomationException {
+        this(element);
+        this.invokePattern = pattern;
+    }
+    
     /**
      * Gets the underlying automation element
      * @return The automation element
@@ -324,7 +364,7 @@ public abstract class AutomationBase implements Automatable {
      */
     protected List<AutomationElement> findAll(TreeScope scope) throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
-        return this.findAll(scope, condition.getValue());
+        return this.findAll(scope, condition);
     }
 
     /**
@@ -373,7 +413,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The And condition
      * @throws AutomationException Error in automation
      */
-   protected PointerByReference createAndCondition(Pointer condition1, Pointer condition2) throws AutomationException {
+   protected PointerByReference createAndCondition(PointerByReference condition1, PointerByReference condition2) throws AutomationException {
        return this.automation.createAndCondition(condition1, condition2);
    }
 
@@ -384,7 +424,7 @@ public abstract class AutomationBase implements Automatable {
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(TreeScope scope, Pointer condition) throws AutomationException {
+    protected List<AutomationElement> findAll(TreeScope scope, PointerByReference condition) throws AutomationException {
         return this.element.findAll(scope, condition);
     }
 
@@ -410,205 +450,250 @@ public abstract class AutomationBase implements Automatable {
      * <p>
      * Gets the selectItem pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationSelectionItemPattern associated with this control
+     * @return  Returns the IUIAutomationSelectionItemPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
     public SelectionItem getSelectItemPattern() throws PatternNotFoundException, AutomationException {
-        SelectionItem pattern = new SelectionItem();
-
         if (this.isSelectionItemPatternAvailable()) {
+        	SelectionItem pattern = new SelectionItem();
             PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
-            pattern.setPattern(unknown.getValue());
-        }
 
-        return pattern;
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (SelectionItem)((PatternProvider) unknown).getPattern();
+            }
+            
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
     }
 
     /**
      * <p>
      * Gets the selection pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationSelectionPattern associated with this control
+     * @return  Returns the IUIAutomationSelectionPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
     Selection getSelectionPattern() throws PatternNotFoundException, AutomationException {
-        Selection pattern = new Selection();
-
         if (this.isSelectionPatternAvailable()) {
+        	Selection pattern = new Selection();
             PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Selection)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
     /**
      * <p>
      * Gets the value pattern for this control
      * </p>
-     * @return Returns ths IUIAutomationValuePattern associated with this control
+     * @return Returns the IUIAutomationValuePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Value getValuePattern() throws PatternNotFoundException, AutomationException {
-        Value pattern = new Value();
-
         if (this.isValuePatternAvailable()) {
+        	Value pattern = new Value();
             PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
-            pattern.setPattern(unknown.getValue());
-        }
 
-        return pattern;
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Value)((PatternProvider) unknown).getPattern();
+            }
+            
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
     }
 
     /**
      * <p>
      * Gets the gridItem pattern for this control
      * </p>
-     * @return Returns ths IUIAutomationGridItemPattern associated with this control
+     * @return Returns the IUIAutomationGridItemPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     GridItem getGridItemPattern() throws PatternNotFoundException, AutomationException {
-        GridItem pattern = new GridItem();
-
         if (this.isGridItemPatternAvailable()) {
+        	GridItem pattern = new GridItem();
             PointerByReference unknown = this.getPattern(PatternID.GridItem.getValue());
-            pattern.setPattern(unknown.getValue());
-        }
 
-        return pattern;
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (GridItem)((PatternProvider) unknown).getPattern();
+            }
+            
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
     }
 
     /**
      * <p>
      * Gets the rangevalue pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationRangeValuePattern associated with this control
+     * @return  Returns the IUIAutomationRangeValuePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Range getRangePattern() throws PatternNotFoundException, AutomationException {
-        Range pattern = new Range();
-
         if (isRangeValuePatternAvailable()) {
+        	Range pattern = new Range();
             PointerByReference unknown = this.getPattern(PatternID.RangeValue.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Range)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
     /**
      * <p>
      * Gets the table pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationTablePattern associated with this control
+     * @return  Returns the IUIAutomationTablePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Table getTablePattern() throws PatternNotFoundException, AutomationException {
-        Table pattern = new Table();
-
         if (isTablePatternAvailable()) {
+        	Table pattern = new Table();
             PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Table)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
     /**
      * <p>
      * Gets the window pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationWindowPattern associated with this control
+     * @return  Returns the IUIAutomationWindowPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Window getWindowPattern() throws PatternNotFoundException, AutomationException {
-        Window pattern = new Window();
-
         if (this.isWindowPatternAvailable()) {
+        	Window pattern = new Window();
             PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Window)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
     /**
      * <p>
      * Gets the expand/collapse pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationExpandCollapsePattern associated with this control
+     * @return  Returns the IUIAutomationExpandCollapsePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     protected ExpandCollapse getExpandCollapsePattern() throws PatternNotFoundException, AutomationException {
-        ExpandCollapse pattern = new ExpandCollapse();
-
         if (isExpandCollapsePatternAvailable()) {
+        	ExpandCollapse pattern = new ExpandCollapse();
             PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
+            
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (ExpandCollapse)((PatternProvider) unknown).getPattern();
+            }
 
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
     /**
      * <p>
      * Gets the grid pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationGridPattern associated with this control
+     * @return  Returns the IUIAutomationGridPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Grid getGridPattern() throws PatternNotFoundException, AutomationException {
-        Grid pattern = new Grid();
-
         if (isGridPatternAvailable()) {
+        	Grid pattern = new Grid();
             PointerByReference unknown = this.getPattern(PatternID.Grid.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Grid)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
     /**
      * <p>
      * Gets the toggle pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationTogglePattern associated with this control
+     * @return  Returns the IUIAutomationTogglePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Toggle getTogglePattern() throws PatternNotFoundException, AutomationException {
-        Toggle pattern = new Toggle();
-
         if (isTogglePatternAvailable()) {
+        	Toggle pattern = new Toggle();
             PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Toggle)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
+            return pattern;
         }
-
-        return pattern;
+        return null;
     }
 
+    /**
+     * <p>
+     * Gets the item container pattern for this control
+     * </p>
+     * @return  Returns the IUIAutomationItemContainerPattern associated with this control, or null if not available
+     * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
+     */
     ItemContainer getItemContainerPattern() throws PatternNotFoundException, AutomationException {
         ItemContainer pattern = new ItemContainer();
 
         if (isItemContainerPatternAvailable()) {
             PointerByReference unknown = this.getPattern(PatternID.ItemContainer.getValue());
 
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (ItemContainer)((PatternProvider) unknown).getPattern();
+            }
+            
             pattern.setPattern(unknown.getValue());
         }
 
@@ -619,38 +704,46 @@ public abstract class AutomationBase implements Automatable {
      * <p>
      * Gets the invoke pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationInvokePattern associated with this control
+     * @return  Returns the IUIAutomationInvokePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     protected Invoke getInvokePattern() throws PatternNotFoundException, AutomationException {
-        Invoke pattern = new Invoke();
-
         if (isInvokePatternAvailable()) {
+        	Invoke pattern = new Invoke();
             PointerByReference unknown = this.getPattern(PatternID.Invoke.getValue());
-            pattern.setPattern(unknown.getValue());
-        }
 
-        return pattern;
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Invoke)((PatternProvider) unknown).getPattern();
+            }
+            
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
     }
 
     /**
      * <p>
      * Gets the text pattern for this control
      * </p>
-     * @return  Returns ths IUIAutomationTextPattern associated with this control
+     * @return  Returns the IUIAutomationTextPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     Text getTextPattern() throws PatternNotFoundException, AutomationException {
-        Text pattern = new Text();
-
         if (this.isTextPatternAvailable()) {
+        	Text pattern = new Text();
             PointerByReference unknown = this.getPattern(PatternID.Text.getValue());
-            pattern.setPattern(unknown.getValue());
-        }
 
-        return pattern;
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+            	return (Text)((PatternProvider) unknown).getPattern();
+            }
+            
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
     }
 
     /**
@@ -773,4 +866,79 @@ public abstract class AutomationBase implements Automatable {
     public Unknown makeUnknown(Pointer pvInstance) {
         return new Unknown(pvInstance);
     }
+    
+
+    /**
+     * <p>
+     * Invokes the click event for this control
+     * </p>
+     * @throws AutomationException Error in the automation library
+     * @throws PatternNotFoundException Could not find the invoke pattern
+     */
+    public void invoke() throws AutomationException, PatternNotFoundException {
+        if (this.invokePattern == null) {
+            this.invokePattern = this.getInvokePattern();
+        }
+
+        if (this.isInvokePatternAvailable()) {
+            this.invokePattern.invoke();
+        } else {
+            throw new PatternNotFoundException("Invoke could not be called");
+        }
+    }
+    
+
+    /**
+     * Gets child Elements
+     *
+     * @param deep set to true to get also children of children
+     * @return The matching element
+     * @throws AutomationException Did not find the element
+     */
+    protected List<AutomationElement> getChildElements(boolean deep) throws AutomationException {
+        return this.findAll(new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
+        		this.createTrueCondition());
+    }
+    
+ // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+//    /**
+//     * Gets the parent element
+//     *
+//     * @return The matching element
+//     * @throws AutomationException Did not find the element
+//     */
+//    protected AutomationElement getParentElement() throws AutomationException {
+//        return this.findFirst(new TreeScope(TreeScope.Parent), this.createTrueCondition());
+//    }
+
+    /**
+     * Gets child controls
+     *
+     * @param deep set to true to get also children of children
+     * @return The matching element
+     * @throws AutomationException Did not find the element
+     * @throws PatternNotFoundException Expected pattern not found 
+     */
+    public List<AutomationBase> getChildren(boolean deep) throws AutomationException, PatternNotFoundException {
+        List<AutomationElement> elements = this.getChildElements(deep);
+        List<AutomationBase> collection = new LinkedList<AutomationBase>();
+        
+        for (AutomationElement el: elements) {
+        	collection.add(AutomationControlFactory.get(this, el));
+        }
+        return collection;
+    }
+
+// TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+//    /**
+//     * Gets the parent control
+//     *
+//     * @return The matching element
+//     * @throws AutomationException Did not find the element
+//     * @throws PatternNotFoundException Expected pattern not found 
+//     */
+//    public AutomationBase getParent() throws AutomationException, PatternNotFoundException {
+//    	AutomationElement el = this.getParentElement();
+//    	return AutomationControlFactory.get(this, el);
+//    }
 }

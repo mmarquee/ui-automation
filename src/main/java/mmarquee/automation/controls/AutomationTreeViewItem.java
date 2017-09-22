@@ -17,18 +17,20 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.*;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.SelectionItem;
 
 /**
  * Created by Mark Humphreys on 20/02/2016.
  *
  * Wrapper for the TreeViewItem element.
  */
-public class AutomationTreeViewItem extends AutomationBase implements Selectable, Clickable {
+public class AutomationTreeViewItem extends AutomationBase implements Selectable, Clickable, Expandable {
 
+    private ExpandCollapse expandCollapsePattern;
     private SelectionItem selectItemPattern;
-    private Invoke invokePattern;
 
     /**
      * Construct the AutomationTreeViewItem
@@ -39,25 +41,22 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     public AutomationTreeViewItem(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
-
-//        this.selectItemPattern = this.getSelectItemPattern();
-//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
      * Construct the AutomationTreeViewItem
      * @param element The element
      * @param selection SelectionItem pattern
+     * @param expandCollapsePattern The expand pattern
      * @param invoke Invoke pattern
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem(AutomationElement element, SelectionItem selection, Invoke invoke)
+    AutomationTreeViewItem(AutomationElement element, SelectionItem selection, ExpandCollapse expandCollapsePattern, Invoke invoke)
             throws PatternNotFoundException, AutomationException {
-        super(element);
-
+        super(element,invoke);
         this.selectItemPattern = selection;
-        this.invokePattern = invoke;
+        this.expandCollapsePattern = expandCollapsePattern;
     }
 
     /**
@@ -69,7 +68,11 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
         if (this.selectItemPattern == null) {
             this.selectItemPattern = this.getSelectItemPattern();
         }
-        this.selectItemPattern.select();
+        if (this.selectItemPattern != null) {
+        	this.selectItemPattern.select();
+        } else {
+            throw new PatternNotFoundException("Select Pattern was not fgound");
+        }
     }
 
     /**
@@ -82,7 +85,10 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
             this.selectItemPattern = this.getSelectItemPattern();
         }
 
-        return this.selectItemPattern.isSelected();
+        if (this.selectItemPattern != null) {
+        	return this.selectItemPattern.isSelected();
+        }
+        throw new PatternNotFoundException("Select state cannot be determined");
     }
 
     /**
@@ -91,14 +97,54 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
      * @throws PatternNotFoundException Pattern not found
      */
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
+        super.invoke();
+    }
 
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
+    /**
+     * Is the control expanded
+     * @return True if expanded
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public boolean isExpanded() throws AutomationException, PatternNotFoundException {
+        if (this.expandCollapsePattern == null) {
+                this.expandCollapsePattern = this.getExpandCollapsePattern();
+        }
+        if (this.expandCollapsePattern != null) {
+            return expandCollapsePattern.isExpanded();
+        }
+        throw new PatternNotFoundException("Collapse state cannot be determined");
+    }
+
+    /**
+     * Collapses the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public void collapse() throws AutomationException, PatternNotFoundException {
+        if (this.expandCollapsePattern == null) {
+                this.expandCollapsePattern = this.getExpandCollapsePattern();
+        }
+        if (this.expandCollapsePattern != null) {
+                this.expandCollapsePattern.collapse();
         } else {
-            logger.warn("Invoke pattern is not available");
+        	throw new PatternNotFoundException("Cannot collapse");
+        }
+    }
+
+    /**
+     * Expands the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public void expand() throws AutomationException, PatternNotFoundException {
+        if (this.expandCollapsePattern == null) {
+                this.expandCollapsePattern = this.getExpandCollapsePattern();
+        }
+        if (this.expandCollapsePattern != null) {
+                this.expandCollapsePattern.expand();
+        } else {
+        	throw new PatternNotFoundException("Cannot expand");
         }
     }
 }

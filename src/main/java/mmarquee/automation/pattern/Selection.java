@@ -117,15 +117,7 @@ public class Selection extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public List<AutomationElement> getSelection() throws AutomationException {
-
-        PointerByReference pbr = new PointerByReference();
-
-        final int res = this.getPattern().getCurrentSelection(pbr);
-        if (res != 0) {
-            throw new AutomationException(res);
-        }
-
-        return collectionToList(getAutomationElementArrayFromReference(pbr));
+        return getCurrentSelection();
     }
 
     /**

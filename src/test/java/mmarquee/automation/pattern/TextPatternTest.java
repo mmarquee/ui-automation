@@ -122,7 +122,6 @@ public class TextPatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("Failures after Mockito upgrade")
     public void test_GetSelection_Throws_Exception_When_GetRange_Length_Fails() throws Exception {
         doAnswer(new Answer() {
             @Override
@@ -237,16 +236,7 @@ public class TextPatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
     public void test_GetText_Throws_Exception_When_QueryInterface_Returns_Error() throws Exception {
-
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
@@ -265,30 +255,13 @@ public class TextPatternTest {
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
-        doReturn(1)
-                .when(mockRange)
-                .getText(any(), any());
-
-        doReturn(mockRange)
-                .when(spyPattern)
-                .convertPointerToInterface(any());
-
         String text = spyPattern.getText();
 
         assertTrue(text.equals(""));
     }
 
     @Test
-    @Ignore("Fails after mockito upgrade")
     public void test_GetText_Calls_getText_From_Pattern() throws Exception {
-
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override
@@ -338,16 +311,7 @@ public class TextPatternTest {
     }
 
     @Test(expected= AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
     public void test_GetText_Throws_Exception_When_GetText_Returns_Error_From_Range() throws Exception {
-
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getSelection(any());
 
         doAnswer(new Answer() {
             @Override

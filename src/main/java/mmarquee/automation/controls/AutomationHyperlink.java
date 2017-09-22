@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -27,7 +26,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Wrapper for the Hyperlink element.
  */
 public class AutomationHyperlink extends AutomationBase implements Clickable {
-    private Invoke invokePattern;
 
     /**
      * Constructor for the AutomationHyperlink
@@ -37,17 +35,18 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      */
     public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
      * Constructor for the AutomationHyperlink
+     * 
      * @param element The underlying automation element
      * @param pattern Invoke pattern
+     * @throws AutomationException 
+     * @throws PatternNotFoundException 
      */
-    public AutomationHyperlink(AutomationElement element, Invoke pattern) {
-        super(element);
-        this.invokePattern = pattern;
+    AutomationHyperlink(AutomationElement element, Invoke pattern) throws PatternNotFoundException, AutomationException {
+        super(element, pattern);
     }
 
     /**
@@ -56,15 +55,7 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * @throws PatternNotFoundException Did not find the pattern
      **/
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
-
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
-        } else {
-            throw new PatternNotFoundException();
-        }
+        super.invoke();
     }
 }
 

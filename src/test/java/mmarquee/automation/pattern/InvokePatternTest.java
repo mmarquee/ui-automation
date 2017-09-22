@@ -78,7 +78,6 @@ public class InvokePatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
         doAnswer(new Answer() {
@@ -97,10 +96,6 @@ public class InvokePatternTest {
         doReturn(mockUnknown)
                 .when(spyPattern)
                 .makeUnknown(any());
-
-        doReturn(mockRange)
-                .when(spyPattern)
-                .convertPointerToInterface(any(PointerByReference.class));
 
         spyPattern.invoke();
 

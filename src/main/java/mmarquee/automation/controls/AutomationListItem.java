@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
@@ -28,10 +27,9 @@ import mmarquee.automation.pattern.SelectionItem;
  *
  * Wrapper for the ListItem element.
  */
-public class AutomationListItem extends AutomationBase implements Selectable, Clickable {
+public class AutomationListItem extends AutomationContainer implements Selectable, Clickable {
 
     SelectionItem selectItemPattern;
-    Invoke invokePattern = null;
 
     /**
      * Constructor for the AutomationListItem
@@ -44,6 +42,17 @@ public class AutomationListItem extends AutomationBase implements Selectable, Cl
     }
 
     /**
+     * Constructor for the AutomationListItem
+     * @param element The underlying automation element
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    AutomationListItem(AutomationElement element, SelectionItem selectItemPattern, Invoke pattern) throws PatternNotFoundException, AutomationException {
+        super(element, pattern);
+        this.selectItemPattern = selectItemPattern;
+    }
+
+    /**
      * Selects this item.
      * @throws AutomationException Something has gone wrong
      */
@@ -51,8 +60,11 @@ public class AutomationListItem extends AutomationBase implements Selectable, Cl
         if (this.selectItemPattern == null) {
             this.selectItemPattern = this.getSelectItemPattern();
         }
-
-        this.selectItemPattern.select();
+        if (this.selectItemPattern != null) {
+        	this.selectItemPattern.select();
+        } else {
+            throw new PatternNotFoundException("Select pattern not found");
+        }
     }
 
     /**
@@ -64,8 +76,10 @@ public class AutomationListItem extends AutomationBase implements Selectable, Cl
         if (this.selectItemPattern == null) {
             this.selectItemPattern = this.getSelectItemPattern();
         }
-
-        return this.selectItemPattern.isSelected();
+        if (this.selectItemPattern != null) {
+        	return this.selectItemPattern.isSelected();
+        }
+        throw new PatternNotFoundException("Select pattern not found");
     }
 
     /**
@@ -75,15 +89,7 @@ public class AutomationListItem extends AutomationBase implements Selectable, Cl
      * @throws PatternNotFoundException Could not find the invoke pattern
      */
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
-
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
-        } else {
-            throw new PatternNotFoundException();
-        }
+        super.invoke();
     }
 
 }

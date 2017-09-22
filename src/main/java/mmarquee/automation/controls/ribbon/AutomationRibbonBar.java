@@ -48,6 +48,6 @@ public class AutomationRibbonBar extends AutomationPanel {
      * @throws PatternNotFoundException Pattern not found
      */
     public AutomationRibbonCommandBar getRibbonCommandBar() throws PatternNotFoundException, AutomationException {
-        return new AutomationRibbonCommandBar(this.getControlByControlType(0, ControlType.Pane, AutomationRibbonCommandBar.CLASS_NAME));
+        return new AutomationRibbonCommandBar(this.getElementByControlType(0, ControlType.Pane, AutomationRibbonCommandBar.CLASS_NAME));
     }
 }
