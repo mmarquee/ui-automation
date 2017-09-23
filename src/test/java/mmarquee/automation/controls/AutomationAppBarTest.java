@@ -48,9 +48,6 @@ import static org.powermock.api.support.membermodification.MemberModifier.suppre
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { Ole32Wrapper.class })
 public class AutomationAppBarTest {
-//    @Spy
-   // private Unknown mockUnknown;
-
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
@@ -59,8 +56,6 @@ public class AutomationAppBarTest {
         when(mocked_automation.createTrueCondition(isA(PointerByReference.class))).thenReturn(0);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
-
-//        suppress(method(Ole32Wrapper.class, "createWrapper"));
 
         when(element.getName()).thenReturn("NAME");
 

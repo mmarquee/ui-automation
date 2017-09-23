@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +47,11 @@ public class AutomationCheckBoxTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
 
         String name = checkbox.getName();
 
@@ -59,7 +65,11 @@ public class AutomationCheckBoxTest {
 
         when(pattern.currentToggleState()).thenReturn(ToggleState.On);
 
-        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
 
         ToggleState state = checkbox.getToggleState();
 
@@ -71,7 +81,11 @@ public class AutomationCheckBoxTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
 
-        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
 
         checkbox.toggle();
     }

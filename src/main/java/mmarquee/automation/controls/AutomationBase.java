@@ -85,6 +85,12 @@ public abstract class AutomationBase implements Automatable {
         this.automation = automation;
     }
 
+    public AutomationBase (AutomationElement element, Invoke pattern, UIAutomation automation) {
+        this.element = element;
+        this.invokePattern = pattern;
+        this.automation = automation;
+    }
+
     /**
      * Constructor for the AutomationBase
      * @param element The underlying automation element

@@ -42,6 +42,5 @@ public class AutomationAppBar extends AutomationBase {
 
     public AutomationAppBar(AutomationElement element, UIAutomation instance) throws AutomationException {
         super(element, instance);
-
     }
 }

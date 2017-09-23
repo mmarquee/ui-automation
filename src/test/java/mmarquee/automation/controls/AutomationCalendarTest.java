@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 import static org.junit.Assert.assertTrue;
@@ -26,8 +28,6 @@ import static org.mockito.Mockito.when;
  * Created by Mark Humphreys on 02/12/2016.
  */
 public class AutomationCalendarTest {
-
-
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
@@ -35,7 +35,11 @@ public class AutomationCalendarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationCalendar calendar = new AutomationCalendar(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCalendar calendar = new AutomationCalendar(element, pattern, instance);
 
         String name = calendar.getName();
 
@@ -49,7 +53,11 @@ public class AutomationCalendarTest {
 
         when(pattern.value()).thenReturn("VALUE");
 
-        AutomationCalendar calendar = new AutomationCalendar(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCalendar calendar = new AutomationCalendar(element, pattern, instance);
 
         String value = calendar.getValue();
 
