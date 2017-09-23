@@ -44,8 +44,8 @@ public class UIAutomation extends BaseAutomation {
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
     protected static UIAutomation INSTANCE = null;
-    private static final Ole32 CANALIZED_OLE32_INSTANCE = Canalizer.canalize(com.sun.jna.platform.win32.Ole32.INSTANCE);
-
+//    private static final Ole32 CANALIZED_OLE32_INSTANCE = Canalizer.canalize(com.sun.jna.platform.win32.Ole32.INSTANCE);
+    private static final Ole32Wrapper Ole32 = new Ole32Wrapper();
 
     protected AutomationElement rootElement;
 
@@ -69,24 +69,9 @@ public class UIAutomation extends BaseAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
-        CANALIZED_OLE32_INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
-
-        PointerByReference pbr = new PointerByReference();
-
-        WinNT.HRESULT hr = CANALIZED_OLE32_INSTANCE.CoCreateInstance(
-                IUIAutomation.CLSID,
-                null,
-                WTypes.CLSCTX_SERVER,
-                IUIAutomation.IID,
-                pbr);
-
-        COMUtils.checkRC(hr);
-
-        Unknown unk = new Unknown(pbr.getValue());
-
         PointerByReference pbr1 = new PointerByReference();
 
-        WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
+        WinNT.HRESULT result = Ole32.getUnknown().QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
             this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
         }

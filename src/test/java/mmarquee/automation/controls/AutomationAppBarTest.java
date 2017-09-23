@@ -15,22 +15,53 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.Unknown;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Ole32Wrapper;
+import mmarquee.automation.utils.Utils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.support.membermodification.MemberMatcher.method;
+import static org.powermock.api.support.membermodification.MemberModifier.suppress;
 
 /**
  * Created by Mark Humphreys on 28/12/2016.
  *
  * Tests for the appbar
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest( { Ole32Wrapper.class })
 public class AutomationAppBarTest {
+    @Spy
+    private Unknown mockUnknown;
+
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        suppress(method(Ole32Wrapper.class, "createWrapper"));
+
+        // This is the way to tell PowerMock to mock all static methods of a
+        // given class
+        mockStatic(Ole32Wrapper.class);
+
+     //   expect(Ole32Wrapper.()).andReturn(expectedId);
+
+        doReturn(mockUnknown)
+                .when(spyPattern)
+                .makeUnknown(any());
 
         when(element.getName()).thenReturn("NAME");
 
