@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 
 /**
  * Created by Mark Humphreys on 02/03/2016.
@@ -37,5 +38,10 @@ public class AutomationAppBar extends AutomationBase {
      */
     public AutomationAppBar(AutomationElement element) throws AutomationException {
         super(element);
+    }
+
+    public AutomationAppBar(AutomationElement element, UIAutomation instance) throws AutomationException {
+        super(element, instance);
+
     }
 }

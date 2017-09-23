@@ -17,8 +17,11 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.Ole32Wrapper;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.utils.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +33,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
@@ -44,28 +48,23 @@ import static org.powermock.api.support.membermodification.MemberModifier.suppre
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { Ole32Wrapper.class })
 public class AutomationAppBarTest {
-    @Spy
-    private Unknown mockUnknown;
+//    @Spy
+   // private Unknown mockUnknown;
 
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        suppress(method(Ole32Wrapper.class, "createWrapper"));
+        when(mocked_automation.createTrueCondition(isA(PointerByReference.class))).thenReturn(0);
 
-        // This is the way to tell PowerMock to mock all static methods of a
-        // given class
-        mockStatic(Ole32Wrapper.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-     //   expect(Ole32Wrapper.()).andReturn(expectedId);
-
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any());
+//        suppress(method(Ole32Wrapper.class, "createWrapper"));
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationAppBar ctrl = new AutomationAppBar(element);
+        AutomationAppBar ctrl = new AutomationAppBar(element, instance);
 
         String name = ctrl.getName();
 

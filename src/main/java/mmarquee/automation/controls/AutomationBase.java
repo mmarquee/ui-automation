@@ -62,7 +62,7 @@ public abstract class AutomationBase implements Automatable {
 
     protected AutomationElement element;
 
-    protected UIAutomation automation = UIAutomation.getInstance();
+    protected UIAutomation automation = null; // UIAutomation.getInstance();
 
     protected Invoke invokePattern = null;
 
@@ -72,6 +72,17 @@ public abstract class AutomationBase implements Automatable {
      */
     public AutomationBase (AutomationElement element) {
         this.element = element;
+        this.automation = UIAutomation.getInstance();
+    }
+
+    /**
+     * For mocking, etc.
+     * @param element
+     * @param automation
+     */
+    public AutomationBase (AutomationElement element, UIAutomation automation) {
+        this.element = element;
+        this.automation = automation;
     }
 
     /**

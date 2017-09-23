@@ -44,10 +44,9 @@ public class UIAutomation extends BaseAutomation {
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
     protected static UIAutomation INSTANCE = null;
-//    private static final Ole32 CANALIZED_OLE32_INSTANCE = Canalizer.canalize(com.sun.jna.platform.win32.Ole32.INSTANCE);
-    private static final Ole32Wrapper Ole32 = new Ole32Wrapper();
+    private static Ole32Wrapper Ole32 = null;
 
-    protected AutomationElement rootElement;
+    private AutomationElement rootElement;
 
     /**
      * Main automation interface
@@ -69,9 +68,11 @@ public class UIAutomation extends BaseAutomation {
      * Constructor for UIAutomation library
      */
     protected UIAutomation() {
+        Ole32 = new Ole32Wrapper();
+
         PointerByReference pbr1 = new PointerByReference();
 
-        WinNT.HRESULT result = Ole32.getUnknown().QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
+        WinNT.HRESULT result = getOle32Unknown().QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
             this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
         }
@@ -87,6 +88,10 @@ public class UIAutomation extends BaseAutomation {
         if (COMUtils.SUCCEEDED(result0)) {
             this.rootElement = new AutomationElement(IUIAutomationElement3Converter.PointerToInterface(pRoot));
         }
+    }
+
+    Unknown getOle32Unknown() {
+        return Ole32.getUnknown();
     }
 
     /**
