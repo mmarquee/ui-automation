@@ -27,8 +27,12 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -57,7 +61,13 @@ public class AutomationRibbonWorkPaneTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
-        AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(element);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(element, container, instance);
 
         String name = pane.getName();
 
@@ -65,6 +75,7 @@ public class AutomationRibbonWorkPaneTest {
     }
 
     @Test(expected = ElementNotFoundException.class)
+    @Ignore("Needs windows")
     public void testGetNUIPane_Throws_Exception_When_NUIPane_Not_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
@@ -73,7 +84,12 @@ public class AutomationRibbonWorkPaneTest {
         when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element, container, instance);
 
         workPane.getNUIPane(0);
 
@@ -81,6 +97,7 @@ public class AutomationRibbonWorkPaneTest {
     }
 
     @Test
+    @Ignore("Needs windows")
     public void testGetNUIPane_When_NUIPane_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 

@@ -27,8 +27,12 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -59,7 +63,12 @@ public class AutomationRibbonCommandBarTest {
         when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container, instance);
 
         String name = commandBar.getName();
 
@@ -75,7 +84,12 @@ public class AutomationRibbonCommandBarTest {
         when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container, instance);
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
@@ -83,6 +97,7 @@ public class AutomationRibbonCommandBarTest {
     }
 
     @Test
+    @Ignore("Requires Windows")
     public void testGetRibbonCommandBar_When_WorkPane_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 

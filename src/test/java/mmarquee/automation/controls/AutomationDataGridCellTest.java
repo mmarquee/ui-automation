@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -38,7 +40,10 @@ public class AutomationDataGridCellTest {
 
         when(value.value()).thenReturn("VALUE");
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
 
         String val = cell.getValue();
 
@@ -52,7 +57,10 @@ public class AutomationDataGridCellTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
 
         String val = cell.getName();
 

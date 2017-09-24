@@ -18,7 +18,9 @@ package mmarquee.automation.controls.ribbon;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.AutomationContainer;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -38,6 +40,19 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      */
     public AutomationRibbonWorkPane(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
+     * Construct the AutomationRibbonWorkPane
+     * @param element The element
+     * @param containerPattern The container Pattern
+     * @param instance Automation instance
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Patter not found
+     */
+    public AutomationRibbonWorkPane(AutomationElement element, ItemContainer containerPattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, containerPattern, instance);
         assertClassName(CLASS_NAME);
     }
 
