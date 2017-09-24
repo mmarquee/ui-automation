@@ -38,7 +38,6 @@ import static org.mockito.Mockito.when;
  *
  * Tests for the IUIAutomationElement3 class
  */
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationElement3Test {
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());

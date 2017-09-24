@@ -35,7 +35,6 @@ import static org.junit.Assert.fail;
  *
  * Tests for the IUIAutomationWindowPattern code.
  */
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationWindowPatternTest {
 
     protected Logger logger = Logger.getLogger(IUIAutomationWindowPatternTest.class.getName());

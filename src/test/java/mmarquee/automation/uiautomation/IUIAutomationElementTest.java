@@ -48,7 +48,6 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({IUIAutomationElementConverter.class})
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationElementTest {
 
     private Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
