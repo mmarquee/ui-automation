@@ -23,7 +23,9 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
@@ -37,8 +39,19 @@ import static org.mockito.Mockito.when;
  * Created by Mark Humphreys on 01/06/2017.
  *
  * Tests for the IUIAutomationElement3 class
+ *
+ * Currently all of these tests require to run on Windows.
  */
 public class IUIAutomationElement3Test {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
