@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -42,11 +43,12 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * 
      * @param element The underlying automation element
      * @param pattern Invoke pattern
+     * @param instance Automation instance
      * @throws AutomationException 
      * @throws PatternNotFoundException 
      */
-    AutomationHyperlink(AutomationElement element, Invoke pattern) throws PatternNotFoundException, AutomationException {
-        super(element, pattern);
+    AutomationHyperlink(AutomationElement element, Invoke pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, pattern, instance);
     }
 
     /**

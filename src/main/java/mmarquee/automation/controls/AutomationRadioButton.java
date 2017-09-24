@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
@@ -35,12 +36,13 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
      * Construct the AutomationRadioButton
      * @param element The element
      * @param selection The item selection pattern
+     * @param instance Automation instance
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation library error
      */
-    public AutomationRadioButton(AutomationElement element, SelectionItem selection)
+    AutomationRadioButton(AutomationElement element, SelectionItem selection, UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(element, instance);
         selectItemPattern = selection;
     }
 

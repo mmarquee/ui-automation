@@ -16,10 +16,7 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -89,10 +86,11 @@ public class AutomationTab extends AutomationContainer {
      * Constructor for the AutomationTab
      * @param element The underlying element
      * @param container The ItemContainer pattern
+     * @param instance Automation instance
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTab (AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
-        super(element, container);
+    public AutomationTab (AutomationElement element, ItemContainer container, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, container, instance);
     }
 }

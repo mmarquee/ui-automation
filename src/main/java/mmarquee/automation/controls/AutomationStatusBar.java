@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -42,13 +43,11 @@ public class AutomationStatusBar extends AutomationContainer {
      * Constructor for AutomationStatusBar
      * @param element The underlying element
      * @param pattern The range pattern
+     * @param instance The automation instance
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Did not find the pattern
      */
-    public AutomationStatusBar(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException{
-        super(element, pattern);
+    AutomationStatusBar(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException{
+        super(element, pattern, instance);
     }
-
-
-
 }

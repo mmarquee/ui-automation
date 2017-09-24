@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -38,7 +40,10 @@ public class AutomationMaskedEditTest {
 
         when(value.value()).thenReturn("VALUE");
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value, instance);
 
         String val = control.getValue();
 
@@ -51,8 +56,11 @@ public class AutomationMaskedEditTest {
         Value value = Mockito.mock(Value.class);
 
         when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
-        
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value, instance);
 
         control.setValue("VALUE");
 

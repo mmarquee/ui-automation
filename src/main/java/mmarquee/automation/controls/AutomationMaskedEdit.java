@@ -2,6 +2,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -29,11 +30,12 @@ public class AutomationMaskedEdit extends AutomationEditBox {
      * Construct the AutomationMaskedEdit
      * @param element The element
      * @param value Value pattern
+     * @param instance Automaiton instance
      * @throws AutomationException Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMaskedEdit(AutomationElement element, Value value) throws PatternNotFoundException, AutomationException {
-        super(element, value);
+    AutomationMaskedEdit(AutomationElement element, Value value, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, value, instance);
         assertClassName(CLASS_NAME);
     }
 }

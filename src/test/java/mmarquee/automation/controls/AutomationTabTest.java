@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -40,7 +41,7 @@ public class AutomationTabTest {
     }
 
     @Test
-    @Ignore("Still needs better tests")
+    @Ignore("TODO: Needs windows!")
     public void testGetTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
@@ -57,12 +58,16 @@ public class AutomationTabTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationTab ctrl = new AutomationTab(element, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTab ctrl = new AutomationTab(element, container, instance);
 
         ctrl.selectTabPage("TEST");
     }
 
     @Test(expected = ElementNotFoundException.class)
+    @Ignore("TODO: Needs windows!")
     public void testGetTabPage_By_Name_Throws_Exception_When_Tab_Not_Present() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
@@ -81,7 +86,11 @@ public class AutomationTabTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
-        AutomationTab ctrl = new AutomationTab(element, container);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTab ctrl = new AutomationTab(element, container, instance);
 
         ctrl.selectTabPage("TEST");
     }

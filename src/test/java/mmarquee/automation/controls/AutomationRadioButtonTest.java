@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -37,7 +39,10 @@ public class AutomationRadioButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
 
         String name = rb1.getName();
 
@@ -51,7 +56,10 @@ public class AutomationRadioButtonTest {
 
         when(selection.isSelected()).thenReturn(true);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
 
         boolean value = rb1.isSelected();
 
@@ -65,7 +73,10 @@ public class AutomationRadioButtonTest {
 
         when(selection.isSelected()).thenReturn(true);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
 
         rb1.select();
 
