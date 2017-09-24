@@ -22,10 +22,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
@@ -34,8 +31,19 @@ import static org.junit.Assert.fail;
  * Created by Mark Humphreys on 20/11/2016.
  *
  * Tests for the IUIAutomationWindowPattern code.
+ *
+ * Currently all of these tests require to run on Windows.
  */
 public class IUIAutomationWindowPatternTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     protected Logger logger = Logger.getLogger(IUIAutomationWindowPatternTest.class.getName());
 
