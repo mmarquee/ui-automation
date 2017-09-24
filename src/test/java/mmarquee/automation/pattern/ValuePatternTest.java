@@ -174,38 +174,6 @@ public class ValuePatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    public void test_SetValue_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).setValue(any());
-
-        Value pattern = new Value(rawPattern);
-
-        pattern.setValue("VALUE-01");
-    }
-
-    @Test
-    public void test_SetValue_Calls_SetValue_From_Pattern() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 0;
-            }
-        }).when(rawPattern).setValue(any());
-
-        Value pattern = new Value(rawPattern);
-
-        pattern.setValue("VALUE-01");
-
-        verify(rawPattern, atLeastOnce()).setValue(any());
-    }
-
-    @Test(expected=AutomationException.class)
     @Ignore("Throws Mockito exception")
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 

@@ -17,12 +17,17 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -38,6 +43,15 @@ import static org.mockito.Mockito.when;
  * Tests for AutomatedWindow class
  */
 public class AutomationWindowTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
 	@Mock AutomationElement element;
 	@Mock Window window;
@@ -65,7 +79,10 @@ public class AutomationWindowTest {
 
         when(window.isModal()).thenReturn(true);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         assertEquals("Name-01", windw.getName());
     }
@@ -77,7 +94,10 @@ public class AutomationWindowTest {
 
         when(window.isModal()).thenReturn(true);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         assertNotEquals("Wrong-01", windw.getName());
     }
@@ -88,7 +108,10 @@ public class AutomationWindowTest {
 
         when(targetElement.findAll(any(), any())).thenReturn(menus);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         windw.getSystemMenu();
     }
@@ -99,7 +122,10 @@ public class AutomationWindowTest {
 
         when(targetElement.findAll(any(), any())).thenReturn(menus);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         windw.getTitleBar();
     }
@@ -110,7 +136,10 @@ public class AutomationWindowTest {
 
         when(targetElement.findAll(any(), any())).thenReturn(menus);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         windw.getAppBar(0);
     }
@@ -120,7 +149,10 @@ public class AutomationWindowTest {
             throws AutomationException, PatternNotFoundException {
         when(window.isModal()).thenReturn(true);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         assertTrue(windw.isModal());
     }
@@ -130,7 +162,10 @@ public class AutomationWindowTest {
             throws AutomationException, PatternNotFoundException {
         when(window.isModal()).thenReturn(false);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
 
         assertFalse(windw.isModal());
     }

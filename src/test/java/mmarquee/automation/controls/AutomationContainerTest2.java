@@ -3,11 +3,11 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -27,6 +27,16 @@ import static org.mockito.Mockito.when;
  * AutomationContainer tests.
  */
 public class AutomationContainerTest2 {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -49,14 +59,22 @@ public class AutomationContainerTest2 {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationWindow window = new AutomationWindow(element, pattern, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow window = new AutomationWindow(element, pattern, container, instance);
 
         assertTrue(window.getName().equals("NAME"));
     }
 
     @Test
     public void testGetPanel_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
         wndw.getPanel("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -64,7 +82,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetPanel_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getPanelByAutomationId("ID-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -73,7 +96,12 @@ public class AutomationContainerTest2 {
     @Test
     @Ignore("Needs further work for _by_Index checks")
     public void testGetPanel_By_Index_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getPanel(0);
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -81,7 +109,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetSlider_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
          wndw.getSlider("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -103,7 +136,12 @@ public class AutomationContainerTest2 {
 
         Mockito.when(elem.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getMaskedEdit("AutomatedMaskEdit1");
 
         verify(elem, atLeastOnce()).findAll(any(), any());
@@ -111,7 +149,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetButton_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getButton("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -119,7 +162,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetButton_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getButtonByAutomationId("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -127,7 +175,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetToolbar_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getToolBar("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -135,7 +188,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetImage_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getImage("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -143,7 +201,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testAutomationSpinner_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getSpinner("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -151,7 +214,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetCustom_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getCustom("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -159,7 +227,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testGetCustom_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getCustomByAutomationId("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -180,7 +253,12 @@ public class AutomationContainerTest2 {
 
         Mockito.when(elem.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(elem, window, container, instance);
+
         wndw.getCustomByControlType("CUSTOM-PANEL");
 
         verify(elem, atLeastOnce()).findAll(any(), any());
@@ -190,7 +268,12 @@ public class AutomationContainerTest2 {
     public void testGetCustom_By_ControlType_Throws_Exception_When_No_Found() throws Exception {
         AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(elem, window, container, instance);
+
         wndw.getCustomByControlType("PANEL-01");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -198,7 +281,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetEditBox_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getEditBox("Edit99");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -206,7 +294,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetEditBox_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getEditBoxByAutomationId("Edit99");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -214,7 +307,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetComboboxByAutomationId_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getComboboxByAutomationId("AutomatedCombobox1");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -222,7 +320,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetCombobox_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getCombobox("AutomatedCombobox1");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -230,7 +333,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetTreeView_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getTreeView("Not there");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -238,7 +346,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetProgressBar_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getProgressBar("NotThere");
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -260,7 +373,12 @@ public class AutomationContainerTest2 {
 
         Mockito.when(elem.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getMaskedEdit(0);
 
         verify(elem, atLeastOnce()).findAll(any(), any());
@@ -268,7 +386,12 @@ public class AutomationContainerTest2 {
 
     @Test
     public void testgetPanelByAutomationId_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
         wndw.getPanelByAutomationId("9999");
 
         verify(element, atLeastOnce()).findFirst(any(), any());

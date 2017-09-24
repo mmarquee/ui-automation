@@ -22,9 +22,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.Mockito;
 
 import com.sun.jna.Pointer;
@@ -50,6 +48,8 @@ import org.mockito.Spy;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
+ *
+ * Currently these tests require windows to run
  */
 public class UIAutomationTest extends BaseAutomationTest {
 
@@ -59,6 +59,15 @@ public class UIAutomationTest extends BaseAutomationTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
 	}
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     @Before
     public void setup() {

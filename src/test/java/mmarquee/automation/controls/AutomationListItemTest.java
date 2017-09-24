@@ -6,6 +6,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -19,6 +21,15 @@ import mmarquee.automation.pattern.SelectionItem;
  * Created by Mark Humphreys on 15/01/2017.
  */
 public class AutomationListItemTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     @Test
     public void test_IsSelected_Gets_Value_From_SelectionItem() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);

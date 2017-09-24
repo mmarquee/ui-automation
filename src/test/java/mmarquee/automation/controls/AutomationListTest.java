@@ -25,7 +25,9 @@ import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -47,6 +49,15 @@ import static org.mockito.Mockito.when;
  * Tests for AutomationList
  */
 public class AutomationListTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     @Mock AutomationElement element;
     @Mock AutomationElement targetElement;

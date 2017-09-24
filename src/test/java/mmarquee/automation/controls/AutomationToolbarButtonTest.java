@@ -18,6 +18,8 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.pattern.Invoke;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -28,6 +30,14 @@ import static org.mockito.Mockito.*;
  * Created by Mark Humphreys on 01/12/2016.
  */
 public class AutomationToolbarButtonTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

@@ -34,9 +34,10 @@ import java.util.List;
  * Created by Mark Humphreys on 26/01/2016.
  *
  * Encapsulates the 'window' element
+ *
+ * Currently all of these tests require to run on Windows.
  */
 public class AutomationWindow extends AutomationContainer implements Focusable {
-
     private Window windowPattern;
 
     private User32 user32;
@@ -67,12 +68,13 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @param element The underlying element
      * @param window The Window pattern
      * @param container The Container pattern
+     * @param instance Automation instance
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow (AutomationElement element, Window window, ItemContainer container)
+    AutomationWindow (AutomationElement element, Window window, ItemContainer container, UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element, container);
+        super(element, container, instance);
 
         this.user32 = User32.INSTANCE;
         this.windowPattern = window;

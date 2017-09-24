@@ -26,7 +26,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -55,6 +57,15 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 	@Mock AutomationElement targetElement;
 	@Mock ExpandCollapse collapse;
 	@Mock Invoke invoke;
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 	
     @Before
     public void setup() {

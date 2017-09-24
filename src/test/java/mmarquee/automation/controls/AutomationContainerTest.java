@@ -17,7 +17,10 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
+import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -41,13 +44,27 @@ import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
+ *
+ * These tests currently require that they are run in a Windows environment
  */
 public class AutomationContainerTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        wndw = new AutomationWindow(element, window, container, instance);
         spyWndw = Mockito.spy(wndw);
         
         elem = Mockito.mock(IUIAutomationElement3.class);
@@ -980,8 +997,11 @@ public class AutomationContainerTest {
         el.element = elem;
 
         when(el.findAll(any(), any())).thenReturn(list);
-        
-        AutomationWindow wndw = new AutomationWindow(el, window, container);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(el, window, container, instance);
         AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
         assertEquals(targetElement,ribbonBar.element);
 

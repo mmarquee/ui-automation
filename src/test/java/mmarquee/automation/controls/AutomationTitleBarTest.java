@@ -18,6 +18,8 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.pattern.ItemContainer;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -33,6 +35,15 @@ import static org.mockito.Mockito.when;
  * Tests for AutomationTitleBar.
  */
 public class AutomationTitleBarTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
     @Test
     public void testName_Returns_Name_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);

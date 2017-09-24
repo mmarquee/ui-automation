@@ -11,9 +11,7 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -30,8 +28,19 @@ import static org.mockito.Mockito.*;
  * Created by Mark Humphreys on 13/01/2017.
  *
  * Mocked tests for AutomationApplication
+ *
+ * Currently these need to be run in a Windows environment.
  */
 public class AutomationApplicationTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
