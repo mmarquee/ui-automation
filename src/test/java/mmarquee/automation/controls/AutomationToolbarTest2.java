@@ -20,6 +20,8 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -33,17 +35,33 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationToolbarTest {
+public class AutomationToolbarTest2 {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
+
     @Test
-    public void testGetName_Returns_Name_From_Element() throws Exception {
+    public void testGetToolbarButton_Gets_Button_When_Within_Bounds() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
-        when(element.getName()).thenReturn("NAME");
+
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(any(), any())).thenReturn(result);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
@@ -51,8 +69,27 @@ public class AutomationToolbarTest {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container, instance);
 
-        String name = ctrl.getName();
+        AutomationToolBarButton btn = ctrl.getToolbarButton(0);
+    }
 
-        assertTrue(name.equals("NAME"));
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetToolbarButton_Throws_Exception_When_Out_Of_Bounds() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
+
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
+
+        when(element.findAll(any(), any())).thenReturn(result);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationToolBar ctrl = new AutomationToolBar(element, container, instance);
+
+        AutomationToolBarButton btn = ctrl.getToolbarButton(1);
     }
 }
