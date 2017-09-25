@@ -61,10 +61,7 @@ public class AutomationContainerTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        wndw = new AutomationWindow(element, window, container, instance);
+        wndw = new AutomationWindow(element, window, container);
         spyWndw = Mockito.spy(wndw);
         
         elem = Mockito.mock(IUIAutomationElement3.class);
@@ -998,10 +995,7 @@ public class AutomationContainerTest {
 
         when(el.findAll(any(), any())).thenReturn(list);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow wndw = new AutomationWindow(el, window, container, instance);
+        AutomationWindow wndw = new AutomationWindow(el, window, container);
         AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
         assertEquals(targetElement,ribbonBar.element);
 

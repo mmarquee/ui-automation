@@ -304,6 +304,7 @@ public class IUIAutomationElementTest {
     }
 
     @Test
+    @Ignore("Should probably be mocked")
     public void testGetControlTypeForNonRootElement() throws Exception {
         IUIAutomationElement root = this.getChildOfRootElement();
 

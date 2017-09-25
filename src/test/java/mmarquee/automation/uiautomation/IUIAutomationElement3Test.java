@@ -23,10 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
@@ -298,6 +295,7 @@ public class IUIAutomationElement3Test {
     }
 
     @Test
+    @Ignore("Should probably be mocked")
     public void testGetControlTypeForNonRootElement() throws Exception {
         IUIAutomationElement3 root = this.getChildOfRootElement();
 

@@ -57,6 +57,18 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
     }
 
     /**
+     * Construct the AutomationRibbonCommandBar
+     * @param element The element
+     * @param container The container Pattern
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationRibbonCommandBar(AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
+        super(element, container);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
      * Get the RibbonWorkPane associated with the container
      * @return The AutomationRibbonWorkPane
      * @throws AutomationException Something is wrong in automation

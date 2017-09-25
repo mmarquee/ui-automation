@@ -85,6 +85,22 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @param element The underlying element
      * @param window The Window pattern
      * @param container The Container pattern
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    AutomationWindow (AutomationElement element, Window window, ItemContainer container)
+            throws PatternNotFoundException, AutomationException {
+        super(element, container);
+
+        this.user32 = User32.INSTANCE;
+        this.windowPattern = window;
+    }
+
+    /**
+     * Constructor for the AutomationWindow
+     * @param element The underlying element
+     * @param window The Window pattern
+     * @param container The Container pattern
      * @param user32 The user32 instance
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Expected pattern not found

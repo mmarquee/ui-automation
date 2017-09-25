@@ -71,12 +71,9 @@ public class AutomationRibbonCommandBarTest2 {
         when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container, instance);
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container);
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 

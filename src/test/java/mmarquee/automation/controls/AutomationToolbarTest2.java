@@ -61,7 +61,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        AutomationToolBarButton btn = ctrl.getToolbarButton(0);
+        ctrl.getToolbarButton(0);
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -78,6 +78,6 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        AutomationToolBarButton btn = ctrl.getToolbarButton(1);
+        ctrl.getToolbarButton(1);
     }
 }

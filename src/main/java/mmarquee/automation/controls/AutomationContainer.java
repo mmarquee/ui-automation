@@ -58,7 +58,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */
-    AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
+    public AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
         super(element);
         itemContainerPattern = pattern;
     }
