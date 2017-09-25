@@ -15,12 +15,14 @@
  */
 package mmarquee.automation;
 
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.*;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.*;
-import org.apache.log4j.Logger;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.OrientationType;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,28 +36,47 @@ import java.util.List;
 public class AutomationElement extends BaseAutomation {
     /**
      * <p>
-     * The underlying automation element
+     * The underlying automation element.
      * </p>
      */
-    public IUIAutomationElement3 element;
+    private IUIAutomationElement3 element;
 
     /**
-     * Constructor of AutomationElement
+     * Gets the underlying automation element.
      *
-     * @param element The element
+     * @return IUIAutomationElement3 The automation element.
      */
-    public AutomationElement(IUIAutomationElement3 element) {
-        this.element = element;
+    public final IUIAutomationElement3 getElement() {
+        return element;
     }
 
     /**
-     * Gets the property associated with the passed in id
+     * Sets the underlying automation element.
      *
-     * @param propertyId The property ID to get
-     * @return The property ID
-     * @throws AutomationException Call to Automation API failed
+     * @param inValue The new value.
      */
-    public Object getPropertyValue(int propertyId) throws AutomationException {
+    public final void setElement(final IUIAutomationElement3 inValue) {
+        this.element = inValue;
+    }
+
+    /**
+     * Constructor of AutomationElement.
+     *
+     * @param inElement The element.
+     */
+    public AutomationElement(final IUIAutomationElement3 inElement) {
+        this.element = inElement;
+    }
+
+    /**
+     * Gets the property associated with the passed in id.
+     *
+     * @param propertyId The property ID to get.
+     * @return The property ID.
+     * @throws AutomationException Call to Automation API failed.
+     */
+    public final Object getPropertyValue(final int propertyId)
+            throws AutomationException {
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
         final int res = this.element.getCurrentPropertyValue(propertyId, value);
@@ -67,12 +88,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current control type
+     * Gets the current control type.
      *
-     * @return The current control type
-     * @throws AutomationException Call to Automation API failed
+     * @return The current control type.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public int getControlType() throws AutomationException {
+    public final int getControlType() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         final int res = this.element.getCurrentControlType(ibr);
@@ -84,12 +105,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current class name of the element
+     * Gets the current class name of the element.
      *
-     * @return The current class name
-     * @throws AutomationException Call to Automation API failed
+     * @return The current class name.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getClassName() throws AutomationException {
+    public final String getClassName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentClassName(sr);
@@ -101,12 +122,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current automation id of the element
+     * Gets the current automation id of the element.
      *
-     * @return The current automation id
-     * @throws AutomationException Call to Automation API failed
+     * @return The current automation id.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getAutomationId() throws AutomationException {
+    public final String getAutomationId() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentAutomationId(sr);
@@ -118,12 +139,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current localized control type of the element
+     * Gets the current localized control type of the element.
      *
-     * @return The current class name
-     * @throws AutomationException Call to Automation API failed
+     * @return The current class name.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String localizedControlType() throws AutomationException {
+    public final String localizedControlType() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentLocalizedControlType(sr);
@@ -137,10 +158,10 @@ public class AutomationElement extends BaseAutomation {
     /**
      * Gets the current IsPassword value.
      *
-     * @return True if IsPassword
-     * @throws AutomationException Call to Automation API failed
+     * @return True if IsPassword.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public Boolean isPassword() throws AutomationException {
+    public final Boolean isPassword() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         final int res = this.element.getCurrentIsPassword(ibr);
@@ -152,11 +173,11 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Returns whether the element is off screen
-     * @return True if off screen
-     * @throws AutomationException Call to Automation API failed
+     * Returns whether the element is off screen.
+     * @return True if off screen.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL offScreen() throws AutomationException {
+    public final WinDef.BOOL offScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsOffscreen(bbr);
@@ -168,11 +189,11 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Returns whether the element is a content element
-     * @return True if content element
-     * @throws AutomationException Call to Automation API failed
+     * Returns whether the element is a content element.
+     * @return True if content element.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isContentElement() throws AutomationException {
+    public final WinDef.BOOL isContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsContentElement(bbr);
@@ -184,11 +205,11 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Returns whether the element is a control element
-     * @return True if control element
-     * @throws AutomationException Call to Automation API failed
+     * Returns whether the element is a control element.
+     * @return True if control element.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isControlElement() throws AutomationException {
+    public final WinDef.BOOL isControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsControlElement(bbr);
@@ -200,11 +221,11 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Returns whether the element is enabled
-     * @return True if enabled
-     * @throws AutomationException Call to Automation API failed
+     * Returns whether the element is enabled.
+     * @return True if enabled.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isEnabled() throws AutomationException {
+    public final WinDef.BOOL isEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsEnabled(bbr);
@@ -216,24 +237,22 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the name, either from the current ot cache property
+     * Gets the name, either from the current ot cache property.
      *
-     * @return The name (either cached or current)
-     * @throws AutomationException Call to Automation API failed
+     * @return The name (either cached or current).
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getName() throws AutomationException {
+    public final String getName() throws AutomationException {
         return this.currentName();
     }
 
-    protected Logger logger = Logger.getLogger(AutomationElement.class.getName());
-
     /**
-     * Gets the current name of the control
+     * Gets the current name of the control.
      *
-     * @return The name of the element
-     * @throws AutomationException Call to Automation API failed
+     * @return The name of the element.
+     * @throws AutomationException Call to Automation API failed.
      */
-    protected String currentName() throws AutomationException {
+    protected final String currentName() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentName(sr);
@@ -258,34 +277,38 @@ public class AutomationElement extends BaseAutomation {
 //    }
 
     /**
-     * Finds the first element that matches the raw condition
+     * Finds the first element that matches the raw condition.
      *
-     * @param scope      Tree scope
-     * @param pCondition The raw condition
-     * @return The first matching element
-     * @throws AutomationException Something has gone wrong
+     * @param scope      Tree scope.
+     * @param pCondition The raw condition.
+     * @return The first matching element.
+     * @throws AutomationException Something has gone wrong.
      */
-    public AutomationElement findFirst(TreeScope scope, PointerByReference pCondition) throws AutomationException {
+    public final AutomationElement findFirst(final TreeScope scope,
+                                       final PointerByReference pCondition)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         this.element.findFirst(scope, pCondition.getValue(), pbr);
 
         try {
-            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
-            return new AutomationElement(element);
+            IUIAutomationElement3 elem =
+                    getAutomationElementFromReference(pbr);
+            return new AutomationElement(elem);
         } catch (NullPointerException npe) {
             throw new ElementNotFoundException();
         }
     }
 
     /**
-     * Get the current pattern that matches the patternId
+     * Get the current pattern that matches the patternId.
      *
-     * @param patternId What pattern to get
-     * @return The pattern
-     * @throws AutomationException Call to Automation API failed
+     * @param patternId What pattern to get.
+     * @return The pattern.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public PointerByReference getPattern(int patternId) throws AutomationException {
+    public PointerByReference getPattern(int patternId)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.element.getCurrentPattern(patternId, pbr);
@@ -297,30 +320,30 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Sets focus to the element
+     * Sets focus to the element.
      */
     public void setFocus() {
         this.element.setFocus();
     }
 
     /**
-     * Gets all of the descendant elements that match the condition
+     * Gets all of the descendant elements that match the condition.
      *
-     * @param pCondition The condition
-     * @return List of matching elements
-     * @throws AutomationException Call to Automation API failed
+     * @param pCondition The condition.
+     * @return List of matching elements.
+     * @throws AutomationException Call to Automation API failed.
      */
     public List<AutomationElement> findAllDescendants(PointerByReference pCondition) throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
     }
 
     /**
-     * Gets all of the elements that match the condition and scope
+     * Gets all of the elements that match the condition and scope.
      *
-     * @param scope The scope in the element tree
-     * @param pCondition The condition
-     * @return List of matching elements
-     * @throws AutomationException Call to Automation API failed
+     * @param scope The scope in the element tree.
+     * @param pCondition The condition.
+     * @return List of matching elements.
+     * @throws AutomationException Call to Automation API failed.
      */
     public List<AutomationElement> findAll(TreeScope scope, PointerByReference pCondition) throws AutomationException {
 
@@ -356,12 +379,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current ARIA role
+     * Gets the current ARIA role.
      *
-     * @return String representing the ARIA role
-     * @throws AutomationException Call to Automation API failed
+     * @return String representing the ARIA role.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getAriaRole() throws AutomationException {
+    public final String getAriaRole() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentAriaRole(sr);
@@ -373,12 +396,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current orientation
+     * Gets the current orientation.
      *
-     * @return The orientation
-     * @throws AutomationException Something has gone wrong
+     * @return The orientation.
+     * @throws AutomationException Something has gone wrong.
      */
-    public OrientationType getOrientation() throws AutomationException {
+    public final OrientationType getOrientation() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         final int res = this.element.getCurrentOrientation(ibr);
@@ -390,12 +413,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current culture
+     * Gets the current culture.
      *
-     * @return The culture
-     * @throws AutomationException Something has gone wrong
+     * @return The culture.
+     * @throws AutomationException Something has gone wrong.
      */
-    public Integer getCulture() throws AutomationException {
+    public final Integer getCulture() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         final int res = this.element.getCurrentCulture(ibr);
@@ -408,12 +431,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the framework ID
+     * Gets the framework ID.
      *
-     * @return The framework ID
-     * @throws AutomationException Call to Automation API failed
+     * @return The framework ID.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getFrameworkId() throws AutomationException {
+    public final String getFrameworkId() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentFrameworkId(sr);
@@ -425,12 +448,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the provider description
+     * Gets the provider description.
      *
-     * @return The provider description
-     * @throws AutomationException Call to Automation API failed
+     * @return The provider description.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getProviderDescription() throws AutomationException {
+    public final String getProviderDescription() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentProviderDescription(sr);
@@ -450,12 +473,12 @@ public class AutomationElement extends BaseAutomation {
 //    //   }
 
     /**
-     * Gets the process ID
+     * Gets the process ID.
      *
-     * @return The process ID
-     * @throws AutomationException Call to Automation API failed
+     * @return The process ID.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public Integer getProcessId() throws AutomationException {
+    public final Integer getProcessId() throws AutomationException {
         IntByReference ibr = new IntByReference();
 
         final int res = this.element.getCurrentProcessId(ibr);
@@ -467,12 +490,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current item status
+     * Gets the current item status.
      *
-     * @return The status
-     * @throws AutomationException Call to Automation API failed
+     * @return The status.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getItemStatus() throws AutomationException {
+    public final String getItemStatus() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentItemStatus(sr);
@@ -484,12 +507,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the current accelerator key associated with the element
+     * Gets the current accelerator key associated with the element.
      *
-     * @return The accelerator key
-     * @throws AutomationException Call to Automation API failed
+     * @return The accelerator key.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public String getAcceleratorKey() throws AutomationException {
+    public final String getAcceleratorKey() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentAcceleratorKey(sr);
@@ -501,11 +524,12 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the clickable point for the control
-     * @return The clickable point
-     * @throws AutomationException Call to Automation API failed
+     * Gets the clickable point for the control.
+     *
+     * @return The clickable point.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.POINT getClickablePoint() throws AutomationException {
+    public final WinDef.POINT getClickablePoint() throws AutomationException {
         WinDef.POINT.ByReference pbr = new WinDef.POINT.ByReference();
 
         WinDef.BOOLByReference br = new WinDef.BOOLByReference();
@@ -520,10 +544,11 @@ public class AutomationElement extends BaseAutomation {
 
     /**
      * Gets the bounding rectangle of the control.
-     * @return The bounding rectangle
-     * @throws AutomationException Call to Automation API failed
+     *
+     * @return The bounding rectangle.
+     * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.RECT getBoundingRectangle() throws AutomationException {
+    public final WinDef.RECT getBoundingRectangle() throws AutomationException {
         WinDef.RECT rect = new WinDef.RECT();
 
         final int res = this.element.getCurrentBoundingRectangle(rect);
@@ -535,10 +560,11 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element
-     * @throws AutomationException Failed to get the correct interface
+     * Shows the context menu for the element.
+     *
+     * @throws AutomationException Failed to get the correct interface.
      */
-    public void showContextMenu() throws AutomationException {
+    public final void showContextMenu() throws AutomationException {
         final int res = this.element.showContextMenu();
         if (res != 0) {
             throw new AutomationException(res);

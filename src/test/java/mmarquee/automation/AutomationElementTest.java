@@ -84,7 +84,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 		// Using mock since desktop does not provide an automation ID
 		AutomationElement element = getMocketAutomationElement();
 		
-        when(element.element.getCurrentAutomationId(any()))
+        when(element.getElement().getCurrentAutomationId(any()))
         .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
 
         assertEquals("myAutomationId", element.getAutomationId());

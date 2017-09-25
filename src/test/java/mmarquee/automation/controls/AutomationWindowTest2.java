@@ -225,7 +225,7 @@ public class AutomationWindowTest2 {
 
         AutomationElement localElement = Mockito.mock(AutomationElement.class);
 
-        localElement.element = elem;
+        localElement.setElement(elem);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);

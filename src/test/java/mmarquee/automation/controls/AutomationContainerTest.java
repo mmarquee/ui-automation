@@ -988,7 +988,7 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementClassName(elem, "UIRibbonCommandBarDock");
      
         AutomationElement el = Mockito.mock(AutomationElement.class);
-        el.element = elem;
+        el.setElement(elem);
 
         when(el.findAll(any(), any())).thenReturn(list);
 

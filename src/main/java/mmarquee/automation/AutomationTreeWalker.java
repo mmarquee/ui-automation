@@ -43,7 +43,7 @@ public class AutomationTreeWalker extends BaseAutomation {
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element.element);
+        Pointer pElement = this.getPointerFromElement(element.getElement());
 
         this.walker.getNextSiblingElement(pElement, pChild);
 
@@ -66,7 +66,7 @@ public class AutomationTreeWalker extends BaseAutomation {
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element.element);
+        Pointer pElement = this.getPointerFromElement(element.getElement());
 
         this.walker.getPreviousSiblingElement(pElement, pChild);
 
@@ -89,7 +89,7 @@ public class AutomationTreeWalker extends BaseAutomation {
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element.element);
+        Pointer pElement = this.getPointerFromElement(element.getElement());
 
         this.walker.getLastChildElement(pElement, pChild);
 
@@ -112,7 +112,7 @@ public class AutomationTreeWalker extends BaseAutomation {
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element.element);
+        Pointer pElement = this.getPointerFromElement(element.getElement());
         this.walker.getFirstChildElement(pElement, pChild);
         
         try {
@@ -135,7 +135,7 @@ public class AutomationTreeWalker extends BaseAutomation {
             throws AutomationException {
         PointerByReference pParent = new PointerByReference();
 
-        Pointer pElement = this.getPointerFromElement(element.element);
+        Pointer pElement = this.getPointerFromElement(element.getElement());
         this.walker.getParentElement(pElement, pParent);
 
         try {
