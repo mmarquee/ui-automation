@@ -1,4 +1,4 @@
-package mmarquee.automation.controls.rebar;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;

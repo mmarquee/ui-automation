@@ -17,7 +17,6 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -35,8 +34,6 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;

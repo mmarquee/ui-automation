@@ -19,8 +19,7 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.*;
+import mmarquee.automation.controls.AutomationReBar;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.

@@ -46,7 +46,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationPanel(AutomationElement element, ItemContainer containerPattern, UIAutomation instance) throws AutomationException, PatternNotFoundException {
+    AutomationPanel(AutomationElement element, ItemContainer containerPattern, UIAutomation instance) throws AutomationException, PatternNotFoundException {
         super(element, containerPattern, instance);
     }
 
@@ -57,7 +57,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationPanel(AutomationElement element, ItemContainer containerPattern) throws AutomationException, PatternNotFoundException {
+    AutomationPanel(AutomationElement element, ItemContainer containerPattern) throws AutomationException, PatternNotFoundException {
         super(element, containerPattern);
     }
 

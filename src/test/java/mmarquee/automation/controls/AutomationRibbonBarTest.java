@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.rebar;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationRibbonBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Before;
@@ -28,11 +29,11 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 31/05/2017.
+ * Created by Mark Humphreys on 28/11/2016.
  *
- * Basic tests for ReBar.
+ * Tests for AutomationRibbonBar.
  */
-public class AutomationReBarTests {
+public class AutomationRibbonBarTest {
 
     @Before
     public void setup() {
@@ -44,40 +45,21 @@ public class AutomationReBarTests {
     }
 
     @Test
-    public void testName_Is_Returned_From_The_Element() throws Exception {
+    public void testGetRibbonBar() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
-        when(element.getName()).thenReturn("REBAR-01");
+        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
+        when(element.getName()).thenReturn("RIBBON-01");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationReBar pane = new AutomationReBar(element, container, instance);
+        AutomationRibbonBar bar = new AutomationRibbonBar(element, container, instance);
 
-        String name = pane.getName();
+        String name = bar.getName();
 
-        assertEquals("REBAR-01", name);
-    }
-
-    @Test
-    public void testName_Is_Returned_From_The_Element_Alternative_Constructor() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-
-        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
-        when(element.getName()).thenReturn("REBAR-01");
-
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationReBar pane = new AutomationReBar(element, container, instance);
-
-        String name = pane.getName();
-
-        assertEquals("REBAR-01", name);
+        assertEquals(name, "RIBBON-01");
     }
 }

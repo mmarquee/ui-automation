@@ -36,12 +36,6 @@ import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.AutomationNUIPane;
-import mmarquee.automation.controls.ribbon.AutomationNetUIHWND;
-import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonCommandBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonWorkPane;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 

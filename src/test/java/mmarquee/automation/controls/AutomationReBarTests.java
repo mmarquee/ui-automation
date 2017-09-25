@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.ribbon;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationReBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Before;
@@ -28,12 +25,15 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * Created by Mark Humphreys on 31/05/2017.
  *
- * Tests for the NUIPane control.
+ * Basic tests for ReBar.
  */
-public class AutomationNUIPaneTest {
+public class AutomationReBarTests {
 
     @Before
     public void setup() {
@@ -45,21 +45,40 @@ public class AutomationNUIPaneTest {
     }
 
     @Test
-    public void testName_Is_Blank() throws Exception {
+    public void testName_Is_Returned_From_The_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
-        when(element.getName()).thenReturn("");
+        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
+        when(element.getName()).thenReturn("REBAR-01");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationNUIPane pane = new AutomationNUIPane(element, container, instance);
+        AutomationReBar pane = new AutomationReBar(element, container, instance);
 
         String name = pane.getName();
 
-        assertTrue(name.isEmpty());
+        assertEquals("REBAR-01", name);
+    }
+
+    @Test
+    public void testName_Is_Returned_From_The_Element_Alternative_Constructor() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
+        when(element.getName()).thenReturn("REBAR-01");
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationReBar pane = new AutomationReBar(element, container, instance);
+
+        String name = pane.getName();
+
+        assertEquals("REBAR-01", name);
     }
 }

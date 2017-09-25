@@ -13,10 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.ribbon;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationNUIPane;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Before;
@@ -24,15 +29,12 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
 /**
  * Created by Mark Humphreys on 28/11/2016.
  *
- * Tests for AutomationRibbonBar.
+ * Tests for the NUIPane control.
  */
-public class AutomationRibbonBarTest {
+public class AutomationNUIPaneTest {
 
     @Before
     public void setup() {
@@ -44,21 +46,21 @@ public class AutomationRibbonBarTest {
     }
 
     @Test
-    public void testGetRibbonBar() throws Exception {
+    public void testName_Is_Blank() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
-        when(element.getName()).thenReturn("RIBBON-01");
+        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
+        when(element.getName()).thenReturn("");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(element, container, instance);
+        AutomationNUIPane pane = new AutomationNUIPane(element, container, instance);
 
-        String name = bar.getName();
+        String name = pane.getName();
 
-        assertEquals(name, "RIBBON-01");
+        assertTrue(name.isEmpty());
     }
 }

@@ -22,8 +22,6 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.*;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -58,7 +56,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
+    AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
         super(element);
         itemContainerPattern = pattern;
     }
@@ -72,7 +70,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something is wrong in automation
      * @throws PatternNotFoundException Could not find pattern
      */
-    public AutomationContainer(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+    AutomationContainer(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
         super(element, instance);
         itemContainerPattern = pattern;
     }
