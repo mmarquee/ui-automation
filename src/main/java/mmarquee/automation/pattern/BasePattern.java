@@ -61,7 +61,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
      * @return True if available.
      */
     public boolean isAvailable () {
-        return (pattern == null);
+        return (pattern != null);
     }
 
     /**
