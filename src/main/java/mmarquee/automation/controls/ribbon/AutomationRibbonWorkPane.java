@@ -57,6 +57,18 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
     }
 
     /**
+     * Construct the AutomationRibbonWorkPane
+     * @param element The element
+     * @param containerPattern The container Pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Patter not found
+     */
+    public AutomationRibbonWorkPane(AutomationElement element, ItemContainer containerPattern) throws PatternNotFoundException, AutomationException {
+        super(element, containerPattern);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
      * Get the AutomationNUIPane associated with the given index
      * @param index The index
      * @return The AutomationNUIPane

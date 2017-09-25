@@ -40,17 +40,13 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 25/09/2017
  *
- * Tests for RibbonCommandBar
+ * Tests for the NUIPane control.
  */
-public class AutomationRibbonCommandBarTest2 {
+public class AutomationNUIPaneTest2 {
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    static {
-        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @BeforeClass
@@ -62,55 +58,61 @@ public class AutomationRibbonCommandBarTest2 {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    @Test (expected = ElementNotFoundException.class)
-    public void testGetRibbonCommandBar_Throws_Exception_When_No_WorkPane_Found() throws Exception {
+    static {
+        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void testGetNetUIHWND_Throws_Exception_When_NetUIHWND_Not_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container);
+        AutomationNUIPane pane = new AutomationNUIPane(element, container);
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        pane.getNetUIHWND(0);
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
-    public void testGetRibbonCommandBar_When_WorkPane_Found() throws Exception {
+    public void testGetNetUIHWND_When_NetUIHWND_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
+        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
 
         Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
-                invocation -> {
-                    Object[] args = invocation.getArguments();
-                    PointerByReference reference = (PointerByReference) args[0];
+            invocation -> {
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference) args[0];
 
-                    String value = "UIRibbonWorkPane";
-                    Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
-                    pointer.setWideString(0, value);
+                String value = "NetUIHWND";
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
+                pointer.setWideString(0, value);
 
-                    reference.setValue(pointer);
+                reference.setValue(pointer);
 
-                    return 0;
-                }
+                return 0;
+            }
         );
 
         collection.add(new AutomationElement(elem));
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        AutomationNUIPane pane = new AutomationNUIPane(element, container);
+
+        pane.getNetUIHWND(0);
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

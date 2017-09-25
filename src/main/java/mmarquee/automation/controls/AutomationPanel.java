@@ -51,6 +51,17 @@ public class AutomationPanel extends AutomationContainer {
     }
 
     /**
+     * Construct the AutomationPanel
+     * @param element The element
+     * @param containerPattern The itemContainer pattern
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    public AutomationPanel(AutomationElement element, ItemContainer containerPattern) throws AutomationException, PatternNotFoundException {
+        super(element, containerPattern);
+    }
+
+    /**
      * Gets an MDI window from the panel
      *
      * Yes, panels can have windows - in this case the window is assumed to be extant.

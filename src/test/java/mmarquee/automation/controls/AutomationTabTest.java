@@ -19,6 +19,8 @@ import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -40,8 +42,17 @@ public class AutomationTabTest {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     @Test
-    @Ignore("TODO: Needs windows!")
+    @Ignore("Broken somewhat")
     public void testGetTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
@@ -58,16 +69,12 @@ public class AutomationTabTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationTab ctrl = new AutomationTab(element, container, instance);
+        AutomationTab ctrl = new AutomationTab(element, container);
 
         ctrl.selectTabPage("TEST");
     }
 
     @Test(expected = ElementNotFoundException.class)
-    @Ignore("TODO: Needs windows!")
     public void testGetTabPage_By_Name_Throws_Exception_When_Tab_Not_Present() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 

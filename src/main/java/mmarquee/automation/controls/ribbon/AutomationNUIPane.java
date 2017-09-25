@@ -57,6 +57,18 @@ public class AutomationNUIPane extends AutomationPanel {
     }
 
     /**
+     * Construct the AutomationNUIPane
+     * @param element The element
+     * @param container ItemContainer pattern
+     * @throws AutomationException Automation error
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    AutomationNUIPane(AutomationElement element, ItemContainer container) throws AutomationException, PatternNotFoundException {
+        super(element, container);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
      * Get the AutomationNetUIHWND associated with the given index
      * @param index The index
      * @return The AutomationNetUIHWND

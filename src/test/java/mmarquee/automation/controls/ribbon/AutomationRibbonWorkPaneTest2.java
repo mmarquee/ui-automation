@@ -40,17 +40,13 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Mark Humphreys on 25/09/2017
  *
- * Tests for RibbonCommandBar
+ * Tests for RibbonWorkPane controls
  */
-public class AutomationRibbonCommandBarTest2 {
+public class AutomationRibbonWorkPaneTest2 {
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    static {
-        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @BeforeClass
@@ -62,26 +58,30 @@ public class AutomationRibbonCommandBarTest2 {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    @Test (expected = ElementNotFoundException.class)
-    public void testGetRibbonCommandBar_Throws_Exception_When_No_WorkPane_Found() throws Exception {
+    static {
+        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void testGetNUIPane_Throws_Exception_When_NUIPane_Not_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container);
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element, container);
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        workPane.getNUIPane(0);
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
-    public void testGetRibbonCommandBar_When_WorkPane_Found() throws Exception {
+    public void testGetNUIPane_When_NUIPane_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
         List<AutomationElement> collection = new ArrayList<>();
@@ -93,24 +93,23 @@ public class AutomationRibbonCommandBarTest2 {
                     Object[] args = invocation.getArguments();
                     PointerByReference reference = (PointerByReference) args[0];
 
-                    String value = "UIRibbonWorkPane";
+                    String value = "NUIPane";
                     Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() + 1));
                     pointer.setWideString(0, value);
 
                     reference.setValue(pointer);
 
                     return 0;
-                }
-        );
+                });
 
         collection.add(new AutomationElement(elem));
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        workPane.getNUIPane(0);
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

@@ -57,6 +57,18 @@ public class AutomationRibbonBar extends AutomationPanel {
     }
 
     /**
+     * Construct the AutomationReBar
+     * @param element The element
+     * @param containerPattern The container Pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationRibbonBar(AutomationElement element, ItemContainer containerPattern) throws PatternNotFoundException, AutomationException {
+        super(element, containerPattern);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
      * Get the RibbonCommandBar associated with this container
      * @return The AutomationRibbonBar
      * @throws AutomationException Automation issue

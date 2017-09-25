@@ -93,4 +93,15 @@ public class AutomationTab extends AutomationContainer {
     public AutomationTab (AutomationElement element, ItemContainer container, UIAutomation instance) throws PatternNotFoundException, AutomationException {
         super(element, container, instance);
     }
+
+    /**
+     * Constructor for the AutomationTab
+     * @param element The underlying element
+     * @param container The ItemContainer pattern
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationTab (AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
+        super(element, container);
+    }
 }

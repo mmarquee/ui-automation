@@ -25,7 +25,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.utils.Utils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -118,18 +117,6 @@ public class UIAutomationTest2 {
         AutomationApplication app = instance.launch("notepad.exe");
     }
 
-    @Test(expected = IOException.class)
-    @Ignore("TODO: instance mocking makes this fail now")
-    public void testLaunchOrAttach_Fails_When_Launching_With_No_executable() throws Exception {
-        UIAutomation instance = Mockito.mock(UIAutomation.class);
-
-        PowerMockito.mockStatic(Utils.class);
-
-        PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java.io.IOException.class);
-
-        instance.launchOrAttach("notepad99.exe");
-    }
-
     @Test
     public void testLaunchOrAttach_Does_Not_Throw_Exception_When_Launching_startProcess_Succeeds() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
@@ -141,31 +128,6 @@ public class UIAutomationTest2 {
         instance.launchOrAttach("notepad.exe");
     }
 
-    @Test(expected = IOException.class)
-    @Ignore("TODO: instance mocking makes this fail now")
-    public void testLaunchOrAttach_Fails_When_Attaching_With_No_executable() throws Exception {
-        UIAutomation instance = Mockito.mock(UIAutomation.class);
-
-        PowerMockito.mockStatic(Utils.class);
-
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(false);
-        PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java.io.IOException.class);
-
-        instance.launchOrAttach("notepad99.exe");
-    }
-
-    @Test(expected = IOException.class)
-    @Ignore("TODO: Fix")
-    public void test_LaunchWithWorkingDirectoryOrAttach_Fails_When_Launching_With_No_executable() throws Exception {
-        UIAutomation instance = Mockito.mock(UIAutomation.class);
-
-        PowerMockito.mockStatic(Utils.class);
-
-        PowerMockito.when(Utils.startProcessWithWorkingDirectory(anyString())).thenThrow(java.io.IOException.class);
-
-        instance.launchWithWorkingDirectoryOrAttach("notepad99.exe");
-    }
-
     @Test
     public void test_LaunchWithWorkingDirectoryOrAttach_Does_Not_Throw_Exception_When_Launching_startProcess_Succeeds() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
@@ -175,19 +137,6 @@ public class UIAutomationTest2 {
         PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(true);
 
         instance.launchWithWorkingDirectoryOrAttach("notepad.exe");
-    }
-
-    @Test(expected = IOException.class)
-    @Ignore("TODO: instance mocking makes this fail now")
-    public void test_LaunchWithWorkingDirectoryOrAttach_Fails_When_Attaching_With_No_executable() throws Exception {
-        UIAutomation instance = Mockito.mock(UIAutomation.class);
-
-        PowerMockito.mockStatic(Utils.class);
-
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(false);
-        PowerMockito.when(Utils.startProcessWithWorkingDirectory(anyString())).thenThrow(java.io.IOException.class);
-
-        instance.launchWithWorkingDirectoryOrAttach("notepad99.exe");
     }
 
     @Test

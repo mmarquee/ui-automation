@@ -56,47 +56,4 @@ public class AutomationStatusBarTest {
 
         assertTrue(name.equals("NAME"));
     }
-
-    @Test(expected=IndexOutOfBoundsException.class)
-    @Ignore("TODO: Gets controls, so needs work")
-    public void testGetTextBox_Throws_IndexOutOfBoundsException_When_Index_Out_Of_Bounds() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer pattern = Mockito.mock(ItemContainer.class);
-
-        when(element.getName()).thenReturn("NAME");
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern, instance);
-
-        AutomationTextBox textBox = statusBar.getTextBox(0);
-
-        verify(element, times(1)).findAll(any(), any());
-    }
-
-    @Test
-    @Ignore("TODO: Gets controls, so needs work")
-    public void testGetTextBox_Calls_Find_All_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer pattern = Mockito.mock(ItemContainer.class);
-
-        when(element.getName()).thenReturn("NAME");
-
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
-
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
-
-        when(element.findAll(any(), any())).thenReturn(result);
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern, instance);
-
-        AutomationTextBox textBox = statusBar.getTextBox(0);
-
-        verify(element, times(1)).findAll(any(), any());
-    }
 }

@@ -137,7 +137,7 @@ public class IUIAutomationWindowPatternTest {
     }
 
     @Test
-    @Ignore // This fails for some reason
+    @Ignore("This fails for some reason")
     public void testGetWindowPatternSucceedsForWindowElement() throws Exception {
         // Get the pattern
         IUIAutomationElement3 element = this.getWindowChildOfRootElement();
