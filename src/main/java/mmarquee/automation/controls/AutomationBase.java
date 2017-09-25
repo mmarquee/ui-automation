@@ -76,9 +76,9 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * For mocking, etc.
-     * @param element
-     * @param automation
+     * For mocking, etc. Doo not use as part of 'real' code
+     * @param element The element
+     * @param automation The automation instance
      */
     public AutomationBase (AutomationElement element, UIAutomation automation) {
         this.element = element;
