@@ -23,9 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.*;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
@@ -37,11 +35,21 @@ import static org.mockito.Mockito.when;
  * Created by Mark Humphreys on 01/06/2017.
  *
  * Tests for the IUIAutomationElement3 class
+ *
+ * Currently all of these tests require to run on Windows.
  */
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationElement3Test {
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
+    private Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -84,7 +92,7 @@ public class IUIAutomationElement3Test {
 
             PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
+            uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
             return IUIAutomationElement3Converter.PointerToInterface(element);
         } else {
@@ -286,6 +294,7 @@ public class IUIAutomationElement3Test {
     }
 
     @Test
+    @Ignore("Should probably be mocked")
     public void testGetControlTypeForNonRootElement() throws Exception {
         IUIAutomationElement3 root = this.getChildOfRootElement();
 
@@ -375,7 +384,7 @@ public class IUIAutomationElement3Test {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
         IUIAutomationElement3 elem = IUIAutomationElement3Converter.PointerToInterface(element);
 
@@ -405,7 +414,7 @@ public class IUIAutomationElement3Test {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
         IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
 
@@ -429,7 +438,7 @@ public class IUIAutomationElement3Test {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
         IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
 

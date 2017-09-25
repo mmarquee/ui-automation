@@ -17,6 +17,7 @@ package mmarquee.automation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.atLeastOnce;
@@ -25,7 +26,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -40,6 +43,8 @@ import mmarquee.automation.uiautomation.TreeScope;
  * Created by Mark Humphreys on 20/07/2016.
  *
  * Tests for the AutomationElement class behaviour.
+ *
+ * Currently all of these tests require to run on Windows.
  */
 public class AutomationElementTest extends BaseAutomationTest {
 	static {
@@ -47,6 +52,15 @@ public class AutomationElementTest extends BaseAutomationTest {
 	}
 
 	private UIAutomation instance;
+
+	@BeforeClass
+	public static void checkOs() throws Exception {
+		Assume.assumeTrue(isWindows());
+	}
+
+	private static boolean isWindows() {
+		return System.getProperty("os.name").toLowerCase().contains("windows");
+	}
 
 	@Before
 	public void setUp() throws Exception {

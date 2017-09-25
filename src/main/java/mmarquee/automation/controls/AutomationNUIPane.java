@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.ribbon;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.controls.AutomationPanel;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -38,6 +39,31 @@ public class AutomationNUIPane extends AutomationPanel {
      */
     public AutomationNUIPane(AutomationElement element) throws AutomationException, PatternNotFoundException {
         super(element);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
+     * Construct the AutomationNUIPane
+     * @param element The element
+     * @param container ItemContainer pattern
+     * @param instance Automation instance
+     * @throws AutomationException Automation error
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    AutomationNUIPane(AutomationElement element, ItemContainer container, UIAutomation instance) throws AutomationException, PatternNotFoundException {
+        super(element, container, instance);
+        assertClassName(CLASS_NAME);
+    }
+
+    /**
+     * Construct the AutomationNUIPane
+     * @param element The element
+     * @param container ItemContainer pattern
+     * @throws AutomationException Automation error
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    AutomationNUIPane(AutomationElement element, ItemContainer container) throws AutomationException, PatternNotFoundException {
+        super(element, container);
         assertClassName(CLASS_NAME);
     }
 

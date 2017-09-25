@@ -13,35 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.ribbon;
+package mmarquee.automation.controls;
 
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
-
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.when;
-
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.controls.AutomationRibbonCommandBar;
+import mmarquee.automation.controls.AutomationRibbonWorkPane;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.when;
+
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * Created by Mark Humphreys on 25/09/2017
  *
  * Tests for RibbonCommandBar
  */
-public class AutomationRibbonCommandBarTest {
+public class AutomationRibbonCommandBarTest2 {
 
     @Before
     public void setup() {
@@ -52,18 +53,13 @@ public class AutomationRibbonCommandBarTest {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    @Test
-    public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
-        when(element.getName()).thenReturn("NAME");
-
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
-
-        String name = commandBar.getName();
-
-        assertTrue(name.equals("NAME"));
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
     @Test (expected = ElementNotFoundException.class)
@@ -75,7 +71,9 @@ public class AutomationRibbonCommandBarTest {
         when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container);
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 

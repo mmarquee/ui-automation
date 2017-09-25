@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Text;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -38,7 +40,10 @@ public class AutomationDocumentTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationDocument document = new AutomationDocument(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDocument document = new AutomationDocument(element, pattern, instance);
 
         String name = document.getName();
 
@@ -52,7 +57,10 @@ public class AutomationDocumentTest {
 
         when(pattern.getSelection()).thenReturn("SELECTION");
 
-        AutomationDocument document = new AutomationDocument(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDocument document = new AutomationDocument(element, pattern, instance);
 
         String name = document.getSelection();
 
@@ -66,7 +74,10 @@ public class AutomationDocumentTest {
 
         when(pattern.getText()).thenReturn("NAME");
 
-        AutomationDocument document = new AutomationDocument(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDocument document = new AutomationDocument(element, pattern, instance);
 
         String name = document.getText();
 

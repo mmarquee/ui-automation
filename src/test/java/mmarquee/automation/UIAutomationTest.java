@@ -19,14 +19,10 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.Mockito;
 
 import com.sun.jna.Pointer;
@@ -43,19 +39,17 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
-import mmarquee.automation.utils.Utils;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 /**
  * Created by Mark Humphreys on 19/07/2016.
+ *
+ * Currently these tests require windows to run
  */
 public class UIAutomationTest extends BaseAutomationTest {
 
@@ -65,6 +59,15 @@ public class UIAutomationTest extends BaseAutomationTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
 	}
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     @Before
     public void setup() {
@@ -95,6 +98,13 @@ public class UIAutomationTest extends BaseAutomationTest {
         
         assertEquals(instance.getRootElement(),desktop.getElement());
         assertTrue("desktop is correct: " + desktop.getName(), desktop.getName().startsWith("Desktop"));
+    }
+
+    @Test
+    public void testCreateAutomationIdPropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        instance.createAutomationIdPropertyCondition("ID");
     }
 
     @Test
@@ -349,12 +359,7 @@ public class UIAutomationTest extends BaseAutomationTest {
         instance.createNamePropertyCondition("ID");
     }
 
-    @Test
-    public void testCreateAutomationIdPropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
-        UIAutomation instance = UIAutomation.getInstance();
 
-        instance.createAutomationIdPropertyCondition("ID");
-    }
 
     @Test
     public void testCreateControlTypeCondition_Does_Not_Throw_Exception() throws AutomationException {
@@ -459,18 +464,6 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test(expected = AutomationException.class)
-    public void testCreateFalseCondition_Throws_Exception_When_Automation_Returns_False()
-            throws AutomationException {
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-
-        when(mocked_automation.createFalseCondition(isA(PointerByReference.class))).thenReturn(-1);
-
-        UIAutomation local_instance = new UIAutomation(mocked_automation);
-
-        local_instance.createFalseCondition();
-    }
-
-    @Test(expected = AutomationException.class)
     @Ignore("Mocking fails - needs investigation")
     public void testCreateAndCondition_Throws_Exception_When_Automation_Returns_False()
             throws AutomationException {
@@ -500,29 +493,6 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void test_GetDesktopMenu_Throws_Exception_When_Not_Found()
             throws IOException, AutomationException, PatternNotFoundException {
         UIAutomation.getInstance().getDesktopMenu("Menu");
-    }
-
-    @Test
-    public void testGetDesktopWindow_Succeeds_When_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
-        IUIAutomation mocked = Mockito.mock(IUIAutomation.class);
-
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
-
-        when(mocked.createAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(0);
-        when(mocked.createPropertyCondition(any(Integer.class), any(Variant.VARIANT.ByValue.class), any(PointerByReference.class))).thenReturn(0);
-
-        UIAutomation local_instance = Mockito.mock(UIAutomation.class);
-
-        doReturn(mockUnknown)
-                .when(local_instance)
-                .makeUnknown(any(Pointer.class));
-
-        local_instance.getDesktopWindow(getLocal("notepad.title"));
     }
 
     @Test(expected = ItemNotFoundException.class)

@@ -17,53 +17,49 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Value;
+import mmarquee.automation.controls.AutomationRibbonBar;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
  * Created by Mark Humphreys on 28/11/2016.
+ *
+ * Tests for AutomationRibbonBar.
  */
-public class AutomationDataGridCellTest {
+public class AutomationRibbonBarTest {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testValue() throws Exception {
+    public void testGetRibbonBar() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        Value value = Mockito.mock(Value.class);
 
-        when(value.value()).thenReturn("VALUE");
+        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
+        when(element.getName()).thenReturn("RIBBON-01");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        String val = cell.getValue();
+        AutomationRibbonBar bar = new AutomationRibbonBar(element, container, instance);
 
-        assertTrue(val.equals("VALUE"));
-    }
+        String name = bar.getName();
 
-    @Test
-    public void testGetCellName() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Value value = Mockito.mock(Value.class);
-
-        when(element.getName()).thenReturn("NAME");
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
-
-        String val = cell.getName();
-
-        assertTrue(val.equals("NAME"));
+        assertEquals(name, "RIBBON-01");
     }
 }

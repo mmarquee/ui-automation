@@ -16,25 +16,25 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.apache.log4j.Logger;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 03/12/2016.
- *
- * Tests for AutomationTitleBar.
+ * Created by Mark Humphreys on 25/09/2017
  */
-public class AutomationTitleBarTest {
+public class AutomationStatusBarTest2 {
+    protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
 
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -44,35 +44,39 @@ public class AutomationTitleBarTest {
     private static boolean isWindows() {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
-    @Test
-    public void testName_Returns_Name_From_Element() throws Exception {
+
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetTextBox_Throws_IndexOutOfBoundsException_When_Index_Out_Of_Bounds() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
+        ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationTitleBar ctrl = new AutomationTitleBar(element, container);
+        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
-        String name = ctrl.getName();
+        AutomationTextBox textBox = statusBar.getTextBox(0);
 
-        assertTrue(name.equals("NAME"));
+        verify(element, times(1)).findAll(any(), any());
     }
 
     @Test
-    public void testGetMenu() throws Exception {
+    public void testGetTextBox_Calls_Find_All_From_Pattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
+        ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
-        when(element.findFirst(any(), any())).thenReturn(elem);
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
 
-        AutomationTitleBar tb = new AutomationTitleBar(element, container);
+        when(element.findAll(any(), any())).thenReturn(result);
 
-        AutomationMainMenu menu = tb.getMenuBar();
+        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
-        verify(element, atLeastOnce()).findFirst(any(),any());
+        AutomationTextBox textBox = statusBar.getTextBox(0);
+
+        verify(element, times(1)).findAll(any(), any());
     }
 }

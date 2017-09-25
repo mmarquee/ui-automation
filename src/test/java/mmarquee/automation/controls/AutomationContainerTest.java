@@ -17,7 +17,9 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -32,8 +34,6 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
@@ -41,8 +41,19 @@ import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 12/01/2017.
+ *
+ * These tests currently require that they are run in a Windows environment
  */
 public class AutomationContainerTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -980,7 +991,7 @@ public class AutomationContainerTest {
         el.element = elem;
 
         when(el.findAll(any(), any())).thenReturn(list);
-        
+
         AutomationWindow wndw = new AutomationWindow(el, window, container);
         AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
         assertEquals(targetElement,ribbonBar.element);

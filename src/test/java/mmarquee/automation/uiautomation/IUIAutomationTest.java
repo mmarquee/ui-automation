@@ -21,20 +21,30 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.WindowsOnlyTests;
 import org.apache.log4j.Logger;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
  * Created by Mark Humphreys on 13/10/2016.
+ *
+ * Currently all of these tests require to run on Windows.
  */
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 

@@ -23,9 +23,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -45,11 +43,21 @@ import static org.mockito.Mockito.when;
  * Created by Mark Humphreys on 18/10/2016.
  *
  * Tests of the IUIAutomationElement interface.
+ *
+ * Currently all of these tests require to run on Windows.
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({IUIAutomationElementConverter.class})
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationElementTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     private Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
@@ -296,6 +304,7 @@ public class IUIAutomationElementTest {
     }
 
     @Test
+    @Ignore("Should probably be mocked")
     public void testGetControlTypeForNonRootElement() throws Exception {
         IUIAutomationElement root = this.getChildOfRootElement();
 

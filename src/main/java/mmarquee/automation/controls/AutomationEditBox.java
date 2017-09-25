@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Value;
@@ -114,9 +115,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
      * Constructor for the AutomationEditBox
      * @param element The underlying element
      * @param value The Value pattern
+     * @param instance Automation instance
      */
-    public AutomationEditBox(AutomationElement element, Value value) {
-        super(element);
+    AutomationEditBox(AutomationElement element, Value value, UIAutomation instance) {
+        super(element, instance);
         this.valuePattern = value;
     }
 }

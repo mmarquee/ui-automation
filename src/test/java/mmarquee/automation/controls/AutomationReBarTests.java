@@ -17,70 +17,68 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Range;
+import mmarquee.automation.controls.AutomationReBar;
+import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 01/12/2016.
+ * Created by Mark Humphreys on 31/05/2017.
+ *
+ * Basic tests for ReBar.
  */
-public class AutomationProgressBarTest {
+public class AutomationReBarTests {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testName_Gets_Name_From_Element() throws Exception {
+    public void testName_Is_Returned_From_The_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        Range range = Mockito.mock(Range.class);
 
-        when(element.getName()).thenReturn("NAME");
+        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
+        when(element.getName()).thenReturn("REBAR-01");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        String name = bar.getName();
+        AutomationReBar pane = new AutomationReBar(element, container, instance);
 
-        assertTrue(name.equals("NAME"));
+        String name = pane.getName();
+
+        assertEquals("REBAR-01", name);
     }
 
     @Test
-    public void testGetRangeValue_Gets_Value_From_Pattern() throws Exception {
+    public void testName_Is_Returned_From_The_Element_Alternative_Constructor() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        Range range = Mockito.mock(Range.class);
 
-        when(range.getValue()).thenReturn(99.9);
+        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
+        when(element.getName()).thenReturn("REBAR-01");
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
+        AutomationReBar pane = new AutomationReBar(element, container, instance);
 
-        double value = bar.getRangeValue();
+        String name = pane.getName();
 
-        assertTrue(value == 99.9);
-    }
-
-    @Test
-    public void testSetRangeValue_Throws_Exception() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Range range = Mockito.mock(Range.class);
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
-
-        bar.setRangeValue(18.99);
-
-        verify(range, atLeast(1)).setValue(18.99);
+        assertEquals("REBAR-01", name);
     }
 }

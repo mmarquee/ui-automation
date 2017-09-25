@@ -15,11 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
@@ -60,6 +56,24 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
     AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection)
             throws PatternNotFoundException, AutomationException {
         super (element);
+
+        this.collapsePattern = collapse;
+        this.valuePattern = value;
+        this.selectionPattern = selection;
+    }
+
+    /**
+     * Constructor for the AutomationComboBox.
+     * @param element The underlying automation element
+     * @param collapse The collapse pattern
+     * @param value The value pattern
+     * @param instance The automation instance
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern(s) not found
+     */
+    AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection, UIAutomation instance)
+            throws PatternNotFoundException, AutomationException {
+        super (element, instance);
 
         this.collapsePattern = collapse;
         this.valuePattern = value;

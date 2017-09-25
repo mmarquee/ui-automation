@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -49,6 +50,17 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
      */
     public AutomationCalendar(AutomationElement element, Value pattern) {
         super(element);
+        this.valuePattern = pattern;
+    }
+
+    /**
+     * Constructor for the AutomationCalendar.
+     * @param element The underlying automation element
+     * @param pattern Value pattern
+     * @param instance the automation instance
+     */
+    public AutomationCalendar(AutomationElement element, Value pattern, UIAutomation instance) {
+        super(element, instance);
         this.valuePattern = pattern;
     }
 

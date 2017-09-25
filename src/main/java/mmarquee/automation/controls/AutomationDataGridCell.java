@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.*;
 
 /**
@@ -45,11 +46,12 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * Construct the AutomationDataGridCell
      * @param element The element
      * @param value The Value pattern
+     * @param instance Automation instance
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    AutomationDataGridCell(AutomationElement element, Value value) throws PatternNotFoundException, AutomationException {
-        super(element);
+    AutomationDataGridCell(AutomationElement element, Value value, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, instance);
         this.valuePattern = value;
     }
 

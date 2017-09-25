@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
@@ -46,11 +47,12 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      * @param element The element
      * @param container ItemContainer pattern
      * @param value The Value pattern to use
+     * @param instance The automation instance
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationCustom (AutomationElement element, ItemContainer container, Value value) throws PatternNotFoundException, AutomationException {
-        super(element, container);
+    AutomationCustom (AutomationElement element, ItemContainer container, Value value, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, container, instance);
 
         this.valuePattern = value;
     }

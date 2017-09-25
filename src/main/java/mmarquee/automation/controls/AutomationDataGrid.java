@@ -21,10 +21,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.*;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
@@ -64,10 +61,11 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
      * @param value Value pattern
      * @param grid Grid pattern
      * @param table Table pattern
+     * @param instance Automation instance
      * @param selection Selection pattern
      */
-    public AutomationDataGrid(AutomationElement element, Value value, Grid grid, Table table, Selection selection) {
-        super(element);
+    AutomationDataGrid(AutomationElement element, Value value, Grid grid, Table table, Selection selection, UIAutomation instance) {
+        super(element, instance);
 
         this.valuePattern = value;
         this.gridPattern = grid;

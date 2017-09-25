@@ -16,10 +16,7 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -50,9 +47,10 @@ public class AutomationDocument extends AutomationBase {
      * Constructor for the AutomationDocument
      * @param element The underlying automation element
      * @param pattern The Text pattern
+     * @param instance Automation instance
      */
-    public AutomationDocument(AutomationElement element, Text pattern) {
-        super(element);
+    AutomationDocument(AutomationElement element, Text pattern, UIAutomation instance) {
+        super(element, instance);
         this.textPattern = pattern;
     }
 

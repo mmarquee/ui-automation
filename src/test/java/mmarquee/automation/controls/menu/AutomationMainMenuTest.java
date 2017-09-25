@@ -28,9 +28,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -53,6 +51,14 @@ import mmarquee.automation.uiautomation.TreeScope;
  * Tests for MainMenu.
  */
 public class AutomationMainMenuTest extends BaseAutomationTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     @Mock private AutomationElement element;
 	@Mock private AutomationElement parent;

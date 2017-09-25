@@ -16,9 +16,12 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -44,45 +47,13 @@ public class AutomationStatusBarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern, instance);
 
         String name = statusBar.getName();
 
         assertTrue(name.equals("NAME"));
-    }
-
-    @Test(expected=IndexOutOfBoundsException.class)
-    public void testGetTextBox_Throws_IndexOutOfBoundsException_When_Index_Out_Of_Bounds() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer pattern = Mockito.mock(ItemContainer.class);
-
-        when(element.getName()).thenReturn("NAME");
-
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
-
-        AutomationTextBox textBox = statusBar.getTextBox(0);
-
-        verify(element, times(1)).findAll(any(), any());
-    }
-
-    @Test
-    public void testGetTextBox_Calls_Find_All_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer pattern = Mockito.mock(ItemContainer.class);
-
-        when(element.getName()).thenReturn("NAME");
-
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
-
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
-
-        when(element.findAll(any(), any())).thenReturn(result);
-
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
-
-        AutomationTextBox textBox = statusBar.getTextBox(0);
-
-        verify(element, times(1)).findAll(any(), any());
     }
 }

@@ -21,13 +21,7 @@ import java.util.List;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -64,6 +58,20 @@ public class AutomationContainer extends AutomationBase {
      */
     AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
         super(element);
+        itemContainerPattern = pattern;
+    }
+
+    /**
+     * Constructor for AutomationContainer
+     *
+     * @param element The underlying element
+     * @param pattern The ItemContainer pattern
+     * @param instance The automation instance
+     * @throws AutomationException Something is wrong in automation
+     * @throws PatternNotFoundException Could not find pattern
+     */
+    AutomationContainer(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, instance);
         itemContainerPattern = pattern;
     }
 

@@ -20,7 +20,9 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.apache.log4j.Logger;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -34,12 +36,6 @@ import mmarquee.automation.PropertyID;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.AutomationNUIPane;
-import mmarquee.automation.controls.ribbon.AutomationNetUIHWND;
-import mmarquee.automation.controls.ribbon.AutomationRibbonBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonCommandBar;
-import mmarquee.automation.controls.ribbon.AutomationRibbonWorkPane;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 
@@ -49,6 +45,16 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3;
  * Tests for AutomationBase class
  */
 public class AutomationControlFactoryTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+
     protected Logger logger = Logger.getLogger(AutomationControlFactoryTest.class.getName());
 	
     private AutomationBase parent;

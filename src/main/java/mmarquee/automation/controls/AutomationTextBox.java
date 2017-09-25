@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
@@ -44,10 +45,11 @@ public class AutomationTextBox extends AutomationBase implements Valueable {
      * Construct the AutomationTextBox
      * @param element The element
      * @param value The value pattern
+     * @param instance Automation instance
      * @throws AutomationException Automation library error
      */
-    AutomationTextBox(AutomationElement element, Value value) throws AutomationException {
-        super(element);
+    AutomationTextBox(AutomationElement element, Value value, UIAutomation instance) throws AutomationException {
+        super(element, instance);
         this.valuePattern = value;
     }
 

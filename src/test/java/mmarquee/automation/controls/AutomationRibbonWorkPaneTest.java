@@ -16,54 +16,50 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import org.junit.Test;
-import org.mockito.Mockito;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationRibbonWorkPane;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * Created by Mark Humphreys on 01/12/2016.
+ *
+ * Tests for RibbonWorkPane controls
  */
-public class AutomationDataGridCellTest {
+public class AutomationRibbonWorkPaneTest {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testValue() throws Exception {
+    public void testName() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        Value value = Mockito.mock(Value.class);
-
-        when(value.value()).thenReturn("VALUE");
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
-
-        String val = cell.getValue();
-
-        assertTrue(val.equals("VALUE"));
-    }
-
-    @Test
-    public void testGetCellName() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        Value value = Mockito.mock(Value.class);
-
+        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
+        ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        String val = cell.getName();
+        AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(element, container, instance);
 
-        assertTrue(val.equals("NAME"));
+        String name = pane.getName();
+
+        assertTrue(name.equals("NAME"));
     }
 }

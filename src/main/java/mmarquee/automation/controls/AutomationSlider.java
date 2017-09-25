@@ -3,6 +3,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
@@ -33,12 +34,13 @@ public class AutomationSlider extends AutomationBase {
      * Construct the AutomationSlider
      * @param element The element
      * @param pattern The range pattern
+     * @param instance Automation instance
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation library error
      */
-    public AutomationSlider(AutomationElement element, Range pattern)
+    public AutomationSlider(AutomationElement element, Range pattern, UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(element, instance);
         this.rangePattern = pattern;
     }
 

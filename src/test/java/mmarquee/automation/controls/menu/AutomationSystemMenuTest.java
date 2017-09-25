@@ -29,7 +29,9 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -45,6 +47,15 @@ import java.util.List;
  * Tests for SystemMenu automation.
  */
 public class AutomationSystemMenuTest extends BaseAutomationTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     @Before
     public void setup() {

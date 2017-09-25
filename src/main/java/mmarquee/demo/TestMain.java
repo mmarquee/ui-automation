@@ -148,7 +148,7 @@ public class TestMain extends TestBase {
 
                 this.rest();
 
-                List<AutomationListItem> litems = cb0.getList();
+                List<AutomationListItem> litems = cb0.getItems();
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find combobox");
             }

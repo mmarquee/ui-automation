@@ -3,6 +3,8 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -15,6 +17,14 @@ import static org.mockito.Mockito.when;
  */
 public class AutomationTreeViewTest {
 
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }

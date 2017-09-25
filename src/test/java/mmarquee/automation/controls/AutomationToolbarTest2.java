@@ -16,25 +16,27 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 03/12/2016.
- *
- * Tests for AutomationTitleBar.
+ * Created by Mark Humphreys on 01/12/2016.
  */
-public class AutomationTitleBarTest {
+public class AutomationToolbarTest2 {
+
+    static {
+        ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
 
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -44,35 +46,38 @@ public class AutomationTitleBarTest {
     private static boolean isWindows() {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
+
     @Test
-    public void testName_Returns_Name_From_Element() throws Exception {
+    public void testGetToolbarButton_Gets_Button_When_Within_Bounds() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.getName()).thenReturn("NAME");
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
-        AutomationTitleBar ctrl = new AutomationTitleBar(element, container);
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
 
-        String name = ctrl.getName();
+        when(element.findAll(any(), any())).thenReturn(result);
 
-        assertTrue(name.equals("NAME"));
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+
+        ctrl.getToolbarButton(0);
     }
 
-    @Test
-    public void testGetMenu() throws Exception {
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetToolbarButton_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        when(element.getName()).thenReturn("NAME");
+        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
 
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        List<AutomationElement> result = new ArrayList<>();
+        result.add(new AutomationElement(listElement));
 
-        when(element.findFirst(any(), any())).thenReturn(elem);
+        when(element.findAll(any(), any())).thenReturn(result);
 
-        AutomationTitleBar tb = new AutomationTitleBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        AutomationMainMenu menu = tb.getMenuBar();
-
-        verify(element, atLeastOnce()).findFirst(any(),any());
+        ctrl.getToolbarButton(1);
     }
 }

@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
@@ -47,9 +48,10 @@ public class AutomationProgressBar extends AutomationBase {
      * Construct the AutomationPanel
      * @param element The element
      * @param range Range pattern
+     * @param instance Automation instance
      */
-    public AutomationProgressBar(AutomationElement element, Range range) {
-        super(element);
+    public AutomationProgressBar(AutomationElement element, Range range, UIAutomation instance) {
+        super(element, instance);
 
         this.rangePattern = range;
     }
