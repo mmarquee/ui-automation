@@ -16,9 +16,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -28,7 +26,6 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -50,7 +47,6 @@ public class AutomationToolbarTest2 {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-
     @Test
     public void testGetToolbarButton_Gets_Button_When_Within_Bounds() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
@@ -63,11 +59,7 @@ public class AutomationToolbarTest2 {
 
         when(element.findAll(any(), any())).thenReturn(result);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationToolBar ctrl = new AutomationToolBar(element, container, instance);
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
         AutomationToolBarButton btn = ctrl.getToolbarButton(0);
     }
@@ -84,11 +76,7 @@ public class AutomationToolbarTest2 {
 
         when(element.findAll(any(), any())).thenReturn(result);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationToolBar ctrl = new AutomationToolBar(element, container, instance);
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
         AutomationToolBarButton btn = ctrl.getToolbarButton(1);
     }
