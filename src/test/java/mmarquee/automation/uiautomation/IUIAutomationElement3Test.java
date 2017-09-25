@@ -24,7 +24,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 import org.junit.*;
-import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
@@ -50,7 +49,7 @@ public class IUIAutomationElement3Test {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    private Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -93,7 +92,7 @@ public class IUIAutomationElement3Test {
 
             PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
+            uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
             return IUIAutomationElement3Converter.PointerToInterface(element);
         } else {
@@ -385,7 +384,7 @@ public class IUIAutomationElement3Test {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
         IUIAutomationElement3 elem = IUIAutomationElement3Converter.PointerToInterface(element);
 
@@ -415,7 +414,7 @@ public class IUIAutomationElement3Test {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
         IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
 
@@ -439,7 +438,7 @@ public class IUIAutomationElement3Test {
 
         PointerByReference element = new PointerByReference();
 
-        WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
+        uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
         IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
 
