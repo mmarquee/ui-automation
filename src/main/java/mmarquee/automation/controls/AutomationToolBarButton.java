@@ -31,35 +31,37 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public class AutomationToolBarButton extends AutomationBase implements Clickable {
 
     /**
-     * Constructor for the AutomationToolBarButton
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
+     * Constructor for the AutomationToolBarButton.
+     * @param element The underlying automation element.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationToolBarButton(AutomationElement element)
+    public AutomationToolBarButton(final AutomationElement element)
             throws AutomationException {
         super (element);
     }
 
     /**
-     * Constructor for the AutomationToolBarButton
-     * @param element The underlying automation element
-     * @param invoke The Invoke pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException  Ppatern not found
+     * Constructor for the AutomationToolBarButton.
+     * @param element The underlying automation element.
+     * @param invoke The Invoke pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    AutomationToolBarButton(AutomationElement element, Invoke invoke)
+    AutomationToolBarButton(final AutomationElement element,
+                            final Invoke invoke)
             throws AutomationException, PatternNotFoundException {
         super (element, invoke);
     }
 
     /**
      * <p>
-     * Invokes the click event for this control
+     * Invokes the click event for this control.
      * </p>
      * <p>
-     * Actually manufactures the click, as the toolbar buttons do not seem behave properly
+     * Actually manufactures the click, as the toolbar buttons do
+     * not seem behave properly
      * </p>
-     * @throws AutomationException Automation library error
+     * @throws AutomationException Automation library error.
      */
     public void click() throws AutomationException {
         WinDef.POINT point = this.element.getClickablePoint();

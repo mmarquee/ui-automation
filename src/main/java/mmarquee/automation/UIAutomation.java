@@ -59,7 +59,7 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param automation The automation object to use.
      */
-    public UIAutomation(IUIAutomation automation) {
+    public UIAutomation(final IUIAutomation automation) {
         this.automation = automation;
     }
 
@@ -103,7 +103,7 @@ public class UIAutomation extends BaseAutomation {
      * @param element Pointer to the element.
      * @return Error status.
      */
-    public int getRootElement(PointerByReference element) {
+    public int getRootElement(final PointerByReference element) {
         return this.automation.getRootElement(element);
     }
 
@@ -115,7 +115,9 @@ public class UIAutomation extends BaseAutomation {
      * @param same     Are they the same.
      * @return Error status.
      */
-    public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
+    public int compareElements(final Pointer element1,
+                               final Pointer element2,
+                               final IntByReference same) {
         return this.automation.compareElements(element1, element2, same);
     }
 
@@ -140,7 +142,8 @@ public class UIAutomation extends BaseAutomation {
      * @throws java.io.IOException Cannot start application?
      * @throws AutomationException Automation library error.
      */
-    public AutomationApplication launch(String... command) throws java.io.IOException, AutomationException {
+    public AutomationApplication launch(final String... command)
+            throws java.io.IOException, AutomationException {
         Process process = Utils.startProcess(command);
         return new AutomationApplication(rootElement, process, false);
     }
@@ -153,7 +156,8 @@ public class UIAutomation extends BaseAutomation {
      * @throws java.io.IOException Cannot start application?
      * @throws AutomationException Automation library error.
      */
-    public AutomationApplication launchWithDirectory(String... command) throws java.io.IOException, AutomationException {
+    public AutomationApplication launchWithDirectory(final String... command)
+            throws java.io.IOException, AutomationException {
         Process process = Utils.startProcessWithWorkingDirectory(command);
         return new AutomationApplication(rootElement, process, false);
     }
@@ -165,7 +169,8 @@ public class UIAutomation extends BaseAutomation {
      * @return AutomationApplication that represents the application.
      * @throws AutomationException Automation library error.
      */
-    public AutomationApplication attach(Process process) throws AutomationException {
+    public AutomationApplication attach(final Process process)
+            throws AutomationException {
         return new AutomationApplication(rootElement, process, true);
     }
 
@@ -176,7 +181,8 @@ public class UIAutomation extends BaseAutomation {
      * @return AutomationApplication that represents the application.
      * @throws java.lang.Exception Unable to find process.
      */
-    public AutomationApplication launchOrAttach(String... command) throws Exception {
+    public AutomationApplication launchOrAttach(final String... command)
+            throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
 
@@ -197,7 +203,8 @@ public class UIAutomation extends BaseAutomation {
      * @return AutomationApplication that represents the application.
      * @throws java.lang.Exception Unable to find process.
      */
-    public AutomationApplication launchWithWorkingDirectoryOrAttach(String... command) throws Exception {
+    public AutomationApplication launchWithWorkingDirectoryOrAttach(final String... command)
+            throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
 
@@ -218,7 +225,9 @@ public class UIAutomation extends BaseAutomation {
      * @return AutomationWindow The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
-    private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
+    private AutomationElement get(final ControlType controlType,
+                                  final String title,
+                                  final int numberOfRetries)
             throws AutomationException {
         AutomationElement element = null;
 
@@ -273,7 +282,7 @@ public class UIAutomation extends BaseAutomation {
      * @throws ElementNotFoundException Element is not found.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow getDesktopWindow(String title)
+    public AutomationWindow getDesktopWindow(final String title)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.get(ControlType.Window, title, FIND_DESKTOP_ATTEMPTS));
     }
@@ -288,7 +297,7 @@ public class UIAutomation extends BaseAutomation {
      * @throws ElementNotFoundException Element is not found.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow getDesktopWindow(String title, int retries)
+    public AutomationWindow getDesktopWindow(final String title, final int retries)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.get(ControlType.Window, title, retries));
     }
@@ -301,7 +310,9 @@ public class UIAutomation extends BaseAutomation {
      * @return The new condition.
      * @throws AutomationException Something is wrong.
      */
-    public PointerByReference createAndCondition(PointerByReference pCondition1, PointerByReference pCondition2) throws AutomationException {
+    public PointerByReference createAndCondition(final PointerByReference pCondition1,
+                                                 final PointerByReference pCondition2)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.automation.createAndCondition(pCondition1.getValue(), pCondition2.getValue(), pbr);
@@ -320,7 +331,9 @@ public class UIAutomation extends BaseAutomation {
      * @return The new condition.
      * @throws AutomationException Something is wrong.
      */
-    public PointerByReference createOrCondition(PointerByReference pCondition1, PointerByReference pCondition2) throws AutomationException {
+    public PointerByReference createOrCondition(final PointerByReference pCondition1,
+                                                final PointerByReference pCondition2)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.automation.createOrCondition(pCondition1.getValue(), pCondition2.getValue(), pbr);
@@ -338,7 +351,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-    public PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
+    public PointerByReference createControlTypeCondition(final ControlType id)
+            throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id.getValue());
 
@@ -352,7 +366,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-    public PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
+    public PointerByReference createAutomationIdPropertyCondition(final String automationId)
+            throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
@@ -371,7 +386,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-    public PointerByReference createNamePropertyCondition(String name) throws AutomationException {
+    public PointerByReference createNamePropertyCondition(final String name)
+            throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
@@ -391,7 +407,9 @@ public class UIAutomation extends BaseAutomation {
      * @return The nre condition.
      * @throws AutomationException Something has gone wrong.
      */
-    public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
+    public PointerByReference createPropertyCondition(final int id,
+                                                      final Variant.VARIANT.ByValue value)
+            throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
         final int res = this.automation.createPropertyCondition(id, value, pCondition);
@@ -430,7 +448,7 @@ public class UIAutomation extends BaseAutomation {
      * @throws ElementNotFoundException Element is not found.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationPanel getDesktopObject(String title)
+    public AutomationPanel getDesktopObject(final String title)
             throws PatternNotFoundException, AutomationException {
         return new AutomationPanel(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
     }
@@ -442,7 +460,8 @@ public class UIAutomation extends BaseAutomation {
      * @return AutomationMenu The found menu.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationMenu getDesktopMenu(String title) throws AutomationException {
+    public AutomationMenu getDesktopMenu(final String title)
+            throws AutomationException {
         AutomationElement element = null;
 
         // Look for a specific title
@@ -518,7 +537,8 @@ public class UIAutomation extends BaseAutomation {
         return result;
     }
 
-	private List<AutomationElement> getRootChildren(ControlType controlType) throws AutomationException {
+	private List<AutomationElement> getRootChildren(final ControlType controlType)
+            throws AutomationException {
         PointerByReference pCondition = this.createControlTypeCondition(controlType);
 
         List<AutomationElement> collection =
@@ -532,7 +552,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something has gone wrong.
      */
-    public PointerByReference createTrueCondition() throws AutomationException {
+    public PointerByReference createTrueCondition()
+            throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
 
         final int res = this.automation.createTrueCondition(pTrueCondition);
@@ -549,7 +570,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something has gone wrong.
      */
-    public PointerByReference createFalseCondition() throws AutomationException {
+    public PointerByReference createFalseCondition()
+            throws AutomationException {
         PointerByReference condition = new PointerByReference();
 
         final int res = this.automation.createFalseCondition(condition);
@@ -567,7 +589,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The new condition.
      * @throws AutomationException Something is wrong.
      */
-    public PointerByReference createNotCondition(PointerByReference condition) throws AutomationException {
+    public PointerByReference createNotCondition(final PointerByReference condition)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.automation.createNotCondition(condition.getValue(), pbr);
@@ -584,7 +607,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The actual element under the tag.
      * @throws AutomationException The automation library returned an error
      */
-    public AutomationElement getElementFromPoint(WinDef.POINT pt) throws AutomationException {
+    public AutomationElement getElementFromPoint(final WinDef.POINT pt)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.automation.elementFromPoint(pt, pbr);
@@ -604,7 +628,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The actual element under the handle.
      * @throws AutomationException The automation library returned an error.
      */
-    public AutomationElement getElementFromHandle(WinDef.HWND hwnd) throws AutomationException {
+    public AutomationElement getElementFromHandle(final WinDef.HWND hwnd)
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.automation.getElementFromHandle(hwnd, pbr);
@@ -622,7 +647,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The focused element.
      * @throws AutomationException Automation returned an error.
      */
-    public AutomationElement getFocusedElement() throws AutomationException {
+    public AutomationElement getFocusedElement()
+            throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.automation.getFocusedElement(pbr);
@@ -651,7 +677,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The Application.
      * @throws AutomationException If findProcessEntry throws an exception.
      */
-    public AutomationApplication findProcess(String... command) throws AutomationException {
+    public AutomationApplication findProcess(final String... command)
+            throws AutomationException {
 
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
             new Tlhelp32.PROCESSENTRY32.ByReference();
@@ -671,7 +698,8 @@ public class UIAutomation extends BaseAutomation {
      * @return The tree walker object.
      * @throws AutomationException if something goes wrong.
      */
-    public AutomationTreeWalker getControlViewWalker() throws AutomationException {
+    public AutomationTreeWalker getControlViewWalker()
+            throws AutomationException {
         PointerByReference pbrWalker = new PointerByReference();
 
         this.automation.getControlViewWalker(pbrWalker);

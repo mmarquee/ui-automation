@@ -36,8 +36,8 @@ public class Ole32Wrapper {
     private Unknown unknown = null;
 
     /**
-     * Gets the Unknown value of the Ole32 library
-     * @return Unknown the Unknown representation of the Ole32 instance
+     * Gets the Unknown value of the Ole32 library.
+     * @return Unknown the Unknown representation of the Ole32 instance.
      */
     public Unknown getUnknown() {
         return unknown;

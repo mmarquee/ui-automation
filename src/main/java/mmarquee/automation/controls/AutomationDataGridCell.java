@@ -18,7 +18,11 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.*;
+import mmarquee.automation.pattern.GridItem;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Created by Mark Humphreys on 04/02/2016.
@@ -27,9 +31,24 @@ import mmarquee.automation.pattern.*;
  */
 public class AutomationDataGridCell extends AutomationBase implements Valueable {
 
+    /**
+     * The value pattern.
+     */
     private Value valuePattern;
+
+    /**
+     * The gridItem pattern.
+     */
     private GridItem gridItemPattern;
+
+    /**
+     * The selectionItem pattern.
+     */
     private SelectionItem selectionItemPattern;
+
+    /**
+     * The invoke pattern.
+     */
     private Invoke invokePattern;
 
     /**
@@ -56,14 +75,14 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     }
 
     /**
-     /**
-     * Construct the AutomationDataGridCell
-     * @param element The element
-     * @param value The Value pattern
-     * @param grid The GridItem pattern
-     * @param selectionItem The SelectionItem pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationDataGridCell.
+     *
+     * @param element The element.
+     * @param value The Value pattern.
+     * @param grid The GridItem pattern.
+     * @param selectionItem The SelectionItem pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     AutomationDataGridCell(AutomationElement element, Value value, GridItem grid, SelectionItem selectionItem) throws PatternNotFoundException, AutomationException {
         super(element);
@@ -73,10 +92,10 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     }
 
     /**
-     * Gets the text associated with this element
-     * @return The current value
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Gets the text associated with this element.
+     * @return The current value.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -94,15 +113,21 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
         }
     }
 
+    /**
+     * Calls the invoke on the cell.
+     *
+     * @throws AutomationException Something went wrong in automation.
+     * @throws PatternNotFoundException Didn't find the pattern.
+     */
     public void invoke() throws AutomationException, PatternNotFoundException {
         super.invoke();
     }
 
     /**
-     * Sets the text associated with this element
-     * @param value The value to set
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Sets the text associated with this element.
+     * @param value The value to set.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void setValue(String value) throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -113,10 +138,10 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     }
 
     /**
-     * Gets the current row for this element
-     * @return The row
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Gets the current row for this element.
+     * @return The row.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public int getRow() throws AutomationException, PatternNotFoundException {
         if (this.gridItemPattern == null) {
@@ -127,10 +152,10 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     }
 
     /**
-     * Gets the current column for this element
-     * @return The column
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Gets the current column for this element.
+     * @return The column.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public int getColumn() throws AutomationException, PatternNotFoundException {
         if (this.gridItemPattern == null) {
@@ -141,9 +166,9 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     }
 
     /**
-     * Selects the cell
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Selects the cell.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void select() throws AutomationException, PatternNotFoundException {
         if (this.selectionItemPattern == null) {
@@ -155,8 +180,8 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
 
     /**
      * Adds to the selection.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void addToSelection() throws AutomationException, PatternNotFoundException {
         if (this.selectionItemPattern == null) {
@@ -168,8 +193,8 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
 
     /**
      * Removes the cell from the selection.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void removeFromSelection() throws AutomationException, PatternNotFoundException {
         if (this.selectionItemPattern == null) {

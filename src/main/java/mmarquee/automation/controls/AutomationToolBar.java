@@ -32,46 +32,53 @@ public class AutomationToolBar extends AutomationContainer {
     /**
      * Constructor for the AutomationToolBar.
      *
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Could not find pattern
+     * @param element The underlying automation element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationToolBar(AutomationElement element) throws AutomationException, PatternNotFoundException {
+    public AutomationToolBar(final AutomationElement element)
+            throws AutomationException, PatternNotFoundException {
         super(element);
     }
 
     /**
      * Constructor for the AutomationToolBar.
      *
-     * @param element The underlying automation element
-     * @param container The ItemContainer pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Could not find pattern
+     * @param element The underlying automation element.
+     * @param container The ItemContainer pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationToolBar(AutomationElement element, ItemContainer container) throws AutomationException, PatternNotFoundException {
+    public AutomationToolBar(final AutomationElement element,
+                             final ItemContainer container)
+            throws AutomationException, PatternNotFoundException {
         super(element, container);
     }
 
     /**
      * Constructor for the AutomationToolBar.
      *
-     * @param element The underlying automation element
-     * @param container The ItemContainer pattern
-     * @param instance The automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Could not find pattern
+     * @param element The underlying automation element.
+     * @param container The ItemContainer pattern.
+     * @param instance The automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationToolBar(AutomationElement element, ItemContainer container, UIAutomation instance) throws AutomationException, PatternNotFoundException {
+    public AutomationToolBar(final AutomationElement element,
+                             final ItemContainer container,
+                             final UIAutomation instance)
+            throws AutomationException, PatternNotFoundException {
         super(element, container, instance);
     }
 
     /**
-     * Gets the button control associated with the given index
-     * @param index The index of the button
-     * @return The AutomationButton
-     * @throws AutomationException Something has gone wrong
+     * Gets the button control associated with the given index.
+     * @param index The index of the button.
+     * @return The AutomationButton.
+     * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(int index) throws AutomationException {
+    public AutomationToolBarButton getToolbarButton(final int index)
+            throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(index, ControlType.Button));
     }
 }

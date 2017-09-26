@@ -20,7 +20,11 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.*;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.ItemContainer;
@@ -38,8 +42,14 @@ import java.util.List;
  * Currently all of these tests require to run on Windows.
  */
 public class AutomationWindow extends AutomationContainer implements Focusable {
+    /**
+     * The window pattern.
+     */
     private Window windowPattern;
 
+    /**
+     * The user32 instance.
+     */
     private User32 user32;
 
     /**
@@ -50,10 +60,10 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Constructor for the AutomationWindow
-     * @param element The underlying element
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationWindow.
+     * @param element The underlying element.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow (AutomationElement element)
             throws PatternNotFoundException, AutomationException {
@@ -64,13 +74,13 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Constructor for the AutomationWindow
-     * @param element The underlying element
-     * @param window The Window pattern
-     * @param container The Container pattern
-     * @param instance Automation instance
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationWindow.
+     * @param element The underlying element.
+     * @param window The Window pattern.
+     * @param container The Container pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     AutomationWindow (AutomationElement element, Window window, ItemContainer container, UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
@@ -81,12 +91,12 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Constructor for the AutomationWindow
-     * @param element The underlying element
-     * @param window The Window pattern
-     * @param container The Container pattern
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationWindow.
+     * @param element The underlying element.
+     * @param window The Window pattern.
+     * @param container The Container pattern.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     AutomationWindow (AutomationElement element, Window window, ItemContainer container)
             throws PatternNotFoundException, AutomationException {
@@ -97,13 +107,13 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Constructor for the AutomationWindow
-     * @param element The underlying element
-     * @param window The Window pattern
-     * @param container The Container pattern
-     * @param user32 The user32 instance
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationWindow.
+     * @param element The underlying element.
+     * @param window The Window pattern.
+     * @param container The Container pattern.
+     * @param user32 The user32 instance.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow (AutomationElement element, Window window, ItemContainer container, User32 user32)
             throws PatternNotFoundException, AutomationException {
@@ -114,10 +124,10 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Gets the status bar associated with this window
-     * @return The status bar
-     * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Did not find the pattern
+     * Gets the status bar associated with this window.
+     * @return The status bar.
+     * @throws AutomationException Automation issue.
+     * @throws PatternNotFoundException Did not find the pattern.
      */
     public AutomationStatusBar getStatusBar() throws AutomationException, PatternNotFoundException {
         PointerByReference condition = this.createTrueCondition();
@@ -139,10 +149,10 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Gets the system menu associated with this window
-     * @return The system menu
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Gets the system menu associated with this window.
+     * @return The system menu.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationSystemMenu getSystemMenu() throws PatternNotFoundException, AutomationException {
         return (new AutomationSystemMenu(this.getElementByControlType(0, ControlType.MenuBar)));
@@ -151,8 +161,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Gets the main menu associated with this window.
      *
-     * @return The main menu
-     * @throws AutomationException Something has gone wrong
+     * @return The main menu.
+     * @throws AutomationException Something has gone wrong.
      */
     public AutomationMainMenu getMainMenu() throws AutomationException {
         return getMainMenu(1);
@@ -161,9 +171,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Gets the main menu associated with this window.
      *
-     * @param offset The menu offset to get
-     * @return The main menu
-     * @throws AutomationException Something has gone wrong
+     * @param offset The menu offset to get.
+     * @return The main menu.
+     * @throws AutomationException Something has gone wrong.
      */
     public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
         return (new AutomationMainMenu(this.element, this.getElementByControlType(offset, ControlType.MenuBar)));
@@ -171,9 +181,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
 
     /**
      * Gets the menu associated with this window.
-     * @param index Index of the menu
-     * @return The menu
-     * @throws AutomationException Something has gone wrong
+     * @param index Index of the menu.
+     * @return The menu.
+     * @throws AutomationException Something has gone wrong.
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
         return (new AutomationMainMenu(this.element, this.getElementByControlType(0, ControlType.Menu)));
@@ -194,9 +204,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Maximize the window
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Maximize the window.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public void maximize() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -207,9 +217,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Minimize the window
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Minimize the window.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public void minimize() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -220,11 +230,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Finds the child window with the given title
-     * @param title Title to search for
-     * @return The child window
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Finds the child window with the given title.
+     * @param title Title to search for.
+     * @return The child window.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getWindow(String title) throws PatternNotFoundException, AutomationException {
         AutomationElement item = null;
@@ -261,10 +271,10 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Whether this window is modal
-     * @return True if modal
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Whether this window is modal.
+     * @return True if modal.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public boolean isModal() throws AutomationException, PatternNotFoundException {
         if (this.windowPattern == null) {
@@ -289,20 +299,20 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Get the AutomationTitleBar associated with the given name
-     * @return The AutomationTitleBar
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Get the AutomationTitleBar associated with the given name.
+     * @return The AutomationTitleBar.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationTitleBar getTitleBar() throws AutomationException, PatternNotFoundException {
         return new AutomationTitleBar(this.getElementByControlType(0, ControlType.TitleBar));
     }
 
     /**
-     * Sets transparency of the window
-     * @param alpha 0..255 alpha attribute
-     * @throws Win32Exception WIN32 call has failed
-     * @throws AutomationException Something is wrong in automation
+     * Sets transparency of the window.
+     * @param alpha 0..255 alpha attribute.
+     * @throws Win32Exception WIN32 call has failed.
+     * @throws AutomationException Something is wrong in automation.
      */
     public void setTransparency(int alpha) throws Win32Exception, AutomationException {
         WinDef.HWND hwnd = this.getNativeWindowHandle();

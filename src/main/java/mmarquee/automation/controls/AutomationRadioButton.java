@@ -30,29 +30,36 @@ import mmarquee.automation.pattern.SelectionItem;
  */
 public class AutomationRadioButton extends AutomationBase implements Selectable {
 
+    /**
+     * The selection item pattern.
+     */
     private SelectionItem selectItemPattern;
 
     /**
-     * Construct the AutomationRadioButton
-     * @param element The element
-     * @param selection The item selection pattern
-     * @param instance Automation instance
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation library error
+     * Construct the AutomationRadioButton.
+     *
+     * @param element The element.
+     * @param selection The item selection pattern.
+     * @param instance Automation instance.
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws AutomationException Automation library error.
      */
-    AutomationRadioButton(AutomationElement element, SelectionItem selection, UIAutomation instance)
+    AutomationRadioButton(final AutomationElement element,
+                          final SelectionItem selection,
+                          final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
         super(element, instance);
         selectItemPattern = selection;
     }
 
     /**
-     * Construct the AutomationRadioButton
-     * @param element The element
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation library error
+     * Construct the AutomationRadioButton.
+     *
+     * @param element The element.
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationRadioButton(AutomationElement element)
+    public AutomationRadioButton(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
 //        selectItemPattern = this.getSelectItemPattern();
@@ -60,10 +67,12 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
 
     /**
      * Selects this element.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
+     *
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
      */
-    public void select() throws AutomationException, PatternNotFoundException {
+    public void select()
+            throws AutomationException, PatternNotFoundException {
         if (this.selectItemPattern == null) {
             selectItemPattern = this.getSelectItemPattern();
         }
@@ -72,12 +81,14 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
     }
 
     /**
-     * Gets the selection state
-     * @return The selection state
-     * @throws AutomationException Error in the automation library
-     * @throws PatternNotFoundException Failed to find pattern
+     * Gets the selection state.
+     *
+     * @return The selection state.
+     * @throws AutomationException Error in the automation library.
+     * @throws PatternNotFoundException Failed to find pattern.
      */
-    public boolean isSelected() throws AutomationException, PatternNotFoundException {
+    public boolean isSelected()
+            throws AutomationException, PatternNotFoundException {
         if (this.selectItemPattern == null) {
             selectItemPattern = this.getSelectItemPattern();
         }

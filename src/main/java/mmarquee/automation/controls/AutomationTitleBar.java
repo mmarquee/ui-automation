@@ -37,7 +37,8 @@ public class AutomationTitleBar extends AutomationContainer {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public AutomationTitleBar(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationTitleBar(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
@@ -48,7 +49,9 @@ public class AutomationTitleBar extends AutomationContainer {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public AutomationTitleBar(AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
+    public AutomationTitleBar(final AutomationElement element,
+                              final ItemContainer container)
+            throws PatternNotFoundException, AutomationException {
         super(element, container);
     }
 

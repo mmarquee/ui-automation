@@ -39,12 +39,12 @@ public abstract class BaseAutomation {
     /**
      * Creates an Unknown object from the pointer.
      *
-     * Allows Mockito to be used to create Unknown objects
+     * Allows Mockito to be used to create Unknown objects.
      *
      * @param pvInstance The pointer to use
      * @return An Unknown object
      */
-    public Unknown makeUnknown(Pointer pvInstance) {
+    public Unknown makeUnknown(final Pointer pvInstance) {
         return new Unknown(pvInstance);
     }
 
@@ -54,7 +54,7 @@ public abstract class BaseAutomation {
      * @return The IUIAutomationElement3
      * @throws AutomationException Automation library has thrown an error.
      */
-    public IUIAutomationElement3 getAutomationElementFromReference(PointerByReference pbr)
+    public IUIAutomationElement3 getAutomationElementFromReference(final PointerByReference pbr)
             throws AutomationException {
         Unknown uElement = makeUnknown(pbr.getValue());
 
@@ -73,7 +73,7 @@ public abstract class BaseAutomation {
      * @return The IUIAutomationElementArray
      * @throws AutomationException Automation library has thrown an error.
      */
-    public IUIAutomationElementArray getAutomationElementArrayFromReference(PointerByReference pbr)
+    public IUIAutomationElementArray getAutomationElementArrayFromReference(final PointerByReference pbr)
             throws AutomationException {
         Unknown uElement = this.makeUnknown(pbr.getValue());
         PointerByReference pUnknown = new PointerByReference();
@@ -94,7 +94,8 @@ public abstract class BaseAutomation {
      * @return The List
      * @throws AutomationException Error in the automation library
      */
-    public List<AutomationElement> collectionToList(IUIAutomationElementArray collection) throws AutomationException {
+    public List<AutomationElement> collectionToList(final IUIAutomationElementArray collection)
+            throws AutomationException {
 
         IntByReference ibr = new IntByReference();
 
@@ -129,7 +130,8 @@ public abstract class BaseAutomation {
         return list;
     }
 
-    protected Pointer getPointerFromElement(IUIAutomationElement3 element) throws AutomationException {
+    protected Pointer getPointerFromElement(final IUIAutomationElement3 element)
+            throws AutomationException {
         PointerByReference pElement = new PointerByReference();
 
         WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);

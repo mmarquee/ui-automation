@@ -30,16 +30,20 @@ import mmarquee.automation.uiautomation.ToggleState;
  */
 public class AutomationCheckBox extends AutomationBase implements Toggleable {
 
+    /**
+     * The toggle pattern.
+     */
     private Toggle togglePattern;
 
     /**
      * <p>
-     * Invokes the toggle event for this control
+     * Invokes the toggle event for this control.
      * </p>
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
      */
-    public void toggle () throws AutomationException, PatternNotFoundException {
+    public void toggle ()
+            throws AutomationException, PatternNotFoundException {
         if (this.togglePattern == null) {
             togglePattern = this.getTogglePattern();
         }
@@ -49,13 +53,14 @@ public class AutomationCheckBox extends AutomationBase implements Toggleable {
 
     /**
      * <p>
-     * Gets the toggle state of this control
+     * Gets the toggle state of this control.
      * </p>
-     * @return The toggle state
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
+     * @return The toggle state.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
      */
-    public ToggleState getToggleState () throws AutomationException, PatternNotFoundException {
+    public ToggleState getToggleState ()
+            throws AutomationException, PatternNotFoundException {
         if (this.togglePattern == null) {
             togglePattern = this.getTogglePattern();
         }
@@ -64,33 +69,39 @@ public class AutomationCheckBox extends AutomationBase implements Toggleable {
     }
 
     /**
-     * Constructor for the AutomationCheckBox
-     * @param element The element
-     * @throws AutomationException Automation exception
-     * @throws PatternNotFoundException Pattern not found
+     * Constructor for the AutomationCheckBox.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation exception.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationCheckBox (AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationCheckBox (final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
-
     /**
-     * Constructor for the AutomationCheckBox
-     * @param element The element
-     * @param pattern The pattern
-     * @param instance Automation instance
+     * Constructor for the AutomationCheckBox.
+     *
+     * @param element The element.
+     * @param pattern The pattern.
+     * @param instance Automation instance.
      */
-    public AutomationCheckBox(AutomationElement element, Toggle pattern, UIAutomation instance) {
+    public AutomationCheckBox(final AutomationElement element,
+                              final Toggle pattern,
+                              final UIAutomation instance) {
         super(element, instance);
         togglePattern = pattern;
     }
 
     /**
-     * Constructor for the AutomationCheckBox
-     * @param element The element
-     * @param pattern The pattern
+     * Constructor for the AutomationCheckBox.
+     *
+     * @param element The element.
+     * @param pattern The pattern.
      */
-    public AutomationCheckBox(AutomationElement element, Toggle pattern) {
+    public AutomationCheckBox(final AutomationElement element,
+                              final Toggle pattern) {
         super(element);
         togglePattern = pattern;
     }

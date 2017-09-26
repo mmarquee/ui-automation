@@ -31,32 +31,35 @@ import java.util.List;
 /**
  * Created by Mark Humphreys on 26/01/2016.
  *
- * Wrapper around the Application element
+ * Wrapper around the Application element.
  */
 public class AutomationApplication extends AutomationBase {
 
     /**
-     * The window handle
+     * The window handle.
      */
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
     /**
-     * Did we attach to the application, or start it
+     * Did we attach to the application, or start it.
      */
     private boolean isAttached = false;
 
+    /**
+     * The User32 instance.
+     */
     private User32 user32;
 
     /**
-     * A very, very long timeout
+     * A very, very long timeout.
      */
     private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
 
     /**
-     * Waits for the application to accept input, i.e. not be idle
-     * @param timeout Timeout to wait for
+     * Waits for the application to accept input, i.e. not be idle.
+     * @param timeout Timeout to wait for.
      */
-    public void waitForInputIdle(int timeout) {
+    public void waitForInputIdle(final int timeout) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
@@ -64,39 +67,40 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Gets whether the application was already running
-     * @return Attached or not
+     * Gets whether the application was already running.
+     * @return Attached or not.
      */
     public boolean getIsAttached() {
         return this.isAttached;
     }
 
     /**
-     * Sets the isAttached value
-     * @param value True or false
+     * Sets the isAttached value.
+     * @param value True or false.
      */
-    public void setIsAttached(boolean value) {
+    public void setIsAttached(final boolean value) {
         this.isAttached = value;
     }
 
     /**
-     * Waits for the application to accept input, i.e. not be idle, with maximum timeout
+     * Waits for the application to accept input, i.e. not be idle, with maximum timeout.
      */
     public void waitForInputIdle() {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
+
         user32.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
     }
 
     /**
-     * Gets the window associated with the title
-     * @param title The title to look for
-     * @return An AutomationWindow
-     * @throws AutomationException Cannot find element
-     * @throws PatternNotFoundException Expected pattern not found
+     * Gets the window associated with the title.
+     * @param title The title to look for.
+     * @return An AutomationWindow.
+     * @throws AutomationException Cannot find element.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow getWindow(String title)
+    public AutomationWindow getWindow(final String title)
             throws PatternNotFoundException, AutomationException {
 
         AutomationElement foundElement = null;
@@ -120,18 +124,35 @@ public class AutomationApplication extends AutomationBase {
 
     /**
      * Constructor for the AutomationApplication.
-     * @param element The underlying automation element
+     *
+     * @param element The underlying automation element.
      * @param handle The handle of this application.
-     * @param attached if we attach or launch the application?
-     * @throws AutomationException Automation library error
+     * @param attached if we attach or launch the application.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached) throws AutomationException  {
+    public AutomationApplication (final AutomationElement element,
+                                  final WinNT.HANDLE handle,
+                                  final boolean attached)
+            throws AutomationException  {
         super(element);
         this.handle = handle;
         this.isAttached = attached;
     }
 
-    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached, User32 user32) throws AutomationException  {
+    /**
+     * Constructor for the AutomationApplication.
+     *
+     * @param element The underlying automation element.
+     * @param handle The handle of this application.
+     * @param attached if we attach or launch the application.
+     * @param user32 The User32 instance.
+     * @throws AutomationException
+     */
+    public AutomationApplication (final AutomationElement element,
+                                  final WinNT.HANDLE handle,
+                                  final boolean attached,
+                                  final User32 user32)
+            throws AutomationException  {
         super(element);
         this.handle = handle;
         this.isAttached = attached;
@@ -140,6 +161,7 @@ public class AutomationApplication extends AutomationBase {
 
     /**
      * Constructor for the AutomationApplication.
+     *
      * Detection of already running application is taken from:
      *   http://www.golesny.de/p/code/javagetpid.
      * @param element The underlying automation element
@@ -147,7 +169,10 @@ public class AutomationApplication extends AutomationBase {
      * @param attached if we attach or launch the application?
      * @throws AutomationException Automation library error
      * */
-    public AutomationApplication (AutomationElement element, Process process, boolean attached) throws AutomationException {
+    public AutomationApplication (final AutomationElement element,
+                                  final Process process,
+                                  final boolean attached)
+            throws AutomationException {
         super(element);
 
         this.isAttached = attached;
@@ -166,10 +191,11 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Closes the process
-     * @param title Title of the window to close
+     * Closes the process.
+     *
+     * @param title Title of the window to close.
      */
-    public void close(String title) {
+    public void close(final String title) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
@@ -182,10 +208,11 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Quits the process
-     * @param title Title of the window to quit
+     * Quits the process.
+     *
+     * @param title Title of the window to quit.
      */
-    public void quit(String title) {
+    public void quit(final String title) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }

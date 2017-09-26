@@ -169,7 +169,9 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         while (childElement != null) {
         	boolean cont = visitor.visit(this, childElement);
-        	if (! cont) break;
+        	if (!cont) {
+        	    break;
+            }
         	
         	childElement = this.getNextSiblingElement(childElement);
         }
@@ -180,8 +182,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      */
     public interface AutomationElementVisitor {
     	/**
-    	 * Visits an element during an 
-    	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run
+    	 * Visits an element during an
+    	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run.
     	 * @param walker The walker to use.
     	 * @param element The currently visited element.
     	 * @return true to continue walking the elements siblings, false otherwise.

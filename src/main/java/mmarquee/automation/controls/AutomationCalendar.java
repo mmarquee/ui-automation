@@ -33,40 +33,48 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
 
     /**
      * Constructor for the AutomationCalendar.
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     *
+     * @param element The underlying automation element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationCalendar(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationCalendar(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         this.valuePattern = this.getValuePattern();
     }
 
     /**
      * Constructor for the AutomationCalendar.
-     * @param element The underlying automation element
-     * @param pattern Value pattern
+     *
+     * @param element The underlying automation element.
+     * @param pattern Value pattern.
      */
-    public AutomationCalendar(AutomationElement element, Value pattern) {
+    public AutomationCalendar(final AutomationElement element,
+                              final Value pattern) {
         super(element);
         this.valuePattern = pattern;
     }
 
     /**
      * Constructor for the AutomationCalendar.
-     * @param element The underlying automation element
-     * @param pattern Value pattern
-     * @param instance the automation instance
+     *
+     * @param element The underlying automation element.
+     * @param pattern Value pattern.
+     * @param instance the automation instance.
      */
-    public AutomationCalendar(AutomationElement element, Value pattern, UIAutomation instance) {
+    public AutomationCalendar(final AutomationElement element,
+                              final Value pattern,
+                              final UIAutomation instance) {
         super(element, instance);
         this.valuePattern = pattern;
     }
 
     /**
-     * Gets the current value of the control
+     * Gets the current value of the control.
+     *
      * @return The current value.
-     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException Something has gone wrong.
      */
     public String getValue() throws AutomationException {
         return this.valuePattern.value();
