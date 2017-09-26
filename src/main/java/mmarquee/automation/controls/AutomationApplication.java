@@ -19,7 +19,6 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.*;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;

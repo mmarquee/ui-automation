@@ -16,14 +16,10 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.*;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.*;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
 import java.util.ArrayList;
@@ -32,7 +28,7 @@ import java.util.List;
 /**
  * Created by Mark Humphreys on 03/02/2016.
  *
- * Wrapper around the Delphi automated string gridPattern
+ * Wrapper around the Delphi automated string gridPattern.
  */
 public class AutomationDataGrid extends AutomationBase implements Valueable {
     private Value valuePattern;
@@ -41,10 +37,10 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     private Selection selectionPattern;
 
     /**
-     * Construct the AutomationDataGrid
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationDataGrid.
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationDataGrid(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
@@ -56,13 +52,13 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Construct the AutomationDataGrid
-     * @param element The element
-     * @param value Value pattern
-     * @param grid Grid pattern
-     * @param table Table pattern
-     * @param instance Automation instance
-     * @param selection Selection pattern
+     * Construct the AutomationDataGrid.
+     * @param element The element.
+     * @param value Value pattern.
+     * @param grid Grid pattern.
+     * @param table Table pattern.
+     * @param instance Automation instance.
+     * @param selection Selection pattern.
      */
     AutomationDataGrid(AutomationElement element, Value value, Grid grid, Table table, Selection selection, UIAutomation instance) {
         super(element, instance);

@@ -1,12 +1,9 @@
 package mmarquee.demo;
 
-import mmarquee.automation.EventID;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Created by Mark Humphreys on 04/02/2017.

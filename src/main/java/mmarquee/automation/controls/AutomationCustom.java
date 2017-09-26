@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -33,23 +32,23 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
     private Value valuePattern;
 
     /**
-     * Constructor for the AutomationCustom
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Pattern not found
+     * Constructor for the AutomationCustom.
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationCustom (AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
     /**
-     * Constructor for the AutomationCustom
-     * @param element The element
-     * @param container ItemContainer pattern
-     * @param value The Value pattern to use
-     * @param instance The automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Pattern not found
+     * Constructor for the AutomationCustom.
+     * @param element The element.
+     * @param container ItemContainer pattern.
+     * @param value The Value pattern to use.
+     * @param instance The automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
      */
     AutomationCustom (AutomationElement element, ItemContainer container, Value value, UIAutomation instance) throws PatternNotFoundException, AutomationException {
         super(element, container, instance);
@@ -58,10 +57,10 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
     }
 
     /**
-     * Gets the value text associated with this element
-     * @return The value of the item
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
+     * Gets the value text associated with this element.
+     * @return The value of the item.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
      */
     public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {

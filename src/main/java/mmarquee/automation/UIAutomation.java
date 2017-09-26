@@ -27,7 +27,6 @@ import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
-import mmarquee.automation.utils.Canalizer;
 import mmarquee.automation.utils.Utils;
 
 import java.util.ArrayList;
@@ -49,14 +48,14 @@ public class UIAutomation extends BaseAutomation {
     private AutomationElement rootElement;
 
     /**
-     * Main automation interface
+     * Main automation interface.
      */
     private IUIAutomation automation;
 
     /*final*/ static int FIND_DESKTOP_ATTEMPTS = 25; // not final to be set in tests
 
     /**
-     * Created for test, to allow mocking
+     * Created for test, to allow mocking.
      *
      * @param automation The automation object to use.
      */
@@ -65,7 +64,7 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Constructor for UIAutomation library
+     * Constructor for UIAutomation library.
      */
     protected UIAutomation() {
         Ole32 = new Ole32Wrapper();
@@ -90,36 +89,40 @@ public class UIAutomation extends BaseAutomation {
         }
     }
 
+    /**
+     * Gets the underlying unknown value of Ole32.
+     * @return Unknown The COM Unknown value.
+     */
     Unknown getOle32Unknown() {
         return Ole32.getUnknown();
     }
 
     /**
-     * Gets the root element for automation
+     * Gets the root element for automation.
      *
-     * @param element Pointer to the element
-     * @return Error status
+     * @param element Pointer to the element.
+     * @return Error status.
      */
     public int getRootElement(PointerByReference element) {
         return this.automation.getRootElement(element);
     }
 
     /**
-     * Compares 2 elements
+     * Compares 2 elements.
      *
-     * @param element1 First element
-     * @param element2 Second element
-     * @param same     Are they the same?
-     * @return Error status
+     * @param element1 First element.
+     * @param element2 Second element.
+     * @param same     Are they the same.
+     * @return Error status.
      */
     public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
         return this.automation.compareElements(element1, element2, same);
     }
 
     /**
-     * Gets the instance
+     * Gets the instance.
      *
-     * @return the instance of the ui automation library
+     * @return the instance of the ui automation library.
      */
     public static UIAutomation getInstance() {
         if (INSTANCE == null) {
@@ -130,12 +133,12 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Launches the application
+     * Launches the application.
      *
-     * @param command The command to be called
-     * @return AutomationApplication that represents the application
+     * @param command The command to be called.
+     * @return AutomationApplication that represents the application.
      * @throws java.io.IOException Cannot start application?
-     * @throws AutomationException Automation library error
+     * @throws AutomationException Automation library error.
      */
     public AutomationApplication launch(String... command) throws java.io.IOException, AutomationException {
         Process process = Utils.startProcess(command);
@@ -145,10 +148,10 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Launches the application, from a given directory.
      *
-     * @param command The command to be called
-     * @return AutomationApplication that represents the application
+     * @param command The command to be called.
+     * @return AutomationApplication that represents the application.
      * @throws java.io.IOException Cannot start application?
-     * @throws AutomationException Automation library error
+     * @throws AutomationException Automation library error.
      */
     public AutomationApplication launchWithDirectory(String... command) throws java.io.IOException, AutomationException {
         Process process = Utils.startProcessWithWorkingDirectory(command);
@@ -156,22 +159,22 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Attaches to the application process
+     * Attaches to the application process.
      *
-     * @param process Process to attach to
-     * @return AutomationApplication that represents the application
-     * @throws AutomationException Automation library error
+     * @param process Process to attach to.
+     * @return AutomationApplication that represents the application.
+     * @throws AutomationException Automation library error.
      */
     public AutomationApplication attach(Process process) throws AutomationException {
         return new AutomationApplication(rootElement, process, true);
     }
 
     /**
-     * Attaches or launches the application
+     * Attaches or launches the application.
      *
-     * @param command Command to be started
-     * @return AutomationApplication that represents the application
-     * @throws java.lang.Exception Unable to find process
+     * @param command Command to be started.
+     * @return AutomationApplication that represents the application.
+     * @throws java.lang.Exception Unable to find process.
      */
     public AutomationApplication launchOrAttach(String... command) throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
@@ -188,11 +191,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Attaches or launches the application
+     * Attaches or launches the application.
      *
-     * @param command Command to be started
-     * @return AutomationApplication that represents the application
-     * @throws java.lang.Exception Unable to find process
+     * @param command Command to be started.
+     * @return AutomationApplication that represents the application.
+     * @throws java.lang.Exception Unable to find process.
      */
     public AutomationApplication launchWithWorkingDirectoryOrAttach(String... command) throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
@@ -209,11 +212,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the desktop object associated with the title
+     * Gets the desktop object associated with the title.
      *
-     * @param title Title to search for
-     * @return AutomationWindow The found 'element'
-     * @throws ElementNotFoundException Element is not found
+     * @param title Title to search for.
+     * @return AutomationWindow The found 'element'.
+     * @throws ElementNotFoundException Element is not found.
      */
     private AutomationElement get(ControlType controlType, String title, int numberOfRetries)
             throws AutomationException {
@@ -263,12 +266,12 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the desktop 'window' associated with the title
+     * Gets the desktop 'window' associated with the title.
      *
-     * @param title Title to search for
-     * @return AutomationWindow The found window
-     * @throws ElementNotFoundException Element is not found
-     * @throws PatternNotFoundException Expected pattern not found
+     * @param title Title to search for.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getDesktopWindow(String title)
             throws PatternNotFoundException, AutomationException {
@@ -279,11 +282,11 @@ public class UIAutomation extends BaseAutomation {
      * Gets the desktop 'window' associated with the title, with a variable
      * number of retries.
      *
-     * @param title Title to search for
-     * @param retries Number of retries
-     * @return AutomationWindow The found window
-     * @throws ElementNotFoundException Element is not found
-     * @throws PatternNotFoundException Expected pattern not found
+     * @param title Title to search for.
+     * @param retries Number of retries.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getDesktopWindow(String title, int retries)
             throws PatternNotFoundException, AutomationException {
@@ -291,12 +294,12 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Create an 'and' condition
+     * Create an 'and' condition.
      *
-     * @param pCondition1 First condition
-     * @param pCondition2 Second condition
-     * @return The new condition
-     * @throws AutomationException Something is wrong
+     * @param pCondition1 First condition.
+     * @param pCondition2 Second condition.
+     * @return The new condition.
+     * @throws AutomationException Something is wrong.
      */
     public PointerByReference createAndCondition(PointerByReference pCondition1, PointerByReference pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
@@ -310,12 +313,12 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Create an 'or' condition
+     * Create an 'or' condition.
      *
-     * @param pCondition1 First condition
-     * @param pCondition2 Second condition
-     * @return The new condition
-     * @throws AutomationException Something is wrong
+     * @param pCondition1 First condition.
+     * @param pCondition2 Second condition.
+     * @return The new condition.
+     * @throws AutomationException Something is wrong.
      */
     public PointerByReference createOrCondition(PointerByReference pCondition1, PointerByReference pCondition2) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
@@ -329,11 +332,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Creates a condition, based on control id
+     * Creates a condition, based on control id.
      *
-     * @param id The control id
-     * @return The condition
-     * @throws AutomationException Something went wrong
+     * @param id The control id.
+     * @return The condition.
+     * @throws AutomationException Something went wrong.
      */
     public PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -343,11 +346,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Creates a condition, based on automation id
+     * Creates a condition, based on automation id.
      *
-     * @param automationId The automation id
-     * @return The condition
-     * @throws AutomationException Something went wrong
+     * @param automationId The automation id.
+     * @return The condition.
+     * @throws AutomationException Something went wrong.
      */
     public PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -362,11 +365,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Creates a condition, based on element name
+     * Creates a condition, based on element name.
      *
-     * @param name The name
-     * @return The condition
-     * @throws AutomationException Something went wrong
+     * @param name The name.
+     * @return The condition.
+     * @throws AutomationException Something went wrong.
      */
     public PointerByReference createNamePropertyCondition(String name) throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -381,12 +384,12 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Creates a property condition
+     * Creates a property condition.
      *
-     * @param id    Which property to check for
-     * @param value The value of the property
-     * @return The nre condition
-     * @throws AutomationException Something has gone wrong
+     * @param id Which property to check for.
+     * @param value The value of the property.
+     * @return The nre condition.
+     * @throws AutomationException Something has gone wrong.
      */
     public PointerByReference createPropertyCondition(int id, Variant.VARIANT.ByValue value) throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
@@ -408,11 +411,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the main desktop object
+     * Gets the main desktop object.
      *
-     * @return AutomationPanel The found object
-     * @throws ElementNotFoundException Element is not found
-     * @throws PatternNotFoundException Expected pattern not found
+     * @return AutomationPanel The found object.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationPanel getDesktop()
             throws AutomationException, PatternNotFoundException {
@@ -420,12 +423,12 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the desktop object associated with the title
+     * Gets the desktop object associated with the title.
      *
-     * @param title Title to search for
-     * @return AutomationPanel The found object
-     * @throws ElementNotFoundException Element is not found
-     * @throws PatternNotFoundException Expected pattern not found
+     * @param title Title to search for.
+     * @return AutomationPanel The found object.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationPanel getDesktopObject(String title)
             throws PatternNotFoundException, AutomationException {
@@ -433,11 +436,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the desktop object associated with the title
+     * Gets the desktop object associated with the title.
      *
-     * @param title Title of the menu to search for
-     * @return AutomationMenu The found menu
-     * @throws ElementNotFoundException Element is not found
+     * @param title Title of the menu to search for.
+     * @return AutomationMenu The found menu.
+     * @throws ElementNotFoundException Element is not found.
      */
     public AutomationMenu getDesktopMenu(String title) throws AutomationException {
         AutomationElement element = null;
@@ -476,11 +479,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the list of desktop windows
+     * Gets the list of desktop windows.
      *
-     * @return List of desktop windows
-     * @throws AutomationException      Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * @return List of desktop windows.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public List<AutomationWindow> getDesktopWindows()
             throws PatternNotFoundException, AutomationException {
@@ -496,11 +499,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the list of desktop objects
+     * Gets the list of desktop objects.
      *
-     * @return List of desktop object
-     * @throws AutomationException      Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * @return List of desktop object.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public List<AutomationPanel> getDesktopObjects()
             throws PatternNotFoundException, AutomationException {
@@ -515,7 +518,6 @@ public class UIAutomation extends BaseAutomation {
         return result;
     }
 
-
 	private List<AutomationElement> getRootChildren(ControlType controlType) throws AutomationException {
         PointerByReference pCondition = this.createControlTypeCondition(controlType);
 
@@ -525,10 +527,10 @@ public class UIAutomation extends BaseAutomation {
 	}
 
     /**
-     * Creates a true Condition
+     * Creates a true Condition.
      *
-     * @return The condition
-     * @throws AutomationException Something has gone wrong
+     * @return The condition.
+     * @throws AutomationException Something has gone wrong.
      */
     public PointerByReference createTrueCondition() throws AutomationException {
         PointerByReference pTrueCondition = new PointerByReference();
@@ -542,10 +544,10 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Creates a false Condition
+     * Creates a false Condition.
      *
-     * @return The condition
-     * @throws AutomationException Something has gone wrong
+     * @return The condition.
+     * @throws AutomationException Something has gone wrong.
      */
     public PointerByReference createFalseCondition() throws AutomationException {
         PointerByReference condition = new PointerByReference();
@@ -559,11 +561,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Create a NOT condition
+     * Create a NOT condition.
      *
-     * @param condition The condition condition
-     * @return The new condition
-     * @throws AutomationException Something is wrong
+     * @param condition The condition condition.
+     * @return The new condition.
+     * @throws AutomationException Something is wrong.
      */
     public PointerByReference createNotCondition(PointerByReference condition) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
@@ -577,9 +579,9 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the element from the supplied tag
-     * @param pt The point
-     * @return The actual element under the tag
+     * Gets the element from the supplied tag.
+     * @param pt The point.
+     * @return The actual element under the tag.
      * @throws AutomationException The automation library returned an error
      */
     public AutomationElement getElementFromPoint(WinDef.POINT pt) throws AutomationException {
@@ -596,11 +598,11 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the element from the native handle
+     * Gets the element from the native handle.
      *
-     * @param hwnd Native Handle
-     * @return The actual element under the handle
-     * @throws AutomationException The automation library returned an error
+     * @param hwnd Native Handle.
+     * @return The actual element under the handle.
+     * @throws AutomationException The automation library returned an error.
      */
     public AutomationElement getElementFromHandle(WinDef.HWND hwnd) throws AutomationException {
         PointerByReference pbr = new PointerByReference();
@@ -616,9 +618,9 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the focused element
-     * @return The focused element
-     * @throws AutomationException Automation returned an error
+     * Gets the focused element.
+     * @return The focused element.
+     * @throws AutomationException Automation returned an error.
      */
     public AutomationElement getFocusedElement() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
@@ -634,19 +636,19 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the root automation element
+     * Gets the root automation element.
      *
-     * @return The root element
+     * @return The root element.
      */
     public AutomationElement getRootElement() {
         return this.rootElement;
     }
 
     /**
-     * Finds the given process
+     * Finds the given process.
      *
-     * @param command Command to look for
-     * @return The Application
+     * @param command Command to look for.
+     * @return The Application.
      * @throws AutomationException If findProcessEntry throws an exception.
      */
     public AutomationApplication findProcess(String... command) throws AutomationException {
@@ -665,9 +667,9 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the control view walker
-     * @return The tree walker object
-     * @throws AutomationException if something goes wrong
+     * Gets the control view walker.
+     * @return The tree walker object.
+     * @throws AutomationException if something goes wrong.
      */
     public AutomationTreeWalker getControlViewWalker() throws AutomationException {
         PointerByReference pbrWalker = new PointerByReference();

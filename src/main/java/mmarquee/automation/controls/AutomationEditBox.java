@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
@@ -27,7 +26,7 @@ import mmarquee.automation.pattern.Value;
 /**
  * Created by Mark Humphreys on 26/01/2016.
  *
- * Wrapper around the edit box element
+ * Wrapper around the edit box element.
  */
 public class AutomationEditBox extends AutomationBase implements Valueable {
 
@@ -35,10 +34,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
     private Text textPattern;
 
     /**
-     * Gets the value of the control
-     * @return The string value of the control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Gets the value of the control.
+     * @return The string value of the control.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -49,10 +48,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the text of the control
-     * @return The string value of the control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Gets the text of the control.
+     * @return The string value of the control.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public String getText() throws AutomationException, PatternNotFoundException {
         if (this.textPattern == null) {
@@ -63,10 +62,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
     }
 
     /**
-     * Sets the value of the edit box
-     * @param value The value to set
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Sets the value of the edit box.
+     * @param value The value to set.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public void setValue(String value) throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -77,10 +76,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
     }
 
     /**
-     * Whether the element is read only
+     * Whether the element is read only.
      * @return True if readonly, otherwise false.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public boolean isReadOnly()throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -91,19 +90,19 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
     }
 
     /**
-     * Whether the element is a password
+     * Whether the element is a password.
      * @return True if it's a password, otherwise false.
-     * @throws AutomationException Automation error
+     * @throws AutomationException Automation error.
      */
     public boolean isPassword() throws AutomationException {
         return this.element.isPassword();
     }
 
     /**
-     * Constructor for the AutomationEditBox
-     * @param element The underlying element
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation error
+     * Constructor for the AutomationEditBox.
+     * @param element The underlying element.
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws AutomationException Automation error.
      */
     public AutomationEditBox(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
