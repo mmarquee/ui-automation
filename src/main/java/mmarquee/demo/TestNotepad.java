@@ -31,6 +31,9 @@ import org.apache.log4j.Logger;
  */
 public class TestNotepad extends TestBase {
 
+    /**
+     * Run the test.
+     */
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 

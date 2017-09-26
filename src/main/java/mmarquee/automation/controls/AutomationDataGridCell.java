@@ -38,19 +38,19 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationDataGridCell(final AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
     /**
-     * Construct the AutomationDataGridCell
-     * @param element The element
-     * @param value The Value pattern
-     * @param instance Automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationDataGridCell.
+     * @param element The element.
+     * @param value The Value pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    AutomationDataGridCell(AutomationElement element, Value value, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+    AutomationDataGridCell(final AutomationElement element, final Value value, final UIAutomation instance) throws PatternNotFoundException, AutomationException {
         super(element, instance);
         this.valuePattern = value;
     }

@@ -37,9 +37,9 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
 
     /**
      * Constructor for the AutomationComboBox.
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern(s) not found
+     * @param element The underlying automation element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern(s) not found.
      */
     public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super (element);
@@ -47,11 +47,11 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
 
     /**
      * Constructor for the AutomationComboBox.
-     * @param element The underlying automation element
-     * @param collapse The collapse pattern
-     * @param value The value pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern(s) not found
+     * @param element The underlying automation element.
+     * @param collapse The collapse pattern.
+     * @param value The value pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern(s) not found.
      */
     AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection)
             throws PatternNotFoundException, AutomationException {
@@ -64,12 +64,12 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
 
     /**
      * Constructor for the AutomationComboBox.
-     * @param element The underlying automation element
-     * @param collapse The collapse pattern
-     * @param value The value pattern
-     * @param instance The automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern(s) not found
+     * @param element The underlying automation element.
+     * @param collapse The collapse pattern.
+     * @param value The value pattern.
+     * @param instance The automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern(s) not found.
      */
     AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection, UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
@@ -81,10 +81,10 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
     }
 
     /**
-     * Gets the text associated with this element
-     * @return The current value
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Gets the text associated with this element.
+     * @return The current value.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public String getValue() throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -95,10 +95,10 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
     }
 
     /**
-     * Sets the text associated with this element
+     * Sets the text associated with this element.
      * @param text The value to be set.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void setText(String text) throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
@@ -110,8 +110,8 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
 
     /**
      * Expands the element.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void expand() throws AutomationException, PatternNotFoundException {
         if (this.collapsePattern == null) {
@@ -122,10 +122,10 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
     }
 
     /**
-     * Is the control expanded
-     * @return True if expanded
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Is the control expanded.
+     * @return True if expanded.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public boolean isExpanded() throws AutomationException, PatternNotFoundException {
         if (this.collapsePattern == null) {
@@ -136,9 +136,9 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
     }
 
     /**
-     * Collapses the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
+     * Collapses the element.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public void collapse() throws AutomationException, PatternNotFoundException {
         if (this.collapsePattern == null) {
@@ -149,10 +149,10 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
 
     /**
      * Gets the list of items associated with this element.
-     * @return List of AutomationListItems
-     * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Expected pattern not found
-     * @deprecated use {{@link #getItems()} instead
+     * @return List of AutomationListItems.
+     * @throws AutomationException Automation issue.
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @deprecated use {{@link #getItems()} instead.
      */
     @Deprecated
     public List<AutomationListItem> getList() throws PatternNotFoundException, AutomationException {
@@ -161,9 +161,9 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
 
     /**
      * Gets the list of items associated with this element.
-     * @return List of AutomationListItems
-     * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Expected pattern not found
+     * @return List of AutomationListItems.
+     * @throws AutomationException Automation issue.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public List<AutomationListItem> getItems() throws PatternNotFoundException, AutomationException {
 
@@ -181,12 +181,12 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
     }
     
     /**
-     * Gets the item associated with the index
+     * Gets the item associated with the index.
      *
-     * @param index Index of element to get
-     * @return The selected item
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * @param index Index of element to get.
+     * @return The selected item.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationListItem getItem(int index) throws PatternNotFoundException, AutomationException {
 

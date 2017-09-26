@@ -15,7 +15,6 @@
  */
 package mmarquee.demo;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;

@@ -38,23 +38,23 @@ public class AutomationContainer extends AutomationBase {
     private ItemContainer itemContainerPattern;
 
     /**
-     * Constructor for AutomationContainer
+     * Constructor for AutomationContainer.
      *
-     * @param element The underlying element
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Could not find pattern
+     * @param element The underlying element.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
      */
     public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
     /**
-     * Constructor for AutomationContainer
+     * Constructor for AutomationContainer.
      *
-     * @param element The underlying element
-     * @param pattern The Container pattern
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Could not find pattern
+     * @param element The underlying element.
+     * @param pattern The Container pattern.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
      */
     AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
         super(element);
@@ -76,23 +76,23 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Constructor for AutomationContainer
+     * Constructor for AutomationContainer.
      *
-     * @param element The underlying element
-     * @param pattern The Invoke pattern
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Could not find pattern
+     * @param element The underlying element.
+     * @param pattern The Invoke pattern.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
      */
     AutomationContainer(AutomationElement element, Invoke pattern) throws PatternNotFoundException, AutomationException {
         super(element, pattern);
     }
     
     /**
-     * Gets a element by control type
-     * @param index The nth item that matches
-     * @param id The control type
-     * @return The matching element
-     * @throws AutomationException Error in the Automation library
+     * Gets a element by control type.
+     * @param index The nth item that matches.
+     * @param id The control type.
+     * @return The matching element.
+     * @throws AutomationException Error in the Automation library.
      */
     AutomationElement getElementByControlType(int index, ControlType id) throws AutomationException {
         PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
@@ -105,14 +105,14 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the element by the control type, for s given control index
+     * Gets the element by the control type, for s given control index.
      * 
-     * @param index Index of the element
-     * @param id Control type
-     * @param className The className to look for
-     * @return The matching element
-     * @throws AutomationException Automation issue
-     * @throws ElementNotFoundException Failed to find element
+     * @param index Index of the element.
+     * @param id Control type.
+     * @param className The className to look for.
+     * @return The matching element.
+     * @throws AutomationException Automation issue.
+     * @throws ElementNotFoundException Failed to find element.
      */
     protected AutomationElement getElementByControlType(int index, ControlType id, String className) throws AutomationException, ElementNotFoundException {
         PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
@@ -147,11 +147,11 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the element by the control type
-     * @param name Name to use
-     * @param id Control type
-     * @return The matching element
-     * @throws ElementNotFoundException Did not find the element
+     * Gets the element by the control type.
+     * @param name Name to use.
+     * @param id Control type.
+     * @return The matching element.
+     * @throws ElementNotFoundException Did not find the element.
      */
     protected AutomationElement getElementByControlType(String name, ControlType id) throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.Descendants),

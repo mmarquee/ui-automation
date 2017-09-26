@@ -16,16 +16,10 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
-import mmarquee.automation.uiautomation.ToggleState;
-import mmarquee.automation.utils.Utils;
-
-import java.util.List;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationWindow;
 
 /**
  * Created by Mark Humphreys on 26/02/2016.

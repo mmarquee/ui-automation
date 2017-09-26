@@ -18,8 +18,6 @@ package mmarquee.demo;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
-import java.util.List;
-
 /**
  * Created by Mark Humphreys on 26/02/2016.
  *
