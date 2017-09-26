@@ -20,13 +20,20 @@ import mmarquee.automation.uiautomation.IUIAutomationEventHandler;
 /**
  * Created by Mark Humphreys on 05/02/2017.
  *
- * Wrapper for event handling
+ * Wrapper for event handling.
  */
 public class AutomationEventHandler  {
+    /**
+     * Underlying raw event handler.
+     */
     private IUIAutomationEventHandler handler;
 
-    public AutomationEventHandler(IUIAutomationEventHandler handler) {
-        this.handler = handler;
+    /**
+     * Constructor for the AutomationEventHandler.
+     * @param inHandler The raw event handler.
+     */
+    public AutomationEventHandler(final IUIAutomationEventHandler inHandler) {
+        this.handler = inHandler;
     }
 
 }

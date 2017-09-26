@@ -18,33 +18,50 @@ package mmarquee.automation;
 /**
  * Created by Mark Humphreys on 14/07/2016.
  *
- * An exception thrown when there is an error returned by the underlying automation library
+ * An exception thrown when there is an error returned by the underlying
+ * automation library.
  */
 public class AutomationException extends Exception {
 
+    /**
+     * The serial version UID.
+     */
     private static final long serialVersionUID = -3074432505437414359L;
 
-    final int errorcode;
+    /**
+     * The error code.
+     */
+    private final int errorCode;
 
-    public AutomationException(String message)
-    {
+    /**
+     * Constructor for the AutomationException.
+     * @param message The message.
+     */
+    public AutomationException(final String message) {
         super(message);
-        this.errorcode = 0;
-    }
-
-    public AutomationException(int errorcode)
-    {
-        super(createErrorString(errorcode));
-        this.errorcode = errorcode;
-    }
-
-    private static String createErrorString(int errorcode)
-    {
-        return "Error: 0x" + Integer.toHexString(errorcode);
+        this.errorCode = 0;
     }
 
     /**
-     * Returns the error code, if available, 0 otherwise
+     * Constructor for the AutomationException.
+     * @param inErrorCode The error code.
+     */
+    public AutomationException(final int inErrorCode) {
+        super(createErrorString(inErrorCode));
+        this.errorCode = inErrorCode;
+    }
+
+    /**
+     * Creates the error string.
+     * @param inErrorCode The error code to use.
+     * @return The formatted error message.
+     */
+    private static String createErrorString(final int inErrorCode) {
+        return "Error: 0x" + Integer.toHexString(inErrorCode);
+    }
+
+    /**
+     * Returns the error code, if available, 0 otherwise.
      * <p>
      * For Microsoft error codes, see:
      * <ul>
@@ -52,9 +69,9 @@ public class AutomationException extends Exception {
      * <li>https://support.symantec.com/en_US/article.TECH12638.html
      * </ul>
      *
-     * @return the errorcode
+     * @return the errorcode.
      */
-    public int getErrorcode() {
-        return errorcode;
+    public final int getErrorcode() {
+        return errorCode;
     }
 }

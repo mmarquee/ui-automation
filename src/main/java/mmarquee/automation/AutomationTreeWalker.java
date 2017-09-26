@@ -27,19 +27,26 @@ import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
  * Wrapper for the AutomationTreeWalker.
  */
 public class AutomationTreeWalker extends BaseAutomation {
-    IUIAutomationTreeWalker walker = null;
+    /**
+     * The underlying raw tree walker.
+     */
+    private IUIAutomationTreeWalker walker = null;
 
-    public AutomationTreeWalker(IUIAutomationTreeWalker walker) {
-        this.walker = walker;
+    /**
+     * Constructor for AutomationTreeWalker.
+     * @param inWalker The raw walker.
+     */
+    public AutomationTreeWalker(final IUIAutomationTreeWalker inWalker) {
+        this.walker = inWalker;
     }
 
     /**
-     * Gets the next sibling element
-     * @param element The element
-     * @return The sibling element, or null if not found
-     * @throws AutomationException Something is up in automation
+     * Gets the next sibling element.
+     * @param element The element.
+     * @return The sibling element, or null if not found.
+     * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getNextSiblingElement (AutomationElement element)
+    public AutomationElement getNextSiblingElement(final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -57,12 +64,12 @@ public class AutomationTreeWalker extends BaseAutomation {
     }
 
     /**
-     * Gets the previous sibling element
-     * @param element The element
-     * @return The previous sibling element, or null if not found
-     * @throws AutomationException Something is up in automation
+     * Gets the previous sibling element.
+     * @param element The element.
+     * @return The previous sibling element, or null if not found.
+     * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getPreviousSiblingElement (AutomationElement element)
+    public AutomationElement getPreviousSiblingElement (final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -80,12 +87,12 @@ public class AutomationTreeWalker extends BaseAutomation {
     }
 
     /**
-     * Gets the last child element of the supplied element
-     * @param element The element
-     * @return The last child of the element, or null if not found
-     * @throws AutomationException Automation has returned an error
+     * Gets the last child element of the supplied element.
+     * @param element The element.
+     * @return The last child of the element, or null if not found.
+     * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getLastChildElement(AutomationElement element)
+    public AutomationElement getLastChildElement(final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -103,12 +110,12 @@ public class AutomationTreeWalker extends BaseAutomation {
     }
 
     /**
-     * Gets the first child element of the supplied element
-     * @param element The element
-     * @return The first child of the element, or null if not found
-     * @throws AutomationException Automation has returned an error
+     * Gets the first child element of the supplied element.
+     * @param element The element.
+     * @return The first child of the element, or null if not found.
+     * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getFirstChildElement(AutomationElement element)
+    public AutomationElement getFirstChildElement(final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -125,13 +132,13 @@ public class AutomationTreeWalker extends BaseAutomation {
     }
 
     /**
-     * Gets the parent child element of the supplied element
+     * Gets the parent child element of the supplied element.
      *
-     * @param element The element
-     * @return The parent of the element, or null if not found
-     * @throws AutomationException Automation has returned an error
+     * @param element The element.
+     * @return The parent of the element, or null if not found.
+     * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getParentElement(AutomationElement element)
+    public AutomationElement getParentElement(final AutomationElement element)
             throws AutomationException {
         PointerByReference pParent = new PointerByReference();
 
@@ -148,13 +155,13 @@ public class AutomationTreeWalker extends BaseAutomation {
     }
 
     /**
-     * A generic walker algorithm
-     * @param visitor The visitor to call on each element
-     * @param root The root element (of which the children are walked)
-     * @throws AutomationException Exception in the automation library
+     * A generic walker algorithm.
+     * @param visitor The visitor to call on each element.
+     * @param root The root element (of which the children are walked).
+     * @throws AutomationException Exception in the automation library.
      */
-    public void walk(AutomationElementVisitor visitor, AutomationElement root) throws AutomationException {
-
+    public void walk(final AutomationElementVisitor visitor, final AutomationElement root)
+            throws AutomationException {
     	assert visitor != null;
     	assert root != null;
     	
@@ -169,17 +176,16 @@ public class AutomationTreeWalker extends BaseAutomation {
     }
     
     /**
-     * A visitor as used by {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)}
-     *
+     * A visitor as used by {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)}.
      */
-    public static interface AutomationElementVisitor {
+    public interface AutomationElementVisitor {
     	/**
     	 * Visits an element during an 
     	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run
-    	 * @param walker The walker to use
-    	 * @param element The currently visited element
-    	 * @return true to continue walking the elements siblings, false otherwise
-    	 * @throws AutomationException if something goes wrong
+    	 * @param walker The walker to use.
+    	 * @param element The currently visited element.
+    	 * @return true to continue walking the elements siblings, false otherwise.
+    	 * @throws AutomationException if something goes wrong.
     	 */
     	boolean visit(AutomationTreeWalker walker, AutomationElement element) throws AutomationException;
     }
