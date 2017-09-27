@@ -69,7 +69,7 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The previous sibling element, or null if not found.
      * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getPreviousSiblingElement (final AutomationElement element)
+    public AutomationElement getPreviousSiblingElement(final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 

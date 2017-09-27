@@ -109,7 +109,7 @@ public class AutomationApplication extends AutomationBase {
 
         for (AutomationElement element : collection) {
             String name = element.getName();
-            if (name.equals(title)){
+            if (name.equals(title)) {
                 foundElement = element;
                 break;
             }
@@ -126,16 +126,16 @@ public class AutomationApplication extends AutomationBase {
      * Constructor for the AutomationApplication.
      *
      * @param element The underlying automation element.
-     * @param handle The handle of this application.
+     * @param inHandle The handle of this application.
      * @param attached if we attach or launch the application.
      * @throws AutomationException Automation library error.
      */
-    public AutomationApplication (final AutomationElement element,
-                                  final WinNT.HANDLE handle,
-                                  final boolean attached)
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached)
             throws AutomationException  {
         super(element);
-        this.handle = handle;
+        this.handle = inHandle;
         this.isAttached = attached;
     }
 
@@ -143,20 +143,20 @@ public class AutomationApplication extends AutomationBase {
      * Constructor for the AutomationApplication.
      *
      * @param element The underlying automation element.
-     * @param handle The handle of this application.
+     * @param inHandle The handle of this application.
      * @param attached if we attach or launch the application.
-     * @param user32 The User32 instance.
-     * @throws AutomationException
+     * @param inUser32 The User32 instance.
+     * @throws AutomationException Error in the automation library.
      */
-    public AutomationApplication (final AutomationElement element,
-                                  final WinNT.HANDLE handle,
-                                  final boolean attached,
-                                  final User32 user32)
-            throws AutomationException  {
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached,
+                                 final User32 inUser32)
+            throws AutomationException {
         super(element);
-        this.handle = handle;
+        this.handle = inHandle;
         this.isAttached = attached;
-        this.user32 = user32;
+        this.user32 = inUser32;
     }
 
     /**
@@ -169,16 +169,18 @@ public class AutomationApplication extends AutomationBase {
      * @param attached if we attach or launch the application?
      * @throws AutomationException Automation library error
      * */
-    public AutomationApplication (final AutomationElement element,
-                                  final Process process,
-                                  final boolean attached)
+    public AutomationApplication(final AutomationElement element,
+                                 final Process process,
+                                 final boolean attached)
             throws AutomationException {
         super(element);
 
         this.isAttached = attached;
 
-        if (process.getClass().getName().equals("java.lang.Wind32Process") ||
-                process.getClass().getName().equals("java.lang.ProcessImpl")) {
+        String name = process.getClass().getName();
+
+        if (name.equals("java.lang.Wind32Process")
+                || name.equals("java.lang.ProcessImpl")) {
             try {
                 Field f = process.getClass().getDeclaredField("handle");
                 f.setAccessible(true);

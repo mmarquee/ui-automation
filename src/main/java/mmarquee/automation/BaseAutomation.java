@@ -49,9 +49,10 @@ public abstract class BaseAutomation {
     }
 
     /**
-     * Convert a raw PointerByReference to a IUIAutomationElement3
-     * @param pbr The raw pointer
-     * @return The IUIAutomationElement3
+     * Convert a raw PointerByReference to a IUIAutomationElement3.
+     *
+     * @param pbr The raw pointer.
+     * @return The IUIAutomationElement3.
      * @throws AutomationException Automation library has thrown an error.
      */
     public IUIAutomationElement3 getAutomationElementFromReference(final PointerByReference pbr)
@@ -68,9 +69,9 @@ public abstract class BaseAutomation {
     }
 
     /**
-     * Convert a raw PointerByReference to a IUIAutomationElementArray
-     * @param pbr The raw pointer
-     * @return The IUIAutomationElementArray
+     * Convert a raw PointerByReference to a IUIAutomationElementArray.
+     * @param pbr The raw pointer.
+     * @return The IUIAutomationElementArray.
      * @throws AutomationException Automation library has thrown an error.
      */
     public IUIAutomationElementArray getAutomationElementArrayFromReference(final PointerByReference pbr)
@@ -91,8 +92,8 @@ public abstract class BaseAutomation {
      * Turns a collection (array) of automation elements, into a collection.
      *
      * @param collection The ElementArray.
-     * @return The List
-     * @throws AutomationException Error in the automation library
+     * @return The List.
+     * @throws AutomationException Error in the automation library.
      */
     public List<AutomationElement> collectionToList(final IUIAutomationElementArray collection)
             throws AutomationException {
@@ -130,6 +131,13 @@ public abstract class BaseAutomation {
         return list;
     }
 
+    /**
+     * Gets the raw pointer to the element.
+     *
+     * @param element The underlying element.
+     * @return Pointer The raw pointer.
+     * @throws AutomationException An error has occurred in the automation library.
+     */
     protected Pointer getPointerFromElement(final IUIAutomationElement3 element)
             throws AutomationException {
         PointerByReference pElement = new PointerByReference();
