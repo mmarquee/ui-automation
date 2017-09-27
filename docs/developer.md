@@ -19,7 +19,7 @@ As the library depends on jna (currently version 4.5.0), then there is no need t
   <!-- Other dependencies -->
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.4.1</version>
+  <version>0.4.2</version>
 <dependencies>  
 ```
 
