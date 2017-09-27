@@ -29,7 +29,9 @@ import mmarquee.automation.uiautomation.ToggleState;
  *
  * Wrapper for the CheckBox element.
  */
-public class AutomationCheckBox extends AutomationBase implements Toggleable {
+public class AutomationCheckBox
+        extends AutomationBase
+        implements Toggleable, Focusable {
 
     private Toggle togglePattern;
 
@@ -94,5 +96,14 @@ public class AutomationCheckBox extends AutomationBase implements Toggleable {
     public AutomationCheckBox(AutomationElement element, Toggle pattern) {
         super(element);
         togglePattern = pattern;
+    }
+
+    /**
+     * <p>
+     * Sets the focus to this control.
+     * </p>
+     */
+    public void focus() {
+        this.element.setFocus();
     }
 }
