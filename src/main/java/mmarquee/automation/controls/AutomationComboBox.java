@@ -30,7 +30,9 @@ import java.util.List;
  *
  * Wrapper for the ComboBox element.
  */
-public class AutomationComboBox extends AutomationBase implements Expandable, Valueable {
+public class AutomationComboBox
+        extends AutomationBase
+        implements Expandable, Valueable, Focusable {
     private ExpandCollapse collapsePattern;
     private Value valuePattern;
     private Selection selectionPattern;
@@ -278,5 +280,14 @@ public class AutomationComboBox extends AutomationBase implements Expandable, Va
         	throw new ElementNotFoundException();
         }
         return list.get(0);
+    }
+
+    /**
+     * <p>
+     * Sets the focus to this control.
+     * </p>
+     */
+    public void focus() {
+        this.element.setFocus();
     }
 }
