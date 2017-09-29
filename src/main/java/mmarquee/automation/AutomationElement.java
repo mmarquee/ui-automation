@@ -333,7 +333,8 @@ public class AutomationElement extends BaseAutomation {
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
      */
-    public List<AutomationElement> findAllDescendants(final PointerByReference pCondition)
+    public List<AutomationElement> findAllDescendants(
+            final PointerByReference pCondition)
             throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
     }
@@ -346,18 +347,21 @@ public class AutomationElement extends BaseAutomation {
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
      */
-    public List<AutomationElement> findAll(final TreeScope scope, final PointerByReference pCondition)
+    public List<AutomationElement> findAll(final TreeScope scope,
+                                           final PointerByReference pCondition)
             throws AutomationException {
         List<AutomationElement> items = new ArrayList<AutomationElement>();
 
         PointerByReference pAll = new PointerByReference();
 
-        final int res = this.element.findAll(scope, pCondition.getValue(), pAll);
+        final int res =
+                this.element.findAll(scope, pCondition.getValue(), pAll);
         if (res != 0) {
             throw new AutomationException(res);
         }
 
-        IUIAutomationElementArray collection = getAutomationElementArrayFromReference(pAll);
+        IUIAutomationElementArray collection =
+                getAutomationElementArrayFromReference(pAll);
 
         IntByReference ibr = new IntByReference();
 
@@ -370,7 +374,8 @@ public class AutomationElement extends BaseAutomation {
 
             collection.getElement(a, pbr);
 
-            IUIAutomationElement3 elem = getAutomationElementFromReference(pbr);
+            IUIAutomationElement3 elem =
+                    getAutomationElementFromReference(pbr);
 
             items.add(new AutomationElement(elem));
         }

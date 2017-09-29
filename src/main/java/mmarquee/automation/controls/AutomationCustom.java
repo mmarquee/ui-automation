@@ -41,7 +41,7 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationCustom (final AutomationElement element)
+    public AutomationCustom(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
     }
@@ -56,10 +56,10 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Pattern not found.
      */
-    AutomationCustom (final AutomationElement element,
-                      final ItemContainer container,
-                      final Value value,
-                      final UIAutomation instance)
+    AutomationCustom(final AutomationElement element,
+                     final ItemContainer container,
+                     final Value value,
+                     final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
         super(element, container, instance);
 
@@ -90,8 +90,8 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Pattern not found.
      */
-    AutomationCustom (final AutomationElement element,
-                      final ItemContainer container)
+    AutomationCustom(final AutomationElement element,
+                     final ItemContainer container)
             throws PatternNotFoundException, AutomationException {
         super(element, container);
     }

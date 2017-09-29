@@ -69,7 +69,7 @@ public class AutomationException extends Exception {
      * <li>https://support.symantec.com/en_US/article.TECH12638.html
      * </ul>
      *
-     * @return the errorcode.
+     * @return the error code.
      */
     public final int getErrorcode() {
         return errorCode;

@@ -53,6 +53,11 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     private User32 user32;
 
     /**
+     * The sleep duration.
+     */
+    static final int SLEEP_DURATION = 500;
+
+    /**
      * Focuses this control.
      */
     public void focus() {
@@ -256,7 +261,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
                 try {
                     logger.warn("Did not find `" + title + "` window, retrying");
                     // Wait for it
-                    Thread.sleep(500);
+                    Thread.sleep(SLEEP_DURATION);
                 } catch (InterruptedException ex) {
                     // interrupted
                 }
