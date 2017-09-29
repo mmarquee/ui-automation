@@ -39,7 +39,8 @@ import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * @author Mark Humphreys
+ * Date 29/11/2016.
  *
  * Tests for Combobox functionality
  */

@@ -10,7 +10,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import java.awt.*;
 
 /**
- * Created by Mark Humphreys on 12/02/2017.
+ * @author Mark Humphreys
+ * Date 12/02/2017.
  */
 public class DemoPointOver extends TestBase {
     public DemoPointOver() {

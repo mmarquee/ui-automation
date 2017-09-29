@@ -23,7 +23,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 20/02/2016.
+ * @author Mark Humphreys
+ * Date 20/02/2016.
  *
  * Wrapper for the TreeViewItem element.
  */

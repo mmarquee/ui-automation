@@ -20,7 +20,8 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
 
 /**
- * Created by Mark Humphreys on 02/03/2016.
+ * @author Mark Humphreys
+ * Date 02/03/2016.
  *
  * Wrapper for the AppBar element
  */

@@ -16,10 +16,31 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.menu.AutomationMenu;
+import mmarquee.automation.controls.AutomationCheckBox;
+import mmarquee.automation.controls.AutomationMaskedEdit;
+import mmarquee.automation.controls.AutomationToolBarButton;
+import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationHyperlink;
+import mmarquee.automation.controls.AutomationRadioButton;
+import mmarquee.automation.controls.AutomationTextBox;
+import mmarquee.automation.controls.AutomationTreeViewItem;
+import mmarquee.automation.controls.AutomationTreeView;
+import mmarquee.automation.controls.AutomationList;
+import mmarquee.automation.controls.AutomationListItem;
+import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.AutomationComboBox;
+import mmarquee.automation.controls.AutomationDataGrid;
+import mmarquee.automation.controls.AutomationStatusBar;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.controls.AutomationToolBar;
+import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
@@ -27,8 +48,9 @@ import mmarquee.automation.uiautomation.ToggleState;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/02/2016
- *  *
+ * @author Mark Humphreys
+ * Date 26/02/2016
+ *
  * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestMain extends TestBase {
@@ -46,7 +68,7 @@ public class TestMain extends TestBase {
 
         try {
             // Wait for the process to start
-            application.waitForInputIdle(5000);
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait properly");
         }

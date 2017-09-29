@@ -16,8 +16,32 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.*;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationDocument;
+import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.controls.AutomationCheckBox;
+import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationRadioButton;
+import mmarquee.automation.controls.AutomationTextBox;
+import mmarquee.automation.controls.AutomationCalendar;
+import mmarquee.automation.controls.AutomationTreeViewItem;
+import mmarquee.automation.controls.AutomationTreeView;
+import mmarquee.automation.controls.AutomationList;
+import mmarquee.automation.controls.AutomationListItem;
+import mmarquee.automation.controls.AutomationTitleBar;
+import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.AutomationComboBox;
+import mmarquee.automation.controls.AutomationDataGrid;
+import mmarquee.automation.controls.AutomationEditBox;
+import mmarquee.automation.controls.AutomationProgressBar;
+import mmarquee.automation.controls.AutomationStatusBar;
+import mmarquee.automation.controls.AutomationSlider;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.controls.AutomationToolBar;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
@@ -28,7 +52,8 @@ import mmarquee.automation.utils.Utils;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on a WPF application.
  */
@@ -47,7 +72,7 @@ public class TestMainWPF extends TestBase {
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
+        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();
@@ -297,14 +322,14 @@ public class TestMainWPF extends TestBase {
 
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
-            for(AutomationDataGridCell cell : headers) {
+            for (AutomationDataGridCell cell : headers) {
                 logger.info(cell.getName());
             }
 
             logger.info(grid.getColumnHeader(1).getName());
 
             List<AutomationDataGridCell> cols = grid.getColumn(1);
-            for(AutomationDataGridCell cell : cols) {
+            for (AutomationDataGridCell cell : cols) {
                 logger.info("Col 1 - " + cell.getName());
             }
 
@@ -532,7 +557,7 @@ public class TestMainWPF extends TestBase {
 
             WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
 
-            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.left +5, rect0.top +5);
+            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.left + 5, rect0.top + 5);
 
             mouse.setLocation(clickPoint1.x, clickPoint1.y);
             mouse.rightClick();
@@ -546,7 +571,7 @@ public class TestMainWPF extends TestBase {
             // Window / element not found
             try {
                 logger.info("Looking for `Not There`");
-                AutomationWindow popupNotThere = applicationWindow.getWindow("Not there");
+                applicationWindow.getWindow("Not there");
                 logger.info("Found `Not There` somehow!");
             } catch (ElementNotFoundException ex) {
                 logger.info("Didn't find element `Not There`");
@@ -572,7 +597,7 @@ public class TestMainWPF extends TestBase {
 
             // Same for desktop window
             try {
-                AutomationWindow desktopWindow = automation.getDesktopWindow("MainWindow99");
+                automation.getDesktopWindow("MainWindow99");
             } catch (AutomationException ex) {
                 logger.info("Failed to find `MainWindow99` - " + ex.getClass());
             }
@@ -581,7 +606,7 @@ public class TestMainWPF extends TestBase {
 
             // .. and object
             try {
-                AutomationWindow desktopObject = automation.getDesktopWindow("MainWindow00");
+                automation.getDesktopWindow("MainWindow00");
             } catch (AutomationException ex) {
                 logger.info("Failed to find `MainWindow00` - " + ex.getClass());
             }

@@ -30,7 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 03/02/2016.
+ * @author Mark Humphreys
+ * Date 03/02/2016.
  *
  * Wrapper around the Delphi automated string gridPattern.
  */

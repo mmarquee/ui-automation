@@ -39,7 +39,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 09/01/2017.
+ * @author Mark Humphreys
+ * Date 09/01/2017.
  *
  * Test for the SelectionItem pattern.
  */

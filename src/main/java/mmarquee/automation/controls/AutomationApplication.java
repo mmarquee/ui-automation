@@ -29,7 +29,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/01/2016.
+ * @author Mark Humphreys
+ * Date 26/01/2016.
  *
  * Wrapper around the Application element.
  */
@@ -54,6 +55,11 @@ public class AutomationApplication extends AutomationBase {
      * A very, very long timeout.
      */
     private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
+
+    /**
+     * A default, normal timeout.
+     */
+    public static final int SHORT_TIMEOUT = 5000;
 
     /**
      * Waits for the application to accept input, i.e. not be idle.

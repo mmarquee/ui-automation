@@ -1,7 +1,8 @@
 package mmarquee.demo;
 
 /**
- * Created by Mark Humphreys on 02/02/2017.
+ * @author Mark Humphreys
+ * Date 02/02/2017.
  */
 public class TreeWalker {
     /**

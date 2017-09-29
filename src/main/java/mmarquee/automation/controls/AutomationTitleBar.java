@@ -26,7 +26,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 04/03/2016.
+ * @author Mark Humphreys
+ * Date 04/03/2016.
  *
  * Wrapper for the TitleBar element.
  */

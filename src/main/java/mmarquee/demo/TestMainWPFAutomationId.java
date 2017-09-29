@@ -22,12 +22,16 @@ import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.AutomationWindow;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on a WPF application.
  */
 public class TestMainWPFAutomationId extends TestBase {
 
+    /**
+     * Run the demo.
+     */
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
@@ -41,7 +45,7 @@ public class TestMainWPFAutomationId extends TestBase {
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
+        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();

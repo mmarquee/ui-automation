@@ -25,7 +25,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 13/01/2017.
+ * @author Mark Humphreys
+ * Date 13/01/2017.
  *
  * Mocked tests for AutomationApplication
  *

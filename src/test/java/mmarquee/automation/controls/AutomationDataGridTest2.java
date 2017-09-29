@@ -36,7 +36,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 25/09/2017
+ * @author Mark Humphreys
+ * Date 25/09/2017
  */
 public class AutomationDataGridTest2 {
 

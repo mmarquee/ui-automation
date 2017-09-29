@@ -39,7 +39,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 28/12/2016.
+ * @author Mark Humphreys
+ * Date 28/12/2016.
  *
  * AutomationWindow tests that rely on mocking behaviour
  */

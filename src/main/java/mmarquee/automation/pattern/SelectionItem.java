@@ -28,7 +28,8 @@ import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the SelectionItem pattern.
  */

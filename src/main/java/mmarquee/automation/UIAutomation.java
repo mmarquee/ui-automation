@@ -34,7 +34,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Created by Mark Humphreys on 26/01/2016.
+ * @author Mark Humphreys
+ * Date 26/01/2016.
  *
  * The base automation wrapper.
  */

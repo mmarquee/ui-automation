@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 01/02/2016.
+ * @author Mark Humphreys
+ * Date 01/02/2016.
  *
  * Wrapper for the ComboBox element.
  */

@@ -28,9 +28,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 09/02/2016.
+ * @author Mark Humphreys
+ * Date 09/02/2016.
  *
- * * Wrapper for the Menu control element.
+ * Wrapper for the Menu control element.
  */
 public class AutomationMenu extends AutomationBase {
     protected Logger logger = Logger.getLogger(AutomationMenu.class.getName());

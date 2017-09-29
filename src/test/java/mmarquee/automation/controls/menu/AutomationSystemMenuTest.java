@@ -42,7 +42,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 03/12/2016.
+ * @author Mark Humphreys
+ * Date 03/12/2016.
  *
  * Tests for SystemMenu automation.
  */

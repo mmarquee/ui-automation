@@ -38,7 +38,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 25/11/2016.
+ * @author Mark Humphreys
+ * Date 25/11/2016.
  *
  * Tests for AutomatedWindow class
  */

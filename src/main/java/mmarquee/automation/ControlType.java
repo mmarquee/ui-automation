@@ -16,7 +16,8 @@
 package mmarquee.automation;
 
 /**
- * Created by Mark Humphreys on 27/01/2016.
+ * @author Mark Humphreys
+ * Date 27/01/2016.
  *
  * Control types - see https://msdn.microsoft.com/en-us/library/windows/desktop/ee671198(v=vs.85).aspx
  */

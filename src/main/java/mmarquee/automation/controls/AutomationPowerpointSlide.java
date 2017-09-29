@@ -21,7 +21,8 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 01/02/2017.
+ * @author Mark Humphreys
+ * Date 01/02/2017.
  *
  * Specialised custom control representing a powerpoint slide.
  */

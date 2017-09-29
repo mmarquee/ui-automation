@@ -21,7 +21,8 @@ import mmarquee.automation.controls.*;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 16/02/2017.
+ * @author Mark Humphreys
+ * Date 16/02/2017.
  *
  * Test the automation wrapper on a Delphi AutomatedGrid.
  */
@@ -40,7 +41,7 @@ public class DemoGrid extends TestBase {
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
+        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();

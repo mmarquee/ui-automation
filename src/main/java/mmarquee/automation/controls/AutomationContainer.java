@@ -32,7 +32,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 28/01/2016.
+ * @author Mark Humphreys
+ * Date 28/01/2016.
  *
  * Encapsulates the functionality of 'containers' i.e. elements that
  * host other elements

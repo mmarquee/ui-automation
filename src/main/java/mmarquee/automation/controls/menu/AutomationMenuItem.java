@@ -31,7 +31,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 10/02/2016.
+ * @author Mark Humphreys
+ * Date 10/02/2016.
  *
  * Wrapper for the MenuItem element.
  */

@@ -27,7 +27,8 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 16/02/2016.
+ * @author Mark Humphreys
+ * Date 16/02/2016.
  *
  * Wrapper for the Document element.
  *

@@ -47,7 +47,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 /**
- * Created by Mark Humphreys on 19/07/2016.
+ * @author Mark Humphreys
+ * Date 19/07/2016.
  *
  * Currently these tests require windows to run
  */

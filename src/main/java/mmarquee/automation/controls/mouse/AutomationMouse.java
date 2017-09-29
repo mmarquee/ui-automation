@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 6/02/2016.
  *
  * Wrapper for Robot, used if no other option is available.
  */

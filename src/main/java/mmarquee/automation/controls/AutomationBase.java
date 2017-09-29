@@ -52,18 +52,31 @@ import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
- * Created by Mark Humphreys on 26/01/2016.
+ * @author Mark Humphreys
+ * Date 26/01/2016.
  *
  * The base for automation.
  */
 public abstract class AutomationBase implements Automatable {
 
+    /**
+     * The logger.
+     */
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
+    /**
+     * The automation element.
+     */
     protected AutomationElement element;
 
-    protected UIAutomation automation = null; // UIAutomation.getInstance();
+    /**
+     * The automation library wrapper.
+     */
+    protected UIAutomation automation = null;
 
+    /**
+     * The invoke pattern.
+     */
     protected Invoke invokePattern = null;
 
     /**
@@ -71,7 +84,7 @@ public abstract class AutomationBase implements Automatable {
      *
      * @param element Element to use.
      */
-    public AutomationBase (AutomationElement element) {
+    public AutomationBase(final AutomationElement element) {
         this.element = element;
         this.automation = UIAutomation.getInstance();
     }
@@ -83,7 +96,8 @@ public abstract class AutomationBase implements Automatable {
      * @param element The element.
      * @param automation The automation instance.
      */
-    public AutomationBase (AutomationElement element, UIAutomation automation) {
+    public AutomationBase(final AutomationElement element,
+                          final UIAutomation automation) {
         this.element = element;
         this.automation = automation;
     }
@@ -96,7 +110,9 @@ public abstract class AutomationBase implements Automatable {
      * @param pattern The invoke pattern.
      * @param automation The automation instance.
      */
-    public AutomationBase (AutomationElement element, Invoke pattern, UIAutomation automation) {
+    public AutomationBase(final AutomationElement element,
+                          final Invoke pattern,
+                          final UIAutomation automation) {
         this.element = element;
         this.invokePattern = pattern;
         this.automation = automation;
@@ -110,7 +126,8 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationBase(AutomationElement element, Invoke pattern)
+    public AutomationBase(final AutomationElement element,
+                          final Invoke pattern)
             throws PatternNotFoundException, AutomationException {
         this(element);
         this.invokePattern = pattern;
@@ -494,7 +511,9 @@ public abstract class AutomationBase implements Automatable {
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(TreeScope scope, PointerByReference condition) throws AutomationException {
+    protected List<AutomationElement> findAll(final TreeScope scope,
+                                              final PointerByReference condition)
+            throws AutomationException {
         return this.element.findAll(scope, condition);
     }
 
@@ -730,7 +749,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the toggle pattern for this control
+     * Gets the toggle pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationTogglePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -753,7 +772,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the item container pattern for this control
+     * Gets the item container pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationItemContainerPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -777,7 +796,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the invoke pattern for this control
+     * Gets the invoke pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationInvokePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -800,7 +819,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the text pattern for this control
+     * Gets the text pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationTextPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -822,7 +841,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Is the control enabled
+     * Is the control enabled.
+     *
      * @return Enabled?
      * @throws AutomationException Something is wrong in automation
      */
@@ -831,7 +851,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the bounding rectangle of the control
+     * Gets the bounding rectangle of the control.
+     *
      * @return The bounding rectangle
      * @throws AutomationException Something is wrong in automation
      */
@@ -840,7 +861,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Get the native window handle
+     * Get the native window handle.
+     *
      * @return The handle
      * @throws AutomationException Something is wrong in automation
      */
@@ -850,7 +872,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the ARIA role of the element
+     * Gets the ARIA role of the element.
+     *
      * @return The ARIA role
      * @throws AutomationException Something is wrong in automation
      */
@@ -859,7 +882,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * The current orientation of the element
+     * The current orientation of the element.
+     *
      * @return The orientation
      * @throws AutomationException Something has gone wrong
      */
@@ -868,7 +892,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current class name
+     * Gets the current class name.
+     *
      * @return The class name
      * @throws AutomationException Something has gone wrong
      */
@@ -877,7 +902,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the runtime id
+     * Gets the runtime id.
+     *
      * @return The runtime id
      * @throws AutomationException Throws big error, so not implemented
      */
@@ -887,7 +913,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current framework ID for the element
+     * Gets the current framework ID for the element.
+     *
      * @return The framework id
      * @throws AutomationException Something is wrong in automation
      */
@@ -896,7 +923,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current provider description
+     * Gets the current provider description.
+     *
      * @return The provider description
      * @throws AutomationException Something is wrong in automation
      */
@@ -905,7 +933,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current item status
+     * Gets the current item status.
+     *
      * @return The item status
      * @throws AutomationException Something is wrong in automation
      */
@@ -914,7 +943,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current accelerator key for the element
+     * Gets the current accelerator key for the element.
+     *
      * @return The key
      * @throws AutomationException Something is wrong in automation
      */
@@ -923,7 +953,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Shows the context menu for the control
+     * Shows the context menu for the control.
+     *
      * @throws AutomationException Failed to get the correct interface
      */
     public void showContextMenu() throws AutomationException {
@@ -945,7 +976,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Invokes the click event for this control
+     * Invokes the click event for this control.
      * </p>
      * @throws AutomationException Error in the automation library
      * @throws PatternNotFoundException Could not find the invoke pattern
@@ -964,13 +995,14 @@ public abstract class AutomationBase implements Automatable {
     
 
     /**
-     * Gets child Elements
+     * Gets child Elements.
      *
      * @param deep set to true to get also children of children
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected List<AutomationElement> getChildElements(boolean deep) throws AutomationException {
+    protected List<AutomationElement> getChildElements(final boolean deep)
+            throws AutomationException {
         return this.findAll(new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
         		this.createTrueCondition());
     }
@@ -987,14 +1019,15 @@ public abstract class AutomationBase implements Automatable {
 //    }
 
     /**
-     * Gets child controls
+     * Gets child controls.
      *
      * @param deep set to true to get also children of children
      * @return The matching element
      * @throws AutomationException Did not find the element
      * @throws PatternNotFoundException Expected pattern not found 
      */
-    public List<AutomationBase> getChildren(boolean deep) throws AutomationException, PatternNotFoundException {
+    public List<AutomationBase> getChildren(final boolean deep)
+            throws AutomationException, PatternNotFoundException {
         List<AutomationElement> elements = this.getChildElements(deep);
         List<AutomationBase> collection = new LinkedList<AutomationBase>();
         

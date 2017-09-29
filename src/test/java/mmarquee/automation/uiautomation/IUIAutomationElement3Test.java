@@ -32,7 +32,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 01/06/2017.
+ * @author Mark Humphreys
+ * Date 01/06/2017.
  *
  * Tests for the IUIAutomationElement3 class
  *

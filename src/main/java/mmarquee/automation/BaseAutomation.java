@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 08/02/2017.
+ * @author Mark Humphreys
+ * Date 08/02/2017.
  *
  * Base class to have underlying behaviour.
  */

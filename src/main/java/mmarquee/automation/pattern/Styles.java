@@ -24,7 +24,8 @@ import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
 
 /**
- * Created by Mark Humphreys on 01/03/2016.
+ * @author Mark Humphreys
+ * Date 01/03/2016.
  *
  * Wrapper around the styles pattern.
  *

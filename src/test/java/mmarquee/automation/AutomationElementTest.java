@@ -40,7 +40,8 @@ import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 20/07/2016.
+ * @author Mark Humphreys
+ * Date 20/07/2016.
  *
  * Tests for the AutomationElement class behaviour.
  *

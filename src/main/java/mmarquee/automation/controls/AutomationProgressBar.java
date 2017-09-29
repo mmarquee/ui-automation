@@ -23,7 +23,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
 /**
- * Created by Mark Humphreys on 25/04/2016.
+ * @author Mark Humphreys
+ * Date 25/04/2016.
  *
  * Wrapper for the ProgressBar control.
  */

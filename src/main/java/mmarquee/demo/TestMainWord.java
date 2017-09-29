@@ -19,7 +19,8 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on Excel.
  */

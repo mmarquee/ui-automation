@@ -23,7 +23,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 05/06/2017.
+ * @author Mark Humphreys
+ * Date 05/06/2017.
  */
 public class IUIAutomationElementArrayConverter {
     private static int UIAutomationElementArray_Methods = 5; // 0-2 IUnknown, 3-4 IUIAutomationElement3

@@ -40,7 +40,8 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 18/10/2016.
+ * @author Mark Humphreys
+ * Date 18/10/2016.
  *
  * Tests of the IUIAutomationElement interface.
  *

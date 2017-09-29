@@ -22,7 +22,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
 /**
- * Created by Mark Humphreys on 02/02/2017.
+ * @author Mark Humphreys
+ * Date 02/02/2017.
  *
  * Wrapper for the AutomationTreeWalker.
  */
@@ -46,7 +47,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The sibling element, or null if not found.
      * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getNextSiblingElement(final AutomationElement element)
+    public AutomationElement getNextSiblingElement
+                        (final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -69,7 +71,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The previous sibling element, or null if not found.
      * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getPreviousSiblingElement(final AutomationElement element)
+    public AutomationElement getPreviousSiblingElement
+                        (final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 

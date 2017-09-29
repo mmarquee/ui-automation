@@ -22,7 +22,8 @@ import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.AutomationReBar;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation library on a non-Delphi, non-WPF application, and see
  * whether we can get to all the bits of the UI
@@ -44,7 +45,7 @@ class TestExplorer extends TestBase {
         }
 
         try {
-            application.waitForInputIdle(5000);
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait for input idle for some reason");
         }

@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 06/03/2016.
+ * @author Mark Humphreys
+ * Date 06/03/2016.
  * <p>
  * Wrapper for the underlying automation element.
  * </p>

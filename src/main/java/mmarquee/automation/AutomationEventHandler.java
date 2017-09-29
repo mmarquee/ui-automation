@@ -18,7 +18,8 @@ package mmarquee.automation;
 import mmarquee.automation.uiautomation.IUIAutomationEventHandler;
 
 /**
- * Created by Mark Humphreys on 05/02/2017.
+ * @author Mark Humphreys
+ * Date 05/02/2017.
  *
  * Wrapper for event handling.
  */

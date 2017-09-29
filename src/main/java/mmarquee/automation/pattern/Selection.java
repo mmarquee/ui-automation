@@ -29,7 +29,8 @@ import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the Selection pattern.
  */

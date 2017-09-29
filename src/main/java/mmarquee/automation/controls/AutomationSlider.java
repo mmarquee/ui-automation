@@ -8,7 +8,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
 /**
- * Created by Mark Humphreys on 15/02/2016.
+ * @author Mark Humphreys
+ * Date 15/02/2016.
  *
  * Wrapper for the Slider element.
  *

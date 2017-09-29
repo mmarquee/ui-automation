@@ -24,7 +24,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 31/01/2016.
+ * @author Mark Humphreys
+ * Date 31/01/2016.
  *
  * Wrapper for the RadioButton element.
  */

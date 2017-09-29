@@ -24,7 +24,8 @@ import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Value;
 
 /**
- * Created by Mark Humphreys on 26/01/2016.
+ * @author Mark Humphreys
+ * Date 26/01/2016.
  *
  * Wrapper around the edit box element.
  */

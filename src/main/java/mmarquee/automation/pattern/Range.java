@@ -26,7 +26,8 @@ import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 
 /**
- * Created by Mark Humphreys on 01/03/2016.
+ * @author Mark Humphreys
+ * Date 01/03/2016.
  *
  * Wrapper for the range pattern.
  */

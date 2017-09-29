@@ -16,7 +16,8 @@
 package mmarquee.automation;
 
 /**
- * Created by Mark Humphreys on 28/01/2016.
+ * @author Mark Humphreys
+ * Date 28/01/2016.
  *
  * Automation Pattern Identifiers
  * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee671195%28v=vs.85%29.aspx

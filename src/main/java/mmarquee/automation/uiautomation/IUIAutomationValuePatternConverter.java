@@ -24,7 +24,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 05/06/2017.
+ * @author Mark Humphreys
+ * Date 05/06/2017.
  */
 public class IUIAutomationValuePatternConverter {
     private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationValuePattern

@@ -30,7 +30,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 03/12/2016.
+ * @author Mark Humphreys
+ * Date 03/12/2016.
  *
  * Tests for AutomationTitleBar.
  */

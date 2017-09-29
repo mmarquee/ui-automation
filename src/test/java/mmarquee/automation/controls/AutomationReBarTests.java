@@ -29,7 +29,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 31/05/2017.
+ * @author Mark Humphreys
+ * Date 31/05/2017.
  *
  * Basic tests for ReBar.
  */
