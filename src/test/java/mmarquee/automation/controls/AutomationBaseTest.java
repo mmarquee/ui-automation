@@ -50,7 +50,8 @@ import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * @author Mark Humphreys
+ * Date 28/11/2016.
  *
  * Tests for AutomationBase class
  *
@@ -601,7 +602,7 @@ public class AutomationBaseTest {
         IUIAutomationElement3 el = Mockito.mock(IUIAutomationElement3.class);
 
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        element.element = el;
+        element.setElement(el);
 
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);

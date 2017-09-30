@@ -40,7 +40,8 @@ import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 20/07/2016.
+ * @author Mark Humphreys
+ * Date 20/07/2016.
  *
  * Tests for the AutomationElement class behaviour.
  *
@@ -84,7 +85,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 		// Using mock since desktop does not provide an automation ID
 		AutomationElement element = getMocketAutomationElement();
 		
-        when(element.element.getCurrentAutomationId(any()))
+        when(element.getElement().getCurrentAutomationId(any()))
         .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
 
         assertEquals("myAutomationId", element.getAutomationId());

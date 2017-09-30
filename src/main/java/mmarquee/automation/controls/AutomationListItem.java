@@ -23,7 +23,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 09/02/2016.
+ * @author Mark Humphreys
+ * Date 09/02/2016.
  *
  * Wrapper for the ListItem element.
  */

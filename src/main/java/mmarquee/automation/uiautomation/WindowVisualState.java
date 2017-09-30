@@ -19,19 +19,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Mapping for the Windows Visual state.
  */
 public enum WindowVisualState {
+    /**
+     * Normal state.
+     */
     Normal(0),
+
+    /**
+     * Maximized state.
+     */
     Maximized(1),
+
+    /**
+     * Minimized state.
+     */
     Minimized(2);
 
+    /**
+     * Underlying value.
+     */
     private int value;
 
+    /**
+     * Gets the state.
+     * @return The visual state.
+     */
     public int getValue() {
         return this.value;
     }
 
-    WindowVisualState (int value) {
+    /**
+     * Constructor for WindowVisualState.
+     * @param value The value of the state.
+     */
+    WindowVisualState(final int value) {
         this.value = value;
     }
 
@@ -47,11 +70,10 @@ public enum WindowVisualState {
      * @param i The given integer
      * @return The value (as an WindowVisualState)
      */
-    public static WindowVisualState fromInt(int i) {
+    public static WindowVisualState fromInt(final int i) {
         WindowVisualState type = intToTypeMap.get(Integer.valueOf(i));
         if (type == null)
             return WindowVisualState.Normal;
         return type;
     }
-
 }

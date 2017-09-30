@@ -16,7 +16,8 @@
 package mmarquee.automation.controls;
 
 /**
- * Created by Mark Humphreys on 21/09/2016.
+ * @author Mark Humphreys
+ * Date 21/09/2016.
  */
 public interface Focusable extends Automatable {
     void focus();

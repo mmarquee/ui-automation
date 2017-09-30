@@ -41,7 +41,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * @author Mark Humphreys
+ * Date 29/11/2016.
  *
  * Tests for ComboBox functionality
  */
@@ -76,7 +77,7 @@ public class AutomationComboBoxTest2 {
             throws AutomationException, PatternNotFoundException {
         when(elem.findAll(any(), any(), any())).thenReturn(-1);
 
-        element.element = elem;
+        element.setElement(elem);
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
@@ -90,7 +91,7 @@ public class AutomationComboBoxTest2 {
             throws AutomationException, PatternNotFoundException {
         when(elem.findAll(any(), any(), any())).thenReturn(0);
 
-        element.element = elem;
+        element.setElement(elem);
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 

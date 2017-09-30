@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.controls.menu;
 
-import java.awt.AWTException;
-import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -38,7 +35,8 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConver
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 09/02/2016.
+ * @author Mark Humphreys
+ * Date 09/02/2016.
  *
  * Wrapper for the MainMenu element.
  */

@@ -23,36 +23,42 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 20/02/2016.
+ * @author Mark Humphreys
+ * Date 20/02/2016.
  *
  * Wrapper for the TreeViewItem element.
  */
-public class AutomationTreeViewItem extends AutomationBase implements Selectable, Clickable, Expandable {
+public class AutomationTreeViewItem
+        extends AutomationBase
+        implements Selectable, Clickable, Expandable {
 
     private ExpandCollapse expandCollapsePattern;
     private SelectionItem selectItemPattern;
 
     /**
-     * Construct the AutomationTreeViewItem
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationTreeViewItem.
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationTreeViewItem(AutomationElement element)
+    public AutomationTreeViewItem(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
     /**
-     * Construct the AutomationTreeViewItem
-     * @param element The element
-     * @param selection SelectionItem pattern
-     * @param expandCollapsePattern The expand pattern
-     * @param invoke Invoke pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationTreeViewItem.
+     * @param element The element.
+     * @param selection SelectionItem pattern.
+     * @param expandCollapsePattern The expand pattern.
+     * @param invoke Invoke pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    AutomationTreeViewItem(AutomationElement element, SelectionItem selection, ExpandCollapse expandCollapsePattern, Invoke invoke)
+    AutomationTreeViewItem(final AutomationElement element,
+                           final SelectionItem selection,
+                           final ExpandCollapse expandCollapsePattern,
+                           final Invoke invoke)
             throws PatternNotFoundException, AutomationException {
         super(element,invoke);
         this.selectItemPattern = selection;
@@ -60,11 +66,12 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     }
 
     /**
-     * Select the item
-     * @throws AutomationException Automation library issue
-     * @throws PatternNotFoundException Pattern not found
+     * Select the item.
+     * @throws AutomationException Automation library issue.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public void select() throws AutomationException, PatternNotFoundException {
+    public void select()
+            throws AutomationException, PatternNotFoundException {
         if (this.selectItemPattern == null) {
             this.selectItemPattern = this.getSelectItemPattern();
         }
@@ -76,11 +83,12 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     }
 
     /**
-     * Is this item selected?
-     * @return True if selected
-     * @throws AutomationException Automation library issue
+     * Is this item selected.
+     * @return True if selected.
+     * @throws AutomationException Automation library issue.
      */
-    public boolean isSelected() throws AutomationException, PatternNotFoundException {
+    public boolean isSelected()
+            throws AutomationException, PatternNotFoundException {
         if (this.selectItemPattern == null) {
             this.selectItemPattern = this.getSelectItemPattern();
         }
@@ -92,39 +100,45 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     }
 
     /**
-     * Click the item
-     * @throws AutomationException Automation library issue
-     * @throws PatternNotFoundException Pattern not found
+     * Click the item.
+     * @throws AutomationException Automation library issue.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public void click() throws AutomationException, PatternNotFoundException {
+    public void click()
+            throws AutomationException, PatternNotFoundException {
         super.invoke();
     }
 
     /**
-     * Is the control expanded
-     * @return True if expanded
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Is the control expanded.
+     * @return True if expanded.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public boolean isExpanded() throws AutomationException, PatternNotFoundException {
+    public boolean isExpanded()
+            throws AutomationException, PatternNotFoundException {
         if (this.expandCollapsePattern == null) {
                 this.expandCollapsePattern = this.getExpandCollapsePattern();
         }
+
         if (this.expandCollapsePattern != null) {
             return expandCollapsePattern.isExpanded();
         }
+
         throw new PatternNotFoundException("Collapse state cannot be determined");
     }
 
     /**
-     * Collapses the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Collapses the element.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public void collapse() throws AutomationException, PatternNotFoundException {
+    public void collapse()
+            throws AutomationException, PatternNotFoundException {
         if (this.expandCollapsePattern == null) {
                 this.expandCollapsePattern = this.getExpandCollapsePattern();
         }
+
         if (this.expandCollapsePattern != null) {
                 this.expandCollapsePattern.collapse();
         } else {
@@ -133,14 +147,16 @@ public class AutomationTreeViewItem extends AutomationBase implements Selectable
     }
 
     /**
-     * Expands the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
+     * Expands the element.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public void expand() throws AutomationException, PatternNotFoundException {
+    public void expand()
+            throws AutomationException, PatternNotFoundException {
         if (this.expandCollapsePattern == null) {
                 this.expandCollapsePattern = this.getExpandCollapsePattern();
         }
+
         if (this.expandCollapsePattern != null) {
                 this.expandCollapsePattern.expand();
         } else {

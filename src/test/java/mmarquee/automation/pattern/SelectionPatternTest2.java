@@ -27,7 +27,8 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 
 /**
- * Created by Mark Humphreys on 15/01/2017.
+ * @author Mark Humphreys
+ * Date 15/01/2017.
  *
  * Tests for the lower level calls to COM used in the Selection pattern.
  */

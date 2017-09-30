@@ -22,7 +22,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 27/01/2017.
+ * @author Mark Humphreys
+ * Date 27/01/2017.
  */
 public interface IUIAutomationGridItemPattern extends IUnknown {
     /**

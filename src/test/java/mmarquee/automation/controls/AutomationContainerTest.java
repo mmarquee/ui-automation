@@ -40,7 +40,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 12/01/2017.
+ * @author Mark Humphreys
+ * Date 12/01/2017.
  *
  * These tests currently require that they are run in a Windows environment
  */
@@ -988,7 +989,7 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementClassName(elem, "UIRibbonCommandBarDock");
      
         AutomationElement el = Mockito.mock(AutomationElement.class);
-        el.element = elem;
+        el.setElement(elem);
 
         when(el.findAll(any(), any())).thenReturn(list);
 

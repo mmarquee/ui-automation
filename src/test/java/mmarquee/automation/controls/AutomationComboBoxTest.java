@@ -17,10 +17,7 @@ package mmarquee.automation.controls;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,7 +25,6 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Before;
@@ -37,17 +33,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.sun.jna.ptr.IntByReference;
-
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * @author Mark Humphreys
+ * Date 29/11/2016.
  *
  * Tests for Combobox functionality
  */
@@ -101,7 +94,7 @@ public class AutomationComboBoxTest {
     public void testGetCombobox_GetExpanded_Gets_Result_From_Pattern() throws Exception {
         when(collapse.isExpanded()).thenReturn(true);
 
-        element.element = elem;
+        element.setElement(elem);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);

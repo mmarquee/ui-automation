@@ -22,7 +22,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreyson 05/06/2017.
+ * @author Mark Humphreys
+ * Date 05/06/2017.
  */
 public class IUIAutomationInvokePatternConverter {
     private static int UIAutomationInvokePattern_Methods = 4; // 0-2 IUnknown, 3 IUIAutomationInvokePattern

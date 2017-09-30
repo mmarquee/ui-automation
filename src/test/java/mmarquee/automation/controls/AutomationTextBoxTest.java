@@ -11,7 +11,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 11/12/2016.
+ * @author Mark Humphreys
+ * Date 11/12/2016.
  */
 public class AutomationTextBoxTest {
     static {

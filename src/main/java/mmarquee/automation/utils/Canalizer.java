@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * Wraps an interface instance in a way that all calls to interface methods originate from the same thread
+ * Wraps an interface instance in a way that all calls to interface methods originate from the same thread.
  *
  * @author Pascal Bihler
  *

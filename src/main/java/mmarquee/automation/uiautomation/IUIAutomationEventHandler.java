@@ -24,7 +24,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 04/02/2017.
+ * @author Mark Humphreys
+ * Date 04/02/2017.
  */
 public interface IUIAutomationEventHandler extends IUnknown {
 

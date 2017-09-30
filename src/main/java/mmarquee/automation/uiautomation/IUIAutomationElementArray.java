@@ -22,7 +22,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 12/07/2016.
+ * @author Mark Humphreys
+ * Date 12/07/2016.
  */
 public interface IUIAutomationElementArray extends IUnknown {
 

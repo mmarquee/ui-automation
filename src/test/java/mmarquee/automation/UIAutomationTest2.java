@@ -46,7 +46,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 22/05/2017.
+ * @author Mark Humphreys
+ * Date 22/05/2017.
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Utils.class })

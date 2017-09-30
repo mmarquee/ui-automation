@@ -19,7 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Mark Humphreys on 13/07/2016.
+ * @author Mark Humphreys
+ * Date 13/07/2016.
  */
 public enum ToggleState {
     Off(0),

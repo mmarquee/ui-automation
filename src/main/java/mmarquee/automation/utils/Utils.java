@@ -27,18 +27,22 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by Mark Humphreys on 18/03/2016.
+ * @author Mark Humphreys
+ * Date 18/03/2016.
  *
  * Utility methods used in the project
  */
 public class Utils {
     /**
-     * Gets the handle of a process from the process entry
+     * Gets the handle of a process from the process entry.
+     *
      * @param processEntry The processEntry to use
      * @return The handle
      * @throws AutomationException Thrown if the handle cannot be determined
      */
-    public static WinNT.HANDLE getHandleFromProcessEntry(Tlhelp32.PROCESSENTRY32.ByReference processEntry) throws AutomationException {
+    public static WinNT.HANDLE getHandleFromProcessEntry
+                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry)
+            throws AutomationException {
         WinNT.HANDLE handle = Kernel32.INSTANCE.OpenProcess (
                 0x0400 |    /* PROCESS_QUERY_INFORMATION */
                 0x0800 |    /* PROCESS_SUSPEND_RESUME */
@@ -55,12 +59,15 @@ public class Utils {
     }
 
     /**
-     * Finds the given process in the process list
-     * @param processEntry The process entry
-     * @param command Command
-     * @return The found process entry
+     * Finds the given process in the process list.
+     *
+     * @param processEntry The process entry.
+     * @param command Command.
+     * @return The found process entry.
      */
-    public static boolean findProcessEntry(Tlhelp32.PROCESSENTRY32.ByReference processEntry, String... command) {
+    public static boolean findProcessEntry
+                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
+                     final String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
 
@@ -87,12 +94,14 @@ public class Utils {
     }
 
     /**
-     * Starts the given command
-     * @param command The command to start
-     * @return The process
-     * @throws java.io.IOException something has gone wrong
+     * Starts the given command.
+     *
+     * @param command The command to start.
+     * @return The process.
+     * @throws java.io.IOException something has gone wrong.
      */
-    public static Process startProcess(String... command) throws java.io.IOException {
+    public static Process startProcess(final String... command)
+            throws java.io.IOException {
         ProcessBuilder pb = createProcessBuilder(command);
 
         return pb.start();
@@ -100,20 +109,23 @@ public class Utils {
 
     /**
      * Wrapper around creation of ProcessBuilder object.
+     *
      * @param command The command line to use
      * @return The created ProcessBuilder object.
      */
-    public static ProcessBuilder createProcessBuilder (String... command) {
+    public static ProcessBuilder createProcessBuilder(final String... command) {
         return new ProcessBuilder(command);
     }
 
     /**
-     * Starts the given command, setting the working directory
-     * @param command The command to start
-     * @return The process
-     * @throws java.io.IOException something has gone wrong
+     * Starts the given command, setting the working directory.
+     *
+     * @param command The command to start.
+     * @return The process.
+     * @throws java.io.IOException something has gone wrong.
      */
-    public static Process startProcessWithWorkingDirectory(String... command) throws java.io.IOException {
+    public static Process startProcessWithWorkingDirectory(final String... command)
+            throws java.io.IOException {
         ProcessBuilder pb = createProcessBuilder(command);
 
         String directory = new File(command[0]).getParent();
@@ -124,30 +136,40 @@ public class Utils {
     }
 
     /**
-     * Quits the given process
-     * @param handle The handle to quit
+     * Quits the given process.
+     *
+     * @param handle The handle to quit.
      */
-    public static void quitProcess(WinDef.HWND handle) {
-        User32.INSTANCE.PostMessage(handle, WinUser.WM_QUIT, null, null);
+    public static void quitProcess(final WinDef.HWND handle) {
+        User32.INSTANCE.PostMessage(handle,
+                WinUser.WM_QUIT,
+                null,
+                null);
     }
 
     /**
-     * Closes the given process
-     * @param handle The handle to close
+     * Closes the given process.
+     *
+     * @param handle The handle to close.
      */
-    public static void closeProcess(WinDef.HWND handle) {
-        User32.INSTANCE.PostMessage(handle, WinUser.WM_CLOSE, null, null);
+    public static void closeProcess(final WinDef.HWND handle) {
+        User32.INSTANCE.PostMessage(handle,
+                WinUser.WM_CLOSE,
+                null,
+                null);
     }
 
     /**
      * Captures the window.
      *
-     * @param hwnd The window to capture
-     * @param filename Name to save the output into
-     * @throws AWTException Robot exception
-     * @throws IOException IO Exception
+     * @param hwnd The window to capture.
+     * @param filename Name to save the output into.
+     * @throws AWTException Robot exception.
+     * @throws IOException IO Exception.
      */
-    public static void capture(WinDef.HWND hwnd, String filename) throws AWTException, IOException, Win32Exception {
+    public static void capture(final WinDef.HWND hwnd,
+                               final String filename)
+            throws AWTException, IOException, Win32Exception {
         WinDef.RECT rect = new WinDef.RECT();
 
         if (!User32.INSTANCE.GetWindowRect(hwnd, rect)) {
@@ -164,11 +186,12 @@ public class Utils {
     /**
      * Captures the screen.
      *
-     * @param filename The filename
-     * @throws AWTException Robot exception
-     * @throws IOException IO Exception
+     * @param filename The filename.
+     * @throws AWTException Robot exception.
+     * @throws IOException IO Exception.
      */
-    public static void captureScreen(String filename) throws AWTException, IOException {
+    public static void captureScreen(final String filename)
+            throws AWTException, IOException {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }

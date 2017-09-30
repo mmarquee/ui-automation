@@ -18,7 +18,8 @@ package mmarquee.automation.pattern;
 import com.sun.jna.Pointer;
 
 /**
- * Created by Mark Humphreys on 28/02/2016.
+ * @author Mark Humphreys
+ * Date 28/02/2016.
  *
  * Interface describing the basic behaviour of a pattern.
  */

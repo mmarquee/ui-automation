@@ -52,75 +52,104 @@ import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
- * Created by Mark Humphreys on 26/01/2016.
+ * @author Mark Humphreys
+ * Date 26/01/2016.
  *
  * The base for automation.
  */
 public abstract class AutomationBase implements Automatable {
 
+    /**
+     * The logger.
+     */
     final Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
+    /**
+     * The automation element.
+     */
     protected AutomationElement element;
 
-    protected UIAutomation automation = null; // UIAutomation.getInstance();
+    /**
+     * The automation library wrapper.
+     */
+    protected UIAutomation automation = null;
 
+    /**
+     * The invoke pattern.
+     */
     protected Invoke invokePattern = null;
 
     /**
-     * Constructor for the AutomationBase class
-     * @param element Element to use
+     * Constructor for the AutomationBase class.
+     *
+     * @param element Element to use.
      */
-    public AutomationBase (AutomationElement element) {
+    public AutomationBase(final AutomationElement element) {
         this.element = element;
         this.automation = UIAutomation.getInstance();
     }
 
     /**
-     * For mocking, etc. Doo not use as part of 'real' code
-     * @param element The element
-     * @param automation The automation instance
+     * Constructor for the AutomationBase class.
+     *
+     * For mocking, etc. Doo not use as part of 'real' code.
+     * @param element The element.
+     * @param automation The automation instance.
      */
-    public AutomationBase (AutomationElement element, UIAutomation automation) {
+    public AutomationBase(final AutomationElement element,
+                          final UIAutomation automation) {
         this.element = element;
         this.automation = automation;
     }
 
-    public AutomationBase (AutomationElement element, Invoke pattern, UIAutomation automation) {
+    /**
+     * Constructor for the AutomationBase class.
+     *
+     * For mocking, etc. Doo not use as part of 'real' code.
+     * @param element The element.
+     * @param pattern The invoke pattern.
+     * @param automation The automation instance.
+     */
+    public AutomationBase(final AutomationElement element,
+                          final Invoke pattern,
+                          final UIAutomation automation) {
         this.element = element;
         this.invokePattern = pattern;
         this.automation = automation;
     }
 
     /**
-     * Constructor for the AutomationBase
-     * @param element The underlying automation element
-     * @param pattern The pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationBase.
+     *
+     * @param element The underlying automation element.
+     * @param pattern The pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationBase(AutomationElement element, Invoke pattern)
+    public AutomationBase(final AutomationElement element,
+                          final Invoke pattern)
             throws PatternNotFoundException, AutomationException {
         this(element);
         this.invokePattern = pattern;
     }
     
     /**
-     * Gets the underlying automation element
-     * @return The automation element
+     * Gets the underlying automation element.
+     *
+     * @return The automation element.
      */
     public AutomationElement getElement() {
         return this.element;
     }
-    
 
     /**
-     * Throws an exception if the element's class name does not equal the expected one
+     * Throws an exception if the element's class name does not equal the expected one.
      * 
-     * @param expectedClassName the expected className
-     * @throws AutomationException if automation access failed
-     * @throws ElementNotFoundException if the className was inconsistent
+     * @param expectedClassName the expected className.
+     * @throws AutomationException if automation access failed.
      */
-	protected void assertClassName(String expectedClassName) throws AutomationException, ElementNotFoundException {
+	protected void assertClassName(final String expectedClassName)
+            throws AutomationException {
         String cName = element.getClassName();
 		if ((cName == null && expectedClassName == null)
 				|| (cName != null && cName.equals(expectedClassName))) {
@@ -130,11 +159,12 @@ public abstract class AutomationBase implements Automatable {
 	}
 
     /**
-     * Checks whether a pattern is available
-     * @param property pattern to search for
-     * @return True if available
+     * Checks whether a pattern is available.
+     *
+     * @param property pattern to search for.
+     * @return True if available.
      */
-    private boolean isPatternAvailable(PropertyID property) {
+    private boolean isPatternAvailable(final PropertyID property) {
         try {
             return !this.element.getPropertyValue(property.getValue()).equals(0);
         } catch (AutomationException ex) {
@@ -143,162 +173,182 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Is the dock pattern available
-     * @return Yes or no
+     * Is the dock pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isDockPatternAvailable () {
+    boolean isDockPatternAvailable() {
         return isPatternAvailable(PropertyID.IsDockPatternAvailable);
     }
 
     /**
-     * Is the expand/collapse pattern available
-     * @return Yes or no
+     * Is the expand/collapse pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isExpandCollapsePatternAvailable () {
+    boolean isExpandCollapsePatternAvailable() {
         return isPatternAvailable(PropertyID.IsExpandCollapsePatternAvailable);
     }
 
     /**
-     * Is the gird item pattern available
-     * @return Yes or no
+     * Is the gird item pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isGridItemPatternAvailable () {
+    boolean isGridItemPatternAvailable() {
         return isPatternAvailable(PropertyID.IsGridItemPatternAvailable);
     }
 
     /**
-     * Is the multiple view pattern available
-     * @return Yes or no
+     * Is the multiple view pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isMultipleViewPatternAvailable () {
+    boolean isMultipleViewPatternAvailable() {
         return isPatternAvailable(PropertyID.IsMultipleViewPatternAvailable);
     }
 
     /**
-     * Is the invoke pattern available
-     * @return Yes or no
+     * Is the invoke pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isInvokePatternAvailable () {
+    boolean isInvokePatternAvailable() {
         return isPatternAvailable(PropertyID.IsInvokePatternAvailable);
     }
 
     /**
-     * Is the grid pattern available
-     * @return Yes or no
+     * Is the grid pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isGridPatternAvailable () {
+    boolean isGridPatternAvailable() {
         return isPatternAvailable(PropertyID.IsGridPatternAvailable);
     }
 
     /**
-     * Is the range value pattern available
-     * @return Yes or no
+     * Is the range value pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isRangeValuePatternAvailable () {
+    boolean isRangeValuePatternAvailable() {
         return isPatternAvailable(PropertyID.IsRangeValuePatternAvailable);
     }
 
     /**
-     * Is the scroll pattern available
-     * @return Yes or no
+     * Is the scroll pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isScrollPatternAvailable () {
+    boolean isScrollPatternAvailable() {
         return isPatternAvailable(PropertyID.IsScrollPatternAvailable);
     }
 
     /**
-     * Is the selection item pattern available
-     * @return Yes or no
+     * Is the selection item pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isSelectionItemPatternAvailable () {
+    boolean isSelectionItemPatternAvailable() {
         return isPatternAvailable(PropertyID.IsSelectionItemPatternAvailable);
     }
 
     /**
-     * Is the scroll item pattern available
-     * @return Yes or no
+     * Is the scroll item pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isScrollItemPatternAvailable () {
+    boolean isScrollItemPatternAvailable() {
         return isPatternAvailable(PropertyID.IsScrollItemPatternAvailable);
     }
 
     /**
-     * Is the window pattern available
-     * @return Yes or no
+     * Is the window pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isWindowPatternAvailable () {
+    boolean isWindowPatternAvailable() {
         return isPatternAvailable(PropertyID.IsWindowPatternAvailable);
     }
 
     /**
-     * Is the text pattern available
-     * @return Yes or no
+     * Is the text pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isTextPatternAvailable () {
+    boolean isTextPatternAvailable() {
         return isPatternAvailable(PropertyID.IsTextPatternAvailable);
     }
 
     /**
-     * Is the table item pattern available
-     * @return Yes or no
+     * Is the table item pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isTableItemPatternAvailable () {
+    boolean isTableItemPatternAvailable() {
         return isPatternAvailable(PropertyID.IsTableItemPatternAvailable);
     }
 
     /**
-     * Is the table pattern available
-     * @return Yes or no
+     * Is the table pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isTablePatternAvailable () {
+    boolean isTablePatternAvailable() {
         return isPatternAvailable(PropertyID.IsTablePatternAvailable);
     }
 
     /**
-     * Is the selection pattern available
-     * @return Yes or no
+     * Is the selection pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isSelectionPatternAvailable () {
+    boolean isSelectionPatternAvailable() {
         return isPatternAvailable(PropertyID.IsSelectionPatternAvailable);
     }
 
     /**
-     * Is the transform pattern available
-     * @return Yes or no
+     * Is the transform pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isTransformPatternAvailable () {
+    boolean isTransformPatternAvailable() {
         return isPatternAvailable(PropertyID.IsTransformPatternAvailable);
     }
 
     /**
-     * Is the toggle pattern available
-     * @return Yes or no
+     * Is the toggle pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isTogglePatternAvailable () {
+    boolean isTogglePatternAvailable() {
         return isPatternAvailable(PropertyID.IsTogglePatternAvailable);
     }
 
     /**
-     * Is the item container pattern available
-     * @return Yes or no
+     * Is the item container pattern available.
+     *
+     * @return Yes or no.
      */
     boolean isItemContainerPatternAvailable() {
         return isPatternAvailable(PropertyID.IsItemContainerPatternAvailablePropertyId);
     }
 
     /**
-     * Is the value pattern available
-     * @return Yes or no
+     * Is the value pattern available.
+     *
+     * @return Yes or no.
      */
-    boolean isValuePatternAvailable () {
+    boolean isValuePatternAvailable() {
         return isPatternAvailable(PropertyID.IsValuePatternAvailable);
     }
 
     /**
-     * Is the control off screen?
-     * @return Off screen?
+     * Is the control off screen.
+     *
+     * @return Off screen.
      */
-    boolean isOffScreen () {
+    boolean isOffScreen() {
         try {
             return !this.element.getPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
         } catch (AutomationException ex) {
@@ -307,39 +357,42 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets a clickable point for the control
+     * Gets a clickable point for the control.
      *
      * This is manufactured by getting the bounding rect and finding the middle point.
      *
-     * @return The clickable point
-     * @throws AutomationException Error in automation library
+     * @return The clickable point.
+     * @throws AutomationException Error in automation library.
      */
-    public WinDef.POINT getClickablePoint () throws AutomationException {
+    public WinDef.POINT getClickablePoint() throws AutomationException {
         return this.element.getClickablePoint();
     }
 
     /**
-     * Gets the processID of the element
-     * @return The processId for the element
-     * @throws AutomationException Error in automation library
+     * Gets the processID of the element.
+     *
+     * @return The processId for the element.
+     * @throws AutomationException Error in automation library.
      */
     public Object getProcessId() throws AutomationException {
         return this.element.getProcessId();
     }
 
     /**
-     * Gets the framework used by the element
-     * @return The framework object (really a string)
-     * @throws AutomationException Error in automation library
+     * Gets the framework used by the element.
+     *
+     * @return The framework object (really a string).
+     * @throws AutomationException Error in automation library.
      */
     public Object getFramework() throws AutomationException {
         return this.element.getPropertyValue(PropertyID.FrameworkId.getValue());
     }
 
     /**
-     * Gets the name associated with this element
-     * @return The name of the element
-     * @throws AutomationException Error in automation library
+     * Gets the name associated with this element.
+     *
+     * @return The name of the element.
+     * @throws AutomationException Error in automation library.
      */
     public String getName () throws AutomationException {
         return this.element.getName();
@@ -354,105 +407,126 @@ public abstract class AutomationBase implements Automatable {
  //   }
 
     /**
-     * Finds all of the elements that are associated with this element
-     * @return List List of elements
-     * @throws AutomationException Something is up with automation
+     * Finds all of the elements that are associated with this element.
+     *
+     * @return List List of elements.
+     * @throws AutomationException Something is up with automation.
      */
     protected List<AutomationElement> findAll() throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Children));
     }
 
     /**
-     * Finds the first match for the condition
-     * @param scope The scope of where to look
-     * @param condition The condition to use
-     * @return The found AutomationElement
-     * @throws AutomationException An error has occurred in automation
+     * Finds the first match for the condition.
+     *
+     * @param scope The scope of where to look.
+     * @param condition The condition to use.
+     * @return The found AutomationElement.
+     * @throws AutomationException An error has occurred in automation.
      */
-   protected AutomationElement findFirst(TreeScope scope, PointerByReference condition) throws AutomationException {
+   protected AutomationElement findFirst(final TreeScope scope,
+                                         final PointerByReference condition)
+           throws AutomationException {
         return this.element.findFirst(scope, condition);
    }
 
     /**
      * Finds all of the elements that are associated with the given condition.
-     * @param scope The scope of where to look
-     * @return List list of all the elements found
-     * @throws AutomationException Something is wrong in automation
+     *
+     * @param scope The scope of where to look.
+     * @return List list of all the elements found.
+     * @throws AutomationException Something is wrong in automation.
      */
-    protected List<AutomationElement> findAll(TreeScope scope) throws AutomationException {
+    protected List<AutomationElement> findAll(final TreeScope scope)
+            throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
 
     /**
-     * Creates a true condition
-     * @return The true condition
-     * @throws AutomationException Something is up with automation
+     * Creates a true condition.
+     *
+     * @return The true condition.
+     * @throws AutomationException Something is up with automation.
      */
     protected PointerByReference createTrueCondition() throws AutomationException {
         return this.automation.createTrueCondition();
     }
 
     /**
-     * Creates a name property condition
-     * @param name The name to use
-     * @return The condition
-     * @throws AutomationException Something has gone wrong
+     * Creates a name property condition.
+     *
+     * @param name The name to use.
+     * @return The condition..
+     * @throws AutomationException Something has gone wrong.
      */
-    protected PointerByReference createNamePropertyCondition(String name) throws AutomationException {
+    protected PointerByReference createNamePropertyCondition(final String name)
+            throws AutomationException {
         return this.automation.createNamePropertyCondition(name);
     }
 
     /**
-     * Creates an automation ID property condition
+     * Creates an automation ID property condition.
+     *
      * @param automationId The automation ID to use
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
-    protected PointerByReference createAutomationIdPropertyCondition(String automationId) throws AutomationException {
+    protected PointerByReference createAutomationIdPropertyCondition(final String automationId)
+            throws AutomationException {
         return this.automation.createAutomationIdPropertyCondition(automationId);
     }
 
     /**
-     * Creates a control type property condition
-     * @param id The control type to use
-     * @return The condition
-     * @throws AutomationException Something has gone wrong
+     * Creates a control type property condition.
+     *
+     * @param id The control type to use.
+     * @return The condition.
+     * @throws AutomationException Something has gone wrong.
      */
-    protected PointerByReference createControlTypeCondition(ControlType id) throws AutomationException {
+    protected PointerByReference createControlTypeCondition(final ControlType id)
+            throws AutomationException {
         return this.automation.createControlTypeCondition(id);
     }
 
     /**
-     * Creates an AND condition
-     * @param condition1 First condition
-     * @param condition2 Second condition
-     * @return The And condition
-     * @throws AutomationException Error in automation
+     * Creates an AND condition.
+     *
+     * @param condition1 First condition.
+     * @param condition2 Second condition.
+     * @return The And condition.
+     * @throws AutomationException Error in automation.
      */
-   protected PointerByReference createAndCondition(PointerByReference condition1, PointerByReference condition2) throws AutomationException {
+   protected PointerByReference createAndCondition(final PointerByReference condition1,
+                                                   final PointerByReference condition2)
+           throws AutomationException {
        return this.automation.createAndCondition(condition1, condition2);
    }
 
     /**
      * Finds all of the elements that are associated with the given condition.
+     *
      * @param scope The scope of where to look
      * @param condition The condition to check
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(TreeScope scope, PointerByReference condition) throws AutomationException {
+    protected List<AutomationElement> findAll(final TreeScope scope,
+                                              final PointerByReference condition)
+            throws AutomationException {
         return this.element.findAll(scope, condition);
     }
 
     /**
-     * Gets the underlying automation pattern
+     * Gets the underlying automation pattern.
+     *
      * @param id The control id to look for
      * @return The pattern
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
-    PointerByReference getPattern (int id) throws PatternNotFoundException, AutomationException {
+    PointerByReference getPattern (final int id)
+            throws PatternNotFoundException, AutomationException {
         PointerByReference unknown = this.element.getPattern(id);
 
         if (unknown != null) {
@@ -465,13 +539,14 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the selectItem pattern for this control
+     * Gets the selectItem pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationSelectionItemPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
-    public SelectionItem getSelectItemPattern() throws PatternNotFoundException, AutomationException {
+    public SelectionItem getSelectItemPattern()
+            throws PatternNotFoundException, AutomationException {
         if (this.isSelectionItemPatternAvailable()) {
         	SelectionItem pattern = new SelectionItem();
             PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
@@ -488,13 +563,14 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the selection pattern for this control
+     * Gets the selection pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationSelectionPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
-    Selection getSelectionPattern() throws PatternNotFoundException, AutomationException {
+    Selection getSelectionPattern()
+            throws PatternNotFoundException, AutomationException {
         if (this.isSelectionPatternAvailable()) {
         	Selection pattern = new Selection();
             PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
@@ -511,7 +587,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the value pattern for this control
+     * Gets the value pattern for this control.
      * </p>
      * @return Returns the IUIAutomationValuePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -534,7 +610,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the gridItem pattern for this control
+     * Gets the gridItem pattern for this control.
      * </p>
      * @return Returns the IUIAutomationGridItemPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -557,7 +633,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the rangevalue pattern for this control
+     * Gets the rangevalue pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationRangeValuePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -580,7 +656,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the table pattern for this control
+     * Gets the table pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationTablePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -603,7 +679,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the window pattern for this control
+     * Gets the window pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationWindowPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -626,13 +702,14 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the expand/collapse pattern for this control
+     * Gets the expand/collapse pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationExpandCollapsePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
-    protected ExpandCollapse getExpandCollapsePattern() throws PatternNotFoundException, AutomationException {
+    protected ExpandCollapse getExpandCollapsePattern()
+            throws PatternNotFoundException, AutomationException {
         if (isExpandCollapsePatternAvailable()) {
         	ExpandCollapse pattern = new ExpandCollapse();
             PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
@@ -649,7 +726,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the grid pattern for this control
+     * Gets the grid pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationGridPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -672,7 +749,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the toggle pattern for this control
+     * Gets the toggle pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationTogglePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -695,7 +772,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the item container pattern for this control
+     * Gets the item container pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationItemContainerPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -719,7 +796,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the invoke pattern for this control
+     * Gets the invoke pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationInvokePattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -742,7 +819,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Gets the text pattern for this control
+     * Gets the text pattern for this control.
      * </p>
      * @return  Returns the IUIAutomationTextPattern associated with this control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
@@ -764,7 +841,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Is the control enabled
+     * Is the control enabled.
+     *
      * @return Enabled?
      * @throws AutomationException Something is wrong in automation
      */
@@ -773,7 +851,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the bounding rectangle of the control
+     * Gets the bounding rectangle of the control.
+     *
      * @return The bounding rectangle
      * @throws AutomationException Something is wrong in automation
      */
@@ -782,7 +861,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Get the native window handle
+     * Get the native window handle.
+     *
      * @return The handle
      * @throws AutomationException Something is wrong in automation
      */
@@ -792,7 +872,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the ARIA role of the element
+     * Gets the ARIA role of the element.
+     *
      * @return The ARIA role
      * @throws AutomationException Something is wrong in automation
      */
@@ -801,7 +882,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * The current orientation of the element
+     * The current orientation of the element.
+     *
      * @return The orientation
      * @throws AutomationException Something has gone wrong
      */
@@ -810,7 +892,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current class name
+     * Gets the current class name.
+     *
      * @return The class name
      * @throws AutomationException Something has gone wrong
      */
@@ -819,7 +902,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the runtime id
+     * Gets the runtime id.
+     *
      * @return The runtime id
      * @throws AutomationException Throws big error, so not implemented
      */
@@ -829,7 +913,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current framework ID for the element
+     * Gets the current framework ID for the element.
+     *
      * @return The framework id
      * @throws AutomationException Something is wrong in automation
      */
@@ -838,7 +923,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current provider description
+     * Gets the current provider description.
+     *
      * @return The provider description
      * @throws AutomationException Something is wrong in automation
      */
@@ -847,7 +933,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current item status
+     * Gets the current item status.
+     *
      * @return The item status
      * @throws AutomationException Something is wrong in automation
      */
@@ -856,7 +943,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the current accelerator key for the element
+     * Gets the current accelerator key for the element.
+     *
      * @return The key
      * @throws AutomationException Something is wrong in automation
      */
@@ -865,7 +953,8 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Shows the context menu for the control
+     * Shows the context menu for the control.
+     *
      * @throws AutomationException Failed to get the correct interface
      */
     public void showContextMenu() throws AutomationException {
@@ -887,7 +976,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * <p>
-     * Invokes the click event for this control
+     * Invokes the click event for this control.
      * </p>
      * @throws AutomationException Error in the automation library
      * @throws PatternNotFoundException Could not find the invoke pattern
@@ -906,13 +995,14 @@ public abstract class AutomationBase implements Automatable {
     
 
     /**
-     * Gets child Elements
+     * Gets child Elements.
      *
      * @param deep set to true to get also children of children
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected List<AutomationElement> getChildElements(boolean deep) throws AutomationException {
+    protected List<AutomationElement> getChildElements(final boolean deep)
+            throws AutomationException {
         return this.findAll(new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
         		this.createTrueCondition());
     }
@@ -929,14 +1019,15 @@ public abstract class AutomationBase implements Automatable {
 //    }
 
     /**
-     * Gets child controls
+     * Gets child controls.
      *
      * @param deep set to true to get also children of children
      * @return The matching element
      * @throws AutomationException Did not find the element
      * @throws PatternNotFoundException Expected pattern not found 
      */
-    public List<AutomationBase> getChildren(boolean deep) throws AutomationException, PatternNotFoundException {
+    public List<AutomationBase> getChildren(final boolean deep)
+            throws AutomationException, PatternNotFoundException {
         List<AutomationElement> elements = this.getChildElements(deep);
         List<AutomationBase> collection = new LinkedList<AutomationBase>();
         

@@ -25,7 +25,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 05/06/2017.
+ * @author Mark Humphreys
+ * Date 05/06/2017.
  */
 public class IUIAutomationConverter {
     private static int UIA_COMPARE_ELEMENTS = 3;

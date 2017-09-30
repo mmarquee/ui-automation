@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
@@ -23,7 +22,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 28/01/2016.
+ * @author Mark Humphreys
+ * Date 28/01/2016.
  *
  * Wrapper for the TabItem element.
  */
@@ -32,25 +32,27 @@ public class AutomationTabItem extends AutomationContainer {
     private SelectionItem selectItemPattern;
 
     /**
-     * Construct the AutomationTabItem
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationTabItem.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationTabItem(AutomationElement element)
+    public AutomationTabItem(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
         //selectItemPattern = this.getSelectItemPattern();
     }
 
     /**
-     * Construct the AutomationTabItem
-     * @param element The element
-     * @param pattern The SelectionItem pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationTabItem.
+     * @param element The element.
+     * @param pattern The SelectionItem pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationTabItem(AutomationElement element, SelectionItem pattern)
+    public AutomationTabItem(final AutomationElement element,
+                             final SelectionItem pattern)
             throws PatternNotFoundException, AutomationException {
         super(element);
         this.selectItemPattern = pattern;
@@ -61,7 +63,8 @@ public class AutomationTabItem extends AutomationContainer {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Pattern not found
      */
-    public void selectItem() throws AutomationException, PatternNotFoundException  {
+    public void selectItem()
+            throws AutomationException, PatternNotFoundException  {
         if (this.selectItemPattern == null) {
             selectItemPattern = this.getSelectItemPattern();
         }

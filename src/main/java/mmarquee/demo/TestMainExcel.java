@@ -15,7 +15,6 @@
  */
 package mmarquee.demo;
 
-import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
@@ -23,7 +22,8 @@ import mmarquee.automation.controls.*;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on Excel.
  */

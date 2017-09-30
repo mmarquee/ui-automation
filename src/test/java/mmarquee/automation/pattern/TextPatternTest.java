@@ -45,7 +45,8 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 
 /**
- * Created by Mark Humphreys on 11/01/2017.
+ * @author Mark Humphreys
+ * Date 11/01/2017.
  *
  * Test for the Text pattern.
  */

@@ -35,7 +35,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 02/12/2016.
+ * @author Mark Humphreys
+ * Date 02/12/2016.
  */
 public class AutomationTreeViewItemTest {
     @Mock AutomationElement element;

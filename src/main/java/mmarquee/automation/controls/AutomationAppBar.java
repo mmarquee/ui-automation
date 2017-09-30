@@ -17,11 +17,11 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.UIAutomation;
 
 /**
- * Created by Mark Humphreys on 02/03/2016.
+ * @author Mark Humphreys
+ * Date 02/03/2016.
  *
  * Wrapper for the AppBar element
  */
@@ -36,11 +36,25 @@ public class AutomationAppBar extends AutomationBase {
      * @param element The underlying automation element
      * @throws AutomationException Automation library error
      */
-    public AutomationAppBar(AutomationElement element) throws AutomationException {
+    public AutomationAppBar(final AutomationElement element)
+            throws AutomationException {
         super(element);
     }
 
-    public AutomationAppBar(AutomationElement element, UIAutomation instance) throws AutomationException {
+    /**
+     * <p>
+     * Constructor for the AutomationAppBar.
+     * </p>
+     * <p>
+     * This element seems to be undocumented by Microsoft.
+     * </p>
+     * @param element The underlying automation element.
+     * @param instance The automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    AutomationAppBar(final AutomationElement element,
+                     final UIAutomation instance)
+            throws AutomationException {
         super(element, instance);
     }
 }

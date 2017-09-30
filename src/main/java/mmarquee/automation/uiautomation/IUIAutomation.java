@@ -28,7 +28,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.structure.PointNativeLong;
 
 /**
- * Created by Mark Humphreys on 06/07/2016.
+ * @author Mark Humphreys
+ * Date 06/07/2016.
  *
  * Use this like:
  * PointerByReference pbr=new PointerByReference();

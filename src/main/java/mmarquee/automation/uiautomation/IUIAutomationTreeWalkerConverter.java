@@ -22,7 +22,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 05/06/2017.
+ * @author Mark Humphreys
+ * Date 05/06/2017.
  */
 public class IUIAutomationTreeWalkerConverter {
     private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationTreeWalker

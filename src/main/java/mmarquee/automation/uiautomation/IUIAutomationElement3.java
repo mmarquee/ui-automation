@@ -25,7 +25,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 24/07/2016.
+ * @author Mark Humphreys
+ * Date 24/07/2016.
  *
  * Wrapper around the IUIAutomation3 interface, only implementing the extra methods.
  *

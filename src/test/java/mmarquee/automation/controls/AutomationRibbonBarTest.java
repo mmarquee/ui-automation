@@ -29,7 +29,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * @author Mark Humphreys
+ * Date 28/11/2016.
  *
  * Tests for AutomationRibbonBar.
  */
