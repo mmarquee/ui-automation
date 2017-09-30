@@ -17,19 +17,33 @@ import mmarquee.automation.uiautomation.ToggleState;
  */
 public class Toggle extends BasePattern {
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
      */
     public Toggle() {
         this.IID = IUIAutomationTogglePattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationTogglePattern rawPattern;
 
-    public Toggle(IUIAutomationTogglePattern rawPattern) {
+    /**
+     * Constructor for the toggle pattern.
+     *
+     * @param rawPattern The raw pattern.
+     */
+    public Toggle(final IUIAutomationTogglePattern rawPattern) {
         this.IID = IUIAutomationTogglePattern.IID;
         this.rawPattern = rawPattern;
     }
 
+    /**
+     * Gets the pattern interface.
+     *
+     * @return The toggle pattern interface
+     * @throws AutomationException Something went wrong with the automation library.
+     */
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;
@@ -47,7 +61,8 @@ public class Toggle extends BasePattern {
     }
 
     /**
-     * Toggles the control
+     * Toggles the control.
+     *
      * @throws AutomationException Something has gone wrong
      */
     public void toggle () throws AutomationException {
@@ -58,7 +73,8 @@ public class Toggle extends BasePattern {
     }
 
     /**
-     * Gets the toggled state of the control
+     * Gets the toggled state of the control.
+     *
      * @return The toggled state
      * @throws AutomationException Something has gone wrong
      */
@@ -73,7 +89,13 @@ public class Toggle extends BasePattern {
         return ToggleState.fromInt(ibr.getValue());
     }
 
-    public IUIAutomationTogglePattern convertPointerToInterface(PointerByReference pUnknown) {
+    /**
+     * Converts the pointer to the correct interface.
+     *
+     * @param pUnknown The unknown pointer.
+     * @return The interface from the pointer.
+     */
+    public IUIAutomationTogglePattern convertPointerToInterface(final PointerByReference pUnknown) {
         return IUIAutomationTogglePatternConverter.PointerToInterface(pUnknown);
     }
 }
