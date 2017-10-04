@@ -31,7 +31,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Created by Mark Humphreys on 13/10/2016.
+ * @author Mark Humphreys
+ * Date 13/10/2016.
  *
  * Currently all of these tests require to run on Windows.
  */

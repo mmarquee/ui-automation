@@ -35,7 +35,8 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by Mark Humphreys on 24/11/2016.
+ * @author Mark Humphreys
+ * Date 24/11/2016.
  *
  * Tests of the Utils class.
  */

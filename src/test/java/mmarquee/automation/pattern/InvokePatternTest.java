@@ -38,7 +38,8 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.doReturn;
 
 /**
- * Created by Mark Humphreys on 12/01/2017.
+ * @author Mark Humphreys
+ * Date 12/01/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class InvokePatternTest {

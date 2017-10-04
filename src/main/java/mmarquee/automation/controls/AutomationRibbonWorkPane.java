@@ -23,58 +23,73 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 02/03/2016.
+ * @author Mark Humphreys
+ * Date 02/03/2016.
  *
  * * Specialist pane that represents the RibbonWorkPane of the MS Ribbon control.
  */
 public class AutomationRibbonWorkPane extends AutomationContainer {
-	
+
+    /**
+     * The class name for this panel type.
+     */
 	public final static String CLASS_NAME = "UIRibbonWorkPane";
 	
     /**
-     * Construct the AutomationRibbonWorkPane
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Patter not found
+     * Construct the AutomationRibbonWorkPane.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Patter not found.
      */
-    public AutomationRibbonWorkPane(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationRibbonWorkPane(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
         assertClassName(CLASS_NAME);
     }
 
     /**
-     * Construct the AutomationRibbonWorkPane
-     * @param element The element
-     * @param containerPattern The container Pattern
-     * @param instance Automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Patter not found
+     * Construct the AutomationRibbonWorkPane.
+     *
+     * @param element The element.
+     * @param containerPattern The container Pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Patter not found.
      */
-    public AutomationRibbonWorkPane(AutomationElement element, ItemContainer containerPattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+    AutomationRibbonWorkPane(final AutomationElement element,
+                             final ItemContainer containerPattern,
+                             final UIAutomation instance)
+            throws PatternNotFoundException, AutomationException {
         super(element, containerPattern, instance);
         assertClassName(CLASS_NAME);
     }
 
     /**
-     * Construct the AutomationRibbonWorkPane
-     * @param element The element
-     * @param containerPattern The container Pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Patter not found
+     * Construct the AutomationRibbonWorkPane.
+     *
+     * @param element The element.
+     * @param containerPattern The container Pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Patter not found.
      */
-    public AutomationRibbonWorkPane(AutomationElement element, ItemContainer containerPattern) throws PatternNotFoundException, AutomationException {
+    AutomationRibbonWorkPane(final AutomationElement element,
+                             final ItemContainer containerPattern)
+            throws PatternNotFoundException, AutomationException {
         super(element, containerPattern);
         assertClassName(CLASS_NAME);
     }
 
     /**
-     * Get the AutomationNUIPane associated with the given index
-     * @param index The index
-     * @return The AutomationNUIPane
-     * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Pattern not found
+     * Get the AutomationNUIPane associated with the given index.
+     *
+     * @param index The index.
+     * @return The AutomationNUIPane.
+     * @throws AutomationException Automation issue.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationNUIPane getNUIPane(int index) throws PatternNotFoundException, AutomationException {
+    public AutomationNUIPane getNUIPane(final int index)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationNUIPane(this.getElementByControlType(index, ControlType.Pane, AutomationNUIPane.CLASS_NAME));
     }
 }

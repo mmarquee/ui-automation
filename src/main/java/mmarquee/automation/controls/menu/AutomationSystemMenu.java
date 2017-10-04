@@ -29,7 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 19/02/2016.
+ * @author Mark Humphreys
+ * Date 19/02/2016.
  *
  * Wrapper for the SystemMenu control element.
  */

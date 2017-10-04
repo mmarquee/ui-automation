@@ -24,7 +24,8 @@ import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
 
 /**
- * Created by Mark Humphreys on 27/01/2017.
+ * @author Mark Humphreys
+ * Date 27/01/2017.
  *
  * Wrapper for the GridItem pattern
  */

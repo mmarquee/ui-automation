@@ -19,7 +19,8 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 19/05/2017.
+ * @author Mark Humphreys
+ * Date 19/05/2017.
  */
 public interface Valueable extends Automatable {
     String getValue() throws AutomationException, PatternNotFoundException;

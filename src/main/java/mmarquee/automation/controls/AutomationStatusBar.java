@@ -24,41 +24,49 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 01/02/2016.
+ * @author Mark Humphreys
+ * Date 01/02/2016.
  *
  * Wrapper for the StatusBar element.
  */
 public class AutomationStatusBar extends AutomationContainer {
     /**
-     * Constructor for AutomationStatusBar
-     * @param element The underlying element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Did not find the pattern
+     * Constructor for AutomationStatusBar.
+     * @param element The underlying element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Did not find the pattern.
      */
-    public AutomationStatusBar(AutomationElement element) throws PatternNotFoundException, AutomationException{
+    public AutomationStatusBar(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException{
         super(element);
     }
 
     /**
-     * Constructor for AutomationStatusBar
-     * @param element The underlying element
-     * @param pattern The range pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Did not find the pattern
+     * Constructor for AutomationStatusBar.
+     * @param element The underlying element.
+     * @param pattern The range pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Did not find the pattern.
      */
-    AutomationStatusBar(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException{
+    AutomationStatusBar(final AutomationElement element,
+                        final ItemContainer pattern)
+            throws PatternNotFoundException, AutomationException{
         super(element, pattern);
     }
 
     /**
-     * Constructor for AutomationStatusBar
-     * @param element The underlying element
-     * @param pattern The range pattern
-     * @param instance The automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Did not find the pattern
+     * Constructor for AutomationStatusBar.
+     *
+     * @param element The underlying element.
+     * @param pattern The range pattern.
+     * @param instance The automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Did not find the pattern.
      */
-    AutomationStatusBar(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException{
+    AutomationStatusBar(final AutomationElement element,
+                        final ItemContainer pattern,
+                        final UIAutomation instance)
+            throws PatternNotFoundException, AutomationException{
         super(element, pattern, instance);
     }
 }

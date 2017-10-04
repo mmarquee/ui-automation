@@ -23,57 +23,68 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 02/03/2016.
+ * @author Mark Humphreys
+ * Date 02/03/2016.
  *
  * Specialist pane that represents the RibbonBar
  */
 public class AutomationRibbonBar extends AutomationPanel {
-	
+
+    /**
+     * Control name of the panel type.
+     */
 	public final static String CLASS_NAME = "UIRibbonCommandBarDock";
 	
     /**
-     * Construct the AutomationRibbonBar
-     * @param element The element
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Could not find pattern
+     * Construct the AutomationRibbonBar.
+     * @param element The element.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationRibbonBar(AutomationElement element) throws AutomationException, PatternNotFoundException {
+    public AutomationRibbonBar(final AutomationElement element)
+            throws AutomationException, PatternNotFoundException {
         super(element);
         assertClassName(CLASS_NAME);
     }
 
     /**
-     * Construct the AutomationReBar
-     * @param element The element
-     * @param containerPattern The container Pattern
-     * @param instance Automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Pattern not found
+     * Construct the AutomationReBar.
+     * @param element The element.
+     * @param containerPattern The container Pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationRibbonBar(AutomationElement element, ItemContainer containerPattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+    AutomationRibbonBar(final AutomationElement element,
+                        final ItemContainer containerPattern,
+                        final UIAutomation instance)
+            throws PatternNotFoundException, AutomationException {
         super(element, containerPattern, instance);
         assertClassName(CLASS_NAME);
     }
 
     /**
-     * Construct the AutomationReBar
-     * @param element The element
-     * @param containerPattern The container Pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Pattern not found
+     * Construct the AutomationReBar.
+     * @param element The element.
+     * @param containerPattern The container Pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationRibbonBar(AutomationElement element, ItemContainer containerPattern) throws PatternNotFoundException, AutomationException {
+    AutomationRibbonBar(final AutomationElement element,
+                        final ItemContainer containerPattern)
+            throws PatternNotFoundException, AutomationException {
         super(element, containerPattern);
         assertClassName(CLASS_NAME);
     }
 
     /**
-     * Get the RibbonCommandBar associated with this container
-     * @return The AutomationRibbonBar
-     * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Pattern not found
+     * Get the RibbonCommandBar associated with this container.
+     * @return The AutomationRibbonBar.
+     * @throws AutomationException Automation issue.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationRibbonCommandBar getRibbonCommandBar() throws PatternNotFoundException, AutomationException {
+    public AutomationRibbonCommandBar getRibbonCommandBar()
+            throws PatternNotFoundException, AutomationException {
         return new AutomationRibbonCommandBar(this.getElementByControlType(0, ControlType.Pane, AutomationRibbonCommandBar.CLASS_NAME));
     }
 }

@@ -23,21 +23,26 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
 /**
- * Created by Mark Humphreys on 25/04/2016.
+ * @author Mark Humphreys
+ * Date 25/04/2016.
  *
  * Wrapper for the ProgressBar control.
  */
 public class AutomationProgressBar extends AutomationBase {
 
+    /**
+     * The range pattern.
+     */
     private Range rangePattern;
 
     /**
-     * Construct the AutomationPanel
-     * @param element The element
-     * @throws AutomationException Error in automation library
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationPanel.
+     *
+     * @param element The element.
+     * @throws AutomationException Error in automation library.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationProgressBar(AutomationElement element)
+    public AutomationProgressBar(final AutomationElement element)
             throws AutomationException, PatternNotFoundException {
         super(element);
 
@@ -45,24 +50,29 @@ public class AutomationProgressBar extends AutomationBase {
     }
 
     /**
-     * Construct the AutomationPanel
-     * @param element The element
-     * @param range Range pattern
-     * @param instance Automation instance
+     * Construct the AutomationPanel.
+     *
+     * @param element The element.
+     * @param range Range pattern.
+     * @param instance Automation instance.
      */
-    public AutomationProgressBar(AutomationElement element, Range range, UIAutomation instance) {
+    AutomationProgressBar(final AutomationElement element,
+                          final Range range,
+                          final UIAutomation instance) {
         super(element, instance);
 
         this.rangePattern = range;
     }
 
     /**
-     * Gets the range value
-     * @return The range value
-     * @throws AutomationException Error in automation library
-     * @throws PatternNotFoundException Expected pattern not found
+     * Gets the range value.
+     *
+     * @return The range value.
+     * @throws AutomationException Error in automation library.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public double getRangeValue() throws AutomationException, PatternNotFoundException {
+    public double getRangeValue()
+            throws AutomationException, PatternNotFoundException {
         if (this.rangePattern == null) {
             this.rangePattern = this.getRangePattern();
         }
@@ -71,12 +81,14 @@ public class AutomationProgressBar extends AutomationBase {
     }
 
     /**
-     * Sets the range value
-     * @param value The value to set
-     * @throws AutomationException Error in automation library
-     * @throws PatternNotFoundException Expected pattern not found
+     * Sets the range value.
+     *
+     * @param value The value to set.
+     * @throws AutomationException Error in automation library.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public void setRangeValue(double value) throws AutomationException, PatternNotFoundException {
+    public void setRangeValue(final double value)
+            throws AutomationException, PatternNotFoundException {
         if (this.rangePattern == null) {
             this.rangePattern = this.getRangePattern();
         }

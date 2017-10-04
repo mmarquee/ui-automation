@@ -30,7 +30,8 @@ import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the Grid pattern
  */

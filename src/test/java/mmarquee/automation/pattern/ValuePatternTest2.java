@@ -33,7 +33,8 @@ import org.mockito.stubbing.Answer;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 11/01/2017.
+ * @author Mark Humphreys
+ * Date 11/01/2017.
  *
  * Tests for the Value pattern
  *

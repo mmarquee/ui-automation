@@ -28,7 +28,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 /**
- * Created by Mark Humphreys on 20/11/2016.
+ * @author Mark Humphreys
+ * Date 20/11/2016.
  *
  * Tests for the IUIAutomationWindowPattern code.
  *

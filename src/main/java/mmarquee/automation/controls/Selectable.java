@@ -19,7 +19,8 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 21/09/2016.
+ * @author Mark Humphreys
+ * Date 21/09/2016.
  */
 public interface Selectable extends Automatable {
     void select() throws AutomationException, PatternNotFoundException;

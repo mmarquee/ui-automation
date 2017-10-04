@@ -26,7 +26,8 @@ import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the window pattern.
  */

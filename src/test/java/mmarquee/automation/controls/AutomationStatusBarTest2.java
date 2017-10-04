@@ -31,7 +31,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 25/09/2017
+ * @author Mark Humphreys
+ * Date 25/09/2017
  */
 public class AutomationStatusBarTest2 {
     protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());

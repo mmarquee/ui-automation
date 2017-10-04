@@ -31,7 +31,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * @author Mark Humphreys
+ * Date 29/11/2016.
  *
  * Tests for RibbonCommandBar
  */

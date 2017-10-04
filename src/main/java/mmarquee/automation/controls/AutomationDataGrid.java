@@ -16,55 +16,74 @@
 
 package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.*;
-import mmarquee.automation.pattern.*;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 03/02/2016.
+ * @author Mark Humphreys
+ * Date 03/02/2016.
  *
- * Wrapper around the Delphi automated string gridPattern
+ * Wrapper around the Delphi automated string gridPattern.
  */
 public class AutomationDataGrid extends AutomationBase implements Valueable {
+    /**
+     * The value pattern.
+     */
     private Value valuePattern;
+
+    /**
+     * The gird pattern.
+     */
     private Grid gridPattern;
+
+    /**
+     * The table pattern.
+     */
     private Table tablePattern;
+
+    /**
+     * The selection pattern.
+     */
     private Selection selectionPattern;
 
     /**
-     * Construct the AutomationDataGrid
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Construct the AutomationDataGrid.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationDataGrid(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationDataGrid(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
-
-//        this.valuePattern = this.getValuePattern();
-//        this.gridPattern = this.getGridPattern();
-//        this.tablePattern = this.getTablePattern();
-//        this.selectionPattern = this.getSelectionPattern();
     }
 
     /**
-     * Construct the AutomationDataGrid
-     * @param element The element
-     * @param value Value pattern
-     * @param grid Grid pattern
-     * @param table Table pattern
-     * @param instance Automation instance
-     * @param selection Selection pattern
+     * Construct the AutomationDataGrid.
+     *
+     * @param element The element.
+     * @param value Value pattern.
+     * @param grid Grid pattern.
+     * @param table Table pattern.
+     * @param instance Automation instance.
+     * @param selection Selection pattern.
      */
-    AutomationDataGrid(AutomationElement element, Value value, Grid grid, Table table, Selection selection, UIAutomation instance) {
+    AutomationDataGrid(final AutomationElement element,
+                       final Value value,
+                       final Grid grid,
+                       final Table table,
+                       final Selection selection,
+                       final UIAutomation instance) {
         super(element, instance);
 
         this.valuePattern = value;
@@ -74,38 +93,46 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the text associated with the active cell of this element
+     * Gets the text associated with the active cell of this element.
+     *
      * @return The value of the item
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public String getValue() throws AutomationException, PatternNotFoundException {
+    public String getValue()
+            throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
             this.valuePattern = this.getValuePattern();
         }
+
         return this.valuePattern.value();
     }
 
     /**
-     * Whether the gridPattern is read only
+     * Whether the gridPattern is read only.
+     *
      * @return Read only?
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public boolean isReadOnly() throws AutomationException, PatternNotFoundException {
+    public boolean isReadOnly()
+            throws AutomationException, PatternNotFoundException {
         if (this.valuePattern == null) {
             this.valuePattern = this.getValuePattern();
         }
+
         return this.valuePattern.isReadOnly();
     }
 
     /**
-     * Gets the selected row from the gridPattern
+     * Gets the selected row from the gridPattern.
+     *
      * @return List of AutomationStringGridItem
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> selectedRow() throws PatternNotFoundException, AutomationException  {
+    public List<AutomationDataGridCell> selectedRow()
+            throws PatternNotFoundException, AutomationException  {
         if (this.selectionPattern == null) {
             this.selectionPattern = this.getSelectionPattern();
         }
@@ -129,12 +156,14 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
 
 
     /**
-     * Gets the selected item from the gridPattern
+     * Gets the selected item from the gridPattern.
+     *
      * @return AutomationStringGridItem
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell selected() throws PatternNotFoundException, AutomationException  {
+    public AutomationDataGridCell selected()
+            throws PatternNotFoundException, AutomationException  {
         if (this.selectionPattern == null) {
             this.selectionPattern = this.getSelectionPattern();
         }
@@ -144,12 +173,14 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the list of the column headers
+     * Gets the list of the column headers.
+     *
      * @return List of GridItems
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getColumnHeaders () throws PatternNotFoundException, AutomationException  {
+    public List<AutomationDataGridCell> getColumnHeaders ()
+            throws PatternNotFoundException, AutomationException  {
         if (this.tablePattern == null) {
             this.tablePattern = this.getTablePattern();
         }
@@ -172,14 +203,17 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the item associated with the given cell
+     * Gets the item associated with the given cell.
+     *
      * @param x X Offset
      * @param y Y Offset
      * @return The GridItem at the given cell position
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell getItem(int x, int y) throws PatternNotFoundException, AutomationException  {
+    public AutomationDataGridCell getItem(final int x,
+                                          final int y)
+            throws PatternNotFoundException, AutomationException  {
         if (this.gridPattern == null) {
             this.gridPattern = this.getGridPattern();
         }
@@ -189,7 +223,8 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the row count of the gridPattern
+     * Gets the row count of the gridPattern.
+     *
      * @return The row count
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
@@ -202,7 +237,8 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the column count of the gridPattern
+     * Gets the column count of the gridPattern.
+     *
      * @return The column count
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
@@ -215,13 +251,15 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the cells for the given row
+     * Gets the cells for the given row.
+     *
      * @param row The row
      * @return Collection of cells for the given row
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getRow(int row) throws PatternNotFoundException, AutomationException {
+    public List<AutomationDataGridCell> getRow(final int row)
+            throws PatternNotFoundException, AutomationException {
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (int count = 0; count < this.rowCount(); count++) {
@@ -233,13 +271,15 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the cells for the given column
+     * Gets the cells for the given column.
+     *
      * @param col The column
      * @return Collection of cells for the given column
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getColumn(int col) throws PatternNotFoundException, AutomationException {
+    public List<AutomationDataGridCell> getColumn(final int col)
+            throws PatternNotFoundException, AutomationException {
         List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
 
         for (int count = 0; count < this.rowCount(); count++) {
@@ -257,25 +297,29 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the column headers for the given column
+     * Gets the column headers for the given column.
+     *
      * @param col The column
      * @return The header cell
      * @throws AutomationException Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell getColumnHeader(int col) throws PatternNotFoundException, AutomationException {
+    public AutomationDataGridCell getColumnHeader(final int col)
+            throws PatternNotFoundException, AutomationException {
         List<AutomationDataGridCell> headers = this.getColumnHeaders();
 
         return headers.get(col);
     }
 
     /**
-     * Returns whether the grid has column or row headers
+     * Returns whether the grid has column or row headers.
+     *
      * @return RowOrColumnMajor Row or column
      * @throws AutomationException Error thrown from automation library
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public RowOrColumnMajor getRowOrColumnMajor() throws AutomationException, PatternNotFoundException {
+    public RowOrColumnMajor getRowOrColumnMajor()
+            throws AutomationException, PatternNotFoundException {
         if (this.tablePattern == null) {
             this.tablePattern = this.getTablePattern();
         }
@@ -284,7 +328,8 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Is multiple selection allowed
+     * Is multiple selection allowed.
+     *
      * @return True is multiple selection is allowed
      * @throws AutomationException Error thrown from automation library
      * @throws PatternNotFoundException Failed to find pattern
@@ -297,7 +342,15 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
         return this.selectionPattern.canSelectMultiple();
     }
 
-    public List<AutomationElement> getSelection() throws AutomationException, PatternNotFoundException {
+    /**
+     * Gets the selection from the data grid.
+     *
+     * @return The list of selected elements.
+     * @throws AutomationException An automation error has occurred.
+     * @throws PatternNotFoundException Pattern was not found.
+     */
+    public List<AutomationElement> getSelection()
+            throws AutomationException, PatternNotFoundException {
         if (this.selectionPattern == null) {
             this.selectionPattern = this.getSelectionPattern();
         }
@@ -305,4 +358,3 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
         return this.selectionPattern.getSelection();
     }
 }
-

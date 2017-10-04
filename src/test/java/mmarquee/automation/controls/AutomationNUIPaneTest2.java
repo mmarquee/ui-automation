@@ -37,7 +37,8 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 25/09/2017
+ * @author Mark Humphreys
+ * Date 25/09/2017
  *
  * Tests for the NUIPane control.
  */

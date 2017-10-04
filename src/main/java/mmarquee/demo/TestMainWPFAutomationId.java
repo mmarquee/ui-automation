@@ -16,24 +16,22 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
-import mmarquee.automation.uiautomation.ToggleState;
-import mmarquee.automation.utils.Utils;
-
-import java.util.List;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationWindow;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on a WPF application.
  */
 public class TestMainWPFAutomationId extends TestBase {
 
+    /**
+     * Run the demo.
+     */
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
@@ -47,7 +45,7 @@ public class TestMainWPFAutomationId extends TestBase {
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
+        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();

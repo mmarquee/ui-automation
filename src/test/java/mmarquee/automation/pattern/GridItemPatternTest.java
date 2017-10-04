@@ -30,7 +30,8 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by Mark Humphreys on 20/05/2017.
+ * @author Mark Humphreys
+ * Date 20/05/2017.
  *
  * Mocked tests for the GridItem pattern
  */

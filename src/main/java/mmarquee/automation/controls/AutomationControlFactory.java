@@ -30,20 +30,34 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public class AutomationControlFactory {
 	
 	/**
-	 * Returns an Automation Control for the given element
+	 * Returns an Automation Control for the given element.
 	 * 
-	 * @param parent the parent control of the new automation control (Only relevant for menuBars)
-	 * @param element The AutomationElement for which to create a specific control object
-	 * @return The AutomationBase child which best describes the given element
-	 * @throws AutomationException Automation library error
-	 * @throws PatternNotFoundException Expected pattern not found
+	 * @param parent the parent control of the new automation control (Only relevant for menuBars).
+	 * @param element The AutomationElement for which to create a specific control object.
+	 * @return The AutomationBase child which best describes the given element.
+	 * @throws AutomationException Automation library error.
+	 * @throws PatternNotFoundException Expected pattern not found.
 	 */
-	public static AutomationBase get(AutomationBase parent, AutomationElement element) throws AutomationException, PatternNotFoundException {
+	public static AutomationBase get(final AutomationBase parent,
+									 final AutomationElement element)
+			throws AutomationException, PatternNotFoundException {
     	ControlType controlType = ControlType.fromValue(element.getControlType());
 		return get(parent, controlType, element);
 	}
-	
-    static AutomationBase get(AutomationBase parent, ControlType controlType, AutomationElement element)
+
+	/**
+	 * Returns an Automation Control for the given element.
+	 *
+	 * @param parent the parent control of the new automation control (Only relevant for menuBars).
+	 * @param controlType The Control type to get.
+	 * @param element The AutomationElement for which to create a specific control object.
+	 * @return The AutomationBase child which best describes the given element.
+	 * @throws AutomationException Automation library error.
+	 * @throws PatternNotFoundException Expected pattern not found.
+	 */
+	static AutomationBase get(final AutomationBase parent,
+							  final ControlType controlType,
+							  final AutomationElement element)
             throws AutomationException, PatternNotFoundException {
 
     	String className = element.getClassName();

@@ -16,7 +16,8 @@
 package mmarquee.automation;
 
 /**
- * Created by Mark Humphreys on 24/05/2016.
+ * @author Mark Humphreys
+ * Date 24/05/2016.
  *
  * Automation Event Identifiers
  */

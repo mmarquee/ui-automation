@@ -50,9 +50,10 @@ import mmarquee.automation.utils.Utils;
 import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * @author Mark Humphreys
+ * Date 29/11/2016.
  *
- * Tests for the BaseAutomation claess.
+ * Tests for the BaseAutomation classes.
  */
 public class BaseAutomationTest {
 	

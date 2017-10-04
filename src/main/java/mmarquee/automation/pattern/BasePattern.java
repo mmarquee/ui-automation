@@ -27,7 +27,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 
 /**
- * Created by Mark Humphreys on 29/02/2016.
+ * @author Mark Humphreys
+ * Date 29/02/2016.
  *
  * Base for the pattern wrappers
  */

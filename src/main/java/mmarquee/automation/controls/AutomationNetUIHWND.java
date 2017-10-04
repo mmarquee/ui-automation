@@ -22,7 +22,8 @@ import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 02/03/2016.
+ * @author Mark Humphreys
+ * Date 02/03/2016.
  *
  * Specialist pane that represents the NetUIHWND (part of the MS ribbon controls)
  */

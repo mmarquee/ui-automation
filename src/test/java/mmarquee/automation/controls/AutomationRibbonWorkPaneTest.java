@@ -30,7 +30,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
- * Created by Mark Humphreys on 01/12/2016.
+ * @author Mark Humphreys
+ * Date 01/12/2016.
  *
  * Tests for RibbonWorkPane controls
  */

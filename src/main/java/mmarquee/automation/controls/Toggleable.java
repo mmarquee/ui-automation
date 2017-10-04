@@ -20,7 +20,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**
- * Created by Mark Humphreys on 19/05/2017.
+ * @author Mark Humphreys
+ * Date 19/05/2017.
  */
 public interface Toggleable extends Automatable {
     void toggle () throws AutomationException, PatternNotFoundException;

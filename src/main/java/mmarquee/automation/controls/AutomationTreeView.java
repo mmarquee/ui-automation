@@ -13,15 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls;
 
-import mmarquee.automation.*;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 20/02/2016.
+ * @author Mark Humphreys
+ * Date 20/02/2016.
  *
  * Wrapper for the TreeView element.
  */
@@ -42,7 +45,6 @@ public class AutomationTreeView extends AutomationBase {
      * @param name The name to look for
      * @return The AutomationTreeViewItem
      * @throws ItemNotFoundException when the item is not found
-     * @throws ElementNotFoundException when the element is not found
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationTreeViewItem getItem(String name) throws PatternNotFoundException, AutomationException {

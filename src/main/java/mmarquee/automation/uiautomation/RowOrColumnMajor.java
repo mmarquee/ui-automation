@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Mark Humphreys on 12/09/2016.
+ * @author Mark Humphreys
+ * Date 12/09/2016.
  */
 public enum RowOrColumnMajor {
     RowMajor(0),

@@ -31,7 +31,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 01/12/2016.
+ * @author Mark Humphreys
+ * Date 01/12/2016.
  */
 public class AutomationToolbarTest {
 

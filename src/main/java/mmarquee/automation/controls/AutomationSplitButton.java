@@ -23,30 +23,36 @@ import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 03/03/2016.
+ * @author Mark Humphreys
+ * Date 03/03/2016.
  *
  * Wrapper for the SplitButton element.
  */
 public class AutomationSplitButton extends AutomationButton {
     /**
-     * Construct the AutomationSplitButton
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find expected pattern
+     * Construct the AutomationSplitButton.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Failed to find expected pattern.
      */
-    public AutomationSplitButton(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationSplitButton(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
         super(element);
     }
 
     /**
-     * Constructor for the AutomationButton
-     * @param element The underlying automation element
-     * @param pattern The pattern
-     * @param instance Automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationButton.
+     *
+     * @param element The underlying automation element.
+     * @param pattern The pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationSplitButton(AutomationElement element, Invoke pattern, UIAutomation instance)
+    public AutomationSplitButton(final AutomationElement element,
+                                 final Invoke pattern,
+                                 final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
         super(element, pattern, instance);
     }

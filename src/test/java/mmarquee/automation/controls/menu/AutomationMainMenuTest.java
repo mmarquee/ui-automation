@@ -46,7 +46,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 13/12/2016.
+ * @author Mark Humphreys
+ * Date 13/12/2016.
  *
  * Tests for MainMenu.
  */
