@@ -28,11 +28,10 @@ import mmarquee.automation.utils.Canalizer;
 /**
  * Wrapper for the access to Ole32, which only exists on Windows, so tests can't be run on Linux, etc.
  *
- * This should allow the underlying funcionality to be Mocked, and allow further testing to be carried out via travis-ci (for example)
+ * This should allow the underlying functionality to be Mocked, and allow further testing to be carried
+ * out via travis-ci (for example).
  */
 public class Ole32Wrapper {
-    private static Ole32 CANALIZED_OLE32_INSTANCE = null;
-
     private Unknown unknown = null;
 
     /**
@@ -48,13 +47,11 @@ public class Ole32Wrapper {
     }
 
     private void createWrapper() {
-        CANALIZED_OLE32_INSTANCE = Canalizer.canalize(com.sun.jna.platform.win32.Ole32.INSTANCE);
-
-        CANALIZED_OLE32_INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
+        Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT hr = CANALIZED_OLE32_INSTANCE.CoCreateInstance(
+        WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance (
                 IUIAutomation.CLSID,
                 null,
                 WTypes.CLSCTX_SERVER,

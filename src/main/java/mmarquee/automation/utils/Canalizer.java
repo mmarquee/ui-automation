@@ -18,13 +18,19 @@ import java.util.concurrent.Future;
  * @author Pascal Bihler
  *
  */
-public class Canalizer
-{
-    /** The thread where all calls originate from */
+public class Canalizer {
+    /** The thread where all calls originate from. */
     static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     /**
-     * Wraps an interface instance in a way that all calls to interface methods originate from the same thread
+     * Shutdown the ExecutorService nicely.
+     */
+    public static void shutdown() {
+        executor.shutdown();
+    }
+
+    /**
+     * Wraps an interface instance in a way that all calls to interface methods originate from the same thread.
      *
      * @param <T> The type of the Object to canalize
      * @param plainInstance The instance to canalize
