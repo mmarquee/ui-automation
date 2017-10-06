@@ -5,9 +5,6 @@ The library is a programmers tool, and they will either need to have the source 
 The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.3.0).
 
 ## Maven
-<!--
-The library is held in the Sonatype OSS repository, so is available for download via Maven (or other tools, such as SBT for Scala). As the library depends on the 4.3.0-SNAPSHOT, then don't specify the JNA library version in YOUR dependencies, the library will guide the dependencies and bring down the correct version. You will also need to allow the download of snapshots in Maven, so look ([read the this Stack Overflow question and answer to find out how to do this ](http://stackoverflow.com/questions/7715321/how-to-download-snapshot-version-from-maven-snapshot-repository)). 
--->
 The library is held in the Sonatype OSS repository, so is 
 available for download via Maven (or other tools, 
 such as SBT for Scala). 
@@ -52,6 +49,7 @@ The snippet below will check whether Project1.exe is running, attaching to it if
 ```
 
 ### Getting hold of a window
+* See [Element Discovery](element-discovery.md) for more details.
 
 To get a 'desktop' window (i.e. one that appears in the Windows tasks bar), then the AutomationDesktop class provides a class function that returns a AutomationWindow object.
 

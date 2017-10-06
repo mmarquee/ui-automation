@@ -9,3 +9,10 @@ try {
   logger.info("Failed to get toggle state");
 }
 ```
+
+: Methods
+
+:Name
+:Value
+:Toggle
+:ToggleState

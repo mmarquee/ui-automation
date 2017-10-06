@@ -15,7 +15,7 @@ public class DemoTreeWalker extends TestBase {
 	/**
 	 * Recursion level.
 	 */
-    final private int recurseLevel = 2;
+    final private int recurseLevel = 50;
 
 	/**
 	 * Constructor for DemoTreeWalker.
@@ -60,7 +60,9 @@ public class DemoTreeWalker extends TestBase {
 			};
             
 			walker.walk(logVisitor, root);
-            
+
+			logger.info("All done");
+
         } catch (Throwable ex) {
             // Smother
             logger.error("Exception thrown - " + ex.toString());
