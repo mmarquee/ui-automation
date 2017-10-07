@@ -1,8 +1,11 @@
 
 
-The library is a programmers tool, in order to automate an application under tests developers will need to 'explore' the application to get the names of controls, etc. using a tool like ... It will also help to have the original source code, but it is not essential.
+The library is a programmers tool, in order to automate an application under tests developers will need to 'explore' 
+the application to get the names of controls, etc. using a tool like[inspect](https://msdn.microsoft.com/en-us/library/windows/desktop/dd318521(v=vs.85).aspx). 
+It will also help to have the original source code, but it is not essential.
  
-The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.5.0).
+The MS UIAutomation Library is a COM library, and the classes that represent this have been wrapped using native 
+JNA calls (currently using 4.5.0).
 
 ## Maven
 The library is held in the Sonatype OSS repository, so is 
