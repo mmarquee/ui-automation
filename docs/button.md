@@ -1,9 +1,9 @@
-#Discovery 
+# Discovery 
 * See [Element Discovery](element-discovery.md)
 
-:Methods
+# Methods
 
-:Name
-:Value
-:Click
-:Focus
+## Name
+## Value
+## Click
+##Focus

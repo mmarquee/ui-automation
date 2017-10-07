@@ -30,6 +30,6 @@ See LICENCE.txt for details.
 * [UIAutomation for Powershell](http://uiautomation.codeplex.com/documentation)
 * [TestStack.White](https://github.com/TestStack/White)
 * [UI Automation - A wrapper around Microsoft's UI Automation libraries.](https://github.com/vijayakumarsuraj/UIAutomation)
-
+* [Automation Spy Blog entry](http://www.automationspy.com/post-25_12_2014.html)
 * [Functional GUI Testing Automation Patterns](https://www.infoq.com/articles/gui-automation-patterns)
 

@@ -1,3 +1,6 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 ```
   AutomationDocument document = applicationWindow.getDocument(0);
 
