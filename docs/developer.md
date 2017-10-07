@@ -1,5 +1,3 @@
-
-
 The library is a programmers tool, in order to automate an application under tests developers will need to 'explore' 
 the application to get the names of controls, etc. using a tool like[inspect](https://msdn.microsoft.com/en-us/library/windows/desktop/dd318521(v=vs.85).aspx). 
 It will also help to have the original source code, but it is not essential.
@@ -53,6 +51,8 @@ The snippet below will check whether Project1.exe is running, attaching to it if
 
 ### Getting hold of a window
 * See [Element Discovery](element-discovery.md) for more details.
+
+The root element of the tree of automation elements is the user’s desktop. 
 
 To get a 'desktop' window (i.e. one that appears in the Windows tasks bar), then the AutomationDesktop class provides a class function that returns a AutomationWindow object.
 
