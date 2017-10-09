@@ -1,3 +1,6 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 ```
 AutomationCheckBox check = window.getCheckBox(0);
 check.toggle();
@@ -10,9 +13,9 @@ try {
 }
 ```
 
-: Methods
+# Methods
 
-:Name
-:Value
-:Toggle
-:ToggleState
+## Name
+## Value
+## Toggle
+## ToggleState

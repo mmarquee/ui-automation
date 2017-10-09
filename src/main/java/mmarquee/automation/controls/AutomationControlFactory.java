@@ -143,7 +143,6 @@ public class AutomationControlFactory {
     	case AppBar:
     		return new AutomationAppBar(element);
     		// No Custom controls, yet:
-    	case Invoke:
     	case ScrollBar:
     	case ToolTip:
     	case Group:
