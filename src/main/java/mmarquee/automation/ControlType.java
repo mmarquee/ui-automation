@@ -104,7 +104,7 @@ public enum ControlType {
     ToolBar(50021),
 
     /**
-     * ToolYip.
+     * ToolTip.
      */
     ToolTip(50022),
 
