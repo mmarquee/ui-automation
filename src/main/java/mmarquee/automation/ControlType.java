@@ -73,14 +73,50 @@ public enum ControlType {
      * List.
      */
     List(50008),
+
+    /**
+     * Menu.
+     */
     Menu(50009),
+
+    /**
+     * MenuBar.
+     */
     MenuBar(50010),
+
+    /**
+     * MenuItem.
+     */
     MenuItem(50011),
+
+    /**
+     * ProgressBar.
+     */
     ProgressBar(50012),
+
+    /**
+     * ProgressBAr.
+     */
     RadioButton(50013),
+
+    /**
+     * ScrollBar.
+     */
     ScrollBar(50014),
+
+    /**
+     * Slider.
+     */
     Slider(50015),
+
+    /**
+     * Spinner.
+     */
     Spinner(50016),
+
+    /**
+     * StatusBar.
+     */
     StatusBar(50017),
 
     /**
