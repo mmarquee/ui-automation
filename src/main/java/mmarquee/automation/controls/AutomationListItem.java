@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
@@ -40,6 +41,17 @@ public class AutomationListItem extends AutomationContainer implements Selectabl
      */
     public AutomationListItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+    }
+
+    /**
+     * Constructor for the AutomationListItem.
+     * @param element The underlying automation element.
+     * @param automation Automation instance
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationListItem(AutomationElement element, UIAutomation automation) throws PatternNotFoundException, AutomationException {
+        super(element, automation);
     }
 
     /**

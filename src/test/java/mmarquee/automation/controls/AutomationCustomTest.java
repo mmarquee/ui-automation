@@ -48,5 +48,4 @@ public class AutomationCustomTest {
 
         assertTrue(name.equals("NAME"));
     }
-
 }
