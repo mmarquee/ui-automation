@@ -203,6 +203,11 @@ public enum ControlType {
 
     private int value;
 
+    /**
+     * Gets the value of the control id.
+     *
+     * @return The value
+     */
     public int getValue() {
         return this.value;
     }
