@@ -15,44 +15,30 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
- * Windows specific tests for AutomationTreeView.
+ * Non-o.s. specific tests for AutomationTreeView.
  *
  * @author Mark Humphreys
- * Date 30/11/2016.
+ * Date 11/10/2017.
  */
-public class AutomationTreeViewTest {
-
-    @BeforeClass
-    public static void checkOs() throws Exception {
-        Assume.assumeTrue(isWindows());
-    }
-
-    private static boolean isWindows() {
-        return System.getProperty("os.name").toLowerCase().contains("windows");
-    }
+public class AutomationTreeViewTest2 {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
     @Test
-    public void testGetItem_When_Item_Present() throws Exception {
+    public void testName() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
-
-        AutomationElement result = new AutomationElement(listElement);
-
-        when(element.findFirst(any(), any())).thenReturn(result);
-        when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
+        when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationTreeView ctrl = new AutomationTreeView(element, instance);
 
-        AutomationTreeViewItem treeItem = ctrl.getItem("SubItem");
+        String name = ctrl.getName();
 
-        // Need to verify something
+        assertTrue(name.equals("NAME"));
     }
 }
