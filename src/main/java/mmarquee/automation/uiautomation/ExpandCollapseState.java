@@ -16,20 +16,51 @@
 package mmarquee.automation.uiautomation;
 
 /**
+ * The ExpandCollapseState.
+ *
+ * @author Mark Humphreys
+ * Date 12/09/2016.
  */
 public enum ExpandCollapseState {
-    ExpandCollapseState_Collapsed(0),
-    ExpandCollapseState_Expanded(1),
-    ExpandCollapseState_PartiallyExpanded(2),
-    ExpandCollapseState_LeafNode(3);
+    /**
+     * Collapsed.
+     */
+    Collapsed(0),
 
+    /**
+     * Expanded.
+     */
+    Expanded(1),
+
+    /**
+     * Partially expanded.
+     */
+    PartiallyExpanded(2),
+
+    /**
+     * A leaf.
+     */
+    LeafNode(3);
+
+    /**
+     * The value.
+     */
     private int value;
 
+    /**
+     * Gets the value.
+     * @return The value.
+     */
     public int getValue() {
         return this.value;
     }
 
-    ExpandCollapseState(int value) {
-        this.value = value;
+    /**
+     * Constructor for ExpandCollapseState.
+     *
+     * @param inValue The value.
+     */
+    ExpandCollapseState(final int inValue) {
+        this.value = inValue;
     }
 }

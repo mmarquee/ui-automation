@@ -73,12 +73,12 @@ public enum ToggleState {
      * @param i The given integer.
      * @return The value (as an ToggleState).
      */
-    public static ToggleState fromInt(int i) {
+    public static ToggleState fromInt(final int i) {
         ToggleState type = IntToTypeMap.get(Integer.valueOf(i));
         if (type == null) {
             return ToggleState.Off;
         }
-        
+
         return type;
     }
 }
