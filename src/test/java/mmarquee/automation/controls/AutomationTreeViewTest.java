@@ -44,12 +44,12 @@ public class AutomationTreeViewTest {
         AutomationElement result = new AutomationElement(listElement);
 
         when(element.findFirst(any(), any())).thenReturn(result);
-        when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
+//        when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
+//        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+//        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeView ctrl = new AutomationTreeView(element, instance);
+        AutomationTreeView ctrl = new AutomationTreeView(element /*, instance*/);
 
         AutomationTreeViewItem treeItem = ctrl.getItem("SubItem");
 
