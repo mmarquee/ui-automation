@@ -90,6 +90,10 @@ public class UIAutomation extends BaseAutomation {
         }
     }
 
+    public void cleanUp() {
+        Ole32.cleanUp();
+    }
+
     /**
      * Gets the underlying unknown value of Ole32.
      * @return Unknown The COM Unknown value.

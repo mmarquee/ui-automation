@@ -122,8 +122,8 @@ public enum ControlType {
     /**
      * Tab (page control).
      */
-
     Tab(50018),
+
     /**
      * TabItem.
      */

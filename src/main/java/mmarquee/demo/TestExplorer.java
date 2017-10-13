@@ -31,120 +31,123 @@ import mmarquee.automation.controls.AutomationReBar;
 class TestExplorer extends TestBase {
 
     void run() {
-
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
-
         try {
-            // Start the application
-            application = automation.launchOrAttach("explorer");
-        } catch (Throwable ex) {
-            // Smother
-            logger.error("Failed to launch or attach");
-        }
-
-        try {
-            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
-        } catch (Throwable ex) {
-            logger.error("Failed to wait for input idle for some reason");
-        }
-
-        // Get the main explorer window
-        try {
-            AutomationWindow window = automation.getDesktopWindow("File Explorer");
-            window.focus();
-
-            // Get the ribbon, work our way down and click the "Preview Button"
-            AutomationRibbonBar ribbon = window.getRibbonBar();
-            AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
-            AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
-            logger.info("First work pane is " + pane.getName());
-
-            AutomationNUIPane uiPane = pane.getNUIPane(0);
-            logger.info("First NUIPane is " + uiPane.getName());
-
-            AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+            AutomationApplication application = null;
 
             try {
-                AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
-
-                AutomationTab tab = uiHWND.getTab(0);
-                tab.selectTabPage("View");
-
-                AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
-
-                AutomationToolBar panes = panel.getToolBar("Panes");
-
-                panes.getButton("Preview pane").click();
-                AutomationSplitButton split = panes.getSplitButton("Navigation pane");
-                split.click();
-
-                this.rest();
-
-                split.click();
-            } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find element");
+                // Start the application
+                application = automation.launchOrAttach("explorer");
+            } catch (Throwable ex) {
+                // Smother
+                logger.error("Failed to launch or attach");
             }
 
-            this.rest();
-
-            logger.info("+++ Rebar +++");
-
-            AutomationReBar rebar = window.getReBar(0);
             try {
-                AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
-
-                logger.info("Toolbar = " + toolbar.getName());
-                AutomationButton upButton = toolbar.getButton(0);
-                logger.info("Rebar button is `" + upButton.getName() + "`");
-             //   upButton.click();
-            } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find element");
+                application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+            } catch (Throwable ex) {
+                logger.error("Failed to wait for input idle for some reason");
             }
 
-            logger.info("+++ Interact with the panel now +++ ");
-
+            // Get the main explorer window
             try {
-                // Now try and get to the list of items in explorer
-                AutomationPanel explorer = window.getPanel("File Explorer");
-                logger.info("." + explorer.getName());
-                AutomationPanel pane0 = explorer.getPanel("Control Host");
-                logger.info(".." + pane0.getName());
-                AutomationTreeView treeView = pane0.getTreeView(0);
-                logger.info("..." + treeView.getName());
+                AutomationWindow window = automation.getDesktopWindow("File Explorer");
+                window.focus();
+
+                // Get the ribbon, work our way down and click the "Preview Button"
+                AutomationRibbonBar ribbon = window.getRibbonBar();
+                AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
+                AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
+                logger.info("First work pane is " + pane.getName());
+
+                AutomationNUIPane uiPane = pane.getNUIPane(0);
+                logger.info("First NUIPane is " + uiPane.getName());
+
+                AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+
                 try {
-                    AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
-                    logger.info("...." + treeItem.getName());
+                    AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+
+                    AutomationTab tab = uiHWND.getTab(0);
+                    tab.selectTabPage("View");
+
+                    AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+
+                    AutomationToolBar panes = panel.getToolBar("Panes");
+
+                    panes.getButton("Preview pane").click();
+                    AutomationSplitButton split = panes.getSplitButton("Navigation pane");
+                    split.click();
 
                     this.rest();
 
-                    logger.info("Here");
-                    // Get an issue here, not sure whether this previously existed
-                    treeItem.click();
-                    logger.info("Here...");
-                } catch (ItemNotFoundException ex) {
-                    logger.info("Didn't find the item");
+                    split.click();
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find element");
                 }
-            } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find element");
+
+                this.rest();
+
+                logger.info("+++ Rebar +++");
+
+                AutomationReBar rebar = window.getReBar(0);
+                try {
+                    AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
+
+                    logger.info("Toolbar = " + toolbar.getName());
+                    AutomationButton upButton = toolbar.getButton(0);
+                    logger.info("Rebar button is `" + upButton.getName() + "`");
+                    //   upButton.click();
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find element");
+                }
+
+                logger.info("+++ Interact with the panel now +++ ");
+
+                try {
+                    // Now try and get to the list of items in explorer
+                    AutomationPanel explorer = window.getPanel("File Explorer");
+                    logger.info("." + explorer.getName());
+                    AutomationPanel pane0 = explorer.getPanel("Control Host");
+                    logger.info(".." + pane0.getName());
+                    AutomationTreeView treeView = pane0.getTreeView(0);
+                    logger.info("..." + treeView.getName());
+                    try {
+                        AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
+                        logger.info("...." + treeItem.getName());
+
+                        this.rest();
+
+                        logger.info("Here");
+                        // Get an issue here, not sure whether this previously existed
+                        treeItem.click();
+                        logger.info("Here...");
+                    } catch (ItemNotFoundException ex) {
+                        logger.info("Didn't find the item");
+                    }
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find element");
+                }
+
+                logger.info("Getting toolbar");
+                AutomationToolBar toolbar = window.getToolBar(0);
+                logger.info("Got toolbar");
+                logger.info("....." + toolbar.getName());
+
+                // Looks like the button is a problem with Delphi
+                AutomationButton btn0 = toolbar.getButton(0);
+                logger.info("....." + btn0.getName());
+                if (btn0.isEnabled()) {
+                    btn0.click();
+                }
+
+            } catch (Exception ex) {
+                logger.info("Something went wrong");
+                ex.printStackTrace();
             }
-
-            logger.info("Getting toolbar");
-            AutomationToolBar toolbar = window.getToolBar(0);
-            logger.info("Got toolbar");
-            logger.info("....." + toolbar.getName());
-
-            // Looks like the button is a problem with Delphi
-            AutomationButton btn0 = toolbar.getButton(0);
-            logger.info("....." + btn0.getName());
-            if (btn0.isEnabled()) {
-                btn0.click();
-            }
-
-        } catch (Exception ex) {
-            logger.info("Something went wrong");
-            ex.printStackTrace();
+        } finally {
+            automation.cleanUp();
         }
     }
 }
