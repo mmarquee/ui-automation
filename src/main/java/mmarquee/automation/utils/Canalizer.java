@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
@@ -20,25 +19,21 @@ import java.util.concurrent.Future;
  */
 public class Canalizer {
     /** The thread where all calls originate from. */
-    static final ExecutorService executor = Executors.newSingleThreadExecutor();
-
-    /**
-     * Shutdown the ExecutorService nicely.
-     */
-    public static void shutdown() {
-        executor.shutdown();
-    }
+    static ExecutorService executor;
 
     /**
      * Wraps an interface instance in a way that all calls to interface methods originate from the same thread.
      *
-     * @param <T> The type of the Object to canalize
-     * @param plainInstance The instance to canalize
-     * @return the canalized instance
+     * @param <T> The type of the Object to canalize.
+     * @param plainInstance The instance to canalize.
+     * @param inExecutor The executor.
+     * @return the canalized instance.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends Object> T canalize(final T plainInstance) {
-        final CanalizerInvocationHandler invocationHandler = new CanalizerInvocationHandler(executor,plainInstance);
+    public static <T extends Object> T canalize(final T plainInstance,
+                                                final ExecutorService inExecutor) {
+        executor = inExecutor;
+        final CanalizerInvocationHandler invocationHandler = new CanalizerInvocationHandler(executor, plainInstance);
         return (T) java.lang.reflect.Proxy
                 .newProxyInstance(plainInstance.getClass().getClassLoader(),
                         getInterfaces(plainInstance),

@@ -25,6 +25,9 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.utils.Canalizer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * Wrapper for the access to Ole32, which only exists on Windows, so tests can't be run on Linux, etc.
  *
@@ -32,6 +35,8 @@ import mmarquee.automation.utils.Canalizer;
  * out via travis-ci (for example).
  */
 public class Ole32Wrapper {
+    private static Ole32 CANALIZED_OLE32_INSTANCE = null;
+
     private Unknown unknown = null;
 
     /**
@@ -42,16 +47,35 @@ public class Ole32Wrapper {
         return unknown;
     }
 
+    private ExecutorService executor;
+
+    /**
+     * Constructor for the Wrapper/
+     */
     Ole32Wrapper() {
+        executor = Executors.newSingleThreadExecutor();
         createWrapper();
     }
 
+    /** 
+     * Cleanup the wrapper.
+     */
+    public void cleanUp() {
+        executor.shutdown();
+    }
+
+    /**
+     * Create the wrapper of the canalized instance.
+     */
     private void createWrapper() {
-        Ole32.INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
+        CANALIZED_OLE32_INSTANCE = Canalizer.canalize(com.sun.jna.platform.win32.Ole32.INSTANCE,
+                executor);
+
+        CANALIZED_OLE32_INSTANCE.CoInitializeEx(Pointer.NULL, Ole32.COINIT_APARTMENTTHREADED);
 
         PointerByReference pbr = new PointerByReference();
 
-        WinNT.HRESULT hr = Ole32.INSTANCE.CoCreateInstance (
+        WinNT.HRESULT hr = CANALIZED_OLE32_INSTANCE.CoCreateInstance (
                 IUIAutomation.CLSID,
                 null,
                 WTypes.CLSCTX_SERVER,
