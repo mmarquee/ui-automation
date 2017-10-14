@@ -109,7 +109,6 @@ the `cleanUp()` method.
   }
 ```
 
-
 # Current supported controls
 
 The controls that have been implemented reflect the requirements for automating the applications that we are testing ourselves, so some controls have not been implemented, or only partially. The currently supported controls are ...
@@ -137,7 +136,6 @@ The controls that have been implemented reflect the requirements for automating 
 * [Document](document.md)
 * [Slider](slider.md)
 * [Window](window.md)
-
 
 ## Real world examples
 * [Tree Walker](treewalker.md)
