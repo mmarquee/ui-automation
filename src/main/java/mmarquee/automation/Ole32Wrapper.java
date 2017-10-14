@@ -50,7 +50,7 @@ public class Ole32Wrapper {
     private ExecutorService executor;
 
     /**
-     * Constructor for the Wrapper/
+     * Constructor for the Wrapper.
      */
     Ole32Wrapper() {
         executor = Executors.newSingleThreadExecutor();
