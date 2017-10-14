@@ -15,6 +15,10 @@ This class encapsulates some simple automation of the Notepad program, starting 
     private var application: AutomationApplication = _
     private var window: AutomationWindow = _
 
+    def cleanUp(): Unit = {
+      this.automation.cleanUp
+    }
+
     def launch(): Unit = {
         this.application = this.automation.launch("notepad.exe")
 
