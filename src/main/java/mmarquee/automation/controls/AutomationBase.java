@@ -93,44 +93,44 @@ public abstract class AutomationBase implements Automatable {
      * Constructor for the AutomationBase class.
      *
      * For mocking, etc. Doo not use as part of 'real' code.
-     * @param element The element.
-     * @param automation The automation instance.
+     * @param inElement The element.
+     * @param inAutomation The automation instance.
      */
-    public AutomationBase(final AutomationElement element,
-                          final UIAutomation automation) {
-        this.element = element;
-        this.automation = automation;
+    public AutomationBase(final AutomationElement inElement,
+                          final UIAutomation inAutomation) {
+        this.element = inElement;
+        this.automation = inAutomation;
     }
 
     /**
      * Constructor for the AutomationBase class.
      *
      * For mocking, etc. Doo not use as part of 'real' code.
-     * @param element The element.
-     * @param pattern The invoke pattern.
-     * @param automation The automation instance.
+     * @param inElement The element.
+     * @param inPattern The invoke pattern.
+     * @param inAutomation The automation instance.
      */
-    public AutomationBase(final AutomationElement element,
-                          final Invoke pattern,
-                          final UIAutomation automation) {
-        this.element = element;
-        this.invokePattern = pattern;
-        this.automation = automation;
+    public AutomationBase(final AutomationElement inElement,
+                          final Invoke inPattern,
+                          final UIAutomation inAutomation) {
+        this.element = inElement;
+        this.invokePattern = inPattern;
+        this.automation = inAutomation;
     }
 
     /**
      * Constructor for the AutomationBase.
      *
-     * @param element The underlying automation element.
-     * @param pattern The pattern.
+     * @param inElement The element.
+     * @param inPattern The pattern.
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationBase(final AutomationElement element,
-                          final Invoke pattern)
+    public AutomationBase(final AutomationElement inElement,
+                          final Invoke inPattern)
             throws PatternNotFoundException, AutomationException {
-        this(element);
-        this.invokePattern = pattern;
+        this(inElement);
+        this.invokePattern = inPattern;
     }
     
     /**

@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -44,6 +45,27 @@ public class AutomationTreeViewItem
     public AutomationTreeViewItem(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
+    }
+
+    /**
+     * Construct the AutomationTreeViewItem.
+     * @param element The element.
+     * @param selection SelectionItem pattern.
+     * @param expandCollapsePattern The expand pattern.
+     * @param invoke Invoke pattern.
+     * @param automation The automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    AutomationTreeViewItem(final AutomationElement element,
+                           final SelectionItem selection,
+                           final ExpandCollapse expandCollapsePattern,
+                           final Invoke invoke,
+                           final UIAutomation automation)
+            throws PatternNotFoundException, AutomationException {
+        super(element,invoke, automation);
+        this.selectItemPattern = selection;
+        this.expandCollapsePattern = expandCollapsePattern;
     }
 
     /**

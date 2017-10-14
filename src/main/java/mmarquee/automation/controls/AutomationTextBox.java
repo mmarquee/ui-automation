@@ -52,6 +52,19 @@ public class AutomationTextBox
      * Construct the AutomationTextBox.
      *
      * @param element The element.
+     * @param automation The automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    public AutomationTextBox(final AutomationElement element,
+                             final UIAutomation automation)
+            throws AutomationException {
+        super(element, automation);
+    }
+
+    /**
+     * Construct the AutomationTextBox.
+     *
+     * @param element The element.
      * @param value The value pattern.
      * @param instance Automation instance.
      * @throws AutomationException Automation library error.
