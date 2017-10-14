@@ -83,11 +83,6 @@ public class AutomationControlFactoryTest {
     }
 
     @Test
-    public void get_returns_AutomationContainer_on_Invoke() throws Exception {
-        testGet(ControlType.Invoke, AutomationContainer.class);
-    }
-
-    @Test
     public void get_returns_AutomationButton_on_Button() throws Exception {
         testGet(ControlType.Button, AutomationButton.class);
     }
