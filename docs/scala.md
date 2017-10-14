@@ -11,7 +11,7 @@ This class encapsulates some simple automation of the Notepad program, starting 
 
 ```scala
   class NotepadAutomation {
-    private var automation = UIAutomation.getElement
+    private var automation = UIAutomation.getInstance
     private var application: AutomationApplication = _
     private var window: AutomationWindow = _
 
