@@ -41,60 +41,65 @@ public class TestNotepad extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        Logger logger = Logger.getLogger(AutomationBase.class.getName());
-
-        AutomationApplication application = null;
-
         try {
-            application = automation.launchOrAttach("notepad.exe");
-        } catch (Throwable ex) {
-            logger.warn("Failed to find notepad application", ex);
-        }
 
-        // Wait for the process to start
-        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+            Logger logger = Logger.getLogger(AutomationBase.class.getName());
 
-        try {
-            AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
-            String name = window.getName();
-            logger.info(name);
-
-            Object framework = window.getFramework();
-            logger.info("Framework is " + framework.toString());
-
-            boolean val = window.isModal();
-
-            AutomationEditBox edit = window.getEditBox(0);
-
-            edit.setValue("This is a test of automation");
-
-            window.focus();
-            window.maximize();
-
-            this.rest();
-
-            // Interact with menus
-            AutomationMainMenu menu = window.getMainMenu();
+            AutomationApplication application = null;
 
             try {
-                AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
-                exit.click();
+                application = automation.launchOrAttach("notepad.exe");
+            } catch (Throwable ex) {
+                logger.warn("Failed to find notepad application", ex);
+            }
+
+            // Wait for the process to start
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+
+            try {
+                AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
+                String name = window.getName();
+                logger.info(name);
+
+                Object framework = window.getFramework();
+                logger.info("Framework is " + framework.toString());
+
+                boolean val = window.isModal();
+
+                AutomationEditBox edit = window.getEditBox(0);
+
+                edit.setValue("This is a test of automation");
+
+                window.focus();
+                window.maximize();
+
+                this.rest();
+
+                // Interact with menus
+                AutomationMainMenu menu = window.getMainMenu();
 
                 try {
-                    AutomationWindow popup = window.getWindow("Notepad");
-                    AutomationButton btn = popup.getButton("Don't Save");
+                    AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+                    exit.click();
 
-                    btn.click();
+                    try {
+                        AutomationWindow popup = window.getWindow("Notepad");
+                        AutomationButton btn = popup.getButton("Don't Save");
 
-                    logger.info("All closed down now");
-                } catch (ItemNotFoundException ex) {
-                    logger.info("Failed to find window");
+                        btn.click();
+
+                        logger.info("All closed down now");
+                    } catch (ItemNotFoundException ex) {
+                        logger.info("Failed to find window");
+                    }
+                } catch (ElementNotFoundException ex) {
+                    logger.info("Failed to find exit menu item");
                 }
-            } catch (ElementNotFoundException ex) {
-                logger.info("Failed to find exit menu item");
+            } catch (Exception ex) {
+                logger.info("Something went wrong - " + ex.toString());
             }
-        } catch (Exception ex) {
-            logger.info("Something went wrong - " + ex.toString());
+        } finally {
+            automation.cleanUp();
         }
     }
 }

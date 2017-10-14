@@ -29,7 +29,8 @@ The ui-automation library is a wrapper for the UIAutomationClient library, which
 
 ### Initialising
 
-In order to get access to the automation API, an UIAutomation instance needs to be created, this is done as follows.
+In order to get access to the automation API, an UIAutomation instance needs to be created, this is done as follows. Note that there are
+resources that need to be disposed of, so see the section on disposing of resources below.
 
 ```
   UIAutomation automation = UIAutomation.getInstance();
@@ -93,6 +94,21 @@ In order to click the 'OK' button associated with a given window, it can be foun
   AutomationButton button1 = window.getButtonByAutomationId("btnOK");
   button1.click();
 ```
+
+### Disposing of resources
+The UIAutomation library creates and holds some resources, so these must be disposed of when they are no longer needed. This is done via
+the `cleanUp()` method.
+
+```
+  UIAutomation automation = UIAutomation.getInstance();
+
+  try {
+    ...
+  } finally {
+    automation.cleanUp();
+  }
+```
+
 
 # Current supported controls
 

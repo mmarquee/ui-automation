@@ -35,64 +35,68 @@ public class TestMainWPFAutomationId extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
-
         try {
-            application = automation.launchOrAttach("apps\\WpfApplicationWithAutomationIds.exe");
-        } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
-        }
-
-        // Wait for the process to start
-        // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
-
-        // Sleep for WPF, to address above issue
-        this.rest();
-
-        AutomationWindow applicationWindow = null;
-
-        try {
-            applicationWindow = automation.getDesktopWindow("MainWindow");
-        } catch (Exception ex) {
-            logger.info("Failed to find `MainWindow`");
-        }
-
-        try {
-            Object framework = applicationWindow.getFramework();
-            logger.info("Framework is " + framework.toString());
-
-            Object id = applicationWindow.getProcessId();
-            logger.info("Process = " + id.toString());
-
-            WinDef.POINT point = applicationWindow.getClickablePoint();
-            logger.info("Clickable point = " + point.toString());
-
-            String name = applicationWindow.getName();
-            logger.info(name);
+            AutomationApplication application = null;
 
             try {
-                boolean val = applicationWindow.isModal();
-
-                logger.info(val);
-            } catch (Exception ex) {
-                logger.info("Ouch");
+                application = automation.launchOrAttach("apps\\WpfApplicationWithAutomationIds.exe");
+            } catch (Throwable ex) {
+                logger.warn("Failed to find application", ex);
             }
 
-            // BUTTONS ***********************************
+            // Wait for the process to start
+            // This doesn't seem to wait for WPF examples
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
-            logger.info("++ BUTTONS ++");
+            // Sleep for WPF, to address above issue
+            this.rest();
 
-            // NOTE: WPF buttons will set the automationID to be the name of the control
+            AutomationWindow applicationWindow = null;
 
-            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("idBtn1");
-            logger.info(btnClickMe.getName());
-            btnClickMe.click();
+            try {
+                applicationWindow = automation.getDesktopWindow("MainWindow");
+            } catch (Exception ex) {
+                logger.info("Failed to find `MainWindow`");
+            }
 
-            logger.info("++ ALL DONE ++");
+            try {
+                Object framework = applicationWindow.getFramework();
+                logger.info("Framework is " + framework.toString());
 
-        } catch (Exception ex) {
-            logger.info("Something went wrong - " + ex.getClass());
+                Object id = applicationWindow.getProcessId();
+                logger.info("Process = " + id.toString());
+
+                WinDef.POINT point = applicationWindow.getClickablePoint();
+                logger.info("Clickable point = " + point.toString());
+
+                String name = applicationWindow.getName();
+                logger.info(name);
+
+                try {
+                    boolean val = applicationWindow.isModal();
+
+                    logger.info(val);
+                } catch (Exception ex) {
+                    logger.info("Ouch");
+                }
+
+                // BUTTONS ***********************************
+
+                logger.info("++ BUTTONS ++");
+
+                // NOTE: WPF buttons will set the automationID to be the name of the control
+
+                AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("idBtn1");
+                logger.info(btnClickMe.getName());
+                btnClickMe.click();
+
+                logger.info("++ ALL DONE ++");
+
+            } catch (Exception ex) {
+                logger.info("Something went wrong - " + ex.getClass());
+            }
+        } finally {
+            automation.cleanUp();
         }
     }
 }

@@ -21,28 +21,33 @@ public class DemoPointOver extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        do {
-            this.rest();
+        try {
 
-            Point p = MouseInfo.getPointerInfo().getLocation();
+            do {
+                this.rest();
 
-            logger.info(p.getX() + " - " + p.getY());
+                Point p = MouseInfo.getPointerInfo().getLocation();
 
-            WinDef.POINT point = new WinDef.POINT();
-            point.x = (int) p.getX();
-            point.y = (int) p.getY();
+                logger.info(p.getX() + " - " + p.getY());
 
-            try {
-                AutomationElement elementUnder = automation.getElementFromPoint(point);
+                WinDef.POINT point = new WinDef.POINT();
+                point.x = (int) p.getX();
+                point.y = (int) p.getY();
 
-                logger.info("From point = " + elementUnder.getName());
+                try {
+                    AutomationElement elementUnder = automation.getElementFromPoint(point);
 
-                AutomationElement elementFocus = automation.getFocusedElement();
-                logger.info("From focus = " + elementFocus.getName());
+                    logger.info("From point = " + elementUnder.getName());
 
-            } catch (Exception ex) {
-                logger.info(ex.getStackTrace());
-            }
-        } while (true);
+                    AutomationElement elementFocus = automation.getFocusedElement();
+                    logger.info("From focus = " + elementFocus.getName());
+
+                } catch (Exception ex) {
+                    logger.info(ex.getStackTrace());
+                }
+            } while (true);
+        } finally {
+            automation.cleanUp();
+        }
     }
 }

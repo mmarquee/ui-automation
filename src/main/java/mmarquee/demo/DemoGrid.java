@@ -31,80 +31,85 @@ public class DemoGrid extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
-
         try {
-            application = automation.launchOrAttach("apps\\GridsDemo.exe");
-        } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
-        }
 
-        // Wait for the process to start
-        // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
-
-        // Sleep for WPF, to address above issue
-        this.rest();
-
-        AutomationWindow applicationWindow = null;
-
-        try {
-            applicationWindow = automation.getDesktopWindow("Main Form");
-        } catch (Exception ex) {
-            logger.info("Failed to find `Demo Form`");
-        }
-
-        try {
-            Object framework = applicationWindow.getFramework();
-            logger.info("Framework is " + framework.toString());
-
-            Object id = applicationWindow.getProcessId();
-            logger.info("Process = " + id.toString());
-
-            String name = applicationWindow.getName();
-            logger.info(name);
+            AutomationApplication application = null;
 
             try {
-                boolean val = applicationWindow.isModal();
+                application = automation.launchOrAttach("apps\\GridsDemo.exe");
+            } catch (Throwable ex) {
+                logger.warn("Failed to find application", ex);
+            }
 
-                logger.info(val);
+            // Wait for the process to start
+            // This doesn't seem to wait for WPF examples
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+
+            // Sleep for WPF, to address above issue
+            this.rest();
+
+            AutomationWindow applicationWindow = null;
+
+            try {
+                applicationWindow = automation.getDesktopWindow("Main Form");
             } catch (Exception ex) {
-                logger.info("Ouch");
+                logger.info("Failed to find `Demo Form`");
             }
 
-            // GRIDS ***********************************
-            AutomationDataGrid grid = applicationWindow.getDataGrid("grdDemoGrid", "TJHCGrid");
-            logger.info(grid.getName());
+            try {
+                Object framework = applicationWindow.getFramework();
+                logger.info("Framework is " + framework.toString());
 
-            // By convention, if there are no selected rows, then show the 'fields' memu of our grids
-         //   grid.showContextMenu();
+                Object id = applicationWindow.getProcessId();
+                logger.info("Process = " + id.toString());
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+                String name = applicationWindow.getName();
+                logger.info(name);
 
-            logger.info("value: " + cell1.getValue());
+                try {
+                    boolean val = applicationWindow.isModal();
 
-            List<AutomationDataGridCell> cells = grid.selectedRow();
+                    logger.info(val);
+                } catch (Exception ex) {
+                    logger.info("Ouch");
+                }
 
-            logger.info("size: " + cells.size());
+                // GRIDS ***********************************
+                AutomationDataGrid grid = applicationWindow.getDataGrid("grdDemoGrid", "TJHCGrid");
+                logger.info(grid.getName());
 
-            if (cells.size() != 0) {
-                logger.info("value is " + cells.get(1).getValue());
-            }
+                // By convention, if there are no selected rows, then show the 'fields' memu of our grids
+                //   grid.showContextMenu();
 
-            AutomationDataGridCell cell3 = grid.getItem(3, 3);
-            cell3.select();
+                AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            List<AutomationDataGridCell> cells0 = grid.selectedRow();
+                logger.info("value: " + cell1.getValue());
 
-            logger.info("value is now " + cells0.get(1).getValue());
+                List<AutomationDataGridCell> cells = grid.selectedRow();
 
-            logger.info("++ ALL DONE ++");
+                logger.info("size: " + cells.size());
+
+                if (cells.size() != 0) {
+                    logger.info("value is " + cells.get(1).getValue());
+                }
+
+                AutomationDataGridCell cell3 = grid.getItem(3, 3);
+                cell3.select();
+
+                List<AutomationDataGridCell> cells0 = grid.selectedRow();
+
+                logger.info("value is now " + cells0.get(1).getValue());
+
+                logger.info("++ ALL DONE ++");
 
 //            cell3.showContextMenu();
-            cell3.invoke();
+                cell3.invoke();
 
-        } catch (Exception ex) {
-            logger.info("Something went wrong - " + ex.getClass());
+            } catch (Exception ex) {
+                logger.info("Something went wrong - " + ex.getClass());
+            }
+        } finally {
+            automation.cleanUp();
         }
     }
 }

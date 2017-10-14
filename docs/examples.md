@@ -5,17 +5,22 @@ This example will periodically (every 1.5 seconds) display the element that has 
 ```
   UIAutomation automation = UIAutomation.getInstance();
 
-  do {
-    this.rest();
+  try {
 
-    try {
-      AutomationElement elementFocus = automation.getFocusedElement();
-      logger.info("From focus = " + elementFocus.getName());
+    do {
+      this.rest();
 
-    } catch (Exception ex) {
-      logger.info(ex.getStackTrace());
-    }
-  } while (true);
+      try {
+        AutomationElement elementFocus = automation.getFocusedElement();
+        logger.info("From focus = " + elementFocus.getName());
+
+      } catch (Exception ex) {
+        logger.info(ex.getStackTrace());
+      }
+    } while (true);
+  } finally {
+    automation.cleanUp();
+  }
 ```
 
 # Real World Examples

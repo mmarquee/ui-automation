@@ -17,27 +17,29 @@ public class DemoEventHandler extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
-
         try {
-            application = automation.launchOrAttach("apps\\Project1.exe");
-        } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
-        }
 
-        try {
-            // Wait for the process to start
-            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
-        } catch (Throwable ex) {
-            logger.error("Failed to wait properly");
-        }
+            AutomationApplication application = null;
 
-        try {
-            AutomationWindow window = automation.getDesktopWindow("Form1");
-            String name = window.getName();
-            logger.info(name);
+            try {
+                application = automation.launchOrAttach("apps\\Project1.exe");
+            } catch (Throwable ex) {
+                logger.warn("Failed to find application", ex);
+            }
 
-            AutomationButton button = window.getButton("OK");
+            try {
+                // Wait for the process to start
+                application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+            } catch (Throwable ex) {
+                logger.error("Failed to wait properly");
+            }
+
+            try {
+                AutomationWindow window = automation.getDesktopWindow("Form1");
+                String name = window.getName();
+                logger.info(name);
+
+                AutomationButton button = window.getButton("OK");
 /*
             automation.addAutomationEventHandler(
                     EventID.Invoke_Invoked,
@@ -45,8 +47,11 @@ public class DemoEventHandler extends TestBase {
                     button.getElement(),
                     new AutomationEventHandler());
                     */
-        } catch (Throwable ex) {
-            logger.error("Failed to get window properly");
+            } catch (Throwable ex) {
+                logger.error("Failed to get window properly");
+            }
+        } finally {
+            automation.cleanUp();
         }
     }
 }

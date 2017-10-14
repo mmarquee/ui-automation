@@ -30,49 +30,54 @@ public class TestMainPowerpoint extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
-
         try {
-            // 0. Load Powerpoint
+
+            AutomationApplication application = null;
+
             try {
-                // Start the application
-                application = automation.launchOrAttach("\"C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE\"");
-            } catch (Throwable ex) {
-                // Smother
-                logger.error("Failed to launch or attach Powerpoint");
+                // 0. Load Powerpoint
+                try {
+                    // Start the application
+                    application = automation.launchOrAttach("\"C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE\"");
+                } catch (Throwable ex) {
+                    // Smother
+                    logger.error("Failed to launch or attach Powerpoint");
+                }
+
+                // 1. Load the file
+
+                // You'll have to do that manually
+
+                // 2. Get the sheet
+                AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
+                logger.info(window.getName());
+
+                AutomationPanel panelX = window.getPanelByClassName(0, "MDIClient");
+                logger.info(panelX.getName());
+                logger.info(panelX.getClassName());
+
+                AutomationPanel panel1 = panelX.getPanel("PowerPoint Edit View - [This is text.pptx]");
+                logger.info(panelX.getName());
+                AutomationPanel panel2 = panel1.getPanel("Slide");
+                logger.info(panel2.getName());
+                AutomationPowerpointSlide slide = panel2.getPowerpointSlide("Slide 1 - This is text");
+                logger.info(slide.getName());
+
+                // Oddly enough this is an image control, and has text in it's selection
+                AutomationImage image = slide.getImage("Title TextBox");
+                AutomationElement element = image.getSelectionContainer();
+
+                // logger.info(text.getValue());
+
+                AutomationImage image1 = slide.getImage(0);
+
+                logger.info("++ ALL DONE ++");
+
+            } catch (Exception ex) {
+                logger.info("Something went wrong - " + ex.getClass());
             }
-
-            // 1. Load the file
-
-            // You'll have to do that manually
-
-            // 2. Get the sheet
-            AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
-            logger.info(window.getName());
-
-            AutomationPanel panelX = window.getPanelByClassName(0, "MDIClient");
-            logger.info(panelX.getName());
-            logger.info(panelX.getClassName());
-
-            AutomationPanel panel1 = panelX.getPanel("PowerPoint Edit View - [This is text.pptx]");
-            logger.info(panelX.getName());
-            AutomationPanel panel2 = panel1.getPanel("Slide");
-            logger.info(panel2.getName());
-            AutomationPowerpointSlide slide = panel2.getPowerpointSlide("Slide 1 - This is text");
-            logger.info(slide.getName());
-
-            // Oddly enough this is an image control, and has text in it's selection
-            AutomationImage image = slide.getImage("Title TextBox");
-            AutomationElement element = image.getSelectionContainer();
-
-            // logger.info(text.getValue());
-
-            AutomationImage image1 = slide.getImage(0);
-
-            logger.info("++ ALL DONE ++");
-
-        } catch (Exception ex) {
-            logger.info("Something went wrong - " + ex.getClass());
+        } finally {
+            automation.cleanUp();
         }
     }
 }
