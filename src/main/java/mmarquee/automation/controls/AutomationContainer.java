@@ -107,6 +107,12 @@ public class AutomationContainer extends AutomationBase {
         List<AutomationElement> collection = this.findAll(
                 new TreeScope(TreeScope.Subtree), condition);
 
+        // For debug
+        for(AutomationElement item : collection) {
+            logger.info(item.getName());
+            logger.info(item.getClassName());
+        }
+
         return collection.get(index);
     }
 

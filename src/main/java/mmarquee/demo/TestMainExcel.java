@@ -52,19 +52,37 @@ public class TestMainExcel extends TestBase {
             logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanelByClassName(0, "XLDESK");
-            logger.info("Name:" + panelX.getName());
-            logger.info("Classname:" + panelX.getClassName());
+            logger.info("Name: " + panelX.getName());
+            logger.info("Classname: " + panelX.getClassName());
 
-            AutomationTab tab = panelX.getTab(0);
-            logger.info(tab.getName());
+       //     AutomationTab tab = panelX.getTab(0);
+       //     logger.info(tab.getName());
+
+//            List<AutomationTabItem> items = tab.getTabItems();
+
+//            for(AutomationTabItem item : items) {
+  //              logger.info(item.getName());
+    //        }
+
+          //  AutomationPanel custom = window.getPanel(0);
+          //  logger.info("Name:" + custom.getName());
+
+
+
+      //      AutomationPanel custom = window.getPanel(0);
+       //     logger.info("Name:" + custom.getName());
+
+            AutomationCustom custom = panelX.getCustom(0);
+            logger.info("Name:" + custom.getName());
+
+            AutomationTab tab = custom.getTab("Book 1");
+            logger.info("Name:" + tab.getName());
 
             List<AutomationTabItem> items = tab.getTabItems();
 
-            for(AutomationTabItem item : items) {
-                logger.info(item.getName());
-            }
+            items.get(0).selectItem();
 
-            AutomationDataGrid grid = window.getDataGrid(0);
+            AutomationDataGrid grid = tab.getDataGrid(0);
             logger.info(grid.getName());
 
             // 3. Get some data
