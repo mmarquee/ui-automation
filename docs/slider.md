@@ -1,3 +1,6 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 ```
   AutomationSlider slider = applicationWindow.getSlider(0);
   logger.info("Slider value = " + slider.getRangeValue());

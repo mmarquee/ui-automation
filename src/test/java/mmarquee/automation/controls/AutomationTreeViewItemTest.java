@@ -20,11 +20,14 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import mmarquee.automation.AutomationElement;
@@ -35,6 +38,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
+ * Tests for AutomationTreeViewItem.
+ *
  * @author Mark Humphreys
  * Date 02/12/2016.
  */
@@ -43,15 +48,6 @@ public class AutomationTreeViewItemTest {
     @Mock SelectionItem selection;
     @Mock ExpandCollapse expand;
     @Mock Invoke invoke;
-
-    @BeforeClass
-    public static void checkOs() throws Exception {
-        Assume.assumeTrue(isWindows());
-    }
-
-    private static boolean isWindows() {
-        return System.getProperty("os.name").toLowerCase().contains("windows");
-    }
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -66,7 +62,10 @@ public class AutomationTreeViewItemTest {
     public void testName_Returns_Name_From_Element() throws Exception {
         when(element.getName()).thenReturn("NAME");
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         String name = ctrl.getName();
 
@@ -76,8 +75,11 @@ public class AutomationTreeViewItemTest {
     @Test
     public void testSelect() throws Exception {
         when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(1);
-        
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         ctrl.select();
 
@@ -88,17 +90,22 @@ public class AutomationTreeViewItemTest {
     public void testSelect_When_Pattern_Is_NOT_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(0);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, null, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, null, expand, invoke, instance);
 
         ctrl.select();
     }
 
-    
     @Test
     public void testClick_When_Pattern_Is_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         ctrl.click();
 
@@ -109,7 +116,10 @@ public class AutomationTreeViewItemTest {
     public void testClick_When_Pattern_Is_NOT_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, null);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, null, instance);
 
         ctrl.click();
     }
@@ -118,7 +128,10 @@ public class AutomationTreeViewItemTest {
     public void testIsSelected_Gets_Value_From_Pattern() throws Exception {
         when(selection.isSelected()).thenReturn(true);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         boolean selected = ctrl.isSelected();
 
@@ -131,7 +144,10 @@ public class AutomationTreeViewItemTest {
     public void testIsSelected_When_Pattern_Is_NOT_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsSelectionItemPatternAvailable.getValue())).thenReturn(0);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, null, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, null, expand, invoke, instance);
 
         ctrl.isSelected();
     }
@@ -141,7 +157,10 @@ public class AutomationTreeViewItemTest {
     public void testIsExpanded_Gets_Value_From_Pattern() throws Exception {
         when(expand.isExpanded()).thenReturn(true);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         boolean expanded = ctrl.isExpanded();
 
@@ -153,14 +172,20 @@ public class AutomationTreeViewItemTest {
     public void testIsExpanded_When_Pattern_Is_NOT_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue())).thenReturn(0);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke, instance);
 
         ctrl.isExpanded();
     }
 
     @Test
     public void testExpand() throws Exception {
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         ctrl.expand();
 
@@ -171,14 +196,20 @@ public class AutomationTreeViewItemTest {
     public void testExpand_When_Pattern_Is_NOT_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue())).thenReturn(0);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke, instance);
 
         ctrl.expand();
     }
     
     @Test
     public void testCollapse() throws Exception {
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
 
         ctrl.collapse();
 
@@ -189,7 +220,10 @@ public class AutomationTreeViewItemTest {
     public void testCollapse_When_Pattern_Is_NOT_Available() throws Exception {
         when(element.getPropertyValue(PropertyID.IsExpandCollapsePatternAvailable.getValue())).thenReturn(0);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke, instance);
 
         ctrl.collapse();
     }

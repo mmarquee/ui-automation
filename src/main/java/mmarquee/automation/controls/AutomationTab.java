@@ -50,7 +50,7 @@ public class AutomationTab extends AutomationContainer {
 
             for (AutomationElement elem : collection) {
                 if (elem.getControlType() == ControlType.TabItem.getValue()) {
-                    tabItems.add(new AutomationTabItem(elem));
+                    tabItems.add(new AutomationTabItem(elem, this.automation));
                 }
             }
         } catch (AutomationException ex) {

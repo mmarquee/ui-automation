@@ -97,6 +97,15 @@ public class AutomationWindowTest2 {
     }
 
     @Test
+    public void testClose_Gets_Close_From_Pattern() throws AutomationException, PatternNotFoundException {
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+
+        wndw.close();
+
+        verify(window, atLeast(1)).close();
+    }
+
+    @Test
     public void testGetName_Gets_Name_From_Element() throws AutomationException, PatternNotFoundException {
         when(element.getName()).thenReturn("NAME");
 

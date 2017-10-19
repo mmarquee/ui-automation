@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Wraps an interface instance in a way that all calls to interface methods originate from the same thread.
@@ -20,7 +21,13 @@ import java.util.concurrent.Future;
  */
 public class Canalizer {
     /** The thread where all calls originate from. */
-    static final ExecutorService executor = Executors.newSingleThreadExecutor();
+    static final ExecutorService executor = Executors.newFixedThreadPool(1, new ThreadFactory() {
+        public Thread newThread(Runnable r) {
+            Thread t = Executors.defaultThreadFactory().newThread(r);
+            t.setDaemon(true);
+            return t;
+        }
+    });
 
     /**
      * Shutdown the ExecutorService nicely.

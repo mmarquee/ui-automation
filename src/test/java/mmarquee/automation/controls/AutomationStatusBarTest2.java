@@ -16,8 +16,11 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 import org.apache.log4j.Logger;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -35,8 +38,6 @@ import static org.mockito.Mockito.*;
  * Date 25/09/2017
  */
 public class AutomationStatusBarTest2 {
-    protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
-
     @BeforeClass
     public static void checkOs() throws Exception {
         Assume.assumeTrue(isWindows());
@@ -52,6 +53,11 @@ public class AutomationStatusBarTest2 {
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+//        when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
         AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
@@ -73,6 +79,11 @@ public class AutomationStatusBarTest2 {
         result.add(new AutomationElement(listElement));
 
         when(element.findAll(any(), any())).thenReturn(result);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+    //    when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
         AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 

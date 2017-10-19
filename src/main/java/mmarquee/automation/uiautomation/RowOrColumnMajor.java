@@ -8,18 +8,40 @@ import java.util.Map;
  * Date 12/09/2016.
  */
 public enum RowOrColumnMajor {
+    /**
+     * Row is major.
+     */
     RowMajor(0),
+
+    /**
+     * Column is major.
+     */
     ColumnMajor(1),
+
+    /**
+     * Indeterminate major.
+     */
     Indeterminate(2);
 
+    /**
+     * The value.
+     */
     private int value;
 
+    /**
+     * Gets the value.
+     * @return The value.
+     */
     public int getValue() {
         return this.value;
     }
 
-    RowOrColumnMajor (int value) {
-        this.value = value;
+    /**
+     * Constructor for RowOrColumnMajor.
+     * @param inValue The value.
+     */
+    RowOrColumnMajor (final int inValue) {
+        this.value = inValue;
     }
 
     private static final Map<Integer, RowOrColumnMajor> intToTypeMap = new HashMap<Integer, RowOrColumnMajor>();
@@ -30,7 +52,8 @@ public enum RowOrColumnMajor {
     }
 
     /**
-     * Gets the enumeration from the given integer
+     * Gets the enumeration from the given integer.
+     *
      * @param i The given integer
      * @return The value (as an RowOrColumnMajor)
      */

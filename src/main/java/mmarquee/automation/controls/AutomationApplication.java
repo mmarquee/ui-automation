@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
@@ -151,6 +152,25 @@ public class AutomationApplication extends AutomationBase {
      * @param element The underlying automation element.
      * @param inHandle The handle of this application.
      * @param attached if we attach or launch the application.
+     * @param automation Automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached,
+                                 final UIAutomation automation)
+            throws AutomationException  {
+        super(element, automation);
+        this.handle = inHandle;
+        this.isAttached = attached;
+    }
+
+    /**
+     * Constructor for the AutomationApplication.
+     *
+     * @param element The underlying automation element.
+     * @param inHandle The handle of this application.
+     * @param attached if we attach or launch the application.
      * @param inUser32 The User32 instance.
      * @throws AutomationException Error in the automation library.
      */
@@ -160,6 +180,28 @@ public class AutomationApplication extends AutomationBase {
                                  final User32 inUser32)
             throws AutomationException {
         super(element);
+        this.handle = inHandle;
+        this.isAttached = attached;
+        this.user32 = inUser32;
+    }
+
+    /**
+     * Constructor for the AutomationApplication.
+     *
+     * @param element The underlying automation element.
+     * @param inHandle The handle of this application.
+     * @param attached if we attach or launch the application.
+     * @param inUser32 The User32 instance.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error
+     */
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached,
+                                 final User32 inUser32,
+                                 final UIAutomation instance)
+            throws AutomationException {
+        super(element, instance);
         this.handle = inHandle;
         this.isAttached = attached;
         this.user32 = inUser32;

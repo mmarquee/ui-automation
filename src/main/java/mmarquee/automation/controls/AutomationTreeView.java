@@ -15,10 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -31,13 +28,27 @@ import mmarquee.automation.uiautomation.TreeScope;
 public class AutomationTreeView extends AutomationBase {
 
     /**
-     * Construct the AutomationTreeView
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * Construct the AutomationTreeView.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationTreeView(AutomationElement element)
+    public AutomationTreeView(final AutomationElement element)
             throws AutomationException {
         super(element);
+    }
+
+    /**
+     * Construct the AutomationTreeView.
+     *
+     * @param element The element.
+     * @param automation The automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    public AutomationTreeView(final AutomationElement element,
+                              final UIAutomation automation)
+            throws AutomationException {
+        super(element, automation);
     }
 
     /**

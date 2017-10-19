@@ -23,17 +23,21 @@ import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.doNothing;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
+ * Tests for AutomationTab.
+ *
  * @author Mark Humphreys
  * Date 29/11/2016.
  */
@@ -43,19 +47,35 @@ public class AutomationTabTest {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
 
-    @BeforeClass
-    public static void checkOs() throws Exception {
-        Assume.assumeTrue(isWindows());
-    }
-
-    private static boolean isWindows() {
-        return System.getProperty("os.name").toLowerCase().contains("windows");
-    }
-
     @Test
-    @Ignore("Broken somewhat")
+    @Ignore("Still broken somewhat")
     public void testGetTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        SelectionItem selectionItem = Mockito.mock(SelectionItem.class);
+        doNothing().when(selectionItem).select();
+
+        List<AutomationElement> list = new ArrayList<>();
+
+        AutomationElement testElem = Mockito.mock(AutomationElement.class);
+        when(testElem.getName()).thenReturn("TEST-01");
+        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
+
+        list.add(testElem);
+
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        ItemContainer container = Mockito.mock(ItemContainer.class);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTab ctrl = new AutomationTab(element, container, instance);
+
+        ctrl.selectTabPage("TEST-01");
+
+
+        /*        AutomationElement element = Mockito.mock(AutomationElement.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         List<AutomationElement> list = new ArrayList<>();
@@ -70,9 +90,13 @@ public class AutomationTabTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationTab ctrl = new AutomationTab(element, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTab ctrl = new AutomationTab(element, container, instance);
 
         ctrl.selectTabPage("TEST");
+*/
     }
 
     @Test(expected = ElementNotFoundException.class)
@@ -87,7 +111,6 @@ public class AutomationTabTest {
         AutomationElement testElem = Mockito.mock(AutomationElement.class);
         when(testElem.getName()).thenReturn("TEST-01");
         when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
-//        when(testElem.getSelectItemPattern()).thenReturn(selectionItem);
 
         list.add(testElem);
 

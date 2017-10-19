@@ -46,12 +46,23 @@ public class AutomationContainer extends AutomationBase {
      * Constructor for AutomationContainer.
      *
      * @param element The underlying element.
-
      * @throws AutomationException Something is wrong in automation.
      * @throws PatternNotFoundException Could not find pattern.
      */
     public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
+    }
+
+    /**
+     * Constructor for AutomationContainer.
+     *
+     * @param element The underlying element.
+     * @param automation UIAutomation instance
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
+     */
+    public AutomationContainer(AutomationElement element, UIAutomation automation) throws PatternNotFoundException, AutomationException {
+        super(element, automation);
     }
 
     /**
@@ -607,13 +618,14 @@ public class AutomationContainer extends AutomationBase {
 
     
     /**
-     * Gets the text box control associated with the given index
-     * @param index Index of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
+     * Gets the text box control associated with the given index.
+     *
+     * @param index Index of the control.
+     * @return The found control.
+     * @throws AutomationException Something has gone wrong.
      */
     public AutomationTextBox getTextBox(int index) throws AutomationException {
-        return new AutomationTextBox(this.getElementByControlType(index, ControlType.Text));
+        return new AutomationTextBox(this.getElementByControlType(index, ControlType.Text), this.automation);
     }
 
     /**
