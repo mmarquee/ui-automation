@@ -1642,6 +1642,50 @@ public class AutomationContainerTest {
 
         wndw.getControlByName("unknownName");
     }
+
+    @Test
+    public void getControlByClassName() throws Exception {
+        setElementTypeAndClassName(elem, ControlType.Window, "BlaBlubber");
+
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationBase bar = spyWndw.getControlByClassName("BlaBlubber");
+        assertEquals(targetElement,bar.getElement());
+        assertEquals(AutomationWindow.class,bar.getClass());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByClassName_Throws_Exception_When_Not_found() throws Exception {
+
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByClassName("BlaBlubber");
+    }
+
+    @Test
+    public void getControlByClassName_By_Index() throws Exception {
+        setElementTypeAndClassName(elem, ControlType.AppBar, "BlaBla");
+
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationBase bar = spyWndw.getControlByClassName(0,"BlaBla");
+        assertEquals(targetElement,bar.getElement());
+        assertEquals(AutomationAppBar.class,bar.getClass());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void getControlByClassName_By_Index_Throws_Exception_When_Not_found() throws Exception {
+        BaseAutomationTest.setElementClassName(elem, "BlaBla");
+
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        wndw.getControlByClassName(99,"BlaBla");
+    }
+
     @Test
     public void getControlByClassName_By_Name() throws Exception {
     	BaseAutomationTest.setElementCurrentName(elem, "myName");

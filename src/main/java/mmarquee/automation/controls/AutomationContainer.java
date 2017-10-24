@@ -1402,7 +1402,38 @@ public class AutomationContainer extends AutomationBase {
 	}
 	
     /**
-     * Gets the control by the name
+     * Gets the first control by the className
+     *
+     * @param className The className to look for
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByClassName(String className) throws AutomationException, PatternNotFoundException {
+        try {
+        	AutomationElement el = this.getElementByIndex(0, className);
+        	return AutomationControlFactory.get(this, el);
+        } catch (IndexOutOfBoundsException ex) {
+        	throw new ElementNotFoundException("with class name " + className);
+        }
+    }
+
+    /**
+     * Gets the control by the index and className
+     *
+     * @param index The nth item that matches
+     * @param className The className to look for
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationBase getControlByClassName(int index, String className) throws AutomationException, PatternNotFoundException {
+        AutomationElement el = this.getElementByIndex(index, className);
+        return AutomationControlFactory.get(this, el);
+    }
+
+    /**
+     * Gets the control by the name and className
      *
      * @param name Name of the element
      * @param className The className to look for
@@ -1410,11 +1441,11 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-	public AutomationBase getControlByClassName(String name, String className) throws AutomationException, PatternNotFoundException {
-		AutomationElement el = this.getElementByName(name, className);
-		return AutomationControlFactory.get(this, el);
-	}
-    
+    public AutomationBase getControlByClassName(String name, String className) throws AutomationException, PatternNotFoundException {
+        AutomationElement el = this.getElementByName(name, className);
+        return AutomationControlFactory.get(this, el);
+    }
+
     /**
      * Gets the control associated with the given automation id
      * @param automationId The id to use
