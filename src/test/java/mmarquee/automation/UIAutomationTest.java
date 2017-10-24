@@ -425,6 +425,37 @@ public class UIAutomationTest extends BaseAutomationTest {
             app.quit(getLocal("notepad.title"));
         }
     }
+    
+
+    @Test(expected=AutomationException.class)
+    public void findProcess_Fails_When_No_executable() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+        instance.findProcess("notepad99.exe");
+    }
+
+    @Test(expected=AutomationException.class)
+    public void findProcess_fails_When_Not_Running() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+        instance.findProcess("notepad.exe");
+    }
+
+    @Test
+    public void findProcess_Succeeds_When_Already_Running() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            this.andRest();
+
+            AutomationApplication launched = instance.findProcess("notepad.exe");
+
+            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
+
+        } finally {
+            app.quit(getLocal("notepad.title"));
+        }
+    }
 
     @Test
     public void testCreateTrueCondition_Succeeds_When_Automation_Returns_True()

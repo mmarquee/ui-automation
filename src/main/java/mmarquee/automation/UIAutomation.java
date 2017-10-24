@@ -184,17 +184,11 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationApplication launchOrAttach(final String... command)
             throws Exception {
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-                new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        boolean found = Utils.findProcessEntry(processEntry, command);
-
-        if (!found) {
-            return this.launch(command);
-        } else {
-            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
-        }
+    	try {
+    		return findProcess(command);
+    	} catch (AutomationException ex) {
+    		return this.launch(command);
+    	}
     }
 
     /**
@@ -206,17 +200,11 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationApplication launchWithWorkingDirectoryOrAttach(final String... command)
             throws Exception {
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-                new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        boolean found = Utils.findProcessEntry(processEntry, command);
-
-        if (!found) {
-            return this.launchWithDirectory(command);
-        } else {
-            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
-        }
+    	try {
+    		return findProcess(command);
+    	} catch (AutomationException ex) {
+    		return this.launchWithDirectory(command);
+    	}
     }
 
     /**
