@@ -25,6 +25,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
+import java.util.Optional;
+
 /**
  * Created by Mark Humphreys on 24/07/2016.
  *
@@ -71,6 +73,10 @@ public interface IUIAutomationElement3 extends IUnknown {
     int getCurrentAutomationId(PointerByReference retVal);
     int getCurrentCulture (IntByReference retVal);
 
+    default Optional<PointerByReference> getPointer() {
+        return Optional.empty();
+    }
+
     // IUIAutomationElement2
     // IUIAutomationElement3
     int showContextMenu();
@@ -88,6 +94,11 @@ public interface IUIAutomationElement3 extends IUnknown {
             final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];
             vTablePointer.read(0, vTable, 0, vTable.length);
             return new IUIAutomationElement3() {
+
+                @Override
+                public Optional<PointerByReference> getPointer() {
+                    return Optional.of(ptr);
+                }
 
                 // IUnknown
                 @Override
