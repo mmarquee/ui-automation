@@ -739,7 +739,7 @@ public class UIAutomation extends BaseAutomation {
     public void addAutomationEventHandler(EventID event,
                                           TreeScope scope,
                                           AutomationElement element,
-                                          AutomationHandler handler) throws AutomationException {
+                                          AutomationEventHandler handler) throws AutomationException {
 
         IntByReference ibr = new IntByReference();
         ibr.setValue(event.getValue());
@@ -748,12 +748,12 @@ public class UIAutomation extends BaseAutomation {
 
         PointerByReference pElement = new PointerByReference();
 
-        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
+        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
         if (COMUtils.SUCCEEDED(resultA)) {
             throw new AutomationException();
         }
 
-        if (automation.addAutomationEventHandler(ibr, scope, pElement.getValue(), null, handler) != 0) {
+        if (automation.addAutomationEventHandler(ibr, scope, pElement.getValue(), null, handler.getHandler()) != 0) {
             throw new AutomationException();
         }
     }

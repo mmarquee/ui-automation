@@ -18,10 +18,10 @@ package mmarquee.automation;
 import mmarquee.automation.uiautomation.IUIAutomationEventHandler;
 
 /**
+ * Wrapper for event handling.
+ *
  * @author Mark Humphreys
  * Date 05/02/2017.
- *
- * Wrapper for event handling.
  */
 public class AutomationEventHandler  {
     /**
@@ -30,7 +30,17 @@ public class AutomationEventHandler  {
     private IUIAutomationEventHandler handler;
 
     /**
+     * Getter for the raw handler.
+     *
+     * @return The raw handler
+     */
+    public IUIAutomationEventHandler getHandler() {
+        return this.handler;
+    }
+
+    /**
      * Constructor for the AutomationEventHandler.
+     *
      * @param inHandler The raw event handler.
      */
     public AutomationEventHandler(final IUIAutomationEventHandler inHandler) {
