@@ -735,40 +735,67 @@ public class UIAutomation extends BaseAutomation {
      * @param handler The object that handles the event.
      * @throws AutomationException
      */
-/*
+
     public void addAutomationEventHandler(EventID event,
                                           TreeScope scope,
                                           AutomationElement element,
-                                          AutomationEventHandler handler) throws AutomationException {
+                                          AutomationEventHandler handler)
+            throws AutomationException {
 
         IntByReference ibr = new IntByReference();
         ibr.setValue(event.getValue());
-
-        PointerByReference handlerRef = new PointerByReference();
 
         PointerByReference pElement = new PointerByReference();
 
-        WinNT.HRESULT resultA = element.element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        WinNT.HRESULT resultA = element.getElement().QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
         if (COMUtils.SUCCEEDED(resultA)) {
-            throw new AutomationException();
+            throw new AutomationException(resultA.intValue());
         }
 
-        if (automation.addAutomationEventHandler(ibr, scope, pElement.getValue(), null, handler.getHandler()) != 0) {
-            throw new AutomationException();
+        IUIAutomationEventHandler raw = handler.getHandler();
+
+        PointerByReference handlerRef = new PointerByReference();
+
+        WinNT.HRESULT resultH = raw.QueryInterface(new Guid.REFIID(IUIAutomationEventHandler.IID), handlerRef);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            throw new AutomationException(resultH.intValue());
+        }
+
+        if (automation.addAutomationEventHandler(ibr, scope, pElement.getValue(), null, handlerRef) != 0) {
+            throw new AutomationException("Failed to add EventHandler");
         }
     }
-*/
+
           /*
         IntByReference eventId, PointerByReference element, PointerByReference handler
          */
-  /*
-    public void removeAutomationEventHandler(EventID event) {
+
+    public void removeAutomationEventHandler(EventID event,
+                                             AutomationElement element,
+                                             AutomationEventHandler handler)
+            throws AutomationException {
 
         IntByReference ibr = new IntByReference();
         ibr.setValue(event.getValue());
 
+        PointerByReference pElement = new PointerByReference();
 
-        automation.removeAutomationEventHandler(ibr);
+        WinNT.HRESULT resultA = element.getElement().QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            throw new AutomationException(resultA.intValue());
+        }
+
+        IUIAutomationEventHandler raw = handler.getHandler();
+
+        PointerByReference handlerRef = new PointerByReference();
+
+        WinNT.HRESULT resultH = raw.QueryInterface(new Guid.REFIID(IUIAutomationEventHandler.IID), handlerRef);
+        if (COMUtils.SUCCEEDED(resultA)) {
+            throw new AutomationException(resultH.intValue());
+        }
+
+        if (automation.removeAutomationEventHandler(ibr, pElement, handlerRef) != 0) {
+            throw new AutomationException("Failed to remove EventHandler");
+        }
     }
-*/
 }
