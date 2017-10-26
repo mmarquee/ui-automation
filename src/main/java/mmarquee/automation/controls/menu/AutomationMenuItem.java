@@ -57,11 +57,18 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      * Invoke the click pattern for the menu item.
      * @throws AutomationException Something has gone wrong
      */
+    @Override
     public void click() throws AutomationException {
-        if (this.invokePattern != null) {
-            this.invokePattern.invoke();
+        if (invokePattern != null && invokePattern.isAvailable()) {
+            invokePattern.invoke();
+        } else if (isExpanded()) {
+            collapse();
+        } else {
+            expand();
         }
+
     }
+
 
     /**
      * Gets the list of items associated with this menu item
