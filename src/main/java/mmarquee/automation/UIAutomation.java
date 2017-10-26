@@ -34,7 +34,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by Mark Humphreys on 26/01/2016.
- *
+ * <p>
  * The base automation wrapper.
  */
 public class UIAutomation extends BaseAutomation {
@@ -120,6 +120,21 @@ public class UIAutomation extends BaseAutomation {
      */
     public int compareElements(Pointer element1, Pointer element2, IntByReference same) {
         return this.automation.compareElements(element1, element2, same);
+    }
+
+    /**
+     * Compares 2 elements
+     *
+     * @param first  First element
+     * @param second Second element
+     * @param same   1 if same, 0 if different
+     * @return Error status
+     */
+    public int compareElements(final AutomationElement first, final AutomationElement second, final IntByReference same) {
+        final Pointer firstPtr = first.element.getPointer().get().getValue();
+        final Pointer secondPtr = second.element.getPointer().get().getValue();
+
+        return this.automation.compareElements(firstPtr, secondPtr, same);
     }
 
     /**
@@ -285,7 +300,7 @@ public class UIAutomation extends BaseAutomation {
      * Gets the desktop 'window' associated with the title, with a variable
      * number of retries.
      *
-     * @param title Title to search for
+     * @param title   Title to search for
      * @param retries Number of retries
      * @return AutomationWindow The found window
      * @throws ElementNotFoundException Element is not found
@@ -546,6 +561,7 @@ public class UIAutomation extends BaseAutomation {
 
     /**
      * Gets the element from the supplied tag
+     *
      * @param pt The point
      * @return The actual element under the tag
      * @throws AutomationException The automation library returned an error
@@ -585,6 +601,7 @@ public class UIAutomation extends BaseAutomation {
 
     /**
      * Gets the focused element
+     *
      * @return The focused element
      * @throws AutomationException Automation returned an error
      */
@@ -620,7 +637,7 @@ public class UIAutomation extends BaseAutomation {
     public AutomationApplication findProcess(String... command) throws AutomationException {
 
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-            new Tlhelp32.PROCESSENTRY32.ByReference();
+                new Tlhelp32.PROCESSENTRY32.ByReference();
 
         boolean found = Utils.findProcessEntry(processEntry, command);
 
@@ -634,6 +651,7 @@ public class UIAutomation extends BaseAutomation {
 
     /**
      * Gets the control view walker
+     *
      * @return The tree walker object
      */
     public AutomationTreeWalker getControlViewWalker() throws AutomationException {
