@@ -16,53 +16,225 @@
 package mmarquee.automation;
 
 /**
- * Created by Mark Humphreys on 27/01/2016.
+ * Enumeration for the control-type.
+ *
+ * @author Mark Humphreys
+ * Date 27/01/2016.
  *
  * Control types - see https://msdn.microsoft.com/en-us/library/windows/desktop/ee671198(v=vs.85).aspx
  */
 public enum ControlType {
+    /**
+     * No control type.
+     */
     None(00000),
-    Invoke(10000),
+
+    /**
+     * Button.
+     */
     Button(50000),
+
+    /**
+     * Calendar.
+     */
     Calendar(50001),
+
+    /**
+     * CheckBox.
+     */
     CheckBox(50002),
+
+    /**
+     * ComboBox.
+     */
     ComboBox(50003),
+
+    /**
+     * Edit.
+     */
     Edit(50004),
+
+    /**
+     * Hyperlink.
+     */
     Hyperlink(50005),
+
+    /**
+     * Image.
+     */
     Image(50006),
+
+    /**
+     * ListItem.
+     */
     ListItem(50007),
+
+    /**
+     * List.
+     */
     List(50008),
+
+    /**
+     * Menu.
+     */
     Menu(50009),
+
+    /**
+     * MenuBar.
+     */
     MenuBar(50010),
+
+    /**
+     * MenuItem.
+     */
     MenuItem(50011),
+
+    /**
+     * ProgressBar.
+     */
     ProgressBar(50012),
+
+    /**
+     * ProgressBAr.
+     */
     RadioButton(50013),
+
+    /**
+     * ScrollBar.
+     */
     ScrollBar(50014),
+
+    /**
+     * Slider.
+     */
     Slider(50015),
+
+    /**
+     * Spinner.
+     */
     Spinner(50016),
+
+    /**
+     * StatusBar.
+     */
     StatusBar(50017),
+
+    /**
+     * Tab (page control).
+     */
+
     Tab(50018),
+    /**
+     * TabItem.
+     */
     TabItem(50019),
+
+    /**
+     * Text.
+     */
     Text(50020),
+
+    /**
+     * Toolbar.
+     */
     ToolBar(50021),
+
+    /**
+     * ToolTip.
+     */
     ToolTip(50022),
+
+    /**
+     * Tree.
+     */
     Tree(50023),
+
+    /**
+     * TreeItem.
+     */
     TreeItem(50024),
+
+    /**
+     * TreeItem.
+     */
+
     Custom(50025),
+
+    /**
+     * Group.
+     */
     Group(50026),
+
+    /**
+     * Thumb.
+     */
     Thumb(50027),
+
+    /**
+     * DataGrid.
+     */
     DataGrid(50028),
+
+    /**
+     * DataItem.
+     */
     DataItem(50029),
+
+    /**
+     * Document.
+     */
     Document(50030),
+
+    /**
+     * SplitButton.
+     */
     SplitButton(50031),
+
+    /**
+     * Window.
+     */
     Window(50032),
+
+    /**
+     * Pane.
+     *
+     * A pane or panel.
+     */
     Pane(50033),
+
+    /**
+     * Header.
+     */
     Header(50034),
+
+    /**
+     * HeaderItem.
+     */
     HeaderItem(50035),
+
+    /**
+     * Table.
+     */
     Table(50036),
+
+    /**
+     * TitleBar.
+     */
     TitleBar(50037),
+
+    /**
+     * Separator.
+     */
     Separator(50038),
+
+    /**
+     * SemanticZoom.
+     */
     SemanticZoom(50039),
+
+    /**
+     * AppBar.
+     */
     AppBar(50040);
 
     private int value;
@@ -71,7 +243,21 @@ public enum ControlType {
         return this.value;
     }
 
+    /**
+     * Constructor for the ControlType.
+     *
+     * @param value The initial value.
+     */
     ControlType(int value) {
         this.value = value;
     }
+
+	public static ControlType fromValue(int controlTypeValue) {
+		for(ControlType type: values()) {
+			if (type.getValue() == controlTypeValue) {
+				return type;
+			}
+		}
+		return None;
+	}
 }

@@ -21,46 +21,48 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 20/07/2016.
+ * @author Mark Humphreys
+ * Date 20/07/2016.
  *
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
 public class AutomationToolBarButton extends AutomationBase implements Clickable {
 
-    private Invoke invokePattern;
-
     /**
-     * Constructor for the AutomationToolBarButton
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
+     * Constructor for the AutomationToolBarButton.
+     * @param element The underlying automation element.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationToolBarButton(AutomationElement element)
+    public AutomationToolBarButton(final AutomationElement element)
             throws AutomationException {
         super (element);
     }
 
     /**
-     * Constructor for the AutomationToolBarButton
-     * @param element The underlying automation element
-     * @param invoke The Invoke pattern
-     * @throws AutomationException Automation library error
+     * Constructor for the AutomationToolBarButton.
+     * @param element The underlying automation element.
+     * @param invoke The Invoke pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationToolBarButton(AutomationElement element, Invoke invoke)
-            throws AutomationException {
-        super (element);
-        this.invokePattern = invoke;
+    AutomationToolBarButton(final AutomationElement element,
+                            final Invoke invoke)
+            throws AutomationException, PatternNotFoundException {
+        super (element, invoke);
     }
 
     /**
      * <p>
-     * Invokes the click event for this control
+     * Invokes the click event for this control.
      * </p>
      * <p>
-     * Actually manufactures the click, as the toolbar buttons do not seem behave properly
+     * Actually manufactures the click, as the toolbar buttons do
+     * not seem behave properly
      * </p>
-     * @throws AutomationException Automation library error
+     * @throws AutomationException Automation library error.
      */
     public void click() throws AutomationException {
         WinDef.POINT point = this.element.getClickablePoint();

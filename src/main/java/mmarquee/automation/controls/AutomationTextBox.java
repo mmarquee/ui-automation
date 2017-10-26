@@ -18,30 +18,86 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
- * Created by Mark Humphreys on 01/02/2016.
+ * @author Mark Humphreys
+ * Date 01/02/2016.
  *
  * Wrapper for the TextBox element.
  */
-public class AutomationTextBox extends AutomationBase {
+public class AutomationTextBox
+        extends AutomationBase
+        implements Valueable {
+
     /**
-     * Construct the AutomationTextBox
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * The value pattern.
      */
-    public AutomationTextBox(AutomationElement element)
+    private Value valuePattern;
+
+    /**
+     * Construct the AutomationTextBox.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
+     */
+    public AutomationTextBox(final AutomationElement element)
             throws AutomationException {
         super(element);
     }
 
     /**
-     * Gets the text associated with this element
-     * @return The current text
-     * @throws AutomationException Automation library error
+     * Construct the AutomationTextBox.
+     *
+     * @param element The element.
+     * @param automation The automation instance.
+     * @throws AutomationException Automation library error.
      */
-    public String getValue() throws AutomationException {
-        return this.element.getName();
+    public AutomationTextBox(final AutomationElement element,
+                             final UIAutomation automation)
+            throws AutomationException {
+        super(element, automation);
+    }
+
+    /**
+     * Construct the AutomationTextBox.
+     *
+     * @param element The element.
+     * @param value The value pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    AutomationTextBox(final AutomationElement element,
+                      final Value value,
+                      final UIAutomation instance)
+            throws AutomationException {
+        super(element, instance);
+        this.valuePattern = value;
+    }
+
+    /**
+     * Gets the text associated with this element.
+     *
+     * @return The current text.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public String getValue()
+            throws PatternNotFoundException, AutomationException {
+        if (this.valuePattern == null) {
+            try {
+                this.valuePattern = this.getValuePattern();
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
+        }
+
+        try {
+            return valuePattern.value();
+        } catch (NullPointerException ex) {
+            return "<Empty>";
+        }
     }
 }

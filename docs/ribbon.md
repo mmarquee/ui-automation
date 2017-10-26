@@ -1,3 +1,6 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 The ribbon control is a complex structure, but the tree of controls is navigable, as the snippet below shows (automating the Windows Explorer), finding the button associated with the Preview Pane and clicking on it to turn it on/off.
 
 ```

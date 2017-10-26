@@ -23,7 +23,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 13/07/2016.
+ * @author Mark Humphreys
+ * Date 13/07/2016.
  */
 public interface IUIAutomationInvokePattern extends IUnknown {
     /**
@@ -37,41 +38,5 @@ public interface IUIAutomationInvokePattern extends IUnknown {
     WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int invoke();
-
-    class Converter {
-        private static int UIAutomationInvokePattern_Methods = 4; // 0-2 IUnknown, 3 IUIAutomationInvokePattern
-
-        public static IUIAutomationInvokePattern PointerToInterface(final PointerByReference ptr) {
-            final Pointer interfacePointer = ptr.getValue();
-            final Pointer vTablePointer = interfacePointer.getPointer(0);
-            final Pointer[] vTable = new Pointer[UIAutomationInvokePattern_Methods];
-            vTablePointer.read(0, vTable, 0, vTable.length);
-            return new IUIAutomationInvokePattern() {
-
-                // IUnknown
-                @Override
-                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
-                }
-
-                @Override
-                public int AddRef() {
-                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int Release() {
-                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int invoke() {
-                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-            };
-        }
-    }
 }
+

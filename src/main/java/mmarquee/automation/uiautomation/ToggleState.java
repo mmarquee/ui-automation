@@ -19,39 +19,66 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Mark Humphreys on 13/07/2016.
+ * @author Mark Humphreys
+ * Date 13/07/2016.
  */
 public enum ToggleState {
+    /**
+     * Toggled off.
+     */
     Off(0),
+
+    /**
+     * Togggled on.
+     */
     On(1),
+
+    /**
+     * Indeterminate toggle.
+     */
     Indeterminate(2);
 
+    /**
+     * The underlying value.
+     */
     private int value;
 
+    /**
+     * Gets the value associated with this enumeration.
+     * @return The associated value.
+     */
     public int getValue() {
         return this.value;
     }
 
-    ToggleState (int value) {
-        this.value = value;
+    /**
+     * Constructor for ToggleState.
+     * @param inValue The value of the object.
+     */
+    ToggleState(final int inValue) {
+        this.value = inValue;
     }
 
-    private static final Map<Integer, ToggleState> intToTypeMap = new HashMap<Integer, ToggleState>();
+    private static final Map<Integer, ToggleState> IntToTypeMap =
+            new HashMap<Integer, ToggleState>();
+
     static {
         for (ToggleState type : ToggleState.values()) {
-            intToTypeMap.put(type.value, type);
+            IntToTypeMap.put(type.value, type);
         }
     }
 
     /**
-     * Gets the enumeration from the given integer
-     * @param i The given integer
-     * @return The value (as an ToggleState)
+     * Gets the enumeration from the given integer.
+     * @param i The given integer.
+     * @return The value (as an ToggleState).
      */
-    public static ToggleState fromInt(int i) {
-        ToggleState type = intToTypeMap.get(Integer.valueOf(i));
-        if (type == null)
+    public static ToggleState fromInt(final int i) {
+        ToggleState type = IntToTypeMap.get(Integer.valueOf(i));
+        if (type == null) {
             return ToggleState.Off;
+        }
+
         return type;
     }
 }

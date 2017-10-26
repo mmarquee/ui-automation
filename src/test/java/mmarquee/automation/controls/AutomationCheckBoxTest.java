@@ -16,18 +16,30 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.ToggleState;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 30/11/2016.
+ * @author Mark Humphreys
+ * Date 30/11/2016.
+ *
+ * Tests of the AutomationCheckBox class.
  */
 public class AutomationCheckBoxTest {
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
@@ -36,9 +48,13 @@ public class AutomationCheckBoxTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        String name = checkbox.name();
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
+
+        String name = checkbox.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -50,7 +66,11 @@ public class AutomationCheckBoxTest {
 
         when(pattern.currentToggleState()).thenReturn(ToggleState.On);
 
-        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
 
         ToggleState state = checkbox.getToggleState();
 
@@ -62,7 +82,11 @@ public class AutomationCheckBoxTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
 
-        AutomationCheckbox checkbox = new AutomationCheckbox(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
 
         checkbox.toggle();
     }

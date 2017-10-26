@@ -16,8 +16,32 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.*;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationDocument;
+import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.controls.AutomationCheckBox;
+import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationRadioButton;
+import mmarquee.automation.controls.AutomationTextBox;
+import mmarquee.automation.controls.AutomationCalendar;
+import mmarquee.automation.controls.AutomationTreeViewItem;
+import mmarquee.automation.controls.AutomationTreeView;
+import mmarquee.automation.controls.AutomationList;
+import mmarquee.automation.controls.AutomationListItem;
+import mmarquee.automation.controls.AutomationTitleBar;
+import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.AutomationComboBox;
+import mmarquee.automation.controls.AutomationDataGrid;
+import mmarquee.automation.controls.AutomationEditBox;
+import mmarquee.automation.controls.AutomationProgressBar;
+import mmarquee.automation.controls.AutomationStatusBar;
+import mmarquee.automation.controls.AutomationSlider;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.controls.AutomationToolBar;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
@@ -28,7 +52,8 @@ import mmarquee.automation.utils.Utils;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on a WPF application.
  */
@@ -47,7 +72,7 @@ public class TestMainWPF extends TestBase {
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
-        application.waitForInputIdle(5000);
+        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();
@@ -82,7 +107,7 @@ public class TestMainWPF extends TestBase {
             WinDef.POINT point = applicationWindow.getClickablePoint();
             logger.info("Clickable point = " + point.toString());
 
-            String name = applicationWindow.name();
+            String name = applicationWindow.getName();
             logger.info(name);
 
             try {
@@ -99,20 +124,20 @@ public class TestMainWPF extends TestBase {
 
             AutomationMainMenu menu = applicationWindow.getMainMenu(0);
 
-            logger.info("Menu name " + menu.name());
+            logger.info("Menu name " + menu.getName());
 
             logger.info(menu.getItems().size() + " menu items");
 
-            logger.info(menu.getItems().get(0).name());
+            logger.info(menu.getItems().get(0).getName());
 
             // Actual program menu is a `Menu`
 
             AutomationMainMenu mainMenu = applicationWindow.getMenu(0);
-            logger.info("Menu name " + mainMenu.name());
+            logger.info("Menu name " + mainMenu.getName());
 
             logger.info(mainMenu.getItems().size() + " menu items");
 
-            logger.info(mainMenu.getItems().get(0).name());
+            logger.info(mainMenu.getItems().get(0).getName());
 
 //            AutomationMainMenu menu = window.getMenu();   // WPF menus seem to be different from Delphi VCL windows
 
@@ -166,7 +191,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ CHECK BOX ++");
 
-            AutomationCheckbox check = applicationWindow.getCheckbox(0);
+            AutomationCheckBox check = applicationWindow.getCheckBox(0);
             check.toggle();
             try {
                 ToggleState state = check.getToggleState();
@@ -175,7 +200,7 @@ public class TestMainWPF extends TestBase {
             }
 /* Only works on one PC at the moment. */
 /*
-            AutomationCheckbox cb = applicationWindow.get(AutomationCheckbox.class, ControlType.CheckBox, "Enable feature WWW");
+            AutomationCheckBox cb = applicationWindow.get(AutomationCheckBox.class, ControlType.CheckBox, "Enable feature WWW");
             cb.toggle();
             try {
                 ToggleState state = cb.getToggleState();
@@ -188,7 +213,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ RADIO BUTTON ++");
 
             AutomationRadioButton radio = applicationWindow.getRadioButton(1);
-            radio.selectItem();
+            radio.select();
 
             // TEXT BOX *********************************************
 
@@ -264,12 +289,12 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationComboBox cb1 = applicationWindow.getCombobox(1);
 
-                String txt = cb1.text();
+                String txt = cb1.getValue();
 
                 logger.info("Text for Combobox is `" + txt + "`");
 
                 cb1.setText("Here we are");
-                logger.info("Text for Combobox is now `" + cb1.text() + "`");
+                logger.info("Text for Combobox is now `" + cb1.getValue() + "`");
 
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find element");
@@ -286,7 +311,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            String itemName = cell1.name();
+            String itemName = cell1.getName();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());
@@ -297,15 +322,15 @@ public class TestMainWPF extends TestBase {
 
             List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 
-            for(AutomationDataGridCell cell : headers) {
-                logger.info(cell.name());
+            for (AutomationDataGridCell cell : headers) {
+                logger.info(cell.getName());
             }
 
-            logger.info(grid.getColumnHeader(1).name());
+            logger.info(grid.getColumnHeader(1).getName());
 
             List<AutomationDataGridCell> cols = grid.getColumn(1);
-            for(AutomationDataGridCell cell : cols) {
-                logger.info("Col 1 - " + cell.name());
+            for (AutomationDataGridCell cell : cols) {
+                logger.info("Col 1 - " + cell.getName());
             }
 
             // TREEVIEW **************************
@@ -317,7 +342,7 @@ public class TestMainWPF extends TestBase {
                 AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
                 treeItem.select();
 
-                logger.info("Item is " + treeItem.name());
+                logger.info("Item is " + treeItem.getName());
 
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find item");
@@ -332,7 +357,7 @@ public class TestMainWPF extends TestBase {
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
             AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("btnClickMe");
-            logger.info(btnClickMe.name());
+            logger.info(btnClickMe.getName());
             btnClickMe.click();
 
             // LISTS ****************************************
@@ -343,12 +368,12 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationListItem listItem = list.getItem("Hello, Window world!");
                 listItem.select();
-                logger.info(listItem.name());
+                logger.info(listItem.getName());
 
                 // Now find by index
                 AutomationListItem listItem0 = list.getItem(0);
                 listItem0.select();
-                logger.info("0th element is " + listItem0.name());
+                logger.info("0th element is " + listItem0.getName());
 
             } catch (ItemNotFoundException ex) {
                 logger.info("Didn't find item");
@@ -367,13 +392,13 @@ public class TestMainWPF extends TestBase {
             // TOOLBAR ***********************************
 
             AutomationToolBar toolbar = applicationWindow.getToolBar(0);
-            logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
+            logger.info("Toolbar name is " + toolbar.getName()); // Blank in default WPF
 
             AutomationButton btn1 = toolbar.getButton(1);
 
             if (btn1.isEnabled()) {
                 logger.info("btn0 Enabled");
-                logger.info(btn1.name());
+                logger.info(btn1.getName());
                 btn1.click();
 
                 logger.info("Clicked btn1");
@@ -405,7 +430,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationCalendar calendar = applicationWindow.getCalendar(0);
 
-            logger.info("Date is " + calendar.name());
+            logger.info("Date is " + calendar.getName());
 
             // Not sure what we can get out of a calendar
 
@@ -419,7 +444,7 @@ public class TestMainWPF extends TestBase {
 
             document.showContextMenu();
 
-            logger.info("Document name is `" + document.name() + "`");
+            logger.info("Document name is `" + document.getName() + "`");
 
             logger.info("Text is " + document.getText());
 
@@ -532,7 +557,7 @@ public class TestMainWPF extends TestBase {
 
             WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
 
-            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.left +5, rect0.top +5);
+            WinDef.POINT clickPoint1 = new WinDef.POINT(rect0.left + 5, rect0.top + 5);
 
             mouse.setLocation(clickPoint1.x, clickPoint1.y);
             mouse.rightClick();
@@ -546,7 +571,7 @@ public class TestMainWPF extends TestBase {
             // Window / element not found
             try {
                 logger.info("Looking for `Not There`");
-                AutomationWindow popupNotThere = applicationWindow.getWindow("Not there");
+                applicationWindow.getWindow("Not there");
                 logger.info("Found `Not There` somehow!");
             } catch (ElementNotFoundException ex) {
                 logger.info("Didn't find element `Not There`");
@@ -572,7 +597,7 @@ public class TestMainWPF extends TestBase {
 
             // Same for desktop window
             try {
-                AutomationWindow desktopWindow = automation.getDesktopWindow("MainWindow99");
+                automation.getDesktopWindow("MainWindow99");
             } catch (AutomationException ex) {
                 logger.info("Failed to find `MainWindow99` - " + ex.getClass());
             }
@@ -581,7 +606,7 @@ public class TestMainWPF extends TestBase {
 
             // .. and object
             try {
-                AutomationWindow desktopObject = automation.getDesktopWindow("MainWindow00");
+                automation.getDesktopWindow("MainWindow00");
             } catch (AutomationException ex) {
                 logger.info("Failed to find `MainWindow00` - " + ex.getClass());
             }

@@ -18,57 +18,111 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Wrapper for the Panel element.
  */
 public class AutomationPanel extends AutomationContainer {
     /**
-     * Construct the AutomationPanel
-     * @param element The element
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Could not find pattern
+     * Construct the AutomationPanel.
+     *
+     * @param element The element.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationPanel(AutomationElement element) throws AutomationException, PatternNotFoundException {
+    public AutomationPanel(final AutomationElement element)
+            throws AutomationException, PatternNotFoundException {
         super(element);
     }
 
     /**
-     * Construct the AutomationPanel
-     * @param element The element
-     * @param containerPattern The itemContainer pattern
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Could not find pattern
+     * Construct the AutomationPanel.
+     *
+     * @param element The element.
+     * @param containerPattern The itemContainer pattern.
+     * @param instance Automation instance.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationPanel(AutomationElement element, ItemContainer containerPattern) throws AutomationException, PatternNotFoundException {
+    AutomationPanel(final AutomationElement element,
+                    final ItemContainer containerPattern,
+                    final UIAutomation instance)
+            throws AutomationException, PatternNotFoundException {
+        super(element, containerPattern, instance);
+    }
+
+    /**
+     * Construct the AutomationPanel.
+     *
+     * @param element The element.
+     * @param containerPattern The itemContainer pattern.
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Could not find pattern.
+     */
+    AutomationPanel(final AutomationElement element,
+                    final ItemContainer containerPattern)
+            throws AutomationException, PatternNotFoundException {
         super(element, containerPattern);
     }
 
     /**
-     * Gets an MDI window from the panel
+     * Gets an MDI window from the panel.
      *
      * Yes, panels can have windows - in this case the window is assumed to be extant.
      *
-     * @param index The nth element
-     * @return The found window
-     * @throws PatternNotFoundException Failed to find the right pattern
+     * @param index The nth element.
+     * @return The found window.
+     * @throws PatternNotFoundException Failed to find the right pattern.
+     * @throws AutomationException Something went really wrong.
+     * @deprecated Use getWindow(int) instead.
+     */
+    public AutomationWindow getMDIWindow(final int index)
+            throws PatternNotFoundException, AutomationException {
+        return getWindow(index);
+    }
+
+    /**
+     * Gets a window from the panel.
+     *
+     * @param index The nth element.
+     * @return The found window.
+     * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    public AutomationWindow getMDIWindow(int index) throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> list =
-                this.findAll(new TreeScope(TreeScope.Descendants),
-                    this.createControlTypeCondition(ControlType.Window).getValue());
+    public AutomationWindow getWindow(final int index)
+            throws PatternNotFoundException, AutomationException {
+    	return new AutomationWindow(this.getElementByControlType(index, ControlType.Window));
+    }
 
-        AutomationElement item = list.get(index);
+    /**
+     * Gets a window from the panel.
+     *
+     * @param name Name of the control.
+     * @return The found window.
+     * @throws PatternNotFoundException Failed to find the right pattern.
+     * @throws AutomationException Something went really wrong.
+     */
+    public AutomationWindow getWindow(final String name)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.getElementByControlType(name, ControlType.Window));
+    }
 
-        return new AutomationWindow(item);
+    /**
+     * Gets the window associated with the given automation id.
+     *
+     * @param id The id to use.
+     * @return The found window.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
+      */
+    public AutomationWindow getWindowByAutomationId(final String id)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.getElementByAutomationId(id, ControlType.Window));
     }
 }

@@ -24,7 +24,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 13/07/2016.
+ * @author Mark Humphreys
+ * Date 13/07/2016.
  */
 //public interface IUIAutomationItemContainerPattern extends IUnknown {
 //

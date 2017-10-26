@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -24,7 +26,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 28/11/2016.
+ * @author Mark Humphreys
+ * Date 28/11/2016.
  */
 public class AutomationDataGridCellTest {
     static {
@@ -38,9 +41,12 @@ public class AutomationDataGridCellTest {
 
         when(value.value()).thenReturn("VALUE");
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String val = cell.value();
+        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
+
+        String val = cell.getValue();
 
         assertTrue(val.equals("VALUE"));
     }
@@ -52,9 +58,12 @@ public class AutomationDataGridCellTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String val = cell.name();
+        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
+
+        String val = cell.getName();
 
         assertTrue(val.equals("NAME"));
     }

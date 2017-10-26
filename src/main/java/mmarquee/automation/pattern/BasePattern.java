@@ -22,10 +22,13 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.BaseAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 
 /**
- * Created by Mark Humphreys on 29/02/2016.
+ * @author Mark Humphreys
+ * Date 29/02/2016.
  *
  * Base for the pattern wrappers
  */
@@ -80,7 +83,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
      * @return The pattern
      */
     public IUIAutomationElement3 convertPointerToElementInterface(PointerByReference pUnknownA) {
-        return IUIAutomationElement3.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationElement3Converter.PointerToInterface(pUnknownA);
     }
 
     /**
@@ -89,6 +92,6 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
      * @return The pattern
      */
     public IUIAutomationElementArray convertPointerToElementArrayInterface(PointerByReference pUnknownA) {
-        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknownA);
     }
 }

@@ -2,8 +2,10 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.PropertyID;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -13,7 +15,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 12/01/2017.
+ * @author Mark Humphreys
+ * Date 12/01/2017.
  */
 public class AutomationSplitButtonTest {
     static {
@@ -27,9 +30,12 @@ public class AutomationSplitButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationSplitButton button = new AutomationSplitButton(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = button.name();
+        AutomationSplitButton button = new AutomationSplitButton(element, pattern, instance);
+
+        String name = button.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -39,7 +45,10 @@ public class AutomationSplitButtonTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
-        AutomationSplitButton button = new AutomationSplitButton(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationSplitButton button = new AutomationSplitButton(element, pattern, instance);
 
         button.focus();
 
@@ -53,7 +62,10 @@ public class AutomationSplitButtonTest {
 
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
-        AutomationSplitButton button = new AutomationSplitButton(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationSplitButton button = new AutomationSplitButton(element, pattern, instance);
 
         button.click();
 
@@ -67,7 +79,10 @@ public class AutomationSplitButtonTest {
 
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
-        AutomationSplitButton button = new AutomationSplitButton(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationSplitButton button = new AutomationSplitButton(element, pattern, instance);
 
         button.click();
 

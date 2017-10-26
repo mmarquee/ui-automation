@@ -15,15 +15,14 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Function;
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 13/07/2016.
+ * @author Mark Humphreys
+ * Date 13/07/2016.
  */
 public interface IUIAutomationTextRange extends IUnknown {
     /**
@@ -37,46 +36,4 @@ public interface IUIAutomationTextRange extends IUnknown {
 
     int select();
     int getText(Integer maxLength, PointerByReference sr);
-
-    class Converter {
-        private static int METHODS = 21; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
-
-        public static IUIAutomationTextRange PointerToInterface(final PointerByReference ptr) {
-            final Pointer interfacePointer = ptr.getValue();
-            final Pointer vTablePointer = interfacePointer.getPointer(0);
-            final Pointer[] vTable = new Pointer[METHODS];
-            vTablePointer.read(0, vTable, 0, vTable.length);
-            return new IUIAutomationTextRange() {
-                // IUnknown
-
-                @Override
-                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
-                }
-
-                @Override
-                public int AddRef() {
-                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int Release() {
-                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int getText(Integer maxLength, PointerByReference sr) {
-                    Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, maxLength, sr});
-                }
-
-                public int select() {
-                    Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-            };
-        }
-    }
-
 }

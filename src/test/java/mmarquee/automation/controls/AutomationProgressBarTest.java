@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Range;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -26,7 +28,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 01/12/2016.
+ * @author Mark Humphreys
+ * Date 01/12/2016.
  */
 public class AutomationProgressBarTest {
     static {
@@ -40,9 +43,12 @@ public class AutomationProgressBarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = bar.name();
+        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
+
+        String name = bar.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -54,7 +60,10 @@ public class AutomationProgressBarTest {
 
         when(range.getValue()).thenReturn(99.9);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
 
         double value = bar.getRangeValue();
 
@@ -66,7 +75,10 @@ public class AutomationProgressBarTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range range = Mockito.mock(Range.class);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
 
         bar.setRangeValue(18.99);
 

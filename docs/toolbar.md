@@ -1,3 +1,8 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
+# Example
+
 ```
   AutomationToolBar toolbar = applicationWindow.getToolBar(0);
   logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF

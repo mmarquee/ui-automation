@@ -16,7 +16,8 @@
 package mmarquee.automation;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Thrown when an item is not found.
  */

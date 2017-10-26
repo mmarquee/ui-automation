@@ -43,7 +43,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 11/01/2017.
+ * @author Mark Humphreys
+ * Date 11/01/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TablePatternTest {
@@ -177,7 +178,6 @@ public class TablePatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
         doAnswer(new Answer() {
@@ -196,10 +196,6 @@ public class TablePatternTest {
         doReturn(mockUnknown)
                 .when(spyPattern)
                 .makeUnknown(any());
-
-        doReturn(mockRange)
-                .when(spyPattern)
-                .convertPointerToInterface(any());
 
         spyPattern.getRowOrColumnMajor();
 

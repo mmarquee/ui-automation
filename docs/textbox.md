@@ -1,4 +1,4 @@
-```
-  String text = tab.getEditBox(0).getValue();
-  logger.info("Text for editBox1 is " + text);
-```
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
+# Example

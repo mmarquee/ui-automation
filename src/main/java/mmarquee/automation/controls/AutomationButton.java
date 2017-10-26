@@ -18,69 +18,78 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
-import javax.naming.ldap.Control;
-
 /**
- * Created by Mark Humphreys on 02/02/2016.
+ * @author Mark Humphreys
+ * Date 02/02/2016.
  *
  * Wrapper around the Button element.
  */
-public class AutomationButton extends AutomationBase implements Clickable {
-
-    protected Invoke invokePattern = null;
-
+public class AutomationButton
+        extends AutomationBase
+        implements Clickable, Focusable {
     public static ControlType controlType = ControlType.Button;
 
     /**
-     * Constructor for the AutomationButton
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationButton.
+     *
+     * @param element The underlying automation element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationButton(AutomationElement element)
+    public AutomationButton(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
 //        this.invokePattern = this.getInvokePattern();
     }
 
     /**
-     * Constructor for the AutomationButton
-     * @param element The underlying automation element
-     * @param pattern The pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationButton.
+     *
+     * @param element The underlying automation element.
+     * @param pattern The pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationButton(AutomationElement element, Invoke pattern)
+    public AutomationButton(final AutomationElement element,
+                            final Invoke pattern)
             throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.invokePattern = pattern;
+        super(element, pattern);
+    }
+
+    /**
+     * Constructor for the AutomationButton.
+     *
+     * @param element The underlying automation element.
+     * @param pattern The pattern.
+     * @param instance The automation instance.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationButton(final AutomationElement element,
+                            final Invoke pattern,
+                            final UIAutomation instance)
+            throws PatternNotFoundException, AutomationException {
+        super(element, pattern, instance);
     }
 
     /**
      * <p>
-     * Invokes the click event for this control
+     * Invokes the click event for this control.
      * </p>
-     * @throws AutomationException Error in the automation library
-     * @throws PatternNotFoundException Could not find the invoke pattern
+     * @throws AutomationException Error in the automation library.
+     * @throws PatternNotFoundException Could not find the invoke pattern.
      */
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
-
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
-        } else {
-            throw new PatternNotFoundException();
-        }
+        this.invoke();
     }
 
     /**
      * <p>
-     * Sets the focus to this control
+     * Sets the focus to this control.
      * </p>
      */
     public void focus() {

@@ -22,10 +22,12 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
+import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 
 /**
- * Created by Mark Humphreys on 01/03/2016.
+ * @author Mark Humphreys
+ * Date 01/03/2016.
  *
  * Wrapper for the range pattern.
  */
@@ -46,7 +48,7 @@ public class Range extends BasePattern {
     }
 
     public IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationRangeValuePattern.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationRangeValuePatternConverter.PointerToInterface(pUnknownA);
     }
 
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {

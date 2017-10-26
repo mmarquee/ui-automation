@@ -17,11 +17,9 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.SelectionItem;
-import org.apache.log4j.Logger;
+import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -29,9 +27,18 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 01/12/2016.
+ * @author Mark Humphreys
+ * Date 01/12/2016.
  */
 public class AutomationToolbarButtonTest {
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -45,7 +52,7 @@ public class AutomationToolbarButtonTest {
 
         AutomationToolBarButton ctrl = new AutomationToolBarButton(element);
 
-        String name = ctrl.name();
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));
     }

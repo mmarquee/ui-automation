@@ -16,10 +16,31 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.*;
-import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.menu.AutomationMenu;
+import mmarquee.automation.controls.AutomationCheckBox;
+import mmarquee.automation.controls.AutomationMaskedEdit;
+import mmarquee.automation.controls.AutomationToolBarButton;
+import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationHyperlink;
+import mmarquee.automation.controls.AutomationRadioButton;
+import mmarquee.automation.controls.AutomationTextBox;
+import mmarquee.automation.controls.AutomationTreeViewItem;
+import mmarquee.automation.controls.AutomationTreeView;
+import mmarquee.automation.controls.AutomationList;
+import mmarquee.automation.controls.AutomationListItem;
+import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.AutomationComboBox;
+import mmarquee.automation.controls.AutomationDataGrid;
+import mmarquee.automation.controls.AutomationStatusBar;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.controls.AutomationToolBar;
+import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.uiautomation.ToggleState;
@@ -27,8 +48,9 @@ import mmarquee.automation.uiautomation.ToggleState;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/02/2016
- *  *
+ * @author Mark Humphreys
+ * Date 26/02/2016
+ *
  * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestMain extends TestBase {
@@ -46,14 +68,14 @@ public class TestMain extends TestBase {
 
         try {
             // Wait for the process to start
-            application.waitForInputIdle(5000);
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait properly");
         }
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Form1");
-            String name = window.name();
+            String name = window.getName();
             logger.info(name);
 
             Object framework = window.getFramework();
@@ -94,7 +116,7 @@ public class TestMain extends TestBase {
             String text = tab.getEditBox(0).getValue();
             logger.info("Text for editBox1 is " + text);
 
-            AutomationCheckbox check = window.getCheckbox(0);
+            AutomationCheckBox check = window.getCheckBox(0);
             check.toggle();
 
             try {
@@ -105,7 +127,7 @@ public class TestMain extends TestBase {
             }
 
             AutomationRadioButton radio = window.getRadioButton(1);
-            radio.selectItem();
+            radio.select();
 
             AutomationStatusBar statusBar = window.getStatusBar();
 
@@ -118,7 +140,7 @@ public class TestMain extends TestBase {
             try {
                 AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
                 cb1.setText("Replacements");
-                String txt = cb1.text();
+                String txt = cb1.getValue();
 
                 cb1.getClickablePoint();
 
@@ -148,7 +170,7 @@ public class TestMain extends TestBase {
 
                 this.rest();
 
-                List<AutomationListItem> litems = cb0.getList();
+                List<AutomationListItem> litems = cb0.getItems();
             } catch (ElementNotFoundException ex) {
                 logger.error("Failed to find combobox");
             }
@@ -158,7 +180,7 @@ public class TestMain extends TestBase {
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
-            String itemName = cell1.value();
+            String itemName = cell1.getValue();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());
@@ -187,7 +209,7 @@ public class TestMain extends TestBase {
                 List<AutomationListItem> items = list.getItems();
 
                 for(AutomationListItem item: items) {
-                    logger.info(" *" +item.name());
+                    logger.info(" *" +item.getName());
                 }
 
             } catch (AutomationException ex) {
@@ -212,7 +234,7 @@ public class TestMain extends TestBase {
             this.rest();
 
             AutomationToolBar toolbar = window.getToolBar(1);
-            logger.info(toolbar.name());
+            logger.info(toolbar.getName());
 
             // Looks like the button is a problem with Delphi
             AutomationToolBarButton btn0 = toolbar.getToolbarButton(0);

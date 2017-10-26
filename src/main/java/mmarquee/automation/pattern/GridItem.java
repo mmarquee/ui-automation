@@ -21,9 +21,11 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
+import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
 
 /**
- * Created by Mark Humphreys on 27/01/2017.
+ * @author Mark Humphreys
+ * Date 27/01/2017.
  *
  * Wrapper for the GridItem pattern
  */
@@ -63,7 +65,7 @@ public class GridItem extends BasePattern {
     }
 
     public IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridItemPattern.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationGridItemPatternConverter.PointerToInterface(pUnknownA);
     }
 
     /**

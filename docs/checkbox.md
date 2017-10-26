@@ -1,5 +1,8 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 ```
-AutomationCheckbox check = window.getCheckbox(0);
+AutomationCheckBox check = window.getCheckBox(0);
 check.toggle();
 
 try {
@@ -9,3 +12,10 @@ try {
   logger.info("Failed to get toggle state");
 }
 ```
+
+# Methods
+
+## Name
+## Value
+## Toggle
+## ToggleState

@@ -15,14 +15,6 @@ The example below shows the current (as of 25/04/2016) support for 2 level menus
   }
 ```
 
-#### Menu fudge
-There has been one odd menu that we have found in our applications, and at the moment this is encapsulated in a fudge method, as shown below. This finds the menu and clicks it, as here doesn't seem to be a nice way of doing this with the other methods.
-
-```
-  // Find the Help | About and click it
-  menu.menuClickFudge("Help", KeyEvent.VK_A);
-```
-
 ### WPF Menus
 
 ```

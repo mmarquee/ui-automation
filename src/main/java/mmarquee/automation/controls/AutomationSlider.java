@@ -3,11 +3,13 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
 /**
- * Created by Mark Humphreys on 15/02/2016.
+ * @author Mark Humphreys
+ * Date 15/02/2016.
  *
  * Wrapper for the Slider element.
  *
@@ -15,40 +17,48 @@ import mmarquee.automation.pattern.Range;
  */
 public class AutomationSlider extends AutomationBase {
 
+    /**
+     * The range pattern.
+     */
     private Range rangePattern;
 
     /**
-     * Construct the AutomationSlider
-     * @param element The element
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation library error
+     * Construct the AutomationSlider.
+     * @param element The element.
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationSlider(AutomationElement element)
+    public AutomationSlider(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
         super(element);
 //        this.rangePattern = this.getRangePattern();
     }
 
     /**
-     * Construct the AutomationSlider
-     * @param element The element
-     * @param pattern The range pattern
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation library error
+     * Construct the AutomationSlider.
+     * @param element The element.
+     * @param pattern The range pattern.
+     * @param instance Automation instance.
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationSlider(AutomationElement element, Range pattern)
+    AutomationSlider(final AutomationElement element,
+                     final Range pattern,
+                     final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(element, instance);
         this.rangePattern = pattern;
     }
 
     /**
-     * Gets the range value
-     * @return The range value
-     * @throws AutomationException Error in automation library
-     * @throws PatternNotFoundException Cannot find pattern
+     * Gets the range value.
+     *
+     * @return The range value.
+     * @throws AutomationException Error in automation library.
+     * @throws PatternNotFoundException Cannot find pattern.
      */
-    public double getRangeValue() throws AutomationException, PatternNotFoundException {
+    public double getRangeValue()
+            throws AutomationException, PatternNotFoundException {
         if (this.rangePattern == null) {
             this.rangePattern = this.getRangePattern();
         }
@@ -57,12 +67,14 @@ public class AutomationSlider extends AutomationBase {
     }
 
     /**
-     * Sets the range value
-     * @param value The value to set
-     * @throws AutomationException Error in automation library
-     * @throws PatternNotFoundException Cannot find pattern
+     * Sets the range value.
+     *
+     * @param value The value to set.
+     * @throws AutomationException Error in automation library.
+     * @throws PatternNotFoundException Cannot find pattern.
      */
-    public void setRangeValue(double value) throws AutomationException, PatternNotFoundException {
+    public void setRangeValue(final double value)
+            throws AutomationException, PatternNotFoundException {
         if (this.rangePattern == null) {
             this.rangePattern = this.getRangePattern();
         }

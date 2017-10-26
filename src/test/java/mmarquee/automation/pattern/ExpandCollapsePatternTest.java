@@ -21,9 +21,8 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -33,7 +32,8 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by Mark Humphreys on 11/01/2017.
+ * @author Mark Humphreys
+ * Date 11/01/2017.
  *
  * Mocked tests for the ExpandCollapse pattern
  */
@@ -67,18 +67,16 @@ public class ExpandCollapsePatternTest {
 
     @Test
     public void testIsExpanded_Returns_True_When_COM_Returns_One() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
+                invocation -> {
+                    Object[] args = invocation.getArguments();
+                    IntByReference reference = (IntByReference)args[0];
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+                    reference.setValue(1);
 
-                reference.setValue(1);
-
-                return 0;
-            }
-        }).when(rawPattern).getCurrentExpandCollapseState(any());
+                    return 0;
+                }
+        );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 
@@ -89,18 +87,17 @@ public class ExpandCollapsePatternTest {
 
     @Test(expected= AutomationException.class)
     public void testIsExpanded_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
 
+        Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
+            invocation -> {
                 Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+                IntByReference reference = (IntByReference) args[0];
 
                 reference.setValue(0);
 
                 return 1;
             }
-        }).when(rawPattern).getCurrentExpandCollapseState(any());
+        );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 
@@ -111,18 +108,16 @@ public class ExpandCollapsePatternTest {
 
     @Test
     public void testIsExpanded_Returns_False_When_COM_Returns_One() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        Mockito.when(rawPattern.getCurrentExpandCollapseState(any())).thenAnswer(
+           invocation -> {
+               Object[] args = invocation.getArguments();
+               IntByReference reference = (IntByReference) args[0];
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+               reference.setValue(0);
 
-                reference.setValue(0);
-
-                return 0;
-            }
-        }).when(rawPattern).getCurrentExpandCollapseState(any());
+               return 0;
+           }
+        );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 
@@ -133,12 +128,9 @@ public class ExpandCollapsePatternTest {
 
     @Test(expected= AutomationException.class)
     public void testCollapse_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 1;
-            }
-        }).when(rawPattern).collapse();
+        Mockito.when(rawPattern.collapse()).thenAnswer(
+            invocation -> 1
+        );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 
@@ -147,12 +139,9 @@ public class ExpandCollapsePatternTest {
 
     @Test(expected= AutomationException.class)
     public void testExpand_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 1;
-            }
-        }).when(rawPattern).expand();
+        Mockito.when(rawPattern.expand()).thenAnswer(
+                invocation -> 1
+        );
 
         ExpandCollapse pattern = new ExpandCollapse(rawPattern);
 

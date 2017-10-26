@@ -26,10 +26,12 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
+import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the Grid pattern
  */
@@ -140,6 +142,6 @@ public class Grid extends BasePattern {
     }
 
     public IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridPattern.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationGridPatternConverter.PointerToInterface(pUnknownA);
     }
 }

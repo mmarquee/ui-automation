@@ -23,13 +23,16 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 08/02/2017.
+ * @author Mark Humphreys
+ * Date 08/02/2017.
  *
  * Base class to have underlying behaviour.
  */
@@ -37,22 +40,23 @@ public abstract class BaseAutomation {
     /**
      * Creates an Unknown object from the pointer.
      *
-     * Allows Mockito to be used to create Unknown objects
+     * Allows Mockito to be used to create Unknown objects.
      *
      * @param pvInstance The pointer to use
      * @return An Unknown object
      */
-    public Unknown makeUnknown(Pointer pvInstance) {
+    public Unknown makeUnknown(final Pointer pvInstance) {
         return new Unknown(pvInstance);
     }
 
     /**
-     * Convert a raw PointerByReference to a IUIAutomationElement3
-     * @param pbr The raw pointer
-     * @return The IUIAutomationElement3
+     * Convert a raw PointerByReference to a IUIAutomationElement3.
+     *
+     * @param pbr The raw pointer.
+     * @return The IUIAutomationElement3.
      * @throws AutomationException Automation library has thrown an error.
      */
-    public IUIAutomationElement3 getAutomationElementFromReference(PointerByReference pbr)
+    public IUIAutomationElement3 getAutomationElementFromReference(final PointerByReference pbr)
             throws AutomationException {
         Unknown uElement = makeUnknown(pbr.getValue());
 
@@ -62,16 +66,16 @@ public abstract class BaseAutomation {
             throw new AutomationException(result0.intValue());
         }
 
-        return IUIAutomationElement3.Converter.PointerToInterface(pbr);
+        return IUIAutomationElement3Converter.PointerToInterface(pbr);
     }
 
     /**
-     * Convert a raw PointerByReference to a IUIAutomationElementArray
-     * @param pbr The raw pointer
-     * @return The IUIAutomationElementArray
+     * Convert a raw PointerByReference to a IUIAutomationElementArray.
+     * @param pbr The raw pointer.
+     * @return The IUIAutomationElementArray.
      * @throws AutomationException Automation library has thrown an error.
      */
-    public IUIAutomationElementArray getAutomationElementArrayFromReference(PointerByReference pbr)
+    public IUIAutomationElementArray getAutomationElementArrayFromReference(final PointerByReference pbr)
             throws AutomationException {
         Unknown uElement = this.makeUnknown(pbr.getValue());
         PointerByReference pUnknown = new PointerByReference();
@@ -82,17 +86,18 @@ public abstract class BaseAutomation {
             throw new AutomationException(result0.intValue());
         }
 
-        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
     }
 
     /**
      * Turns a collection (array) of automation elements, into a collection.
      *
      * @param collection The ElementArray.
-     * @return The List
-     * @throws AutomationException Error in the automation library
+     * @return The List.
+     * @throws AutomationException Error in the automation library.
      */
-    public List<AutomationElement> collectionToList(IUIAutomationElementArray collection) throws AutomationException {
+    public List<AutomationElement> collectionToList(final IUIAutomationElementArray collection)
+            throws AutomationException {
 
         IntByReference ibr = new IntByReference();
 
@@ -118,7 +123,7 @@ public abstract class BaseAutomation {
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement3 element =
-                        IUIAutomationElement3.Converter.PointerToInterface(pbr);
+                        IUIAutomationElement3Converter.PointerToInterface(pbr);
 
                 list.add(new AutomationElement(element));
             }
@@ -127,7 +132,15 @@ public abstract class BaseAutomation {
         return list;
     }
 
-    protected Pointer getPointerFromElement(IUIAutomationElement3 element) throws AutomationException {
+    /**
+     * Gets the raw pointer to the element.
+     *
+     * @param element The underlying element.
+     * @return Pointer The raw pointer.
+     * @throws AutomationException An error has occurred in the automation library.
+     */
+    protected Pointer getPointerFromElement(final IUIAutomationElement3 element)
+            throws AutomationException {
         PointerByReference pElement = new PointerByReference();
 
         WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pElement);
