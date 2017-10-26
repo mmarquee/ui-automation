@@ -77,7 +77,13 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      * @throws PatternNotFoundException Expected pattern not found
      */
     public void click() throws AutomationException, PatternNotFoundException {
-    	this.invoke();
+        if (invokePattern != null && invokePattern.isAvailable()) {
+            invokePattern.invoke();
+        } else if (isExpanded()) {
+            collapse();
+        } else {
+            expand();
+        }
     }
 
     /**

@@ -100,7 +100,7 @@ public class IUIAutomationConverter {
 
             public int elementFromPoint(WinDef.POINT pt, PointerByReference element) {
                 Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_POINT], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{myInterfacePointer, new PointNativeLong(pt.x, pt.y), element});
+                return f.invokeInt(new Object[]{myInterfacePointer, PointNativeLong.from(pt.x, pt.y), element});
             }
 
             public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {
