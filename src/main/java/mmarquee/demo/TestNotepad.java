@@ -25,6 +25,9 @@ import mmarquee.automation.controls.AutomationEditBox;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
+
+import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -55,7 +58,7 @@ public class TestNotepad extends TestBase {
         application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         try {
-            AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
+            AutomationWindow window = automation.getDesktopWindow(Pattern.compile("Untitled - Notepad|Unbenannt - Editor"));
             String name = window.getName();
             logger.info(name);
 
@@ -77,12 +80,12 @@ public class TestNotepad extends TestBase {
             AutomationMainMenu menu = window.getMainMenu();
 
             try {
-                AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+                AutomationMenuItem exit = menu.getMenuItem(Pattern.compile("File|Datei"), Pattern.compile("Exit|Beenden"));
                 exit.click();
 
                 try {
-                    AutomationWindow popup = window.getWindow("Notepad");
-                    AutomationButton btn = popup.getButton("Don't Save");
+                    AutomationWindow popup = window.getWindow(Pattern.compile("Notepad|Editor"));
+                    AutomationButton btn = popup.getButton(Pattern.compile("Don't Save|Nicht speichern"));
 
                     btn.click();
 
