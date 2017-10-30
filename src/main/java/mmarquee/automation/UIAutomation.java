@@ -241,49 +241,32 @@ public class UIAutomation extends BaseAutomation {
                                   final String title,
                                   final int numberOfRetries)
             throws AutomationException {
-        AutomationElement element = null;
+        AutomationElement foundElement = null;
+        
+        // And Condition
+        PointerByReference pAndCondition = this.createAndCondition(
+        		this.createNamePropertyCondition(title), 
+        		this.createControlTypeCondition(controlType));
 
-        // Look for a control type
-        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, controlType.getValue());
+        for (int loop = 0; loop < numberOfRetries; loop++) {
 
-        // Look for a specific title
-        Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
-        variant2.setValue(Variant.VT_BSTR, sysAllocated);
-
-        try {
-            // First condition
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
-
-            // Second condition
-            PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
-
-            // And Condition
-            PointerByReference pAndCondition = this.createAndCondition(pCondition1, pCondition2);
-
-            for (int loop = 0; loop < numberOfRetries; loop++) {
-
-                try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
-                } catch (AutomationException ex) {
-                    logger.info("Not found, retrying " + title);
-                }
-
-                if (element != null) {
-                    break;
-                }
+            try {
+            	foundElement = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
+            } catch (AutomationException ex) {
+                logger.info("Not found, retrying " + title);
             }
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+
+            if (foundElement != null) {
+                break;
+            }
         }
 
-        if (element == null) {
+        if (foundElement == null) {
             logger.warning("Failed to find desktop window `" + title + "`");
             throw new ItemNotFoundException(title);
         }
 
-        return element;
+        return foundElement;
     }
 
     /**
@@ -296,7 +279,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationWindow getDesktopWindow(final String title)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Window, title, FIND_DESKTOP_ATTEMPTS));
+        return getDesktopWindow(title, FIND_DESKTOP_ATTEMPTS);
     }
 
     /**
