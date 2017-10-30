@@ -82,4 +82,27 @@ public class AutomationToolBar extends AutomationContainer {
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(index, ControlType.Button));
     }
+
+    /**
+     * Gets the button control associated with the given name.
+     * @param name The name of the button.
+     * @return The AutomationButton.
+     * @throws AutomationException Something has gone wrong.
+     */
+    public AutomationToolBarButton getToolbarButton(final String name)
+            throws AutomationException {
+        return new AutomationToolBarButton(this.getElementByControlType(name, ControlType.Button));
+    }
+
+
+    /**
+     * Gets the button control associated with the given automationId.
+     * @param automationId The index of the button.
+     * @return The AutomationButton.
+     * @throws AutomationException Something has gone wrong.
+     */
+    public AutomationToolBarButton getToolbarButtonByAutomationId(final String automationId)
+            throws AutomationException {
+        return new AutomationToolBarButton(this.getElementByAutomationId(automationId));
+    }
 }
