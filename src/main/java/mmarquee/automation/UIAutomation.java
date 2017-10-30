@@ -259,6 +259,13 @@ public class UIAutomation extends BaseAutomation {
             if (foundElement != null) {
                 break;
             }
+
+            // Wait for it
+            try {
+				Thread.sleep(AutomationWindow.SLEEP_DURATION);
+			} catch (InterruptedException e) {
+                // interrupted
+			}
         }
 
         if (foundElement == null) {

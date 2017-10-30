@@ -33,6 +33,7 @@ import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -56,7 +57,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * The sleep duration.
      */
-    static final int SLEEP_DURATION = 500;
+    public static final int SLEEP_DURATION = 500;
 
     /**
      * Focuses this control.
@@ -302,6 +303,51 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
 
         if (item == null) {
             throw new ElementNotFoundException(title);
+        }
+
+        return new AutomationWindow(item);
+    }
+
+    /**
+     * Finds the child window matching the given title.
+     * @param titlePattern Title to match against for.
+     * @return The child window.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationWindow getWindow(Pattern titlePattern) throws PatternNotFoundException, AutomationException {
+        AutomationElement item = null;
+
+        retry_loop: for (int loop = 0; loop < 10; loop++) {
+
+            try {
+                List<AutomationElement> collection = 
+                		this.findAll(new TreeScope(TreeScope.Descendants), 
+                				this.createControlTypeCondition(ControlType.Window));
+                
+                for (AutomationElement element : collection) {
+                    String name = element.getName();
+
+                    if (titlePattern.matcher(name).matches()) {
+                    	item = element;
+                        break retry_loop;
+                    }
+                }
+                
+            } catch (AutomationException ex) {
+            }
+
+            logger.warn("Did not find window matching `" + titlePattern + "`, retrying");
+            // Wait for it
+            try {
+				Thread.sleep(SLEEP_DURATION);
+			} catch (InterruptedException e) {
+                // interrupted
+			}
+        }
+        
+        if (item == null) {
+            throw new ElementNotFoundException(titlePattern.toString());
         }
 
         return new AutomationWindow(item);
