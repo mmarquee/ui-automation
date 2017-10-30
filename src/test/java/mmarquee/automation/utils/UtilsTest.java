@@ -17,10 +17,13 @@ package mmarquee.automation.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinDef.HWND;
+
 import mmarquee.automation.BaseAutomationTest;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -29,10 +32,10 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Mark Humphreys
@@ -43,7 +46,12 @@ import static org.mockito.Mockito.verify;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Utils.class })
 public class UtilsTest extends BaseAutomationTest {
-
+    
+	// helper methods for tests
+    public static void setUser32(User32 user32) {
+    	Utils.user32 = user32;	
+    }
+    
     @BeforeClass
     public static void checkOs() throws Exception {
         Assume.assumeTrue(isWindows());
@@ -116,6 +124,22 @@ public class UtilsTest extends BaseAutomationTest {
     }
 
     @Test
+    public void testCloseWindow_Closes_Notepad() {
+        try {
+            Utils.startProcess("notepad.exe");
+
+            WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, getLocal("notepad.title"));
+
+            if (hwnd != null) {
+                Utils.closeWindow(hwnd);
+            }
+        } catch (IOException io) {
+            assertTrue("quitProcess: " + io.getMessage(), false);
+        }
+
+        assertTrue("quitProcess", true);
+    }
+    @Test
     public void testStartProcess_Throws_Exception_When_not_found() {
         try {
             Utils.startProcess("notepad99.exe");
@@ -172,6 +196,46 @@ public class UtilsTest extends BaseAutomationTest {
         } finally {
             closeApplication();
         }
+    }
+   
+    @Test
+    public void test_FindWindow_with_RegexPattern_findsWindow() throws IOException {
+        Utils.startProcess("notepad.exe");
+
+        this.andRest();
+
+        HWND handle = Utils.findWindow(null, Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+
+        assertNotNull(handle);
+    }
+
+    @Test
+    public void test_FindWindow_with_RegexPattern_WithClass_findsWindow() throws IOException {
+        Utils.startProcess("notepad.exe");
+
+        this.andRest();
+
+        HWND handle = Utils.findWindow("Notepad", Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+
+        assertNotNull(handle);
+    }
+
+    @Test
+    public void test_FindWindow_with_RegexPattern_failstoFindNonExistingWindow() throws IOException {
+        HWND handle = Utils.findWindow(null, Pattern.compile("Schnulli"));
+
+        assertNull(handle);
+    }
+
+    @Test
+    public void test_FindWindow_with_RegexPattern_WithClass_failsOnWringClass() throws IOException {
+        Utils.startProcess("notepad.exe");
+
+        this.andRest();
+
+        HWND handle = Utils.findWindow("NotANotepad", Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+
+        assertNull(handle);
     }
 
 }

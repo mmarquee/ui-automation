@@ -15,19 +15,21 @@
  */
 package mmarquee.automation.controls;
 
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
-
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * @author Mark Humphreys
@@ -241,7 +243,7 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Closes the process.
+     * Closes the window.
      *
      * @param title Title of the window to close.
      */
@@ -253,14 +255,31 @@ public class AutomationApplication extends AutomationBase {
         WinDef.HWND hwnd = user32.FindWindow(null, title);
 
         if (hwnd != null) {
-            Utils.closeProcess(hwnd);
+            Utils.closeWindow(hwnd);
         }
     }
 
     /**
+     * Closes the window.
+     *
+     * @param titlePattern a pattern matching the title of the window to close
+     */
+    public void close(final Pattern titlePattern) {
+        if (user32 == null) {
+            user32 = User32.INSTANCE;
+        }
+
+        WinDef.HWND hwnd = Utils.findWindow(null, titlePattern);
+
+        if (hwnd != null) {
+            Utils.closeWindow(hwnd);
+        }
+    }
+    
+    /**
      * Quits the process.
      *
-     * @param title Title of the window to quit.
+     * @param title Title of the window of the process to quit.
      */
     public void quit(final String title) {
         if (user32 == null) {
@@ -273,4 +292,22 @@ public class AutomationApplication extends AutomationBase {
             Utils.quitProcess(hwnd);
         }
     }
+
+    /**
+     * Quits the process.
+     *
+     * @param titlePattern a pattern matching the title of the window of the process to quit
+     */
+    public void quit(final Pattern titlePattern) {
+        if (user32 == null) {
+            user32 = User32.INSTANCE;
+        }
+
+        final WinDef.HWND hwnd = Utils.findWindow(null, titlePattern);
+
+        if (hwnd != null) {
+            Utils.quitProcess(hwnd);
+        }
+    }
+
 }

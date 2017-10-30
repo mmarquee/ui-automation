@@ -8,6 +8,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.utils.UtilsTest;
+
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,6 +21,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -95,6 +98,18 @@ public class AutomationApplicationTest2 {
     }
 
     @Test
+    public void testClose_with_RegexPattern_Calls_EnumWindows() throws Exception {
+        User32 user32 = Mockito.mock(User32.class);
+        UtilsTest.setUser32(user32);
+
+        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+
+        app.close(Pattern.compile("Untitled - Notepad"));
+
+        verify(user32, atLeastOnce()).EnumWindows(any(), any());
+    }
+
+    @Test
     public void testQuit_Calls_FindWindow() throws Exception {
         User32 user32 = Mockito.mock(User32.class);
 
@@ -103,6 +118,18 @@ public class AutomationApplicationTest2 {
         app.quit("Untitled - Notepad");
 
         verify(user32, atLeastOnce()).FindWindow(any(), any());
+    }
+
+    @Test
+    public void testQuit_with_RegexPattern_Calls_EnumWindows() throws Exception {
+        User32 user32 = Mockito.mock(User32.class);
+        UtilsTest.setUser32(user32);
+
+        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+
+        app.quit(Pattern.compile("Untitled - Notepad"));
+
+        verify(user32, atLeastOnce()).EnumWindows(any(), any());
     }
 
 }

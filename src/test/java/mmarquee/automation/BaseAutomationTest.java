@@ -136,7 +136,7 @@ public class BaseAutomationTest {
     		if (hwnd == null) {
     			break;
     		}
-            Utils.closeProcess(hwnd);
+            Utils.closeWindow(hwnd);
     	}
     }
     
