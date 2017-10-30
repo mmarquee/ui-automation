@@ -32,6 +32,7 @@ import mmarquee.automation.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -230,6 +231,29 @@ public class UIAutomation extends BaseAutomation {
         }
     }
 
+    /**
+     * Finds the given process.
+     *
+     * @param filenamePattern A pattern which matches the filename of the application
+     * @return AutomationApplication that represents the application.
+     * @throws java.lang.Exception Unable to find process.
+     *
+     */
+    public AutomationApplication findProcess(final Pattern filenamePattern)
+            throws Exception {
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+                new Tlhelp32.PROCESSENTRY32.ByReference();
+
+        boolean found = Utils.findProcessEntry(processEntry, filenamePattern);
+
+        if (!found) {
+            throw new AutomationException("No process found matching " + filenamePattern);
+        }
+        
+        WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
+        return new AutomationApplication(rootElement, handle, true);
+    }
+    
     /**
      * Gets the desktop object associated with the title.
      *

@@ -21,6 +21,7 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.*;
 import org.mockito.Mockito;
@@ -445,6 +446,36 @@ public class UIAutomationTest extends BaseAutomationTest {
             this.andRest();
 
             AutomationApplication launched = instance.findProcess("notepad.exe");
+
+            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
+
+        } finally {
+            app.quit(getLocal("notepad.title"));
+        }
+    }
+
+    @Test(expected=AutomationException.class)
+    public void findProcess_ByRegexPattern_Fails_When_No_executable() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+        instance.findProcess(Pattern.compile("n\\S+pad99\\.exe"));
+    }
+
+    @Test(expected=AutomationException.class)
+    public void findProcess_ByRegexPattern_fails_When_Not_Running() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+        instance.findProcess(Pattern.compile("n\\S+pad\\.exe"));
+    }
+
+    @Test
+    public void findProcess_ByRegexPattern_Succeeds_When_Already_Running() throws Exception {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        AutomationApplication app = instance.launch("notepad.exe");
+
+        try {
+            this.andRest();
+
+            AutomationApplication launched = instance.findProcess(Pattern.compile("n\\S+pad\\.exe"));
 
             assertTrue("Should be the same name", launched.getName().equals(app.getName()));
 

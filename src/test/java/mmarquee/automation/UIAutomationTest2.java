@@ -124,7 +124,7 @@ public class UIAutomationTest2 {
 
         PowerMockito.mockStatic(Utils.class);
 
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(true);
+        PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(true);
 
         instance.launchOrAttach("notepad.exe");
     }
@@ -135,7 +135,7 @@ public class UIAutomationTest2 {
 
         PowerMockito.mockStatic(Utils.class);
 
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(true);
+        PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(true);
 
         instance.launchWithWorkingDirectoryOrAttach("notepad.exe");
     }
@@ -146,7 +146,7 @@ public class UIAutomationTest2 {
 
         PowerMockito.mockStatic(Utils.class);
 
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(true);
+        PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(true);
         PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java.io.IOException.class);
         PowerMockito.when(Utils.getHandleFromProcessEntry(any())).thenReturn(new WinNT.HANDLE());
 

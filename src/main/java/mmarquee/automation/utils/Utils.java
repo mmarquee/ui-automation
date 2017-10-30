@@ -25,6 +25,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -70,7 +71,19 @@ public class Utils {
                      final String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
+        return findProcessEntry(processEntry,Pattern.compile(filename, Pattern.LITERAL));
+    }
 
+    /**
+     * Finds the given process in the process list.
+     *
+     * @param processEntry The process entry.
+     * @param filenamePattern pattern matching the filename of the process.
+     * @return The found process entry.
+     */
+    public static boolean findProcessEntry
+                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
+                     final Pattern filenamePattern) {
         Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
 
         WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
@@ -81,7 +94,7 @@ public class Utils {
             while (kernel32.Process32Next(snapshot, processEntry)) {
                 String fname = Native.toString(processEntry.szExeFile);
 
-                if (fname.equals(filename)) {
+                if (filenamePattern.matcher(fname).matches()) {
                     found = true;
                     break;
                 }
@@ -92,7 +105,6 @@ public class Utils {
 
         return found;
     }
-
     /**
      * Starts the given command.
      *
