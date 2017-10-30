@@ -15,6 +15,8 @@
  */
 package mmarquee.automation.controls;
 
+import java.util.regex.Pattern;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
@@ -111,6 +113,19 @@ public class AutomationPanel extends AutomationContainer {
     public AutomationWindow getWindow(final String name)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.getElementByControlType(name, ControlType.Window));
+    }
+
+    /**
+     * Gets a window from the panel.
+     *
+     * @param namePattern pattern matching the name of the control.
+     * @return The found window.
+     * @throws PatternNotFoundException Failed to find the right pattern.
+     * @throws AutomationException Something went really wrong.
+     */
+    public AutomationWindow getWindow(final Pattern namePattern)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.getElementByControlType(namePattern, ControlType.Window));
     }
 
     /**

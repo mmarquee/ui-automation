@@ -21,6 +21,7 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import org.junit.*;
@@ -405,24 +406,34 @@ public class UIAutomationTest extends BaseAutomationTest {
         }
     }
 
-    @Test
-    public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
-        UIAutomation instance = UIAutomation.getInstance();
-
+    static interface TestWithNotepad {
+    	void doTest(UIAutomation instance, AutomationApplication app) throws Exception;
+    }
+    
+    void doTestWithNotepad(TestWithNotepad test) throws Exception {
+		UIAutomation instance = UIAutomation.getInstance();
         AutomationApplication app = instance.launch("notepad.exe");
+        this.andRest();
 
         try {
-            this.andRest();
-
-            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
-
-            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
-
+        	test.doTest(instance, app);
         } finally {
             app.quit(getLocal("notepad.title"));
         }
     }
     
+    @Test
+    public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
+    	doTestWithNotepad(new TestWithNotepad() {
+			@Override
+			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
+				
+	            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
+	            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
+	            
+			}
+		});
+    }
 
     @Test(expected=AutomationException.class)
     public void findProcess_Fails_When_No_executable() throws Exception {
@@ -438,20 +449,16 @@ public class UIAutomationTest extends BaseAutomationTest {
 
     @Test
     public void findProcess_Succeeds_When_Already_Running() throws Exception {
-        UIAutomation instance = UIAutomation.getInstance();
+    	doTestWithNotepad(new TestWithNotepad() {
+			@Override
+			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
 
-        AutomationApplication app = instance.launch("notepad.exe");
+	            AutomationApplication launched = instance.findProcess("notepad.exe");
 
-        try {
-            this.andRest();
-
-            AutomationApplication launched = instance.findProcess("notepad.exe");
-
-            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
-
-        } finally {
-            app.quit(getLocal("notepad.title"));
-        }
+	            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
+	            
+			}
+		});
     }
 
     @Test(expected=AutomationException.class)
@@ -554,9 +561,42 @@ public class UIAutomationTest extends BaseAutomationTest {
         UIAutomation.getInstance().getDesktopMenu("Menu");
     }
 
+    @Test
+    public void testGetDesktopWindow_succeeds() throws Exception {
+    	doTestWithNotepad(new TestWithNotepad() {
+			@Override
+			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
+				
+				AutomationWindow window = instance.getDesktopWindow(getLocal("notepad.title"));
+				assertNotNull(window);
+				
+			}
+		});
+    	
+    }
+    
     @Test(expected = ItemNotFoundException.class)
     public void testGetDesktopWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
         UIAutomation.getInstance().getDesktopWindow("Untitled - Notepad99");
+    }
+
+    @Test
+    public void testGetDesktopWindow_WithRegexp_succeeds() throws Exception {
+    	doTestWithNotepad(new TestWithNotepad() {
+			@Override
+			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
+				
+				AutomationWindow window = instance.getDesktopWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+				assertNotNull(window);
+				
+			}
+		});
+    	
+    }
+    
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetDesktopWindow_WithRegexp_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation.getInstance().getDesktopWindow(Pattern.compile(".*Notepad99"));
     }
 
 }

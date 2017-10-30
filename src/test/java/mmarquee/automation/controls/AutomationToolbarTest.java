@@ -15,20 +15,16 @@
  */
 package mmarquee.automation.controls;
 
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Humphreys

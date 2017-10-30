@@ -17,6 +17,7 @@ package mmarquee.automation.controls.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
@@ -144,6 +145,56 @@ public class AutomationMainMenu extends AutomationMenu {
         return menuItem.getMenuItem(name1);
     }
 
+    /**
+     * Get the menu item matching with the hierarchy of names
+     * @param name0Pattern First Name matching pattern
+     * @param name1Pattern Second name matching pattern
+     * @return The menu item that matches the name
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationMenuItem getMenuItem (Pattern name0Pattern, Pattern name1Pattern)
+            throws PatternNotFoundException, AutomationException {
+    	List<AutomationElement> collection;
+
+        AutomationElement item = null;
+
+        collection = this.findAll(new TreeScope(TreeScope.Children),
+        		this.createControlTypeCondition(ControlType.MenuItem));
+
+        for (AutomationElement element : collection) {
+            String name = element.getName();
+
+            if (name != null && name0Pattern.matcher(name).matches()) {
+                item = element;
+                break;
+            }
+        }
+        
+        if (item == null) {
+            throw new ItemNotFoundException("Failed to find element matching " + name0Pattern);
+        }
+        
+        AutomationMenuItem menuItem = new AutomationMenuItem(item);
+        menuItem.parentMenuName = item.getName();
+        menuItem.mainMenuParentElement = this.getParentElement();
+
+        if (name1Pattern == null) {
+        	return menuItem;
+        }
+        
+
+        menuItem.expand();
+        
+        try {
+            Thread.sleep(750);
+        } catch (Exception ex) {
+            // Seems to be fine
+        }
+        
+        return menuItem.getMenuItem(name1Pattern);
+    }
+    
     /**
      * Get the menu item associated with the automationID
      * @param automationId The automation ID to look for

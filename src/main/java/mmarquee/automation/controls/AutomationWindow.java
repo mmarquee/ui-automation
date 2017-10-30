@@ -328,7 +328,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
                 for (AutomationElement element : collection) {
                     String name = element.getName();
 
-                    if (titlePattern.matcher(name).matches()) {
+                    if (name != null && titlePattern.matcher(name).matches()) {
                     	item = element;
                         break retry_loop;
                     }
@@ -347,7 +347,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         }
         
         if (item == null) {
-            throw new ElementNotFoundException(titlePattern.toString());
+            throw new ElementNotFoundException("matching " + titlePattern.toString());
         }
 
         return new AutomationWindow(item);

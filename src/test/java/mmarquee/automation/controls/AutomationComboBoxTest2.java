@@ -34,6 +34,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -53,6 +54,7 @@ public class AutomationComboBoxTest2 {
 	@Mock Value value;
 	@Mock Selection selection;
 	@Mock IUIAutomationElement3 elem;
+	List<AutomationElement> list;
 
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -70,10 +72,13 @@ public class AutomationComboBoxTest2 {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+
+        list = new ArrayList<>();
+        list.add(targetElement);
     }
 
     @Test
-    public void testGetItems_Gets_Correct_Size_Of_List_When_Empty()
+    public void test_GetItems_Gets_Correct_Size_Of_List_When_Empty()
             throws AutomationException, PatternNotFoundException {
         when(elem.findAll(any(), any(), any())).thenReturn(-1);
 
@@ -87,7 +92,7 @@ public class AutomationComboBoxTest2 {
     }
 
     @Test
-    public void testGetItems_Gets_Correct_Size_Of_List_When_findAll_Returns_No_Entries()
+    public void test_GetItems_Gets_Correct_Size_Of_List_When_findAll_Returns_No_Entries()
             throws AutomationException, PatternNotFoundException {
         when(elem.findAll(any(), any(), any())).thenReturn(0);
 
@@ -131,9 +136,6 @@ public class AutomationComboBoxTest2 {
     @Deprecated
     @Test
     public void test_GetList_Returns_Items_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
@@ -186,9 +188,6 @@ public class AutomationComboBoxTest2 {
 
     @Test
     public void test_GetItems_Returns_Items_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
@@ -214,9 +213,6 @@ public class AutomationComboBoxTest2 {
     
     @Test
     public void test_GetItem_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-        
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
@@ -259,6 +255,29 @@ public class AutomationComboBoxTest2 {
     }
 
     @Test
+    public void test_GetItem_By_Name_with_RegExPattern() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("myWorld");
+
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
+
+        AutomationListItem item = combo.getItem(Pattern.compile("my.*"));
+        assertEquals(targetElement,item.getElement());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ItemNotFoundException.class)
+    public void test_GetItem_By_Name_with_RegExPattern_Throws_Exception_When_Not_found() throws Exception {
+        when(targetElement.getName()).thenReturn("myWorld");
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
+
+        combo.getItem(Pattern.compile("unknown"));
+    }
+
+    @Test
     public void test_GetItem_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
@@ -281,9 +300,6 @@ public class AutomationComboBoxTest2 {
 
     @Test
     public void test_GetSelectedItems_Returns_Items_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-
         when(selection.getCurrentSelection()).thenReturn(list);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -299,9 +315,6 @@ public class AutomationComboBoxTest2 {
 
     @Test
     public void test_GetSelectedItem_Returns_Item_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-
         when(selection.getCurrentSelection()).thenReturn(list);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);

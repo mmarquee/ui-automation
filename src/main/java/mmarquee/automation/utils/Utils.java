@@ -124,7 +124,7 @@ public class Utils {
             while (kernel32.Process32Next(snapshot, processEntry)) {
                 String fname = Native.toString(processEntry.szExeFile);
 
-                if (filenamePattern.matcher(fname).matches()) {
+                if (fname != null && filenamePattern.matcher(fname).matches()) {
                     found = true;
                     break;
                 }
@@ -308,7 +308,7 @@ public class Utils {
                     
                     final boolean windowClassMatches = ! checkWindowClass || windowClass.equals(wClass);
 
-                    if (windowClassMatches && titlePattern.matcher(wText).matches()) {
+                    if (wText != null && windowClassMatches && titlePattern.matcher(wText).matches()) {
                         logger.info("Matching window: " + wText + ", HWND: " + hWnd);
                     	returnContainer[0] = hWnd;
                         return false;

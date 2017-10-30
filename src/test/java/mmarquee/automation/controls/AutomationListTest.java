@@ -20,6 +20,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -33,6 +34,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -164,6 +166,35 @@ public class AutomationListTest {
         AutomationList list = new AutomationList(element, selection);
 
         list.getItem("unknownName");
+    }
+
+    @Test
+    public void test_GetItem_By_Name_with_RegExPattern() throws Exception {
+        List<AutomationElement> items = new ArrayList<>();
+        items.add(targetElement);
+        
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
+        when(targetElement.getName()).thenReturn("myWorld");
+
+        AutomationList list = new AutomationList(element, selection);
+
+        AutomationListItem item = list.getItem(Pattern.compile("my.*"));
+        assertEquals(targetElement,item.getElement());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ItemNotFoundException.class)
+    public void test_GetItem_By_Name_with_RegExPattern_Throws_Exception_When_Not_found() throws Exception {
+        List<AutomationElement> items = new ArrayList<>();
+        items.add(targetElement);
+        
+        when(targetElement.getName()).thenReturn("myWorld");
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
+
+        AutomationList list = new AutomationList(element, selection);
+
+        list.getItem(Pattern.compile("unknown"));
     }
 
     @Test

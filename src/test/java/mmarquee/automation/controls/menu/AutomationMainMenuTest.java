@@ -18,24 +18,21 @@ package mmarquee.automation.controls.menu;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
-import org.junit.*;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
@@ -65,9 +62,15 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 	@Mock private AutomationElement parent;
 	@Mock IUIAutomationElement3 elem;
 
+	@Mock AutomationElement targetElement;
+	List<AutomationElement> list;
+	
 	@Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        
+        list = new ArrayList<AutomationElement>();
+        list.add(targetElement);
     }
 
     @Test
@@ -101,8 +104,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
     @Test
     public void testGetMenuItem_With_Both_Parameters() throws Exception {
         when(element.getName()).thenReturn(getLocal("menu.file"));
-        
-
+       
         AutomationElement menuItemElement1 = Mockito.mock(AutomationElement.class);
         ExpandCollapse expandCollapsePattern = BaseAutomationTest.mockExpandCollapsePattern(menuItemElement1);
 		when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(menuItemElement1);
@@ -166,6 +168,80 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
                 new AutomationMainMenu(parent, element);
 
         menu.getMenuItem(getLocal("menu.file"));
+    }
+
+
+    @Test
+    public void testGetMenuItem_with_RegExPattern_With_Both_Parameters() throws Exception {
+    	AutomationElement menuItemElement1 = Mockito.mock(AutomationElement.class);
+        when(menuItemElement1.getName()).thenReturn(getLocal("menu.file"));
+        list.add(menuItemElement1);
+        
+        ExpandCollapse expandCollapsePattern = BaseAutomationTest.mockExpandCollapsePattern(menuItemElement1);
+		when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+
+        AutomationElement menuItemElement2 = Mockito.mock(AutomationElement.class);
+        when(menuItemElement2.getName()).thenReturn(getLocal("menu.exit"));
+        list.add(menuItemElement2);
+        
+        when(menuItemElement1.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        AutomationMenuItem item = menu.getMenuItem(Pattern.compile(Pattern.quote(getLocal("menu.file"))), 
+        		Pattern.compile(Pattern.quote(getLocal("menu.exit"))));
+        
+        verify(expandCollapsePattern, atLeastOnce()).expand();
+        assertEquals(menuItemElement2,item.getElement());
+    }
+
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetMenuItem_with_RegExPattern_With_First_Parameter_Only_Throws_Exception_When_Not_Found() throws Exception {
+        when(targetElement.getName()).thenReturn("NOT MENU-01");
+
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        menu.getMenuItem(Pattern.compile("\\S+-\\d+"), null);
+    }
+
+    @Test
+    public void testGetMenuItem_with_RegExPattern_With_First_Parameter_Does_Not_Throws_Exception_When_Found() throws Exception {
+        when(targetElement.getName()).thenReturn("MENU-01");
+
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        menu.getMenuItem(Pattern.compile("\\S+-\\d+"), null);
+    }
+
+    @Test
+    public void testGetMenuItem_with_RegExPattern_With_One_Parameter_Does_Not_Throws_Exception_When_Found() throws Exception {
+        when(targetElement.getName()).thenReturn("MENU-01");
+
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        menu.getMenuItem(Pattern.compile("\\S+-\\d+"));
+    }
+
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetMenuItem_with_RegExPattern_With_One_Parameter_Throws_Exception_When_Not_Found() throws Exception {
+        when(targetElement.getName()).thenReturn("NOT MENU-01");
+
+        when(element.findAll(any(), any())).thenReturn(list);
+
+        AutomationMainMenu menu =
+                new AutomationMainMenu(parent, element);
+
+        menu.getMenuItem(Pattern.compile("\\S+-\\d+"));
     }
 
     @Test

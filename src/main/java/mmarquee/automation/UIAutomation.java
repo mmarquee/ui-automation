@@ -301,6 +301,59 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
+     * Gets the desktop object matching the title pattern.
+     *
+     * @param titlePattern the pattern to match the title.
+     * @return AutomationWindow The found 'element'.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    private AutomationElement get(final ControlType controlType,
+                                  final Pattern titlePattern,
+                                  final int numberOfRetries)
+            throws AutomationException {
+    	
+        AutomationElement foundElement = null;
+        
+        // And Condition
+        PointerByReference condition = this.createControlTypeCondition(controlType);
+
+        retry_loop: for (int loop = 0; loop < numberOfRetries; loop++) {
+
+            try {
+                List<AutomationElement> collection = 
+                		this.rootElement.findAll(new TreeScope(TreeScope.Descendants), condition);
+                
+                for (AutomationElement element : collection) {
+                    String name = element.getName();
+
+                    if (name != null && titlePattern.matcher(name).matches()) {
+                        foundElement = element;
+                        break retry_loop;
+                    }
+                }
+                
+            } catch (AutomationException ex) {
+            }
+            
+            logger.info("Not found, retrying matching " + titlePattern);
+
+            // Wait for it
+            try {
+				Thread.sleep(AutomationWindow.SLEEP_DURATION);
+			} catch (InterruptedException e) {
+                // interrupted
+			}
+        }
+
+        if (foundElement == null) {
+            logger.warning("Failed to find desktop window matching `" + titlePattern + "`");
+            throw new ItemNotFoundException(titlePattern.toString());
+        }
+
+        return foundElement;
+    }
+    
+    /**
      * Gets the desktop 'window' associated with the title.
      *
      * @param title Title to search for.
@@ -328,6 +381,33 @@ public class UIAutomation extends BaseAutomation {
         return new AutomationWindow(this.get(ControlType.Window, title, retries));
     }
 
+    /**
+     * Gets the desktop 'window' matching the title pattern
+     *
+     * @param titlePattern a pattern matching the title.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationWindow getDesktopWindow(final Pattern titlePattern)
+            throws PatternNotFoundException, AutomationException {
+        return getDesktopWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
+    }
+    
+    /**
+     * Gets the desktop 'window' matching the title pattern, with a variable
+     * number of retries.
+     *
+     * @param titlePattern a pattern matching the title.
+     * @param retries Number of retries.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationWindow getDesktopWindow(final Pattern titlePattern, final int retries)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.get(ControlType.Window, titlePattern, retries));
+    }
     /**
      * Create an 'and' condition.
      *

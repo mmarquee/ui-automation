@@ -17,6 +17,7 @@ package mmarquee.automation.controls.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
@@ -153,6 +154,47 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
+        return new AutomationMenuItem(item);
+    }
+
+    /**
+     * Get the menu item matching the name. If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * (i.e. this item is expanded)
+     * 
+     * @param namePattern a pattern matching the menu item name
+     * @return The menu item that matches the name
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationMenuItem getMenuItem (Pattern namePattern)
+            throws PatternNotFoundException, AutomationException {
+    	
+    	AutomationMenu realMenu = getRealMenu();
+    	if (realMenu != null) {
+    		return realMenu.getMenuItem(namePattern);
+    	}
+
+    	List<AutomationElement> collection;
+
+        AutomationElement item = null;
+
+        collection = this.findAll(new TreeScope(TreeScope.Children),
+        		this.createControlTypeCondition(ControlType.MenuItem));
+
+        for (AutomationElement element : collection) {
+            String name = element.getName();
+
+            if (name != null && namePattern.matcher(name).matches()) {
+                item = element;
+                break;
+            }
+        }
+
+        if (item == null) {
+            throw new ElementNotFoundException("Failed to find element matching " + namePattern);
+        }
+        
         return new AutomationMenuItem(item);
     }
     

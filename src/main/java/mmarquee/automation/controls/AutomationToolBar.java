@@ -15,6 +15,8 @@
  */
 package mmarquee.automation.controls;
 
+import java.util.regex.Pattern;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
@@ -94,6 +96,16 @@ public class AutomationToolBar extends AutomationContainer {
         return new AutomationToolBarButton(this.getElementByControlType(name, ControlType.Button));
     }
 
+    /**
+     * Gets the button control matching the given name.
+     * @param namePattern The namePattern of the button.
+     * @return The AutomationButton.
+     * @throws AutomationException Something has gone wrong.
+     */
+    public AutomationToolBarButton getToolbarButton(final Pattern namePattern)
+            throws AutomationException {
+        return new AutomationToolBarButton(this.getElementByControlType(namePattern, ControlType.Button));
+    }
 
     /**
      * Gets the button control associated with the given automationId.

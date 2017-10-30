@@ -132,6 +132,35 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
+     * Gets the window associated with the title.
+     * @param titlePattern A pattern matching the title to look for.
+     * @return An AutomationWindow.
+     * @throws AutomationException Cannot find element.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationWindow getWindow(final Pattern titlePattern)
+            throws PatternNotFoundException, AutomationException {
+
+        AutomationElement foundElement = null;
+
+        List<AutomationElement> collection = this.findAll();
+
+        for (AutomationElement element : collection) {
+            String name = element.getName();
+            if (name != null && titlePattern.matcher(name).matches()) {
+                foundElement = element;
+                break;
+            }
+        }
+
+        if (foundElement != null) {
+            return new AutomationWindow(foundElement);
+        } else {
+            throw new ElementNotFoundException("matching " + titlePattern);
+        }
+    }
+
+    /**
      * Constructor for the AutomationApplication.
      *
      * @param element The underlying automation element.

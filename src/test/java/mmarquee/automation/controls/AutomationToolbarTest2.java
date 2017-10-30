@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -69,7 +70,7 @@ public class AutomationToolbarTest2 {
         MockitoAnnotations.initMocks(this);
         
         list = new ArrayList<>();
-        list.add(new AutomationElement(listElement));
+        list.add(targetElement);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class AutomationToolbarTest2 {
     }
 
     @Test
-    public void test_GetToolbarButton_By_Name_Gets_Button_When_Within_Bounds() throws Exception {
+    public void test_GetToolbarButton_By_Name_Gets_Button() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
@@ -105,12 +106,35 @@ public class AutomationToolbarTest2 {
     }
 
     @Test(expected=ElementNotFoundException.class)
-    public void test_GetToolbarButton_By_Name_Throws_Exception_When_Out_Of_Bounds() throws Exception {
+    public void test_GetToolbarButton_By_Name_Throws_Exception() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
         ctrl.getToolbarButton("unknownName");
+    }
+
+    @Test
+    public void test_GetToolbarButton_By_Name_with_RegExPattern_Gets_Button() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("myName");
+        
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+
+        AutomationToolBarButton button = ctrl.getToolbarButton(Pattern.compile("my.*"));
+        
+        assertEquals(targetElement,button.getElement());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetToolbarButton_By_Name_with_RegExPattern_Throws_Exception() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+
+        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+
+        ctrl.getToolbarButton(Pattern.compile("unknownName"));
     }
 
     @Test

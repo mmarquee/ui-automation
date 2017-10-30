@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -38,7 +39,6 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 public class AutomationPanelTest {
@@ -59,9 +59,9 @@ public class AutomationPanelTest {
     
     AutomationPanel panel;
     
-    IUIAutomationElement3 elem;
-    
     List<AutomationElement> list;
+    
+    @Mock
     AutomationElement targetElement;
 
     @Before
@@ -70,10 +70,7 @@ public class AutomationPanelTest {
 
         panel = Mockito.spy(new AutomationPanel(element));
         
-        elem = Mockito.mock(IUIAutomationElement3.class);
-        
         list = new ArrayList<>();
-        targetElement = new AutomationElement(elem);
         list.add(targetElement);
     }
 
@@ -112,7 +109,27 @@ public class AutomationPanelTest {
     public void test_GetWindow_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        panel.getTextBox("unknownName");
+        panel.getWindow("unknownName");
+    }
+
+    @Test
+    public void test_GetWindow_By_Name_with_RegexPattern() throws Exception {
+    	when(targetElement.getName()).thenReturn("myName");
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+
+        AutomationWindow window = panel.getWindow(Pattern.compile(".+Name"));
+        assertEquals(targetElement,window.getElement());
+
+        verify(panel).createControlTypeCondition(ControlType.Window);
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetWindow_By_Name_with_RegexPatternThrows_Exception_When_Not_found() throws Exception {
+    	when(targetElement.getName()).thenReturn("myName");
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+    	
+        panel.getWindow(Pattern.compile("unknownName"));
     }
 
     @Test
