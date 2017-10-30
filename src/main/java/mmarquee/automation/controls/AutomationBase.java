@@ -150,6 +150,10 @@ public abstract class AutomationBase implements Automatable {
      */
 	protected void assertClassName(final String expectedClassName)
             throws AutomationException {
+		if (element == null) {
+			throw new ElementNotFoundException("null");
+		}
+		
         String cName = element.getClassName();
 		if ((cName == null && expectedClassName == null)
 				|| (cName != null && cName.equals(expectedClassName))) {
@@ -489,6 +493,17 @@ public abstract class AutomationBase implements Automatable {
         return this.automation.createControlTypeCondition(id);
     }
 
+    /**
+     * Creates a class name property condition.
+     *
+     * @param className The class name to use.
+     * @return The condition
+     * @throws AutomationException Something has gone wrong.
+     */
+    protected PointerByReference createClassNamePropertyCondition(final String className)
+            throws AutomationException {
+        return this.automation.createClassNamePropertyCondition(className);
+    }
     /**
      * Creates an AND condition.
      *

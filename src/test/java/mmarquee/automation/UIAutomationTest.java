@@ -102,13 +102,6 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testCreateAutomationIdPropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
-        UIAutomation instance = UIAutomation.getInstance();
-
-        instance.createAutomationIdPropertyCondition("ID");
-    }
-
-    @Test
     public void testCompareElementsWhenTheSame() {
         UIAutomation instance = UIAutomation.getInstance();
 
@@ -354,28 +347,31 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     @Test
-    public void testCreateNamePropertyCondition() throws AutomationException {
+    public void testCreateNamePropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
         instance.createNamePropertyCondition("ID");
     }
-
-
 
     @Test
     public void testCreateControlTypeCondition_Does_Not_Throw_Exception() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
         instance.createControlTypeCondition(ControlType.Button);
-        try {
-            // Create first condition to use
-            PointerByReference condition =
-                    instance.createControlTypeCondition(ControlType.Button);
-        } catch (AutomationException ex) {
-            assertTrue(false);
-        }
+    }
 
-        assertTrue(true);
+    @Test
+    public void testCreateClassNamePropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        instance.createClassNamePropertyCondition("XTestButton");
+    }
+
+    @Test
+    public void testCreateAutomationIdPropertyCondition_Does_Not_Throw_Exception() throws AutomationException {
+        UIAutomation instance = UIAutomation.getInstance();
+
+        instance.createAutomationIdPropertyCondition("ID");
     }
 
     @Test

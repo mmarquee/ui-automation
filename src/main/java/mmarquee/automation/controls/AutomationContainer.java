@@ -132,39 +132,24 @@ public class AutomationContainer extends AutomationBase {
      * @throws ElementNotFoundException Failed to find element.
      */
     protected AutomationElement getElementByControlType(int index, ControlType id, String className) throws AutomationException, ElementNotFoundException {
-        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
-                this.createIntegerVariant(id.getValue()));
+        PointerByReference condition =  
+        		this.createAndCondition(this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
+        				this.createIntegerVariant(id.getValue())),
+        				this.createClassNamePropertyCondition(className));
         
         List<AutomationElement> collection;
 
-        AutomationElement foundElement = null;
-
         collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
-
-        int counter = 0;
-
-        for (AutomationElement element : collection) {
-            String cName = element.getClassName();
-
-            if (cName.equals(className)) {
-                if (counter == index) {
-                    foundElement = element;
-                    break;
-                } else {
-                    counter++;
-                }
-            }
+        try {
+        	return collection.get(index);
+        } catch (IndexOutOfBoundsException ex) {
+        	throw new ElementNotFoundException(ex); // Backward compatibility
         }
-
-        if (foundElement == null) {
-            throw new ElementNotFoundException(className);
-        }
-
-        return foundElement;
     }
 
     /**
-     * Gets the element by the control type.
+     * Gets the element by the control type for a given name.
+     * 
      * @param name Name to use.
      * @param id Control type.
      * @return The matching element.
@@ -178,9 +163,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the element by the control type, for s given control name.
-     *
-     * There is probably a much better way of doing this
+     * Gets the element by the control type, for a given control name and class name.
      *
      * @param name Name of the element
      * @param id Control type
@@ -189,33 +172,16 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Did not find the element
      */
     protected AutomationElement getElementByControlType(String name, ControlType id, String className) throws AutomationException {
-        List<AutomationElement> collection;
-
-        AutomationElement foundElement = null;
-
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        return this.findFirst(new TreeScope(TreeScope.Descendants),
         		this.createAndCondition(
-                        this.createNamePropertyCondition(name),
-                        this.createControlTypeCondition(id)));
-
-        for (AutomationElement element : collection) {
-            String cName = element.getClassName();
-
-            if (cName.equals(className)) {
-                foundElement = element;
-                break;
-            }
-        }
-
-        if (foundElement == null) {
-            throw new ElementNotFoundException(className);
-        }
-
-        return foundElement;
+        				this.createAndCondition(
+	                        this.createNamePropertyCondition(name),
+	                        this.createControlTypeCondition(id)),
+        				this.createClassNamePropertyCondition(className)));
     }
-
+    
     /**
-     * Gets the element by the name
+     * Gets an element by the name
      *
      * @param name Name of the element
      * @return The matching element
@@ -225,9 +191,9 @@ public class AutomationContainer extends AutomationBase {
         return this.findFirst(new TreeScope(TreeScope.Descendants),
         		this.createNamePropertyCondition(name));
     }
-    
+
     /**
-     * Gets the element by the name
+     * Gets an element by the name and className
      *
      * @param name Name of the element
      * @param className The className to look for
@@ -235,29 +201,11 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Did not find the element
      */
     protected AutomationElement getElementByName(String name, String className) throws AutomationException {
-        List<AutomationElement> collection;
-
-        AutomationElement foundElement = null;
-
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
-        		this.createNamePropertyCondition(name));
-
-        for (AutomationElement element : collection) {
-            String cName = element.getClassName();
-
-            if (cName.equals(className)) {
-                foundElement = element;
-                break;
-            }
-        }
-
-        if (foundElement == null) {
-            throw new ElementNotFoundException(className);
-        }
-
-        return foundElement;
+        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        		this.createAndCondition(
+        				this.createNamePropertyCondition(name),
+        				this.createClassNamePropertyCondition(className)));
     }
-
 
     /**
      * Gets the element by the given control index
@@ -271,30 +219,13 @@ public class AutomationContainer extends AutomationBase {
     protected AutomationElement getElementByIndex(int index, String className) throws AutomationException, ElementNotFoundException {
         List<AutomationElement> collection;
 
-        AutomationElement foundElement = null;
+        collection = this.findAll(new TreeScope(TreeScope.Descendants), this.createClassNamePropertyCondition(className));
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants), this.createTrueCondition());
-
-        int counter = 0;
-
-        for (AutomationElement element : collection) {
-            String cName = element.getClassName();
-
-            if (cName.equals(className)) {
-                if (counter == index) {
-                    foundElement = element;
-                    break;
-                } else {
-                    counter++;
-                }
-            }
+        try {
+        	return collection.get(index);
+        } catch (IndexOutOfBoundsException ex) {
+        	throw new ElementNotFoundException(ex); // backward compatibility
         }
-
-        if (foundElement == null) {
-            throw new ElementNotFoundException(className);
-        }
-
-        return foundElement;
     }
 
     /**

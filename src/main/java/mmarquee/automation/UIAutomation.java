@@ -412,6 +412,26 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
+     * Creates a condition, based on element class name.
+     *
+     * @param className The class name.
+     * @return The condition.
+     * @throws AutomationException Something went wrong.
+     */
+	public PointerByReference createClassNamePropertyCondition(final String className)
+            throws AutomationException {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(className);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        try {
+            return this.createPropertyCondition(PropertyID.ClassName.getValue(), variant);
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+    
+    /**
      * Creates a property condition.
      *
      * @param id Which property to check for.

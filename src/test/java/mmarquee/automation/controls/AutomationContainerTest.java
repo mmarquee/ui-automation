@@ -462,14 +462,14 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementClassName(elem, "BlaBla");
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationPanel panel = spyWndw.getPanelByClassName("myName","BlaBla");
         assertEquals(targetElement,panel.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
         verify(spyWndw).createControlTypeCondition(ControlType.Pane);
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -481,6 +481,7 @@ public class AutomationContainerTest {
 
         wndw.getPanelByClassName("unknownName","BlaBla");
     }
+    
     @Test
     public void testGetDocument_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
@@ -823,14 +824,14 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementClassName(elem, "PasswordBox");
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationPasswordEditBox box = spyWndw.getPasswordEditBox("myName");
         assertEquals(targetElement,box.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
         verify(spyWndw).createControlTypeCondition(ControlType.Edit);
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -921,12 +922,12 @@ public class AutomationContainerTest {
             }
         }).when(elem).getCurrentName(any());
 
-        when(element.findAll(any(), any())).thenReturn(list);
+        when(element.findFirst(any(), any())).thenReturn(targetElement);
 
         AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit("SMITH-01");
         assertEquals(targetElement,maskedEdit.element);
 
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -1315,14 +1316,14 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementClassName(elem, "ReBarWindow32");
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationReBar bar = spyWndw.getReBar("myName");
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
         verify(spyWndw).createControlTypeCondition(ControlType.Pane);
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -1441,14 +1442,14 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementClassName(elem, "BlaBla");
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationCustom bar = spyWndw.getCustomByClassName("myName","BlaBla");
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
         verify(spyWndw).createControlTypeCondition(ControlType.Custom);
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -1587,14 +1588,14 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
         setElementTypeAndClassName(elem, ControlType.Button, "Blubber");
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationBase bar = spyWndw.getControlByControlType("myName",ControlType.Button, "Blubber");
         assertEquals(targetElement,bar.getElement());
         assertEquals(AutomationButton.class,bar.getClass());
 
         verify(spyWndw).createNamePropertyCondition("myName");
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -1691,14 +1692,14 @@ public class AutomationContainerTest {
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
         setElementTypeAndClassName(elem, ControlType.AppBar, "BlaBla");
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationBase bar = spyWndw.getControlByClassName("myName","BlaBla");
         assertEquals(targetElement,bar.getElement());
         assertEquals(AutomationAppBar.class,bar.getClass());
 
         verify(spyWndw).createNamePropertyCondition("myName");
-        verify(element, atLeastOnce()).findAll(any(), any());
+        verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test(expected=ElementNotFoundException.class)
