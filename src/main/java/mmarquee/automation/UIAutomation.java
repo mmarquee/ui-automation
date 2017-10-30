@@ -208,6 +208,29 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
+     * Finds the given process.
+     *
+     * @param command Command to look for.
+     * @return The Application.
+     * @throws AutomationException If findProcessEntry throws an exception.
+     */
+    public AutomationApplication findProcess(final String... command)
+            throws AutomationException {
+
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+            new Tlhelp32.PROCESSENTRY32.ByReference();
+
+        boolean found = Utils.findProcessEntry(processEntry, command);
+
+        if (!found) {
+            throw new AutomationException("Process " + command + " not found.");
+        } else {
+            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
+            return new AutomationApplication(rootElement, handle, true);
+        }
+    }
+
+    /**
      * Gets the desktop object associated with the title.
      *
      * @param title Title to search for.
@@ -657,29 +680,6 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationElement getRootElement() {
         return this.rootElement;
-    }
-
-    /**
-     * Finds the given process.
-     *
-     * @param command Command to look for.
-     * @return The Application.
-     * @throws AutomationException If findProcessEntry throws an exception.
-     */
-    public AutomationApplication findProcess(final String... command)
-            throws AutomationException {
-
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-            new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        boolean found = Utils.findProcessEntry(processEntry, command);
-
-        if (!found) {
-            throw new AutomationException("Process " + command + " not found.");
-        } else {
-            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
-        }
     }
 
     /**
