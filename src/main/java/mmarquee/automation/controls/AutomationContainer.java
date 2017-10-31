@@ -835,7 +835,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
-     * @deprecated use {@link #getComboBoxByAutomationId(int)} instead
+     * @deprecated use {@link #getComboBoxByAutomationId(String)} instead
      */
     @Deprecated
     public AutomationComboBox getComboboxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
