@@ -197,6 +197,11 @@ public enum PatternID {
 
     private int value;
 
+    /**
+     * Gets the value of the pattern id.
+     *
+     * @return The value.
+     */
     public int getValue() {
         return this.value;
     }
