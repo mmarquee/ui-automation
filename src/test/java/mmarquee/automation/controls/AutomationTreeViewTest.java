@@ -1,6 +1,7 @@
 package mmarquee.automation.controls;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
@@ -10,7 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -28,6 +33,15 @@ import mmarquee.automation.ItemNotFoundException;
  */
 public class AutomationTreeViewTest {
 
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
+    
     @Mock AutomationElement element;
     @Mock AutomationElement targetElement;
     
@@ -36,6 +50,22 @@ public class AutomationTreeViewTest {
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
+    }
+
+    @Test
+    public void testName() throws Exception {
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+
+        when(element.getName()).thenReturn("NAME");
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTreeView ctrl = new AutomationTreeView(element, instance);
+
+        String name = ctrl.getName();
+
+        assertTrue(name.equals("NAME"));
     }
 
     @Before
