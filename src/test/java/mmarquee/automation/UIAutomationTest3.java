@@ -68,7 +68,7 @@ public class UIAutomationTest3 {
 
         PowerMockito.mockStatic(Utils.class);
 
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(false);
+        PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(false);
         PowerMockito.when(Utils.startProcess(anyString())).thenThrow(IOException.class);
 
         instance.launchOrAttach("notepad99.exe");
@@ -91,7 +91,7 @@ public class UIAutomationTest3 {
 
         PowerMockito.mockStatic(Utils.class);
 
-        PowerMockito.when(Utils.findProcessEntry(any(), any())).thenReturn(false);
+        PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(false);
         PowerMockito.when(Utils.startProcessWithWorkingDirectory(anyString())).thenThrow(IOException.class);
 
         instance.launchWithWorkingDirectoryOrAttach("notepad99.exe");

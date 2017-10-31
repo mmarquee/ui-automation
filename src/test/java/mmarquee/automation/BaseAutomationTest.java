@@ -44,6 +44,7 @@ import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
@@ -136,7 +137,7 @@ public class BaseAutomationTest {
     		if (hwnd == null) {
     			break;
     		}
-            Utils.closeProcess(hwnd);
+            Utils.closeWindow(hwnd);
     	}
     }
     
@@ -240,6 +241,15 @@ public class BaseAutomationTest {
 	     setPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
 	     
 	     return expandCollapsePattern;
+	}
+	
+	static public SelectionItem mockSelectItemPattern(AutomationElement automationElementMock) throws AutomationException {
+		 PatternID patternId = PatternID.SelectionItem;
+	     PropertyID patternAvailablePropertyID = PropertyID.IsSelectionItemPatternAvailable;
+	     SelectionItem selectItemPattern = Mockito.mock(SelectionItem.class);
+	     setPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, selectItemPattern);
+	     
+	     return selectItemPattern;
 	}
     
 }

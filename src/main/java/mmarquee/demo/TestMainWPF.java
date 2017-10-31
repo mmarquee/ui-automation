@@ -50,6 +50,7 @@ import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.utils.Utils;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -145,7 +146,7 @@ public class TestMainWPF extends TestBase {
             file.expand();
 
             this.rest();
-
+            
             logger.info("Items = " + file.getItems().size());
 
             AutomationMenuItem exit = file.getItems().get(3);
@@ -155,7 +156,7 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationWindow popup = applicationWindow.getWindow("Confirm Exit");
 
-                AutomationButton btn = popup.getButton("Cancel");
+                AutomationButton btn = popup.getButton(Pattern.compile("Cancel|Abbrechen"));
 
                 boolean val1 = popup.isModal();
 
@@ -615,6 +616,7 @@ public class TestMainWPF extends TestBase {
 
         } catch (Exception ex) {
             logger.info("Something went wrong - " + ex.getClass());
+            ex.printStackTrace();
         }
     }
 }

@@ -32,6 +32,7 @@ import mmarquee.automation.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -184,17 +185,11 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationApplication launchOrAttach(final String... command)
             throws Exception {
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-                new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        boolean found = Utils.findProcessEntry(processEntry, command);
-
-        if (!found) {
-            return this.launch(command);
-        } else {
-            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
-        }
+    	try {
+    		return findProcess(command);
+    	} catch (AutomationException ex) {
+    		return this.launch(command);
+    	}
     }
 
     /**
@@ -206,19 +201,59 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationApplication launchWithWorkingDirectoryOrAttach(final String... command)
             throws Exception {
+    	try {
+    		return findProcess(command);
+    	} catch (AutomationException ex) {
+    		return this.launchWithDirectory(command);
+    	}
+    }
+
+    /**
+     * Finds the given process.
+     *
+     * @param command Command to look for.
+     * @return The Application.
+     * @throws AutomationException If findProcessEntry throws an exception.
+     */
+    public AutomationApplication findProcess(final String... command)
+            throws AutomationException {
+
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-                new Tlhelp32.PROCESSENTRY32.ByReference();
+            new Tlhelp32.PROCESSENTRY32.ByReference();
 
         boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
-            return this.launchWithDirectory(command);
+            throw new AutomationException("Process " + command + " not found.");
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(rootElement, handle, true);
         }
     }
 
+    /**
+     * Finds the given process.
+     *
+     * @param filenamePattern A pattern which matches the filename of the application
+     * @return AutomationApplication that represents the application.
+     * @throws java.lang.Exception Unable to find process.
+     *
+     */
+    public AutomationApplication findProcess(final Pattern filenamePattern)
+            throws Exception {
+        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
+                new Tlhelp32.PROCESSENTRY32.ByReference();
+
+        boolean found = Utils.findProcessEntry(processEntry, filenamePattern);
+
+        if (!found) {
+            throw new AutomationException("No process found matching " + filenamePattern);
+        }
+        
+        WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
+        return new AutomationApplication(rootElement, handle, true);
+    }
+    
     /**
      * Gets the desktop object associated with the title.
      *
@@ -230,51 +265,94 @@ public class UIAutomation extends BaseAutomation {
                                   final String title,
                                   final int numberOfRetries)
             throws AutomationException {
-        AutomationElement element = null;
+        AutomationElement foundElement = null;
+        
+        // And Condition
+        PointerByReference pAndCondition = this.createAndCondition(
+        		this.createNamePropertyCondition(title), 
+        		this.createControlTypeCondition(controlType));
 
-        // Look for a control type
-        Variant.VARIANT.ByValue variant1 = new Variant.VARIANT.ByValue();
-        variant1.setValue(Variant.VT_INT, controlType.getValue());
+        for (int loop = 0; loop < numberOfRetries; loop++) {
 
-        // Look for a specific title
-        Variant.VARIANT.ByValue variant2 = new Variant.VARIANT.ByValue();
-        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(title);
-        variant2.setValue(Variant.VT_BSTR, sysAllocated);
-
-        try {
-            // First condition
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant2);
-
-            // Second condition
-            PointerByReference pCondition2 = this.createPropertyCondition(PropertyID.ControlType.getValue(), variant1);
-
-            // And Condition
-            PointerByReference pAndCondition = this.createAndCondition(pCondition1, pCondition2);
-
-            for (int loop = 0; loop < numberOfRetries; loop++) {
-
-                try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
-                } catch (AutomationException ex) {
-                    logger.info("Not found, retrying " + title);
-                }
-
-                if (element != null) {
-                    break;
-                }
+            try {
+            	foundElement = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
+            } catch (AutomationException ex) {
+                logger.info("Not found, retrying " + title);
             }
-        } finally {
-            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+
+            if (foundElement != null) {
+                break;
+            }
+
+            // Wait for it
+            try {
+				Thread.sleep(AutomationWindow.SLEEP_DURATION);
+			} catch (InterruptedException e) {
+                // interrupted
+			}
         }
 
-        if (element == null) {
+        if (foundElement == null) {
             logger.warning("Failed to find desktop window `" + title + "`");
             throw new ItemNotFoundException(title);
         }
 
-        return element;
+        return foundElement;
     }
 
+    /**
+     * Gets the desktop object matching the title pattern.
+     *
+     * @param titlePattern the pattern to match the title.
+     * @return AutomationWindow The found 'element'.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    private AutomationElement get(final ControlType controlType,
+                                  final Pattern titlePattern,
+                                  final int numberOfRetries)
+            throws AutomationException {
+    	
+        AutomationElement foundElement = null;
+        
+        // And Condition
+        PointerByReference condition = this.createControlTypeCondition(controlType);
+
+        retry_loop: for (int loop = 0; loop < numberOfRetries; loop++) {
+
+            try {
+                List<AutomationElement> collection = 
+                		this.rootElement.findAll(new TreeScope(TreeScope.Descendants), condition);
+                
+                for (AutomationElement element : collection) {
+                    String name = element.getName();
+
+                    if (name != null && titlePattern.matcher(name).matches()) {
+                        foundElement = element;
+                        break retry_loop;
+                    }
+                }
+                
+            } catch (AutomationException ex) {
+            }
+            
+            logger.info("Not found, retrying matching " + titlePattern);
+
+            // Wait for it
+            try {
+				Thread.sleep(AutomationWindow.SLEEP_DURATION);
+			} catch (InterruptedException e) {
+                // interrupted
+			}
+        }
+
+        if (foundElement == null) {
+            logger.warning("Failed to find desktop window matching `" + titlePattern + "`");
+            throw new ItemNotFoundException(titlePattern.toString());
+        }
+
+        return foundElement;
+    }
+    
     /**
      * Gets the desktop 'window' associated with the title.
      *
@@ -285,7 +363,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationWindow getDesktopWindow(final String title)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Window, title, FIND_DESKTOP_ATTEMPTS));
+        return getDesktopWindow(title, FIND_DESKTOP_ATTEMPTS);
     }
 
     /**
@@ -303,6 +381,33 @@ public class UIAutomation extends BaseAutomation {
         return new AutomationWindow(this.get(ControlType.Window, title, retries));
     }
 
+    /**
+     * Gets the desktop 'window' matching the title pattern
+     *
+     * @param titlePattern a pattern matching the title.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationWindow getDesktopWindow(final Pattern titlePattern)
+            throws PatternNotFoundException, AutomationException {
+        return getDesktopWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
+    }
+    
+    /**
+     * Gets the desktop 'window' matching the title pattern, with a variable
+     * number of retries.
+     *
+     * @param titlePattern a pattern matching the title.
+     * @param retries Number of retries.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationWindow getDesktopWindow(final Pattern titlePattern, final int retries)
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationWindow(this.get(ControlType.Window, titlePattern, retries));
+    }
     /**
      * Create an 'and' condition.
      *
@@ -400,6 +505,26 @@ public class UIAutomation extends BaseAutomation {
         }
     }
 
+    /**
+     * Creates a condition, based on element class name.
+     *
+     * @param className The class name.
+     * @return The condition.
+     * @throws AutomationException Something went wrong.
+     */
+	public PointerByReference createClassNamePropertyCondition(final String className)
+            throws AutomationException {
+        Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
+        WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(className);
+        variant.setValue(Variant.VT_BSTR, sysAllocated);
+
+        try {
+            return this.createPropertyCondition(PropertyID.ClassName.getValue(), variant);
+        } finally {
+            OleAuto.INSTANCE.SysFreeString(sysAllocated);
+        }
+    }
+    
     /**
      * Creates a property condition.
      *
@@ -669,29 +794,6 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationElement getRootElement() {
         return this.rootElement;
-    }
-
-    /**
-     * Finds the given process.
-     *
-     * @param command Command to look for.
-     * @return The Application.
-     * @throws AutomationException If findProcessEntry throws an exception.
-     */
-    public AutomationApplication findProcess(final String... command)
-            throws AutomationException {
-
-        final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
-            new Tlhelp32.PROCESSENTRY32.ByReference();
-
-        boolean found = Utils.findProcessEntry(processEntry, command);
-
-        if (!found) {
-            throw new AutomationException("Process " + command + " not found.");
-        } else {
-            WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
-        }
     }
 
     /**

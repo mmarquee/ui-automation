@@ -15,6 +15,9 @@
  */
 package mmarquee.automation.controls;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -68,6 +71,58 @@ public class AutomationTreeView extends AutomationBase {
             return new AutomationTreeViewItem(item);
         } else {
             throw new ItemNotFoundException(name);
+        }
+    }
+
+    /**
+     * Gets the item matching the namePattern
+     * 
+     * @param namePattern Name to look for
+     * @return The selected item
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationTreeViewItem getItem(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        List<AutomationElement> collection;
+
+        AutomationElement foundElement = null;
+
+        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        		this.createControlTypeCondition(ControlType.TreeItem));
+
+        for (AutomationElement element : collection) {
+            String name = element.getName();
+
+            if (name != null && namePattern.matcher(name).matches()) {
+                foundElement = element;
+                break;
+            }
+        }
+
+        if (foundElement == null) {
+            throw new ItemNotFoundException(namePattern.toString());
+        }
+
+        return new AutomationTreeViewItem(foundElement);
+    }
+
+    /**
+     * Gets the item that has the name
+     * @param automationId The automationId of the item
+     * @return The AutomationTreeViewItem
+     * @throws ItemNotFoundException when the item is not found
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationTreeViewItem getItemByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
+        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
+                this.createAndCondition(
+                        this.createAutomationIdPropertyCondition(automationId),
+                        this.createControlTypeCondition(ControlType.TreeItem)));
+
+        if (item != null) {
+            return new AutomationTreeViewItem(item);
+        } else {
+            throw new ItemNotFoundException(automationId);
         }
     }
 }

@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -35,6 +36,7 @@ import org.mockito.MockitoAnnotations;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -58,10 +60,15 @@ public class AutomationMenuTest extends BaseAutomationTest {
     @Mock private AutomationElement element;
 	@Mock private AutomationElement targetElement;
 	@Mock IUIAutomationElement3 elem;
+	
+	List<AutomationElement> list;
 
 	@Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        
+        list = new ArrayList<AutomationElement>();
+        list.add(targetElement);
     }
 
 	@Test
@@ -121,7 +128,30 @@ public class AutomationMenuTest extends BaseAutomationTest {
 
 		AutomationMenu menu = new AutomationMenu(element);
 		
-		 menu.getMenuItem("unknownName");
+		menu.getMenuItem("unknownName");
+    }
+
+    @Test
+    public void test_GetMenuItem_By_Name_with_RegExPattern() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("myName");
+        
+		AutomationMenu menu = new AutomationMenu(element);
+
+		AutomationMenuItem item = menu.getMenuItem(Pattern.compile("\\S+ame"));
+        assertEquals(targetElement,item.getElement());
+
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test(expected=ItemNotFoundException.class)
+    public void test_GetMenuItem_By_Name_with_RegExPattern_Throws_Exception_When_Not_found() throws Exception {
+    	when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("myName");
+        
+		AutomationMenu menu = new AutomationMenu(element);
+		
+		menu.getMenuItem(Pattern.compile("\\d+"));
     }
 
     @Test

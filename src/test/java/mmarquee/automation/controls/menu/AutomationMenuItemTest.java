@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assume;
 import org.junit.Before;
@@ -58,6 +59,7 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 	@Mock AutomationElement targetElement;
 	@Mock ExpandCollapse collapse;
 	@Mock Invoke invoke;
+	private List<AutomationElement> list;
 
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -71,6 +73,9 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        
+        list = new ArrayList<>();
+        list.add(targetElement);
     }
 
     @Test
@@ -123,9 +128,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void test_GetItems_Returns_Items_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-
         when(mocked_element.findAll(any(), any())).thenReturn(list);
 
         when(collapse.isExpanded()).thenReturn(true);
@@ -156,9 +158,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     	AutomationMenuItem item =
     			new AutomationMenuItem(mocked_element, collapse, invoke);
     	
-    	List<AutomationElement> list = new ArrayList<>();
-    	list.add(targetElement);
-    	
     	enableMainMenuReference(item, list);
 
         List<AutomationMenuItem> items = item.getItems();
@@ -169,9 +168,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     
     @Test
     public void test_GetMenuItem_By_Index() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-        
         when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationMenuItem item =
@@ -185,9 +181,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     
     @Test
     public void test_GetMenuItem_By_Index_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-
         AutomationMenuItem item =
         		new AutomationMenuItem(mocked_element, collapse, invoke);
         
@@ -223,9 +216,6 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
 
     @Test
     public void test_GetMenuItem_By_Name_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        list.add(targetElement);
-        
         AutomationMenuItem item =
                 new AutomationMenuItem(mocked_element, collapse, invoke);
 
@@ -248,6 +238,47 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         item.getMenuItem("unknownName");
     }
 
+    @Test
+    public void test_GetMenuItem_By_Name_with_RegExPattern() throws Exception {
+        when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("myName");
+        
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+		AutomationMenuItem subItem = item.getMenuItem(Pattern.compile("myName?"));
+        assertEquals(targetElement,subItem.getElement());
+
+        verify(mocked_element, atLeastOnce()).findAll(any(), any());
+    }
+
+    @Test
+    public void test_GetMenuItem_By_Name_with_RegExPattern_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
+        when(targetElement.getName()).thenReturn("myName");
+
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+
+    	enableMainMenuReference(item, list);
+    	
+        when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(targetElement);
+    	
+		AutomationMenuItem subItem = item.getMenuItem(Pattern.compile("(my)+Name"));
+        assertEquals(targetElement,subItem.getElement());
+
+    }
+    
+    @Test(expected=ElementNotFoundException.class)
+    public void test_GetMenuItem_By_Name_with_RegExPattern_Throws_Exception_When_Not_found() throws Exception {
+    	when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("myName");
+        
+        AutomationMenuItem item =
+                new AutomationMenuItem(mocked_element, collapse, invoke);
+		
+        item.getMenuItem(Pattern.compile("nix"));
+    }
+    
     @Test
     public void test_GetMenuItem_By_AutomationId() throws Exception {
         when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);

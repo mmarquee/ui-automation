@@ -27,6 +27,7 @@ import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -46,12 +47,10 @@ public class AutomationTab extends AutomationContainer {
         List<AutomationTabItem> tabItems = new ArrayList<>();
 
         try {
-            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants));
+            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.TabItem));
 
             for (AutomationElement elem : collection) {
-                if (elem.getControlType() == ControlType.TabItem.getValue()) {
-                    tabItems.add(new AutomationTabItem(elem, this.automation));
-                }
+                tabItems.add(new AutomationTabItem(elem, this.automation));
             }
         } catch (AutomationException ex) {
             logger.error(ex.getMessage());
@@ -72,6 +71,30 @@ public class AutomationTab extends AutomationContainer {
 
         for(AutomationTabItem item: this.getTabItems()) {
             if (name.equals(item.getName())) {
+                found = true;
+                item.selectItem();
+            }
+        }
+
+        if (!found) {
+            throw new ElementNotFoundException();
+        }
+    }
+
+    /**
+     * Selects the tab matching given namePattern.
+     * @param namePattern Pattern matching the name of the tab to select.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Pattern not found.
+     */
+    public void selectTabPage(final Pattern namePattern) throws AutomationException, PatternNotFoundException {
+
+        boolean found = false;
+
+        for(AutomationTabItem item: this.getTabItems()) {
+            final String name = item.getName();
+            
+			if (name != null && namePattern.matcher(name).matches()) {
                 found = true;
                 item.selectItem();
             }

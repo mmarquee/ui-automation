@@ -32,4 +32,8 @@ public class ElementNotFoundException extends AutomationException {
     public ElementNotFoundException(String name) {
         super("Element " + name +" not found");
     }
+
+    public ElementNotFoundException(Throwable cause) {
+        super(cause);
+    }
 }

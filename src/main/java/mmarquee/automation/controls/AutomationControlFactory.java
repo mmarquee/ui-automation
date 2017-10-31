@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
@@ -41,6 +42,10 @@ public class AutomationControlFactory {
 	public static AutomationBase get(final AutomationBase parent,
 									 final AutomationElement element)
 			throws AutomationException, PatternNotFoundException {
+		if (element == null) {
+			throw new ElementNotFoundException("null");
+		}
+		
     	ControlType controlType = ControlType.fromValue(element.getControlType());
 		return get(parent, controlType, element);
 	}

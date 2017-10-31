@@ -19,10 +19,12 @@ package mmarquee.automation.controls.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -96,6 +98,36 @@ public class AutomationMenu extends AutomationBase {
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
+        return new AutomationMenuItem(item);
+    }
+
+    /**
+     * Gets the item matching the name
+     * @param namePattern a pattern matching the name
+     * @return The found item
+     * @throws AutomationException Something went wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationMenuItem getMenuItem (Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    	List<AutomationElement> collection;
+
+        AutomationElement item = null;
+
+        collection = this.findAll(new TreeScope(TreeScope.Children),
+        		this.createControlTypeCondition(ControlType.MenuItem));
+
+        for (AutomationElement element : collection) {
+            String name = element.getName();
+
+            if (name != null && namePattern.matcher(name).matches()) {
+                item = element;
+                break;
+            }
+        }
+
+        if (item == null) {
+            throw new ItemNotFoundException("Failed to find element matching " + namePattern);
+        }
         return new AutomationMenuItem(item);
     }
 

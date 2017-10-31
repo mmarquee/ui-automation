@@ -52,6 +52,16 @@ public class AutomationException extends Exception {
         this.errorCode = inErrorCode;
     }
 
+
+    /**
+     * Constructor for the AutomationException.
+     * @param cause The underlying exception which caused this
+     */
+    public AutomationException(Throwable cause) {
+        super(cause);
+        this.errorCode = 0;
+    }
+
     /**
      * Creates the error string.
      * @param inErrorCode The error code to use.

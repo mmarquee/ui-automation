@@ -27,6 +27,7 @@ import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Mark Humphreys
@@ -82,6 +83,42 @@ public class AutomationSystemMenu extends AutomationBase {
         } else {
             // Throw an exception
             throw  new ItemNotFoundException(name);
+        }
+    }
+
+    /**
+     * Get the item matching the name
+     *
+     * @param namePattern Pattern matching the name to look for
+     * @return The menu item
+     * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationMenuItem getItem(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+
+        PointerByReference condition = this.createTrueCondition();
+
+        List<AutomationElement> collection =
+                this.findAll(new TreeScope(TreeScope.Descendants), condition);
+
+        AutomationElement foundElement = null;
+        boolean found = false;
+
+        for (AutomationElement elem: collection) {
+            String eName = elem.getName();
+
+            if (eName != null && namePattern.matcher(eName).matches()) {
+                found = true;
+                foundElement = elem;
+                break;
+            }
+        }
+
+        if (found) {
+            return new AutomationMenuItem(foundElement);
+        } else {
+            // Throw an exception
+            throw  new ItemNotFoundException(namePattern.toString());
         }
     }
 

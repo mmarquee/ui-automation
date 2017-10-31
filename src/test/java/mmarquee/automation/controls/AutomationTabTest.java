@@ -15,25 +15,28 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.*;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import org.junit.Assume;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Tests for AutomationTab.
@@ -43,86 +46,83 @@ import static org.mockito.Mockito.when;
  */
 public class AutomationTabTest {
 
+    @Mock
+    AutomationElement element;
+
+    AutomationTab automationTab;
+    
+    List<AutomationElement> list;
+    
+    @Mock
+    AutomationElement targetElement;
+
+    @Before
+    public void setup() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
+        automationTab = Mockito.spy(new AutomationTab(element));
+        
+        list = new ArrayList<>();
+        list.add(targetElement);
+    }
+    
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
-
+    
     @Test
-    @Ignore("Still broken somewhat")
-    public void testGetTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+    public void test_GetTabItems_Returns_Items() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        SelectionItem selectionItem = Mockito.mock(SelectionItem.class);
-        doNothing().when(selectionItem).select();
+        List<AutomationTabItem> tabItems = automationTab.getTabItems();
+        
+        assertEquals(1,tabItems.size());
+        
+        assertEquals(targetElement,tabItems.get(0).getElement());
 
-        List<AutomationElement> list = new ArrayList<>();
-
-        AutomationElement testElem = Mockito.mock(AutomationElement.class);
-        when(testElem.getName()).thenReturn("TEST-01");
-        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
-
-        list.add(testElem);
-
-        when(element.findAll(any(), any())).thenReturn(list);
-
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationTab ctrl = new AutomationTab(element, container, instance);
-
-        ctrl.selectTabPage("TEST-01");
-
-
-        /*        AutomationElement element = Mockito.mock(AutomationElement.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        List<AutomationElement> list = new ArrayList<>();
-
-        AutomationElement testElem = Mockito.mock(AutomationElement.class);
-        when(testElem.getName()).thenReturn("TEST");
-        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
-
-        doNothing().when(testElem).setFocus();
-
-        list.add(testElem);
-
-        when(element.findAll(any(), any())).thenReturn(list);
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationTab ctrl = new AutomationTab(element, container, instance);
-
-        ctrl.selectTabPage("TEST");
-*/
+        verify(automationTab).createControlTypeCondition(ControlType.TabItem);
+        verify(element, atLeastOnce()).findAll(any(), any());
     }
 
+    @Test
+    public void test_SelectTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("TEST-01");
+        SelectionItem mockSelectItemPattern = BaseAutomationTest.mockSelectItemPattern(targetElement);
+        
+        automationTab.selectTabPage("TEST-01");
+        
+        verify(mockSelectItemPattern).select();
+        verify(automationTab).createControlTypeCondition(ControlType.TabItem);
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+    
     @Test(expected = ElementNotFoundException.class)
-    public void testGetTabPage_By_Name_Throws_Exception_When_Tab_Not_Present() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+    public void test_SelectTabPage_By_Name_Throws_Exception_When_Tab_Not_Present() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("TEST-01");
+        
+        automationTab.selectTabPage("TEST");
+    }
 
-        SelectionItem selectionItem = Mockito.mock(SelectionItem.class);
-        doNothing().when(selectionItem).select();
-
-        List<AutomationElement> list = new ArrayList<>();
-
-        AutomationElement testElem = Mockito.mock(AutomationElement.class);
-        when(testElem.getName()).thenReturn("TEST-01");
-        when(testElem.getControlType()).thenReturn(ControlType.TabItem.getValue());
-
-        list.add(testElem);
-
-        when(element.findAll(any(), any())).thenReturn(list);
-
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationTab ctrl = new AutomationTab(element, container, instance);
-
-        ctrl.selectTabPage("TEST");
+    @Test
+    public void test_SelectTabPage_By_Name_with_RegExPattern_Succeeds_When_Tab_Present() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("TEST-01");
+        SelectionItem mockSelectItemPattern = BaseAutomationTest.mockSelectItemPattern(targetElement);
+        
+        automationTab.selectTabPage(Pattern.compile("TEST-\\d{2,3}"));
+        
+        verify(mockSelectItemPattern).select();
+        verify(automationTab).createControlTypeCondition(ControlType.TabItem);
+        verify(element, atLeastOnce()).findAll(any(), any());
+    }
+    
+    @Test(expected = ElementNotFoundException.class)
+    public void test_SelectTabPage_By_Name_with_RegExPattern_Throws_Exception_When_Tab_Not_Present() throws Exception {
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(targetElement.getName()).thenReturn("TEST-01");
+        
+        automationTab.selectTabPage(Pattern.compile("test.*"));
     }
 }
