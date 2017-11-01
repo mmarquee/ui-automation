@@ -44,7 +44,7 @@ public class AutomationTab extends AutomationContainer {
      */
     public List<AutomationTabItem> getTabItems() throws PatternNotFoundException {
         // Now get the list of tab items
-        List<AutomationTabItem> tabItems = new ArrayList<>();
+        List<AutomationTabItem> tabItems = new ArrayList<AutomationTabItem>();
 
         try {
             List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.TabItem));
