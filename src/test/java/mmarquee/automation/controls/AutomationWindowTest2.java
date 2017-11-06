@@ -19,18 +19,13 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.rebar.AutomationReBar;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -44,11 +39,21 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 28/12/2016.
+ * @author Mark Humphreys
+ * Date 28/12/2016.
  *
  * AutomationWindow tests that rely on mocking behaviour
  */
 public class AutomationWindowTest2 {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     @Mock
     AutomationElement element;
@@ -69,7 +74,10 @@ public class AutomationWindowTest2 {
 
     @Test
     public void testMaximize_Gets_Maximize_From_Pattern() throws AutomationException, PatternNotFoundException {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.maximize();
 
@@ -78,7 +86,10 @@ public class AutomationWindowTest2 {
 
     @Test
     public void testMinimize_Calls_Minimize_From_Pattern() throws AutomationException, PatternNotFoundException {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.minimize();
 
@@ -86,19 +97,34 @@ public class AutomationWindowTest2 {
     }
 
     @Test
+    public void testClose_Gets_Close_From_Pattern() throws AutomationException, PatternNotFoundException {
+        AutomationWindow wndw = new AutomationWindow(element, window, container);
+
+        wndw.close();
+
+        verify(window, atLeast(1)).close();
+    }
+
+    @Test
     public void testGetName_Gets_Name_From_Element() throws AutomationException, PatternNotFoundException {
         when(element.getName()).thenReturn("NAME");
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = wndw.name();
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
+
+        String name = wndw.getName();
 
         assertTrue(name.equals("NAME"));
     }
 
     @Test
     public void test_focus_Calls_setFocus_From_element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.focus();
 
@@ -107,7 +133,10 @@ public class AutomationWindowTest2 {
 
     @Test
     public void test_WaitForIdleInput_Calls_waitForInputIdle_From_Window() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.waitForInputIdle(100);
 
@@ -116,7 +145,10 @@ public class AutomationWindowTest2 {
 
     @Test
     public void test_isTopMost_Calls_isTopMost_From_Window() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.isTopMost();
 
@@ -125,7 +157,10 @@ public class AutomationWindowTest2 {
 
     @Test
     public void test_isModal_Calls_isModal_From_Window() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.isModal();
 
@@ -146,7 +181,10 @@ public class AutomationWindowTest2 {
             }
         }).when(element).getPropertyValue(anyInt());
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         wndw.setTransparency(100);
 
@@ -167,7 +205,10 @@ public class AutomationWindowTest2 {
             }
         }).when(element).getPropertyValue(anyInt());
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         WinDef.HWND handle = wndw.getNativeWindowHandle();
 
@@ -194,9 +235,12 @@ public class AutomationWindowTest2 {
 
         AutomationElement localElement = Mockito.mock(AutomationElement.class);
 
-        localElement.element = elem;
+        localElement.setElement(elem);
 
-        AutomationWindow wndw = new AutomationWindow(localElement, window, container);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationWindow wndw = new AutomationWindow(element, window, container, instance);
 
         WinDef.HWND handle = wndw.getNativeWindowHandle();
 
@@ -448,12 +492,7 @@ public class AutomationWindowTest2 {
         doAnswer(new Answer() {
             @Override
             public AutomationElement answer(InvocationOnMock invocation) throws Throwable {
-//                Object[] args = invocation.getArguments();
-                // Set the 2nd parameter
-//                Object reference = (Object)args[1];
-
                 IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-//                reference = new AutomationElement(elem);
 
                 return new AutomationElement(elem);
             }

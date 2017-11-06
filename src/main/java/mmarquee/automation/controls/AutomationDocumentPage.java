@@ -6,7 +6,8 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 28/01/2017.
+ * @author Mark Humphreys
+ * Date 28/01/2017.
  *
  * Represents a page in a document - i.e. a Word document.
  *

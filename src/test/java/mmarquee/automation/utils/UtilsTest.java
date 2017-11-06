@@ -22,17 +22,36 @@ import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.BaseAutomationTest;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 /**
- * Created by Mark Humphreys on 24/11/2016.
+ * @author Mark Humphreys
+ * Date 24/11/2016.
+ *
+ * Tests of the Utils class.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ Utils.class })
 public class UtilsTest extends BaseAutomationTest {
 
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
@@ -47,6 +66,19 @@ public class UtilsTest extends BaseAutomationTest {
         if (hwnd != null) {
             Utils.quitProcess(hwnd);
         }
+    }
+
+    @Test
+    @Ignore("How to verify a powermocked static class")
+    public void testStartProcess_Calls_Start_Process_Once() throws IOException {
+
+        PowerMockito.mockStatic(Utils.class);
+
+        PowerMockito.when(Utils.createProcessBuilder(anyString())).thenThrow(java.io.IOException.class);
+
+        Utils.startProcess("Notepad.exe");
+
+//        verify(Utils, atLeastOnce()).start();
     }
 
     @Test

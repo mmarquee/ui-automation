@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls;
 
 import mmarquee.automation.*;
@@ -21,20 +20,35 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 20/02/2016.
+ * @author Mark Humphreys
+ * Date 20/02/2016.
  *
  * Wrapper for the TreeView element.
  */
 public class AutomationTreeView extends AutomationBase {
 
     /**
-     * Construct the AutomationTreeView
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * Construct the AutomationTreeView.
+     *
+     * @param element The element.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationTreeView(AutomationElement element)
+    public AutomationTreeView(final AutomationElement element)
             throws AutomationException {
         super(element);
+    }
+
+    /**
+     * Construct the AutomationTreeView.
+     *
+     * @param element The element.
+     * @param automation The automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    public AutomationTreeView(final AutomationElement element,
+                              final UIAutomation automation)
+            throws AutomationException {
+        super(element, automation);
     }
 
     /**
@@ -42,14 +56,13 @@ public class AutomationTreeView extends AutomationBase {
      * @param name The name to look for
      * @return The AutomationTreeViewItem
      * @throws ItemNotFoundException when the item is not found
-     * @throws ElementNotFoundException when the element is not found
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationTreeViewItem getItem(String name) throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
-                        this.createNamePropertyCondition(name).getValue(),
-                        this.createControlTypeCondition(ControlType.TreeItem).getValue()));
+                        this.createNamePropertyCondition(name),
+                        this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
             return new AutomationTreeViewItem(item);

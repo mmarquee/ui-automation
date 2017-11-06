@@ -11,7 +11,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 12/09/2016.
+ * @author Mark Humphreys
+ * Date 12/09/2016.
  *
  * Use this like:
  * PointerByReference pbr=new PointerByReference();

@@ -19,23 +19,50 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The OrientationType.
+ *
+ * @author Mark Humphreys
+ * Date 12/09/2016.
  */
 public enum OrientationType {
+    /**
+     * No orientation.
+     */
     None(0),
+
+    /**
+     * Horizontal orientation.
+     */
     Horizontal(1),
+
+    /**
+     * Vertical orientation.
+     */
     Vertical(2);
 
+    /**
+     * The value.
+     */
     private int value;
 
+    /**
+     * Gets the value.
+     * @return The value.
+     */
     public int getValue() {
         return this.value;
     }
 
-    OrientationType (int value) {
-        this.value = value;
+    /**
+     * Constructor for OrientationType.
+     * @param inValue The value.
+     */
+    OrientationType (final int inValue) {
+        this.value = inValue;
     }
 
     private static final Map<Integer, OrientationType> intToTypeMap = new HashMap<Integer, OrientationType>();
+
     static {
         for (OrientationType type : OrientationType.values()) {
             intToTypeMap.put(type.value, type);

@@ -1,3 +1,6 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 The [DelphiUIAutomation](https://github.com/markhumphreysjhc/DelphiUIAutomation) project introduced some Delphi controls that implement IUIAutomation providers, allowing them to be accessed by automation. The Delphi implementation of a masked edit is another of these.
 
 There does not seem to be an equivalent WPF control.

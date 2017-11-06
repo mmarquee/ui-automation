@@ -22,21 +22,29 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.*;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 /**
- * Created by Mark Humphreys on 20/11/2016.
+ * @author Mark Humphreys
+ * Date 20/11/2016.
  *
  * Tests for the IUIAutomationWindowPattern code.
+ *
+ * Currently all of these tests require to run on Windows.
  */
-@Category(WindowsOnlyTests.class)
 public class IUIAutomationWindowPatternTest {
+
+    @BeforeClass
+    public static void checkOs() throws Exception {
+        Assume.assumeTrue(isWindows());
+    }
+
+    private static boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 
     protected Logger logger = Logger.getLogger(IUIAutomationWindowPatternTest.class.getName());
 
@@ -54,7 +62,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3.Converter.PointerToInterface(root);
+            return IUIAutomationElement3Converter.PointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -82,7 +90,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomation.Converter.PointerToInterface(pbr1);
+            this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
         }
     }
 
@@ -94,7 +102,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement3 rootElement = IUIAutomationElement3.Converter.PointerToInterface(root);
+            IUIAutomationElement3 rootElement = IUIAutomationElement3Converter.PointerToInterface(root);
 
             Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
             variant.setValue(Variant.VT_INT, ControlType.Window.getValue());
@@ -112,7 +120,7 @@ public class IUIAutomationWindowPatternTest {
 
             WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
-            return IUIAutomationElement3.Converter.PointerToInterface(element);
+            return IUIAutomationElement3Converter.PointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -130,7 +138,7 @@ public class IUIAutomationWindowPatternTest {
     }
 
     @Test
-    @Ignore // This fails for some reason
+    @Ignore("This fails for some reason")
     public void testGetWindowPatternSucceedsForWindowElement() throws Exception {
         // Get the pattern
         IUIAutomationElement3 element = this.getWindowChildOfRootElement();
@@ -149,7 +157,7 @@ public class IUIAutomationWindowPatternTest {
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationWindowPattern.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationWindowPattern pattern =
-                    IUIAutomationWindowPattern.Converter.PointerToInterface(pUnknownA);
+                    IUIAutomationWindowPatternConverter.PointerToInterface(pUnknownA);
         } else {
             fail("Failed to get WindowPattern");
         }

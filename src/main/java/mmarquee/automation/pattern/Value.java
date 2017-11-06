@@ -20,10 +20,13 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationTablePatternConverter;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import mmarquee.automation.uiautomation.IUIAutomationValuePatternConverter;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the value pattern.
  */
@@ -114,6 +117,6 @@ public class Value extends BasePattern {
     }
 
     public IUIAutomationValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationValuePattern.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationValuePatternConverter.PointerToInterface(pUnknownA);
     }
 }

@@ -18,19 +18,26 @@ package mmarquee.demo;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.controls.AutomationButton;
+import mmarquee.automation.controls.AutomationEditBox;
+import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
-import mmarquee.automation.controls.mouse.AutomationMouse;
 import org.apache.log4j.Logger;
 
 /**
- * Created by Mark Humphreys on 26/02/2016
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestNotepad extends TestBase {
 
+    /**
+     * Run the test.
+     */
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
@@ -45,11 +52,11 @@ public class TestNotepad extends TestBase {
         }
 
         // Wait for the process to start
-        application.waitForInputIdle(5000);
+        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         try {
             AutomationWindow window = automation.getDesktopWindow("Untitled - Notepad");
-            String name = window.name();
+            String name = window.getName();
             logger.info(name);
 
             Object framework = window.getFramework();

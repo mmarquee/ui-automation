@@ -16,20 +16,18 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Text;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 30/11/2016.
+ * @author Mark Humphreys
+ * Date 30/11/2016.
  */
 public class AutomationDocumentTest {
     static {
@@ -43,9 +41,12 @@ public class AutomationDocumentTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationDocument document = new AutomationDocument(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = document.name();
+        AutomationDocument document = new AutomationDocument(element, pattern, instance);
+
+        String name = document.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -57,7 +58,10 @@ public class AutomationDocumentTest {
 
         when(pattern.getSelection()).thenReturn("SELECTION");
 
-        AutomationDocument document = new AutomationDocument(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDocument document = new AutomationDocument(element, pattern, instance);
 
         String name = document.getSelection();
 
@@ -71,7 +75,10 @@ public class AutomationDocumentTest {
 
         when(pattern.getText()).thenReturn("NAME");
 
-        AutomationDocument document = new AutomationDocument(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationDocument document = new AutomationDocument(element, pattern, instance);
 
         String name = document.getText();
 

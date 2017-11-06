@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -26,7 +28,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 30/11/2016.
+ * @author Mark Humphreys
+ * Date 30/11/2016.
  */
 public class AutomationRadioButtonTest {
 
@@ -37,9 +40,12 @@ public class AutomationRadioButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = rb1.name();
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
+
+        String name = rb1.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -51,7 +57,10 @@ public class AutomationRadioButtonTest {
 
         when(selection.isSelected()).thenReturn(true);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
 
         boolean value = rb1.isSelected();
 
@@ -65,9 +74,12 @@ public class AutomationRadioButtonTest {
 
         when(selection.isSelected()).thenReturn(true);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        rb1.selectItem();
+        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
+
+        rb1.select();
 
         verify(selection, atLeastOnce()).select();
     }

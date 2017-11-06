@@ -22,12 +22,15 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the Selection pattern.
  */
@@ -96,7 +99,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     public IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationSelectionPattern.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationSelectionPatternConverter.PointerToInterface(pUnknown);
     }
 
     /**
@@ -106,7 +109,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
-        return IUIAutomationElementArray.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
     }
 
     /**
@@ -115,15 +118,7 @@ public class Selection extends BasePattern {
      * @throws AutomationException Something has gone wrong
      */
     public List<AutomationElement> getSelection() throws AutomationException {
-
-        PointerByReference pbr = new PointerByReference();
-
-        final int res = this.getPattern().getCurrentSelection(pbr);
-        if (res != 0) {
-            throw new AutomationException(res);
-        }
-
-        return collectionToList(getAutomationElementArrayFromReference(pbr));
+        return getCurrentSelection();
     }
 
     /**

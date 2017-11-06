@@ -25,7 +25,8 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.doReturn;
 
 /**
- * Created by Mark Humphreys on 12/01/2017.
+ * @author Mark Humphreys
+ * Date 12/01/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class StylesPatternTest {
@@ -104,7 +105,6 @@ public class StylesPatternTest {
     }
 
     @Test(expected=AutomationException.class)
-    @Ignore("Fails after mockito upgrade")
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
         doAnswer(new Answer() {
@@ -124,25 +124,13 @@ public class StylesPatternTest {
                 .when(spyPattern)
                 .makeUnknown(any());
 
-        doReturn(mockPattern)
-                .when(spyPattern)
-                .convertPointerToInterface(any());
-
         spyPattern.getStyleName();
 
         verify(spyPattern, atLeastOnce()).getStyleName();
     }
 
     @Test
-    @Ignore("Fails after mockito upgrade")
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
-
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         IUIAutomationStylesPattern mockPattern = Mockito.mock(IUIAutomationStylesPattern.class);
 
@@ -166,14 +154,6 @@ public class StylesPatternTest {
         Styles pattern = new Styles(rawPattern);
 
         Styles spyPattern = Mockito.spy(pattern);
-
-        doReturn(mockUnknown)
-                .when(spyPattern)
-                .makeUnknown(any());
-
-        doReturn(mockPattern)
-                .when(spyPattern)
-                .convertPointerToInterface(any());
 
         spyPattern.getStyleName();
 

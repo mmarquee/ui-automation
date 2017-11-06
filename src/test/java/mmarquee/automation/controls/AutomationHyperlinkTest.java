@@ -3,6 +3,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -12,7 +13,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 30/11/2016.
+ * @author Mark Humphreys
+ * Date 30/11/2016.
  */
 public class AutomationHyperlinkTest {
     static {
@@ -26,9 +28,12 @@ public class AutomationHyperlinkTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationHyperlink link = new AutomationHyperlink(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = link.name();
+        AutomationHyperlink link = new AutomationHyperlink(element, pattern, instance);
+
+        String name = link.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -40,7 +45,10 @@ public class AutomationHyperlinkTest {
 
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
 
-        AutomationHyperlink link = new AutomationHyperlink(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationHyperlink link = new AutomationHyperlink(element, pattern, instance);
 
         link.click();
 
@@ -54,7 +62,10 @@ public class AutomationHyperlinkTest {
 
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
-        AutomationHyperlink link = new AutomationHyperlink(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationHyperlink link = new AutomationHyperlink(element, pattern, instance);
 
         link.click();
 

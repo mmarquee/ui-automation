@@ -17,6 +17,7 @@ package mmarquee.automation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.atLeastOnce;
@@ -25,7 +26,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.junit.Assume;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -37,7 +40,12 @@ import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * Created by Mark Humphreys on 20/07/2016.
+ * @author Mark Humphreys
+ * Date 20/07/2016.
+ *
+ * Tests for the AutomationElement class behaviour.
+ *
+ * Currently all of these tests require to run on Windows.
  */
 public class AutomationElementTest extends BaseAutomationTest {
 	static {
@@ -45,6 +53,15 @@ public class AutomationElementTest extends BaseAutomationTest {
 	}
 
 	private UIAutomation instance;
+
+	@BeforeClass
+	public static void checkOs() throws Exception {
+		Assume.assumeTrue(isWindows());
+	}
+
+	private static boolean isWindows() {
+		return System.getProperty("os.name").toLowerCase().contains("windows");
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -68,7 +85,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 		// Using mock since desktop does not provide an automation ID
 		AutomationElement element = getMocketAutomationElement();
 		
-        when(element.element.getCurrentAutomationId(any()))
+        when(element.getElement().getCurrentAutomationId(any()))
         .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
 
         assertEquals("myAutomationId", element.getAutomationId());
@@ -166,7 +183,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition.getValue());
+		List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition);
 
 		assertTrue("findAll:" + elements.size(), elements.size() != 0);
 	}
@@ -177,7 +194,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		List<AutomationElement> elements = root.findAllDescendants(condition.getValue());
+		List<AutomationElement> elements = root.findAllDescendants(condition);
 
 		assertTrue("findAll:" + elements.size(), elements.size() != 0);
 	}
@@ -242,7 +259,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		AutomationElement element = new AutomationElement(mocked);
 
-		point = element.getClickablePoint();
+		element.getClickablePoint();
 	}
 
 	@Test(expected = AutomationException.class)
@@ -252,11 +269,9 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
 
-		WinDef.RECT rect = new WinDef.RECT();
-
 		AutomationElement element = new AutomationElement(mocked);
 
-		rect = element.getBoundingRectangle();
+		element.getBoundingRectangle();
 	}
 
 	@Test

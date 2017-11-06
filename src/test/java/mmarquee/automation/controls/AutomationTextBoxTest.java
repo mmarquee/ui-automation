@@ -1,6 +1,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -8,7 +11,10 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 11/12/2016.
+ * Tests for AutomationTextBox.
+ *
+ * @author Mark Humphreys
+ * Date 11/12/2016.
  */
 public class AutomationTextBoxTest {
     static {
@@ -21,23 +27,33 @@ public class AutomationTextBoxTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationTextBox ctrl = new AutomationTextBox(element);
+        Value value = Mockito.mock(Value.class);
+        when(value.value()).thenReturn("VALUE");
 
-        String name = ctrl.name();
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTextBox ctrl = new AutomationTextBox(element, value, instance);
+
+        String name = ctrl.getName();
 
         assertTrue(name.equals("NAME"));
     }
 
     @Test
-    public void testGetValue_Gets_Value_From_Element_Name() throws Exception {
+    public void testGetValue_Gets_Value_From_Element_Value() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getName()).thenReturn("VALUE");
+        Value value = Mockito.mock(Value.class);
+        when(value.value()).thenReturn("NAME");
 
-        AutomationTextBox ctrl = new AutomationTextBox(element);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationTextBox ctrl = new AutomationTextBox(element, value, instance);
 
         String name = ctrl.getValue();
 
-        assertTrue(name.equals("VALUE"));
+        assertTrue(name.equals("NAME"));
     }
 }

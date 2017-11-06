@@ -15,40 +15,56 @@
  */
 package mmarquee.automation;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
+
 import java.util.ResourceBundle;
 
 import org.junit.After;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.Stubber;
 
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
+import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
- * Created by Mark Humphreys on 29/11/2016.
+ * @author Mark Humphreys
+ * Date 29/11/2016.
+ *
+ * Tests for the BaseAutomation classes.
  */
 public class BaseAutomationTest {
 	
-	static ResourceBundle locals = ResourceBundle.getBundle("locals");
+	private static ResourceBundle locals = ResourceBundle.getBundle("locals");
 	static {
 		UIAutomation.FIND_DESKTOP_ATTEMPTS = 2; // speed up tests
 	}
-	
-    protected UIAutomation instance;
-    protected AutomationApplication application;
+
+    private AutomationApplication application;
     protected AutomationWindow window;
-    protected String windowName;
+    private String windowName;
 
     protected void andRest() {
         // Must be a better way of doing this????
@@ -87,11 +103,10 @@ public class BaseAutomationTest {
 	 * @param key the key to get the string for
 	 * @return the localized string;
 	 */
-	public static String getLocal(String key) {
+	protected static String getLocal(String key) {
 		return locals.getString(key);
 	}
-	
-	
+
 	protected AutomationElement getMocketAutomationElement() {
         IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
         return new AutomationElement(mockedElement);
@@ -124,5 +139,107 @@ public class BaseAutomationTest {
             Utils.closeProcess(hwnd);
     	}
     }
+    
+
+    /***************************************
+     * Special Matchers & Helpers
+     ***************************************/
+
+    public static void setElementClassName(IUIAutomationElement3 elem, String className) {
+		answerStringByReference(className).when(elem).getCurrentClassName(any());
+	}
+
+	public static void setElementCurrentName(IUIAutomationElement3 elem, String name) {
+		answerStringByReference(name).when(elem).getCurrentName(any());
+	}
+
+	public static Stubber answerStringByReference(String value) {
+		return doAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                PointerByReference reference = (PointerByReference)args[0];
+
+                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+                pointer.setWideString(0, value);
+
+                reference.setValue(pointer);
+
+                return 0;
+            }
+        });
+	}
+
+	public static Stubber answerIntByReference(int value) {
+		return doAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                IntByReference reference = (IntByReference)args[0];
+
+				reference.setValue(value);
+
+                return 0;
+            }
+        });
+	}
+	
+	public static void setElementPropertyValue(IUIAutomationElement3 elem, PropertyID property, int vartype, Object propertyValue) {
+		doAnswer(new Answer<Integer>() {
+            @Override
+            public Integer answer(InvocationOnMock invocation) throws Throwable {
+
+                Object[] args = invocation.getArguments();
+                Variant.VARIANT.ByReference reference = (Variant.VARIANT.ByReference)args[1];
+
+				reference.setValue(vartype, propertyValue);
+
+                return 0;
+            }
+        })
+        .when(elem)
+        .getCurrentPropertyValue(eq(property.getValue()),any());
+	}
+	
+	public static TreeScope isTreeScope(int expectedValue) {
+		return argThat(new TreeScopeMatcher(expectedValue));
+	}
+	
+    static class TreeScopeMatcher implements ArgumentMatcher<TreeScope> {
+    	final int expectedValue;
+    	
+    	TreeScopeMatcher(int expectedValue) {
+    		this.expectedValue = expectedValue;
+    	}
+    	
+        public boolean matches(TreeScope list) {
+            return list.value == expectedValue;
+        }
+    }
+
+    static abstract class PointerByReferenceWithPattern extends PointerByReference implements PatternProvider { 	
+    }
+
+	static public void setPatternForElementMock(AutomationElement automationElementMock, PatternID patternId,
+			PropertyID patternAvailablePropertyID, BasePattern pattern) throws AutomationException {
+		when(automationElementMock.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
+        
+		when(automationElementMock.getPattern(patternId.getValue())).thenReturn(new PointerByReferenceWithPattern(){
+			@Override
+			public BasePattern getPattern() {
+				return pattern;
+			}});
+	}
+	
+	static public ExpandCollapse mockExpandCollapsePattern(AutomationElement automationElementMock) throws AutomationException {
+		 PatternID patternId = PatternID.ExpandCollapse;
+	     PropertyID patternAvailablePropertyID = PropertyID.IsExpandCollapsePatternAvailable;
+	     ExpandCollapse expandCollapsePattern = Mockito.mock(ExpandCollapse.class);
+	     setPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
+	     
+	     return expandCollapsePattern;
+	}
     
 }

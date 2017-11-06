@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Function;
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
@@ -24,7 +22,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Created by Mark Humphreys on 12/07/2016.
+ * @author Mark Humphreys
+ * Date 12/07/2016.
  */
 public interface IUIAutomationElementArray extends IUnknown {
 
@@ -40,44 +39,4 @@ public interface IUIAutomationElementArray extends IUnknown {
 
     int getLength(IntByReference length); // 3
     int getElement(int index, PointerByReference element); // 4
-
-    class Converter {
-        private static int UIAutomationElementArray_Methods = 5; // 0-2 IUnknown, 3-4 IUIAutomationElement3
-
-        public static IUIAutomationElementArray PointerToInterface(final PointerByReference ptr) {
-            final Pointer interfacePointer = ptr.getValue();
-            final Pointer vTablePointer = interfacePointer.getPointer(0);
-            final Pointer[] vTable = new Pointer[UIAutomationElementArray_Methods];
-            vTablePointer.read(0, vTable, 0, vTable.length);
-            return new IUIAutomationElementArray() {
-                // IUnknown
-                @Override
-                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
-                }
-
-                @Override
-                public int AddRef() {
-                    Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int Release() {
-                    Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer});
-                }
-
-                public int getLength(IntByReference length) {
-                    Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, length});
-                }
-
-                public int getElement(int index, PointerByReference element) {
-                    Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, index, element});
-                }
-            };
-        }
-    }
 }

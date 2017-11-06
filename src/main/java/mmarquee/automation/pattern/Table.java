@@ -28,7 +28,8 @@ import mmarquee.automation.uiautomation.*;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 25/02/2016.
+ * @author Mark Humphreys
+ * Date 25/02/2016.
  *
  * Wrapper for the table pattern
  */
@@ -118,6 +119,6 @@ public class Table extends BasePattern {
      * @return The pattern
      */
     public IUIAutomationTablePattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTablePattern.Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationTablePatternConverter.PointerToInterface(pUnknownA);
     }
 }

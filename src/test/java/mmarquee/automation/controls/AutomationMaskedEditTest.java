@@ -16,7 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -26,17 +28,23 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 02/12/2016.
+ * @author Mark Humphreys
+ * Date 02/12/2016.
  */
 public class AutomationMaskedEditTest {
     @Test
     public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
+        
+        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
 
         when(value.value()).thenReturn("VALUE");
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value, instance);
 
         String val = control.getValue();
 
@@ -48,7 +56,12 @@ public class AutomationMaskedEditTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value);
+        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
+
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationMaskedEdit control = new AutomationMaskedEdit(element, value, instance);
 
         control.setValue("VALUE");
 

@@ -1,3 +1,8 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
+# Example
+
 ```
   AutomationStatusBar statusBar = window.getStatusBar();
   AutomationTextBox tb1 = statusBar.getTextBox(1);

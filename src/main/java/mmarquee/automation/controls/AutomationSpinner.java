@@ -20,17 +20,18 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Wrapper for the Spinner element.
  */
 public class AutomationSpinner extends AutomationBase {
     /**
-     * Construct the AutomationSpinner
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * Construct the AutomationSpinner.
+     * @param element The element.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationSpinner(AutomationElement element)
+    public AutomationSpinner(final AutomationElement element)
             throws AutomationException {
         super(element);
     }

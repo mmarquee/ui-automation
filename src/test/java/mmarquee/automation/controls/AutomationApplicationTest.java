@@ -3,21 +3,20 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +26,13 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by Mark Humphreys on 13/01/2017.
+ * @author Mark Humphreys
+ * Date 13/01/2017.
  *
- * Mocked tests for AutomationApplication
+ * Mocked tests for AutomationApplication.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest( { Ole32Wrapper.class })
 public class AutomationApplicationTest {
     @Before
     public void setup() {
@@ -56,26 +58,15 @@ public class AutomationApplicationTest {
     public void testGetWindow_Returns_Exception_When_Element_Not_Found()
             throws AutomationException, PatternNotFoundException {
 
-        AutomationApplication app = new AutomationApplication(element, handle, false);
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
-        AutomationWindow window = app.getWindow("Untitled - Notepad");
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        verify(element, atLeastOnce()).findAll(any(), any());
-    }
-
-    @Test
-    @Ignore("Need to mock the elem getting a name")
-    public void testGetWindow_Calls_FindAll_From_Element()
-            throws AutomationException, PatternNotFoundException {
-        List<AutomationElement> list = new ArrayList<>();
-
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
-
-        list.add(new AutomationElement(elem));
-
-        when(element.findAll(any(), any())).thenReturn(list);
-
-        AutomationApplication app = new AutomationApplication(element, handle, false);
+        AutomationApplication app = new AutomationApplication(element,
+                handle,
+                false,
+                instance);
 
         AutomationWindow window = app.getWindow("Untitled - Notepad");
 
@@ -84,38 +75,26 @@ public class AutomationApplicationTest {
 
     @Test
     public void testSetAttached_Set_To_False() throws Exception {
-        AutomationApplication app = new AutomationApplication(element, handle, false);
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationApplication app = new AutomationApplication(element, handle, false, instance);
 
         assertFalse(app.getIsAttached());
     }
 
     @Test
     public void testSetAttached_Set_To_True() throws Exception {
-        AutomationApplication app = new AutomationApplication(element, handle, true);
+
+        AutomationElement element = Mockito.mock(AutomationElement.class);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+
+        UIAutomation instance = new UIAutomation(mocked_automation);
+        AutomationApplication app = new AutomationApplication(element, handle, true, instance);
 
         assertTrue(app.getIsAttached());
     }
-
-    @Test
-    public void testClose_Calls_FindWindow() throws Exception {
-        User32 user32 = Mockito.mock(User32.class);
-
-        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
-
-        app.close("Untitled - Notepad");
-
-        verify(user32, atLeastOnce()).FindWindow(any(), any());
-    }
-
-    @Test
-    public void testQuit_Calls_FindWindow() throws Exception {
-        User32 user32 = Mockito.mock(User32.class);
-
-        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
-
-        app.quit("Untitled - Notepad");
-
-        verify(user32, atLeastOnce()).FindWindow(any(), any());
-    }
-
 }

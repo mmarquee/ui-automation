@@ -16,11 +16,13 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.*;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
@@ -28,34 +30,43 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
- * Created by Mark Humphreys on 26/01/2016.
+ * @author Mark Humphreys
+ * Date 26/01/2016.
  *
- * Wrapper around the Application element
+ * Wrapper around the Application element.
  */
 public class AutomationApplication extends AutomationBase {
 
     /**
-     * The window handle
+     * The window handle.
      */
     private WinNT.HANDLE handle = new WinNT.HANDLE();
 
     /**
-     * Did we attach to the application, or start it
+     * Did we attach to the application, or start it.
      */
     private boolean isAttached = false;
 
+    /**
+     * The User32 instance.
+     */
     private User32 user32;
 
     /**
-     * A very, very long timeout
+     * A very, very long timeout.
      */
     private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
 
     /**
-     * Waits for the application to accept input, i.e. not be idle
-     * @param timeout Timeout to wait for
+     * A default, normal timeout.
      */
-    public void waitForInputIdle(int timeout) {
+    public static final int SHORT_TIMEOUT = 5000;
+
+    /**
+     * Waits for the application to accept input, i.e. not be idle.
+     * @param timeout Timeout to wait for.
+     */
+    public void waitForInputIdle(final int timeout) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
@@ -63,39 +74,40 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Gets whether the application was already running
-     * @return Attached or not
+     * Gets whether the application was already running.
+     * @return Attached or not.
      */
     public boolean getIsAttached() {
         return this.isAttached;
     }
 
     /**
-     * Sets the isAttached value
-     * @param value True or false
+     * Sets the isAttached value.
+     * @param value True or false.
      */
-    public void setIsAttached(boolean value) {
+    public void setIsAttached(final boolean value) {
         this.isAttached = value;
     }
 
     /**
-     * Waits for the application to accept input, i.e. not be idle, with maximum timeout
+     * Waits for the application to accept input, i.e. not be idle, with maximum timeout.
      */
     public void waitForInputIdle() {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
+
         user32.WaitForInputIdle(this.handle, INFINITE_TIMEOUT);
     }
 
     /**
-     * Gets the window associated with the title
-     * @param title The title to look for
-     * @return An AutomationWindow
-     * @throws AutomationException Cannot find element
-     * @throws PatternNotFoundException Expected pattern not found
+     * Gets the window associated with the title.
+     * @param title The title to look for.
+     * @return An AutomationWindow.
+     * @throws AutomationException Cannot find element.
+     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow getWindow(String title)
+    public AutomationWindow getWindow(final String title)
             throws PatternNotFoundException, AutomationException {
 
         AutomationElement foundElement = null;
@@ -104,7 +116,7 @@ public class AutomationApplication extends AutomationBase {
 
         for (AutomationElement element : collection) {
             String name = element.getName();
-            if (name.equals(title)){
+            if (name.equals(title)) {
                 foundElement = element;
                 break;
             }
@@ -119,26 +131,85 @@ public class AutomationApplication extends AutomationBase {
 
     /**
      * Constructor for the AutomationApplication.
-     * @param element The underlying automation element
-     * @param handle The handle of this application.
-     * @param attached if we attach or launch the application?
-     * @throws AutomationException Automation library error
+     *
+     * @param element The underlying automation element.
+     * @param inHandle The handle of this application.
+     * @param attached if we attach or launch the application.
+     * @throws AutomationException Automation library error.
      */
-    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached) throws AutomationException  {
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached)
+            throws AutomationException  {
         super(element);
-        this.handle = handle;
+        this.handle = inHandle;
         this.isAttached = attached;
-    }
-
-    public AutomationApplication (AutomationElement element, WinNT.HANDLE handle, boolean attached, User32 user32) throws AutomationException  {
-        super(element);
-        this.handle = handle;
-        this.isAttached = attached;
-        this.user32 = user32;
     }
 
     /**
      * Constructor for the AutomationApplication.
+     *
+     * @param element The underlying automation element.
+     * @param inHandle The handle of this application.
+     * @param attached if we attach or launch the application.
+     * @param automation Automation instance.
+     * @throws AutomationException Automation library error.
+     */
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached,
+                                 final UIAutomation automation)
+            throws AutomationException  {
+        super(element, automation);
+        this.handle = inHandle;
+        this.isAttached = attached;
+    }
+
+    /**
+     * Constructor for the AutomationApplication.
+     *
+     * @param element The underlying automation element.
+     * @param inHandle The handle of this application.
+     * @param attached if we attach or launch the application.
+     * @param inUser32 The User32 instance.
+     * @throws AutomationException Error in the automation library.
+     */
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached,
+                                 final User32 inUser32)
+            throws AutomationException {
+        super(element);
+        this.handle = inHandle;
+        this.isAttached = attached;
+        this.user32 = inUser32;
+    }
+
+    /**
+     * Constructor for the AutomationApplication.
+     *
+     * @param element The underlying automation element.
+     * @param inHandle The handle of this application.
+     * @param attached if we attach or launch the application.
+     * @param inUser32 The User32 instance.
+     * @param instance Automation instance.
+     * @throws AutomationException Automation library error
+     */
+    public AutomationApplication(final AutomationElement element,
+                                 final WinNT.HANDLE inHandle,
+                                 final boolean attached,
+                                 final User32 inUser32,
+                                 final UIAutomation instance)
+            throws AutomationException {
+        super(element, instance);
+        this.handle = inHandle;
+        this.isAttached = attached;
+        this.user32 = inUser32;
+    }
+
+    /**
+     * Constructor for the AutomationApplication.
+     *
      * Detection of already running application is taken from:
      *   http://www.golesny.de/p/code/javagetpid.
      * @param element The underlying automation element
@@ -146,13 +217,18 @@ public class AutomationApplication extends AutomationBase {
      * @param attached if we attach or launch the application?
      * @throws AutomationException Automation library error
      * */
-    public AutomationApplication (AutomationElement element, Process process, boolean attached) throws AutomationException {
+    public AutomationApplication(final AutomationElement element,
+                                 final Process process,
+                                 final boolean attached)
+            throws AutomationException {
         super(element);
 
         this.isAttached = attached;
 
-        if (process.getClass().getName().equals("java.lang.Wind32Process") ||
-                process.getClass().getName().equals("java.lang.ProcessImpl")) {
+        String name = process.getClass().getName();
+
+        if (name.equals("java.lang.Wind32Process")
+                || name.equals("java.lang.ProcessImpl")) {
             try {
                 Field f = process.getClass().getDeclaredField("handle");
                 f.setAccessible(true);
@@ -165,10 +241,11 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Closes the process
-     * @param title Title of the window to close
+     * Closes the process.
+     *
+     * @param title Title of the window to close.
      */
-    public void close(String title) {
+    public void close(final String title) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
@@ -181,10 +258,11 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Quits the process
-     * @param title Title of the window to quit
+     * Quits the process.
+     *
+     * @param title Title of the window to quit.
      */
-    public void quit(String title) {
+    public void quit(final String title) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }

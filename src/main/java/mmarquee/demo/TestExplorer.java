@@ -19,11 +19,11 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.rebar.AutomationReBar;
-import mmarquee.automation.controls.ribbon.*;
+import mmarquee.automation.controls.AutomationReBar;
 
 /**
- * Created by Mark Humphreys on 26/02/2016.
+ * @author Mark Humphreys
+ * Date 26/02/2016.
  *
  * Test the automation library on a non-Delphi, non-WPF application, and see
  * whether we can get to all the bits of the UI
@@ -45,7 +45,7 @@ class TestExplorer extends TestBase {
         }
 
         try {
-            application.waitForInputIdle(5000);
+            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait for input idle for some reason");
         }
@@ -59,10 +59,10 @@ class TestExplorer extends TestBase {
             AutomationRibbonBar ribbon = window.getRibbonBar();
             AutomationRibbonCommandBar commandBar = ribbon.getRibbonCommandBar();
             AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
-            logger.info("First work pane is " + pane.name());
+            logger.info("First work pane is " + pane.getName());
 
             AutomationNUIPane uiPane = pane.getNUIPane(0);
-            logger.info("First NUIPane is " + uiPane.name());
+            logger.info("First NUIPane is " + uiPane.getName());
 
             AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
 
@@ -95,9 +95,9 @@ class TestExplorer extends TestBase {
             try {
                 AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
 
-                logger.info("Toolbar = " + toolbar.name());
+                logger.info("Toolbar = " + toolbar.getName());
                 AutomationButton upButton = toolbar.getButton(0);
-                logger.info("Rebar button is `" + upButton.name() + "`");
+                logger.info("Rebar button is `" + upButton.getName() + "`");
              //   upButton.click();
             } catch (ElementNotFoundException ex) {
                 logger.info("Failed to find element");
@@ -108,14 +108,14 @@ class TestExplorer extends TestBase {
             try {
                 // Now try and get to the list of items in explorer
                 AutomationPanel explorer = window.getPanel("File Explorer");
-                logger.info("." + explorer.name());
+                logger.info("." + explorer.getName());
                 AutomationPanel pane0 = explorer.getPanel("Control Host");
-                logger.info(".." + pane0.name());
+                logger.info(".." + pane0.getName());
                 AutomationTreeView treeView = pane0.getTreeView(0);
-                logger.info("..." + treeView.name());
+                logger.info("..." + treeView.getName());
                 try {
                     AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
-                    logger.info("...." + treeItem.name());
+                    logger.info("...." + treeItem.getName());
 
                     this.rest();
 
@@ -133,11 +133,11 @@ class TestExplorer extends TestBase {
             logger.info("Getting toolbar");
             AutomationToolBar toolbar = window.getToolBar(0);
             logger.info("Got toolbar");
-            logger.info("....." + toolbar.name());
+            logger.info("....." + toolbar.getName());
 
             // Looks like the button is a problem with Delphi
             AutomationButton btn0 = toolbar.getButton(0);
-            logger.info("....." + btn0.name());
+            logger.info("....." + btn0.getName());
             if (btn0.isEnabled()) {
                 btn0.click();
             }

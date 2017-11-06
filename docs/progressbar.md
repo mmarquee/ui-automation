@@ -1,3 +1,6 @@
+# Discovery 
+* See [Element Discovery](element-discovery.md)
+
 ```
   AutomationProgressBar progress = applicationWindow.getProgressBar(0);
   logger.info("Progress = " + progress.getRangeValue());

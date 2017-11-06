@@ -17,17 +17,17 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Created by Mark Humphreys on 03/02/2016.
+ * @author Mark Humphreys
+ * Date 03/02/2016.
  *
  * Wrapper for the Hyperlink element.
  */
 public class AutomationHyperlink extends AutomationBase implements Clickable {
-    private Invoke invokePattern;
 
     /**
      * Constructor for the AutomationHyperlink
@@ -37,17 +37,19 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      */
     public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
-//        this.invokePattern = this.getInvokePattern();
     }
 
     /**
      * Constructor for the AutomationHyperlink
+     * 
      * @param element The underlying automation element
      * @param pattern Invoke pattern
+     * @param instance Automation instance
+     * @throws AutomationException 
+     * @throws PatternNotFoundException 
      */
-    public AutomationHyperlink(AutomationElement element, Invoke pattern) {
-        super(element);
-        this.invokePattern = pattern;
+    AutomationHyperlink(AutomationElement element, Invoke pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(element, pattern, instance);
     }
 
     /**
@@ -56,15 +58,7 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * @throws PatternNotFoundException Did not find the pattern
      **/
     public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
-
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
-        } else {
-            throw new PatternNotFoundException();
-        }
+        super.invoke();
     }
 }
 

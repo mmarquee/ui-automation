@@ -18,72 +18,107 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
- * Created by Mark Humphreys on 09/02/2016.
+ * @author Mark Humphreys
+ * Date 09/02/2016.
  *
  * Wrapper for the ListItem element.
  */
-public class AutomationListItem extends AutomationBase implements Selectable, Clickable {
-
-    SelectionItem selectItemPattern;
-    Invoke invokePattern = null;
+public class AutomationListItem extends AutomationContainer
+        implements Selectable, Clickable {
 
     /**
-     * Constructor for the AutomationListItem
-     * @param element The underlying automation element
+     * The selectionItem pattern.
+     */
+    SelectionItem selectItemPattern;
+
+    /**
+     * Constructor for the AutomationListItem.
+     * @param inElement The underlying automation element.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    public AutomationListItem(final AutomationElement inElement)
+            throws PatternNotFoundException, AutomationException {
+        super(inElement);
+    }
+
+    /**
+     * Constructor for the AutomationListItem.
+     * @param inElement The underlying automation element.
+     * @param inAutomation Automation instance
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationListItem(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+    public AutomationListItem(final AutomationElement inElement,
+                              final UIAutomation inAutomation)
+            throws PatternNotFoundException, AutomationException {
+        super(inElement, inAutomation);
+    }
+
+    /**
+     * Constructor for the AutomationListItem.
+     * @param inElement The underlying automation element.
+     * @param inSelectItemPattern The associated selectionItem pattern.
+     * @param inPattern The invoke pattern.
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
+    AutomationListItem(final AutomationElement inElement,
+                       final SelectionItem inSelectItemPattern,
+                       final Invoke inPattern)
+            throws PatternNotFoundException, AutomationException {
+        super(inElement, inPattern);
+        this.selectItemPattern = inSelectItemPattern;
     }
 
     /**
      * Selects this item.
      * @throws AutomationException Something has gone wrong
      */
-    public void select() throws AutomationException, PatternNotFoundException {
+    public void select()
+            throws AutomationException, PatternNotFoundException {
         if (this.selectItemPattern == null) {
             this.selectItemPattern = this.getSelectItemPattern();
         }
 
-        this.selectItemPattern.select();
-    }
-
-    /**
-     * Is this item selected?
-     * @return True if selected
-     * @throws AutomationException Automation library issue
-     */
-    public boolean isSelected() throws AutomationException, PatternNotFoundException {
-        if (this.selectItemPattern == null) {
-            this.selectItemPattern = this.getSelectItemPattern();
-        }
-
-        return this.selectItemPattern.isSelected();
-    }
-
-    /**
-     * Clicks the item
-     * 
-     * @throws AutomationException Error in the automation library
-     * @throws PatternNotFoundException Could not find the invoke pattern
-     */
-    public void click() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
-
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
+        if (this.selectItemPattern != null) {
+        	this.selectItemPattern.select();
         } else {
-            throw new PatternNotFoundException();
+            throw new PatternNotFoundException("Select pattern not found");
         }
+    }
+
+    /**
+     * Is this item selected.
+     * @return True if selected.
+     * @throws AutomationException Automation library issue.
+     */
+    public boolean isSelected()
+            throws AutomationException, PatternNotFoundException {
+        if (this.selectItemPattern == null) {
+            this.selectItemPattern = this.getSelectItemPattern();
+        }
+        if (this.selectItemPattern != null) {
+        	return this.selectItemPattern.isSelected();
+        }
+        throw new PatternNotFoundException("Select pattern not found");
+    }
+
+    /**
+     * Clicks the item.
+     * 
+     * @throws AutomationException Error in the automation library.
+     * @throws PatternNotFoundException Could not find the invoke pattern.
+     */
+    public void click()
+            throws AutomationException, PatternNotFoundException {
+        super.invoke();
     }
 
 }

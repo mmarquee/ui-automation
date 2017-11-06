@@ -16,9 +16,9 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Range;
-import org.apache.log4j.Logger;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -28,7 +28,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mark Humphreys on 01/12/2016.
+ * @author Mark Humphreys
+ * Date 01/12/2016.
  */
 public class AutomationSliderTest {
 
@@ -43,9 +44,12 @@ public class AutomationSliderTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationSlider slider = new AutomationSlider(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
 
-        String name = slider.name();
+        AutomationSlider slider = new AutomationSlider(element, pattern, instance);
+
+        String name = slider.getName();
 
         assertTrue(name.equals("NAME"));
     }
@@ -57,7 +61,10 @@ public class AutomationSliderTest {
 
         when(pattern.getValue()).thenReturn(79.0);
 
-        AutomationSlider slider = new AutomationSlider(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationSlider slider = new AutomationSlider(element, pattern, instance);
 
         double value = slider.getRangeValue();
 
@@ -69,7 +76,10 @@ public class AutomationSliderTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range pattern = Mockito.mock(Range.class);
 
-        AutomationSlider slider = new AutomationSlider(element, pattern);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationSlider slider = new AutomationSlider(element, pattern, instance);
 
         slider.setRangeValue(99.0);
 

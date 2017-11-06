@@ -21,9 +21,11 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
 
 /**
- * Created by Mark Humphreys on 01/03/2016.
+ * @author Mark Humphreys
+ * Date 01/03/2016.
  *
  * Wrapper around the styles pattern.
  *
@@ -94,6 +96,6 @@ public class Styles extends BasePattern {
     }
 
     public IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationStylesPattern.Converter.PointerToInterface(pUnknown);
+        return IUIAutomationStylesPatternConverter.PointerToInterface(pUnknown);
     }
 }

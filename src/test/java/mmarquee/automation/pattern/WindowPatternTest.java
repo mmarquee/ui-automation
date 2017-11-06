@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.ptr.PointerByReference;
+import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
@@ -32,7 +32,8 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by Mark Humphreys on 12/01/2017.
+ * @author Mark Humphreys
+ * Date 12/01/2017.
  */
 public class WindowPatternTest {
     @Mock
@@ -168,7 +169,7 @@ public class WindowPatternTest {
 
                 return 1;
             }
-        }).when(rawPattern).waitForInputIdle(any(), any());
+        }).when(rawPattern).waitForInputIdle(any(Integer.class), any(IntByReference.class));
 
         Window pattern = new Window(rawPattern);
 
@@ -184,6 +185,6 @@ public class WindowPatternTest {
 
         pattern.waitForInputIdle(100);
 
-        verify(rawPattern, atLeastOnce()).waitForInputIdle(any(), any());
+        verify(rawPattern, atLeastOnce()).waitForInputIdle(any(Integer.class), any(IntByReference.class));
     }
 }

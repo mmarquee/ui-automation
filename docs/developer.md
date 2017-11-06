@@ -1,25 +1,25 @@
-
-
-The library is a programmers tool, and they will either need to have the source code of the application under test, or be able to 'explore'`the application to get the names of controls, etc.
+The library is a programmers tool, in order to automate an application under tests developers will need to 'explore' 
+the application to get the names of controls, etc. using a tool like[inspect](https://msdn.microsoft.com/en-us/library/windows/desktop/dd318521(v=vs.85).aspx). 
+It will also help to have the original source code, but it is not essential.
  
-The MS UIAutomation Library is a COM control, and the classes that represent this have been wrapped using native JNA calls (currently using 4.3.0).
+The MS UIAutomation Library is a COM library, and the classes that represent this have been wrapped using native 
+JNA calls (currently using 4.5.0).
 
 ## Maven
-<!--
-The library is held in the Sonatype OSS repository, so is available for download via Maven (or other tools, such as SBT for Scala). As the library depends on the 4.3.0-SNAPSHOT, then don't specify the JNA library version in YOUR dependencies, the library will guide the dependencies and bring down the correct version. You will also need to allow the download of snapshots in Maven, so look ([read the this Stack Overflow question and answer to find out how to do this ](http://stackoverflow.com/questions/7715321/how-to-download-snapshot-version-from-maven-snapshot-repository)). 
--->
 The library is held in the Sonatype OSS repository, so is 
 available for download via Maven (or other tools, 
 such as SBT for Scala). 
 
-As the library depends on jna version 4.3.0, then don't specify the JNA library version in YOUR dependencies, the library will guide the dependencies and bring down the correct version. 
+As the library depends on jna (currently version 4.5.0), then there is no need to specify the JNA library version in YOUR project's dependencies, the library will guide the dependencies and bring down the correct version. 
 
 ```
 <dependencies>
   <!-- Other dependencies -->
-  <groupId>com.github.mmarquee</groupId>
-  <artifactId>ui-automation</artifactId>
-  <version>0.3.11</version>
+  <dependency>
+    <groupId>com.github.mmarquee</groupId>
+    <artifactId>ui-automation</artifactId>
+    <version>0.4.3</version>
+  </dependency>  
 <dependencies>  
 ```
 
@@ -50,6 +50,9 @@ The snippet below will check whether Project1.exe is running, attaching to it if
 ```
 
 ### Getting hold of a window
+* See [Element Discovery](element-discovery.md) for more details.
+
+The root element of the tree of automation elements is the user’s desktop. 
 
 To get a 'desktop' window (i.e. one that appears in the Windows tasks bar), then the AutomationDesktop class provides a class function that returns a AutomationWindow object.
 
@@ -117,6 +120,7 @@ The controls that have been implemented reflect the requirements for automating 
 * [Calendar](calendar.md)
 * [Document](document.md)
 * [Slider](slider.md)
+* [Window](window.md)
 
 
 ## Real world examples

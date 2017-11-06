@@ -7,17 +7,27 @@ import mmarquee.automation.AutomationTreeWalker.AutomationElementVisitor;
 import mmarquee.automation.UIAutomation;
 
 /**
- * Created by Mark Humphreys on 02/02/2017.
+ * @author Mark Humphreys
+ * Date 02/02/2017.
  */
 public class DemoTreeWalker extends TestBase {
 
-    final int recurse_level = 2;
-    
-    public DemoTreeWalker() {
+	/**
+	 * Recursion level.
+	 */
+    final private int recurseLevel = 50;
+
+	/**
+	 * Constructor for DemoTreeWalker.
+	 */
+	public DemoTreeWalker() {
 
     }
 
-    public void run() {
+	/**
+	 * Run the demo.
+	 */
+	public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         try {
@@ -39,7 +49,7 @@ public class DemoTreeWalker extends TestBase {
 					
 					logger.info(message);
 					
-					if (recurse_level > level) {
+					if (recurseLevel > level) {
 						level++;
 						walker.walk(this, element);
 						level--;
@@ -50,7 +60,9 @@ public class DemoTreeWalker extends TestBase {
 			};
             
 			walker.walk(logVisitor, root);
-            
+
+			logger.info("All done");
+
         } catch (Throwable ex) {
             // Smother
             logger.error("Exception thrown - " + ex.toString());
