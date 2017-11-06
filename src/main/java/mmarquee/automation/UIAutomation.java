@@ -124,6 +124,21 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
+     * Compares 2 elements
+     *
+     * @param first  First element
+     * @param second Second element
+     * @param same   1 if same, 0 if different
+     * @return Error status
+     */
+    public int compareElements(final AutomationElement first, final AutomationElement second, final IntByReference same) {
+        final Pointer firstPtr = first.getElement().getPointer().get().getValue();
+        final Pointer secondPtr = second.getElement().getPointer().get().getValue();
+
+        return this.automation.compareElements(firstPtr, secondPtr, same);
+    }
+
+    /**
      * Gets the instance.
      *
      * @return the instance of the ui automation library.

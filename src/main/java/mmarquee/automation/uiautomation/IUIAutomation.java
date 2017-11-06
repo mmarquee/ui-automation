@@ -46,7 +46,7 @@ public interface IUIAutomation extends IUnknown {
     /**
      * The IID for the library itself
      */
-    Guid.GUID CLSID = new Guid.GUID("{FF48DBA4-60EF-4201-AA87-54103EEF594E}");
+    Guid.GUID CLSID = new Guid.GUID("{e22ad333-b25f-460c-83d0-0581107395c9}");
 
     int AddRef();
     int Release();
@@ -140,7 +140,7 @@ public interface IUIAutomation extends IUnknown {
 
                 public int elementFromPoint(WinDef.POINT pt, PointerByReference element) {
                     Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_POINT], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{myInterfacePointer, new PointNativeLong(pt.x, pt.y), element});
+                    return f.invokeInt(new Object[]{myInterfacePointer, PointNativeLong.from(pt.x, pt.y), element});
                 }
 
                 public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {

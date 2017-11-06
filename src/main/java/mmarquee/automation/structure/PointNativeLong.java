@@ -41,6 +41,10 @@ public class PointNativeLong extends Structure implements Structure.ByValue {
         this.y = new NativeLong((long) y);
     }
 
+    public static PointNativeLong from(double x, double y) {
+        return new PointNativeLong(x, y);
+    }
+
     protected List<String> getFieldOrder() {
         return FIELDS;
     }
