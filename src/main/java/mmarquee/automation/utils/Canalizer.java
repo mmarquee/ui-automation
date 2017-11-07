@@ -54,7 +54,7 @@ public class Canalizer {
 
     private static Class<?>[] getInterfaces(final Object target) {
         Class<?> base = target.getClass();
-        final Set<Class<?>> interfaces = new HashSet<>();
+        final Set<Class<?>> interfaces = new HashSet<Class<?>>();
         if (base.isInterface()) {
             interfaces.add(base);
         }
