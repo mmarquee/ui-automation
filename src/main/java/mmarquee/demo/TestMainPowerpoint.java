@@ -58,7 +58,7 @@ public class TestMainPowerpoint extends TestBase {
             logger.info(panelX.getName());
             AutomationPanel panel2 = panel1.getPanel("Slide");
             logger.info(panel2.getName());
-            AutomationPowerpointSlide slide = panel2.getPowerpointSlide("Slide 1 - This is text");
+            AutomationPowerpointSlide slide = panel2.getPowerpointSlide(new Search.Builder().name("Slide 1 - This is text").build());
             logger.info(slide.getName());
 
             // Oddly enough this is an image control, and has text in it's selection

@@ -1050,6 +1050,50 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationSpinner(this.getElementByAutomationId(id, ControlType.Spinner));
     }
 
+    /**
+     * Gets the PowerpointSlide control associated with the given index
+     * @param index Index of the control
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationPowerpointSlide getPowerpointSlide(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationPowerpointSlide(this.getElementByControlType(index, ControlType.Custom));
+    }
+
+    /**
+     * Get the PowerpointSlide control associated with the given name
+     * @param name The name to look for
+     * @return The AutomationCustom
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPowerpointSlide getPowerpointSlide(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationPowerpointSlide(this.getElementByControlType(name, ControlType.Custom));
+    }
+
+    /**
+     * Get the PowerpointSlide control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return The AutomationCustom
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPowerpointSlide getPowerpointSlide(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationPowerpointSlide(this.getElementByControlType(namePattern, ControlType.Custom));
+    }
+
+    /**
+     * Gets the PowerpointSlide control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationPowerpointSlide getPowerpointSlideByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationPowerpointSlide(this.getElementByAutomationId(id, ControlType.Custom));
+    }
+
     ////////////////// Public API //////////////////
 
     /**
@@ -1942,48 +1986,21 @@ public class AutomationContainer extends AutomationBase {
         }
     }
 
-    /**
-     * Gets the PowerpointSlide control associated with the given index
-     * @param index Index of the control
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationPowerpointSlide getPowerpointSlide(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationPowerpointSlide(this.getElementByControlType(index, ControlType.Custom));
-    }
-    
-    /**
-     * Get the PowerpointSlide control associated with the given name
-     * @param name The name to look for
-     * @return The AutomationCustom
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPowerpointSlide getPowerpointSlide(String name) throws PatternNotFoundException, AutomationException {
-    	return new AutomationPowerpointSlide(this.getElementByControlType(name, ControlType.Custom));
-    }
-    
-    /**
-     * Get the PowerpointSlide control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return The AutomationCustom
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPowerpointSlide getPowerpointSlide(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-    	return new AutomationPowerpointSlide(this.getElementByControlType(namePattern, ControlType.Custom));
-    }
 
-    /**
-     * Gets the PowerpointSlide control associated with the given automation id
-     * @param id The id to use
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationPowerpointSlide getPowerpointSlideByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationPowerpointSlide(this.getElementByAutomationId(id, ControlType.Custom));
+
+
+    public AutomationPowerpointSlide getPowerpointSlide(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getPowerpointSlide(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getPowerpointSlideByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getPowerpointSlide(search.getId());
+        } else if (search.getHasName()) {
+            return getPowerpointSlide(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**

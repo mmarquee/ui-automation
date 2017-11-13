@@ -629,7 +629,6 @@ public class AutomationBaseTest {
 
         verify(element, atLeastOnce()).getBoundingRectangle();
     }
-    
 
     @Test
     public void test_GetChildren_non_deep_Returns_Children_When_List_Not_Empty() throws Exception {

@@ -2308,7 +2308,7 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(0);
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(new Search.Builder().id(0).build());
         assertEquals(targetElement,slide.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Custom.getValue());
@@ -2319,14 +2319,14 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getPowerpointSlide(99);
+        wndw.getPowerpointSlide(new Search.Builder().id(99).build());
     }
     
     @Test
     public void test_GetPowerpointSlide_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide("myName");
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(new Search.Builder().name("myName").build());
         assertEquals(targetElement,slide.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -2338,7 +2338,7 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPowerpointSlide("unknownName");
+        wndw.getPowerpointSlide(new Search.Builder().name("unknownName").build());
     }
     
     @Test
@@ -2346,7 +2346,8 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Pattern.compile("myName"));
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(
+                new Search.Builder().namePattern(Pattern.compile("myName")).build());
         assertEquals(targetElement,slide.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Custom);
@@ -2358,14 +2359,15 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getPowerpointSlide(Pattern.compile("libreOfficePresenterSlide"));
+        wndw.getPowerpointSlide(
+                new Search.Builder().namePattern(Pattern.compile("libreOfficePresenterSlide")).build());
     }
 
     @Test
     public void test_GetPowerpointSlide_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlideByAutomationId("myID");
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(new Search.Builder().automationId("myID").build());
         assertEquals(targetElement,slide.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -2377,7 +2379,7 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPowerpointSlideByAutomationId("unknownID");
+        wndw.getPowerpointSlide(new Search.Builder().automationId("unknownID").build());
     }
 
     @Test
