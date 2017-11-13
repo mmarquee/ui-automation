@@ -812,7 +812,7 @@ public class AutomationContainer extends AutomationBase {
      * @deprecated use {@link #getComboBox(int)} instead
      */
     @Deprecated
-    public AutomationComboBox getCombobox(int index) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getCombobox(int index) throws PatternNotFoundException, AutomationException {
         return getComboBox(index);
     }
 
@@ -825,7 +825,7 @@ public class AutomationContainer extends AutomationBase {
      * @deprecated use {@link #getComboBox(String)} instead
      */
     @Deprecated
-    public AutomationComboBox getCombobox(String name) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getCombobox(String name) throws PatternNotFoundException, AutomationException {
         return getComboBox(name);
     }
 
@@ -838,8 +838,28 @@ public class AutomationContainer extends AutomationBase {
      * @deprecated use {@link #getComboBoxByAutomationId(String)} instead
      */
     @Deprecated
-    public AutomationComboBox getComboboxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getComboboxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return getComboBoxByAutomationId(id);
+    }
+
+    /**
+     * Experimental searching for combobox
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationComboBox getComboBox(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getComboBox(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getComboBoxByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getComboBox(search.getId());
+        } else if (search.getHasName()) {
+            return getComboBox(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
     
     /**
@@ -849,7 +869,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationComboBox getComboBox(int index) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getComboBox(int index) throws PatternNotFoundException, AutomationException {
         return new AutomationComboBox(this.getElementByControlType(index, ControlType.ComboBox));
     }
 
@@ -860,7 +880,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationComboBox getComboBox(String name) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getComboBox(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationComboBox(this.getElementByControlType(name, ControlType.ComboBox));
     }
 
@@ -871,7 +891,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationComboBox getComboBox(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getComboBox(Pattern namePattern) throws PatternNotFoundException, AutomationException {
         return new AutomationComboBox(this.getElementByControlType(namePattern, ControlType.ComboBox));
     }
 
@@ -882,10 +902,9 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationComboBox getComboBoxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    private AutomationComboBox getComboBoxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationComboBox(this.getElementByAutomationId(id, ControlType.ComboBox));
     }
-
     
     /**
      * Gets the button control associated with the given index

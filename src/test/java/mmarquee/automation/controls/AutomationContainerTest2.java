@@ -243,7 +243,7 @@ public class AutomationContainerTest2 {
     public void testgetComboboxByAutomationId_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getComboboxByAutomationId("AutomatedCombobox1");
+        wndw.getComboBox(new Search.Builder().name("AutomatedCombobox1").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -252,7 +252,7 @@ public class AutomationContainerTest2 {
     public void testgetCombobox_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getCombobox("AutomatedCombobox1");
+        wndw.getComboBox(new Search.Builder().name("AutomatedCombobox1").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

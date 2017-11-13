@@ -18,28 +18,10 @@ package mmarquee.demo;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.controls.*;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.menu.AutomationMenu;
-import mmarquee.automation.controls.AutomationCheckBox;
-import mmarquee.automation.controls.AutomationMaskedEdit;
-import mmarquee.automation.controls.AutomationToolBarButton;
-import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.AutomationHyperlink;
-import mmarquee.automation.controls.AutomationRadioButton;
-import mmarquee.automation.controls.AutomationTextBox;
-import mmarquee.automation.controls.AutomationTreeViewItem;
-import mmarquee.automation.controls.AutomationTreeView;
-import mmarquee.automation.controls.AutomationList;
-import mmarquee.automation.controls.AutomationListItem;
-import mmarquee.automation.controls.AutomationDataGridCell;
-import mmarquee.automation.controls.AutomationComboBox;
-import mmarquee.automation.controls.AutomationDataGrid;
-import mmarquee.automation.controls.AutomationStatusBar;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationToolBar;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
@@ -138,7 +120,7 @@ public class TestMain extends TestBase {
             logger.info("Status Bar text = " + eb1Text);
 
             try {
-                AutomationComboBox cb1 = window.getCombobox("AutomatedCombobox1");
+                AutomationComboBox cb1 = window.getComboBox(new Search.Builder().name("AutomatedCombobox1").build());
                 cb1.setText("Replacements");
                 String txt = cb1.getValue();
 
@@ -165,7 +147,7 @@ public class TestMain extends TestBase {
             }
 
             try {
-                AutomationComboBox cb0 = window.getCombobox("AutomatedCombobox2");
+                AutomationComboBox cb0 = window.getComboBox(new Search.Builder().name("AutomatedCombobox2").build());
                 cb0.expand();
 
                 this.rest();

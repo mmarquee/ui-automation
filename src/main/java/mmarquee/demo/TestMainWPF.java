@@ -18,30 +18,9 @@ package mmarquee.demo;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.AutomationDocument;
-import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.controls.*;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.controls.AutomationCheckBox;
-import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.AutomationRadioButton;
-import mmarquee.automation.controls.AutomationTextBox;
-import mmarquee.automation.controls.AutomationCalendar;
-import mmarquee.automation.controls.AutomationTreeViewItem;
-import mmarquee.automation.controls.AutomationTreeView;
-import mmarquee.automation.controls.AutomationList;
-import mmarquee.automation.controls.AutomationListItem;
-import mmarquee.automation.controls.AutomationTitleBar;
-import mmarquee.automation.controls.AutomationDataGridCell;
-import mmarquee.automation.controls.AutomationComboBox;
-import mmarquee.automation.controls.AutomationDataGrid;
-import mmarquee.automation.controls.AutomationEditBox;
-import mmarquee.automation.controls.AutomationProgressBar;
-import mmarquee.automation.controls.AutomationStatusBar;
-import mmarquee.automation.controls.AutomationSlider;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationToolBar;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
@@ -274,7 +253,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ COMBO BOX ++");
 
             try {
-                AutomationComboBox cb0 = applicationWindow.getCombobox(0);
+                AutomationComboBox cb0 = applicationWindow.getComboBox(new Search.Builder().id(0).build());
 
 // NPE thrown here
 //                String txt = cb0.text();
@@ -288,7 +267,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ EDITTABLE COMBOBOX ++");
 
             try {
-                AutomationComboBox cb1 = applicationWindow.getCombobox(1);
+                AutomationComboBox cb1 = applicationWindow.getComboBox(new Search.Builder().id(1).build());
 
                 String txt = cb1.getValue();
 

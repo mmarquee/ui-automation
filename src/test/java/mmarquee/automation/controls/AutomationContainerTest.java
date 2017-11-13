@@ -194,7 +194,7 @@ public class AutomationContainerTest {
     public void Button() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getComboBox(99);
+        wndw.getComboBox(new Search.Builder().id(99).build());
     }
 
     @Test
@@ -471,7 +471,7 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationComboBox editBox = wndw.getComboBox(0);
+        AutomationComboBox editBox = wndw.getComboBox(new Search.Builder().id(0).build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -481,14 +481,14 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_Index_Errors_When_Too_Big() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getComboBox(99);
+        wndw.getComboBox(new Search.Builder().id(99).build());
     }
 
     @Test
     public void test_GetComboBox_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationComboBox comboBox = spyWndw.getComboBox("name");
+        AutomationComboBox comboBox = spyWndw.getComboBox(new Search.Builder().name("name").build());
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createNamePropertyCondition("name");
@@ -500,7 +500,7 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getComboBox("unknownName");
+        wndw.getComboBox(new Search.Builder().name("unknownName").build());
     }
     
     @Test
@@ -508,7 +508,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationComboBox comboBox = spyWndw.getComboBox(Pattern.compile("myN.*"));
+        AutomationComboBox comboBox = spyWndw.getComboBox(new Search.Builder().namePattern(Pattern.compile("myN.*")).build());
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.ComboBox);
@@ -520,14 +520,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getComboBox(Pattern.compile("other"));
+        wndw.getComboBox(new Search.Builder().namePattern(Pattern.compile("other")).build());
     }
 
     @Test
     public void test_GetComboBox_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationComboBox comboBox = spyWndw.getComboBoxByAutomationId("myID");
+        AutomationComboBox comboBox = spyWndw.getComboBox(new Search.Builder().automationId("myID").build());
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -539,7 +539,7 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getComboBoxByAutomationId("unknownID");
+        wndw.getComboBox(new Search.Builder().automationId("unknownID").build());
     }
     
     @Test
