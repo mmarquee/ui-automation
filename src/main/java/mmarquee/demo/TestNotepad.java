@@ -18,11 +18,7 @@ package mmarquee.demo;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.AutomationEditBox;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 
@@ -67,7 +63,7 @@ public class TestNotepad extends TestBase {
 
             boolean val = window.isModal();
 
-            AutomationEditBox edit = window.getEditBox(0);
+            AutomationEditBox edit = window.getEditBox(new Search.Builder().id(0).build());
 
             edit.setValue("This is a test of automation");
 

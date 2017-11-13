@@ -73,7 +73,7 @@ public class DemoGrid extends TestBase {
             }
 
             // GRIDS ***********************************
-            AutomationDataGrid grid = applicationWindow.getDataGrid("grdDemoGrid", "TJHCGrid");
+            AutomationDataGrid grid = applicationWindow.getDataGrid(new Search.Builder().name("AutomatedCombobox1").className("TJHCGrid").build());
             logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids

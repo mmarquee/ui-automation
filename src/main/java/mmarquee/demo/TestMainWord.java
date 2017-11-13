@@ -59,7 +59,7 @@ public class TestMainWord extends TestBase {
             AutomationDocumentPage page0 = doc.getPage(0);
             logger.info(page0.getName());
 
-            AutomationEditBox edit = page0.getEditBox(0);
+            AutomationEditBox edit = page0.getEditBox(new Search.Builder().id(0).build());
             logger.info(edit.getName());
 
             String text = edit.getText();

@@ -69,7 +69,7 @@ class TestExplorer extends TestBase {
             try {
                 AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
 
-                AutomationTab tab = uiHWND.getTab(0);
+                AutomationTab tab = uiHWND.getTab(new Search.Builder().id(0).build());
                 tab.selectTabPage("View");
 
                 AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");

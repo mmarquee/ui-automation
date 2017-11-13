@@ -55,7 +55,7 @@ public class TestMainExcel extends TestBase {
             logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
-            AutomationTab tab = panelX.getTab(0);
+            AutomationTab tab = panelX.getTab(new Search.Builder().id(0).build());
             logger.info(tab.getName());
 
             List<AutomationTabItem> items = tab.getTabItems();
@@ -64,7 +64,7 @@ public class TestMainExcel extends TestBase {
                 logger.info(item.getName());
             }
 
-            AutomationDataGrid grid = window.getDataGrid(0);
+            AutomationDataGrid grid = window.getDataGrid(new Search.Builder().id(0).build());
             logger.info(grid.getName());
 
             // 3. Get some data

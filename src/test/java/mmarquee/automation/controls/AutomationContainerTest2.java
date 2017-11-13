@@ -225,7 +225,7 @@ public class AutomationContainerTest2 {
     public void testgetEditBox_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getEditBox("Edit99");
+        wndw.getEditBox(new Search.Builder().name("Edit99").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -234,7 +234,7 @@ public class AutomationContainerTest2 {
     public void testgetEditBox_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getEditBoxByAutomationId("Edit99");
+        wndw.getEditBox(new Search.Builder().automationId("Edit99").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -270,7 +270,7 @@ public class AutomationContainerTest2 {
     public void testgetProgressBar_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getProgressBar("NotThere");
+        wndw.getProgressBar(new Search.Builder().name("notThere").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

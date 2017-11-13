@@ -91,14 +91,14 @@ public class TestMain extends TestBase {
                 logger.info("Failed to find menu");
             }
 
-            AutomationTab tab = window.getTab(0);
+            AutomationTab tab = window.getTab(new Search.Builder().id(0).build());
             tab.selectTabPage("Last Tab");
             //	String tabName = tab.name();
 
-            String text = tab.getEditBox(0).getValue();
+            String text = tab.getEditBox(new Search.Builder().id(0).build()).getValue();
             logger.info("Text for editBox1 is " + text);
 
-            AutomationCheckBox check = window.getCheckBox(0);
+            AutomationCheckBox check = window.getCheckBox(new Search.Builder().id(0).build());
             check.toggle();
 
             try {
@@ -158,7 +158,7 @@ public class TestMain extends TestBase {
             }
 
             // Now string grids
-            AutomationDataGrid grid = window.getDataGrid("AutomationStringGrid1", "TAutomationStringGrid");
+            AutomationDataGrid grid = window.getDataGrid(new Search.Builder().name("AutomationStringGrid1").className("TAutomationStringGrid").build());
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
