@@ -96,7 +96,7 @@ public class AutomationContainerTest2 {
     public void testGetSlider_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-         wndw.getSlider("PANEL-01");
+         wndw.getSlider(new Search.Builder().name("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -165,7 +165,7 @@ public class AutomationContainerTest2 {
     public void testAutomationSpinner_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getSpinner("PANEL-01");
+        wndw.getSpinner(new Search.Builder().name("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -174,7 +174,7 @@ public class AutomationContainerTest2 {
     public void testGetCustom_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getCustom("PANEL-01");
+        wndw.getCustom(new Search.Builder().name("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -183,7 +183,7 @@ public class AutomationContainerTest2 {
     public void testGetCustom_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getCustomByAutomationId("PANEL-01");
+        wndw.getCustom(new Search.Builder().automationId("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -205,7 +205,7 @@ public class AutomationContainerTest2 {
 
         AutomationWindow wndw = new AutomationWindow(elem, window, container);
 
-        wndw.getCustomByControlType("CUSTOM-PANEL");
+        wndw.getCustom(new Search.Builder().controlType("CUSTOM-PANEL").build());
 
         verify(elem, atLeastOnce()).findAll(any(), any());
     }
@@ -216,7 +216,7 @@ public class AutomationContainerTest2 {
 
         AutomationWindow wndw = new AutomationWindow(elem, window, container);
 
-        wndw.getCustomByControlType("PANEL-01");
+        wndw.getCustom(new Search.Builder().controlType("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

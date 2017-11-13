@@ -61,7 +61,7 @@ public class AutomationStatusBarTest2 {
 
         AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
-        AutomationTextBox textBox = statusBar.getTextBox(0);
+        AutomationTextBox textBox = statusBar.getTextBox(new Search.Builder().id(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }
@@ -87,7 +87,7 @@ public class AutomationStatusBarTest2 {
 
         AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
 
-        AutomationTextBox textBox = statusBar.getTextBox(0);
+        AutomationTextBox textBox = statusBar.getTextBox(new Search.Builder().id(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }

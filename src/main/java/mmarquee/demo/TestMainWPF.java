@@ -192,18 +192,18 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ RADIO BUTTON ++");
 
-            AutomationRadioButton radio = applicationWindow.getRadioButton(1);
+            AutomationRadioButton radio = applicationWindow.getRadioButton(new Search.Builder().id(1).build());
             radio.select();
 
             // TEXT BOX *********************************************
 
             logger.info("++ TEXT BOX ++");
 
-            AutomationTextBox tb0 = applicationWindow.getTextBox(9);
+            AutomationTextBox tb0 = applicationWindow.getTextBox(new Search.Builder().id(9).build());
             String tb0Text = tb0.getValue();
             logger.info("Text for text box 1 is " + tb0Text);
 
-            AutomationTextBox tb1 = applicationWindow.getTextBox(18);
+            AutomationTextBox tb1 = applicationWindow.getTextBox(new Search.Builder().id(18).build());
             String tb1Text = tb1.getValue();
             logger.info("Text for text box 1 is " + tb1Text);
 
@@ -222,7 +222,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ SLIDER ++");
 
-            AutomationSlider slider = applicationWindow.getSlider(0);
+            AutomationSlider slider = applicationWindow.getSlider(new Search.Builder().id(0).build());
             logger.info("Slider value = " + slider.getRangeValue());
 
             // Looks like this does bad things too
@@ -235,7 +235,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationStatusBar statusbar = applicationWindow.getStatusBar();
 
-            AutomationTextBox tb = statusbar.getTextBox(0);
+            AutomationTextBox tb = statusbar.getTextBox(new Search.Builder().id(0).build());
 
             String ebText = tb.getValue();
 

@@ -23,6 +23,7 @@ public class Search {
     private int id;
     private String className;
     private Pattern namePattern;
+    private String controlType;
 
     public static class Builder {
         private String automationId;
@@ -30,6 +31,7 @@ public class Search {
         private int id;
         private String className;
         private Pattern namePattern;
+        private String controlType;
 
         public Builder() {
             this.automationId = "";
@@ -37,6 +39,7 @@ public class Search {
             this.id = -1;
             this.className = "";
             this.namePattern = null;
+            this.controlType = "";
         }
 
         public Builder name(String inName) {
@@ -64,6 +67,11 @@ public class Search {
             return this;
         }
 
+        public Builder controlType(String inControlType) {
+            this.controlType = inControlType;
+            return this;
+        }
+
         public Search build() {
             return new Search(this);
         }
@@ -75,6 +83,7 @@ public class Search {
         this.className = builder.className;
         this.id = builder.id;
         this.namePattern = builder.namePattern;
+        this.controlType = builder.controlType;
     }
 
     public boolean getHasAutomationId() {
@@ -91,6 +100,10 @@ public class Search {
 
     public boolean getHasName() {
         return !this.name.equals("");
+    }
+
+    public boolean getHasControlType() {
+        return !this.controlType.equals("");
     }
 
     public boolean getHasClassName() {
@@ -111,6 +124,10 @@ public class Search {
 
     public String getClassName() {
         return this.className;
+    }
+
+    public String getControlType() {
+        return this.controlType;
     }
 
     public int getId() {

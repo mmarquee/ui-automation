@@ -108,12 +108,12 @@ public class TestMain extends TestBase {
                 logger.info("Failed to get toggle state");
             }
 
-            AutomationRadioButton radio = window.getRadioButton(1);
+            AutomationRadioButton radio = window.getRadioButton(new Search.Builder().id(1).build());
             radio.select();
 
             AutomationStatusBar statusBar = window.getStatusBar();
 
-            AutomationTextBox tb1 = statusBar.getTextBox(1);
+            AutomationTextBox tb1 = statusBar.getTextBox(new Search.Builder().id(1).build());
 
             String eb1Text = tb1.getValue();
 
