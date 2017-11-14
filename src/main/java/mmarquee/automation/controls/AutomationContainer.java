@@ -1135,6 +1135,224 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationImage(this.getElementByAutomationId(id, ControlType.Image));
     }
 
+    /**
+     * Gets the (JHC) Masked Edit control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     * @throws AutomationException Automation issue
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationMaskedEdit getMaskedEdit(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationMaskedEdit(this.getElementByControlType(index, ControlType.Edit, AutomationMaskedEdit.CLASS_NAME));
+    }
+
+    /**
+     * Gets the (JHC) Masked Edit control associated with the given index
+     * @param name Name of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationMaskedEdit getMaskedEdit(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationMaskedEdit(this.getElementByControlType(name, ControlType.Edit, AutomationMaskedEdit.CLASS_NAME));
+    }
+
+    /**
+     * Gets the (JHC) Masked Edit control matching the given index
+     * @param namePattern Matcher for the control name
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationMaskedEdit getMaskedEdit(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationMaskedEdit(this.getElementByControlType(namePattern, ControlType.Edit, AutomationMaskedEdit.CLASS_NAME));
+    }
+
+    /**
+     * Gets the (JHC) Masked Edit control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationMaskedEdit getMaskedEditByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationMaskedEdit(this.getElementByAutomationId(id, ControlType.Edit));
+    }
+
+    /**
+     * Gets the panel control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPanel getPanel(int index) throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.getElementByControlType(index, ControlType.Pane));
+    }
+
+    /**
+     * Gets the panel control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPanel getPanel(String name) throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.getElementByControlType(name, ControlType.Pane));
+    }
+
+    /**
+     * Gets the panel control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPanel getPanel(Pattern namePattern) throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.getElementByControlType(namePattern, ControlType.Pane));
+    }
+
+    /**
+     * Gets the panel control associated with the automation id
+     * @param id Automaton id of the control
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPanel getPanelByAutomationId(String id) throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.getElementByAutomationId(id, ControlType.Pane));
+    }
+
+    /**
+     * Gets the panel control associated with the given index, with a specific class name
+     * @param index Index of the control
+     * @param className The specific classname
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    private AutomationPanel getPanelByClassName(int index, String className) throws AutomationException, PatternNotFoundException {
+        return new AutomationPanel(this.getElementByControlType(index, ControlType.Pane, className));
+    }
+
+    /**
+     * Gets the panel control associated with the given name, with a specific class name
+     * @param name Name of the control
+     * @param className The specific classname
+     * @return the found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationPanel getPanelByClassName(String name, String className) throws PatternNotFoundException, AutomationException {
+        return new AutomationPanel(this.getElementByControlType(name, ControlType.Pane, className));
+    }
+
+    /**
+     * Gets the panel control matching the given namePattern, with a specific class name
+     * @param namePattern Matcher for the control name
+     * @param className The specific classname
+     * @return the found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationPanel getPanelByClassName(Pattern namePattern, String className) throws PatternNotFoundException, AutomationException {
+        return new AutomationPanel(this.getElementByControlType(namePattern, ControlType.Pane, className));
+    }
+
+    /**
+     * Gets the SplitButton control associated with the given index
+     * @param index Index of the control
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationSplitButton getSplitButton(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationSplitButton(this.getElementByControlType(index, ControlType.SplitButton));
+    }
+
+    /**
+     * Get the SplitButton control associated with the given name
+     * @param name The name to look for
+     * @return The AutomationSplitButton
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationSplitButton getSplitButton(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationSplitButton(this.getElementByControlType(name, ControlType.SplitButton));
+    }
+
+    /**
+     * Get the SplitButton control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return The AutomationSplitButton
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationSplitButton getSplitButton(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationSplitButton(this.getElementByControlType(namePattern, ControlType.SplitButton));
+    }
+
+    /**
+     * Gets the SplitButton control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationSplitButton getSplitButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationSplitButton(this.getElementByAutomationId(id, ControlType.SplitButton));
+    }
+
+    /**
+     * Gets the button control associated with the given index
+     * @param index The index of the button
+     * @return The AutomationButton
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationButton getButton(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationButton(this.getElementByControlType(index, ControlType.Button));
+    }
+
+    /**
+     * Gets the button control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationButton getButton(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationButton(this.getElementByControlType(name, ControlType.Button));
+    }
+
+    /**
+     * Gets the button control matching with the given name
+     * @param namePattern Matcher for the control name
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationButton getButton(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationButton(this.getElementByControlType(namePattern, ControlType.Button));
+    }
+
+    /**
+     * Gets the button using the automation ID
+     * @param id The automation id
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationButton(this.getElementByAutomationId(id, ControlType.Button));
+    }
+
     ////////////////// Public API //////////////////
 
     /**
@@ -1285,47 +1503,45 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the (JHC) Masked Edit control associated with the given index
-     * @param index Index of the control
-     * @return The found control
-     * @throws AutomationException Automation issue
+     * Gets the button control, using the search criteria.
+     * @param search The search criteria
+     * @return The AutomationButton
+     * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMaskedEdit getMaskedEdit(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationMaskedEdit(this.getElementByControlType(index, ControlType.Edit, AutomationMaskedEdit.CLASS_NAME));
+    public AutomationButton getButton(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getButton(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getButtonByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getButton(search.getId());
+        } else if (search.getHasName()) {
+            return getButton(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
-     * Gets the (JHC) Masked Edit control associated with the given index
-     * @param name Name of the control
+     * Gets the (JHC) Masked Edit control, using the search criteria.
+     * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMaskedEdit getMaskedEdit(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationMaskedEdit(this.getElementByControlType(name, ControlType.Edit, AutomationMaskedEdit.CLASS_NAME));
-    }
-
-    /**
-     * Gets the (JHC) Masked Edit control matching the given index
-     * @param namePattern Matcher for the control name
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationMaskedEdit getMaskedEdit(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationMaskedEdit(this.getElementByControlType(namePattern, ControlType.Edit, AutomationMaskedEdit.CLASS_NAME));
-    }
-    
-    /**
-     * Gets the (JHC) Masked Edit control associated with the given automation id
-     * @param id The id to use
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationMaskedEdit getMaskedEditByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationMaskedEdit(this.getElementByAutomationId(id, ControlType.Edit));
+    public AutomationMaskedEdit getMaskedEdit(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getMaskedEdit(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getMaskedEditByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getMaskedEdit(search.getId());
+        } else if (search.getHasName()) {
+            return getMaskedEdit(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
@@ -1350,7 +1566,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the combobox, using the seatch criteria.
+     * Get the combobox, using the search criteria.
      * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1370,50 +1586,15 @@ public class AutomationContainer extends AutomationBase {
         }
     }
     
-    /**
-     * Gets the button control associated with the given index
-     * @param index The index of the button
-     * @return The AutomationButton
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationButton getButton(int index) throws PatternNotFoundException, AutomationException {
-    	return new AutomationButton(this.getElementByControlType(index, ControlType.Button));
-    }
-    
-    /**
-     * Gets the button control associated with the given name
-     * @param name Name of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationButton getButton(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationButton(this.getElementByControlType(name, ControlType.Button));
-    }
-    
-    /**
-     * Gets the button control matching with the given name
-     * @param namePattern Matcher for the control name
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationButton getButton(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationButton(this.getElementByControlType(namePattern, ControlType.Button));
-    }
+
 
     /**
-     * Gets the button using the automation ID
-     * @param id The automation id
+     * Get the data grid, using the search criteria.
+     * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationButton getButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationButton(this.getElementByAutomationId(id, ControlType.Button));
-    }
-
     public AutomationDataGrid getDataGrid(Search search) throws PatternNotFoundException, AutomationException {
         if (search.getHasClassName()) {
             if (search.getHasName()) {
@@ -1527,7 +1708,6 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationHyperlink(this.getElementByAutomationId(id, ControlType.Hyperlink));
     }
 
-    
     /**
      * Gets the treeview control associated with the given index
      * @param index Index of the control
@@ -1569,7 +1749,6 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationTreeView(this.getElementByAutomationId(id, ControlType.Tree));
     }
 
-    
     /**
      * Deprecated. use {@link #getList(int)} instead.
      * @param index the index of the item
@@ -1626,7 +1805,38 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationList(this.getElementByAutomationId(automationId, ControlType.List));
     }
 
-    
+    /**
+     * Gets the panel control, using the search criteria.
+     * @param search Matcher for the control name
+     * @return The found control
+     * @throws ElementNotFoundException Did not find the element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Pattern not found
+     */
+    public AutomationPanel getPanel(Search search) throws AutomationException, PatternNotFoundException {
+        if (search.getHasClassName()) {
+            if (search.getHasId()) {
+                return getPanelByClassName(search.getId(), search.getClassName());
+            } else if (search.getHasName()) {
+                return getPanelByClassName(search.getName(), search.getClassName());
+            }  else if (search.getHasPattern()) {
+                return getPanelByClassName(search.getPattern(), search.getClassName());
+            } else {
+                throw new AutomationException("Search type not found");
+            }
+        } else if (search.getHasPattern()) {
+            return getPanel(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getPanelByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getPanel(search.getId());
+        } else if (search.getHasName()) {
+            return getPanel(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
     /**
      * Gets the calendar control associated with the given index
      * @param index Index of the control
@@ -1671,95 +1881,6 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationCalendar(this.getElementByAutomationId(id, ControlType.Calendar));
     }
 
-   
-    /**
-     * Gets the panel control associated with the given index
-     * @param index Index of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPanel getPanel(int index) throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.getElementByControlType(index, ControlType.Pane));
-    }
-
-    /**
-     * Gets the panel control associated with the given name
-     * @param name Name of the control
-     * @return The found control
-     * @throws ElementNotFoundException Did not find the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPanel getPanel(String name) throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.getElementByControlType(name, ControlType.Pane));
-    }
-
-    /**
-     * Gets the panel control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return The found control
-     * @throws ElementNotFoundException Did not find the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPanel getPanel(Pattern namePattern) throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.getElementByControlType(namePattern, ControlType.Pane));
-    }
-
-    /**
-     * Gets the panel control associated with the automation id
-     * @param id Automaton id of the control
-     * @return The found control
-     * @throws ElementNotFoundException Did not find the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPanel getPanelByAutomationId(String id) throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.getElementByAutomationId(id, ControlType.Pane));
-    }
-
-    /**
-     * Gets the panel control associated with the given index, with a specific class name
-     * @param index Index of the control
-     * @param className The specific classname
-     * @return The found control
-     * @throws ElementNotFoundException Did not find the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationPanel getPanelByClassName(int index, String className) throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.getElementByControlType(index, ControlType.Pane, className));
-    }
-
-    /**
-     * Gets the panel control associated with the given name, with a specific class name
-     * @param name Name of the control
-     * @param className The specific classname
-     * @return the found control
-     * @throws ElementNotFoundException Did not find the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationPanel getPanelByClassName(String name, String className) throws PatternNotFoundException, AutomationException {
-        return new AutomationPanel(this.getElementByControlType(name, ControlType.Pane, className));
-    }
-
-
-    /**
-     * Gets the panel control matching the given namePattern, with a specific class name
-     * @param namePattern Matcher for the control name
-     * @param className The specific classname
-     * @return the found control
-     * @throws ElementNotFoundException Did not find the element
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationPanel getPanelByClassName(Pattern namePattern, String className) throws PatternNotFoundException, AutomationException {
-        return new AutomationPanel(this.getElementByControlType(namePattern, ControlType.Pane, className));
-    }
-    
-
     /**
      * Get the AppBar control associated with the given index
      * @param index The index
@@ -1803,7 +1924,6 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationAppBar(this.getElementByAutomationId(id, ControlType.AppBar));
     }
 
-    
     /**
      * Get the ToolBar control associated with the given index
      * @param index The index
@@ -1902,50 +2022,6 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationReBar getReBarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationReBar(this.getElementByAutomationId(id, ControlType.Pane));
-    }
-
-    /**
-     * Gets the SplitButton control associated with the given index
-     * @param index Index of the control
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    private AutomationSplitButton getSplitButton(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationSplitButton(this.getElementByControlType(index, ControlType.SplitButton));
-    }
-    
-    /**
-     * Get the SplitButton control associated with the given name
-     * @param name The name to look for
-     * @return The AutomationSplitButton
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    private AutomationSplitButton getSplitButton(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationSplitButton(this.getElementByControlType(name, ControlType.SplitButton));
-    }
-    
-    /**
-     * Get the SplitButton control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return The AutomationSplitButton
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    private AutomationSplitButton getSplitButton(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationSplitButton(this.getElementByControlType(namePattern, ControlType.SplitButton));
-    }
-    
-    /**
-     * Gets the SplitButton control associated with the given automation id
-     * @param id The id to use
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    private AutomationSplitButton getSplitButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationSplitButton(this.getElementByAutomationId(id, ControlType.SplitButton));
     }
 
     /**

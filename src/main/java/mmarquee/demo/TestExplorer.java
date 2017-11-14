@@ -67,16 +67,16 @@ class TestExplorer extends TestBase {
             AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
 
             try {
-                AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+                AutomationButton btn = uiHWND.getButton(Search.getBuilder("Minimise the Ribbon").build());
 
                 AutomationTab tab = uiHWND.getTab(Search.getBuilder(0).build());
                 tab.selectTabPage("View");
 
-                AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+                AutomationPanel panel = uiHWND.getPanel(Search.getBuilder("Lower Ribbon").build());
 
                 AutomationToolBar panes = panel.getToolBar("Panes");
 
-                panes.getButton("Preview pane").click();
+                panes.getButton(Search.getBuilder("Preview pane").build()).click();
                 AutomationSplitButton split = panes.getSplitButton(Search.getBuilder("Navigation pane").build());
                 split.click();
 
@@ -96,7 +96,7 @@ class TestExplorer extends TestBase {
                 AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
 
                 logger.info("Toolbar = " + toolbar.getName());
-                AutomationButton upButton = toolbar.getButton(0);
+                AutomationButton upButton = toolbar.getButton(Search.getBuilder(0).build());
                 logger.info("Rebar button is `" + upButton.getName() + "`");
              //   upButton.click();
             } catch (ElementNotFoundException ex) {
@@ -107,9 +107,9 @@ class TestExplorer extends TestBase {
 
             try {
                 // Now try and get to the list of items in explorer
-                AutomationPanel explorer = window.getPanel("File Explorer");
+                AutomationPanel explorer = window.getPanel(Search.getBuilder("File Explorer").build());
                 logger.info("." + explorer.getName());
-                AutomationPanel pane0 = explorer.getPanel("Control Host");
+                AutomationPanel pane0 = explorer.getPanel(Search.getBuilder("Control Host").build());
                 logger.info(".." + pane0.getName());
                 AutomationTreeView treeView = pane0.getTreeView(0);
                 logger.info("..." + treeView.getName());
@@ -136,7 +136,7 @@ class TestExplorer extends TestBase {
             logger.info("....." + toolbar.getName());
 
             // Looks like the button is a problem with Delphi
-            AutomationButton btn0 = toolbar.getButton(0);
+            AutomationButton btn0 = toolbar.getButton(Search.getBuilder(0).build());
             logger.info("....." + btn0.getName());
             if (btn0.isEnabled()) {
                 btn0.click();

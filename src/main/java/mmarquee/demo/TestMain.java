@@ -78,7 +78,7 @@ public class TestMain extends TestBase {
                     AutomationWindow popup = window.getWindow("Project1");
                     Object val111 = popup.getBoundingRectangle();
 
-                    AutomationButton btn = popup.getButton("OK");
+                    AutomationButton btn = popup.getButton(Search.getBuilder("OK").build());
                     Object val11 = btn.getBoundingRectangle();
 
                     boolean val1 = popup.isModal();
@@ -132,7 +132,7 @@ public class TestMain extends TestBase {
             }
 
             try {
-                AutomationMaskedEdit me0 = window.getMaskedEdit("AutomatedMaskEdit1");
+                AutomationMaskedEdit me0 = window.getMaskedEdit(Search.getBuilder("AutomatedMaskEdit1").build());
 
                 String value = me0.getValue();
                 logger.info("Initial value " + value);
@@ -204,7 +204,7 @@ public class TestMain extends TestBase {
             try {
                 AutomationWindow popup1 = window.getWindow("Project1");
                 try {
-                    AutomationButton btn1 = popup1.getButton("OK");
+                    AutomationButton btn1 = popup1.getButton(Search.getBuilder("OK").build());
                     btn1.click();
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
@@ -228,7 +228,7 @@ public class TestMain extends TestBase {
 
                 AutomationWindow popup1 = window.getWindow("Project1");
                 try {
-                    AutomationButton btn1 = popup1.getButton("OK");
+                    AutomationButton btn1 = popup1.getButton(Search.getBuilder("OK").build());
                     btn1.click();
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
@@ -243,7 +243,7 @@ public class TestMain extends TestBase {
 
                 AutomationWindow popup1 = window.getWindow("Project1");
                 try {
-                    AutomationButton btnOK = popup1.getButton("OK");
+                    AutomationButton btnOK = popup1.getButton(Search.getBuilder("OK").build());
                     btnOK.click();
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");

@@ -47,10 +47,10 @@ public class TestMainWord extends TestBase {
             AutomationWindow window = application.getWindow("Document1 - Word");
             logger.info(window.getName());
 
-            AutomationPanel pane = window.getPanel("Document1");
+            AutomationPanel pane = window.getPanel(Search.getBuilder("Document1").build());
             logger.info(pane.getName());
             logger.info(pane.getClassName());
-            AutomationPanel pane1 = pane.getPanel(0);
+            AutomationPanel pane1 = pane.getPanel(Search.getBuilder(0).build());
             logger.info(pane1.getName());
 
             AutomationDocument doc = pane1.getDocument(0);

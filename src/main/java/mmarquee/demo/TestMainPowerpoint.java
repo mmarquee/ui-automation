@@ -50,13 +50,13 @@ public class TestMainPowerpoint extends TestBase {
             AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
             logger.info(window.getName());
 
-            AutomationPanel panelX = window.getPanelByClassName(0, "MDIClient");
+            AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("MDIClient").build());
             logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
-            AutomationPanel panel1 = panelX.getPanel("PowerPoint Edit View - [This is text.pptx]");
+            AutomationPanel panel1 = panelX.getPanel(Search.getBuilder("PowerPoint Edit View - [This is text.pptx]").build());
             logger.info(panelX.getName());
-            AutomationPanel panel2 = panel1.getPanel("Slide");
+            AutomationPanel panel2 = panel1.getPanel(Search.getBuilder("Slide").build());
             logger.info(panel2.getName());
             AutomationPowerpointSlide slide = panel2.getPowerpointSlide(Search.getBuilder("Slide 1 - This is text").build());
             logger.info(slide.getName());

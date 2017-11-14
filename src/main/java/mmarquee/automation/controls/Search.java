@@ -88,10 +88,7 @@ public class Search {
          */
         private String controlType;
 
-        /**
-         * Default constructor for the search criteria.
-         */
-        public Builder() {
+        private void initialise() {
             this.automationId = "";
             this.name = "";
             this.id = -1;
@@ -101,11 +98,18 @@ public class Search {
         }
 
         /**
+         * Default constructor for the search criteria.
+         */
+        public Builder() {
+            this.initialise();
+        }
+
+        /**
          * Constructor with a name criteria.
          * @param inName The name
          */
         public Builder(String inName ) {
-            super();
+            this.initialise();
             this.name = inName;
         }
 
@@ -114,7 +118,7 @@ public class Search {
          * @param inPattern The name pattern
          */
         public Builder(Pattern inPattern) {
-            super();
+            this.initialise();
             this.namePattern = inPattern;
         }
 
@@ -123,7 +127,7 @@ public class Search {
          * @param inIndex The id (index)
          */
         public Builder(int inIndex) {
-            super();
+            this.initialise();
             this.id = inIndex;
         }
 

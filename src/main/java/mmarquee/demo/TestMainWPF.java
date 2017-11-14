@@ -135,7 +135,7 @@ public class TestMainWPF extends TestBase {
             try {
                 AutomationWindow popup = applicationWindow.getWindow("Confirm Exit");
 
-                AutomationButton btn = popup.getButton(Pattern.compile("Cancel|Abbrechen"));
+                AutomationButton btn = popup.getButton(Search.getBuilder(Pattern.compile("Cancel|Abbrechen")).build());
 
                 boolean val1 = popup.isModal();
 
@@ -336,7 +336,7 @@ public class TestMainWPF extends TestBase {
 
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
-            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("btnClickMe");
+            AutomationButton btnClickMe = applicationWindow.getButton(Search.getBuilder().automationId("btnClickMe").build());
             logger.info(btnClickMe.getName());
             btnClickMe.click();
 
@@ -374,7 +374,7 @@ public class TestMainWPF extends TestBase {
             AutomationToolBar toolbar = applicationWindow.getToolBar(0);
             logger.info("Toolbar name is " + toolbar.getName()); // Blank in default WPF
 
-            AutomationButton btn1 = toolbar.getButton(1);
+            AutomationButton btn1 = toolbar.getButton(Search.getBuilder(1).build());
 
             if (btn1.isEnabled()) {
                 logger.info("btn0 Enabled");
@@ -390,7 +390,7 @@ public class TestMainWPF extends TestBase {
                     logger.info("Looking for `New Thing`");
                     AutomationWindow popup1 = applicationWindow.getWindow("New Thing");
                     logger.info("Looking for `OK` btn");
-                    AutomationButton okBtn = popup1.getButton("OK");
+                    AutomationButton okBtn = popup1.getButton(Search.getBuilder("OK").build());
 
                     boolean val2 = popup1.isModal();
 
@@ -521,7 +521,7 @@ public class TestMainWPF extends TestBase {
             // Right-click ****************************************
             logger.info("++ CONTEXT MENU ++");
 
-            AutomationButton rightClickBtn = applicationWindow.getButton("Right-click me!");
+            AutomationButton rightClickBtn = applicationWindow.getButton(Search.getBuilder("Right-click me!").build());
             rightClickBtn.showContextMenu();
 
             // Right-click ****************************************
@@ -529,7 +529,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationMouse mouse = AutomationMouse.getInstance();
 
-            rightClickBtn = applicationWindow.getButton("Right-click me!");
+            rightClickBtn = applicationWindow.getButton(Search.getBuilder("Right-click me!").build());
 
             // Still issues with get locations out of some controls
 
