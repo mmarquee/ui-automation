@@ -157,21 +157,21 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ TAB ++");
 
-            AutomationTab tab = applicationWindow.getTab(new Search.Builder().id(0).build());
+            AutomationTab tab = applicationWindow.getTab(Search.getBuilder(0).build());
 
             tab.selectTabPage("Details");
 
-            String text = applicationWindow.getEditBox(new Search.Builder().id(1).build()).getValue();
+            String text = applicationWindow.getEditBox(Search.getBuilder(1).build()).getValue();
             logger.info("Text for edit box 1 is " + text);
 
-            applicationWindow.getEditBox(new Search.Builder().id(1).build()).setValue("Hi");
-            logger.info("Text for edit box 1 is now " + applicationWindow.getEditBox(new Search.Builder().id(1).build()).getValue());
+            applicationWindow.getEditBox(Search.getBuilder(1).build()).setValue("Hi");
+            logger.info("Text for edit box 1 is now " + applicationWindow.getEditBox(Search.getBuilder(1).build()).getValue());
 
             // CHECK BOX *********************************************
 
             logger.info("++ CHECK BOX ++");
 
-            AutomationCheckBox check = applicationWindow.getCheckBox(new Search.Builder().id(0).build());
+            AutomationCheckBox check = applicationWindow.getCheckBox(Search.getBuilder(0).build());
             check.toggle();
             try {
                 ToggleState state = check.getToggleState();
@@ -192,18 +192,18 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ RADIO BUTTON ++");
 
-            AutomationRadioButton radio = applicationWindow.getRadioButton(new Search.Builder().id(1).build());
+            AutomationRadioButton radio = applicationWindow.getRadioButton(Search.getBuilder(1).build());
             radio.select();
 
             // TEXT BOX *********************************************
 
             logger.info("++ TEXT BOX ++");
 
-            AutomationTextBox tb0 = applicationWindow.getTextBox(new Search.Builder().id(9).build());
+            AutomationTextBox tb0 = applicationWindow.getTextBox(Search.getBuilder(9).build());
             String tb0Text = tb0.getValue();
             logger.info("Text for text box 1 is " + tb0Text);
 
-            AutomationTextBox tb1 = applicationWindow.getTextBox(new Search.Builder().id(18).build());
+            AutomationTextBox tb1 = applicationWindow.getTextBox(Search.getBuilder(18).build());
             String tb1Text = tb1.getValue();
             logger.info("Text for text box 1 is " + tb1Text);
 
@@ -211,7 +211,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ PROGRESS BAR ++");
 
-            AutomationProgressBar progress = applicationWindow.getProgressBar(new Search.Builder().id(0).build());
+            AutomationProgressBar progress = applicationWindow.getProgressBar(Search.getBuilder(0).build());
             logger.info("Progress = " + progress.getRangeValue());
 
             // Looks like this does bad things
@@ -222,7 +222,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ SLIDER ++");
 
-            AutomationSlider slider = applicationWindow.getSlider(new Search.Builder().id(0).build());
+            AutomationSlider slider = applicationWindow.getSlider(Search.getBuilder(0).build());
             logger.info("Slider value = " + slider.getRangeValue());
 
             // Looks like this does bad things too
@@ -235,14 +235,14 @@ public class TestMainWPF extends TestBase {
 
             AutomationStatusBar statusbar = applicationWindow.getStatusBar();
 
-            AutomationTextBox tb = statusbar.getTextBox(new Search.Builder().id(0).build());
+            AutomationTextBox tb = statusbar.getTextBox(Search.getBuilder(0).build());
 
             String ebText = tb.getValue();
 
             logger.info("Statusbar text = " + ebText);
 
             // Now make something happen in the statusbar
-            AutomationEditBox sbeb = applicationWindow.getEditBox(new Search.Builder().id(0).build());
+            AutomationEditBox sbeb = applicationWindow.getEditBox(Search.getBuilder(0).build());
             logger.info(sbeb.getValue());
             sbeb.setValue("Some text");
 
@@ -253,7 +253,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ COMBO BOX ++");
 
             try {
-                AutomationComboBox cb0 = applicationWindow.getComboBox(new Search.Builder().id(0).build());
+                AutomationComboBox cb0 = applicationWindow.getComboBox(Search.getBuilder(0).build());
 
 // NPE thrown here
 //                String txt = cb0.text();
@@ -267,7 +267,7 @@ public class TestMainWPF extends TestBase {
             logger.info("++ EDITTABLE COMBOBOX ++");
 
             try {
-                AutomationComboBox cb1 = applicationWindow.getComboBox(new Search.Builder().id(1).build());
+                AutomationComboBox cb1 = applicationWindow.getComboBox(Search.getBuilder(1).build());
 
                 String txt = cb1.getValue();
 
@@ -287,7 +287,7 @@ public class TestMainWPF extends TestBase {
             // These are entirely different beasts in WPF, but look the same to us!
 
             // Now string grids
-            AutomationDataGrid grid = applicationWindow.getDataGrid(new Search.Builder().id(0).build());
+            AutomationDataGrid grid = applicationWindow.getDataGrid(Search.getBuilder(0).build());
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 
@@ -437,7 +437,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ PASSWORD EDITBOX ++");
 
-            AutomationEditBox passwd = applicationWindow.getPasswordEditBox(new Search.Builder().id(0).build());
+            AutomationEditBox passwd = applicationWindow.getPasswordEditBox(Search.getBuilder(0).build());
             passwd.setValue("Hello there everyone");
 
             logger.info("IsPassword = " + passwd.isPassword());

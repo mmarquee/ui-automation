@@ -58,16 +58,16 @@ public class TestMainPowerpoint extends TestBase {
             logger.info(panelX.getName());
             AutomationPanel panel2 = panel1.getPanel("Slide");
             logger.info(panel2.getName());
-            AutomationPowerpointSlide slide = panel2.getPowerpointSlide(new Search.Builder().name("Slide 1 - This is text").build());
+            AutomationPowerpointSlide slide = panel2.getPowerpointSlide(Search.getBuilder("Slide 1 - This is text").build());
             logger.info(slide.getName());
 
             // Oddly enough this is an image control, and has text in it's selection
-            AutomationImage image = slide.getImage(new Search.Builder().name("Title TextBox").build());
+            AutomationImage image = slide.getImage(Search.getBuilder("Title TextBox").build());
             AutomationElement element = image.getSelectionContainer();
 
             // logger.info(text.getValue());
 
-            AutomationImage image1 = slide.getImage(new Search.Builder().id(0).build());
+            AutomationImage image1 = slide.getImage(Search.getBuilder(0).build());
 
             logger.info("++ ALL DONE ++");
 

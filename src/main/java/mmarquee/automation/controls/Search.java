@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 /**
  * The search criteria for the standard, consistent searching.
- * 
+ *
  * @author Mark Humphreys
  * Date 02/03/2016.
  */
@@ -101,6 +101,33 @@ public class Search {
         }
 
         /**
+         * Constructor with a name criteria.
+         * @param inName The name
+         */
+        public Builder(String inName ) {
+            super();
+            this.name = inName;
+        }
+
+        /**
+         * Constructor with a name pattern criteria.
+         * @param inPattern The name pattern
+         */
+        public Builder(Pattern inPattern) {
+            super();
+            this.namePattern = inPattern;
+        }
+
+        /**
+         * Constructor with an id (index) criteria.
+         * @param inIndex The id (index)
+         */
+        public Builder(int inIndex) {
+            super();
+            this.id = inIndex;
+        }
+
+        /**
          * Sets the name for the search criteria.
          * @param inName The name value
          * @return The Builder created
@@ -169,7 +196,11 @@ public class Search {
         }
     }
 
-    public Search(Builder builder) {
+    /**
+     * Construct a search criteria from the builder.
+     * @param builder The search builder
+     */
+    private Search(Builder builder) {
         this.automationId = builder.automationId;
         this.name = builder.name;
         this.className = builder.className;
@@ -224,5 +255,40 @@ public class Search {
 
     public int getId() {
         return this.id;
+    }
+
+    /**
+     * Creates a new builder object.
+     * @return The new builder object
+     */
+    public static Builder getBuilder() {
+        return new Builder();
+    }
+
+    /**
+     * Creates a new builder object, with a name criteria.
+     * @param name The name criteria
+     * @return The new builder object
+     */
+    public static Builder getBuilder(String name) {
+        return new Builder(name);
+    }
+
+    /**
+     * Creates a new builder object, with a name criteria.
+     * @param id The id (index) criteria
+     * @return The new builder object
+     */
+    public static Builder getBuilder(int id) {
+        return new Builder(id);
+    }
+
+    /**
+     * Creates a new builder object, with a name criteria.
+     * @param pattern The pattern criteria
+     * @return The new builder object
+     */
+    public static Builder getBuilder(Pattern pattern) {
+        return new Builder(pattern);
     }
 }

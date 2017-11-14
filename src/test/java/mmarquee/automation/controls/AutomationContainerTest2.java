@@ -96,7 +96,7 @@ public class AutomationContainerTest2 {
     public void testGetSlider_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-         wndw.getSlider(new Search.Builder().name("PANEL-01").build());
+         wndw.getSlider(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -156,7 +156,7 @@ public class AutomationContainerTest2 {
     public void testGetImage_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getImage(new Search.Builder().name("PANEL-01").build());
+        wndw.getImage(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -165,7 +165,7 @@ public class AutomationContainerTest2 {
     public void testAutomationSpinner_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getSpinner(new Search.Builder().name("PANEL-01").build());
+        wndw.getSpinner(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -174,7 +174,7 @@ public class AutomationContainerTest2 {
     public void testGetCustom_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getCustom(new Search.Builder().name("PANEL-01").build());
+        wndw.getCustom(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -183,7 +183,7 @@ public class AutomationContainerTest2 {
     public void testGetCustom_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getCustom(new Search.Builder().automationId("PANEL-01").build());
+        wndw.getCustom(Search.getBuilder().automationId("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -205,7 +205,7 @@ public class AutomationContainerTest2 {
 
         AutomationWindow wndw = new AutomationWindow(elem, window, container);
 
-        wndw.getCustom(new Search.Builder().controlType("CUSTOM-PANEL").build());
+        wndw.getCustom(Search.getBuilder().controlType("CUSTOM-PANEL").build());
 
         verify(elem, atLeastOnce()).findAll(any(), any());
     }
@@ -216,7 +216,7 @@ public class AutomationContainerTest2 {
 
         AutomationWindow wndw = new AutomationWindow(elem, window, container);
 
-        wndw.getCustom(new Search.Builder().controlType("PANEL-01").build());
+        wndw.getCustom(Search.getBuilder().controlType("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -225,7 +225,7 @@ public class AutomationContainerTest2 {
     public void testgetEditBox_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getEditBox(new Search.Builder().name("Edit99").build());
+        wndw.getEditBox(Search.getBuilder("Edit99").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -234,7 +234,7 @@ public class AutomationContainerTest2 {
     public void testgetEditBox_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getEditBox(new Search.Builder().automationId("Edit99").build());
+        wndw.getEditBox(Search.getBuilder().automationId("Edit99").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -243,7 +243,7 @@ public class AutomationContainerTest2 {
     public void testgetComboboxByAutomationId_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getComboBox(new Search.Builder().name("AutomatedCombobox1").build());
+        wndw.getComboBox(Search.getBuilder("AutomatedCombobox1").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -252,7 +252,7 @@ public class AutomationContainerTest2 {
     public void testgetCombobox_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getComboBox(new Search.Builder().name("AutomatedCombobox1").build());
+        wndw.getComboBox(Search.getBuilder("AutomatedCombobox1").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -270,7 +270,7 @@ public class AutomationContainerTest2 {
     public void testgetProgressBar_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getProgressBar(new Search.Builder().name("notThere").build());
+        wndw.getProgressBar(Search.getBuilder("notThere").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

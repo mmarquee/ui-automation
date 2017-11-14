@@ -69,7 +69,7 @@ class TestExplorer extends TestBase {
             try {
                 AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
 
-                AutomationTab tab = uiHWND.getTab(new Search.Builder().id(0).build());
+                AutomationTab tab = uiHWND.getTab(Search.getBuilder(0).build());
                 tab.selectTabPage("View");
 
                 AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
@@ -77,7 +77,7 @@ class TestExplorer extends TestBase {
                 AutomationToolBar panes = panel.getToolBar("Panes");
 
                 panes.getButton("Preview pane").click();
-                AutomationSplitButton split = panes.getSplitButton(new Search.Builder().name("Navigation pane").build());
+                AutomationSplitButton split = panes.getSplitButton(Search.getBuilder("Navigation pane").build());
                 split.click();
 
                 this.rest();

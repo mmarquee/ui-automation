@@ -91,14 +91,14 @@ public class TestMain extends TestBase {
                 logger.info("Failed to find menu");
             }
 
-            AutomationTab tab = window.getTab(new Search.Builder().id(0).build());
+            AutomationTab tab = window.getTab(Search.getBuilder(0).build());
             tab.selectTabPage("Last Tab");
             //	String tabName = tab.name();
 
-            String text = tab.getEditBox(new Search.Builder().id(0).build()).getValue();
+            String text = tab.getEditBox(Search.getBuilder(0).build()).getValue();
             logger.info("Text for editBox1 is " + text);
 
-            AutomationCheckBox check = window.getCheckBox(new Search.Builder().id(0).build());
+            AutomationCheckBox check = window.getCheckBox(Search.getBuilder(0).build());
             check.toggle();
 
             try {
@@ -108,19 +108,19 @@ public class TestMain extends TestBase {
                 logger.info("Failed to get toggle state");
             }
 
-            AutomationRadioButton radio = window.getRadioButton(new Search.Builder().id(1).build());
+            AutomationRadioButton radio = window.getRadioButton(Search.getBuilder(1).build());
             radio.select();
 
             AutomationStatusBar statusBar = window.getStatusBar();
 
-            AutomationTextBox tb1 = statusBar.getTextBox(new Search.Builder().id(1).build());
+            AutomationTextBox tb1 = statusBar.getTextBox(Search.getBuilder(1).build());
 
             String eb1Text = tb1.getValue();
 
             logger.info("Status Bar text = " + eb1Text);
 
             try {
-                AutomationComboBox cb1 = window.getComboBox(new Search.Builder().name("AutomatedCombobox1").build());
+                AutomationComboBox cb1 = window.getComboBox(Search.getBuilder("AutomatedCombobox1").build());
                 cb1.setText("Replacements");
                 String txt = cb1.getValue();
 
@@ -147,7 +147,7 @@ public class TestMain extends TestBase {
             }
 
             try {
-                AutomationComboBox cb0 = window.getComboBox(new Search.Builder().name("AutomatedCombobox2").build());
+                AutomationComboBox cb0 = window.getComboBox(Search.getBuilder("AutomatedCombobox2").build());
                 cb0.expand();
 
                 this.rest();
@@ -158,7 +158,7 @@ public class TestMain extends TestBase {
             }
 
             // Now string grids
-            AutomationDataGrid grid = window.getDataGrid(new Search.Builder().name("AutomationStringGrid1").className("TAutomationStringGrid").build());
+            AutomationDataGrid grid = window.getDataGrid(Search.getBuilder("AutomationStringGrid1").className("TAutomationStringGrid").build());
 
             AutomationDataGridCell cell1 = grid.getItem(1, 1);
 

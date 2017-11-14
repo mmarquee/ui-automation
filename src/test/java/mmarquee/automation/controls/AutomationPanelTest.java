@@ -90,7 +90,7 @@ public class AutomationPanelTest {
     public void test_GetWindow_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        panel.getTextBox(new Search.Builder().id(99).build());
+        panel.getTextBox(Search.getBuilder(99).build());
     }
 
     @Test
@@ -148,6 +148,6 @@ public class AutomationPanelTest {
     public void test_GetWindow_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        panel.getTextBox(new Search.Builder().automationId("unknownID").build());
+        panel.getTextBox(Search.getBuilder().automationId("unknownID").build());
     }
 }
