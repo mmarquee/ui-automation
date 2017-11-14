@@ -1832,7 +1832,7 @@ public class AutomationContainerTest {
     public void test_GetSplitButton_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationSplitButton btn = spyWndw.getSplitButton(0);
+        AutomationSplitButton btn = spyWndw.getSplitButton(new Search.Builder().id(0).build());
         assertEquals(targetElement,btn.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.SplitButton.getValue());
@@ -1843,14 +1843,14 @@ public class AutomationContainerTest {
     public void test_GetSpliztButton_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getSplitButton(99);
+        wndw.getSplitButton(new Search.Builder().id(99).build());
     }
     
     @Test
     public void test_GetSplitButton_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSplitButton btn = spyWndw.getSplitButton("myName");
+        AutomationSplitButton btn = spyWndw.getSplitButton(new Search.Builder().name("myName").build());
         assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1862,7 +1862,7 @@ public class AutomationContainerTest {
     public void test_GetSplitButton_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSplitButton("unknownName");
+        wndw.getSplitButton(new Search.Builder().name("unknownName").build());
     }
     
     @Test
@@ -1870,7 +1870,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationSplitButton btn = spyWndw.getSplitButton(Pattern.compile("myName"));
+        AutomationSplitButton btn = spyWndw.getSplitButton(new Search.Builder().namePattern(Pattern.compile("myName")).build());
         assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.SplitButton);
@@ -1882,14 +1882,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getSplitButton(Pattern.compile("ThisIsNotMyName"));
+        wndw.getSplitButton(new Search.Builder().namePattern(Pattern.compile("ThisIsNotMyName")).build());
     }
     
     @Test
     public void test_GetSplitButton_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSplitButton btn = spyWndw.getSplitButtonByAutomationId("myID");
+        AutomationSplitButton btn = spyWndw.getSplitButton(new Search.Builder().automationId("myID").build());
         assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1901,7 +1901,7 @@ public class AutomationContainerTest {
     public void test_GetSplitButton_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSplitButtonByAutomationId("unknownID");
+        wndw.getSplitButton(new Search.Builder().automationId("unknownID").build());
     }
 
 
@@ -1909,7 +1909,7 @@ public class AutomationContainerTest {
     public void test_GetImage_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationImage img = spyWndw.getImage(0);
+        AutomationImage img = spyWndw.getImage(new Search.Builder().id(0).build());
         assertEquals(targetElement,img.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Image.getValue());
@@ -1920,14 +1920,14 @@ public class AutomationContainerTest {
     public void test_GetImage_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getImage(99);
+        wndw.getImage(new Search.Builder().id(99).build());
     }
     
     @Test
     public void test_GetImage_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationImage img = spyWndw.getImage("myName");
+        AutomationImage img = spyWndw.getImage(new Search.Builder().name("myName").build());
         assertEquals(targetElement,img.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1939,7 +1939,7 @@ public class AutomationContainerTest {
     public void test_GetImage_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getImage("unknownName");
+        wndw.getImage(new Search.Builder().name("unknownName").build());
     }
     
     @Test
@@ -1947,7 +1947,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationImage img = spyWndw.getImage(Pattern.compile(".*yNa.*"));
+        AutomationImage img = spyWndw.getImage(new Search.Builder().namePattern(Pattern.compile(".*yNa.*")).build());
         assertEquals(targetElement,img.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Image);
@@ -1959,14 +1959,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getImage(Pattern.compile("blaBla"));
+        wndw.getImage(new Search.Builder().namePattern(Pattern.compile("blaBla")).build());
     }
     
     @Test
     public void test_GetImage_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationImage img = spyWndw.getImageByAutomationId("myID");
+        AutomationImage img = spyWndw.getImage(new Search.Builder().automationId("myID").build());
         assertEquals(targetElement,img.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1978,7 +1978,7 @@ public class AutomationContainerTest {
     public void test_GetImage_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getImageByAutomationId("unknownID");
+        wndw.getImage(new Search.Builder().automationId("unknownID").build());
     }
 
     @Test

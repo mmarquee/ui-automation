@@ -9,10 +9,11 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Specialised type of pane, with a specific control name.
+ *
  * @author Mark Humphreys
  * Date 02/03/2016.
  *
- * Specialised type of pane, with a specific control name
  */
 public class AutomationReBar extends AutomationPanel {
 	

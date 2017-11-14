@@ -1094,6 +1094,47 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationPowerpointSlide(this.getElementByAutomationId(id, ControlType.Custom));
     }
 
+    /**
+     * Get the Image control associated with the given index
+     * @param index The index to look for
+     * @return The AutomationImage
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationImage getImage(int index) throws AutomationException {
+        return new AutomationImage(this.getElementByControlType(index, ControlType.Image));
+    }
+
+    /**
+     * Get the Image control associated with the given name
+     * @param name The name to look for
+     * @return The AutomationImage
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationImage getImage(String name) throws AutomationException {
+        return new AutomationImage(this.getElementByControlType(name, ControlType.Image));
+    }
+
+    /**
+     * Get the Image control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return The AutomationImage
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationImage getImage(Pattern namePattern) throws AutomationException {
+        return new AutomationImage(this.getElementByControlType(namePattern, ControlType.Image));
+    }
+
+    /**
+     * Gets the Image control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationImage getImageByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationImage(this.getElementByAutomationId(id, ControlType.Image));
+    }
+
     ////////////////// Public API //////////////////
 
     /**
@@ -1677,7 +1718,6 @@ public class AutomationContainer extends AutomationBase {
     public AutomationPanel getPanelByAutomationId(String id) throws AutomationException, PatternNotFoundException {
         return new AutomationPanel(this.getElementByAutomationId(id, ControlType.Pane));
     }
-    
 
     /**
      * Gets the panel control associated with the given index, with a specific class name
@@ -1691,7 +1731,6 @@ public class AutomationContainer extends AutomationBase {
     public AutomationPanel getPanelByClassName(int index, String className) throws AutomationException, PatternNotFoundException {
         return new AutomationPanel(this.getElementByControlType(index, ControlType.Pane, className));
     }
-
 
     /**
      * Gets the panel control associated with the given name, with a specific class name
@@ -1865,7 +1904,6 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationReBar(this.getElementByAutomationId(id, ControlType.Pane));
     }
 
-
     /**
      * Gets the SplitButton control associated with the given index
      * @param index Index of the control
@@ -1873,7 +1911,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSplitButton getSplitButton(int index) throws PatternNotFoundException, AutomationException {
+    private AutomationSplitButton getSplitButton(int index) throws PatternNotFoundException, AutomationException {
         return new AutomationSplitButton(this.getElementByControlType(index, ControlType.SplitButton));
     }
     
@@ -1884,7 +1922,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSplitButton getSplitButton(String name) throws PatternNotFoundException, AutomationException {
+    private AutomationSplitButton getSplitButton(String name) throws PatternNotFoundException, AutomationException {
         return new AutomationSplitButton(this.getElementByControlType(name, ControlType.SplitButton));
     }
     
@@ -1895,7 +1933,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSplitButton getSplitButton(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    private AutomationSplitButton getSplitButton(Pattern namePattern) throws PatternNotFoundException, AutomationException {
         return new AutomationSplitButton(this.getElementByControlType(namePattern, ControlType.SplitButton));
     }
     
@@ -1906,50 +1944,50 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationSplitButton getSplitButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    private AutomationSplitButton getSplitButtonByAutomationId(String id) throws PatternNotFoundException, AutomationException {
         return new AutomationSplitButton(this.getElementByAutomationId(id, ControlType.SplitButton));
     }
-    
-    
-    /**
-     * Get the Image control associated with the given index
-     * @param index The index to look for
-     * @return The AutomationImage
-     * @throws AutomationException Something has gone wrong
-     */
-    public AutomationImage getImage(int index) throws AutomationException {
-    	return new AutomationImage(this.getElementByControlType(index, ControlType.Image));
-    }
 
     /**
-     * Get the Image control associated with the given name
-     * @param name The name to look for
-     * @return The AutomationImage
-     * @throws AutomationException Something has gone wrong
-     */
-    public AutomationImage getImage(String name) throws AutomationException {
-        return new AutomationImage(this.getElementByControlType(name, ControlType.Image));
-    }
-
-    /**
-     * Get the Image control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return The AutomationImage
-     * @throws AutomationException Something has gone wrong
-     */
-    public AutomationImage getImage(Pattern namePattern) throws AutomationException {
-        return new AutomationImage(this.getElementByControlType(namePattern, ControlType.Image));
-    }
-
-    /**
-     * Gets the Image control associated with the given automation id
-     * @param id The id to use
+     * Get the SplitButton, using the search criteria.
+     * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationImage getImageByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationImage(this.getElementByAutomationId(id, ControlType.Image));
+    public AutomationSplitButton getSplitButton(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getSplitButton(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getSplitButtonByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getSplitButton(search.getId());
+        } else if (search.getHasName()) {
+            return getSplitButton(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
+    /**
+     * Get the image control, using the search criteria.
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationImage getImage(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getImage(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getImageByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getImage(search.getId());
+        } else if (search.getHasName()) {
+            return getImage(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
@@ -1986,9 +2024,13 @@ public class AutomationContainer extends AutomationBase {
         }
     }
 
-
-
-
+    /**
+     * Get the power point slide, using the search criteria.
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
     public AutomationPowerpointSlide getPowerpointSlide(Search search) throws PatternNotFoundException, AutomationException {
         if (search.getHasPattern()) {
             return getPowerpointSlide(search.getPattern());

@@ -77,7 +77,7 @@ class TestExplorer extends TestBase {
                 AutomationToolBar panes = panel.getToolBar("Panes");
 
                 panes.getButton("Preview pane").click();
-                AutomationSplitButton split = panes.getSplitButton("Navigation pane");
+                AutomationSplitButton split = panes.getSplitButton(new Search.Builder().name("Navigation pane").build());
                 split.click();
 
                 this.rest();

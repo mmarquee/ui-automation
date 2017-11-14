@@ -17,22 +17,80 @@ package mmarquee.automation.controls;
 
 import java.util.regex.Pattern;
 
+/**
+ * The search criteria for the standard, consistent searching.
+ * 
+ * @author Mark Humphreys
+ * Date 02/03/2016.
+ */
 public class Search {
+    /**
+     * Automation id to search for.
+      */
     private String automationId;
+
+    /**
+     * Name part of the search.
+     */
     private String name;
+
+    /**
+     * Id (index) search criteria.
+     */
     private int id;
+
+    /**
+     * Classname criteria.
+     */
     private String className;
+
+    /**
+     * Name pattern (regex expression) criteria.
+     */
     private Pattern namePattern;
+
+    /**
+     * Control type search criteria.
+     */
     private String controlType;
 
+    /**
+     * The builder for the Search criteria.
+     */
     public static class Builder {
+        /**
+         * Automation id to search for.
+         */
         private String automationId;
+
+        /**
+         * Name part of the search.
+         */
         private String name;
+
+        /**
+         * Id (index) search criteria.
+         */
         private int id;
+
+        /**
+         * Classname criteria.
+         */
         private String className;
+
+        /**
+         * Name pattern (regex expression) criteria.
+         */
         private Pattern namePattern;
+
+        /**
+         * Control type search criteria.
+         */
         private String controlType;
 
+        /**
+         * Default constructor for the search criteria.
+         */
         public Builder() {
             this.automationId = "";
             this.name = "";
@@ -42,36 +100,70 @@ public class Search {
             this.controlType = "";
         }
 
+        /**
+         * Sets the name for the search criteria.
+         * @param inName The name value
+         * @return The Builder created
+         */
         public Builder name(String inName) {
             this.name = inName;
             return this;
         }
 
+        /**
+         * Sets the automation id for the search criteria.
+         * @param inAutomationId The name value
+         * @return The Builder created
+         */
         public Builder automationId(String inAutomationId) {
             this.automationId = inAutomationId;
             return this;
         }
 
+        /**
+         * Sets the class name for the search criteria.
+         * @param inClassName The name value
+         * @return The Builder created
+         */
         public Builder className(String inClassName) {
             this.className = inClassName;
             return this;
         }
 
+        /**
+         * Sets the name pattern for the search criteria.
+         * @param inNamePattern The name value
+         * @return The Builder created
+         */
         public Builder namePattern(Pattern inNamePattern) {
             this.namePattern = inNamePattern;
             return this;
         }
 
+        /**
+         * Sets the id (index) for the search criteria.
+         * @param inID The name value
+         * @return The Builder created
+         */
         public Builder id(int inID) {
             this.id = inID;
             return this;
         }
 
+        /**
+         * Sets the control type for the search criteria.
+         * @param inControlType The name value
+         * @return The Builder created
+         */
         public Builder controlType(String inControlType) {
             this.controlType = inControlType;
             return this;
         }
 
+        /**
+         * Builds the search criteria.
+         * @return The Search Criteria created
+         */
         public Search build() {
             return new Search(this);
         }

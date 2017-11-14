@@ -62,12 +62,12 @@ public class TestMainPowerpoint extends TestBase {
             logger.info(slide.getName());
 
             // Oddly enough this is an image control, and has text in it's selection
-            AutomationImage image = slide.getImage("Title TextBox");
+            AutomationImage image = slide.getImage(new Search.Builder().name("Title TextBox").build());
             AutomationElement element = image.getSelectionContainer();
 
             // logger.info(text.getValue());
 
-            AutomationImage image1 = slide.getImage(0);
+            AutomationImage image1 = slide.getImage(new Search.Builder().id(0).build());
 
             logger.info("++ ALL DONE ++");
 
