@@ -1497,6 +1497,134 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationList(this.getElementByAutomationId(automationId, ControlType.List));
     }
 
+    /**
+     * Gets the treeview control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationTreeView getTreeView(int index) throws AutomationException {
+        return new AutomationTreeView(this.getElementByControlType(index, ControlType.Tree));
+    }
+
+    /**
+     * Gets the treeview control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationTreeView getTreeView(String name) throws AutomationException {
+        return new AutomationTreeView(this.getElementByControlType(name, ControlType.Tree));
+    }
+
+    /**
+     * Gets the treeview control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationTreeView getTreeView(Pattern namePattern) throws AutomationException {
+        return new AutomationTreeView(this.getElementByControlType(namePattern, ControlType.Tree));
+    }
+
+    /**
+     * Gets the treeview control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationTreeView getTreeViewByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationTreeView(this.getElementByAutomationId(id, ControlType.Tree));
+    }
+
+    /**
+     * Gets the calendar control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationCalendar getCalendar(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationCalendar(this.getElementByControlType(index, ControlType.Calendar));
+    }
+
+    /**
+     * Gets the calendar associated with the given name
+     * @param name Name of the control
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationCalendar getCalendar(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationCalendar(this.getElementByControlType(name, ControlType.Calendar));
+    }
+
+    /**
+     * Gets the calendar matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationCalendar getCalendar(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationCalendar(this.getElementByControlType(namePattern, ControlType.Calendar));
+    }
+
+    /**
+     * Gets the calendar control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationCalendar getCalendarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationCalendar(this.getElementByAutomationId(id, ControlType.Calendar));
+    }
+
+    /**
+     * Get the AppBar control associated with the given index
+     * @param index The index
+     * @return The AutomationAppBar
+     * @throws AutomationException Something has gone wrong
+     */
+    private AutomationAppBar getAppBar(int index) throws AutomationException {
+        return new AutomationAppBar(this.getElementByControlType(index, ControlType.AppBar));
+    }
+
+    /**
+     * Gets the AppBar control associated with the given name
+     * @param name Name of the control
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationAppBar getAppBar(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationAppBar(this.getElementByControlType(name, ControlType.AppBar));
+    }
+
+    /**
+     * Gets the AppBar control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationAppBar getAppBar(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationAppBar(this.getElementByControlType(namePattern, ControlType.AppBar));
+    }
+
+    /**
+     * Gets the AppBar control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationAppBar getAppBarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationAppBar(this.getElementByAutomationId(id, ControlType.AppBar));
+    }
+
     ////////////////// Public API //////////////////
 
     /**
@@ -1804,44 +1932,23 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the treeview control associated with the given index
-     * @param index Index of the control
+     * Gets the treeview control, using the search criteria.
+     * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationTreeView getTreeView(int index) throws AutomationException {
-        return new AutomationTreeView(this.getElementByControlType(index, ControlType.Tree));
-    }
-
-    /**
-     * Gets the treeview control associated with the given name
-     * @param name Name of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     */
-    public AutomationTreeView getTreeView(String name) throws AutomationException {
-        return new AutomationTreeView(this.getElementByControlType(name, ControlType.Tree));
-    }
-
-    /**
-     * Gets the treeview control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     */
-    public AutomationTreeView getTreeView(Pattern namePattern) throws AutomationException {
-        return new AutomationTreeView(this.getElementByControlType(namePattern, ControlType.Tree));
-    }
-    
-    /**
-     * Gets the treeview control associated with the given automation id
-     * @param id The id to use
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationTreeView getTreeViewByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationTreeView(this.getElementByAutomationId(id, ControlType.Tree));
+    public AutomationTreeView getTreeView(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getTreeView(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getTreeViewByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getTreeView(search.getId());
+        } else if (search.getHasName()) {
+            return getTreeView(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
@@ -1898,90 +2005,45 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the calendar control associated with the given index
-     * @param index Index of the control
+     * Gets the calendar control, using the search criteria.
+     * @param search Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCalendar getCalendar(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationCalendar(this.getElementByControlType(index, ControlType.Calendar));
+    public AutomationCalendar getCalendar(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getCalendar(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getCalendarByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getCalendar(search.getId());
+        } else if (search.getHasName()) {
+            return getCalendar(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
-     * Gets the calendar associated with the given name
-     * @param name Name of the control
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationCalendar getCalendar(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationCalendar(this.getElementByControlType(name, ControlType.Calendar));
-    }
-
-    /**
-     * Gets the calendar matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationCalendar getCalendar(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationCalendar(this.getElementByControlType(namePattern, ControlType.Calendar));
-    }
-
-    /**
-     * Gets the calendar control associated with the given automation id
-     * @param id The id to use
+     * Gets the AppBar control , using the search criteria.
+     * @param search Matcher for the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCalendar getCalendarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationCalendar(this.getElementByAutomationId(id, ControlType.Calendar));
-    }
-
-    /**
-     * Get the AppBar control associated with the given index
-     * @param index The index
-     * @return The AutomationAppBar
-     * @throws AutomationException Something has gone wrong
-     */
-    public AutomationAppBar getAppBar(int index) throws AutomationException {
-        return new AutomationAppBar(this.getElementByControlType(index, ControlType.AppBar));
-    }
-
-    /**
-     * Gets the AppBar control associated with the given name
-     * @param name Name of the control
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationAppBar getAppBar(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationAppBar(this.getElementByControlType(name, ControlType.AppBar));
-    }
-
-    /**
-     * Gets the AppBar control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationAppBar getAppBar(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationAppBar(this.getElementByControlType(namePattern, ControlType.AppBar));
-    }
-
-    /**
-     * Gets the AppBar control associated with the given automation id
-     * @param id The id to use
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationAppBar getAppBarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationAppBar(this.getElementByAutomationId(id, ControlType.AppBar));
+    public AutomationAppBar getAppBar(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getAppBar(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getAppBarByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getAppBar(search.getId());
+        } else if (search.getHasName()) {
+            return getAppBar(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**

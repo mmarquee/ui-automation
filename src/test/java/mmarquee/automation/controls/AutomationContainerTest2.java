@@ -261,7 +261,7 @@ public class AutomationContainerTest2 {
     public void testgetTreeView_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getTreeView("Not there");
+        wndw.getTreeView(Search.getBuilder("Not there").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

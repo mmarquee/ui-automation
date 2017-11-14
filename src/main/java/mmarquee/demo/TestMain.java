@@ -167,7 +167,7 @@ public class TestMain extends TestBase {
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());
 
-            AutomationTreeView tree = window.getTreeView(0);
+            AutomationTreeView tree = window.getTreeView(Search.getBuilder(0).build());
             try {
                 AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
                 treeItem.select();

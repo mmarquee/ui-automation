@@ -142,7 +142,7 @@ public class AutomationWindowTest {
 
         AutomationWindow windw = new AutomationWindow(element, window, container);
 
-        windw.getAppBar(0);
+        windw.getAppBar(Search.getBuilder(0).build());
     }
 
     @Test

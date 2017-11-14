@@ -317,7 +317,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ TREEVIEW ++");
 
-            AutomationTreeView tree = applicationWindow.getTreeView(0);
+            AutomationTreeView tree = applicationWindow.getTreeView(Search.getBuilder(0).build());
             try {
                 AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
                 treeItem.select();
@@ -408,7 +408,7 @@ public class TestMainWPF extends TestBase {
 
             tab.selectTabPage("Calendar");
 
-            AutomationCalendar calendar = applicationWindow.getCalendar(0);
+            AutomationCalendar calendar = applicationWindow.getCalendar(Search.getBuilder(0).build());
 
             logger.info("Date is " + calendar.getName());
 

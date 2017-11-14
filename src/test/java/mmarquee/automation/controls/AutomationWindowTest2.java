@@ -430,7 +430,7 @@ public class AutomationWindowTest2 {
 
         when(element.findAll(any(), any())).thenReturn(result);
 
-        AutomationAppBar bar = wndw.getAppBar(0);
+        AutomationAppBar bar = wndw.getAppBar(Search.getBuilder(0).build());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
