@@ -344,7 +344,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ LISTS ++");
 
-            AutomationList list = applicationWindow.getList(0);
+            AutomationList list = applicationWindow.getList(Search.getBuilder(0).build());
             try {
                 AutomationListItem listItem = list.getItem("Hello, Window world!");
                 listItem.select();
@@ -420,7 +420,7 @@ public class TestMainWPF extends TestBase {
 
             tab.selectTabPage("Document");
 
-            AutomationDocument document = applicationWindow.getDocument(0);
+            AutomationDocument document = applicationWindow.getDocument(Search.getBuilder(0).build());
 
             document.showContextMenu();
 

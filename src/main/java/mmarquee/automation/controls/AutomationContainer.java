@@ -1353,6 +1353,150 @@ public class AutomationContainer extends AutomationBase {
         return new AutomationButton(this.getElementByAutomationId(id, ControlType.Button));
     }
 
+    /**
+     * Gets the document associated with the given index
+     * @param index Index of the control
+     * @return The document control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationDocument getDocument(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationDocument(this.getElementByControlType(index, ControlType.Document));
+    }
+
+    /**
+     * Gets the document associated with the given name
+     * @param name Name of the control
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationDocument getDocument(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationDocument(this.getElementByControlType(name, ControlType.Document));
+    }
+
+    /**
+     * Gets the document matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationDocument getDocument(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationDocument(this.getElementByControlType(namePattern, ControlType.Document));
+    }
+
+    /**
+     * Gets the document associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationDocument getDocumentByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationDocument(this.getElementByAutomationId(id, ControlType.Document));
+    }
+
+    /**
+     * Gets the hyperlink control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationHyperlink getHyperlink(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationHyperlink(this.getElementByControlType(index, ControlType.Hyperlink));
+    }
+
+    /**
+     * Gets the hyperlink control associated with the given name
+     * @param name Name of the control
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationHyperlink getHyperlink(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationHyperlink(this.getElementByControlType(name, ControlType.Hyperlink));
+    }
+
+    /**
+     * Gets the hyperlink control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return the found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationHyperlink getHyperlink(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationHyperlink(this.getElementByControlType(namePattern, ControlType.Hyperlink));
+    }
+
+    /**
+     * Gets the hyperlink control associated with the given automation id
+     * @param id The id to use
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationHyperlink getHyperlinkByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+        return new AutomationHyperlink(this.getElementByAutomationId(id, ControlType.Hyperlink));
+    }
+
+    /**
+     * Deprecated. use {@link #getList(int)} instead.
+     * @param index the index of the item
+     * @return the List
+     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException if something goes wrong
+     */
+    @Deprecated
+    private AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
+        return getList(index);
+    }
+
+    /**
+     * Gets the list control associated with the given index
+     * @param index Index of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationList getList(int index) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getElementByControlType(index, ControlType.List));
+    }
+
+    /**
+     * Gets the list control associated with the given name
+     * @param name Name of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationList getList(String name) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getElementByControlType(name, ControlType.List));
+    }
+
+    /**
+     * Gets the list control matching the given namePattern
+     * @param namePattern Matcher for the control name
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationList getList(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getElementByControlType(namePattern, ControlType.List));
+    }
+
+    /**
+     * Gets the list control associated with the given automation ID
+     * @param automationId Automation id of the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationList getListByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
+        return new AutomationList(this.getElementByAutomationId(automationId, ControlType.List));
+    }
+
     ////////////////// Public API //////////////////
 
     /**
@@ -1403,7 +1547,7 @@ public class AutomationContainer extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
-     */
+*    */
     public AutomationEditBox getEditBox(Search search) throws PatternNotFoundException, AutomationException {
         if (search.getHasPattern()) {
             return getEditBox(search.getPattern());
@@ -1585,8 +1729,6 @@ public class AutomationContainer extends AutomationBase {
             throw new AutomationException("Search type not found");
         }
     }
-    
-
 
     /**
      * Get the data grid, using the search criteria.
@@ -1618,94 +1760,47 @@ public class AutomationContainer extends AutomationBase {
             throw new AutomationException("Search type not found");
         }
     }
-    
-    /**
-     * Gets the document associated with the given index
-     * @param index Index of the control
-     * @return The document control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationDocument getDocument(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationDocument(this.getElementByControlType(index, ControlType.Document));
-    }
 
     /**
-     * Gets the document associated with the given name
-     * @param name Name of the control
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationDocument getDocument(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationDocument(this.getElementByControlType(name, ControlType.Document));
-    }
-
-    /**
-     * Gets the document matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationDocument getDocument(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationDocument(this.getElementByControlType(namePattern, ControlType.Document));
-    }
-    
-    /**
-     * Gets the document associated with the given automation id
-     * @param id The id to use
+     * Gets the document, using the search criteria.
+     * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDocument getDocumentByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationDocument(this.getElementByAutomationId(id, ControlType.Document));
+    public AutomationDocument getDocument(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getDocument(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getDocumentByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getDocument(search.getId());
+        } else if (search.getHasName()) {
+            return getDocument(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
-    
 
     /**
-     * Gets the hyperlink control associated with the given index
-     * @param index Index of the control
+     * Gets the hyperlink, using the search criteria.
+     * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationHyperlink getHyperlink(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationHyperlink(this.getElementByControlType(index, ControlType.Hyperlink));
-    }
-
-    /**
-     * Gets the hyperlink control associated with the given name
-     * @param name Name of the control
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationHyperlink getHyperlink(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationHyperlink(this.getElementByControlType(name, ControlType.Hyperlink));
-    }
-
-    /**
-     * Gets the hyperlink control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return the found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationHyperlink getHyperlink(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationHyperlink(this.getElementByControlType(namePattern, ControlType.Hyperlink));
-    }
-    
-    /**
-     * Gets the hyperlink control associated with the given automation id
-     * @param id The id to use
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationHyperlink getHyperlinkByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationHyperlink(this.getElementByAutomationId(id, ControlType.Hyperlink));
+    public AutomationHyperlink getHyperlink(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getHyperlink(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getHyperlinkByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getHyperlink(search.getId());
+        } else if (search.getHasName()) {
+            return getHyperlink(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
@@ -1750,59 +1845,24 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Deprecated. use {@link #getList(int)} instead.
-     * @param index the index of the item
-     * @return the List
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException if something goes wrong
-     */
-    @Deprecated
-    public AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
-    	return getList(index);
-    }
-
-    /**
-     * Gets the list control associated with the given index
-     * @param index Index of the control
+     * Gets the list control, using the search criteria.
+     * @param search Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationList getList(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationList(this.getElementByControlType(index, ControlType.List));
-    }
-
-    /**
-     * Gets the list control associated with the given name
-     * @param name Name of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationList getList(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationList(this.getElementByControlType(name, ControlType.List));
-    }
-
-    /**
-     * Gets the list control matching the given namePattern
-     * @param namePattern Matcher for the control name
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationList getList(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationList(this.getElementByControlType(namePattern, ControlType.List));
-    }
-
-    /**
-     * Gets the list control associated with the given automation ID
-     * @param automationId Automation id of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationList getListByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
-        return new AutomationList(this.getElementByAutomationId(automationId, ControlType.List));
+    public AutomationList getList(Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getList(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getListByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getList(search.getId());
+        } else if (search.getHasName()) {
+            return getList(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**

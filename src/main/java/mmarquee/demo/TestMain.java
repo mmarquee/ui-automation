@@ -177,7 +177,7 @@ public class TestMain extends TestBase {
                 // Not found
             }
 
-            AutomationList list = window.getList(0);
+            AutomationList list = window.getList(Search.getBuilder(0).build());
             try {
                 AutomationListItem listItem = list.getItem("First (List)");
                 listItem.select();
@@ -198,7 +198,7 @@ public class TestMain extends TestBase {
                 // Not found
             }
 
-            AutomationHyperlink link = window.getHyperlink(0);
+            AutomationHyperlink link = window.getHyperlink(Search.getBuilder(0).build());
             link.click();
 
             try {

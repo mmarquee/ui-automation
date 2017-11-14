@@ -53,7 +53,7 @@ public class TestMainWord extends TestBase {
             AutomationPanel pane1 = pane.getPanel(Search.getBuilder(0).build());
             logger.info(pane1.getName());
 
-            AutomationDocument doc = pane1.getDocument(0);
+            AutomationDocument doc = pane1.getDocument(Search.getBuilder(0).build());
             logger.info(doc.getName());
 
             AutomationDocumentPage page0 = doc.getPage(0);
