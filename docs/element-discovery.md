@@ -1,11 +1,26 @@
 Most elements, will sit within a container, either a window or a pane, etc. Once the container has been found, the desired element can be found using one of three methods. 
 
-:Name
+In order to have a consistent search API, the criteria are built using a builder, allowing the following search criteria to be added (note that not all combinations will return values for specific elements)
 
-Here a textbox is found using it's control name.
+* name
+* regex name pattern
+* id (index)
+* automation id
+* classname
+* controlname
+
+These can be combined, as shown in these examples
 
 ```
-  String text = tab.getTextBox("textBox1").getValue();
+  tab.getTextBox(Search.getBuilder("AutomatedCombobox1").className("MyClassName").build()).getValue();
+```
+
+:Name
+
+Here a text box is found using it's control name.
+
+```
+  String text = tab.getTextBox(Search.getBuilder("AutomatedCombobox1").build()).getValue();
   logger.info("Text for textBox1 is " + text);
 ```
 
@@ -15,7 +30,7 @@ Here a button is found using it's automation id. Some controls, especially Delph
 
 ```
   // Get button by automation id
-  AutomationButton button1 = window.getButtonByAutomationId("OK");
+  AutomationButton button1 = window.getButtonSearch.getBuilder().automationId("AutomatedCombobox1").build());
   button1.click();
 ```
 
@@ -27,6 +42,6 @@ The example shows a button being located by it's index. This will be the first b
 
 ```
   // Get button by index
-  AutomationButton button1 = window.getButton(0);
+  AutomationButton button1 = window.getButton(Search.getBuilder(0).build());
   button1.click();
 ```
