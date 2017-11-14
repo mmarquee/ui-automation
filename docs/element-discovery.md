@@ -28,6 +28,8 @@ Here a text box is found using it's control name.
 
 Here a button is found using it's automation id. Some controls, especially Delphi Win32 controls may not set the automation id to a useful value, so this method will not be usable for those controls.
 
+Note that the automation id is an 'extra' search criteria, and has to be 'chained' with an existing set of search criteria, as shown below.
+
 ```
   // Get button by automation id
   AutomationButton button1 = window.getButtonSearch.getBuilder().automationId("AutomatedCombobox1").build());

@@ -8,9 +8,9 @@ AutomationPanel panelX = window.getPanelByClassName(0, "XLDESK");
 logger.info(panelX.name());
 logger.info(panelX.getClassName());
 
-AutomationTab tab = panelX.getTab(0);
+AutomationTab tab = panelX.getTab(Search.getBuilder(0).build());
 logger.info(tab.name());
-AutomationDataGrid grid = tab.getDataGrid(0);
+AutomationDataGrid grid = tab.getDataGrid(Search.getBuilder(0).build());
 logger.info(grid.name());
 
 // Get some data
