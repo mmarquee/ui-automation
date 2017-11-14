@@ -23,14 +23,14 @@ class NotepadApplication extends BaseApplication {
     application = automation.launch("notepad.exe")
 
     // A short wait for the expand to work, just in case
-    Thread.sleep(500);
+    Thread.sleep(500)
 
     // Find the window
     window = automation.getDesktopWindow("Untitled - Notepad")
   }
 
   def addText(tag: String): Unit = {
-    var edit = window.getEditBox(Search.getBuilder(0).build())
+    val edit = window.getEditBox(Search.getBuilder(0).build())
 
     edit.setValue(tag)
   }
