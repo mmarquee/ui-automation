@@ -203,23 +203,39 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the item associated with the given cell.
+     * Gets the item associated with the given cell, using search criteria.
      *
-     * @param x X Offset
-     * @param y Y Offset
+     * @param search Search criteria
      * @return The GridItem at the given cell position
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell getItem(final int x,
-                                          final int y)
+    public AutomationDataGridCell getItem(final Search search)
+            throws PatternNotFoundException, AutomationException  {
+        if (search.getHasRow() || search.getHasColumn()) {
+            return getItem(search.getRow(), search.getColumn());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
+    /**
+     * Gets the item associated with the given cell.
+     *
+     * @param row X Offset
+     * @param column Y Offset
+     * @return The GridItem at the given cell position
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    private AutomationDataGridCell getItem(final int row,
+                                           final int column)
             throws PatternNotFoundException, AutomationException  {
         if (this.gridPattern == null) {
             this.gridPattern = this.getGridPattern();
         }
-        AutomationElement element = this.gridPattern.getItem(x, y);
 
-        return new AutomationDataGridCell(element);
+        return new AutomationDataGridCell(this.gridPattern.getItem(row, column));
     }
 
     /**

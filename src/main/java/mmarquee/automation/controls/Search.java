@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public class Search {
     /**
      * Automation id to search for.
-      */
+     */
     private String automationId;
 
     /**
@@ -53,6 +53,9 @@ public class Search {
      * Control type search criteria.
      */
     private String controlType;
+
+    private int row;
+    private int column;
 
     /**
      * The builder for the Search criteria.
@@ -88,6 +91,9 @@ public class Search {
          */
         private String controlType;
 
+        private int row;
+        private int column;
+
         private void initialise() {
             this.automationId = "";
             this.name = "";
@@ -95,6 +101,8 @@ public class Search {
             this.className = "";
             this.namePattern = null;
             this.controlType = "";
+            this.row = -1;
+            this.column = -1;
         }
 
         /**
@@ -132,6 +140,17 @@ public class Search {
         }
 
         /**
+         * Constructor with x,y coordinates criteria.
+         * @param inRow The X value
+         * @param inColumn The Y value
+         */
+        public Builder(int inRow, int inColumn) {
+            this.initialise();
+            this.row = inRow;
+            this.column = inColumn;
+        }
+
+        /**
          * Sets the name for the search criteria.
          * @param inName The name value
          * @return The Builder created
@@ -158,6 +177,18 @@ public class Search {
          */
         public Builder className(String inClassName) {
             this.className = inClassName;
+            return this;
+        }
+
+        /**
+         * Sets the x,y coordinates for the search criteria.
+         * @param inRow The X value
+         * @param inColumn The Y value
+         * @return The Builder created
+         */
+        public Builder coordinates(int inRow, int inColumn) {
+            this.row = inRow;
+            this.column = inColumn;
             return this;
         }
 
@@ -191,6 +222,16 @@ public class Search {
             return this;
         }
 
+        public Builder row(int inRow) {
+            this.row = inRow;
+            return this;
+        }
+
+        public Builder column(int inColumn) {
+            this.column = inColumn;
+            return this;
+        }
+
         /**
          * Builds the search criteria.
          * @return The Search Criteria created
@@ -211,6 +252,8 @@ public class Search {
         this.id = builder.id;
         this.namePattern = builder.namePattern;
         this.controlType = builder.controlType;
+        this.row = builder.row;
+        this.column = builder.column;
     }
 
     public boolean getHasAutomationId() {
@@ -219,6 +262,14 @@ public class Search {
 
     public boolean getHasId() {
         return this.id != -1;
+    }
+
+    public boolean getHasRow() {
+        return this.row != -1;
+    }
+
+    public boolean getHasColumn() {
+        return this.column != -1;
     }
 
     public boolean getHasPattern() {
@@ -261,6 +312,14 @@ public class Search {
         return this.id;
     }
 
+    public int getRow() {
+        return this.row;
+    }
+
+    public int getColumn() {
+        return this.column;
+    }
+
     /**
      * Creates a new builder object.
      * @return The new builder object
@@ -285,6 +344,16 @@ public class Search {
      */
     public static Builder getBuilder(int id) {
         return new Builder(id);
+    }
+
+    /**
+     * Creates a new builder object, with a name criteria.
+     * @param inRow The offset criteria
+     * @param inColumn The offset criteria
+     * @return The new builder object
+     */
+    public static Builder getBuilder(int inRow, int inColumn) {
+        return new Builder(inRow, inColumn);
     }
 
     /**

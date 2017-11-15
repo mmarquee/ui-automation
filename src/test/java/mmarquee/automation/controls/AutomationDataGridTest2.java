@@ -69,7 +69,7 @@ public class AutomationDataGridTest2 {
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection, instance);
 
-        AutomationDataGridCell cell = dataGrid.getItem(0,0);
+        AutomationDataGridCell cell = dataGrid.getItem(Search.getBuilder(0,0).build());
 
         verify(grid, times(1)).getItem(0, 0);
     }

@@ -86,11 +86,34 @@ public class AutomationDocument extends AutomationBase {
         return this.textPattern.getSelection();
     }
 
-    public AutomationDocumentPage getPage(int index) throws PatternNotFoundException, AutomationException {
+    /**
+     * Gets the page, based on index.
+     * @param index The index
+     * @return The selected page
+     * @throws PatternNotFoundException
+     * @throws AutomationException
+     */
+    private AutomationDocumentPage getPage(final int index) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(
                 new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.Custom));
 
         return new AutomationDocumentPage(items.get(index));
+    }
+
+    /**
+     * Get the page, using the search criteria.
+     *
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationDocumentPage getPage(final Search search) throws PatternNotFoundException, AutomationException {
+       if (search.getHasId()) {
+           return getPage(search.getId());
+       } else {
+           throw new AutomationException("Search type not found");
+       }
     }
 }

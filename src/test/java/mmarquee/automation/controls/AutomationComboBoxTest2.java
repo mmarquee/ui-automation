@@ -217,7 +217,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        AutomationListItem item = combo.getItem(0);
+        AutomationListItem item = combo.getItem(Search.getBuilder(0).build());
         assertEquals(targetElement,item.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -230,7 +230,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        combo.getItem(99);
+        combo.getItem(Search.getBuilder(99).build());
     }
 
     @Test
@@ -239,7 +239,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        AutomationListItem item = combo.getItem("myName");
+        AutomationListItem item = combo.getItem(Search.getBuilder("myName").build());
         assertEquals(targetElement,item.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -251,7 +251,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        combo.getItem("unknownName");
+        combo.getItem(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -261,7 +261,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        AutomationListItem item = combo.getItem(Pattern.compile("my.*"));
+        AutomationListItem item = combo.getItem(Search.getBuilder(Pattern.compile("my.*")).build());
         assertEquals(targetElement,item.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -274,7 +274,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        combo.getItem(Pattern.compile("unknown"));
+        combo.getItem(Search.getBuilder(Pattern.compile("unknown")).build());
     }
 
     @Test
@@ -283,7 +283,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-        AutomationListItem item = combo.getItemByAutomationId("myID");
+        AutomationListItem item = combo.getItem(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,item.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -295,7 +295,7 @@ public class AutomationComboBoxTest2 {
 
         AutomationComboBox combo = new AutomationComboBox(element, collapse, value, selection);
 
-       combo.getItemByAutomationId("unknownID");
+       combo.getItem(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test

@@ -68,19 +68,19 @@ public class TestMainExcel extends TestBase {
             logger.info(grid.getName());
 
             // 3. Get some data
-            AutomationDataGridCell cell = grid.getItem(0,0);
+            AutomationDataGridCell cell = grid.getItem(Search.getBuilder(0,0).build());
             logger.info(cell.getName());
             logger.info(cell.getValue());
             logger.info(cell.getColumn());
             logger.info(cell.getRow());
 
-            AutomationDataGridCell cell1 = grid.getItem(1,1);
+            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1,1).build());
             logger.info(cell1.getName());
             logger.info(cell1.getValue());
             logger.info(cell1.getColumn());
             logger.info(cell1.getRow());
 
-            AutomationDataGridCell cell2 = grid.getItem(2,2);
+            AutomationDataGridCell cell2 = grid.getItem(Search.getBuilder(2,2).build());
             logger.info(cell2.getName());
             logger.info(cell2.getValue());
             logger.info(cell2.getColumn());
@@ -90,7 +90,7 @@ public class TestMainExcel extends TestBase {
             cell2.setValue("XYZ");
             logger.info(cell2.getValue());
 
-            AutomationDataGridCell cell3 = grid.getItem(3,3);
+            AutomationDataGridCell cell3 = grid.getItem(Search.getBuilder(3,3).build());
             logger.info(cell3.getName());
             logger.info(cell3.getValue());
 

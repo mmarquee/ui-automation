@@ -80,7 +80,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        ctrl.getToolbarButton(0);
+        ctrl.getToolbarButton(Search.getBuilder(0).build());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -89,7 +89,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        ctrl.getToolbarButton(1);
+        ctrl.getToolbarButton(Search.getBuilder(1).build());
     }
 
     @Test
@@ -98,7 +98,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        AutomationToolBarButton button = ctrl.getToolbarButton("myName");
+        AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder("myName").build());
         
         assertEquals(targetElement,button.getElement());
 
@@ -111,7 +111,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        ctrl.getToolbarButton("unknownName");
+        ctrl.getToolbarButton(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -121,7 +121,7 @@ public class AutomationToolbarTest2 {
         
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        AutomationToolBarButton button = ctrl.getToolbarButton(Pattern.compile("my.*"));
+        AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("my.*")).build());
         
         assertEquals(targetElement,button.getElement());
 
@@ -134,7 +134,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        ctrl.getToolbarButton(Pattern.compile("unknownName"));
+        ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("unknownName")).build());
     }
 
     @Test

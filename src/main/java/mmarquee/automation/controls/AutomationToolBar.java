@@ -80,7 +80,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(final int index)
+    private AutomationToolBarButton getToolbarButton(final int index)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(index, ControlType.Button));
     }
@@ -91,7 +91,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(final String name)
+    private AutomationToolBarButton getToolbarButton(final String name)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(name, ControlType.Button));
     }
@@ -102,7 +102,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(final Pattern namePattern)
+    private AutomationToolBarButton getToolbarButton(final Pattern namePattern)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(namePattern, ControlType.Button));
     }
@@ -113,8 +113,29 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButtonByAutomationId(final String automationId)
+    private AutomationToolBarButton getToolbarButtonByAutomationId(final String automationId)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByAutomationId(automationId));
+    }
+
+    /**
+     * Get the toolbar button, using the search criteria.
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationToolBarButton getToolbarButton(final Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getToolbarButton(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getToolbarButtonByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getToolbarButton(search.getId());
+        } else if (search.getHasName()) {
+            return getToolbarButton(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 }

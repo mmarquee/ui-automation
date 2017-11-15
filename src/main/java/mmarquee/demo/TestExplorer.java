@@ -114,7 +114,7 @@ class TestExplorer extends TestBase {
                 AutomationTreeView treeView = pane0.getTreeView(Search.getBuilder(0).build());
                 logger.info("..." + treeView.getName());
                 try {
-                    AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
+                    AutomationTreeViewItem treeItem = treeView.getItem(Search.getBuilder("Desktop").build());
                     logger.info("...." + treeItem.getName());
 
                     this.rest();

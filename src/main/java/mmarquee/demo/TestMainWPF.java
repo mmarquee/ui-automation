@@ -289,7 +289,7 @@ public class TestMainWPF extends TestBase {
             // Now string grids
             AutomationDataGrid grid = applicationWindow.getDataGrid(Search.getBuilder(0).build());
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1, 1).build());
 
             String itemName = cell1.getName();
             logger.info("Grid item is " + itemName);
@@ -319,7 +319,7 @@ public class TestMainWPF extends TestBase {
 
             AutomationTreeView tree = applicationWindow.getTreeView(Search.getBuilder(0).build());
             try {
-                AutomationTreeViewItem treeItem = tree.getItem("Level 2.2");
+                AutomationTreeViewItem treeItem = tree.getItem(Search.getBuilder("Level 2.2").build());
                 treeItem.select();
 
                 logger.info("Item is " + treeItem.getName());

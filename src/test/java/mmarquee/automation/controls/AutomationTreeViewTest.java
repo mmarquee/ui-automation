@@ -82,7 +82,7 @@ public class AutomationTreeViewTest {
     public void testGetItem_When_Item_Is_Present() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationTreeViewItem treeItem = ctrl.getItem("SubItem");
+        AutomationTreeViewItem treeItem = ctrl.getItem(Search.getBuilder("SubItem").build());
 
         assertEquals(targetElement,treeItem.getElement());
         verify(ctrl).createNamePropertyCondition("SubItem");
@@ -95,7 +95,7 @@ public class AutomationTreeViewTest {
     public void testGetItem_Fails_When_Item_Is_Not_Present() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(null);
 
-        ctrl.getItem("SubItem");
+        ctrl.getItem(Search.getBuilder("SubItem").build());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class AutomationTreeViewTest {
         when(element.findAll(any(), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myName");
 
-        AutomationTreeViewItem treeItem = ctrl.getItem(Pattern.compile(".*yN.+"));
+        AutomationTreeViewItem treeItem = ctrl.getItem(Search.getBuilder(Pattern.compile(".*yN.+")).build());
 
         assertEquals(targetElement,treeItem.getElement());
         verify(ctrl).createControlTypeCondition(ControlType.TreeItem);
@@ -116,14 +116,14 @@ public class AutomationTreeViewTest {
         when(element.findAll(any(), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myName");
 
-        ctrl.getItem(Pattern.compile("nixIs"));
+        ctrl.getItem(Search.getBuilder(Pattern.compile("nixIs")).build());
     }
     
     @Test
     public void testGetItemByAutomationId_When_Item_Present() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationTreeViewItem treeItem = ctrl.getItemByAutomationId("autoId");
+        AutomationTreeViewItem treeItem = ctrl.getItem(Search.getBuilder().automationId("autoId").build());
 
         assertEquals(targetElement,treeItem.getElement());
         verify(ctrl).createAutomationIdPropertyCondition("autoId");
@@ -131,11 +131,10 @@ public class AutomationTreeViewTest {
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
-
     @Test(expected=ItemNotFoundException.class)
     public void testGetItemByAutomationId_Fails_When_Item_Is_Not_Present() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(null);
 
-        ctrl.getItemByAutomationId("wrongAutoId");
+        ctrl.getItem(Search.getBuilder().automationId("wrongAutoId").build());
     }
 }

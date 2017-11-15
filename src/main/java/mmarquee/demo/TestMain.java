@@ -160,7 +160,7 @@ public class TestMain extends TestBase {
             // Now string grids
             AutomationDataGrid grid = window.getDataGrid(Search.getBuilder("AutomationStringGrid1").className("TAutomationStringGrid").build());
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1, 1).build());
 
             String itemName = cell1.getValue();
             logger.info("Grid item is " + itemName);
@@ -169,7 +169,7 @@ public class TestMain extends TestBase {
 
             AutomationTreeView tree = window.getTreeView(Search.getBuilder(0).build());
             try {
-                AutomationTreeViewItem treeItem = tree.getItem("Sub-SubItem");
+                AutomationTreeViewItem treeItem = tree.getItem(Search.getBuilder("Sub-SubItem").build());
                 treeItem.select();
             } catch (ItemNotFoundException ex) {
                 // Not found
@@ -219,7 +219,7 @@ public class TestMain extends TestBase {
             logger.info(toolbar.getName());
 
             // Looks like the button is a problem with Delphi
-            AutomationToolBarButton btn0 = toolbar.getToolbarButton(0);
+            AutomationToolBarButton btn0 = toolbar.getToolbarButton(Search.getBuilder(0).build());
 
             if (btn0.isEnabled()) {
                 logger.info("btn0 Enabled");
@@ -235,7 +235,7 @@ public class TestMain extends TestBase {
                 }
             }
 
-            AutomationToolBarButton btn1 = toolbar.getToolbarButton(1);
+            AutomationToolBarButton btn1 = toolbar.getToolbarButton(Search.getBuilder(1).build());
 
             if (btn1.isEnabled()) {
                 logger.info("btn1 Enabled");
@@ -250,14 +250,14 @@ public class TestMain extends TestBase {
                 }
             }
 
-            AutomationToolBarButton btn2 = toolbar.getToolbarButton(2);
+            AutomationToolBarButton btn2 = toolbar.getToolbarButton(Search.getBuilder(2).build());
 
             if (btn2.isEnabled()) {
                 logger.info("btn2 Enabled");
                 btn2.click();
             }
 
-            AutomationToolBarButton btn3 = toolbar.getToolbarButton(3);
+            AutomationToolBarButton btn3 = toolbar.getToolbarButton(Search.getBuilder(3).build());
 
             if (btn3.isEnabled()) {
                 logger.info("btn3 Enabled");

@@ -22,7 +22,7 @@ public class AutomationMaskedEdit extends AutomationEditBox {
      * @throws AutomationException Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMaskedEdit(AutomationElement element) throws PatternNotFoundException, AutomationException {
+    public AutomationMaskedEdit(final AutomationElement element) throws PatternNotFoundException, AutomationException {
         super(element);
         assertClassName(CLASS_NAME);
     }
@@ -35,7 +35,9 @@ public class AutomationMaskedEdit extends AutomationEditBox {
      * @throws AutomationException Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
-    AutomationMaskedEdit(AutomationElement element, Value value, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+    AutomationMaskedEdit(final AutomationElement element,
+                         final Value value,
+                         final UIAutomation instance) throws PatternNotFoundException, AutomationException {
         super(element, value, instance);
         assertClassName(CLASS_NAME);
     }

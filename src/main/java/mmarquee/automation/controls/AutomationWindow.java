@@ -267,6 +267,13 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         this.windowPattern.close();
     }
 
+    /**
+     * Finds the child window, using the search criteria.
+     * @param search The search criteria
+     * @return The child window.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
     public AutomationWindow getWindow(final Search search)
             throws PatternNotFoundException, AutomationException {
         if (search.getHasName()) {

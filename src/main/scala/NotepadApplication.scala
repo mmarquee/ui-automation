@@ -42,13 +42,13 @@ class NotepadApplication extends BaseApplication {
   }
 
   def confirmExit(): Unit = {
-    val confirm = window.getWindow("Notepad")
+    val confirm = window.getWindow(Search.getBuilder("Notepad").build())
     var button = confirm.getButton(Search.getBuilder("Don't Save").build())
     button.click()
   }
 
   def getConfirm(): AutomationWindow = {
-    window.getWindow("Notepad")
+    window.getWindow(Search.getBuilder("Notepad").build())
   }
 
   def findProcess(): Boolean = {
