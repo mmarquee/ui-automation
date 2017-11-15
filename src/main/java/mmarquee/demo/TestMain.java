@@ -75,7 +75,7 @@ public class TestMain extends TestBase {
                 exit.click();
 
                 try {
-                    AutomationWindow popup = window.getWindow("Project1");
+                    AutomationWindow popup = window.getWindow(Search.getBuilder("Project1").build());
                     Object val111 = popup.getBoundingRectangle();
 
                     AutomationButton btn = popup.getButton(Search.getBuilder("OK").build());
@@ -202,7 +202,7 @@ public class TestMain extends TestBase {
             link.click();
 
             try {
-                AutomationWindow popup1 = window.getWindow("Project1");
+                AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
                 try {
                     AutomationButton btn1 = popup1.getButton(Search.getBuilder("OK").build());
                     btn1.click();
@@ -215,7 +215,7 @@ public class TestMain extends TestBase {
 
             this.rest();
 
-            AutomationToolBar toolbar = window.getToolBar(1);
+            AutomationToolBar toolbar = window.getToolBar(Search.getBuilder(1).build());
             logger.info(toolbar.getName());
 
             // Looks like the button is a problem with Delphi
@@ -226,7 +226,7 @@ public class TestMain extends TestBase {
 
                 btn0.click();
 
-                AutomationWindow popup1 = window.getWindow("Project1");
+                AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
                 try {
                     AutomationButton btn1 = popup1.getButton(Search.getBuilder("OK").build());
                     btn1.click();
@@ -241,7 +241,7 @@ public class TestMain extends TestBase {
                 logger.info("btn1 Enabled");
                 btn1.click();
 
-                AutomationWindow popup1 = window.getWindow("Project1");
+                AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
                 try {
                     AutomationButton btnOK = popup1.getButton(Search.getBuilder("OK").build());
                     btnOK.click();

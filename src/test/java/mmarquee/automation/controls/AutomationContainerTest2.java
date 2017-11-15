@@ -147,7 +147,7 @@ public class AutomationContainerTest2 {
     public void testGetToolbar_By_Name_Calls_findFirst_From_Element() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container);
 
-        wndw.getToolBar("PANEL-01");
+        wndw.getToolBar(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

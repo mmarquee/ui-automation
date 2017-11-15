@@ -74,7 +74,7 @@ class TestExplorer extends TestBase {
 
                 AutomationPanel panel = uiHWND.getPanel(Search.getBuilder("Lower Ribbon").build());
 
-                AutomationToolBar panes = panel.getToolBar("Panes");
+                AutomationToolBar panes = panel.getToolBar(Search.getBuilder("Panes").build());
 
                 panes.getButton(Search.getBuilder("Preview pane").build()).click();
                 AutomationSplitButton split = panes.getSplitButton(Search.getBuilder("Navigation pane").build());
@@ -91,9 +91,9 @@ class TestExplorer extends TestBase {
 
             logger.info("+++ Rebar +++");
 
-            AutomationReBar rebar = window.getReBar(0);
+            AutomationReBar rebar = window.getReBar(Search.getBuilder(0).build());
             try {
-                AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
+                AutomationToolBar toolbar = rebar.getToolBar(Search.getBuilder("Up band toolbar").build());
 
                 logger.info("Toolbar = " + toolbar.getName());
                 AutomationButton upButton = toolbar.getButton(Search.getBuilder(0).build());
@@ -131,7 +131,7 @@ class TestExplorer extends TestBase {
             }
 
             logger.info("Getting toolbar");
-            AutomationToolBar toolbar = window.getToolBar(0);
+            AutomationToolBar toolbar = window.getToolBar(Search.getBuilder(0).build());
             logger.info("Got toolbar");
             logger.info("....." + toolbar.getName());
 

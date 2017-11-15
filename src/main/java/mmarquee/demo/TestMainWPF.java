@@ -133,7 +133,7 @@ public class TestMainWPF extends TestBase {
             exit.click();
 
             try {
-                AutomationWindow popup = applicationWindow.getWindow("Confirm Exit");
+                AutomationWindow popup = applicationWindow.getWindow(Search.getBuilder("Confirm Exit").build());
 
                 AutomationButton btn = popup.getButton(Search.getBuilder(Pattern.compile("Cancel|Abbrechen")).build());
 
@@ -371,7 +371,7 @@ public class TestMainWPF extends TestBase {
 
             // TOOLBAR ***********************************
 
-            AutomationToolBar toolbar = applicationWindow.getToolBar(0);
+            AutomationToolBar toolbar = applicationWindow.getToolBar(Search.getBuilder(0).build());
             logger.info("Toolbar name is " + toolbar.getName()); // Blank in default WPF
 
             AutomationButton btn1 = toolbar.getButton(Search.getBuilder(1).build());
@@ -388,7 +388,7 @@ public class TestMainWPF extends TestBase {
                 // Now cope with the results of the click
                 try {
                     logger.info("Looking for `New Thing`");
-                    AutomationWindow popup1 = applicationWindow.getWindow("New Thing");
+                    AutomationWindow popup1 = applicationWindow.getWindow(Search.getBuilder("New Thing").build());
                     logger.info("Looking for `OK` btn");
                     AutomationButton okBtn = popup1.getButton(Search.getBuilder("OK").build());
 
@@ -551,7 +551,7 @@ public class TestMainWPF extends TestBase {
             // Window / element not found
             try {
                 logger.info("Looking for `Not There`");
-                applicationWindow.getWindow("Not there");
+                applicationWindow.getWindow(Search.getBuilder("Not there").build());
                 logger.info("Found `Not There` somehow!");
             } catch (ElementNotFoundException ex) {
                 logger.info("Didn't find element `Not There`");

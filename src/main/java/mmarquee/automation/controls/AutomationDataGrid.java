@@ -30,10 +30,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Wrapper around the Delphi automated string gridPattern.
+ *
  * @author Mark Humphreys
  * Date 03/02/2016.
- *
- * Wrapper around the Delphi automated string gridPattern.
  */
 public class AutomationDataGrid extends AutomationBase implements Valueable {
     /**

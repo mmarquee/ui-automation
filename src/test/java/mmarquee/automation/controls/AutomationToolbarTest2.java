@@ -143,7 +143,7 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        AutomationToolBar button = ctrl.getToolBarByAutomationId("myID");
+        AutomationToolBar button = ctrl.getToolBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,button.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -155,6 +155,6 @@ public class AutomationToolbarTest2 {
 
         AutomationToolBar ctrl = new AutomationToolBar(element, container);
 
-        ctrl.getToolBarByAutomationId("unknownID");
+        ctrl.getToolBar(Search.getBuilder().automationId("unknownID").build());
     }
 }

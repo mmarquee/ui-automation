@@ -80,7 +80,7 @@ public class TestNotepad extends TestBase {
                 exit.click();
 
                 try {
-                    AutomationWindow popup = window.getWindow(Pattern.compile("Notepad|Editor"));
+                    AutomationWindow popup = window.getWindow(Search.getBuilder(Pattern.compile("Notepad|Editor")).build());
                     AutomationButton btn = popup.getButton(Search.getBuilder(Pattern.compile("Don't Save|Nicht speichern")).build());
 
                     btn.click();

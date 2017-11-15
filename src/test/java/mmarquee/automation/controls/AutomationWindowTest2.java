@@ -360,7 +360,7 @@ public class AutomationWindowTest2 {
 
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
-        AutomationReBar rebar = wndw.getReBar(0);
+        AutomationReBar rebar = wndw.getReBar(Search.getBuilder(0).build());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -469,7 +469,7 @@ public class AutomationWindowTest2 {
     public void testGetWindow_Throws_Exception_When_Not_Found() throws Exception {
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
-        AutomationWindow w = wndw.getWindow("WINDOW-01");
+        AutomationWindow w = wndw.getWindow(Search.getBuilder("WINDOW-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -479,7 +479,7 @@ public class AutomationWindowTest2 {
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
         try {
-            AutomationWindow w = wndw.getWindow("WINDOW-01");
+            AutomationWindow w = wndw.getWindow(Search.getBuilder("WINDOW-01").build());
         } catch (Throwable t) {
             // Catch exception to allow verify to work
         }
@@ -501,7 +501,7 @@ public class AutomationWindowTest2 {
         AutomationWindow wndw = new AutomationWindow(element, window, container, user32);
 
         try {
-            AutomationWindow w = wndw.getWindow("WINDOW-01");
+            AutomationWindow w = wndw.getWindow(Search.getBuilder("WINDOW-01").build());
         } catch (Throwable t) {
             // Catch exception so test can continue
         }
