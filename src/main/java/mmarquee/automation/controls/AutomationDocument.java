@@ -43,7 +43,7 @@ public class AutomationDocument extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDocument(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 //        this.textPattern = this.getTextPattern();
     }
 
@@ -54,7 +54,7 @@ public class AutomationDocument extends AutomationBase {
      * @param instance Automation instance
      */
     AutomationDocument(AutomationElement element, Text pattern, UIAutomation instance) {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         this.textPattern = pattern;
     }
 

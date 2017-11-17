@@ -80,7 +80,7 @@ public class AutomationCheckBox
      */
     public AutomationCheckBox (final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -93,7 +93,7 @@ public class AutomationCheckBox
     public AutomationCheckBox(final AutomationElement element,
                               final Toggle pattern,
                               final UIAutomation instance) {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         togglePattern = pattern;
     }
 
@@ -105,7 +105,7 @@ public class AutomationCheckBox
      */
     public AutomationCheckBox(final AutomationElement element,
                               final Toggle pattern) {
-        super(element);
+        super(new ElementBuilder(element));
         togglePattern = pattern;
     }
 

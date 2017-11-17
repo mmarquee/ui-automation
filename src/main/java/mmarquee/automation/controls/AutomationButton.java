@@ -42,7 +42,7 @@ public class AutomationButton
      */
     public AutomationButton(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 //        this.invokePattern = this.getInvokePattern();
     }
 
@@ -57,7 +57,7 @@ public class AutomationButton
     public AutomationButton(final AutomationElement element,
                             final Invoke pattern)
             throws PatternNotFoundException, AutomationException {
-        super(element, pattern);
+        super(new ElementBuilder(element).invoke(pattern));
     }
 
     /**
@@ -73,7 +73,7 @@ public class AutomationButton
                             final Invoke pattern,
                             final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element, pattern, instance);
+        super(new ElementBuilder(element).automation(instance).invoke(pattern));
     }
 
     /**

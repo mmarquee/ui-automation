@@ -190,7 +190,7 @@ public class AutomationApplication extends AutomationBase {
                                  final WinNT.HANDLE inHandle,
                                  final boolean attached)
             throws AutomationException  {
-        super(element);
+        super (new ElementBuilder(element));
         this.handle = inHandle;
         this.isAttached = attached;
     }
@@ -209,7 +209,7 @@ public class AutomationApplication extends AutomationBase {
                                  final boolean attached,
                                  final UIAutomation automation)
             throws AutomationException  {
-        super(element, automation);
+        super (new ElementBuilder(element).automation(automation));
         this.handle = inHandle;
         this.isAttached = attached;
     }
@@ -228,7 +228,7 @@ public class AutomationApplication extends AutomationBase {
                                  final boolean attached,
                                  final User32 inUser32)
             throws AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
         this.handle = inHandle;
         this.isAttached = attached;
         this.user32 = inUser32;
@@ -250,7 +250,7 @@ public class AutomationApplication extends AutomationBase {
                                  final User32 inUser32,
                                  final UIAutomation instance)
             throws AutomationException {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         this.handle = inHandle;
         this.isAttached = attached;
         this.user32 = inUser32;
@@ -270,7 +270,7 @@ public class AutomationApplication extends AutomationBase {
                                  final Process process,
                                  final boolean attached)
             throws AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 
         this.isAttached = attached;
 

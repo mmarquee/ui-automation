@@ -38,7 +38,7 @@ public class AutomationTreeView extends AutomationBase {
      */
     public AutomationTreeView(final AutomationElement element)
             throws AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -51,7 +51,7 @@ public class AutomationTreeView extends AutomationBase {
     public AutomationTreeView(final AutomationElement element,
                               final UIAutomation automation)
             throws AutomationException {
-        super(element, automation);
+        super(new ElementBuilder(element).automation(automation));
     }
 
     /**

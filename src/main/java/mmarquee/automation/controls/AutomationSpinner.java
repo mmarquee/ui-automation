@@ -33,6 +33,6 @@ public class AutomationSpinner extends AutomationBase {
      */
     public AutomationSpinner(final AutomationElement element)
             throws AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 }

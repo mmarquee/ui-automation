@@ -30,7 +30,7 @@ public class AutomationSlider extends AutomationBase {
      */
     public AutomationSlider(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 //        this.rangePattern = this.getRangePattern();
     }
 
@@ -46,7 +46,7 @@ public class AutomationSlider extends AutomationBase {
                      final Range pattern,
                      final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         this.rangePattern = pattern;
     }
 

@@ -51,7 +51,7 @@ public class AutomationList extends AutomationBase {
      */
     public AutomationList(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 //        this.selectionPattern = this.getSelectionPattern();
     }
 
@@ -66,7 +66,7 @@ public class AutomationList extends AutomationBase {
     public AutomationList(final AutomationElement element,
                           final Selection selection)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
         this.selectionPattern = selection;
     }
 

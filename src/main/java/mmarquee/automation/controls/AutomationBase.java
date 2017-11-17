@@ -79,59 +79,73 @@ public abstract class AutomationBase implements Automatable {
      */
     protected Invoke invokePattern = null;
 
-    /**
-     * Constructor for the AutomationBase class.
-     *
-     * @param element Element to use.
-     */
-    public AutomationBase(final AutomationElement element) {
-        this.element = element;
-        this.automation = UIAutomation.getInstance();
+//    /**
+//     * Constructor for the AutomationBase class.
+//     *
+//     * @param element Element to use.
+//     */
+//    public AutomationBase(final AutomationElement element) {
+//        this.element = element;
+//        this.automation = UIAutomation.getInstance();
+//    }
+
+    public AutomationBase(final ElementBuilder builder) {
+        this.element = builder.getElement();
+
+        if (builder.getHasAutomation()) {
+            this.automation = builder.getInstance();
+        } else {
+            this.automation = UIAutomation.getInstance();
+        }
+
+        if (builder.getHasInvoke()) {
+            this.invokePattern = builder.getInvoke();
+        }
     }
 
-    /**
-     * Constructor for the AutomationBase class.
-     *
-     * For mocking, etc. Doo not use as part of 'real' code.
-     * @param inElement The element.
-     * @param inAutomation The automation instance.
-     */
-    public AutomationBase(final AutomationElement inElement,
-                          final UIAutomation inAutomation) {
-        this.element = inElement;
-        this.automation = inAutomation;
-    }
+//    /**
+//     * Constructor for the AutomationBase class.
+//     *
+//     * For mocking, etc. Doo not use as part of 'real' code.
+//     * @param inElement The element.
+//     * @param inAutomation The automation instance.
+//     */
+//    public AutomationBase(final AutomationElement inElement,
+//                          final UIAutomation inAutomation) {
+//        this.element = inElement;
+ //       this.automation = inAutomation;
+ //   }
 
-    /**
-     * Constructor for the AutomationBase class.
-     *
-     * For mocking, etc. Doo not use as part of 'real' code.
-     * @param inElement The element.
-     * @param inPattern The invoke pattern.
-     * @param inAutomation The automation instance.
-     */
-    public AutomationBase(final AutomationElement inElement,
-                          final Invoke inPattern,
-                          final UIAutomation inAutomation) {
-        this.element = inElement;
-        this.invokePattern = inPattern;
-        this.automation = inAutomation;
-    }
+//    /**
+//     * Constructor for the AutomationBase class.
+//     *
+//     * For mocking, etc. Doo not use as part of 'real' code.
+//     * @param inElement The element.
+//     * @param inPattern The invoke pattern.
+//     * @param inAutomation The automation instance.
+//     */
+//    public AutomationBase(final AutomationElement inElement,
+//                          final Invoke inPattern,
+//                          final UIAutomation inAutomation) {
+//        this.element = inElement;
+//        this.invokePattern = inPattern;
+//        this.automation = inAutomation;
+//    }
 
-    /**
-     * Constructor for the AutomationBase.
-     *
-     * @param inElement The element.
-     * @param inPattern The pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationBase(final AutomationElement inElement,
-                          final Invoke inPattern)
-            throws PatternNotFoundException, AutomationException {
-        this(inElement);
-        this.invokePattern = inPattern;
-    }
+//    /**
+//     * Constructor for the AutomationBase.
+//     *
+//     * @param inElement The element.
+//     * @param inPattern The pattern.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationBase(final AutomationElement inElement,
+//                          final Invoke inPattern)
+//            throws PatternNotFoundException, AutomationException {
+//        this(inElement);
+//        this.invokePattern = inPattern;
+//    }
     
     /**
      * Gets the underlying automation element.

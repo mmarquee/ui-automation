@@ -44,7 +44,7 @@ public class AutomationProgressBar extends AutomationBase {
      */
     public AutomationProgressBar(final AutomationElement element)
             throws AutomationException, PatternNotFoundException {
-        super(element);
+        super(new ElementBuilder(element));
 
 //        this.rangePattern = this.getRangePattern();
     }
@@ -59,7 +59,7 @@ public class AutomationProgressBar extends AutomationBase {
     AutomationProgressBar(final AutomationElement element,
                           final Range range,
                           final UIAutomation instance) {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
 
         this.rangePattern = range;
     }

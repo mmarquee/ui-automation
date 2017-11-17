@@ -22,6 +22,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -44,7 +45,7 @@ public class AutomationSystemMenu extends AutomationBase {
      */
     public AutomationSystemMenu(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
         this.getItems();
     }
 

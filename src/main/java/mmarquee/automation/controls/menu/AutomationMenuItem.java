@@ -25,6 +25,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.Clickable;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.Expandable;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
@@ -51,7 +52,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      */
     public AutomationMenuItem(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -65,9 +66,8 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
      */
     AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element).invoke(invoke));
         this.collapsePattern = collapse;
-        this.invokePattern = invoke;
     }
 
     public static ControlType controlType = ControlType.MenuItem;

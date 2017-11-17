@@ -50,7 +50,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern.
      */
     public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -62,7 +62,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern.
      */
     public AutomationContainer(AutomationElement element, UIAutomation automation) throws PatternNotFoundException, AutomationException {
-        super(element, automation);
+        super(new ElementBuilder(automation).element(element));
     }
 
     /**
@@ -74,7 +74,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern.
      */
     AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
         itemContainerPattern = pattern;
     }
 
@@ -88,7 +88,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern
      */
     AutomationContainer(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
-        super(element, instance);
+        super(new ElementBuilder(instance).element(element));
         itemContainerPattern = pattern;
     }
 
@@ -101,7 +101,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern.
      */
     AutomationContainer(AutomationElement element, Invoke pattern) throws PatternNotFoundException, AutomationException {
-        super(element, pattern);
+        super(new ElementBuilder(element).invoke(pattern));
     }
     
     /**

@@ -38,7 +38,7 @@ public class AutomationAppBar extends AutomationBase {
      */
     public AutomationAppBar(final AutomationElement element)
             throws AutomationException {
-        super(element);
+        super (new ElementBuilder(element));
     }
 
     /**
@@ -55,6 +55,6 @@ public class AutomationAppBar extends AutomationBase {
     AutomationAppBar(final AutomationElement element,
                      final UIAutomation instance)
             throws AutomationException {
-        super(element, instance);
+        super (new ElementBuilder(element).automation(instance));
     }
 }

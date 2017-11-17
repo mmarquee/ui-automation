@@ -59,7 +59,7 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell(final AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -70,8 +70,10 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    AutomationDataGridCell(final AutomationElement element, final Value value, final UIAutomation instance) throws PatternNotFoundException, AutomationException {
-        super(element, instance);
+    AutomationDataGridCell(final AutomationElement element,
+                           final Value value,
+                           final UIAutomation instance) throws PatternNotFoundException, AutomationException {
+        super(new ElementBuilder(element).automation(instance));
         this.valuePattern = value;
     }
 
@@ -86,7 +88,7 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
      * @throws PatternNotFoundException Expected pattern not found.
      */
     AutomationDataGridCell(AutomationElement element, Value value, GridItem grid, SelectionItem selectionItem) throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
         this.valuePattern = value;
         this.gridItemPattern = grid;
         this.selectionItemPattern = selectionItem;

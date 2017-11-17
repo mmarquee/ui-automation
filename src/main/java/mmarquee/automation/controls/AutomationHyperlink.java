@@ -35,8 +35,9 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationHyperlink(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+    public AutomationHyperlink(final AutomationElement element)
+            throws PatternNotFoundException, AutomationException {
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -49,7 +50,7 @@ public class AutomationHyperlink extends AutomationBase implements Clickable {
      * @throws PatternNotFoundException 
      */
     AutomationHyperlink(AutomationElement element, Invoke pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
-        super(element, pattern, instance);
+        super(new ElementBuilder(element).invoke(pattern).automation(instance));
     }
 
     /**

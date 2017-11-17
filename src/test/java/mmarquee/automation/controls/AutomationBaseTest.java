@@ -81,7 +81,7 @@ public class AutomationBaseTest {
     static class ConcreteAutomationBase extends AutomationBase {
 
 		public ConcreteAutomationBase(AutomationElement element) {
-			super(element);
+			super(new ElementBuilder(element));
 		}
 	}
 

@@ -51,7 +51,7 @@ public class AutomationComboBox
      * @throws PatternNotFoundException Expected pattern(s) not found.
      */
     public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super (element);
+        super (new ElementBuilder(element));
     }
 
     /**
@@ -64,7 +64,7 @@ public class AutomationComboBox
      */
     AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection)
             throws PatternNotFoundException, AutomationException {
-        super (element);
+        super (new ElementBuilder(element));
 
         this.collapsePattern = collapse;
         this.valuePattern = value;
@@ -82,7 +82,7 @@ public class AutomationComboBox
      */
     AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection, UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super (element, instance);
+        super (new ElementBuilder(element).automation(instance));
 
         this.collapsePattern = collapse;
         this.valuePattern = value;

@@ -65,7 +65,7 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
      */
     public AutomationDataGrid(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -84,7 +84,7 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
                        final Table table,
                        final Selection selection,
                        final UIAutomation instance) {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
 
         this.valuePattern = value;
         this.gridPattern = grid;

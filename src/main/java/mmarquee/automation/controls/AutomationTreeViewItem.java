@@ -44,7 +44,7 @@ public class AutomationTreeViewItem
      */
     public AutomationTreeViewItem(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -63,7 +63,7 @@ public class AutomationTreeViewItem
                            final Invoke invoke,
                            final UIAutomation automation)
             throws PatternNotFoundException, AutomationException {
-        super(element,invoke, automation);
+        super(new ElementBuilder(element).invoke(invoke).automation(automation));
         this.selectItemPattern = selection;
         this.expandCollapsePattern = expandCollapsePattern;
     }
@@ -82,7 +82,7 @@ public class AutomationTreeViewItem
                            final ExpandCollapse expandCollapsePattern,
                            final Invoke invoke)
             throws PatternNotFoundException, AutomationException {
-        super(element,invoke);
+        super(new ElementBuilder(element).invoke(invoke));
         this.selectItemPattern = selection;
         this.expandCollapsePattern = expandCollapsePattern;
     }

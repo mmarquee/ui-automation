@@ -37,7 +37,7 @@ public class AutomationImage extends AutomationBase {
      * @throws AutomationException Automation library error
      */
     public AutomationImage(AutomationElement element) throws AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     // Powerpoint weirdness, probably needs it's own class in the end

@@ -45,7 +45,7 @@ public class AutomationTextBox
      */
     public AutomationTextBox(final AutomationElement element)
             throws AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -58,7 +58,7 @@ public class AutomationTextBox
     public AutomationTextBox(final AutomationElement element,
                              final UIAutomation automation)
             throws AutomationException {
-        super(element, automation);
+        super(new ElementBuilder(element).automation(automation));
     }
 
     /**
@@ -73,7 +73,7 @@ public class AutomationTextBox
                       final Value value,
                       final UIAutomation instance)
             throws AutomationException {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         this.valuePattern = value;
     }
 

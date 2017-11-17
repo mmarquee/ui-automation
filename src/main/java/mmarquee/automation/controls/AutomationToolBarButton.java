@@ -38,7 +38,7 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
      */
     public AutomationToolBarButton(final AutomationElement element)
             throws AutomationException {
-        super (element);
+        super (new ElementBuilder(element));
     }
 
     /**
@@ -51,7 +51,7 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
     AutomationToolBarButton(final AutomationElement element,
                             final Invoke invoke)
             throws AutomationException, PatternNotFoundException {
-        super (element, invoke);
+        super (new ElementBuilder(element).invoke(invoke));
     }
 
     /**

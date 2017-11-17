@@ -41,7 +41,7 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
      */
     public AutomationCalendar(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
         this.valuePattern = this.getValuePattern();
     }
 
@@ -53,7 +53,7 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
      */
     public AutomationCalendar(final AutomationElement element,
                               final Value pattern) {
-        super(element);
+        super(new ElementBuilder(element));
         this.valuePattern = pattern;
     }
 
@@ -67,7 +67,7 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
     public AutomationCalendar(final AutomationElement element,
                               final Value pattern,
                               final UIAutomation instance) {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         this.valuePattern = pattern;
     }
 

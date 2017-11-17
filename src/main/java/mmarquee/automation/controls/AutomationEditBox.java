@@ -107,7 +107,7 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
      */
     public AutomationEditBox(AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 //        this.valuePattern = this.getValuePattern();
     }
 
@@ -117,8 +117,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
      * @param value The Value pattern
      * @param instance Automation instance
      */
-    AutomationEditBox(AutomationElement element, Value value, UIAutomation instance) {
-        super(element, instance);
+    AutomationEditBox(final AutomationElement element,
+                      final Value value,
+                      final UIAutomation instance) {
+        super(new ElementBuilder(element).automation(instance));
         this.valuePattern = value;
     }
 }

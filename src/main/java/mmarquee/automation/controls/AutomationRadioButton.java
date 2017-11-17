@@ -49,7 +49,7 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
                           final SelectionItem selection,
                           final UIAutomation instance)
             throws PatternNotFoundException, AutomationException {
-        super(element, instance);
+        super(new ElementBuilder(element).automation(instance));
         selectItemPattern = selection;
     }
 
@@ -62,7 +62,7 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
      */
     public AutomationRadioButton(final AutomationElement element)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(new ElementBuilder(element));
 //        selectItemPattern = this.getSelectItemPattern();
     }
 
