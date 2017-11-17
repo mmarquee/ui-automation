@@ -61,10 +61,10 @@ class TestExplorer extends TestBase {
             AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
             logger.info("First work pane is " + pane.getName());
 
-            AutomationNUIPane uiPane = pane.getNUIPane(0);
+            AutomationNUIPane uiPane = pane.getNUIPane(Search.getBuilder(0).build());
             logger.info("First NUIPane is " + uiPane.getName());
 
-            AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+            AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(Search.getBuilder(0).build());
 
             try {
                 AutomationButton btn = uiHWND.getButton(Search.getBuilder("Minimise the Ribbon").build());

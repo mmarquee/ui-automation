@@ -32,45 +32,59 @@ public class AutomationTabItem extends AutomationContainer {
 
     private SelectionItem selectItemPattern;
 
+//    /**
+//     * Construct the AutomationTabItem.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException      Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationTabItem(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element);
+//        //selectItemPattern = this.getSelectItemPattern();
+//    }
+
+//    /**
+//     * Construct the AutomationTabItem.
+//     *
+//     * @param element The element.
+//     * @param pattern The SelectionItem pattern.
+//     * @throws AutomationException      Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationTabItem(final AutomationElement element,
+//                             final SelectionItem pattern)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element);
+//        this.selectItemPattern = pattern;
+//    }
+
+//    /**
+//     * Construct the AutomationTabItem.
+//     * @param element The element.
+//     * @param automation The automation instance
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+    //   public AutomationTabItem(final AutomationElement element,
+//                             final UIAutomation automation)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element, automation);
+//       // this.selectItemPattern = pattern;
+//    }
+
     /**
      * Construct the AutomationTabItem.
      *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
+     * @param builder The builder.
+     * @throws AutomationException      Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationTabItem(final AutomationElement element)
+    public AutomationTabItem(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(element);
-        //selectItemPattern = this.getSelectItemPattern();
-    }
-
-    /**
-     * Construct the AutomationTabItem.
-     * @param element The element.
-     * @param pattern The SelectionItem pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationTabItem(final AutomationElement element,
-                             final SelectionItem pattern)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.selectItemPattern = pattern;
-    }
-
-    /**
-     * Construct the AutomationTabItem.
-     * @param element The element.
-     * @param automation The automation instance
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationTabItem(final AutomationElement element,
-                             final UIAutomation automation)
-            throws PatternNotFoundException, AutomationException {
-        super(element, automation);
-       // this.selectItemPattern = pattern;
+        super(builder);
+        this.selectItemPattern = builder.getSelectItemPattern();
     }
 
     /**

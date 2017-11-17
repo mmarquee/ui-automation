@@ -101,9 +101,9 @@ public class AutomationControlFactory {
     	case RadioButton:
     		return new AutomationRadioButton(element);
     	case Slider:
-    		return new AutomationSlider(element);
+    		return new AutomationSlider(new ElementBuilder(element));
     	case Spinner:
-    		return new AutomationSpinner(element);
+    		return new AutomationSpinner(new ElementBuilder(element));
     	case StatusBar:
     		return new AutomationStatusBar(element);
     	case Tab:
@@ -130,19 +130,19 @@ public class AutomationControlFactory {
     		return new AutomationWindow(element);
     	case Pane:
 			if (AutomationReBar.CLASS_NAME.equals(className)) {
-				return new AutomationReBar(element);
+				return new AutomationReBar(new ElementBuilder(element));
 			} else if (AutomationRibbonBar.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonBar(element);
+				return new AutomationRibbonBar(new ElementBuilder(element));
 			} else if (AutomationRibbonCommandBar.CLASS_NAME.equals(className)) {
 				return new AutomationRibbonCommandBar(element);
 			} else if (AutomationRibbonWorkPane.CLASS_NAME.equals(className)) {
 				return new AutomationRibbonWorkPane(element);
 			} else if (AutomationNUIPane.CLASS_NAME.equals(className)) {
-				return new AutomationNUIPane(element);
+				return new AutomationNUIPane(new ElementBuilder(element));
 			} else if (AutomationNetUIHWND.CLASS_NAME.equals(className)) {
-				return new AutomationNetUIHWND(element);
+				return new AutomationNetUIHWND(new ElementBuilder(element));
 			}
-    		return new AutomationPanel(element);
+    		return new AutomationPanel(new ElementBuilder(element));
     	case TitleBar:
     		return new AutomationTitleBar(element);
     	case AppBar:
@@ -160,7 +160,7 @@ public class AutomationControlFactory {
     	case SemanticZoom:
     	default:
     		// best try
-            return new AutomationContainer(element);
+            return new AutomationContainer(new ElementBuilder(element));
     	}
     }
 }

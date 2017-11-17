@@ -35,36 +35,42 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      */
     private Value valuePattern;
 
-    /**
-     * Constructor for the AutomationCustom.
-     *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public AutomationCustom(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
+//    /**
+//     * Constructor for the AutomationCustom.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    public AutomationCustom(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element);
+//    }
 
-    /**
-     * Constructor for the AutomationCustom control.
-     *
-     * @param element The element.
-     * @param container ItemContainer pattern.
-     * @param value The Value pattern to use.
-     * @param instance The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    AutomationCustom(final AutomationElement element,
-                     final ItemContainer container,
-                     final Value value,
-                     final UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container, instance);
+//    /**
+//     * Constructor for the AutomationCustom control.
+//     *
+//     * @param element The element.
+//     * @param container ItemContainer pattern.
+ //    * @param value The Value pattern to use.
+  //   * @param instance The automation instance.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    AutomationCustom(final AutomationElement element,
+//                     final ItemContainer container,
+//                     final Value value,
+//                     final UIAutomation instance)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element, container, instance);
+//
+//        this.valuePattern = value;
+//    }
 
-        this.valuePattern = value;
+    public AutomationCustom(final ElementBuilder builder)
+            throws PatternNotFoundException, AutomationException {
+        super(builder);
+        this.valuePattern = builder.getValue();
     }
 
     /**
@@ -83,17 +89,17 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
         return this.valuePattern.value();
     }
 
-    /**
-     * Constructor for the AutomationCustom.
-     *
-     * @param element The element.
-     * @param container ItemContainer pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    AutomationCustom(final AutomationElement element,
-                     final ItemContainer container)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container);
-    }
+//    /**
+//     * Constructor for the AutomationCustom.
+//     *
+//     * @param element The element.
+//     * @param container ItemContainer pattern.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    AutomationCustom(final AutomationElement element,
+//                     final ItemContainer container)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element, container);
+ //   }
 }

@@ -34,27 +34,27 @@ import mmarquee.automation.uiautomation.TreeScope;
 public class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
-     * @param element The underlying automation element
+     * @param builder The builder
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    public AutomationTitleBar(final AutomationElement element)
+    public AutomationTitleBar(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(element);
+        super(builder);
     }
 
-    /**
-     * Constructor for the AutomationTitleBar.
-     * @param element The underlying automation element
-     * @param container The underlying item container pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public AutomationTitleBar(final AutomationElement element,
-                              final ItemContainer container)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container);
-    }
+//    /**
+//     * Constructor for the AutomationTitleBar.
+//     * @param element The underlying automation element
+//     * @param container The underlying item container pattern
+//     * @throws AutomationException Automation library error
+//     * @throws PatternNotFoundException Failed to find pattern
+//     */
+//    public AutomationTitleBar(final AutomationElement element,
+//                              final ItemContainer container)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element, container);
+//    }
 
     /**
      * Gets the menu bar for this title-bar.

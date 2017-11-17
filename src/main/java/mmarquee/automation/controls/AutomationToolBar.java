@@ -32,47 +32,45 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * IDockProvider, IExpandCollapse,
  */
 public class AutomationToolBar extends AutomationContainer {
-    /**
-     * Constructor for the AutomationToolBar.
-     *
-     * @param element The underlying automation element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Could not find pattern.
-     */
-    public AutomationToolBar(final AutomationElement element)
-            throws AutomationException, PatternNotFoundException {
-        super(element);
-    }
+//    /**
+//     * Constructor for the AutomationToolBar.
+//     *
+//     * @param element The underlying automation element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Could not find pattern.
+//     */
+//    public AutomationToolBar(final AutomationElement element)
+//            throws AutomationException, PatternNotFoundException {
+ //       super(element);
+//    }
 
     /**
      * Constructor for the AutomationToolBar.
      *
-     * @param element The underlying automation element.
-     * @param container The ItemContainer pattern.
+     * @param builder The builder
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationToolBar(final AutomationElement element,
-                             final ItemContainer container)
+    public AutomationToolBar(final ElementBuilder builder)
             throws AutomationException, PatternNotFoundException {
-        super(element, container);
+        super(builder);
     }
 
-    /**
-     * Constructor for the AutomationToolBar.
-     *
-     * @param element The underlying automation element.
-     * @param container The ItemContainer pattern.
-     * @param instance The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Could not find pattern.
-     */
-    public AutomationToolBar(final AutomationElement element,
-                             final ItemContainer container,
-                             final UIAutomation instance)
-            throws AutomationException, PatternNotFoundException {
-        super(element, container, instance);
-    }
+//    /**
+//     * Constructor for the AutomationToolBar.
+//     *
+//     * @param element The underlying automation element.
+//     * @param container The ItemContainer pattern.
+//     * @param instance The automation instance.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Could not find pattern.
+//     */
+//    public AutomationToolBar(final AutomationElement element,
+//                             final ItemContainer container,
+//                             final UIAutomation instance)
+//            throws AutomationException, PatternNotFoundException {
+//        super(element, container, instance);
+//    }
 
     /**
      * Gets the button control associated with the given index.

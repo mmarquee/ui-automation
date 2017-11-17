@@ -37,45 +37,57 @@ public class AutomationListItem extends AutomationContainer
      */
     SelectionItem selectItemPattern;
 
-    /**
-     * Constructor for the AutomationListItem.
-     * @param inElement The underlying automation element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationListItem(final AutomationElement inElement)
-            throws PatternNotFoundException, AutomationException {
-        super(inElement);
-    }
+//    /**
+//     * Constructor for the AutomationListItem.
+//     * @param inElement The underlying automation element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationListItem(final AutomationElement inElement)
+//            throws PatternNotFoundException, AutomationException {
+//        super(inElement);
+//    }
 
     /**
      * Constructor for the AutomationListItem.
-     * @param inElement The underlying automation element.
-     * @param inAutomation Automation instance
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationListItem(final AutomationElement inElement,
-                              final UIAutomation inAutomation)
-            throws PatternNotFoundException, AutomationException {
-        super(inElement, inAutomation);
-    }
-
-    /**
-     * Constructor for the AutomationListItem.
-     * @param inElement The underlying automation element.
-     * @param inSelectItemPattern The associated selectionItem pattern.
-     * @param inPattern The invoke pattern.
+     * @param builder The builder
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    AutomationListItem(final AutomationElement inElement,
-                       final SelectionItem inSelectItemPattern,
-                       final Invoke inPattern)
+    public AutomationListItem(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(inElement, inPattern);
-        this.selectItemPattern = inSelectItemPattern;
+        super(builder);
+        this.selectItemPattern = builder.getSelectItemPattern();
     }
+
+//    /**
+//     * Constructor for the AutomationListItem.
+//     * @param inElement The underlying automation element.
+//     * @param inAutomation Automation instance
+//     * @throws AutomationException Automation library error
+//     * @throws PatternNotFoundException Expected pattern not found
+//     */
+//    public AutomationListItem(final AutomationElement inElement,
+//                              final UIAutomation inAutomation)
+//            throws PatternNotFoundException, AutomationException {
+//        super(inElement, inAutomation);
+//    }
+
+//    /**
+//     * Constructor for the AutomationListItem.
+//     * @param inElement The underlying automation element.
+//     * @param inSelectItemPattern The associated selectionItem pattern.
+//     * @param inPattern The invoke pattern.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+ //    */
+//    AutomationListItem(final AutomationElement inElement,
+//                       final SelectionItem inSelectItemPattern,
+//                       final Invoke inPattern)
+//            throws PatternNotFoundException, AutomationException {
+//        super(inElement, inPattern);
+//        this.selectItemPattern = inSelectItemPattern;
+//    }
 
     /**
      * Selects this item.

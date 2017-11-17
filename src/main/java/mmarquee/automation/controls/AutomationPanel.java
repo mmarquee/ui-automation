@@ -31,47 +31,60 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 26/02/2016.
  */
 public class AutomationPanel extends AutomationContainer {
-    /**
-     * Construct the AutomationPanel.
-     *
-     * @param element The element.
-     * @throws AutomationException Something is wrong in automation.
-     * @throws PatternNotFoundException Could not find pattern.
-     */
-    public AutomationPanel(final AutomationElement element)
-            throws AutomationException, PatternNotFoundException {
-        super(element);
-    }
+//    /**
+//     * Construct the AutomationPanel.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Something is wrong in automation.
+//     * @throws PatternNotFoundException Could not find pattern.
+//     */
+//    public AutomationPanel(final AutomationElement element)
+//            throws AutomationException, PatternNotFoundException {
+//        super(element);
+//    }
+
 
     /**
      * Construct the AutomationPanel.
      *
-     * @param element The element.
-     * @param containerPattern The itemContainer pattern.
-     * @param instance Automation instance.
+     * @param builder The builder
      * @throws AutomationException Something is wrong in automation.
      * @throws PatternNotFoundException Could not find pattern.
      */
-    AutomationPanel(final AutomationElement element,
-                    final ItemContainer containerPattern,
-                    final UIAutomation instance)
+    public AutomationPanel(final ElementBuilder builder)
             throws AutomationException, PatternNotFoundException {
-        super(element, containerPattern, instance);
+        super(builder);
     }
 
-    /**
-     * Construct the AutomationPanel.
-     *
-     * @param element The element.
-     * @param containerPattern The itemContainer pattern.
-     * @throws AutomationException Something is wrong in automation.
-     * @throws PatternNotFoundException Could not find pattern.
-     */
-    AutomationPanel(final AutomationElement element,
-                    final ItemContainer containerPattern)
-            throws AutomationException, PatternNotFoundException {
-        super(element, containerPattern);
-    }
+//    /**
+//     * Construct the AutomationPanel.
+//     *
+ //    * @param element The element.
+//     * @param containerPattern The itemContainer pattern.
+//     * @param instance Automation instance.
+//     * @throws AutomationException Something is wrong in automation.
+//     * @throws PatternNotFoundException Could not find pattern.
+//     */
+//    AutomationPanel(final AutomationElement element,
+//                    final ItemContainer containerPattern,
+//                    final UIAutomation instance)
+//            throws AutomationException, PatternNotFoundException {
+ //       super(element, containerPattern, instance);
+//    }
+
+//    /**
+//     * Construct the AutomationPanel.
+//     *
+//     * @param element The element.
+//     * @param containerPattern The itemContainer pattern.
+//     * @throws AutomationException Something is wrong in automation.
+//     * @throws PatternNotFoundException Could not find pattern.
+//     */
+//    AutomationPanel(final AutomationElement element,
+//                    final ItemContainer containerPattern)
+//            throws AutomationException, PatternNotFoundException {
+//        super(element, containerPattern);
+//    }
 
     /**
      * Gets an MDI window from the panel.

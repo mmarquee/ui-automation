@@ -11,11 +11,14 @@ public class ElementBuilder {
     private AutomationElement element;
     private UIAutomation instance;
 
+    private Range range;
     private Value value;
     private Invoke invoke;
     private Toggle toggle;
     private ExpandCollapse collapse;
     private Selection selection;
+    private ItemContainer itemContainer;
+    private SelectionItem selectionItem;
 
     /**
      * Constructor with an instance.
@@ -38,6 +41,9 @@ public class ElementBuilder {
         this.invoke = null;
         this.value = null;
         this.toggle = null;
+        this.range = null;
+        this.itemContainer = null;
+        this.selectionItem = null;
     }
 
     /**
@@ -45,6 +51,11 @@ public class ElementBuilder {
      */
     public ElementBuilder() {
         this.initialise();
+    }
+
+    public ElementBuilder range(Range pattern) {
+        this.range = pattern;
+        return this;
     }
 
     public ElementBuilder toggle(Toggle pattern) {
@@ -59,6 +70,16 @@ public class ElementBuilder {
 
     public ElementBuilder collapse(ExpandCollapse pattern) {
         this.collapse = pattern;
+        return this;
+    }
+
+    public ElementBuilder itemContainer(ItemContainer pattern) {
+        this.itemContainer = pattern;
+        return this;
+    }
+
+    public ElementBuilder selectionItem(SelectionItem pattern) {
+        this.selectionItem = pattern;
         return this;
     }
 
@@ -95,6 +116,10 @@ public class ElementBuilder {
         return this.invoke;
     }
 
+    public Range getRange() {
+        return this.range;
+    }
+
     public Value getValue() {
         return this.value;
     }
@@ -102,6 +127,8 @@ public class ElementBuilder {
     public Toggle getToggle() {
         return this.toggle;
     }
+
+    public SelectionItem getSelectItemPattern() { return this.selectionItem;  }
 
     public ExpandCollapse getCollapse() { return this.collapse; }
 
@@ -111,6 +138,8 @@ public class ElementBuilder {
         return this.element;
     }
 
+    public ItemContainer getItemContainer() { return this.itemContainer; }
+
     public boolean getHasAutomation() {
         return this.instance != null;
     }
@@ -119,5 +148,5 @@ public class ElementBuilder {
         return this.invoke != null;
     }
 
-     public boolean getHasValue() { return this.value != null; }
+    public boolean getHasValue() { return this.value != null; }
 }

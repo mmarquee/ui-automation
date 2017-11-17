@@ -35,50 +35,63 @@ public class AutomationRibbonCommandBar extends AutomationContainer {
      */
 	public final static String CLASS_NAME = "UIRibbonCommandBar";
 	
-    /**
-     * Construct the AutomationRibbonCommandBar.
-     *
-     * @param element The element.
-     * @throws AutomationException Something is wrong in automation.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public AutomationRibbonCommandBar(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-        assertClassName(CLASS_NAME);
-    }
+//    /**
+//     * Construct the AutomationRibbonCommandBar.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Something is wrong in automation.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    public AutomationRibbonCommandBar(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element);
+//        assertClassName(CLASS_NAME);
+ //   }
 
     /**
      * Construct the AutomationRibbonCommandBar.
      *
-     * @param element The element.
-     * @param container The container Pattern.
-     * @param instance Automation instance.
-     * @throws AutomationException Something is wrong in automation
-     * @throws PatternNotFoundException Pattern not found
-     */
-    AutomationRibbonCommandBar(final AutomationElement element,
-                               final ItemContainer container,
-                               final UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container, instance);
-        assertClassName(CLASS_NAME);
-    }
-
-    /**
-     * Construct the AutomationRibbonCommandBar.
-     *
-     * @param element The element.
-     * @param container The container Pattern.
+     * @param builder The builder.
      * @throws AutomationException Something is wrong in automation.
      * @throws PatternNotFoundException Pattern not found.
      */
-    AutomationRibbonCommandBar(final AutomationElement element,
-                               final ItemContainer container)
+    public AutomationRibbonCommandBar(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(element, container);
+        super(builder);
         assertClassName(CLASS_NAME);
     }
+
+//    /**
+//     * Construct the AutomationRibbonCommandBar.
+//     *
+//     * @param element The element.
+//     * @param container The container Pattern.
+//     * @param instance Automation instance.
+//     * @throws AutomationException Something is wrong in automation
+//     * @throws PatternNotFoundException Pattern not found
+//     */
+//    AutomationRibbonCommandBar(final AutomationElement element,
+//                               final ItemContainer container,
+//                               final UIAutomation instance)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element, container, instance);
+//        assertClassName(CLASS_NAME);
+//    }
+
+//    /**
+//     * Construct the AutomationRibbonCommandBar.
+//     *
+//     * @param element The element.
+//     * @param container The container Pattern.
+//     * @throws AutomationException Something is wrong in automation.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    AutomationRibbonCommandBar(final AutomationElement element,
+//                               final ItemContainer container)
+//            throws PatternNotFoundException, AutomationException {
+ //       super(element, container);
+ //       assertClassName(CLASS_NAME);
+ //   }
 
     /**
      * Get the RibbonWorkPane associated with the container.

@@ -26,13 +26,18 @@ import mmarquee.automation.ControlType;
  * Wrapper for the Spinner element.
  */
 public class AutomationSpinner extends AutomationBase {
-    /**
-     * Construct the AutomationSpinner.
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     */
-    public AutomationSpinner(final AutomationElement element)
+//    /**
+//     * Construct the AutomationSpinner.
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     */
+//    public AutomationSpinner(final AutomationElement element)
+//            throws AutomationException {
+//        super(new ElementBuilder(element));
+//    }
+
+    public AutomationSpinner(final ElementBuilder builder)
             throws AutomationException {
-        super(new ElementBuilder(element));
+        super(builder);
     }
 }

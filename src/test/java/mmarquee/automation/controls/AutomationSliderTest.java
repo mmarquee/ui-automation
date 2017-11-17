@@ -47,7 +47,8 @@ public class AutomationSliderTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSlider slider = new AutomationSlider(element, pattern, instance);
+        AutomationSlider slider = new AutomationSlider(
+                new ElementBuilder(element).automation(instance).range(pattern));
 
         String name = slider.getName();
 
@@ -64,7 +65,8 @@ public class AutomationSliderTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSlider slider = new AutomationSlider(element, pattern, instance);
+        AutomationSlider slider = new AutomationSlider(
+                new ElementBuilder(element).automation(instance).range(pattern));
 
         double value = slider.getRangeValue();
 
@@ -79,7 +81,8 @@ public class AutomationSliderTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSlider slider = new AutomationSlider(element, pattern, instance);
+        AutomationSlider slider = new AutomationSlider(
+                new ElementBuilder(element).automation(instance).range(pattern));
 
         slider.setRangeValue(99.0);
 

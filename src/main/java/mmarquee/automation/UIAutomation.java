@@ -24,6 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
@@ -563,7 +564,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationPanel getDesktop()
             throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.rootElement);
+        return new AutomationPanel(new ElementBuilder(this.rootElement));
     }
 
     /**
@@ -576,7 +577,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationPanel getDesktopObject(final String title)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationPanel(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
+        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS)));
     }
 
     /**
@@ -657,7 +658,7 @@ public class UIAutomation extends BaseAutomation {
         List<AutomationElement> collection = getRootChildren(ControlType.Pane);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationPanel(element));
+            result.add(new AutomationPanel(new ElementBuilder(element)));
         }
 
         return result;

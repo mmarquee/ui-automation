@@ -34,51 +34,64 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * The class name for this panel type.
      */
 	public final static String CLASS_NAME = "UIRibbonWorkPane";
-	
-    /**
-     * Construct the AutomationRibbonWorkPane.
-     *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Patter not found.
-     */
-    public AutomationRibbonWorkPane(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-        assertClassName(CLASS_NAME);
-    }
+
+//    /**
+//     * Construct the AutomationRibbonWorkPane.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Patter not found.
+//     */
+//    public AutomationRibbonWorkPane(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element);
+//        assertClassName(CLASS_NAME);
+//    }
 
     /**
      * Construct the AutomationRibbonWorkPane.
      *
-     * @param element The element.
-     * @param containerPattern The container Pattern.
-     * @param instance Automation instance.
+     * @param builder The builder.
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Patter not found.
      */
-    AutomationRibbonWorkPane(final AutomationElement element,
-                             final ItemContainer containerPattern,
-                             final UIAutomation instance)
+    public AutomationRibbonWorkPane(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(element, containerPattern, instance);
+        super(builder);
         assertClassName(CLASS_NAME);
     }
 
-    /**
-     * Construct the AutomationRibbonWorkPane.
-     *
-     * @param element The element.
-     * @param containerPattern The container Pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Patter not found.
-     */
-    AutomationRibbonWorkPane(final AutomationElement element,
-                             final ItemContainer containerPattern)
-            throws PatternNotFoundException, AutomationException {
-        super(element, containerPattern);
-        assertClassName(CLASS_NAME);
-    }
+//    /**
+//     * Construct the AutomationRibbonWorkPane.
+//     *
+//     * @param element The element.
+//     * @param containerPattern The container Pattern.
+//     * @param instance Automation instance.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Patter not found.
+//     */
+ //   AutomationRibbonWorkPane(final AutomationElement element,
+//                             final ItemContainer containerPattern,
+//                             final UIAutomation instance)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element, containerPattern, instance);
+//        assertClassName(CLASS_NAME);
+//    }
+
+//    /**
+////     * Construct the AutomationRibbonWorkPane.
+//     *
+//     * @param element The element.
+//     * @param containerPattern The container Pattern.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Patter not found.
+//     */
+//    AutomationRibbonWorkPane(final AutomationElement element,
+//                             final ItemContainer containerPattern)
+//            throws PatternNotFoundException, AutomationException {
+ //       super(element, containerPattern);
+//        assertClassName(CLASS_NAME);
+//    }
 
     /**
      * Get the AutomationNUIPane associated with the given index.
@@ -88,9 +101,24 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      * @throws AutomationException Automation issue.
      * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationNUIPane getNUIPane(final int index)
+    private AutomationNUIPane getNUIPane(final int index)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationNUIPane(this.getElementByControlType(index, ControlType.Pane, AutomationNUIPane.CLASS_NAME));
+        return new AutomationNUIPane(new ElementBuilder(this.getElementByControlType(index,
+                ControlType.Pane, AutomationNUIPane.CLASS_NAME)));
     }
+
+    /**
+     * Get the AutomationNUIPane associated with the given index.
+     *
+     * @param search The search.
+     * @return The AutomationNUIPane.
+     * @throws AutomationException Automation issue.
+     * @throws PatternNotFoundException Pattern not found.
+     */
+    public AutomationNUIPane getNUIPane(final Search search)
+            throws PatternNotFoundException, AutomationException {
+        return getNUIPane(search.getId());
+    }
+
 }
 

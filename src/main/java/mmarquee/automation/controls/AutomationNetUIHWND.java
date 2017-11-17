@@ -22,23 +22,34 @@ import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Specialist pane that represents the NetUIHWND (part of the MS ribbon controls).
+ *
  * @author Mark Humphreys
  * Date 02/03/2016.
- *
- * Specialist pane that represents the NetUIHWND (part of the MS ribbon controls)
  */
 public class AutomationNetUIHWND extends AutomationPanel {
 	
 	public final static String CLASS_NAME = "NetUIHWND";
 	
+//    /**
+//     * Construct the AutomationNetUIHWND
+//     * @param element The element
+//     * @throws AutomationException Automation library error
+//     * @throws PatternNotFoundException Pattern not found
+//     */
+//    public AutomationNetUIHWND(AutomationElement element) throws PatternNotFoundException, AutomationException {
+//        super(element);
+//        assertClassName(CLASS_NAME);
+//    }
+
     /**
-     * Construct the AutomationNetUIHWND
-     * @param element The element
+     * Construct the AutomationNetUIHWND.
+     * @param builder The builder
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationNetUIHWND(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+    public AutomationNetUIHWND(final ElementBuilder builder) throws PatternNotFoundException, AutomationException {
+        super(builder);
         assertClassName(CLASS_NAME);
     }
 }
