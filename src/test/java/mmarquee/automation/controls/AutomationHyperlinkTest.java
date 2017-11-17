@@ -31,7 +31,8 @@ public class AutomationHyperlinkTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationHyperlink link = new AutomationHyperlink(element, pattern, instance);
+        AutomationHyperlink link = new AutomationHyperlink(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         String name = link.getName();
 
@@ -48,7 +49,8 @@ public class AutomationHyperlinkTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationHyperlink link = new AutomationHyperlink(element, pattern, instance);
+        AutomationHyperlink link = new AutomationHyperlink(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         link.click();
 
@@ -65,7 +67,8 @@ public class AutomationHyperlinkTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationHyperlink link = new AutomationHyperlink(element, pattern, instance);
+        AutomationHyperlink link = new AutomationHyperlink(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         link.click();
 

@@ -36,15 +36,24 @@ public class AutomationButton
     /**
      * Constructor for the AutomationButton.
      *
+     * @param builder The builder
+     */
+    public AutomationButton(final ElementBuilder builder) {
+        super(builder);
+    }
+
+    /**
+     * Constructor for the AutomationButton.
+     *
      * @param element The underlying automation element.
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationButton(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
-//        this.invokePattern = this.getInvokePattern();
-    }
+//    public AutomationButton(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+////        this.invokePattern = this.getInvokePattern();
+//    }
 
     /**
      * Constructor for the AutomationButton.
@@ -54,11 +63,11 @@ public class AutomationButton
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationButton(final AutomationElement element,
-                            final Invoke pattern)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element).invoke(pattern));
-    }
+//    public AutomationButton(final AutomationElement element,
+//                            final Invoke pattern)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element).invoke(pattern));
+//    }
 
     /**
      * Constructor for the AutomationButton.
@@ -69,12 +78,12 @@ public class AutomationButton
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationButton(final AutomationElement element,
-                            final Invoke pattern,
-                            final UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element).automation(instance).invoke(pattern));
-    }
+//    public AutomationButton(final AutomationElement element,
+//                            final Invoke pattern,
+//                            final UIAutomation instance)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element).automation(instance).invoke(pattern));
+//    }
 
     /**
      * <p>

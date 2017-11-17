@@ -29,29 +29,34 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public class AutomationHyperlink extends AutomationBase implements Clickable {
 
-    /**
-     * Constructor for the AutomationHyperlink
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationHyperlink(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
+//    /**
+//     * Constructor for the AutomationHyperlink
+//     * @param element The underlying automation element
+//     * @throws AutomationException Automation library error
+//     * @throws PatternNotFoundException Expected pattern not found
+//     */
+//    public AutomationHyperlink(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+//    }
+
+    public AutomationHyperlink(final ElementBuilder builder) {
+           // throws PatternNotFoundException, AutomationException {
+        super(builder);
     }
 
-    /**
-     * Constructor for the AutomationHyperlink
-     * 
-     * @param element The underlying automation element
-     * @param pattern Invoke pattern
-     * @param instance Automation instance
-     * @throws AutomationException 
-     * @throws PatternNotFoundException 
-     */
-    AutomationHyperlink(AutomationElement element, Invoke pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element).invoke(pattern).automation(instance));
-    }
+//    /**
+//     * Constructor for the AutomationHyperlink
+//     *
+//     * @param element The underlying automation element
+//     * @param pattern Invoke pattern
+ //    * @param instance Automation instance
+//     * @throws AutomationException
+//     * @throws PatternNotFoundException
+//     */
+//    AutomationHyperlink(AutomationElement element, Invoke pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element).invoke(pattern).automation(instance));
+ //   }
 
     /**
      * Fires the click event associated with this element.

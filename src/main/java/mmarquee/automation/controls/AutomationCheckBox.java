@@ -71,43 +71,48 @@ public class AutomationCheckBox
         return this.togglePattern.currentToggleState();
     }
 
-    /**
-     * Constructor for the AutomationCheckBox.
-     *
-     * @param element The element.
-     * @throws AutomationException Automation exception.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public AutomationCheckBox (final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
+//    /**
+//     * Constructor for the AutomationCheckBox.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation exception.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    public AutomationCheckBox (final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+//    }
+
+    public AutomationCheckBox (final ElementBuilder builder) {
+        super(builder);
+        togglePattern = builder.getToggle();
     }
 
-    /**
-     * Constructor for the AutomationCheckBox.
-     *
-     * @param element The element.
-     * @param pattern The pattern.
-     * @param instance Automation instance.
-     */
-    public AutomationCheckBox(final AutomationElement element,
-                              final Toggle pattern,
-                              final UIAutomation instance) {
-        super(new ElementBuilder(element).automation(instance));
-        togglePattern = pattern;
-    }
-
-    /**
-     * Constructor for the AutomationCheckBox.
-     *
-     * @param element The element.
-     * @param pattern The pattern.
-     */
-    public AutomationCheckBox(final AutomationElement element,
-                              final Toggle pattern) {
-        super(new ElementBuilder(element));
-        togglePattern = pattern;
-    }
+//    /**
+//     * Constructor for the AutomationCheckBox.
+//     *
+//     * @param element The element.
+//     * @param pattern The pattern.
+//     * @param instance Automation instance.
+//     */
+//    public AutomationCheckBox(final AutomationElement element,
+//                              final Toggle pattern,
+//                              final UIAutomation instance) {
+//        super(new ElementBuilder(element).automation(instance));
+//        togglePattern = pattern;
+ //   }
+//
+//    /**
+//     * Constructor for the AutomationCheckBox.
+//     *
+ //    * @param element The element.
+//     * @param pattern The pattern.
+//     */
+//    public AutomationCheckBox(final AutomationElement element,
+//                              final Toggle pattern) {
+//        super(new ElementBuilder(element));
+//        togglePattern = pattern;
+//    }
 
     /**
      * <p>

@@ -2,7 +2,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.*;
 
 /**
  * The pattern builder.
@@ -10,7 +10,12 @@ import mmarquee.automation.pattern.Invoke;
 public class ElementBuilder {
     private AutomationElement element;
     private UIAutomation instance;
+
+    private Value value;
     private Invoke invoke;
+    private Toggle toggle;
+    private ExpandCollapse collapse;
+    private Selection selection;
 
     /**
      * Constructor with an instance.
@@ -31,17 +36,39 @@ public class ElementBuilder {
         this.element = null;
         this.instance = null;
         this.invoke = null;
+        this.value = null;
+        this.toggle = null;
     }
 
     /**
-     * Constructor with an element.
+     * Base constructor.
      */
     public ElementBuilder() {
         this.initialise();
     }
 
+    public ElementBuilder toggle(Toggle pattern) {
+        this.toggle = pattern;
+        return this;
+    }
+
+    public ElementBuilder select(Selection pattern) {
+        this.selection = pattern;
+        return this;
+    }
+
+    public ElementBuilder collapse(ExpandCollapse pattern) {
+        this.collapse = pattern;
+        return this;
+    }
+
     public ElementBuilder element(AutomationElement element) {
         this.element = element;
+        return this;
+    }
+
+    public ElementBuilder value(Value pattern) {
+        this.value = pattern;
         return this;
     }
 
@@ -55,6 +82,11 @@ public class ElementBuilder {
         return this;
     }
 
+    public ElementBuilder selection(Selection pattern) {
+        this.selection = pattern;
+        return this;
+    }
+
     public UIAutomation getInstance() {
         return this.instance;
     }
@@ -62,6 +94,18 @@ public class ElementBuilder {
     public Invoke getInvoke() {
         return this.invoke;
     }
+
+    public Value getValue() {
+        return this.value;
+    }
+
+    public Toggle getToggle() {
+        return this.toggle;
+    }
+
+    public ExpandCollapse getCollapse() { return this.collapse; }
+
+    public Selection getSelection() { return this.selection; }
 
     public AutomationElement getElement() {
         return this.element;
@@ -74,4 +118,6 @@ public class ElementBuilder {
     public boolean getHasInvoke() {
         return this.invoke != null;
     }
+
+     public boolean getHasValue() { return this.value != null; }
 }

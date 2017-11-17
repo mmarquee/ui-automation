@@ -68,13 +68,13 @@ public class AutomationControlFactory {
     	String className = element.getClassName();
     	switch (controlType) {
     	case Button:
-    		return new AutomationButton(element);
+    		return new AutomationButton(new ElementBuilder(element));
     	case Calendar:
-    		return new AutomationCalendar(element);
+    		return new AutomationCalendar(new ElementBuilder(element));
     	case CheckBox:
-    		return new AutomationCheckBox(element);
+    		return new AutomationCheckBox(new ElementBuilder(element));
     	case ComboBox:
-    		return new AutomationComboBox(element);
+    		return new AutomationComboBox(new ElementBuilder(element));
     	case Edit:
 			if (AutomationPasswordEditBox.CLASS_NAME.equals(className)) {
 				return new AutomationPasswordEditBox(element);
@@ -83,9 +83,9 @@ public class AutomationControlFactory {
 			}
     		return new AutomationEditBox(element);
     	case Hyperlink:
-    		return new AutomationHyperlink(element);
+    		return new AutomationHyperlink(new ElementBuilder(element));
     	case Image:
-    		return new AutomationImage(element);
+    		return new AutomationImage(new ElementBuilder(element));
     	case ListItem:
     		return new AutomationListItem(element);
     	case List:
@@ -125,7 +125,7 @@ public class AutomationControlFactory {
     	case Document:
     		return new AutomationDocument(element);
     	case SplitButton:
-    		return new AutomationSplitButton(element);
+    		return new AutomationSplitButton(new ElementBuilder(element));
     	case Window:
     		return new AutomationWindow(element);
     	case Pane:

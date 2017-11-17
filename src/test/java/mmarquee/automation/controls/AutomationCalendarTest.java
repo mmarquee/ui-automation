@@ -40,7 +40,8 @@ public class AutomationCalendarTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCalendar calendar = new AutomationCalendar(element, pattern, instance);
+        AutomationCalendar calendar = new AutomationCalendar(
+                new ElementBuilder(element).automation(instance).value(pattern));
 
         String name = calendar.getName();
 
@@ -58,7 +59,8 @@ public class AutomationCalendarTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCalendar calendar = new AutomationCalendar(element, pattern, instance);
+        AutomationCalendar calendar = new AutomationCalendar(
+                new ElementBuilder(element).automation(instance).value(pattern));
 
         String value = calendar.getValue();
 

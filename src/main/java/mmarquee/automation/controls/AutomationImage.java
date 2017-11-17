@@ -31,13 +31,17 @@ import java.util.List;
  * Wrapper for the Image control element.
  */
 public class AutomationImage extends AutomationBase {
-    /**
-     * Construct the AutomationImage
-     * @param element The element
-     * @throws AutomationException Automation library error
-     */
-    public AutomationImage(AutomationElement element) throws AutomationException {
-        super(new ElementBuilder(element));
+//    /**
+//     * Construct the AutomationImage
+//     * @param element The element
+//     * @throws AutomationException Automation library error
+//     */
+//    public AutomationImage(AutomationElement element) throws AutomationException {
+//        super(new ElementBuilder(element));
+//    }
+
+    public AutomationImage(final ElementBuilder builder) throws AutomationException {
+        super(builder);
     }
 
     // Powerpoint weirdness, probably needs it's own class in the end
