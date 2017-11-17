@@ -104,7 +104,7 @@ public class AutomationApplicationTest {
                 false,
                 instance);
 
-        AutomationWindow window = app.getWindow("Untitled - Notepad");
+        AutomationWindow window = app.getWindow(Search.getBuilder("Untitled - Notepad").build());
         assertEquals(targetElement,window.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -119,7 +119,7 @@ public class AutomationApplicationTest {
                 false,
                 instance);
 
-        app.getWindow("Untitled - Notepad");
+        app.getWindow(Search.getBuilder("Untitled - Notepad").build());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -136,7 +136,7 @@ public class AutomationApplicationTest {
                 false,
                 instance);
 
-        AutomationWindow window = app.getWindow(Pattern.compile("untitled.+",Pattern.CASE_INSENSITIVE));
+        AutomationWindow window = app.getWindow(Search.getBuilder(Pattern.compile("untitled.+",Pattern.CASE_INSENSITIVE)).build());
         assertEquals(targetElement,window.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -151,7 +151,7 @@ public class AutomationApplicationTest {
                 false,
                 instance);
 
-        app.getWindow(Pattern.compile("bla\\.+blubb"));
+        app.getWindow(Search.getBuilder(Pattern.compile("bla\\.+blubb")).build());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -184,7 +184,7 @@ public class AutomationApplicationTest {
 
         AutomationApplication app = new AutomationApplication(element, handle, false);
 
-        AutomationWindow window = app.getWindow("Untitled - Notepad");
+        AutomationWindow window = app.getWindow(Search.getBuilder("Untitled - Notepad").build());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
