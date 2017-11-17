@@ -16,10 +16,10 @@
 package mmarquee.automation.controls;
 
 /**
+ * The basic definition of an Automation control.
+ *
  * @author Mark Humphreys
  * Date 21/09/2016.
- *
- * The basic definition of an Automation control
  */
 public interface Automatable {
 }

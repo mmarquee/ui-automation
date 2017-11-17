@@ -25,10 +25,10 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Wrapper for the Panel element.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Wrapper for the Panel element.
  */
 public class AutomationPanel extends AutomationContainer {
     /**
@@ -84,7 +84,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something went really wrong.
      * @deprecated Use getWindow(int) instead.
      */
-    public AutomationWindow getMDIWindow(final int index)
+    private AutomationWindow getMDIWindow(final int index)
             throws PatternNotFoundException, AutomationException {
         return getWindow(index);
     }
@@ -97,7 +97,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    public AutomationWindow getWindow(final int index)
+    private AutomationWindow getWindow(final int index)
             throws PatternNotFoundException, AutomationException {
     	return new AutomationWindow(this.getElementByControlType(index, ControlType.Window));
     }
@@ -110,7 +110,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    public AutomationWindow getWindow(final String name)
+    private AutomationWindow getWindow(final String name)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.getElementByControlType(name, ControlType.Window));
     }
@@ -123,7 +123,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    public AutomationWindow getWindow(final Pattern namePattern)
+    private AutomationWindow getWindow(final Pattern namePattern)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.getElementByControlType(namePattern, ControlType.Window));
     }
@@ -136,8 +136,44 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Expected pattern not found.
       */
-    public AutomationWindow getWindowByAutomationId(final String id)
+    private AutomationWindow getWindowByAutomationId(final String id)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(this.getElementByAutomationId(id, ControlType.Window));
+    }
+
+    /**
+     * Gets the window, using the search criteria.
+     * @param search Matcher for the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationWindow getWindow(final Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasPattern()) {
+            return getWindow(search.getPattern());
+        } else if (search.getHasAutomationId()) {
+            return getWindowByAutomationId(search.getAutomationId());
+        } else if (search.getHasId()) {
+            return getWindow(search.getId());
+        } else if (search.getHasName()) {
+            return getWindow(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
+    /**
+     * Gets the window, using the search criteria.
+     * @param search Matcher for the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationWindow getMDIWindow(final Search search) throws PatternNotFoundException, AutomationException {
+        if (search.getHasId()) {
+            return getWindow(search.getId());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 }

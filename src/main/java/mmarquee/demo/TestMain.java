@@ -63,7 +63,7 @@ public class TestMain extends TestBase {
             Object framework = window.getFramework();
             logger.info("Framework is " + framework.toString());
 
-            logger.info("Model? :" + window.isModal());
+            logger.info("Modal? :" + window.isModal());
 
             java.lang.Object rect = window.getBoundingRectangle();
 

@@ -79,7 +79,7 @@ public class AutomationPanelTest {
     public void test_GetWindow_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationWindow window = panel.getWindow(0);
+        AutomationWindow window = panel.getWindow(Search.getBuilder(0).build());
         assertEquals(targetElement,window.element);
 
         verify(panel).createIntegerVariant(ControlType.Window.getValue());
@@ -97,7 +97,7 @@ public class AutomationPanelTest {
     public void test_GetWindow_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationWindow window = panel.getWindow("myName");
+        AutomationWindow window = panel.getWindow(Search.getBuilder("myName").build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createNamePropertyCondition("myName");
@@ -109,7 +109,7 @@ public class AutomationPanelTest {
     public void test_GetWindow_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        panel.getWindow("unknownName");
+        panel.getWindow(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class AutomationPanelTest {
     	when(targetElement.getName()).thenReturn("myName");
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationWindow window = panel.getWindow(Pattern.compile(".+Name"));
+        AutomationWindow window = panel.getWindow(Search.getBuilder(Pattern.compile(".+Name")).build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createControlTypeCondition(ControlType.Window);
@@ -129,14 +129,14 @@ public class AutomationPanelTest {
     	when(targetElement.getName()).thenReturn("myName");
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
     	
-        panel.getWindow(Pattern.compile("unknownName"));
+        panel.getWindow(Search.getBuilder(Pattern.compile("unknownName")).build());
     }
 
     @Test
     public void test_GetWindow_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationWindow window = panel.getWindowByAutomationId("myID");
+        AutomationWindow window = panel.getWindow(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createAutomationIdPropertyCondition("myID");

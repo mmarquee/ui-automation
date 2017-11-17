@@ -47,7 +47,7 @@ public class TestMainPowerpoint extends TestBase {
             // You'll have to do that manually
 
             // 2. Get the sheet
-            AutomationWindow window = application.getWindow("This is text.pptx - PowerPoint");
+            AutomationWindow window = application.getWindow(Search.getBuilder("This is text.pptx - PowerPoint").build());
             logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("MDIClient").build());

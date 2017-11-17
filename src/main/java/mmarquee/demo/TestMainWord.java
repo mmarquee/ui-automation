@@ -44,7 +44,7 @@ public class TestMainWord extends TestBase {
             // 1. Load a file in Word
 
             // 2. Get the sheet
-            AutomationWindow window = application.getWindow("Document1 - Word");
+            AutomationWindow window = application.getWindow(Search.getBuilder("Document1 - Word").build());
             logger.info(window.getName());
 
             AutomationPanel pane = window.getPanel(Search.getBuilder("Document1").build());

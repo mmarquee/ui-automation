@@ -20,10 +20,10 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
 
 /**
+ * Wrapper for the AppBar element.
+ *
  * @author Mark Humphreys
  * Date 02/03/2016.
- *
- * Wrapper for the AppBar element
  */
 public class AutomationAppBar extends AutomationBase {
     /**

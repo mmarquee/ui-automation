@@ -48,7 +48,7 @@ public class TestMainExcel extends TestBase {
             // 1. Load a file in excel
 
             // 2. Get the sheet
-            AutomationWindow window = application.getWindow("Book1 - Excel");
+            AutomationWindow window = application.getWindow(Search.getBuilder("Book1 - Excel").build());
             logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("XLDESK").build());
