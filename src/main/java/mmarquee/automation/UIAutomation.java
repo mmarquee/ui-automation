@@ -30,6 +30,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
+import javax.xml.bind.Element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -379,7 +380,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationWindow getDesktopWindow(final String title, final int retries)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Window, title, retries));
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, retries)));
     }
 
     /**
@@ -407,7 +408,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationWindow getDesktopWindow(final Pattern titlePattern, final int retries)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Window, titlePattern, retries));
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, retries)));
     }
     /**
      * Create an 'and' condition.
@@ -638,7 +639,7 @@ public class UIAutomation extends BaseAutomation {
         List<AutomationElement> collection = getRootChildren(ControlType.Window);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationWindow(element));
+            result.add(new AutomationWindow(new ElementBuilder(element)));
         }
 
         return result;

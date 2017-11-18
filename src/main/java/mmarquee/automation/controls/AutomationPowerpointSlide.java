@@ -27,29 +27,27 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Specialised custom control representing a powerpoint slide.
  */
 public class AutomationPowerpointSlide extends AutomationCustom {
-    /**
-     * Constructor for the AutomationPowerpointSlide.
-     *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public AutomationPowerpointSlide (final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
+//    /**
+//     * Constructor for the AutomationPowerpointSlide.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Pattern not found.
+//     */
+//    public AutomationPowerpointSlide (final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(element);
+//    }
 
     /**
      * Constructor for the AutomationPowerpointSlide.
      *
-     * @param element The element.
-     * @param container ItemContainer pattern.
+     * @param builder The builder
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Pattern not found.
      */
-    AutomationPowerpointSlide (final AutomationElement element,
-                               final ItemContainer container)
+    AutomationPowerpointSlide (final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(element, container);
+        super(builder);
     }
 }

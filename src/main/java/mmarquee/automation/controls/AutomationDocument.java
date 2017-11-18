@@ -98,7 +98,7 @@ public class AutomationDocument extends AutomationBase {
                 new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.Custom));
 
-        return new AutomationDocumentPage(items.get(index));
+        return new AutomationDocumentPage(new ElementBuilder(items.get(index)));
     }
 
     /**

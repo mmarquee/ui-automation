@@ -125,7 +125,7 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            return new AutomationWindow(foundElement);
+            return new AutomationWindow(new ElementBuilder(foundElement));
         } else {
             throw new ElementNotFoundException(title);
         }
@@ -154,7 +154,7 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            return new AutomationWindow(foundElement);
+            return new AutomationWindow(new ElementBuilder(foundElement));
         } else {
             throw new ElementNotFoundException("matching " + titlePattern);
         }

@@ -190,7 +190,7 @@ public class AutomationComboBox
                         this.createControlTypeCondition(ControlType.ListItem));
 
         for (AutomationElement element : collection) {
-            list.add(new AutomationListItem(element));
+            list.add(new AutomationListItem(new ElementBuilder(element)));
         }
 
         return list;
@@ -233,7 +233,7 @@ public class AutomationComboBox
         AutomationElement item = items.get(index);
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(index);
         }
@@ -253,7 +253,7 @@ public class AutomationComboBox
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(name);
         }
@@ -287,7 +287,7 @@ public class AutomationComboBox
             throw new ItemNotFoundException(namePattern.toString());
         }
 
-        return new AutomationListItem(foundElement);
+        return new AutomationListItem(new ElementBuilder(foundElement));
     }
 
     /**
@@ -304,7 +304,7 @@ public class AutomationComboBox
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(automationId);
         }
@@ -326,7 +326,7 @@ public class AutomationComboBox
 	        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 	        
 	        for (AutomationElement element : collection) {
-	            list.add(new AutomationListItem(element));
+	            list.add(new AutomationListItem(new ElementBuilder(element)));
 	        }
 	
 	        return list;

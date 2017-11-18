@@ -50,7 +50,7 @@ public class AutomationTab extends AutomationContainer {
             List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.TabItem));
 
             for (AutomationElement elem : collection) {
-                tabItems.add(new AutomationTabItem(elem, this.automation));
+                tabItems.add(new AutomationTabItem(new ElementBuilder(elem).automation(this.automation)));
             }
         } catch (AutomationException ex) {
             logger.error(ex.getMessage());

@@ -577,9 +577,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationTab getTab(int index) throws PatternNotFoundException, AutomationException {
-        AutomationElement tab = this.getElementByControlType(index, ControlType.Tab);
-
-        return new AutomationTab(tab);
+         return new AutomationTab(new ElementBuilder(this.getElementByControlType(index, ControlType.Tab)));
     }
 
     /**
@@ -590,7 +588,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationTab getTab(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationTab(this.getElementByControlType(name, ControlType.Tab));
+        return new AutomationTab(new ElementBuilder(this.getElementByControlType(name, ControlType.Tab)));
     }
 
     /**
@@ -601,7 +599,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationTab getTab(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationTab(this.getElementByControlType(namePattern, ControlType.Tab));
+        return new AutomationTab(new ElementBuilder(this.getElementByControlType(namePattern, ControlType.Tab)));
     }
 
     /**
@@ -612,7 +610,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationTab getTabByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationTab(this.getElementByAutomationId(id, ControlType.Tab));
+        return new AutomationTab(new ElementBuilder(this.getElementByAutomationId(id, ControlType.Tab)));
     }
 
     /**
@@ -934,7 +932,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationCustom getCustom(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByControlType(index, ControlType.Custom));
+        return new AutomationCustom(new ElementBuilder(this.getElementByControlType(index,
+                ControlType.Custom)));
     }
 
     /**
@@ -945,7 +944,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     private AutomationCustom getCustom(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByControlType(name, ControlType.Custom));
+        return new AutomationCustom(new ElementBuilder(this.getElementByControlType(name, ControlType.Custom)));
     }
 
     /**
@@ -956,7 +955,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     private AutomationCustom getCustom(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByControlType(namePattern, ControlType.Custom));
+        return new AutomationCustom(new ElementBuilder(this.getElementByControlType(namePattern, ControlType.Custom)));
     }
 
     /**
@@ -967,7 +966,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     private AutomationCustom getCustomByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByAutomationId(id, ControlType.Custom));
+        return new AutomationCustom(new ElementBuilder(this.getElementByAutomationId(id, ControlType.Custom)));
     }
 
     /**
@@ -995,7 +994,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     private AutomationCustom getCustomByClassName(int index, String className) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByControlType(index, ControlType.Custom, className));
+        return new AutomationCustom(new ElementBuilder(this.getElementByControlType(index, ControlType.Custom,
+                className)));
     }
 
     /**
@@ -1007,7 +1007,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationCustom getCustomByClassName(String name, String className) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByControlType(name, ControlType.Custom, className));
+        return new AutomationCustom(new ElementBuilder(this.getElementByControlType(name, ControlType.Custom,
+                className)));
     }
 
     /**
@@ -1019,7 +1020,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationCustom getCustomByClassName(Pattern namePattern, String className) throws PatternNotFoundException, AutomationException {
-        return new AutomationCustom(this.getElementByControlType(namePattern, ControlType.Custom, className));
+        return new AutomationCustom(new ElementBuilder(this.getElementByControlType(namePattern,
+                ControlType.Custom, className)));
     }
 
     /**
@@ -1076,7 +1078,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationPowerpointSlide getPowerpointSlide(int index) throws PatternNotFoundException, AutomationException {
-        return new AutomationPowerpointSlide(this.getElementByControlType(index, ControlType.Custom));
+        return new AutomationPowerpointSlide(new ElementBuilder(this.getElementByControlType(index,
+                ControlType.Custom)));
     }
 
     /**
@@ -1087,7 +1090,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     private AutomationPowerpointSlide getPowerpointSlide(String name) throws PatternNotFoundException, AutomationException {
-        return new AutomationPowerpointSlide(this.getElementByControlType(name, ControlType.Custom));
+        return new AutomationPowerpointSlide(new ElementBuilder(this.getElementByControlType(name,
+                ControlType.Custom)));
     }
 
     /**
@@ -1098,7 +1102,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Pattern not found
      */
     private AutomationPowerpointSlide getPowerpointSlide(Pattern namePattern) throws PatternNotFoundException, AutomationException {
-        return new AutomationPowerpointSlide(this.getElementByControlType(namePattern, ControlType.Custom));
+        return new AutomationPowerpointSlide(new ElementBuilder(this.getElementByControlType(namePattern,
+                ControlType.Custom)));
     }
 
     /**
@@ -1109,7 +1114,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationPowerpointSlide getPowerpointSlideByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationPowerpointSlide(this.getElementByAutomationId(id, ControlType.Custom));
+        return new AutomationPowerpointSlide(new ElementBuilder(this.getElementByAutomationId(id,
+                ControlType.Custom)));
     }
 
     /**
@@ -1713,7 +1719,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern
      */
     private AutomationToolBar getToolBar(int index) throws AutomationException, PatternNotFoundException {
-        return new AutomationToolBar(this.getElementByControlType(index, ControlType.ToolBar));
+        return new AutomationToolBar(new ElementBuilder(this.getElementByControlType(index, ControlType.ToolBar)));
     }
 
     /**
@@ -1724,7 +1730,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern
      */
     private AutomationToolBar getToolBar(String name) throws AutomationException, PatternNotFoundException {
-        return new AutomationToolBar(this.getElementByControlType(name, ControlType.ToolBar));
+        return new AutomationToolBar(new ElementBuilder(this.getElementByControlType(name, ControlType.ToolBar)));
     }
 
     /**
@@ -1735,7 +1741,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Could not find pattern
      */
     private AutomationToolBar getToolBar(Pattern namePattern) throws AutomationException, PatternNotFoundException {
-        return new AutomationToolBar(this.getElementByControlType(namePattern, ControlType.ToolBar));
+        return new AutomationToolBar(new ElementBuilder(this.getElementByControlType(namePattern,
+                ControlType.ToolBar)));
     }
 
     /**
@@ -1746,7 +1753,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     private AutomationToolBar getToolBarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return new AutomationToolBar(this.getElementByAutomationId(id, ControlType.ToolBar));
+        return new AutomationToolBar(new ElementBuilder(this.getElementByAutomationId(id, ControlType.ToolBar)));
     }
 
     ////////////////// Public API //////////////////

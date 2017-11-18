@@ -68,7 +68,8 @@ public class AutomationPanelTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        panel = Mockito.spy(new AutomationPanel(element));
+        panel = Mockito.spy(new AutomationPanel(
+                new ElementBuilder(element)));
         
         list = new ArrayList<>();
         list.add(targetElement);

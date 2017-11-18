@@ -15,23 +15,33 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public class AutomationDocumentPage extends AutomationCustom {
     /**
-     * Constructor for the AutomationDocumentPage
-     * @param element The element
+     * Constructor for the AutomationDocumentPage.
+     * @param builder The builder
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationDocumentPage (AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+    public AutomationDocumentPage (ElementBuilder builder) throws PatternNotFoundException, AutomationException {
+        super(builder);
     }
 
-    /**
-     * Constructor for the AutomationDocumentPage
-     * @param element The element
-     * @param container ItemContainer pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Pattern not found
-     */
-    public AutomationDocumentPage (AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
-        super(element, container);
-    }
+//    /**
+//     * Constructor for the AutomationDocumentPage
+//     * @param element The element
+//     * @throws AutomationException Automation library error
+//     * @throws PatternNotFoundException Pattern not found
+//     */
+//    public AutomationDocumentPage (AutomationElement element) throws PatternNotFoundException, AutomationException {
+//        super(element);
+//    }
+
+//    /**
+//     * Constructor for the AutomationDocumentPage
+//     * @param element The element
+//     * @param container ItemContainer pattern
+//     * @throws AutomationException Automation library error
+//     * @throws PatternNotFoundException Pattern not found
+//     */
+//    public AutomationDocumentPage (AutomationElement element, ItemContainer container) throws PatternNotFoundException, AutomationException {
+//        super(element, container);
+//    }
 }

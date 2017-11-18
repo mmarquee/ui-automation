@@ -87,7 +87,7 @@ public class AutomationControlFactory {
     	case Image:
     		return new AutomationImage(new ElementBuilder(element));
     	case ListItem:
-    		return new AutomationListItem(element);
+    		return new AutomationListItem(new ElementBuilder(element));
     	case List:
     		return new AutomationList(element);
     	case Menu:
@@ -105,21 +105,21 @@ public class AutomationControlFactory {
     	case Spinner:
     		return new AutomationSpinner(new ElementBuilder(element));
     	case StatusBar:
-    		return new AutomationStatusBar(element);
+    		return new AutomationStatusBar(new ElementBuilder(element));
     	case Tab:
-    		return new AutomationTab(element);
+    		return new AutomationTab(new ElementBuilder(element));
     	case TabItem:
-    		return new AutomationTabItem(element);
+    		return new AutomationTabItem(new ElementBuilder(element));
     	case Text:
     		return new AutomationTextBox(element);
     	case ToolBar:
-    		return new AutomationToolBar(element);
+    		return new AutomationToolBar(new ElementBuilder(element));
     	case Tree:
     		return new AutomationTreeView(element);
     	case TreeItem:
     		return new AutomationTreeViewItem(element);
     	case Custom:
-    		return new AutomationCustom(element);
+    		return new AutomationCustom(new ElementBuilder(element));
     	case DataGrid:
     		return new AutomationDataGrid(element);
     	case Document:
@@ -127,16 +127,16 @@ public class AutomationControlFactory {
     	case SplitButton:
     		return new AutomationSplitButton(new ElementBuilder(element));
     	case Window:
-    		return new AutomationWindow(element);
+    		return new AutomationWindow(new ElementBuilder(element));
     	case Pane:
 			if (AutomationReBar.CLASS_NAME.equals(className)) {
 				return new AutomationReBar(new ElementBuilder(element));
 			} else if (AutomationRibbonBar.CLASS_NAME.equals(className)) {
 				return new AutomationRibbonBar(new ElementBuilder(element));
 			} else if (AutomationRibbonCommandBar.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonCommandBar(element);
+				return new AutomationRibbonCommandBar(new ElementBuilder(element));
 			} else if (AutomationRibbonWorkPane.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonWorkPane(element);
+				return new AutomationRibbonWorkPane(new ElementBuilder(element));
 			} else if (AutomationNUIPane.CLASS_NAME.equals(className)) {
 				return new AutomationNUIPane(new ElementBuilder(element));
 			} else if (AutomationNetUIHWND.CLASS_NAME.equals(className)) {
@@ -144,7 +144,7 @@ public class AutomationControlFactory {
 			}
     		return new AutomationPanel(new ElementBuilder(element));
     	case TitleBar:
-    		return new AutomationTitleBar(element);
+    		return new AutomationTitleBar(new ElementBuilder(element));
     	case AppBar:
     		return new AutomationAppBar(element);
     		// No Custom controls, yet:

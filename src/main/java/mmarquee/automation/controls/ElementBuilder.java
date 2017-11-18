@@ -1,5 +1,6 @@
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.User32;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.*;
@@ -19,6 +20,16 @@ public class ElementBuilder {
     private Selection selection;
     private ItemContainer itemContainer;
     private SelectionItem selectionItem;
+
+    /**
+     * The window pattern.
+     */
+    private Window windowPattern;
+
+    /**
+     * The user32 instance.
+     */
+    private User32 user32;
 
     /**
      * Constructor with an instance.
@@ -44,6 +55,8 @@ public class ElementBuilder {
         this.range = null;
         this.itemContainer = null;
         this.selectionItem = null;
+        this.windowPattern = null;
+        this.user32 = null;
     }
 
     /**
@@ -93,6 +106,16 @@ public class ElementBuilder {
         return this;
     }
 
+    public ElementBuilder window(Window pattern) {
+        this.windowPattern = pattern;
+        return this;
+    }
+
+    public ElementBuilder user32(User32 user32) {
+        this.user32 = user32;
+        return this;
+    }
+
     public ElementBuilder automation(UIAutomation automation) {
         this.instance = automation;
         return this;
@@ -112,6 +135,10 @@ public class ElementBuilder {
         return this.instance;
     }
 
+    public User32 getUser32() {
+        return this.user32;
+    }
+
     public Invoke getInvoke() {
         return this.invoke;
     }
@@ -126,6 +153,10 @@ public class ElementBuilder {
 
     public Toggle getToggle() {
         return this.toggle;
+    }
+
+    public Window getWindow() {
+        return this.windowPattern;
     }
 
     public SelectionItem getSelectItemPattern() { return this.selectionItem;  }
@@ -149,4 +180,6 @@ public class ElementBuilder {
     }
 
     public boolean getHasValue() { return this.value != null; }
+
+    public boolean hasUser32() { return this.user32 != null; }
 }

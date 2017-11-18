@@ -87,7 +87,7 @@ public class AutomationList extends AutomationBase {
         AutomationElement item = items.get(index);
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(index);
         }
@@ -109,7 +109,7 @@ public class AutomationList extends AutomationBase {
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(name);
         }
@@ -144,7 +144,7 @@ public class AutomationList extends AutomationBase {
             throw new ItemNotFoundException(namePattern.toString());
         }
 
-        return new AutomationListItem(foundElement);
+        return new AutomationListItem(new ElementBuilder(foundElement));
     }
     
     /**
@@ -163,7 +163,7 @@ public class AutomationList extends AutomationBase {
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(automationId);
         }
@@ -198,7 +198,7 @@ public class AutomationList extends AutomationBase {
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 
         for (AutomationElement item: items) {
-            list.add(new AutomationListItem(item));
+            list.add(new AutomationListItem(new ElementBuilder(item)));
         }
 
         return list;
@@ -222,7 +222,7 @@ public class AutomationList extends AutomationBase {
 	        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 	        
 	        for (AutomationElement element : collection) {
-	            list.add(new AutomationListItem(element));
+	            list.add(new AutomationListItem(new ElementBuilder(element)));
 	        }
 	
 	        return list;

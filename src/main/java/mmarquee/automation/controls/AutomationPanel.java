@@ -112,7 +112,7 @@ public class AutomationPanel extends AutomationContainer {
      */
     private AutomationWindow getWindow(final int index)
             throws PatternNotFoundException, AutomationException {
-    	return new AutomationWindow(this.getElementByControlType(index, ControlType.Window));
+    	return new AutomationWindow(new ElementBuilder(this.getElementByControlType(index, ControlType.Window)));
     }
 
     /**
@@ -125,7 +125,7 @@ public class AutomationPanel extends AutomationContainer {
      */
     private AutomationWindow getWindow(final String name)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.getElementByControlType(name, ControlType.Window));
+        return new AutomationWindow(new ElementBuilder(this.getElementByControlType(name, ControlType.Window)));
     }
 
     /**
@@ -138,7 +138,7 @@ public class AutomationPanel extends AutomationContainer {
      */
     private AutomationWindow getWindow(final Pattern namePattern)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.getElementByControlType(namePattern, ControlType.Window));
+        return new AutomationWindow(new ElementBuilder(this.getElementByControlType(namePattern, ControlType.Window)));
     }
 
     /**
@@ -151,7 +151,7 @@ public class AutomationPanel extends AutomationContainer {
       */
     private AutomationWindow getWindowByAutomationId(final String id)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.getElementByAutomationId(id, ControlType.Window));
+        return new AutomationWindow(new ElementBuilder(this.getElementByAutomationId(id, ControlType.Window)));
     }
 
     /**
