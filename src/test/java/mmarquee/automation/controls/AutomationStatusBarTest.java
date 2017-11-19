@@ -51,7 +51,8 @@ public class AutomationStatusBarTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern, instance);
+        AutomationStatusBar statusBar = new AutomationStatusBar(
+                new ElementBuilder(element).itemContainer(pattern).automation(instance));
 
         String name = statusBar.getName();
 

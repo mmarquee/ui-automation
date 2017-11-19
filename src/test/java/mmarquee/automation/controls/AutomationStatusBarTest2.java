@@ -59,7 +59,8 @@ public class AutomationStatusBarTest2 {
 
 //        when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+        AutomationStatusBar statusBar = new AutomationStatusBar(
+                new ElementBuilder(element).itemContainer(pattern));
 
         AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
@@ -85,7 +86,8 @@ public class AutomationStatusBarTest2 {
 
     //    when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+        AutomationStatusBar statusBar = new AutomationStatusBar(
+                new ElementBuilder(element).itemContainer(pattern));
 
         AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 

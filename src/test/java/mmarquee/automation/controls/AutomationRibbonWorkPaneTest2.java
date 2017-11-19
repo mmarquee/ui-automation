@@ -73,9 +73,10 @@ public class AutomationRibbonWorkPaneTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element, container);
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
+                new ElementBuilder(element).itemContainer(container));
 
-        workPane.getNUIPane(0);
+        workPane.getNUIPane(Search.getBuilder(0).build());
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -107,9 +108,10 @@ public class AutomationRibbonWorkPaneTest2 {
         when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
+                new ElementBuilder(element));
 
-        workPane.getNUIPane(0);
+        workPane.getNUIPane(Search.getBuilder(0).build());
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

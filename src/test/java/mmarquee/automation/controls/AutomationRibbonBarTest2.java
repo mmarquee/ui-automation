@@ -73,7 +73,8 @@ public class AutomationRibbonBarTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(element, container);
+        AutomationRibbonBar bar = new AutomationRibbonBar(
+                new ElementBuilder(element).itemContainer(container));
 
         bar.getRibbonCommandBar();
 
@@ -108,7 +109,8 @@ public class AutomationRibbonBarTest2 {
 
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(element);
+        AutomationRibbonBar bar = new AutomationRibbonBar(
+                new ElementBuilder(element));
 
         bar.getRibbonCommandBar();
 

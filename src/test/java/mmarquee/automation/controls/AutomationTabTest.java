@@ -70,7 +70,7 @@ public class AutomationTabTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        automationTab = Mockito.spy(new AutomationTab(element));
+        automationTab = Mockito.spy(new AutomationTab(new ElementBuilder(element)));
         
         list = new ArrayList<>();
         list.add(targetElement);

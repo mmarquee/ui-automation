@@ -74,7 +74,8 @@ public class AutomationRibbonCommandBarTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container);
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+                new ElementBuilder(element).itemContainer(container));
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
@@ -109,7 +110,8 @@ public class AutomationRibbonCommandBarTest2 {
         when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+                new ElementBuilder(element));
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
