@@ -18,14 +18,13 @@ package mmarquee.automation.controls;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * @author Mark Humphreys
- * Date 20/07/2016.
+ * Date 20/07/2016
  *
  * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */

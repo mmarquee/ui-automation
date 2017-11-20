@@ -26,7 +26,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  * Wrapper for the TreeView element.
  *
  * @author Mark Humphreys
- * Date 20/02/2016.
+ * Date 20/02/2016
  */
 public class AutomationTreeView extends AutomationBase {
 

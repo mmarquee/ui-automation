@@ -17,19 +17,16 @@ package mmarquee.automation.controls;
 
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * @author Mark Humphreys
- * Date 02/03/2016.
-
  * Wrapper for the Toolbar element.
  * IDockProvider, IExpandCollapse,
+ *
+ * @author Mark Humphreys
+ * Date 02/03/2016
  */
 public class AutomationToolBar extends AutomationContainer {
 //    /**
