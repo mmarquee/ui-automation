@@ -197,7 +197,7 @@ public class TestMain extends TestBase {
             } catch (AutomationException ex) {
                 // Not found
             }
-
+/*
             AutomationHyperlink link = window.getHyperlink(Search.getBuilder(0).build());
             link.click();
 
@@ -212,7 +212,7 @@ public class TestMain extends TestBase {
             } catch (ItemNotFoundException ex) {
                 logger.info("Failed to find window");
             }
-
+*/
             this.rest();
 
             AutomationToolBar toolbar = window.getToolBar(Search.getBuilder(1).build());
@@ -223,7 +223,7 @@ public class TestMain extends TestBase {
 
             if (btn0.isEnabled()) {
                 logger.info("btn0 Enabled");
-
+/*
                 btn0.click();
 
                 AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
@@ -233,12 +233,14 @@ public class TestMain extends TestBase {
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
                 }
+*/
             }
 
             AutomationToolBarButton btn1 = toolbar.getToolbarButton(Search.getBuilder(1).build());
 
             if (btn1.isEnabled()) {
                 logger.info("btn1 Enabled");
+/*
                 btn1.click();
 
                 AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
@@ -248,20 +250,20 @@ public class TestMain extends TestBase {
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
                 }
-            }
+  */          }
 
             AutomationToolBarButton btn2 = toolbar.getToolbarButton(Search.getBuilder(2).build());
 
             if (btn2.isEnabled()) {
                 logger.info("btn2 Enabled");
-                btn2.click();
+    //            btn2.click();
             }
 
             AutomationToolBarButton btn3 = toolbar.getToolbarButton(Search.getBuilder(3).build());
 
             if (btn3.isEnabled()) {
                 logger.info("btn3 Enabled");
-                btn3.click();
+      //          btn3.click();
             }
 
             window.setTransparency(128);

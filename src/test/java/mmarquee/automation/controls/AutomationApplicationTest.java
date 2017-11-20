@@ -99,10 +99,8 @@ public class AutomationApplicationTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children),any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("Untitled - Notepad");
         
-        AutomationApplication app = new AutomationApplication(element,
-                handle,
-                false,
-                instance);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(false).automation(instance));
 
         AutomationWindow window = app.getWindow(Search.getBuilder("Untitled - Notepad").build());
         assertEquals(targetElement,window.getElement());
@@ -114,10 +112,8 @@ public class AutomationApplicationTest {
     public void testGetWindow_Returns_Exception_When_Element_Not_Found()
             throws AutomationException, PatternNotFoundException {
 
-        AutomationApplication app = new AutomationApplication(element,
-                handle,
-                false,
-                instance);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(false).automation(instance));
 
         app.getWindow(Search.getBuilder("Untitled - Notepad").build());
 
@@ -131,10 +127,8 @@ public class AutomationApplicationTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children),any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("Untitled - Notepad");
         
-        AutomationApplication app = new AutomationApplication(element,
-                handle,
-                false,
-                instance);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(false).automation(instance));
 
         AutomationWindow window = app.getWindow(Search.getBuilder(Pattern.compile("untitled.+",Pattern.CASE_INSENSITIVE)).build());
         assertEquals(targetElement,window.getElement());
@@ -146,10 +140,8 @@ public class AutomationApplicationTest {
     public void testGetWindow_with_RegExPattern_Returns_Exception_When_Element_Not_Found()
             throws AutomationException, PatternNotFoundException {
 
-        AutomationApplication app = new AutomationApplication(element,
-                handle,
-                false,
-                instance);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(false).automation(instance));
 
         app.getWindow(Search.getBuilder(Pattern.compile("bla\\.+blubb")).build());
 
@@ -158,14 +150,16 @@ public class AutomationApplicationTest {
 
     @Test
     public void testSetAttached_Set_To_False() throws Exception {
-        AutomationApplication app = new AutomationApplication(element, handle, false, instance);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(false).automation(instance));
 
         assertFalse(app.getIsAttached());
     }
 
     @Test
     public void testSetAttached_Set_To_True() throws Exception {
-        AutomationApplication app = new AutomationApplication(element, handle, true, instance);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(true).automation(instance));
 
         assertTrue(app.getIsAttached());
     }
@@ -182,7 +176,8 @@ public class AutomationApplicationTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationApplication app = new AutomationApplication(element, handle, false);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(false));
 
         AutomationWindow window = app.getWindow(Search.getBuilder("Untitled - Notepad").build());
 
@@ -193,7 +188,8 @@ public class AutomationApplicationTest {
     public void testClose_Calls_FindWindow() throws Exception {
         User32 user32 = Mockito.mock(User32.class);
 
-        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).user32(user32).attached(true));
 
         app.close("Untitled - Notepad");
 
@@ -205,7 +201,8 @@ public class AutomationApplicationTest {
         User32 user32 = Mockito.mock(User32.class);
         UtilsTest.setUser32(user32);
 
-        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(true).user32(user32));
 
         app.close(Pattern.compile("Untitled - Notepad"));
 
@@ -216,7 +213,8 @@ public class AutomationApplicationTest {
     public void testQuit_Calls_FindWindow() throws Exception {
         User32 user32 = Mockito.mock(User32.class);
 
-        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(true).user32(user32));
 
         app.quit("Untitled - Notepad");
 
@@ -228,7 +226,8 @@ public class AutomationApplicationTest {
         User32 user32 = Mockito.mock(User32.class);
         UtilsTest.setUser32(user32);
 
-        AutomationApplication app = new AutomationApplication(element, handle, true, user32);
+        AutomationApplication app = new AutomationApplication(
+                new ElementBuilder(element).handle(handle).attached(true).user32(user32));
 
         app.quit(Pattern.compile("Untitled - Notepad"));
 

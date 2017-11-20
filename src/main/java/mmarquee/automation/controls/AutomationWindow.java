@@ -101,7 +101,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
             throws PatternNotFoundException, AutomationException {
         super(builder);
 
-        if (builder.hasUser32()) {
+        if (builder.getHasUser32()) {
             this.user32 = builder.getUser32();
         } else {
             this.user32 = User32.INSTANCE;

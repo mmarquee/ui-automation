@@ -149,7 +149,8 @@ public class UIAutomation extends BaseAutomation {
     public AutomationApplication launch(final String... command)
             throws java.io.IOException, AutomationException {
         Process process = Utils.startProcess(command);
-        return new AutomationApplication(rootElement, process, false);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
     }
 
     /**
@@ -163,7 +164,8 @@ public class UIAutomation extends BaseAutomation {
     public AutomationApplication launchWithDirectory(final String... command)
             throws java.io.IOException, AutomationException {
         Process process = Utils.startProcessWithWorkingDirectory(command);
-        return new AutomationApplication(rootElement, process, false);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
     }
 
     /**
@@ -175,7 +177,8 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationApplication attach(final Process process)
             throws AutomationException {
-        return new AutomationApplication(rootElement, process, true);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
     }
 
     /**
@@ -229,7 +232,8 @@ public class UIAutomation extends BaseAutomation {
             throw new AutomationException("Process " + command + " not found.");
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
+            return new AutomationApplication(
+                    new ElementBuilder(rootElement).handle(handle).attached(false));
         }
     }
 
@@ -253,7 +257,8 @@ public class UIAutomation extends BaseAutomation {
         }
         
         WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-        return new AutomationApplication(rootElement, handle, true);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).handle(handle).attached(false));
     }
     
     /**

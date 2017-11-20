@@ -1,6 +1,7 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.*;
@@ -20,6 +21,10 @@ public class ElementBuilder {
     private Selection selection;
     private ItemContainer itemContainer;
     private SelectionItem selectionItem;
+
+    private WinNT.HANDLE handle;
+    private Process process;
+    private boolean attached;
 
     /**
      * The window pattern.
@@ -57,6 +62,8 @@ public class ElementBuilder {
         this.selectionItem = null;
         this.windowPattern = null;
         this.user32 = null;
+        this.handle = null;
+        this.process = null;
     }
 
     /**
@@ -64,6 +71,17 @@ public class ElementBuilder {
      */
     public ElementBuilder() {
         this.initialise();
+    }
+
+
+    public ElementBuilder handle(WinNT.HANDLE handle) {
+        this.handle = handle;
+        return this;
+    }
+
+    public ElementBuilder process(Process process) {
+        this.process = process;
+        return this;
     }
 
     public ElementBuilder range(Range pattern) {
@@ -131,9 +149,16 @@ public class ElementBuilder {
         return this;
     }
 
+    public ElementBuilder attached(boolean attached) {
+        this.attached = attached;
+        return this;
+    }
+
     public UIAutomation getInstance() {
         return this.instance;
     }
+
+    public boolean getAttached() { return this.attached; }
 
     public User32 getUser32() {
         return this.user32;
@@ -155,6 +180,10 @@ public class ElementBuilder {
         return this.toggle;
     }
 
+    public WinNT.HANDLE getHandle() {
+        return this.handle;
+    }
+
     public Window getWindow() {
         return this.windowPattern;
     }
@@ -171,6 +200,8 @@ public class ElementBuilder {
 
     public ItemContainer getItemContainer() { return this.itemContainer; }
 
+    public Process getProcess() { return this.process; }
+
     public boolean getHasAutomation() {
         return this.instance != null;
     }
@@ -181,5 +212,7 @@ public class ElementBuilder {
 
     public boolean getHasValue() { return this.value != null; }
 
-    public boolean hasUser32() { return this.user32 != null; }
+    public boolean getHasUser32() { return this.user32 != null; }
+
+    public boolean getHasHandle() { return this.handle != null; }
 }

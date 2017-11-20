@@ -225,7 +225,7 @@ public class AutomationComboBox
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    private AutomationListItem getItem(final int index) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(final int index) throws PatternNotFoundException, AutomationException {
 
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
                 this.createControlTypeCondition(ControlType.ListItem));
@@ -246,7 +246,7 @@ public class AutomationComboBox
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    private AutomationListItem getItem(final String name) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(final String name) throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
@@ -266,7 +266,7 @@ public class AutomationComboBox
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    private AutomationListItem getItem(final Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(final Pattern namePattern) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
