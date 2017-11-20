@@ -21,7 +21,7 @@ object AutomationTest {
   def start(): Unit = {
     notepad = new NotepadApplication()
 
-    notepad.launch
+    notepad.launch()
     notepad.addText("Hello there")
     notepad.clickExit()
     val confirm = notepad.getConfirm
