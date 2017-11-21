@@ -31,10 +31,10 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 
 /**
+ * Tests for the appbar.
+ *
  * @author Mark Humphreys
  * Date 28/12/2016.
- *
- * Tests for the appbar
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest( { Ole32Wrapper.class })
@@ -50,7 +50,8 @@ public class AutomationAppBarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationAppBar ctrl = new AutomationAppBar(element, instance);
+        AutomationAppBar ctrl = new AutomationAppBar(
+                new ElementBuilder(element).automation(instance));
 
         String name = ctrl.getName();
 

@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Table;
@@ -35,7 +34,9 @@ import java.util.List;
  * @author Mark Humphreys
  * Date 03/02/2016.
  */
-public class AutomationDataGrid extends AutomationBase implements Valueable {
+public class AutomationDataGrid
+        extends AutomationBase
+        implements Valueable {
     /**
      * The value pattern.
      */
@@ -59,38 +60,55 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     /**
      * Construct the AutomationDataGrid.
      *
-     * @param element The element.
+     * @param builder The builder.
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationDataGrid(final AutomationElement element)
+    public AutomationDataGrid(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
+        super(builder);
+
+        this.valuePattern = builder.getValue();
+        this.gridPattern = builder.getGrid();
+        this.tablePattern = builder.getTable();
+        this.selectionPattern = builder.getSelection();
     }
 
-    /**
-     * Construct the AutomationDataGrid.
-     *
-     * @param element The element.
-     * @param value Value pattern.
-     * @param grid Grid pattern.
-     * @param table Table pattern.
-     * @param instance Automation instance.
-     * @param selection Selection pattern.
-     */
-    AutomationDataGrid(final AutomationElement element,
-                       final Value value,
-                       final Grid grid,
-                       final Table table,
-                       final Selection selection,
-                       final UIAutomation instance) {
-        super(new ElementBuilder(element).automation(instance));
+//    /**
+//     * Construct the AutomationDataGrid.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationDataGrid(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+//    }
 
-        this.valuePattern = value;
-        this.gridPattern = grid;
-        this.tablePattern = table;
-        this.selectionPattern = selection;
-    }
+//    /**
+//     * Construct the AutomationDataGrid.
+//     *
+//     * @param element The element.
+//     * @param value Value pattern.
+//     * @param grid Grid pattern.
+//     * @param table Table pattern.
+//     * @param instance Automation instance.
+//     * @param selection Selection pattern.
+//     */
+//    AutomationDataGrid(final AutomationElement element,
+//                       final Value value,
+//                       final Grid grid,
+//                       final Table table,
+//                       final Selection selection,
+//                       final UIAutomation instance) {
+//        super(new ElementBuilder(element).automation(instance));
+//
+//        this.valuePattern = value;
+//        this.gridPattern = grid;
+//        this.tablePattern = table;
+//        this.selectionPattern = selection;
+//    }
 
     /**
      * Gets the text associated with the active cell of this element.

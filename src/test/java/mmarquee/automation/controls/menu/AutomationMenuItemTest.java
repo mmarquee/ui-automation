@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.controls.ElementBuilder;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -83,7 +84,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.getName()).thenReturn("NAME");
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         assertEquals("NAME", item.getName());
     }
@@ -93,7 +95,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(false);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         assertFalse(item.isExpanded());
     }
@@ -103,7 +106,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         assertTrue(item.isExpanded());
     }
@@ -119,7 +123,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         item.click();
 
@@ -133,7 +138,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         List<AutomationMenuItem> items = item.getItems();
 
@@ -146,7 +152,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         List<AutomationMenuItem> items = item.getItems();
 
@@ -156,7 +163,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     @Test
     public void test_GetItems_Returns_MainMenuItems_When_ParentIsMainMenu() throws Exception {
     	AutomationMenuItem item =
-    			new AutomationMenuItem(mocked_element, collapse, invoke);
+    			new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
     	
     	enableMainMenuReference(item, list);
 
@@ -171,7 +179,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 		
 		AutomationMenuItem subItem = item.getMenuItem(0);
         assertEquals(targetElement,subItem.getElement());
@@ -182,7 +191,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     @Test
     public void test_GetMenuItem_By_Index_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
         AutomationMenuItem item =
-        		new AutomationMenuItem(mocked_element, collapse, invoke);
+        		new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
         
     	enableMainMenuReference(item, list);
 
@@ -196,7 +206,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
         
         item.getMenuItem(99);
     }
@@ -206,7 +217,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(targetElement);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
 		AutomationMenuItem subItem = item.getMenuItem("myName");
         assertEquals(targetElement,subItem.getElement());
@@ -217,7 +229,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     @Test
     public void test_GetMenuItem_By_Name_Returns_MainMenuItem_When_ParentIsMainMenu() throws Exception {
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
     	enableMainMenuReference(item, list);
     	
@@ -233,7 +246,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenThrow(new ElementNotFoundException());
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 		
         item.getMenuItem("unknownName");
     }
@@ -244,7 +258,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("myName");
         
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
 		AutomationMenuItem subItem = item.getMenuItem(Pattern.compile("myName?"));
         assertEquals(targetElement,subItem.getElement());
@@ -257,7 +272,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("myName");
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
     	enableMainMenuReference(item, list);
     	
@@ -274,7 +290,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("myName");
         
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 		
         item.getMenuItem(Pattern.compile("nix"));
     }
@@ -284,7 +301,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         AutomationMenuItem subItem = item.getMenuItemByAutomationId("myID");
         assertEquals(targetElement,subItem.getElement());
@@ -298,7 +316,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         list.add(targetElement);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
     	enableMainMenuReference(item, list);
     	
@@ -311,7 +330,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(mocked_element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         item.getMenuItemByAutomationId("unknownID");
     }
@@ -321,7 +341,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         item.expand();
 
@@ -333,7 +354,8 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationMenuItem item =
-                new AutomationMenuItem(mocked_element, collapse, invoke);
+                new AutomationMenuItem(
+                        new ElementBuilder(mocked_element).collapse(collapse).invoke(invoke));
 
         item.collapse();
 

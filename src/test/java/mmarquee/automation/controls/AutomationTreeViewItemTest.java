@@ -65,7 +65,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke));
 
         String name = ctrl.getName();
 
@@ -79,7 +80,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke));
 
         ctrl.select();
 
@@ -93,7 +95,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, null, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke));
 
         ctrl.select();
     }
@@ -105,7 +108,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke).selectionItem(selection));
 
         ctrl.click();
 
@@ -119,7 +123,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, null, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).selectionItem(selection));
 
         ctrl.click();
     }
@@ -131,7 +136,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke).selectionItem(selection));
 
         boolean selected = ctrl.isSelected();
 
@@ -147,7 +153,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, null, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke));
 
         ctrl.isSelected();
     }
@@ -160,7 +167,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke).selectionItem(selection));
 
         boolean expanded = ctrl.isExpanded();
 
@@ -175,7 +183,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).automation(instance).invoke(invoke).selectionItem(selection));
 
         ctrl.isExpanded();
     }
@@ -185,7 +194,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke).selectionItem(selection));
 
         ctrl.expand();
 
@@ -199,7 +209,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).automation(instance).invoke(invoke).selectionItem(selection));
 
         ctrl.expand();
     }
@@ -209,7 +220,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, expand, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke).selectionItem(selection));
 
         ctrl.collapse();
 
@@ -223,7 +235,8 @@ public class AutomationTreeViewItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(element, selection, null, invoke, instance);
+        AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
+                new ElementBuilder(element).automation(instance).invoke(invoke).selectionItem(selection));
 
         ctrl.collapse();
     }

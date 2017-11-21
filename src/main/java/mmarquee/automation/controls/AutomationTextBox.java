@@ -37,45 +37,57 @@ public class AutomationTextBox
      */
     private Value valuePattern;
 
-    /**
-     * Construct the AutomationTextBox.
-     *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     */
-    public AutomationTextBox(final AutomationElement element)
-            throws AutomationException {
-        super(new ElementBuilder(element));
-    }
+//    /**
+//     * Construct the AutomationTextBox.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     */
+//    public AutomationTextBox(final AutomationElement element)
+//            throws AutomationException {
+//        super(new ElementBuilder(element));
+//    }
 
     /**
      * Construct the AutomationTextBox.
      *
-     * @param element The element.
-     * @param automation The automation instance.
+     * @param builder The builder.
      * @throws AutomationException Automation library error.
      */
-    public AutomationTextBox(final AutomationElement element,
-                             final UIAutomation automation)
+    public AutomationTextBox(final ElementBuilder builder)
             throws AutomationException {
-        super(new ElementBuilder(element).automation(automation));
+        super(builder);
+        this.valuePattern = builder.getValue();
     }
 
-    /**
-     * Construct the AutomationTextBox.
-     *
-     * @param element The element.
-     * @param value The value pattern.
-     * @param instance Automation instance.
-     * @throws AutomationException Automation library error.
-     */
-    AutomationTextBox(final AutomationElement element,
-                      final Value value,
-                      final UIAutomation instance)
-            throws AutomationException {
-        super(new ElementBuilder(element).automation(instance));
-        this.valuePattern = value;
-    }
+//    /**
+//     * Construct the AutomationTextBox.
+//     *
+//     * @param element The element.
+//     * @param automation The automation instance.
+//     * @throws AutomationException Automation library error.
+//     */
+//    public AutomationTextBox(final AutomationElement element,
+//                             final UIAutomation automation)
+//            throws AutomationException {
+//        super(new ElementBuilder(element).automation(automation));
+//    }
+
+//    /**
+//     * Construct the AutomationTextBox.
+//     *
+//     * @param element The element.
+//     * @param value The value pattern.
+//     * @param instance Automation instance.
+//     * @throws AutomationException Automation library error.
+//     */
+//    AutomationTextBox(final AutomationElement element,
+//                      final Value value,
+//                      final UIAutomation instance)
+//            throws AutomationException {
+//        super(new ElementBuilder(element).automation(instance));
+ //       this.valuePattern = value;
+//    }
 
     /**
      * Gets the text associated with this element.

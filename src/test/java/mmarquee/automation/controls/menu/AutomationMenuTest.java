@@ -26,6 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.controls.ElementBuilder;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -74,7 +75,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
 	@Test
 	public void getItems() throws Exception {
 		
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		
 		List<AutomationElement> itemElements = new LinkedList<>();
 		itemElements.add(targetElement);
@@ -93,7 +94,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
         
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		
 		AutomationMenuItem item = menu.getMenuItem(0);
         assertEquals(targetElement,item.getElement());
@@ -106,7 +107,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
         List<AutomationElement> list = new ArrayList<>();
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		menu.getMenuItem(99);
     }
 
@@ -114,7 +115,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
     public void test_GetMenuItem_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(targetElement);
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 
 		AutomationMenuItem item = menu.getMenuItem("myName");
         assertEquals(targetElement,item.getElement());
@@ -126,7 +127,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
     public void test_GetMenuItem_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenThrow(new ElementNotFoundException());
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		
 		menu.getMenuItem("unknownName");
     }
@@ -136,7 +137,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myName");
         
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 
 		AutomationMenuItem item = menu.getMenuItem(Pattern.compile("\\S+ame"));
         assertEquals(targetElement,item.getElement());
@@ -149,7 +150,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
     	when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myName");
         
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		
 		menu.getMenuItem(Pattern.compile("\\d+"));
     }
@@ -158,7 +159,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
     public void test_GetMenuItem_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 
         AutomationMenuItem item = menu.getMenuItemByAutomationId("myID");
         assertEquals(targetElement,item.getElement());
@@ -170,7 +171,7 @@ public class AutomationMenuTest extends BaseAutomationTest {
     public void test_GetMenuItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 
         menu.getMenuItemByAutomationId("unknownID");
     }

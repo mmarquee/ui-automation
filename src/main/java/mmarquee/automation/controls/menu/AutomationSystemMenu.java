@@ -80,7 +80,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(foundElement);
+            return new AutomationMenuItem(new ElementBuilder(foundElement));
         } else {
             // Throw an exception
             throw  new ItemNotFoundException(name);
@@ -116,7 +116,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(foundElement);
+            return new AutomationMenuItem(new ElementBuilder(foundElement));
         } else {
             // Throw an exception
             throw  new ItemNotFoundException(namePattern.toString());
@@ -139,7 +139,7 @@ public class AutomationSystemMenu extends AutomationBase {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;

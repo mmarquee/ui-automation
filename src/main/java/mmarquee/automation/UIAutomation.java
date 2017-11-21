@@ -627,7 +627,7 @@ public class UIAutomation extends BaseAutomation {
             throw new ItemNotFoundException(title);
         }
 
-        return new AutomationMenu(element);
+        return new AutomationMenu(new ElementBuilder(element));
     }
 
     /**

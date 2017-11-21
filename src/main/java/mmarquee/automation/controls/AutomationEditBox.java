@@ -31,7 +31,14 @@ import mmarquee.automation.pattern.Value;
  */
 public class AutomationEditBox extends AutomationBase implements Valueable {
 
+    /**
+     * The value pattern.
+     */
     private Value valuePattern;
+
+    /**
+     * The text pattern.
+     */
     private Text textPattern;
 
     /**
@@ -99,28 +106,40 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
         return this.element.isPassword();
     }
 
+//    /**
+//     * Constructor for the AutomationEditBox.
+//     * @param element The underlying element.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     * @throws AutomationException Automation error.
+//     */
+//    public AutomationEditBox(AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+////        this.valuePattern = this.getValuePattern();
+//    }
+
     /**
      * Constructor for the AutomationEditBox.
-     * @param element The underlying element.
+     * @param builder The builder.
      * @throws PatternNotFoundException Expected pattern not found.
      * @throws AutomationException Automation error.
      */
-    public AutomationEditBox(AutomationElement element)
+    public AutomationEditBox(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
-//        this.valuePattern = this.getValuePattern();
+        super(builder);
+        this.valuePattern = builder.getValue();
     }
 
-    /**
-     * Constructor for the AutomationEditBox
-     * @param element The underlying element
-     * @param value The Value pattern
-     * @param instance Automation instance
-     */
-    AutomationEditBox(final AutomationElement element,
-                      final Value value,
-                      final UIAutomation instance) {
-        super(new ElementBuilder(element).automation(instance));
-        this.valuePattern = value;
-    }
+//    /**
+//     * Constructor for the AutomationEditBox
+//     * @param element The underlying element
+//     * @param value The Value pattern
+//     * @param instance Automation instance
+//     */
+//    AutomationEditBox(final AutomationElement element,
+//                      final Value value,
+//                      final UIAutomation instance) {
+//        super(new ElementBuilder(element).automation(instance));
+//        this.valuePattern = value;
+//    }
 }

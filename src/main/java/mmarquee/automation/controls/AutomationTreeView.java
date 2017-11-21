@@ -33,26 +33,37 @@ public class AutomationTreeView extends AutomationBase {
     /**
      * Construct the AutomationTreeView.
      *
-     * @param element The element.
+     * @param builder The builder
      * @throws AutomationException Automation library error.
      */
-    public AutomationTreeView(final AutomationElement element)
+    public AutomationTreeView(final ElementBuilder builder)
             throws AutomationException {
-        super(new ElementBuilder(element));
+        super(builder);
     }
 
-    /**
-     * Construct the AutomationTreeView.
-     *
-     * @param element The element.
-     * @param automation The automation instance.
-     * @throws AutomationException Automation library error.
-     */
-    public AutomationTreeView(final AutomationElement element,
-                              final UIAutomation automation)
-            throws AutomationException {
-        super(new ElementBuilder(element).automation(automation));
-    }
+//    /**
+//     * Construct the AutomationTreeView.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     */
+//    public AutomationTreeView(final AutomationElement element)
+//            throws AutomationException {
+ //       super(new ElementBuilder(element));
+//    }
+
+//    /**
+//     * Construct the AutomationTreeView.
+//     *
+//     * @param element The element.
+//     * @param automation The automation instance.
+//     * @throws AutomationException Automation library error.
+//     */
+//    public AutomationTreeView(final AutomationElement element,
+//                              final UIAutomation automation)
+//            throws AutomationException {
+ //       super(new ElementBuilder(element).automation(automation));
+ //   }
 
     /**
      * Gets the item, using the search criteria.
@@ -87,7 +98,7 @@ public class AutomationTreeView extends AutomationBase {
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
-            return new AutomationTreeViewItem(item);
+            return new AutomationTreeViewItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(name);
         }
@@ -121,7 +132,7 @@ public class AutomationTreeView extends AutomationBase {
             throw new ItemNotFoundException(namePattern.toString());
         }
 
-        return new AutomationTreeViewItem(foundElement);
+        return new AutomationTreeViewItem(new ElementBuilder(foundElement));
     }
 
     /**
@@ -138,7 +149,7 @@ public class AutomationTreeView extends AutomationBase {
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
-            return new AutomationTreeViewItem(item);
+            return new AutomationTreeViewItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(automationId);
         }

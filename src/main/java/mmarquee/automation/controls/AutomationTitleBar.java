@@ -67,6 +67,6 @@ public class AutomationTitleBar extends AutomationContainer {
         AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
                 condition);
 
-        return new AutomationMainMenu(this.element, element);
+        return new AutomationMainMenu(new ElementBuilder(element).parent(this.element));
     }
 }

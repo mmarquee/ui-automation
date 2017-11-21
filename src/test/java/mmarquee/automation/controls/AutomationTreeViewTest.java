@@ -61,7 +61,8 @@ public class AutomationTreeViewTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTreeView ctrl = new AutomationTreeView(element, instance);
+        AutomationTreeView ctrl = new AutomationTreeView(
+                new ElementBuilder(element).automation(instance));
 
         String name = ctrl.getName();
 
@@ -75,7 +76,7 @@ public class AutomationTreeViewTest {
         list = new ArrayList<>();
         list.add(targetElement);
         
-        ctrl = Mockito.spy(new AutomationTreeView(element));
+        ctrl = Mockito.spy(new AutomationTreeView(new ElementBuilder(element)));
     }
 
     @Test

@@ -213,7 +213,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong.
      */
     public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
-        return (new AutomationMainMenu(this.element, this.getElementByControlType(offset, ControlType.MenuBar)));
+        return (new AutomationMainMenu(new ElementBuilder(this.getElementByControlType(offset,
+                ControlType.MenuBar)).parent(this.element)));
     }
 
     /**
@@ -223,7 +224,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong.
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
-        return (new AutomationMainMenu(this.element, this.getElementByControlType(0, ControlType.Menu)));
+        return (new AutomationMainMenu(new ElementBuilder(this.getElementByControlType(0, ControlType.Menu)).parent(this.element)));
     }
 
     /**

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
@@ -77,11 +76,11 @@ public class AutomationControlFactory {
     		return new AutomationComboBox(new ElementBuilder(element));
     	case Edit:
 			if (AutomationPasswordEditBox.CLASS_NAME.equals(className)) {
-				return new AutomationPasswordEditBox(element);
+				return new AutomationPasswordEditBox(new ElementBuilder(element));
 			} else if (AutomationMaskedEdit.CLASS_NAME.equals(className)) {
-				return new AutomationMaskedEdit(element);
+				return new AutomationMaskedEdit(new ElementBuilder(element));
 			}
-    		return new AutomationEditBox(element);
+    		return new AutomationEditBox(new ElementBuilder(element));
     	case Hyperlink:
     		return new AutomationHyperlink(new ElementBuilder(element));
     	case Image:
@@ -89,17 +88,17 @@ public class AutomationControlFactory {
     	case ListItem:
     		return new AutomationListItem(new ElementBuilder(element));
     	case List:
-    		return new AutomationList(element);
+    		return new AutomationList(new ElementBuilder(element));
     	case Menu:
-    		return new AutomationMenu(element);
+    		return new AutomationMenu(new ElementBuilder(element));
     	case MenuBar:
-    		return new AutomationMainMenu(parent.getElement(), element);
+    		return new AutomationMainMenu(new ElementBuilder(parent.getElement()).parent(element));
     	case MenuItem:
-    		return new AutomationMenuItem(element);
+    		return new AutomationMenuItem(new ElementBuilder(element));
     	case ProgressBar:
-    		return new AutomationProgressBar(element);
+    		return new AutomationProgressBar(new ElementBuilder(element));
     	case RadioButton:
-    		return new AutomationRadioButton(element);
+    		return new AutomationRadioButton(new ElementBuilder(element));
     	case Slider:
     		return new AutomationSlider(new ElementBuilder(element));
     	case Spinner:
@@ -111,19 +110,19 @@ public class AutomationControlFactory {
     	case TabItem:
     		return new AutomationTabItem(new ElementBuilder(element));
     	case Text:
-    		return new AutomationTextBox(element);
+    		return new AutomationTextBox(new ElementBuilder(element));
     	case ToolBar:
     		return new AutomationToolBar(new ElementBuilder(element));
     	case Tree:
-    		return new AutomationTreeView(element);
+    		return new AutomationTreeView(new ElementBuilder(element));
     	case TreeItem:
-    		return new AutomationTreeViewItem(element);
+    		return new AutomationTreeViewItem(new ElementBuilder(element));
     	case Custom:
     		return new AutomationCustom(new ElementBuilder(element));
     	case DataGrid:
-    		return new AutomationDataGrid(element);
+    		return new AutomationDataGrid(new ElementBuilder(element));
     	case Document:
-    		return new AutomationDocument(element);
+    		return new AutomationDocument(new ElementBuilder(element));
     	case SplitButton:
     		return new AutomationSplitButton(new ElementBuilder(element));
     	case Window:
@@ -146,7 +145,7 @@ public class AutomationControlFactory {
     	case TitleBar:
     		return new AutomationTitleBar(new ElementBuilder(element));
     	case AppBar:
-    		return new AutomationAppBar(element);
+    		return new AutomationAppBar(new ElementBuilder(element));
     		// No Custom controls, yet:
     	case ScrollBar:
     	case ToolTip:

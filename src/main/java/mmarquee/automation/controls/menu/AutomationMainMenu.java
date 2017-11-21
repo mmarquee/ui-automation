@@ -30,6 +30,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PatternID;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
@@ -56,14 +57,14 @@ public class AutomationMainMenu extends AutomationMenu {
     public static ControlType controlType = ControlType.MenuBar;
 
     /**
-     * Constructor for AutomationMainMenu
-     * @param parent Parent of the element
-     * @param element The element
+     * Constructor for AutomationMainMenu.
+     *
+     * @param builder The builder
      * @throws AutomationException Automation library error
      */
-    public AutomationMainMenu(AutomationElement parent, AutomationElement element) throws AutomationException {
-        super(element);
-        this.parent = parent;
+    public AutomationMainMenu(final ElementBuilder builder) throws AutomationException {
+        super(builder);
+        this.parent = builder.getParent();
     }
 
     /**
@@ -125,7 +126,7 @@ public class AutomationMainMenu extends AutomationMenu {
             throw new ItemNotFoundException("Failed to find element: " + name0);
         }
         
-        AutomationMenuItem menuItem = new AutomationMenuItem(item);
+        AutomationMenuItem menuItem = new AutomationMenuItem(new ElementBuilder(item));
         menuItem.parentMenuName = item.getName();
         menuItem.mainMenuParentElement = this.getParentElement();
 
@@ -175,7 +176,7 @@ public class AutomationMainMenu extends AutomationMenu {
             throw new ItemNotFoundException("Failed to find element matching " + name0Pattern);
         }
         
-        AutomationMenuItem menuItem = new AutomationMenuItem(item);
+        AutomationMenuItem menuItem = new AutomationMenuItem(new ElementBuilder(item));
         menuItem.parentMenuName = item.getName();
         menuItem.mainMenuParentElement = this.getParentElement();
 
@@ -210,7 +211,7 @@ public class AutomationMainMenu extends AutomationMenu {
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
     
     /**
@@ -226,7 +227,7 @@ public class AutomationMainMenu extends AutomationMenu {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
         
         for(AutomationElement item: items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;

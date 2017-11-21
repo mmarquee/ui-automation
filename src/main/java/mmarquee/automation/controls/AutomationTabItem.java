@@ -84,7 +84,7 @@ public class AutomationTabItem extends AutomationContainer {
     public AutomationTabItem(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
         super(builder);
-        this.selectItemPattern = builder.getSelectItemPattern();
+        this.selectItemPattern = builder.getSelectItem();
     }
 
     /**

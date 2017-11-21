@@ -40,17 +40,27 @@ public class AutomationMenu extends AutomationBase {
     protected Logger logger = Logger.getLogger(AutomationMenu.class.getName());
 
     /**
-     * Construct the AutomationMenu
-     * @param element The element
+     * Construct the AutomationMenu.
+     *
+     * @param builder The builder
      * @throws AutomationException Automation library error
      */
-    public AutomationMenu(AutomationElement element)
+    public AutomationMenu(ElementBuilder builder)
             throws AutomationException {
-        super(new ElementBuilder(element));
+        super(builder);
     }
 
-    public static ControlType controlType = ControlType.Menu;
+//    /**
+//     * Construct the AutomationMenu
+//     * @param element The element
+//     * @throws AutomationException Automation library error
+//     */
+//    public AutomationMenu(AutomationElement element)
+//            throws AutomationException {
+//        super(new ElementBuilder(element));
+//    }
 
+    public static ControlType controlType = ControlType.Menu;
 
     /**
      * Gets the list of items associated with this menu item
@@ -66,7 +76,7 @@ public class AutomationMenu extends AutomationBase {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;
@@ -82,7 +92,7 @@ public class AutomationMenu extends AutomationBase {
     public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
 
-        return new AutomationMenuItem(items.get(index));
+        return new AutomationMenuItem(new ElementBuilder(items.get(index)));
     }
 
     /**
@@ -99,7 +109,7 @@ public class AutomationMenu extends AutomationBase {
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 
     /**
@@ -129,7 +139,7 @@ public class AutomationMenu extends AutomationBase {
         if (item == null) {
             throw new ItemNotFoundException("Failed to find element matching " + namePattern);
         }
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 
     /**
@@ -147,6 +157,6 @@ public class AutomationMenu extends AutomationBase {
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 }

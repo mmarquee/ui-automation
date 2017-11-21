@@ -44,7 +44,8 @@ public class AutomationDocumentTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDocument document = new AutomationDocument(element, pattern, instance);
+        AutomationDocument document = new AutomationDocument(
+                new ElementBuilder(element).text(pattern).automation(instance));
 
         String name = document.getName();
 
@@ -61,7 +62,8 @@ public class AutomationDocumentTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDocument document = new AutomationDocument(element, pattern, instance);
+        AutomationDocument document = new AutomationDocument(
+                new ElementBuilder(element).text(pattern).automation(instance));
 
         String name = document.getSelection();
 
@@ -78,7 +80,8 @@ public class AutomationDocumentTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDocument document = new AutomationDocument(element, pattern, instance);
+        AutomationDocument document = new AutomationDocument(
+                new ElementBuilder(element).text(pattern).automation(instance));
 
         String name = document.getText();
 

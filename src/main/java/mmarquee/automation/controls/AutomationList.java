@@ -45,30 +45,45 @@ public class AutomationList extends AutomationBase {
     /**
      * Constructor for the AutomationList.
      *
-     * @param element The underlying automation element.
+     * @param builder The underlying automation element.
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationList(final AutomationElement element)
+    public AutomationList(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
-//        this.selectionPattern = this.getSelectionPattern();
+        super(builder);
+        this.selectionPattern = builder.getSelection();
+
+        //        this.selectionPattern = this.getSelectionPattern();
     }
 
-    /**
-     * Constructor for the AutomationList.
-     *
-     * @param element The underlying automation element.
-     * @param selection The Selection pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationList(final AutomationElement element,
-                          final Selection selection)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
-        this.selectionPattern = selection;
-    }
+//    /**
+//     * Constructor for the AutomationList.
+//     *
+//     * @param element The underlying automation element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationList(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+////        this.selectionPattern = this.getSelectionPattern();
+//    }
+
+//    /**
+//     * Constructor for the AutomationList.
+//     *
+//     * @param element The underlying automation element.
+//     * @param selection The Selection pattern.
+//     * @throws AutomationException Automation library error.
+ //    * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationList(final AutomationElement element,
+//                          final Selection selection)
+//            throws PatternNotFoundException, AutomationException {
+ //       super(new ElementBuilder(element));
+//        this.selectionPattern = selection;
+//    }
 
     /**
      * Gets the item associated with the index.

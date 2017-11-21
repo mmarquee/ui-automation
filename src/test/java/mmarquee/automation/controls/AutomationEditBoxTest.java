@@ -43,7 +43,8 @@ public class AutomationEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationEditBox ctrl = new AutomationEditBox(element, value, instance);
+        AutomationEditBox ctrl = new AutomationEditBox(
+                new ElementBuilder(element).value(value).automation(instance));
 
         String name = ctrl.getName();
 
@@ -59,7 +60,8 @@ public class AutomationEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationEditBox ctrl = new AutomationEditBox(element, value, instance);
+        AutomationEditBox ctrl = new AutomationEditBox(
+                new ElementBuilder(element).value(value).automation(instance));
 
         String name = ctrl.getValue();
 
@@ -75,7 +77,8 @@ public class AutomationEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationEditBox ctrl = new AutomationEditBox(element, value, instance);
+        AutomationEditBox ctrl = new AutomationEditBox(
+                new ElementBuilder(element).value(value).automation(instance));
 
         boolean result = ctrl.isReadOnly();
 
@@ -91,7 +94,8 @@ public class AutomationEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationEditBox ctrl = new AutomationEditBox(element, value, instance);
+        AutomationEditBox ctrl = new AutomationEditBox(
+                new ElementBuilder(element).value(value).automation(instance));
 
         boolean result = ctrl.isReadOnly();
 
@@ -107,7 +111,8 @@ public class AutomationEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationEditBox ctrl = new AutomationEditBox(element, value, instance);
+        AutomationEditBox ctrl = new AutomationEditBox(
+                new ElementBuilder(element).value(value).automation(instance));
 
         ctrl.setValue("VALUE");
 

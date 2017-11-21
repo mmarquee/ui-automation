@@ -57,7 +57,7 @@ public class AutomationListItem extends AutomationContainer
     public AutomationListItem(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
         super(builder);
-        this.selectItemPattern = builder.getSelectItemPattern();
+        this.selectItemPattern = builder.getSelectItem();
     }
 
 //    /**

@@ -23,6 +23,8 @@ import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
+import javax.xml.bind.Element;
+
 /**
  * Wrapper for the TreeViewItem element.
  *
@@ -36,56 +38,63 @@ public class AutomationTreeViewItem
     private ExpandCollapse expandCollapsePattern;
     private SelectionItem selectItemPattern;
 
-    /**
-     * Construct the AutomationTreeViewItem.
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationTreeViewItem(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
+//    /**
+//     * Construct the AutomationTreeViewItem.
+//     * @param element The element.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationTreeViewItem(final AutomationElement element)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element));
+//    }
+
+    public AutomationTreeViewItem(final ElementBuilder builder) {
+        super(builder);
+
+        this.selectItemPattern = builder.getSelectItem();
+        this.expandCollapsePattern = builder.getCollapse();
     }
 
-    /**
-     * Construct the AutomationTreeViewItem.
-     * @param element The element.
-     * @param selection SelectionItem pattern.
-     * @param expandCollapsePattern The expand pattern.
-     * @param invoke Invoke pattern.
-     * @param automation The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    AutomationTreeViewItem(final AutomationElement element,
-                           final SelectionItem selection,
-                           final ExpandCollapse expandCollapsePattern,
-                           final Invoke invoke,
-                           final UIAutomation automation)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element).invoke(invoke).automation(automation));
-        this.selectItemPattern = selection;
-        this.expandCollapsePattern = expandCollapsePattern;
-    }
+//    /**
+//     * Construct the AutomationTreeViewItem.
+//     * @param element The element.
+//     * @param selection SelectionItem pattern.
+//     * @param expandCollapsePattern The expand pattern.
+//     * @param invoke Invoke pattern.
+//     * @param automation The automation instance.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    AutomationTreeViewItem(final AutomationElement element,
+//                           final SelectionItem selection,
+//                           final ExpandCollapse expandCollapsePattern,
+//                           final Invoke invoke,
+//                           final UIAutomation automation)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element).invoke(invoke).automation(automation));
+//        this.selectItemPattern = selection;
+//        this.expandCollapsePattern = expandCollapsePattern;
+//    }
 
-    /**
-     * Construct the AutomationTreeViewItem.
-     * @param element The element.
-     * @param selection SelectionItem pattern.
-     * @param expandCollapsePattern The expand pattern.
-     * @param invoke Invoke pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    AutomationTreeViewItem(final AutomationElement element,
-                           final SelectionItem selection,
-                           final ExpandCollapse expandCollapsePattern,
-                           final Invoke invoke)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element).invoke(invoke));
-        this.selectItemPattern = selection;
-        this.expandCollapsePattern = expandCollapsePattern;
-    }
+//    /**
+//     * Construct the AutomationTreeViewItem.
+//     * @param element The element.
+//     * @param selection SelectionItem pattern.
+//     * @param expandCollapsePattern The expand pattern.
+//     * @param invoke Invoke pattern.
+//     * @throws AutomationException Automation library error.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    AutomationTreeViewItem(final AutomationElement element,
+//                           final SelectionItem selection,
+//                           final ExpandCollapse expandCollapsePattern,
+//                           final Invoke invoke)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element).invoke(invoke));
+//        this.selectItemPattern = selection;
+//        this.expandCollapsePattern = expandCollapsePattern;
+//    }
 
     /**
      * Select the item.

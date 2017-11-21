@@ -31,6 +31,7 @@ public class ElementBuilder {
     private AutomationElement element;
     private UIAutomation instance;
 
+    private AutomationElement parent;
     private Range range;
     private Value value;
     private Invoke invoke;
@@ -39,6 +40,9 @@ public class ElementBuilder {
     private Selection selection;
     private ItemContainer itemContainer;
     private SelectionItem selectionItem;
+    private Grid grid;
+    private Table table;
+    private Text text;
 
     private WinNT.HANDLE handle;
     private Process process;
@@ -90,6 +94,10 @@ public class ElementBuilder {
         this.user32 = null;
         this.handle = null;
         this.process = null;
+        this.grid = null;
+        this.table = null;
+        this.text = null;
+        this.parent = null;
     }
 
     /**
@@ -130,6 +138,31 @@ public class ElementBuilder {
     }
 
     /**
+     * Create a ElementBuilder with a Table pattern.
+     * @param pattern The Table pattern
+     * @return The ElementBuilder
+     */
+    public ElementBuilder table(Table pattern) {
+        this.table = pattern;
+        return this;
+    }
+
+    /**
+     * Create a ElementBuilder with a Grid pattern.
+     * @param pattern The Grid pattern
+     * @return The ElementBuilder
+     */
+    public ElementBuilder grid(Grid pattern) {
+        this.grid = pattern;
+        return this;
+    }
+
+    public ElementBuilder text(Text pattern) {
+        this.text = pattern;
+        return this;
+    }
+
+    /**
      * Create a ElementBuilder with a Toggle pattern.
      * @param pattern The Toggle pattern
      * @return The ElementBuilder
@@ -156,6 +189,16 @@ public class ElementBuilder {
      */
     public ElementBuilder collapse(ExpandCollapse pattern) {
         this.collapse = pattern;
+        return this;
+    }
+
+    /**
+     * Create a ElementBuilder with a parent.
+     * @param parent The parent
+     * @return The ElementBuilder
+     */
+    public ElementBuilder parent(AutomationElement parent) {
+        this.parent = parent;
         return this;
     }
 
@@ -293,7 +336,15 @@ public class ElementBuilder {
         return this.windowPattern;
     }
 
-    public SelectionItem getSelectItemPattern() { return this.selectionItem;  }
+    public Grid getGrid() {
+        return this.grid;
+    }
+
+    public Table getTable() {
+        return this.table;
+    }
+
+    public SelectionItem getSelectItem() { return this.selectionItem;  }
 
     public ExpandCollapse getCollapse() { return this.collapse; }
 
@@ -306,6 +357,10 @@ public class ElementBuilder {
     public ItemContainer getItemContainer() { return this.itemContainer; }
 
     public Process getProcess() { return this.process; }
+
+    public Text getText() { return this.text; }
+
+    public AutomationElement getParent() { return this.parent; }
 
     public boolean getHasAutomation() {
         return this.instance != null;

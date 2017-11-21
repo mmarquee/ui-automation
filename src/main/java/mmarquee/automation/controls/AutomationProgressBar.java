@@ -35,33 +35,43 @@ public class AutomationProgressBar extends AutomationBase {
      */
     private Range rangePattern;
 
+//    /**
+//     * Construct the AutomationPanel.
+//     *
+//     * @param element The element.
+//     * @throws AutomationException Error in automation library.
+//     * @throws PatternNotFoundException Expected pattern not found.
+//     */
+//    public AutomationProgressBar(final AutomationElement element)
+//            throws AutomationException, PatternNotFoundException {
+//        super(new ElementBuilder(element));
+//
+////        this.rangePattern = this.getRangePattern();
+//    }
+
+//    /**
+//     * Construct the AutomationPanel.
+//     *
+//     * @param element The element.
+//     * @param range Range pattern.
+//     * @param instance Automation instance.
+//     */
+//    AutomationProgressBar(final AutomationElement element,
+//                          final Range range,
+//                          final UIAutomation instance) {
+//        super(new ElementBuilder(element).automation(instance));
+//
+//        this.rangePattern = range;
+//    }
+
     /**
      * Construct the AutomationPanel.
      *
-     * @param element The element.
-     * @throws AutomationException Error in automation library.
-     * @throws PatternNotFoundException Expected pattern not found.
+     * @param builder The builder
      */
-    public AutomationProgressBar(final AutomationElement element)
-            throws AutomationException, PatternNotFoundException {
-        super(new ElementBuilder(element));
-
-//        this.rangePattern = this.getRangePattern();
-    }
-
-    /**
-     * Construct the AutomationPanel.
-     *
-     * @param element The element.
-     * @param range Range pattern.
-     * @param instance Automation instance.
-     */
-    AutomationProgressBar(final AutomationElement element,
-                          final Range range,
-                          final UIAutomation instance) {
-        super(new ElementBuilder(element).automation(instance));
-
-        this.rangePattern = range;
+    AutomationProgressBar(final ElementBuilder builder) {
+        super(builder);
+        this.rangePattern = builder.getRange();
     }
 
     /**

@@ -43,7 +43,8 @@ public class AutomationRadioButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
+        AutomationRadioButton rb1 = new AutomationRadioButton(
+                new ElementBuilder(element).selectionItem(selection).automation(instance));
 
         String name = rb1.getName();
 
@@ -60,7 +61,8 @@ public class AutomationRadioButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
+        AutomationRadioButton rb1 = new AutomationRadioButton(
+                new ElementBuilder(element).selectionItem(selection).automation(instance));
 
         boolean value = rb1.isSelected();
 
@@ -77,7 +79,8 @@ public class AutomationRadioButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationRadioButton rb1 = new AutomationRadioButton(element, selection, instance);
+        AutomationRadioButton rb1 = new AutomationRadioButton(
+                new ElementBuilder(element).selectionItem(selection).automation(instance));
 
         rb1.select();
 

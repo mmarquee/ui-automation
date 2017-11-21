@@ -45,30 +45,31 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     protected String parentMenuName;
 
     /**
-     * Construct the AutomationMenuItem
-     * @param element The element
+     * Construct the AutomationMenuItem.
+     * @param builder The builder
      * @throws PatternNotFoundException Expected pattern not found
      * @throws AutomationException Automation error
      */
-    public AutomationMenuItem(AutomationElement element)
+    public AutomationMenuItem(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element));
+        super(builder);
+        this.collapsePattern = builder.getCollapse();
     }
 
-    /**
-     *
-     * Construct the AutomationMenuItem
-     * @param element The element
-     * @param collapse ExpandCollapse pattern
-     * @param invoke Invoke Pattern
-     * @throws PatternNotFoundException Pattern eas not found
-     * @throws AutomationException Error in the automation library
-     */
-    AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
-            throws PatternNotFoundException, AutomationException {
-        super(new ElementBuilder(element).invoke(invoke));
-        this.collapsePattern = collapse;
-    }
+//    /**
+//     *
+//     * Construct the AutomationMenuItem
+//     * @param element The element
+//     * @param collapse ExpandCollapse pattern
+//     * @param invoke Invoke Pattern
+//     * @throws PatternNotFoundException Pattern eas not found
+//     * @throws AutomationException Error in the automation library
+//     */
+//    AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
+//            throws PatternNotFoundException, AutomationException {
+//        super(new ElementBuilder(element).invoke(invoke));
+//        this.collapsePattern = collapse;
+//    }
 
     public static ControlType controlType = ControlType.MenuItem;
 
@@ -103,7 +104,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;
@@ -128,7 +129,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     	
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
 
-        return new AutomationMenuItem(items.get(index));
+        return new AutomationMenuItem(new ElementBuilder(items.get(index)));
     }
     
     /**
@@ -154,7 +155,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 
     /**
@@ -195,7 +196,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
             throw new ElementNotFoundException("Failed to find element matching " + namePattern);
         }
         
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
     
     /**
@@ -221,7 +222,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
     
     // For MainMenus, the dropdown is disconnected from the MenuItem here
@@ -237,7 +238,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
 	    	if (item == null) {
 	    		return null;
 	    	}
-	    	return new AutomationMenu(item);
+	    	return new AutomationMenu(new ElementBuilder(item));
     	} catch (ElementNotFoundException ex) {
     		return null;
     	}

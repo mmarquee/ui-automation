@@ -16,29 +16,41 @@ public class AutomationMaskedEdit extends AutomationEditBox {
 	
 	public static final String CLASS_NAME = "TAutomatedMaskEdit";
 	
+//    /**
+//     * Construct the AutomationMaskedEdit
+//     * @param element The element
+//     * @throws AutomationException Error in automation library
+//     * @throws PatternNotFoundException Expected pattern not found
+//     */
+//    public AutomationMaskedEdit(final AutomationElement element) throws PatternNotFoundException, AutomationException {
+//        super(element);
+//        assertClassName(CLASS_NAME);
+//    }
+
     /**
-     * Construct the AutomationMaskedEdit
-     * @param element The element
+     * Construct the AutomationMaskedEdit.
+     * @param builder The builder
      * @throws AutomationException Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMaskedEdit(final AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
+    public AutomationMaskedEdit(final ElementBuilder builder)
+            throws PatternNotFoundException, AutomationException {
+        super(builder);
         assertClassName(CLASS_NAME);
     }
 
-    /**
-     * Construct the AutomationMaskedEdit
-     * @param element The element
-     * @param value Value pattern
-     * @param instance Automaiton instance
-     * @throws AutomationException Error in automation library
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    AutomationMaskedEdit(final AutomationElement element,
-                         final Value value,
-                         final UIAutomation instance) throws PatternNotFoundException, AutomationException {
-        super(element, value, instance);
-        assertClassName(CLASS_NAME);
-    }
+//    /**
+//     * Construct the AutomationMaskedEdit
+//     * @param element The element
+//     * @param value Value pattern
+//     * @param instance Automaiton instance
+//     * @throws AutomationException Error in automation library
+//     * @throws PatternNotFoundException Expected pattern not found
+//     */
+//    AutomationMaskedEdit(final AutomationElement element,
+//                         final Value value,
+//                         final UIAutomation instance) throws PatternNotFoundException, AutomationException {
+//        super(element, value, instance);
+//        assertClassName(CLASS_NAME);
+//    }
 }

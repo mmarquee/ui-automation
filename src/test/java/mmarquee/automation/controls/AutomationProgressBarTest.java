@@ -46,7 +46,8 @@ public class AutomationProgressBarTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
+        AutomationProgressBar bar = new AutomationProgressBar(
+                new ElementBuilder(element).range(range).automation(instance));
 
         String name = bar.getName();
 
@@ -63,7 +64,8 @@ public class AutomationProgressBarTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
+        AutomationProgressBar bar = new AutomationProgressBar(
+                new ElementBuilder(element).range(range).automation(instance));
 
         double value = bar.getRangeValue();
 
@@ -78,7 +80,8 @@ public class AutomationProgressBarTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationProgressBar bar = new AutomationProgressBar(element, range, instance);
+        AutomationProgressBar bar = new AutomationProgressBar(
+                new ElementBuilder(element).range(range).automation(instance));
 
         bar.setRangeValue(18.99);
 
