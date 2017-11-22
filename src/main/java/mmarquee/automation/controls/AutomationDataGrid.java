@@ -74,42 +74,6 @@ public class AutomationDataGrid
         this.selectionPattern = builder.getSelection();
     }
 
-//    /**
-//     * Construct the AutomationDataGrid.
-//     *
-//     * @param element The element.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationDataGrid(final AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-//    }
-
-//    /**
-//     * Construct the AutomationDataGrid.
-//     *
-//     * @param element The element.
-//     * @param value Value pattern.
-//     * @param grid Grid pattern.
-//     * @param table Table pattern.
-//     * @param instance Automation instance.
-//     * @param selection Selection pattern.
-//     */
-//    AutomationDataGrid(final AutomationElement element,
-//                       final Value value,
-//                       final Grid grid,
-//                       final Table table,
-//                       final Selection selection,
-//                       final UIAutomation instance) {
-//        super(new ElementBuilder(element).automation(instance));
-//
-//        this.valuePattern = value;
-//        this.gridPattern = grid;
-//        this.tablePattern = table;
-//        this.selectionPattern = selection;
-//    }
-
     /**
      * Gets the text associated with the active cell of this element.
      *

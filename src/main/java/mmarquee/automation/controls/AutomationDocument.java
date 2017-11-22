@@ -36,17 +36,6 @@ import java.util.List;
 public class AutomationDocument extends AutomationBase {
     private Text textPattern;
 
-//    /**
-//     * Constructor for the AutomationDocument
-//     * @param element The underlying automation element
-//     * @throws AutomationException Automation library error
-//     * @throws PatternNotFoundException Expected pattern not found
-//     */
-//    public AutomationDocument(AutomationElement element) throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-////        this.textPattern = this.getTextPattern();
-//    }
-
     /**
      * Constructor for the AutomationDocument.
      * @param builder The builder

@@ -22,7 +22,7 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.*;
 
 /**
- * The pattern builder.
+ * The element builder.
  *
  * @author Mark Humphreys
  * Date 20/11/2017
@@ -302,6 +302,10 @@ public class ElementBuilder {
         return this;
     }
 
+    /**
+     * Gets the automation instance.
+     * @return The automation instance
+     */
     public UIAutomation getInstance() {
         return this.instance;
     }
@@ -312,54 +316,119 @@ public class ElementBuilder {
         return this.user32;
     }
 
+    /**
+     * Gets the invoke pattern.
+     * @return The invoke pattern
+     */
     public Invoke getInvoke() {
         return this.invoke;
     }
 
+    /**
+     * Gets the range pattern.
+     * @return The range pattern
+     */
     public Range getRange() {
         return this.range;
     }
 
+    /**
+     * Gets the value pattern.
+     * @return The value pattern
+     */
     public Value getValue() {
         return this.value;
     }
+
+    /**
+     * Gets the toggle pattern.
+     * @return The toggle pattern
+     */
 
     public Toggle getToggle() {
         return this.toggle;
     }
 
+    /**
+     * Gets the element handle.
+     * @return The element handle
+     */
     public WinNT.HANDLE getHandle() {
         return this.handle;
     }
 
+    /**
+     * Gets the window pattern.
+     * @return The window pattern
+     */
     public Window getWindow() {
         return this.windowPattern;
     }
 
+    /**
+     * Gets the grid pattern.
+     * @return The grid pattern
+     */
     public Grid getGrid() {
         return this.grid;
     }
 
+    /**
+     * Gets the table pattern.
+     * @return The table pattern
+     */
     public Table getTable() {
         return this.table;
     }
 
+    /**
+     * The selectitem pattern.
+     * @return The selectitem pattern
+     */
     public SelectionItem getSelectItem() { return this.selectionItem;  }
 
+    /**
+     * The expand/collapse pattern.
+     * @return The expandcollapse pattern
+     */
     public ExpandCollapse getCollapse() { return this.collapse; }
 
+    /**
+     * Gets the selection pattern.
+     * @return The selection pattern
+     */
     public Selection getSelection() { return this.selection; }
 
+    /**
+     * The element itself.
+     * @return The element
+     */
     public AutomationElement getElement() {
         return this.element;
     }
 
+    /**
+     * Gets the itemcontainer pattern.
+     * @return The itemcontainer pattern
+     */
     public ItemContainer getItemContainer() { return this.itemContainer; }
 
+    /**
+     * Gets the process.
+     * @return The process
+     */
     public Process getProcess() { return this.process; }
 
+    /**
+     * Gets the text pattern.
+     * @return The text pattern
+     */
     public Text getText() { return this.text; }
 
+    /**
+     * Gets the parent.
+     * @return The parent
+     */
     public AutomationElement getParent() { return this.parent; }
 
     public boolean getHasAutomation() {

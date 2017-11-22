@@ -50,16 +50,9 @@ public class AutomationMenu extends AutomationBase {
         super(builder);
     }
 
-//    /**
-//     * Construct the AutomationMenu
-//     * @param element The element
-//     * @throws AutomationException Automation library error
-//     */
-//    public AutomationMenu(AutomationElement element)
-//            throws AutomationException {
-//        super(new ElementBuilder(element));
-//    }
-
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.Menu;
 
     /**

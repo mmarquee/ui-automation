@@ -27,7 +27,6 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
@@ -178,84 +177,6 @@ public class AutomationApplication extends AutomationBase {
         }
     }
 
-//    /**
-//     * Constructor for the AutomationApplication.
-//     *
-//     * @param element The underlying automation element.
-//     * @param inHandle The handle of this application.
-//     * @param attached if we attach or launch the application.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationApplication(final AutomationElement element,
-//                                 final WinNT.HANDLE inHandle,
-//                                 final boolean attached)
-//            throws AutomationException  {
-//        super (new ElementBuilder(element));
-//        this.handle = inHandle;
-//        this.isAttached = attached;
-//    }
-
-//    /**
-//     * Constructor for the AutomationApplication.
-//     *
-//     * @param element The underlying automation element.
-//     * @param inHandle The handle of this application.
-//     * @param attached if we attach or launch the application.
-//     * @param automation Automation instance.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationApplication(final AutomationElement element,
-//                                 final WinNT.HANDLE inHandle,
-//                                 final boolean attached,
-//                                 final UIAutomation automation)
-//            throws AutomationException  {
-//        super (new ElementBuilder(element).automation(automation));
-//        this.handle = inHandle;
-//        this.isAttached = attached;
-//    }
-
-//    /**
-//     * Constructor for the AutomationApplication.
-//     *
-//     * @param element The underlying automation element.
-//     * @param inHandle The handle of this application.
-//     * @param attached if we attach or launch the application.
-//     * @param inUser32 The User32 instance.
-//     * @throws AutomationException Error in the automation library.
-//     */
-//    public AutomationApplication(final AutomationElement element,
-//                                 final WinNT.HANDLE inHandle,
-//                                 final boolean attached,
-//                                 final User32 inUser32)
-//            throws AutomationException {
-//        super(new ElementBuilder(element));
-//        this.handle = inHandle;
- //       this.isAttached = attached;
- //       this.user32 = inUser32;
- //   }
-
-//    /**
-//     * Constructor for the AutomationApplication.
-//     *
-//     * @param element The underlying automation element.
-//     * @param inHandle The handle of this application.
-//     * @param attached if we attach or launch the application.
-//     * @param inUser32 The User32 instance.
-//     * @param instance Automation instance.
-//     * @throws AutomationException Automation library error
-//     */
- //   public AutomationApplication(final AutomationElement element,
-//                                 final WinNT.HANDLE inHandle,
-//                                 final boolean attached,
-//                                 final User32 inUser32,
-//                                 final UIAutomation inst//ance)
-//            throws AutomationException {
-//        super(new ElementBuilder(element).automation(instance));
-//        this.handle = inHandle;
-//        this.isAttached = attached;
-//        this.user32 = inUser32;
- //   }
-
     /**
      * Constructor for the AutomationApplication.
      *
@@ -288,39 +209,6 @@ public class AutomationApplication extends AutomationBase {
             }
         }
     }
-
-//    /**
-//     * Constructor for the AutomationApplication.
-//     *
-//     * Detection of already running application is taken from:
-//     *   http://www.golesny.de/p/code/javagetpid.
-//     * @param element The underlying automation element
-//     * @param process The process for this application.
-//     * @param attached if we attach or launch the application?
-//     * @throws AutomationException Automation library error
-//     * */
-//    public AutomationApplication(final AutomationElement element,
-//                                 final Process process,
-//                                 final boolean attached)
-//            throws AutomationException {
-//       super(new ElementBuilder(element));
-//
-//        this.isAttached = attached;
-//
-  //      String name = process.getClass().getName();
-//
-  //      if (name.equals("java.lang.Wind32Process")
-    //            || name.equals("java.lang.ProcessImpl")) {
-      //      try {
-        //        Field f = process.getClass().getDeclaredField("handle");
-          //      f.setAccessible(true);
-            //    long handl = f.getLong(process);
-              //  this.handle.setPointer(Pointer.createConstant(handl));
-//            } catch (Throwable e) {
-//              // Handle the error nicely
-//            }
-//        }
-//    }
 
     /**
      * Closes the window.
@@ -383,11 +271,10 @@ public class AutomationApplication extends AutomationBase {
             user32 = User32.INSTANCE;
         }
 
-        final WinDef.HWND hwnd = Utils.findWindow(null, titlePattern);
+        final WinDef.HWND handle = Utils.findWindow(null, titlePattern);
 
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
+        if (handle != null) {
+            Utils.quitProcess(handle);
         }
     }
-
 }

@@ -29,35 +29,14 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 03/03/2016.
  */
 public class AutomationSplitButton extends AutomationButton {
-//    /**
-//     * Construct the AutomationSplitButton.
-//     *
-//     * @param element The element.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Failed to find expected pattern.
-//     */
-//    public AutomationSplitButton(final AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element);
-//    }
-
+    /**
+     * Construct the AutomationSplitButton.
+     *
+     * @param builder The builder
+     * @throws AutomationException Automation library error.
+     * @throws PatternNotFoundException Failed to find expected pattern.
+     */
     public AutomationSplitButton(final ElementBuilder builder) {
         super(builder);
     }
-
- //   /**
- //    * Constructor for the AutomationButton.
- //    *
- //    * @param element The underlying automation element.
- //    * @param pattern The pattern.
- //    * @param instance Automation instance.
- //    * @throws AutomationException Automation library error.
- //    * @throws PatternNotFoundException Expected pattern not found.
- //    */
- //   public AutomationSplitButton(final AutomationElement element,
- //                                final Invoke pattern,
- //                                final UIAutomation instance)
- //           throws PatternNotFoundException, AutomationException {
- //       super(element, pattern, instance);
- //   }
 }

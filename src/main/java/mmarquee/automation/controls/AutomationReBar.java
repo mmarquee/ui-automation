@@ -18,34 +18,17 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public class AutomationReBar extends AutomationPanel {
 	
 	public final static String CLASS_NAME = "ReBarWindow32";
-	
-//    /**
-//     * Construct the AutomationReBar
-//     * @param element The element
-//     * @throws AutomationException Automation library error
-//     * @throws PatternNotFoundException Pattern not found
-//     */
-//    public AutomationReBar(AutomationElement element) throws PatternNotFoundException, AutomationException {
-//        super(element);
-//        assertClassName(CLASS_NAME);
-//    }
 
+    /**
+     * Construct the AutomationReBar.
+     *
+     * @param builder The builder
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Pattern not found
+     */
     public AutomationReBar(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
         super(builder);
         assertClassName(CLASS_NAME);
     }
-
-//    /**
-//     * Construct the AutomationReBar
-//     * @param element The element
-//     * @param containerPattern The container Pattern
-//     * @param instance Automation instance
-//     * @throws AutomationException Automation library error
- //    * @throws PatternNotFoundException Pattern not found
- //    */
-//    public AutomationReBar(AutomationElement element, ItemContainer containerPattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
-//        super(element, containerPattern, instance);
-//        assertClassName(CLASS_NAME);
-//    }
 }

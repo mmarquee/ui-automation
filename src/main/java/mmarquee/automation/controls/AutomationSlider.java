@@ -1,17 +1,14 @@
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
 /**
+ * Wrapper for the Slider element.
+ *
  * @author Mark Humphreys
  * Date 15/02/2016.
- *
- * Wrapper for the Slider element.
  *
  * IRangeProvider, ISelectionProvider, IValueProvider
  */
@@ -22,39 +19,17 @@ public class AutomationSlider extends AutomationBase {
      */
     private Range rangePattern;
 
-//    /**
-//     * Construct the AutomationSlider.
-//     * @param element The element.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationSlider(final AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-////        this.rangePattern = this.getRangePattern();
-//    }
-
+    /**
+     * Construct the AutomationSlider.
+     * @param builder The builder
+     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws AutomationException Automation library error.
+     */
       public AutomationSlider(final ElementBuilder builder)
           throws PatternNotFoundException, AutomationException {
         super(builder);
         this.rangePattern = builder.getRange();
     }
-
-    //   /**
- //    * Construct the AutomationSlider.
- //    * @param element The element.
- //    * @param pattern The range pattern.
- //    * @param instance Automation instance.
- //    * @throws PatternNotFoundException Expected pattern not found.
- //    * @throws AutomationException Automation library error.
- //    */
-//    AutomationSlider(final AutomationElement element,
-//                     final Range pattern,
-//                     final UIAutomation instance)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element).automation(instance));
-//        this.rangePattern = pattern;
-//    }
 
     /**
      * Gets the range value.

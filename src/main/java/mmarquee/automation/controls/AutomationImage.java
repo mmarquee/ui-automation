@@ -31,15 +31,11 @@ import java.util.List;
  * Wrapper for the Image control element.
  */
 public class AutomationImage extends AutomationBase {
-//    /**
-//     * Construct the AutomationImage
-//     * @param element The element
-//     * @throws AutomationException Automation library error
-//     */
-//    public AutomationImage(AutomationElement element) throws AutomationException {
-//        super(new ElementBuilder(element));
-//    }
-
+    /**
+     * Construct the AutomationImage.
+     * @param builder The builder
+     * @throws AutomationException Automation library error
+     */
     public AutomationImage(final ElementBuilder builder) throws AutomationException {
         super(builder);
     }

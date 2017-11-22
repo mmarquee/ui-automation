@@ -29,18 +29,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 02/03/2016
  */
 public class AutomationToolBar extends AutomationContainer {
-//    /**
-//     * Constructor for the AutomationToolBar.
-//     *
-//     * @param element The underlying automation element.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    public AutomationToolBar(final AutomationElement element)
-//            throws AutomationException, PatternNotFoundException {
- //       super(element);
-//    }
-
     /**
      * Constructor for the AutomationToolBar.
      *
@@ -52,22 +40,6 @@ public class AutomationToolBar extends AutomationContainer {
             throws AutomationException, PatternNotFoundException {
         super(builder);
     }
-
-//    /**
-//     * Constructor for the AutomationToolBar.
-//     *
-//     * @param element The underlying automation element.
-//     * @param container The ItemContainer pattern.
-//     * @param instance The automation instance.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    public AutomationToolBar(final AutomationElement element,
-//                             final ItemContainer container,
-//                             final UIAutomation instance)
-//            throws AutomationException, PatternNotFoundException {
-//        super(element, container, instance);
-//    }
 
     /**
      * Gets the button control associated with the given index.

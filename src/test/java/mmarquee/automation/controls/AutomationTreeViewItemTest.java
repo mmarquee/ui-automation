@@ -81,7 +81,7 @@ public class AutomationTreeViewItemTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationTreeViewItem ctrl = new AutomationTreeViewItem(
-                new ElementBuilder(element).collapse(expand).automation(instance).invoke(invoke));
+                new ElementBuilder(element).selectionItem(selection).collapse(expand).automation(instance).invoke(invoke));
 
         ctrl.select();
 

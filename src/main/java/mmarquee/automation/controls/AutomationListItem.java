@@ -16,18 +16,15 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
+ * Wrapper for the ListItem element.
+ *
  * @author Mark Humphreys
  * Date 09/02/2016.
- *
- * Wrapper for the ListItem element.
  */
 public class AutomationListItem extends AutomationContainer
         implements Selectable, Clickable {
@@ -36,17 +33,6 @@ public class AutomationListItem extends AutomationContainer
      * The selectionItem pattern.
      */
     SelectionItem selectItemPattern;
-
-//    /**
-//     * Constructor for the AutomationListItem.
-//     * @param inElement The underlying automation element.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationListItem(final AutomationElement inElement)
-//            throws PatternNotFoundException, AutomationException {
-//        super(inElement);
-//    }
 
     /**
      * Constructor for the AutomationListItem.
@@ -59,35 +45,6 @@ public class AutomationListItem extends AutomationContainer
         super(builder);
         this.selectItemPattern = builder.getSelectItem();
     }
-
-//    /**
-//     * Constructor for the AutomationListItem.
-//     * @param inElement The underlying automation element.
-//     * @param inAutomation Automation instance
-//     * @throws AutomationException Automation library error
-//     * @throws PatternNotFoundException Expected pattern not found
-//     */
-//    public AutomationListItem(final AutomationElement inElement,
-//                              final UIAutomation inAutomation)
-//            throws PatternNotFoundException, AutomationException {
-//        super(inElement, inAutomation);
-//    }
-
-//    /**
-//     * Constructor for the AutomationListItem.
-//     * @param inElement The underlying automation element.
-//     * @param inSelectItemPattern The associated selectionItem pattern.
-//     * @param inPattern The invoke pattern.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
- //    */
-//    AutomationListItem(final AutomationElement inElement,
-//                       final SelectionItem inSelectItemPattern,
-//                       final Invoke inPattern)
-//            throws PatternNotFoundException, AutomationException {
-//        super(inElement, inPattern);
-//        this.selectItemPattern = inSelectItemPattern;
-//    }
 
     /**
      * Selects this item.

@@ -44,57 +44,18 @@ public class AutomationComboBox
     private Value valuePattern;
     private Selection selectionPattern;
 
-//    /**
-//     * Constructor for the AutomationComboBox.
-//     * @param element The underlying automation element.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern(s) not found.
-//     */
-//    public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
-//        super (new ElementBuilder(element));
-//    }
-
+    /**
+     * Constructor for the AutomationComboBox.
+     * @param builder The builder
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern(s) not found.
+     */
     public AutomationComboBox(final ElementBuilder builder) {
         super(builder);
         this.collapsePattern = builder.getCollapse();
         this.valuePattern = builder.getValue();
         this.selectionPattern = builder.getSelection();
     }
-
-//    /**
-//     * Constructor for the AutomationComboBox.
-//     * @param element The underlying automation element.
- //    * @param collapse The collapse pattern.
-//     * @param value The value pattern.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern(s) not found.
-//     */
-//    AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection)
-//            throws PatternNotFoundException, AutomationException {
-//        super (new ElementBuilder(element));
-//
-//        this.collapsePattern = collapse;
-//        this.valuePattern = value;
-//        this.selectionPattern = selection;
-//    }
-
-//    /**
-//     * Constructor for the AutomationComboBox.
-//     * @param element The underlying automation element.
-//     * @param collapse The collapse pattern.
-//     * @param value The value pattern.
-//     * @param instance The automation instance.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern(s) not found.
-//     */
-//    AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection, UIAutomation instance)
-//            throws PatternNotFoundException, AutomationException {
-//        super (new ElementBuilder(element).automation(instance));
-//
-//        this.collapsePattern = collapse;
-//        this.valuePattern = value;
-//        this.selectionPattern = selection;
-//    }
 
     /**
      * Gets the text associated with this element.

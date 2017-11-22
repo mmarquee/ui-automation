@@ -22,10 +22,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper for the Calendar element.
+ *
  * @author Mark Humphreys
  * Date 16/02/2016.
- *
- * Wrapper for the Calendar element.
  *
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
@@ -49,46 +49,6 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
             this.valuePattern = this.getValuePattern();
         }
     }
-
-
-//    /**
-//     * Constructor for the AutomationCalendar.
-//     *
-//     * @param element The underlying automation element.
- //    * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationCalendar(final AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-//        this.valuePattern = this.getValuePattern();
-//    }
-
-//    /**
-//     * Constructor for the AutomationCalendar.
-//     *
- //    * @param element The underlying automation element.
-//     * @param pattern Value pattern.
-//     */
-//    public AutomationCalendar(final AutomationElement element,
-//                              final Value pattern) {
-//        super(new ElementBuilder(element));
-//        this.valuePattern = pattern;
-//    }
-
-//    /**
-//     * Constructor for the AutomationCalendar.
-//     *
-//     * @param element The underlying automation element.
-//     * @param pattern Value pattern.
-//     * @param instance the automation instance.
-//     */
-//    public AutomationCalendar(final AutomationElement element,
-//                              final Value pattern,
-//                              final UIAutomation instance) {
-//        super(new ElementBuilder(element).automation(instance));
-//        this.valuePattern = pattern;
-//    }
 
     /**
      * Gets the current value of the control.

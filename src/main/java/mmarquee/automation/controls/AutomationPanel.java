@@ -31,19 +31,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 26/02/2016.
  */
 public class AutomationPanel extends AutomationContainer {
-//    /**
-//     * Construct the AutomationPanel.
-//     *
-//     * @param element The element.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    public AutomationPanel(final AutomationElement element)
-//            throws AutomationException, PatternNotFoundException {
-//        super(element);
-//    }
-
-
     /**
      * Construct the AutomationPanel.
      *
@@ -56,36 +43,6 @@ public class AutomationPanel extends AutomationContainer {
         super(builder);
     }
 
-//    /**
-//     * Construct the AutomationPanel.
-//     *
- //    * @param element The element.
-//     * @param containerPattern The itemContainer pattern.
-//     * @param instance Automation instance.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    AutomationPanel(final AutomationElement element,
-//                    final ItemContainer containerPattern,
-//                    final UIAutomation instance)
-//            throws AutomationException, PatternNotFoundException {
- //       super(element, containerPattern, instance);
-//    }
-
-//    /**
-//     * Construct the AutomationPanel.
-//     *
-//     * @param element The element.
-//     * @param containerPattern The itemContainer pattern.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    AutomationPanel(final AutomationElement element,
-//                    final ItemContainer containerPattern)
-//            throws AutomationException, PatternNotFoundException {
-//        super(element, containerPattern);
-//    }
-
     /**
      * Gets an MDI window from the panel.
      *
@@ -97,6 +54,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something went really wrong.
      * @deprecated Use getWindow(int) instead.
      */
+    @Deprecated
     private AutomationWindow getMDIWindow(final int index)
             throws PatternNotFoundException, AutomationException {
         return getWindow(index);

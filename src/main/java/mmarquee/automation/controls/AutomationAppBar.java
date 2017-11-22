@@ -40,21 +40,4 @@ public class AutomationAppBar extends AutomationBase {
             throws AutomationException {
         super (builder);
     }
-
-//    /**
-//     * <p>
-//     * Constructor for the AutomationAppBar.
-//     * </p>
-//     * <p>
-//     * This element seems to be undocumented by Microsoft.
-//     * </p>
-//     * @param element The underlying automation element.
-//     * @param instance The automation instance.
-//     * @throws AutomationException Automation library error.
-//     */
-//    AutomationAppBar(final AutomationElement element,
-//                     final UIAutomation instance)
-//            throws AutomationException {
-//        super (new ElementBuilder(element).automation(instance));
-//    }
 }

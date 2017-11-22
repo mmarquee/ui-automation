@@ -16,9 +16,7 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Value;
@@ -106,18 +104,6 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
         return this.element.isPassword();
     }
 
-//    /**
-//     * Constructor for the AutomationEditBox.
-//     * @param element The underlying element.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     * @throws AutomationException Automation error.
-//     */
-//    public AutomationEditBox(AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-////        this.valuePattern = this.getValuePattern();
-//    }
-
     /**
      * Constructor for the AutomationEditBox.
      * @param builder The builder.
@@ -129,17 +115,4 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
         super(builder);
         this.valuePattern = builder.getValue();
     }
-
-//    /**
-//     * Constructor for the AutomationEditBox
-//     * @param element The underlying element
-//     * @param value The Value pattern
-//     * @param instance Automation instance
-//     */
-//    AutomationEditBox(final AutomationElement element,
-//                      final Value value,
-//                      final UIAutomation instance) {
-//        super(new ElementBuilder(element).automation(instance));
-//        this.valuePattern = value;
-//    }
 }

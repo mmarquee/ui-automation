@@ -40,73 +40,11 @@ public class AutomationContainer extends AutomationBase {
 
     private ItemContainer itemContainerPattern;
 
-//    /**
-//     * Constructor for AutomationContainer.
-//     *
-//     * @param element The underlying element.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    public AutomationContainer(AutomationElement element) throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-//    }
-
     public AutomationContainer(final ElementBuilder builder) throws PatternNotFoundException, AutomationException {
         super(builder);
         itemContainerPattern = builder.getItemContainer();
     }
 
-//    /**
-//     * Constructor for AutomationContainer.
-//     *
-//     * @param element The underlying element.
-//     * @param automation UIAutomation instance
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    public AutomationContainer(AutomationElement element, UIAutomation automation) throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(automation).element(element));
-//    }
-
-//    /**
-//     * Constructor for AutomationContainer.
-//     *
-//     * @param element The underlying element.
-//     * @param pattern The Container pattern.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    AutomationContainer(AutomationElement element, ItemContainer pattern) throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-//        itemContainerPattern = pattern;
-//    }
-
-//    /**
-//     * Constructor for AutomationContainer
-//     *
-//     * @param element The underlying element
-//     * @param pattern The ItemContainer pattern
-//     * @param instance The automation instance
-//     * @throws AutomationException Something is wrong in automation
-//     * @throws PatternNotFoundException Could not find pattern
-//     */
-//    AutomationContainer(AutomationElement element, ItemContainer pattern, UIAutomation instance) throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(instance).element(element));
-//        itemContainerPattern = pattern;
-//    }
-
-//    /**
-//     * Constructor for AutomationContainer.
-//     *
-//     * @param element The underlying element.
-//     * @param pattern The Invoke pattern.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Could not find pattern.
-//     */
-//    AutomationContainer(AutomationElement element, Invoke pattern) throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element).invoke(pattern));
-//    }
-    
     /**
      * Gets a element by control type.
      * @param index The nth item that matches.

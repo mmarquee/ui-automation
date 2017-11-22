@@ -36,10 +36,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Encapsulates the 'window' element
+ *
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Encapsulates the 'window' element
  *
  * Currently all of these tests require to run on Windows.
  */
@@ -66,37 +66,12 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         this.element.setFocus();
     }
 
-//    /**
-//     * Constructor for the AutomationWindow.
-//     * @param element The underlying element.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationWindow (AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element);
-//
-//        this.user32 = User32.INSTANCE;
-//        this.windowPattern = this.getWindowPattern();
-//    }
-
-//    /**
- //    * Constructor for the AutomationWindow.
- //    * @param element The underlying element.
-//     * @param window The Window pattern.
-//     * @param container The Container pattern.
-//     * @param instance Automation instance.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    AutomationWindow (AutomationElement element, Window window, ItemContainer container, UIAutomation instance)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container, instance);
-//
- //       this.user32 = User32.INSTANCE;
-//        this.windowPattern = window;
-//    }
-
+    /**
+     * Constructor for the AutomationWindow.
+     * @param builder The builder
+     * @throws AutomationException Something is wrong in automation.
+     * @throws PatternNotFoundException Expected pattern not found.
+     */
     public AutomationWindow (ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
         super(builder);
@@ -108,57 +83,6 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         }
         this.windowPattern = builder.getWindow();
     }
-
-//    /**
-//     * Constructor for the AutomationWindow.
-//     * @param element The underlying element.
-//     * @param window The Window pattern.
-//     * @param container The Container pattern.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Expected pattern not found.
- //    */
-//    AutomationWindow (AutomationElement element, Window window, ItemContainer container)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container);
-//
-//        this.user32 = User32.INSTANCE;
-//        this.windowPattern = window;
- //   }
-
-//    /**
-//     * Constructor for the AutomationWindow.
-//     * @param element The underlying element.
-//     * @param window The Window pattern.
-//     * @param container The Container pattern.
-//     * @param user32 The user32 instance.
-//     * @param instance The automation instance.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationWindow (AutomationElement element, Window window, ItemContainer container, User32 user32, UIAutomation instance)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container, instance)//;
-//
-//        this.user32 = user32;
-//        this.windowPattern = window;
-//    }
-
-//    /**
-//     * Constructor for the AutomationWindow.
-//     * @param element The underlying element.
-//     * @param window The Window pattern.
-//     * @param container The Container pattern.
- //    * @param user32 The user32 instance.
-//     * @throws AutomationException Something is wrong in automation.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationWindow (AutomationElement element, Window window, ItemContainer container, User32 user32)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container);
-//
-//        this.user32 = user32;
-//        this.windowPattern = window;
-//    }
 
     /**
      * Gets the status bar associated with this window.

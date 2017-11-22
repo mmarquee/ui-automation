@@ -109,7 +109,7 @@ public class AutomationTreeViewItem
         if (this.selectItemPattern != null) {
         	this.selectItemPattern.select();
         } else {
-            throw new PatternNotFoundException("Select Pattern was not fgound");
+            throw new PatternNotFoundException("Select Pattern was not found");
         }
     }
 

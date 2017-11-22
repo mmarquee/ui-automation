@@ -26,10 +26,11 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
+ * Wrapper for the TitleBar element.
+ *
  * @author Mark Humphreys
  * Date 04/03/2016.
  *
- * Wrapper for the TitleBar element.
  */
 public class AutomationTitleBar extends AutomationContainer {
     /**
@@ -42,19 +43,6 @@ public class AutomationTitleBar extends AutomationContainer {
             throws PatternNotFoundException, AutomationException {
         super(builder);
     }
-
-//    /**
-//     * Constructor for the AutomationTitleBar.
-//     * @param element The underlying automation element
-//     * @param container The underlying item container pattern
-//     * @throws AutomationException Automation library error
-//     * @throws PatternNotFoundException Failed to find pattern
-//     */
-//    public AutomationTitleBar(final AutomationElement element,
-//                              final ItemContainer container)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container);
-//    }
 
     /**
      * Gets the menu bar for this title-bar.

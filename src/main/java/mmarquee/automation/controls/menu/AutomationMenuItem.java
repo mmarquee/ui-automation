@@ -56,21 +56,9 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
         this.collapsePattern = builder.getCollapse();
     }
 
-//    /**
-//     *
-//     * Construct the AutomationMenuItem
-//     * @param element The element
-//     * @param collapse ExpandCollapse pattern
-//     * @param invoke Invoke Pattern
-//     * @throws PatternNotFoundException Pattern eas not found
-//     * @throws AutomationException Error in the automation library
-//     */
-//    AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element).invoke(invoke));
-//        this.collapsePattern = collapse;
-//    }
-
+    /**
+     * The Control type.
+     */
     public static ControlType controlType = ControlType.MenuItem;
 
     /**

@@ -92,7 +92,7 @@ public class AutomationControlFactory {
     	case Menu:
     		return new AutomationMenu(new ElementBuilder(element));
     	case MenuBar:
-    		return new AutomationMainMenu(new ElementBuilder(parent.getElement()).parent(element));
+    		return new AutomationMainMenu(new ElementBuilder(element).parent(parent.getElement()));
     	case MenuItem:
     		return new AutomationMenuItem(new ElementBuilder(element));
     	case ProgressBar:

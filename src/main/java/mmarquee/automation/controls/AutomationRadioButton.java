@@ -33,23 +33,6 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
      */
     private SelectionItem selectItemPattern;
 
-//    /**
-//     * Construct the AutomationRadioButton.
-//     *
-//     * @param element The element.
-//     * @param selection The item selection pattern.
-//     * @param instance Automation instance.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     * @throws AutomationException Automation library error.
-//     */
-//    AutomationRadioButton(final AutomationElement element,
-//                          final SelectionItem selection,
-//                          final UIAutomation instance)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element).automation(instance));
-//        selectItemPattern = selection;
-//    }
-
     /**
      * Construct the AutomationRadioButton.
      *
@@ -61,21 +44,7 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
             throws PatternNotFoundException, AutomationException {
         super(builder);
         selectItemPattern = builder.getSelectItem();
-//        selectItemPattern = this.getSelectItemPattern();
     }
-
-//    /**
-//     * Construct the AutomationRadioButton.
-//     *
-//     * @param element The element.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationRadioButton(final AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(new ElementBuilder(element));
-////        selectItemPattern = this.getSelectItemPattern();
-//    }
 
     /**
      * Selects this element.

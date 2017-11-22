@@ -105,45 +105,6 @@ public class AutomationTab extends AutomationContainer {
         }
     }
 
-//    /**
-//     * Constructor for the AutomationTab.
-//     * @param element The underlying element.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationTab (final AutomationElement element)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element);
-//    }
-
-//    /**
-//     * Constructor for the AutomationTab.
-//     * @param element The underlying element.
-//     * @param container The ItemContainer pattern.
-//     * @param instance Automation instance.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationTab (final AutomationElement element,
-//                          final ItemContainer container,
-//                          final UIAutomation instance)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container, instance);
-//    }
-
-//    /**
-//     * Constructor for the AutomationTab.
-//     * @param element The underlying element.
-//     * @param container The ItemContainer pattern.
-//     * @throws AutomationException Automation library error.
-//     * @throws PatternNotFoundException Expected pattern not found.
-//     */
-//    public AutomationTab (final AutomationElement element,
-//                          final ItemContainer container)
-//            throws PatternNotFoundException, AutomationException {
-//        super(element, container);
-//    }
-
     /**
      * Constructor for the AutomationTab.
      * @param builder The builder

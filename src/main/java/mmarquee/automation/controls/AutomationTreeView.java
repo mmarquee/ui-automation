@@ -41,30 +41,6 @@ public class AutomationTreeView extends AutomationBase {
         super(builder);
     }
 
-//    /**
-//     * Construct the AutomationTreeView.
-//     *
-//     * @param element The element.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationTreeView(final AutomationElement element)
-//            throws AutomationException {
- //       super(new ElementBuilder(element));
-//    }
-
-//    /**
-//     * Construct the AutomationTreeView.
-//     *
-//     * @param element The element.
-//     * @param automation The automation instance.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationTreeView(final AutomationElement element,
-//                              final UIAutomation automation)
-//            throws AutomationException {
- //       super(new ElementBuilder(element).automation(automation));
- //   }
-
     /**
      * Gets the item, using the search criteria.
      * @param search The search criteria

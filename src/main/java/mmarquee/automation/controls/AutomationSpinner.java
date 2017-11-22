@@ -15,9 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 
 /**
  * @author Mark Humphreys
@@ -26,16 +24,11 @@ import mmarquee.automation.ControlType;
  * Wrapper for the Spinner element.
  */
 public class AutomationSpinner extends AutomationBase {
-//    /**
-//     * Construct the AutomationSpinner.
-//     * @param element The element.
-//     * @throws AutomationException Automation library error.
-//     */
-//    public AutomationSpinner(final AutomationElement element)
-//            throws AutomationException {
-//        super(new ElementBuilder(element));
-//    }
-
+    /**
+     * Construct the AutomationSpinner.
+     * @param builder The builder
+     * @throws AutomationException Automation library error.
+     */
     public AutomationSpinner(final ElementBuilder builder)
             throws AutomationException {
         super(builder);
