@@ -17,13 +17,19 @@ package mmarquee.demo;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationImage;
+import mmarquee.automation.controls.Search;
+import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationPanel;
+import mmarquee.automation.controls.AutomationPowerpointSlide;
 
 /**
+ * Test the automation wrapper on Excel.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
  *
- * Test the automation wrapper on Excel.
  */
 public class TestMainPowerpoint extends TestBase {
 

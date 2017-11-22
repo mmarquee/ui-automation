@@ -57,7 +57,7 @@ public class AutomationException extends Exception {
      * Constructor for the AutomationException.
      * @param cause The underlying exception which caused this
      */
-    public AutomationException(Throwable cause) {
+    public AutomationException(final Throwable cause) {
         super(cause);
         this.errorCode = 0;
     }
