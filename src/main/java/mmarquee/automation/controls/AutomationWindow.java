@@ -229,7 +229,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    private AutomationWindow getWindow(String title) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getWindow(String title) throws PatternNotFoundException, AutomationException {
         AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {
@@ -270,7 +270,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    private AutomationWindow getWindow(Pattern titlePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getWindow(Pattern titlePattern) throws PatternNotFoundException, AutomationException {
         AutomationElement item = null;
 
         retry_loop: for (int loop = 0; loop < 10; loop++) {

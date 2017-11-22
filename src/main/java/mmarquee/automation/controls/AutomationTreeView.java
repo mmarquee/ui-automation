@@ -67,7 +67,7 @@ public class AutomationTreeView extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws PatternNotFoundException Expected pattern not found
      */
-    private AutomationTreeViewItem getItem(final String name) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final String name) throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
@@ -87,7 +87,7 @@ public class AutomationTreeView extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    private AutomationTreeViewItem getItem(final Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final Pattern namePattern) throws PatternNotFoundException, AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -118,7 +118,7 @@ public class AutomationTreeView extends AutomationBase {
      * @throws ItemNotFoundException when the item is not found
      * @throws PatternNotFoundException Expected pattern not found
      */
-    private AutomationTreeViewItem getItemByAutomationId(final String automationId) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItemByAutomationId(final String automationId) throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),

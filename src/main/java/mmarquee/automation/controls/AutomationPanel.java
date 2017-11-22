@@ -68,7 +68,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    private AutomationWindow getWindow(final int index)
+    public AutomationWindow getWindow(final int index)
             throws PatternNotFoundException, AutomationException {
     	return new AutomationWindow(new ElementBuilder(this.getElementByControlType(index, ControlType.Window)));
     }
@@ -81,7 +81,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    private AutomationWindow getWindow(final String name)
+    public AutomationWindow getWindow(final String name)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(new ElementBuilder(this.getElementByControlType(name, ControlType.Window)));
     }
@@ -94,7 +94,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
-    private AutomationWindow getWindow(final Pattern namePattern)
+    public AutomationWindow getWindow(final Pattern namePattern)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(new ElementBuilder(this.getElementByControlType(namePattern, ControlType.Window)));
     }
@@ -107,7 +107,7 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Expected pattern not found.
       */
-    private AutomationWindow getWindowByAutomationId(final String id)
+    public AutomationWindow getWindowByAutomationId(final String id)
             throws PatternNotFoundException, AutomationException {
         return new AutomationWindow(new ElementBuilder(this.getElementByAutomationId(id, ControlType.Window)));
     }

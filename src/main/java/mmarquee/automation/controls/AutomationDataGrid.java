@@ -210,7 +210,7 @@ public class AutomationDataGrid
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    private AutomationDataGridCell getItem(final int row,
+    public AutomationDataGridCell getItem(final int row,
                                            final int column)
             throws PatternNotFoundException, AutomationException  {
         if (this.gridPattern == null) {
