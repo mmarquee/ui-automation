@@ -24,10 +24,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -215,8 +213,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
             throws PatternNotFoundException, AutomationException {
         if (search.getHasName()) {
             return getWindow(search.getName());
-        } else if (search.getHasPattern()) {
-            return getWindow(search.getPattern());
+        } else if (search.getHasNamePattern()) {
+            return getWindow(search.getNamePattern());
         } else {
             throw new AutomationException("Search type not found");
         }

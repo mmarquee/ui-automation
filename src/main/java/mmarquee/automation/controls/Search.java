@@ -35,9 +35,9 @@ public class Search {
     private String name;
 
     /**
-     * Id (index) search criteria.
+     * Index search criteria.
      */
-    private int id;
+    private int index;
 
     /**
      * Classname criteria.
@@ -54,7 +54,14 @@ public class Search {
      */
     private String controlType;
 
+    /**
+     * Row criteria.
+     */
     private int row;
+
+    /**
+     * Column criteria.
+     */
     private int column;
 
     /**
@@ -72,9 +79,9 @@ public class Search {
         private String name;
 
         /**
-         * Id (index) search criteria.
+         * Index search criteria.
          */
-        private int id;
+        private int index;
 
         /**
          * Classname criteria.
@@ -91,13 +98,23 @@ public class Search {
          */
         private String controlType;
 
+        /**
+         * Row criteria.
+         */
         private int row;
+
+        /**
+         * Column criteria.
+         */
         private int column;
 
+        /**
+         * Initialise the search criteria.
+         */
         private void initialise() {
             this.automationId = "";
             this.name = "";
-            this.id = -1;
+            this.index = -1;
             this.className = "";
             this.namePattern = null;
             this.controlType = "";
@@ -116,7 +133,7 @@ public class Search {
          * Constructor with a name criteria.
          * @param inName The name
          */
-        public Builder(String inName ) {
+        public Builder(final String inName ) {
             this.initialise();
             this.name = inName;
         }
@@ -125,7 +142,7 @@ public class Search {
          * Constructor with a name pattern criteria.
          * @param inPattern The name pattern
          */
-        public Builder(Pattern inPattern) {
+        public Builder(final Pattern inPattern) {
             this.initialise();
             this.namePattern = inPattern;
         }
@@ -134,9 +151,9 @@ public class Search {
          * Constructor with an id (index) criteria.
          * @param inIndex The id (index)
          */
-        public Builder(int inIndex) {
+        public Builder(final int inIndex) {
             this.initialise();
-            this.id = inIndex;
+            this.index = inIndex;
         }
 
         /**
@@ -144,7 +161,7 @@ public class Search {
          * @param inRow The X value
          * @param inColumn The Y value
          */
-        public Builder(int inRow, int inColumn) {
+        public Builder(final int inRow, final int inColumn) {
             this.initialise();
             this.row = inRow;
             this.column = inColumn;
@@ -155,7 +172,7 @@ public class Search {
          * @param inName The name value
          * @return The Builder created
          */
-        public Builder name(String inName) {
+        public Builder name(final String inName) {
             this.name = inName;
             return this;
         }
@@ -165,7 +182,7 @@ public class Search {
          * @param inAutomationId The name value
          * @return The Builder created
          */
-        public Builder automationId(String inAutomationId) {
+        public Builder automationId(final String inAutomationId) {
             this.automationId = inAutomationId;
             return this;
         }
@@ -175,7 +192,7 @@ public class Search {
          * @param inClassName The name value
          * @return The Builder created
          */
-        public Builder className(String inClassName) {
+        public Builder className(final String inClassName) {
             this.className = inClassName;
             return this;
         }
@@ -186,7 +203,8 @@ public class Search {
          * @param inColumn The Y value
          * @return The Builder created
          */
-        public Builder coordinates(int inRow, int inColumn) {
+        public Builder coordinates(final int inRow,
+                                   final int inColumn) {
             this.row = inRow;
             this.column = inColumn;
             return this;
@@ -197,18 +215,18 @@ public class Search {
          * @param inNamePattern The name value
          * @return The Builder created
          */
-        public Builder namePattern(Pattern inNamePattern) {
+        public Builder namePattern(final Pattern inNamePattern) {
             this.namePattern = inNamePattern;
             return this;
         }
 
         /**
-         * Sets the id (index) for the search criteria.
-         * @param inID The name value
+         * Sets the index for the search criteria.
+         * @param inIndex The index value
          * @return The Builder created
          */
-        public Builder id(int inID) {
-            this.id = inID;
+        public Builder index(final int inIndex) {
+            this.index = inIndex;
             return this;
         }
 
@@ -217,17 +235,27 @@ public class Search {
          * @param inControlType The name value
          * @return The Builder created
          */
-        public Builder controlType(String inControlType) {
+        public Builder controlType(final String inControlType) {
             this.controlType = inControlType;
             return this;
         }
 
-        public Builder row(int inRow) {
+        /**
+         * Sets the row for the search criteria.
+         * @param inRow The row criteria
+         * @return The Builder created
+         */
+        public Builder row(final int inRow) {
             this.row = inRow;
             return this;
         }
 
-        public Builder column(int inColumn) {
+        /**
+         * Sets the column for the search criteria.
+         * @param inColumn The column criteria
+         * @return The Builder created
+         */
+        public Builder column(final int inColumn) {
             this.column = inColumn;
             return this;
         }
@@ -249,73 +277,137 @@ public class Search {
         this.automationId = builder.automationId;
         this.name = builder.name;
         this.className = builder.className;
-        this.id = builder.id;
+        this.index = builder.index;
         this.namePattern = builder.namePattern;
         this.controlType = builder.controlType;
         this.row = builder.row;
         this.column = builder.column;
     }
 
+    /**
+     * Does the search criteria have an automation id.
+     * @return True is present
+     */
     public boolean getHasAutomationId() {
         return !this.automationId.equals("");
     }
 
-    public boolean getHasId() {
-        return this.id != -1;
+    /**
+     * Does the search have an index.
+     * @return True or false
+     */
+    public boolean getHasIndex() {
+        return this.index != -1;
     }
 
+    /**
+     * Does the search criteria have a row.
+     * @return True is present
+     */
     public boolean getHasRow() {
         return this.row != -1;
     }
 
+    /**
+     * Does the search criteria have a column.
+     * @return True is present
+     */
     public boolean getHasColumn() {
         return this.column != -1;
     }
 
-    public boolean getHasPattern() {
+    /**
+     * Does the search criteria have a name pattern.
+     * @return True is present
+     */
+    public boolean getHasNamePattern() {
         return this.namePattern != null;
     }
 
+    /**
+     * Does the search criteria have a name.
+     * @return True is present
+     */
     public boolean getHasName() {
         return !this.name.equals("");
     }
 
+    /**
+     * Does the search criteria have a control type.
+     * @return True is present
+     */
     public boolean getHasControlType() {
         return !this.controlType.equals("");
     }
 
+    /**
+     * Does the search criteria have a class name.
+     * @return True is present
+     */
     public boolean getHasClassName() {
         return !this.className.equals("");
     }
 
+    /**
+     * Gets the automation id.
+     * @return The automation id
+     */
     public String getAutomationId() {
         return this.automationId;
     }
 
-    public Pattern getPattern() {
+    /**
+     * Gets the name pattern.
+     * @return The name pattern
+     */
+    public Pattern getNamePattern() {
         return this.namePattern;
     }
 
+    /**
+     * Gets the name criteria.
+     * @return The name value
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Gets the classname criteria.
+     * @return The criteria
+     */
     public String getClassName() {
         return this.className;
     }
 
+    /**
+     * Gets the control=type criteria.
+     * @return The criteria
+     */
     public String getControlType() {
         return this.controlType;
     }
 
-    public int getId() {
-        return this.id;
+    /**
+     * Gets the index criteria.
+     * @return The index value
+     */
+    public int getIndex() {
+        return this.index;
     }
 
+    /**
+     * Gets the row criteria.
+     * @return The row value
+     */
     public int getRow() {
         return this.row;
     }
 
+    /**
+     * Gets the column criteria.
+     * @return The column value
+     */
     public int getColumn() {
         return this.column;
     }

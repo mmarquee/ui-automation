@@ -19,7 +19,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -97,8 +96,8 @@ public class AutomationDocument extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDocumentPage getPage(final Search search) throws PatternNotFoundException, AutomationException {
-       if (search.getHasId()) {
-           return getPage(search.getId());
+       if (search.getHasIndex()) {
+           return getPage(search.getIndex());
        } else {
            throw new AutomationException("Search type not found");
        }

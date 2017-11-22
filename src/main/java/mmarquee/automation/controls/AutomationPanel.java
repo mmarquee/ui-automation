@@ -17,11 +17,8 @@ package mmarquee.automation.controls;
 
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -120,12 +117,12 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationWindow getWindow(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getWindow(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getWindow(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getWindowByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getWindow(search.getId());
+        } else if (search.getHasIndex()) {
+            return getWindow(search.getIndex());
         } else if (search.getHasName()) {
             return getWindow(search.getName());
         } else {
@@ -141,8 +138,8 @@ public class AutomationPanel extends AutomationContainer {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationWindow getMDIWindow(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasId()) {
-            return getWindow(search.getId());
+        if (search.getHasIndex()) {
+            return getWindow(search.getIndex());
         } else {
             throw new AutomationException("Search type not found");
         }

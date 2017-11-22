@@ -69,7 +69,7 @@ public class AutomationRibbonWorkPane extends AutomationContainer {
      */
     public AutomationNUIPane getNUIPane(final Search search)
             throws PatternNotFoundException, AutomationException {
-        return getNUIPane(search.getId());
+        return getNUIPane(search.getIndex());
     }
 }
 

@@ -168,8 +168,8 @@ public class AutomationApplication extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationWindow getWindow(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getWindow(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getWindow(search.getNamePattern());
         } else if (search.getHasName()) {
             return getWindow(search.getName());
         } else {

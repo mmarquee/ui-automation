@@ -1719,12 +1719,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationCheckBox getCheckBox(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getCheckBox(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getCheckBox(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getCheckBoxByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getCheckBox(search.getId());
+        } else if (search.getHasIndex()) {
+            return getCheckBox(search.getIndex());
         } else if (search.getHasName()) {
             return getCheckBox(search.getName());
         } else {
@@ -1740,12 +1740,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationTab getTab(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getTab(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getTab(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getTabByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getTab(search.getId());
+        } else if (search.getHasIndex()) {
+            return getTab(search.getIndex());
         } else if (search.getHasName()) {
             return getTab(search.getName());
         } else {
@@ -1762,12 +1762,12 @@ public class AutomationContainer extends AutomationBase {
 *    */
     public AutomationEditBox getEditBox(final Search search)
             throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getEditBox(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getEditBox(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getEditBoxByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getEditBox(search.getId());
+        } else if (search.getHasIndex()) {
+            return getEditBox(search.getIndex());
         } else if (search.getHasName()) {
             return getEditBox(search.getName());
         } else {
@@ -1784,12 +1784,12 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationPasswordEditBox getPasswordEditBox(final Search search)
             throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getPasswordEditBox(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getPasswordEditBox(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getPasswordEditBoxByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getPasswordEditBox(search.getId());
+        } else if (search.getHasIndex()) {
+            return getPasswordEditBox(search.getIndex());
         } else if (search.getHasName()) {
             return getPasswordEditBox(search.getName());
         } else {
@@ -1805,12 +1805,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationProgressBar getProgressBar(Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getProgressBar(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getProgressBar(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getProgressBarByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getProgressBar(search.getId());
+        } else if (search.getHasIndex()) {
+            return getProgressBar(search.getIndex());
         } else if (search.getHasName()) {
             return getProgressBar(search.getName());
         } else {
@@ -1826,12 +1826,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationSlider getSlider(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getSlider(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getSlider(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getSliderByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getSlider(search.getId());
+        } else if (search.getHasIndex()) {
+            return getSlider(search.getIndex());
         } else if (search.getHasName()) {
             return getSlider(search.getName());
         } else {
@@ -1847,12 +1847,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationRadioButton getRadioButton(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getRadioButton(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getRadioButton(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getRadioButtonByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getRadioButton(search.getId());
+        } else if (search.getHasIndex()) {
+            return getRadioButton(search.getIndex());
         } else if (search.getHasName()) {
             return getRadioButton(search.getName());
         } else {
@@ -1868,12 +1868,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationButton getButton(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getButton(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getButton(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getButtonByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getButton(search.getId());
+        } else if (search.getHasIndex()) {
+            return getButton(search.getIndex());
         } else if (search.getHasName()) {
             return getButton(search.getName());
         } else {
@@ -1889,12 +1889,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMaskedEdit getMaskedEdit(Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getMaskedEdit(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getMaskedEdit(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getMaskedEditByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getMaskedEdit(search.getId());
+        } else if (search.getHasIndex()) {
+            return getMaskedEdit(search.getIndex());
         } else if (search.getHasName()) {
             return getMaskedEdit(search.getName());
         } else {
@@ -1910,12 +1910,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationTextBox getTextBox(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getTextBox(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getTextBox(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getTextBoxByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getTextBox(search.getId());
+        } else if (search.getHasIndex()) {
+            return getTextBox(search.getIndex());
         } else if (search.getHasName()) {
             return getTextBox(search.getName());
         } else {
@@ -1931,12 +1931,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationComboBox getComboBox(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getComboBox(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getComboBox(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getComboBoxByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getComboBox(search.getId());
+        } else if (search.getHasIndex()) {
+            return getComboBox(search.getIndex());
         } else if (search.getHasName()) {
             return getComboBox(search.getName());
         } else {
@@ -1955,19 +1955,19 @@ public class AutomationContainer extends AutomationBase {
         if (search.getHasClassName()) {
             if (search.getHasName()) {
                 return getDataGrid(search.getName(), search.getClassName());
-            } else if (search.getHasPattern()) {
-                return getDataGrid(search.getPattern(), search.getClassName());
-            } else if (search.getHasId()) {
-                return getDataGrid(search.getId(), search.getClassName());
+            } else if (search.getHasNamePattern()) {
+                return getDataGrid(search.getNamePattern(), search.getClassName());
+            } else if (search.getHasIndex()) {
+                return getDataGrid(search.getIndex(), search.getClassName());
             } else {
                 throw new AutomationException("Search type not found");
             }
-        } else if (search.getHasPattern()) {
-            return getDataGrid(search.getPattern());
+        } else if (search.getHasNamePattern()) {
+            return getDataGrid(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getDataGridByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getDataGrid(search.getId());
+        } else if (search.getHasIndex()) {
+            return getDataGrid(search.getIndex());
         } else if (search.getHasName()) {
             return getDataGrid(search.getName());
         } else {
@@ -1983,12 +1983,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDocument getDocument(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getDocument(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getDocument(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getDocumentByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getDocument(search.getId());
+        } else if (search.getHasIndex()) {
+            return getDocument(search.getIndex());
         } else if (search.getHasName()) {
             return getDocument(search.getName());
         } else {
@@ -2004,12 +2004,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationHyperlink getHyperlink(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getHyperlink(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getHyperlink(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getHyperlinkByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getHyperlink(search.getId());
+        } else if (search.getHasIndex()) {
+            return getHyperlink(search.getIndex());
         } else if (search.getHasName()) {
             return getHyperlink(search.getName());
         } else {
@@ -2024,12 +2024,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      */
     public AutomationTreeView getTreeView(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getTreeView(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getTreeView(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getTreeViewByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getTreeView(search.getId());
+        } else if (search.getHasIndex()) {
+            return getTreeView(search.getIndex());
         } else if (search.getHasName()) {
             return getTreeView(search.getName());
         } else {
@@ -2045,12 +2045,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationList getList(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getList(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getList(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getListByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getList(search.getId());
+        } else if (search.getHasIndex()) {
+            return getList(search.getIndex());
         } else if (search.getHasName()) {
             return getList(search.getName());
         } else {
@@ -2068,21 +2068,21 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationPanel getPanel(final Search search) throws AutomationException, PatternNotFoundException {
         if (search.getHasClassName()) {
-            if (search.getHasId()) {
-                return getPanelByClassName(search.getId(), search.getClassName());
+            if (search.getHasIndex()) {
+                return getPanelByClassName(search.getIndex(), search.getClassName());
             } else if (search.getHasName()) {
                 return getPanelByClassName(search.getName(), search.getClassName());
-            }  else if (search.getHasPattern()) {
-                return getPanelByClassName(search.getPattern(), search.getClassName());
+            }  else if (search.getHasNamePattern()) {
+                return getPanelByClassName(search.getNamePattern(), search.getClassName());
             } else {
                 throw new AutomationException("Search type not found");
             }
-        } else if (search.getHasPattern()) {
-            return getPanel(search.getPattern());
+        } else if (search.getHasNamePattern()) {
+            return getPanel(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getPanelByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getPanel(search.getId());
+        } else if (search.getHasIndex()) {
+            return getPanel(search.getIndex());
         } else if (search.getHasName()) {
             return getPanel(search.getName());
         } else {
@@ -2098,12 +2098,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationCalendar getCalendar(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getCalendar(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getCalendar(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getCalendarByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getCalendar(search.getId());
+        } else if (search.getHasIndex()) {
+            return getCalendar(search.getIndex());
         } else if (search.getHasName()) {
             return getCalendar(search.getName());
         } else {
@@ -2119,12 +2119,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationAppBar getAppBar(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getAppBar(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getAppBar(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getAppBarByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getAppBar(search.getId());
+        } else if (search.getHasIndex()) {
+            return getAppBar(search.getIndex());
         } else if (search.getHasName()) {
             return getAppBar(search.getName());
         } else {
@@ -2151,12 +2151,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationReBar getReBar(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getReBar(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getReBar(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getReBarByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getReBar(search.getId());
+        } else if (search.getHasIndex()) {
+            return getReBar(search.getIndex());
         } else if (search.getHasName()) {
             return getReBar(search.getName());
         } else {
@@ -2172,12 +2172,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationToolBar getToolBar(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getToolBar(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getToolBar(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getToolBarByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getToolBar(search.getId());
+        } else if (search.getHasIndex()) {
+            return getToolBar(search.getIndex());
         } else if (search.getHasName()) {
             return getToolBar(search.getName());
         } else {
@@ -2194,12 +2194,12 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationSplitButton getSplitButton(final Search search)
             throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getSplitButton(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getSplitButton(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getSplitButtonByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getSplitButton(search.getId());
+        } else if (search.getHasIndex()) {
+            return getSplitButton(search.getIndex());
         } else if (search.getHasName()) {
             return getSplitButton(search.getName());
         } else {
@@ -2215,12 +2215,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationImage getImage(Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getImage(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getImage(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getImageByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getImage(search.getId());
+        } else if (search.getHasIndex()) {
+            return getImage(search.getIndex());
         } else if (search.getHasName()) {
             return getImage(search.getName());
         } else {
@@ -2240,21 +2240,21 @@ public class AutomationContainer extends AutomationBase {
         if (search.getHasClassName()) {
             if (search.getHasName()) {
                 return getCustomByClassName(search.getName(), search.getClassName());
-            } else if (search.getHasPattern()) {
-                return getCustomByClassName(search.getPattern(), search.getClassName());
-            } else if (search.getHasId()) {
-                return getCustomByClassName(search.getId(), search.getClassName());
+            } else if (search.getHasNamePattern()) {
+                return getCustomByClassName(search.getNamePattern(), search.getClassName());
+            } else if (search.getHasIndex()) {
+                return getCustomByClassName(search.getIndex(), search.getClassName());
             } else {
                 throw new AutomationException("Search type not found");
             }
         } else if (search.getHasControlType()) {
             return getCustomByControlType(search.getControlType());
-        } else if (search.getHasPattern()) {
-            return getCustom(search.getPattern());
+        } else if (search.getHasNamePattern()) {
+            return getCustom(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getCustomByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getCustom(search.getId());
+        } else if (search.getHasIndex()) {
+            return getCustom(search.getIndex());
         } else if (search.getHasName()) {
             return getCustom(search.getName());
         } else {
@@ -2271,12 +2271,12 @@ public class AutomationContainer extends AutomationBase {
      */
     public AutomationPowerpointSlide getPowerpointSlide(final Search search)
             throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getPowerpointSlide(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getPowerpointSlide(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getPowerpointSlideByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getPowerpointSlide(search.getId());
+        } else if (search.getHasIndex()) {
+            return getPowerpointSlide(search.getIndex());
         } else if (search.getHasName()) {
             return getPowerpointSlide(search.getName());
         } else {
@@ -2292,12 +2292,12 @@ public class AutomationContainer extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationSpinner getSpinner(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getSpinner(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getSpinner(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getSpinnerByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getSpinner(search.getId());
+        } else if (search.getHasIndex()) {
+            return getSpinner(search.getIndex());
         } else if (search.getHasName()) {
             return getSpinner(search.getName());
         } else {

@@ -20,7 +20,6 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
@@ -165,12 +164,12 @@ public class AutomationComboBox
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationListItem getItem(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getItem(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getItem(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getItemByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getItem(search.getId());
+        } else if (search.getHasIndex()) {
+            return getItem(search.getIndex());
         } else if (search.getHasName()) {
             return getItem(search.getName());
         } else {

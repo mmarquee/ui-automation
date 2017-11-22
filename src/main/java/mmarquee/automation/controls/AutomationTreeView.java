@@ -49,8 +49,8 @@ public class AutomationTreeView extends AutomationBase {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationTreeViewItem getItem(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getItem(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getItem(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getItemByAutomationId(search.getAutomationId());
         } else if (search.getHasName()) {

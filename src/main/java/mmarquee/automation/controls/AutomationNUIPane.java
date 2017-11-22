@@ -69,6 +69,6 @@ public class AutomationNUIPane extends AutomationPanel {
      */
     public AutomationNetUIHWND getNetUIHWND(final Search search)
             throws PatternNotFoundException, AutomationException {
-        return getNetUIHWND(search.getId());
+        return getNetUIHWND(search.getIndex());
     }
 }

@@ -93,12 +93,12 @@ public class AutomationToolBar extends AutomationContainer {
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationToolBarButton getToolbarButton(final Search search) throws PatternNotFoundException, AutomationException {
-        if (search.getHasPattern()) {
-            return getToolbarButton(search.getPattern());
+        if (search.getHasNamePattern()) {
+            return getToolbarButton(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
             return getToolbarButtonByAutomationId(search.getAutomationId());
-        } else if (search.getHasId()) {
-            return getToolbarButton(search.getId());
+        } else if (search.getHasIndex()) {
+            return getToolbarButton(search.getIndex());
         } else if (search.getHasName()) {
             return getToolbarButton(search.getName());
         } else {
