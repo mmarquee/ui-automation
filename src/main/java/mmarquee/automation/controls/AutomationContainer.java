@@ -189,7 +189,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets an element by the name
+     * Gets an element by the name.
      *
      * @param name Name of the element
      * @return The matching element
@@ -201,7 +201,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets an element by matching the name
+     * Gets an element by matching the name.
      *
      * @param namePattern a pattern which matches the name
      * @return The matching element
@@ -232,7 +232,7 @@ public class AutomationContainer extends AutomationBase {
     }
     
     /**
-     * Gets an element by the name and className
+     * Gets an element by the name and className.
      *
      * @param name Name of the element
      * @param className The className to look for
@@ -247,7 +247,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets an element by matching the name and by className
+     * Gets an element by matching the name and by className.
      *
      * @param namePattern a pattern which matches the name
      * @param className The className to look for
@@ -279,7 +279,7 @@ public class AutomationContainer extends AutomationBase {
     }
     
     /**
-     * Gets the element by the given control index
+     * Gets the element by the given control index.
      * 
      * @param index Index of the element
      * @param className The className to look for
@@ -300,7 +300,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the control type and automation ID
+     * Gets the control by the control type and automation ID.
      * @param automationId Name to use
      * @param controlType Control type
      * @return The matching element
@@ -314,7 +314,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the automation ID
+     * Gets the control by the automation ID.
      * @param automationId Name to use
      * @return The matching element
      * @throws AutomationException An error has occurred in automation
@@ -378,7 +378,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the String Grid control associated with the given index
+     * Gets the String Grid control associated with the given index.
      * @param index The index to look for
      * @return The string grid
      * @throws AutomationException Something has gone wrong
@@ -390,7 +390,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the String Grid control associated with the given name
+     * Gets the String Grid control associated with the given name.
      * @param name The name to look for
      * @return The string grid
      * @throws AutomationException Something has gone wrong
@@ -402,7 +402,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the String Grid control matching the given namePattern
+     * Gets the String Grid control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The string grid
      * @throws AutomationException Something has gone wrong
@@ -414,7 +414,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the String Grid control associated with the given automation id
+     * Gets the String Grid control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -426,7 +426,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the  String Grid control associated with the given index, with a specific control name
+     * Gets the  String Grid control associated with the given index, with a specific control name.
      * @param index Index of the control
      * @param controlName Control Type name
      * @return The found control
@@ -439,7 +439,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the String Grid control associated with the given name, with a specific control name
+     * Gets the String Grid control associated with the given name, with a specific control name.
      * @param name Name of the control
      * @param controlName Control Type name
      * @return The found control
@@ -452,79 +452,85 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the String Grid control matching the given namePattern, with a specific control name
+     * Gets the String Grid control matching the given namePattern, with a specific control name.
      * @param namePattern Matcher for the control name
      * @param controlName Control Type name
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGrid getDataGrid(Pattern namePattern, String controlName) throws PatternNotFoundException, AutomationException {
+    public AutomationDataGrid getDataGrid(Pattern namePattern, String controlName)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationDataGrid(
                 new ElementBuilder(this.getElementByControlType(namePattern, ControlType.DataGrid, controlName)));
     }
 
     /**
-     * Gets the CheckBox associated with the given index
+     * Gets the CheckBox associated with the given index.
      * @param index Index of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCheckBox getCheckBox(int index) throws PatternNotFoundException, AutomationException {
+    public AutomationCheckBox getCheckBox(int index)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationCheckBox(new ElementBuilder(this.getElementByControlType(index,
                 ControlType.CheckBox)));
     }
 
     /**
-     * Gets the CheckBox associated with the given name
+     * Gets the CheckBox associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCheckBox getCheckBox(String name) throws PatternNotFoundException, AutomationException {
+    public AutomationCheckBox getCheckBox(String name)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationCheckBox(new ElementBuilder(this.getElementByControlType(name,
                 ControlType.CheckBox)));
     }
 
     /**
-     * Gets the CheckBox matching the given namePattern
+     * Gets the CheckBox matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCheckBox getCheckBox(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationCheckBox getCheckBox(Pattern namePattern)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationCheckBox(new ElementBuilder(this.getElementByControlType(namePattern,
                 ControlType.CheckBox)));
     }
 
     /**
-     * Gets the CheckBox control associated with the given automation id
+     * Gets the CheckBox control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCheckBox getCheckBoxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    public AutomationCheckBox getCheckBoxByAutomationId(String id)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationCheckBox(new ElementBuilder(this.getElementByAutomationId(id,
                 ControlType.CheckBox)));
     }
 
     /**
-     * Gets the Tab control associated with the given index
+     * Gets the Tab control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTab getTab(int index) throws PatternNotFoundException, AutomationException {
+    public AutomationTab getTab(int index)
+            throws PatternNotFoundException, AutomationException {
          return new AutomationTab(new ElementBuilder(this.getElementByControlType(index, ControlType.Tab)));
     }
 
     /**
-     * Gets the Tab associated with the given name
+     * Gets the Tab associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -535,7 +541,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Tab matching the given namePattern
+     * Gets the Tab matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -546,7 +552,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Tab control associated with the given automation id
+     * Gets the Tab control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -557,7 +563,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Editbox control associated with the given index
+     * Gets the Editbox control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -568,7 +574,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Editbox control associated with the given name
+     * Gets the Editbox control associated with the given name.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -579,7 +585,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Editbox control matching the given namePattern
+     * Gets the Editbox control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -601,7 +607,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the EditBox (with password marking) associated with the given index
+     * Gets the EditBox (with password marking) associated with the given index.
      * @param index The index
      * @return The found control
      * @throws AutomationException Automation issue
@@ -612,7 +618,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the EditBox (with password marking) associated with the given name
+     * Gets the EditBox (with password marking) associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -623,7 +629,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the EditBox (with password marking) matcing the given name
+     * Gets the EditBox (with password marking) matching the given name.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -634,7 +640,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Editbox (with password marking) control associated with the given automation id
+     * Gets the Editbox (with password marking) control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -645,7 +651,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ProgressBar control associated with the given index
+     * Gets the ProgressBar control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -657,7 +663,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ProgressBar control associated with the given name
+     * Gets the ProgressBar control associated with the given name.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -669,7 +675,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ProgressBar control matching the given namePattern
+     * Gets the ProgressBar control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -681,7 +687,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ProgressBar control associated with the given automation id
+     * Gets the ProgressBar control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -693,7 +699,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the slider control associated with the given index
+     * Gets the slider control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong in automation
@@ -704,7 +710,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the slider control associated with the given index
+     * Gets the slider control associated with the given index.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -715,7 +721,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the slider control matching the given index
+     * Gets the slider control matching the given index.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -727,7 +733,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the slider control associated with the given automation id
+     * Gets the slider control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -739,7 +745,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the radio button control associated with the given index
+     * Gets the radio button control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -751,7 +757,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the radio button associated with the given name
+     * Gets the radio button associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -763,7 +769,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the radio button matching the given namePattern
+     * Gets the radio button matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -775,7 +781,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the radio button control associated with the given automation id
+     * Gets the radio button control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -798,7 +804,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the text box control associated with the given index
+     * Gets the text box control associated with the given index.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -808,7 +814,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the text box control matching the given index
+     * Gets the text box control matching the given index.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -818,7 +824,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the text box control associated with the given automation id
+     * Gets the text box control associated with the given automation id.
      * @param id Automation id of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -840,7 +846,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ComboBox control associated with the given name
+     * Gets the ComboBox control associated with the given name.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -852,7 +858,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ComboBox control matching the given namePattern
+     * Gets the ComboBox control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -864,7 +870,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ComboBox control associated with the given automation id
+     * Gets the ComboBox control associated with the given automation id.
      * @param id Automation id of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -876,7 +882,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Custom control associated with the given index
+     * Gets the Custom control associated with the given index.
      * @param index Index of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -888,7 +894,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Custom control associated with the given name
+     * Get the Custom control associated with the given name.
      * @param name The name to look for
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
@@ -899,7 +905,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Custom control matching the given namePattern
+     * Get the Custom control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
@@ -910,7 +916,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Custom control associated with the given automation id
+     * Get the Custom control associated with the given automation id.
      * @param id The id to look for
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
@@ -922,7 +928,7 @@ public class AutomationContainer extends AutomationBase {
 
     /**
      * <p>
-     * Get the Custom Control associated with the given control type
+     * Get the Custom Control associated with the given control type.
      * </p>
      * <p>
      * At the moment, just get the first first element.
@@ -937,9 +943,9 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Custom control associated with this index
+     * Gets the Custom control associated with this index.
      * @param index The index
-     * @param className The expected class name of the control
+     * @param className The expected class name of the con.trol
      * @return The control wrapper
      * @throws AutomationException Automation issue
      * @throws PatternNotFoundException Pattern not found
@@ -950,7 +956,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Custom associated with the given name
+     * Gets the Custom associated with the given name.
      * @param name Name of the control
      * @param className The expected class name of the control
      * @return the found control
@@ -963,7 +969,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Custom matching the given namePattern
+     * Gets the Custom matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @param className The expected class name of the control
      * @return the found control
@@ -976,7 +982,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Spinner control associated with the given index
+     * Gets the Spinner control associated with the given index.
      * @param index Index of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -988,7 +994,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Spinner control associated with the given name
+     * Get the Spinner control associated with the given name.
      * @param name The name to look for
      * @return The AutomationSpinner control
      * @throws AutomationException Something has gone wrong
@@ -999,7 +1005,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Spinner control matching the given namePattern
+     * Get the Spinner control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The AutomationSpinner control
      * @throws AutomationException Something has gone wrong
@@ -1010,7 +1016,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Spinner control associated with the given automation id
+     * Gets the Spinner control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1022,7 +1028,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the PowerpointSlide control associated with the given index
+     * Gets the PowerpointSlide control associated with the given index.
      * @param index Index of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1034,7 +1040,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the PowerpointSlide control associated with the given name
+     * Get the PowerpointSlide control associated with the given name.
      * @param name The name to look for
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
@@ -1046,7 +1052,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the PowerpointSlide control matching the given namePattern
+     * Get the PowerpointSlide control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The AutomationCustom
      * @throws AutomationException Something has gone wrong
@@ -1058,7 +1064,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the PowerpointSlide control associated with the given automation id
+     * Gets the PowerpointSlide control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1070,7 +1076,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Image control associated with the given index
+     * Get the Image control associated with the given index.
      * @param index The index to look for
      * @return The AutomationImage
      * @throws AutomationException Something has gone wrong
@@ -1080,7 +1086,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Image control associated with the given name
+     * Get the Image control associated with the given name.
      * @param name The name to look for
      * @return The AutomationImage
      * @throws AutomationException Something has gone wrong
@@ -1090,7 +1096,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the Image control matching the given namePattern
+     * Get the Image control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The AutomationImage
      * @throws AutomationException Something has gone wrong
@@ -1100,7 +1106,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Image control associated with the given automation id
+     * Gets the Image control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1133,7 +1139,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the (JHC) Masked Edit control matching the given index
+     * Gets the (JHC) Masked Edit control matching the given index.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1144,7 +1150,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the (JHC) Masked Edit control associated with the given automation id
+     * Gets the (JHC) Masked Edit control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1155,7 +1161,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control associated with the given index
+     * Gets the panel control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1166,7 +1172,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control associated with the given name
+     * Gets the panel control associated with the given name.
      * @param name Name of the control
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
@@ -1178,7 +1184,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control matching the given namePattern
+     * Gets the panel control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
@@ -1190,7 +1196,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control associated with the automation id
+     * Gets the panel control associated with the automation id.
      * @param id Automaton id of the control
      * @return The found control
      * @throws ElementNotFoundException Did not find the element
@@ -1202,7 +1208,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control associated with the given index, with a specific class name
+     * Gets the panel control associated with the given index, with a specific class name.
      * @param index Index of the control
      * @param className The specific classname
      * @return The found control
@@ -1215,7 +1221,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control associated with the given name, with a specific class name
+     * Gets the panel control associated with the given name, with a specific class name.
      * @param name Name of the control
      * @param className The specific classname
      * @return the found control
@@ -1228,7 +1234,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the panel control matching the given namePattern, with a specific class name
+     * Gets the panel control matching the given namePattern, with a specific class name.
      * @param namePattern Matcher for the control name
      * @param className The specific classname
      * @return the found control
@@ -1241,7 +1247,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the SplitButton control associated with the given index
+     * Gets the SplitButton control associated with the given index.
      * @param index Index of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1253,7 +1259,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the SplitButton control associated with the given name
+     * Get the SplitButton control associated with the given name.
      * @param name The name to look for
      * @return The AutomationSplitButton
      * @throws AutomationException Something has gone wrong
@@ -1265,7 +1271,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the SplitButton control matching the given namePattern
+     * Get the SplitButton control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The AutomationSplitButton
      * @throws AutomationException Something has gone wrong
@@ -1277,7 +1283,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the SplitButton control associated with the given automation id
+     * Gets the SplitButton control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1289,7 +1295,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the button control associated with the given index
+     * Gets the button control associated with the given index.
      * @param index The index of the button
      * @return The AutomationButton
      * @throws AutomationException Something has gone wrong
@@ -1324,7 +1330,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the button using the automation ID
+     * Gets the button using the automation ID.
      * @param id The automation id
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1336,7 +1342,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the document associated with the given index
+     * Gets the document associated with the given index.
      * @param index Index of the control
      * @return The document control
      * @throws AutomationException Something has gone wrong
@@ -1347,7 +1353,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the document associated with the given name
+     * Gets the document associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1358,7 +1364,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the document matching the given namePattern
+     * Gets the document matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1370,7 +1376,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the document associated with the given automation id
+     * Gets the document associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1382,7 +1388,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the hyperlink control associated with the given index
+     * Gets the hyperlink control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1394,7 +1400,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the hyperlink control associated with the given name
+     * Gets the hyperlink control associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1406,7 +1412,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the hyperlink control matching the given namePattern
+     * Gets the hyperlink control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1418,7 +1424,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the hyperlink control associated with the given automation id
+     * Gets the hyperlink control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1442,7 +1448,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the list control associated with the given index
+     * Gets the list control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1453,7 +1459,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the list control associated with the given name
+     * Gets the list control associated with the given name.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1464,7 +1470,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the list control matching the given namePattern
+     * Gets the list control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1475,7 +1481,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the list control associated with the given automation ID
+     * Gets the list control associated with the given automation ID.
      * @param automationId Automation id of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1486,7 +1492,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the treeview control associated with the given index
+     * Gets the treeview control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1496,7 +1502,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the treeview control associated with the given name
+     * Gets the treeview control associated with the given name.
      * @param name Name of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1506,7 +1512,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the treeview control matching the given namePattern
+     * Gets the treeview control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1516,7 +1522,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the treeview control associated with the given automation id
+     * Gets the treeview control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1527,7 +1533,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the calendar control associated with the given index
+     * Gets the calendar control associated with the given index.
      * @param index Index of the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1539,7 +1545,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the calendar associated with the given name
+     * Gets the calendar associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1551,7 +1557,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the calendar matching the given namePattern
+     * Gets the calendar matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1563,19 +1569,20 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the calendar control associated with the given automation id
+     * Gets the calendar control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationCalendar getCalendarByAutomationId(String id) throws PatternNotFoundException, AutomationException {
+    public AutomationCalendar getCalendarByAutomationId(String id)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationCalendar(new ElementBuilder(this.getElementByAutomationId(id,
                 ControlType.Calendar)));
     }
 
     /**
-     * Get the AppBar control associated with the given index
+     * Get the AppBar control associated with the given index.
      * @param index The index
      * @return The AutomationAppBar
      * @throws AutomationException Something has gone wrong
@@ -1585,7 +1592,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the AppBar control associated with the given name
+     * Gets the AppBar control associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1596,18 +1603,19 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the AppBar control matching the given namePattern
+     * Gets the AppBar control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationAppBar getAppBar(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationAppBar getAppBar(Pattern namePattern)
+            throws PatternNotFoundException, AutomationException {
         return new AutomationAppBar(new ElementBuilder(this.getElementByControlType(namePattern, ControlType.AppBar)));
     }
 
     /**
-     * Gets the AppBar control associated with the given automation id
+     * Gets the AppBar control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1618,7 +1626,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ReBar control associated with this index
+     * Gets the ReBar control associated with this index.
      * @param index The index
      * @return The control wrapper
      * @throws AutomationException Automation issue
@@ -1630,7 +1638,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ReBar associated with the given name
+     * Gets the ReBar associated with the given name.
      * @param name Name of the control
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1642,7 +1650,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ReBar matching the given namePattern
+     * Gets the ReBar matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return the found control
      * @throws AutomationException Something has gone wrong
@@ -1654,7 +1662,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ReBar control associated with the given automation id
+     * Gets the ReBar control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -1665,7 +1673,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the ToolBar control associated with the given index
+     * Get the ToolBar control associated with the given index.
      * @param index The index
      * @return The AutomationToolBar
      * @throws AutomationException Something has gone wrong
@@ -1676,7 +1684,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the ToolBar control associated with the given name
+     * Get the ToolBar control associated with the given name.
      * @param name The name
      * @return The AutomationToolBar
      * @throws AutomationException Something has gone wrong
@@ -1687,7 +1695,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the ToolBar control matching the given namePattern
+     * Get the ToolBar control matching the given namePattern.
      * @param namePattern Matcher for the control name
      * @return The AutomationToolBar
      * @throws AutomationException Something has gone wrong
@@ -1699,7 +1707,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ToolBar control associated with the given automation id
+     * Gets the ToolBar control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -2133,7 +2141,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Get the RibbonBar control associated this container
+     * Get the RibbonBar control associated this container.
      * @return The AutomationRibbonBar
      * @throws AutomationException Automation issue
      * @throws PatternNotFoundException Could not find pattern
@@ -2165,7 +2173,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the ToolBar control associated with the given automation id
+     * Gets the ToolBar control associated with the given automation id.
      * @param search Matcher for the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -2308,7 +2316,7 @@ public class AutomationContainer extends AutomationBase {
     //// Generic getters
     
     /**
-     * Gets a control by control type
+     * Gets a control by control type.
      * @param index The nth item that matches
      * @param id The control type
      * @return The found control
@@ -2323,7 +2331,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets a control by control type
+     * Gets a control by control type.
      * @param index The nth item that matches
      * @param id The control type
      * @param className The className to look for
@@ -2340,7 +2348,7 @@ public class AutomationContainer extends AutomationBase {
     }
     
     /**
-     * Gets the control by the control type
+     * Gets the control by the control type.
      * @param name Name to use
      * @param id Control type
      * @return The found control
@@ -2355,7 +2363,7 @@ public class AutomationContainer extends AutomationBase {
     }
     
     /**
-     * Gets the control by the control type
+     * Gets the control by the control type.
      * 
      * @param namePattern a pattern to match the name
      * @param id Control type
@@ -2371,7 +2379,7 @@ public class AutomationContainer extends AutomationBase {
     }
     
     /**
-     * Gets the control by the control type
+     * Gets the control by the control type.
      * @param name Name to use
      * @param id Control type
      * @param className The className to look for
@@ -2388,7 +2396,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the control type
+     * Gets the control by the control type.
      * 
      * @param namePattern a pattern matching the name
      * @param id Control type
@@ -2421,7 +2429,7 @@ public class AutomationContainer extends AutomationBase {
 	}
 
     /**
-     * Gets the control by the name
+     * Gets the control by the name.
      *
      * @param namePattern A pattern which matches the name of the element
      * @return The found control
@@ -2436,7 +2444,7 @@ public class AutomationContainer extends AutomationBase {
 	}
     
     /**
-     * Gets the first control by the className
+     * Gets the first control by the className.
      *
      * @param className The className to look for
      * @return The found control
@@ -2454,7 +2462,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the index and className
+     * Gets the control by the index and className.
      *
      * @param index The nth item that matches
      * @param className The className to look for
@@ -2470,7 +2478,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by the name and className
+     * Gets the control by the name and className.
      *
      * @param name Name of the element
      * @param className The className to look for
@@ -2485,7 +2493,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control by matching the name and className
+     * Gets the control by matching the name and className.
      *
      * @param namePattern a pattern matching the name
      * @param className The className to look for
@@ -2501,7 +2509,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the control associated with the given automation id
+     * Gets the control associated with the given automation id.
      * @param automationId The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
