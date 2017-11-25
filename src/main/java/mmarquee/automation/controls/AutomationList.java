@@ -30,10 +30,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Wrapper for the List control element.
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Wrapper for the List control element.
  */
 public class AutomationList extends AutomationBase {
 

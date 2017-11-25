@@ -20,10 +20,9 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Wrapper around the Button element.
  * @author Mark Humphreys
  * Date 02/02/2016.
- *
- * Wrapper around the Button element.
  */
 public class AutomationButton
         extends AutomationBase

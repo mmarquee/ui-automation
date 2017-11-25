@@ -31,10 +31,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
 /**
+ * Wrapper around the Application element.
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Wrapper around the Application element.
  */
 public class AutomationApplication extends AutomationBase {
 

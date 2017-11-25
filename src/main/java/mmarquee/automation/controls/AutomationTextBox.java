@@ -21,10 +21,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper for the TextBox element.
+ *
  * @author Mark Humphreys
  * Date 01/02/2016.
- *
- * Wrapper for the TextBox element.
  */
 public class AutomationTextBox
         extends AutomationBase

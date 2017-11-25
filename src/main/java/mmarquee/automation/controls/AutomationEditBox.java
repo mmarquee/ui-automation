@@ -22,10 +22,9 @@ import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper around the edit box element.
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Wrapper around the edit box element.
  */
 public class AutomationEditBox extends AutomationBase implements Valueable {
 

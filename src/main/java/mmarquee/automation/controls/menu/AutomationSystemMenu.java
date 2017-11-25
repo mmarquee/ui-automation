@@ -31,10 +31,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * @author Mark Humphreys
- * Date 19/02/2016.
- *
  * Wrapper for the SystemMenu control element.
+ * @author Mark Humphreys
+ * Date 19/02/2016
  */
 public class AutomationSystemMenu extends AutomationBase {
     /**
@@ -49,6 +48,9 @@ public class AutomationSystemMenu extends AutomationBase {
         this.getItems();
     }
 
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.Menu;
 
     /**

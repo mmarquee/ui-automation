@@ -20,10 +20,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper for the Custom ControlId, which is usually a container.
  * @author Mark Humphreys
  * Date 08/03/2016.
- *
- * Wrapper for the Custom ControlId, which is usually a container.
  */
 public class AutomationCustom extends AutomationContainer implements Valueable {
 

@@ -26,11 +26,10 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * @author Mark Humphreys
- * Date 16/02/2016.
- *
  * Wrapper for the Document element.
  *
+ * @author Mark Humphreys
+ * Date 16/02/2016.
  */
 public class AutomationDocument extends AutomationBase {
     private Text textPattern;

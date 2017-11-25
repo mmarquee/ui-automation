@@ -18,7 +18,6 @@ package mmarquee.automation.controls.menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.AutomationElement;
@@ -31,14 +30,11 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * @author Mark Humphreys
- * Date 09/02/2016.
- *
  * Wrapper for the Menu control element.
+ * @author Mark Humphreys
+ * Date 09/02/2016
  */
 public class AutomationMenu extends AutomationBase {
-    protected Logger logger = Logger.getLogger(AutomationMenu.class.getName());
-
     /**
      * Construct the AutomationMenu.
      *

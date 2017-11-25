@@ -20,10 +20,10 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Wrapper for the StatusBar element.
+ *
  * @author Mark Humphreys
  * Date 01/02/2016.
- *
- * Wrapper for the StatusBar element.
  */
 public class AutomationStatusBar extends AutomationContainer {
 

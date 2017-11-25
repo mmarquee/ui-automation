@@ -18,10 +18,10 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationException;
 
 /**
+ * Wrapper for the Spinner element.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Wrapper for the Spinner element.
  */
 public class AutomationSpinner extends AutomationBase {
     /**

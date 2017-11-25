@@ -23,6 +23,8 @@ import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Wrapper for the ToolBarButton.
+ *
  * @author Mark Humphreys
  * Date 20/07/2016
  *

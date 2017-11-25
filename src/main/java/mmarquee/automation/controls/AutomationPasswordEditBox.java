@@ -1,10 +1,7 @@
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Value;
 
 /**
  * Wrapper around the PasswordEditBox control

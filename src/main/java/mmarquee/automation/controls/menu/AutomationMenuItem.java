@@ -33,15 +33,17 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
+ * Wrapper for the MenuItem element.
  * @author Mark Humphreys
  * Date 10/02/2016.
- *
- * Wrapper for the MenuItem element.
  */
 public class AutomationMenuItem extends AutomationBase implements Clickable, Expandable {
     private ExpandCollapse collapsePattern;
-    
+
+    /** The parent element. */
     protected AutomationElement mainMenuParentElement;
+
+    /** Name of the parent. */
     protected String parentMenuName;
 
     /**

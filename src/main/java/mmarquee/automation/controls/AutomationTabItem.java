@@ -20,10 +20,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
+ * Wrapper for the TabItem element.
+ *
  * @author Mark Humphreys
  * Date 28/01/2016.
- *
- * Wrapper for the TabItem element.
  */
 public class AutomationTabItem extends AutomationContainer {
 

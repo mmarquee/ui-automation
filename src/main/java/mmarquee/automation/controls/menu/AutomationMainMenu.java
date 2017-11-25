@@ -37,13 +37,15 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConver
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
+ * Wrapper for the MainMenu element.
  * @author Mark Humphreys
  * Date 09/02/2016.
- *
- * Wrapper for the MainMenu element.
  */
 public class AutomationMainMenu extends AutomationMenu {
 
+    /**
+     * The parent of the element.
+     */
     private AutomationElement parent;
 
     /**

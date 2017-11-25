@@ -25,10 +25,10 @@ import mmarquee.automation.pattern.SelectionItem;
 import java.util.List;
 
 /**
+ * Wrapper for the Image control element.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Wrapper for the Image control element.
  */
 public class AutomationImage extends AutomationBase {
     /**

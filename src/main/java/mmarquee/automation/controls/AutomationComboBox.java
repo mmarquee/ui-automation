@@ -31,16 +31,21 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Wrapper for the ComboBox element.
  * @author Mark Humphreys
  * Date 01/02/2016.
- *
- * Wrapper for the ComboBox element.
  */
 public class AutomationComboBox
         extends AutomationBase
         implements Expandable, Valueable, Focusable {
+
+    /** The expand collapse pattern. */
     private ExpandCollapse collapsePattern;
+
+    /** The value pattern. */
     private Value valuePattern;
+
+    /** The selection pattern. */
     private Selection selectionPattern;
 
     /**
@@ -200,7 +205,7 @@ public class AutomationComboBox
     }
 
     /**
-     * Gets the item associated with the name
+     * Gets the item associated with the name.
      * @param name Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
@@ -220,7 +225,7 @@ public class AutomationComboBox
     }
 
     /**
-     * Gets the item matching the namePattern
+     * Gets the item matching the namePattern.
      * @param namePattern Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
@@ -251,7 +256,7 @@ public class AutomationComboBox
     }
 
     /**
-     * Gets the item associated with the automationId
+     * Gets the item associated with the automationId.
      * @param automationId AutomationId to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
@@ -271,7 +276,7 @@ public class AutomationComboBox
     }
     
     /**
-     * Gets the current selection
+     * Gets the current selection.
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
@@ -295,7 +300,7 @@ public class AutomationComboBox
     }
 
     /**
-     * Gets the first currently selected element
+     * Gets the first currently selected element.
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern

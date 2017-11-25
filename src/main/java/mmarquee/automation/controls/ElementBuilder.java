@@ -28,7 +28,9 @@ import mmarquee.automation.pattern.*;
  * Date 20/11/2017
  */
 public class ElementBuilder {
+    /** The AutomationElement. */
     private AutomationElement element;
+    /** The automation instance. */
     private UIAutomation instance;
 
     private AutomationElement parent;
@@ -157,6 +159,11 @@ public class ElementBuilder {
         return this;
     }
 
+    /**
+     * Create a ElementBuilder with a Text pattern.
+     * @param pattern The Text pattern
+     * @return The ElementBuilder
+     */
     public ElementBuilder text(Text pattern) {
         this.text = pattern;
         return this;
@@ -310,8 +317,16 @@ public class ElementBuilder {
         return this.instance;
     }
 
+    /**
+     * Gets the attached flag.
+     * @return True if set
+     */
     public boolean getAttached() { return this.attached; }
 
+    /**
+     * Gets the user32 instance.
+     * @return The instance
+     */
     public User32 getUser32() {
         return this.user32;
     }

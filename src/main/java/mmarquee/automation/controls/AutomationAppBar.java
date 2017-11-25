@@ -15,9 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 
 /**
  * Wrapper for the AppBar element.

@@ -20,10 +20,10 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Specialist pane that represents the NUIPane (part of the MS ribbon controls).
+ *
  * @author Mark Humphreys
  * Date 02/03/2016.
- *
- * Specialist pane that represents the NUIPane (part of the MS ribbon controls)
  */
 public class AutomationNUIPane extends AutomationPanel {
 
