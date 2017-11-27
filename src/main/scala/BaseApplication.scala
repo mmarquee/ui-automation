@@ -20,7 +20,7 @@ import mmarquee.automation.controls.{AutomationApplication, AutomationWindow}
 import scala.util.{Failure, Success, Try}
 
 trait BaseApplication {
-  var automation = UIAutomation.getInstance
+  val automation = UIAutomation.getInstance
   var application: AutomationApplication = _
 
   var applicationName = ""

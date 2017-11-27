@@ -73,8 +73,6 @@ public final class AutomationCheckBox
      * Constructor for the AutomationCheckBox.
      *
      * @param builder The builder
-     * @throws AutomationException Automation exception.
-     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationCheckBox (final ElementBuilder builder) {
         super(builder);

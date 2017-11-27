@@ -180,11 +180,9 @@ public class AutomationApplication extends AutomationBase {
     /**
      * Constructor for the AutomationApplication.
      *
-     * @param builder The builder.
-     * @throws AutomationException Automation library error
+     * @param builder The builder
      */
-    public AutomationApplication(ElementBuilder builder)
-            throws AutomationException {
+    public AutomationApplication(final ElementBuilder builder) {
         super(builder);
         this.isAttached = builder.getAttached();
         this.user32 = builder.getUser32();

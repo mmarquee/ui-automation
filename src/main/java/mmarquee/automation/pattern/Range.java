@@ -20,10 +20,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 
 /**
  * @author Mark Humphreys

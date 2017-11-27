@@ -45,11 +45,8 @@ public final class AutomationList extends AutomationBase {
      * Constructor for the AutomationList.
      *
      * @param builder The underlying automation element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationList(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationList(final ElementBuilder builder) {
         super(builder);
         this.selectionPattern = builder.getSelection();
 

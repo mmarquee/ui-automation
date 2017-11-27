@@ -288,6 +288,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
                 }
                 
             } catch (AutomationException ex) {
+                logger.info("Failed");
             }
 
             logger.warn("Did not find window matching `" + titlePattern + "`, retrying");
@@ -296,6 +297,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
 				Thread.sleep(SLEEP_DURATION);
 			} catch (InterruptedException e) {
                 // interrupted
+                logger.info("interrupted");
 			}
         }
         

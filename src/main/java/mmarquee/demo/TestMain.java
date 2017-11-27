@@ -191,8 +191,10 @@ public class TestMain extends TestBase {
                 treeItem.select();
             } catch (ItemNotFoundException ex) {
                 // Not found
+                logger.info("ItemNotFoundException");
             } catch (ElementNotFoundException ex) {
                 // Not found
+                logger.info("ElementNotFoundException");
             }
 
             AutomationList list = window.getList(Search.getBuilder(0).build());
@@ -201,8 +203,10 @@ public class TestMain extends TestBase {
                 listItem.select();
             } catch (ItemNotFoundException ex) {
                 // Not found
+                logger.info("ItemNotFoundException");
             } catch (ElementNotFoundException ex) {
                 // Not found
+                logger.info("ElementNotFoundException");
             }
 
             try {
@@ -213,6 +217,7 @@ public class TestMain extends TestBase {
                 }
 
             } catch (AutomationException ex) {
+                logger.info("AutomationException");
                 // Not found
             }
 /*

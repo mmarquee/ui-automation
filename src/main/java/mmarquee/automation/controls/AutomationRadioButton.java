@@ -37,11 +37,8 @@ public final class AutomationRadioButton extends AutomationBase implements Selec
      * Construct the AutomationRadioButton.
      *
      * @param builder The builder.
-     * @throws PatternNotFoundException Expected pattern not found.
-     * @throws AutomationException Automation library error.
      */
-    public AutomationRadioButton(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationRadioButton(final ElementBuilder builder) {
         super(builder);
         selectItemPattern = builder.getSelectItem();
     }

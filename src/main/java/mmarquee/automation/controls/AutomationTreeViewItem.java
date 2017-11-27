@@ -15,15 +15,10 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
-
-import javax.xml.bind.Element;
 
 /**
  * Wrapper for the TreeViewItem element.
@@ -44,8 +39,6 @@ public final class AutomationTreeViewItem
     /**
      * Construct the AutomationTreeViewItem.
      * @param builder The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationTreeViewItem(final ElementBuilder builder) {
         super(builder);

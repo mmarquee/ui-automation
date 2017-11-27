@@ -82,7 +82,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Automation issue.
      * @throws ElementNotFoundException Failed to find element.
      */
-    protected AutomationElement getElementByControlType(int index, ControlType id, String className) throws AutomationException, ElementNotFoundException {
+    protected AutomationElement getElementByControlType(int index, ControlType id, String className) throws AutomationException {
         PointerByReference condition =  
         		this.createAndCondition(this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
         				this.createIntegerVariant(id.getValue())),
@@ -301,7 +301,7 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Automation issue
      * @throws ElementNotFoundException Failed to find element
      */
-    protected AutomationElement getElementByIndex(int index, String className) throws AutomationException, ElementNotFoundException {
+    protected AutomationElement getElementByIndex(int index, String className) throws AutomationException {
         List<AutomationElement> collection;
 
         collection = this.findAll(new TreeScope(TreeScope.Descendants), this.createClassNamePropertyCondition(className));

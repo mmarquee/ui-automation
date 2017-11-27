@@ -83,8 +83,6 @@ public abstract class AutomationBase implements Automatable {
      * Constructor for the AutomationBase.
      *
      * @param builder The builder
-     * @throws AutomationException Automation exception.
-     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationBase(final ElementBuilder builder) {
         this.element = builder.getElement();

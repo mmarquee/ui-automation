@@ -30,7 +30,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
-import javax.xml.bind.Element;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -350,6 +349,7 @@ public class UIAutomation extends BaseAutomation {
                 }
                 
             } catch (AutomationException ex) {
+                logger.info("Failed");
             }
             
             logger.info("Not found, retrying matching " + titlePattern);
@@ -359,6 +359,7 @@ public class UIAutomation extends BaseAutomation {
 				Thread.sleep(AutomationWindow.SLEEP_DURATION);
 			} catch (InterruptedException e) {
                 // interrupted
+                logger.info("interrupted");
 			}
         }
 
@@ -680,13 +681,17 @@ public class UIAutomation extends BaseAutomation {
         return result;
     }
 
+    /**
+     * Gets the children of the root element.
+     * @param controlType The control type to get
+     * @return List of Elements
+     * @throws AutomationException Something went wrong
+     */
 	private List<AutomationElement> getRootChildren(final ControlType controlType)
             throws AutomationException {
         PointerByReference pCondition = this.createControlTypeCondition(controlType);
 
-        List<AutomationElement> collection =
-                this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
-		return collection;
+		return this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
 	}
 
     /**

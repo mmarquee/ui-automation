@@ -29,11 +29,8 @@ public final class AutomationHyperlink extends AutomationBase implements Clickab
        * Constructor for the AutomationHyperlink.
      *
      * @param builder The builder
-     * @throws AutomationException
-     * @throws PatternNotFoundException
      */
     public AutomationHyperlink(final ElementBuilder builder) {
-           // throws PatternNotFoundException, AutomationException {
         super(builder);
     }
 

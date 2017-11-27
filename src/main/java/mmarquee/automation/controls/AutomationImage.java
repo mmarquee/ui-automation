@@ -17,12 +17,8 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.SelectionItem;
-
-import java.util.List;
 
 /**
  * Wrapper for the Image control element.
@@ -58,9 +54,6 @@ public final class AutomationImage extends AutomationBase {
             this.selectionItemPattern = this.getSelectItemPattern();
         }
 
-        AutomationElement element
-                = selectionItemPattern.getSelectionContainer();
-
-        return element;
+        return selectionItemPattern.getSelectionContainer();
     }
 }

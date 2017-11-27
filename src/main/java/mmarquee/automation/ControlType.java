@@ -27,7 +27,7 @@ public enum ControlType {
     /**
      * No control type.
      */
-    None(00000),
+    None(0),
 
     /**
      * Button.

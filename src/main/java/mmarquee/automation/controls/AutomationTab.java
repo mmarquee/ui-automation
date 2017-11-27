@@ -19,8 +19,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;

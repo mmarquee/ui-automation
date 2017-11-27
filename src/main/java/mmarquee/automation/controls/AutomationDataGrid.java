@@ -61,11 +61,8 @@ public final class AutomationDataGrid
      * Construct the AutomationDataGrid.
      *
      * @param builder The builder.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationDataGrid(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationDataGrid(final ElementBuilder builder) {
         super(builder);
 
         this.valuePattern = builder.getValue();
@@ -125,7 +122,7 @@ public final class AutomationDataGrid
 
         for (AutomationElement item : collection) {
             try {
-                items.add(new AutomationDataGridCell(item));
+                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {
                 // Try and add am empty cell
                 AutomationDataGridCell cell = new AutomationDataGridCell(null);
@@ -151,7 +148,7 @@ public final class AutomationDataGrid
         }
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        return new AutomationDataGridCell(collection.get(0));
+        return new AutomationDataGridCell(new ElementBuilder(collection.get(0)));
     }
 
     /**
@@ -173,7 +170,7 @@ public final class AutomationDataGrid
 
         for (AutomationElement item : collection) {
             try {
-                items.add(new AutomationDataGridCell(item));
+                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {
                 // Try and add am empty cell
                 AutomationDataGridCell cell = new AutomationDataGridCell(null);
@@ -217,7 +214,7 @@ public final class AutomationDataGrid
             this.gridPattern = this.getGridPattern();
         }
 
-        return new AutomationDataGridCell(this.gridPattern.getItem(row, column));
+        return new AutomationDataGridCell(new ElementBuilder(this.gridPattern.getItem(row, column)));
     }
 
     /**

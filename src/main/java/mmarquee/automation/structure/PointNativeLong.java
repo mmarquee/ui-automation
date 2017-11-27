@@ -24,7 +24,7 @@ import com.sun.jna.Structure;
 import java.util.List;
 
 public class PointNativeLong extends Structure implements Structure.ByValue {
-    public static final List<String> FIELDS = createFieldsOrder(new String[]{"x", "y"});
+    public static final List<String> FIELDS = createFieldsOrder("x", "y");
     public NativeLong x;
     public NativeLong y;
 

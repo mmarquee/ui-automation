@@ -23,11 +23,9 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.controls.AutomationDataGridCell;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 
 /**
  * @author Mark Humphreys

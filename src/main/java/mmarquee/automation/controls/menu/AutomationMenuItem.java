@@ -28,7 +28,6 @@ import mmarquee.automation.controls.Clickable;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.Expandable;
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 

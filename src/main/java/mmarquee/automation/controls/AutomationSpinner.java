@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-
 /**
  * Wrapper for the Spinner element.
  *
@@ -27,10 +25,8 @@ public final class AutomationSpinner extends AutomationBase {
     /**
      * Construct the AutomationSpinner.
      * @param builder The builder
-     * @throws AutomationException Automation library error.
      */
-    public AutomationSpinner(final ElementBuilder builder)
-            throws AutomationException {
+    public AutomationSpinner(final ElementBuilder builder) {
         super(builder);
     }
 }

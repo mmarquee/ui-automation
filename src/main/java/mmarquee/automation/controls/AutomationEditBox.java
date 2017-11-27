@@ -106,11 +106,8 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
     /**
      * Constructor for the AutomationEditBox.
      * @param builder The builder.
-     * @throws PatternNotFoundException Expected pattern not found.
-     * @throws AutomationException Automation error.
      */
-    public AutomationEditBox(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationEditBox(final ElementBuilder builder) {
         super(builder);
         this.valuePattern = builder.getValue();
     }

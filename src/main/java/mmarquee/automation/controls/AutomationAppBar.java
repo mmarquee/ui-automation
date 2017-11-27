@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-
 /**
  * Wrapper for the AppBar element.
  *
@@ -32,10 +30,8 @@ public class AutomationAppBar extends AutomationBase {
      * This element seems to be undocumented by Microsoft
      * </p>
      * @param builder The builder
-     * @throws AutomationException Automation library error
      */
-    public AutomationAppBar(final ElementBuilder builder)
-            throws AutomationException {
+    public AutomationAppBar(final ElementBuilder builder) {
         super(builder);
     }
 }

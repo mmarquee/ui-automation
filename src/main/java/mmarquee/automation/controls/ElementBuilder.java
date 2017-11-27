@@ -65,6 +65,9 @@ public class ElementBuilder {
     /** Grid pattern. */
     private Grid grid;
 
+    /** GridItem pattern. */
+    private GridItem gridItem;
+
     /** Table pattern. */
     private Table table;
 
@@ -130,6 +133,7 @@ public class ElementBuilder {
         this.table = null;
         this.text = null;
         this.parent = null;
+        this.gridItem = null;
     }
 
     /**
@@ -156,6 +160,16 @@ public class ElementBuilder {
      */
     public ElementBuilder process(Process process) {
         this.process = process;
+        return this;
+    }
+
+    /**
+     * Create a ElementBuilder with a griditem.
+     * @param inGridItem The GridItem
+     * @return The ElementBuilder
+     */
+    public ElementBuilder gridItem(GridItem inGridItem) {
+        this.gridItem = inGridItem;
         return this;
     }
 
@@ -400,6 +414,14 @@ public class ElementBuilder {
      */
     public WinNT.HANDLE getHandle() {
         return this.handle;
+    }
+
+    /**
+     * Gets the gridItem pattern.
+     * @return The GridItem pattern
+     */
+    public GridItem getGridItem() {
+        return this.gridItem;
     }
 
     /**

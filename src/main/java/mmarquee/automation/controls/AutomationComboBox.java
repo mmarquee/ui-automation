@@ -51,8 +51,6 @@ public final class AutomationComboBox
     /**
      * Constructor for the AutomationComboBox.
      * @param builder The builder
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern(s) not found.
      */
     public AutomationComboBox(final ElementBuilder builder) {
         super(builder);

@@ -20,7 +20,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Wrapper for the ToolBarButton.
@@ -36,10 +35,8 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
     /**
      * Constructor for the AutomationToolBarButton.
      * @param element The underlying automation element.
-     * @throws AutomationException Automation library error.
      */
-    public AutomationToolBarButton(final AutomationElement element)
-            throws AutomationException {
+    public AutomationToolBarButton(final AutomationElement element) {
         super (new ElementBuilder(element));
     }
 
@@ -47,12 +44,9 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      * Constructor for the AutomationToolBarButton.
      * @param element The underlying automation element.
      * @param invoke The Invoke pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
      */
     AutomationToolBarButton(final AutomationElement element,
-                            final Invoke invoke)
-            throws AutomationException, PatternNotFoundException {
+                            final Invoke invoke) {
         super (new ElementBuilder(element).invoke(invoke));
     }
 
