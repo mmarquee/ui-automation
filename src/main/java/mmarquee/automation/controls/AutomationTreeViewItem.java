@@ -31,7 +31,7 @@ import javax.xml.bind.Element;
  * @author Mark Humphreys
  * Date 20/02/2016
  */
-public class AutomationTreeViewItem
+public final class AutomationTreeViewItem
         extends AutomationBase
         implements Selectable, Clickable, Expandable {
 

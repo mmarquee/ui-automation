@@ -25,7 +25,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 02/03/2016.
  */
-public class AutomationRibbonBar extends AutomationPanel {
+public final class AutomationRibbonBar extends AutomationPanel {
 
     /**
      * Control name of the panel type.

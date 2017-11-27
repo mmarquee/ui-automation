@@ -25,7 +25,7 @@ import mmarquee.automation.pattern.Range;
  * @author Mark Humphreys
  * Date 25/04/2016.
  */
-public class AutomationProgressBar extends AutomationBase {
+public final class AutomationProgressBar extends AutomationBase {
 
     /**
      * The range pattern.

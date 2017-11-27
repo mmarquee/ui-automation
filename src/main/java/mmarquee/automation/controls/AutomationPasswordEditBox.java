@@ -6,7 +6,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 /**
  * Wrapper around the PasswordEditBox control.
  */
-public class AutomationPasswordEditBox extends AutomationEditBox {
+public final class AutomationPasswordEditBox extends AutomationEditBox {
 
     /**
      * The class name.

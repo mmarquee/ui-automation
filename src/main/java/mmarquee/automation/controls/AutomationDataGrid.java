@@ -34,7 +34,7 @@ import java.util.List;
  * @author Mark Humphreys
  * Date 03/02/2016.
  */
-public class AutomationDataGrid
+public final class AutomationDataGrid
         extends AutomationBase
         implements Valueable {
     /**

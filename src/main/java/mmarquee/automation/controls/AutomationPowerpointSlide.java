@@ -24,7 +24,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 01/02/2017.
  */
-public class AutomationPowerpointSlide extends AutomationCustom {
+public final class AutomationPowerpointSlide extends AutomationCustom {
     /**
      * Constructor for the AutomationPowerpointSlide.
      *

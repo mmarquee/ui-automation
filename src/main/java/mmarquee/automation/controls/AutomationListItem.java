@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.SelectionItem;
  * @author Mark Humphreys
  * Date 09/02/2016.
  */
-public class AutomationListItem extends AutomationContainer
+public final class AutomationListItem extends AutomationContainer
         implements Selectable, Clickable {
 
     /**

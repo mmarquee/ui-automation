@@ -33,7 +33,7 @@ public class TestMainWPFAutomationId extends TestBase {
     /**
      * Run the demo.
      */
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;

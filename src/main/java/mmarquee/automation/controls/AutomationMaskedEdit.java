@@ -9,7 +9,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 15/02/2016.
  */
-public class AutomationMaskedEdit extends AutomationEditBox {
+public final class AutomationMaskedEdit extends AutomationEditBox {
 
     /**
      * The class name.

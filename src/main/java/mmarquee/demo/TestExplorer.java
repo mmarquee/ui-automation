@@ -30,7 +30,7 @@ import mmarquee.automation.controls.AutomationReBar;
  */
 class TestExplorer extends TestBase {
 
-    void run() {
+    public final void run() {
 
         UIAutomation automation = UIAutomation.getInstance();
 

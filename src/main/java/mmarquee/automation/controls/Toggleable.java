@@ -29,7 +29,7 @@ public interface Toggleable extends Automatable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    void toggle () throws AutomationException, PatternNotFoundException;
+    void toggle() throws AutomationException, PatternNotFoundException;
 
     /**
      * Gets the state of the toggle.
@@ -37,5 +37,5 @@ public interface Toggleable extends Automatable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    ToggleState getToggleState () throws AutomationException, PatternNotFoundException;
+    ToggleState getToggleState() throws AutomationException, PatternNotFoundException;
 }

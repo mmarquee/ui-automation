@@ -55,7 +55,8 @@ public class AutomationApplication extends AutomationBase {
     /**
      * A very, very long timeout.
      */
-    private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
+    private static final WinDef.DWORD INFINITE_TIMEOUT =
+            new WinDef.DWORD(0xFFFFFFFF);
 
     /**
      * A default, normal timeout.

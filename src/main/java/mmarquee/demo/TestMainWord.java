@@ -26,7 +26,7 @@ import mmarquee.automation.controls.*;
  */
 public class TestMainWord extends TestBase {
 
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;

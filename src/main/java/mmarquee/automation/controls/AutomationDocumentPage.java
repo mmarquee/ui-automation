@@ -11,7 +11,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  *
  * It seems to be a specific set of custom elements.
  */
-public class AutomationDocumentPage extends AutomationCustom {
+public final class AutomationDocumentPage extends AutomationCustom {
     /**
      * Constructor for the AutomationDocumentPage.
      *

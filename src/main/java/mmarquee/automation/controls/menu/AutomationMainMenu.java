@@ -105,7 +105,7 @@ public class AutomationMainMenu extends AutomationMenu {
      * @throws PatternNotFoundException Expected pattern not found
      */
     @Override
-    public AutomationMenuItem getMenuItem (String name)
+    public AutomationMenuItem getMenuItem(final String name)
             throws PatternNotFoundException, AutomationException {
     	return getMenuItem(name, "");
     }
@@ -118,7 +118,8 @@ public class AutomationMainMenu extends AutomationMenu {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1)
+    public AutomationMenuItem getMenuItem(final String name0,
+                                          final String name1)
             throws PatternNotFoundException, AutomationException {
 
 
@@ -159,7 +160,8 @@ public class AutomationMainMenu extends AutomationMenu {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (Pattern name0Pattern, Pattern name1Pattern)
+    public AutomationMenuItem getMenuItem(final Pattern name0Pattern,
+                                          final Pattern name1Pattern)
             throws PatternNotFoundException, AutomationException {
     	List<AutomationElement> collection;
 
@@ -208,7 +210,7 @@ public class AutomationMainMenu extends AutomationMenu {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItemByAutomationId (String automationId)
+    public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
             throws PatternNotFoundException, AutomationException {
     	
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),

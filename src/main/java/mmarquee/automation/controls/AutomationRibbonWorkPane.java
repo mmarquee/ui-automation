@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 02/03/2016.
  *
  */
-public class AutomationRibbonWorkPane extends AutomationContainer {
+public final class AutomationRibbonWorkPane extends AutomationContainer {
 
     /**
      * The class name for this panel type.

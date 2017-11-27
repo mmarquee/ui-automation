@@ -32,7 +32,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  * Date 04/03/2016.
  *
  */
-public class AutomationTitleBar extends AutomationContainer {
+public final class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
      * @param builder The builder

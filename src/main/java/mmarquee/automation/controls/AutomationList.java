@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public class AutomationList extends AutomationBase {
+public final class AutomationList extends AutomationBase {
 
     /**
      * The selection pattern.

@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.SelectionItem;
  * @author Mark Humphreys
  * Date 31/01/2016.
  */
-public class AutomationRadioButton extends AutomationBase implements Selectable {
+public final class AutomationRadioButton extends AutomationBase implements Selectable {
 
     /**
      * The selection item pattern.

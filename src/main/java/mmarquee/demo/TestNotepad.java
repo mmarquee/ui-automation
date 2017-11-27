@@ -42,7 +42,7 @@ public class TestNotepad extends TestBase {
     /**
      * Run the test.
      */
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         Logger logger = Logger.getLogger(AutomationBase.class.getName());

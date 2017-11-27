@@ -33,7 +33,7 @@ import mmarquee.automation.controls.AutomationPowerpointSlide;
  */
 public class TestMainPowerpoint extends TestBase {
 
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
@@ -42,7 +42,7 @@ public class TestMainPowerpoint extends TestBase {
             // 0. Load Powerpoint
             try {
                 // Start the application
-                application = automation.launchOrAttach("\"C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE\"");
+                application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE\"");
             } catch (Throwable ex) {
                 // Smother
                 logger.error("Failed to launch or attach Powerpoint");

@@ -23,7 +23,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 03/02/2016.
  */
-public class AutomationHyperlink extends AutomationBase implements Clickable {
+public final class AutomationHyperlink extends AutomationBase implements Clickable {
 
       /**
        * Constructor for the AutomationHyperlink.

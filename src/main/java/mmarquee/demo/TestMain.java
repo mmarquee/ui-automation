@@ -55,7 +55,7 @@ import java.util.List;
  */
 public class TestMain extends TestBase {
 
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;

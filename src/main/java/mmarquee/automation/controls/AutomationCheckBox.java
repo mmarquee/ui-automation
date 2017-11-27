@@ -27,7 +27,7 @@ import mmarquee.automation.uiautomation.ToggleState;
  * @author Mark Humphreys
  * Date 31/01/2016.
  */
-public class AutomationCheckBox
+public final class AutomationCheckBox
         extends AutomationBase
         implements Toggleable, Focusable {
 

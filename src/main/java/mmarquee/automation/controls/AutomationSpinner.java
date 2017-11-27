@@ -23,7 +23,7 @@ import mmarquee.automation.AutomationException;
  * @author Mark Humphreys
  * Date 26/02/2016.
  */
-public class AutomationSpinner extends AutomationBase {
+public final class AutomationSpinner extends AutomationBase {
     /**
      * Construct the AutomationSpinner.
      * @param builder The builder

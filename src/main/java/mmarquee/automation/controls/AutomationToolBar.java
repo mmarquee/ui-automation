@@ -28,7 +28,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 02/03/2016
  */
-public class AutomationToolBar extends AutomationContainer {
+public final class AutomationToolBar extends AutomationContainer {
     /**
      * Constructor for the AutomationToolBar.
      *

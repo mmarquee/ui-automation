@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
  */
 public class TestMainWPF extends TestBase {
 
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;

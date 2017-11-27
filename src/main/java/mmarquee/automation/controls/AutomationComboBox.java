@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * @author Mark Humphreys
  * Date 01/02/2016.
  */
-public class AutomationComboBox
+public final class AutomationComboBox
         extends AutomationBase
         implements Expandable, Valueable, Focusable {
 

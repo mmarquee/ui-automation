@@ -25,7 +25,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 02/03/2016.
  */
-public class AutomationNUIPane extends AutomationPanel {
+public final class AutomationNUIPane extends AutomationPanel {
 
     /**
      * The class name of this pane type.

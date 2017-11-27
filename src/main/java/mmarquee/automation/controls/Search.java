@@ -273,7 +273,7 @@ public class Search {
      * Construct a search criteria from the builder.
      * @param builder The search builder
      */
-    private Search(Builder builder) {
+    private Search(final Builder builder) {
         this.automationId = builder.automationId;
         this.name = builder.name;
         this.className = builder.className;
@@ -425,7 +425,7 @@ public class Search {
      * @param name The name criteria
      * @return The new builder object
      */
-    public static Builder getBuilder(String name) {
+    public static Builder getBuilder(final String name) {
         return new Builder(name);
     }
 
@@ -434,7 +434,7 @@ public class Search {
      * @param id The id (index) criteria
      * @return The new builder object
      */
-    public static Builder getBuilder(int id) {
+    public static Builder getBuilder(final int id) {
         return new Builder(id);
     }
 
@@ -444,7 +444,8 @@ public class Search {
      * @param inColumn The offset criteria
      * @return The new builder object
      */
-    public static Builder getBuilder(int inRow, int inColumn) {
+    public static Builder getBuilder(final int inRow,
+                                     final int inColumn) {
         return new Builder(inRow, inColumn);
     }
 
@@ -453,7 +454,7 @@ public class Search {
      * @param pattern The pattern criteria
      * @return The new builder object
      */
-    public static Builder getBuilder(Pattern pattern) {
+    public static Builder getBuilder(final Pattern pattern) {
         return new Builder(pattern);
     }
 }

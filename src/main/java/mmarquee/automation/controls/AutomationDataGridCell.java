@@ -30,7 +30,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 04/02/2016.
  */
-public class AutomationDataGridCell extends AutomationBase implements Valueable {
+public final class AutomationDataGridCell extends AutomationBase implements Valueable {
 
     /**
      * The value pattern.

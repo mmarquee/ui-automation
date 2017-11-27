@@ -16,19 +16,27 @@
 package mmarquee.automation;
 
 /**
+ * Thrown when an item is not found.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Thrown when an item is not found.
  */
 public class ItemNotFoundException extends AutomationException {
 
     private static final long serialVersionUID = -7175159800746711939L;
 
+    /**
+     * Constructor, with a name of the not found item.
+     * @param name The element name
+     */
     public ItemNotFoundException(String name) {
         super("Item " + name + " not found");
     }
 
+    /**
+     * Constructor, with the index of the not found item.
+     * @param index The index
+     */
     public ItemNotFoundException(int index) {
         super("Item " + index + " not found");
     }

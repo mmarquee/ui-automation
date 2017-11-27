@@ -12,7 +12,7 @@ import mmarquee.automation.pattern.Range;
  *
  * IRangeProvider, ISelectionProvider, IValueProvider
  */
-public class AutomationSlider extends AutomationBase {
+public final class AutomationSlider extends AutomationBase {
 
     /**
      * The range pattern.

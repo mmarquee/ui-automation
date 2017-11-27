@@ -10,7 +10,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 02/03/2016.
  *
  */
-public class AutomationReBar extends AutomationPanel {
+public final class AutomationReBar extends AutomationPanel {
 
     /**
      * The class name.

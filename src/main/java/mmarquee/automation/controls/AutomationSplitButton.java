@@ -15,11 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -28,7 +24,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 03/03/2016.
  */
-public class AutomationSplitButton extends AutomationButton {
+public final class AutomationSplitButton extends AutomationButton {
     /**
      * Construct the AutomationSplitButton.
      *

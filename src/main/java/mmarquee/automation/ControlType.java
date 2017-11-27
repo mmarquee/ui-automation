@@ -253,10 +253,10 @@ public enum ControlType {
     /**
      * Constructor for the ControlType.
      *
-     * @param value The initial value.
+     * @param inValue The initial value.
      */
-    ControlType(int value) {
-        this.value = value;
+    ControlType(final int inValue) {
+        this.value = inValue;
     }
 
     /**
@@ -265,7 +265,7 @@ public enum ControlType {
      * @return The control type
      */
 	public static ControlType fromValue(int controlTypeValue) {
-		for(ControlType type: values()) {
+		for (ControlType type: values()) {
 			if (type.getValue() == controlTypeValue) {
 				return type;
 			}

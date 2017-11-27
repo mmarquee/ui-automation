@@ -25,14 +25,25 @@ public class ElementNotFoundException extends AutomationException {
 
     private static final long serialVersionUID = 5575725853478222085L;
 
+    /**
+     * Default constructor.
+     */
     public ElementNotFoundException() {
         super("Element not found");
     }
 
+    /**
+     * Constructor, with a name of the not found element.
+     * @param name The element name
+     */
     public ElementNotFoundException(String name) {
         super("Element " + name +" not found");
     }
 
+    /**
+     * Constructor, with a cause.
+     * @param cause The cause
+     */
     public ElementNotFoundException(Throwable cause) {
         super(cause);
     }

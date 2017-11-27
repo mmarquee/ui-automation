@@ -25,6 +25,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public interface Valueable extends Automatable {
     /**
      * Gets the value of the element.
+     * @return The value
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */

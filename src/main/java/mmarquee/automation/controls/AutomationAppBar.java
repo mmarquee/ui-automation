@@ -36,6 +36,6 @@ public class AutomationAppBar extends AutomationBase {
      */
     public AutomationAppBar(final ElementBuilder builder)
             throws AutomationException {
-        super (builder);
+        super(builder);
     }
 }

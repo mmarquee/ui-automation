@@ -30,7 +30,7 @@ import java.util.List;
  * @author Mark Humphreys
  * Date 26/02/2016.
  */
-public class AutomationImage extends AutomationBase {
+public final class AutomationImage extends AutomationBase {
     /**
      * Construct the AutomationImage.
      * @param builder The builder
