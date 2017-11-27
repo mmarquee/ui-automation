@@ -42,8 +42,17 @@ public class AutomationImage extends AutomationBase {
 
     // Powerpoint weirdness, probably needs it's own class in the end
 
+    /**
+     * The selection item pattern.
+     */
     private SelectionItem selectionItemPattern;
 
+    /**
+     * Gets the selection container.
+     * @return The selected element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
     public AutomationElement getSelectionContainer() throws PatternNotFoundException, AutomationException {
         if (this.selectionItemPattern == null) {
             this.selectionItemPattern = this.getSelectItemPattern();

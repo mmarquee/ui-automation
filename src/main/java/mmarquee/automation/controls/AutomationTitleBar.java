@@ -47,7 +47,7 @@ public class AutomationTitleBar extends AutomationContainer {
     /**
      * Gets the menu bar for this title-bar.
      * @return The Main menu
-     * @throws ElementNotFoundException When the element is not found
+     * @throws AutomationException Automation library error
      */
     public AutomationMainMenu getMenuBar() throws AutomationException {
         PointerByReference condition = this.automation.createControlTypeCondition(ControlType.MenuBar);

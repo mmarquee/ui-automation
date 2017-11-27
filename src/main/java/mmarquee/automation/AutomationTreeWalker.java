@@ -22,10 +22,10 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
 /**
+ * Wrapper for the AutomationTreeWalker.
+ *
  * @author Mark Humphreys
  * Date 02/02/2017.
- *
- * Wrapper for the AutomationTreeWalker.
  */
 public class AutomationTreeWalker extends BaseAutomation {
     /**
@@ -163,7 +163,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @param root The root element (of which the children are walked).
      * @throws AutomationException Exception in the automation library.
      */
-    public void walk(final AutomationElementVisitor visitor, final AutomationElement root)
+    public void walk(final AutomationElementVisitor visitor,
+                     final AutomationElement root)
             throws AutomationException {
     	assert visitor != null;
     	assert root != null;
@@ -192,6 +193,7 @@ public class AutomationTreeWalker extends BaseAutomation {
     	 * @return true to continue walking the elements siblings, false otherwise.
     	 * @throws AutomationException if something goes wrong.
     	 */
-    	boolean visit(AutomationTreeWalker walker, AutomationElement element) throws AutomationException;
+    	boolean visit(AutomationTreeWalker walker, AutomationElement element)
+                throws AutomationException;
     }
 }

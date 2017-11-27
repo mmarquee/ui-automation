@@ -25,7 +25,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 02/03/2016.
  */
 public class AutomationNetUIHWND extends AutomationPanel {
-	
+
+    /**
+     * The class name.
+     */
 	public final static String CLASS_NAME = "NetUIHWND";
 	
     /**

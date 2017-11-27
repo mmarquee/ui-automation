@@ -30,6 +30,9 @@ import mmarquee.automation.pattern.Value;
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
 public class AutomationCalendar extends AutomationBase implements Valueable {
+    /**
+     * The value pattern.
+     */
     private Value valuePattern;
 
     /**

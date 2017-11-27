@@ -31,10 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Base class to have underlying behaviour.
+ *
  * @author Mark Humphreys
  * Date 08/02/2017.
- *
- * Base class to have underlying behaviour.
  */
 public abstract class BaseAutomation {
     /**

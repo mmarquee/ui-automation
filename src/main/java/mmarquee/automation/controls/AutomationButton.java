@@ -27,6 +27,9 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public class AutomationButton
         extends AutomationBase
         implements Clickable, Focusable {
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.Button;
 
     /**

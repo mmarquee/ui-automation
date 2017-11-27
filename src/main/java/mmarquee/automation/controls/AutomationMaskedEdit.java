@@ -10,7 +10,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 15/02/2016.
  */
 public class AutomationMaskedEdit extends AutomationEditBox {
-	
+
+    /**
+     * The class name.
+     */
 	public static final String CLASS_NAME = "TAutomatedMaskEdit";
 	
     /**

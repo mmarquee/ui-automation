@@ -16,10 +16,11 @@
 package mmarquee.automation;
 
 /**
+ * Automation Pattern Identifiers.
+ *
  * @author Mark Humphreys
  * Date 28/01/2016.
  *
- * Automation Pattern Identifiers
  * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee671195%28v=vs.85%29.aspx
  */
 
@@ -195,8 +196,15 @@ public enum PatternID {
      */
     CustomNavigation(10033);
 
+    /**
+     * The actual value.
+     */
     private int value;
 
+    /**
+     * Gets the value.
+     * @return The actual value
+     */
     public int getValue() {
         return this.value;
     }

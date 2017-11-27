@@ -31,6 +31,13 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      */
     private Value valuePattern;
 
+    /**
+     * Constructor for the AutomationCustom element.
+     *
+     * @param builder The builder
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
+     */
     public AutomationCustom(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
         super(builder);

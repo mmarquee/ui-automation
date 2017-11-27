@@ -38,8 +38,18 @@ import mmarquee.automation.uiautomation.TreeScope;
  */
 public class AutomationContainer extends AutomationBase {
 
+    /**
+     * The ItemContainer pattern.
+     */
     private ItemContainer itemContainerPattern;
 
+    /**
+     * Constructor for the AutomationContainer.
+     *
+     * @param builder The builder
+     * @throws AutomationException Automation exception.
+     * @throws PatternNotFoundException Pattern not found.
+     */
     public AutomationContainer(final ElementBuilder builder) throws PatternNotFoundException, AutomationException {
         super(builder);
         itemContainerPattern = builder.getItemContainer();
@@ -94,9 +104,10 @@ public class AutomationContainer extends AutomationBase {
      * @param name Name to use.
      * @param id Control type.
      * @return The matching element.
-     * @throws ElementNotFoundException Did not find the element.
+     * @throws AutomationException Error from automation library
      */
-    protected AutomationElement getElementByControlType(String name, ControlType id) throws AutomationException {
+    protected AutomationElement getElementByControlType(String name, ControlType id)
+            throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
@@ -109,7 +120,7 @@ public class AutomationContainer extends AutomationBase {
      * @param namePattern a pattern which matches the name
      * @param id Control type.
      * @return The matching element.
-     * @throws ElementNotFoundException Did not find the element.
+     * @throws AutomationException Error from automation library
      */
     protected AutomationElement getElementByControlType(Pattern namePattern, ControlType id) throws AutomationException {
     	List<AutomationElement> collection;
@@ -144,7 +155,10 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByControlType(String name, ControlType id, String className) throws AutomationException {
+    protected AutomationElement getElementByControlType(final String name,
+                                                        final ControlType id,
+                                                        final String className)
+            throws AutomationException {
         return this.findFirst(new TreeScope(TreeScope.Descendants),
         		this.createAndCondition(
         				this.createAndCondition(
@@ -325,7 +339,7 @@ public class AutomationContainer extends AutomationBase {
 
 
     /**
-     * Creates an integer variant
+     * Creates an integer variant.
      * @param value The value to set
      * @return ByValue variant
      */
@@ -596,7 +610,7 @@ public class AutomationContainer extends AutomationBase {
     }
 
     /**
-     * Gets the Editbox control associated with the given automation id
+     * Gets the Editbox control associated with the given automation id.
      * @param id The id to use
      * @return The found control
      * @throws AutomationException Something has gone wrong
@@ -2030,8 +2044,10 @@ public class AutomationContainer extends AutomationBase {
      * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeView getTreeView(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeView getTreeView(final Search search)
+            throws PatternNotFoundException, AutomationException {
         if (search.getHasNamePattern()) {
             return getTreeView(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
@@ -2052,7 +2068,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationList getList(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationList getList(final Search search)
+            throws PatternNotFoundException, AutomationException {
         if (search.getHasNamePattern()) {
             return getList(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
@@ -2074,7 +2091,8 @@ public class AutomationContainer extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Pattern not found
      */
-    public AutomationPanel getPanel(final Search search) throws AutomationException, PatternNotFoundException {
+    public AutomationPanel getPanel(final Search search)
+            throws AutomationException, PatternNotFoundException {
         if (search.getHasClassName()) {
             if (search.getHasIndex()) {
                 return getPanelByClassName(search.getIndex(), search.getClassName());

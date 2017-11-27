@@ -28,7 +28,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 20/07/2016
  *
- * For some reason the invoke pattern doesn't work for these buttons, even via Object Inspector - no error, just doesn't work, so have to manufacture the click.
+ * For some reason the invoke pattern doesn't work for these buttons, even via
+ * Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
 public class AutomationToolBarButton extends AutomationBase implements Clickable {
 
@@ -75,7 +76,7 @@ public class AutomationToolBarButton extends AutomationBase implements Clickable
 
     /**
      * <p>
-     * Sets the focus to this control
+     * Sets the focus to this control.
      * </p>
      */
     public void focus() {

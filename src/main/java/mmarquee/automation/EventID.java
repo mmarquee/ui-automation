@@ -16,10 +16,10 @@
 package mmarquee.automation;
 
 /**
+ * Automation Event Identifiers.
+ *
  * @author Mark Humphreys
  * Date 24/05/2016.
- *
- * Automation Event Identifiers
  */
 public enum EventID {
     ToolTipOpened(20000),
@@ -46,8 +46,15 @@ public enum EventID {
     InputReachedOtherElement(20021),
     InputDiscarded(20022);
 
+    /**
+     * The actual value.
+     */
     private int value;
 
+    /**
+     * Gets the value.
+     * @return The actual value
+     */
     public int getValue() {
         return this.value;
     }

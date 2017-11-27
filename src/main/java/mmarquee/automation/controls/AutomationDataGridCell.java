@@ -53,7 +53,7 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     private Invoke invokePattern;
 
     /**
-     * Construct the AutomationDataGridCell
+     * Construct the AutomationDataGridCell.
      * @param element The element
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found

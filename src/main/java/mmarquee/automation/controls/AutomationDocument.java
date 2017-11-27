@@ -32,6 +32,9 @@ import java.util.List;
  * Date 16/02/2016.
  */
 public class AutomationDocument extends AutomationBase {
+    /**
+     * The text pattern.
+     */
     private Text textPattern;
 
     /**
@@ -44,7 +47,7 @@ public class AutomationDocument extends AutomationBase {
     }
 
     /**
-     * Gets the text for the document
+     * Gets the text for the document.
      * @return The document's text
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
@@ -57,7 +60,7 @@ public class AutomationDocument extends AutomationBase {
     }
 
     /**
-     * Gets the selection
+     * Gets the selection.
      *
      * @return String of text that is selected
      * @throws AutomationException Something has gone wrong
@@ -75,10 +78,11 @@ public class AutomationDocument extends AutomationBase {
      * Gets the page, based on index.
      * @param index The index
      * @return The selected page
-     * @throws PatternNotFoundException
-     * @throws AutomationException
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
      */
-    public AutomationDocumentPage getPage(final int index) throws PatternNotFoundException, AutomationException {
+    public AutomationDocumentPage getPage(final int index)
+            throws PatternNotFoundException, AutomationException {
         List<AutomationElement> items = this.findAll(
                 new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.Custom));
@@ -94,7 +98,8 @@ public class AutomationDocument extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDocumentPage getPage(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationDocumentPage getPage(final Search search)
+            throws PatternNotFoundException, AutomationException {
        if (search.getHasIndex()) {
            return getPage(search.getIndex());
        } else {

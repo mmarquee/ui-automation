@@ -37,7 +37,12 @@ import mmarquee.automation.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 10/02/2016.
  */
-public class AutomationMenuItem extends AutomationBase implements Clickable, Expandable {
+public class AutomationMenuItem
+        extends AutomationBase
+        implements Clickable, Expandable {
+    /**
+     * The expand collapse pattern.
+     */
     private ExpandCollapse collapsePattern;
 
     /** The parent element. */
@@ -73,8 +78,10 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Gets the list of items associated with this menu item. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Gets the list of items associated with this menu item.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @return List of menu items
@@ -101,8 +108,10 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Gets the subItem associated with the index. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Gets the subItem associated with the index.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param index The index
@@ -123,8 +132,10 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
     
     /**
-     * Get the menu item associated with the name. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Get the menu item associated with the name.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param name First Name
@@ -149,8 +160,10 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Get the menu item matching the name. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Get the menu item matching the name.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param namePattern a pattern matching the menu item name
@@ -190,8 +203,11 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
     
     /**
-     * Get the menu item associated with the automationID. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Get the menu item associated with the automationID.
+     *
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param automationId The automation ID to look for
@@ -214,8 +230,14 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
 
         return new AutomationMenuItem(new ElementBuilder(item));
     }
-    
-    // For MainMenus, the dropdown is disconnected from the MenuItem here
+
+    /**
+     * Gets the real menu.
+     * @return The menu item
+     * @throws AutomationException Something has gone wrong
+     *
+     * For MainMenus, the dropdown is disconnected from the MenuItem here
+     */
     private AutomationMenu getRealMenu() throws AutomationException {
     	if (parentMenuName == null || mainMenuParentElement == null) {
     		return null;
@@ -235,7 +257,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
     
     /**
-     * Is the control expanded
+     * Is the control expanded.
      * @return True if expanded
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
@@ -251,7 +273,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Collapses the element
+     * Collapses the element.
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
@@ -267,7 +289,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Expands the element
+     * Expands the element.
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */

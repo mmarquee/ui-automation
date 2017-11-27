@@ -49,6 +49,7 @@ public class AutomationListItem extends AutomationContainer
     /**
      * Selects this item.
      * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public void select()
             throws AutomationException, PatternNotFoundException {
@@ -66,7 +67,8 @@ public class AutomationListItem extends AutomationContainer
     /**
      * Is this item selected.
      * @return True if selected.
-     * @throws AutomationException Automation library issue.
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public boolean isSelected()
             throws AutomationException, PatternNotFoundException {

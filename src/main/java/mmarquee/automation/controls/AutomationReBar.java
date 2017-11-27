@@ -11,7 +11,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  *
  */
 public class AutomationReBar extends AutomationPanel {
-	
+
+    /**
+     * The class name.
+     */
 	public final static String CLASS_NAME = "ReBarWindow32";
 
     /**

@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Encapsulates the 'window' element
+ * Encapsulates the 'window' element.
  *
  * @author Mark Humphreys
  * Date 26/01/2016.
@@ -190,7 +190,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Closes the window
+     * Closes the window.
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
@@ -321,7 +321,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     }
 
     /**
-     * Whether this window is topmost
+     * Whether this window is topmost.
      * @return True if topmost
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found

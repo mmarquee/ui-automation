@@ -37,18 +37,28 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
+ * The base automation wrapper.
+ *
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * The base automation wrapper.
  */
 public class UIAutomation extends BaseAutomation {
 
     protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
+    /**
+     * The automation instance.
+     */
     protected static UIAutomation INSTANCE = null;
+
+    /**
+     * The wrapper for the Ole32 library.
+     */
     private static Ole32Wrapper Ole32 = null;
 
+    /**
+     * The root element.
+     */
     private AutomationElement rootElement;
 
     /**

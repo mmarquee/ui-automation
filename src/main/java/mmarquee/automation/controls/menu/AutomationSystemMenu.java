@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
  */
 public class AutomationSystemMenu extends AutomationBase {
     /**
-     * Construct the AutomationSystemMenu
+     * Construct the AutomationSystemMenu.
      * @param element The element
      * @throws AutomationException Automation issue
      * @throws PatternNotFoundException Expected pattern not found
@@ -54,7 +54,7 @@ public class AutomationSystemMenu extends AutomationBase {
     public static ControlType controlType = ControlType.Menu;
 
     /**
-     * Get the item associated with the name
+     * Get the item associated with the name.
      *
      * @param name The name to look for
      * @return The menu item
@@ -90,7 +90,7 @@ public class AutomationSystemMenu extends AutomationBase {
     }
 
     /**
-     * Get the item matching the name
+     * Get the item matching the name.
      *
      * @param namePattern Pattern matching the name to look for
      * @return The menu item

@@ -28,7 +28,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 public class AutomationNUIPane extends AutomationPanel {
 
     /**
-     * The class name of this pane type
+     * The class name of this pane type.
      */
 	public final static String CLASS_NAME = "NUIPane";
 	

@@ -75,6 +75,7 @@ public class AutomationTreeViewItem
      * Is this item selected.
      * @return True if selected.
      * @throws AutomationException Automation library issue.
+     * @throws PatternNotFoundException Pattern not found.
      */
     public boolean isSelected()
             throws AutomationException, PatternNotFoundException {

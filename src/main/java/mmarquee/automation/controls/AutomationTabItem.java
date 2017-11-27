@@ -27,6 +27,9 @@ import mmarquee.automation.pattern.SelectionItem;
  */
 public class AutomationTabItem extends AutomationContainer {
 
+    /**
+     * The select item pattern.
+     */
     private SelectionItem selectItemPattern;
 
     /**

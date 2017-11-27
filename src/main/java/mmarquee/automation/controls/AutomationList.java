@@ -102,7 +102,7 @@ public class AutomationList extends AutomationBase {
     }
 
     /**
-     * Gets the item matching the namePattern
+     * Gets the item matching the namePattern.
      * 
      * @param namePattern Name to look for
      * @return The selected item

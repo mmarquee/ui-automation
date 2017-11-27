@@ -30,24 +30,54 @@ import mmarquee.automation.pattern.*;
 public class ElementBuilder {
     /** The AutomationElement. */
     private AutomationElement element;
+
     /** The automation instance. */
     private UIAutomation instance;
 
+    /** The parent element. */
+
     private AutomationElement parent;
+
+    /** Range pattern. */
     private Range range;
+
+    /** Value pattern. */
     private Value value;
+
+    /** Invoke pattern. */
     private Invoke invoke;
+
+    /** Toggle pattern. */
     private Toggle toggle;
+
+    /** ExpandCollapse pattern. */
     private ExpandCollapse collapse;
+
+    /** Selection pattern. */
     private Selection selection;
+
+    /** ItemContainer pattern. */
     private ItemContainer itemContainer;
+
+    /** SelectionItem pattern. */
     private SelectionItem selectionItem;
+
+    /** Grid pattern. */
     private Grid grid;
+
+    /** Table pattern. */
     private Table table;
+
+    /** Range pattern. */
     private Text text;
 
+    /** The handle. */
     private WinNT.HANDLE handle;
+
+    /** The process. */
     private Process process;
+
+    /** Attached. */
     private boolean attached;
 
     /**
@@ -260,7 +290,7 @@ public class ElementBuilder {
     }
 
     /**
-     * Create a ElementBuilder with a User32,
+     * Create a ElementBuilder with a User32.
      * @param user32 The User32
      * @return The ElementBuilder
      */
@@ -400,19 +430,25 @@ public class ElementBuilder {
      * The selectitem pattern.
      * @return The selectitem pattern
      */
-    public SelectionItem getSelectItem() { return this.selectionItem;  }
+    public SelectionItem getSelectItem() {
+        return this.selectionItem;
+    }
 
     /**
      * The expand/collapse pattern.
      * @return The expandcollapse pattern
      */
-    public ExpandCollapse getCollapse() { return this.collapse; }
+    public ExpandCollapse getCollapse() {
+        return this.collapse;
+    }
 
     /**
      * Gets the selection pattern.
      * @return The selection pattern
      */
-    public Selection getSelection() { return this.selection; }
+    public Selection getSelection() {
+        return this.selection;
+    }
 
     /**
      * The element itself.
@@ -426,37 +462,71 @@ public class ElementBuilder {
      * Gets the itemcontainer pattern.
      * @return The itemcontainer pattern
      */
-    public ItemContainer getItemContainer() { return this.itemContainer; }
+    public ItemContainer getItemContainer() {
+        return this.itemContainer;
+    }
 
     /**
      * Gets the process.
      * @return The process
      */
-    public Process getProcess() { return this.process; }
+    public Process getProcess() {
+        return this.process;
+    }
 
     /**
      * Gets the text pattern.
      * @return The text pattern
      */
-    public Text getText() { return this.text; }
+    public Text getText() {
+        return this.text;
+    }
 
     /**
      * Gets the parent.
      * @return The parent
      */
-    public AutomationElement getParent() { return this.parent; }
+    public AutomationElement getParent() {
+        return this.parent;
+    }
 
+    /**
+     * Has automation.
+     * @return true if present
+     */
     public boolean getHasAutomation() {
         return this.instance != null;
     }
 
+    /**
+     * Has invoke pattern.
+     * @return true if present
+     */
     public boolean getHasInvoke() {
         return this.invoke != null;
     }
 
-    public boolean getHasValue() { return this.value != null; }
+    /**
+     * Has value pattern.
+     * @return true is present
+     */
+    public boolean getHasValue() {
+        return this.value != null;
+    }
 
-    public boolean getHasUser32() { return this.user32 != null; }
+    /**
+     * Has User32.
+     * @return true if present
+     */
+    public boolean getHasUser32() {
+        return this.user32 != null;
+    }
 
-    public boolean getHasHandle() { return this.handle != null; }
+    /**
+     * Has handle.
+     * @return true if present
+     */
+    public boolean getHasHandle() {
+        return this.handle != null;
+    }
 }

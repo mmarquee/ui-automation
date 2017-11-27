@@ -48,7 +48,8 @@ public class AutomationTreeView extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItem(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final Search search)
+            throws PatternNotFoundException, AutomationException {
         if (search.getHasNamePattern()) {
             return getItem(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
@@ -64,10 +65,11 @@ public class AutomationTreeView extends AutomationBase {
      * Gets the item that has the name.
      * @param name The name to look for
      * @return The AutomationTreeViewItem
-     * @throws ItemNotFoundException when the item is not found
+     * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItem(final String name) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final String name)
+            throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
@@ -87,7 +89,8 @@ public class AutomationTreeView extends AutomationBase {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItem(final Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final Pattern namePattern)
+            throws PatternNotFoundException, AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -115,10 +118,11 @@ public class AutomationTreeView extends AutomationBase {
      * Gets the item that has the name.
      * @param automationId The automationId of the item
      * @return The AutomationTreeViewItem
-     * @throws ItemNotFoundException when the item is not found
+     * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItemByAutomationId(final String automationId) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItemByAutomationId(final String automationId)
+            throws PatternNotFoundException, AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),

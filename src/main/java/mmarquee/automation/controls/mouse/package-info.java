@@ -1,5 +1,5 @@
 /**
- * Domain classes used to encapsulate interaction with the mouse the ms ui automation libraries
+ * Domain classes used to encapsulate interaction with the mouse the ms ui automation libraries.
  *
  * @since 0.4
  * @author Mark Humphreys

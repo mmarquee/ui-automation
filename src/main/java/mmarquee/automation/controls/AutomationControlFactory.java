@@ -25,7 +25,7 @@ import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * A Factory which creates concrete controls for AutomationElements
+ * A Factory which creates concrete controls for AutomationElements.
  */
 public class AutomationControlFactory {
 	

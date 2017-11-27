@@ -23,7 +23,26 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 21/09/2016.
  */
 public interface Expandable extends Automatable {
+
+    /**
+     * Expands the element.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
     void expand() throws AutomationException, PatternNotFoundException;
+
+    /**
+     * Collapses the element.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
     void collapse() throws AutomationException, PatternNotFoundException;
+
+    /**
+     * Whether the element is expanded.
+     * @return True if expanded
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
     boolean isExpanded() throws AutomationException, PatternNotFoundException;
 }

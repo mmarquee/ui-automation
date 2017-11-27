@@ -49,13 +49,16 @@ public class AutomationMainMenu extends AutomationMenu {
     private AutomationElement parent;
 
     /**
-     * Gets the parent element of the menu element
+     * Gets the parent element of the menu element.
      * @return The parent element
      */
     public AutomationElement getParentElement() {
         return this.parent;
     }
 
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.MenuBar;
 
     /**
@@ -70,7 +73,7 @@ public class AutomationMainMenu extends AutomationMenu {
     }
 
     /**
-     * Gets the raw pattern from the given element
+     * Gets the raw pattern from the given element.
      * @param item The Element
      * @return The raw collapse pattern
      * @throws AutomationException Failed to get pattern
@@ -95,7 +98,7 @@ public class AutomationMainMenu extends AutomationMenu {
     }
 
     /**
-     * Get the menu item associated with the name
+     * Get the menu item associated with the name.
      * @param name First Name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
@@ -108,7 +111,7 @@ public class AutomationMainMenu extends AutomationMenu {
     }
     
     /**
-     * Get the menu item associated with the hierarchy of names
+     * Get the menu item associated with the hierarchy of names.
      * @param name0 First Name
      * @param name1 Second name
      * @return The menu item that matches the name
@@ -149,7 +152,7 @@ public class AutomationMainMenu extends AutomationMenu {
     }
 
     /**
-     * Get the menu item matching with the hierarchy of names
+     * Get the menu item matching with the hierarchy of names.
      * @param name0Pattern First Name matching pattern
      * @param name1Pattern Second name matching pattern
      * @return The menu item that matches the name
@@ -199,7 +202,7 @@ public class AutomationMainMenu extends AutomationMenu {
     }
     
     /**
-     * Get the menu item associated with the automationID
+     * Get the menu item associated with the automationID.
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
@@ -217,7 +220,7 @@ public class AutomationMainMenu extends AutomationMenu {
     }
     
     /**
-     * Gets the items associated with this menu control
+     * Gets the items associated with this menu control.
      * @return The list of items
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found

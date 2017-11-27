@@ -44,10 +44,10 @@ import com.sun.jna.win32.W32APIOptions;
 import mmarquee.automation.AutomationException;
 
 /**
+ * Utility methods used in the project.
+ *
  * @author Mark Humphreys
  * Date 18/03/2016.
- *
- * Utility methods used in the project
  */
 public class Utils {
     protected static Logger logger = Logger.getLogger(Utils.class.getName());

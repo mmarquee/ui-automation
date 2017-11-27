@@ -19,11 +19,16 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Implement this interface to respond to the clickable action.
+ *
  * @author Mark Humphreys
  * Date 21/09/2016.
- *
- * Implement this interface to respond to the clickable action.
  */
 public interface Clickable extends Automatable {
+    /**
+     * Clicks the element.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
     void click() throws AutomationException, PatternNotFoundException;
 }

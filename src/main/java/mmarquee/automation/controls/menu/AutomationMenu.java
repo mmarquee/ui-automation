@@ -52,7 +52,7 @@ public class AutomationMenu extends AutomationBase {
     public static ControlType controlType = ControlType.Menu;
 
     /**
-     * Gets the list of items associated with this menu item
+     * Gets the list of items associated with this menu item.
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
@@ -72,7 +72,7 @@ public class AutomationMenu extends AutomationBase {
     }
     
     /**
-     * Gets the item associated with the index
+     * Gets the item associated with the index.
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
@@ -85,7 +85,7 @@ public class AutomationMenu extends AutomationBase {
     }
 
     /**
-     * Gets the item associated with the name
+     * Gets the item associated with the name.
      * @param name The name to look for
      * @return The found item
      * @throws AutomationException Something went wrong
@@ -102,7 +102,7 @@ public class AutomationMenu extends AutomationBase {
     }
 
     /**
-     * Gets the item matching the name
+     * Gets the item matching the name.
      * @param namePattern a pattern matching the name
      * @return The found item
      * @throws AutomationException Something went wrong
@@ -132,7 +132,7 @@ public class AutomationMenu extends AutomationBase {
     }
 
     /**
-     * Get the menu item associated with the automationID
+     * Get the menu item associated with the automationID.
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong

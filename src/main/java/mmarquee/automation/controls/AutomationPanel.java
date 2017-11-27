@@ -67,7 +67,9 @@ public class AutomationPanel extends AutomationContainer {
      */
     public AutomationWindow getWindow(final int index)
             throws PatternNotFoundException, AutomationException {
-    	return new AutomationWindow(new ElementBuilder(this.getElementByControlType(index, ControlType.Window)));
+    	return new AutomationWindow(
+    	        new ElementBuilder(
+    	                this.getElementByControlType(index, ControlType.Window)));
     }
 
     /**
@@ -80,7 +82,9 @@ public class AutomationPanel extends AutomationContainer {
      */
     public AutomationWindow getWindow(final String name)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.getElementByControlType(name, ControlType.Window)));
+        return new AutomationWindow(
+                new ElementBuilder(
+                        this.getElementByControlType(name, ControlType.Window)));
     }
 
     /**
@@ -93,7 +97,9 @@ public class AutomationPanel extends AutomationContainer {
      */
     public AutomationWindow getWindow(final Pattern namePattern)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.getElementByControlType(namePattern, ControlType.Window)));
+        return new AutomationWindow(
+                new ElementBuilder(
+                        this.getElementByControlType(namePattern, ControlType.Window)));
     }
 
     /**
@@ -106,7 +112,9 @@ public class AutomationPanel extends AutomationContainer {
       */
     public AutomationWindow getWindowByAutomationId(final String id)
             throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.getElementByAutomationId(id, ControlType.Window)));
+        return new AutomationWindow(
+                new ElementBuilder(
+                        this.getElementByAutomationId(id, ControlType.Window)));
     }
 
     /**
@@ -116,7 +124,8 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getWindow(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getWindow(final Search search)
+            throws PatternNotFoundException, AutomationException {
         if (search.getHasNamePattern()) {
             return getWindow(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
@@ -137,7 +146,8 @@ public class AutomationPanel extends AutomationContainer {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getMDIWindow(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getMDIWindow(final Search search)
+            throws PatternNotFoundException, AutomationException {
         if (search.getHasIndex()) {
             return getWindow(search.getIndex());
         } else {

@@ -20,5 +20,8 @@ package mmarquee.automation.controls;
  * Date 21/09/2016.
  */
 public interface Focusable extends Automatable {
+    /**
+     * Focus on the element.
+     */
     void focus();
 }
