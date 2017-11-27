@@ -43,7 +43,10 @@ import java.util.regex.Pattern;
  */
 public class UIAutomation extends BaseAutomation {
 
-    protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
+    /**
+     * The logger instance.
+     */
+    private Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
     /**
      * The automation instance.
