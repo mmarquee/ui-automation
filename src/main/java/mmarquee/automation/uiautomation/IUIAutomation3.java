@@ -32,7 +32,7 @@ import com.sun.jna.ptr.PointerByReference;
  * if(COMUtils.SUCCEEDED(result)) IUIAutomation3 iua=IUIAutomation3.Converter.PointerToInterface(pbr);
  *
  */
-public interface IUIAutomation3 extends IUnknown {
+public interface IUIAutomation3 extends IUIAutomation2 {
     /**
      * The interface IID for QueryInterface et al
      */
