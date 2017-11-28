@@ -406,7 +406,7 @@ public class UIAutomationTest extends BaseAutomationTest {
         }
     }
 
-    static interface TestWithNotepad {
+    interface TestWithNotepad {
     	void doTest(UIAutomation instance, AutomationApplication app) throws Exception;
     }
     
