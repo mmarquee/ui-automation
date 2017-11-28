@@ -15,24 +15,36 @@
  */
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.IUnknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
+
 /**
+ * Wrapper for the IUIAutomationItemContainerPattern COM interface.
+ *
  * @author Mark Humphreys
  * Date 13/07/2016.
  */
-//public interface IUIAutomationItemContainerPattern extends IUnknown {
-//
-//    /**
-//     * The interface IID for QueryInterface et al
-//     */
-//    Guid.IID IID = new Guid.IID(
- //           "{C690FDB2-27A8-423C-812D-429773C9084E}");
-//
-//    int AddRef();
-//    int Release();
-//    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-//
-//    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
-//
+public interface IUIAutomationItemContainerPattern extends IUnknown {
+
+    /**
+     * The interface IID for QueryInterface et al
+     */
+    Guid.IID IID = new Guid.IID(
+            "{C690FDB2-27A8-423C-812D-429773C9084E}");
+
+    int AddRef();
+
+    int Release();
+
+    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+
+    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
+}
+    //
 //    class Converter {
 //        private static int METHODS = 4; // 0-2 IUnknown, 3 IUIAutomationItemContainerPattern/
 //
