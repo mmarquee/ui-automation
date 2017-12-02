@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.OrientationType;
@@ -40,14 +41,14 @@ public class AutomationElement extends BaseAutomation {
      * The underlying automation element.
      * </p>
      */
-    private IUIAutomationElement3 element;
+    private IUIAutomationElement element;
 
     /**
      * Gets the underlying automation element.
      *
      * @return IUIAutomationElement3 The automation element.
      */
-    public final IUIAutomationElement3 getElement() {
+    public final IUIAutomationElement getElement() {
         return element;
     }
 
@@ -56,7 +57,7 @@ public class AutomationElement extends BaseAutomation {
      *
      * @param inValue The new value.
      */
-    public final void setElement(final IUIAutomationElement3 inValue) {
+    public final void setElement(final IUIAutomationElement inValue) {
         this.element = inValue;
     }
 
@@ -65,7 +66,7 @@ public class AutomationElement extends BaseAutomation {
      *
      * @param inElement The element.
      */
-    public AutomationElement(final IUIAutomationElement3 inElement) {
+    public AutomationElement(final IUIAutomationElement inElement) {
         this.element = inElement;
     }
 
@@ -293,7 +294,7 @@ public class AutomationElement extends BaseAutomation {
         this.element.findFirst(scope, pCondition.getValue(), pbr);
 
         try {
-            IUIAutomationElement3 elem =
+            IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
             return new AutomationElement(elem);
         } catch (NullPointerException npe) {
@@ -375,7 +376,7 @@ public class AutomationElement extends BaseAutomation {
 
             collection.getElement(a, pbr);
 
-            IUIAutomationElement3 elem =
+            IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
 
             items.add(new AutomationElement(elem));
