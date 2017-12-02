@@ -27,6 +27,7 @@ import java.util.List;
 
 import mmarquee.automation.*;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -36,8 +37,6 @@ import org.mockito.MockitoAnnotations;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-
 /**
  * @author Mark Humphreys
  * Date 29/11/2016.
@@ -50,7 +49,8 @@ public class AutomationComboBoxTest {
 	@Mock ExpandCollapse collapse;
 	@Mock Value value;
 	@Mock Selection selection;
-	@Mock IUIAutomationElement3 elem;
+	@Mock
+    IUIAutomationElement elem;
 	
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

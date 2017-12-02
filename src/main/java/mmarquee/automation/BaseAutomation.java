@@ -23,8 +23,6 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
@@ -52,10 +50,10 @@ public abstract class BaseAutomation {
     }
 
     /**
-     * Convert a raw PointerByReference to a IUIAutomationElement3.
+     * Convert a raw PointerByReference to a IUIAutomationElement.
      *
      * @param pbr The raw pointer.
-     * @return The IUIAutomationElement3.
+     * @return The IUIAutomationElement.
      * @throws AutomationException Automation library has thrown an error.
      */
     public IUIAutomationElement getAutomationElementFromReference(final PointerByReference pbr)

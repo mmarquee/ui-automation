@@ -80,7 +80,7 @@ public class IUIAutomationElement3Test {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement3 rootElement = IUIAutomationElement3Converter.PointerToInterface(root);
+            IUIAutomationElement rootElement = IUIAutomationElement3Converter.PointerToInterface(root);
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
@@ -93,7 +93,7 @@ public class IUIAutomationElement3Test {
 
             PointerByReference element = new PointerByReference();
 
-            uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
+            uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
             return IUIAutomationElement3Converter.PointerToInterface(element);
         } else {
@@ -256,7 +256,7 @@ public class IUIAutomationElement3Test {
 
     @Test
     public void testClassNameForNonRootElement() throws Exception {
-        IUIAutomationElement3 root = this.getChildOfRootElement();
+        IUIAutomationElement root = this.getChildOfRootElement();
 
         PointerByReference sr = new PointerByReference();
 
@@ -452,7 +452,7 @@ public class IUIAutomationElement3Test {
 
     @Test (expected=AutomationException.class)
     public void testcurrentControlType_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
 
         when(mockedElement.getCurrentControlType(any())).thenReturn(-1);
 
@@ -507,7 +507,7 @@ public class IUIAutomationElement3Test {
 
     @Test (expected=AutomationException.class)
     public void testCurrentClassName_Fails_When_Element_Call_Fails() throws AutomationException {
-        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
 
         when(mockedElement.getCurrentClassName(any())).thenReturn(-1);
 

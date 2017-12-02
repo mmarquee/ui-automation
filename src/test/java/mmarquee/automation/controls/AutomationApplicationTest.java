@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.sun.jna.platform.win32.User32;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.utils.UtilsTest;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -35,7 +36,6 @@ import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -170,7 +170,7 @@ public class AutomationApplicationTest {
             throws AutomationException, PatternNotFoundException {
         List<AutomationElement> list = new ArrayList<>();
 
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
         list.add(new AutomationElement(elem));
 

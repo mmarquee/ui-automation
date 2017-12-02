@@ -28,7 +28,7 @@ import com.sun.jna.ptr.PointerByReference;
 public interface IUIAutomationElementArray extends IUnknown {
 
     /**
-     * The interface IID for QueryInterface et al
+     * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID(
             "{14314595-B4BC-4055-95F2-58F2E42C9855}");

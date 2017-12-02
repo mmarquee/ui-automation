@@ -22,15 +22,15 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
+ * Wrapper for the IUIAutomationElement3 automation interface.
+ *
  * @author Mark Humphreys
  * Date 06/07/2016.
- *
- * Wrapper for the IUIAutomationElement3 automation interface
  */
 public interface IUIAutomationElement extends IUnknown {
 
     /**
-     * The interface IID for QueryInterface et al
+     * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{D22108AA-8AC5-49A5-837B-37BBB3D7591E}");
 

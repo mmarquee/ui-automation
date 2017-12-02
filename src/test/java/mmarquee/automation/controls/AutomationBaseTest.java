@@ -31,6 +31,7 @@ import java.util.List;
 
 import mmarquee.automation.*;
 import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
 import org.junit.*;
 import org.mockito.Mock;
@@ -45,7 +46,6 @@ import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -635,7 +635,7 @@ public class AutomationBaseTest {
     @Test
     @Ignore("Need to mock variants somehow")
     public void test_getSelectItemPattern() throws Exception {
-        IUIAutomationElement3 el = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement el = Mockito.mock(IUIAutomationElement.class);
 
         AutomationElement element = Mockito.mock(AutomationElement.class);
         element.setElement(el);

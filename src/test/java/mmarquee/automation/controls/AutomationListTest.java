@@ -22,7 +22,7 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import org.junit.Assume;
@@ -64,7 +64,8 @@ public class AutomationListTest {
     @Mock AutomationElement targetElement;
     @Mock Selection selection;
 
-    @Mock IUIAutomationElement3 listElement;
+    @Mock
+    IUIAutomationElement listElement;
 
     @Before
     public void setup() {

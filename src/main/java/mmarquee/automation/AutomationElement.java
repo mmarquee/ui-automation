@@ -15,12 +15,16 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -46,7 +50,7 @@ public class AutomationElement extends BaseAutomation {
     /**
      * Gets the underlying automation element.
      *
-     * @return IUIAutomationElement3 The automation element.
+     * @return IUIAutomationElement The automation element.
      */
     public final IUIAutomationElement getElement() {
         return element;
@@ -567,14 +571,23 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element.
+     * Shows the context menu for the element, by trying to get the IUIAutomationElement3.
+     * Not supported in Windows 7 and before
      *
      * @throws AutomationException Failed to get the correct interface.
      */
     public void showContextMenu() throws AutomationException {
-        final int res = this.element.showContextMenu();
-        if (res != 0) {
-            throw new AutomationException(res);
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement3 element3 =
+                    IUIAutomationElement3Converter.PointerToInterface(pUnknown);
+
+            element3.showContextMenu();
+        } else {
+            throw new AutomationException("Interface not supported");
         }
     }
 }

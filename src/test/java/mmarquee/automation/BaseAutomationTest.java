@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ResourceBundle;
 
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.After;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
@@ -45,7 +46,6 @@ import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
 import mmarquee.automation.utils.providers.PatternProvider;
@@ -109,7 +109,7 @@ public class BaseAutomationTest {
 	}
 
 	protected AutomationElement getMocketAutomationElement() {
-        IUIAutomationElement3 mockedElement = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
         return new AutomationElement(mockedElement);
 	}
 	
@@ -146,11 +146,11 @@ public class BaseAutomationTest {
      * Special Matchers & Helpers
      ***************************************/
 
-    public static void setElementClassName(IUIAutomationElement3 elem, String className) {
+    public static void setElementClassName(IUIAutomationElement elem, String className) {
 		answerStringByReference(className).when(elem).getCurrentClassName(any());
 	}
 
-	public static void setElementCurrentName(IUIAutomationElement3 elem, String name) {
+	public static void setElementCurrentName(IUIAutomationElement elem, String name) {
 		answerStringByReference(name).when(elem).getCurrentName(any());
 	}
 
@@ -187,7 +187,7 @@ public class BaseAutomationTest {
         });
 	}
 	
-	public static void setElementPropertyValue(IUIAutomationElement3 elem, PropertyID property, int vartype, Object propertyValue) {
+	public static void setElementPropertyValue(IUIAutomationElement elem, PropertyID property, int vartype, Object propertyValue) {
 		doAnswer(new Answer<Integer>() {
             @Override
             public Integer answer(InvocationOnMock invocation) throws Throwable {

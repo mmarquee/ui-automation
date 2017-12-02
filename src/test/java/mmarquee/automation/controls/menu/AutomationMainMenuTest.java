@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.controls.ElementBuilder;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -40,7 +41,6 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -61,7 +61,8 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
     @Mock private AutomationElement element;
 	@Mock private AutomationElement parent;
-	@Mock IUIAutomationElement3 elem;
+	@Mock
+    IUIAutomationElement elem;
 
 	@Mock AutomationElement targetElement;
 	List<AutomationElement> list;

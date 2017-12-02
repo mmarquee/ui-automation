@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +32,6 @@ import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -78,7 +78,7 @@ public class AutomationContainerTest {
     AutomationWindow spyWndw;
     
     @Mock
-    IUIAutomationElement3 elem;
+    IUIAutomationElement elem;
     
     List<AutomationElement> list;
     AutomationElement targetElement;
@@ -2662,7 +2662,7 @@ public class AutomationContainerTest {
         wndw.getControlByClassName(Pattern.compile("myNonsenseName"),"BlaBla");
     }
     
-	private void setElementTypeAndClassName(IUIAutomationElement3 elem, ControlType controlType, String className) {
+	private void setElementTypeAndClassName(IUIAutomationElement elem, ControlType controlType, String className) {
 		BaseAutomationTest.answerIntByReference(controlType.getValue()).when(elem).getCurrentControlType(any());
 		BaseAutomationTest.answerStringByReference(className).when(elem).getCurrentClassName(any());
 	}

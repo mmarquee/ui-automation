@@ -21,10 +21,10 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.BaseAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 
 /**
  * Base for the pattern wrappers.
@@ -79,13 +79,13 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
     }
 
     /**
-     * Converts the unknown value to a IUIAutomationElement3.
+     * Converts the unknown value to a IUIAutomationElement.
      * @param pUnknownA The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationElement3 convertPointerToElementInterface(
+    public IUIAutomationElement convertPointerToElementInterface(
             final PointerByReference pUnknownA) {
-        return IUIAutomationElement3Converter.PointerToInterface(pUnknownA);
+        return IUIAutomationElementConverter.PointerToInterface(pUnknownA);
     }
 
     /**

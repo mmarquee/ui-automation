@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.controls.ElementBuilder;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -45,7 +46,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -115,7 +115,7 @@ public class AutomationMenuItemTest extends BaseAutomationTest {
     @Test
     public void testClick() throws Exception {
 
-    	IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+    	IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsInvokePatternAvailable, Variant.VT_INT, 1);
         
         mocked_element = new AutomationElement(elem);

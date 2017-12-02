@@ -19,9 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
-import org.apache.log4j.Logger;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -74,7 +72,7 @@ public class AutomationStatusBarTest2 {
 
         when(element.getName()).thenReturn("NAME");
 
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));

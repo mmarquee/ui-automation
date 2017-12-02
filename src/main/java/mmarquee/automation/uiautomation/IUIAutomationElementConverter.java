@@ -25,10 +25,10 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
+ * Converter implementation of IUIAutomationElement.
+ *
  * @author Mark Humphreys
  * Date 05/06/2017.
- *
- * Converter implementation of IUIAutomationElement
  */
 public class IUIAutomationElementConverter {
     //  0-2  IUnknown,

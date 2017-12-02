@@ -22,7 +22,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.junit.Assume;
 import org.junit.Before;
@@ -53,7 +53,8 @@ public class AutomationComboBoxTest2 {
 	@Mock ExpandCollapse collapse;
 	@Mock Value value;
 	@Mock Selection selection;
-	@Mock IUIAutomationElement3 elem;
+	@Mock
+    IUIAutomationElement elem;
 	List<AutomationElement> list;
 
     @BeforeClass
