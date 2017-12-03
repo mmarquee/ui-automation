@@ -23,7 +23,6 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
@@ -40,10 +39,9 @@ public class AutomationSystemMenu extends AutomationBase {
      * Construct the AutomationSystemMenu.
      * @param element The element
      * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationSystemMenu(AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         super(new ElementBuilder(element));
         this.getItems();
     }
@@ -59,9 +57,8 @@ public class AutomationSystemMenu extends AutomationBase {
      * @param name The name to look for
      * @return The menu item
      * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getItem(String name) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getItem(String name) throws AutomationException {
 
         PointerByReference condition = this.createTrueCondition();
 
@@ -95,9 +92,8 @@ public class AutomationSystemMenu extends AutomationBase {
      * @param namePattern Pattern matching the name to look for
      * @return The menu item
      * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getItem(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getItem(Pattern namePattern) throws AutomationException {
 
         PointerByReference condition = this.createTrueCondition();
 
@@ -130,9 +126,8 @@ public class AutomationSystemMenu extends AutomationBase {
      *
      * @return The list of menu items
      * @throws AutomationException Automation issue
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    protected List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    protected List<AutomationMenuItem> getItems() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> items =

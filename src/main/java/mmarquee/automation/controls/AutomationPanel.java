@@ -32,11 +32,8 @@ public class AutomationPanel extends AutomationContainer {
      * Construct the AutomationPanel.
      *
      * @param builder The builder
-     * @throws AutomationException Something is wrong in automation.
-     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationPanel(final ElementBuilder builder)
-            throws AutomationException, PatternNotFoundException {
+    public AutomationPanel(final ElementBuilder builder) {
         super(builder);
     }
 
@@ -61,12 +58,11 @@ public class AutomationPanel extends AutomationContainer {
      * Gets a window from the panel.
      *
      * @param index The nth element.
-     * @return The found window.
-     * @throws PatternNotFoundException Failed to find the right pattern.
+     * @return The found window
      * @throws AutomationException Something went really wrong.
      */
     public AutomationWindow getWindow(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
     	return new AutomationWindow(
     	        new ElementBuilder(
     	                this.getElementByControlType(index, ControlType.Window)));
@@ -77,11 +73,10 @@ public class AutomationPanel extends AutomationContainer {
      *
      * @param name Name of the control.
      * @return The found window.
-     * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
     public AutomationWindow getWindow(final String name)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return new AutomationWindow(
                 new ElementBuilder(
                         this.getElementByControlType(name, ControlType.Window)));
@@ -92,11 +87,10 @@ public class AutomationPanel extends AutomationContainer {
      *
      * @param namePattern pattern matching the name of the control.
      * @return The found window.
-     * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      */
     public AutomationWindow getWindow(final Pattern namePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return new AutomationWindow(
                 new ElementBuilder(
                         this.getElementByControlType(namePattern, ControlType.Window)));
@@ -108,10 +102,9 @@ public class AutomationPanel extends AutomationContainer {
      * @param id The id to use.
      * @return The found window.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
       */
     public AutomationWindow getWindowByAutomationId(final String id)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return new AutomationWindow(
                 new ElementBuilder(
                         this.getElementByAutomationId(id, ControlType.Window)));
@@ -122,10 +115,9 @@ public class AutomationPanel extends AutomationContainer {
      * @param search Matcher for the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationWindow getWindow(final Search search)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         if (search.getHasNamePattern()) {
             return getWindow(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
@@ -144,10 +136,9 @@ public class AutomationPanel extends AutomationContainer {
      * @param search Matcher for the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationWindow getMDIWindow(final Search search)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         if (search.getHasIndex()) {
             return getWindow(search.getIndex());
         } else {

@@ -37,9 +37,8 @@ public class AutomationTab extends AutomationContainer {
     /**
      * Gets the tab items for the tab container.
      * @return List of tabsItems.
-     * @throws PatternNotFoundException Failed to find the required pattern.
      */
-    public List<AutomationTabItem> getTabItems() throws PatternNotFoundException {
+    public List<AutomationTabItem> getTabItems() {
         // Now get the list of tab items
         List<AutomationTabItem> tabItems = new ArrayList<AutomationTabItem>();
 
@@ -105,11 +104,8 @@ public class AutomationTab extends AutomationContainer {
     /**
      * Constructor for the AutomationTab.
      * @param builder The builder
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationTab (final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationTab (final ElementBuilder builder) {
         super(builder);
     }
 }

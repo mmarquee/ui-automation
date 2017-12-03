@@ -67,11 +67,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
     /**
      * Constructor for the AutomationWindow.
      * @param builder The builder
-     * @throws AutomationException Something is wrong in automation.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow (ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationWindow (ElementBuilder builder) {
         super(builder);
 
         if (builder.getHasUser32()) {
@@ -86,9 +83,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Gets the status bar associated with this window.
      * @return The status bar.
      * @throws AutomationException Automation issue.
-     * @throws PatternNotFoundException Did not find the pattern.
      */
-    public AutomationStatusBar getStatusBar() throws AutomationException, PatternNotFoundException {
+    public AutomationStatusBar getStatusBar() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
         List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
@@ -111,9 +107,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Gets the system menu associated with this window.
      * @return The system menu.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationSystemMenu getSystemMenu() throws PatternNotFoundException, AutomationException {
+    public AutomationSystemMenu getSystemMenu() throws AutomationException {
         return (new AutomationSystemMenu(this.getElementByControlType(0, ControlType.MenuBar)));
     }
 
@@ -207,10 +202,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @param search The search criteria
      * @return The child window.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getWindow(final Search search)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         if (search.getHasName()) {
             return getWindow(search.getName());
         } else if (search.getHasNamePattern()) {
@@ -225,9 +219,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @param title Title to search for.
      * @return The child window.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow getWindow(String title) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getWindow(String title) throws AutomationException {
         AutomationElement item = null;
 
         for (int count = 0; count < 10; count++) {
@@ -266,9 +259,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @param titlePattern Title to match against for.
      * @return The child window.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationWindow getWindow(Pattern titlePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getWindow(Pattern titlePattern) throws AutomationException {
         AutomationElement item = null;
 
         retry_loop: for (int loop = 0; loop < 10; loop++) {
@@ -340,9 +332,8 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Get the AutomationTitleBar associated with the given name.
      * @return The AutomationTitleBar.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Pattern not found.
      */
-    public AutomationTitleBar getTitleBar() throws AutomationException, PatternNotFoundException {
+    public AutomationTitleBar getTitleBar() throws AutomationException {
         return new AutomationTitleBar(new ElementBuilder(this.getElementByControlType(0,
                 ControlType.TitleBar)));
     }

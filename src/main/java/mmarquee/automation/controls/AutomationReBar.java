@@ -1,7 +1,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Specialised type of pane, with a specific control name.
@@ -22,10 +21,9 @@ public final class AutomationReBar extends AutomationPanel {
      *
      * @param builder The builder
      * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Pattern not found
      */
     public AutomationReBar(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         super(builder);
         assertClassName(CLASS_NAME);
     }

@@ -39,10 +39,8 @@ public class AutomationMenu extends AutomationBase {
      * Construct the AutomationMenu.
      *
      * @param builder The builder
-     * @throws AutomationException Automation library error
      */
-    public AutomationMenu(ElementBuilder builder)
-            throws AutomationException {
+    public AutomationMenu(ElementBuilder builder) {
         super(builder);
     }
 
@@ -55,10 +53,9 @@ public class AutomationMenu extends AutomationBase {
      * Gets the list of items associated with this menu item.
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationMenuItem> getItems()
-            throws PatternNotFoundException, AutomationException {
+            throws  AutomationException {
     	
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
                 this.createControlTypeCondition(ControlType.MenuItem));
@@ -77,10 +74,9 @@ public class AutomationMenu extends AutomationBase {
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItem(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
 
         return new AutomationMenuItem(new ElementBuilder(items.get(index)));
@@ -109,10 +105,9 @@ public class AutomationMenu extends AutomationBase {
      * @param namePattern a pattern matching the name
      * @return The found item
      * @throws AutomationException Something went wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItem(final Pattern namePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws  AutomationException {
     	List<AutomationElement> collection;
 
         AutomationElement item = null;
@@ -140,10 +135,9 @@ public class AutomationMenu extends AutomationBase {
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
-            throws PatternNotFoundException, AutomationException {
+            throws  AutomationException {
     	
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(

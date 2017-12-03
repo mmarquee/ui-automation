@@ -30,9 +30,8 @@ public final class AutomationImage extends AutomationBase {
     /**
      * Construct the AutomationImage.
      * @param builder The builder
-     * @throws AutomationException Automation library error
      */
-    public AutomationImage(final ElementBuilder builder) throws AutomationException {
+    public AutomationImage(final ElementBuilder builder) {
         super(builder);
     }
 

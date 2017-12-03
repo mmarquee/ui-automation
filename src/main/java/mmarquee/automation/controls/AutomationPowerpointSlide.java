@@ -15,9 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-
 /**
  * Specialised custom control representing a powerpoint slide.
  *
@@ -29,11 +26,8 @@ public final class AutomationPowerpointSlide extends AutomationCustom {
      * Constructor for the AutomationPowerpointSlide.
      *
      * @param builder The builder
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
      */
-    AutomationPowerpointSlide (final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    AutomationPowerpointSlide (final ElementBuilder builder) {
         super(builder);
     }
 }

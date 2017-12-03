@@ -53,11 +53,8 @@ public class AutomationMenuItem
     /**
      * Construct the AutomationMenuItem.
      * @param builder The builder
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation error
      */
-    public AutomationMenuItem(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem(final ElementBuilder builder){
         super(builder);
         this.collapsePattern = builder.getCollapse();
     }
@@ -85,9 +82,8 @@ public class AutomationMenuItem
      * 
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    public List<AutomationMenuItem> getItems() throws AutomationException {
 
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -116,9 +112,8 @@ public class AutomationMenuItem
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItem (int index) throws AutomationException {
 
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -168,10 +163,9 @@ public class AutomationMenuItem
      * @param namePattern a pattern matching the menu item name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItem (Pattern namePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -212,10 +206,9 @@ public class AutomationMenuItem
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItemByAutomationId (String automationId)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {

@@ -106,10 +106,9 @@ public class AutomationApplication extends AutomationBase {
      * @param title The title to look for.
      * @return An AutomationWindow.
      * @throws AutomationException Cannot find element.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getWindow(final String title)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
 
         AutomationElement foundElement = null;
 
@@ -135,10 +134,9 @@ public class AutomationApplication extends AutomationBase {
      * @param titlePattern A pattern matching the title to look for.
      * @return An AutomationWindow.
      * @throws AutomationException Cannot find element.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getWindow(final Pattern titlePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
 
         AutomationElement foundElement = null;
 
@@ -165,9 +163,8 @@ public class AutomationApplication extends AutomationBase {
      * @param search Matcher for the control
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationWindow getWindow(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationWindow getWindow(final Search search) throws AutomationException {
         if (search.getHasNamePattern()) {
             return getWindow(search.getNamePattern());
         } else if (search.getHasName()) {

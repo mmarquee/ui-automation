@@ -16,9 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-
 /**
  * Wrapper for the StatusBar element.
  *
@@ -31,11 +28,8 @@ public final class AutomationStatusBar extends AutomationContainer {
      * Constructor for AutomationStatusBar.
      *
      * @param builder The builder
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Did not find the pattern.
      */
-    public AutomationStatusBar(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException{
+    public AutomationStatusBar(final ElementBuilder builder) {
         super(builder);
     }
 }

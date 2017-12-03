@@ -65,9 +65,8 @@ public class AutomationMainMenu extends AutomationMenu {
      * Constructor for AutomationMainMenu.
      *
      * @param builder The builder
-     * @throws AutomationException Automation library error
      */
-    public AutomationMainMenu(final ElementBuilder builder) throws AutomationException {
+    public AutomationMainMenu(final ElementBuilder builder) {
         super(builder);
         this.parent = builder.getParent();
     }
@@ -205,10 +204,9 @@ public class AutomationMainMenu extends AutomationMenu {
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
     	
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
@@ -222,9 +220,8 @@ public class AutomationMainMenu extends AutomationMenu {
      * Gets the items associated with this menu control.
      * @return The list of items
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    public List<AutomationMenuItem> getItems() throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem));
 

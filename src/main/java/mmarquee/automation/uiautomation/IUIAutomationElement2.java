@@ -15,13 +15,7 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.Variant;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
 
 /**
  * Wrapper around the IUIAutomation2 interface, only implementing the extra methods.
@@ -38,17 +32,18 @@ public interface IUIAutomationElement2 extends IUIAutomationElement {
     Guid.IID IID = new Guid.IID("{34723aff-0c9d-49d0-9896-7ab52df8cd8a}");
 
     // IUnknown
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+//    int AddRef();
+//    int Release();
+//    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     // IUIAutomationElement
+    /*
     int setFocus();
     int getCurrentName(PointerByReference sr);
     int getCurrentClassName(PointerByReference sr);
     int findAll(TreeScope scope, Pointer condition, PointerByReference sr);
     int findFirst(TreeScope scope, Pointer condition, PointerByReference sr);
-    int getClickablePoint(/* [out] */ WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable);
+    int getClickablePoint(WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable);
     int getCurrentIsPassword(IntByReference value);
     int getCurrentAriaRole(PointerByReference sr);
     int getCurrentPattern(Integer patternId, PointerByReference pbr);
@@ -69,6 +64,6 @@ public interface IUIAutomationElement2 extends IUIAutomationElement {
     int getRuntimeId(PointerByReference runtimeId);
     int getCurrentAutomationId(PointerByReference retVal);
     int getCurrentCulture(IntByReference retVal);
-
+*/
     // IUIAutomationElement2
 }

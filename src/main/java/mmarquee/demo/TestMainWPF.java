@@ -16,6 +16,7 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
+import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
@@ -178,16 +179,21 @@ public class TestMainWPF extends TestBase {
             } catch (Exception ex) {
                 logger.info("Failed to get toggle state");
             }
-/* Only works on one PC at the moment. */
-/*
-            AutomationCheckBox cb = applicationWindow.get(AutomationCheckBox.class, ControlType.CheckBox, "Enable feature WWW");
+
+            logger.info("++ Experimental GENERIC ++");
+
+            /* Only seems to work on one PC at the moment. */
+
+            AutomationCheckBox cb = applicationWindow.get(AutomationCheckBox.class,
+                    ControlType.CheckBox,
+                    "Enable feature WWW");
             cb.toggle();
             try {
                 ToggleState state = cb.getToggleState();
             } catch (Exception ex) {
                 logger.info("Failed to get toggle state");
             }
-*/
+
             // RADIO BUTTON *********************************************
 
             logger.info("++ RADIO BUTTON ++");

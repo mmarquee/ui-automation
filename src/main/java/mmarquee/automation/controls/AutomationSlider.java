@@ -22,11 +22,8 @@ public final class AutomationSlider extends AutomationBase {
     /**
      * Construct the AutomationSlider.
      * @param builder The builder
-     * @throws PatternNotFoundException Expected pattern not found.
-     * @throws AutomationException Automation library error.
      */
-      public AutomationSlider(final ElementBuilder builder)
-          throws PatternNotFoundException, AutomationException {
+      public AutomationSlider(final ElementBuilder builder) {
         super(builder);
         this.rangePattern = builder.getRange();
     }

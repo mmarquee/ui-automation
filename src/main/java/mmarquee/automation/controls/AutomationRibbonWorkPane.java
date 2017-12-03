@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Specialist pane that represents the RibbonWorkPane of the MS Ribbon control.
@@ -37,11 +36,10 @@ public final class AutomationRibbonWorkPane extends AutomationContainer {
      * Construct the AutomationRibbonWorkPane.
      *
      * @param builder The builder.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Patter not found.
+     * @throws AutomationException Automation library error
      */
     public AutomationRibbonWorkPane(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         super(builder);
         assertClassName(CLASS_NAME);
     }
@@ -51,11 +49,10 @@ public final class AutomationRibbonWorkPane extends AutomationContainer {
      *
      * @param index The index.
      * @return The AutomationNUIPane.
-     * @throws AutomationException Automation issue.
-     * @throws PatternNotFoundException Pattern not found.
+     * @throws AutomationException Automation issue
      */
     public AutomationNUIPane getNUIPane(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return new AutomationNUIPane(new ElementBuilder(this.getElementByControlType(index,
                 ControlType.Pane, AutomationNUIPane.CLASS_NAME)));
     }
@@ -66,10 +63,9 @@ public final class AutomationRibbonWorkPane extends AutomationContainer {
      * @param search The search.
      * @return The AutomationNUIPane.
      * @throws AutomationException Automation issue.
-     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationNUIPane getNUIPane(final Search search)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return getNUIPane(search.getIndex());
     }
 }

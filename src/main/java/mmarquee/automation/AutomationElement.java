@@ -585,7 +585,11 @@ public class AutomationElement extends BaseAutomation {
             IUIAutomationElement3 element3 =
                     IUIAutomationElement3Converter.PointerToInterface(pUnknown);
 
-            element3.showContextMenu();
+            final int res = element3.showContextMenu();
+
+            if (res != 0) {
+                throw new AutomationException(res);
+            }
         } else {
             throw new AutomationException("Interface not supported");
         }

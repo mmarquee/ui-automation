@@ -59,10 +59,9 @@ public final class AutomationList extends AutomationBase {
      * @param index Index of element to get.
      * @return The selected item.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationListItem getItem(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
 
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
                 this.createControlTypeCondition(ControlType.ListItem));
@@ -82,10 +81,9 @@ public final class AutomationList extends AutomationBase {
      * @param name Name to look for.
      * @return The selected item.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationListItem getItem(final String name)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
@@ -104,9 +102,8 @@ public final class AutomationList extends AutomationBase {
      * @param namePattern Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationListItem getItem(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(Pattern namePattern) throws AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -136,10 +133,9 @@ public final class AutomationList extends AutomationBase {
      * @param automationId AutomationId to look for.
      * @return The selected item.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationListItem getItemByAutomationId(final String automationId)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
@@ -172,10 +168,9 @@ public final class AutomationList extends AutomationBase {
      *
      * @return List of elements.
      * @throws AutomationException Something is wrong in automation library.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public List<AutomationListItem> getItems()
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.ListItem));
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();

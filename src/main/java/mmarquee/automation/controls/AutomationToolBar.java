@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Wrapper for the Toolbar element.
@@ -33,11 +32,8 @@ public final class AutomationToolBar extends AutomationContainer {
      * Constructor for the AutomationToolBar.
      *
      * @param builder The builder
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Could not find pattern.
      */
-    public AutomationToolBar(final ElementBuilder builder)
-            throws AutomationException, PatternNotFoundException {
+    public AutomationToolBar(final ElementBuilder builder) {
         super(builder);
     }
 
@@ -90,9 +86,9 @@ public final class AutomationToolBar extends AutomationContainer {
      * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationToolBarButton getToolbarButton(final Search search) throws PatternNotFoundException, AutomationException {
+    public AutomationToolBarButton getToolbarButton(final Search search)
+            throws AutomationException {
         if (search.getHasNamePattern()) {
             return getToolbarButton(search.getNamePattern());
         } else if (search.getHasAutomationId()) {

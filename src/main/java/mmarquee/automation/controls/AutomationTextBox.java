@@ -39,10 +39,8 @@ public final class AutomationTextBox
      * Construct the AutomationTextBox.
      *
      * @param builder The builder.
-     * @throws AutomationException Automation library error.
      */
-    public AutomationTextBox(final ElementBuilder builder)
-            throws AutomationException {
+    public AutomationTextBox(final ElementBuilder builder) {
         super(builder);
         this.valuePattern = builder.getValue();
     }

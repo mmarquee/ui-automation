@@ -20,7 +20,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -34,11 +33,8 @@ public final class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
      * @param builder The builder
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find pattern
      */
-    public AutomationTitleBar(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationTitleBar(final ElementBuilder builder){
         super(builder);
     }
 

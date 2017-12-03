@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Specialist pane that represents the NUIPane (part of the MS ribbon controls).
@@ -37,10 +36,9 @@ public final class AutomationNUIPane extends AutomationPanel {
      *
      * @param builder The builder
      * @throws AutomationException Automation error.
-     * @throws PatternNotFoundException Could not find pattern.
      */
     public AutomationNUIPane(final ElementBuilder builder)
-            throws AutomationException, PatternNotFoundException {
+            throws AutomationException {
         super(builder);
         assertClassName(CLASS_NAME);
     }
@@ -51,10 +49,9 @@ public final class AutomationNUIPane extends AutomationPanel {
      * @param index The index.
      * @return The AutomationNetUIHWND.
      * @throws AutomationException Automation error.
-     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationNetUIHWND getNetUIHWND(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return new AutomationNetUIHWND(new ElementBuilder(this.getElementByControlType(index,
                 ControlType.Pane, AutomationNetUIHWND.CLASS_NAME)));
     }
@@ -65,10 +62,9 @@ public final class AutomationNUIPane extends AutomationPanel {
      * @param search The search criteria
      * @return The AutomationNetUIHWND.
      * @throws AutomationException Automation error.
-     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationNetUIHWND getNetUIHWND(final Search search)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return getNetUIHWND(search.getIndex());
     }
 }

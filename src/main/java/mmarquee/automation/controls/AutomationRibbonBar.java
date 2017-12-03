@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Specialist pane that represents the RibbonBar.
@@ -36,10 +35,9 @@ public final class AutomationRibbonBar extends AutomationPanel {
      * Construct the AutomationRibbonBar.
      * @param builder The builder
      * @throws AutomationException Something is wrong in automation.
-     * @throws PatternNotFoundException Could not find pattern.
      */
     public AutomationRibbonBar(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         super(builder);
         assertClassName(CLASS_NAME);
     }
@@ -48,10 +46,9 @@ public final class AutomationRibbonBar extends AutomationPanel {
      * Get the RibbonCommandBar associated with this container.
      * @return The AutomationRibbonBar.
      * @throws AutomationException Automation issue.
-     * @throws PatternNotFoundException Pattern not found.
      */
     public AutomationRibbonCommandBar getRibbonCommandBar()
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return new AutomationRibbonCommandBar(new ElementBuilder(this.getElementByControlType(0,
                 ControlType.Pane, AutomationRibbonCommandBar.CLASS_NAME)));
     }

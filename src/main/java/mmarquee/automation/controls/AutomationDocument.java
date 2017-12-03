@@ -79,10 +79,9 @@ public final class AutomationDocument extends AutomationBase {
      * @param index The index
      * @return The selected page
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
      */
     public AutomationDocumentPage getPage(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         List<AutomationElement> items = this.findAll(
                 new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.Custom));
@@ -96,10 +95,9 @@ public final class AutomationDocument extends AutomationBase {
      * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDocumentPage getPage(final Search search)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
        if (search.getHasIndex()) {
            return getPage(search.getIndex());
        } else {

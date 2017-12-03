@@ -36,11 +36,8 @@ public final class AutomationTabItem extends AutomationContainer {
      * Construct the AutomationTabItem.
      *
      * @param builder The builder.
-     * @throws AutomationException      Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationTabItem(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationTabItem(final ElementBuilder builder) {
         super(builder);
         this.selectItemPattern = builder.getSelectItem();
     }

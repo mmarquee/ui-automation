@@ -37,11 +37,8 @@ public final class AutomationListItem extends AutomationContainer
     /**
      * Constructor for the AutomationListItem.
      * @param builder The builder
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationListItem(final ElementBuilder builder)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationListItem(final ElementBuilder builder) {
         super(builder);
         this.selectItemPattern = builder.getSelectItem();
     }

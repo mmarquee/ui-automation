@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.*;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -44,10 +43,8 @@ public class AutomationTreeView extends AutomationBase {
      * @param search The search criteria
      * @return The found control
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItem(final Search search)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final Search search) throws AutomationException {
         if (search.getHasNamePattern()) {
             return getItem(search.getNamePattern());
         } else if (search.getHasAutomationId()) {
