@@ -34,10 +34,6 @@ public interface IUIAutomationElement extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{D22108AA-8AC5-49A5-837B-37BBB3D7591E}");
 
-//    int AddRef();
-//    int Release();
-//    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int setFocus();
     int getCurrentName (PointerByReference sr);
     int getCurrentClassName (PointerByReference sr);

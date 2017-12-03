@@ -30,40 +30,4 @@ public interface IUIAutomationElement2 extends IUIAutomationElement {
      * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{34723aff-0c9d-49d0-9896-7ab52df8cd8a}");
-
-    // IUnknown
-//    int AddRef();
-//    int Release();
-//    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
-    // IUIAutomationElement
-    /*
-    int setFocus();
-    int getCurrentName(PointerByReference sr);
-    int getCurrentClassName(PointerByReference sr);
-    int findAll(TreeScope scope, Pointer condition, PointerByReference sr);
-    int findFirst(TreeScope scope, Pointer condition, PointerByReference sr);
-    int getClickablePoint(WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable);
-    int getCurrentIsPassword(IntByReference value);
-    int getCurrentAriaRole(PointerByReference sr);
-    int getCurrentPattern(Integer patternId, PointerByReference pbr);
-    int getCurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value);
-    int getCurrentControlType(IntByReference ipr);
-    int getCurrentProviderDescription(PointerByReference sr);
-    int getCurrentFrameworkId(PointerByReference retVal);
-    int getCurrentItemStatus(PointerByReference retVal);
-    int getCurrentOrientation(IntByReference retVal);
-    int getCurrentAcceleratorKey(PointerByReference retVal);
-    int getCurrentProcessId(IntByReference retVal);
-    int getCurrentBoundingRectangle(WinDef.RECT retVal);
-    int getCurrentLocalizedControlType(PointerByReference retVal);
-    int getCurrentIsOffscreen(WinDef.BOOLByReference retVal);
-    int getCurrentIsEnabled(WinDef.BOOLByReference retVal);
-    int getCurrentIsControlElement(WinDef.BOOLByReference retVal);
-    int getCurrentIsContentElement(WinDef.BOOLByReference retVal);
-    int getRuntimeId(PointerByReference runtimeId);
-    int getCurrentAutomationId(PointerByReference retVal);
-    int getCurrentCulture(IntByReference retVal);
-*/
-    // IUIAutomationElement2
 }

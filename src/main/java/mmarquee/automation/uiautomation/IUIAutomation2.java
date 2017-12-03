@@ -35,10 +35,13 @@ public interface IUIAutomation2 extends IUIAutomation {
      */
     Guid.IID IID = new Guid.IID("{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}");
 
-//    int AddRef();
-
-//    int Release();
-
-//    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
+/*
+    function Get_AutoSetFocus(out AutoSetFocus: Integer): HResult; stdcall;
+    function Set_AutoSetFocus(AutoSetFocus: Integer): HResult; stdcall;
+    function Get_ConnectionTimeout(out timeout: LongWord): HResult; stdcall;
+    function Set_ConnectionTimeout(timeout: LongWord): HResult; stdcall;
+    function Get_TransactionTimeout(out timeout: LongWord): HResult; stdcall;
+    function Set_TransactionTimeout(timeout: LongWord): HResult; stdcall;
+     */
 }
 
