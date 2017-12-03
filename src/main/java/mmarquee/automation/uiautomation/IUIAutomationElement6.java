@@ -16,6 +16,7 @@
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.ptr.PointerByReference;
 
 /**
  * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
@@ -31,4 +32,5 @@ public interface IUIAutomationElement6 extends IUIAutomationElement5 {
      */
     Guid.IID IID = new Guid.IID("{4780D450-8BCA-4977-AFA5-A4A517F555E3}");
 
+    int getCurrentFullDescription(PointerByReference sr);
 }

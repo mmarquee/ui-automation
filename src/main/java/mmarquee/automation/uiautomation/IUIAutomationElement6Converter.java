@@ -1,18 +1,3 @@
-/*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.Function;
@@ -24,26 +9,23 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-/**
- * Converter implementation of IUIAutomationElement3.
- *
- * @author Mark Humphreys
- * Date 05/06/2017.
- */
-public class IUIAutomationElement3Converter {
+public class IUIAutomationElement6Converter {
 
-    public static IUIAutomationElement3 PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationElement6 PointerToInterface(final PointerByReference ptr) {
         //  0-2  IUnknown,
-        //  3-84 IUIAutomationElement3,
+        //  3-84 IUIAutomationElement,
         // 85-90 IUIAutomationElement2,
         // 91-93 IUIAutomationElement3
-        final int UIAutomationElement_Methods = 94;
+        // ????? IUIAutomationElement4          (6) 94,95,96,97,98,99
+        // ????? IUIAutomationElement5          (4) 100,101,102,103
+        // ????? IUIAutomationElement6          (2) 104,105
+        final int IUIAutomationElement6_Methods = 118;
 
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
-        final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];
+        final Pointer[] vTable = new Pointer[IUIAutomationElement6_Methods];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationElement3() {
+        return new IUIAutomationElement6() {
 
             // IUnknown
             @Override
@@ -84,7 +66,7 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
             }
 
-//                public int FindFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement3 */ PointerByReference found) {
+//                public int FindFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference found) {
 //                    Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
 //                }
@@ -94,7 +76,7 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
 //                }
 
-//                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement3 */ PointerByReference updatedElement) {
+//                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference updatedElement) {
 //                    Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
 //                }
@@ -139,7 +121,7 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, patternId, patternObject});
 //                }
 
-//                public int GetCachedParent (/* IUIAutomationElement3 */ PointerByReference parent) {
+//                public int GetCachedParent (/* IUIAutomationElement */ PointerByReference parent) {
 //                    Function f = Function.getFunction(vTable[18], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, parent});
 //                }
@@ -269,7 +251,7 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentLabeledBy (/* IUIAutomationElement3 */ PointerByReference retVal) {
+            public int getCurrentLabeledBy (/* IUIAutomationElement */ PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[44], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
@@ -424,7 +406,7 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-//                public int get_CachedLabeledBy (/* IUIAutomationElement3 */ PointerByReference retVal) {
+//                public int get_CachedLabeledBy (/* IUIAutomationElement */ PointerByReference retVal) {
 //                    Function f = Function.getFunction(vTable[76], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
@@ -475,6 +457,15 @@ public class IUIAutomationElement3Converter {
             public int showContextMenu() {
                 Function f = Function.getFunction(vTable[91], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
+            }
+
+            // IUIAutomationElement4
+            // IUIAutomationElement5
+            // IUIAutomationElement6
+
+            public int getCurrentFullDescription(PointerByReference sr) {
+                Function f = Function.getFunction(vTable[105], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr});
             }
         };
     }

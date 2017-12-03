@@ -180,6 +180,10 @@ public class TestMainWPF extends TestBase {
                 logger.info("Failed to get toggle state");
             }
 
+            logger.info("++ IUIAUTOMATIONELEMENT6 stuff");
+
+            logger.info("Description is " + check.getDescription());
+
             logger.info("++ Experimental GENERIC ++");
 
             /* Only seems to work on one PC at the moment. */

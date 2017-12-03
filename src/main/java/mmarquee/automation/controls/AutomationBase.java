@@ -1017,6 +1017,15 @@ public abstract class AutomationBase implements Automatable {
         return collection;
     }
 
+    /**
+     * Tries to get the full description.
+     * @return The full description
+     * @throws AutomationException Something has gone wrong
+     */
+    public String getDescription() throws AutomationException {
+        return this.element.getFullDescription();
+    }
+
 // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent control

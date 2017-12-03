@@ -25,6 +25,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
+import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -589,6 +591,41 @@ public class AutomationElement extends BaseAutomation {
 
             if (res != 0) {
                 throw new AutomationException(res);
+            }
+        } else {
+            throw new AutomationException("Interface not supported");
+        }
+    }
+
+    /**
+     * Gets the full description for the element, by trying to get the IUIAutomationElement6.
+     *
+     * Not supported in before Windows 10 build 1703
+     * @return The description, if set
+     * @throws AutomationException Something has gone wrong in automation library
+     */
+    public String getFullDescription() throws AutomationException {
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(
+                new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement6 element =
+                    IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+
+            PointerByReference sr = new PointerByReference();
+
+            final int res = element.getCurrentFullDescription(sr);
+
+            if (res != 0) {
+                throw new AutomationException(res);
+            } else {
+                if (sr.getValue() == null) {
+                    return "Not set";
+                } else {
+                    return sr.getValue().getWideString(0);
+                }
             }
         } else {
             throw new AutomationException("Interface not supported");
