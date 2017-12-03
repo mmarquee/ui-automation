@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid;
 /**
  * Wrapper around the IUIAutomation3 interface, only implementing the extra methods.
  *
- * This interface is supported fro Windows 8zz desktop onwards
+ * This interface is supported for Windows 8.1 [desktop apps only] onwards
  *
  * @author Mark Humphreys
  * Date 24/07/2016.
