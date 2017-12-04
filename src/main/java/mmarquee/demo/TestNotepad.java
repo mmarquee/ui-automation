@@ -56,6 +56,7 @@ public class TestNotepad extends TestBase {
         }
 
         // Wait for the process to start
+        assert application != null;
         application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         try {

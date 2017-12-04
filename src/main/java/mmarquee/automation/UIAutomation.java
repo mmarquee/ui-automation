@@ -30,6 +30,7 @@ import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -236,7 +237,7 @@ public class UIAutomation extends BaseAutomation {
         boolean found = Utils.findProcessEntry(processEntry, command);
 
         if (!found) {
-            throw new AutomationException("Process " + command + " not found.");
+            throw new AutomationException("Process " + Arrays.toString(command) + " not found.");
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(

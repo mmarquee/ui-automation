@@ -44,6 +44,7 @@ public class TestMainWord extends TestBase {
             // 1. Load a file in Word
 
             // 2. Get the sheet
+            assert application != null;
             AutomationWindow window = application.getWindow(Search.getBuilder("Document1 - Word").build());
             logger.info(window.getName());
 

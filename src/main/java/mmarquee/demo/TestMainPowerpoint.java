@@ -53,6 +53,7 @@ public class TestMainPowerpoint extends TestBase {
             // You'll have to do that manually
 
             // 2. Get the sheet
+            assert application != null;
             AutomationWindow window = application.getWindow(Search.getBuilder("This is text.pptx - PowerPoint").build());
             logger.info(window.getName());
 

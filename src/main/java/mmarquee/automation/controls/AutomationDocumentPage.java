@@ -1,7 +1,5 @@
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-
 /**
  * Represents a page in a document - i.e. a Word document.
  *

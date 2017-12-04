@@ -27,7 +27,6 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
 /**
@@ -195,6 +194,7 @@ public class AutomationApplication extends AutomationBase {
             if (name.equals("java.lang.Wind32Process")
                     || name.equals("java.lang.ProcessImpl")) {
                 try {
+                    //noinspection JavaReflectionMemberAccess
                     Field f = process.getClass().getDeclaredField("handle");
                     f.setAccessible(true);
                     this.handle.setPointer(Pointer.createConstant(f.getLong(process)));

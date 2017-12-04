@@ -68,6 +68,7 @@ public class TestMain extends TestBase {
 
         try {
             // Wait for the process to start
+            assert application != null;
             application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait properly");

@@ -41,6 +41,7 @@ public class DemoGrid extends TestBase {
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
+        assert application != null;
         application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
@@ -55,6 +56,7 @@ public class DemoGrid extends TestBase {
         }
 
         try {
+            assert applicationWindow != null;
             Object framework = applicationWindow.getFramework();
             logger.info("Framework is " + framework.toString());
 

@@ -15,8 +15,8 @@
  */
 package mmarquee.automation.uiautomation;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Arrays;
 
 import com.sun.jna.*;
 
@@ -59,6 +59,6 @@ public class TreeScope extends Structure {
 
     @Override
     protected List<String> getFieldOrder() {
-        return Arrays.asList("value");
+        return Collections.singletonList("value");
     }
 }

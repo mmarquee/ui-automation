@@ -29,5 +29,5 @@ public interface IUIAutomationTextRange2 extends IUIAutomationTextRange {
      */
     Guid.IID IID = new Guid.IID("{BB9B40E0-5E04-46BD-9BE0-4B601B9AFAD4}");
 
-    int ShowContextMenu();
+    int showContextMenu();
 }

@@ -44,6 +44,7 @@ class TestExplorer extends TestBase {
         }
 
         try {
+            assert application != null;
             application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait for input idle for some reason");
@@ -66,7 +67,7 @@ class TestExplorer extends TestBase {
             AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(Search.getBuilder(0).build());
 
             try {
-                AutomationButton btn = uiHWND.getButton(Search.getBuilder("Minimise the Ribbon").build());
+                uiHWND.getButton(Search.getBuilder("Minimise the Ribbon").build());
 
                 AutomationTab tab = uiHWND.getTab(Search.getBuilder(0).build());
                 tab.selectTabPage("View");
