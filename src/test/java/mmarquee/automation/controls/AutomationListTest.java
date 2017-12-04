@@ -22,7 +22,7 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import org.junit.Assume;
@@ -64,7 +64,8 @@ public class AutomationListTest {
     @Mock AutomationElement targetElement;
     @Mock Selection selection;
 
-    @Mock IUIAutomationElement3 listElement;
+    @Mock
+    IUIAutomationElement listElement;
 
     @Before
     public void setup() {
@@ -75,7 +76,8 @@ public class AutomationListTest {
     public void testName_Gets_Value_From_Element() throws Exception {
         when(element.getName()).thenReturn("NAME");
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         String name = list.getName();
 
@@ -89,7 +91,8 @@ public class AutomationListTest {
 
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         list.getItem(1);
     }
@@ -101,7 +104,8 @@ public class AutomationListTest {
 
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         AutomationListItem item = list.getItem(0);
 
@@ -115,7 +119,8 @@ public class AutomationListTest {
 
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         List<AutomationListItem> items = list.getItems();
 
@@ -129,7 +134,8 @@ public class AutomationListTest {
         
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         AutomationListItem item = list.getItem(0);
         assertEquals(targetElement,item.getElement());
@@ -142,7 +148,8 @@ public class AutomationListTest {
         List<AutomationElement> items = new ArrayList<>();
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         list.getItem(99);
     }
@@ -151,7 +158,8 @@ public class AutomationListTest {
     public void test_GetItem_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         AutomationListItem item = list.getItem("myName");
         assertEquals(targetElement,item.getElement());
@@ -163,7 +171,8 @@ public class AutomationListTest {
     public void test_GetItem_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         list.getItem("unknownName");
     }
@@ -176,7 +185,8 @@ public class AutomationListTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
         when(targetElement.getName()).thenReturn("myWorld");
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         AutomationListItem item = list.getItem(Pattern.compile("my.*"));
         assertEquals(targetElement,item.getElement());
@@ -192,7 +202,8 @@ public class AutomationListTest {
         when(targetElement.getName()).thenReturn("myWorld");
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         list.getItem(Pattern.compile("unknown"));
     }
@@ -201,7 +212,8 @@ public class AutomationListTest {
     public void test_GetItem_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         AutomationListItem item = list.getItemByAutomationId("myID");
         assertEquals(targetElement,item.getElement());
@@ -213,7 +225,8 @@ public class AutomationListTest {
     public void test_GetItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
        list.getItemByAutomationId("unknownID");
     }
@@ -225,7 +238,8 @@ public class AutomationListTest {
 
         when(selection.getCurrentSelection()).thenReturn(mockItems);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         List<AutomationListItem> items = list.getSelectedItems();
 
@@ -238,7 +252,8 @@ public class AutomationListTest {
         List<AutomationElement> mockItems = new ArrayList<>();
         when(selection.getCurrentSelection()).thenReturn(mockItems);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         List<AutomationListItem> items = list.getSelectedItems();
 
@@ -252,7 +267,8 @@ public class AutomationListTest {
 
         when(selection.getCurrentSelection()).thenReturn(mockItems);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         AutomationListItem item = list.getSelectedItem();
 
@@ -264,7 +280,8 @@ public class AutomationListTest {
         List<AutomationElement> mockItems = new ArrayList<>();
         when(selection.getCurrentSelection()).thenReturn(mockItems);
 
-        AutomationList list = new AutomationList(element, selection);
+        AutomationList list = new AutomationList(
+                new ElementBuilder(element).selection(selection));
 
         list.getSelectedItem();
     }

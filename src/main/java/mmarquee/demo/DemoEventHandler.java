@@ -4,6 +4,7 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Search;
 
 /**
  * @author Mark Humphreys
@@ -37,7 +38,7 @@ public class DemoEventHandler extends TestBase {
             String name = window.getName();
             logger.info(name);
 
-            AutomationButton button = window.getButton("OK");
+            AutomationButton button = window.getButton(Search.getBuilder("OK").build());
 /*
             automation.addAutomationEventHandler(
                     EventID.Invoke_Invoked,

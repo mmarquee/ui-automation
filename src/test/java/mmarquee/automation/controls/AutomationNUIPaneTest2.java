@@ -21,9 +21,8 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationNUIPane;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.*;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -73,9 +72,10 @@ public class AutomationNUIPaneTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationNUIPane pane = new AutomationNUIPane(element, container);
+        AutomationNUIPane pane = new AutomationNUIPane(
+                new ElementBuilder(element).itemContainer(container));
 
-        pane.getNetUIHWND(0);
+        pane.getNetUIHWND(Search.getBuilder(0).build());
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -87,7 +87,7 @@ public class AutomationNUIPaneTest2 {
         when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
         Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
             invocation -> {
@@ -110,9 +110,10 @@ public class AutomationNUIPaneTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationNUIPane pane = new AutomationNUIPane(element, container);
+        AutomationNUIPane pane = new AutomationNUIPane(
+                new ElementBuilder(element).itemContainer(container));
 
-        pane.getNetUIHWND(0);
+        pane.getNetUIHWND(Search.getBuilder(0).build());
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

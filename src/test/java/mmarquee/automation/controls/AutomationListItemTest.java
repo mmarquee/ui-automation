@@ -35,7 +35,8 @@ public class AutomationListItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationListItem ctrl = new AutomationListItem(element, instance);
+        AutomationListItem ctrl = new AutomationListItem(
+                new ElementBuilder(element).automation(instance));
         ctrl.selectItemPattern = selection;
 
         boolean result = ctrl.isSelected();
@@ -52,7 +53,8 @@ public class AutomationListItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationListItem ctrl = new AutomationListItem(element, instance);
+        AutomationListItem ctrl = new AutomationListItem(
+                new ElementBuilder(element).automation(instance));
         ctrl.selectItemPattern = selection;
 
         ctrl.select();
@@ -70,7 +72,8 @@ public class AutomationListItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationListItem ctrl = new AutomationListItem(element, instance);
+        AutomationListItem ctrl = new AutomationListItem(
+                new ElementBuilder(element).automation(instance));
         ctrl.invokePattern = invokePattern;
 
         ctrl.click();
@@ -88,7 +91,8 @@ public class AutomationListItemTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationListItem ctrl = new AutomationListItem(element, instance);
+        AutomationListItem ctrl = new AutomationListItem(
+                new ElementBuilder(element).automation(instance));
         ctrl.invokePattern = invokePattern;
 
         ctrl.click();

@@ -15,65 +15,30 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Wrapper around the Button element.
  * @author Mark Humphreys
  * Date 02/02/2016.
- *
- * Wrapper around the Button element.
  */
 public class AutomationButton
         extends AutomationBase
         implements Clickable, Focusable {
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.Button;
 
     /**
      * Constructor for the AutomationButton.
      *
-     * @param element The underlying automation element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
+     * @param builder The builder
      */
-    public AutomationButton(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-//        this.invokePattern = this.getInvokePattern();
-    }
-
-    /**
-     * Constructor for the AutomationButton.
-     *
-     * @param element The underlying automation element.
-     * @param pattern The pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationButton(final AutomationElement element,
-                            final Invoke pattern)
-            throws PatternNotFoundException, AutomationException {
-        super(element, pattern);
-    }
-
-    /**
-     * Constructor for the AutomationButton.
-     *
-     * @param element The underlying automation element.
-     * @param pattern The pattern.
-     * @param instance The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public AutomationButton(final AutomationElement element,
-                            final Invoke pattern,
-                            final UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super(element, pattern, instance);
+    public AutomationButton(final ElementBuilder builder) {
+        super(builder);
     }
 
     /**

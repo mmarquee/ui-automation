@@ -20,7 +20,6 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
 import mmarquee.automation.uiautomation.WindowVisualState;
@@ -89,6 +88,38 @@ public class Window extends BasePattern {
      */
     public void minimize() throws AutomationException {
         this.setWindowState(WindowVisualState.Minimized);
+    }
+
+    /**
+     * Can the window be maximized.
+     * @return True or false
+     * @throws AutomationException Something is wrong
+     */
+    public boolean getCanMaximize() throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        final int res = this.getPattern().getCurrentCanMaximize(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return (ibr.getValue() == 1);
+    }
+
+    /**
+     * Can the window be minimized.
+     * @return True or false
+     * @throws AutomationException Something is wrong
+     */
+    public boolean getCanMinimize() throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        final int res = this.getPattern().getCurrentCanMinimize(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return (ibr.getValue() == 1);
     }
 
     /**

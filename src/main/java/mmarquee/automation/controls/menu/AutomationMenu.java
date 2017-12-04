@@ -18,7 +18,6 @@ package mmarquee.automation.controls.menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.AutomationElement;
@@ -26,38 +25,37 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * @author Mark Humphreys
- * Date 09/02/2016.
- *
  * Wrapper for the Menu control element.
+ * @author Mark Humphreys
+ * Date 09/02/2016
  */
 public class AutomationMenu extends AutomationBase {
-    protected Logger logger = Logger.getLogger(AutomationMenu.class.getName());
-
     /**
-     * Construct the AutomationMenu
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * Construct the AutomationMenu.
+     *
+     * @param builder The builder
      */
-    public AutomationMenu(AutomationElement element)
-            throws AutomationException {
-        super(element);
+    public AutomationMenu(ElementBuilder builder) {
+        super(builder);
     }
 
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.Menu;
 
-
     /**
-     * Gets the list of items associated with this menu item
+     * Gets the list of items associated with this menu item.
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    public List<AutomationMenuItem> getItems()
+            throws  AutomationException {
     	
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
                 this.createControlTypeCondition(ControlType.MenuItem));
@@ -65,50 +63,51 @@ public class AutomationMenu extends AutomationBase {
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;
     }
     
     /**
-     * Gets the item associated with the index
+     * Gets the item associated with the index.
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItem(final int index)
+            throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
 
-        return new AutomationMenuItem(items.get(index));
+        return new AutomationMenuItem(new ElementBuilder(items.get(index)));
     }
 
     /**
-     * Gets the item associated with the name
+     * Gets the item associated with the name.
      * @param name The name to look for
      * @return The found item
      * @throws AutomationException Something went wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItem(final String name)
+            throws PatternNotFoundException, AutomationException {
 
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Children),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 
     /**
-     * Gets the item matching the name
+     * Gets the item matching the name.
      * @param namePattern a pattern matching the name
      * @return The found item
      * @throws AutomationException Something went wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItem(final Pattern namePattern)
+            throws  AutomationException {
     	List<AutomationElement> collection;
 
         AutomationElement item = null;
@@ -128,24 +127,23 @@ public class AutomationMenu extends AutomationBase {
         if (item == null) {
             throw new ItemNotFoundException("Failed to find element matching " + namePattern);
         }
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 
     /**
-     * Get the menu item associated with the automationID
+     * Get the menu item associated with the automationID.
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItemByAutomationId (String automationId)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
+            throws  AutomationException {
     	
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 }

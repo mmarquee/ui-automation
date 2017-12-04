@@ -17,9 +17,7 @@ package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
 
 /**
  * @author Mark Humphreys
@@ -30,10 +28,6 @@ public interface IUIAutomationTogglePattern extends IUnknown {
      * The interface IID for QueryInterface et al
      */
     Guid.IID IID = new Guid.IID("{94CF8058-9B8D-4AB9-8BFD-4CD0A33C8C70}");
-
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int toggle();
     int getCurrentToggleState(IntByReference ibr);

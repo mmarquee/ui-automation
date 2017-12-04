@@ -30,44 +30,49 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PatternID;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
+ * Wrapper for the MainMenu element.
  * @author Mark Humphreys
  * Date 09/02/2016.
- *
- * Wrapper for the MainMenu element.
  */
 public class AutomationMainMenu extends AutomationMenu {
 
+    /**
+     * The parent of the element.
+     */
     private AutomationElement parent;
 
     /**
-     * Gets the parent element of the menu element
+     * Gets the parent element of the menu element.
      * @return The parent element
      */
     public AutomationElement getParentElement() {
         return this.parent;
     }
 
+    /**
+     * The control type.
+     */
     public static ControlType controlType = ControlType.MenuBar;
 
     /**
-     * Constructor for AutomationMainMenu
-     * @param parent Parent of the element
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * Constructor for AutomationMainMenu.
+     *
+     * @param builder The builder
      */
-    public AutomationMainMenu(AutomationElement parent, AutomationElement element) throws AutomationException {
-        super(element);
-        this.parent = parent;
+    public AutomationMainMenu(final ElementBuilder builder) {
+        super(builder);
+        this.parent = builder.getParent();
     }
 
     /**
-     * Gets the raw pattern from the given element
+     * Gets the raw pattern from the given element.
      * @param item The Element
      * @return The raw collapse pattern
      * @throws AutomationException Failed to get pattern
@@ -82,37 +87,35 @@ public class AutomationMainMenu extends AutomationMenu {
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-            IUIAutomationExpandCollapsePattern pattern =
-                    IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknownA);
-
-            return pattern;
+            return IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknownA);
         } else {
             throw new AutomationException("QueryInterface failed");
         }
     }
 
     /**
-     * Get the menu item associated with the name
+     * Get the menu item associated with the name.
      * @param name First Name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
     @Override
-    public AutomationMenuItem getMenuItem (String name)
+    public AutomationMenuItem getMenuItem(final String name)
             throws PatternNotFoundException, AutomationException {
     	return getMenuItem(name, "");
     }
     
     /**
-     * Get the menu item associated with the hierarchy of names
+     * Get the menu item associated with the hierarchy of names.
      * @param name0 First Name
      * @param name1 Second name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name0, String name1)
+    public AutomationMenuItem getMenuItem(final String name0,
+                                          final String name1)
             throws PatternNotFoundException, AutomationException {
 
 
@@ -125,7 +128,7 @@ public class AutomationMainMenu extends AutomationMenu {
             throw new ItemNotFoundException("Failed to find element: " + name0);
         }
         
-        AutomationMenuItem menuItem = new AutomationMenuItem(item);
+        AutomationMenuItem menuItem = new AutomationMenuItem(new ElementBuilder(item));
         menuItem.parentMenuName = item.getName();
         menuItem.mainMenuParentElement = this.getParentElement();
 
@@ -146,14 +149,15 @@ public class AutomationMainMenu extends AutomationMenu {
     }
 
     /**
-     * Get the menu item matching with the hierarchy of names
+     * Get the menu item matching with the hierarchy of names.
      * @param name0Pattern First Name matching pattern
      * @param name1Pattern Second name matching pattern
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (Pattern name0Pattern, Pattern name1Pattern)
+    public AutomationMenuItem getMenuItem(final Pattern name0Pattern,
+                                          final Pattern name1Pattern)
             throws PatternNotFoundException, AutomationException {
     	List<AutomationElement> collection;
 
@@ -175,7 +179,7 @@ public class AutomationMainMenu extends AutomationMenu {
             throw new ItemNotFoundException("Failed to find element matching " + name0Pattern);
         }
         
-        AutomationMenuItem menuItem = new AutomationMenuItem(item);
+        AutomationMenuItem menuItem = new AutomationMenuItem(new ElementBuilder(item));
         menuItem.parentMenuName = item.getName();
         menuItem.mainMenuParentElement = this.getParentElement();
 
@@ -196,37 +200,35 @@ public class AutomationMainMenu extends AutomationMenu {
     }
     
     /**
-     * Get the menu item associated with the automationID
+     * Get the menu item associated with the automationID.
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItemByAutomationId (String automationId)
-            throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
+            throws AutomationException {
     	
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
     
     /**
-     * Gets the items associated with this menu control
+     * Gets the items associated with this menu control.
      * @return The list of items
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    public List<AutomationMenuItem> getItems() throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
         
         for(AutomationElement item: items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;

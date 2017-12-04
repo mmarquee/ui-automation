@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -36,7 +37,6 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -49,7 +49,8 @@ public class AutomationToolbarTest2 {
     @Mock AutomationElement targetElement;
     
     @Mock ItemContainer container;
-    @Mock IUIAutomationElement3 listElement;
+    @Mock
+    IUIAutomationElement listElement;
     List<AutomationElement> list;
 
 	static {
@@ -78,27 +79,30 @@ public class AutomationToolbarTest2 {
     	
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        ctrl.getToolbarButton(0);
+        ctrl.getToolbarButton(Search.getBuilder(0).build());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_GetToolbarButton_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        ctrl.getToolbarButton(1);
+        ctrl.getToolbarButton(Search.getBuilder(1).build());
     }
 
     @Test
     public void test_GetToolbarButton_By_Name_Gets_Button() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        AutomationToolBarButton button = ctrl.getToolbarButton("myName");
+        AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder("myName").build());
         
         assertEquals(targetElement,button.getElement());
 
@@ -109,9 +113,10 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_Name_Throws_Exception() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        ctrl.getToolbarButton("unknownName");
+        ctrl.getToolbarButton(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -119,9 +124,10 @@ public class AutomationToolbarTest2 {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myName");
         
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        AutomationToolBarButton button = ctrl.getToolbarButton(Pattern.compile("my.*"));
+        AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("my.*")).build());
         
         assertEquals(targetElement,button.getElement());
 
@@ -132,18 +138,20 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_Name_with_RegExPattern_Throws_Exception() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        ctrl.getToolbarButton(Pattern.compile("unknownName"));
+        ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("unknownName")).build());
     }
 
     @Test
     public void test_GetToolbarButton_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        AutomationToolBar button = ctrl.getToolBarByAutomationId("myID");
+        AutomationToolBar button = ctrl.getToolBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,button.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -153,8 +161,9 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationToolBar ctrl = new AutomationToolBar(element, container);
+        AutomationToolBar ctrl = new AutomationToolBar(
+                new ElementBuilder(element).itemContainer(container));
 
-        ctrl.getToolBarByAutomationId("unknownID");
+        ctrl.getToolBar(Search.getBuilder().automationId("unknownID").build());
     }
 }

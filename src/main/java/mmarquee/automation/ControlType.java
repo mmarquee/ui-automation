@@ -27,7 +27,7 @@ public enum ControlType {
     /**
      * No control type.
      */
-    None(00000),
+    None(0),
 
     /**
      * Button.
@@ -237,8 +237,15 @@ public enum ControlType {
      */
     AppBar(50040);
 
+    /**
+     * The actual value.
+     */
     private int value;
 
+    /**
+     * Gets the value.
+     * @return The actual value
+     */
     public int getValue() {
         return this.value;
     }
@@ -246,14 +253,19 @@ public enum ControlType {
     /**
      * Constructor for the ControlType.
      *
-     * @param value The initial value.
+     * @param inValue The initial value.
      */
-    ControlType(int value) {
-        this.value = value;
+    ControlType(final int inValue) {
+        this.value = inValue;
     }
 
+    /**
+     * Gets the control type from the value.
+     * @param controlTypeValue The value
+     * @return The control type
+     */
 	public static ControlType fromValue(int controlTypeValue) {
-		for(ControlType type: values()) {
+		for (ControlType type: values()) {
 			if (type.getValue() == controlTypeValue) {
 				return type;
 			}

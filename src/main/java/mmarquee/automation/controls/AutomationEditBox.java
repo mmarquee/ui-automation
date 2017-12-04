@@ -16,22 +16,26 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper around the edit box element.
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Wrapper around the edit box element.
  */
 public class AutomationEditBox extends AutomationBase implements Valueable {
 
+    /**
+     * The value pattern.
+     */
     private Value valuePattern;
+
+    /**
+     * The text pattern.
+     */
     private Text textPattern;
 
     /**
@@ -101,24 +105,10 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
 
     /**
      * Constructor for the AutomationEditBox.
-     * @param element The underlying element.
-     * @throws PatternNotFoundException Expected pattern not found.
-     * @throws AutomationException Automation error.
+     * @param builder The builder.
      */
-    public AutomationEditBox(AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-//        this.valuePattern = this.getValuePattern();
-    }
-
-    /**
-     * Constructor for the AutomationEditBox
-     * @param element The underlying element
-     * @param value The Value pattern
-     * @param instance Automation instance
-     */
-    AutomationEditBox(AutomationElement element, Value value, UIAutomation instance) {
-        super(element, instance);
-        this.valuePattern = value;
+    public AutomationEditBox(final ElementBuilder builder) {
+        super(builder);
+        this.valuePattern = builder.getValue();
     }
 }

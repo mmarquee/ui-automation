@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.controls.ElementBuilder;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -39,7 +41,6 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -60,7 +61,8 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
 
     @Mock private AutomationElement element;
 	@Mock private AutomationElement parent;
-	@Mock IUIAutomationElement3 elem;
+	@Mock
+    IUIAutomationElement elem;
 
 	@Mock AutomationElement targetElement;
 	List<AutomationElement> list;
@@ -78,7 +80,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.getName()).thenReturn("MENU-01");
 
         AutomationMainMenu item =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         assertEquals("MENU-01", item.getName());
     }
@@ -94,7 +96,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findAll(any(), any())).thenReturn(collection);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         List<AutomationMenuItem> items = menu.getItems();
 
@@ -114,7 +116,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(menuItemElement1.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(menuItemElement2);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         AutomationMenuItem item = menu.getMenuItem(getLocal("menu.file"), getLocal("menu.exit"));
         
@@ -129,7 +131,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findFirst(any(), any())).thenReturn(null);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem(getLocal("menu.file"), "");
     }
@@ -141,7 +143,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem("MENU-01", "");
     }
@@ -153,7 +155,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findFirst(any(), any())).thenReturn(new AutomationElement(elem));
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem("MENU-01");
     }
@@ -165,7 +167,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findFirst(any(), any())).thenReturn(null);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem(getLocal("menu.file"));
     }
@@ -187,7 +189,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(menuItemElement1.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         AutomationMenuItem item = menu.getMenuItem(Pattern.compile(Pattern.quote(getLocal("menu.file"))), 
         		Pattern.compile(Pattern.quote(getLocal("menu.exit"))));
@@ -203,7 +205,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem(Pattern.compile("\\S+-\\d+"), null);
     }
@@ -215,7 +217,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem(Pattern.compile("\\S+-\\d+"), null);
     }
@@ -227,7 +229,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem(Pattern.compile("\\S+-\\d+"));
     }
@@ -239,7 +241,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationMainMenu menu =
-                new AutomationMainMenu(parent, element);
+                new AutomationMainMenu(new ElementBuilder(element).parent(parent));
 
         menu.getMenuItem(Pattern.compile("\\S+-\\d+"));
     }
@@ -253,7 +255,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		
 		AutomationMenuItem item = menu.getMenuItem(0);
         assertEquals(menuItemElement,item.getElement());
@@ -266,7 +268,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         List<AutomationElement> list = new ArrayList<>();
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
-		AutomationMenu menu = new AutomationMenu(element);
+		AutomationMenu menu = new AutomationMenu(new ElementBuilder(element));
 		menu.getMenuItem(99);
     }
 
@@ -276,7 +278,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(menuItemElement);
 
-        AutomationMainMenu menu = Mockito.spy(new AutomationMainMenu(parent, element));
+        AutomationMainMenu menu = Mockito.spy(new AutomationMainMenu(new ElementBuilder(element).parent(parent)));
 
         AutomationMenuItem item = menu.getMenuItemByAutomationId("myID");
         assertEquals(menuItemElement,item.getElement());
@@ -287,7 +289,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
     @Test(expected=ElementNotFoundException.class)
     public void test_GetMenuItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
-        AutomationMainMenu menu = Mockito.spy(new AutomationMainMenu(parent, element));
+        AutomationMainMenu menu = Mockito.spy(new AutomationMainMenu(new ElementBuilder(element).parent(parent)));
 
         menu.getMenuItemByAutomationId("unknownID");
     }

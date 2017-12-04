@@ -75,7 +75,7 @@ public enum OrientationType {
      * @return The value (as an OrientationType)
      */
     public static OrientationType fromInt(int i) {
-        OrientationType type = intToTypeMap.get(Integer.valueOf(i));
+        OrientationType type = intToTypeMap.get(i);
         if (type == null)
             return OrientationType.None;
         return type;

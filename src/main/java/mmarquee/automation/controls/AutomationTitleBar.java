@@ -19,47 +19,29 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
+ * Wrapper for the TitleBar element.
+ *
  * @author Mark Humphreys
  * Date 04/03/2016.
  *
- * Wrapper for the TitleBar element.
  */
-public class AutomationTitleBar extends AutomationContainer {
+public final class AutomationTitleBar extends AutomationContainer {
     /**
      * Constructor for the AutomationTitleBar.
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find pattern
+     * @param builder The builder
      */
-    public AutomationTitleBar(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
-
-    /**
-     * Constructor for the AutomationTitleBar.
-     * @param element The underlying automation element
-     * @param container The underlying item container pattern
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public AutomationTitleBar(final AutomationElement element,
-                              final ItemContainer container)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container);
+    public AutomationTitleBar(final ElementBuilder builder){
+        super(builder);
     }
 
     /**
      * Gets the menu bar for this title-bar.
      * @return The Main menu
-     * @throws ElementNotFoundException When the element is not found
+     * @throws AutomationException Automation library error
      */
     public AutomationMainMenu getMenuBar() throws AutomationException {
         PointerByReference condition = this.automation.createControlTypeCondition(ControlType.MenuBar);
@@ -67,6 +49,6 @@ public class AutomationTitleBar extends AutomationContainer {
         AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
                 condition);
 
-        return new AutomationMainMenu(this.element, element);
+        return new AutomationMainMenu(new ElementBuilder(element).parent(this.element));
     }
 }

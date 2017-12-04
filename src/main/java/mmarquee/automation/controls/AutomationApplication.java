@@ -27,15 +27,13 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.utils.Utils;
 
 /**
+ * Wrapper around the Application element.
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Wrapper around the Application element.
  */
 public class AutomationApplication extends AutomationBase {
 
@@ -57,7 +55,8 @@ public class AutomationApplication extends AutomationBase {
     /**
      * A very, very long timeout.
      */
-    private static final WinDef.DWORD INFINITE_TIMEOUT = new WinDef.DWORD(0xFFFFFFFF);
+    private static final WinDef.DWORD INFINITE_TIMEOUT =
+            new WinDef.DWORD(0xFFFFFFFF);
 
     /**
      * A default, normal timeout.
@@ -107,10 +106,9 @@ public class AutomationApplication extends AutomationBase {
      * @param title The title to look for.
      * @return An AutomationWindow.
      * @throws AutomationException Cannot find element.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getWindow(final String title)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
 
         AutomationElement foundElement = null;
 
@@ -125,7 +123,7 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            return new AutomationWindow(foundElement);
+            return new AutomationWindow(new ElementBuilder(foundElement));
         } else {
             throw new ElementNotFoundException(title);
         }
@@ -136,10 +134,9 @@ public class AutomationApplication extends AutomationBase {
      * @param titlePattern A pattern matching the title to look for.
      * @return An AutomationWindow.
      * @throws AutomationException Cannot find element.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getWindow(final Pattern titlePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
 
         AutomationElement foundElement = null;
 
@@ -154,119 +151,56 @@ public class AutomationApplication extends AutomationBase {
         }
 
         if (foundElement != null) {
-            return new AutomationWindow(foundElement);
+            return new AutomationWindow(new ElementBuilder(foundElement));
         } else {
             throw new ElementNotFoundException("matching " + titlePattern);
         }
     }
 
     /**
-     * Constructor for the AutomationApplication.
+     * Gets the window, using the search criteria.
      *
-     * @param element The underlying automation element.
-     * @param inHandle The handle of this application.
-     * @param attached if we attach or launch the application.
-     * @throws AutomationException Automation library error.
+     * @param search Matcher for the control
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
-    public AutomationApplication(final AutomationElement element,
-                                 final WinNT.HANDLE inHandle,
-                                 final boolean attached)
-            throws AutomationException  {
-        super(element);
-        this.handle = inHandle;
-        this.isAttached = attached;
+    public AutomationWindow getWindow(final Search search) throws AutomationException {
+        if (search.getHasNamePattern()) {
+            return getWindow(search.getNamePattern());
+        } else if (search.getHasName()) {
+            return getWindow(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
      * Constructor for the AutomationApplication.
      *
-     * @param element The underlying automation element.
-     * @param inHandle The handle of this application.
-     * @param attached if we attach or launch the application.
-     * @param automation Automation instance.
-     * @throws AutomationException Automation library error.
+     * @param builder The builder
      */
-    public AutomationApplication(final AutomationElement element,
-                                 final WinNT.HANDLE inHandle,
-                                 final boolean attached,
-                                 final UIAutomation automation)
-            throws AutomationException  {
-        super(element, automation);
-        this.handle = inHandle;
-        this.isAttached = attached;
-    }
+    public AutomationApplication(final ElementBuilder builder) {
+        super(builder);
+        this.isAttached = builder.getAttached();
+        this.user32 = builder.getUser32();
 
-    /**
-     * Constructor for the AutomationApplication.
-     *
-     * @param element The underlying automation element.
-     * @param inHandle The handle of this application.
-     * @param attached if we attach or launch the application.
-     * @param inUser32 The User32 instance.
-     * @throws AutomationException Error in the automation library.
-     */
-    public AutomationApplication(final AutomationElement element,
-                                 final WinNT.HANDLE inHandle,
-                                 final boolean attached,
-                                 final User32 inUser32)
-            throws AutomationException {
-        super(element);
-        this.handle = inHandle;
-        this.isAttached = attached;
-        this.user32 = inUser32;
-    }
+        Process process = builder.getProcess();
 
-    /**
-     * Constructor for the AutomationApplication.
-     *
-     * @param element The underlying automation element.
-     * @param inHandle The handle of this application.
-     * @param attached if we attach or launch the application.
-     * @param inUser32 The User32 instance.
-     * @param instance Automation instance.
-     * @throws AutomationException Automation library error
-     */
-    public AutomationApplication(final AutomationElement element,
-                                 final WinNT.HANDLE inHandle,
-                                 final boolean attached,
-                                 final User32 inUser32,
-                                 final UIAutomation instance)
-            throws AutomationException {
-        super(element, instance);
-        this.handle = inHandle;
-        this.isAttached = attached;
-        this.user32 = inUser32;
-    }
+        if (builder.getHasHandle()) {
+            this.handle = builder.getHandle();
+        } else {
 
-    /**
-     * Constructor for the AutomationApplication.
-     *
-     * Detection of already running application is taken from:
-     *   http://www.golesny.de/p/code/javagetpid.
-     * @param element The underlying automation element
-     * @param process The process for this application.
-     * @param attached if we attach or launch the application?
-     * @throws AutomationException Automation library error
-     * */
-    public AutomationApplication(final AutomationElement element,
-                                 final Process process,
-                                 final boolean attached)
-            throws AutomationException {
-        super(element);
+            String name = process.getClass().getName();
 
-        this.isAttached = attached;
-
-        String name = process.getClass().getName();
-
-        if (name.equals("java.lang.Wind32Process")
-                || name.equals("java.lang.ProcessImpl")) {
-            try {
-                Field f = process.getClass().getDeclaredField("handle");
-                f.setAccessible(true);
-                long handl = f.getLong(process);
-                this.handle.setPointer(Pointer.createConstant(handl));
-            } catch (Throwable e) {
-              // Handle the error nicely
+            if (name.equals("java.lang.Wind32Process")
+                    || name.equals("java.lang.ProcessImpl")) {
+                try {
+                    Field f = process.getClass().getDeclaredField("handle");
+                    f.setAccessible(true);
+                    this.handle.setPointer(Pointer.createConstant(f.getLong(process)));
+                } catch (Throwable e) {
+                    // Handle the error nicely
+                }
             }
         }
     }
@@ -332,11 +266,10 @@ public class AutomationApplication extends AutomationBase {
             user32 = User32.INSTANCE;
         }
 
-        final WinDef.HWND hwnd = Utils.findWindow(null, titlePattern);
+        final WinDef.HWND handle = Utils.findWindow(null, titlePattern);
 
-        if (hwnd != null) {
-            Utils.quitProcess(hwnd);
+        if (handle != null) {
+            Utils.quitProcess(handle);
         }
     }
-
 }

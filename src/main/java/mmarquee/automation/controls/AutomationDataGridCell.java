@@ -15,9 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.SelectionItem;
@@ -25,12 +23,12 @@ import mmarquee.automation.pattern.Value;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
+ * Wrapper around the 'virtual' cell element in the automated Delphi string grid.
+ *
  * @author Mark Humphreys
  * Date 04/02/2016.
- *
- * Wrapper around the 'virtual' cell element in the automated Delphi string grid
  */
-public class AutomationDataGridCell extends AutomationBase implements Valueable {
+public final class AutomationDataGridCell extends AutomationBase implements Valueable {
 
     /**
      * The value pattern.
@@ -53,43 +51,14 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
     private Invoke invokePattern;
 
     /**
-     * Construct the AutomationDataGridCell
-     * @param element The element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public AutomationDataGridCell(final AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
-
-    /**
      * Construct the AutomationDataGridCell.
-     * @param element The element.
-     * @param value The Value pattern.
-     * @param instance Automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
+     * @param builder The builder
      */
-    AutomationDataGridCell(final AutomationElement element, final Value value, final UIAutomation instance) throws PatternNotFoundException, AutomationException {
-        super(element, instance);
-        this.valuePattern = value;
-    }
-
-    /**
-     * Construct the AutomationDataGridCell.
-     *
-     * @param element The element.
-     * @param value The Value pattern.
-     * @param grid The GridItem pattern.
-     * @param selectionItem The SelectionItem pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    AutomationDataGridCell(AutomationElement element, Value value, GridItem grid, SelectionItem selectionItem) throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.valuePattern = value;
-        this.gridItemPattern = grid;
-        this.selectionItemPattern = selectionItem;
+    public AutomationDataGridCell(final ElementBuilder builder) {
+        super(builder);
+        this.valuePattern = builder.getValue();
+        this.gridItemPattern = builder.getGridItem();
+        this.selectionItemPattern = builder.getSelectItem();
     }
 
     /**
@@ -112,16 +81,6 @@ public class AutomationDataGridCell extends AutomationBase implements Valueable 
         } catch (NullPointerException ex) {
             return "<Empty>";
         }
-    }
-
-    /**
-     * Calls the invoke on the cell.
-     *
-     * @throws AutomationException Something went wrong in automation.
-     * @throws PatternNotFoundException Didn't find the pattern.
-     */
-    public void invoke() throws AutomationException, PatternNotFoundException {
-        super.invoke();
     }
 
     /**

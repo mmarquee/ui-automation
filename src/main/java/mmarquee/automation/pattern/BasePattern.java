@@ -21,16 +21,16 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.BaseAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 
 /**
+ * Base for the pattern wrappers.
+ *
  * @author Mark Humphreys
  * Date 29/02/2016.
- *
- * Base for the pattern wrappers
  */
 public abstract class BasePattern extends BaseAutomation implements Pattern {
 
@@ -40,19 +40,19 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
     protected Guid.IID IID;
 
     /**
-     * The underlying automation pattern
+     * The underlying automation pattern.
      */
     protected Pointer pattern;
 
     /**
-     * Constructs a Pattern
+     * Constructs a Pattern.
      */
     public BasePattern () {
         this.pattern = null;
     }
 
     /**
-     * Sets the pattern
+     * Sets the pattern.
      * @param pattern The pattern to set
      */
     public void setPattern(Pointer pattern) {
@@ -60,7 +60,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
     }
 
     /**
-     * Is this pattern available?
+     * Is this pattern available.
      * @return True if available.
      */
     public boolean isAvailable () {
@@ -68,30 +68,33 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
     }
 
     /**
-     * Gets the raw pointer to the pattern
+     * Gets the raw pointer to the pattern.
      * @param pbr The raw pointer
      * @return Result of the call from the COM library
      */
-    public WinNT.HRESULT getRawPatternPointer(PointerByReference pbr) {
+    public WinNT.HRESULT getRawPatternPointer(
+            final PointerByReference pbr) {
         Unknown uElement = makeUnknown(this.pattern);
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }
 
     /**
-     * Converts the unknown value to a IUIAutomationElement3
+     * Converts the unknown value to a IUIAutomationElement.
      * @param pUnknownA The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationElement3 convertPointerToElementInterface(PointerByReference pUnknownA) {
-        return IUIAutomationElement3Converter.PointerToInterface(pUnknownA);
+    public IUIAutomationElement convertPointerToElementInterface(
+            final PointerByReference pUnknownA) {
+        return IUIAutomationElementConverter.PointerToInterface(pUnknownA);
     }
 
     /**
-     * Converts the unknown value to a IUIAutomationElementArray
+     * Converts the unknown value to a IUIAutomationElementArray.
      * @param pUnknownA The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationElementArray convertPointerToElementArrayInterface(PointerByReference pUnknownA) {
+    public IUIAutomationElementArray convertPointerToElementArrayInterface(
+            final PointerByReference pUnknownA) {
         return IUIAutomationElementArrayConverter.PointerToInterface(pUnknownA);
     }
 }

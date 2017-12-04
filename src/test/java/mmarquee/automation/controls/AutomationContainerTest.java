@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,7 +32,6 @@ import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -54,7 +54,7 @@ public class AutomationContainerTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        wndw = new AutomationWindow(element, window, container);
+        wndw = new AutomationWindow(new ElementBuilder(element).window(window).itemContainer(container));
         spyWndw = Mockito.spy(wndw);
         
         list = new ArrayList<>();
@@ -78,7 +78,7 @@ public class AutomationContainerTest {
     AutomationWindow spyWndw;
     
     @Mock
-    IUIAutomationElement3 elem;
+    IUIAutomationElement elem;
     
     List<AutomationElement> list;
     AutomationElement targetElement;
@@ -87,7 +87,7 @@ public class AutomationContainerTest {
     public void test_getEditBox_By_Index_Calls_findFirst_From_Element() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationEditBox edit = wndw.getEditBox(0);
+        AutomationEditBox edit = wndw.getEditBox(Search.getBuilder(0).build());
         assertEquals(targetElement,edit.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -97,7 +97,7 @@ public class AutomationContainerTest {
     public void test_getEditBox_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationEditBox edit = wndw.getEditBox(1);
+        AutomationEditBox edit = wndw.getEditBox(Search.getBuilder(1).build());
         assertEquals(targetElement,edit.getElement());
     }
 
@@ -105,7 +105,7 @@ public class AutomationContainerTest {
     public void test_getAppBar_By_Index_Calls_findFirst_From_Element() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationAppBar appBar = wndw.getAppBar(0);
+        AutomationAppBar appBar = wndw.getAppBar(Search.getBuilder(0).build());
         assertEquals(targetElement,appBar.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -115,7 +115,7 @@ public class AutomationContainerTest {
     public void test_GetAppBar_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationAppBar bar = spyWndw.getAppBar("myName");
+        AutomationAppBar bar = spyWndw.getAppBar(Search.getBuilder("myName").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -127,7 +127,7 @@ public class AutomationContainerTest {
     public void test_GetAppBar_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getAppBar("unknownName");
+        wndw.getAppBar(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -135,7 +135,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationAppBar bar = spyWndw.getAppBar(Pattern.compile("myName"));
+        AutomationAppBar bar = spyWndw.getAppBar(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.AppBar);
@@ -147,14 +147,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getAppBar(Pattern.compile("NotmyName"));
+        wndw.getAppBar(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
     public void test_GetAppBar_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationAppBar bar = spyWndw.getAppBarByAutomationId("myID");
+        AutomationAppBar bar = spyWndw.getAppBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -166,15 +166,14 @@ public class AutomationContainerTest {
     public void test_GetAppBar_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getAppBarByAutomationId("unknownID");
+        wndw.getAppBar(Search.getBuilder().automationId("unknownID").build());
     }
 
-   
     @Test
     public void test_getSlider_By_Index_Calls_findFirst_From_Element() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationSlider slider = wndw.getSlider(0);
+        AutomationSlider slider = wndw.getSlider(Search.getBuilder(0).build());
         assertEquals(targetElement,slider.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -184,7 +183,7 @@ public class AutomationContainerTest {
     public void test_getButton_By_Index_Calls_findFirst_From_Element() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationButton btn = wndw.getButton(0);
+        AutomationButton btn = wndw.getButton(Search.getBuilder(0).build());
         assertEquals(targetElement,btn.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -194,14 +193,14 @@ public class AutomationContainerTest {
     public void Button() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getComboBox(99);
+        wndw.getComboBox(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetButton_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationButton button = spyWndw.getButton("name");
+        AutomationButton button = spyWndw.getButton(Search.getBuilder("name").build());
         assertEquals(targetElement,button.getElement());
 
         verify(spyWndw).createNamePropertyCondition("name");
@@ -213,7 +212,7 @@ public class AutomationContainerTest {
     public void test_GetButton_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getButton("unknownName");
+        wndw.getButton(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -221,7 +220,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationButton button = spyWndw.getButton(Pattern.compile("myN.*"));
+        AutomationButton button = spyWndw.getButton(Search.getBuilder(Pattern.compile("myN.*")).build());
         assertEquals(targetElement,button.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Button);
@@ -233,14 +232,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getButton(Pattern.compile("other"));
+        wndw.getButton(Search.getBuilder(Pattern.compile("other")).build());
     }
 
     @Test
     public void test_GetButton_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationButton button = spyWndw.getButtonByAutomationId("myID");
+        AutomationButton button = spyWndw.getButton(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,button.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -252,14 +251,14 @@ public class AutomationContainerTest {
     public void test_GetButton_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getButtonByAutomationId("unknownID");
+        wndw.getButton(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
     public void testGetTab_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationTab tab = wndw.getTab(0);
+        AutomationTab tab = wndw.getTab(Search.getBuilder(0).build());
 
         assertTrue(tab != null);
         assertEquals(targetElement,tab.getElement());
@@ -271,14 +270,14 @@ public class AutomationContainerTest {
     public void testGetTab_By_Index_Errors_When_Too_Big() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getTab(99);
+        wndw.getTab(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetTab_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationTab tab = spyWndw.getTab("myName");
+        AutomationTab tab = spyWndw.getTab(Search.getBuilder("myName").build());
         assertEquals(targetElement,tab.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -290,7 +289,7 @@ public class AutomationContainerTest {
     public void test_GetTab_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getTab("unknownName");
+        wndw.getTab(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -298,7 +297,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationTab tab = spyWndw.getTab(Pattern.compile("myName"));
+        AutomationTab tab = spyWndw.getTab(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,tab.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Tab);
@@ -310,14 +309,14 @@ public class AutomationContainerTest {
     	when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
     	BaseAutomationTest.setElementCurrentName(elem, "myName");
         
-        wndw.getTab(Pattern.compile("NNN"));
+        wndw.getTab(Search.getBuilder(Pattern.compile("NNN")).build());
     }
     
     @Test
     public void test_GetTab_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationTab tab = spyWndw.getTabByAutomationId("myID");
+        AutomationTab tab = spyWndw.getTab(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,tab.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -329,14 +328,14 @@ public class AutomationContainerTest {
     public void test_GetTab_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getTabByAutomationId("unknownID");
+        wndw.getTab(Search.getBuilder().automationId("unknownID").build());
     }
     
     @Test
     public void testGetEditBox_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationEditBox editBox = wndw.getEditBox(0);
+        AutomationEditBox editBox = wndw.getEditBox(Search.getBuilder(0).build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -346,7 +345,7 @@ public class AutomationContainerTest {
     public void test_GetEditBox_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationEditBox editBox = spyWndw.getEditBox("myName");
+        AutomationEditBox editBox = spyWndw.getEditBox(Search.getBuilder("myName").build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -358,7 +357,7 @@ public class AutomationContainerTest {
     public void test_GetEditBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getEditBox("unknownName");
+        wndw.getEditBox(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -366,7 +365,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
         
-        AutomationEditBox editBox = spyWndw.getEditBox(Pattern.compile("m.*e"));
+        AutomationEditBox editBox = spyWndw.getEditBox(Search.getBuilder(Pattern.compile("m.*e")).build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Edit);
@@ -378,14 +377,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getEditBox(Pattern.compile("\\s+"));
+        wndw.getEditBox(Search.getBuilder(Pattern.compile("\\s+")).build());
     }
 
     @Test
     public void test_GetEditBox_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationEditBox editBox = spyWndw.getEditBoxByAutomationId("myID");
+        AutomationEditBox editBox = spyWndw.getEditBox(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -397,13 +396,13 @@ public class AutomationContainerTest {
     public void test_GetEditBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getEditBoxByAutomationId("unknownID");
+        wndw.getEditBox(Search.getBuilder().automationId("unknownID").build());
     }
     @Test
     public void testGetToolBar_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationToolBar editBox = wndw.getToolBar(0);
+        AutomationToolBar editBox = wndw.getToolBar(Search.getBuilder(0).build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -413,7 +412,7 @@ public class AutomationContainerTest {
     public void test_GetToolBar_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationToolBar toolbar = spyWndw.getToolBar("myName");
+        AutomationToolBar toolbar = spyWndw.getToolBar(Search.getBuilder("myName").build());
         assertEquals(targetElement,toolbar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -425,7 +424,7 @@ public class AutomationContainerTest {
     public void test_GetToolBar_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getToolBar("unknownName");
+        wndw.getToolBar(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -433,7 +432,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationToolBar toolbar = spyWndw.getToolBar(Pattern.compile("myName"));
+        AutomationToolBar toolbar = spyWndw.getToolBar(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,toolbar.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.ToolBar);
@@ -445,14 +444,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getToolBar(Pattern.compile("IsNotMyName"));
+        wndw.getToolBar(Search.getBuilder(Pattern.compile("IsNotMyName")).build());
     }
 
     @Test
     public void test_GetToolBar_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationToolBar bar = spyWndw.getToolBarByAutomationId("myID");
+        AutomationToolBar bar = spyWndw.getToolBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -464,14 +463,14 @@ public class AutomationContainerTest {
     public void test_GetToolBar_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getToolBarByAutomationId("unknownID");
+        wndw.getToolBar(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
     public void test_GetComboBox_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationComboBox editBox = wndw.getComboBox(0);
+        AutomationComboBox editBox = wndw.getComboBox(Search.getBuilder(0).build());
         assertEquals(targetElement,editBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -481,14 +480,14 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_Index_Errors_When_Too_Big() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getComboBox(99);
+        wndw.getComboBox(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetComboBox_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationComboBox comboBox = spyWndw.getComboBox("name");
+        AutomationComboBox comboBox = spyWndw.getComboBox(Search.getBuilder("name").build());
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createNamePropertyCondition("name");
@@ -500,7 +499,7 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getComboBox("unknownName");
+        wndw.getComboBox(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -508,7 +507,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationComboBox comboBox = spyWndw.getComboBox(Pattern.compile("myN.*"));
+        AutomationComboBox comboBox = spyWndw.getComboBox(Search.getBuilder(Pattern.compile("myN.*")).build());
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.ComboBox);
@@ -520,14 +519,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getComboBox(Pattern.compile("other"));
+        wndw.getComboBox(Search.getBuilder(Pattern.compile("other")).build());
     }
 
     @Test
     public void test_GetComboBox_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationComboBox comboBox = spyWndw.getComboBoxByAutomationId("myID");
+        AutomationComboBox comboBox = spyWndw.getComboBox(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -539,14 +538,14 @@ public class AutomationContainerTest {
     public void test_GetComboBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getComboBoxByAutomationId("unknownID");
+        wndw.getComboBox(Search.getBuilder().automationId("unknownID").build());
     }
     
     @Test
     public void testGetCheckBox_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationCheckBox checkBox = wndw.getCheckBox(0);
+        AutomationCheckBox checkBox = wndw.getCheckBox(Search.getBuilder(0).build());
         assertEquals(targetElement,checkBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(PointerByReference.class));
@@ -556,7 +555,7 @@ public class AutomationContainerTest {
     public void test_GetCheckBox_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCheckBox checkBox = spyWndw.getCheckBox("name");
+        AutomationCheckBox checkBox = spyWndw.getCheckBox(Search.getBuilder("name").build());
         assertEquals(targetElement,checkBox.getElement());
 
         verify(spyWndw).createNamePropertyCondition("name");
@@ -568,7 +567,7 @@ public class AutomationContainerTest {
     public void test_GetCheckBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCheckBox("unknownName");
+        wndw.getCheckBox(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -576,7 +575,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationCheckBox checkBox = spyWndw.getCheckBox(Pattern.compile("myN.*"));
+        AutomationCheckBox checkBox = spyWndw.getCheckBox(Search.getBuilder(Pattern.compile("myN.*")).build());
         assertEquals(targetElement,checkBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.CheckBox);
@@ -588,14 +587,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getCheckBox(Pattern.compile("other"));
+        wndw.getCheckBox(Search.getBuilder(Pattern.compile("other")).build());
     }
     
     @Test
     public void test_GetCheckBox_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCheckBox checkBox = spyWndw.getCheckBoxByAutomationId("myID");
+        AutomationCheckBox checkBox = spyWndw.getCheckBox(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,checkBox.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -607,7 +606,7 @@ public class AutomationContainerTest {
     public void test_GetCheckBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCheckBoxByAutomationId("unknownID");
+        wndw.getCheckBox(Search.getBuilder().automationId("unknown").build());
     }
     
 
@@ -615,14 +614,14 @@ public class AutomationContainerTest {
     public void testGetRadioButton_By_Index_Fails_When_Index_No_Present() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getRadioButton(99);
+        wndw.getRadioButton(Search.getBuilder(99).build());
     }
 
     @Test
     public void testGetRadioButton_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationRadioButton radio = wndw.getRadioButton(0);
+        AutomationRadioButton radio = wndw.getRadioButton(Search.getBuilder(0).build());
         assertEquals(targetElement,radio.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -632,7 +631,7 @@ public class AutomationContainerTest {
     public void test_GetRadioButton_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationRadioButton radio = spyWndw.getRadioButton("myName");
+        AutomationRadioButton radio = spyWndw.getRadioButton(Search.getBuilder("myName").build());
         assertEquals(targetElement,radio.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -644,7 +643,7 @@ public class AutomationContainerTest {
     public void test_GetRadioButton_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getRadioButton("unknownName");
+        wndw.getRadioButton(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -652,7 +651,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationRadioButton radio = spyWndw.getRadioButton(Pattern.compile("myName"));
+        AutomationRadioButton radio = spyWndw.getRadioButton(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,radio.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.RadioButton);
@@ -664,14 +663,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getRadioButton(Pattern.compile("notMyName"));
+        wndw.getRadioButton(Search.getBuilder(Pattern.compile("notMyName")).build());
     }
     
     @Test
     public void test_GetRadioButton_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationRadioButton radio = spyWndw.getRadioButtonByAutomationId("myID");
+        AutomationRadioButton radio = spyWndw.getRadioButton(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,radio.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -683,14 +682,14 @@ public class AutomationContainerTest {
     public void test_GetRadioButton_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getRadioButtonByAutomationId("unknownID");
+        wndw.getRadioButton(Search.getBuilder("unknownID").build());
     }
 
     @Test
     public void testGetPanel_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationPanel panel = wndw.getPanel(0);
+        AutomationPanel panel = wndw.getPanel(Search.getBuilder(0).build());
         assertEquals(targetElement,panel.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -700,7 +699,7 @@ public class AutomationContainerTest {
     public void test_GetPanel_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPanel panel = spyWndw.getPanel("myName");
+        AutomationPanel panel = spyWndw.getPanel(Search.getBuilder("myName").build());
         assertEquals(targetElement,panel.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -712,7 +711,7 @@ public class AutomationContainerTest {
     public void test_GetPanel_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPanel("unknownName");
+        wndw.getPanel(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -720,7 +719,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationPanel panel = spyWndw.getPanel(Pattern.compile("myName"));
+        AutomationPanel panel = spyWndw.getPanel(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,panel.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Pane);
@@ -732,14 +731,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getPanel(Pattern.compile("IsNotmyName"));
+        wndw.getPanel(Search.getBuilder(Pattern.compile("IsNotmyName")).build());
     }
 
     @Test
     public void test_GetPanel_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPanel panel = spyWndw.getPanelByAutomationId("myID");
+        AutomationPanel panel = spyWndw.getPanel(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,panel.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -751,7 +750,7 @@ public class AutomationContainerTest {
     public void test_GetPanel_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPanelByAutomationId("unknownID");
+        wndw.getPanel(Search.getBuilder().automationId("unknownID").build());
     }
 
 
@@ -761,7 +760,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationPanel bar = spyWndw.getPanelByClassName(0,"BlaBla");
+        AutomationPanel bar = spyWndw.getPanel(Search.getBuilder(0).className("BlaBla").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Pane.getValue());
@@ -774,7 +773,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPanelByClassName(99,"BlaBla");
+        wndw.getPanel(Search.getBuilder(0).className("BlaBla").build());
     }
     
     @Test
@@ -784,7 +783,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPanel panel = spyWndw.getPanelByClassName("myName","BlaBla");
+        AutomationPanel panel = spyWndw.getPanel(Search.getBuilder("myName").className("BlaBla").build());
         assertEquals(targetElement,panel.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -800,7 +799,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPanelByClassName("unknownName","BlaBla");
+        wndw.getPanel(Search.getBuilder("unknownName").className("BlaBla").build());
     }
     
     @Test
@@ -810,7 +809,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationPanel panel = spyWndw.getPanelByClassName(Pattern.compile("myName"),"BlaBla");
+        AutomationPanel panel = spyWndw.getPanel(Search.getBuilder(Pattern.compile("myName")).className("BlaBla").build());
         assertEquals(targetElement,panel.getElement());
 
         verify(spyWndw).createClassNamePropertyCondition("BlaBla");
@@ -825,14 +824,14 @@ public class AutomationContainerTest {
 
     	when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getPanelByClassName(Pattern.compile("unkownName"),"BlaBla");
+        wndw.getPanel(Search.getBuilder(Pattern.compile("unknownName")).className("BlaBla").build());
     }
     
     @Test
     public void testGetDocument_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationDocument doc = wndw.getDocument(0);
+        AutomationDocument doc = wndw.getDocument(Search.getBuilder(0).build());
         assertEquals(targetElement,doc.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -842,7 +841,7 @@ public class AutomationContainerTest {
     public void test_GetDocument_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationDocument doc = spyWndw.getDocument("myName");
+        AutomationDocument doc = spyWndw.getDocument(Search.getBuilder("myName").build());
         assertEquals(targetElement,doc.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -854,7 +853,7 @@ public class AutomationContainerTest {
     public void test_GetDocument_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getDocument("unknownName");
+        wndw.getDocument(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -862,7 +861,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationDocument doc = spyWndw.getDocument(Pattern.compile("myName"));
+        AutomationDocument doc = spyWndw.getDocument(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,doc.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Document);
@@ -874,14 +873,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getDocument(Pattern.compile("NotmyName"));
+        wndw.getDocument((Search.getBuilder(Pattern.compile("NotmyName")).build()));
     }
     
     @Test
     public void test_GetDocument_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationDocument doc = spyWndw.getDocumentByAutomationId("myID");
+        AutomationDocument doc = spyWndw.getDocument((Search.getBuilder().automationId("myID").build()));
         assertEquals(targetElement,doc.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -893,15 +892,14 @@ public class AutomationContainerTest {
     public void test_GetDocument_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getDocumentByAutomationId("unknownID");
+        wndw.getDocument(Search.getBuilder().automationId("unknownID").build());
     }
-
     
     @Test
     public void testGetProgress_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationProgressBar progress = wndw.getProgressBar(0);
+        AutomationProgressBar progress = wndw.getProgressBar(Search.getBuilder(0).build());
         assertEquals(targetElement,progress.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -911,14 +909,14 @@ public class AutomationContainerTest {
     public void testGetProgress_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getProgressBar(99);
+        wndw.getProgressBar(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetProgresBar_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationProgressBar bar = spyWndw.getProgressBar("myName");
+        AutomationProgressBar bar = spyWndw.getProgressBar(Search.getBuilder("myName").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -930,7 +928,7 @@ public class AutomationContainerTest {
     public void test_GetProgressBar_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getProgressBar("unknownName");
+        wndw.getProgressBar(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -938,7 +936,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationProgressBar bar = spyWndw.getProgressBar(Pattern.compile("myName"));
+        AutomationProgressBar bar = spyWndw.getProgressBar(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.ProgressBar);
@@ -950,14 +948,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getProgressBar(Pattern.compile("notmyName"));
+        wndw.getProgressBar(Search.getBuilder(Pattern.compile("notmyName")).build());
     }
     
     @Test
     public void test_GetProgresBar_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationProgressBar bar = spyWndw.getProgressBarByAutomationId("myID");
+        AutomationProgressBar bar = spyWndw.getProgressBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -969,7 +967,7 @@ public class AutomationContainerTest {
     public void test_GetProgressBar_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getProgressBarByAutomationId("unknownID");
+        wndw.getProgressBar(Search.getBuilder().automationId("unknownID").build());
     }
 
 
@@ -977,7 +975,7 @@ public class AutomationContainerTest {
     public void testGetHyperlink_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationHyperlink link = wndw.getHyperlink(0);
+        AutomationHyperlink link = wndw.getHyperlink(Search.getBuilder(0).build());
         assertEquals(targetElement,link.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -987,14 +985,14 @@ public class AutomationContainerTest {
     public void testGetHyperlink_By_Index_Fails_When_Index_No_Present() throws Exception {
     	when(element.findAll(any(), any())).thenReturn(list);
     	
-    	wndw.getHyperlink(99);
+    	wndw.getHyperlink(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetHyperlink_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationHyperlink link = spyWndw.getHyperlink("myName");
+        AutomationHyperlink link = spyWndw.getHyperlink(Search.getBuilder("myName").build());
         assertEquals(targetElement,link.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1006,7 +1004,7 @@ public class AutomationContainerTest {
     public void test_GetHyperlink_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getHyperlink("unknownName");
+        wndw.getHyperlink(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1014,7 +1012,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationHyperlink link = spyWndw.getHyperlink(Pattern.compile("myName"));
+        AutomationHyperlink link = spyWndw.getHyperlink(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,link.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Hyperlink);
@@ -1026,14 +1024,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getHyperlink(Pattern.compile("NotmyName"));
+        wndw.getHyperlink(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
     public void test_GetHyperlink_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationHyperlink link = spyWndw.getHyperlinkByAutomationId("myID");
+        AutomationHyperlink link = spyWndw.getHyperlink(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,link.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1045,21 +1043,21 @@ public class AutomationContainerTest {
     public void test_GetHyperlink_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getHyperlinkByAutomationId("unknownID");
+        wndw.getHyperlink(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetToolbar_By_Index_Fails_When_Not_Found() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getHyperlink(99);
+        wndw.getHyperlink(Search.getBuilder(99).build());
     }
 
     @Test
     public void testGetToolbar_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationToolBar toolBar = wndw.getToolBar(0);
+        AutomationToolBar toolBar = wndw.getToolBar(Search.getBuilder(0).build());
         assertEquals(targetElement,toolBar.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1069,14 +1067,14 @@ public class AutomationContainerTest {
     public void testGetSlider_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getSlider(99);
+        wndw.getSlider(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetSlider_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSlider slider = spyWndw.getSlider("myName");
+        AutomationSlider slider = spyWndw.getSlider(Search.getBuilder("myName").build());
         assertEquals(targetElement,slider.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1088,7 +1086,7 @@ public class AutomationContainerTest {
     public void test_GetSlider_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSlider("unknownName");
+        wndw.getSlider(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1096,7 +1094,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationSlider slider = spyWndw.getSlider(Pattern.compile("myName"));
+        AutomationSlider slider = spyWndw.getSlider(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,slider.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Slider);
@@ -1108,14 +1106,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getSlider(Pattern.compile("NotmyName"));
+        wndw.getSlider(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
     public void test_GetSlider_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSlider slider = spyWndw.getSliderByAutomationId("myID");
+        AutomationSlider slider = spyWndw.getSlider(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,slider.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1127,7 +1125,7 @@ public class AutomationContainerTest {
     public void test_GetSlider_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSliderByAutomationId("unknownID");
+        wndw.getSlider(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
@@ -1135,7 +1133,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
         
-        AutomationCalendar calendar = wndw.getCalendar(0);
+        AutomationCalendar calendar = wndw.getCalendar(Search.getBuilder(0).build());
         assertEquals(targetElement,calendar.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1146,7 +1144,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
 
-        wndw.getCalendar(99);
+        wndw.getCalendar(Search.getBuilder(99).build());
     }
 
     @Test
@@ -1154,7 +1152,7 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
         
-        AutomationCalendar cal = spyWndw.getCalendar("myName");
+        AutomationCalendar cal = spyWndw.getCalendar(Search.getBuilder("myName").build());
         assertEquals(targetElement,cal.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1167,7 +1165,7 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
         
-        wndw.getCalendar("unknownName");
+        wndw.getCalendar(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1176,7 +1174,7 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationCalendar cal = spyWndw.getCalendar(Pattern.compile("myName"));
+        AutomationCalendar cal = spyWndw.getCalendar(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,cal.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Calendar);
@@ -1189,7 +1187,7 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
         
-        wndw.getCalendar(Pattern.compile("NotmyName"));
+        wndw.getCalendar(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
@@ -1197,7 +1195,7 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
 
-        AutomationCalendar cal = spyWndw.getCalendarByAutomationId("myID");
+        AutomationCalendar cal = spyWndw.getCalendar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,cal.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1210,14 +1208,14 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
         BaseAutomationTest.setElementPropertyValue(elem, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
 
-        wndw.getCalendarByAutomationId("unknownID");
+        wndw.getCalendar(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
     public void testGetDataGrid_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationDataGrid dataGrid = wndw.getDataGrid(0);
+        AutomationDataGrid dataGrid = wndw.getDataGrid(Search.getBuilder(0).build());
         assertEquals(targetElement,dataGrid.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1227,14 +1225,14 @@ public class AutomationContainerTest {
     public void testGetDataGrid_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getDataGrid(99);
+        wndw.getDataGrid(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetDataGrid_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationDataGrid edit = spyWndw.getDataGrid("myName");
+        AutomationDataGrid edit = spyWndw.getDataGrid(Search.getBuilder("myName").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1246,7 +1244,7 @@ public class AutomationContainerTest {
     public void test_GetDataGrid_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getDataGrid("unknownName");
+        wndw.getDataGrid(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1254,7 +1252,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationDataGrid edit = spyWndw.getDataGrid(Pattern.compile("myName"));
+        AutomationDataGrid edit = spyWndw.getDataGrid(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.DataGrid);
@@ -1266,14 +1264,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getDataGrid(Pattern.compile("NotmyName"));
+        wndw.getDataGrid(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
     public void test_GetDataGrid_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationDataGrid edit = spyWndw.getDataGridByAutomationId("myID");
+        AutomationDataGrid edit = spyWndw.getDataGrid(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1285,7 +1283,7 @@ public class AutomationContainerTest {
     public void test_GetDataGrid_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getDataGridByAutomationId("unknownID");
+        wndw.getDataGrid(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
@@ -1293,7 +1291,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
         BaseAutomationTest.setElementClassName(elem, "TXYZ");
 
-        AutomationDataGrid dataGrid = wndw.getDataGrid(0, "TXYZ");
+        AutomationDataGrid dataGrid = wndw.getDataGrid(Search.getBuilder(0).className("TXYZ").build());
         assertEquals(targetElement,dataGrid.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1304,7 +1302,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenThrow(ElementNotFoundException.class);
         BaseAutomationTest.setElementClassName(elem, "TABC");
 
-        wndw.getDataGrid(0, "TXYZ");
+        wndw.getDataGrid(Search.getBuilder(0).className("TXYZ").build());
     }
     
     @Test(expected=ElementNotFoundException.class)
@@ -1312,7 +1310,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
         BaseAutomationTest.setElementClassName(elem, "TXYZ");
 
-        wndw.getDataGrid(99, "TXYZ");
+        wndw.getDataGrid(Search.getBuilder(99).className("TXYZ").build());
     }
 
     @Test
@@ -1320,7 +1318,7 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
         BaseAutomationTest.setElementClassName(elem, "TXYZ");
 
-        AutomationDataGrid edit = spyWndw.getDataGrid("myName", "TXYZ");
+        AutomationDataGrid edit = spyWndw.getDataGrid(Search.getBuilder("myName").className("TXYZ").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1333,14 +1331,14 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
         BaseAutomationTest.setElementClassName(elem, "TABC");
 
-        spyWndw.getDataGrid("myName", "TXYZ");
+        spyWndw.getDataGrid(Search.getBuilder("myName").className("TXYZ").build());
     }
 
     @Test(expected=ElementNotFoundException.class)
     public void test_GetDataGrid_By_Name_and_ControlName_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getDataGrid("unknownName", "TXYZ");
+        wndw.getDataGrid(Search.getBuilder("notMyName").className("TXYZ").build());
     }
     
     @Test
@@ -1349,7 +1347,7 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementCurrentName(elem, "myName");
         BaseAutomationTest.setElementClassName(elem, "TXYZ");
 
-        AutomationDataGrid edit = spyWndw.getDataGrid(Pattern.compile("myName"), "TXYZ");
+        AutomationDataGrid edit = spyWndw.getDataGrid(Search.getBuilder(Pattern.compile("myName")).className("TXYZ").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.DataGrid);
@@ -1362,7 +1360,7 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementCurrentName(elem, "myName");
         BaseAutomationTest.setElementClassName(elem, "TABC");
 
-        spyWndw.getDataGrid(Pattern.compile("myName"), "TXYZ");
+        spyWndw.getDataGrid(Search.getBuilder(Pattern.compile("myName")).className("TXYZ").build());
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -1371,22 +1369,21 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementCurrentName(elem, "myName");
         BaseAutomationTest.setElementClassName(elem, "TXYZ");
 
-        wndw.getDataGrid(Pattern.compile("NotmyName"), "TXYZ");
+        wndw.getDataGrid(Search.getBuilder(Pattern.compile("NotMyName")).className("TXYZ").build());
     }
-    
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testTreeView_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getTreeView(99);
+        wndw.getTreeView(Search.getBuilder(99).build());
     }
 
     @Test
     public void testTreeView_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationTreeView treeView = wndw.getTreeView(0);
+        AutomationTreeView treeView = wndw.getTreeView(Search.getBuilder(0).build());
         assertEquals(targetElement,treeView.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1397,7 +1394,7 @@ public class AutomationContainerTest {
     public void test_GetTreeView_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationTreeView treeView = spyWndw.getTreeView("myName");
+        AutomationTreeView treeView = spyWndw.getTreeView(Search.getBuilder("myName").build());
         assertEquals(targetElement,treeView.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1409,7 +1406,7 @@ public class AutomationContainerTest {
     public void test_GetTreeView_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getTreeView("unknownName");
+        wndw.getTreeView(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1417,7 +1414,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationTreeView treeView = spyWndw.getTreeView(Pattern.compile("myName"));
+        AutomationTreeView treeView = spyWndw.getTreeView(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,treeView.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Tree);
@@ -1429,14 +1426,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getTreeView(Pattern.compile("NotmyName"));
+        wndw.getTreeView(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
     public void test_GetTreeView_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationTreeView edit = spyWndw.getTreeViewByAutomationId("myID");
+        AutomationTreeView edit = spyWndw.getTreeView(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1448,7 +1445,7 @@ public class AutomationContainerTest {
     public void test_GetTreeView_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getTreeViewByAutomationId("unknownID");
+        wndw.getTreeView(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
@@ -1457,7 +1454,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(0);
+        AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(Search.getBuilder(0).build());
         assertEquals(targetElement,passwordEditBox.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1469,7 +1466,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getPasswordEditBox(99);
+        wndw.getPasswordEditBox(Search.getBuilder(99).build());
     }
 
     @Test
@@ -1479,7 +1476,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPasswordEditBox box = spyWndw.getPasswordEditBox("myName");
+        AutomationPasswordEditBox box = spyWndw.getPasswordEditBox(Search.getBuilder("myName").build());
         assertEquals(targetElement,box.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1494,7 +1491,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPasswordEditBox("unknownName");
+        wndw.getPasswordEditBox(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1504,7 +1501,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationPasswordEditBox box = spyWndw.getPasswordEditBox(Pattern.compile("(my)+Name"));
+        AutomationPasswordEditBox box = spyWndw.getPasswordEditBox(Search.getBuilder(Pattern.compile("(my)+Name")).build());
         assertEquals(targetElement,box.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Edit);
@@ -1518,7 +1515,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getPasswordEditBox(Pattern.compile("otherName"));
+        wndw.getPasswordEditBox(Search.getBuilder(Pattern.compile("otherName")).build());
     }
 
     @Test
@@ -1527,7 +1524,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPasswordEditBox edit = spyWndw.getPasswordEditBoxByAutomationId("myID");
+        AutomationPasswordEditBox edit = spyWndw.getPasswordEditBox(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1541,7 +1538,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPasswordEditBoxByAutomationId("unknownID");
+        wndw.getPasswordEditBox(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
@@ -1550,7 +1547,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(0);
+        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Search.getBuilder(0).build());
         assertEquals(targetElement,maskedEdit.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1562,7 +1559,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getMaskedEdit(99);
+        wndw.getMaskedEdit(Search.getBuilder(99).build());
     }
 
     @Test
@@ -1572,7 +1569,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit("SMITH-01");
+        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Search.getBuilder("SMITH-01").build());
         assertEquals(targetElement,maskedEdit.element);
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -1584,7 +1581,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(any(), any())).thenReturn(null);
 
-        wndw.getMaskedEdit("SMITH-01");
+        wndw.getMaskedEdit(Search.getBuilder("SMITH-01").build());
     }
 
     @Test
@@ -1594,7 +1591,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Pattern.compile("SMITH-01"));
+        AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Search.getBuilder(Pattern.compile("SMITH-01")).build());
         assertEquals(targetElement,maskedEdit.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1606,7 +1603,7 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementCurrentName(elem, "myName");
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getMaskedEdit(Pattern.compile("SMITH-01"));
+        wndw.getMaskedEdit(Search.getBuilder(Pattern.compile("SMITH-01")).build());
     }
 
     @Test
@@ -1615,7 +1612,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationMaskedEdit edit = spyWndw.getMaskedEditByAutomationId("myID");
+        AutomationMaskedEdit edit = spyWndw.getMaskedEdit(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1629,9 +1626,8 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getMaskedEditByAutomationId("unknownID");
+        wndw.getMaskedEdit(Search.getBuilder().automationId("unknownID").build());
     }
-
 
     @Test
     public void test_PasswordBox_By_Index() throws Exception {
@@ -1639,7 +1635,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(0);
+        AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(Search.getBuilder(0).build());
         assertEquals(targetElement,passwordEditBox.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1651,7 +1647,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getPasswordEditBox(99);
+        wndw.getPasswordEditBox(Search.getBuilder(99).build());
     }
 
     @Test
@@ -1663,7 +1659,7 @@ public class AutomationContainerTest {
 
         when(el.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(el, window, container);
+        AutomationWindow wndw = new AutomationWindow(new ElementBuilder(el).window(window).itemContainer(container));
         AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
         assertEquals(targetElement,ribbonBar.element);
 
@@ -1680,7 +1676,7 @@ public class AutomationContainerTest {
     public void test_GetList_By_Index() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationList list = wndw.getList(0);
+        AutomationList list = wndw.getList(Search.getBuilder(0).build());
         assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1690,14 +1686,14 @@ public class AutomationContainerTest {
     public void test_GetList_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        wndw.getList(99);
+        wndw.getList(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetList_By_Name() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationList list = wndw.getList("myName");
+        AutomationList list = wndw.getList(Search.getBuilder("myName").build());
         assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -1707,7 +1703,7 @@ public class AutomationContainerTest {
     public void test_GetList_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getList("unknownName");
+        wndw.getList(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1715,7 +1711,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationList list = wndw.getList(Pattern.compile("myName"));
+        AutomationList list = wndw.getList(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1726,14 +1722,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getList(Pattern.compile("NotmyName"));
+        wndw.getList(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
 
     @Test
     public void test_GetList_By_AutomationId() throws Exception {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
-        AutomationList list = wndw.getListByAutomationId("myID");
+        AutomationList list = wndw.getList(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,list.element);
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -1743,7 +1739,7 @@ public class AutomationContainerTest {
     public void test_GetList_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(any(), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getListByAutomationId("unknownID");
+        wndw.getList(Search.getBuilder().automationId("unknownID").build());
     }
 
     /************************************************************************************
@@ -1756,7 +1752,7 @@ public class AutomationContainerTest {
     public void test_GetTextBox_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationTextBox textBox = spyWndw.getTextBox(0);
+        AutomationTextBox textBox = spyWndw.getTextBox(Search.getBuilder(0).build());
         assertEquals(targetElement,textBox.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Text.getValue());
@@ -1767,14 +1763,14 @@ public class AutomationContainerTest {
     public void test_GetTextBox_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getTextBox(99);
+        wndw.getTextBox(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetTextBox_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationTextBox textBox = spyWndw.getTextBox("myName");
+        AutomationTextBox textBox = spyWndw.getTextBox(Search.getBuilder("myName").build());
         assertEquals(targetElement,textBox.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1786,7 +1782,7 @@ public class AutomationContainerTest {
     public void test_GetTextBox_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getTextBox("unknownName");
+        wndw.getTextBox(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -1794,7 +1790,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationTextBox textBox = spyWndw.getTextBox(Pattern.compile("myName"));
+        AutomationTextBox textBox = spyWndw.getTextBox(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,textBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Text);
@@ -1806,14 +1802,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getTextBox(Pattern.compile("NotmyName"));
+        wndw.getTextBox(Search.getBuilder(Pattern.compile("NotmyName")).build());
     }
     
     @Test
     public void test_GetTextBox_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationTextBox textBox = spyWndw.getTextBoxByAutomationId("myID");
+        AutomationTextBox textBox = spyWndw.getTextBox(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,textBox.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1825,14 +1821,14 @@ public class AutomationContainerTest {
     public void test_GetTextBox_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getTextBoxByAutomationId("unknownID");
+        wndw.getTextBox(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
     public void test_GetSplitButton_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationSplitButton btn = spyWndw.getSplitButton(0);
+        AutomationSplitButton btn = spyWndw.getSplitButton(Search.getBuilder(0).build());
         assertEquals(targetElement,btn.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.SplitButton.getValue());
@@ -1843,14 +1839,14 @@ public class AutomationContainerTest {
     public void test_GetSpliztButton_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getSplitButton(99);
+        wndw.getSplitButton(Search.getBuilder(99).build());
     }
     
     @Test
     public void test_GetSplitButton_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSplitButton btn = spyWndw.getSplitButton("myName");
+        AutomationSplitButton btn = spyWndw.getSplitButton(Search.getBuilder("myName").build());
         assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1862,7 +1858,7 @@ public class AutomationContainerTest {
     public void test_GetSplitButton_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSplitButton("unknownName");
+        wndw.getSplitButton(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -1870,7 +1866,8 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationSplitButton btn = spyWndw.getSplitButton(Pattern.compile("myName"));
+        AutomationSplitButton btn = spyWndw.getSplitButton(Search.getBuilder(Pattern.compile("myName")).build());
+
         assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.SplitButton);
@@ -1882,14 +1879,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getSplitButton(Pattern.compile("ThisIsNotMyName"));
+        wndw.getSplitButton(Search.getBuilder(Pattern.compile("ThisIsNotMyName")).build());
     }
     
     @Test
     public void test_GetSplitButton_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSplitButton btn = spyWndw.getSplitButtonByAutomationId("myID");
+        AutomationSplitButton btn = spyWndw.getSplitButton(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1901,7 +1898,7 @@ public class AutomationContainerTest {
     public void test_GetSplitButton_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSplitButtonByAutomationId("unknownID");
+        wndw.getSplitButton(Search.getBuilder().automationId("unknownID").build());
     }
 
 
@@ -1909,7 +1906,7 @@ public class AutomationContainerTest {
     public void test_GetImage_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationImage img = spyWndw.getImage(0);
+        AutomationImage img = spyWndw.getImage(Search.getBuilder(0).build());
         assertEquals(targetElement,img.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Image.getValue());
@@ -1920,14 +1917,14 @@ public class AutomationContainerTest {
     public void test_GetImage_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getImage(99);
+        wndw.getImage(Search.getBuilder(99).build());
     }
     
     @Test
     public void test_GetImage_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationImage img = spyWndw.getImage("myName");
+        AutomationImage img = spyWndw.getImage(Search.getBuilder("myName").build());
         assertEquals(targetElement,img.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -1939,7 +1936,7 @@ public class AutomationContainerTest {
     public void test_GetImage_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getImage("unknownName");
+        wndw.getImage(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -1947,7 +1944,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationImage img = spyWndw.getImage(Pattern.compile(".*yNa.*"));
+        AutomationImage img = spyWndw.getImage(Search.getBuilder(Pattern.compile(".*yNa.*")).build());
         assertEquals(targetElement,img.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Image);
@@ -1959,14 +1956,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getImage(Pattern.compile("blaBla"));
+        wndw.getImage(Search.getBuilder(Pattern.compile("blaBla")).build());
     }
     
     @Test
     public void test_GetImage_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationImage img = spyWndw.getImageByAutomationId("myID");
+        AutomationImage img = spyWndw.getImage(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,img.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -1978,14 +1975,14 @@ public class AutomationContainerTest {
     public void test_GetImage_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getImageByAutomationId("unknownID");
+        wndw.getImage(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
     public void test_GetSpinner_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationSpinner spin = spyWndw.getSpinner(0);
+        AutomationSpinner spin = spyWndw.getSpinner(Search.getBuilder(0).build());
         assertEquals(targetElement,spin.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Spinner.getValue());
@@ -1996,14 +1993,14 @@ public class AutomationContainerTest {
     public void test_GetSpinner_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getSpinner(99);
+        wndw.getSpinner(Search.getBuilder(99).build());
     }
     
     @Test
     public void test_GetSpinner_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSpinner spin = spyWndw.getSpinner("myName");
+        AutomationSpinner spin = spyWndw.getSpinner(Search.getBuilder("myName").build());
         assertEquals(targetElement,spin.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -2015,7 +2012,7 @@ public class AutomationContainerTest {
     public void test_GetSpinner_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSpinner("unknownName");
+        wndw.getSpinner(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -2023,7 +2020,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationSpinner spin = spyWndw.getSpinner(Pattern.compile("myName"));
+        AutomationSpinner spin = spyWndw.getSpinner(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,spin.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Spinner);
@@ -2035,14 +2032,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getSpinner(Pattern.compile("NotmyName"));
+        wndw.getSpinner(Search.getBuilder(Pattern.compile("notmyName")).build());
     }
     
     @Test
     public void test_GetSpinner_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationSpinner spinner = spyWndw.getSpinnerByAutomationId("myID");
+        AutomationSpinner spinner = spyWndw.getSpinner(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,spinner.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -2054,7 +2051,7 @@ public class AutomationContainerTest {
     public void test_GetSpinner_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getSpinnerByAutomationId("unknownID");
+        wndw.getSpinner(Search.getBuilder("unknownID").build());
     }
 
     @Test
@@ -2063,7 +2060,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationReBar bar = spyWndw.getReBar(0);
+        AutomationReBar bar = spyWndw.getReBar(Search.getBuilder(0).build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Pane.getValue());
@@ -2076,7 +2073,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getReBar(99);
+        wndw.getReBar(Search.getBuilder(99).build());
     }
     
     @Test
@@ -2086,7 +2083,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationReBar bar = spyWndw.getReBar("myName");
+        AutomationReBar bar = spyWndw.getReBar(Search.getBuilder("myName").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -2102,7 +2099,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getReBar("unknownName");
+        wndw.getReBar(Search.getBuilder("unknownName").build());
     }
     
     
@@ -2113,7 +2110,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationReBar bar = spyWndw.getReBar(Pattern.compile("myName"));
+        AutomationReBar bar = spyWndw.getReBar(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createClassNamePropertyCondition("ReBarWindow32");
@@ -2128,7 +2125,7 @@ public class AutomationContainerTest {
 
     	when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getReBar(Pattern.compile("None"));
+        wndw.getReBar(Search.getBuilder(Pattern.compile("None")).build());
     }
     
     @Test
@@ -2137,7 +2134,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationReBar edit = spyWndw.getReBarByAutomationId("myID");
+        AutomationReBar edit = spyWndw.getReBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,edit.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -2151,14 +2148,14 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getReBarByAutomationId("unknownID");
+        wndw.getReBar(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
     public void test_GetCustom_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationCustom custom = spyWndw.getCustom(0);
+        AutomationCustom custom = spyWndw.getCustom(Search.getBuilder(0).build());
         assertEquals(targetElement,custom.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Custom.getValue());
@@ -2169,14 +2166,14 @@ public class AutomationContainerTest {
     public void test_GetCustom_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getCustom(99);
+        wndw.getCustom(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetCustom_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCustom custom = spyWndw.getCustom("myName");
+        AutomationCustom custom = spyWndw.getCustom(Search.getBuilder("myName").build());
         assertEquals(targetElement,custom.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -2188,7 +2185,7 @@ public class AutomationContainerTest {
     public void test_GetCustom_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCustom("unknownName");
+        wndw.getCustom(Search.getBuilder("unknownName").build());
     }
 
     @Test
@@ -2196,7 +2193,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationCustom custom = spyWndw.getCustom(Pattern.compile("myName"));
+        AutomationCustom custom = spyWndw.getCustom(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,custom.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Custom);
@@ -2208,14 +2205,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getCustom(Pattern.compile("NotReallyMyName"));
+        wndw.getCustom(Search.getBuilder(Pattern.compile("NotReallyMyName")).build());
     }
 
     @Test
     public void test_GetCustom_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCustom custom = spyWndw.getCustomByAutomationId("myID");
+        AutomationCustom custom = spyWndw.getCustom(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,custom.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -2227,7 +2224,7 @@ public class AutomationContainerTest {
     public void test_GetCustom_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCustomByAutomationId("unknownID");
+        wndw.getCustom(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
@@ -2236,7 +2233,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationCustom bar = spyWndw.getCustomByClassName(0,"BlaBla");
+        AutomationCustom bar = spyWndw.getCustom(Search.getBuilder(0).className("BlaBla").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Custom.getValue());
@@ -2249,7 +2246,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCustomByClassName(99,"BlaBla");
+        wndw.getCustom(Search.getBuilder(99).className("BlaBla").build());
     }
     
     @Test
@@ -2259,7 +2256,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationCustom bar = spyWndw.getCustomByClassName("myName","BlaBla");
+        AutomationCustom bar = spyWndw.getCustom(Search.getBuilder("myName").className("BlaBla").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -2275,7 +2272,7 @@ public class AutomationContainerTest {
 
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getCustomByClassName("unknownName","BlaBla");
+        wndw.getCustom(Search.getBuilder("unknownName").className("BlaBla").build());
     }
     
     @Test
@@ -2285,7 +2282,7 @@ public class AutomationContainerTest {
 
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        AutomationCustom bar = spyWndw.getCustomByClassName(Pattern.compile("myName"),"BlaBla");
+        AutomationCustom bar = spyWndw.getCustom(Search.getBuilder(Pattern.compile("myName")).className("BlaBla").build());
         assertEquals(targetElement,bar.getElement());
 
         verify(spyWndw).createClassNamePropertyCondition("BlaBla");
@@ -2300,7 +2297,7 @@ public class AutomationContainerTest {
 
     	when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getCustomByClassName(Pattern.compile("NixMyName"),"BlaBla");
+        wndw.getCustom(Search.getBuilder(Pattern.compile("NixMyName")).className("BlaBla").build());
     }
     
 
@@ -2308,7 +2305,7 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_Index() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(0);
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Search.getBuilder(0).build());
         assertEquals(targetElement,slide.element);
 
         verify(spyWndw).createIntegerVariant(ControlType.Custom.getValue());
@@ -2319,14 +2316,14 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_Index_Throws_Exception_When_Not_found() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        wndw.getPowerpointSlide(99);
+        wndw.getPowerpointSlide(Search.getBuilder(99).build());
     }
     
     @Test
     public void test_GetPowerpointSlide_By_Name() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide("myName");
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Search.getBuilder("myName").build());
         assertEquals(targetElement,slide.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
@@ -2338,7 +2335,7 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_Name_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPowerpointSlide("unknownName");
+        wndw.getPowerpointSlide(Search.getBuilder("unknownName").build());
     }
     
     @Test
@@ -2346,7 +2343,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Pattern.compile("myName"));
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Search.getBuilder(Pattern.compile("myName")).build());
         assertEquals(targetElement,slide.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Custom);
@@ -2358,14 +2355,14 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
-        wndw.getPowerpointSlide(Pattern.compile("libreOfficePresenterSlide"));
+        wndw.getPowerpointSlide(Search.getBuilder(Pattern.compile("libreOfficePresenterSlide")).build());
     }
 
     @Test
     public void test_GetPowerpointSlide_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlideByAutomationId("myID");
+        AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,slide.getElement());
 
         verify(spyWndw).createAutomationIdPropertyCondition("myID");
@@ -2377,7 +2374,7 @@ public class AutomationContainerTest {
     public void test_GetPowerpointSlide_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        wndw.getPowerpointSlideByAutomationId("unknownID");
+        wndw.getPowerpointSlide(Search.getBuilder().automationId("unknownID").build());
     }
 
     @Test
@@ -2665,7 +2662,7 @@ public class AutomationContainerTest {
         wndw.getControlByClassName(Pattern.compile("myNonsenseName"),"BlaBla");
     }
     
-	private void setElementTypeAndClassName(IUIAutomationElement3 elem, ControlType controlType, String className) {
+	private void setElementTypeAndClassName(IUIAutomationElement elem, ControlType controlType, String className) {
 		BaseAutomationTest.answerIntByReference(controlType.getValue()).when(elem).getCurrentControlType(any());
 		BaseAutomationTest.answerStringByReference(className).when(elem).getCurrentClassName(any());
 	}

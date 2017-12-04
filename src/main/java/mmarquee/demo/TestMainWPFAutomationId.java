@@ -20,6 +20,7 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Search;
 
 /**
  * @author Mark Humphreys
@@ -32,7 +33,7 @@ public class TestMainWPFAutomationId extends TestBase {
     /**
      * Run the demo.
      */
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
@@ -85,7 +86,7 @@ public class TestMainWPFAutomationId extends TestBase {
 
             // NOTE: WPF buttons will set the automationID to be the name of the control
 
-            AutomationButton btnClickMe = applicationWindow.getButtonByAutomationId("idBtn1");
+            AutomationButton btnClickMe = applicationWindow.getButton(Search.getBuilder().automationId("idBtn1").build());
             logger.info(btnClickMe.getName());
             btnClickMe.click();
 

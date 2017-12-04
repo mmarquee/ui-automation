@@ -15,13 +15,9 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Function;
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
 
 /**
  * @author Mark Humphreys
@@ -32,10 +28,6 @@ public interface IUIAutomationWindowPattern extends IUnknown {
      * The interface IID for QueryInterface et al
      */
     Guid.IID IID = new Guid.IID("{0FAEF453-9208-43EF-BBB2-3B485177864F}");
-
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int close();
     int waitForInputIdle(Integer milliseconds, IntByReference success);

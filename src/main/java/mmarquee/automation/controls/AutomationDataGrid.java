@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Table;
@@ -30,12 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Wrapper around the Delphi automated string gridPattern.
+ *
  * @author Mark Humphreys
  * Date 03/02/2016.
- *
- * Wrapper around the Delphi automated string gridPattern.
  */
-public class AutomationDataGrid extends AutomationBase implements Valueable {
+public final class AutomationDataGrid
+        extends AutomationBase
+        implements Valueable {
     /**
      * The value pattern.
      */
@@ -59,37 +60,15 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     /**
      * Construct the AutomationDataGrid.
      *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
+     * @param builder The builder.
      */
-    public AutomationDataGrid(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
+    public AutomationDataGrid(final ElementBuilder builder) {
+        super(builder);
 
-    /**
-     * Construct the AutomationDataGrid.
-     *
-     * @param element The element.
-     * @param value Value pattern.
-     * @param grid Grid pattern.
-     * @param table Table pattern.
-     * @param instance Automation instance.
-     * @param selection Selection pattern.
-     */
-    AutomationDataGrid(final AutomationElement element,
-                       final Value value,
-                       final Grid grid,
-                       final Table table,
-                       final Selection selection,
-                       final UIAutomation instance) {
-        super(element, instance);
-
-        this.valuePattern = value;
-        this.gridPattern = grid;
-        this.tablePattern = table;
-        this.selectionPattern = selection;
+        this.valuePattern = builder.getValue();
+        this.gridPattern = builder.getGrid();
+        this.tablePattern = builder.getTable();
+        this.selectionPattern = builder.getSelection();
     }
 
     /**
@@ -143,7 +122,7 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
 
         for (AutomationElement item : collection) {
             try {
-                items.add(new AutomationDataGridCell(item));
+                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {
                 // Try and add am empty cell
                 AutomationDataGridCell cell = new AutomationDataGridCell(null);
@@ -169,7 +148,7 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
         }
         List<AutomationElement> collection = selectionPattern.getCurrentSelection();
 
-        return new AutomationDataGridCell(collection.get(0));
+        return new AutomationDataGridCell(new ElementBuilder(collection.get(0)));
     }
 
     /**
@@ -191,7 +170,7 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
 
         for (AutomationElement item : collection) {
             try {
-                items.add(new AutomationDataGridCell(item));
+                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {
                 // Try and add am empty cell
                 AutomationDataGridCell cell = new AutomationDataGridCell(null);
@@ -203,23 +182,39 @@ public class AutomationDataGrid extends AutomationBase implements Valueable {
     }
 
     /**
-     * Gets the item associated with the given cell.
+     * Gets the item associated with the given cell, using search criteria.
      *
-     * @param x X Offset
-     * @param y Y Offset
+     * @param search Search criteria
      * @return The GridItem at the given cell position
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationDataGridCell getItem(final int x,
-                                          final int y)
+    public AutomationDataGridCell getItem(final Search search)
+            throws PatternNotFoundException, AutomationException  {
+        if (search.getHasRow() || search.getHasColumn()) {
+            return getItem(search.getRow(), search.getColumn());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
+    /**
+     * Gets the item associated with the given cell.
+     *
+     * @param row X Offset
+     * @param column Y Offset
+     * @return The GridItem at the given cell position
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public AutomationDataGridCell getItem(final int row,
+                                          final int column)
             throws PatternNotFoundException, AutomationException  {
         if (this.gridPattern == null) {
             this.gridPattern = this.getGridPattern();
         }
-        AutomationElement element = this.gridPattern.getItem(x, y);
 
-        return new AutomationDataGridCell(element);
+        return new AutomationDataGridCell(new ElementBuilder(this.gridPattern.getItem(row, column)));
     }
 
     /**

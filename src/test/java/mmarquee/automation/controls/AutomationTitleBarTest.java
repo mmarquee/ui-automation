@@ -52,7 +52,8 @@ public class AutomationTitleBarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationTitleBar ctrl = new AutomationTitleBar(element, container);
+        AutomationTitleBar ctrl = new AutomationTitleBar(
+                new ElementBuilder(element).itemContainer(container));
 
         String name = ctrl.getName();
 
@@ -70,7 +71,8 @@ public class AutomationTitleBarTest {
 
         when(element.findFirst(any(), any())).thenReturn(elem);
 
-        AutomationTitleBar tb = new AutomationTitleBar(element, container);
+        AutomationTitleBar tb = new AutomationTitleBar(
+                new ElementBuilder(element).itemContainer(container));
 
         AutomationMainMenu menu = tb.getMenuBar();
 

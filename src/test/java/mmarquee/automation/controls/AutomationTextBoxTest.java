@@ -33,7 +33,8 @@ public class AutomationTextBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTextBox ctrl = new AutomationTextBox(element, value, instance);
+        AutomationTextBox ctrl = new AutomationTextBox(
+                new ElementBuilder(element).automation(instance).value(value));
 
         String name = ctrl.getName();
 
@@ -50,7 +51,8 @@ public class AutomationTextBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationTextBox ctrl = new AutomationTextBox(element, value, instance);
+        AutomationTextBox ctrl = new AutomationTextBox(
+                new ElementBuilder(element).automation(instance).value(value));
 
         String name = ctrl.getValue();
 

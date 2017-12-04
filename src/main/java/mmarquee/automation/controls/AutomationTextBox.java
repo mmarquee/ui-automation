@@ -16,19 +16,17 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper for the TextBox element.
+ *
  * @author Mark Humphreys
  * Date 01/02/2016.
- *
- * Wrapper for the TextBox element.
  */
-public class AutomationTextBox
+public final class AutomationTextBox
         extends AutomationBase
         implements Valueable {
 
@@ -40,41 +38,11 @@ public class AutomationTextBox
     /**
      * Construct the AutomationTextBox.
      *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
+     * @param builder The builder.
      */
-    public AutomationTextBox(final AutomationElement element)
-            throws AutomationException {
-        super(element);
-    }
-
-    /**
-     * Construct the AutomationTextBox.
-     *
-     * @param element The element.
-     * @param automation The automation instance.
-     * @throws AutomationException Automation library error.
-     */
-    public AutomationTextBox(final AutomationElement element,
-                             final UIAutomation automation)
-            throws AutomationException {
-        super(element, automation);
-    }
-
-    /**
-     * Construct the AutomationTextBox.
-     *
-     * @param element The element.
-     * @param value The value pattern.
-     * @param instance Automation instance.
-     * @throws AutomationException Automation library error.
-     */
-    AutomationTextBox(final AutomationElement element,
-                      final Value value,
-                      final UIAutomation instance)
-            throws AutomationException {
-        super(element, instance);
-        this.valuePattern = value;
+    public AutomationTextBox(final ElementBuilder builder) {
+        super(builder);
+        this.valuePattern = builder.getValue();
     }
 
     /**

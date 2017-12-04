@@ -15,11 +15,18 @@
  */
 package mmarquee.automation;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
+import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -40,14 +47,14 @@ public class AutomationElement extends BaseAutomation {
      * The underlying automation element.
      * </p>
      */
-    private IUIAutomationElement3 element;
+    private IUIAutomationElement element;
 
     /**
      * Gets the underlying automation element.
      *
-     * @return IUIAutomationElement3 The automation element.
+     * @return IUIAutomationElement The automation element.
      */
-    public final IUIAutomationElement3 getElement() {
+    public final IUIAutomationElement getElement() {
         return element;
     }
 
@@ -56,7 +63,7 @@ public class AutomationElement extends BaseAutomation {
      *
      * @param inValue The new value.
      */
-    public final void setElement(final IUIAutomationElement3 inValue) {
+    public final void setElement(final IUIAutomationElement inValue) {
         this.element = inValue;
     }
 
@@ -65,7 +72,7 @@ public class AutomationElement extends BaseAutomation {
      *
      * @param inElement The element.
      */
-    public AutomationElement(final IUIAutomationElement3 inElement) {
+    public AutomationElement(final IUIAutomationElement inElement) {
         this.element = inElement;
     }
 
@@ -293,7 +300,7 @@ public class AutomationElement extends BaseAutomation {
         this.element.findFirst(scope, pCondition.getValue(), pbr);
 
         try {
-            IUIAutomationElement3 elem =
+            IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
             return new AutomationElement(elem);
         } catch (NullPointerException npe) {
@@ -375,7 +382,7 @@ public class AutomationElement extends BaseAutomation {
 
             collection.getElement(a, pbr);
 
-            IUIAutomationElement3 elem =
+            IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
 
             items.add(new AutomationElement(elem));
@@ -566,14 +573,62 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element.
+     * Shows the context menu for the element, by trying to get the IUIAutomationElement3.
+     * Not supported in Windows 7 and before
      *
      * @throws AutomationException Failed to get the correct interface.
      */
     public void showContextMenu() throws AutomationException {
-        final int res = this.element.showContextMenu();
-        if (res != 0) {
-            throw new AutomationException(res);
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement3 element3 =
+                    IUIAutomationElement3Converter.PointerToInterface(pUnknown);
+
+            final int res = element3.showContextMenu();
+
+            if (res != 0) {
+                throw new AutomationException(res);
+            }
+        } else {
+            throw new AutomationException("Interface not supported");
+        }
+    }
+
+    /**
+     * Gets the full description for the element, by trying to get the IUIAutomationElement6.
+     *
+     * Not supported in before Windows 10 build 1703
+     * @return The description, if set
+     * @throws AutomationException Something has gone wrong in automation library
+     */
+    public String getFullDescription() throws AutomationException {
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(
+                new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement6 element =
+                    IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+
+            PointerByReference sr = new PointerByReference();
+
+            final int res = element.getCurrentFullDescription(sr);
+
+            if (res != 0) {
+                throw new AutomationException(res);
+            } else {
+                if (sr.getValue() == null) {
+                    return "Not set";
+                } else {
+                    return sr.getValue().getWideString(0);
+                }
+            }
+        } else {
+            throw new AutomationException("Interface not supported");
         }
     }
 }

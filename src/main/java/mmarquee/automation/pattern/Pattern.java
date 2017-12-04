@@ -28,11 +28,11 @@ public interface Pattern {
      * Is the pattern available?
      * @return True if available
      */
-    boolean isAvailable ();
+    boolean isAvailable();
 
     /**
      * Sets the pattern
      * @param pattern The pattern to set
      */
-    void setPattern (Pointer pattern);
+    void setPattern(Pointer pattern);
 }

@@ -15,66 +15,27 @@
  */
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.Variant;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
+ * Wrapper for the IUIAutomationItemContainerPattern COM interface.
+ *
  * @author Mark Humphreys
  * Date 13/07/2016.
  */
-//public interface IUIAutomationItemContainerPattern extends IUnknown {
-//
-//    /**
-//     * The interface IID for QueryInterface et al
-//     */
-//    Guid.IID IID = new Guid.IID(
- //           "{C690FDB2-27A8-423C-812D-429773C9084E}");
-//
-//    int AddRef();
-//    int Release();
-//    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-//
-//    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
-//
-//    class Converter {
-//        private static int METHODS = 4; // 0-2 IUnknown, 3 IUIAutomationItemContainerPattern/
-//
- //       public static IUIAutomationItemContainerPattern PointerToInterface(final PointerByReference ptr) {
-//            final Pointer interfacePointer = ptr.getValue();
-//            final Pointer vTablePointer = interfacePointer.getPointer(0);
-//            final Pointer[] vTable = new Pointer[METHODS];
-//            vTablePointer.read(0, vTable, 0, vTable.length);
-//            return new IUIAutomationItemContainerPattern() {
-//
-//                // IUnknown
-//                @Override
-//                public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-//                    Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-//                    return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
-//                //}
-//
- //               @Override
- //              public int AddRef() {
-  //                  Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
- //                   return f.invokeInt(new Object[]{interfacePointer});
- //               }
-//
-  //              public int Release() {
-    //                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
-      //              return f.invokeInt(new Object[]{interfacePointer});
-        //        }
-//
-  //              public int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found) {
-    //                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-      //              return f.invokeInt(new Object[]{interfacePointer, startAfter, propertyId, value, found});
-        //        }
-//
-  //          };
-    //    }
-//    }
-//}
+public interface IUIAutomationItemContainerPattern extends IUnknown {
+
+    /**
+     * The interface IID for QueryInterface et al
+     */
+    Guid.IID IID = new Guid.IID(
+            "{C690FDB2-27A8-423C-812D-429773C9084E}");
+
+    int AddRef();
+
+    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
+}

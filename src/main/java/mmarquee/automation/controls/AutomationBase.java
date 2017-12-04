@@ -52,10 +52,10 @@ import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
+ * The base for automation.
+ *
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * The base for automation.
  */
 public abstract class AutomationBase implements Automatable {
 
@@ -80,59 +80,24 @@ public abstract class AutomationBase implements Automatable {
     protected Invoke invokePattern = null;
 
     /**
-     * Constructor for the AutomationBase class.
-     *
-     * @param element Element to use.
-     */
-    public AutomationBase(final AutomationElement element) {
-        this.element = element;
-        this.automation = UIAutomation.getInstance();
-    }
-
-    /**
-     * Constructor for the AutomationBase class.
-     *
-     * For mocking, etc. Doo not use as part of 'real' code.
-     * @param inElement The element.
-     * @param inAutomation The automation instance.
-     */
-    public AutomationBase(final AutomationElement inElement,
-                          final UIAutomation inAutomation) {
-        this.element = inElement;
-        this.automation = inAutomation;
-    }
-
-    /**
-     * Constructor for the AutomationBase class.
-     *
-     * For mocking, etc. Doo not use as part of 'real' code.
-     * @param inElement The element.
-     * @param inPattern The invoke pattern.
-     * @param inAutomation The automation instance.
-     */
-    public AutomationBase(final AutomationElement inElement,
-                          final Invoke inPattern,
-                          final UIAutomation inAutomation) {
-        this.element = inElement;
-        this.invokePattern = inPattern;
-        this.automation = inAutomation;
-    }
-
-    /**
      * Constructor for the AutomationBase.
      *
-     * @param inElement The element.
-     * @param inPattern The pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
+     * @param builder The builder
      */
-    public AutomationBase(final AutomationElement inElement,
-                          final Invoke inPattern)
-            throws PatternNotFoundException, AutomationException {
-        this(inElement);
-        this.invokePattern = inPattern;
+    public AutomationBase(final ElementBuilder builder) {
+        this.element = builder.getElement();
+
+        if (builder.getHasAutomation()) {
+            this.automation = builder.getInstance();
+        } else {
+            this.automation = UIAutomation.getInstance();
+        }
+
+        if (builder.getHasInvoke()) {
+            this.invokePattern = builder.getInvoke();
+        }
     }
-    
+
     /**
      * Gets the underlying automation element.
      *
@@ -1050,6 +1015,15 @@ public abstract class AutomationBase implements Automatable {
         	collection.add(AutomationControlFactory.get(this, el));
         }
         return collection;
+    }
+
+    /**
+     * Tries to get the full description.
+     * @return The full description
+     * @throws AutomationException Something has gone wrong
+     */
+    public String getDescription() throws AutomationException {
+        return this.element.getFullDescription();
     }
 
 // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope

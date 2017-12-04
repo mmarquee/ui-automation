@@ -15,7 +15,7 @@ Notepad is quite a simple application, and the following code is adapted from th
 
   logger.info("Modal = " + window.isModal());
 
-  AutomationEditBox edit = window.getEditBox(0);
+  AutomationEditBox edit = window.getEditBox(Search.getBuilder(0).build());
 
   edit.setValue("This is a test of automation");
 

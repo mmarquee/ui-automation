@@ -7,7 +7,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -204,7 +204,7 @@ public class GridPatternTest {
                 .when(spyPattern)
                 .convertPointerToInterface(any());
 
-        IUIAutomationElement3 mockElement = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement mockElement = Mockito.mock(IUIAutomationElement.class);
 
         doReturn(mockElement)
                 .when(spyPattern)

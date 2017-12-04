@@ -68,7 +68,7 @@ This will find (if it is there) a window that has the given title, and set focus
 Each control contained in a container (such as a window or panel) can be identified by the index of that control, sometimes (this depends on the control type), by the text associated with it, OR by the Automation Id. For example, in order to get the textbox associated with the connection window (and assuming that it is the 1st Edit box on the window), the following code will find the editbox, and change the text to be USER1.
 
 ```
-  AutomationEditBox user = window.getEditBox(0);
+  AutomationEditBox user = window.getEditBox(Search.getBuilder(0).build());
   user.setText("USER1");
 ```
 
@@ -78,19 +78,19 @@ In order to click the 'OK' button associated with a given window, it can be foun
 
 ```
   // Get button by index
-  AutomationButton button1 = window.getButton(0);
+  AutomationButton button1 = window.getButton(Search.getBuilder(0).build());
   button1.click();
 ```
 
 ```
   // Get button by name
-  AutomationButton button1 = window.getButton("OK");
+  AutomationButton button1 = window.getButton(Search.getBuilder("OK").build());
   button1.click();
 ```
 
 ```
   // Get button by automation id
-  AutomationButton button1 = window.getButtonByAutomationId("btnOK");
+  AutomationButton button1 = window.getButton(Search.getBuilder().automationId("btnOK").build());
   button1.click();
 ```
 

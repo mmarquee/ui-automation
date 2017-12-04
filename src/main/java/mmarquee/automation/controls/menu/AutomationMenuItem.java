@@ -25,51 +25,43 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.Clickable;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.Expandable;
 import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
+ * Wrapper for the MenuItem element.
  * @author Mark Humphreys
  * Date 10/02/2016.
- *
- * Wrapper for the MenuItem element.
  */
-public class AutomationMenuItem extends AutomationBase implements Clickable, Expandable {
+public class AutomationMenuItem
+        extends AutomationBase
+        implements Clickable, Expandable {
+    /**
+     * The expand collapse pattern.
+     */
     private ExpandCollapse collapsePattern;
-    
+
+    /** The parent element. */
     protected AutomationElement mainMenuParentElement;
+
+    /** Name of the parent. */
     protected String parentMenuName;
 
     /**
-     * Construct the AutomationMenuItem
-     * @param element The element
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException Automation error
+     * Construct the AutomationMenuItem.
+     * @param builder The builder
      */
-    public AutomationMenuItem(AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
+    public AutomationMenuItem(final ElementBuilder builder){
+        super(builder);
+        this.collapsePattern = builder.getCollapse();
     }
 
     /**
-     *
-     * Construct the AutomationMenuItem
-     * @param element The element
-     * @param collapse ExpandCollapse pattern
-     * @param invoke Invoke Pattern
-     * @throws PatternNotFoundException Pattern eas not found
-     * @throws AutomationException Error in the automation library
+     * The Control type.
      */
-    AutomationMenuItem(AutomationElement element, ExpandCollapse collapse, Invoke invoke)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.collapsePattern = collapse;
-        this.invokePattern = invoke;
-    }
-
     public static ControlType controlType = ControlType.MenuItem;
 
     /**
@@ -82,15 +74,16 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Gets the list of items associated with this menu item. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Gets the list of items associated with this menu item.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationMenuItem> getItems() throws PatternNotFoundException, AutomationException {
+    public List<AutomationMenuItem> getItems() throws AutomationException {
 
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -103,23 +96,24 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
         List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
 
         for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(item));
+            list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 
         return list;
     }
 
     /**
-     * Gets the subItem associated with the index. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Gets the subItem associated with the index.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (int index) throws PatternNotFoundException, AutomationException {
+    public AutomationMenuItem getMenuItem (int index) throws AutomationException {
 
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -128,12 +122,14 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     	
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
 
-        return new AutomationMenuItem(items.get(index));
+        return new AutomationMenuItem(new ElementBuilder(items.get(index)));
     }
     
     /**
-     * Get the menu item associated with the name. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Get the menu item associated with the name.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param name First Name
@@ -154,21 +150,22 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
 
     /**
-     * Get the menu item matching the name. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Get the menu item matching the name.
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param namePattern a pattern matching the menu item name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItem (Pattern namePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -195,21 +192,23 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
             throw new ElementNotFoundException("Failed to find element matching " + namePattern);
         }
         
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
     
     /**
-     * Get the menu item associated with the automationID. If the current item is known as member of an AutomationMainMenu,
-     * the request is automatically redirected to the correspondent AutomationMenu, when such a menu can be found
+     * Get the menu item associated with the automationID.
+     *
+     * If the current item is known as member of an AutomationMainMenu,
+     * the request is automatically redirected to the correspondent
+     * AutomationMenu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationMenuItem getMenuItemByAutomationId (String automationId)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -221,10 +220,16 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(item);
+        return new AutomationMenuItem(new ElementBuilder(item));
     }
-    
-    // For MainMenus, the dropdown is disconnected from the MenuItem here
+
+    /**
+     * Gets the real menu.
+     * @return The menu item
+     * @throws AutomationException Something has gone wrong
+     *
+     * For MainMenus, the dropdown is disconnected from the MenuItem here
+     */
     private AutomationMenu getRealMenu() throws AutomationException {
     	if (parentMenuName == null || mainMenuParentElement == null) {
     		return null;
@@ -237,14 +242,14 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
 	    	if (item == null) {
 	    		return null;
 	    	}
-	    	return new AutomationMenu(item);
+	    	return new AutomationMenu(new ElementBuilder(item));
     	} catch (ElementNotFoundException ex) {
     		return null;
     	}
     }
     
     /**
-     * Is the control expanded
+     * Is the control expanded.
      * @return True if expanded
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
@@ -260,7 +265,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Collapses the element
+     * Collapses the element.
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
@@ -276,7 +281,7 @@ public class AutomationMenuItem extends AutomationBase implements Clickable, Exp
     }
 
     /**
-     * Expands the element
+     * Expands the element.
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */

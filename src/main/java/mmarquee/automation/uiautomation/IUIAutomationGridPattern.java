@@ -17,7 +17,6 @@ package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
@@ -31,10 +30,6 @@ public interface IUIAutomationGridPattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID(
             "{414C3CDC-856B-4F5B-8538-3131C6302550}");
-
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int getItem(int row, int column, PointerByReference item);
     int getCurrentRowCount(IntByReference retVal);

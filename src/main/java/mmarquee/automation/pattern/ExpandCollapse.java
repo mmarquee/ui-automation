@@ -24,34 +24,41 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 
 /**
+ * Wrapper for  the ExpandCollapse pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for  the ExpandCollapse pattern
  */
 public class ExpandCollapse extends BasePattern {
 
     /**
-     * Constructor for the pattern
+     * Constructor for the pattern.
      */
     public ExpandCollapse() {
         this.IID = IUIAutomationExpandCollapsePattern.IID;
     }
 
+    /**
+     * The raw pointer.
+     */
     private IUIAutomationExpandCollapsePattern rawPattern;
 
-    ExpandCollapse(IUIAutomationExpandCollapsePattern rawPattern) {
+    /**
+     * Constructor taking a raw pattern.
+     * @param rawPattern The raw pattern
+     */
+    ExpandCollapse(final IUIAutomationExpandCollapsePattern rawPattern) {
         this();
-
         this.rawPattern = rawPattern;
     }
 
     /**
-     * Gets the pattern
+     * Gets the pattern.
      * @return The pattern
      * @throws AutomationException Something went wrong getting the pattern
      */
-    private IUIAutomationExpandCollapsePattern getPattern() throws AutomationException {
+    private IUIAutomationExpandCollapsePattern getPattern()
+            throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;
         } else {
@@ -68,7 +75,7 @@ public class ExpandCollapse extends BasePattern {
     }
 
     /**
-     * Expands the control
+     * Expands the control.
      * @throws AutomationException Something has gone wrong
      */
     public void expand() throws AutomationException {
@@ -79,7 +86,7 @@ public class ExpandCollapse extends BasePattern {
     }
 
     /**
-     * Collapses the control
+     * Collapses the control.
      * @throws AutomationException Something has gone wrong
      */
     public void collapse()throws AutomationException  {
@@ -90,7 +97,7 @@ public class ExpandCollapse extends BasePattern {
     }
 
     /**
-     * Determines whether the control is expanded
+     * Determines whether the control is expanded.
      * @return Is the control expanded
      * @throws AutomationException Something has gone wrong
      */
@@ -106,11 +113,12 @@ public class ExpandCollapse extends BasePattern {
     }
 
     /**
-     * Gets the interface from the raw PointerByReference
+     * Gets the interface from the raw PointerByReference.
      * @param pUnknown The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationExpandCollapsePattern convertPointerToInterface(PointerByReference pUnknown) {
+    public IUIAutomationExpandCollapsePattern convertPointerToInterface(
+            final PointerByReference pUnknown) {
         return IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknown);
     }
 }

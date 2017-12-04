@@ -24,6 +24,18 @@ import mmarquee.automation.uiautomation.ToggleState;
  * Date 19/05/2017.
  */
 public interface Toggleable extends Automatable {
-    void toggle () throws AutomationException, PatternNotFoundException;
-    ToggleState getToggleState () throws AutomationException, PatternNotFoundException;
+    /**
+     * Toggles the element.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    void toggle() throws AutomationException, PatternNotFoundException;
+
+    /**
+     * Gets the state of the toggle.
+     * @return Toggled state
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    ToggleState getToggleState() throws AutomationException, PatternNotFoundException;
 }

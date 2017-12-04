@@ -20,7 +20,6 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
@@ -32,61 +31,32 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * Wrapper for the ComboBox element.
  * @author Mark Humphreys
  * Date 01/02/2016.
- *
- * Wrapper for the ComboBox element.
  */
-public class AutomationComboBox
+public final class AutomationComboBox
         extends AutomationBase
         implements Expandable, Valueable, Focusable {
+
+    /** The expand collapse pattern. */
     private ExpandCollapse collapsePattern;
+
+    /** The value pattern. */
     private Value valuePattern;
+
+    /** The selection pattern. */
     private Selection selectionPattern;
 
     /**
      * Constructor for the AutomationComboBox.
-     * @param element The underlying automation element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern(s) not found.
+     * @param builder The builder
      */
-    public AutomationComboBox(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super (element);
-    }
-
-    /**
-     * Constructor for the AutomationComboBox.
-     * @param element The underlying automation element.
-     * @param collapse The collapse pattern.
-     * @param value The value pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern(s) not found.
-     */
-    AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection)
-            throws PatternNotFoundException, AutomationException {
-        super (element);
-
-        this.collapsePattern = collapse;
-        this.valuePattern = value;
-        this.selectionPattern = selection;
-    }
-
-    /**
-     * Constructor for the AutomationComboBox.
-     * @param element The underlying automation element.
-     * @param collapse The collapse pattern.
-     * @param value The value pattern.
-     * @param instance The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern(s) not found.
-     */
-    AutomationComboBox(AutomationElement element, ExpandCollapse collapse, Value value, Selection selection, UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super (element, instance);
-
-        this.collapsePattern = collapse;
-        this.valuePattern = value;
-        this.selectionPattern = selection;
+    public AutomationComboBox(final ElementBuilder builder) {
+        super(builder);
+        this.collapsePattern = builder.getCollapse();
+        this.valuePattern = builder.getValue();
+        this.selectionPattern = builder.getSelection();
     }
 
     /**
@@ -172,9 +142,8 @@ public class AutomationComboBox
      * Gets the list of items associated with this element.
      * @return List of AutomationListItems.
      * @throws AutomationException Automation issue.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public List<AutomationListItem> getItems() throws PatternNotFoundException, AutomationException {
+    public List<AutomationListItem> getItems() throws AutomationException {
 
         List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 
@@ -183,21 +152,40 @@ public class AutomationComboBox
                         this.createControlTypeCondition(ControlType.ListItem));
 
         for (AutomationElement element : collection) {
-            list.add(new AutomationListItem(element));
+            list.add(new AutomationListItem(new ElementBuilder(element)));
         }
 
         return list;
     }
-    
+
+    /**
+     * Get the item, using the search criteria.
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationListItem getItem(final Search search) throws AutomationException {
+        if (search.getHasNamePattern()) {
+            return getItem(search.getNamePattern());
+        } else if (search.getHasAutomationId()) {
+            return getItemByAutomationId(search.getAutomationId());
+        } else if (search.getHasIndex()) {
+            return getItem(search.getIndex());
+        } else if (search.getHasName()) {
+            return getItem(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
     /**
      * Gets the item associated with the index.
      *
      * @param index Index of element to get.
      * @return The selected item.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationListItem getItem(int index) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(final int index) throws AutomationException {
 
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
                 this.createControlTypeCondition(ControlType.ListItem));
@@ -205,40 +193,38 @@ public class AutomationComboBox
         AutomationElement item = items.get(index);
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(index);
         }
     }
 
     /**
-     * Gets the item associated with the name
+     * Gets the item associated with the name.
      * @param name Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationListItem getItem(String name) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(final String name) throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(name);
         }
     }
 
     /**
-     * Gets the item matching the namePattern
+     * Gets the item matching the namePattern.
      * @param namePattern Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationListItem getItem(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationListItem getItem(final Pattern namePattern) throws AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -259,31 +245,31 @@ public class AutomationComboBox
             throw new ItemNotFoundException(namePattern.toString());
         }
 
-        return new AutomationListItem(foundElement);
+        return new AutomationListItem(new ElementBuilder(foundElement));
     }
 
     /**
-     * Gets the item associated with the automationId
+     * Gets the item associated with the automationId.
      * @param automationId AutomationId to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationListItem getItemByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
+    private AutomationListItem getItemByAutomationId(final String automationId)
+            throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.ListItem)));
 
         if (item != null) {
-            return new AutomationListItem(item);
+            return new AutomationListItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(automationId);
         }
     }
     
     /**
-     * Gets the current selection
+     * Gets the current selection.
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
@@ -298,7 +284,7 @@ public class AutomationComboBox
 	        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
 	        
 	        for (AutomationElement element : collection) {
-	            list.add(new AutomationListItem(element));
+	            list.add(new AutomationListItem(new ElementBuilder(element)));
 	        }
 	
 	        return list;
@@ -307,7 +293,7 @@ public class AutomationComboBox
     }
 
     /**
-     * Gets the first currently selected element
+     * Gets the first currently selected element.
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern

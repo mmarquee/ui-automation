@@ -2,7 +2,7 @@
 * See [Element Discovery](element-discovery.md)
 
 ```
-  AutomationProgressBar progress = applicationWindow.getProgressBar(0);
+  AutomationProgressBar progress = applicationWindow.getProgressBar(Search.getBuilder(0).build());
   logger.info("Progress = " + progress.getRangeValue());
 
   // Looks like this does bad things

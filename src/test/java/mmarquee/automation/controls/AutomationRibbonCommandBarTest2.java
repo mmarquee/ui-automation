@@ -21,10 +21,8 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationRibbonCommandBar;
-import mmarquee.automation.controls.AutomationRibbonWorkPane;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.*;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -74,7 +72,8 @@ public class AutomationRibbonCommandBarTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element, container);
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+                new ElementBuilder(element).itemContainer(container));
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
@@ -87,7 +86,7 @@ public class AutomationRibbonCommandBarTest2 {
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
         Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
@@ -109,7 +108,8 @@ public class AutomationRibbonCommandBarTest2 {
         when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(element);
+        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+                new ElementBuilder(element));
 
         AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 

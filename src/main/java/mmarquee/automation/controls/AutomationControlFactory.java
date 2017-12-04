@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
@@ -26,7 +25,7 @@ import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * A Factory which creates concrete controls for AutomationElements
+ * A Factory which creates concrete controls for AutomationElements.
  */
 public class AutomationControlFactory {
 	
@@ -68,85 +67,85 @@ public class AutomationControlFactory {
     	String className = element.getClassName();
     	switch (controlType) {
     	case Button:
-    		return new AutomationButton(element);
+    		return new AutomationButton(new ElementBuilder(element));
     	case Calendar:
-    		return new AutomationCalendar(element);
+    		return new AutomationCalendar(new ElementBuilder(element));
     	case CheckBox:
-    		return new AutomationCheckBox(element);
+    		return new AutomationCheckBox(new ElementBuilder(element));
     	case ComboBox:
-    		return new AutomationComboBox(element);
+    		return new AutomationComboBox(new ElementBuilder(element));
     	case Edit:
 			if (AutomationPasswordEditBox.CLASS_NAME.equals(className)) {
-				return new AutomationPasswordEditBox(element);
+				return new AutomationPasswordEditBox(new ElementBuilder(element));
 			} else if (AutomationMaskedEdit.CLASS_NAME.equals(className)) {
-				return new AutomationMaskedEdit(element);
+				return new AutomationMaskedEdit(new ElementBuilder(element));
 			}
-    		return new AutomationEditBox(element);
+    		return new AutomationEditBox(new ElementBuilder(element));
     	case Hyperlink:
-    		return new AutomationHyperlink(element);
+    		return new AutomationHyperlink(new ElementBuilder(element));
     	case Image:
-    		return new AutomationImage(element);
+    		return new AutomationImage(new ElementBuilder(element));
     	case ListItem:
-    		return new AutomationListItem(element);
+    		return new AutomationListItem(new ElementBuilder(element));
     	case List:
-    		return new AutomationList(element);
+    		return new AutomationList(new ElementBuilder(element));
     	case Menu:
-    		return new AutomationMenu(element);
+    		return new AutomationMenu(new ElementBuilder(element));
     	case MenuBar:
-    		return new AutomationMainMenu(parent.getElement(), element);
+    		return new AutomationMainMenu(new ElementBuilder(element).parent(parent.getElement()));
     	case MenuItem:
-    		return new AutomationMenuItem(element);
+    		return new AutomationMenuItem(new ElementBuilder(element));
     	case ProgressBar:
-    		return new AutomationProgressBar(element);
+    		return new AutomationProgressBar(new ElementBuilder(element));
     	case RadioButton:
-    		return new AutomationRadioButton(element);
+    		return new AutomationRadioButton(new ElementBuilder(element));
     	case Slider:
-    		return new AutomationSlider(element);
+    		return new AutomationSlider(new ElementBuilder(element));
     	case Spinner:
-    		return new AutomationSpinner(element);
+    		return new AutomationSpinner(new ElementBuilder(element));
     	case StatusBar:
-    		return new AutomationStatusBar(element);
+    		return new AutomationStatusBar(new ElementBuilder(element));
     	case Tab:
-    		return new AutomationTab(element);
+    		return new AutomationTab(new ElementBuilder(element));
     	case TabItem:
-    		return new AutomationTabItem(element);
+    		return new AutomationTabItem(new ElementBuilder(element));
     	case Text:
-    		return new AutomationTextBox(element);
+    		return new AutomationTextBox(new ElementBuilder(element));
     	case ToolBar:
-    		return new AutomationToolBar(element);
+    		return new AutomationToolBar(new ElementBuilder(element));
     	case Tree:
-    		return new AutomationTreeView(element);
+    		return new AutomationTreeView(new ElementBuilder(element));
     	case TreeItem:
-    		return new AutomationTreeViewItem(element);
+    		return new AutomationTreeViewItem(new ElementBuilder(element));
     	case Custom:
-    		return new AutomationCustom(element);
+    		return new AutomationCustom(new ElementBuilder(element));
     	case DataGrid:
-    		return new AutomationDataGrid(element);
+    		return new AutomationDataGrid(new ElementBuilder(element));
     	case Document:
-    		return new AutomationDocument(element);
+    		return new AutomationDocument(new ElementBuilder(element));
     	case SplitButton:
-    		return new AutomationSplitButton(element);
+    		return new AutomationSplitButton(new ElementBuilder(element));
     	case Window:
-    		return new AutomationWindow(element);
+    		return new AutomationWindow(new ElementBuilder(element));
     	case Pane:
 			if (AutomationReBar.CLASS_NAME.equals(className)) {
-				return new AutomationReBar(element);
+				return new AutomationReBar(new ElementBuilder(element));
 			} else if (AutomationRibbonBar.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonBar(element);
+				return new AutomationRibbonBar(new ElementBuilder(element));
 			} else if (AutomationRibbonCommandBar.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonCommandBar(element);
+				return new AutomationRibbonCommandBar(new ElementBuilder(element));
 			} else if (AutomationRibbonWorkPane.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonWorkPane(element);
+				return new AutomationRibbonWorkPane(new ElementBuilder(element));
 			} else if (AutomationNUIPane.CLASS_NAME.equals(className)) {
-				return new AutomationNUIPane(element);
+				return new AutomationNUIPane(new ElementBuilder(element));
 			} else if (AutomationNetUIHWND.CLASS_NAME.equals(className)) {
-				return new AutomationNetUIHWND(element);
+				return new AutomationNetUIHWND(new ElementBuilder(element));
 			}
-    		return new AutomationPanel(element);
+    		return new AutomationPanel(new ElementBuilder(element));
     	case TitleBar:
-    		return new AutomationTitleBar(element);
+    		return new AutomationTitleBar(new ElementBuilder(element));
     	case AppBar:
-    		return new AutomationAppBar(element);
+    		return new AutomationAppBar(new ElementBuilder(element));
     		// No Custom controls, yet:
     	case ScrollBar:
     	case ToolTip:
@@ -160,7 +159,7 @@ public class AutomationControlFactory {
     	case SemanticZoom:
     	default:
     		// best try
-            return new AutomationContainer(element);
+            return new AutomationContainer(new ElementBuilder(element));
     	}
     }
 }

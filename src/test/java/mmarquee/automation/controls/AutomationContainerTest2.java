@@ -60,24 +60,27 @@ public class AutomationContainerTest2 {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationWindow window = new AutomationWindow(element, pattern, container);
+        AutomationWindow window = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(pattern));
 
         assertTrue(window.getName().equals("NAME"));
     }
 
     @Test
     public void testGetPanel_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
-        wndw.getPanel("PANEL-01");
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
+        wndw.getPanel(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetPanel_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getPanelByAutomationId("ID-01");
+        wndw.getPanel(Search.getBuilder().automationId("ID-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -85,18 +88,20 @@ public class AutomationContainerTest2 {
     @Test
     @Ignore("Needs further work for _by_Index checks")
     public void testGetPanel_By_Index_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getPanel(0);
+        wndw.getPanel(Search.getBuilder(0).build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetSlider_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-         wndw.getSlider("PANEL-01");
+         wndw.getSlider(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -118,72 +123,80 @@ public class AutomationContainerTest2 {
 
         Mockito.when(elem.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getMaskedEdit("AutomatedMaskEdit1");
+        wndw.getMaskedEdit(Search.getBuilder("AutomatedMaskEdit1").build());
 
         verify(elem, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testGetButton_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getButton("PANEL-01");
+        wndw.getButton(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetButton_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getButtonByAutomationId("PANEL-01");
+        wndw.getButton(Search.getBuilder().automationId("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetToolbar_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getToolBar("PANEL-01");
+        wndw.getToolBar(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetImage_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getImage("PANEL-01");
+        wndw.getImage(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testAutomationSpinner_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getSpinner("PANEL-01");
+        wndw.getSpinner(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetCustom_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getCustom("PANEL-01");
+        wndw.getCustom(Search.getBuilder("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testGetCustom_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getCustomByAutomationId("PANEL-01");
+        wndw.getCustom(Search.getBuilder().automationId("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -203,9 +216,10 @@ public class AutomationContainerTest2 {
 
         Mockito.when(elem.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(elem).itemContainer(container).window(window));
 
-        wndw.getCustomByControlType("CUSTOM-PANEL");
+        wndw.getCustom(Search.getBuilder().controlType("CUSTOM-PANEL").build());
 
         verify(elem, atLeastOnce()).findAll(any(), any());
     }
@@ -214,63 +228,70 @@ public class AutomationContainerTest2 {
     public void testGetCustom_By_ControlType_Throws_Exception_When_No_Found() throws Exception {
         AutomationElement elem = Mockito.mock(AutomationElement.class);
 
-        AutomationWindow wndw = new AutomationWindow(elem, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(elem).itemContainer(container).window(window));
 
-        wndw.getCustomByControlType("PANEL-01");
+        wndw.getCustom(Search.getBuilder().controlType("PANEL-01").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testgetEditBox_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getEditBox("Edit99");
+        wndw.getEditBox(Search.getBuilder("Edit99").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testgetEditBox_By_AutomationID_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getEditBoxByAutomationId("Edit99");
+        wndw.getEditBox(Search.getBuilder().automationId("Edit99").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testgetComboboxByAutomationId_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getComboboxByAutomationId("AutomatedCombobox1");
+        wndw.getComboBox(Search.getBuilder("AutomatedCombobox1").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testgetCombobox_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getCombobox("AutomatedCombobox1");
+        wndw.getComboBox(Search.getBuilder("AutomatedCombobox1").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testgetTreeView_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getTreeView("Not there");
+        wndw.getTreeView(Search.getBuilder("Not there").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
 
     @Test
     public void testgetProgressBar_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getProgressBar("NotThere");
+        wndw.getProgressBar(Search.getBuilder("notThere").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -292,18 +313,20 @@ public class AutomationContainerTest2 {
 
         Mockito.when(elem.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getMaskedEdit(0);
+        wndw.getMaskedEdit(Search.getBuilder(0).build());
 
         verify(elem, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testgetPanelByAutomationId_Calls_findFirst_From_Element() throws Exception {
-        AutomationWindow wndw = new AutomationWindow(element, window, container);
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        wndw.getPanelByAutomationId("9999");
+        wndw.getPanel(Search.getBuilder().automationId("9999").build());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

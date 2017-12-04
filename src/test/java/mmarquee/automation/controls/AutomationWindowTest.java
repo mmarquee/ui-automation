@@ -83,7 +83,8 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
 
         assertEquals("Name-01", windw.getName());
     }
@@ -98,7 +99,8 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
 
         assertNotEquals("Wrong-01", windw.getName());
     }
@@ -112,7 +114,8 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
         windw.getSystemMenu();
     }
@@ -126,7 +129,8 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
         windw.getTitleBar();
     }
@@ -140,9 +144,10 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window));
 
-        windw.getAppBar(0);
+        windw.getAppBar(Search.getBuilder(0).build());
     }
 
     @Test
@@ -153,7 +158,8 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
 
         assertTrue(windw.isModal());
     }
@@ -166,7 +172,8 @@ public class AutomationWindowTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationWindow windw = new AutomationWindow(element, window, container, instance);
+        AutomationWindow windw = new AutomationWindow(
+                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
 
         assertFalse(windw.isModal());
     }

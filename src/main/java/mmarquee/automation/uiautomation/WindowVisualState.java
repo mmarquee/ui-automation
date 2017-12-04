@@ -71,7 +71,7 @@ public enum WindowVisualState {
      * @return The value (as an WindowVisualState)
      */
     public static WindowVisualState fromInt(final int i) {
-        WindowVisualState type = intToTypeMap.get(Integer.valueOf(i));
+        WindowVisualState type = intToTypeMap.get(i);
         if (type == null)
             return WindowVisualState.Normal;
         return type;

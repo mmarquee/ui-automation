@@ -17,15 +17,15 @@ package mmarquee.automation;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
 
 /**
+ * Wrapper for the AutomationTreeWalker.
+ *
  * @author Mark Humphreys
  * Date 02/02/2017.
- *
- * Wrapper for the AutomationTreeWalker.
  */
 public class AutomationTreeWalker extends BaseAutomation {
     /**
@@ -57,8 +57,8 @@ public class AutomationTreeWalker extends BaseAutomation {
         this.walker.getNextSiblingElement(pElement, pChild);
 
         try {
-	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3Converter.PointerToInterface(pChild);
+	        IUIAutomationElement childElement =
+	                IUIAutomationElementConverter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -81,8 +81,8 @@ public class AutomationTreeWalker extends BaseAutomation {
         this.walker.getPreviousSiblingElement(pElement, pChild);
 
         try {
-	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3Converter.PointerToInterface(pChild);
+	        IUIAutomationElement childElement =
+	                IUIAutomationElementConverter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -104,8 +104,8 @@ public class AutomationTreeWalker extends BaseAutomation {
         this.walker.getLastChildElement(pElement, pChild);
 
         try {
-	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3Converter.PointerToInterface(pChild);
+	        IUIAutomationElement childElement =
+	                IUIAutomationElementConverter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -126,8 +126,8 @@ public class AutomationTreeWalker extends BaseAutomation {
         this.walker.getFirstChildElement(pElement, pChild);
         
         try {
-	        IUIAutomationElement3 childElement =
-	                IUIAutomationElement3Converter.PointerToInterface(pChild);
+	        IUIAutomationElement childElement =
+	                IUIAutomationElementConverter.PointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -149,8 +149,8 @@ public class AutomationTreeWalker extends BaseAutomation {
         this.walker.getParentElement(pElement, pParent);
 
         try {
-            IUIAutomationElement3 parentElement =
-                    IUIAutomationElement3Converter.PointerToInterface(pParent);
+            IUIAutomationElement parentElement =
+                    IUIAutomationElementConverter.PointerToInterface(pParent);
             return new AutomationElement(parentElement);
         } catch (NullPointerException ex) {
             return null;
@@ -163,7 +163,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @param root The root element (of which the children are walked).
      * @throws AutomationException Exception in the automation library.
      */
-    public void walk(final AutomationElementVisitor visitor, final AutomationElement root)
+    public void walk(final AutomationElementVisitor visitor,
+                     final AutomationElement root)
             throws AutomationException {
     	assert visitor != null;
     	assert root != null;
@@ -192,6 +193,7 @@ public class AutomationTreeWalker extends BaseAutomation {
     	 * @return true to continue walking the elements siblings, false otherwise.
     	 * @throws AutomationException if something goes wrong.
     	 */
-    	boolean visit(AutomationTreeWalker walker, AutomationElement element) throws AutomationException;
+    	boolean visit(AutomationTreeWalker walker, AutomationElement element)
+                throws AutomationException;
     }
 }

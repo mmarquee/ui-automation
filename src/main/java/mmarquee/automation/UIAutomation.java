@@ -24,8 +24,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.menu.AutomationMenu;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
@@ -35,18 +35,31 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
+ * The base automation wrapper.
+ *
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * The base automation wrapper.
  */
 public class UIAutomation extends BaseAutomation {
 
-    protected Logger logger = Logger.getLogger(UIAutomation.class.getName());
+    /**
+     * The logger instance.
+     */
+    private Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
+    /**
+     * The automation instance.
+     */
     protected static UIAutomation INSTANCE = null;
+
+    /**
+     * The wrapper for the Ole32 library.
+     */
     private static Ole32Wrapper Ole32 = null;
 
+    /**
+     * The root element.
+     */
     private AutomationElement rootElement;
 
     /**
@@ -84,10 +97,10 @@ public class UIAutomation extends BaseAutomation {
 
         Unknown uRoot = new Unknown(pRoot.getValue());
 
-        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pRoot);
+        WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            this.rootElement = new AutomationElement(IUIAutomationElement3Converter.PointerToInterface(pRoot));
+            this.rootElement = new AutomationElement(IUIAutomationElementConverter.PointerToInterface(pRoot));
         }
     }
 
@@ -141,13 +154,13 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param command The command to be called.
      * @return AutomationApplication that represents the application.
-     * @throws java.io.IOException Cannot start application?
-     * @throws AutomationException Automation library error.
+     * @throws java.io.IOException Cannot start application.
      */
     public AutomationApplication launch(final String... command)
-            throws java.io.IOException, AutomationException {
+            throws java.io.IOException {
         Process process = Utils.startProcess(command);
-        return new AutomationApplication(rootElement, process, false);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
     }
 
     /**
@@ -155,13 +168,13 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param command The command to be called.
      * @return AutomationApplication that represents the application.
-     * @throws java.io.IOException Cannot start application?
-     * @throws AutomationException Automation library error.
+     * @throws java.io.IOException Cannot start application.
      */
     public AutomationApplication launchWithDirectory(final String... command)
-            throws java.io.IOException, AutomationException {
+            throws java.io.IOException {
         Process process = Utils.startProcessWithWorkingDirectory(command);
-        return new AutomationApplication(rootElement, process, false);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
     }
 
     /**
@@ -169,11 +182,10 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param process Process to attach to.
      * @return AutomationApplication that represents the application.
-     * @throws AutomationException Automation library error.
      */
-    public AutomationApplication attach(final Process process)
-            throws AutomationException {
-        return new AutomationApplication(rootElement, process, true);
+    public AutomationApplication attach(final Process process) {
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
     }
 
     /**
@@ -227,7 +239,8 @@ public class UIAutomation extends BaseAutomation {
             throw new AutomationException("Process " + command + " not found.");
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(rootElement, handle, true);
+            return new AutomationApplication(
+                    new ElementBuilder(rootElement).handle(handle).attached(false));
         }
     }
 
@@ -251,7 +264,8 @@ public class UIAutomation extends BaseAutomation {
         }
         
         WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-        return new AutomationApplication(rootElement, handle, true);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).handle(handle).attached(false));
     }
     
     /**
@@ -333,6 +347,7 @@ public class UIAutomation extends BaseAutomation {
                 }
                 
             } catch (AutomationException ex) {
+                logger.info("Failed");
             }
             
             logger.info("Not found, retrying matching " + titlePattern);
@@ -342,6 +357,7 @@ public class UIAutomation extends BaseAutomation {
 				Thread.sleep(AutomationWindow.SLEEP_DURATION);
 			} catch (InterruptedException e) {
                 // interrupted
+                logger.info("interrupted");
 			}
         }
 
@@ -359,10 +375,9 @@ public class UIAutomation extends BaseAutomation {
      * @param title Title to search for.
      * @return AutomationWindow The found window.
      * @throws ElementNotFoundException Element is not found.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getDesktopWindow(final String title)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return getDesktopWindow(title, FIND_DESKTOP_ATTEMPTS);
     }
 
@@ -374,11 +389,10 @@ public class UIAutomation extends BaseAutomation {
      * @param retries Number of retries.
      * @return AutomationWindow The found window.
      * @throws ElementNotFoundException Element is not found.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getDesktopWindow(final String title, final int retries)
-            throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Window, title, retries));
+            throws AutomationException {
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, retries)));
     }
 
     /**
@@ -387,10 +401,9 @@ public class UIAutomation extends BaseAutomation {
      * @param titlePattern a pattern matching the title.
      * @return AutomationWindow The found window.
      * @throws ElementNotFoundException Element is not found.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationWindow getDesktopWindow(final Pattern titlePattern)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return getDesktopWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
     }
     
@@ -401,12 +414,11 @@ public class UIAutomation extends BaseAutomation {
      * @param titlePattern a pattern matching the title.
      * @param retries Number of retries.
      * @return AutomationWindow The found window.
-     * @throws ElementNotFoundException Element is not found.
-     * @throws PatternNotFoundException Expected pattern not found.
+     * @throws ElementNotFoundException Element is not found
      */
     public AutomationWindow getDesktopWindow(final Pattern titlePattern, final int retries)
-            throws PatternNotFoundException, AutomationException {
-        return new AutomationWindow(this.get(ControlType.Window, titlePattern, retries));
+            throws AutomationException {
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, retries)));
     }
     /**
      * Create an 'and' condition.
@@ -558,12 +570,9 @@ public class UIAutomation extends BaseAutomation {
      * Gets the main desktop object.
      *
      * @return AutomationPanel The found object.
-     * @throws ElementNotFoundException Element is not found.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationPanel getDesktop()
-            throws AutomationException, PatternNotFoundException {
-        return new AutomationPanel(this.rootElement);
+    public AutomationPanel getDesktop() {
+        return new AutomationPanel(new ElementBuilder(this.rootElement));
     }
 
     /**
@@ -572,11 +581,10 @@ public class UIAutomation extends BaseAutomation {
      * @param title Title to search for.
      * @return AutomationPanel The found object.
      * @throws ElementNotFoundException Element is not found.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public AutomationPanel getDesktopObject(final String title)
-            throws PatternNotFoundException, AutomationException {
-        return new AutomationPanel(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS));
+            throws AutomationException {
+        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS)));
     }
 
     /**
@@ -620,7 +628,7 @@ public class UIAutomation extends BaseAutomation {
             throw new ItemNotFoundException(title);
         }
 
-        return new AutomationMenu(element);
+        return new AutomationMenu(new ElementBuilder(element));
     }
 
     /**
@@ -628,16 +636,15 @@ public class UIAutomation extends BaseAutomation {
      *
      * @return List of desktop windows.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public List<AutomationWindow> getDesktopWindows()
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         List<AutomationWindow> result = new ArrayList<AutomationWindow>();
 
         List<AutomationElement> collection = getRootChildren(ControlType.Window);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationWindow(element));
+            result.add(new AutomationWindow(new ElementBuilder(element)));
         }
 
         return result;
@@ -648,28 +655,31 @@ public class UIAutomation extends BaseAutomation {
      *
      * @return List of desktop object.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
      */
     public List<AutomationPanel> getDesktopObjects()
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         List<AutomationPanel> result = new ArrayList<AutomationPanel>();
 
         List<AutomationElement> collection = getRootChildren(ControlType.Pane);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationPanel(element));
+            result.add(new AutomationPanel(new ElementBuilder(element)));
         }
 
         return result;
     }
 
+    /**
+     * Gets the children of the root element.
+     * @param controlType The control type to get
+     * @return List of Elements
+     * @throws AutomationException Something went wrong
+     */
 	private List<AutomationElement> getRootChildren(final ControlType controlType)
             throws AutomationException {
         PointerByReference pCondition = this.createControlTypeCondition(controlType);
 
-        List<AutomationElement> collection =
-                this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
-		return collection;
+		return this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
 	}
 
     /**
@@ -739,7 +749,7 @@ public class UIAutomation extends BaseAutomation {
 
         final int res = this.automation.elementFromPoint(pt, pbr);
         if (res == 0) {
-            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+            IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
             return new AutomationElement(element);
         } else {
@@ -760,7 +770,7 @@ public class UIAutomation extends BaseAutomation {
 
         final int res = this.automation.getElementFromHandle(hwnd, pbr);
         if (res == 0) {
-            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+            IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
             return new AutomationElement(element);
         } else {
@@ -779,7 +789,7 @@ public class UIAutomation extends BaseAutomation {
 
         final int res = this.automation.getFocusedElement(pbr);
         if (res == 0) {
-            IUIAutomationElement3 element = getAutomationElementFromReference(pbr);
+            IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
             return new AutomationElement(element);
         } else {

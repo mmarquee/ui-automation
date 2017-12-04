@@ -74,7 +74,7 @@ public enum ToggleState {
      * @return The value (as an ToggleState).
      */
     public static ToggleState fromInt(final int i) {
-        ToggleState type = IntToTypeMap.get(Integer.valueOf(i));
+        ToggleState type = IntToTypeMap.get(i);
         if (type == null) {
             return ToggleState.Off;
         }

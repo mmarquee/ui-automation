@@ -17,9 +17,7 @@ package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
 
 /**
  * @author Mark Humphreys
@@ -31,10 +29,6 @@ public interface IUIAutomationExpandCollapsePattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID(
             "{619BE086-1F4E-4EE4-BAFA-210128738730}");
-
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int expand();
     int collapse();

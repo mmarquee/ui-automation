@@ -21,7 +21,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 
 /**
  * @author Mark Humphreys

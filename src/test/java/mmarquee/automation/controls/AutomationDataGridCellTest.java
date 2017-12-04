@@ -44,7 +44,8 @@ public class AutomationDataGridCellTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
+        AutomationDataGridCell cell =
+                new AutomationDataGridCell(new ElementBuilder(element).value(value).automation(instance));
 
         String val = cell.getValue();
 
@@ -61,7 +62,8 @@ public class AutomationDataGridCellTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGridCell cell = new AutomationDataGridCell(element, value, instance);
+        AutomationDataGridCell cell =
+                new AutomationDataGridCell(new ElementBuilder(element).value(value).automation(instance));
 
         String val = cell.getName();
 

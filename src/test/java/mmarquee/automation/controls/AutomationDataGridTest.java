@@ -55,7 +55,8 @@ public class AutomationDataGridTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection, instance);
+        AutomationDataGrid dataGrid = new AutomationDataGrid(
+                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
 
         String name = dataGrid.getName();
 
@@ -75,7 +76,8 @@ public class AutomationDataGridTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection, instance);
+        AutomationDataGrid dataGrid = new AutomationDataGrid(
+                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
         String name = dataGrid.getValue();
 
         assertTrue(name.equals("VALUE"));
@@ -94,7 +96,8 @@ public class AutomationDataGridTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection, instance);
+        AutomationDataGrid dataGrid = new AutomationDataGrid(
+                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
         RowOrColumnMajor val = dataGrid.getRowOrColumnMajor();
 
         assertTrue(val == RowOrColumnMajor.RowMajor);
@@ -113,7 +116,8 @@ public class AutomationDataGridTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationDataGrid dataGrid = new AutomationDataGrid(element, value, grid, table, selection, instance);
+        AutomationDataGrid dataGrid = new AutomationDataGrid(
+                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
 
         boolean val = dataGrid.isReadOnly();
 

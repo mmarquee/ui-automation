@@ -21,9 +21,8 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationRibbonWorkPane;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.*;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -31,7 +30,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.when;
@@ -73,9 +71,10 @@ public class AutomationRibbonWorkPaneTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element, container);
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
+                new ElementBuilder(element).itemContainer(container));
 
-        workPane.getNUIPane(0);
+        workPane.getNUIPane(Search.getBuilder(0).build());
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -86,7 +85,7 @@ public class AutomationRibbonWorkPaneTest2 {
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        IUIAutomationElement3 elem = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
         Mockito.when(elem.getCurrentClassName(any())).thenAnswer(
                 invocation -> {
@@ -107,9 +106,10 @@ public class AutomationRibbonWorkPaneTest2 {
         when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(element);
+        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
+                new ElementBuilder(element));
 
-        workPane.getNUIPane(0);
+        workPane.getNUIPane(Search.getBuilder(0).build());
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

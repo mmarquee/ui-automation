@@ -1,48 +1,41 @@
 ## sbt
-To add the library as a prerequisite, use the following entry in the build.sbt file
+To add the library as a prerequisite, use the following entry to the library dependencies in the `build.sbt` file
 
-```scala
+```
   libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.4.3"
 ```
 
 ## Examples
 
-This class encapsulates some simple automation of the Notepad program, starting the application, adding text, exiting the application and confirming exit
+The sample code encapsulates some simple automation of the Notepad program, starting the application, adding text, exiting the application and confirming exit
+
+To simplify the code, the standard behaviour of the application has been encapsulated in the `NotepadApplication` class - ee the `main\Scala` folder for the full code
 
 ```scala
-  class NotepadAutomation {
-    private var automation = UIAutomation.getElement
-    private var application: AutomationApplication = _
-    private var window: AutomationWindow = _
-
-    def launch(): Unit = {
-        this.application = this.automation.launch("notepad.exe")
-
-        this.window = automation.getDesktopWindow("Untitled - Notepad")
-    }
-
-    def addText(text: String): Unit = {
-        val editor = this.window.getEditBox("Edit1")
-        editor.setValue(text)
-    }
-
-    def clickExit(): Unit = {
-        val menu = this.window.getMainMenu(1)
-        menu.getMenuItem ("File", "Exit").click
-    }
-
-    def confirmExit(): Unit = {
-        val confirm = this.window.getWindow("Notepad")
-        confirm.getButton("Don't Save").click
-    }
-  }
-
-  ...
-  val notepad = NotepadAutomation()
-  notepad.launch
-  notepad.addText("This is automated from Scala")
-  notepad.clickExit
-  notepad.confirmExit
-  ...
+  object AutomationTest {
+ 
+   var notepad: NotepadApplication = _
+ 
+   def start(): Unit = {
+     notepad = new NotepadApplication()
+ 
+     notepad.launch
+     notepad.addText("Hello there")
+     notepad.clickExit()
+     val confirm = notepad.getConfirm
+ 
+     if (confirm != null) {
+       System.out.println(s"Found the confirmation popup")
+     } else {
+       System.out.println(s"Didn't find confirmation window")
+     }
+ 
+     notepad.confirmExit()
+   }
+ 
+   def main(args: Array[String]) {
+     start()
+   }
+ }
 
 ```

@@ -17,7 +17,6 @@ package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -29,10 +28,6 @@ public interface IUIAutomationTextRange extends IUnknown {
      * The interface IID for QueryInterface et al
      */
     Guid.IID IID = new Guid.IID("{A543CC6A-F4AE-494B-8239-C814481187A8}");
-
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 
     int select();
     int getText(Integer maxLength, PointerByReference sr);

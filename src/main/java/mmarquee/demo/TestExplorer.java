@@ -19,7 +19,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.AutomationReBar;
 
 /**
  * @author Mark Humphreys
@@ -30,7 +29,7 @@ import mmarquee.automation.controls.AutomationReBar;
  */
 class TestExplorer extends TestBase {
 
-    void run() {
+    public final void run() {
 
         UIAutomation automation = UIAutomation.getInstance();
 
@@ -61,23 +60,23 @@ class TestExplorer extends TestBase {
             AutomationRibbonWorkPane pane = commandBar.getRibbonWorkPane();
             logger.info("First work pane is " + pane.getName());
 
-            AutomationNUIPane uiPane = pane.getNUIPane(0);
+            AutomationNUIPane uiPane = pane.getNUIPane(Search.getBuilder(0).build());
             logger.info("First NUIPane is " + uiPane.getName());
 
-            AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(0);
+            AutomationNetUIHWND uiHWND = uiPane.getNetUIHWND(Search.getBuilder(0).build());
 
             try {
-                AutomationButton btn = uiHWND.getButton("Minimise the Ribbon");
+                AutomationButton btn = uiHWND.getButton(Search.getBuilder("Minimise the Ribbon").build());
 
-                AutomationTab tab = uiHWND.getTab(0);
+                AutomationTab tab = uiHWND.getTab(Search.getBuilder(0).build());
                 tab.selectTabPage("View");
 
-                AutomationPanel panel = uiHWND.getPanel("Lower Ribbon");
+                AutomationPanel panel = uiHWND.getPanel(Search.getBuilder("Lower Ribbon").build());
 
-                AutomationToolBar panes = panel.getToolBar("Panes");
+                AutomationToolBar panes = panel.getToolBar(Search.getBuilder("Panes").build());
 
-                panes.getButton("Preview pane").click();
-                AutomationSplitButton split = panes.getSplitButton("Navigation pane");
+                panes.getButton(Search.getBuilder("Preview pane").build()).click();
+                AutomationSplitButton split = panes.getSplitButton(Search.getBuilder("Navigation pane").build());
                 split.click();
 
                 this.rest();
@@ -91,12 +90,12 @@ class TestExplorer extends TestBase {
 
             logger.info("+++ Rebar +++");
 
-            AutomationReBar rebar = window.getReBar(0);
+            AutomationReBar rebar = window.getReBar(Search.getBuilder(0).build());
             try {
-                AutomationToolBar toolbar = rebar.getToolBar("Up band toolbar");
+                AutomationToolBar toolbar = rebar.getToolBar(Search.getBuilder("Up band toolbar").build());
 
                 logger.info("Toolbar = " + toolbar.getName());
-                AutomationButton upButton = toolbar.getButton(0);
+                AutomationButton upButton = toolbar.getButton(Search.getBuilder(0).build());
                 logger.info("Rebar button is `" + upButton.getName() + "`");
              //   upButton.click();
             } catch (ElementNotFoundException ex) {
@@ -107,14 +106,14 @@ class TestExplorer extends TestBase {
 
             try {
                 // Now try and get to the list of items in explorer
-                AutomationPanel explorer = window.getPanel("File Explorer");
+                AutomationPanel explorer = window.getPanel(Search.getBuilder("File Explorer").build());
                 logger.info("." + explorer.getName());
-                AutomationPanel pane0 = explorer.getPanel("Control Host");
+                AutomationPanel pane0 = explorer.getPanel(Search.getBuilder("Control Host").build());
                 logger.info(".." + pane0.getName());
-                AutomationTreeView treeView = pane0.getTreeView(0);
+                AutomationTreeView treeView = pane0.getTreeView(Search.getBuilder(0).build());
                 logger.info("..." + treeView.getName());
                 try {
-                    AutomationTreeViewItem treeItem = treeView.getItem("Desktop");
+                    AutomationTreeViewItem treeItem = treeView.getItem(Search.getBuilder("Desktop").build());
                     logger.info("...." + treeItem.getName());
 
                     this.rest();
@@ -131,12 +130,12 @@ class TestExplorer extends TestBase {
             }
 
             logger.info("Getting toolbar");
-            AutomationToolBar toolbar = window.getToolBar(0);
+            AutomationToolBar toolbar = window.getToolBar(Search.getBuilder(0).build());
             logger.info("Got toolbar");
             logger.info("....." + toolbar.getName());
 
             // Looks like the button is a problem with Delphi
-            AutomationButton btn0 = toolbar.getButton(0);
+            AutomationButton btn0 = toolbar.getButton(Search.getBuilder(0).build());
             logger.info("....." + btn0.getName());
             if (btn0.isEnabled()) {
                 btn0.click();

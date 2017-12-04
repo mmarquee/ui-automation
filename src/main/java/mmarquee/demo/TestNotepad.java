@@ -20,9 +20,10 @@ import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.AutomationEditBox;
+import mmarquee.automation.controls.Search;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 
@@ -31,17 +32,17 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 
 /**
+ * Test the automation wrapper on a Delphi VCL application.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Test the automation wrapper on a Delphi VCL application.
  */
 public class TestNotepad extends TestBase {
 
     /**
      * Run the test.
      */
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         Logger logger = Logger.getLogger(AutomationBase.class.getName());
@@ -58,7 +59,8 @@ public class TestNotepad extends TestBase {
         application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
 
         try {
-            AutomationWindow window = automation.getDesktopWindow(Pattern.compile("Untitled - Notepad|Unbenannt - Editor"));
+            AutomationWindow window = automation.getDesktopWindow(
+                    Pattern.compile("Untitled - Notepad|Unbenannt - Editor"));
             String name = window.getName();
             logger.info(name);
 
@@ -67,7 +69,7 @@ public class TestNotepad extends TestBase {
 
             boolean val = window.isModal();
 
-            AutomationEditBox edit = window.getEditBox(0);
+            AutomationEditBox edit = window.getEditBox(Search.getBuilder(0).build());
 
             edit.setValue("This is a test of automation");
 
@@ -80,12 +82,16 @@ public class TestNotepad extends TestBase {
             AutomationMainMenu menu = window.getMainMenu();
 
             try {
-                AutomationMenuItem exit = menu.getMenuItem(Pattern.compile("File|Datei"), Pattern.compile("Exit|Beenden"));
+                AutomationMenuItem exit = menu.getMenuItem(
+                        Pattern.compile("File|Datei"), Pattern.compile("Exit|Beenden"));
                 exit.click();
 
                 try {
-                    AutomationWindow popup = window.getWindow(Pattern.compile("Notepad|Editor"));
-                    AutomationButton btn = popup.getButton(Pattern.compile("Don't Save|Nicht speichern"));
+                    AutomationWindow popup = window.getWindow(
+                            Search.getBuilder(Pattern.compile("Notepad|Editor")).build());
+                    AutomationButton btn = popup.getButton(
+                            Search.getBuilder(
+                                    Pattern.compile("Don't Save|Nicht speichern")).build());
 
                     btn.click();
 

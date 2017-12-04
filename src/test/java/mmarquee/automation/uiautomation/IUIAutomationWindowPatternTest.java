@@ -54,15 +54,15 @@ public class IUIAutomationWindowPatternTest {
 
     private IUIAutomation automation;
 
-    private IUIAutomationElement3 getRootElement() throws Exception {
+    private IUIAutomationElement getRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
         automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
-        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3Converter.PointerToInterface(root);
+            return IUIAutomationElementConverter.PointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -94,15 +94,15 @@ public class IUIAutomationWindowPatternTest {
         }
     }
 
-    private IUIAutomationElement3 getWindowChildOfRootElement() throws Exception {
+    private IUIAutomationElement getWindowChildOfRootElement() throws Exception {
         PointerByReference root = new PointerByReference();
         automation.getRootElement(root);
 
         Unknown uRoot = new Unknown(root.getValue());
 
-        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
+        WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement3 rootElement = IUIAutomationElement3Converter.PointerToInterface(root);
+            IUIAutomationElement rootElement = IUIAutomationElementConverter.PointerToInterface(root);
 
             Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
             variant.setValue(Variant.VT_INT, ControlType.Window.getValue());
@@ -118,9 +118,9 @@ public class IUIAutomationWindowPatternTest {
 
             PointerByReference element = new PointerByReference();
 
-            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
+            WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
-            return IUIAutomationElement3Converter.PointerToInterface(element);
+            return IUIAutomationElementConverter.PointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -129,7 +129,7 @@ public class IUIAutomationWindowPatternTest {
     @Test
     public void testGetWindowPatternFailsForRootElement() throws Exception {
         // Get the pattern
-        IUIAutomationElement3 element = this.getRootElement();
+        IUIAutomationElement element = this.getRootElement();
 
         PointerByReference pbr = new PointerByReference();
 
@@ -141,7 +141,7 @@ public class IUIAutomationWindowPatternTest {
     @Ignore("This fails for some reason")
     public void testGetWindowPatternSucceedsForWindowElement() throws Exception {
         // Get the pattern
-        IUIAutomationElement3 element = this.getWindowChildOfRootElement();
+        IUIAutomationElement element = this.getWindowChildOfRootElement();
 
         PointerByReference pbr = new PointerByReference();
 

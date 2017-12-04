@@ -15,60 +15,40 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper for the Calendar element.
+ *
  * @author Mark Humphreys
  * Date 16/02/2016.
- *
- * Wrapper for the Calendar element.
  *
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
 public class AutomationCalendar extends AutomationBase implements Valueable {
+    /**
+     * The value pattern.
+     */
     private Value valuePattern;
 
     /**
      * Constructor for the AutomationCalendar.
      *
-     * @param element The underlying automation element.
+     * @param builder The element builder.
      * @throws AutomationException Automation library error.
      * @throws PatternNotFoundException Expected pattern not found.
      */
-    public AutomationCalendar(final AutomationElement element)
+    public AutomationCalendar(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
-        super(element);
-        this.valuePattern = this.getValuePattern();
-    }
+        super(builder);
 
-    /**
-     * Constructor for the AutomationCalendar.
-     *
-     * @param element The underlying automation element.
-     * @param pattern Value pattern.
-     */
-    public AutomationCalendar(final AutomationElement element,
-                              final Value pattern) {
-        super(element);
-        this.valuePattern = pattern;
-    }
-
-    /**
-     * Constructor for the AutomationCalendar.
-     *
-     * @param element The underlying automation element.
-     * @param pattern Value pattern.
-     * @param instance the automation instance.
-     */
-    public AutomationCalendar(final AutomationElement element,
-                              final Value pattern,
-                              final UIAutomation instance) {
-        super(element, instance);
-        this.valuePattern = pattern;
+        if (builder.getHasValue()) {
+            this.valuePattern = builder.getValue();
+        } else {
+            this.valuePattern = this.getValuePattern();
+        }
     }
 
     /**

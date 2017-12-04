@@ -58,7 +58,7 @@ public enum RowOrColumnMajor {
      * @return The value (as an RowOrColumnMajor)
      */
     public static RowOrColumnMajor fromInt(int i) {
-        RowOrColumnMajor type = intToTypeMap.get(Integer.valueOf(i));
+        RowOrColumnMajor type = intToTypeMap.get(i);
         if (type == null)
             return RowOrColumnMajor.Indeterminate;
         return type;

@@ -25,19 +25,20 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
+ * Converter implementation of IUIAutomationElement3.
+ *
  * @author Mark Humphreys
  * Date 05/06/2017.
- *
- * Converter implementation of IUIAutomationElement3
  */
 public class IUIAutomationElement3Converter {
-    //  0-2  IUnknown,
-    //  3-84 IUIAutomationElement3,
-    // 85-90 IUIAutomationElement2,
-    // 91-93 IUIAutomationElement3
-    private static int UIAutomationElement_Methods = 94;
 
     public static IUIAutomationElement3 PointerToInterface(final PointerByReference ptr) {
+        //  0-2  IUnknown,
+        //  3-84 IUIAutomationElement3,
+        // 85-90 IUIAutomationElement2,
+        // 91-93 IUIAutomationElement3
+        final int UIAutomationElement_Methods = 94;
+
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];

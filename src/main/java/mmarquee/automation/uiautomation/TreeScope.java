@@ -59,6 +59,6 @@ public class TreeScope extends Structure {
 
     @Override
     protected List<String> getFieldOrder() {
-        return Arrays.asList(new String[] { "value" });
+        return Arrays.asList("value");
     }
 }

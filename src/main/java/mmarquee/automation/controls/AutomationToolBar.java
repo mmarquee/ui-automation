@@ -17,61 +17,24 @@ package mmarquee.automation.controls;
 
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * @author Mark Humphreys
- * Date 02/03/2016.
-
  * Wrapper for the Toolbar element.
  * IDockProvider, IExpandCollapse,
+ *
+ * @author Mark Humphreys
+ * Date 02/03/2016
  */
-public class AutomationToolBar extends AutomationContainer {
+public final class AutomationToolBar extends AutomationContainer {
     /**
      * Constructor for the AutomationToolBar.
      *
-     * @param element The underlying automation element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Could not find pattern.
+     * @param builder The builder
      */
-    public AutomationToolBar(final AutomationElement element)
-            throws AutomationException, PatternNotFoundException {
-        super(element);
-    }
-
-    /**
-     * Constructor for the AutomationToolBar.
-     *
-     * @param element The underlying automation element.
-     * @param container The ItemContainer pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Could not find pattern.
-     */
-    public AutomationToolBar(final AutomationElement element,
-                             final ItemContainer container)
-            throws AutomationException, PatternNotFoundException {
-        super(element, container);
-    }
-
-    /**
-     * Constructor for the AutomationToolBar.
-     *
-     * @param element The underlying automation element.
-     * @param container The ItemContainer pattern.
-     * @param instance The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Could not find pattern.
-     */
-    public AutomationToolBar(final AutomationElement element,
-                             final ItemContainer container,
-                             final UIAutomation instance)
-            throws AutomationException, PatternNotFoundException {
-        super(element, container, instance);
+    public AutomationToolBar(final ElementBuilder builder) {
+        super(builder);
     }
 
     /**
@@ -80,7 +43,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(final int index)
+    private AutomationToolBarButton getToolbarButton(final int index)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(index, ControlType.Button));
     }
@@ -91,7 +54,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(final String name)
+    private AutomationToolBarButton getToolbarButton(final String name)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(name, ControlType.Button));
     }
@@ -102,7 +65,7 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButton(final Pattern namePattern)
+    private AutomationToolBarButton getToolbarButton(final Pattern namePattern)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByControlType(namePattern, ControlType.Button));
     }
@@ -113,8 +76,29 @@ public class AutomationToolBar extends AutomationContainer {
      * @return The AutomationButton.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationToolBarButton getToolbarButtonByAutomationId(final String automationId)
+    private AutomationToolBarButton getToolbarButtonByAutomationId(final String automationId)
             throws AutomationException {
         return new AutomationToolBarButton(this.getElementByAutomationId(automationId));
+    }
+
+    /**
+     * Get the toolbar button, using the search criteria.
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationToolBarButton getToolbarButton(final Search search)
+            throws AutomationException {
+        if (search.getHasNamePattern()) {
+            return getToolbarButton(search.getNamePattern());
+        } else if (search.getHasAutomationId()) {
+            return getToolbarButtonByAutomationId(search.getAutomationId());
+        } else if (search.getHasIndex()) {
+            return getToolbarButton(search.getIndex());
+        } else if (search.getHasName()) {
+            return getToolbarButton(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 }

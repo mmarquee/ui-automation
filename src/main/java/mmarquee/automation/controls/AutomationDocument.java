@@ -19,7 +19,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -27,39 +26,28 @@ import mmarquee.automation.uiautomation.TreeScope;
 import java.util.List;
 
 /**
- * @author Mark Humphreys
- * Date 16/02/2016.
- *
  * Wrapper for the Document element.
  *
+ * @author Mark Humphreys
+ * Date 16/02/2016.
  */
-public class AutomationDocument extends AutomationBase {
+public final class AutomationDocument extends AutomationBase {
+    /**
+     * The text pattern.
+     */
     private Text textPattern;
 
     /**
-     * Constructor for the AutomationDocument
-     * @param element The underlying automation element
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Expected pattern not found
+     * Constructor for the AutomationDocument.
+     * @param builder The builder
      */
-    public AutomationDocument(AutomationElement element) throws PatternNotFoundException, AutomationException {
-        super(element);
-//        this.textPattern = this.getTextPattern();
+    AutomationDocument(final ElementBuilder builder) {
+        super(builder);
+        this.textPattern = builder.getText();
     }
 
     /**
-     * Constructor for the AutomationDocument
-     * @param element The underlying automation element
-     * @param pattern The Text pattern
-     * @param instance Automation instance
-     */
-    AutomationDocument(AutomationElement element, Text pattern, UIAutomation instance) {
-        super(element, instance);
-        this.textPattern = pattern;
-    }
-
-    /**
-     * Gets the text for the document
+     * Gets the text for the document.
      * @return The document's text
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
@@ -72,7 +60,7 @@ public class AutomationDocument extends AutomationBase {
     }
 
     /**
-     * Gets the selection
+     * Gets the selection.
      *
      * @return String of text that is selected
      * @throws AutomationException Something has gone wrong
@@ -86,11 +74,34 @@ public class AutomationDocument extends AutomationBase {
         return this.textPattern.getSelection();
     }
 
-    public AutomationDocumentPage getPage(int index) throws PatternNotFoundException, AutomationException {
+    /**
+     * Gets the page, based on index.
+     * @param index The index
+     * @return The selected page
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationDocumentPage getPage(final int index)
+            throws AutomationException {
         List<AutomationElement> items = this.findAll(
                 new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.Custom));
 
-        return new AutomationDocumentPage(items.get(index));
+        return new AutomationDocumentPage(new ElementBuilder(items.get(index)));
+    }
+
+    /**
+     * Get the page, using the search criteria.
+     *
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
+     */
+    public AutomationDocumentPage getPage(final Search search)
+            throws AutomationException {
+       if (search.getHasIndex()) {
+           return getPage(search.getIndex());
+       } else {
+           throw new AutomationException("Search type not found");
+       }
     }
 }

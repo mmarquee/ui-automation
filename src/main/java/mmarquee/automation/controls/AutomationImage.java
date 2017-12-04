@@ -17,41 +17,42 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.SelectionItem;
 
-import java.util.List;
-
 /**
+ * Wrapper for the Image control element.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Wrapper for the Image control element.
  */
-public class AutomationImage extends AutomationBase {
+public final class AutomationImage extends AutomationBase {
     /**
-     * Construct the AutomationImage
-     * @param element The element
-     * @throws AutomationException Automation library error
+     * Construct the AutomationImage.
+     * @param builder The builder
      */
-    public AutomationImage(AutomationElement element) throws AutomationException {
-        super(element);
+    public AutomationImage(final ElementBuilder builder) {
+        super(builder);
     }
 
     // Powerpoint weirdness, probably needs it's own class in the end
 
+    /**
+     * The selection item pattern.
+     */
     private SelectionItem selectionItemPattern;
 
+    /**
+     * Gets the selection container.
+     * @return The selected element
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Expected pattern not found
+     */
     public AutomationElement getSelectionContainer() throws PatternNotFoundException, AutomationException {
         if (this.selectionItemPattern == null) {
             this.selectionItemPattern = this.getSelectItemPattern();
         }
 
-        AutomationElement element
-                = selectionItemPattern.getSelectionContainer();
-
-        return element;
+        return selectionItemPattern.getSelectionContainer();
     }
 }

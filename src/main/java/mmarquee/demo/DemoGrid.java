@@ -73,13 +73,13 @@ public class DemoGrid extends TestBase {
             }
 
             // GRIDS ***********************************
-            AutomationDataGrid grid = applicationWindow.getDataGrid("grdDemoGrid", "TJHCGrid");
+            AutomationDataGrid grid = applicationWindow.getDataGrid(Search.getBuilder("AutomatedCombobox1").className("TJHCGrid").build());
             logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids
          //   grid.showContextMenu();
 
-            AutomationDataGridCell cell1 = grid.getItem(1, 1);
+            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1, 1).build());
 
             logger.info("value: " + cell1.getValue());
 
@@ -91,7 +91,7 @@ public class DemoGrid extends TestBase {
                 logger.info("value is " + cells.get(1).getValue());
             }
 
-            AutomationDataGridCell cell3 = grid.getItem(3, 3);
+            AutomationDataGridCell cell3 = grid.getItem(Search.getBuilder(3, 3).build());
             cell3.select();
 
             List<AutomationDataGridCell> cells0 = grid.selectedRow();

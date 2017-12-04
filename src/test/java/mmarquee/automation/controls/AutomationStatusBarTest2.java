@@ -19,9 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
-import org.apache.log4j.Logger;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -59,9 +57,10 @@ public class AutomationStatusBarTest2 {
 
 //        when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+        AutomationStatusBar statusBar = new AutomationStatusBar(
+                new ElementBuilder(element).itemContainer(pattern));
 
-        AutomationTextBox textBox = statusBar.getTextBox(0);
+        AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }
@@ -73,7 +72,7 @@ public class AutomationStatusBarTest2 {
 
         when(element.getName()).thenReturn("NAME");
 
-        IUIAutomationElement3 listElement = Mockito.mock(IUIAutomationElement3.class);
+        IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
@@ -85,9 +84,10 @@ public class AutomationStatusBarTest2 {
 
     //    when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(element, pattern);
+        AutomationStatusBar statusBar = new AutomationStatusBar(
+                new ElementBuilder(element).itemContainer(pattern));
 
-        AutomationTextBox textBox = statusBar.getTextBox(0);
+        AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }

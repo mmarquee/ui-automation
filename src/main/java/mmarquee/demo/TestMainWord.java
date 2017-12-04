@@ -26,7 +26,7 @@ import mmarquee.automation.controls.*;
  */
 public class TestMainWord extends TestBase {
 
-    public void run() {
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
@@ -44,22 +44,22 @@ public class TestMainWord extends TestBase {
             // 1. Load a file in Word
 
             // 2. Get the sheet
-            AutomationWindow window = application.getWindow("Document1 - Word");
+            AutomationWindow window = application.getWindow(Search.getBuilder("Document1 - Word").build());
             logger.info(window.getName());
 
-            AutomationPanel pane = window.getPanel("Document1");
+            AutomationPanel pane = window.getPanel(Search.getBuilder("Document1").build());
             logger.info(pane.getName());
             logger.info(pane.getClassName());
-            AutomationPanel pane1 = pane.getPanel(0);
+            AutomationPanel pane1 = pane.getPanel(Search.getBuilder(0).build());
             logger.info(pane1.getName());
 
-            AutomationDocument doc = pane1.getDocument(0);
+            AutomationDocument doc = pane1.getDocument(Search.getBuilder(0).build());
             logger.info(doc.getName());
 
-            AutomationDocumentPage page0 = doc.getPage(0);
+            AutomationDocumentPage page0 = doc.getPage(Search.getBuilder(0).build());
             logger.info(page0.getName());
 
-            AutomationEditBox edit = page0.getEditBox(0);
+            AutomationEditBox edit = page0.getEditBox(Search.getBuilder(0).build());
             logger.info(edit.getName());
 
             String text = edit.getText();

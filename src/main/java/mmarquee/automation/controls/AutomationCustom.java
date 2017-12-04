@@ -15,18 +15,14 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * Wrapper for the Custom ControlId, which is usually a container.
  * @author Mark Humphreys
  * Date 08/03/2016.
- *
- * Wrapper for the Custom ControlId, which is usually a container.
  */
 public class AutomationCustom extends AutomationContainer implements Valueable {
 
@@ -36,35 +32,13 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
     private Value valuePattern;
 
     /**
-     * Constructor for the AutomationCustom.
+     * Constructor for the AutomationCustom element.
      *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
+     * @param builder The builder
      */
-    public AutomationCustom(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
-
-    /**
-     * Constructor for the AutomationCustom control.
-     *
-     * @param element The element.
-     * @param container ItemContainer pattern.
-     * @param value The Value pattern to use.
-     * @param instance The automation instance.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    AutomationCustom(final AutomationElement element,
-                     final ItemContainer container,
-                     final Value value,
-                     final UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container, instance);
-
-        this.valuePattern = value;
+    public AutomationCustom(final ElementBuilder builder) {
+        super(builder);
+        this.valuePattern = builder.getValue();
     }
 
     /**
@@ -81,19 +55,5 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
         }
 
         return this.valuePattern.value();
-    }
-
-    /**
-     * Constructor for the AutomationCustom.
-     *
-     * @param element The element.
-     * @param container ItemContainer pattern.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    AutomationCustom(final AutomationElement element,
-                     final ItemContainer container)
-            throws PatternNotFoundException, AutomationException {
-        super(element, container);
     }
 }

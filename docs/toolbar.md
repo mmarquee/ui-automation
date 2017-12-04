@@ -4,10 +4,10 @@
 # Example
 
 ```
-  AutomationToolBar toolbar = applicationWindow.getToolBar(0);
+  AutomationToolBar toolbar = applicationWindow.getToolBar(Search.getBuilder(0).build());
   logger.info("Toolbar name is " + toolbar.name()); // Blank in default WPF
 
-  AutomationToolBarButton btn0 = toolbar.getToolbarButton(0);
+  AutomationToolBarButton btn0 = toolbar.getToolbarButton(Search.getBuilder(0).build());
 
   if (btn0.isEnabled()) {
     logger.info("btn0 Enabled");

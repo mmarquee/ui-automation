@@ -16,20 +16,17 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
 
 /**
+ * Wrapper for the RadioButton element.
+ *
  * @author Mark Humphreys
  * Date 31/01/2016.
- *
- * Wrapper for the RadioButton element.
  */
-public class AutomationRadioButton extends AutomationBase implements Selectable {
+public final class AutomationRadioButton extends AutomationBase implements Selectable {
 
     /**
      * The selection item pattern.
@@ -39,31 +36,11 @@ public class AutomationRadioButton extends AutomationBase implements Selectable 
     /**
      * Construct the AutomationRadioButton.
      *
-     * @param element The element.
-     * @param selection The item selection pattern.
-     * @param instance Automation instance.
-     * @throws PatternNotFoundException Expected pattern not found.
-     * @throws AutomationException Automation library error.
+     * @param builder The builder.
      */
-    AutomationRadioButton(final AutomationElement element,
-                          final SelectionItem selection,
-                          final UIAutomation instance)
-            throws PatternNotFoundException, AutomationException {
-        super(element, instance);
-        selectItemPattern = selection;
-    }
-
-    /**
-     * Construct the AutomationRadioButton.
-     *
-     * @param element The element.
-     * @throws PatternNotFoundException Expected pattern not found.
-     * @throws AutomationException Automation library error.
-     */
-    public AutomationRadioButton(final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-//        selectItemPattern = this.getSelectItemPattern();
+    public AutomationRadioButton(final ElementBuilder builder) {
+        super(builder);
+        selectItemPattern = builder.getSelectItem();
     }
 
     /**

@@ -99,7 +99,7 @@ public class AutomationMouse {
     public void rightClick() {
         robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
         try {
-            Thread.sleep(500);
+            Thread.sleep(MOUSE_SLEEP_DURATION);
         } catch (Exception ex) {
             // Hmmm.
         }

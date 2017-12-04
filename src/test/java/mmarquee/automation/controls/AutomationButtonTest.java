@@ -58,7 +58,8 @@ public class AutomationButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationButton button = new AutomationButton(element, pattern, instance);
+        AutomationButton button = new AutomationButton(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         String name = button.getName();
 
@@ -74,7 +75,8 @@ public class AutomationButtonTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationButton button = new AutomationButton(element, pattern, instance);
+        AutomationButton button = new AutomationButton(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         button.focus();
 
@@ -92,7 +94,8 @@ public class AutomationButtonTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationButton button = new AutomationButton(element, pattern, instance);
+        AutomationButton button = new AutomationButton(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         button.click();
 
@@ -110,7 +113,8 @@ public class AutomationButtonTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationButton button = new AutomationButton(element, pattern, instance);
+        AutomationButton button = new AutomationButton(
+                new ElementBuilder(element).invoke(pattern).automation(instance));
 
         button.click();
 

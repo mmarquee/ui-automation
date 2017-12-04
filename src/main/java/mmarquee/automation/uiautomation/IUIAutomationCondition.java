@@ -17,8 +17,6 @@ package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.PointerByReference;
 
 /**
  * @author Mark Humphreys
@@ -30,8 +28,4 @@ public interface IUIAutomationCondition extends IUnknown {
      */
     Guid.IID IID = new Guid.IID(
             "352FFBA8-0973-437C-A61F-F64CAFD81DF9");
-
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
 }

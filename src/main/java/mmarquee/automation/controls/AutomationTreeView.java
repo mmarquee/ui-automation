@@ -19,70 +19,71 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.*;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
- * @author Mark Humphreys
- * Date 20/02/2016.
- *
  * Wrapper for the TreeView element.
+ *
+ * @author Mark Humphreys
+ * Date 20/02/2016
  */
 public class AutomationTreeView extends AutomationBase {
 
     /**
      * Construct the AutomationTreeView.
      *
-     * @param element The element.
-     * @throws AutomationException Automation library error.
+     * @param builder The builder
      */
-    public AutomationTreeView(final AutomationElement element)
-            throws AutomationException {
-        super(element);
+    public AutomationTreeView(final ElementBuilder builder){
+        super(builder);
     }
 
     /**
-     * Construct the AutomationTreeView.
-     *
-     * @param element The element.
-     * @param automation The automation instance.
-     * @throws AutomationException Automation library error.
+     * Gets the item, using the search criteria.
+     * @param search The search criteria
+     * @return The found control
+     * @throws AutomationException Something has gone wrong
      */
-    public AutomationTreeView(final AutomationElement element,
-                              final UIAutomation automation)
-            throws AutomationException {
-        super(element, automation);
+    public AutomationTreeViewItem getItem(final Search search) throws AutomationException {
+        if (search.getHasNamePattern()) {
+            return getItem(search.getNamePattern());
+        } else if (search.getHasAutomationId()) {
+            return getItemByAutomationId(search.getAutomationId());
+        } else if (search.getHasName()) {
+            return getItem(search.getName());
+        } else {
+            throw new AutomationException("Search type not found");
+        }
     }
 
     /**
-     * Gets the item that has the name
+     * Gets the item that has the name.
      * @param name The name to look for
      * @return The AutomationTreeViewItem
-     * @throws ItemNotFoundException when the item is not found
-     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Something has gone wrong
      */
-    public AutomationTreeViewItem getItem(String name) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final String name)
+            throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
-            return new AutomationTreeViewItem(item);
+            return new AutomationTreeViewItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(name);
         }
     }
 
     /**
-     * Gets the item matching the namePattern
-     * 
+     * Gets the item matching the namePattern.
      * @param namePattern Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationTreeViewItem getItem(Pattern namePattern) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItem(final Pattern namePattern)
+            throws AutomationException {
         List<AutomationElement> collection;
 
         AutomationElement foundElement = null;
@@ -103,24 +104,24 @@ public class AutomationTreeView extends AutomationBase {
             throw new ItemNotFoundException(namePattern.toString());
         }
 
-        return new AutomationTreeViewItem(foundElement);
+        return new AutomationTreeViewItem(new ElementBuilder(foundElement));
     }
 
     /**
-     * Gets the item that has the name
+     * Gets the item that has the name.
      * @param automationId The automationId of the item
      * @return The AutomationTreeViewItem
-     * @throws ItemNotFoundException when the item is not found
-     * @throws PatternNotFoundException Expected pattern not found
+     * @throws AutomationException Something has gone wrong
      */
-    public AutomationTreeViewItem getItemByAutomationId(String automationId) throws PatternNotFoundException, AutomationException {
+    public AutomationTreeViewItem getItemByAutomationId(final String automationId)
+            throws AutomationException {
         AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
         if (item != null) {
-            return new AutomationTreeViewItem(item);
+            return new AutomationTreeViewItem(new ElementBuilder(item));
         } else {
             throw new ItemNotFoundException(automationId);
         }

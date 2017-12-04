@@ -16,20 +16,18 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**
+ * Wrapper for the CheckBox element.
+ *
  * @author Mark Humphreys
  * Date 31/01/2016.
- *
- * Wrapper for the CheckBox element.
  */
-public class AutomationCheckBox
+public final class AutomationCheckBox
         extends AutomationBase
         implements Toggleable, Focusable {
 
@@ -74,39 +72,11 @@ public class AutomationCheckBox
     /**
      * Constructor for the AutomationCheckBox.
      *
-     * @param element The element.
-     * @throws AutomationException Automation exception.
-     * @throws PatternNotFoundException Pattern not found.
+     * @param builder The builder
      */
-    public AutomationCheckBox (final AutomationElement element)
-            throws PatternNotFoundException, AutomationException {
-        super(element);
-    }
-
-    /**
-     * Constructor for the AutomationCheckBox.
-     *
-     * @param element The element.
-     * @param pattern The pattern.
-     * @param instance Automation instance.
-     */
-    public AutomationCheckBox(final AutomationElement element,
-                              final Toggle pattern,
-                              final UIAutomation instance) {
-        super(element, instance);
-        togglePattern = pattern;
-    }
-
-    /**
-     * Constructor for the AutomationCheckBox.
-     *
-     * @param element The element.
-     * @param pattern The pattern.
-     */
-    public AutomationCheckBox(final AutomationElement element,
-                              final Toggle pattern) {
-        super(element);
-        togglePattern = pattern;
+    public AutomationCheckBox (final ElementBuilder builder) {
+        super(builder);
+        togglePattern = builder.getToggle();
     }
 
     /**

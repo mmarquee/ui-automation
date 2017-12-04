@@ -52,7 +52,8 @@ public class AutomationCheckBoxTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
+        AutomationCheckBox checkbox = new AutomationCheckBox(
+                new ElementBuilder(element).toggle(pattern).automation(instance));
 
         String name = checkbox.getName();
 
@@ -70,7 +71,8 @@ public class AutomationCheckBoxTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
+        AutomationCheckBox checkbox = new AutomationCheckBox(
+                new ElementBuilder(element).toggle(pattern).automation(instance));
 
         ToggleState state = checkbox.getToggleState();
 
@@ -86,7 +88,8 @@ public class AutomationCheckBoxTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCheckBox checkbox = new AutomationCheckBox(element, pattern, instance);
+        AutomationCheckBox checkbox = new AutomationCheckBox(
+                new ElementBuilder(element).toggle(pattern).automation(instance));
 
         checkbox.toggle();
     }
