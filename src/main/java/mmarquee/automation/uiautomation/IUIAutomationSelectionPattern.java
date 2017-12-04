@@ -32,10 +32,6 @@ public interface IUIAutomationSelectionPattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{5ED5202E-B2AC-47A6-B638-4B0BF140D78E}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int getCurrentSelection(PointerByReference retVal);
     int getCurrentCanSelectMultiple(IntByReference retval);
 }

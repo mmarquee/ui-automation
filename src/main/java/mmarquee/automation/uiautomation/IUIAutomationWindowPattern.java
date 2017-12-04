@@ -31,10 +31,6 @@ public interface IUIAutomationWindowPattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{0FAEF453-9208-43EF-BBB2-3B485177864F}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int close();
     int waitForInputIdle(Integer milliseconds, IntByReference success);
     int setWindowVisualState(Integer state);

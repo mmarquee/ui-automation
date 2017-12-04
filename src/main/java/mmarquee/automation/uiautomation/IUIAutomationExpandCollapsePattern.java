@@ -32,10 +32,6 @@ public interface IUIAutomationExpandCollapsePattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{619BE086-1F4E-4EE4-BAFA-210128738730}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int expand();
     int collapse();
     int getCurrentExpandCollapseState(IntByReference retVal);

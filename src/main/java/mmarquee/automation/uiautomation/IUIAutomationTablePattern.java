@@ -31,10 +31,6 @@ public interface IUIAutomationTablePattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{620E691C-EA96-4710-A850-754B24CE2417}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int getCurrentRowHeaders(PointerByReference retVal);
     int getCurrentColumnHeaders(PointerByReference retVal);
     int getCurrentRowOrColumnMajor(IntByReference retVal);

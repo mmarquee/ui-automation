@@ -30,10 +30,6 @@ public interface IUIAutomationTextPattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{32EBA289-3583-42C9-9C59-3B6D9A1E9B6A}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int getSelection(PointerByReference result);
     int getVisibleRanges(PointerByReference ranges);
     int getDocumentRange(PointerByReference range);

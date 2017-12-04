@@ -31,10 +31,6 @@ public interface IUIAutomationTogglePattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{94CF8058-9B8D-4AB9-8BFD-4CD0A33C8C70}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int toggle();
     int getCurrentToggleState(IntByReference ibr);
 }

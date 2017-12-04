@@ -35,10 +35,6 @@ public interface IUIAutomationEventHandler extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{146C3C17-F12E-4E22-8C27-F894B9B79C69}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int handleAutomationEvent(PointerByReference sender, IntByReference event);
 
     class Converter {

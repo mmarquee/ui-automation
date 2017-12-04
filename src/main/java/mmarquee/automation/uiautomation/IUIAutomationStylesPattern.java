@@ -31,10 +31,6 @@ public interface IUIAutomationStylesPattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{85B5F0A2-BD79-484A-AD2B-388C9838D5FB}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int getCurrentStyleId(IntByReference retVal);
     int getCurrentStyleName(PointerByReference retVal);
 }

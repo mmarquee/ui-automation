@@ -32,10 +32,6 @@ public interface IUIAutomationRangeValuePattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{59213F4F-7346-49E5-B120-80555987A148}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int setValue(Double val);
     int getValue(DoubleByReference retVal);
 }

@@ -33,10 +33,6 @@ public interface IUIAutomationValuePattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{A94CD8B1-0844-4CD6-9D2D-640537AB39E9}");
 
-    int AddRef();
-    int Release();
-    WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference);
-
     int setValue(WTypes.BSTR sr);
     int getValue(PointerByReference sr);
     int getCurrentIsReadOnly(IntByReference ibr);
