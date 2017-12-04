@@ -91,6 +91,38 @@ public class Window extends BasePattern {
     }
 
     /**
+     * Can the window be maximized.
+     * @return True or false
+     * @throws AutomationException Something is wrong
+     */
+    public boolean getCanMaximize() throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        final int res = this.getPattern().getCurrentCanMaximize(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return (ibr.getValue() == 1);
+    }
+
+    /**
+     * Can the window be minimized.
+     * @return True or false
+     * @throws AutomationException Something is wrong
+     */
+    public boolean getCanMinimize() throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        final int res = this.getPattern().getCurrentCanMinimize(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return (ibr.getValue() == 1);
+    }
+
+    /**
      * Returns whether this control is modal
      * @return Is this control modal?
      * @throws AutomationException Something has gone wrong
