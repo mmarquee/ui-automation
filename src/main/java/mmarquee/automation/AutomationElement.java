@@ -59,6 +59,25 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
+     * Gets the IUIAutomationElement3 interface, if possible
+     * @return The IUIAutomationElement3 interface
+     * @throws AutomationException Not able to convert interface
+     */
+    public final IUIAutomationElement3 getElement3() throws AutomationException {
+
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(
+                new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            return IUIAutomationElement3Converter.PointerToInterface(pUnknown);
+        }
+
+        throw new AutomationException("Failed to convert to IUIAutomationElement6");
+    }
+
+    /**
      * Gets the IUIAutomationElement6 interface, if possible
      * @return The IUIAutomationElement6 interface
      * @throws AutomationException Not able to convert interface
@@ -71,9 +90,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement6 elem =
-                    IUIAutomationElement6Converter.PointerToInterface(pUnknown);
-            return elem;
+            return IUIAutomationElement6Converter.PointerToInterface(pUnknown);
         }
 
         throw new AutomationException("Failed to convert to IUIAutomationElement6");
@@ -388,7 +405,7 @@ public class AutomationElement extends BaseAutomation {
     public List<AutomationElement> findAll(final TreeScope scope,
                                            final PointerByReference pCondition)
             throws AutomationException {
-        List<AutomationElement> items = new ArrayList<AutomationElement>();
+        List<AutomationElement> items = new ArrayList<>();
 
         PointerByReference pAll = new PointerByReference();
 
@@ -609,21 +626,13 @@ public class AutomationElement extends BaseAutomation {
      * @throws AutomationException Failed to get the correct interface.
      */
     public void showContextMenu() throws AutomationException {
-        PointerByReference pUnknown = new PointerByReference();
 
-        WinNT.HRESULT result = this.element.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
+        IUIAutomationElement3 element3 = this.getElement3();
 
-        if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement3 element3 =
-                    IUIAutomationElement3Converter.PointerToInterface(pUnknown);
+        final int res = element3.showContextMenu();
 
-            final int res = element3.showContextMenu();
-
-            if (res != 0) {
-                throw new AutomationException(res);
-            }
-        } else {
-            throw new AutomationException("Interface not supported");
+        if (res != 0) {
+            throw new AutomationException(res);
         }
     }
 
@@ -635,30 +644,20 @@ public class AutomationElement extends BaseAutomation {
      * @throws AutomationException Something has gone wrong in automation library
      */
     public String getFullDescription() throws AutomationException {
-        PointerByReference pUnknown = new PointerByReference();
+        IUIAutomationElement6 element = this.getElement6();
 
-        WinNT.HRESULT result = this.element.QueryInterface(
-                new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
+        PointerByReference sr = new PointerByReference();
 
-        if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement6 element =
-                    IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+        final int res = element.getCurrentFullDescription(sr);
 
-            PointerByReference sr = new PointerByReference();
-
-            final int res = element.getCurrentFullDescription(sr);
-
-            if (res != 0) {
-                throw new AutomationException(res);
-            } else {
-                if (sr.getValue() == null) {
-                    return "Not set";
-                } else {
-                    return sr.getValue().getWideString(0);
-                }
-            }
+        if (res != 0) {
+            throw new AutomationException(res);
         } else {
-            throw new AutomationException("Interface not supported");
+            if (sr.getValue() == null) {
+                return "Not set";
+            } else {
+                return sr.getValue().getWideString(0);
+            }
         }
     }
 }

@@ -93,7 +93,7 @@ public class AutomationMenuItem
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
                 this.createControlTypeCondition(ControlType.MenuItem));
 
-        List<AutomationMenuItem> list = new ArrayList<AutomationMenuItem>();
+        List<AutomationMenuItem> list = new ArrayList<>();
 
         for (AutomationElement item : items) {
             list.add(new AutomationMenuItem(new ElementBuilder(item)));

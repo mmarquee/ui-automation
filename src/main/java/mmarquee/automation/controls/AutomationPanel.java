@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Wrapper for the Panel element.
@@ -44,13 +43,12 @@ public class AutomationPanel extends AutomationContainer {
      *
      * @param index The nth element.
      * @return The found window.
-     * @throws PatternNotFoundException Failed to find the right pattern.
      * @throws AutomationException Something went really wrong.
      * @deprecated Use getWindow(int) instead.
      */
     @Deprecated
     private AutomationWindow getMDIWindow(final int index)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         return getWindow(index);
     }
 

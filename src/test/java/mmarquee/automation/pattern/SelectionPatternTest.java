@@ -29,15 +29,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
 
 /**
  * @author Mark Humphreys
@@ -74,13 +70,7 @@ public class SelectionPatternTest {
 
     @Test(expected=AutomationException.class)
     public void test_getCurrentSelection_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentSelection(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentSelection(any());
 
         Selection pattern = new Selection(rawPattern);
 
@@ -90,12 +80,7 @@ public class SelectionPatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Selection pattern = new Selection();
 
@@ -115,12 +100,7 @@ public class SelectionPatternTest {
     @Test
     @Ignore("Needs better tests")
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Selection pattern = new Selection();
 
@@ -149,13 +129,7 @@ public class SelectionPatternTest {
 
     @Test(expected = AutomationException.class)
     public void test_getSelection_Calls_getCurrentSelection_From_rawPattern_Throws_Exception_When_Error_Returned() throws AutomationException {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return -1;
-            }
-        }).when(rawPattern).getCurrentSelection(any());
+        doAnswer(invocation -> -1).when(rawPattern).getCurrentSelection(any());
 
         Selection pattern = new Selection(rawPattern);
 
@@ -168,17 +142,10 @@ public class SelectionPatternTest {
     @Ignore("More a work in progress")
     public void test_getSelection_Calls_getCurrentSelection_From_rawPattern() throws AutomationException {
         Mockito.when(rawPattern.getCurrentSelection(any())).thenAnswer(
-                invocation -> {
-                    return 0;
-                }
+                invocation -> 0
         );
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(), any());
 
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
 

@@ -640,7 +640,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public List<AutomationWindow> getDesktopWindows()
             throws AutomationException {
-        List<AutomationWindow> result = new ArrayList<AutomationWindow>();
+        List<AutomationWindow> result = new ArrayList<>();
 
         List<AutomationElement> collection = getRootChildren(ControlType.Window);
 
@@ -659,7 +659,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public List<AutomationPanel> getDesktopObjects()
             throws AutomationException {
-        List<AutomationPanel> result = new ArrayList<AutomationPanel>();
+        List<AutomationPanel> result = new ArrayList<>();
 
         List<AutomationElement> collection = getRootChildren(ControlType.Pane);
 

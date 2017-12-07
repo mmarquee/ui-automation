@@ -40,7 +40,7 @@ public class AutomationTab extends AutomationContainer {
      */
     public List<AutomationTabItem> getTabItems() {
         // Now get the list of tab items
-        List<AutomationTabItem> tabItems = new ArrayList<AutomationTabItem>();
+        List<AutomationTabItem> tabItems = new ArrayList<>();
 
         try {
             List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.TabItem));

@@ -21,8 +21,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
@@ -65,13 +63,7 @@ public class GridItemPatternTest {
     @Test(expected=AutomationException.class)
     public void test_GetColumn_Throws_Exception_When_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentColumn(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentColumn(any());
 
         GridItem pattern = new GridItem(rawPattern);
 
@@ -83,13 +75,7 @@ public class GridItemPatternTest {
     @Test(expected=AutomationException.class)
     public void test_GetRow_Throws_Exception_When_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentRow(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentRow(any());
 
         GridItem pattern = new GridItem(rawPattern);
 

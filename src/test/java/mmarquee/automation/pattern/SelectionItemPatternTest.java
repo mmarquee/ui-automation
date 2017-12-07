@@ -30,9 +30,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -69,17 +67,14 @@ public class SelectionItemPatternTest {
 
     @Test
     public void testIsSelected_Returns_False_When_COM_Returns_One() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentIsSelected(any(IntByReference.class));
 
         SelectionItem item = new SelectionItem(rawPattern);
@@ -91,17 +86,14 @@ public class SelectionItemPatternTest {
 
     @Test
     public void testIsSelected_Returns_True_When_COM_Returns_Zero() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(1);
+            reference.setValue(1);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentIsSelected(any(IntByReference.class));
 
         SelectionItem item = new SelectionItem(rawPattern);
@@ -126,12 +118,7 @@ public class SelectionItemPatternTest {
     @Ignore("Fails after mockito upgrade")
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         SelectionItem pattern = new SelectionItem();
 

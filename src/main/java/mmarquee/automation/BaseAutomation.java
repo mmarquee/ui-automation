@@ -106,7 +106,7 @@ public abstract class BaseAutomation {
             throw new AutomationException(res);
         }
 
-        List<AutomationElement> list = new ArrayList<AutomationElement>();
+        List<AutomationElement> list = new ArrayList<>();
 
         for (int count = 0; count < ibr.getValue(); count++) {
 

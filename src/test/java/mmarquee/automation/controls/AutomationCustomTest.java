@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.uiautomation.IUIAutomation;

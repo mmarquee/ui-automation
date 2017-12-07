@@ -44,7 +44,7 @@ public enum RowOrColumnMajor {
         this.value = inValue;
     }
 
-    private static final Map<Integer, RowOrColumnMajor> intToTypeMap = new HashMap<Integer, RowOrColumnMajor>();
+    private static final Map<Integer, RowOrColumnMajor> intToTypeMap = new HashMap<>();
     static {
         for (RowOrColumnMajor type : RowOrColumnMajor.values()) {
             intToTypeMap.put(type.value, type);

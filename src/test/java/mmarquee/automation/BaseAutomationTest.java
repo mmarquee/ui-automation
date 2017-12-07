@@ -28,7 +28,6 @@ import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import org.junit.After;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
 
@@ -120,18 +119,15 @@ public class BaseAutomationTest {
     }
 	
 	protected Answer<Integer> answerWithSetPointerReferenceToWideString(final String expectedString) {
-		return new Answer<Integer>() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-              Object[] args = invocation.getArguments();
-              PointerByReference pr = (PointerByReference)args[0];
+		return invocation -> {
+          Object[] args = invocation.getArguments();
+          PointerByReference pr = (PointerByReference)args[0];
 
-              Pointer m = new Memory(Native.WCHAR_SIZE * (expectedString.length() + 1));
-              m.setWideString(0, expectedString);
-              pr.setValue(m);
-              return 0;
-            }
-          };
+          Pointer m = new Memory(Native.WCHAR_SIZE * (expectedString.length() + 1));
+          m.setWideString(0, expectedString);
+          pr.setValue(m);
+          return 0;
+        };
 	}
 
 
@@ -161,50 +157,41 @@ public class BaseAutomationTest {
 	}
 
 	public static Stubber answerStringByReference(String value) {
-		return doAnswer(new Answer<Integer>() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+		return doAnswer((Answer<Integer>) invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[0];
 
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         });
 	}
 
 	public static Stubber answerIntByReference(int value) {
-		return doAnswer(new Answer<Integer>() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+		return doAnswer((Answer<Integer>) invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-				reference.setValue(value);
+            reference.setValue(value);
 
-                return 0;
-            }
+            return 0;
         });
 	}
 	
 	public static void setElementPropertyValue(IUIAutomationElement elem, PropertyID property, int vartype, Object propertyValue) {
-		doAnswer(new Answer<Integer>() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+		doAnswer((Answer<Integer>) invocation -> {
 
-                Object[] args = invocation.getArguments();
-                Variant.VARIANT.ByReference reference = (Variant.VARIANT.ByReference)args[1];
+            Object[] args = invocation.getArguments();
+            Variant.VARIANT.ByReference reference = (Variant.VARIANT.ByReference)args[1];
 
-				reference.setValue(vartype, propertyValue);
+            reference.setValue(vartype, propertyValue);
 
-                return 0;
-            }
+            return 0;
         })
         .when(elem)
         .getCurrentPropertyValue(eq(property.getValue()),any());

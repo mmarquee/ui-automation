@@ -44,7 +44,7 @@ public class AutomationApplication extends AutomationBase {
     /**
      * Did we attach to the application, or start it.
      */
-    private boolean isAttached = false;
+    private boolean isAttached;
 
     /**
      * The User32 instance.

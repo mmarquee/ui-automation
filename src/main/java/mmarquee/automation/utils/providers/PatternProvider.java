@@ -23,6 +23,7 @@ import mmarquee.automation.pattern.BasePattern;
 public interface PatternProvider {
 	/**
 	 * Gets the base pattern.
+	 * @return Returns the pattern.
 	 */
 	BasePattern getPattern();
 }

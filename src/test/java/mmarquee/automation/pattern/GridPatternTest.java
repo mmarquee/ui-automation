@@ -17,9 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -45,17 +43,14 @@ public class GridPatternTest {
 
     @Test
     public void testGetRowCount_Gets_Value_From_Pattern() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(2);
+            reference.setValue(2);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentRowCount(any());
 
         Grid item = new Grid(rawPattern);
@@ -67,17 +62,14 @@ public class GridPatternTest {
 
     @Test
     public void testGetColumnCount_Gets_Value_From_Pattern() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(99);
+            reference.setValue(99);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentColumnCount(any());
 
         Grid item = new Grid(rawPattern);
@@ -89,17 +81,14 @@ public class GridPatternTest {
 
     @Test(expected= AutomationException.class)
     public void testGetColumnCount_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(99);
+            reference.setValue(99);
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getCurrentColumnCount(any());
 
         Grid item = new Grid(rawPattern);
@@ -111,17 +100,14 @@ public class GridPatternTest {
 
     @Test(expected=AutomationException.class)
     public void testGetRowCount_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(99);
+            reference.setValue(99);
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getCurrentRowCount(any());
 
         Grid item = new Grid(rawPattern);
@@ -138,12 +124,7 @@ public class GridPatternTest {
 
         Grid spyPattern = Mockito.spy(pattern);
 
-        doAnswer(new Answer(){
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         IUIAutomationGridPattern mockGrid = Mockito.mock(IUIAutomationGridPattern.class);
 
@@ -157,12 +138,7 @@ public class GridPatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Grid pattern = new Grid();
 
@@ -183,12 +159,7 @@ public class GridPatternTest {
     @Ignore("Mocking issues, need to be sorted")
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Grid pattern = new Grid();
 

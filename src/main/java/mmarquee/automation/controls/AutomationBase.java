@@ -72,7 +72,7 @@ public abstract class AutomationBase implements Automatable {
     /**
      * The automation library wrapper.
      */
-    protected UIAutomation automation = null;
+    protected UIAutomation automation;
 
     /**
      * The invoke pattern.
@@ -1009,7 +1009,7 @@ public abstract class AutomationBase implements Automatable {
     public List<AutomationBase> getChildren(final boolean deep)
             throws AutomationException, PatternNotFoundException {
         List<AutomationElement> elements = this.getChildElements(deep);
-        List<AutomationBase> collection = new LinkedList<AutomationBase>();
+        List<AutomationBase> collection = new LinkedList<>();
         
         for (AutomationElement el: elements) {
         	collection.add(AutomationControlFactory.get(this, el));

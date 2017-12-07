@@ -71,7 +71,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         
-        list = new ArrayList<AutomationElement>();
+        list = new ArrayList<>();
         list.add(targetElement);
     }
 

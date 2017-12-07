@@ -118,7 +118,7 @@ public final class AutomationDataGrid
 
         List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
 
-        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+        List<AutomationDataGridCell> items = new ArrayList<>();
 
         for (AutomationElement item : collection) {
             try {
@@ -166,7 +166,7 @@ public final class AutomationDataGrid
 
         List<AutomationElement> collection = this.tablePattern.getCurrentColumnHeaders();
 
-        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+        List<AutomationDataGridCell> items = new ArrayList<>();
 
         for (AutomationElement item : collection) {
             try {
@@ -255,7 +255,7 @@ public final class AutomationDataGrid
      */
     public List<AutomationDataGridCell> getRow(final int row)
             throws PatternNotFoundException, AutomationException {
-        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+        List<AutomationDataGridCell> items = new ArrayList<>();
 
         for (int count = 0; count < this.rowCount(); count++) {
             AutomationDataGridCell cell = this.getItem(row, count);
@@ -275,7 +275,7 @@ public final class AutomationDataGrid
      */
     public List<AutomationDataGridCell> getColumn(final int col)
             throws PatternNotFoundException, AutomationException {
-        List<AutomationDataGridCell> items = new ArrayList<AutomationDataGridCell>();
+        List<AutomationDataGridCell> items = new ArrayList<>();
 
         for (int count = 0; count < this.rowCount(); count++) {
             try {

@@ -21,24 +21,19 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.ToggleState;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doReturn;
 
 /**
  * @author Mark Humphreys
@@ -70,17 +65,14 @@ public class TogglePatternTest {
 
     @Test
     public void test_getCurrentToggleState_Returns_On_When_COM_Returns_One() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(1);
+            reference.setValue(1);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
@@ -92,17 +84,14 @@ public class TogglePatternTest {
 
     @Test
     public void test_getCurrentToggleState_Returns_Off_When_COM_Returns_Zero() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
@@ -114,17 +103,14 @@ public class TogglePatternTest {
 
     @Test
     public void test_getCurrentToggleState_Returns_Intermediate_When_COM_Returns_Two() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(2);
+            reference.setValue(2);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
@@ -136,17 +122,14 @@ public class TogglePatternTest {
 
     @Test(expected=AutomationException.class)
     public void testIsExpanded_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
@@ -158,17 +141,14 @@ public class TogglePatternTest {
 
     @Test(expected=AutomationException.class)
     public void test_toggle_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(2);
+            reference.setValue(2);
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getCurrentToggleState(any());
 
         Toggle pattern = new Toggle(rawPattern);
@@ -181,12 +161,7 @@ public class TogglePatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Toggle pattern = new Toggle();
 
@@ -206,12 +181,7 @@ public class TogglePatternTest {
     @Test
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Toggle pattern = new Toggle();
 

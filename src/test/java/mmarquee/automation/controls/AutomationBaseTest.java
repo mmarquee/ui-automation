@@ -37,7 +37,6 @@ import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import com.sun.jna.platform.win32.WinDef;
@@ -643,17 +642,14 @@ public class AutomationBaseTest {
         Window pattern = Mockito.mock(Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        doAnswer(new Answer<Integer>() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer((Answer<Integer>) invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[1];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[1];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 0;
-            }
+            return 0;
         }).when(el).getCurrentPropertyValue(any(), any());
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);

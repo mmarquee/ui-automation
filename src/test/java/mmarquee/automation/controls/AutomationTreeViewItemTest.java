@@ -22,9 +22,7 @@ import static org.mockito.Mockito.when;
 
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import org.junit.Assume;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;

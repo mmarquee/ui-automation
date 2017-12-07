@@ -61,7 +61,7 @@ public enum OrientationType {
         this.value = inValue;
     }
 
-    private static final Map<Integer, OrientationType> intToTypeMap = new HashMap<Integer, OrientationType>();
+    private static final Map<Integer, OrientationType> intToTypeMap = new HashMap<>();
 
     static {
         for (OrientationType type : OrientationType.values()) {

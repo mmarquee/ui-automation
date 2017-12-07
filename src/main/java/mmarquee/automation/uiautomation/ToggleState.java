@@ -60,7 +60,7 @@ public enum ToggleState {
     }
 
     private static final Map<Integer, ToggleState> IntToTypeMap =
-            new HashMap<Integer, ToggleState>();
+            new HashMap<>();
 
     static {
         for (ToggleState type : ToggleState.values()) {

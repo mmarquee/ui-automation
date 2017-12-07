@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationElement;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.UIAutomation;

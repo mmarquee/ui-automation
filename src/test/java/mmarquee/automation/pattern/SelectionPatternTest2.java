@@ -16,9 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -49,19 +47,9 @@ public class SelectionPatternTest2 {
     @Ignore("Needs better tests")
     public void test_getCurrentSelection() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 0;
-            }
-        }).when(rawPattern).getCurrentSelection(any());
+        doAnswer(invocation -> 0).when(rawPattern).getCurrentSelection(any());
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Selection pattern = new Selection(rawPattern);
 
@@ -83,12 +71,7 @@ public class SelectionPatternTest2 {
     @Test
     public void test_canSelectMultiple_Throws_Error_When_Query_Interface_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 0;
-            }
-        }).when(rawPattern).getCurrentCanSelectMultiple(any());
+        doAnswer(invocation -> 0).when(rawPattern).getCurrentCanSelectMultiple(any());
 
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
 
@@ -98,12 +81,7 @@ public class SelectionPatternTest2 {
     @Test(expected=AutomationException.class)
     public void test_getCurrentSelection_Throws_Error_When_Query_Interface_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 1;
-            }
-        }).when(rawPattern).getCurrentSelection(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentSelection(any());
 
         Selection spyPattern = Mockito.spy(new Selection(rawPattern));
 
@@ -112,24 +90,16 @@ public class SelectionPatternTest2 {
 
     public void test_canSelectMultiple_Returns_False_When_Interface_Returns_True() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentCanSelectMultiple(any());
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(), any());
 
         Selection pattern = new Selection(rawPattern);
 
@@ -147,16 +117,13 @@ public class SelectionPatternTest2 {
     @Test(expected = AutomationException.class)
     public void test_canSelectMultiple_Throws_Exception_When_Interface_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return -1;
-            }
+            return -1;
         }).when(rawPattern).getCurrentCanSelectMultiple(any());
 
         Selection pattern = new Selection(rawPattern);
@@ -170,24 +137,16 @@ public class SelectionPatternTest2 {
 
     public void test_canSelectMultiple_Returns_True_When_Interface_Returns_True() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(1);
+            reference.setValue(1);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentCanSelectMultiple(any());
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(), any());
 
         Selection pattern = new Selection(rawPattern);
 

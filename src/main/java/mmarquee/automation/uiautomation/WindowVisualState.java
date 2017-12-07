@@ -58,7 +58,7 @@ public enum WindowVisualState {
         this.value = value;
     }
 
-    private static final Map<Integer, WindowVisualState> intToTypeMap = new HashMap<Integer, WindowVisualState>();
+    private static final Map<Integer, WindowVisualState> intToTypeMap = new HashMap<>();
     static {
         for (WindowVisualState type : WindowVisualState.values()) {
             intToTypeMap.put(type.value, type);

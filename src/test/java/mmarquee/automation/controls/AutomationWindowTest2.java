@@ -29,8 +29,6 @@ import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,16 +175,13 @@ public class AutomationWindowTest2 {
 
     @Test(expected= Win32Exception.class)
     public void test_setTransparency_Throws_Exception_When_Win32_Calls_Throw_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                Object reference = (Object)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            Object reference = (Object)args[0];
 
-                reference = 1245;
+            reference = 1245;
 
-                return 1234;
-            }
+            return 1234;
         }).when(element).getPropertyValue(anyInt());
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -202,16 +197,13 @@ public class AutomationWindowTest2 {
 
     @Test
     public void test_windowHandle_Calls_currentPropertyValue_From_Window() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                Object reference = (Object)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            Object reference = (Object)args[0];
 
-                reference = 1245;
+            reference = 1245;
 
-                return 1234;
-            }
+            return 1234;
         }).when(element).getPropertyValue(anyInt());
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -231,16 +223,13 @@ public class AutomationWindowTest2 {
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                Object reference = (Object)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            Object reference = (Object)args[0];
 
-                reference = 1245;
+            reference = 1245;
 
-                return 1;
-            }
+            return 1;
         }).when(elem).getCurrentPropertyValue(anyInt(), any());
 
         AutomationElement localElement = Mockito.mock(AutomationElement.class);
@@ -261,30 +250,17 @@ public class AutomationWindowTest2 {
     @Test
     public void test_setTransparency_Calls_currentPropertyValue_From_Window() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 1;
-            }
-        }).when(user32).SetWindowLong(any(), anyInt(), anyInt());
+        doAnswer(invocation -> 1).when(user32).SetWindowLong(any(), anyInt(), anyInt());
 
-        doAnswer(new Answer() {
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                return true;
-            }
-        }).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
+        doAnswer(invocation -> true).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                Object reference = (Object)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            Object reference = (Object)args[0];
 
-                reference = 1245;
+            reference = 1245;
 
-                return 1234;
-            }
+            return 1234;
         }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(
@@ -298,30 +274,17 @@ public class AutomationWindowTest2 {
     @Test(expected = Win32Exception.class)
     public void test_setTransparency_Throws_Exception_When_SetWindowLong_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 0;
-            }
-        }).when(user32).SetWindowLong(any(), anyInt(), anyInt());
+        doAnswer(invocation -> 0).when(user32).SetWindowLong(any(), anyInt(), anyInt());
 
-        doAnswer(new Answer() {
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                return true;
-            }
-        }).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
+        doAnswer(invocation -> true).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                Object reference = (Object)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            Object reference = (Object)args[0];
 
-                reference = 1245;
+            reference = 1245;
 
-                return 1234;
-            }
+            return 1234;
         }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(
@@ -335,30 +298,17 @@ public class AutomationWindowTest2 {
     @Test(expected = Win32Exception.class)
     public void test_setTransparency_Throws_Exception_When_SetLayeredWindowAttributes_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 1;
-            }
-        }).when(user32).SetWindowLong(any(), anyInt(), anyInt());
+        doAnswer(invocation -> 1).when(user32).SetWindowLong(any(), anyInt(), anyInt());
 
-        doAnswer(new Answer() {
-            @Override
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                return false;
-            }
-        }).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
+        doAnswer(invocation -> false).when(user32).SetLayeredWindowAttributes(any(), anyInt(), anyByte(), anyInt());
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                Object reference = (Object)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            Object reference = (Object)args[0];
 
-                reference = 1245;
+            reference = 1245;
 
-                return 1234;
-            }
+            return 1234;
         }).when(element).getPropertyValue(anyInt());
 
         AutomationWindow wndw = new AutomationWindow(
@@ -399,17 +349,14 @@ public class AutomationWindowTest2 {
 
         IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(ControlType.StatusBar.getValue());
+            reference.setValue(ControlType.StatusBar.getValue());
 
-                return 0;
-            }
+            return 0;
         }).when(listElement).getCurrentControlType(any());
 
         List<AutomationElement> result = new ArrayList<>();
@@ -430,17 +377,14 @@ public class AutomationWindowTest2 {
 
         IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(ControlType.AppBar.getValue());
+            reference.setValue(ControlType.AppBar.getValue());
 
-                return 0;
-            }
+            return 0;
         }).when(listElement).getCurrentControlType(any());
 
         List<AutomationElement> result = new ArrayList<>();
@@ -461,17 +405,14 @@ public class AutomationWindowTest2 {
 
         IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(ControlType.TitleBar.getValue());
+            reference.setValue(ControlType.TitleBar.getValue());
 
-                return 0;
-            }
+            return 0;
         }).when(listElement).getCurrentControlType(any());
 
         List<AutomationElement> result = new ArrayList<>();
@@ -510,13 +451,10 @@ public class AutomationWindowTest2 {
 
     @Test
     public void testGetWindow() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public AutomationElement answer(InvocationOnMock invocation) throws Throwable {
-                IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+        doAnswer(invocation -> {
+            IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-                return new AutomationElement(elem);
-            }
+            return new AutomationElement(elem);
         }).when(element).findFirst(any(), any());
 
         AutomationWindow wndw = new AutomationWindow(

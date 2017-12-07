@@ -31,7 +31,7 @@ public class AutomationTreeWalker extends BaseAutomation {
     /**
      * The underlying raw tree walker.
      */
-    private IUIAutomationTreeWalker walker = null;
+    private IUIAutomationTreeWalker walker;
 
     /**
      * Constructor for AutomationTreeWalker.

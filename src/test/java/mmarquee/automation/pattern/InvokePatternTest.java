@@ -21,21 +21,16 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doReturn;
 
 /**
  * @author Mark Humphreys
@@ -65,13 +60,7 @@ public class InvokePatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_Invoke_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).invoke();
+        doAnswer(invocation -> 1).when(rawPattern).invoke();
 
         Invoke pattern = new Invoke(rawPattern);
 
@@ -81,12 +70,7 @@ public class InvokePatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Invoke pattern = new Invoke();
 
@@ -106,12 +90,7 @@ public class InvokePatternTest {
     @Test
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Invoke pattern = new Invoke();
 

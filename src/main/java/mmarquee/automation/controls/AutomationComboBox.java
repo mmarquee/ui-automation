@@ -130,11 +130,10 @@ public final class AutomationComboBox
      * Gets the list of items associated with this element.
      * @return List of AutomationListItems.
      * @throws AutomationException Automation issue.
-     * @throws PatternNotFoundException Expected pattern not found.
      * @deprecated use {{@link #getItems()} instead.
      */
     @Deprecated
-    public List<AutomationListItem> getList() throws PatternNotFoundException, AutomationException {
+    public List<AutomationListItem> getList() throws AutomationException {
         return getItems();
     }
 
@@ -145,7 +144,7 @@ public final class AutomationComboBox
      */
     public List<AutomationListItem> getItems() throws AutomationException {
 
-        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
+        List<AutomationListItem> list = new ArrayList<>();
 
         List<AutomationElement> collection =
                 this.findAll(new TreeScope(TreeScope.Children),
@@ -281,7 +280,7 @@ public final class AutomationComboBox
         if (this.selectionPattern != null) {
 	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
 	
-	        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
+	        List<AutomationListItem> list = new ArrayList<>();
 	        
 	        for (AutomationElement element : collection) {
 	            list.add(new AutomationListItem(new ElementBuilder(element)));

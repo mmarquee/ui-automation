@@ -24,7 +24,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 import org.junit.*;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -35,9 +34,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Mark Humphreys

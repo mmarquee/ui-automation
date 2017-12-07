@@ -33,9 +33,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import java.util.List;
 
@@ -61,17 +59,14 @@ public class TablePatternTest {
 
     @Test
     public void test_getRowOrColumnMajor_Returns_ColumnMajor_When_Pattern_Returns_One() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(1);
+            reference.setValue(1);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
         Table item = new Table(rawPattern);
@@ -83,17 +78,14 @@ public class TablePatternTest {
 
     @Test
     public void test_getRowOrColumnMajor_Returns_RowMajor_When_Pattern_Returns_Zero() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
         Table item = new Table(rawPattern);
@@ -105,17 +97,14 @@ public class TablePatternTest {
 
     @Test
     public void test_getRowOrColumnMajor_Returns_Indeterminate_When_Pattern_Returns_Three() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(2);
+            reference.setValue(2);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
         Table item = new Table(rawPattern);
@@ -127,17 +116,14 @@ public class TablePatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_getRowOrColumnMajor_Throws_Exception_When_Pattern_Returns_An_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(2);
+            reference.setValue(2);
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
         Table item = new Table(rawPattern);
@@ -149,13 +135,7 @@ public class TablePatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_GetText_Throws_Exception_When_getCurrentColumnHeaders_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentColumnHeaders(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentColumnHeaders(any());
 
         Table pattern = new Table(rawPattern);
 
@@ -164,13 +144,7 @@ public class TablePatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_GetText_Throws_Exception_When_getCurrentRowHeaders_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentRowHeaders(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentRowHeaders(any());
 
         Table pattern = new Table(rawPattern);
 
@@ -180,12 +154,7 @@ public class TablePatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Table pattern = new Table();
 
@@ -205,12 +174,7 @@ public class TablePatternTest {
     @Test
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Table pattern = new Table();
 
@@ -235,12 +199,7 @@ public class TablePatternTest {
     @Ignore("Needs better tests")
     public void test_getColumnsHeaders_Calls_getColumnHeaders_From_Pattern() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Table pattern = new Table();
 
@@ -271,12 +230,8 @@ public class TablePatternTest {
     @Ignore("Needs better tests")
     public void test_getRowHeaders_Calls_getColumnHeaders_From_Pattern() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation ->
+                new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Table pattern = new Table();
 

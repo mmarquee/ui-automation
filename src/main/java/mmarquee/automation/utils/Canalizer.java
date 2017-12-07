@@ -26,7 +26,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
 
 /**
  * Wraps an interface instance in a way that all calls to interface methods originate from the same thread.
@@ -36,12 +35,10 @@ import java.util.concurrent.ThreadFactory;
  */
 public class Canalizer {
     /** The thread where all calls originate from. */
-    static final ExecutorService executor = Executors.newFixedThreadPool(1, new ThreadFactory() {
-        public Thread newThread(Runnable r) {
-            Thread t = Executors.defaultThreadFactory().newThread(r);
-            t.setDaemon(true);
-            return t;
-        }
+    static final ExecutorService executor = Executors.newFixedThreadPool(1, r -> {
+        Thread t = Executors.defaultThreadFactory().newThread(r);
+        t.setDaemon(true);
+        return t;
     });
 
     /**
@@ -69,7 +66,7 @@ public class Canalizer {
 
     private static Class<?>[] getInterfaces(final Object target) {
         Class<?> base = target.getClass();
-        final Set<Class<?>> interfaces = new HashSet<Class<?>>();
+        final Set<Class<?>> interfaces = new HashSet<>();
         if (base.isInterface()) {
             interfaces.add(base);
         }
@@ -90,15 +87,11 @@ public class Canalizer {
         }
 
         @Override
-        public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable
-        {
-            final Callable<Object> task = new Callable<Object>() {
-                @Override
-                public Object call() throws Exception
-                {
-                    return method.invoke(underlying, args);
-                }
-            };
+        public Object invoke(final Object proxy,
+                             final Method method,
+                             final Object[] args)
+                throws Throwable {
+            final Callable<Object> task = () -> method.invoke(underlying, args);
 
             final Future<Object> result = executor.submit(task);
 
@@ -108,7 +101,5 @@ public class Canalizer {
                 throw ex.getCause();
             }
         }
-
     }
-
 }

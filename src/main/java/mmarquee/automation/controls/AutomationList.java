@@ -173,7 +173,7 @@ public final class AutomationList extends AutomationBase {
             throws AutomationException {
         List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.ListItem));
 
-        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
+        List<AutomationListItem> list = new ArrayList<>();
 
         for (AutomationElement item: items) {
             list.add(new AutomationListItem(new ElementBuilder(item)));
@@ -197,7 +197,7 @@ public final class AutomationList extends AutomationBase {
         if (this.selectionPattern != null) {
 	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
 	
-	        List<AutomationListItem> list = new ArrayList<AutomationListItem>();
+	        List<AutomationListItem> list = new ArrayList<>();
 	        
 	        for (AutomationElement element : collection) {
 	            list.add(new AutomationListItem(new ElementBuilder(element)));

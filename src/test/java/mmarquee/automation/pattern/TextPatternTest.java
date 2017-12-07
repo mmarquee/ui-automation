@@ -35,9 +35,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -65,13 +63,7 @@ public class TextPatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_GetText_Throws_Exception_When_getDocumentRange_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getDocumentRange(any());
+        doAnswer(invocation -> 1).when(rawPattern).getDocumentRange(any());
 
         Text pattern = new Text(rawPattern);
 
@@ -82,13 +74,7 @@ public class TextPatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_GetSelection_Throws_Exception_When_getSelection_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getSelection(any());
+        doAnswer(invocation -> 1).when(rawPattern).getSelection(any());
 
         Text pattern = new Text(rawPattern);
 
@@ -100,20 +86,9 @@ public class TextPatternTest {
     @Test(expected=AutomationException.class)
     @Ignore("Failures after Mockito upgrade")
     public void test_GetSelection_Throws_Exception_When_Error_Returned() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> 0).when(rawPattern).getSelection(any(PointerByReference.class));
 
-                return 0;
-            }
-        }).when(rawPattern).getSelection(any(PointerByReference.class));
-
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Text pattern = new Text(rawPattern);
 
@@ -124,20 +99,9 @@ public class TextPatternTest {
 
     @Test(expected=AutomationException.class)
     public void test_GetSelection_Throws_Exception_When_GetRange_Length_Fails() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> 0).when(rawPattern).getSelection(any());
 
-                return 0;
-            }
-        }).when(rawPattern).getSelection(any());
-
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Text pattern = new Text(rawPattern);
 
@@ -149,12 +113,7 @@ public class TextPatternTest {
 
         IUIAutomationTextRangeArray mockRangeArray = Mockito.mock(IUIAutomationTextRangeArray.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                return 1;
-            }
-        }).when(mockRangeArray).getLength(any());
+        doAnswer(invocation -> 1).when(mockRangeArray).getLength(any());
 
         doReturn(mockRangeArray)
                 .when(spyPattern)
@@ -167,20 +126,9 @@ public class TextPatternTest {
 
     @Test
     public void test_GetSelection_When_() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> 0).when(rawPattern).getSelection(any());
 
-                return 0;
-            }
-        }).when(rawPattern).getSelection(any());
-
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Text pattern = new Text(rawPattern);
 
@@ -192,35 +140,29 @@ public class TextPatternTest {
 
         IUIAutomationTextRangeArray mockRangeArray = Mockito.mock(IUIAutomationTextRangeArray.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(1);
+            reference.setValue(1);
 
-                return 0;
-            }
+            return 0;
         }).when(mockRangeArray).getLength(any());
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[1];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[1];
 
-                String value = "Hello";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            String value = "Hello";
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         }).when(mockRange).getText(any(), any());
 
         doReturn(mockRange)
@@ -239,12 +181,7 @@ public class TextPatternTest {
     @Test(expected=AutomationException.class)
     public void test_GetText_Throws_Exception_When_QueryInterface_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Text pattern = new Text(rawPattern);
 
@@ -264,12 +201,7 @@ public class TextPatternTest {
     @Test
     public void test_GetText_Calls_getText_From_Pattern() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Text pattern = new Text(rawPattern);
 
@@ -281,21 +213,18 @@ public class TextPatternTest {
 
         IUIAutomationTextRange mockRange = Mockito.mock(IUIAutomationTextRange.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[1];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[1];
 
-                String value = "Hello";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            String value = "Hello";
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         }).when(mockRange).getText(any(), any());
 
 //        doReturn(0)
@@ -314,12 +243,7 @@ public class TextPatternTest {
     @Test(expected= AutomationException.class)
     public void test_GetText_Throws_Exception_When_GetText_Returns_Error_From_Range() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Text pattern = new Text(rawPattern);
 

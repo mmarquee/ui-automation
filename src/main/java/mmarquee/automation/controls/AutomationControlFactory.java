@@ -128,18 +128,19 @@ public class AutomationControlFactory {
     	case Window:
     		return new AutomationWindow(new ElementBuilder(element));
     	case Pane:
-			if (AutomationReBar.CLASS_NAME.equals(className)) {
-				return new AutomationReBar(new ElementBuilder(element));
-			} else if (AutomationRibbonBar.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonBar(new ElementBuilder(element));
-			} else if (AutomationRibbonCommandBar.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonCommandBar(new ElementBuilder(element));
-			} else if (AutomationRibbonWorkPane.CLASS_NAME.equals(className)) {
-				return new AutomationRibbonWorkPane(new ElementBuilder(element));
-			} else if (AutomationNUIPane.CLASS_NAME.equals(className)) {
-				return new AutomationNUIPane(new ElementBuilder(element));
-			} else if (AutomationNetUIHWND.CLASS_NAME.equals(className)) {
-				return new AutomationNetUIHWND(new ElementBuilder(element));
+			switch (className) {
+				case AutomationReBar.CLASS_NAME:
+					return new AutomationReBar(new ElementBuilder(element));
+				case AutomationRibbonBar.CLASS_NAME:
+					return new AutomationRibbonBar(new ElementBuilder(element));
+				case AutomationRibbonCommandBar.CLASS_NAME:
+					return new AutomationRibbonCommandBar(new ElementBuilder(element));
+				case AutomationRibbonWorkPane.CLASS_NAME:
+					return new AutomationRibbonWorkPane(new ElementBuilder(element));
+				case AutomationNUIPane.CLASS_NAME:
+					return new AutomationNUIPane(new ElementBuilder(element));
+				case AutomationNetUIHWND.CLASS_NAME:
+					return new AutomationNetUIHWND(new ElementBuilder(element));
 			}
     		return new AutomationPanel(new ElementBuilder(element));
     	case TitleBar:

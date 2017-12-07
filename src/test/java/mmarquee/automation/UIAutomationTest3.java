@@ -18,7 +18,6 @@ package mmarquee.automation;
 import mmarquee.automation.utils.Utils;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;

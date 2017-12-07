@@ -21,7 +21,6 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import org.junit.*;
@@ -424,15 +423,10 @@ public class UIAutomationTest extends BaseAutomationTest {
     
     @Test
     public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
-    	doTestWithNotepad(new TestWithNotepad() {
-			@Override
-			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
-				
-	            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
-	            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
-	            
-			}
-		});
+    	doTestWithNotepad((instance, app) -> {
+            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
+            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
+        });
     }
 
     @Test(expected=AutomationException.class)
@@ -449,16 +443,10 @@ public class UIAutomationTest extends BaseAutomationTest {
 
     @Test
     public void findProcess_Succeeds_When_Already_Running() throws Exception {
-    	doTestWithNotepad(new TestWithNotepad() {
-			@Override
-			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
-
-	            AutomationApplication launched = instance.findProcess("notepad.exe");
-
-	            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
-	            
-			}
-		});
+    	doTestWithNotepad((instance, app) -> {
+    	    AutomationApplication launched = instance.findProcess("notepad.exe");
+            assertTrue("Should be the same name", launched.getName().equals(app.getName()));
+        });
     }
 
     @Test(expected=AutomationException.class)
@@ -563,16 +551,10 @@ public class UIAutomationTest extends BaseAutomationTest {
 
     @Test
     public void testGetDesktopWindow_succeeds() throws Exception {
-    	doTestWithNotepad(new TestWithNotepad() {
-			@Override
-			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
-				
-				AutomationWindow window = instance.getDesktopWindow(getLocal("notepad.title"));
-				assertNotNull(window);
-				
-			}
-		});
-    	
+    	doTestWithNotepad((instance, app) -> {
+            AutomationWindow window = instance.getDesktopWindow(getLocal("notepad.title"));
+            assertNotNull(window);
+        });
     }
     
     @Test(expected = ItemNotFoundException.class)
@@ -582,16 +564,10 @@ public class UIAutomationTest extends BaseAutomationTest {
 
     @Test
     public void testGetDesktopWindow_WithRegexp_succeeds() throws Exception {
-    	doTestWithNotepad(new TestWithNotepad() {
-			@Override
-			public void doTest(UIAutomation instance, AutomationApplication app) throws Exception {
-				
-				AutomationWindow window = instance.getDesktopWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
-				assertNotNull(window);
-				
-			}
-		});
-    	
+    	doTestWithNotepad((instance, app) -> {
+            AutomationWindow window = instance.getDesktopWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+            assertNotNull(window);
+        });
     }
     
     @Test(expected = ItemNotFoundException.class)

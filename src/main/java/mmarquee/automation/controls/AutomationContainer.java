@@ -337,7 +337,6 @@ public class AutomationContainer extends AutomationBase {
         return this.findFirst(new TreeScope(TreeScope.Descendants),this.createAutomationIdPropertyCondition(automationId));
     }
 
-
     /**
      * Creates an integer variant.
      * @param value The value to set
@@ -351,45 +350,6 @@ public class AutomationContainer extends AutomationBase {
     }
 
     ////////////////// 'old-style' API ////////////////
-
-    /**
-     * For backward compatibility only.
-     * @param index Index of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     * @deprecated use {@link #getComboBox(int)} instead
-     */
-    @Deprecated
-    public AutomationComboBox getCombobox(int index) throws PatternNotFoundException, AutomationException {
-        return getComboBox(index);
-    }
-
-    /**
-     * For backward compatibility only.
-     * @param name Name of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     * @deprecated use {@link #getComboBox(String)} instead
-     */
-    @Deprecated
-    public AutomationComboBox getCombobox(String name) throws PatternNotFoundException, AutomationException {
-        return getComboBox(name);
-    }
-
-    /**
-     * For backward compatibility only.
-     * @param id Automation id of the control
-     * @return The found control
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     * @deprecated use {@link #getComboBoxByAutomationId(String)} instead
-     */
-    @Deprecated
-    public AutomationComboBox getComboboxByAutomationId(String id) throws PatternNotFoundException, AutomationException {
-        return getComboBoxByAutomationId(id);
-    }
 
     /**
      * Gets the String Grid control associated with the given index.
@@ -1386,18 +1346,6 @@ public class AutomationContainer extends AutomationBase {
     public AutomationHyperlink getHyperlinkByAutomationId(String id) throws AutomationException {
         return new AutomationHyperlink(new ElementBuilder(this.getElementByAutomationId(id,
                 ControlType.Hyperlink)));
-    }
-
-    /**
-     * Deprecated. use {@link #getList(int)} instead.
-     * @param index the index of the item
-     * @return the List
-     * @throws PatternNotFoundException Expected pattern not found
-     * @throws AutomationException if something goes wrong
-     */
-    @Deprecated
-    public AutomationList getListItem(int index) throws PatternNotFoundException, AutomationException {
-        return getList(index);
     }
 
     /**

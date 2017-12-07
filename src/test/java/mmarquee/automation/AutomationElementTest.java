@@ -17,17 +17,11 @@ package mmarquee.automation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
 import java.util.List;
 
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -40,8 +34,6 @@ import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 /**
  * @author Mark Humphreys

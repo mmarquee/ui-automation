@@ -29,8 +29,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -88,12 +86,7 @@ public class UIAutomationTest2 {
 
         Unknown mockUnknown = Mockito.mock(Unknown.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(), any());
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(), any());
 
         when(mocked.createAndCondition(any(Pointer.class), any(Pointer.class), any(PointerByReference.class))).thenReturn(0);
         when(mocked.createPropertyCondition(any(Integer.class), any(Variant.VARIANT.ByValue.class), any(PointerByReference.class))).thenReturn(0);

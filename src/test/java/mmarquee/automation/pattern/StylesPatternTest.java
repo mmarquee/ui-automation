@@ -10,19 +10,15 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doReturn;
 
 /**
  * @author Mark Humphreys
@@ -51,13 +47,7 @@ public class StylesPatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_getStyleId_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentStyleId(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentStyleId(any());
 
         Styles pattern = new Styles(rawPattern);
 
@@ -66,21 +56,18 @@ public class StylesPatternTest {
 
     @Test
     public void test_getStyleName_Calls_getCurrentStyleName_From_Pattern() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[0];
 
-                String value = "Hello";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            String value = "Hello";
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(rawPattern);
@@ -91,13 +78,7 @@ public class StylesPatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_getStyleName_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
-
-                return 1;
-            }
-        }).when(rawPattern).getCurrentStyleName(any());
+        doAnswer(invocation -> 1).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(rawPattern);
 
@@ -107,12 +88,7 @@ public class StylesPatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Styles pattern = new Styles();
 
@@ -134,21 +110,18 @@ public class StylesPatternTest {
 
         IUIAutomationStylesPattern mockPattern = Mockito.mock(IUIAutomationStylesPattern.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[0];
 
-                String value = "Hello";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            String value = "Hello";
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(rawPattern);

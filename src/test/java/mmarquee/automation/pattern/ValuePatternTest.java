@@ -32,8 +32,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -60,21 +58,18 @@ public class ValuePatternTest {
 
     @Test
     public void test_Value_Calls_getValue_From_Pattern() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[0];
 
-                String value = "Hello";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            String value = "Hello";
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getValue(any());
 
         Value pattern = new Value(rawPattern);
@@ -88,17 +83,14 @@ public class ValuePatternTest {
 
     @Test(expected=AutomationException.class)
     public void test_Value_Throws_Exception_When_COM_Sets_Error_State() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[0];
 
 //                reference.setValue("VALUE-01");
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getValue(any());
 
         Value pattern = new Value(rawPattern);
@@ -110,17 +102,14 @@ public class ValuePatternTest {
 
     @Test(expected= AutomationException.class)
     public void test_isReadOnly_Throws_Exception_When_COM_Returns_Error() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 1;
-            }
+            return 1;
         }).when(rawPattern).getCurrentIsReadOnly(any());
 
         Value pattern = new Value(rawPattern);
@@ -132,17 +121,14 @@ public class ValuePatternTest {
 
     @Test
     public void test_isReadOnly_Returns_False_When_COM_Returns_Two() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(0);
+            reference.setValue(0);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentIsReadOnly(any());
 
         Value pattern = new Value(rawPattern);
@@ -154,17 +140,14 @@ public class ValuePatternTest {
 
     @Test
     public void test_isReadOnly_Returns_True_When_COM_Returns_One() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                IntByReference reference = (IntByReference)args[0];
+            Object[] args = invocation.getArguments();
+            IntByReference reference = (IntByReference)args[0];
 
-                reference.setValue(1);
+            reference.setValue(1);
 
-                return 0;
-            }
+            return 0;
         }).when(rawPattern).getCurrentIsReadOnly(any());
 
         Value pattern = new Value(rawPattern);
@@ -178,12 +161,7 @@ public class ValuePatternTest {
     @Ignore("Throws Mockito exception")
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(-1);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Value pattern = new Value();
 
@@ -206,12 +184,7 @@ public class ValuePatternTest {
 
     @Test
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public WinNT.HRESULT answer(InvocationOnMock invocation) throws Throwable {
-                return new WinNT.HRESULT(0);
-            }
-        }).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Value pattern = new Value();
 
@@ -219,21 +192,18 @@ public class ValuePatternTest {
 
         IUIAutomationValuePattern mockPattern = Mockito.mock(IUIAutomationValuePattern.class);
 
-        doAnswer(new Answer() {
-            @Override
-            public Integer answer(InvocationOnMock invocation) throws Throwable {
+        doAnswer(invocation -> {
 
-                Object[] args = invocation.getArguments();
-                PointerByReference reference = (PointerByReference)args[0];
+            Object[] args = invocation.getArguments();
+            PointerByReference reference = (PointerByReference)args[0];
 
-                String value = "Hello";
-                Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
-                pointer.setWideString(0, value);
+            String value = "Hello";
+            Pointer pointer = new Memory(Native.WCHAR_SIZE * (value.length() +1));
+            pointer.setWideString(0, value);
 
-                reference.setValue(pointer);
+            reference.setValue(pointer);
 
-                return 0;
-            }
+            return 0;
         }).when(mockPattern).getValue(any());
 
         doReturn(mockUnknown)
