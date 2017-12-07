@@ -20,16 +20,18 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -38,6 +40,8 @@ import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  * @author Mark Humphreys
@@ -75,10 +79,28 @@ public class AutomationElementTest extends BaseAutomationTest {
 	}
 
 	@Test
+	public void testGetFullDescription() throws AutomationException {
+		AutomationElement root = instance.getRootElement();
+		assertTrue("root:" + root.getFullDescription(), root.getFullDescription().isEmpty());
+	}
+
+	@Test
 	public void testGetClassName() throws AutomationException {
 		AutomationElement root = instance.getRootElement();
 		assertTrue("root:" + root.getClassName(), root.getClassName().equals("#32769"));
 	}
+
+    @Test
+    @Ignore("Needs better mocking")
+    public void testGetFullDescription_Mocked() throws AutomationException {
+        // Using mock since desktop does not provide an automation ID
+        AutomationElement element = getMocketAutomationElement6();
+
+        when(element.getElement6().getCurrentFullDescription(any()))
+                .thenAnswer(answerWithSetPointerReferenceToWideString("MyCurrentFullDescription"));
+
+        assertEquals("MyCurrentFullDescription", element.getFullDescription());
+    }
 
 	@Test
 	public void testGetAutomationId() throws AutomationException {

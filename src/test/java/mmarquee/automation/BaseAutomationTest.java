@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 import java.util.ResourceBundle;
 
 import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import org.junit.After;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
@@ -112,6 +113,11 @@ public class BaseAutomationTest {
         IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
         return new AutomationElement(mockedElement);
 	}
+
+    protected AutomationElement getMocketAutomationElement6() {
+        IUIAutomationElement6 mockedElement = Mockito.mock(IUIAutomationElement6.class);
+        return new AutomationElement(mockedElement);
+    }
 	
 	protected Answer<Integer> answerWithSetPointerReferenceToWideString(final String expectedString) {
 		return new Answer<Integer>() {

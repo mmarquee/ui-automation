@@ -59,6 +59,27 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
+     * Gets the IUIAutomationElement6 interface, if possible
+     * @return The IUIAutomationElement6 interface
+     * @throws AutomationException Not able to convert interface
+     */
+    public final IUIAutomationElement6 getElement6() throws AutomationException {
+
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(
+                new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            IUIAutomationElement6 elem =
+                    IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+            return elem;
+        }
+
+        throw new AutomationException("Failed to convert to IUIAutomationElement6");
+    }
+
+    /**
      * Sets the underlying automation element.
      *
      * @param inValue The new value.
@@ -73,6 +94,15 @@ public class AutomationElement extends BaseAutomation {
      * @param inElement The element.
      */
     public AutomationElement(final IUIAutomationElement inElement) {
+        this.element = inElement;
+    }
+
+    /**
+     * Constructor of AutomationElement, for IUIAutomationElement6.
+     *
+     * @param inElement The element (IUIAutomationElement6)
+     */
+    public AutomationElement(final IUIAutomationElement6 inElement) {
         this.element = inElement;
     }
 
