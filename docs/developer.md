@@ -122,6 +122,8 @@ The controls that have been implemented reflect the requirements for automating 
 * [Slider](slider.md)
 * [Window](window.md)
 
+# Windows support details
+[Windows versions](windows-support.md)
 
 ## Real world examples
 * [Tree Walker](treewalker.md)
