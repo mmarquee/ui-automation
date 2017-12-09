@@ -1,10 +1,13 @@
 Most elements, will sit within a container, either a window or a pane, etc. Once the container has been found, the desired element can be found using one of three methods. 
 
+THere are couple of ways to find elements, either through the consistent Search API, or a more traditional set of APIs.
+
+# Search API
 In order to have a consistent search API, the criteria are built using a builder, allowing the following search criteria to be added (note that not all combinations will return values for specific elements)
 
 * name
 * regex name pattern
-* id (index)
+* index
 * automation id
 * classname
 * controlname
@@ -47,3 +50,37 @@ The example shows a button being located by it's index. This will be the first b
   AutomationButton button1 = window.getButton(Search.getBuilder(0).build());
   button1.click();
 ```
+
+#'Traditional' Find API
+
+Each element also has a more specific find API, allowing specific functions to find specific element type, for example.
+
+## Index
+```
+  // Get button by index
+  AutomationButton button1 = window.getButton(0);
+  button1.click();
+```
+
+## Name
+```
+  // Get button by name
+  AutomationButton button1 = window.getButton("Button1");
+  button1.click();
+```
+
+## AutomationId
+```
+  // Get button by automationId
+  AutomationButton button1 = window.getButtonByAutomationId("ButtonId");
+  button1.click();
+```
+
+## Regex pattern
+
+```
+  // Get button by regex pattern
+  AutomationButton button1 = window.getButton(Pattern.compile("myN.*"));
+  button1.click();
+```
+ 

@@ -23,6 +23,22 @@ As the library depends on jna (currently version 4.5.0), then there is no need t
 <dependencies>  
 ```
 
+## Snapshot build
+
+Currently the library is preparing for a 0.5 release, so builds are being snapshotted, so nto get the latest development version, use the the following in the pom.xml.
+
+```
+<dependencies>
+  <!-- Other dependencies -->
+  <dependency>
+    <groupId>com.github.mmarquee</groupId>
+    <artifactId>ui-automation</artifactId>
+    <version>0.5.0-SNAPSHOT</version>
+  </dependency>  
+<dependencies>  
+```
+
+
 ## Getting started
 
 The ui-automation library is a wrapper for the UIAutomationClient library, which has been extracted using com4j. As the generated code is large and complex, this has been wrapped up in a number of classes, each providing classes that encapsulate part of this library (together with other utility methods as necessary).
