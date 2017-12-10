@@ -300,7 +300,7 @@ public abstract class AutomationBase implements Automatable {
      * @return Yes or no.
      */
     boolean isItemContainerPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsItemContainerPatternAvailablePropertyId);
+        return isPatternAvailable(PropertyID.IsItemContainerPatternAvailable);
     }
 
     /**

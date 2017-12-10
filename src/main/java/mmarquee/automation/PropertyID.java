@@ -68,8 +68,23 @@ public enum PropertyID {
     IsTransformPatternAvailable(30042),
     IsValuePatternAvailable(30043),
     IsWindowPatternAvailable(30044),
+
+    GridRowCount(30062),
+    GridColumnCount(30063),
     WindowIsModal(30077),
     WindowIsTopmost(30078),
+
+    IsLegacyIAccessiblePatternAvailable(30090),
+    LegacyIAccessibleChildId(30091),
+    LegacyIAccessibleName(30092),
+    LegacyIAccessibleValue(30093),
+    LegacyIAccessibleDescription(30094),
+    LegacyIAccessibleRole(30095),
+    LegacyIAccessibleState(30096),
+    LegacyIAccessibleHelp(30097),
+    LegacyIAccessibleKeyboardShortcut(30098),
+    LegacyIAccessibleSelection(30099),
+    LegacyIAccessibleDefaultAction(30100),
     AriaRole(30101),
     AriaProperties(30102),
     IsDataValidForForm(30103),
@@ -77,7 +92,10 @@ public enum PropertyID {
     DescribedBy(30105),
     FlowsTo(30106),
     ProviderDescription(30107),
-    IsItemContainerPatternAvailablePropertyId(30108),
+    IsItemContainerPatternAvailable(30108),
+    IsVirtualizedItemPatternAvailable(30109),
+    IsSynchronizedInputPatternAvailable(30110),
+
     LiveSetting(30135);
 
     /**
