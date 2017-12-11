@@ -31,4 +31,6 @@ The functionality supported by this library is only important issue is the addit
 
 * `IUIAutomationElement7`
 
+## Windows 10 (Build 1709)
+* `IUIAutomationSelectionPattern2`
 
