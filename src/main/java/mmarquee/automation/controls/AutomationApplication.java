@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.controls;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -27,6 +28,7 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.utils.EXEFileInfo;
 import mmarquee.automation.utils.Utils;
 
 /**
@@ -271,5 +273,18 @@ public class AutomationApplication extends AutomationBase {
         if (handle != null) {
             Utils.quitProcess(handle);
         }
+    }
+
+    /**
+     * Gets the windows version number.
+     * @param arg The path
+     * @return The version number
+     * @throws IOException Failed
+     */
+    public static String getVersionNumber(String arg) throws IOException {
+        EXEFileInfo info = new EXEFileInfo();
+        int[] version = info.getVersionInfo(arg);
+
+        return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
     }
 }
