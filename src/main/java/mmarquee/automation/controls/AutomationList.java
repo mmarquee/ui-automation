@@ -194,6 +194,7 @@ public final class AutomationList extends AutomationBase {
         if (this.selectionPattern == null) {
             this.selectionPattern = this.getSelectionPattern();
         }
+
         if (this.selectionPattern != null) {
 	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
 	
@@ -208,6 +209,19 @@ public final class AutomationList extends AutomationBase {
         throw new PatternNotFoundException("Could not determine selection");
     }
 
+    private AutomationElement getCurrentSelectedItem()
+            throws AutomationException, PatternNotFoundException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+
+        if (this.selectionPattern != null) {
+            return selectionPattern.getCurrentSelectedItem();
+        } else {
+            throw new AutomationException("Failed to call getCurrentSelectedItem");
+        }
+    }
+
     /**
      * Gets the first currently selected element.
      *
@@ -217,11 +231,20 @@ public final class AutomationList extends AutomationBase {
      */
     public AutomationListItem getSelectedItem()
             throws AutomationException, PatternNotFoundException {
-        List<AutomationListItem> list = this.getSelectedItems();
-        if (list.size() == 0) {
-        	throw new ElementNotFoundException();
+
+        // Try and use the more modern interface
+
+        try {
+            AutomationElement elem = this.getCurrentSelectedItem();
+
+            return new AutomationListItem(new ElementBuilder(elem));
+        } catch (AutomationException ex) {
+            List<AutomationListItem> list = this.getSelectedItems();
+            if (list.size() == 0) {
+                throw new ElementNotFoundException();
+            }
+            return list.get(0);
         }
-        return list.get(0);
     }
 }
 

@@ -29,7 +29,7 @@ The functionality supported by this library is only important issue is the addit
 The functionality supported by this library is only important issue is the addition of the `getFullDescription()` method that is available in
 `IUIAutomationElement6`.
 
-* `IUIAutomationElement7`
+* `IUIAutomationElement7`  
 
 ## Windows 10 (Build 1709)
 * `IUIAutomationSelectionPattern2`

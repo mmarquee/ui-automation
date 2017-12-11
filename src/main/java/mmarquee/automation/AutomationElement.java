@@ -35,16 +35,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mark Humphreys
+ * Wrapper for the underlying umphreys
  * Date 06/03/2016.
- * <p>
- * Wrapper for the underlying automation element.
- * </p>
  */
 public class AutomationElement extends BaseAutomation {
     /**
      * <p>
-     * The underlying automation element.
+     automation element.
+     *
+     * @author Mark H  * The underlying automation element.
      * </p>
      */
     private IUIAutomationElement element;
@@ -59,7 +58,7 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement3 interface, if possible
+     * Gets the IUIAutomationElement3 interface, if possible.
      * @return The IUIAutomationElement3 interface
      * @throws AutomationException Not able to convert interface
      */
@@ -78,7 +77,7 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement6 interface, if possible
+     * Gets the IUIAutomationElement6 interface, if possible.
      * @return The IUIAutomationElement6 interface
      * @throws AutomationException Not able to convert interface
      */
