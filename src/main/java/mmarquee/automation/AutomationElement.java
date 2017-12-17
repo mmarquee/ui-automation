@@ -22,14 +22,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElement6;
-import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -391,6 +384,43 @@ public class AutomationElement extends BaseAutomation {
             final PointerByReference pCondition)
             throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
+    }
+
+    public List<AutomationElement> findAll(final TreeScope scope,
+                                           final PointerByReference pCondition,
+                                           final CacheRequest cacheRequest)
+            throws AutomationException {
+        List<AutomationElement> items = new ArrayList<>();
+
+        PointerByReference pAll = new PointerByReference();
+
+        final int res =
+                this.element.findAllBuildCache(scope.value, pCondition.getValue(), cacheRequest.getValue(), pAll);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        IUIAutomationElementArray collection =
+                getAutomationElementArrayFromReference(pAll);
+
+        IntByReference ibr = new IntByReference();
+
+        collection.getLength(ibr);
+
+        int counter = ibr.getValue();
+
+        for (int a = 0; a < counter; a++) {
+            PointerByReference pbr = new PointerByReference();
+
+            collection.getElement(a, pbr);
+
+            IUIAutomationElement elem =
+                    getAutomationElementFromReference(pbr);
+
+            items.add(new AutomationElement(elem));
+        }
+
+        return items;
     }
 
     /**

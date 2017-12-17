@@ -60,4 +60,6 @@ public interface IUIAutomation extends IUnknown {
     int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler);
     int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler);
     int elementFromPoint(WinDef.POINT pt, PointerByReference element);
+
+    int createCacheRequest(PointerByReference request);
 }

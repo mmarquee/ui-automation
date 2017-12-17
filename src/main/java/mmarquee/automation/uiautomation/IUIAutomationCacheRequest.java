@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,32 @@
  */
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
  * @author Mark Humphreys
- * Date 10/12/2017
+ * Date 16/12/2017
  */
-public interface IUIAutomationSelectionPattern2
-        extends IUIAutomationSelectionPattern {
+public interface IUIAutomationCacheRequest extends IUnknown {
     /**
      * The interface IID for QueryInterface et al
      */
     Guid.IID IID = new Guid.IID(
-                "{0532bfae-c011-4e32-a343-6d642d798555}");
+            "B32A92B5-BC25-4078-9C08-D7EE95C48E03");
 
-    int CurrentCurrentSelectedItem(PointerByReference retval);
-    int CurrentFirstSelectedItem(PointerByReference retval);
-    int CurrentItemCount(IntByReference retval);
-    int CurrentLastSelectedItem(PointerByReference retval);
+    int AddPattern(int inVal);
+    int AddProperty(int inVal);
+    int Clone(PointerByReference retVal);
+
+    int GetTreeScope(PointerByReference inVal);
+    int SetTreeScope(PointerByReference retVal);
+
+    int GetTreeFilter(PointerByReference inVal);
+    int SetTreeFilter(PointerByReference retVal);
+
+    int GetAutomationElementMode(PointerByReference mode);
+    int SetAutomationElementMode(PointerByReference mode);
 }
