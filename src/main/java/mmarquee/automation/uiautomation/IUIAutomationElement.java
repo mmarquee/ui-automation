@@ -62,5 +62,6 @@ public interface IUIAutomationElement extends IUnknown {
     int getRuntimeId(PointerByReference runtimeId);
     int getCurrentAutomationId(PointerByReference retVal);
     int getCurrentCulture (IntByReference retVal);
+    int getCachedName (PointerByReference retVal);
 }
 

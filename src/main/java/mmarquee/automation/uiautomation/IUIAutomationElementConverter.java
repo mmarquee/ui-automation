@@ -66,7 +66,7 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getRuntimeId(/* SAFEARRAY */ PointerByReference runtimeId) {
+            public int getRuntimeId(PointerByReference runtimeId) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, runtimeId});
             }
@@ -316,10 +316,10 @@ public class IUIAutomationElementConverter {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-//                public int get_CachedName (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+                public int getCachedName (PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
 
 //                public int get_CachedAcceleratorKey (PointerByReference retVal) {
 //                    Function f = Function.getFunction(vTable[56], Function.ALT_CONVENTION);

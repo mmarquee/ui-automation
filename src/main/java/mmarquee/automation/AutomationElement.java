@@ -293,6 +293,10 @@ public class AutomationElement extends BaseAutomation {
         return this.currentName();
     }
 
+    public String getCachedName() throws AutomationException {
+        return this.cachedName();
+    }
+
     /**
      * Gets the current name of the control.
      *
@@ -303,6 +307,27 @@ public class AutomationElement extends BaseAutomation {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentName(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        if (sr.getValue() == null) {
+            return "";
+        } else {
+            return sr.getValue().getWideString(0);
+        }
+    }
+
+    /**
+     * Gets the cached name of the control.
+     *
+     * @return The name of the element.
+     * @throws AutomationException Call to Automation API failed.
+     */
+    protected String cachedName() throws AutomationException {
+        PointerByReference sr = new PointerByReference();
+
+        final int res = this.element.getCachedName(sr);
         if (res != 0) {
             throw new AutomationException(res);
         }
