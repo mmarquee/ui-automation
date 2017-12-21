@@ -25,10 +25,11 @@ import com.sun.jna.ptr.PointerByReference;
  */
 public interface IUIAutomationTextRange extends IUnknown {
     /**
-     * The interface IID for QueryInterface et al
+     * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{A543CC6A-F4AE-494B-8239-C814481187A8}");
 
     int select();
     int getText(Integer maxLength, PointerByReference sr);
+    int findText(PointerByReference sr, Integer backward, Integer ignoreCase, PointerByReference found);
 }

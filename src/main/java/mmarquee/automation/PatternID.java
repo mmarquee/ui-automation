@@ -199,7 +199,7 @@ public enum PatternID {
     /**
      * The actual value.
      */
-    private int value;
+    private final int value;
 
     /**
      * Gets the value.

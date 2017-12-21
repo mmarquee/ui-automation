@@ -27,9 +27,9 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationTogglePatternConverter {
-    private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
 
     public static IUIAutomationTogglePattern PointerToInterface(final PointerByReference ptr) {
+        final int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];

@@ -28,15 +28,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Wrapper for the underlying umphreys
+ * Wrapper for the underlying automation element.
+ *
+ * @author Mark Humphreys
  * Date 06/03/2016.
  */
 public class AutomationElement extends BaseAutomation {
     /**
      * <p>
-     automation element.
-     *
-     * @author Mark H  * The underlying automation element.
+     * The underlying automation element.
      * </p>
      */
     private IUIAutomationElement element;
@@ -113,6 +113,13 @@ public class AutomationElement extends BaseAutomation {
      */
     public AutomationElement(final IUIAutomationElement6 inElement) {
         this.element = inElement;
+        this.cached = false;
+    }
+
+    private boolean cached = false;
+
+    public void setCached (boolean value) {
+        this.cached = value;
     }
 
     /**
@@ -284,13 +291,17 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the name, either from the current ot cache property.
+     * Gets the name, either from the current or cache property.
      *
      * @return The name (either cached or current).
      * @throws AutomationException Call to Automation API failed.
      */
     public String getName() throws AutomationException {
-        return this.currentName();
+       // if (this.cached) {
+       //     return this.cachedName();
+       // } else {
+            return this.currentName();
+       // }
     }
 
     public String getCachedName() throws AutomationException {
@@ -442,7 +453,10 @@ public class AutomationElement extends BaseAutomation {
             IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
 
-            items.add(new AutomationElement(elem));
+            AutomationElement element = new AutomationElement(elem);
+            element.cached = true;
+
+            items.add(element);
         }
 
         return items;

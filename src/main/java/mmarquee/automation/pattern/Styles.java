@@ -95,6 +95,11 @@ public class Styles extends BasePattern {
         return ipr.getValue();
     }
 
+    /**
+     * Converts An Unknown pointer to the automation interface.
+     * @param pUnknown The Unknown pointer
+     * @return The converted interface
+     */
     public IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
         return IUIAutomationStylesPatternConverter.PointerToInterface(pUnknown);
     }

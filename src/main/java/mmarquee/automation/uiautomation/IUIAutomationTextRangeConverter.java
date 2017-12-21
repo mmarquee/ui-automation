@@ -26,7 +26,7 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationTextRangeConverter {
-    private static int METHODS = 21; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
+    private static int METHODS = 21; // 0-2 IUnknown, 3-20 IUIAutomationTextRange
 
     public static IUIAutomationTextRange PointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
@@ -51,6 +51,11 @@ public class IUIAutomationTextRangeConverter {
             public int Release() {
                 Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
+            }
+
+            public int findText(PointerByReference sr, Integer backward, Integer ignoreCase, PointerByReference found) {
+                Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr, backward, ignoreCase, found});
             }
 
             public int getText(Integer maxLength, PointerByReference sr) {

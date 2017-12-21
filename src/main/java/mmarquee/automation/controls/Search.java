@@ -27,42 +27,42 @@ public class Search {
     /**
      * Automation id to search for.
      */
-    private String automationId;
+    private final String automationId;
 
     /**
      * Name part of the search.
      */
-    private String name;
+    private final String name;
 
     /**
      * Index search criteria.
      */
-    private int index;
+    private final int index;
 
     /**
      * Classname criteria.
      */
-    private String className;
+    private final String className;
 
     /**
      * Name pattern (regex expression) criteria.
      */
-    private Pattern namePattern;
+    private final Pattern namePattern;
 
     /**
      * Control type search criteria.
      */
-    private String controlType;
+    private final String controlType;
 
     /**
      * Row criteria.
      */
-    private int row;
+    private final int row;
 
     /**
      * Column criteria.
      */
-    private int column;
+    private final int column;
 
     /**
      * The builder for the Search criteria.

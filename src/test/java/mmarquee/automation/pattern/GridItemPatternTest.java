@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
  */
 public class GridItemPatternTest {
     @Mock
-    IUIAutomationGridItemPattern rawPattern;
+    private IUIAutomationGridItemPattern rawPattern;
 
     @Before
     public void setup() {

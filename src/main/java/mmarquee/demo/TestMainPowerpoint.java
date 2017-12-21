@@ -54,12 +54,14 @@ public class TestMainPowerpoint extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window = application.getWindow(Search.getBuilder("This is text.pptx - PowerPoint").build());
+            AutomationWindow window = application.getWindow(Search.getBuilder().className("PPTFrameClass").build());
             logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("MDIClient").build());
             logger.info(panelX.getName());
             logger.info(panelX.getClassName());
+
+            // Again this seems to fail for Powerpoint 2016 at this point
 
             AutomationPanel panel1 = panelX.getPanel(Search.getBuilder("PowerPoint Edit View - [This is text.pptx]").build());
             logger.info(panelX.getName());

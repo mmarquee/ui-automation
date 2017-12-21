@@ -49,7 +49,7 @@ public class TestMainExcel extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window = application.getWindow(Search.getBuilder("Book1 - Excel").build());
+            AutomationWindow window = application.getWindow(Search.getBuilder().className("XLMAIN").build());
             logger.info(window.getName());
 
             AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("XLDESK").build());
@@ -64,6 +64,8 @@ public class TestMainExcel extends TestBase {
             for(AutomationTabItem item : items) {
                 logger.info(item.getName());
             }
+
+            // Something goes wrong here in Excel 2016 - it can't find the actual Excel grids.
 
             AutomationDataGrid grid = window.getDataGrid(Search.getBuilder(0).build());
             logger.info(grid.getName());

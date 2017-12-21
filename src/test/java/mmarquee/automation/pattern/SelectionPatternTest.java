@@ -45,7 +45,7 @@ import static org.mockito.Mockito.*;
 @PrepareForTest(IUIAutomationSelectionItemPatternConverter.class)
 public class SelectionPatternTest {
     @Mock
-    IUIAutomationSelectionPattern rawPattern;
+    private IUIAutomationSelectionPattern rawPattern;
 
     @Spy
     private Unknown mockUnknown;

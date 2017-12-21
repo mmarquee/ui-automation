@@ -46,7 +46,7 @@ public class UIAutomation extends BaseAutomation {
     /**
      * The logger instance.
      */
-    private Logger logger = Logger.getLogger(UIAutomation.class.getName());
+    private final Logger logger = Logger.getLogger(UIAutomation.class.getName());
 
     /**
      * The automation instance.

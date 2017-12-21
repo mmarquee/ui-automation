@@ -39,7 +39,6 @@ public class DemoCaching extends TestBase {
 
             CacheRequest cacheRequest = new CacheRequest(automation);
 
-            cacheRequest.addPattern(PatternID.Selection.getValue());
             cacheRequest.addProperty(PropertyID.Name.getValue());
 
             List<AutomationElement> all =
@@ -48,9 +47,8 @@ public class DemoCaching extends TestBase {
             logger.info(all.size());
 
             for(AutomationElement item: all) {
-                logger.info(" *" +item.getName());
+                logger.info(" *" +item.getCachedName());
             }
-
 
         } catch (Exception ex) {
             logger.info("Something went wrong - " + ex.getClass());
