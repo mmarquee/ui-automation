@@ -29,7 +29,7 @@ import mmarquee.automation.pattern.Value;
  */
 public final class AutomationTextBox
         extends AutomationBase
-        implements Valueable {
+        implements Valueable, LegacyAccessible {
 
     /**
      * The value pattern.

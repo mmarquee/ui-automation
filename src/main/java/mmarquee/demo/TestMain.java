@@ -98,6 +98,11 @@ public class TestMain extends TestBase {
                     Object val111 = popup.getBoundingRectangle();
 
                     AutomationButton btn = popup.getButton(Search.getBuilder("OK").build());
+
+                    String aText = btn.getValueFromIAccesible();
+
+                    logger.info(aText);
+
                     Object val11 = btn.getBoundingRectangle();
 
                     boolean val1 = popup.isModal();
