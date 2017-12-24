@@ -32,7 +32,9 @@ import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
  * @author Mark Humphreys
  * Date 29/02/2016.
  */
-public abstract class BasePattern extends BaseAutomation implements Pattern {
+public abstract class BasePattern
+        extends BaseAutomation
+        implements Pattern {
 
     /**
      * The guid of the pattern.

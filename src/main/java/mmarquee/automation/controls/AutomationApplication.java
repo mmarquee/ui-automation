@@ -309,9 +309,8 @@ public class AutomationApplication extends AutomationBase {
      * Gets the windows version number.
      * @param arg The path
      * @return The version number
-     * @throws IOException Failed
      */
-    public static String getVersionNumber(String arg) throws IOException {
+    public static String getVersionNumber(String arg) {
         EXEFileInfo info = new EXEFileInfo();
         int[] version = info.getVersionInfo(arg);
 

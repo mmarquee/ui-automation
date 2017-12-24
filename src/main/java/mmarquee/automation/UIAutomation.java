@@ -861,7 +861,8 @@ public class UIAutomation extends BaseAutomation {
      PointerByReference handler
      *
      * @param event The identifier of the event that the method handles.
-     * @param scope The scope of events to be handled; that is, whether they are on the element itself, or on its ancestors and descendants.
+     * @param scope The scope of events to be handled; that is, whether they are on the element itself, or on its
+     * ancestors and descendants.
      * @param element The UI Automation element to associate with the event handler.
      * @param handler The object that handles the event.
      * @throws AutomationException

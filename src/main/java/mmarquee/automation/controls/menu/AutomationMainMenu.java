@@ -85,7 +85,10 @@ public class AutomationMainMenu extends AutomationMenu {
 
         PointerByReference pUnknownA = new PointerByReference();
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
+        WinNT.HRESULT resultA =
+                unkConditionA.QueryInterface(
+                        new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID),
+                        pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             return IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknownA);
         } else {

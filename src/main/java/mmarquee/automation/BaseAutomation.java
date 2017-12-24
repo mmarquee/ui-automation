@@ -26,6 +26,7 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
+import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ import java.util.List;
  * Date 08/02/2017.
  */
 public abstract class BaseAutomation {
+
     /**
      * Creates an Unknown object from the pointer.
      *

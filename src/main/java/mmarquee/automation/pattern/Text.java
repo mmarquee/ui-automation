@@ -85,7 +85,9 @@ public class Text extends BasePattern {
 
         String selectionResult = "";
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationTextRangeArray.IID), pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(
+                new Guid.REFIID(IUIAutomationTextRangeArray.IID), pUnknownA);
+
         if (COMUtils.SUCCEEDED(resultA)) {
             IUIAutomationTextRangeArray selection =
                     convertPointerToArrayInterface(pUnknownA);

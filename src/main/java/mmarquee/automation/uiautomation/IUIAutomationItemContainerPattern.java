@@ -35,7 +35,8 @@ public interface IUIAutomationItemContainerPattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{C690FDB2-27A8-423C-812D-429773C9084E}");
 
-    int AddRef();
-
-    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
+    int findItemByProperty(Pointer startAfter,
+                           int propertyId,
+                           Variant.VARIANT.ByValue value,
+                           PointerByReference found);
 }

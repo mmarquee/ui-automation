@@ -81,12 +81,18 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
             }
 
-            public int findFirstBuildCache(int scope, Pointer condition, Pointer cacheRequest, PointerByReference found) {
+            public int findFirstBuildCache(int scope,
+                                           Pointer condition,
+                                           Pointer cacheRequest,
+                                           PointerByReference found) {
                 Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
             }
 
-            public int findAllBuildCache(int scope, Pointer condition, Pointer cacheRequest, PointerByReference found) {
+            public int findAllBuildCache(int scope,
+                                         Pointer condition,
+                                         Pointer cacheRequest,
+                                         PointerByReference found) {
                 Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
             }
@@ -101,7 +107,9 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, value});
             }
 
-            public int getCurrentPropertyValueEx(/* [in] */ int propertyId, /* [in] */ WinDef.BOOL ignoreDefaultValue, Variant.VARIANT retVal) {
+            public int getCurrentPropertyValueEx(int propertyId,
+                                                 WinDef.BOOL ignoreDefaultValue,
+                                                 Variant.VARIANT retVal) {
                 Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
             }
@@ -116,7 +124,10 @@ public class IUIAutomationElementConverter {
 //                    return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
 //                }
 
-            public int getCurrentPatternAs(/* [in] */ int patternId, /* [in] */ Guid.REFIID riid, /* [retval][iid_is][out] */ PointerByReference patternObject) {
+            public int getCurrentPatternAs(
+                    int patternId,
+                    Guid.REFIID riid,
+                    PointerByReference patternObject) {
                 Function f = Function.getFunction(vTable[14], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
             }
@@ -461,7 +472,8 @@ public class IUIAutomationElementConverter {
             //                   return f.invokeInt(new Object[]{interfacePointer, retVal});
 ///                }
 
-            public int getClickablePoint(/* [out] */ WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable) {
+            public int getClickablePoint(WinDef.POINT.ByReference clickable,
+                                         WinDef.BOOLByReference gotClickable) {
                 Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
             }

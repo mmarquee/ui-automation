@@ -141,7 +141,9 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Something has gone wrong.
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
-        return (new AutomationMainMenu(new ElementBuilder(this.getElementByControlType(0, ControlType.Menu)).parent(this.element)));
+        return (new AutomationMainMenu(
+                new ElementBuilder(
+                        this.getElementByControlType(0, ControlType.Menu)).parent(this.element)));
     }
 
     /**

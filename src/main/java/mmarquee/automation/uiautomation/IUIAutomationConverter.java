@@ -103,7 +103,9 @@ public class IUIAutomationConverter {
                 return f.invokeInt(new Object[]{myInterfacePointer, pt, element});
             }
 
-            public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {
+            public int createPropertyCondition(int propertyId,
+                                               Variant.VARIANT.ByValue value,
+                                               PointerByReference condition) {
                 Function f = Function.getFunction(vTable[UIA_CREATE_PROPERTY_CONDITION], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{myInterfacePointer, propertyId, value, condition});
             }
@@ -153,12 +155,18 @@ public class IUIAutomationConverter {
                 return f.invokeInt(new Object[]{myInterfacePointer, walker});
             }
 
-            public int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler) {
+            public int addAutomationEventHandler(IntByReference eventId,
+                                                 TreeScope scope,
+                                                 Pointer element,
+                                                 PointerByReference cacheRequest,
+                                                 PointerByReference handler) {
                 Function f = Function.getFunction(vTable[UIA_ADD_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, scope, cacheRequest, handler});
             }
 
-            public int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler) {
+            public int removeAutomationEventHandler(IntByReference eventId,
+                                                    PointerByReference element,
+                                                    PointerByReference handler) {
                 Function f = Function.getFunction(vTable[UIA_REMOVE_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, handler});
             }

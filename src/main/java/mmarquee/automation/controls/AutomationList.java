@@ -171,7 +171,9 @@ public final class AutomationList extends AutomationBase {
      */
     public List<AutomationListItem> getItems()
             throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.ListItem));
+        List<AutomationElement> items = this.findAll(
+                new TreeScope(TreeScope.Descendants),
+                this.createControlTypeCondition(ControlType.ListItem));
 
         List<AutomationListItem> list = new ArrayList<>();
 

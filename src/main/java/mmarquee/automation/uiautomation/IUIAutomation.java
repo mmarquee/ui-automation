@@ -57,7 +57,11 @@ public interface IUIAutomation extends IUnknown {
     int getFocusedElement(PointerByReference element);
     int createTreeWalker(PointerByReference condition, PointerByReference walker);
     int getControlViewWalker(PointerByReference walker);
-    int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler);
+    int addAutomationEventHandler(IntByReference eventId,
+                                  TreeScope scope,
+                                  Pointer element,
+                                  PointerByReference cacheRequest,
+                                  PointerByReference handler);
     int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler);
     int elementFromPoint(WinDef.POINT pt, PointerByReference element);
 

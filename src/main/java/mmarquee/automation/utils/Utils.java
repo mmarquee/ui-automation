@@ -265,7 +265,8 @@ public class Utils {
      */
     public static void captureScreen(final String filename)
             throws AWTException, IOException {
-        BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        BufferedImage image = new Robot().createScreenCapture(
+                new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }
 
@@ -329,9 +330,9 @@ public class Utils {
      * Gets the windows version number.
      * @param arg The path
      * @return The version number
-     * @throws IOException Failed
+     *
      */
-	public static String getVersionNumber(String arg) throws IOException {
+	public static String getVersionNumber(String arg) {
         EXEFileInfo info = new EXEFileInfo();
         int[] version = info.getVersionInfo(arg);
 

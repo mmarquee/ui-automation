@@ -19,6 +19,8 @@ package mmarquee.automation.controls;
 import java.util.LinkedList;
 import java.util.List;
 
+import mmarquee.automation.pattern.LegacyIAccessible;
+import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
 import org.apache.log4j.Logger;
 
 import com.sun.jna.Pointer;
@@ -73,6 +75,11 @@ public abstract class AutomationBase implements Automatable {
      * The automation library wrapper.
      */
     protected UIAutomation automation;
+
+    /**
+     * The basic IAccessible pattern.
+     */
+    private LegacyIAccessible accessible;
 
     /**
      * The invoke pattern.
@@ -220,6 +227,15 @@ public abstract class AutomationBase implements Automatable {
      */
     boolean isSelectionItemPatternAvailable() {
         return isPatternAvailable(PropertyID.IsSelectionItemPatternAvailable);
+    }
+
+    /**
+     * Is the legacy accessible pattern available.
+     *
+     * @return Yes or no.
+     */
+    boolean isLegacyIAccessiblePatternAvailable() {
+        return isPatternAvailable(PropertyID.IsLegacyIAccessiblePatternAvailable);
     }
 
     /**
@@ -535,6 +551,30 @@ public abstract class AutomationBase implements Automatable {
             	return (SelectionItem)((PatternProvider) unknown).getPattern();
             }
             
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
+    }
+
+    /**
+     * <p>
+     * Gets the legacy IAccessible pattern for this control.
+     * </p>
+     * @return  Returns the LegacyIAccessible associated with this control, or null if not available
+     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Error in automation library
+     */
+    public LegacyIAccessible getAccessiblePattern()
+            throws PatternNotFoundException, AutomationException {
+        if (this.isLegacyIAccessiblePatternAvailable()) {
+            LegacyIAccessible pattern = new LegacyIAccessible();
+            PointerByReference unknown = this.getPattern(PatternID.LegacyIAccessible.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+                return (LegacyIAccessible)((PatternProvider) unknown).getPattern();
+            }
+
             pattern.setPattern(unknown.getValue());
             return pattern;
         }
@@ -987,7 +1027,8 @@ public abstract class AutomationBase implements Automatable {
         		this.createTrueCondition());
     }
     
- // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+ // TreeScope.Parent is not yet supported,
+    // see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent element
 //     *
@@ -1026,7 +1067,8 @@ public abstract class AutomationBase implements Automatable {
         return this.element.getFullDescription();
     }
 
-// TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+// TreeScope.Parent is not yet supported,
+// see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent control
 //     *

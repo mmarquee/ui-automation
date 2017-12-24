@@ -33,8 +33,16 @@ public class EXEFileInfo {
         Pointer lpData = new Memory(bufferarray.length);
         PointerByReference lplpBuffer = new PointerByReference();
         IntByReference puLen = new IntByReference();
-        boolean fileInfoResult = com.sun.jna.platform.win32.Version.INSTANCE.GetFileVersionInfo(path, 0, versionlength, lpData);
-        boolean verQueryVal = com.sun.jna.platform.win32.Version.INSTANCE.VerQueryValue(lpData, "\\", lplpBuffer, puLen);
+        boolean fileInfoResult =
+                com.sun.jna.platform.win32.Version.INSTANCE.GetFileVersionInfo(path,
+                        0,
+                        versionlength,
+                        lpData);
+        boolean verQueryVal =
+                com.sun.jna.platform.win32.Version.INSTANCE.VerQueryValue(lpData,
+                        "\\",
+                        lplpBuffer,
+                        puLen);
 
         VerRsrc.VS_FIXEDFILEINFO lplpBufStructure = new VerRsrc.VS_FIXEDFILEINFO(lplpBuffer.getValue());
         lplpBufStructure.read();
