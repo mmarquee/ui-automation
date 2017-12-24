@@ -50,7 +50,7 @@ public class TestMainExcel extends TestBase {
             // 2. Get the sheet
             assert application != null;
             AutomationWindow window = application.getWindow(Search.getBuilder().className("XLMAIN").build());
-            logger.info(window.getName());
+            logger.info(window.getClassName());
 
             AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("XLDESK").build());
             logger.info(panelX.getName());
@@ -61,11 +61,11 @@ public class TestMainExcel extends TestBase {
 
             List<AutomationTabItem> items = tab.getTabItems();
 
+            logger.info(items.size());
+
             for(AutomationTabItem item : items) {
                 logger.info(item.getName());
             }
-
-            // Something goes wrong here in Excel 2016 - it can't find the actual Excel grids.
 
             AutomationDataGrid grid = window.getDataGrid(Search.getBuilder(0).build());
             logger.info(grid.getName());
@@ -97,6 +97,15 @@ public class TestMainExcel extends TestBase {
             logger.info(cell3.getName());
             logger.info(cell3.getValue());
 
+
+            logger.info(cell3.getColumn());
+            logger.info(cell3.getRow());
+
+
+            cell3.setValue("Hey hey");
+            logger.info(cell3.getValue());
+
+            /*
             if (grid.canSelectMultiple()) {
                 // Play with selection - doesn't seem to be working yet
                 cell.addToSelection();
@@ -115,6 +124,7 @@ public class TestMainExcel extends TestBase {
             } else {
                 logger.info("Multiple selection not allowed");
             }
+*/
 
             // 3.4 More data
 
