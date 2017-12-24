@@ -158,7 +158,7 @@ public final class AutomationDataGrid
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getColumnHeaders ()
+    public List<AutomationDataGridCell> getColumnHeaders()
             throws PatternNotFoundException, AutomationException  {
         if (this.tablePattern == null) {
             this.tablePattern = this.getTablePattern();

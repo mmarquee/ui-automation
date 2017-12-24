@@ -40,6 +40,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.WinUser;
 import com.sun.jna.platform.win32.WinUser.WNDENUMPROC;
 import com.sun.jna.win32.W32APIOptions;
+import com.sun.jna.platform.win32.Tlhelp32.PROCESSENTRY32.ByReference;
 
 import mmarquee.automation.AutomationException;
 
@@ -96,8 +97,7 @@ public class Utils {
      * @param command Command.
      * @return The found process entry.
      */
-    public static boolean findProcessEntry
-                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
+    public static boolean findProcessEntry (final ByReference processEntry,
                      final String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
@@ -114,9 +114,12 @@ public class Utils {
     public static boolean findProcessEntry
                     (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
                      final Pattern filenamePattern) {
-        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
+        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class,
+                W32APIOptions.UNICODE_OPTIONS);
 
-        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
+        WinNT.HANDLE snapshot =
+                kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS,
+                    new WinDef.DWORD(0));
 
         boolean found = false;
 

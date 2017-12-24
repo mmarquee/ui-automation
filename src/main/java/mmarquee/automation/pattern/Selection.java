@@ -22,6 +22,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ConversionFailure;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
@@ -114,7 +115,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
-        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
+        return IUIAutomationElementArrayConverter.pointerToInterface(pUnknown);
     }
 
     /**
@@ -163,9 +164,9 @@ public class Selection extends BasePattern {
                 new Guid.REFIID(IUIAutomationElement.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return new AutomationElement(IUIAutomationElementConverter.PointerToInterface(pUnknown));
+            return new AutomationElement(IUIAutomationElementConverter.pointerToInterface(pUnknown));
         } else {
-            throw new AutomationException("Failed to convert to IUIAutomationElement");
+            throw new ConversionFailure("IUIAutomationElement");
         }
     }
 
@@ -183,11 +184,9 @@ public class Selection extends BasePattern {
                 new Guid.REFIID(IUIAutomationSelectionPattern2.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationSelectionPattern2Convertor.PointerToInterface(pUnknown);
+            return IUIAutomationSelectionPattern2Convertor.pointerToInterface(pUnknown);
         }
 
-        throw new AutomationException("Failed to convert to IUIAutomationSelectionPattern2");
+        throw new ConversionFailure("IUIAutomationSelectionPattern2");
     }
-
-
 }

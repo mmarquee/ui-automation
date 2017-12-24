@@ -62,7 +62,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElementConverter.PointerToInterface(root);
+            return IUIAutomationElementConverter.pointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -90,7 +90,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
+            this.automation = IUIAutomationConverter.pointerToInterface(pbr1);
         }
     }
 
@@ -102,7 +102,7 @@ public class IUIAutomationWindowPatternTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement rootElement = IUIAutomationElementConverter.PointerToInterface(root);
+            IUIAutomationElement rootElement = IUIAutomationElementConverter.pointerToInterface(root);
 
             Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
             variant.setValue(Variant.VT_INT, ControlType.Window.getValue());
@@ -120,7 +120,7 @@ public class IUIAutomationWindowPatternTest {
 
             WinNT.HRESULT res = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
-            return IUIAutomationElementConverter.PointerToInterface(element);
+            return IUIAutomationElementConverter.pointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }

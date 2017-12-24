@@ -105,7 +105,7 @@ public class AutomationTab extends AutomationContainer {
      * Constructor for the AutomationTab.
      * @param builder The builder
      */
-    public AutomationTab (final ElementBuilder builder) {
+    public AutomationTab(final ElementBuilder builder) {
         super(builder);
     }
 }

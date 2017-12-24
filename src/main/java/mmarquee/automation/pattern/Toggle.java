@@ -65,7 +65,7 @@ public class Toggle extends BasePattern {
      *
      * @throws AutomationException Something has gone wrong
      */
-    public void toggle () throws AutomationException {
+    public void toggle() throws AutomationException {
         final int res = this.getPattern().toggle();
         if (res != 0) {
             throw new AutomationException(res);

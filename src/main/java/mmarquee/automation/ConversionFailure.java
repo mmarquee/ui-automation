@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls;
+package mmarquee.automation;
 
 /**
- * Specialised custom control representing a powerpoint slide.
+ * Thrown when a conversion to an interface fails.
  *
  * @author Mark Humphreys
- * Date 01/02/2017.
+ * Date 24/12/2017.
  */
-public final class AutomationPowerpointSlide extends AutomationCustom {
-    /**
-     * Constructor for the AutomationPowerpointSlide.
-     *
-     * @param builder The builder
-     */
-    AutomationPowerpointSlide(final ElementBuilder builder) {
-        super(builder);
+public class ConversionFailure extends AutomationException {
+
+    public ConversionFailure(final String message) {
+        super(message);
     }
 }

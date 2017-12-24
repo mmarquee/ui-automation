@@ -58,7 +58,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
 	        IUIAutomationElement childElement =
-	                IUIAutomationElementConverter.PointerToInterface(pChild);
+	                IUIAutomationElementConverter.pointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -82,7 +82,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
 	        IUIAutomationElement childElement =
-	                IUIAutomationElementConverter.PointerToInterface(pChild);
+	                IUIAutomationElementConverter.pointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -105,7 +105,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
 	        IUIAutomationElement childElement =
-	                IUIAutomationElementConverter.PointerToInterface(pChild);
+	                IUIAutomationElementConverter.pointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -127,7 +127,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         
         try {
 	        IUIAutomationElement childElement =
-	                IUIAutomationElementConverter.PointerToInterface(pChild);
+	                IUIAutomationElementConverter.pointerToInterface(pChild);
 	        return new AutomationElement(childElement);
         } catch (NullPointerException ex) {
         	return null;
@@ -150,7 +150,7 @@ public class AutomationTreeWalker extends BaseAutomation {
 
         try {
             IUIAutomationElement parentElement =
-                    IUIAutomationElementConverter.PointerToInterface(pParent);
+                    IUIAutomationElementConverter.pointerToInterface(pParent);
             return new AutomationElement(parentElement);
         } catch (NullPointerException ex) {
             return null;

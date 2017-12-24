@@ -214,7 +214,7 @@ public enum PatternID {
      *
      * @param value Initial value.
      */
-    PatternID (int value) {
+    PatternID(int value) {
         this.value = value;
     }
 }

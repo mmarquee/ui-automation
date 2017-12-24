@@ -113,7 +113,7 @@ public class AutomationMenuItem
      * @return The found item
      * @throws AutomationException Something went wrong
      */
-    public AutomationMenuItem getMenuItem (int index) throws AutomationException {
+    public AutomationMenuItem getMenuItem(final int index) throws AutomationException {
 
     	AutomationMenu realMenu = getRealMenu();
     	if (realMenu != null) {
@@ -137,7 +137,7 @@ public class AutomationMenuItem
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name)
+    public AutomationMenuItem getMenuItem(final String name)
             throws PatternNotFoundException, AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();
@@ -164,7 +164,7 @@ public class AutomationMenuItem
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationMenuItem getMenuItem (Pattern namePattern)
+    public AutomationMenuItem getMenuItem(final Pattern namePattern)
             throws AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();
@@ -207,7 +207,7 @@ public class AutomationMenuItem
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationMenuItem getMenuItemByAutomationId (String automationId)
+    public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
             throws AutomationException {
     	
     	AutomationMenu realMenu = getRealMenu();

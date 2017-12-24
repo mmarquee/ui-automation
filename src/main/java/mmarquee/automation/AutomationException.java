@@ -16,11 +16,11 @@
 package mmarquee.automation;
 
 /**
- * @author Mark Humphreys
- * Date 14/07/2016.
- *
  * An exception thrown when there is an error returned by the underlying
  * automation library.
+ *
+ * @author Mark Humphreys
+ * Date 14/07/2016.
  */
 public class AutomationException extends Exception {
 

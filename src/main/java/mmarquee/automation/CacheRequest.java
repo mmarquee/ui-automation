@@ -80,7 +80,7 @@ public class CacheRequest {
             throw new AutomationException(result0.intValue());
         }
 
-        this.request = IUIAutomationCacheRequestConverter.PointerToInterface(pbr);
+        this.request = IUIAutomationCacheRequestConverter.pointerToInterface(pbr);
     }
 
     /**
