@@ -9,17 +9,26 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
+/**
+ * Converter implementation of IUIAutomationElement6.
+ *
+ * @author Mark Humphreys
+ * Date 26/12/2017.
+ */
 public class IUIAutomationElement6Converter {
 
+    public static final int IUI6_CURRENT_FULL_DESCRIPTION = 104;
+    public static final int IUI6_CACHED_FULL_DESCRIPTION = 105;
+
     public static IUIAutomationElement6 PointerToInterface(final PointerByReference ptr) {
-        //  0-2  IUnknown,
-        //  3-84 IUIAutomationElement,
-        // 85-90 IUIAutomationElement2,
-        // 91-93 IUIAutomationElement3
-        // ????? IUIAutomationElement4          (6) 94,95,96,97,98,99
-        // ????? IUIAutomationElement5          (4) 100,101,102,103
-        // ????? IUIAutomationElement6          (2) 104,105
-        final int IUIAutomationElement6_Methods = 118;
+        //   0-2   IUnknown,
+        //   3-84  IUIAutomationElement,
+        //  85-90  IUIAutomationElement2,
+        //  91-93  IUIAutomationElement3
+        //  94-99  IUIAutomationElement4
+        // 100-103 IUIAutomationElement5
+        // 104-105 IUIAutomationElement6
+        final int IUIAutomationElement6_Methods = 106;
 
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
@@ -470,12 +479,27 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
+            public int getCurrentIsPeripheral(Integer retVal){
+                Function f = Function.getFunction(vTable[92], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            public int getCachedIsPeripheral(Integer retVal){
+                Function f = Function.getFunction(vTable[93], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
             // IUIAutomationElement4
             // IUIAutomationElement5
             // IUIAutomationElement6
 
             public int getCurrentFullDescription(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[105], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[IUI6_CURRENT_FULL_DESCRIPTION], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr});
+            }
+
+            public int getCachedFullDescription(PointerByReference sr) {
+                Function f = Function.getFunction(vTable[IUI6_CACHED_FULL_DESCRIPTION], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
         };

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,18 @@
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinDef;
 
 /**
- * Wrapper around the IUIAutomation2 interface, only implementing the extra methods.
+ * Wrapper for the IUIAutomation4 COM interface.
  *
- * This interface is supported fro Windows 8.1 desktop onwards
+ * Extends the IUIAutomation3 interface to expose additional methods for controlling UI Automation functionality.
  *
- * @author Mark Humphreys
- * Date 24/07/2016.
+ * Windows 10, version 1607 [desktop apps only]
+ * Windows Server 2016 [desktop apps only]
  */
-public interface IUIAutomationElement2 extends IUIAutomationElement {
+public interface IUIAutomation4 extends IUIAutomation3 {
     /**
      * The interface IID for QueryInterface et al.
      */
-    Guid.IID IID = new Guid.IID("{6749C683-F70D-4487-A698-5F79D55290D}");
+    Guid.IID IID = new Guid.IID("{1189C02A-05F8-4319-8E21-E817E3DB2860}");
 }

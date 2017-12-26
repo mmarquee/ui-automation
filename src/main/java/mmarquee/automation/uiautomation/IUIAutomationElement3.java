@@ -31,10 +31,45 @@ public interface IUIAutomationElement3 extends IUIAutomationElement2 {
      */
     Guid.IID IID = new Guid.IID("{8471DF34-AEE0-4A01-A7DE-7DB9AF12C296}");
 
+    /**
+     * Programmatically invokes a context menu on the target element.
+     * @return Error code
+     */
     int showContextMenu();
 
-    /*
-    function Get_CurrentIsPeripheral(out retVal: Integer): HResult; stdcall;
-    function Get_CachedIsPeripheral(out retVal: Integer): HResult; stdcall;
+    /**
+     * Retrieves the current peripheral UI indicator for the element.
+     *
+     * Peripheral UI appears and supports user interaction, but does not take keyboard focus when it appears.
+     * Examples of peripheral UI includes popups, flyouts, context menus, or floating notifications.
+     *
+     * When the IsPeripheral property is TRUE, a client application can't assume that focus was taken by
+     * the element even if it's currently keyboard-interactive.
+     *
+     * Could apply to:
+     * <p><ul>
+     * <li>Group
+     * <li>Menu
+     * <li>Pane
+     * <li>ToolBar
+     * <li>ToolTip
+     * <li>Window
+     * <li>Custom
+     * </ul><p>
+     *
+     * @param retVal The return value
+     * @return Error code
      */
+    int getCurrentIsPeripheral(Integer retVal);
+
+    /**
+     * Retrieves the cached peripheral UI indicator for the element.
+     *
+     * Peripheral UI appears and supports user interaction, but does not take keyboard focus when it appears.
+     * Examples of peripheral UI includes popups, flyouts, context menus, or floating notifications.
+     *
+     * @param retVal The return value
+     * @return Error code
+     */
+    int getCachedIsPeripheral(Integer retVal);
 }

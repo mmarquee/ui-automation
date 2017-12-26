@@ -31,9 +31,10 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationElementConverter {
-    //  0-2  IUnknown,
-    //  3-84 IUIAutomationElement
-    private static int UIAutomationElement_Methods = 94;
+    public static final int IUI_ELEMENT_GET_CLICKABLE_POINT = 84;
+    //   0-2   IUnknown,
+    //   3-84  IUIAutomationElement
+    private static int UIAutomationElement_Methods = 85;
 
     public static IUIAutomationElement pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
@@ -474,7 +475,7 @@ public class IUIAutomationElementConverter {
 
             public int getClickablePoint(WinDef.POINT.ByReference clickable,
                                          WinDef.BOOLByReference gotClickable) {
-                Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[IUI_ELEMENT_GET_CLICKABLE_POINT], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
             }
         };

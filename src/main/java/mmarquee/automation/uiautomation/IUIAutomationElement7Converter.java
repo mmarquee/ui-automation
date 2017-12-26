@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,30 +24,28 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-/**
- * Converter implementation of IUIAutomationElement3.
- *
- * @author Mark Humphreys
- * Date 05/06/2017.
- */
-public class IUIAutomationElement3Converter {
+public class IUIAutomationElement7Converter {
 
-    public static final int IUI3_SHOW_CONTEXT_MENU = 91;
-    public static final int IUI3_CURRENT_IS_PERIPHERAL = 92;
-    public static final int IUI3_CACHED_IS_PERIPHERAL = 93;
+    public static final int IUI6_CURRENT_FULL_DESCRIPTION = 104;
+    public static final int IUI6_CACHED_FULL_DESCRIPTION = 105;
+    public static final int IUI7_GET_CURRENT_METADATA_VALUE = 110;
 
-    public static IUIAutomationElement3 pointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationElement7 PointerToInterface(final PointerByReference ptr) {
         //   0-2   IUnknown,
         //   3-84  IUIAutomationElement,
         //  85-90  IUIAutomationElement2,
         //  91-93  IUIAutomationElement3
-        final int UIAutomationElement_Methods = 94;
+        //  94-99  IUIAutomationElement4
+        // 100-103 IUIAutomationElement5
+        // 104-105 IUIAutomationElement6
+        // 106-110 IUIAutomationElement7
+        final int IUIAutomationElement7_Methods = 111;
 
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
-        final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];
+        final Pointer[] vTable = new Pointer[IUIAutomationElement7_Methods];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationElement3() {
+        return new IUIAutomationElement7() {
 
             // IUnknown
             @Override
@@ -73,7 +71,7 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getRuntimeId (/* SAFEARRAY */ PointerByReference runtimeId) {
+            public int getRuntimeId(/* SAFEARRAY */ PointerByReference runtimeId) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, runtimeId});
             }
@@ -96,12 +94,15 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
             }
 
-            public int findAllBuildCache(int scope, Pointer condition, Pointer cacheRequest, PointerByReference found) {
+            public int findAllBuildCache(int scope,
+                                         Pointer condition,
+                                         Pointer cacheRequest,
+                                         PointerByReference found) {
                 Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
             }
 
-//                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement3 */ PointerByReference updatedElement) {
+//                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference updatedElement) {
 //                    Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
 //                }
@@ -111,10 +112,9 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, value});
             }
 
-            public int getCurrentPropertyValueEx(
-                    int propertyId,
-                    WinDef.BOOL ignoreDefaultValue,
-                    Variant.VARIANT retVal) {
+            public int getCurrentPropertyValueEx(int propertyId,
+                                                 WinDef.BOOL ignoreDefaultValue,
+                                                 Variant.VARIANT retVal) {
                 Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
             }
@@ -129,10 +129,9 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
 //                }
 
-            public int getCurrentPatternAs(
-                    int patternId,
-                    Guid.REFIID riid,
-                    PointerByReference patternObject) {
+            public int getCurrentPatternAs(int patternId,
+                                           Guid.REFIID riid,
+                                           PointerByReference patternObject) {
                 Function f = Function.getFunction(vTable[14], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
             }
@@ -152,7 +151,7 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, patternId, patternObject});
 //                }
 
-//                public int GetCachedParent (/* IUIAutomationElement3 */ PointerByReference parent) {
+//                public int GetCachedParent (/* IUIAutomationElement */ PointerByReference parent) {
 //                    Function f = Function.getFunction(vTable[18], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, parent});
 //                }
@@ -272,7 +271,7 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentItemStatus (PointerByReference retVal) {
+            public int getCurrentItemStatus(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[42], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
@@ -282,7 +281,7 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentLabeledBy(/* IUIAutomationElement3 */ PointerByReference retVal) {
+            public int getCurrentLabeledBy(/* IUIAutomationElement */ PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[44], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
@@ -332,10 +331,10 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-                public int getCachedName(PointerByReference retVal) {
-                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
+            public int getCachedName(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
 //                public int get_CachedAcceleratorKey (PointerByReference retVal) {
 //                    Function f = Function.getFunction(vTable[56], Function.ALT_CONVENTION);
@@ -437,7 +436,7 @@ public class IUIAutomationElement3Converter {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-//                public int get_CachedLabeledBy (/* IUIAutomationElement3 */ PointerByReference retVal) {
+//                public int get_CachedLabeledBy (/* IUIAutomationElement */ PointerByReference retVal) {
 //                    Function f = Function.getFunction(vTable[76], Function.ALT_CONVENTION);
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
@@ -477,9 +476,8 @@ public class IUIAutomationElement3Converter {
             //                   return f.invokeInt(new Object[]{interfacePointer, retVal});
 ///                }
 
-            public int getClickablePoint(
-                    WinDef.POINT.ByReference clickable,
-                    WinDef.BOOLByReference gotClickable) {
+            public int getClickablePoint(WinDef.POINT.ByReference clickable,
+                                         WinDef.BOOLByReference gotClickable) {
                 Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
             }
@@ -488,18 +486,40 @@ public class IUIAutomationElement3Converter {
 
             // IUIAutomationElement3
             public int showContextMenu() {
-                Function f = Function.getFunction(vTable[IUI3_SHOW_CONTEXT_MENU], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[91], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getCurrentIsPeripheral(Integer retVal){
-                Function f = Function.getFunction(vTable[IUI3_CURRENT_IS_PERIPHERAL], Function.ALT_CONVENTION);
+            public int getCurrentIsPeripheral(Integer retVal) {
+                Function f = Function.getFunction(vTable[92], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCachedIsPeripheral(Integer retVal){
-                Function f = Function.getFunction(vTable[IUI3_CACHED_IS_PERIPHERAL], Function.ALT_CONVENTION);
+            public int getCachedIsPeripheral(Integer retVal) {
+                Function f = Function.getFunction(vTable[93], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            // IUIAutomationElement4
+            // IUIAutomationElement5
+            // IUIAutomationElement6
+
+            public int getCurrentFullDescription(PointerByReference sr) {
+                Function f = Function.getFunction(vTable[IUI6_CURRENT_FULL_DESCRIPTION], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr});
+            }
+
+            public int getCachedFullDescription(PointerByReference sr) {
+                Function f = Function.getFunction(vTable[IUI6_CACHED_FULL_DESCRIPTION], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr});
+            }
+
+            // IUIAutomationElement7
+            public int getCurrentMetadataValue(Integer target,
+                                               Pointer metadata,
+                                               Variant.VARIANT.ByReference retVal) {
+                Function f = Function.getFunction(vTable[IUI7_GET_CURRENT_METADATA_VALUE], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, target, metadata, retVal});
             }
         };
     }

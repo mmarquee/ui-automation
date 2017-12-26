@@ -15,7 +15,10 @@
  */
 package mmarquee.automation.uiautomation;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.ptr.PointerByReference;
 
 /**
  * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
@@ -31,4 +34,76 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      */
     Guid.IID IID = new Guid.IID("{204E8572-CFC3-4C11-B0C8-7DA7420750B7}");
 
+    /**
+     * Find all matching elements in the specified order.
+     * @param scope The scope
+     * @param condition The condition to match
+     * @param options The tree navigation order
+     * @param root Start element
+     * @param foundArray The matching elements
+     * @return Error code
+     */
+  //   int findAllWithOptions(TreeScope scope,
+  //                          Pointer condition,
+  //                          Pointer options,
+  //                          Pointer root,
+  //                          PointerByReference foundArray);
+
+    /**
+     * Finds all matching elements in the specified order, but also caches their properties and patterns.
+     * @param scope The scope
+     * @param condition The condition to match
+     * @param options The tree navigation order
+     * @param root Start element
+     * @param foundArray The matching elements
+     * @return Error code
+     */
+  //   int findAllWithOptionsBuildCache(TreeScope scope,
+  //                                    Pointer condition,
+  //                                    Pointer options,
+  //                                    Pointer root,
+  //                                    PointerByReference foundArray);
+
+    /**
+     * Finds the first matching element in the specified order.
+     * @param scope The scope
+     * @param condition The condition to match
+     * @param options The tree navigation order
+     * @param root Start element
+     * @param found The matching element
+     * @return Error code
+     */
+ //    int findFirstWithOptions(TreeScope scope,
+ //                             Pointer condition,
+ //                             Pointer options,
+ //                             Pointer root,
+ //                             PointerByReference found);
+
+    /**
+     * Finds the first matching element in the specified order, but also caches its properties and pattern.
+     * @param scope The scope
+     * @param condition The condition to match
+     * @param options The tree navigation order
+     * @param root Start element
+     * @param found The matching element
+     * @return Error code
+     */
+ //    int findFirstWithOptionsBuildCache(TreeScope scope,
+ //                                       Pointer condition,
+ //                                       Pointer options,
+ //                                       Pointer root,
+ //                                       PointerByReference found);
+
+    /**
+     * Gets metadata from the UI Automation element that indicates how the information should be interpreted.
+     *
+     * For example, should the string "1/4" be interpreted as a fraction or a date?
+     * @param target The property to retrieve
+     * @param metadata The type of metadata
+     * @param retVal The metadata
+     * @return Error code
+     */
+     int getCurrentMetadataValue(Integer target,
+                                 Pointer metadata,
+                                 Variant.VARIANT.ByReference retVal);
 }

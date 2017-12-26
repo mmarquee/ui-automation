@@ -234,12 +234,15 @@ public final class AutomationList extends AutomationBase {
     public AutomationListItem getSelectedItem()
             throws AutomationException, PatternNotFoundException {
 
-        // Try and use the more modern interface
-
+        // Try and use the more modern interface first
         try {
             AutomationElement elem = this.getCurrentSelectedItem();
 
-            return new AutomationListItem(new ElementBuilder(elem));
+            if (elem == null) {
+                throw new ElementNotFoundException();
+            } else {
+                return new AutomationListItem(new ElementBuilder(elem));
+            }
         } catch (AutomationException ex) {
             List<AutomationListItem> list = this.getSelectedItems();
             if (list.size() == 0) {

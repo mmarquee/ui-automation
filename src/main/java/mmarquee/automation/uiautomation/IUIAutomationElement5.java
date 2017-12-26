@@ -31,4 +31,11 @@ public interface IUIAutomationElement5 extends IUIAutomationElement4 {
      */
     Guid.IID IID = new Guid.IID("{98141C1D-0D0E-4175-BBE2-6BFF455842A7}");
 
+    /*
+    CachedLandmarkType
+    CachedLocalizedLandmarkType
+    CurrentLandmarkType
+    CurrentLocalizedLandmarkType
+     */
+
 }
