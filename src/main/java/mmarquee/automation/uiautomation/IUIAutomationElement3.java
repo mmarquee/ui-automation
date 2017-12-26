@@ -18,7 +18,7 @@ package mmarquee.automation.uiautomation;
 import com.sun.jna.platform.win32.Guid;
 
 /**
- * Wrapper around the IUIAutomation3 interface, only implementing the extra methods.
+ * Wrapper around the IUIAutomation3 interface.
  *
  * This interface is supported for Windows 8.1 [desktop apps only] onwards
  *

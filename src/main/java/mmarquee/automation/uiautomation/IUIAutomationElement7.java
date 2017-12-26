@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
+ * Wrapper around the IUIAutomation7 interface.
  *
  * This interface is supported in Windows 10, version 1703 [desktop apps only] upwards
  *
@@ -43,11 +43,11 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param foundArray The matching elements
      * @return Error code
      */
-  //   int findAllWithOptions(TreeScope scope,
-  //                          Pointer condition,
-  //                          Pointer options,
-  //                          Pointer root,
-  //                          PointerByReference foundArray);
+     int findAllWithOptions(TreeScope scope,
+                            Pointer condition,
+                            Pointer options,
+                            Pointer root,
+                            PointerByReference foundArray);
 
     /**
      * Finds all matching elements in the specified order, but also caches their properties and patterns.
@@ -58,11 +58,11 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param foundArray The matching elements
      * @return Error code
      */
-  //   int findAllWithOptionsBuildCache(TreeScope scope,
-  //                                    Pointer condition,
-  //                                    Pointer options,
-  //                                    Pointer root,
-  //                                    PointerByReference foundArray);
+     int findAllWithOptionsBuildCache(TreeScope scope,
+                                      Pointer condition,
+                                      Pointer options,
+                                      Pointer root,
+                                      PointerByReference foundArray);
 
     /**
      * Finds the first matching element in the specified order.
@@ -73,11 +73,11 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param found The matching element
      * @return Error code
      */
- //    int findFirstWithOptions(TreeScope scope,
- //                             Pointer condition,
- //                             Pointer options,
- //                             Pointer root,
- //                             PointerByReference found);
+     int findFirstWithOptions(TreeScope scope,
+                              Pointer condition,
+                              Pointer options,
+                              Pointer root,
+                              PointerByReference found);
 
     /**
      * Finds the first matching element in the specified order, but also caches its properties and pattern.
@@ -88,11 +88,11 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param found The matching element
      * @return Error code
      */
- //    int findFirstWithOptionsBuildCache(TreeScope scope,
- //                                       Pointer condition,
- //                                       Pointer options,
- //                                       Pointer root,
- //                                       PointerByReference found);
+     int findFirstWithOptionsBuildCache(TreeScope scope,
+                                        Pointer condition,
+                                        Pointer options,
+                                        Pointer root,
+                                        PointerByReference found);
 
     /**
      * Gets metadata from the UI Automation element that indicates how the information should be interpreted.
@@ -104,6 +104,6 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @return Error code
      */
      int getCurrentMetadataValue(Integer target,
-                                 Pointer metadata,
+                                 Integer metadata,
                                  Variant.VARIANT.ByReference retVal);
 }

@@ -515,8 +515,45 @@ public class IUIAutomationElement7Converter {
             }
 
             // IUIAutomationElement7
+
+            public int findAllWithOptions(TreeScope scope,
+                                   Pointer condition,
+                                   Pointer options,
+                                   Pointer root,
+                                   PointerByReference foundArray) {
+                Function f = Function.getFunction(vTable[106], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, foundArray});
+            }
+
+            public int findAllWithOptionsBuildCache(TreeScope scope,
+                                             Pointer condition,
+                                             Pointer options,
+                                             Pointer root,
+                                             PointerByReference foundArray) {
+                Function f = Function.getFunction(vTable[107], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, foundArray});
+            }
+
+            public int findFirstWithOptions(TreeScope scope,
+                                     Pointer condition,
+                                     Pointer options,
+                                     Pointer root,
+                                     PointerByReference found) {
+                Function f = Function.getFunction(vTable[108], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, found});
+            }
+
+            public int findFirstWithOptionsBuildCache(TreeScope scope,
+                                               Pointer condition,
+                                               Pointer options,
+                                               Pointer root,
+                                               PointerByReference found) {
+                Function f = Function.getFunction(vTable[109], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, found});
+            }
+
             public int getCurrentMetadataValue(Integer target,
-                                               Pointer metadata,
+                                               Integer metadata,
                                                Variant.VARIANT.ByReference retVal) {
                 Function f = Function.getFunction(vTable[IUI7_GET_CURRENT_METADATA_VALUE], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, target, metadata, retVal});

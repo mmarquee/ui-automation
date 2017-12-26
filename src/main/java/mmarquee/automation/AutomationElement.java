@@ -27,6 +27,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement7;
+import mmarquee.automation.uiautomation.IUIAutomationElement7Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -95,6 +97,25 @@ public class AutomationElement extends BaseAutomation {
         }
 
         throw new ConversionFailure("IUIAutomationElement6");
+    }
+
+    /**
+     * Gets the IUIAutomationElement7 interface, if possible.
+     * @return The IUIAutomationElement7 interface
+     * @throws AutomationException Not able to convert interface
+     */
+    public final IUIAutomationElement7 getElement7()
+        throws AutomationException {
+        PointerByReference pUnknown = new PointerByReference();
+
+        WinNT.HRESULT result = this.element.QueryInterface(
+                new Guid.REFIID(IUIAutomationElement7.IID), pUnknown);
+
+        if (COMUtils.SUCCEEDED(result)) {
+            return IUIAutomationElement7Converter.PointerToInterface(pUnknown);
+        }
+
+        throw new ConversionFailure("IUIAutomationElement7");
     }
 
     /**
@@ -762,6 +783,31 @@ public class AutomationElement extends BaseAutomation {
                 return "Not set";
             } else {
                 return sr.getValue().getWideString(0);
+            }
+        }
+    }
+
+    /**
+     * Gets the current metadata value.
+     * @return The value
+     * @throws AutomationException Error in automation library
+     */
+    public int getCurrentMetadataValue() throws AutomationException {
+        IUIAutomationElement7 element7 = this.getElement7();
+
+        PointerByReference sr = new PointerByReference();
+
+        Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
+
+        final int res = element7.getCurrentMetadataValue(PropertyID.Name.getValue(), MetaDataID.SayAsInterpretAs.getValue(), value);
+
+        if (res != 0) {
+            throw new AutomationException(res);
+        } else {
+            if (sr.getValue() == null) {
+                return -1;
+            } else {
+                return sr.getValue().getInt(0);
             }
         }
     }

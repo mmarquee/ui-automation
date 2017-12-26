@@ -26,7 +26,9 @@ import mmarquee.automation.pattern.Value;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public class AutomationEditBox extends AutomationBase implements Valueable {
+public class AutomationEditBox
+        extends AutomationBase
+        implements Valueable {
 
     /**
      * The value pattern.

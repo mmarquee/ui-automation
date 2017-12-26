@@ -19,7 +19,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
+ * Wrapper around the IUIAutomation6 interface.
  *
  * This interface is supported in Windows 10, version 1703 [desktop apps only] upwards
  *

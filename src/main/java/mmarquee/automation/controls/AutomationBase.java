@@ -1053,9 +1053,13 @@ public abstract class AutomationBase implements Automatable {
         List<AutomationBase> collection = new LinkedList<>();
         
         for (AutomationElement el: elements) {
-        	collection.add(AutomationControlFactory.get(this, el));
+            collection.add(AutomationControlFactory.get(this, el));
         }
         return collection;
+    }
+
+    public int getMetadata() throws AutomationException {
+        return this.getElement().getCurrentMetadataValue();
     }
 
     /**
