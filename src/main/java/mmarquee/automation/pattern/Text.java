@@ -25,10 +25,10 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
 
 /**
+ * Wrapper for the text pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the text pattern
  */
 public class Text extends BasePattern {
 
@@ -39,6 +39,9 @@ public class Text extends BasePattern {
         this.IID = IUIAutomationTextPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationTextPattern rawPattern;
 
     public Text(IUIAutomationTextPattern rawPattern) {

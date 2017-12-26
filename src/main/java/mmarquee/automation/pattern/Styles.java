@@ -40,6 +40,9 @@ public class Styles extends BasePattern {
         this.IID = IUIAutomationStylesPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationStylesPattern rawPattern;
 
     public Styles(IUIAutomationStylesPattern rawPattern) {
@@ -47,6 +50,11 @@ public class Styles extends BasePattern {
         this.rawPattern = rawPattern;
     }
 
+    /**
+     * Gets the pattern.
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     */
     private IUIAutomationStylesPattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;

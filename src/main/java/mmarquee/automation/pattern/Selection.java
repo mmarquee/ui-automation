@@ -49,6 +49,9 @@ public class Selection extends BasePattern {
         this.IID = IUIAutomationSelectionPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationSelectionPattern rawPattern;
 
     /**
