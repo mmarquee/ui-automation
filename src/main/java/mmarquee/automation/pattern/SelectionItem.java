@@ -32,6 +32,8 @@ import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionItemPatte
  *
  * @author Mark Humphreys
  * Date 25/02/2016.
+ *
+ * Wrapper for the SelectionItem pattern.
  */
 public class SelectionItem extends BasePattern {
 
@@ -43,7 +45,7 @@ public class SelectionItem extends BasePattern {
     }
 
     /**
-     * The raw pattern.
+     * The raw pointer.
      */
     private IUIAutomationSelectionItemPattern rawPattern;
 

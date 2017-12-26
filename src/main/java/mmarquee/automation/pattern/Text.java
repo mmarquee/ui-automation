@@ -46,11 +46,20 @@ public class Text extends BasePattern {
      */
     private IUIAutomationTextPattern rawPattern;
 
-    public Text(IUIAutomationTextPattern rawPattern) {
+    /**
+     * Constructor for the Text pattern.
+     * @param pattern The raw pattern
+     */
+    public Text(IUIAutomationTextPattern pattern) {
         this.IID = IUIAutomationTextPattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
+    /**
+     * Gets the pattern.
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     */
     private IUIAutomationTextPattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;
@@ -67,8 +76,13 @@ public class Text extends BasePattern {
         }
     }
 
-    public IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextRangeArrayConverter.PointerToInterface(pUnknownA);
+    /**
+     * Converts the pointer to the interface
+     * @param unknown The unknown pointer
+     * @return The interface
+     */
+    public IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference unknown) {
+        return IUIAutomationTextRangeArrayConverter.PointerToInterface(unknown);
     }
 
     /**
@@ -175,7 +189,12 @@ public class Text extends BasePattern {
         }
     }
 
-    public IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextRangeConverter.PointerToInterface(pUnknownA);
+    /**
+     * Converts the pointer to the interface
+     * @param unknown The unknown pointer
+     * @return The interface
+     */
+    public IUIAutomationTextRange convertPointerToInterface(PointerByReference unknown) {
+        return IUIAutomationTextRangeConverter.PointerToInterface(unknown);
     }
 }

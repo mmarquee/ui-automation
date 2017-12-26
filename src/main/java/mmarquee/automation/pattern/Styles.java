@@ -45,9 +45,13 @@ public class Styles extends BasePattern {
      */
     private IUIAutomationStylesPattern rawPattern;
 
-    public Styles(IUIAutomationStylesPattern rawPattern) {
+    /**
+     * Constructs the styles pattern.
+     * @param pattern The pattern
+     */
+    public Styles(IUIAutomationStylesPattern pattern) {
         this.IID = IUIAutomationStylesPattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
     /**

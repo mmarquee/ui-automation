@@ -37,11 +37,18 @@ public class Invoke extends BasePattern {
         this.IID = IUIAutomationInvokePattern.IID;
     }
 
+    /**
+     * The raw pointer.
+     */
     private IUIAutomationInvokePattern rawPattern;
 
-    public Invoke(IUIAutomationInvokePattern rawPattern) {
+    /**
+     * Constructor for the Invole pattern.
+     * @param pattern The rawPattern
+     */
+    public Invoke(IUIAutomationInvokePattern pattern) {
         this.IID = IUIAutomationInvokePattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
     /**

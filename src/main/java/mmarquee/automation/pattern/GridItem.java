@@ -67,8 +67,13 @@ public class GridItem extends BasePattern {
         }
     }
 
-    public IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridItemPatternConverter.PointerToInterface(pUnknownA);
+    /**
+     * Converts the pointer to the interface.
+     * @param unknown The pointer
+     * @return The converted interface
+     */
+    public IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference unknown) {
+        return IUIAutomationGridItemPatternConverter.PointerToInterface(unknown);
     }
 
     /**

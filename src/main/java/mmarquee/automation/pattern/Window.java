@@ -38,13 +38,25 @@ public class Window extends BasePattern {
         this.IID = IUIAutomationWindowPattern.IID;
     }
 
+    /**
+     * The raw pointer.
+     */
     private IUIAutomationWindowPattern rawPattern;
 
-    public Window(IUIAutomationWindowPattern rawPattern) {
+    /**
+     * Constructor for the window pattern.
+     * @param pattern The pattern
+     */
+    public Window(IUIAutomationWindowPattern pattern) {
         this.IID = IUIAutomationWindowPattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
+    /**
+     * Gets the pattern.
+     * @return The converted interface
+     * @throws AutomationException Error in the automation library
+     */
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;

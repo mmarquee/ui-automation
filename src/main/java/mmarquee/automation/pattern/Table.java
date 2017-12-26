@@ -42,13 +42,25 @@ public class Table extends BasePattern {
         this.IID = IUIAutomationTablePattern.IID;
     }
 
+    /**
+     * The raw pointer,
+     */
     private IUIAutomationTablePattern rawPattern;
 
-    public Table(IUIAutomationTablePattern rawPattern) {
+    /**
+     * Constructs the Table pattern.
+     * @param pattern The raw pattern
+     */
+    public Table(IUIAutomationTablePattern pattern) {
         this.IID = IUIAutomationTablePattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
+    /**
+     * Gets the pattern.
+     * @return The pattern
+     * @throws AutomationException Error is automation library
+     */
     private IUIAutomationTablePattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;

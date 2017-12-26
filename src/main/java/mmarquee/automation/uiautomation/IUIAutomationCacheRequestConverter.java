@@ -29,7 +29,7 @@ public class IUIAutomationCacheRequestConverter {
     public static IUIAutomationCacheRequest pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
-        final Pointer[] vTable = new Pointer[10];
+        final Pointer[] vTable = new Pointer[10];  //  82 + 3 from IUnknown
         vTablePointer.read(0, vTable, 0, vTable.length);
         return new IUIAutomationCacheRequest() {
 

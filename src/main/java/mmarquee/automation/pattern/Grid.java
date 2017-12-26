@@ -42,14 +42,27 @@ public class Grid extends BasePattern {
         this.IID = IUIAutomationGridPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationGridPattern rawPattern;
 
-    public Grid(IUIAutomationGridPattern rawPattern) {
+    /**
+     * Constructor for the Grid pattern.
+     * @param pattern The pattern
+     */
+    public Grid(IUIAutomationGridPattern pattern) {
         this.IID = IUIAutomationGridPattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
-    private IUIAutomationGridPattern getPattern() throws AutomationException {
+    /**
+     * Gets the pattern.
+     * @return The pattern
+     * @throws AutomationException Error in the automation library
+     */
+    private IUIAutomationGridPattern getPattern()
+            throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;
         } else {
@@ -139,7 +152,12 @@ public class Grid extends BasePattern {
         return ibr.getValue();
     }
 
-    public IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridPatternConverter.PointerToInterface(pUnknownA);
+    /**
+     * Converts the pointer to the interface.
+     * @param unknown The pointer
+     * @return The converted interface
+     */
+    public IUIAutomationGridPattern convertPointerToInterface(PointerByReference unknown) {
+        return IUIAutomationGridPatternConverter.PointerToInterface(unknown);
     }
 }

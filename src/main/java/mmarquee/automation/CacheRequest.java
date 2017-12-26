@@ -45,12 +45,12 @@ public class CacheRequest {
     /**
      * The raw pointer.
      */
-    PointerByReference cache;
+    private PointerByReference cache;
 
     /**
      * The cache request.
      */
-    IUIAutomationCacheRequest request;
+    private IUIAutomationCacheRequest request;
 
     /**
      * Gets the value.

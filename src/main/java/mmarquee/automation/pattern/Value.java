@@ -24,29 +24,36 @@ import mmarquee.automation.uiautomation.patterns.IUIAutomationValuePattern;
 import mmarquee.automation.uiautomation.patterns.IUIAutomationValuePatternConverter;
 
 /**
+ * Wrapper for the value pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the value pattern.
  */
 public class Value extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
      */
     public Value() {
         this.IID = IUIAutomationValuePattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationValuePattern rawPattern;
 
-    public Value(IUIAutomationValuePattern rawPattern) {
+    /**
+     * Constructor for the Value pattern.
+     * @param pattern The raw pattern
+     */
+    public Value(IUIAutomationValuePattern pattern) {
         this.IID = IUIAutomationValuePattern.IID;
-        this.rawPattern = rawPattern;
+        this.rawPattern = pattern;
     }
 
     /**
-     * Gets the pattern
+     * Gets the pattern.
      * @return The actual pattern itself
      */
     private IUIAutomationValuePattern getPattern() throws AutomationException {
@@ -66,7 +73,7 @@ public class Value extends BasePattern {
     }
 
     /**
-     * Get the current value of the control
+     * Get the current value of the control.
      * @return The current value
      * @throws AutomationException Something has gone wrong
      */
@@ -82,7 +89,7 @@ public class Value extends BasePattern {
     }
 
     /**
-     * Gets the current readonly status of the control
+     * Gets the current readonly status of the control.
      * @return True if read-only
      * @throws AutomationException Something has gone wrong
      */
@@ -115,7 +122,12 @@ public class Value extends BasePattern {
         }
     }
 
-    public IUIAutomationValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationValuePatternConverter.PointerToInterface(pUnknownA);
+    /**
+     * Converts the pointer to the interface
+     * @param unknown The unknown pointer
+     * @return The interface
+     */
+    public IUIAutomationValuePattern convertPointerToInterface(PointerByReference unknown) {
+        return IUIAutomationValuePatternConverter.PointerToInterface(unknown);
     }
 }
