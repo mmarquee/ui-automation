@@ -21,8 +21,8 @@ import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
-import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationLegacyIAccessiblePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationLegacyIAccessiblePatternConverter;
 
 public class LegacyIAccessible extends BasePattern {
 

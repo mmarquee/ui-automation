@@ -7,7 +7,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionPattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -20,7 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import mmarquee.automation.pattern.LegacyIAccessible;
-import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
 import org.apache.log4j.Logger;
 
 import com.sun.jna.Pointer;

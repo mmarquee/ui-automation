@@ -8,7 +8,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationStylesPattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

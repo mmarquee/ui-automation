@@ -17,7 +17,7 @@ package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationExpandCollapsePattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

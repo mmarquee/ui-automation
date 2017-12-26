@@ -21,6 +21,8 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationWindowPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationWindowPatternConverter;
 import org.apache.log4j.Logger;
 import org.junit.*;
 

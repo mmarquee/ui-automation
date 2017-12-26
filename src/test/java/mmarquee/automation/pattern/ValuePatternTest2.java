@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationValuePattern;
 import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;

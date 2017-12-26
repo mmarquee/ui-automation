@@ -8,7 +8,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationGridPattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

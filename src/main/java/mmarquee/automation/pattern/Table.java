@@ -22,6 +22,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTablePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTablePatternConverter;
 
 import java.util.List;
 

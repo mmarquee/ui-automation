@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionItemPattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

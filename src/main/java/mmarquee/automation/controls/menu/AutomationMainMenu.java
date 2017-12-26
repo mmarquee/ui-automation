@@ -32,8 +32,8 @@ import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationExpandCollapsePatternConverter;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**

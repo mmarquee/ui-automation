@@ -17,7 +17,7 @@ package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 import org.junit.Before;
 import org.junit.Test;

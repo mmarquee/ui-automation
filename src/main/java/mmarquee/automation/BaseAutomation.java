@@ -26,7 +26,6 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
-import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
 
 import java.util.ArrayList;
 import java.util.List;

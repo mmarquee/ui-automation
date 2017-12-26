@@ -24,7 +24,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTextPattern;
 import mmarquee.automation.uiautomation.IUIAutomationTextRange;
 import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 import org.junit.Before;

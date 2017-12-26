@@ -23,7 +23,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTablePattern;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 import org.junit.Before;
 import org.junit.Ignore;

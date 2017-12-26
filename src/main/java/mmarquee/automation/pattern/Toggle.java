@@ -5,8 +5,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTogglePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTogglePatternConverter;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**

@@ -20,8 +20,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationExpandCollapsePattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationExpandCollapsePatternConverter;
 
 /**
  * Wrapper for  the ExpandCollapse pattern.

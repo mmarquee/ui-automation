@@ -24,8 +24,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionItemPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionItemPatternConverter;
 
 /**
  * Wrapper for the SelectionItem pattern.

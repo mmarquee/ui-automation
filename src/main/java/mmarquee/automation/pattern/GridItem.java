@@ -20,8 +20,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationGridItemPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationGridItemPatternConverter;
 
 /**
  * @author Mark Humphreys

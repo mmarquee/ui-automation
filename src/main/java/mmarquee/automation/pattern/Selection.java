@@ -27,10 +27,10 @@ import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern2;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern2Convertor;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionPattern2;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionPattern2Convertor;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationSelectionPatternConverter;
 
 import java.util.List;
 

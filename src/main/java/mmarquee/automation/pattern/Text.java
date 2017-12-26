@@ -23,6 +23,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationTextPatternConverter;
 
 /**
  * Wrapper for the text pattern.

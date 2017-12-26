@@ -23,12 +23,8 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPatternConverter;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationItemContainerPatternConverter;
 
 /**
  * @author Mark Humphreys

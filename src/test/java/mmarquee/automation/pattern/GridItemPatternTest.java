@@ -16,7 +16,7 @@
 package mmarquee.automation.pattern;
 
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
+import mmarquee.automation.uiautomation.patterns.IUIAutomationGridItemPattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

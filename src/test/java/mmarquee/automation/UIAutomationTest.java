@@ -42,7 +42,7 @@ import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationCondition;
+import mmarquee.automation.uiautomation.conditions.IUIAutomationCondition;
 import mmarquee.automation.uiautomation.TreeScope;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;

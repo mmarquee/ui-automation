@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.conditions.IUIAutomationCondition;
 import org.apache.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
