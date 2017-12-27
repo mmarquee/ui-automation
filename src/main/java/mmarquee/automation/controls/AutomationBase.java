@@ -1057,7 +1057,7 @@ public abstract class AutomationBase implements Automatable {
         return collection;
     }
 
-    public int getMetadata() throws AutomationException {
+    public Object getMetadata() throws AutomationException {
         return this.getElement().getCurrentMetadataValue();
     }
 

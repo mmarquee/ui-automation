@@ -792,10 +792,8 @@ public class AutomationElement extends BaseAutomation {
      * @return The value
      * @throws AutomationException Error in automation library
      */
-    public int getCurrentMetadataValue() throws AutomationException {
+    public Object getCurrentMetadataValue() throws AutomationException {
         IUIAutomationElement7 element7 = this.getElement7();
-
-        PointerByReference sr = new PointerByReference();
 
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
@@ -804,10 +802,10 @@ public class AutomationElement extends BaseAutomation {
         if (res != 0) {
             throw new AutomationException(res);
         } else {
-            if (sr.getValue() == null) {
+            if (value.getValue() == null) {
                 return -1;
             } else {
-                return sr.getValue().getInt(0);
+                return value.getValue();
             }
         }
     }
