@@ -22,7 +22,7 @@ import java.util.Map;
  * Defines values that can be used to customize tree navigation order.
  *
  * @author Mark Humphreys
- * Date 13/07/2016.
+ * Date 27/12/2017
  */
 public enum TreeTraversalOptions {
     /**
