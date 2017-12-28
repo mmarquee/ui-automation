@@ -496,4 +496,17 @@ public class AutomationElementTest extends BaseAutomationTest {
 
         element.getElement6();
     }
+
+    @Test
+    public void findAll() throws Exception {
+        AutomationElement root = instance.getRootElement();
+
+        Condition condition = instance.createTrueCondition();
+
+        CacheRequest request = new CacheRequest(instance);
+
+        List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition, request);
+
+        assertTrue("findAll:" + elements.size(), elements.size() != 0);
+	}
 }
