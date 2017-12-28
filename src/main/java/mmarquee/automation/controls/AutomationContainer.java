@@ -28,6 +28,8 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
+import mmarquee.automation.controls.conditions.Condition;
+import mmarquee.automation.controls.conditions.PropertyCondition;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -62,18 +64,21 @@ public class AutomationContainer extends AutomationBase {
      * @return The matching element.
      * @throws AutomationException Error in the Automation library.
      */
-    AutomationElement getElementByControlType(int index, ControlType id) throws AutomationException {
-        PointerByReference condition =  this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
-                this.createIntegerVariant(id.getValue()));
+    AutomationElement getElementByControlType(final int index,
+                                              final ControlType id)
+            throws AutomationException {
+        Condition condition = this.automation.createPropertyCondition(PropertyID.ControlType,
+                                    this.createIntegerVariant(id.getValue()));
 
         List<AutomationElement> collection = this.findAll(
-                new TreeScope(TreeScope.Subtree), condition);
+                            new TreeScope(TreeScope.Subtree),
+                            condition);
 
         return collection.get(index);
     }
 
     /**
-     * Gets the element by the control type, for s given control index.
+     * Gets the element by the control type, for a given control index.
      * 
      * @param index Index of the element.
      * @param id Control type.
@@ -84,8 +89,8 @@ public class AutomationContainer extends AutomationBase {
      */
     protected AutomationElement getElementByControlType(int index, ControlType id, String className)
             throws AutomationException {
-        PointerByReference condition =  
-        		this.createAndCondition(this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
+        Condition condition =
+        		this.createAndCondition(this.automation.createPropertyCondition(PropertyID.ControlType,
         				this.createIntegerVariant(id.getValue())),
         				this.createClassNamePropertyCondition(className));
         
@@ -2440,14 +2445,14 @@ public class AutomationContainer extends AutomationBase {
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            PointerByReference propertyCondition =
-                    this.automation.createPropertyCondition(PropertyID.ControlType.getValue(),
+            Condition propertyCondition =
+                    this.automation.createPropertyCondition(PropertyID.ControlType,
                             variant1);
 
-            PointerByReference nameCondition =
-                    this.automation.createPropertyCondition(PropertyID.Name.getValue(),
+            Condition nameCondition =
+                    this.automation.createPropertyCondition(PropertyID.Name,
                             variant);
-            PointerByReference condition = this.automation.createAndCondition(nameCondition, propertyCondition);
+            Condition condition = this.automation.createAndCondition(nameCondition, propertyCondition);
 
             AutomationElement elem = this.findFirst(new TreeScope(TreeScope.Descendants), condition);
 

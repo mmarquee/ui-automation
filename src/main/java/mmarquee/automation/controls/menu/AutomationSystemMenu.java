@@ -23,6 +23,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.ElementBuilder;
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class AutomationSystemMenu extends AutomationBase {
      */
     public AutomationMenuItem getItem(String name) throws AutomationException {
 
-        PointerByReference condition = this.createTrueCondition();
+        Condition condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
                 this.findAll(new TreeScope(TreeScope.Descendants), condition);
@@ -95,7 +96,7 @@ public class AutomationSystemMenu extends AutomationBase {
      */
     public AutomationMenuItem getItem(Pattern namePattern) throws AutomationException {
 
-        PointerByReference condition = this.createTrueCondition();
+        Condition condition = this.createTrueCondition();
 
         List<AutomationElement> collection =
                 this.findAll(new TreeScope(TreeScope.Descendants), condition);
@@ -128,7 +129,7 @@ public class AutomationSystemMenu extends AutomationBase {
      * @throws AutomationException Automation issue
      */
     protected List<AutomationMenuItem> getItems() throws AutomationException {
-        PointerByReference condition = this.createTrueCondition();
+        Condition condition = this.createTrueCondition();
 
         List<AutomationElement> items =
                 this.findAll(new TreeScope(TreeScope.Children), condition);

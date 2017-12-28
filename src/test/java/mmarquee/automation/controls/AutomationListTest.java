@@ -21,6 +21,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -89,7 +90,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(Condition.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(
                 new ElementBuilder(element).selection(selection));
@@ -102,7 +103,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(Condition.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(
                 new ElementBuilder(element).selection(selection));
@@ -117,7 +118,7 @@ public class AutomationListTest {
         List<AutomationElement> result = new ArrayList<>();
         result.add(new AutomationElement(listElement));
 
-        when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
+        when(element.findAll(any(TreeScope.class), any(Condition.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(
                 new ElementBuilder(element).selection(selection));

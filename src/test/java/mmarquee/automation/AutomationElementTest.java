@@ -21,7 +21,10 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import mmarquee.automation.controls.conditions.Condition;
+import mmarquee.automation.uiautomation.*;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,9 +34,6 @@ import org.mockito.Mockito;
 
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * @author Mark Humphreys
@@ -184,7 +184,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	public void testFindFirst() throws AutomationException {
 		AutomationElement root = instance.getRootElement();
 
-		PointerByReference condition = instance.createTrueCondition();
+		Condition condition = instance.createTrueCondition();
 
 		AutomationElement element = root.findFirst(new TreeScope(TreeScope.Descendants), condition);
 
@@ -195,7 +195,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	public void testFindAll() throws AutomationException {
 		AutomationElement root = instance.getRootElement();
 
-		PointerByReference condition = instance.createTrueCondition();
+		Condition condition = instance.createTrueCondition();
 
 		List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition);
 
@@ -206,7 +206,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	public void testFindAllDescendants() throws AutomationException {
 		AutomationElement root = instance.getRootElement();
 
-		PointerByReference condition = instance.createTrueCondition();
+		Condition condition = instance.createTrueCondition();
 
 		List<AutomationElement> elements = root.findAllDescendants(condition);
 
@@ -334,7 +334,46 @@ public class AutomationElementTest extends BaseAutomationTest {
 		verify(mocked, atLeastOnce()).getCurrentName(any());
 	}
 
-	@Test(expected = AutomationException.class)
+    @Test
+    public void test_GetName_0K_When_Element_Returns_Success() throws Exception {
+        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+        when(mocked.getCurrentName(any())).thenReturn(0);
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        element.getName();
+
+        verify(mocked, atLeastOnce()).getCurrentName(any());
+    }
+
+    @Test
+    public void test_GetCachedName_0K_When_Element_Returns_Success() throws Exception {
+        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+        when(mocked.getCachedName(any())).thenReturn(0);
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        element.getCachedName();
+
+        verify(mocked, atLeastOnce()).getCachedName(any());
+    }
+
+    @Test(expected = AutomationException.class)
+    public void test_GetCachedName_Throws_Exception_When_Element_Returns_Error() throws Exception {
+        IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+        when(mocked.getCachedName(any())).thenReturn(-1);
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        element.getCachedName();
+
+        verify(mocked, atLeastOnce()).getCachedName(any());
+    }
+
+    @Test(expected = AutomationException.class)
 	public void test_currentIsContentElement_Throws_Exception_When_Element_Returns_Error() throws Exception {
 		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
 
@@ -385,4 +424,76 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		verify(mocked, atLeastOnce()).getCurrentIsEnabled(any());
 	}
+
+    @Test
+    public void getElement() {
+		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+		AutomationElement element = new AutomationElement(mocked);
+
+		element.getElement();
+	}
+
+    @Test(expected = ConversionFailure.class)
+    public void getElement3_Throws_Exception_When_Cannot_Convert_Element() throws Exception {
+		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+		when(mocked.QueryInterface(any(), any())).thenReturn(new WinNT.HRESULT(-1));
+
+		AutomationElement element = new AutomationElement(mocked);
+
+		element.getElement3();
+    }
+
+	@Test(expected = ConversionFailure.class)
+	public void getElement6_Throws_Exception_When_Cannot_Convert_Element() throws Exception {
+		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+		AutomationElement element = new AutomationElement(mocked);
+
+		when(mocked.QueryInterface(any(), any())).thenReturn(new WinNT.HRESULT(-1));
+
+		element.getElement6();
+    }
+
+	@Test(expected = ConversionFailure.class)
+	public void getElement7_Throws_Exception_When_Cannot_Convert_Element() throws Exception {
+		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
+
+		when(mocked.QueryInterface(any(), any())).thenReturn(new WinNT.HRESULT(-1));
+
+		AutomationElement element = new AutomationElement(mocked);
+
+		element.getElement7();
+    }
+
+	@Test
+    @Ignore("Needs bettermocking")
+	public void getElement7_Does_not_Throws_Exception_When_Can_Convert_Element() throws Exception {
+		IUIAutomationElement7 mocked = Mockito.mock(IUIAutomationElement7.class);
+
+		AutomationElement element = new AutomationElement(mocked);
+
+		element.getElement7();
+	}
+
+    @Test
+    @Ignore("Needs bettermocking")
+    public void getElement3_Does_not_Throws_Exception_When_Can_Convert_Element() throws Exception {
+        IUIAutomationElement3 mocked = Mockito.mock(IUIAutomationElement3.class);
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        element.getElement3();
+    }
+
+    @Test
+    @Ignore("Needs bettermocking")
+    public void getElement6_Does_not_Throws_Exception_When_Can_Convert_Element() throws Exception {
+        IUIAutomationElement7 mocked = Mockito.mock(IUIAutomationElement7.class);
+
+        AutomationElement element = new AutomationElement(mocked);
+
+        element.getElement6();
+    }
 }

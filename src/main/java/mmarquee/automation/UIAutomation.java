@@ -25,9 +25,13 @@ import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.ElementBuilder;
+import mmarquee.automation.controls.conditions.Condition;
+import mmarquee.automation.controls.conditions.PropertyCondition;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.uiautomation.conditions.IUIAutomationCondition;
+import mmarquee.automation.uiautomation.conditions.IUIAutomationConditionConverter;
+import mmarquee.automation.uiautomation.conditions.IUIAutomationPropertyCondition;
 import mmarquee.automation.utils.Utils;
 
 import java.util.ArrayList;
@@ -284,14 +288,14 @@ public class UIAutomation extends BaseAutomation {
         AutomationElement foundElement = null;
         
         // And Condition
-        PointerByReference pAndCondition = this.createAndCondition(
+        Condition andCondition = this.createAndCondition(
         		this.createNamePropertyCondition(title), 
         		this.createControlTypeCondition(controlType));
 
         for (int loop = 0; loop < numberOfRetries; loop++) {
 
             try {
-            	foundElement = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
+            	foundElement = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), andCondition);
             } catch (AutomationException ex) {
                 logger.info("Not found, retrying " + title);
             }
@@ -331,7 +335,7 @@ public class UIAutomation extends BaseAutomation {
         AutomationElement foundElement = null;
         
         // And Condition
-        PointerByReference condition = this.createControlTypeCondition(controlType);
+        Condition condition = this.createControlTypeCondition(controlType);
 
         retry_loop: for (int loop = 0; loop < numberOfRetries; loop++) {
 
@@ -425,19 +429,19 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Create an 'and' condition.
      *
-     * @param pCondition1 First condition.
-     * @param pCondition2 Second condition.
+     * @param condition1 First condition.
+     * @param condition2 Second condition.
      * @return The new condition.
      * @throws AutomationException Something is wrong.
      */
-    public PointerByReference createAndCondition(final PointerByReference pCondition1,
-                                                 final PointerByReference pCondition2)
+    public Condition createAndCondition(final Condition condition1,
+                                        final Condition condition2)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createAndCondition(pCondition1.getValue(), pCondition2.getValue(), pbr);
+        final int res = this.automation.createAndCondition(condition1.getValue(), condition2.getValue(), pbr);
         if (res == 0) {
-            return pbr;
+            return new Condition(pbr);
         } else {
             throw new AutomationException(res);
         }
@@ -446,19 +450,19 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Create an 'or' condition.
      *
-     * @param pCondition1 First condition.
-     * @param pCondition2 Second condition.
+     * @param condition1 First condition.
+     * @param condition2 Second condition.
      * @return The new condition.
      * @throws AutomationException Something is wrong.
      */
-    public PointerByReference createOrCondition(final PointerByReference pCondition1,
-                                                final PointerByReference pCondition2)
+    public Condition createOrCondition(final Condition condition1,
+                                       final Condition condition2)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createOrCondition(pCondition1.getValue(), pCondition2.getValue(), pbr);
+        final int res = this.automation.createOrCondition(condition1.getValue(), condition2.getValue(), pbr);
         if (res == 0) {
-            return pbr;
+            return new Condition(pbr);
         } else {
             throw new AutomationException(res);
         }
@@ -471,12 +475,12 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-    public PointerByReference createControlTypeCondition(final ControlType id)
+    public Condition createControlTypeCondition(final ControlType id)
             throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         variant.setValue(Variant.VT_INT, id.getValue());
 
-        return this.createPropertyCondition(PropertyID.ControlType.getValue(), variant);
+        return this.createPropertyCondition(PropertyID.ControlType, variant);
     }
 
     /**
@@ -486,14 +490,14 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-    public PointerByReference createAutomationIdPropertyCondition(final String automationId)
+    public Condition createAutomationIdPropertyCondition(final String automationId)
             throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(automationId);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            return this.createPropertyCondition(PropertyID.AutomationId.getValue(), variant);
+            return this.createPropertyCondition(PropertyID.AutomationId, variant);
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
@@ -506,14 +510,14 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-    public PointerByReference createNamePropertyCondition(final String name)
+    public Condition createNamePropertyCondition(final String name)
             throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(name);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            return this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+            return this.createPropertyCondition(PropertyID.Name, variant);
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
@@ -526,14 +530,14 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something went wrong.
      */
-	public PointerByReference createClassNamePropertyCondition(final String className)
+	public Condition createClassNamePropertyCondition(final String className)
             throws AutomationException {
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
         WTypes.BSTR sysAllocated = OleAuto.INSTANCE.SysAllocString(className);
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            return this.createPropertyCondition(PropertyID.ClassName.getValue(), variant);
+            return this.createPropertyCondition(PropertyID.ClassName, variant);
         } finally {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
@@ -547,19 +551,19 @@ public class UIAutomation extends BaseAutomation {
      * @return The nre condition.
      * @throws AutomationException Something has gone wrong.
      */
-    public PointerByReference createPropertyCondition(final int id,
-                                                      final Variant.VARIANT.ByValue value)
+      public PropertyCondition createPropertyCondition (final PropertyID id,
+                                                        final Variant.VARIANT.ByValue value)
             throws AutomationException {
         PointerByReference pCondition = new PointerByReference();
 
-        final int res = this.automation.createPropertyCondition(id, value, pCondition);
+        final int res = this.automation.createPropertyCondition(id.getValue(), value, pCondition);
         if (res == 0) {
             Unknown unkCondition = new Unknown(pCondition.getValue());
-            PointerByReference pUnknown = new PointerByReference();
+            PointerByReference pbr = new PointerByReference();
 
-            WinNT.HRESULT result1 = unkCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pUnknown);
+            WinNT.HRESULT result1 = unkCondition.QueryInterface(new Guid.REFIID(IUIAutomationCondition.IID), pbr);
             if (COMUtils.SUCCEEDED(result1)) {
-                return pCondition;
+                return new PropertyCondition(pbr);
             } else {
                 throw new AutomationException(result1.intValue());
             }
@@ -606,13 +610,13 @@ public class UIAutomation extends BaseAutomation {
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+            Condition condition = this.createPropertyCondition(PropertyID.Name, variant);
 
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
                     element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
-                            pCondition1);
+                            condition);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
                 }
@@ -679,9 +683,9 @@ public class UIAutomation extends BaseAutomation {
      */
 	private List<AutomationElement> getRootChildren(final ControlType controlType)
             throws AutomationException {
-        PointerByReference pCondition = this.createControlTypeCondition(controlType);
+        Condition condition = this.createControlTypeCondition(controlType);
 
-		return this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
+		return this.rootElement.findAll(new TreeScope(TreeScope.Children), condition);
 	}
 
     /**
@@ -690,13 +694,13 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something has gone wrong.
      */
-    public PointerByReference createTrueCondition()
+    public Condition createTrueCondition()
             throws AutomationException {
-        PointerByReference pTrueCondition = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createTrueCondition(pTrueCondition);
+        final int res = this.automation.createTrueCondition(pbr);
         if (res == 0) {
-            return pTrueCondition;
+            return new Condition(pbr);
         } else {
             throw new AutomationException(res);
         }
@@ -726,13 +730,13 @@ public class UIAutomation extends BaseAutomation {
      * @return The condition.
      * @throws AutomationException Something has gone wrong.
      */
-    public PointerByReference createFalseCondition()
+    public Condition createFalseCondition()
             throws AutomationException {
-        PointerByReference condition = new PointerByReference();
+        PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createFalseCondition(condition);
+        final int res = this.automation.createFalseCondition(pbr);
         if (res == 0) {
-            return condition;
+            return new Condition(pbr);
         } else {
             throw new AutomationException(res);
         }
@@ -741,17 +745,17 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Create a NOT condition.
      *
-     * @param condition The condition condition.
+     * @param inCondition The condition condition.
      * @return The new condition.
      * @throws AutomationException Something is wrong.
      */
-    public PointerByReference createNotCondition(final PointerByReference condition)
+    public Condition createNotCondition(final Condition inCondition)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        final int res = this.automation.createNotCondition(condition.getValue(), pbr);
+        final int res = this.automation.createNotCondition(inCondition.getValue(), pbr);
         if (res == 0) {
-            return pbr;
+            return new Condition(pbr);
         } else {
             throw new AutomationException(res);
         }

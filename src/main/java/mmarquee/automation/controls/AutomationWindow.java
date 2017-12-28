@@ -24,6 +24,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -85,7 +86,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * @throws AutomationException Automation issue.
      */
     public AutomationStatusBar getStatusBar() throws AutomationException {
-        PointerByReference condition = this.createTrueCondition();
+        Condition condition = this.createTrueCondition();
 
         List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
 

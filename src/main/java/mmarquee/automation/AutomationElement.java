@@ -22,6 +22,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
@@ -73,10 +74,22 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3Converter.pointerToInterface(pUnknown);
+            return getPointerToInterface3(pUnknown);
         }
 
         throw new ConversionFailure("IUIAutomationElement3");
+    }
+
+    public IUIAutomationElement3 getPointerToInterface3(PointerByReference ref) {
+        return IUIAutomationElement3Converter.pointerToInterface(ref);
+    }
+
+    public IUIAutomationElement6 getPointerToInterface6(PointerByReference ref) {
+        return IUIAutomationElement6Converter.PointerToInterface(ref);
+    }
+
+    public IUIAutomationElement7 getPointerToInterface7(PointerByReference ref) {
+        return IUIAutomationElement7Converter.PointerToInterface(ref);
     }
 
     /**
@@ -93,7 +106,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+            return getPointerToInterface6(pUnknown);
         }
 
         throw new ConversionFailure("IUIAutomationElement6");
@@ -112,7 +125,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement7.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement7Converter.PointerToInterface(pUnknown);
+            return getPointerToInterface7(pUnknown);
         }
 
         throw new ConversionFailure("IUIAutomationElement7");
@@ -406,16 +419,16 @@ public class AutomationElement extends BaseAutomation {
      * Finds the first element that matches the raw condition.
      *
      * @param scope Tree scope.
-     * @param pCondition The raw condition.
+     * @param condition The raw condition.
      * @return The first matching element.
      * @throws AutomationException Something has gone wrong.
      */
     public AutomationElement findFirst(final TreeScope scope,
-                                       final PointerByReference pCondition)
+                                       final Condition condition)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
-        this.element.findFirst(scope, pCondition.getValue(), pbr);
+        this.element.findFirst(scope, condition.getValue(), pbr);
 
         try {
             IUIAutomationElement elem =
@@ -455,14 +468,14 @@ public class AutomationElement extends BaseAutomation {
     /**
      * Gets all of the descendant elements that match the condition.
      *
-     * @param pCondition The condition.
+     * @param condition The condition.
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
      */
     public List<AutomationElement> findAllDescendants(
-            final PointerByReference pCondition)
+            final Condition condition)
             throws AutomationException {
-        return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
+        return this.findAll(new TreeScope(TreeScope.Descendants), condition);
     }
 
     /**
@@ -476,7 +489,7 @@ public class AutomationElement extends BaseAutomation {
      * @throws AutomationException Something has gone wrong
      */
     public List<AutomationElement> findAll(final TreeScope scope,
-                                           final PointerByReference condition,
+                                           final Condition condition,
                                            final CacheRequest cacheRequest)
             throws AutomationException {
         List<AutomationElement> items = new ArrayList<>();
@@ -522,19 +535,19 @@ public class AutomationElement extends BaseAutomation {
      * Gets all of the elements that match the condition and scope.
      *
      * @param scope The scope in the element tree.
-     * @param pCondition The condition.
+     * @param condition The condition.
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
      */
     public List<AutomationElement> findAll(final TreeScope scope,
-                                           final PointerByReference pCondition)
+                                           final Condition condition)
             throws AutomationException {
         List<AutomationElement> items = new ArrayList<>();
 
         PointerByReference pAll = new PointerByReference();
 
         final int res =
-                this.element.findAll(scope, pCondition.getValue(), pAll);
+                this.element.findAll(scope, condition.getValue(), pAll);
         if (res != 0) {
             throw new AutomationException(res);
         }

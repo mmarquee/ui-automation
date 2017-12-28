@@ -19,6 +19,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -44,7 +45,7 @@ public final class AutomationTitleBar extends AutomationContainer {
      * @throws AutomationException Automation library error
      */
     public AutomationMainMenu getMenuBar() throws AutomationException {
-        PointerByReference condition = this.automation.createControlTypeCondition(ControlType.MenuBar);
+        Condition condition = this.automation.createControlTypeCondition(ControlType.MenuBar);
 
         AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
                 condition);

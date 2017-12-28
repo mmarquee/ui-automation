@@ -28,7 +28,7 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 26/12/2017
  */
 public class IUIAutomationConditionConverter {
-    public static IUIAutomationCondition PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationCondition pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[85];  //  82 + 3 from IUnknown

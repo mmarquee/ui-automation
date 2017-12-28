@@ -4,6 +4,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.uiautomation.*;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class DemoCaching extends TestBase {
 
             AutomationWindow window = automation.getDesktopWindow("Form1");
 
-            PointerByReference condition = automation.createTrueCondition();
+            Condition condition = automation.createTrueCondition();
 
             CacheRequest cacheRequest = new CacheRequest(automation);
 

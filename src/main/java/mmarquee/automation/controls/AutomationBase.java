@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import java.util.LinkedList;
 import java.util.List;
 
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.pattern.LegacyIAccessible;
 import org.apache.log4j.Logger;
 
@@ -409,7 +410,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException An error has occurred in automation.
      */
    protected AutomationElement findFirst(final TreeScope scope,
-                                         final PointerByReference condition)
+                                         final Condition condition)
            throws AutomationException {
         return this.element.findFirst(scope, condition);
    }
@@ -423,7 +424,7 @@ public abstract class AutomationBase implements Automatable {
      */
     protected List<AutomationElement> findAll(final TreeScope scope)
             throws AutomationException {
-        PointerByReference condition = this.createTrueCondition();
+        Condition condition = this.createTrueCondition();
         return this.findAll(scope, condition);
     }
 
@@ -433,7 +434,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The true condition.
      * @throws AutomationException Something is up with automation.
      */
-    protected PointerByReference createTrueCondition() throws AutomationException {
+    protected Condition createTrueCondition() throws AutomationException {
         return this.automation.createTrueCondition();
     }
 
@@ -444,7 +445,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The condition..
      * @throws AutomationException Something has gone wrong.
      */
-    protected PointerByReference createNamePropertyCondition(final String name)
+    protected Condition createNamePropertyCondition(final String name)
             throws AutomationException {
         return this.automation.createNamePropertyCondition(name);
     }
@@ -456,7 +457,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
-    protected PointerByReference createAutomationIdPropertyCondition(final String automationId)
+    protected Condition createAutomationIdPropertyCondition(final String automationId)
             throws AutomationException {
         return this.automation.createAutomationIdPropertyCondition(automationId);
     }
@@ -468,7 +469,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The condition.
      * @throws AutomationException Something has gone wrong.
      */
-    protected PointerByReference createControlTypeCondition(final ControlType id)
+    protected Condition createControlTypeCondition(final ControlType id)
             throws AutomationException {
         return this.automation.createControlTypeCondition(id);
     }
@@ -480,7 +481,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The condition
      * @throws AutomationException Something has gone wrong.
      */
-    protected PointerByReference createClassNamePropertyCondition(final String className)
+    protected Condition createClassNamePropertyCondition(final String className)
             throws AutomationException {
         return this.automation.createClassNamePropertyCondition(className);
     }
@@ -492,8 +493,8 @@ public abstract class AutomationBase implements Automatable {
      * @return The And condition.
      * @throws AutomationException Error in automation.
      */
-   protected PointerByReference createAndCondition(final PointerByReference condition1,
-                                                   final PointerByReference condition2)
+   protected Condition createAndCondition(final Condition condition1,
+                                          final Condition condition2)
            throws AutomationException {
        return this.automation.createAndCondition(condition1, condition2);
    }
@@ -507,7 +508,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws AutomationException Error in automation library
      */
     protected List<AutomationElement> findAll(final TreeScope scope,
-                                              final PointerByReference condition)
+                                              final Condition condition)
             throws AutomationException {
         return this.element.findAll(scope, condition);
     }

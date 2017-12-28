@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.controls.conditions.Condition;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
@@ -205,7 +206,7 @@ public class AutomationContainerTest {
 
         verify(spyWndw).createNamePropertyCondition("name");
         verify(spyWndw).createControlTypeCondition(ControlType.Button);
-        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(Condition.class));
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -224,7 +225,7 @@ public class AutomationContainerTest {
         assertEquals(targetElement,button.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.Button);
-        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(Condition.class));
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -492,7 +493,7 @@ public class AutomationContainerTest {
 
         verify(spyWndw).createNamePropertyCondition("name");
         verify(spyWndw).createControlTypeCondition(ControlType.ComboBox);
-        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(Condition.class));
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -511,7 +512,7 @@ public class AutomationContainerTest {
         assertEquals(targetElement,comboBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.ComboBox);
-        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(Condition.class));
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -548,7 +549,7 @@ public class AutomationContainerTest {
         AutomationCheckBox checkBox = wndw.getCheckBox(Search.getBuilder(0).build());
         assertEquals(targetElement,checkBox.getElement());
 
-        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(Condition.class));
     }
 
     @Test
@@ -560,7 +561,7 @@ public class AutomationContainerTest {
 
         verify(spyWndw).createNamePropertyCondition("name");
         verify(spyWndw).createControlTypeCondition(ControlType.CheckBox);
-        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findFirst(any(TreeScope.class), any(Condition.class));
     }
 
     @Test(expected=ElementNotFoundException.class)
@@ -579,7 +580,7 @@ public class AutomationContainerTest {
         assertEquals(targetElement,checkBox.getElement());
 
         verify(spyWndw).createControlTypeCondition(ControlType.CheckBox);
-        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(PointerByReference.class));
+        verify(element, atLeastOnce()).findAll(any(TreeScope.class), any(Condition.class));
     }
 
     @Test(expected=ElementNotFoundException.class)
