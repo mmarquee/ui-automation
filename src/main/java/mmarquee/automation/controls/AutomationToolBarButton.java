@@ -40,6 +40,10 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
         super(new ElementBuilder(element));
     }
 
+    public AutomationToolBarButton(final ElementBuilder builder) {
+        super(builder);
+    }
+
     /**
      * Constructor for the AutomationToolBarButton.
      * @param element The underlying automation element.

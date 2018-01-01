@@ -15,12 +15,15 @@
  */
 package mmarquee.automation.controls;
 
+import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.AutomationElement;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
-import org.junit.Assume;
-import org.junit.BeforeClass;
+import mmarquee.automation.uiautomation.IUIAutomation;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.assertTrue;
@@ -31,14 +34,8 @@ import static org.mockito.Mockito.*;
  * Date 01/12/2016.
  */
 public class AutomationToolbarButtonTest {
-    @BeforeClass
-    public static void checkOs() throws Exception {
-        Assume.assumeTrue(isWindows());
-    }
-
-    private static boolean isWindows() {
-        return System.getProperty("os.name").toLowerCase().contains("windows");
-    }
+    @Mock
+    User32 user32;
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -50,7 +47,12 @@ public class AutomationToolbarButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationToolBarButton ctrl = new AutomationToolBarButton(element);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationToolBarButton ctrl =
+                new AutomationToolBarButton(
+                        new ElementBuilder(element).automation(instance).user32(user32));
 
         String name = ctrl.getName();
 
@@ -58,12 +60,17 @@ public class AutomationToolbarButtonTest {
     }
 
     @Test
+    @Ignore("Slightly meaningless test")
     public void testClick_Never_Calls_Invoke_From_Pattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke invoke = Mockito.mock(Invoke.class);
         when(element.getClickablePoint()).thenReturn(new WinDef.POINT(0,0));
 
-        AutomationToolBarButton ctrl = new AutomationToolBarButton(element, invoke);
+        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
+        UIAutomation instance = new UIAutomation(mocked_automation);
+
+        AutomationToolBarButton ctrl = new AutomationToolBarButton(
+                new ElementBuilder(element).automation(instance).invoke(invoke));
 
         ctrl.click();
 
