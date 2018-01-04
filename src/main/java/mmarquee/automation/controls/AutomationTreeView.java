@@ -18,6 +18,7 @@ package mmarquee.automation.controls;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.sun.jna.platform.win32.User32;
 import mmarquee.automation.*;
 import mmarquee.automation.uiautomation.TreeScope;
 
