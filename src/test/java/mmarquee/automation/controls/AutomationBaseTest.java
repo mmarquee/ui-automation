@@ -59,11 +59,17 @@ import mmarquee.automation.uiautomation.TreeScope;
 public class AutomationBaseTest {
     @Mock
     AutomationElement element;
-    @Mock AutomationElement targetElement;
+    @Mock
+    AutomationElement targetElement;
     @Mock
     Window pattern;
     @Mock
     ItemContainer container;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @BeforeClass
     public static void checkOs() throws Exception {

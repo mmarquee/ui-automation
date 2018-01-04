@@ -32,6 +32,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -467,5 +468,25 @@ public class AutomationWindowTest2 {
         }
 
         verify(element, times(1)).findFirst(any(), any());
+    }
+
+    @Test
+    public void testGetWindow_With_Regex_Calls_Get_Window_10_Times_When_No_Found() throws Exception {
+        doAnswer(invocation -> {
+            IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
+
+            return new AutomationElement(elem);
+        }).when(element).findFirst(any(), any());
+
+        AutomationWindow wndw = new AutomationWindow(
+                new ElementBuilder(element).window(window).itemContainer(container).user32(user32));
+
+        try {
+            AutomationWindow w = wndw.getWindow(Search.getBuilder(Pattern.compile("n\\S+pad99")).build());
+        } catch (Throwable t) {
+            // Catch exception so test can continue
+        }
+
+        verify(element, times(10)).findAll(any(), any());
     }
 }

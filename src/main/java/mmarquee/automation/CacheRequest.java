@@ -23,6 +23,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IUIAutomationCacheRequest;
 import mmarquee.automation.uiautomation.IUIAutomationCacheRequestConverter;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 
 /**
  * Encapsulated the cache request.
@@ -34,23 +36,9 @@ import mmarquee.automation.uiautomation.IUIAutomationCacheRequestConverter;
 public class CacheRequest {
 
     /**
-     * Makes an Unknown value fro the pointer.
-     * @param pvInstance The pointer
-     * @return The Unknown value
-     */
-    private Unknown makeUnknown(final Pointer pvInstance) {
-        return new Unknown(pvInstance);
-    }
-
-    /**
      * The raw pointer.
      */
     private PointerByReference cache;
-
-    /**
-     * The cache request.
-     */
-    private IUIAutomationCacheRequest request;
 
     /**
      * Gets the value.
@@ -72,7 +60,7 @@ public class CacheRequest {
 
         PointerByReference pbr = new PointerByReference();
 
-        Unknown unknown = makeUnknown(cache.getValue());
+        Unknown unknown = automation.makeUnknown(cache.getValue());
 
         WinNT.HRESULT result0 = unknown.QueryInterface(new Guid.REFIID(IUIAutomationCacheRequest.IID), pbr);
 
@@ -80,7 +68,7 @@ public class CacheRequest {
             throw new AutomationException(result0.intValue());
         }
 
-        this.request = IUIAutomationCacheRequestConverter.pointerToInterface(pbr);
+        //this.request = IUIAutomationCacheRequestConverter.pointerToInterface(pbr);
     }
 
     /**
@@ -88,7 +76,10 @@ public class CacheRequest {
      * @param inVal The pattern
      */
     public void addPattern(final int inVal) {
-        this.request.addPattern(inVal);
+        IUIAutomationCacheRequest request =
+                convertPointerToElementInterface(this.cache);
+
+        request.addPattern(inVal);
     }
 
     /**
@@ -96,6 +87,15 @@ public class CacheRequest {
      * @param inVal The property
      */
     public void addProperty(final int inVal) {
-        this.request.addProperty(inVal);
+        IUIAutomationCacheRequest request =
+                convertPointerToElementInterface(this.cache);
+
+        request.addProperty(inVal);
     }
+
+    public IUIAutomationCacheRequest convertPointerToElementInterface(
+            final PointerByReference unknown) {
+        return IUIAutomationCacheRequestConverter.pointerToInterface(unknown);
+    }
+
 }

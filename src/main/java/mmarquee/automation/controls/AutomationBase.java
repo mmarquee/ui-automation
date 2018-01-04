@@ -705,7 +705,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
-    Window getWindowPattern() throws PatternNotFoundException, AutomationException {
+    public Window getWindowPattern() throws PatternNotFoundException, AutomationException {
         if (this.isWindowPatternAvailable()) {
         	Window pattern = new Window();
             PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
