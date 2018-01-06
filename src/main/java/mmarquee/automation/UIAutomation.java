@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2016-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.accessibility.MSAAWrapper;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
@@ -30,8 +31,6 @@ import mmarquee.automation.controls.conditions.PropertyCondition;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.automation.uiautomation.*;
 import mmarquee.automation.uiautomation.conditions.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.conditions.IUIAutomationConditionConverter;
-import mmarquee.automation.uiautomation.conditions.IUIAutomationPropertyCondition;
 import mmarquee.automation.utils.Utils;
 
 import java.util.ArrayList;
@@ -57,6 +56,11 @@ public class UIAutomation extends BaseAutomation {
      * The automation instance.
      */
     protected static UIAutomation INSTANCE = null;
+
+    /**
+     * The accessibility instance.
+     */
+    protected static MSAAWrapper MSAA = null;
 
     /**
      * The wrapper for the Ole32 library.
@@ -89,6 +93,8 @@ public class UIAutomation extends BaseAutomation {
      */
     protected UIAutomation() {
         Ole32 = new Ole32Wrapper();
+
+        MSAA = new MSAAWrapper();
 
         PointerByReference pbr1 = new PointerByReference();
 
