@@ -15,7 +15,10 @@
  */
 package mmarquee.automation.accessibility;
 
+import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.uiautomation.IAccessible;
 
 /**
  * Wrapper for basic MSAA functionality.
@@ -25,12 +28,23 @@ import com.sun.jna.platform.win32.WinDef;
  */
 public class MSAAWrapper {
 
+    /**
+     * The OLEACC instance.
+     */
     private static Oleacc oleacc;
 
+    /**
+     * Constructor for the MSAAWrapper.
+     */
     public MSAAWrapper() {
         oleacc = Oleacc.INSTANCE;
     }
 
+    /**
+     * Constructor for the MSAAWrapper, primarily used for tests.
+     *
+     * @param oleacc The Oleacc instance to use
+     */
     public MSAAWrapper(Oleacc oleacc) {
         this.oleacc = oleacc;
     }
@@ -54,5 +68,17 @@ public class MSAAWrapper {
                 build.getHigh().intValue(),
                 build.getLow().intValue());
     }
+/*
+    public IAccessible accessibleObjectFromWindow(WinDef.HWND hwnd) {
+        Guid.GUID.ByReference IID =
+                new Guid.IID.ByReference(
+                        new Guid.IID("{618736E0-3C3D-11CF-810C-00AA00389B71}"));
 
+        PointerByReference ptr = new PointerByReference();
+
+        oleacc.AccessibleObjectFromWindow(hwnd, new WinDef.DWORD(0), IID, ptr);
+
+
+    }
+*/
 }
