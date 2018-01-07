@@ -24,16 +24,18 @@ import com.sun.jna.ptr.PointerByReference;
 
 public interface IAccessible extends IDispatch {
     /**
-     * The interface IID for QueryInterface et al
+     * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{618736E0-3C3D-11CF-810C-00AA00389B71}");
-
-    int Get_accParent(PointerByReference pdisp);
-    int Get_accChildCount(LongByReference pcnt);
-    int Get_accChild(int childId, PointerByReference cdisp);
-    int Get_accName(int childId, PointerByReference pstr);
-    int Get_accValue(int childId, PointerByReference pstr);
-    int Get_accDescription(int childId, PointerByReference pstr);
+/*
+    int Get_accParent(PointerByReference pdisp);                     // 7
+    int Get_accChildCount(LongByReference pcnt);                     // 8
+    int Get_accChild(int childId, PointerByReference cdisp);         // 9
+    */
+    int Get_accName(int childId, PointerByReference pstr);           // 10
+    int Get_accValue(int childId, PointerByReference pstr);          // 11
+    int Get_accDescription(int childId, PointerByReference pstr);    // 12
+    /*
     int Get_accRole(int childId, PointerByReference roleId);
     int Get_accState(int childId, PointerByReference stateId);
     int Get_accHelp(int childId, PointerByReference pstr);
@@ -54,4 +56,5 @@ public interface IAccessible extends IDispatch {
     int accDoDefaultAction(int childId);
     int Set_accName(int childId, String str);
     int Set_accValue(int childId, String str);
+    */
 }

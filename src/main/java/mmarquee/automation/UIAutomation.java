@@ -60,7 +60,7 @@ public class UIAutomation extends BaseAutomation {
     /**
      * The accessibility instance.
      */
-    protected static MSAAWrapper MSAA = null;
+    public static MSAAWrapper MSAA = null;
 
     /**
      * The wrapper for the Ole32 library.

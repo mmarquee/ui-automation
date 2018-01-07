@@ -19,6 +19,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.uiautomation.IAccessible;
+import mmarquee.automation.uiautomation.IAccessibleConverter;
 
 /**
  * Wrapper for basic MSAA functionality.
@@ -68,17 +69,15 @@ public class MSAAWrapper {
                 build.getHigh().intValue(),
                 build.getLow().intValue());
     }
-/*
+
     public IAccessible accessibleObjectFromWindow(WinDef.HWND hwnd) {
-        Guid.GUID.ByReference IID =
-                new Guid.IID.ByReference(
-                        new Guid.IID("{618736E0-3C3D-11CF-810C-00AA00389B71}"));
+        Guid.GUID.ByReference IID = new Guid.IID.ByReference(IAccessible.IID);
 
         PointerByReference ptr = new PointerByReference();
 
         oleacc.AccessibleObjectFromWindow(hwnd, new WinDef.DWORD(0), IID, ptr);
 
-
+        return IAccessibleConverter.pointerToInterface(ptr);
     }
-*/
+
 }

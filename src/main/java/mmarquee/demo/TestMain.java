@@ -15,7 +15,9 @@
  */
 package mmarquee.demo;
 
+import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.AutomationException;
@@ -25,6 +27,7 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
+import mmarquee.automation.uiautomation.IAccessible;
 import mmarquee.automation.uiautomation.ToggleState;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.AutomationTab;
@@ -78,6 +81,17 @@ public class TestMain extends TestBase {
             AutomationWindow window = automation.getDesktopWindow("Form1");
             String name = window.getName();
             logger.info(name);
+
+            // Now try MSAA accessiblity
+            WinDef.HWND hwnd  = User32.INSTANCE.FindWindow(null, "Form1");
+
+            IAccessible acc = UIAutomation.MSAA.accessibleObjectFromWindow(hwnd);
+
+            PointerByReference sr = new PointerByReference();
+
+            acc.Get_accName(0, sr);
+
+            sr.getValue().getWideString(0);
 
             Object framework = window.getFramework();
             logger.info("Framework is " + framework.toString());
