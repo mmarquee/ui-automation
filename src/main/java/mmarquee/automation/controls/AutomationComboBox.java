@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * Date 01/02/2016.
  */
 public final class AutomationComboBox
-        extends AutomationBase
+        extends AutomationContainer
         implements Expandable, Valueable, Focusable {
 
     /** The expand collapse pattern. */
@@ -266,7 +266,7 @@ public final class AutomationComboBox
             throw new ItemNotFoundException(automationId);
         }
     }
-    
+
     /**
      * Gets the current selection.
      * @return The current selection
@@ -279,13 +279,13 @@ public final class AutomationComboBox
         }
         if (this.selectionPattern != null) {
 	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
-	
+
 	        List<AutomationListItem> list = new ArrayList<>();
-	        
+
 	        for (AutomationElement element : collection) {
 	            list.add(new AutomationListItem(new ElementBuilder(element)));
 	        }
-	
+
 	        return list;
 	    }
         throw new PatternNotFoundException("Could not determine selection");
