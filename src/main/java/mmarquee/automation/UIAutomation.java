@@ -263,34 +263,38 @@ public class UIAutomation extends BaseAutomation {
         if (!found) {
             throw new AutomationException("No process found matching " + filenamePattern);
         }
-        
+
         WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
         return new AutomationApplication(
                 new ElementBuilder(rootElement).handle(handle).attached(false));
     }
-    
+
     /**
      * Gets the desktop object associated with the title.
      *
+     * @param controlType the ControlType to search for
      * @param title Title to search for.
+     * @param treeScopeConstant the treescope to search
+     * @param numberOfRetries the number of tries to find the window
      * @return AutomationWindow The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
     private AutomationElement get(final ControlType controlType,
                                   final String title,
+                                  final int treeScopeConstant,
                                   final int numberOfRetries)
             throws AutomationException {
         AutomationElement foundElement = null;
-        
+
         // And Condition
         PointerByReference pAndCondition = this.createAndCondition(
-        		this.createNamePropertyCondition(title), 
+        		this.createNamePropertyCondition(title),
         		this.createControlTypeCondition(controlType));
 
         for (int loop = 0; loop < numberOfRetries; loop++) {
 
             try {
-            	foundElement = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants), pAndCondition);
+            	foundElement = this.rootElement.findFirst(new TreeScope(treeScopeConstant), pAndCondition);
             } catch (AutomationException ex) {
                 logger.info("Not found, retrying " + title);
             }
@@ -301,10 +305,10 @@ public class UIAutomation extends BaseAutomation {
 
             // Wait for it
             try {
-				Thread.sleep(AutomationWindow.SLEEP_DURATION);
-			} catch (InterruptedException e) {
+                Thread.sleep(AutomationWindow.SLEEP_DURATION);
+            } catch (InterruptedException e) {
                 // interrupted
-			}
+            }
         }
 
         if (foundElement == null) {
@@ -318,26 +322,30 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Gets the desktop object matching the title pattern.
      *
+     * @param controlType the ControlType to search for
      * @param titlePattern the pattern to match the title.
+     * @param treeScopeConstant the treescope to search
+     * @param numberOfRetries the number of tries to find the window
      * @return AutomationWindow The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
     private AutomationElement get(final ControlType controlType,
                                   final Pattern titlePattern,
+                                  final int treeScopeConstant,
                                   final int numberOfRetries)
             throws AutomationException {
-    	
+
         AutomationElement foundElement = null;
-        
+
         // And Condition
         PointerByReference condition = this.createControlTypeCondition(controlType);
 
         retry_loop: for (int loop = 0; loop < numberOfRetries; loop++) {
 
             try {
-                List<AutomationElement> collection = 
-                		this.rootElement.findAll(new TreeScope(TreeScope.Descendants), condition);
-                
+                List<AutomationElement> collection =
+                		this.rootElement.findAll(new TreeScope(treeScopeConstant), condition);
+
                 for (AutomationElement element : collection) {
                     String name = element.getName();
 
@@ -346,20 +354,20 @@ public class UIAutomation extends BaseAutomation {
                         break retry_loop;
                     }
                 }
-                
+
             } catch (AutomationException ex) {
                 logger.info("Failed");
             }
-            
+
             logger.info("Not found, retrying matching " + titlePattern);
 
             // Wait for it
             try {
-				Thread.sleep(AutomationWindow.SLEEP_DURATION);
-			} catch (InterruptedException e) {
+                Thread.sleep(AutomationWindow.SLEEP_DURATION);
+            } catch (InterruptedException e) {
                 // interrupted
                 logger.info("interrupted");
-			}
+            }
         }
 
         if (foundElement == null) {
@@ -369,7 +377,7 @@ public class UIAutomation extends BaseAutomation {
 
         return foundElement;
     }
-    
+
     /**
      * Gets the desktop 'window' associated with the title.
      *
@@ -393,7 +401,7 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationWindow getDesktopWindow(final String title, final int retries)
             throws AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, retries)));
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Children, retries)));
     }
 
     /**
@@ -407,7 +415,7 @@ public class UIAutomation extends BaseAutomation {
             throws AutomationException {
         return getDesktopWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
     }
-    
+
     /**
      * Gets the desktop 'window' matching the title pattern, with a variable
      * number of retries.
@@ -419,8 +427,61 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationWindow getDesktopWindow(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, retries)));
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Children, retries)));
     }
+
+    /**
+     * Gets the 'window' associated with the title. Searches all windows currently opened windows.
+     *
+     * @param title Title to search for.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    public AutomationWindow getWindow(final String title)
+            throws AutomationException {
+        return getWindow(title, FIND_DESKTOP_ATTEMPTS);
+    }
+
+    /**
+     * Gets the 'window' associated with the title, with a variable
+     * number of retries. Searches all windows currently opened windows.
+     *
+     * @param title Title to search for.
+     * @param retries Number of retries.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    public AutomationWindow getWindow(final String title, final int retries)
+            throws AutomationException {
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Descendants, retries)));
+    }
+
+    /**
+     * Gets the 'window' matching the title pattern. Searches all windows currently opened windows.
+     *
+     * @param titlePattern a pattern matching the title.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    public AutomationWindow getWindow(final Pattern titlePattern)
+            throws AutomationException {
+        return getWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
+    }
+
+    /**
+     * Gets the 'window' matching the title pattern, with a variable
+     * number of retries. Searches all windows currently opened windows.
+     *
+     * @param titlePattern a pattern matching the title.
+     * @param retries Number of retries.
+     * @return AutomationWindow The found window.
+     * @throws ElementNotFoundException Element is not found
+     */
+    public AutomationWindow getWindow(final Pattern titlePattern, final int retries)
+            throws AutomationException {
+        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Descendants, retries)));
+    }
+
     /**
      * Create an 'and' condition.
      *
@@ -537,7 +598,7 @@ public class UIAutomation extends BaseAutomation {
             OleAuto.INSTANCE.SysFreeString(sysAllocated);
         }
     }
-    
+
     /**
      * Creates a property condition.
      *
@@ -577,7 +638,7 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Gets the desktop object associated with the title.
+     * Gets the desktop object (a pane) associated with the title.
      *
      * @param title Title to search for.
      * @return AutomationPanel The found object.
@@ -585,11 +646,53 @@ public class UIAutomation extends BaseAutomation {
      */
     public AutomationPanel getDesktopObject(final String title)
             throws AutomationException {
-        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, title, FIND_DESKTOP_ATTEMPTS)));
+        return getDesktopObject(title, FIND_DESKTOP_ATTEMPTS);
+    }
+
+
+    /**
+     * Gets the desktop object (a pane) associated with the title, with a variable
+     * number of retries.
+     *
+     * @param title Title to search for.
+     * @param retries Number of retries.
+     * @return AutomationPanel The found object.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    public AutomationPanel getDesktopObject(final String title, final int retries)
+            throws AutomationException {
+        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, title, TreeScope.Children, retries)));
     }
 
     /**
-     * Gets the desktop object associated with the title.
+     * Gets the desktop object (a pane) matching the title pattern.
+     *
+     * @param titlePattern a pattern matching the title.
+     * @return AutomationPanel The found object.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    public AutomationPanel getDesktopObject(final Pattern titlePattern)
+            throws AutomationException {
+        return getDesktopObject(titlePattern, FIND_DESKTOP_ATTEMPTS);
+    }
+
+
+    /**
+     * Gets the desktop object (a pane) matching the title pattern, with a variable
+     * number of retries.
+     *
+     * @param titlePattern a pattern matching the title.
+     * @param retries Number of retries.
+     * @return AutomationPanel The found object.
+     * @throws ElementNotFoundException Element is not found.
+     */
+    public AutomationPanel getDesktopObject(final Pattern titlePattern, final int retries)
+            throws AutomationException {
+        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, titlePattern, TreeScope.Children, retries)));
+    }
+
+    /**
+     * Gets the desktop menu associated with the title.
      *
      * @param title Title of the menu to search for.
      * @return AutomationMenu The found menu.

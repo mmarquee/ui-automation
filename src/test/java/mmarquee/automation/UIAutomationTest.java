@@ -575,4 +575,29 @@ public class UIAutomationTest extends BaseAutomationTest {
         UIAutomation.getInstance().getDesktopWindow(Pattern.compile(".*Notepad99"));
     }
 
+    @Test
+    public void testGetWindow_succeeds() throws Exception {
+    	doTestWithNotepad((instance, app) -> {
+            AutomationWindow window = instance.getWindow(getLocal("notepad.title"));
+            assertNotNull(window);
+        });
+    }
+    
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetWindow_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation.getInstance().getWindow("Untitled - Notepad99");
+    }
+
+    @Test
+    public void testGetWindow_WithRegexp_succeeds() throws Exception {
+    	doTestWithNotepad((instance, app) -> {
+            AutomationWindow window = instance.getWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+            assertNotNull(window);
+        });
+    }
+    
+    @Test(expected = ItemNotFoundException.class)
+    public void testGetWindow_WithRegexp_Fails_When_Not_Window_Present() throws IOException, AutomationException, PatternNotFoundException {
+        UIAutomation.getInstance().getWindow(Pattern.compile(".*Notepad99"));
+    }
 }
