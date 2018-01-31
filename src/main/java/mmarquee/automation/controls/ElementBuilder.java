@@ -15,11 +15,16 @@
  */
 package mmarquee.automation.controls;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinNT;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.*;
+import mmarquee.automation.pattern.BasePattern;
 
 /**
  * The element builder.
@@ -38,41 +43,8 @@ public class ElementBuilder {
 
     private AutomationElement parent;
 
-    /** Range pattern. */
-    private Range range;
-
-    /** Value pattern. */
-    private Value value;
-
-    /** Invoke pattern. */
-    private Invoke invoke;
-
-    /** Toggle pattern. */
-    private Toggle toggle;
-
-    /** ExpandCollapse pattern. */
-    private ExpandCollapse collapse;
-
-    /** Selection pattern. */
-    private Selection selection;
-
-    /** ItemContainer pattern. */
-    private ItemContainer itemContainer;
-
-    /** SelectionItem pattern. */
-    private SelectionItem selectionItem;
-
-    /** Grid pattern. */
-    private Grid grid;
-
-    /** GridItem pattern. */
-    private GridItem gridItem;
-
-    /** Table pattern. */
-    private Table table;
-
-    /** Range pattern. */
-    private Text text;
+    /** Predefined automation patterns (for testing purposes) */
+    protected final Set<BasePattern> automationPatterns = new HashSet<>();
 
     /** The handle. */
     private WinNT.HANDLE handle;
@@ -82,11 +54,6 @@ public class ElementBuilder {
 
     /** Attached. */
     private boolean attached;
-
-    /**
-     * The window pattern.
-     */
-    private Window windowPattern;
 
     /**
      * The user32 instance.
@@ -118,22 +85,12 @@ public class ElementBuilder {
      */
     private void initialise() {
         this.element = null;
+        this.automationPatterns.clear();
         this.instance = null;
-        this.invoke = null;
-        this.value = null;
-        this.toggle = null;
-        this.range = null;
-        this.itemContainer = null;
-        this.selectionItem = null;
-        this.windowPattern = null;
         this.user32 = null;
         this.handle = null;
         this.process = null;
-        this.grid = null;
-        this.table = null;
-        this.text = null;
         this.parent = null;
-        this.gridItem = null;
     }
 
     /**
@@ -164,82 +121,14 @@ public class ElementBuilder {
     }
 
     /**
-     * Create a ElementBuilder with a griditem.
-     * @param inGridItem The GridItem
+     * Create an ElementBuilder with the given pattern.
+     * @param pattern The pattern to support
      * @return The ElementBuilder
      */
-    public ElementBuilder gridItem(GridItem inGridItem) {
-        this.gridItem = inGridItem;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Range pattern.
-     * @param pattern The Range pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder range(Range pattern) {
-        this.range = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Table pattern.
-     * @param pattern The Table pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder table(Table pattern) {
-        this.table = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Grid pattern.
-     * @param pattern The Grid pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder grid(Grid pattern) {
-        this.grid = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Text pattern.
-     * @param pattern The Text pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder text(Text pattern) {
-        this.text = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Toggle pattern.
-     * @param pattern The Toggle pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder toggle(Toggle pattern) {
-        this.toggle = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Selection pattern.
-     * @param pattern The Selection pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder select(Selection pattern) {
-        this.selection = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a ExpandCollapse pattern.
-     * @param pattern The ExpandCollapse pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder collapse(ExpandCollapse pattern) {
-        this.collapse = pattern;
+    public ElementBuilder addPattern(final BasePattern... patterns) {
+        for (final BasePattern pattern: patterns) {
+            this.automationPatterns.add(pattern);
+        }
         return this;
     }
 
@@ -254,52 +143,12 @@ public class ElementBuilder {
     }
 
     /**
-     * Create a ElementBuilder with a ItemContainer pattern.
-     * @param pattern The ItemContainer pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder itemContainer(ItemContainer pattern) {
-        this.itemContainer = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a SelectionItem pattern.
-     * @param pattern The SelectionItem pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder selectionItem(SelectionItem pattern) {
-        this.selectionItem = pattern;
-        return this;
-    }
-
-    /**
      * Create a ElementBuilder with an AutomationElement.
      * @param element The AutomationElement
      * @return The ElementBuilder
      */
     public ElementBuilder element(AutomationElement element) {
         this.element = element;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Value pattern.
-     * @param pattern The Value pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder value(Value pattern) {
-        this.value = pattern;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Window pattern.
-     * @param pattern The Window pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder window(Window pattern) {
-        this.windowPattern = pattern;
         return this;
     }
 
@@ -320,26 +169,6 @@ public class ElementBuilder {
      */
     public ElementBuilder automation(UIAutomation automation) {
         this.instance = automation;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Invoke pattern.
-     * @param invoke The Invoke pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder invoke(Invoke invoke) {
-        this.invoke = invoke;
-        return this;
-    }
-
-    /**
-     * Create a ElementBuilder with a Selection pattern.
-     * @param pattern The Selection pattern
-     * @return The ElementBuilder
-     */
-    public ElementBuilder selection(Selection pattern) {
-        this.selection = pattern;
         return this;
     }
 
@@ -376,36 +205,11 @@ public class ElementBuilder {
     }
 
     /**
-     * Gets the invoke pattern.
-     * @return The invoke pattern
+     * Gets the provided pattern.
+     * @return The provided pattern
      */
-    public Invoke getInvoke() {
-        return this.invoke;
-    }
-
-    /**
-     * Gets the range pattern.
-     * @return The range pattern
-     */
-    public Range getRange() {
-        return this.range;
-    }
-
-    /**
-     * Gets the value pattern.
-     * @return The value pattern
-     */
-    public Value getValue() {
-        return this.value;
-    }
-
-    /**
-     * Gets the toggle pattern.
-     * @return The toggle pattern
-     */
-
-    public Toggle getToggle() {
-        return this.toggle;
+    public Collection<BasePattern> getAutomationPatterns() {
+        return this.automationPatterns;
     }
 
     /**
@@ -417,91 +221,19 @@ public class ElementBuilder {
     }
 
     /**
-     * Gets the gridItem pattern.
-     * @return The GridItem pattern
-     */
-    public GridItem getGridItem() {
-        return this.gridItem;
-    }
-
-    /**
-     * Gets the window pattern.
-     * @return The window pattern
-     */
-    public Window getWindow() {
-        return this.windowPattern;
-    }
-
-    /**
-     * Gets the grid pattern.
-     * @return The grid pattern
-     */
-    public Grid getGrid() {
-        return this.grid;
-    }
-
-    /**
-     * Gets the table pattern.
-     * @return The table pattern
-     */
-    public Table getTable() {
-        return this.table;
-    }
-
-    /**
-     * The selectitem pattern.
-     * @return The selectitem pattern
-     */
-    public SelectionItem getSelectItem() {
-        return this.selectionItem;
-    }
-
-    /**
-     * The expand/collapse pattern.
-     * @return The expandcollapse pattern
-     */
-    public ExpandCollapse getCollapse() {
-        return this.collapse;
-    }
-
-    /**
-     * Gets the selection pattern.
-     * @return The selection pattern
-     */
-    public Selection getSelection() {
-        return this.selection;
-    }
-
-    /**
      * The element itself.
      * @return The element
      */
     public AutomationElement getElement() {
         return this.element;
     }
-
-    /**
-     * Gets the itemcontainer pattern.
-     * @return The itemcontainer pattern
-     */
-    public ItemContainer getItemContainer() {
-        return this.itemContainer;
-    }
-
+    
     /**
      * Gets the process.
      * @return The process
      */
     public Process getProcess() {
         return this.process;
-    }
-
-    /**
-     * Gets the text pattern.
-     * @return The text pattern
-     */
-    public Text getText() {
-        return this.text;
     }
 
     /**
@@ -518,22 +250,6 @@ public class ElementBuilder {
      */
     public boolean getHasAutomation() {
         return this.instance != null;
-    }
-
-    /**
-     * Has invoke pattern.
-     * @return true if present
-     */
-    public boolean getHasInvoke() {
-        return this.invoke != null;
-    }
-
-    /**
-     * Has value pattern.
-     * @return true is present
-     */
-    public boolean getHasValue() {
-        return this.value != null;
     }
 
     /**

@@ -32,7 +32,7 @@ public class AutomationHyperlinkTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationHyperlink link = new AutomationHyperlink(
-                new ElementBuilder(element).invoke(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = link.getName();
 
@@ -43,14 +43,13 @@ public class AutomationHyperlinkTest {
     public void testClick_Called_Once_When_Invoke_Pattern_Available() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
-
-        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
+        when(pattern.isAvailable()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationHyperlink link = new AutomationHyperlink(
-                new ElementBuilder(element).invoke(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         link.click();
 
@@ -61,14 +60,13 @@ public class AutomationHyperlinkTest {
     public void testClick_Throws_PatternNotFoundException_When_Invoke_Pattern_Not_Available() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke pattern = Mockito.mock(Invoke.class);
-
-        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
+        when(pattern.isAvailable()).thenReturn(false);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationHyperlink link = new AutomationHyperlink(
-                new ElementBuilder(element).invoke(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         link.click();
 

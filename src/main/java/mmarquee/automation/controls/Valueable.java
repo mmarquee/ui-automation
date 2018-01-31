@@ -17,17 +17,54 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Value;
 
 /**
  * @author Mark Humphreys
  * Date 19/05/2017.
  */
-public interface Valueable extends Automatable {
+public interface Valueable extends Automatable, CanRequestBasePattern {
     /**
      * Gets the value of the element.
      * @return The value
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    String getValue() throws AutomationException, PatternNotFoundException;
+    default String getValue() throws AutomationException, PatternNotFoundException {
+		final Value valuePattern = requestBasePattern(Value.class);
+		if (valuePattern.isAvailable()) {
+			return valuePattern.value();
+		}
+		throw new PatternNotFoundException("Cannot get value");
+    }
+    
+    /**
+     * Sets the value of the element.
+     * @param value the value to set
+     * @return The value
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    default void setValue(final String value) throws AutomationException, PatternNotFoundException {
+		final Value valuePattern = requestBasePattern(Value.class);
+		if (valuePattern.isAvailable()) {
+			valuePattern.setValue(value);
+			return;
+		}
+		throw new PatternNotFoundException("Cannot set value");
+    }
+
+    /**
+     * Tests whether the Value is read only
+     * @return Read only?
+     * @throws AutomationException Something has gone wrong
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    default boolean isReadOnly() throws AutomationException, PatternNotFoundException {
+		final Value valuePattern = requestBasePattern(Value.class);
+		if (valuePattern.isAvailable()) {
+			return valuePattern.isReadOnly();
+		}
+		throw new PatternNotFoundException("Cannot check read only state");
+    }
 }

@@ -41,7 +41,7 @@ public class AutomationCalendarTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationCalendar calendar = new AutomationCalendar(
-                new ElementBuilder(element).automation(instance).value(pattern));
+                new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         String name = calendar.getName();
 
@@ -53,6 +53,7 @@ public class AutomationCalendarTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value pattern = Mockito.mock(Value.class);
 
+        when(pattern.isAvailable()).thenReturn(true);
         when(pattern.value()).thenReturn("VALUE");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -60,7 +61,7 @@ public class AutomationCalendarTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationCalendar calendar = new AutomationCalendar(
-                new ElementBuilder(element).automation(instance).value(pattern));
+                new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         String value = calendar.getValue();
 

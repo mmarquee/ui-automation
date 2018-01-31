@@ -58,7 +58,7 @@ public class AutomationReBarTests {
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationReBar pane = new AutomationReBar(
-                new ElementBuilder(element).itemContainer(container).automation(instance));
+                new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = pane.getName();
 
@@ -78,7 +78,7 @@ public class AutomationReBarTests {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationReBar pane = new AutomationReBar(
-                new ElementBuilder(element).itemContainer(container).automation(instance));
+                new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = pane.getName();
 

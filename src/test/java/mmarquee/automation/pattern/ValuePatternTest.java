@@ -15,16 +15,14 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Memory;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,9 +31,21 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 
 /**
  * @author Mark Humphreys
@@ -47,13 +57,18 @@ import static org.mockito.Mockito.*;
 public class ValuePatternTest {
     @Mock
     IUIAutomationValuePattern rawPattern;
+    @Mock
+    AutomationElement element;
 
     @Spy
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Value, PropertyID.IsValuePatternAvailable);
     }
 
     @Test
@@ -72,7 +87,8 @@ public class ValuePatternTest {
             return 0;
         }).when(rawPattern).getValue(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         String text = pattern.value();
 
@@ -93,7 +109,8 @@ public class ValuePatternTest {
             return 1;
         }).when(rawPattern).getValue(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         String text = pattern.value();
 
@@ -112,7 +129,8 @@ public class ValuePatternTest {
             return 1;
         }).when(rawPattern).getCurrentIsReadOnly(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         boolean state = pattern.isReadOnly();
 
@@ -131,7 +149,8 @@ public class ValuePatternTest {
             return 0;
         }).when(rawPattern).getCurrentIsReadOnly(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         boolean state = pattern.isReadOnly();
 
@@ -150,7 +169,8 @@ public class ValuePatternTest {
             return 0;
         }).when(rawPattern).getCurrentIsReadOnly(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         boolean state = pattern.isReadOnly();
 
@@ -163,7 +183,7 @@ public class ValuePatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Value pattern = new Value();
+        Value pattern = new Value(element);
 
         Value spyPattern = Mockito.spy(pattern);
 
@@ -186,7 +206,7 @@ public class ValuePatternTest {
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Value pattern = new Value();
+        Value pattern = new Value(element);
 
         Value spyPattern = Mockito.spy(pattern);
 

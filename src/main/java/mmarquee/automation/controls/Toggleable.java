@@ -17,19 +17,27 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.uiautomation.ToggleState;
 
 /**
  * @author Mark Humphreys
  * Date 19/05/2017.
  */
-public interface Toggleable extends Automatable {
+public interface Toggleable extends Automatable, CanRequestBasePattern {
     /**
      * Toggles the element.
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    void toggle() throws AutomationException, PatternNotFoundException;
+    default void toggle() throws AutomationException, PatternNotFoundException {
+		final Toggle togglePattern = requestBasePattern(Toggle.class);
+		if (togglePattern.isAvailable()) {
+			togglePattern.toggle();
+			return;
+		}
+		throw new PatternNotFoundException("Cannot toggle");
+    }
 
     /**
      * Gets the state of the toggle.
@@ -37,5 +45,11 @@ public interface Toggleable extends Automatable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    ToggleState getToggleState() throws AutomationException, PatternNotFoundException;
+    default ToggleState getToggleState() throws AutomationException, PatternNotFoundException {
+		final Toggle togglePattern = requestBasePattern(Toggle.class);
+		if (togglePattern.isAvailable()) {
+			return togglePattern.currentToggleState();
+		}
+		throw new PatternNotFoundException("Cannot query toggle state");
+    }
 }

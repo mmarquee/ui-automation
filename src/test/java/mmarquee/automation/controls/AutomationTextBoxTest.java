@@ -28,13 +28,14 @@ public class AutomationTextBoxTest {
         when(element.getName()).thenReturn("NAME");
 
         Value value = Mockito.mock(Value.class);
+        when(value.isAvailable()).thenReturn(true);
         when(value.value()).thenReturn("VALUE");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationTextBox ctrl = new AutomationTextBox(
-                new ElementBuilder(element).automation(instance).value(value));
+                new ElementBuilder(element).automation(instance).addPattern(value));
 
         String name = ctrl.getName();
 
@@ -46,13 +47,14 @@ public class AutomationTextBoxTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
         Value value = Mockito.mock(Value.class);
+        when(value.isAvailable()).thenReturn(true);
         when(value.value()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationTextBox ctrl = new AutomationTextBox(
-                new ElementBuilder(element).automation(instance).value(value));
+                new ElementBuilder(element).automation(instance).addPattern(value));
 
         String name = ctrl.getValue();
 

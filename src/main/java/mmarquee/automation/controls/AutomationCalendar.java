@@ -17,7 +17,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Value;
 
 /**
  * Wrapper for the Calendar element.
@@ -28,10 +27,6 @@ import mmarquee.automation.pattern.Value;
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
 public class AutomationCalendar extends AutomationBase implements Valueable {
-    /**
-     * The value pattern.
-     */
-    private Value valuePattern;
 
     /**
      * Constructor for the AutomationCalendar.
@@ -43,21 +38,5 @@ public class AutomationCalendar extends AutomationBase implements Valueable {
     public AutomationCalendar(final ElementBuilder builder)
             throws PatternNotFoundException, AutomationException {
         super(builder);
-
-        if (builder.getHasValue()) {
-            this.valuePattern = builder.getValue();
-        } else {
-            this.valuePattern = this.getValuePattern();
-        }
-    }
-
-    /**
-     * Gets the current value of the control.
-     *
-     * @return The current value.
-     * @throws AutomationException Something has gone wrong.
-     */
-    public String getValue() throws AutomationException {
-        return this.valuePattern.value();
     }
 }

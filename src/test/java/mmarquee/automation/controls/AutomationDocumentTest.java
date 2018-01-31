@@ -39,13 +39,14 @@ public class AutomationDocumentTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Text pattern = Mockito.mock(Text.class);
 
+        when(pattern.isAvailable()).thenReturn(true);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDocument document = new AutomationDocument(
-                new ElementBuilder(element).text(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = document.getName();
 
@@ -56,6 +57,7 @@ public class AutomationDocumentTest {
     public void testGetSelection_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Text pattern = Mockito.mock(Text.class);
+        when(pattern.isAvailable()).thenReturn(true);
 
         when(pattern.getSelection()).thenReturn("SELECTION");
 
@@ -63,7 +65,7 @@ public class AutomationDocumentTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDocument document = new AutomationDocument(
-                new ElementBuilder(element).text(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = document.getSelection();
 
@@ -75,13 +77,14 @@ public class AutomationDocumentTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Text pattern = Mockito.mock(Text.class);
 
+        when(pattern.isAvailable()).thenReturn(true);
         when(pattern.getText()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDocument document = new AutomationDocument(
-                new ElementBuilder(element).text(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = document.getText();
 

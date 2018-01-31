@@ -15,23 +15,23 @@
  */
 package mmarquee.automation.controls;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Encapsulates the 'window' element.
@@ -41,7 +41,7 @@ import java.util.regex.Pattern;
  *
  * Currently all of these tests require to run on Windows.
  */
-public class AutomationWindow extends AutomationContainer implements Focusable {
+public class AutomationWindow extends AutomationContainer implements Focusable, Windowable {
     /**
      * The window pattern.
      */
@@ -76,7 +76,6 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         } else {
             this.user32 = User32.INSTANCE;
         }
-        this.windowPattern = builder.getWindow();
     }
 
     /**
@@ -142,59 +141,6 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      */
     public AutomationMainMenu getMenu(int index) throws AutomationException {
         return (new AutomationMainMenu(new ElementBuilder(this.getElementByControlType(0, ControlType.Menu)).parent(this.element)));
-    }
-
-    /**
-     * Waits for this window to become idle.
-     * @param timeout The timeout
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public void waitForInputIdle(int timeout) throws AutomationException, PatternNotFoundException {
-        if (this.windowPattern == null) {
-            this.windowPattern = this.getWindowPattern();
-        }
-
-        this.windowPattern.waitForInputIdle(timeout);
-    }
-
-    /**
-     * Maximize the window.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public void maximize() throws AutomationException, PatternNotFoundException {
-        if (this.windowPattern == null) {
-            this.windowPattern = this.getWindowPattern();
-        }
-
-        this.windowPattern.maximize();
-    }
-
-    /**
-     * Minimize the window.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public void minimize() throws AutomationException, PatternNotFoundException {
-        if (this.windowPattern == null) {
-            this.windowPattern = this.getWindowPattern();
-        }
-
-        this.windowPattern.minimize();
-    }
-
-    /**
-     * Closes the window.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public void close() throws AutomationException, PatternNotFoundException {
-        if (this.windowPattern == null) {
-            this.windowPattern = this.getWindowPattern();
-        }
-
-        this.windowPattern.close();
     }
 
     /**
@@ -298,34 +244,6 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
         }
 
         return new AutomationWindow(new ElementBuilder(item));
-    }
-
-    /**
-     * Whether this window is modal.
-     * @return True if modal.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public boolean isModal() throws AutomationException, PatternNotFoundException {
-        if (this.windowPattern == null) {
-            this.windowPattern = this.getWindowPattern();
-        }
-
-        return this.windowPattern.isModal();
-    }
-
-    /**
-     * Whether this window is topmost.
-     * @return True if topmost
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public boolean isTopMost() throws AutomationException, PatternNotFoundException {
-        if (this.windowPattern == null) {
-            this.windowPattern = this.getWindowPattern();
-        }
-
-        return this.windowPattern.isTopMost();
     }
 
     /**

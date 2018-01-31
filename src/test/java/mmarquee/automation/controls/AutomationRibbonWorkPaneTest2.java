@@ -72,7 +72,7 @@ public class AutomationRibbonWorkPaneTest2 {
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         workPane.getNUIPane(Search.getBuilder(0).build());
 

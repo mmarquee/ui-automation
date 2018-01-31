@@ -42,13 +42,14 @@ public class AutomationSliderTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range pattern = Mockito.mock(Range.class);
 
+        when(pattern.isAvailable()).thenReturn(true);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationSlider slider = new AutomationSlider(
-                new ElementBuilder(element).automation(instance).range(pattern));
+                new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         String name = slider.getName();
 
@@ -60,13 +61,14 @@ public class AutomationSliderTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range pattern = Mockito.mock(Range.class);
 
+        when(pattern.isAvailable()).thenReturn(true);
         when(pattern.getValue()).thenReturn(79.0);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationSlider slider = new AutomationSlider(
-                new ElementBuilder(element).automation(instance).range(pattern));
+                new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         double value = slider.getRangeValue();
 
@@ -78,11 +80,12 @@ public class AutomationSliderTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range pattern = Mockito.mock(Range.class);
 
+        when(pattern.isAvailable()).thenReturn(true);
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationSlider slider = new AutomationSlider(
-                new ElementBuilder(element).automation(instance).range(pattern));
+                new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         slider.setRangeValue(99.0);
 

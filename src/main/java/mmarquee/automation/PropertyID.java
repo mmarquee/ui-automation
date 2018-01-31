@@ -20,7 +20,7 @@ package mmarquee.automation;
  *
  * @author Mark Humphreys
  * Date 28/01/2016.
- * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee684017(v=vs.85).aspx
+ * See - https://msdn.microsoft.com/en-us/library/windows/desktop/ee671199(v=vs.85).aspx
  */
 public enum PropertyID {
     RuntimeId(30000),
@@ -95,6 +95,7 @@ public enum PropertyID {
     IsItemContainerPatternAvailable(30108),
     IsVirtualizedItemPatternAvailable(30109),
     IsSynchronizedInputPatternAvailable(30110),
+    IsStylesPatternAvailable(30127),
 
     LiveSetting(30135);
 

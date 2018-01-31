@@ -23,6 +23,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
@@ -37,32 +39,19 @@ public class Grid extends BasePattern {
 
     /**
      * Constructor for the pattern
+     * @throws AutomationException 
      */
-    public Grid() {
+    public Grid(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationGridPattern.IID;
+        this.patternID = PatternID.Grid;
+        this.availabilityPropertyID = PropertyID.IsGridPatternAvailable;
     }
 
-    private IUIAutomationGridPattern rawPattern;
-
-    public Grid(IUIAutomationGridPattern rawPattern) {
-        this.IID = IUIAutomationGridPattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationGridPattern rawPattern;
 
     private IUIAutomationGridPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**
@@ -139,7 +128,7 @@ public class Grid extends BasePattern {
         return ibr.getValue();
     }
 
-    public IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationGridPatternConverter.PointerToInterface(pUnknownA);
     }
 }

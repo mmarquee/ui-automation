@@ -28,7 +28,6 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -41,18 +40,12 @@ import mmarquee.automation.uiautomation.TreeScope;
 public class AutomationContainer extends AutomationBase {
 
     /**
-     * The ItemContainer pattern.
-     */
-    private ItemContainer itemContainerPattern;
-
-    /**
      * Constructor for the AutomationContainer.
      *
      * @param builder The builder
      */
     public AutomationContainer(final ElementBuilder builder) {
         super(builder);
-        itemContainerPattern = builder.getItemContainer();
     }
 
     /**

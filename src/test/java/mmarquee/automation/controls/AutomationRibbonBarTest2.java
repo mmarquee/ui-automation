@@ -72,7 +72,7 @@ public class AutomationRibbonBarTest2 {
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationRibbonBar bar = new AutomationRibbonBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         bar.getRibbonCommandBar();
 

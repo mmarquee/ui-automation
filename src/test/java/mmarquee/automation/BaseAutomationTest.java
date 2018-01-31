@@ -23,11 +23,10 @@ import static org.mockito.Mockito.when;
 
 import java.util.ResourceBundle;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import org.junit.After;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
 
@@ -46,9 +45,10 @@ import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
-import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
  * @author Mark Humphreys
@@ -213,16 +213,14 @@ public class BaseAutomationTest {
         }
     }
 
-    static abstract class PointerByReferenceWithPattern extends PointerByReference implements PatternProvider { 	
-    }
-
-	static public void setPatternForElementMock(AutomationElement automationElementMock, PatternID patternId,
+	@SuppressWarnings("rawtypes")
+	static public void addPatternForElementMock(AutomationElement automationElementMock, PatternID patternId,
 			PropertyID patternAvailablePropertyID, BasePattern pattern) throws AutomationException {
-		when(automationElementMock.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
-        
-		when(automationElementMock.getPattern(patternId.getValue())).thenReturn(new PointerByReferenceWithPattern(){
+		declarePatternAvailable(automationElementMock, patternId, patternAvailablePropertyID);
+		when(pattern.isAvailable()).thenReturn(true);
+		when(automationElementMock.getProvidedPattern(pattern.getPatternClass())).thenAnswer(new Answer(){
 			@Override
-			public BasePattern getPattern() {
+			public Object answer(InvocationOnMock invocation) throws Throwable {
 				return pattern;
 			}});
 	}
@@ -231,18 +229,34 @@ public class BaseAutomationTest {
 		 PatternID patternId = PatternID.ExpandCollapse;
 	     PropertyID patternAvailablePropertyID = PropertyID.IsExpandCollapsePatternAvailable;
 	     ExpandCollapse expandCollapsePattern = Mockito.mock(ExpandCollapse.class);
-	     setPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
+	     addPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
 	     
 	     return expandCollapsePattern;
 	}
+
 	
 	static public SelectionItem mockSelectItemPattern(AutomationElement automationElementMock) throws AutomationException {
 		 PatternID patternId = PatternID.SelectionItem;
 	     PropertyID patternAvailablePropertyID = PropertyID.IsSelectionItemPatternAvailable;
 	     SelectionItem selectItemPattern = Mockito.mock(SelectionItem.class);
-	     setPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, selectItemPattern);
+	     addPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, selectItemPattern);
 	     
 	     return selectItemPattern;
+	}
+	
+	
+	
+	public static void declarePatternAvailable(AutomationElement element, PatternID patternId, PropertyID patternAvailablePropertyID) throws AutomationException {
+		declarePatternAvailable(element, patternId);
+		when(element.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
+	}
+	
+	public static void declarePatternAvailable(AutomationElement element, PatternID patternId) throws AutomationException {
+		Pointer patternPointer = Mockito.mock(Pointer.class);
+        PointerByReference patternPointerReference = Mockito.mock(PointerByReference.class);
+        when(patternPointerReference.getValue()).thenReturn(patternPointer);
+        
+		when(element.getPattern(patternId.getValue())).thenReturn(patternPointerReference);
 	}
     
 }

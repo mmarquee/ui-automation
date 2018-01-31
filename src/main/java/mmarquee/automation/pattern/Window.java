@@ -15,11 +15,13 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
 import mmarquee.automation.uiautomation.WindowVisualState;
@@ -32,33 +34,20 @@ import mmarquee.automation.uiautomation.WindowVisualState;
  */
 public class Window extends BasePattern {
     /**
-     * Constructor for the value pattern
+     * Constructor for the window pattern
+     * @throws AutomationException 
      */
-    public Window() {
+    public Window(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationWindowPattern.IID;
+        this.patternID = PatternID.Window;
+        this.availabilityPropertyID = PropertyID.IsWindowPatternAvailable;
     }
 
-    private IUIAutomationWindowPattern rawPattern;
-
-    public Window(IUIAutomationWindowPattern rawPattern) {
-        this.IID = IUIAutomationWindowPattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationWindowPattern rawPattern;
 
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationWindowPatternConverter.PointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+        return getPattern(rawPattern,this::convertPointerToInterface);
     }
 
     /**
@@ -173,5 +162,9 @@ public class Window extends BasePattern {
         if (res != 0) {
             throw new AutomationException(res);
         }
+    }
+
+    IUIAutomationWindowPattern convertPointerToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationWindowPatternConverter.PointerToInterface(pUnknownA);
     }
 }

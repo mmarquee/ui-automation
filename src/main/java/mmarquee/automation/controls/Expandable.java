@@ -16,27 +16,42 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Expandable extends Automatable {
+public interface Expandable extends Automatable, CanRequestBasePattern {
 
     /**
      * Expands the element.
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    void expand() throws AutomationException, PatternNotFoundException;
+    default void expand() throws AutomationException {
+		final ExpandCollapse collapsePattern = requestBasePattern(ExpandCollapse.class);
+		if (collapsePattern.isAvailable()) {
+			collapsePattern.expand();
+			return;
+		}
+		throw new PatternNotFoundException("Cannot expand");
+    }
 
     /**
      * Collapses the element.
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    void collapse() throws AutomationException, PatternNotFoundException;
+    default void collapse() throws AutomationException {
+        final ExpandCollapse collapsePattern = requestBasePattern(ExpandCollapse.class);
+        if (collapsePattern.isAvailable()) {
+        	collapsePattern.collapse();
+			return;
+        } 
+        throw new PatternNotFoundException("collapse could not be called");
+    }
 
     /**
      * Whether the element is expanded.
@@ -44,5 +59,11 @@ public interface Expandable extends Automatable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    boolean isExpanded() throws AutomationException, PatternNotFoundException;
+    default boolean isExpanded() throws AutomationException {
+        final ExpandCollapse collapsePattern = requestBasePattern(ExpandCollapse.class);
+        if (collapsePattern.isAvailable()) {
+        	return collapsePattern.isExpanded();
+        } 
+        throw new PatternNotFoundException("Cannot collapse");
+    }
 }

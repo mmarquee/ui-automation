@@ -45,6 +45,7 @@ public class AutomationCheckBoxTest {
     public void testName_Gets_Value_From_Element() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
+        when(pattern.isAvailable()).thenReturn(true);
 
         when(element.getName()).thenReturn("NAME");
 
@@ -53,7 +54,7 @@ public class AutomationCheckBoxTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationCheckBox checkbox = new AutomationCheckBox(
-                new ElementBuilder(element).toggle(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = checkbox.getName();
 
@@ -64,6 +65,7 @@ public class AutomationCheckBoxTest {
     public void test_getToggleState_Gets_Value_From_Pattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
+        when(pattern.isAvailable()).thenReturn(true);
 
         when(pattern.currentToggleState()).thenReturn(ToggleState.On);
 
@@ -72,7 +74,7 @@ public class AutomationCheckBoxTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationCheckBox checkbox = new AutomationCheckBox(
-                new ElementBuilder(element).toggle(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         ToggleState state = checkbox.getToggleState();
 
@@ -83,13 +85,14 @@ public class AutomationCheckBoxTest {
     public void testToggle() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Toggle pattern = Mockito.mock(Toggle.class);
+        when(pattern.isAvailable()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationCheckBox checkbox = new AutomationCheckBox(
-                new ElementBuilder(element).toggle(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         checkbox.toggle();
     }

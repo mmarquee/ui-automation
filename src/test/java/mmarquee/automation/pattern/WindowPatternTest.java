@@ -16,7 +16,12 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
 import mmarquee.automation.uiautomation.WindowVisualState;
 import org.junit.Before;
@@ -35,16 +40,23 @@ import static org.mockito.Mockito.verify;
  */
 public class WindowPatternTest {
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationWindowPattern rawPattern;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+        
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Window, PropertyID.IsWindowPatternAvailable);
     }
 
     @Test
     public void test_isTopMost_Calls_getCurrentIsTopmost_From_Pattern() throws Exception {
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         boolean value = pattern.isTopMost();
 
@@ -53,7 +65,8 @@ public class WindowPatternTest {
 
     @Test
     public void test_isModal_Calls_getCurrentIsModal_From_Pattern() throws Exception {
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         boolean value = pattern.isModal();
 
@@ -65,7 +78,8 @@ public class WindowPatternTest {
 
         doAnswer(invocation -> 1).when(rawPattern).getCurrentIsTopmost(any());
 
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         boolean value = pattern.isTopMost();
 
@@ -76,7 +90,8 @@ public class WindowPatternTest {
     public void test_isModal_Throws_Exception_When_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentIsModal(any());
 
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         boolean value = pattern.isModal();
 
@@ -85,7 +100,8 @@ public class WindowPatternTest {
 
     @Test
     public void test_Close_Calls_Close_From_Pattern() throws Exception {
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.close();
 
@@ -97,7 +113,8 @@ public class WindowPatternTest {
 
         doAnswer(invocation -> 1).when(rawPattern).close();
 
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.close();
 
@@ -106,7 +123,8 @@ public class WindowPatternTest {
 
     @Test
     public void test_Maximize_Calls_SetWindowState_From_Pattern() throws Exception {
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.maximize();
 
@@ -115,7 +133,8 @@ public class WindowPatternTest {
 
     @Test
     public void test_Minimize_Calls_SetWindowState_From_Pattern() throws Exception {
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.minimize();
 
@@ -127,7 +146,8 @@ public class WindowPatternTest {
 
         doAnswer(invocation -> 1).when(rawPattern).setWindowVisualState(any());
 
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.setWindowState(WindowVisualState.Maximized);
 
@@ -139,7 +159,8 @@ public class WindowPatternTest {
 
         doAnswer(invocation -> 1).when(rawPattern).waitForInputIdle(any(Integer.class), any(IntByReference.class));
 
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.waitForInputIdle(100);
 
@@ -149,7 +170,8 @@ public class WindowPatternTest {
     @Test
     public void test_waitForInputIdle_Calls_waitForInputIdle_From_Pattern() throws Exception {
 
-        Window pattern = new Window(rawPattern);
+        Window pattern = new Window(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.waitForInputIdle(100);
 

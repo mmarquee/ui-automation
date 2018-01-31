@@ -15,6 +15,11 @@
  */
 package mmarquee.automation.pattern;
 
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+
 /**
  * @author Mark Humphreys
  * Date 25/02/2016.
@@ -23,8 +28,12 @@ package mmarquee.automation.pattern;
 public class ItemContainer extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the ItemContainer pattern
+     * @throws AutomationException 
      */
-    public ItemContainer() {
+    public ItemContainer(final AutomationElement element) throws AutomationException {
+    	super(element);
+        this.patternID = PatternID.ItemContainer;
+        this.availabilityPropertyID = PropertyID.IsItemContainerPatternAvailable;
     }
 }

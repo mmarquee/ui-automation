@@ -77,7 +77,7 @@ public class AutomationListTest {
         when(element.getName()).thenReturn("NAME");
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         String name = list.getName();
 
@@ -92,7 +92,7 @@ public class AutomationListTest {
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         list.getItem(1);
     }
@@ -105,7 +105,7 @@ public class AutomationListTest {
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         AutomationListItem item = list.getItem(0);
 
@@ -120,7 +120,7 @@ public class AutomationListTest {
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         List<AutomationListItem> items = list.getItems();
 
@@ -135,7 +135,7 @@ public class AutomationListTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         AutomationListItem item = list.getItem(0);
         assertEquals(targetElement,item.getElement());
@@ -149,7 +149,7 @@ public class AutomationListTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         list.getItem(99);
     }
@@ -159,7 +159,7 @@ public class AutomationListTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         AutomationListItem item = list.getItem("myName");
         assertEquals(targetElement,item.getElement());
@@ -172,7 +172,7 @@ public class AutomationListTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         list.getItem("unknownName");
     }
@@ -186,7 +186,7 @@ public class AutomationListTest {
         when(targetElement.getName()).thenReturn("myWorld");
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         AutomationListItem item = list.getItem(Pattern.compile("my.*"));
         assertEquals(targetElement,item.getElement());
@@ -203,7 +203,7 @@ public class AutomationListTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         list.getItem(Pattern.compile("unknown"));
     }
@@ -213,7 +213,7 @@ public class AutomationListTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         AutomationListItem item = list.getItemByAutomationId("myID");
         assertEquals(targetElement,item.getElement());
@@ -226,7 +226,7 @@ public class AutomationListTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
        list.getItemByAutomationId("unknownID");
     }
@@ -237,9 +237,10 @@ public class AutomationListTest {
         mockItems.add(targetElement);
 
         when(selection.getCurrentSelection()).thenReturn(mockItems);
+        when(selection.isAvailable()).thenReturn(true);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         List<AutomationListItem> items = list.getSelectedItems();
 
@@ -251,9 +252,10 @@ public class AutomationListTest {
     public void test_GetSelectedItems_Returns_No_Items_When_List_Empty() throws Exception {
         List<AutomationElement> mockItems = new ArrayList<>();
         when(selection.getCurrentSelection()).thenReturn(mockItems);
+        when(selection.isAvailable()).thenReturn(true);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         List<AutomationListItem> items = list.getSelectedItems();
 
@@ -266,9 +268,10 @@ public class AutomationListTest {
         mockItems.add(targetElement);
 
         when(selection.getCurrentSelection()).thenReturn(mockItems);
+        when(selection.isAvailable()).thenReturn(true);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         AutomationListItem item = list.getSelectedItem();
 
@@ -279,9 +282,10 @@ public class AutomationListTest {
     public void test_GetSelectedItem_ThrowsException_When_List_Empty() throws Exception {
         List<AutomationElement> mockItems = new ArrayList<>();
         when(selection.getCurrentSelection()).thenReturn(mockItems);
+        when(selection.isAvailable()).thenReturn(true);
 
         AutomationList list = new AutomationList(
-                new ElementBuilder(element).selection(selection));
+                new ElementBuilder(element).addPattern(selection));
 
         list.getSelectedItem();
     }

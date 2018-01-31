@@ -54,7 +54,8 @@ public class AutomationContainerTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        wndw = new AutomationWindow(new ElementBuilder(element).window(window).itemContainer(container));
+        wndw = new AutomationWindow(new ElementBuilder(element).addPattern(window, container));
+        when(window.isAvailable()).thenReturn(true);
         spyWndw = Mockito.spy(wndw);
         
         list = new ArrayList<>();
@@ -1659,7 +1660,7 @@ public class AutomationContainerTest {
 
         when(el.findAll(any(), any())).thenReturn(list);
 
-        AutomationWindow wndw = new AutomationWindow(new ElementBuilder(el).window(window).itemContainer(container));
+        AutomationWindow wndw = new AutomationWindow(new ElementBuilder(el).addPattern(window, container));
         AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
         assertEquals(targetElement,ribbonBar.element);
 

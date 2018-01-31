@@ -47,7 +47,7 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      */
     AutomationToolBarButton(final AutomationElement element,
                             final Invoke invoke) {
-        super (new ElementBuilder(element).invoke(invoke));
+        super (new ElementBuilder(element).addPattern(invoke));
     }
 
     /**
