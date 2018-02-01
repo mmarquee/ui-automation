@@ -38,7 +38,7 @@ public interface ChildSelectable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default boolean canSelectMultiple() throws AutomationException, PatternNotFoundException {
-		final Selection selectionPattern = requestBasePattern(Selection.class);
+		final Selection selectionPattern = requestAutomationPattern(Selection.class);
 		if (selectionPattern.isAvailable()) {
 			return selectionPattern.canSelectMultiple();
 		}
@@ -54,7 +54,7 @@ public interface ChildSelectable extends Automatable, CanRequestBasePattern {
      */
     default List<AutomationElement> getSelection()
             throws AutomationException, PatternNotFoundException {
-        final Selection selectionPattern = requestBasePattern(Selection.class);
+        final Selection selectionPattern = requestAutomationPattern(Selection.class);
 		if (selectionPattern.isAvailable()) {
 			return selectionPattern.getSelection();
 		}
@@ -70,7 +70,7 @@ public interface ChildSelectable extends Automatable, CanRequestBasePattern {
      */
     default List<AutomationElement> getCurrentSelection()
             throws AutomationException, PatternNotFoundException {
-        final Selection selectionPattern = requestBasePattern(Selection.class);
+        final Selection selectionPattern = requestAutomationPattern(Selection.class);
 		if (selectionPattern.isAvailable()) {
 			return selectionPattern.getCurrentSelection();
 		}

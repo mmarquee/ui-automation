@@ -95,7 +95,19 @@ public enum PropertyID {
     IsItemContainerPatternAvailable(30108),
     IsVirtualizedItemPatternAvailable(30109),
     IsSynchronizedInputPatternAvailable(30110),
+    IsObjectModelPatternAvailable(30112),
+    IsAnnotationPatternAvailable(30118),
+    IsTextPattern2Available(30119),
     IsStylesPatternAvailable(30127),
+    IsSpreadsheetPatternAvailable(30128),
+    IsSpreadsheetItemPatternAvailable(30132),
+    IsTransformPattern2Available(30134),
+    IsTextChildPatternAvailable(30136),
+    IsDragPatternAvailable(30137),
+    IsDropTargetPatternAvailable(30141),
+    IsTextEditPatternAvailable(30149),
+    IsCustomNavigationPatternAvailable(30151),
+    
 
     LiveSetting(30135);
 

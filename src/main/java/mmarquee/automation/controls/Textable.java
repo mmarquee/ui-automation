@@ -31,7 +31,7 @@ public interface Textable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default public String getText() throws AutomationException, PatternNotFoundException {
-		final Text textPattern = requestBasePattern(Text.class);
+		final Text textPattern = requestAutomationPattern(Text.class);
 		if (textPattern.isAvailable()) {
 			return textPattern.getText();
 		}
@@ -45,7 +45,7 @@ public interface Textable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default public String getSelection() throws AutomationException, PatternNotFoundException {
-		final Text textPattern = requestBasePattern(Text.class);
+		final Text textPattern = requestAutomationPattern(Text.class);
 		if (textPattern.isAvailable()) {
 			return textPattern.getSelection();
 		}

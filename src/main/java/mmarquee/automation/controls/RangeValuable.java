@@ -34,7 +34,7 @@ public interface RangeValuable extends Automatable, CanRequestBasePattern {
      */
     default double getRangeValue()
             throws AutomationException, PatternNotFoundException {
-		final Range rangePattern = requestBasePattern(Range.class);
+		final Range rangePattern = requestAutomationPattern(Range.class);
 		if (rangePattern.isAvailable()) {
 			return rangePattern.getValue();
 		}
@@ -50,7 +50,7 @@ public interface RangeValuable extends Automatable, CanRequestBasePattern {
      */
     default void setRangeValue(final double value)
             throws AutomationException, PatternNotFoundException {
-		final Range rangePattern = requestBasePattern(Range.class);
+		final Range rangePattern = requestAutomationPattern(Range.class);
 		if (rangePattern.isAvailable()) {
 			rangePattern.setValue(value);
 			return;

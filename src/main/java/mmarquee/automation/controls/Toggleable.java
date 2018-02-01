@@ -31,7 +31,7 @@ public interface Toggleable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void toggle() throws AutomationException, PatternNotFoundException {
-		final Toggle togglePattern = requestBasePattern(Toggle.class);
+		final Toggle togglePattern = requestAutomationPattern(Toggle.class);
 		if (togglePattern.isAvailable()) {
 			togglePattern.toggle();
 			return;
@@ -46,7 +46,7 @@ public interface Toggleable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default ToggleState getToggleState() throws AutomationException, PatternNotFoundException {
-		final Toggle togglePattern = requestBasePattern(Toggle.class);
+		final Toggle togglePattern = requestAutomationPattern(Toggle.class);
 		if (togglePattern.isAvailable()) {
 			return togglePattern.currentToggleState();
 		}

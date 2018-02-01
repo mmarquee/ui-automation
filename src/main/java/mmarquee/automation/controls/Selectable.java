@@ -33,7 +33,7 @@ public interface Selectable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void select() throws AutomationException, PatternNotFoundException {
-    	final SelectionItem selectionItemPattern = requestBasePattern(SelectionItem.class);
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
  		if (selectionItemPattern.isAvailable()) {
  			selectionItemPattern.select();
  			return;
@@ -48,7 +48,7 @@ public interface Selectable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default boolean isSelected() throws AutomationException, PatternNotFoundException {
-    	final SelectionItem selectionItemPattern = requestBasePattern(SelectionItem.class);
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
  		if (selectionItemPattern.isAvailable()) {
  			return selectionItemPattern.isSelected();
  		}
@@ -61,7 +61,7 @@ public interface Selectable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void addToSelection() throws AutomationException, PatternNotFoundException {
-    	final SelectionItem selectionItemPattern = requestBasePattern(SelectionItem.class);
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
  		if (selectionItemPattern.isAvailable()) {
  			selectionItemPattern.addToSelection();
  			return;
@@ -75,7 +75,7 @@ public interface Selectable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void removeFromSelection() throws AutomationException, PatternNotFoundException {
-    	final SelectionItem selectionItemPattern = requestBasePattern(SelectionItem.class);
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
  		if (selectionItemPattern.isAvailable()) {
  			selectionItemPattern.removeFromSelection();
  			return;
@@ -90,7 +90,7 @@ public interface Selectable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default AutomationElement getSelectionContainer() throws AutomationException, PatternNotFoundException {
-    	final SelectionItem selectionItemPattern = requestBasePattern(SelectionItem.class);
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
  		if (selectionItemPattern.isAvailable()) {
  			return selectionItemPattern.getSelectionContainer();
  		}

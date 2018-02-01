@@ -31,7 +31,7 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default String getValue() throws AutomationException, PatternNotFoundException {
-		final Value valuePattern = requestBasePattern(Value.class);
+		final Value valuePattern = requestAutomationPattern(Value.class);
 		if (valuePattern.isAvailable()) {
 			return valuePattern.value();
 		}
@@ -46,7 +46,7 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void setValue(final String value) throws AutomationException, PatternNotFoundException {
-		final Value valuePattern = requestBasePattern(Value.class);
+		final Value valuePattern = requestAutomationPattern(Value.class);
 		if (valuePattern.isAvailable()) {
 			valuePattern.setValue(value);
 			return;
@@ -61,7 +61,7 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default boolean isReadOnly() throws AutomationException, PatternNotFoundException {
-		final Value valuePattern = requestBasePattern(Value.class);
+		final Value valuePattern = requestAutomationPattern(Value.class);
 		if (valuePattern.isAvailable()) {
 			return valuePattern.isReadOnly();
 		}

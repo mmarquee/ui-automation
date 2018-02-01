@@ -40,7 +40,7 @@ public interface Tabulable extends Automatable, CanRequestBasePattern {
      */
     default List<AutomationElement> getCurrentColumnHeaders ()
             throws PatternNotFoundException, AutomationException  {
-    	final Table tablePattern = requestBasePattern(Table.class);
+    	final Table tablePattern = requestAutomationPattern(Table.class);
  		if (tablePattern.isAvailable()) {
  			return tablePattern.getCurrentColumnHeaders();
  		}
@@ -53,7 +53,7 @@ public interface Tabulable extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something has gone wrong
      */
     default List<AutomationElement> getCurrentRowHeaders() throws AutomationException {
-    	final Table tablePattern = requestBasePattern(Table.class);
+    	final Table tablePattern = requestAutomationPattern(Table.class);
  		if (tablePattern.isAvailable()) {
  			return tablePattern.getCurrentRowHeaders();
  		}
@@ -69,7 +69,7 @@ public interface Tabulable extends Automatable, CanRequestBasePattern {
      */
     default RowOrColumnMajor getRowOrColumnMajor()
             throws AutomationException, PatternNotFoundException {
-    	final Table tablePattern = requestBasePattern(Table.class);
+    	final Table tablePattern = requestAutomationPattern(Table.class);
  		if (tablePattern.isAvailable()) {
  			return tablePattern.getRowOrColumnMajor();
  		}

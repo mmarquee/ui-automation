@@ -33,7 +33,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
 	default void waitForInputIdle(int timeout) throws AutomationException, PatternNotFoundException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			windowPattern.waitForInputIdle(timeout);
 			return;
@@ -47,7 +47,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Expected pattern not found.
      */
     default void maximize() throws AutomationException, PatternNotFoundException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			windowPattern.maximize();
 			return;
@@ -61,7 +61,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Expected pattern not found.
      */
     default void minimize() throws AutomationException, PatternNotFoundException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			windowPattern.minimize();
 			return;
@@ -75,7 +75,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Expected pattern not found
      */
     default void close() throws AutomationException, PatternNotFoundException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			windowPattern.close();
 			return;
@@ -89,7 +89,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something is wrong
      */
     default boolean getCanMaximize() throws AutomationException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			return windowPattern.getCanMaximize();
 		}
@@ -102,7 +102,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something is wrong
      */
     default boolean getCanMinimize() throws AutomationException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			return windowPattern.getCanMinimize();
 		}
@@ -115,7 +115,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something has gone wrong
      */
     default boolean isModal() throws AutomationException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			return windowPattern.isModal();
 		}
@@ -128,7 +128,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something has gone wrong
      */
     default boolean isTopMost() throws AutomationException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			return windowPattern.isTopMost();
 		}
@@ -141,7 +141,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something has gone wrong
      */
     default void setWindowState(WindowVisualState state) throws AutomationException {
-		final Window windowPattern = requestBasePattern(Window.class);
+		final Window windowPattern = requestAutomationPattern(Window.class);
 		if (windowPattern.isAvailable()) {
 			windowPattern.setWindowState(state);
 			return;

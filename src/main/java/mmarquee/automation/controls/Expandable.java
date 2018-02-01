@@ -31,7 +31,7 @@ public interface Expandable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void expand() throws AutomationException {
-		final ExpandCollapse collapsePattern = requestBasePattern(ExpandCollapse.class);
+		final ExpandCollapse collapsePattern = requestAutomationPattern(ExpandCollapse.class);
 		if (collapsePattern.isAvailable()) {
 			collapsePattern.expand();
 			return;
@@ -45,7 +45,7 @@ public interface Expandable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default void collapse() throws AutomationException {
-        final ExpandCollapse collapsePattern = requestBasePattern(ExpandCollapse.class);
+        final ExpandCollapse collapsePattern = requestAutomationPattern(ExpandCollapse.class);
         if (collapsePattern.isAvailable()) {
         	collapsePattern.collapse();
 			return;
@@ -60,7 +60,7 @@ public interface Expandable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default boolean isExpanded() throws AutomationException {
-        final ExpandCollapse collapsePattern = requestBasePattern(ExpandCollapse.class);
+        final ExpandCollapse collapsePattern = requestAutomationPattern(ExpandCollapse.class);
         if (collapsePattern.isAvailable()) {
         	return collapsePattern.isExpanded();
         } 

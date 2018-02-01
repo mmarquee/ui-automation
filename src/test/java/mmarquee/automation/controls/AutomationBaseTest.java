@@ -44,7 +44,10 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.Dock;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.ItemContainer;
@@ -196,6 +199,108 @@ public class AutomationBaseTest {
         assertTrue(name.equals("FRAMEWORK"));
     }
 
+    @Test
+    public void testIsAutomationPatternAvailablePatternID () throws Exception {
+    	
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue())).thenReturn(1);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.GridItem);
+
+        assertTrue(value);
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailableAllDefinedPatternID_no_Exception () throws Exception {
+    	
+    	AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(anyInt())).thenReturn(0);
+        
+    	for (final PatternID patternId: PatternID.values()) {
+    		window.isAutomationPatternAvailable(patternId);
+    	}
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailablePatternID_when_not_available () throws Exception {
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue())).thenReturn(0);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.RangeValue);
+
+        assertFalse(value);
+    }
+
+
+    @Test
+    public void testIsAutomationPatternAvailableInt () throws Exception {
+    	
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsWindowPatternAvailable.getValue())).thenReturn(1);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.Window.getValue());
+
+        assertTrue(value);
+    }
+
+
+    @Test
+    public void testIsAutomationPatternAvailableIntSecondVersion () throws Exception {
+    	
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsTextPattern2Available.getValue())).thenReturn(1);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.Text2.getValue());
+
+        assertTrue(value);
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailableInt_when_not_available () throws Exception {
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsTogglePatternAvailable.getValue())).thenReturn(0);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.Toggle.getValue());
+
+        assertFalse(value);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testIsAutomationPatternAvailableInt_when_bad_number () throws Exception {
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+
+        window.isAutomationPatternAvailable(-815);
+    }
+    
+    @Test
+    public void testIsAutomationPatternAvailableBasePatternClass () throws Exception {
+    	
+    	MultipleView pattern = Mockito.mock(MultipleView.class);
+    	when(pattern.isAvailable()).thenReturn(true);
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
+
+        boolean value = window.isAutomationPatternAvailable(MultipleView.class);
+
+        assertTrue(value);
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailableBasePatternClass_when_not_available () throws Exception {
+    	
+    	Dock pattern = Mockito.mock(Dock.class);
+    	when(pattern.isAvailable()).thenReturn(false);
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
+
+        boolean value = window.isAutomationPatternAvailable(Dock.class);
+
+        assertFalse(value);
+    }
+    
     @Test
     public void testIsMultipleViewPatternAvailable () throws Exception {
     	

@@ -32,7 +32,7 @@ public interface GridItemable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Pattern not found.
      */
     default int getRow() throws AutomationException, PatternNotFoundException {
-    	final GridItem gridItemPattern = requestBasePattern(GridItem.class);
+    	final GridItem gridItemPattern = requestAutomationPattern(GridItem.class);
         if (gridItemPattern.isAvailable()) {
         	return gridItemPattern.getRow();
         }
@@ -47,7 +47,7 @@ public interface GridItemable extends Automatable, CanRequestBasePattern {
      */
     default int getColumn() throws AutomationException, PatternNotFoundException {
 
-    	final GridItem gridItemPattern = requestBasePattern(GridItem.class);
+    	final GridItem gridItemPattern = requestAutomationPattern(GridItem.class);
         if (gridItemPattern.isAvailable()) {
         	return gridItemPattern.getColumn();
         }

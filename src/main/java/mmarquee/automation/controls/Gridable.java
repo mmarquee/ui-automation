@@ -37,7 +37,7 @@ public interface Gridable extends Automatable, CanRequestBasePattern {
     default AutomationElement getGridItem(final int row, final int column)
             throws PatternNotFoundException, AutomationException  {
     	
-    	final Grid gridPattern = requestBasePattern(Grid.class);
+    	final Grid gridPattern = requestAutomationPattern(Grid.class);
         if (gridPattern.isAvailable()) {
         	return gridPattern.getItem(row, column);
         }
@@ -54,7 +54,7 @@ public interface Gridable extends Automatable, CanRequestBasePattern {
      */
     default int rowCount() throws AutomationException, PatternNotFoundException {
     	
-    	final Grid gridPattern = requestBasePattern(Grid.class);
+    	final Grid gridPattern = requestAutomationPattern(Grid.class);
         if (gridPattern.isAvailable()) {
         	return gridPattern.rowCount();
         }
@@ -69,7 +69,7 @@ public interface Gridable extends Automatable, CanRequestBasePattern {
      * @throws PatternNotFoundException Failed to find pattern
      */
     default int columnCount() throws AutomationException, PatternNotFoundException {
-    	final Grid gridPattern = requestBasePattern(Grid.class);
+    	final Grid gridPattern = requestAutomationPattern(Grid.class);
         if (gridPattern.isAvailable()) {
         	return gridPattern.columnCount();
         }

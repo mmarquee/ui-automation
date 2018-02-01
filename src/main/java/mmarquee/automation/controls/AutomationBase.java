@@ -33,6 +33,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.BasePattern;
@@ -106,7 +107,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         	setAutomationPattern(pattern);
         }
     }
-    
+
     /**
      * for testing purposes
      */
@@ -144,15 +145,57 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
 	}
 
     /**
+     * Checks whether a pattern is available. Can be used if no BasePattern class
+     * is available for the pattern, yet. Tries to get the matching propertyId to check for availability
+     * of for the given PatternId
+     *
+     * @param patternId
+     *            the Pattern ID to test for
+     * @return True if available.
+     *
+     */
+    public boolean isAutomationPatternAvailable(final PatternID patternId) {
+        try {
+        	final String patternIdName = patternId.name();
+        	final String patternIdNameText = patternIdName.replaceAll("\\d", "");
+        	final String patternIdNameVersion = patternIdName.replaceAll("\\D", "");
+        	final String propertyName = String.format("Is%sPattern%sAvailable", patternIdNameText, patternIdNameVersion);
+        	final PropertyID propertyId = PropertyID.valueOf(propertyName);
+            return !this.element.getPropertyValue(propertyId.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks whether a pattern is available. Can be used if no BasePattern class
+     * is available for the pattern, yet. Tries to get the matching propertyId to check for availability
+     * of for the given PatternId
+     *
+     * @param patternIdValue
+     *            the numerical id of the pattern to test for
+     * @return True if available.
+     *
+     */
+    public boolean isAutomationPatternAvailable(final int patternIdValue) {
+    	for (final PatternID patternId: PatternID.values()) {
+    		if (patternId.getValue() == patternIdValue) {
+    	        return isAutomationPatternAvailable(patternId);
+    		}
+    	}
+    	throw new IllegalArgumentException("No PatternID constant defined for patternId " + patternIdValue);
+    }
+
+    /**
      * Checks whether a pattern is available.
      *
      * @param patternClass pattern to search for.
      * @return True if available.
      *
      */
-    public boolean isPatternAvailable(final Class<? extends BasePattern> patternClass) {
+    public boolean isAutomationPatternAvailable(final Class<? extends BasePattern> patternClass) {
         try {
-            return requestBasePattern(patternClass).isAvailable();
+            return requestAutomationPattern(patternClass).isAvailable();
         } catch (AutomationException ex) {
             return false;
         }
@@ -163,8 +206,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isDockPatternAvailable() {
-        return isPatternAvailable(Dock.class);
+    public boolean isDockPatternAvailable() {
+        return isAutomationPatternAvailable(Dock.class);
     }
 
     /**
@@ -172,8 +215,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isExpandCollapsePatternAvailable() {
-        return isPatternAvailable(ExpandCollapse.class);
+    public boolean isExpandCollapsePatternAvailable() {
+        return isAutomationPatternAvailable(ExpandCollapse.class);
     }
 
     /**
@@ -181,8 +224,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isGridItemPatternAvailable() {
-        return isPatternAvailable(GridItem.class);
+    public boolean isGridItemPatternAvailable() {
+        return isAutomationPatternAvailable(GridItem.class);
     }
 
     /**
@@ -190,8 +233,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isMultipleViewPatternAvailable() {
-        return isPatternAvailable(MultipleView.class);
+    public boolean isMultipleViewPatternAvailable() {
+        return isAutomationPatternAvailable(MultipleView.class);
     }
 
     /**
@@ -199,8 +242,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isInvokePatternAvailable() {
-        return isPatternAvailable(Invoke.class);
+    public boolean isInvokePatternAvailable() {
+        return isAutomationPatternAvailable(Invoke.class);
     }
 
     /**
@@ -208,8 +251,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isGridPatternAvailable() {
-        return isPatternAvailable(Grid.class);
+    public boolean isGridPatternAvailable() {
+        return isAutomationPatternAvailable(Grid.class);
     }
 
     /**
@@ -217,8 +260,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isRangeValuePatternAvailable() {
-        return isPatternAvailable(Range.class);
+    public boolean isRangeValuePatternAvailable() {
+        return isAutomationPatternAvailable(Range.class);
     }
 
     /**
@@ -226,8 +269,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isScrollPatternAvailable() {
-        return isPatternAvailable(Scroll.class);
+    public boolean isScrollPatternAvailable() {
+        return isAutomationPatternAvailable(Scroll.class);
     }
 
     /**
@@ -235,8 +278,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isSelectionItemPatternAvailable() {
-        return isPatternAvailable(SelectionItem.class);
+    public boolean isSelectionItemPatternAvailable() {
+        return isAutomationPatternAvailable(SelectionItem.class);
     }
 
     /**
@@ -244,8 +287,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isScrollItemPatternAvailable() {
-        return isPatternAvailable(ScrollItem.class);
+    public boolean isScrollItemPatternAvailable() {
+        return isAutomationPatternAvailable(ScrollItem.class);
     }
 
     /**
@@ -253,8 +296,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isWindowPatternAvailable() {
-        return isPatternAvailable(Window.class);
+    public boolean isWindowPatternAvailable() {
+        return isAutomationPatternAvailable(Window.class);
     }
 
     /**
@@ -262,8 +305,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isTextPatternAvailable() {
-        return isPatternAvailable(Text.class);
+    public boolean isTextPatternAvailable() {
+        return isAutomationPatternAvailable(Text.class);
     }
 
     /**
@@ -271,8 +314,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isTableItemPatternAvailable() {
-        return isPatternAvailable(TableItem.class);
+    public boolean isTableItemPatternAvailable() {
+        return isAutomationPatternAvailable(TableItem.class);
     }
 
     /**
@@ -280,8 +323,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isTablePatternAvailable() {
-        return isPatternAvailable(Table.class);
+    public boolean isTablePatternAvailable() {
+        return isAutomationPatternAvailable(Table.class);
     }
 
     /**
@@ -289,8 +332,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isSelectionPatternAvailable() {
-        return isPatternAvailable(Selection.class);
+    public boolean isSelectionPatternAvailable() {
+        return isAutomationPatternAvailable(Selection.class);
     }
 
     /**
@@ -298,8 +341,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isTransformPatternAvailable() {
-        return isPatternAvailable(Transform.class);
+    public boolean isTransformPatternAvailable() {
+        return isAutomationPatternAvailable(Transform.class);
     }
 
     /**
@@ -307,8 +350,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isTogglePatternAvailable() {
-        return isPatternAvailable(Toggle.class);
+    public boolean isTogglePatternAvailable() {
+        return isAutomationPatternAvailable(Toggle.class);
     }
 
     /**
@@ -316,8 +359,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isItemContainerPatternAvailable() {
-        return isPatternAvailable(ItemContainer.class);
+    public boolean isItemContainerPatternAvailable() {
+        return isAutomationPatternAvailable(ItemContainer.class);
     }
 
     /**
@@ -325,8 +368,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Yes or no.
      */
-    boolean isValuePatternAvailable() {
-        return isPatternAvailable(Value.class);
+    public boolean isValuePatternAvailable() {
+        return isAutomationPatternAvailable(Value.class);
     }
 
     /**
@@ -334,7 +377,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      *
      * @return Off screen.
      */
-    boolean isOffScreen() {
+    public boolean isOffScreen() {
         try {
             return !this.element.getPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
         } catch (AutomationException ex) {
@@ -657,7 +700,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      */
     public void invoke() throws AutomationException, PatternNotFoundException {
 
-        final Invoke invokePattern = requestBasePattern(Invoke.class);
+        final Invoke invokePattern = requestAutomationPattern(Invoke.class);
         if (invokePattern.isAvailable()) {
             invokePattern.invoke();
         } else {
@@ -740,7 +783,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @throws AutomationException Error in automation library
      */
     @Override
-    public <T extends BasePattern> T requestBasePattern(final Class<T> automationPatternClass) throws AutomationException {
+    public <T extends BasePattern> T requestAutomationPattern(final Class<T> automationPatternClass) throws AutomationException {
         synchronized(patternAccessMonitor) {
             @SuppressWarnings("unchecked")
             T automationPattern = (T) automationPatterns.get(automationPatternClass);
@@ -760,7 +803,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
             return automationPattern;
         }
     }
-    
+
     private Throwable getInnerException(Throwable e) {
     	if (e instanceof InvocationTargetException) {
     		return  getInnerException(((InvocationTargetException) e).getCause());
