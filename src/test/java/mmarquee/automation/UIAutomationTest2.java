@@ -123,14 +123,14 @@ public class UIAutomationTest2 {
     }
 
     @Test
-    public void test_LaunchWithWorkingDirectoryOrAttach_Does_Not_Throw_Exception_When_Launching_startProcess_Succeeds() throws Exception {
+    public void test_LaunchWithDirectoryOrAttach_Does_Not_Throw_Exception_When_Launching_startProcess_Succeeds() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
 
         PowerMockito.mockStatic(Utils.class);
 
         PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(true);
 
-        instance.launchWithWorkingDirectoryOrAttach("notepad.exe");
+        instance.launchWithDirectoryOrAttach("notepad.exe");
     }
 
     @Test
