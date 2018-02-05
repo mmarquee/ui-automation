@@ -74,18 +74,18 @@ public class UIAutomationTest3 {
     }
 
     @Test(expected = IOException.class)
-    public void test_LaunchWithWorkingDirectoryOrAttach_Fails_When_Launching_With_No_executable() throws Exception {
+    public void test_LaunchWithDirectoryOrAttach_Fails_When_Launching_With_No_executable() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
         PowerMockito.mockStatic(Utils.class);
 
         PowerMockito.when(Utils.startProcessWithWorkingDirectory(anyString())).thenThrow(IOException.class);
 
-        instance.launchWithWorkingDirectoryOrAttach("notepad99.exe");
+        instance.launchWithDirectoryOrAttach("notepad99.exe");
     }
 
     @Test(expected = IOException.class)
-    public void test_LaunchWithWorkingDirectoryOrAttach_Fails_When_Attaching_With_No_executable() throws Exception {
+    public void test_LaunchWithDirectoryOrAttach_Fails_When_Attaching_With_No_executable() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
         PowerMockito.mockStatic(Utils.class);
@@ -93,6 +93,6 @@ public class UIAutomationTest3 {
         PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class))).thenReturn(false);
         PowerMockito.when(Utils.startProcessWithWorkingDirectory(anyString())).thenThrow(IOException.class);
 
-        instance.launchWithWorkingDirectoryOrAttach("notepad99.exe");
+        instance.launchWithDirectoryOrAttach("notepad99.exe");
     }
 }

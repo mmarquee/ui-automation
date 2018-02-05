@@ -165,7 +165,8 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
-     * Launches the application, from a given directory.
+     * Launches the application, from a given directory, with setting its working directory set to the
+     * commands parent folder.
      *
      * @param command The command to be called.
      * @return AutomationApplication that represents the application.
@@ -211,14 +212,30 @@ public class UIAutomation extends BaseAutomation {
      * @param command Command to be started.
      * @return AutomationApplication that represents the application.
      * @throws java.lang.Exception Unable to find process.
+     *
+     * @deprecated Use {@link #launchWithDirectoryOrAttach(String...)} instead
      */
+    @Deprecated
     public AutomationApplication launchWithWorkingDirectoryOrAttach(final String... command)
             throws Exception {
-    	try {
-    		return findProcess(command);
-    	} catch (AutomationException ex) {
-    		return this.launchWithDirectory(command);
-    	}
+    	return launchWithDirectoryOrAttach(command);
+    }
+
+    /**
+     * Attaches or launches the application, with setting its working directory set to the
+     * commands parent folder.
+     *
+     * @param command Command to be started.
+     * @return AutomationApplication that represents the application.
+     * @throws java.lang.Exception Unable to find process.
+     */
+    public AutomationApplication launchWithDirectoryOrAttach(final String... command)
+            throws Exception {
+        try {
+                return findProcess(command);
+        } catch (AutomationException ex) {
+                return this.launchWithDirectory(command);
+        }
     }
 
     /**
