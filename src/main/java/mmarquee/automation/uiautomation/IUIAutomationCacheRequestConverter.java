@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,23 +22,19 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-public class IUIAutomationSelectionPattern2Convertor {
-    private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationSelectionPattern
-
-    public static IUIAutomationSelectionPattern2 PointerToInterface(final PointerByReference ptr) {
-        // 0-2 IUnknown,
-        // 3-5 IUIAutomationSelectionPattern
-        // 6-13 IUIAutomationSelectionPattern2
-
-        final int METHODS = 6;
-
+/**
+ * @author Mark Humphreys
+ * Date 16/12/2017
+ */
+public class IUIAutomationCacheRequestConverter {
+    public static IUIAutomationCacheRequest PointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
-        final Pointer[] vTable = new Pointer[METHODS];
+        final Pointer[] vTable = new Pointer[11];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationSelectionPattern2() {
-            // IUnknown
+        return new IUIAutomationCacheRequest() {
 
+            // IUnknown
             @Override
             public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                 Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
@@ -56,36 +52,50 @@ public class IUIAutomationSelectionPattern2Convertor {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getCurrentSelection(PointerByReference retVal) {
+            public int AddPattern(int inVal) {
                 Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, inVal});
+            }
+
+            public int AddProperty(int inVal) {
+                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, inVal});
+            }
+
+            public int Clone(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentCanSelectMultiple(IntByReference retVal) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int GetTreeScope(PointerByReference inVal) {
+                Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, inVal});
+            }
+
+            public int SetTreeScope(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int currentCurrentSelectedItem(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int GetTreeFilter(PointerByReference inVal) {
+                Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, inVal});
+            }
+
+            public int SetTreeFilter(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int currentFirstSelectedItem(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            public int GetAutomationElementMode(PointerByReference inVal) {
+                Function f = Function.getFunction(vTable[10], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, inVal});
             }
 
-            public int currentItemCount(IntByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
-
-            public int currentLastSelectedItem(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int SetAutomationElementMode(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };
     }
-
 }

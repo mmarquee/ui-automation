@@ -217,11 +217,38 @@ public final class AutomationList extends AutomationBase {
      */
     public AutomationListItem getSelectedItem()
             throws AutomationException, PatternNotFoundException {
-        List<AutomationListItem> list = this.getSelectedItems();
-        if (list.size() == 0) {
-        	throw new ElementNotFoundException();
+
+        try {
+            AutomationElement elem = this.getCurrentSelectedItem();
+
+            return new AutomationListItem(new ElementBuilder(elem));
+        } catch (AutomationException ex) {
+            List<AutomationListItem> list = this.getSelectedItems();
+            if (list.size() == 0) {
+                throw new ElementNotFoundException();
+            }
+            return list.get(0);
         }
-        return list.get(0);
     }
+
+    /**
+     * Gets the currently selected item.
+     * @return The selected element
+     * @throws AutomationException Library error
+     * @throws PatternNotFoundException Failed to find the pattern
+     */
+    private AutomationElement getCurrentSelectedItem()
+            throws AutomationException, PatternNotFoundException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern = this.getSelectionPattern();
+        }
+
+        if (this.selectionPattern != null) {
+            return selectionPattern.getCurrentSelectedItem();
+        } else {
+            throw new AutomationException("Failed to call getCurrentSelectedItem");
+        }
+    }
+
 }
 

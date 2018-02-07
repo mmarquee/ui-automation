@@ -15,6 +15,7 @@
  */
 package mmarquee.automation.controls;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -27,6 +28,7 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.utils.ExecutableFileInfo;
 import mmarquee.automation.utils.Utils;
 
 /**
@@ -129,6 +131,34 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
+     * Gets the window associated with the classname.
+     * @param className The class name of the element to look for
+     * @return An AutomationWindow.
+     * @throws AutomationException Cannot find element.
+     */
+    public AutomationWindow getWindowByClassName(final String  className)
+            throws AutomationException {
+
+        AutomationElement foundElement = null;
+
+        List<AutomationElement> collection = this.findAll();
+
+        for (AutomationElement element : collection) {
+            String name = element.getClassName();
+            if (name != null && name.equals(className)) {
+                foundElement = element;
+                break;
+            }
+        }
+
+        if (foundElement != null) {
+            return new AutomationWindow(new ElementBuilder(foundElement));
+        } else {
+            throw new ElementNotFoundException("matching " + className);
+        }
+    }
+
+    /**
      * Gets the window associated with the title.
      * @param titlePattern A pattern matching the title to look for.
      * @return An AutomationWindow.
@@ -168,6 +198,8 @@ public class AutomationApplication extends AutomationBase {
             return getWindow(search.getNamePattern());
         } else if (search.getHasName()) {
             return getWindow(search.getName());
+        } else if (search.getHasClassName()) {
+            return getWindowByClassName(search.getClassName());
         } else {
             throw new AutomationException("Search type not found");
         }
@@ -271,5 +303,18 @@ public class AutomationApplication extends AutomationBase {
         if (handle != null) {
             Utils.quitProcess(handle);
         }
+    }
+
+    /**
+     * Gets the windows version number.
+     * @param arg The path
+     * @return The version number
+     * @throws IOException Failed
+     */
+    public static String getVersionNumber(String arg) throws IOException {
+        ExecutableFileInfo info = new ExecutableFileInfo();
+        int[] version = info.getVersionInfo(arg);
+
+        return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
     }
 }

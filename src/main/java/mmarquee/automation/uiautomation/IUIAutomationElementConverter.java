@@ -81,15 +81,15 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
             }
 
-//                public int FindFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference found) {
-//                    Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
-//                }
+            public int findFirstBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference found) {
+                Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+            }
 
-//                public int FindAllBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElementArray */ PointerByReference found) {
-//                    Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
-//                }
+            public int findAllBuildCache (/* [in] */ int scope, /* [in] */ /* IUIAutomationCondition */ Pointer condition, /* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElementArray */ PointerByReference found) {
+                Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+            }
 
 //                public int BuildUpdatedCache (/* [in] */ /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference updatedElement) {
 //                    Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
@@ -316,10 +316,10 @@ public class IUIAutomationElementConverter {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-//                public int get_CachedName (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+                public int getCachedName (PointerByReference retVal) {
+                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, retVal});
+                }
 
 //                public int get_CachedAcceleratorKey (PointerByReference retVal) {
 //                    Function f = Function.getFunction(vTable[56], Function.ALT_CONVENTION);

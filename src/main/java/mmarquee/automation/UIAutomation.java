@@ -241,7 +241,7 @@ public class UIAutomation extends BaseAutomation {
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
             return new AutomationApplication(
-                    new ElementBuilder(rootElement).handle(handle).attached(false));
+                    new ElementBuilder(rootElement).handle(handle).attached(true));
         }
     }
 
@@ -884,4 +884,22 @@ public class UIAutomation extends BaseAutomation {
         automation.removeAutomationEventHandler(ibr);
     }
 */
+
+    /**
+     * Creates a cache request.
+     *
+     * @return The cache request.
+     * @throws AutomationException Something has gone wrong.
+     */
+    public PointerByReference createCacheRequest()
+            throws AutomationException {
+        PointerByReference request = new PointerByReference();
+
+        final int res = this.automation.createCacheRequest(request);
+        if (res == 0) {
+            return request;
+        } else {
+            throw new AutomationException(res);
+        }
+    }
 }

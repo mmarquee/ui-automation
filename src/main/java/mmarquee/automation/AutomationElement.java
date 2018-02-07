@@ -35,11 +35,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Mark Humphreys
- * Date 06/03/2016.
  * <p>
  * Wrapper for the underlying automation element.
  * </p>
+ * @author Mark Humphreys
+ * Date 06/03/2016.
  */
 public class AutomationElement extends BaseAutomation {
     /**
@@ -59,7 +59,7 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement3 interface, if possible
+     * Gets the IUIAutomationElement3 interface, if possible.
      * @return The IUIAutomationElement3 interface
      * @throws AutomationException Not able to convert interface
      */
@@ -78,7 +78,7 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement6 interface, if possible
+     * Gets the IUIAutomationElement6 interface, if possible.
      * @return The IUIAutomationElement6 interface
      * @throws AutomationException Not able to convert interface
      */
@@ -121,6 +121,13 @@ public class AutomationElement extends BaseAutomation {
      */
     public AutomationElement(final IUIAutomationElement6 inElement) {
         this.element = inElement;
+        this.cached = false;
+    }
+
+    private boolean cached = false;
+
+    public void setCached (boolean value) {
+        this.cached = value;
     }
 
     /**
@@ -301,6 +308,10 @@ public class AutomationElement extends BaseAutomation {
         return this.currentName();
     }
 
+    public String getCachedName() throws AutomationException {
+        return this.cachedName();
+    }
+
     /**
      * Gets the current name of the control.
      *
@@ -311,6 +322,27 @@ public class AutomationElement extends BaseAutomation {
         PointerByReference sr = new PointerByReference();
 
         final int res = this.element.getCurrentName(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        if (sr.getValue() == null) {
+            return "";
+        } else {
+            return sr.getValue().getWideString(0);
+        }
+    }
+
+    /**
+     * Gets the cached name of the control.
+     *
+     * @return The name of the element.
+     * @throws AutomationException Call to Automation API failed.
+     */
+    protected String cachedName() throws AutomationException {
+        PointerByReference sr = new PointerByReference();
+
+        final int res = this.element.getCachedName(sr);
         if (res != 0) {
             throw new AutomationException(res);
         }
@@ -392,6 +424,46 @@ public class AutomationElement extends BaseAutomation {
             final PointerByReference pCondition)
             throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
+    }
+
+    public List<AutomationElement> findAll(final TreeScope scope,
+                                           final PointerByReference pCondition,
+                                           final CacheRequest cacheRequest)
+            throws AutomationException {
+        List<AutomationElement> items = new ArrayList<>();
+
+        PointerByReference pAll = new PointerByReference();
+
+        final int res =
+                this.element.findAllBuildCache(scope.value, pCondition.getValue(), cacheRequest.getValue(), pAll);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        IUIAutomationElementArray collection =
+                getAutomationElementArrayFromReference(pAll);
+
+        IntByReference ibr = new IntByReference();
+
+        collection.getLength(ibr);
+
+        int counter = ibr.getValue();
+
+        for (int a = 0; a < counter; a++) {
+            PointerByReference pbr = new PointerByReference();
+
+            collection.getElement(a, pbr);
+
+            IUIAutomationElement elem =
+                    getAutomationElementFromReference(pbr);
+
+            AutomationElement element = new AutomationElement(elem);
+            element.cached = true;
+
+            items.add(element);
+        }
+
+        return items;
     }
 
     /**

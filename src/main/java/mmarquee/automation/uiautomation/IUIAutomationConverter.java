@@ -37,6 +37,7 @@ public class IUIAutomationConverter {
     private static int UIA_GET_FOCUSED_ELEMENT = 8;
     private static int UIA_CREATE_TREE_WALKER = 13;
     private static int UIA_GET_CONTROL_VIEW_WALKER = 14;
+    private static int UIA_CREATE_CACHE_REQUEST = 20;
     private static int UIA_CREATE_TRUE_CONDITION = 21;
     private static int UIA_CREATE_FALSE_CONDITION = 22;
     private static int UIA_CREATE_PROPERTY_CONDITION = 23;
@@ -100,6 +101,11 @@ public class IUIAutomationConverter {
             public int elementFromPoint(WinDef.POINT pt, PointerByReference element) {
                 Function f = Function.getFunction(vTable[UIA_GET_ELEMENT_FROM_POINT], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{myInterfacePointer, pt, element});
+            }
+
+            public int createCacheRequest(PointerByReference request) {
+                Function f = Function.getFunction(vTable[UIA_CREATE_CACHE_REQUEST], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{myInterfacePointer, request});
             }
 
             public int createPropertyCondition(int propertyId, Variant.VARIANT.ByValue value, PointerByReference condition) {

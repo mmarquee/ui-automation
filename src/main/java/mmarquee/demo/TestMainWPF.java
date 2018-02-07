@@ -375,6 +375,12 @@ public class TestMainWPF extends TestBase {
                 logger.info("Didn't find element");
             }
 
+            try {
+                AutomationListItem item = list.getSelectedItem();
+            } catch (AutomationException ex) {
+                logger.info(ex.getMessage());
+            }
+
             // HYPERLINK ***********************************
 /*
             logger.info("++ HYPERLINK ++");

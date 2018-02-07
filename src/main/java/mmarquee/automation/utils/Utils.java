@@ -265,10 +265,9 @@ public class Utils {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }
-    
 
     /**
-     * An implementation of user32.FindWindow with Regex pattern matching
+     * An implementation of user32.FindWindow with Regex pattern matching.
      * 
      * @param windowClass the classname of the window, or null to ignore
      * @param titlePattern the regex pattern to match the title against
@@ -322,4 +321,17 @@ public class Utils {
         
         return returnContainer[0];
 	}
+
+    /**
+     * Gets the windows version number.
+     * @param arg The path
+     * @return The version number
+     * @throws IOException Failed
+     */
+    public static String getVersionNumber(String arg) throws IOException {
+        ExecutableFileInfo info = new ExecutableFileInfo();
+        int[] version = info.getVersionInfo(arg);
+
+        return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
+    }
 }

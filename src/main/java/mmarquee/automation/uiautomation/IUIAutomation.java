@@ -35,7 +35,7 @@ import com.sun.jna.ptr.PointerByReference;
  */
 public interface IUIAutomation extends IUnknown {
     /**
-     * The interface IID for QueryInterface et al
+     * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{30CBE57D-D9D0-452A-AB13-7AC5AC4825EE}");
 
@@ -60,4 +60,6 @@ public interface IUIAutomation extends IUnknown {
     int addAutomationEventHandler(IntByReference eventId, TreeScope scope, Pointer element, PointerByReference cacheRequest, PointerByReference handler);
     int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler);
     int elementFromPoint(WinDef.POINT pt, PointerByReference element);
+
+    int createCacheRequest(PointerByReference request);
 }
