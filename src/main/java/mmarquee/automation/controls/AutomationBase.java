@@ -363,7 +363,7 @@ public abstract class AutomationBase implements Automatable {
      * @return The name of the element.
      * @throws AutomationException Error in automation library.
      */
-    public String getName () throws AutomationException {
+    public String getName() throws AutomationException {
         return this.element.getName();
     }
 
@@ -505,7 +505,7 @@ public abstract class AutomationBase implements Automatable {
      * @throws PatternNotFoundException Pattern not found
      * @throws AutomationException Error in automation library
      */
-    PointerByReference getPattern (final int id)
+    PointerByReference getPattern(final int id)
             throws PatternNotFoundException, AutomationException {
         PointerByReference unknown = this.element.getPattern(id);
 
@@ -826,7 +826,7 @@ public abstract class AutomationBase implements Automatable {
      * @return Enabled?
      * @throws AutomationException Something is wrong in automation
      */
-    public boolean isEnabled () throws AutomationException {
+    public boolean isEnabled() throws AutomationException {
         return this.element.isEnabled().booleanValue();
     }
 

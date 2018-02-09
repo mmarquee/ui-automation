@@ -63,7 +63,8 @@ public class AutomationElement extends BaseAutomation {
      * @return The IUIAutomationElement3 interface
      * @throws AutomationException Not able to convert interface
      */
-    public final IUIAutomationElement3 getElement3() throws AutomationException {
+    public final IUIAutomationElement3 getElement3()
+            throws AutomationException {
 
         PointerByReference pUnknown = new PointerByReference();
 
@@ -71,10 +72,10 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3Converter.PointerToInterface(pUnknown);
+            return IUIAutomationElement3Converter.pointerToInterface(pUnknown);
+        } else {
+            throw new ConversionFailure("IUIAutomationElement6");
         }
-
-        throw new AutomationException("Failed to convert to IUIAutomationElement6");
     }
 
     /**
@@ -90,10 +91,10 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+            return IUIAutomationElement6Converter.pointerToInterface(pUnknown);
+        } else {
+            throw new ConversionFailure("IUIAutomationElement6");
         }
-
-        throw new AutomationException("Failed to convert to IUIAutomationElement6");
     }
 
     /**
@@ -124,9 +125,16 @@ public class AutomationElement extends BaseAutomation {
         this.cached = false;
     }
 
+    /**
+     * Is the element cached.
+     */
     private boolean cached = false;
 
-    public void setCached (boolean value) {
+    /**
+     * Access property for cached value.
+     * @param value Is the element cached?
+     */
+    public void setCached(final boolean value) {
         this.cached = value;
     }
 
@@ -301,13 +309,19 @@ public class AutomationElement extends BaseAutomation {
     /**
      * Gets the name, either from the current ot cache property.
      *
-     * @return The name (either cached or current).
+     * @return The current name
      * @throws AutomationException Call to Automation API failed.
      */
     public String getName() throws AutomationException {
         return this.currentName();
     }
 
+    /**
+     * Gets the name from the cached property.
+     *
+     * @return The cached name
+     * @throws AutomationException Call to Automation API failed.
+     */
     public String getCachedName() throws AutomationException {
         return this.cachedName();
     }
@@ -426,22 +440,35 @@ public class AutomationElement extends BaseAutomation {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
     }
 
+    /**
+     * Finds all for the cache.
+     * Probably will get refactored away at some point
+     *
+     * @param scope The scope
+     * @param condition The condition
+     * @param cacheRequest The cache
+     * @return List of found elements from the cache
+     * @throws AutomationException Something has gone wrong
+     */
     public List<AutomationElement> findAll(final TreeScope scope,
-                                           final PointerByReference pCondition,
+                                           final PointerByReference condition,
                                            final CacheRequest cacheRequest)
             throws AutomationException {
         List<AutomationElement> items = new ArrayList<>();
 
-        PointerByReference pAll = new PointerByReference();
+        PointerByReference all = new PointerByReference();
 
-        final int res =
-                this.element.findAllBuildCache(scope.value, pCondition.getValue(), cacheRequest.getValue(), pAll);
+        final int res = this.element.findAllBuildCache(scope.value,
+                            condition.getValue(),
+                            cacheRequest.getValue(),
+                            all);
+
         if (res != 0) {
             throw new AutomationException(res);
         }
 
         IUIAutomationElementArray collection =
-                getAutomationElementArrayFromReference(pAll);
+                getAutomationElementArrayFromReference(all);
 
         IntByReference ibr = new IntByReference();
 
@@ -457,10 +484,10 @@ public class AutomationElement extends BaseAutomation {
             IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
 
-            AutomationElement element = new AutomationElement(elem);
-            element.cached = true;
+            AutomationElement elmnt = new AutomationElement(elem);
+            elmnt.cached = true;
 
-            items.add(element);
+            items.add(elmnt);
         }
 
         return items;
@@ -692,7 +719,9 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element, by trying to get the IUIAutomationElement3.
+     * Shows the context menu for the element, by trying to get the
+     * IUIAutomationElement3.
+     *
      * Not supported in Windows 7 and before
      *
      * @throws AutomationException Failed to get the correct interface.
@@ -709,18 +738,19 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the full description for the element, by trying to get the IUIAutomationElement6.
+     * Gets the full description for the element, by trying to get the
+     * IUIAutomationElement6.
      *
      * Not supported in before Windows 10 build 1703
      * @return The description, if set
      * @throws AutomationException Something has gone wrong in automation library
      */
     public String getFullDescription() throws AutomationException {
-        IUIAutomationElement6 element = this.getElement6();
+        IUIAutomationElement6 element6 = this.getElement6();
 
         PointerByReference sr = new PointerByReference();
 
-        final int res = element.getCurrentFullDescription(sr);
+        final int res = element6.getCurrentFullDescription(sr);
 
         if (res != 0) {
             throw new AutomationException(res);

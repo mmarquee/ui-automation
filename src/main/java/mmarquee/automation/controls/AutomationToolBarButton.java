@@ -37,7 +37,7 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      * @param element The underlying automation element.
      */
     public AutomationToolBarButton(final AutomationElement element) {
-        super (new ElementBuilder(element));
+        super(new ElementBuilder(element));
     }
 
     /**
@@ -47,7 +47,7 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      */
     AutomationToolBarButton(final AutomationElement element,
                             final Invoke invoke) {
-        super (new ElementBuilder(element).invoke(invoke));
+        super(new ElementBuilder(element).invoke(invoke));
     }
 
     /**

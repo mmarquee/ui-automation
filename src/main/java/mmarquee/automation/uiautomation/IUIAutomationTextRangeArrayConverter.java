@@ -29,7 +29,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationTextRangeArrayConverter {
     private static int METHODS = 5; // 0-2 IUnknown, 3-4 IUIAutomationTextRangeArray
 
-    public static IUIAutomationTextRangeArray PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationTextRangeArray pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];

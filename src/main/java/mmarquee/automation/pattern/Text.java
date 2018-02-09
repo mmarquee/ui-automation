@@ -55,7 +55,7 @@ public class Text extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationTextPatternConverter.PointerToInterface(pbr);
+                return IUIAutomationTextPatternConverter.pointerToInterface(pbr);
             } else {
                 throw new AutomationException(result0.intValue());
             }
@@ -63,7 +63,7 @@ public class Text extends BasePattern {
     }
 
     public IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextRangeArrayConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationTextRangeArrayConverter.pointerToInterface(pUnknownA);
     }
 
     /**
@@ -169,6 +169,6 @@ public class Text extends BasePattern {
     }
 
     public IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextRangeConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationTextRangeConverter.pointerToInterface(pUnknownA);
     }
 }

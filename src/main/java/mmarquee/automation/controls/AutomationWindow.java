@@ -68,7 +68,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable {
      * Constructor for the AutomationWindow.
      * @param builder The builder
      */
-    public AutomationWindow (ElementBuilder builder) {
+    public AutomationWindow(ElementBuilder builder) {
         super(builder);
 
         if (builder.getHasUser32()) {

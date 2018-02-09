@@ -32,7 +32,9 @@ import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
  * @author Mark Humphreys
  * Date 29/02/2016.
  */
-public abstract class BasePattern extends BaseAutomation implements Pattern {
+public abstract class BasePattern
+        extends BaseAutomation
+        implements Pattern {
 
     /**
      * The guid of the pattern.
@@ -47,7 +49,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
     /**
      * Constructs a Pattern.
      */
-    public BasePattern () {
+    public BasePattern() {
         this.pattern = null;
     }
 
@@ -63,7 +65,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
      * Is this pattern available.
      * @return True if available.
      */
-    public boolean isAvailable () {
+    public boolean isAvailable() {
         return (pattern == null);
     }
 
@@ -85,7 +87,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
      */
     public IUIAutomationElement convertPointerToElementInterface(
             final PointerByReference pUnknownA) {
-        return IUIAutomationElementConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationElementConverter.pointerToInterface(pUnknownA);
     }
 
     /**
@@ -95,6 +97,6 @@ public abstract class BasePattern extends BaseAutomation implements Pattern {
      */
     public IUIAutomationElementArray convertPointerToElementArrayInterface(
             final PointerByReference pUnknownA) {
-        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationElementArrayConverter.pointerToInterface(pUnknownA);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,16 @@ import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-/**
- * @author Mark Humphreys
- * Date 05/06/2017.
- */
-public class IUIAutomationTablePatternConverter {
-    private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTablePattern
-
-    public static IUIAutomationTablePattern pointerToInterface(final PointerByReference ptr) {
+public class IUIAutomationScrollItemPatternConverter {
+    public static IUIAutomationScrollItemPattern pointerToInterface(final PointerByReference ptr) {
+        final int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationSelectionItemPattern
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationTablePattern() {
+        return new IUIAutomationScrollItemPattern() {
             // IUnknown
 
             @Override
@@ -54,19 +48,9 @@ public class IUIAutomationTablePatternConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getCurrentRowHeaders(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
-
-            public int getCurrentColumnHeaders(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
-
-            public int getCurrentRowOrColumnMajor(IntByReference retVal) {
-                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            public int scrollIntoView() {
+                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer});
             }
         };
     }

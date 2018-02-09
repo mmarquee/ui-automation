@@ -239,7 +239,7 @@ public class IUIAutomationTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            rootElement = IUIAutomationElementConverter.PointerToInterface(root);
+            rootElement = IUIAutomationElementConverter.pointerToInterface(root);
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();

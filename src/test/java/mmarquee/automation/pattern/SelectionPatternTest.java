@@ -168,7 +168,7 @@ public class SelectionPatternTest {
         IUIAutomationSelectionItemPattern rawPattern
                 = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
-        Mockito.when(IUIAutomationSelectionItemPatternConverter.PointerToInterface(any()))
+        Mockito.when(IUIAutomationSelectionItemPatternConverter.pointerToInterface(any()))
                 .thenReturn(rawPattern);
 
         spyPattern.getSelection();

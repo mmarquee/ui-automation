@@ -43,7 +43,7 @@ public final class AutomationCheckBox
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Failed to find pattern.
      */
-    public void toggle ()
+    public void toggle()
             throws AutomationException, PatternNotFoundException {
         if (this.togglePattern == null) {
             togglePattern = this.getTogglePattern();
@@ -60,7 +60,7 @@ public final class AutomationCheckBox
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Failed to find pattern.
      */
-    public ToggleState getToggleState ()
+    public ToggleState getToggleState()
             throws AutomationException, PatternNotFoundException {
         if (this.togglePattern == null) {
             togglePattern = this.getTogglePattern();
@@ -74,7 +74,7 @@ public final class AutomationCheckBox
      *
      * @param builder The builder
      */
-    public AutomationCheckBox (final ElementBuilder builder) {
+    public AutomationCheckBox(final ElementBuilder builder) {
         super(builder);
         togglePattern = builder.getToggle();
     }

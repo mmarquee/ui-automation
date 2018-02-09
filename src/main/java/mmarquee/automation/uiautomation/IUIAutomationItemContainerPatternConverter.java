@@ -18,25 +18,19 @@ package mmarquee.automation.uiautomation;
 import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-/**
- * @author Mark Humphreys
- * Date 05/06/2017.
- */
-public class IUIAutomationTablePatternConverter {
-    private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTablePattern
-
-    public static IUIAutomationTablePattern pointerToInterface(final PointerByReference ptr) {
+public class IUIAutomationItemContainerPatternConverter {
+    public static IUIAutomationItemContainerPattern pointerToInterface(final PointerByReference ptr) {
+        final int METHODS = 4; // 0-2 IUnknown, 3-15 IUIAutomationItemContainerPattern
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationTablePattern() {
+        return new IUIAutomationItemContainerPattern() {
             // IUnknown
-
             @Override
             public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                 Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
@@ -54,19 +48,14 @@ public class IUIAutomationTablePatternConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getCurrentRowHeaders(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
+            // IUIAutomationItemContainerPattern
 
-            public int getCurrentColumnHeaders(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
-
-            public int getCurrentRowOrColumnMajor(IntByReference retVal) {
-                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            public int findItemByProperty(Pointer startAfter,
+                                          int propertyId,
+                                          Variant.VARIANT.ByValue value,
+                                          PointerByReference found) {
+                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer,startAfter, propertyId, value, found});
             }
         };
     }

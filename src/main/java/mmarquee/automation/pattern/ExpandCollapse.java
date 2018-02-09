@@ -119,6 +119,6 @@ public class ExpandCollapse extends BasePattern {
      */
     public IUIAutomationExpandCollapsePattern convertPointerToInterface(
             final PointerByReference pUnknown) {
-        return IUIAutomationExpandCollapsePatternConverter.PointerToInterface(pUnknown);
+        return IUIAutomationExpandCollapsePatternConverter.pointerToInterface(pUnknown);
     }
 }

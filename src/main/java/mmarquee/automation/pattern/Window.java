@@ -54,7 +54,7 @@ public class Window extends BasePattern {
             WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationWindowPatternConverter.PointerToInterface(pbr);
+                return IUIAutomationWindowPatternConverter.pointerToInterface(pbr);
             } else {
                 throw new AutomationException(result0.intValue());
             }

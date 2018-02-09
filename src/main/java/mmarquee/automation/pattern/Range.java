@@ -32,7 +32,7 @@ import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
 public class Range extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
      */
     public Range() {
         this.IID = IUIAutomationRangeValuePattern.IID;
@@ -46,7 +46,7 @@ public class Range extends BasePattern {
     }
 
     public IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationRangeValuePatternConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationRangeValuePatternConverter.pointerToInterface(pUnknownA);
     }
 
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
@@ -66,11 +66,11 @@ public class Range extends BasePattern {
     }
 
     /**
-     * Sets the value
+     * Sets the value.
      * @param value The value to set
      * @throws AutomationException Something has gone wrong
      */
-    public void setValue (double value) throws AutomationException {
+    public void setValue(final double value) throws AutomationException {
         final int res = this.getPattern().setValue(value);
         if (res != 0) {
             throw new AutomationException(res);
@@ -82,7 +82,7 @@ public class Range extends BasePattern {
      * @return The value
      * @throws AutomationException Something has gone wrong
      */
-    public double getValue () throws AutomationException {
+    public double getValue() throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 
         final int res = this.getPattern().getValue(dbr);

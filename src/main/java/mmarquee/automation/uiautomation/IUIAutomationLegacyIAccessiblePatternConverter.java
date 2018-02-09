@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,19 @@ package mmarquee.automation.uiautomation;
 import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-/**
- * @author Mark Humphreys
- * Date 05/06/2017.
- */
-public class IUIAutomationTablePatternConverter {
-    private static int METHODS = 9; // 0-2 IUnknown, 3-8 IUIAutomationTablePattern
-
-    public static IUIAutomationTablePattern pointerToInterface(final PointerByReference ptr) {
+public class IUIAutomationLegacyIAccessiblePatternConverter {
+    public static IUIAutomationLegacyIAccessiblePattern pointerToInterface(final PointerByReference ptr) {
+        final int METHODS = 26; // 0-2 IUnknown, 3-15 IUIAutomationLegacyIAccessiblePattern
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationTablePattern() {
+        return new IUIAutomationLegacyIAccessiblePattern() {
             // IUnknown
-
             @Override
             public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                 Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
@@ -54,19 +48,14 @@ public class IUIAutomationTablePatternConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getCurrentRowHeaders(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
-
-            public int getCurrentColumnHeaders(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
-            }
-
-            public int getCurrentRowOrColumnMajor(IntByReference retVal) {
+            public int setValue(WTypes.BSTR sr) {
                 Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, retVal});
+                return f.invokeInt(new Object[]{interfacePointer, sr});
+            }
+
+            public int getCurrentName(PointerByReference pszName) {
+                Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, pszName});
             }
         };
     }

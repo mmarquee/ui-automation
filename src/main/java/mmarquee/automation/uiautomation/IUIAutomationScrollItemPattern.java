@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls;
+package mmarquee.automation.uiautomation;
 
-/**
- * Specialised custom control representing a powerpoint slide.
- *
- * @author Mark Humphreys
- * Date 01/02/2017.
- */
-public final class AutomationPowerpointSlide extends AutomationCustom {
+import com.sun.jna.platform.win32.COM.IUnknown;
+import com.sun.jna.platform.win32.Guid;
+
+public interface IUIAutomationScrollItemPattern extends IUnknown {
     /**
-     * Constructor for the AutomationPowerpointSlide.
-     *
-     * @param builder The builder
+     * The interface IID for QueryInterface et al
      */
-    AutomationPowerpointSlide(final ElementBuilder builder) {
-        super(builder);
-    }
+    Guid.IID IID = new Guid.IID(
+            "{B488300F-D015-4F19-9C29-BB595E3645EF}");
+
+    int scrollIntoView();
 }

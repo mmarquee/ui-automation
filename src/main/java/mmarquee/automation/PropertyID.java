@@ -111,7 +111,7 @@ public enum PropertyID {
         return this.value;
     }
 
-    PropertyID (int value) {
+    PropertyID(final int value) {
         this.value = value;
     }
 }

@@ -37,5 +37,5 @@ public interface IUIAutomationItemContainerPattern extends IUnknown {
 
     int AddRef();
 
-    int FindItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
+    int findItemByProperty(Pointer startAfter, int propertyId, Variant.VARIANT.ByValue value, PointerByReference found);
 }

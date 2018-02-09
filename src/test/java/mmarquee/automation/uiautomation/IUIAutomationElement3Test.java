@@ -66,7 +66,7 @@ public class IUIAutomationElement3Test {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3Converter.PointerToInterface(root);
+            return IUIAutomationElement3Converter.pointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -80,7 +80,7 @@ public class IUIAutomationElement3Test {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement rootElement = IUIAutomationElement3Converter.PointerToInterface(root);
+            IUIAutomationElement rootElement = IUIAutomationElement3Converter.pointerToInterface(root);
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
@@ -95,7 +95,7 @@ public class IUIAutomationElement3Test {
 
             uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
-            return IUIAutomationElement3Converter.PointerToInterface(element);
+            return IUIAutomationElement3Converter.pointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -387,7 +387,7 @@ public class IUIAutomationElement3Test {
 
         uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement3.IID), element);
 
-        IUIAutomationElement3 elem = IUIAutomationElement3Converter.PointerToInterface(element);
+        IUIAutomationElement3 elem = IUIAutomationElement3Converter.pointerToInterface(element);
 
         PointerByReference sr = new PointerByReference();
 
@@ -417,7 +417,7 @@ public class IUIAutomationElement3Test {
 
         uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
-        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
+        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.pointerToInterface(element);
 
         IntByReference ibr = new IntByReference();
 
@@ -441,7 +441,7 @@ public class IUIAutomationElement3Test {
 
         uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
-        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
+        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.pointerToInterface(element);
 
         IntByReference ibr = new IntByReference();
 

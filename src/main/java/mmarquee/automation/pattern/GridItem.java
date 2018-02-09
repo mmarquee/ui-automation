@@ -37,6 +37,9 @@ public class GridItem extends BasePattern {
         this.IID = IUIAutomationGridItemPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationGridItemPattern rawPattern;
 
     /**
@@ -65,7 +68,7 @@ public class GridItem extends BasePattern {
     }
 
     public IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridItemPatternConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationGridItemPatternConverter.pointerToInterface(pUnknownA);
     }
 
     /**

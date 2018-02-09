@@ -114,9 +114,12 @@ public class Utils {
     public static boolean findProcessEntry
                     (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
                      final Pattern filenamePattern) {
-        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
+        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class,
+                W32APIOptions.UNICODE_OPTIONS);
 
-        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
+        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(
+                Tlhelp32.TH32CS_SNAPPROCESS,
+                new WinDef.DWORD(0));
 
         boolean found = false;
 

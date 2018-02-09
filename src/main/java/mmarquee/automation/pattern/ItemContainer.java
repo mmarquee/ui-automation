@@ -15,6 +15,17 @@
  */
 package mmarquee.automation.pattern;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.Variant;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.automation.uiautomation.IUIAutomationItemContainerPatternConverter;
+
 /**
  * @author Mark Humphreys
  * Date 25/02/2016.
@@ -26,5 +37,65 @@ public class ItemContainer extends BasePattern {
      * Constructor for the value pattern
      */
     public ItemContainer() {
+        this.IID = IUIAutomationItemContainerPattern.IID;
+    }
+
+    /**
+     * The raw pattern.
+     */
+    private IUIAutomationItemContainerPattern rawPattern;
+
+    /**
+     * Gets the pattern
+     * @return The pattern
+     * @throws AutomationException Something went wrong getting the pattern
+     */
+    private IUIAutomationItemContainerPattern getPattern() throws AutomationException {
+        if (this.rawPattern != null) {
+            return this.rawPattern;
+        } else {
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return this.convertPointerToInterface(pbr);
+            } else {
+                throw new AutomationException(result0.intValue());
+            }
+        }
+    }
+
+    /**
+     * Converts a pointer to the appropriate interface.
+     * @param unknown The pointer
+     * @return The converted interface
+     */
+    public IUIAutomationItemContainerPattern convertPointerToInterface(PointerByReference unknown) {
+        return IUIAutomationItemContainerPatternConverter.pointerToInterface(unknown);
+    }
+
+    /**
+     * Finds the first element that matches the property.
+     * @param startAfter Element to start after
+     * @param propertyId The property
+     * @param value The value of the property
+     * @return The found element.
+     */
+    public AutomationElement findItemByProperty(final Pointer startAfter,
+                                                final int propertyId,
+                                                final Variant.VARIANT.ByValue value)
+            throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        final int res = this.getPattern().findItemByProperty(startAfter, propertyId, value, pbr);
+
+        if (res == 0) {
+            IUIAutomationElement element = getAutomationElementFromReference(pbr);
+
+            return new AutomationElement(element);
+        } else {
+            throw new AutomationException(res);
+        }
     }
 }
