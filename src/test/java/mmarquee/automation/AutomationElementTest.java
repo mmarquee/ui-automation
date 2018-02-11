@@ -73,7 +73,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	@Test
 	public void testGetFullDescription() throws AutomationException {
 		AutomationElement root = instance.getRootElement();
-		assertTrue("root:" + root.getFullDescription(), root.getFullDescription().isEmpty());
+		assertTrue("root:" + root.getFullDescription(), root.getFullDescription().equals("Not set"));
 	}
 
 	@Test

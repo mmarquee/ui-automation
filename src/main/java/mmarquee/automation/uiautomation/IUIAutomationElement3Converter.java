@@ -32,6 +32,10 @@ import com.sun.jna.ptr.PointerByReference;
  */
 public class IUIAutomationElement3Converter {
 
+    public static final int IUI3_SHOW_CONTEXT_MENU = 91;
+    public static final int IUI3_CURRENT_IS_PERIPHERAL = 92;
+    public static final int IUI3_CACHED_IS_PERIPHERAL = 93;
+
     public static IUIAutomationElement3 pointerToInterface(final PointerByReference ptr) {
         //  0-2  IUnknown,
         //  3-84 IUIAutomationElement3,
@@ -473,8 +477,18 @@ public class IUIAutomationElement3Converter {
 
             // IUIAutomationElement3
             public int showContextMenu() {
-                Function f = Function.getFunction(vTable[91], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[IUI3_SHOW_CONTEXT_MENU], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
+            }
+
+            public int getCurrentIsPeripheral(Integer retVal){
+                Function f = Function.getFunction(vTable[IUI3_CURRENT_IS_PERIPHERAL], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            public int getCachedIsPeripheral(Integer retVal){
+                Function f = Function.getFunction(vTable[IUI3_CACHED_IS_PERIPHERAL], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };
     }

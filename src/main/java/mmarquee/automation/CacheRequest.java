@@ -88,7 +88,7 @@ public class CacheRequest {
      * @param inVal The pattern
      */
     public void addPattern(final int inVal) {
-        this.request.AddPattern(inVal);
+        this.request.addPattern(inVal);
     }
 
     /**
@@ -96,6 +96,6 @@ public class CacheRequest {
      * @param inVal The property
      */
     public void addProperty(final int inVal) {
-        this.request.AddProperty(inVal);
+        this.request.addProperty(inVal);
     }
 }

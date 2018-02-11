@@ -16,9 +16,10 @@
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinDef;
 
 /**
- * Wrapper for the IUIAutomation3 COM interface.
+ * Wrapper for the IUIAutomation2 COM interface.
  *
  * @author Mark Humphreys
  * Date 12/09/2016.
@@ -35,13 +36,11 @@ public interface IUIAutomation2 extends IUIAutomation {
      */
     Guid.IID IID = new Guid.IID("{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}");
 
-/*
-    function Get_AutoSetFocus(out AutoSetFocus: Integer): HResult; stdcall;
-    function Set_AutoSetFocus(AutoSetFocus: Integer): HResult; stdcall;
-    function Get_ConnectionTimeout(out timeout: LongWord): HResult; stdcall;
-    function Set_ConnectionTimeout(timeout: LongWord): HResult; stdcall;
-    function Get_TransactionTimeout(out timeout: LongWord): HResult; stdcall;
-    function Set_TransactionTimeout(timeout: LongWord): HResult; stdcall;
-     */
+    int getAutoSetFocus(Integer AutoSetFocus);
+    int setAutoSetFocus(Integer AutoSetFocus);
+    int getConnectionTimeout(WinDef.DWORD timeout);
+    int setConnectionTimeout(WinDef.DWORD timeout);
+    int getTransactionTimeout(WinDef.DWORD timeout);
+    int setTransactionTimeout(WinDef.DWORD timeout);
 }
 

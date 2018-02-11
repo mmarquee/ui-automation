@@ -19,7 +19,6 @@ import com.sun.jna.Function;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -30,11 +29,12 @@ public class IUIAutomationCacheRequestConverter {
     public static IUIAutomationCacheRequest pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
-        final Pointer[] vTable = new Pointer[11];
+        final Pointer[] vTable = new Pointer[10];
         vTablePointer.read(0, vTable, 0, vTable.length);
         return new IUIAutomationCacheRequest() {
 
             // IUnknown
+
             @Override
             public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
                 Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
@@ -52,48 +52,50 @@ public class IUIAutomationCacheRequestConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int AddPattern(int inVal) {
+            // IUIAutomationCacheRequest
+
+            public int addPattern(int inVal) {
                 Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, inVal});
             }
 
-            public int AddProperty(int inVal) {
+            public int addProperty(int inVal) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, inVal});
             }
 
-            public int Clone(PointerByReference retVal) {
+            public int clone(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int GetTreeScope(PointerByReference inVal) {
+            public int getTreeScope(PointerByReference inVal) {
                 Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, inVal});
             }
 
-            public int SetTreeScope(PointerByReference retVal) {
+            public int setTreeScope(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int GetTreeFilter(PointerByReference inVal) {
+            public int getTreeFilter(PointerByReference inVal) {
                 Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, inVal});
             }
 
-            public int SetTreeFilter(PointerByReference retVal) {
+            public int setTreeFilter(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int GetAutomationElementMode(PointerByReference inVal) {
-                Function f = Function.getFunction(vTable[10], Function.ALT_CONVENTION);
+            public int getAutomationElementMode(PointerByReference inVal) {
+                Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, inVal});
             }
 
-            public int SetAutomationElementMode(PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
+            public int setAutomationElementMode(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };

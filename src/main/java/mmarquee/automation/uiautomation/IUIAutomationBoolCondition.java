@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,23 +18,19 @@ package mmarquee.automation.uiautomation;
 import com.sun.jna.platform.win32.Guid;
 
 /**
- * Wrapper around the IUIAutomation5 interface.
- *
- * This interface is supported in Windows 10 [desktop apps only] upwards
- *
- * @author Mark Humphreys
- * Date 24/07/2016.
+ * Represents a condition that can be either TRUE (selects all elements) or FALSE (selects no elements).
  */
-public interface IUIAutomationElement5 extends IUIAutomationElement4 {
+public interface IUIAutomationBoolCondition extends IUIAutomationCondition {
     /**
      * The interface IID for QueryInterface et al.
      */
-    Guid.IID IID = new Guid.IID("{98141C1D-0D0E-4175-BBE2-6BFF455842A7}");
+    Guid.IID IID = new Guid.IID(
+            "1B4E1F2E-75EB-4D0B-8952-5A69988E2307");
 
-    /*
-    CachedLandmarkType
-    CachedLocalizedLandmarkType
-    CurrentLandmarkType
-    CurrentLocalizedLandmarkType
+    /**
+     * Retrieves the value of the condition: either TRUE or FALSE.
+     * @param boolVal The condition
+     * @return Error status
      */
+    int getBooleanValue(Integer boolVal);
 }

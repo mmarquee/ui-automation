@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.uiautomation;
+package mmarquee.automation.controls;
 
-import com.sun.jna.platform.win32.Guid;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Wrapper around the IUIAutomation2 interface.
- *
- * This interface is supported fro Windows 8.1 desktop onwards
- *
  * @author Mark Humphreys
- * Date 24/07/2016.
+ * Date 24/12/2017.
  */
-public interface IUIAutomationElement2 extends IUIAutomationElement {
-    /**
-     * The interface IID for QueryInterface et al.
-     */
-    Guid.IID IID = new Guid.IID("{6749C683-F70D-4487-A698-5F79D55290D}");
+public interface LegacyAccessible extends Automatable {
+    String getValueFromIAccesible() throws PatternNotFoundException, AutomationException;
+    void setValueFromIAccessible(final String value) throws PatternNotFoundException, AutomationException;
 }

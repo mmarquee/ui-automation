@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,24 +24,28 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-/**
- * Converter implementation of IUIAutomationElement.
- *
- * @author Mark Humphreys
- * Date 05/06/2017.
- */
-public class IUIAutomationElementConverter {
-    public static final int IUI_ELEMENT_GET_CLICKABLE_POINT = 84;
-    //   0-2   IUnknown,
-    //   3-84  IUIAutomationElement
-    private static int UIAutomationElement_Methods = 85;
+public class IUIAutomationElement7Converter {
 
-    public static IUIAutomationElement pointerToInterface(final PointerByReference ptr) {
+    public static final int IUI6_CURRENT_FULL_DESCRIPTION = 104;
+    public static final int IUI6_CACHED_FULL_DESCRIPTION = 105;
+    public static final int IUI7_GET_CURRENT_METADATA_VALUE = 110;
+
+    public static IUIAutomationElement7 PointerToInterface(final PointerByReference ptr) {
+        //   0-2   IUnknown,
+        //   3-84  IUIAutomationElement,
+        //  85-90  IUIAutomationElement2,
+        //  91-93  IUIAutomationElement3
+        //  94-99  IUIAutomationElement4
+        // 100-103 IUIAutomationElement5
+        // 104-105 IUIAutomationElement6
+        // 106-110 IUIAutomationElement7
+        final int IUIAutomationElement7_Methods = 111;
+
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
-        final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];
+        final Pointer[] vTable = new Pointer[IUIAutomationElement7_Methods];
         vTablePointer.read(0, vTable, 0, vTable.length);
-        return new IUIAutomationElement() {
+        return new IUIAutomationElement7() {
 
             // IUnknown
             @Override
@@ -67,7 +71,7 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getRuntimeId(PointerByReference runtimeId) {
+            public int getRuntimeId(/* SAFEARRAY */ PointerByReference runtimeId) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, runtimeId});
             }
@@ -125,10 +129,9 @@ public class IUIAutomationElementConverter {
 //                    return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
 //                }
 
-            public int getCurrentPatternAs(
-                    int patternId,
-                    Guid.REFIID riid,
-                    PointerByReference patternObject) {
+            public int getCurrentPatternAs(int patternId,
+                                           Guid.REFIID riid,
+                                           PointerByReference patternObject) {
                 Function f = Function.getFunction(vTable[14], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
             }
@@ -328,7 +331,7 @@ public class IUIAutomationElementConverter {
 //                    return f.invokeInt(new Object[]{interfacePointer, retVal});
 //                }
 
-            public int getCachedName (PointerByReference retVal) {
+            public int getCachedName(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
@@ -475,8 +478,84 @@ public class IUIAutomationElementConverter {
 
             public int getClickablePoint(WinDef.POINT.ByReference clickable,
                                          WinDef.BOOLByReference gotClickable) {
-                Function f = Function.getFunction(vTable[IUI_ELEMENT_GET_CLICKABLE_POINT], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
+            }
+
+            // IUIAutomationElement2
+
+            // IUIAutomationElement3
+            public int showContextMenu() {
+                Function f = Function.getFunction(vTable[91], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer});
+            }
+
+            public int getCurrentIsPeripheral(Integer retVal) {
+                Function f = Function.getFunction(vTable[92], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            public int getCachedIsPeripheral(Integer retVal) {
+                Function f = Function.getFunction(vTable[93], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            // IUIAutomationElement4
+            // IUIAutomationElement5
+            // IUIAutomationElement6
+
+            public int getCurrentFullDescription(PointerByReference sr) {
+                Function f = Function.getFunction(vTable[IUI6_CURRENT_FULL_DESCRIPTION], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr});
+            }
+
+            public int getCachedFullDescription(PointerByReference sr) {
+                Function f = Function.getFunction(vTable[IUI6_CACHED_FULL_DESCRIPTION], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, sr});
+            }
+
+            // IUIAutomationElement7
+            public int findAllWithOptions(TreeScope scope,
+                                          Pointer condition,
+                                          Pointer options,
+                                          Pointer root,
+                                          PointerByReference foundArray) {
+                Function f = Function.getFunction(vTable[106], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, foundArray});
+            }
+
+            public int findAllWithOptionsBuildCache(TreeScope scope,
+                                                    Pointer condition,
+                                                    Pointer options,
+                                                    Pointer root,
+                                                    PointerByReference foundArray) {
+                Function f = Function.getFunction(vTable[107], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, foundArray});
+            }
+
+            public int findFirstWithOptions(TreeScope scope,
+                                            Pointer condition,
+                                            Pointer options,
+                                            Pointer root,
+                                            PointerByReference found) {
+                Function f = Function.getFunction(vTable[108], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, found});
+            }
+
+            public int findFirstWithOptionsBuildCache(TreeScope scope,
+                                                      Pointer condition,
+                                                      Pointer options,
+                                                      Pointer root,
+                                                      PointerByReference found) {
+                Function f = Function.getFunction(vTable[109], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope, condition, options, root, found});
+            }
+
+            public int getCurrentMetadataValue(Integer target,
+                                               Integer metadata,
+                                               Variant.VARIANT.ByReference retVal) {
+                Function f = Function.getFunction(vTable[IUI7_GET_CURRENT_METADATA_VALUE], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, target, metadata, retVal});
             }
         };
     }

@@ -19,6 +19,7 @@ package mmarquee.automation.controls;
 import java.util.LinkedList;
 import java.util.List;
 
+import mmarquee.automation.pattern.*;
 import org.apache.log4j.Logger;
 
 import com.sun.jna.Pointer;
@@ -33,20 +34,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Grid;
-import mmarquee.automation.pattern.GridItem;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Range;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.pattern.Table;
-import mmarquee.automation.pattern.Text;
-import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 import mmarquee.automation.utils.providers.PatternProvider;
@@ -73,6 +60,11 @@ public abstract class AutomationBase implements Automatable {
      * The automation library wrapper.
      */
     protected UIAutomation automation;
+
+    /**
+     * The basic IAccessible pattern.
+     */
+    private LegacyIAccessible accessible;
 
     /**
      * The invoke pattern.
@@ -157,6 +149,15 @@ public abstract class AutomationBase implements Automatable {
      */
     boolean isExpandCollapsePatternAvailable() {
         return isPatternAvailable(PropertyID.IsExpandCollapsePatternAvailable);
+    }
+
+    /**
+     * Is the legacy accessible pattern available.
+     *
+     * @return Yes or no.
+     */
+    boolean isLegacyIAccessiblePatternAvailable() {
+        return isPatternAvailable(PropertyID.IsLegacyIAccessiblePatternAvailable);
     }
 
     /**
@@ -535,6 +536,30 @@ public abstract class AutomationBase implements Automatable {
             	return (SelectionItem)((PatternProvider) unknown).getPattern();
             }
             
+            pattern.setPattern(unknown.getValue());
+            return pattern;
+        }
+        return null;
+    }
+
+    /**
+     * <p>
+     * Gets the legacy IAccessible pattern for this control.
+     * </p>
+     * @return  Returns the LegacyIAccessible associated with this control, or null if not available
+     * @throws PatternNotFoundException Pattern not found
+     * @throws AutomationException Error in automation library
+     */
+    public LegacyIAccessible getAccessiblePattern()
+            throws PatternNotFoundException, AutomationException {
+        if (this.isLegacyIAccessiblePatternAvailable()) {
+            LegacyIAccessible pattern = new LegacyIAccessible();
+            PointerByReference unknown = this.getPattern(PatternID.LegacyIAccessible.getValue());
+
+            if (unknown instanceof PatternProvider) { // Hook for mocking tests
+                return (LegacyIAccessible)((PatternProvider) unknown).getPattern();
+            }
+
             pattern.setPattern(unknown.getValue());
             return pattern;
         }
@@ -1018,6 +1043,15 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
+     * Gets the metadata associated with the element.
+     * @return The metadata
+     * @throws AutomationException Library exception
+     */
+    public int getMetadata() throws AutomationException {
+        return this.getElement().getCurrentMetadataValue();
+    }
+
+    /**
      * Tries to get the full description.
      * @return The full description
      * @throws AutomationException Something has gone wrong
@@ -1027,6 +1061,7 @@ public abstract class AutomationBase implements Automatable {
     }
 
 // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+// see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent control
 //     *

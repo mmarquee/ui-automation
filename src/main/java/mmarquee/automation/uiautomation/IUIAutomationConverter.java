@@ -48,6 +48,8 @@ public class IUIAutomationConverter {
     private static int UIA_REMOVE_AUTOMATION_EVENT_HANDLER = 33;
     private static int UIA_GET_PATTERN_PROGRAMMATIC_NAME = 50;
     private static int UIA_ELEMENT_FROM_IACCESSIBLE = 56;
+    private static int UIA_POLL_FOR_POTENTIAL_SUPPORTED_PATTERNS = 51;
+    private static int UIA_POLL_FOR_POTENTIAL_SUPPORTED_PROPERTIES = 52;
 
     private static int UIAutomation_Methods  = 58; // 0-2 IUnknown, 3-57 IUIAutomation
 
@@ -161,6 +163,16 @@ public class IUIAutomationConverter {
             public int removeAutomationEventHandler(IntByReference eventId, PointerByReference element, PointerByReference handler) {
                 Function f = Function.getFunction(vTable[UIA_REMOVE_AUTOMATION_EVENT_HANDLER], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{myInterfacePointer, eventId, element, handler});
+            }
+
+            public int pollForPotentialSupportedProperties(Pointer element, /* SAFEARRAY */ PointerByReference ids, /* SAFEARRAY */ PointerByReference names) {
+                Function f = Function.getFunction(vTable[UIA_POLL_FOR_POTENTIAL_SUPPORTED_PROPERTIES], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{myInterfacePointer, element, ids, names});
+            }
+
+            public int pollForPotentialSupportedPatterns(Pointer element, /* SAFEARRAY */ PointerByReference ids, /* SAFEARRAY */ PointerByReference names) {
+                Function f = Function.getFunction(vTable[UIA_POLL_FOR_POTENTIAL_SUPPORTED_PATTERNS], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{myInterfacePointer, element, ids, names});
             }
         };
     }

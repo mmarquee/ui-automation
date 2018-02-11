@@ -40,13 +40,25 @@ public class Styles extends BasePattern {
         this.IID = IUIAutomationStylesPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationStylesPattern rawPattern;
 
+    /**
+     * Default constructor.
+     * @param rawPattern The raw pattern
+     */
     public Styles(IUIAutomationStylesPattern rawPattern) {
         this.IID = IUIAutomationStylesPattern.IID;
         this.rawPattern = rawPattern;
     }
 
+    /**
+     * Gets the pattern.
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     */
     private IUIAutomationStylesPattern getPattern() throws AutomationException {
         if (this.rawPattern != null) {
             return this.rawPattern;

@@ -19,7 +19,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
+ * Wrapper around the IUIAutomation6 interface.
  *
  * This interface is supported in Windows 10, version 1703 [desktop apps only] upwards
  *
@@ -32,5 +32,17 @@ public interface IUIAutomationElement6 extends IUIAutomationElement5 {
      */
     Guid.IID IID = new Guid.IID("{4780D450-8BCA-4977-AFA5-A4A517F555E3}");
 
+    /**
+     * Gets the current full description of the automation element.
+     * @param sr The pointer to the full description
+     * @return Error code
+     */
     int getCurrentFullDescription(PointerByReference sr);
+
+    /**
+     * Gets the cached full description of the automation element.
+     * @param sr The pointer to the full description
+     * @return Error code
+     */
+    int getCachedFullDescription(PointerByReference sr);
 }

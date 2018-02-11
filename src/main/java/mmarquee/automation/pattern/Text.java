@@ -25,22 +25,29 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.uiautomation.*;
 
 /**
+ * Wrapper for the text pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the text pattern
  */
 public class Text extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
      */
     public Text() {
         this.IID = IUIAutomationTextPattern.IID;
     }
 
+    /**
+     * The raw pattern.
+     */
     private IUIAutomationTextPattern rawPattern;
 
+    /**
+     * Default constructor.
+     * @param rawPattern The raw pattern
+     */
     public Text(IUIAutomationTextPattern rawPattern) {
         this.IID = IUIAutomationTextPattern.IID;
         this.rawPattern = rawPattern;

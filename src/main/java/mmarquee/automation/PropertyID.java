@@ -96,7 +96,27 @@ public enum PropertyID {
     IsVirtualizedItemPatternAvailable(30109),
     IsSynchronizedInputPatternAvailable(30110),
 
-    LiveSetting(30135);
+    OptimizeForVisualContent(30111),
+
+    LiveSetting(30135),
+
+    FlowsFrom(30148),
+    IsPeripheral(30150),
+    PositionInSet(30152),
+    SizeOfSet(30153),
+    Level(30154),
+    AnnotationTypes(30155),
+    AnnotationObjects(30156),
+    LandmarkType(30157),
+    LocalizedLandmark(30158),
+    FullDescription(30159),
+    FillColor(30160),
+    OutlineColor(30161),
+    FillType(30162),
+    OutlineThickness(30164),
+    CenterPoint(30165),
+    Rotation(30166),
+    Size(30167);
 
     /**
      * The actual value.

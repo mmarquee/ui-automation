@@ -98,7 +98,7 @@ public final class AutomationList extends AutomationBase {
 
     /**
      * Gets the item matching the namePattern.
-     * 
+     *
      * @param namePattern Name to look for
      * @return The selected item
      * @throws AutomationException Something has gone wrong
@@ -109,7 +109,7 @@ public final class AutomationList extends AutomationBase {
         AutomationElement foundElement = null;
 
         collection = this.findAll(new TreeScope(TreeScope.Descendants),
-        		this.createControlTypeCondition(ControlType.ListItem));
+                this.createControlTypeCondition(ControlType.ListItem));
 
         for (AutomationElement element : collection) {
             String name = element.getName();
@@ -126,7 +126,7 @@ public final class AutomationList extends AutomationBase {
 
         return new AutomationListItem(new ElementBuilder(foundElement));
     }
-    
+
     /**
      * Gets the item associated with the automationId.
      *
@@ -171,7 +171,9 @@ public final class AutomationList extends AutomationBase {
      */
     public List<AutomationListItem> getItems()
             throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.ListItem));
+        List<AutomationElement> items = this.findAll(
+                new TreeScope(TreeScope.Descendants),
+                this.createControlTypeCondition(ControlType.ListItem));
 
         List<AutomationListItem> list = new ArrayList<>();
 
@@ -194,49 +196,21 @@ public final class AutomationList extends AutomationBase {
         if (this.selectionPattern == null) {
             this.selectionPattern = this.getSelectionPattern();
         }
+
         if (this.selectionPattern != null) {
-	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
-	
-	        List<AutomationListItem> list = new ArrayList<>();
-	        
-	        for (AutomationElement element : collection) {
-	            list.add(new AutomationListItem(new ElementBuilder(element)));
-	        }
-	
-	        return list;
-	    }
+            List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
+
+            List<AutomationListItem> list = new ArrayList<>();
+
+            for (AutomationElement element : collection) {
+                list.add(new AutomationListItem(new ElementBuilder(element)));
+            }
+
+            return list;
+        }
         throw new PatternNotFoundException("Could not determine selection");
     }
 
-    /**
-     * Gets the first currently selected element.
-     *
-     * @return The current selection.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public AutomationListItem getSelectedItem()
-            throws AutomationException, PatternNotFoundException {
-
-        try {
-            AutomationElement elem = this.getCurrentSelectedItem();
-
-            return new AutomationListItem(new ElementBuilder(elem));
-        } catch (AutomationException ex) {
-            List<AutomationListItem> list = this.getSelectedItems();
-            if (list.size() == 0) {
-                throw new ElementNotFoundException();
-            }
-            return list.get(0);
-        }
-    }
-
-    /**
-     * Gets the currently selected item.
-     * @return The selected element
-     * @throws AutomationException Library error
-     * @throws PatternNotFoundException Failed to find the pattern
-     */
     private AutomationElement getCurrentSelectedItem()
             throws AutomationException, PatternNotFoundException {
         if (this.selectionPattern == null) {
@@ -250,5 +224,31 @@ public final class AutomationList extends AutomationBase {
         }
     }
 
-}
+    /**
+     * Gets the first currently selected element.
+     *
+     * @return The current selection.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
+     */
+    public AutomationListItem getSelectedItem()
+            throws AutomationException, PatternNotFoundException {
 
+        // Try and use the more modern interface first
+        try {
+            AutomationElement elem = this.getCurrentSelectedItem();
+
+            if (elem == null) {
+                throw new ElementNotFoundException();
+            } else {
+                return new AutomationListItem(new ElementBuilder(elem));
+            }
+        } catch (AutomationException ex) {
+            List<AutomationListItem> list = this.getSelectedItems();
+            if (list.size() == 0) {
+                throw new ElementNotFoundException();
+            }
+            return list.get(0);
+        }
+    }
+}

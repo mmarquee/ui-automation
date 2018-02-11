@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.uiautomation;
+package mmarquee.automation;
 
-import com.sun.jna.platform.win32.Guid;
+public enum MetaDataID {
+    SayAsInterpretAs(100000);
 
-/**
- * Wrapper around the IUIAutomation2 interface.
- *
- * This interface is supported fro Windows 8.1 desktop onwards
- *
- * @author Mark Humphreys
- * Date 24/07/2016.
- */
-public interface IUIAutomationElement2 extends IUIAutomationElement {
     /**
-     * The interface IID for QueryInterface et al.
+     * The actual value.
      */
-    Guid.IID IID = new Guid.IID("{6749C683-F70D-4487-A698-5F79D55290D}");
+    private final int value;
+
+    /**
+     * Gets the value.
+     * @return The actual value
+     */
+    public int getValue() {
+        return this.value;
+    }
+
+    /**
+     * Constructor for PatterID.
+     *
+     * @param value Initial value.
+     */
+    MetaDataID(int value) {
+        this.value = value;
+    }
 }
