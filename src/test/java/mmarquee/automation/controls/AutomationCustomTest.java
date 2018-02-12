@@ -42,7 +42,7 @@ public class AutomationCustomTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationCustom ctrl = new AutomationCustom(
-                new ElementBuilder(element).itemContainer(container).value(value).automation(instance));
+                new ElementBuilder(element).addPattern(container).addPattern(value).automation(instance));
 
         String name = ctrl.getName();
 

@@ -20,7 +20,12 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import org.junit.*;
 import org.mockito.Mock;
@@ -49,20 +54,26 @@ public class ValuePatternTest2 {
 
     @Mock
     IUIAutomationValuePattern rawPattern;
+    @Mock
+    AutomationElement element;
 
     @Spy
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Value, PropertyID.IsValuePatternAvailable);
     }
 
     @Test(expected=AutomationException.class)
     public void test_SetValue_Throws_Exception_When_COM_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).setValue(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.setValue("VALUE-01");
     }
@@ -71,7 +82,8 @@ public class ValuePatternTest2 {
     public void test_SetValue_Calls_SetValue_From_Pattern() throws Exception {
         doAnswer(invocation -> 0).when(rawPattern).setValue(any());
 
-        Value pattern = new Value(rawPattern);
+        Value pattern = new Value(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.setValue("VALUE-01");
 
@@ -84,7 +96,7 @@ public class ValuePatternTest2 {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Value pattern = new Value();
+        Value pattern = new Value(element);
 
         Value spyPattern = Mockito.spy(pattern);
 

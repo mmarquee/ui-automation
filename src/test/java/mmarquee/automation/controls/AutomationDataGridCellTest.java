@@ -38,6 +38,7 @@ public class AutomationDataGridCellTest {
     public void testValue() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
+        when(value.isAvailable()).thenReturn(true);
 
         when(value.value()).thenReturn("VALUE");
 
@@ -45,7 +46,7 @@ public class AutomationDataGridCellTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDataGridCell cell =
-                new AutomationDataGridCell(new ElementBuilder(element).value(value).automation(instance));
+                new AutomationDataGridCell(new ElementBuilder(element).addPattern(value).automation(instance));
 
         String val = cell.getValue();
 
@@ -63,7 +64,7 @@ public class AutomationDataGridCellTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDataGridCell cell =
-                new AutomationDataGridCell(new ElementBuilder(element).value(value).automation(instance));
+                new AutomationDataGridCell(new ElementBuilder(element).addPattern(value).automation(instance));
 
         String val = cell.getName();
 

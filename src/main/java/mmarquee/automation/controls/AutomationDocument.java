@@ -16,14 +16,12 @@
 
 package mmarquee.automation.controls;
 
+import java.util.List;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Text;
 import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.List;
 
 /**
  * Wrapper for the Document element.
@@ -31,11 +29,7 @@ import java.util.List;
  * @author Mark Humphreys
  * Date 16/02/2016.
  */
-public final class AutomationDocument extends AutomationBase {
-    /**
-     * The text pattern.
-     */
-    private Text textPattern;
+public final class AutomationDocument extends AutomationBase implements Textable {
 
     /**
      * Constructor for the AutomationDocument.
@@ -43,35 +37,6 @@ public final class AutomationDocument extends AutomationBase {
      */
     AutomationDocument(final ElementBuilder builder) {
         super(builder);
-        this.textPattern = builder.getText();
-    }
-
-    /**
-     * Gets the text for the document.
-     * @return The document's text
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public String getText() throws AutomationException, PatternNotFoundException {
-        if (this.textPattern == null) {
-            this.textPattern = this.getTextPattern();
-        }
-        return this.textPattern.getText();
-    }
-
-    /**
-     * Gets the selection.
-     *
-     * @return String of text that is selected
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public String getSelection() throws AutomationException, PatternNotFoundException {
-        if (this.textPattern == null) {
-            this.textPattern = this.getTextPattern();
-        }
-
-        return this.textPattern.getSelection();
     }
 
     /**

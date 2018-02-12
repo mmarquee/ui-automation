@@ -99,7 +99,7 @@ public class AutomationTabTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("TEST-01");
         SelectionItem mockSelectItemPattern = BaseAutomationTest.mockSelectItemPattern(targetElement);
-        
+
         automationTab.selectTabPage("TEST-01");
         
         verify(mockSelectItemPattern).select();
@@ -120,7 +120,7 @@ public class AutomationTabTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("TEST-01");
         SelectionItem mockSelectItemPattern = BaseAutomationTest.mockSelectItemPattern(targetElement);
-        
+
         automationTab.selectTabPage(Pattern.compile("TEST-\\d{2,3}"));
         
         verify(mockSelectItemPattern).select();

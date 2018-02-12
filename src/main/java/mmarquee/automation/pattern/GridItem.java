@@ -15,11 +15,13 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
 
@@ -30,41 +32,25 @@ import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
  * Wrapper for the GridItem pattern
  */
 public class GridItem extends BasePattern {
+	
     /**
      * Constructor for the pattern
+     * @throws AutomationException 
      */
-    public GridItem() {
+    public GridItem(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationGridItemPattern.IID;
+        this.patternID = PatternID.GridItem;
+        this.availabilityPropertyID = PropertyID.IsGridItemPatternAvailable;
     }
 
-    private IUIAutomationGridItemPattern rawPattern;
-
-    /**
-     * Constructor for the pattern
-     * @param rawPattern The raw pattern
-     */
-    public GridItem(IUIAutomationGridItemPattern rawPattern) {
-        this.IID = IUIAutomationGridItemPattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationGridItemPattern rawPattern;
 
     private IUIAutomationGridItemPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
-    public IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationGridItemPatternConverter.PointerToInterface(pUnknownA);
     }
 

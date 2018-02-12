@@ -72,7 +72,7 @@ public class AutomationNUIPaneTest2 {
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationNUIPane pane = new AutomationNUIPane(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         pane.getNetUIHWND(Search.getBuilder(0).build());
 
@@ -110,7 +110,7 @@ public class AutomationNUIPaneTest2 {
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationNUIPane pane = new AutomationNUIPane(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         pane.getNetUIHWND(Search.getBuilder(0).build());
 

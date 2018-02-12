@@ -15,8 +15,6 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Pointer;
-
 /**
  * @author Mark Humphreys
  * Date 28/02/2016.
@@ -29,10 +27,4 @@ public interface Pattern {
      * @return True if available
      */
     boolean isAvailable();
-
-    /**
-     * Sets the pattern
-     * @param pattern The pattern to set
-     */
-    void setPattern(Pointer pattern);
 }

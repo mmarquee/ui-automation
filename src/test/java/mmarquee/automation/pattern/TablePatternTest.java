@@ -15,16 +15,15 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -35,10 +34,19 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
+import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
 /**
  * @author Mark Humphreys
@@ -47,14 +55,21 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class TablePatternTest {
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationTablePattern rawPattern;
 
     @Spy
     private Unknown mockUnknown;
 
+
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Table);
     }
 
     @Test
@@ -69,7 +84,8 @@ public class TablePatternTest {
             return 0;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
-        Table item = new Table(rawPattern);
+        Table item = new Table(element);
+        item.rawPattern = rawPattern;
 
         RowOrColumnMajor value = item.getRowOrColumnMajor();
 
@@ -88,7 +104,8 @@ public class TablePatternTest {
             return 0;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
-        Table item = new Table(rawPattern);
+        Table item = new Table(element);
+        item.rawPattern = rawPattern;
 
         RowOrColumnMajor value = item.getRowOrColumnMajor();
 
@@ -107,7 +124,8 @@ public class TablePatternTest {
             return 0;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
-        Table item = new Table(rawPattern);
+        Table item = new Table(element);
+        item.rawPattern = rawPattern;
 
         RowOrColumnMajor value = item.getRowOrColumnMajor();
 
@@ -126,7 +144,8 @@ public class TablePatternTest {
             return 1;
         }).when(rawPattern).getCurrentRowOrColumnMajor(any());
 
-        Table item = new Table(rawPattern);
+        Table item = new Table(element);
+        item.rawPattern = rawPattern;
 
         RowOrColumnMajor value = item.getRowOrColumnMajor();
 
@@ -137,7 +156,8 @@ public class TablePatternTest {
     public void test_GetText_Throws_Exception_When_getCurrentColumnHeaders_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentColumnHeaders(any());
 
-        Table pattern = new Table(rawPattern);
+        Table pattern = new Table(element);
+        pattern.rawPattern = rawPattern;
 
         List<AutomationElement> elements = pattern.getCurrentColumnHeaders();
     }
@@ -146,7 +166,8 @@ public class TablePatternTest {
     public void test_GetText_Throws_Exception_When_getCurrentRowHeaders_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentRowHeaders(any());
 
-        Table pattern = new Table(rawPattern);
+        Table pattern = new Table(element);
+        pattern.rawPattern = rawPattern;
 
         List<AutomationElement> elements = pattern.getCurrentRowHeaders();
     }
@@ -156,7 +177,7 @@ public class TablePatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Table pattern = new Table();
+        Table pattern = new Table(element);
 
         Table spyPattern = Mockito.spy(pattern);
 
@@ -176,23 +197,23 @@ public class TablePatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Table pattern = new Table();
+        Table pattern = new Table(element);
 
         Table spyPattern = Mockito.spy(pattern);
 
-        IUIAutomationTablePattern mockRange = Mockito.mock(IUIAutomationTablePattern.class);
+        IUIAutomationTablePattern mockTable = Mockito.mock(IUIAutomationTablePattern.class);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
                 .makeUnknown(any());
 
-        doReturn(mockRange)
+        doReturn(mockTable)
                 .when(spyPattern)
                 .convertPointerToInterface(any());
 
         spyPattern.getRowOrColumnMajor();
 
-        verify(mockRange, atLeastOnce()).getCurrentRowOrColumnMajor(any());
+        verify(mockTable, atLeastOnce()).getCurrentRowOrColumnMajor(any());
     }
 
     @Test
@@ -201,7 +222,7 @@ public class TablePatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Table pattern = new Table();
+        Table pattern = new Table(element);
 
         Table spyPattern = Mockito.spy(pattern);
 
@@ -233,7 +254,7 @@ public class TablePatternTest {
         doAnswer(invocation ->
                 new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Table pattern = new Table();
+        Table pattern = new Table(element);
 
         Table spyPattern = Mockito.spy(pattern);
 

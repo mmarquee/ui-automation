@@ -16,30 +16,24 @@
 
 package mmarquee.automation.controls;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.TreeScope;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Wrapper for the List control element.
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public final class AutomationList extends AutomationBase {
-
-    /**
-     * The selection pattern.
-     */
-    private Selection selectionPattern;
+public final class AutomationList extends AutomationBase implements ChildSelectable {
 
     /**
      * Constructor for the AutomationList.
@@ -48,9 +42,6 @@ public final class AutomationList extends AutomationBase {
      */
     public AutomationList(final ElementBuilder builder) {
         super(builder);
-        this.selectionPattern = builder.getSelection();
-
-        //        this.selectionPattern = this.getSelectionPattern();
     }
 
     /**
@@ -149,21 +140,6 @@ public final class AutomationList extends AutomationBase {
     }
 
     /**
-     * Gets the current selection.
-     *
-     * @return The current selection.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public List<AutomationElement> getSelection()
-            throws AutomationException, PatternNotFoundException {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
-        }
-        return this.selectionPattern.getCurrentSelection();
-    }
-
-    /**
      * Gets the items from the list.
      *
      * @return List of elements.
@@ -191,21 +167,15 @@ public final class AutomationList extends AutomationBase {
      */
     public List<AutomationListItem> getSelectedItems()
             throws AutomationException, PatternNotFoundException {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
+        List<AutomationElement> collection = getCurrentSelection();
+	
+        List<AutomationListItem> list = new ArrayList<>();
+        
+        for (AutomationElement element : collection) {
+            list.add(new AutomationListItem(new ElementBuilder(element)));
         }
-        if (this.selectionPattern != null) {
-	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
-	
-	        List<AutomationListItem> list = new ArrayList<>();
-	        
-	        for (AutomationElement element : collection) {
-	            list.add(new AutomationListItem(new ElementBuilder(element)));
-	        }
-	
-	        return list;
-	    }
-        throw new PatternNotFoundException("Could not determine selection");
+
+        return list;
     }
 
     /**

@@ -1,14 +1,11 @@
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Memory;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +15,19 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 
 /**
  * @author Mark Humphreys
@@ -27,19 +36,28 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class StylesPatternTest {
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationStylesPattern rawPattern;
 
     @Spy
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+        
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Styles);
     }
+
 
     @Test
     public void test_getStyleId_Calls_getCurrentStyleId_From_Pattern() throws Exception {
-        Styles pattern = new Styles(rawPattern);
+        Styles pattern = new Styles(element);
+        pattern.rawPattern = rawPattern;
+        
         pattern.getStyleId();
 
         verify(rawPattern, atLeastOnce()).getCurrentStyleId(any());
@@ -49,7 +67,8 @@ public class StylesPatternTest {
     public void test_getStyleId_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentStyleId(any());
 
-        Styles pattern = new Styles(rawPattern);
+        Styles pattern = new Styles(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.getStyleId();
     }
@@ -70,7 +89,8 @@ public class StylesPatternTest {
             return 0;
         }).when(rawPattern).getCurrentStyleName(any());
 
-        Styles pattern = new Styles(rawPattern);
+        Styles pattern = new Styles(element);
+        pattern.rawPattern = rawPattern;
         pattern.getStyleName();
 
         verify(rawPattern, atLeastOnce()).getCurrentStyleName(any());
@@ -80,7 +100,8 @@ public class StylesPatternTest {
     public void test_getStyleName_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentStyleName(any());
 
-        Styles pattern = new Styles(rawPattern);
+        Styles pattern = new Styles(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.getStyleName();
     }
@@ -90,7 +111,7 @@ public class StylesPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Styles pattern = new Styles();
+        Styles pattern = new Styles(element);
 
         Styles spyPattern = Mockito.spy(pattern);
 
@@ -124,7 +145,8 @@ public class StylesPatternTest {
             return 0;
         }).when(rawPattern).getCurrentStyleName(any());
 
-        Styles pattern = new Styles(rawPattern);
+        Styles pattern = new Styles(element);
+        pattern.rawPattern = rawPattern;
 
         Styles spyPattern = Mockito.spy(pattern);
 

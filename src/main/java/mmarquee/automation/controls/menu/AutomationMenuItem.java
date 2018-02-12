@@ -27,7 +27,6 @@ import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.Clickable;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.Expandable;
-import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -39,10 +38,6 @@ import mmarquee.automation.uiautomation.TreeScope;
 public class AutomationMenuItem
         extends AutomationBase
         implements Clickable, Expandable {
-    /**
-     * The expand collapse pattern.
-     */
-    private ExpandCollapse collapsePattern;
 
     /** The parent element. */
     protected AutomationElement mainMenuParentElement;
@@ -56,7 +51,6 @@ public class AutomationMenuItem
      */
     public AutomationMenuItem(final ElementBuilder builder){
         super(builder);
-        this.collapsePattern = builder.getCollapse();
     }
 
     /**
@@ -247,53 +241,4 @@ public class AutomationMenuItem
     		return null;
     	}
     }
-    
-    /**
-     * Is the control expanded.
-     * @return True if expanded
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public boolean isExpanded() throws AutomationException, PatternNotFoundException {
-    	if (this.collapsePattern == null) {
-    		this.collapsePattern = this.getExpandCollapsePattern();
-    	}
-    	if (this.collapsePattern != null) {
-    		return collapsePattern.isExpanded();
-    	}
-    	throw new AutomationException("Collapse state cannot be determined");
-    }
-
-    /**
-     * Collapses the element.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public void collapse() throws AutomationException, PatternNotFoundException {
-    	if (this.collapsePattern == null) {
-    		this.collapsePattern = this.getExpandCollapsePattern();
-    	}
-    	if (this.collapsePattern != null) {
-    		this.collapsePattern.collapse();
-            return;
-    	}
-    	throw new AutomationException("Cannot collapse");
-    }
-
-    /**
-     * Expands the element.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public void expand() throws AutomationException, PatternNotFoundException {
-    	if (this.collapsePattern == null) {
-    		this.collapsePattern = this.getExpandCollapsePattern();
-    	}
-    	if (this.collapsePattern != null) {
-    		this.collapsePattern.expand();
-            return;
-    	}
-    	throw new AutomationException("Cannot expand");
-    }
-
 }

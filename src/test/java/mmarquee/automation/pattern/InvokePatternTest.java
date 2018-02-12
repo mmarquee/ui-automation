@@ -15,12 +15,12 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +30,16 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 
 /**
  * @author Mark Humphreys
@@ -40,18 +49,25 @@ import static org.mockito.Mockito.*;
 public class InvokePatternTest {
     @Mock
     IUIAutomationInvokePattern rawPattern;
+    @Mock
+    AutomationElement element;
 
     @Spy
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+        
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Invoke
+        		);
     }
 
     @Test
     public void test_Invoke_Calls_getCurrentIsTopmost_From_Pattern() throws Exception {
-        Invoke pattern = new Invoke(rawPattern);
+        Invoke pattern = new Invoke(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.invoke();
 
@@ -62,7 +78,8 @@ public class InvokePatternTest {
     public void test_Invoke_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).invoke();
 
-        Invoke pattern = new Invoke(rawPattern);
+        Invoke pattern = new Invoke(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.invoke();
     }
@@ -72,9 +89,7 @@ public class InvokePatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Invoke pattern = new Invoke();
-
-        Invoke spyPattern = Mockito.spy(new Invoke());
+        Invoke spyPattern = Mockito.spy(new Invoke(element));
 
         IUIAutomationInvokePattern mockRange = Mockito.mock(IUIAutomationInvokePattern.class);
 
@@ -92,9 +107,7 @@ public class InvokePatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Invoke pattern = new Invoke();
-
-        Invoke spyPattern = Mockito.spy(new Invoke());
+        Invoke spyPattern = Mockito.spy(new Invoke(element));
 
         IUIAutomationInvokePattern mockRange = Mockito.mock(IUIAutomationInvokePattern.class);
 

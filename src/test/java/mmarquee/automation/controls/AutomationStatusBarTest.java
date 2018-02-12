@@ -44,7 +44,7 @@ public class AutomationStatusBarTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationStatusBar statusBar = new AutomationStatusBar(
-                new ElementBuilder(element).itemContainer(pattern).automation(instance));
+                new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = statusBar.getName();
 

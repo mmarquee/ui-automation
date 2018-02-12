@@ -85,7 +85,7 @@ public class AutomationComboBoxTest2 {
         element.setElement(elem);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         List<AutomationListItem> elements = combo.getItems();
 
@@ -100,7 +100,7 @@ public class AutomationComboBoxTest2 {
         element.setElement(elem);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         List<AutomationListItem> elements = combo.getItems();
 
@@ -129,7 +129,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         combo.getList();
 
@@ -142,7 +142,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         List<AutomationListItem> items = combo.getList();
 
@@ -156,7 +156,7 @@ public class AutomationComboBoxTest2 {
     @Test
     public void test_GetList_Returns_No_Items_When_List_Empty() throws Exception {
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         List<AutomationListItem> items = combo.getList();
 
@@ -185,7 +185,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         combo.getItems();
 
@@ -197,7 +197,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         List<AutomationListItem> items = combo.getItems();
 
@@ -212,7 +212,7 @@ public class AutomationComboBoxTest2 {
         when(collapse.isExpanded()).thenReturn(true);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         List<AutomationListItem> items = combo.getItems();
 
@@ -224,7 +224,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         AutomationListItem item = combo.getItem(Search.getBuilder(0).build());
         assertEquals(targetElement,item.getElement());
@@ -238,7 +238,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         combo.getItem(Search.getBuilder(99).build());
     }
@@ -248,7 +248,7 @@ public class AutomationComboBoxTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         AutomationListItem item = combo.getItem(Search.getBuilder("myName").build());
         assertEquals(targetElement,item.getElement());
@@ -261,7 +261,7 @@ public class AutomationComboBoxTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         combo.getItem(Search.getBuilder("unknownName").build());
     }
@@ -272,7 +272,7 @@ public class AutomationComboBoxTest2 {
         when(targetElement.getName()).thenReturn("myWorld");
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         AutomationListItem item = combo.getItem(Search.getBuilder(Pattern.compile("my.*")).build());
         assertEquals(targetElement,item.getElement());
@@ -286,7 +286,7 @@ public class AutomationComboBoxTest2 {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         combo.getItem(Search.getBuilder(Pattern.compile("unknown")).build());
     }
@@ -296,7 +296,7 @@ public class AutomationComboBoxTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
         AutomationListItem item = combo.getItem(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,item.getElement());
@@ -309,7 +309,7 @@ public class AutomationComboBoxTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
 
        combo.getItem(Search.getBuilder().automationId("unknownID").build());
     }
@@ -317,12 +317,13 @@ public class AutomationComboBoxTest2 {
     @Test
     public void test_GetSelectedItems_Returns_Items_When_List_Not_Empty() throws Exception {
         when(selection.getCurrentSelection()).thenReturn(list);
+        when(selection.isAvailable()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection).automation(instance));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection).automation(instance));
 
         List<AutomationListItem> items = combo.getSelectedItems();
 
@@ -333,12 +334,13 @@ public class AutomationComboBoxTest2 {
     @Test
     public void test_GetSelectedItem_Returns_Item_When_List_Not_Empty() throws Exception {
         when(selection.getCurrentSelection()).thenReturn(list);
+        when(selection.isAvailable()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationComboBox combo = new AutomationComboBox(
-                new ElementBuilder(element).collapse(collapse).value(value).selection(selection).automation(instance));
+                new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection).automation(instance));
 
         AutomationListItem item = combo.getSelectedItem();
 

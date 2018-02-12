@@ -15,20 +15,17 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.TreeScope;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.uiautomation.TreeScope;
 
 /**
  * Wrapper for the ComboBox element.
@@ -37,16 +34,7 @@ import java.util.regex.Pattern;
  */
 public final class AutomationComboBox
         extends AutomationContainer
-        implements Expandable, Valueable, Focusable {
-
-    /** The expand collapse pattern. */
-    private ExpandCollapse collapsePattern;
-
-    /** The value pattern. */
-    private Value valuePattern;
-
-    /** The selection pattern. */
-    private Selection selectionPattern;
+        implements Expandable, Valueable, Focusable, ChildSelectable {
 
     /**
      * Constructor for the AutomationComboBox.
@@ -54,23 +42,6 @@ public final class AutomationComboBox
      */
     public AutomationComboBox(final ElementBuilder builder) {
         super(builder);
-        this.collapsePattern = builder.getCollapse();
-        this.valuePattern = builder.getValue();
-        this.selectionPattern = builder.getSelection();
-    }
-
-    /**
-     * Gets the text associated with this element.
-     * @return The current value.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public String getValue() throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        return valuePattern.value();
     }
 
     /**
@@ -80,50 +51,7 @@ public final class AutomationComboBox
      * @throws PatternNotFoundException Pattern not found.
      */
     public void setText(String text) throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        valuePattern.setValue(text);
-    }
-
-    /**
-     * Expands the element.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public void expand() throws AutomationException, PatternNotFoundException {
-        if (this.collapsePattern == null) {
-            this.collapsePattern = this.getExpandCollapsePattern();
-        }
-
-        this.collapsePattern.expand();
-    }
-
-    /**
-     * Is the control expanded.
-     * @return True if expanded.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public boolean isExpanded() throws AutomationException, PatternNotFoundException {
-        if (this.collapsePattern == null) {
-            this.collapsePattern = this.getExpandCollapsePattern();
-        }
-
-        return collapsePattern.isExpanded();
-    }
-
-    /**
-     * Collapses the element.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Pattern not found.
-     */
-    public void collapse() throws AutomationException, PatternNotFoundException {
-        if (this.collapsePattern == null) {
-            this.collapsePattern = this.getExpandCollapsePattern();
-        }
-        this.collapsePattern.collapse();
+        setValue(text);
     }
 
     /**
@@ -274,21 +202,16 @@ public final class AutomationComboBox
      * @throws PatternNotFoundException Failed to find pattern
      */
     public List<AutomationListItem> getSelectedItems() throws AutomationException, PatternNotFoundException {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
+        
+    	List<AutomationElement> collection = getCurrentSelection();
+
+        List<AutomationListItem> list = new ArrayList<>();
+
+        for (AutomationElement element : collection) {
+            list.add(new AutomationListItem(new ElementBuilder(element)));
         }
-        if (this.selectionPattern != null) {
-	        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
 
-	        List<AutomationListItem> list = new ArrayList<>();
-
-	        for (AutomationElement element : collection) {
-	            list.add(new AutomationListItem(new ElementBuilder(element)));
-	        }
-
-	        return list;
-	    }
-        throw new PatternNotFoundException("Could not determine selection");
+        return list;
     }
 
     /**

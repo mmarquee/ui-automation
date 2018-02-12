@@ -16,8 +16,11 @@
 
 package mmarquee.automation.controls;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -33,23 +36,29 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.pattern.Dock;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.MultipleView;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
+import mmarquee.automation.pattern.Scroll;
+import mmarquee.automation.pattern.ScrollItem;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.TableItem;
 import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.pattern.Transform;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
-import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
  * The base for automation.
@@ -57,7 +66,7 @@ import mmarquee.automation.utils.providers.PatternProvider;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public abstract class AutomationBase implements Automatable {
+public abstract class AutomationBase implements Automatable, CanRequestBasePattern {
 
     /**
      * The logger.
@@ -75,9 +84,10 @@ public abstract class AutomationBase implements Automatable {
     protected UIAutomation automation;
 
     /**
-     * The invoke pattern.
+     * The available Patterns.
      */
-    protected Invoke invokePattern = null;
+    protected final Map<Class<? extends BasePattern>,BasePattern> automationPatterns = new HashMap<>();
+    private Object patternAccessMonitor = new Object();
 
     /**
      * Constructor for the AutomationBase.
@@ -93,9 +103,16 @@ public abstract class AutomationBase implements Automatable {
             this.automation = UIAutomation.getInstance();
         }
 
-        if (builder.getHasInvoke()) {
-            this.invokePattern = builder.getInvoke();
+        for (final BasePattern pattern: builder.getAutomationPatterns()) {
+        	setAutomationPattern(pattern);
         }
+    }
+
+    /**
+     * for testing purposes
+     */
+    void setAutomationPattern(final BasePattern pattern) {
+        this.automationPatterns.put(pattern.getPatternClass(), pattern);
     }
 
     /**
@@ -109,7 +126,7 @@ public abstract class AutomationBase implements Automatable {
 
     /**
      * Throws an exception if the element's class name does not equal the expected one.
-     * 
+     *
      * @param expectedClassName the expected className.
      * @throws AutomationException if automation access failed.
      */
@@ -118,7 +135,7 @@ public abstract class AutomationBase implements Automatable {
 		if (element == null) {
 			throw new ElementNotFoundException("null");
 		}
-		
+
         String cName = element.getClassName();
 		if ((cName == null && expectedClassName == null)
 				|| (cName != null && cName.equals(expectedClassName))) {
@@ -128,14 +145,57 @@ public abstract class AutomationBase implements Automatable {
 	}
 
     /**
+     * Checks whether a pattern is available. Can be used if no BasePattern class
+     * is available for the pattern, yet. Tries to get the matching propertyId to check for availability
+     * of for the given PatternId
+     *
+     * @param patternId
+     *            the Pattern ID to test for
+     * @return True if available.
+     *
+     */
+    public boolean isAutomationPatternAvailable(final PatternID patternId) {
+        try {
+        	final String patternIdName = patternId.name();
+        	final String patternIdNameText = patternIdName.replaceAll("\\d", "");
+        	final String patternIdNameVersion = patternIdName.replaceAll("\\D", "");
+        	final String propertyName = String.format("Is%sPattern%sAvailable", patternIdNameText, patternIdNameVersion);
+        	final PropertyID propertyId = PropertyID.valueOf(propertyName);
+            return !this.element.getPropertyValue(propertyId.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks whether a pattern is available. Can be used if no BasePattern class
+     * is available for the pattern, yet. Tries to get the matching propertyId to check for availability
+     * of for the given PatternId
+     *
+     * @param patternIdValue
+     *            the numerical id of the pattern to test for
+     * @return True if available.
+     *
+     */
+    public boolean isAutomationPatternAvailable(final int patternIdValue) {
+    	for (final PatternID patternId: PatternID.values()) {
+    		if (patternId.getValue() == patternIdValue) {
+    	        return isAutomationPatternAvailable(patternId);
+    		}
+    	}
+    	throw new IllegalArgumentException("No PatternID constant defined for patternId " + patternIdValue);
+    }
+
+    /**
      * Checks whether a pattern is available.
      *
-     * @param property pattern to search for.
+     * @param patternClass pattern to search for.
      * @return True if available.
+     *
      */
-    private boolean isPatternAvailable(final PropertyID property) {
+    public boolean isAutomationPatternAvailable(final Class<? extends BasePattern> patternClass) {
         try {
-            return !this.element.getPropertyValue(property.getValue()).equals(0);
+            return requestAutomationPattern(patternClass).isAvailable();
         } catch (AutomationException ex) {
             return false;
         }
@@ -146,8 +206,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isDockPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsDockPatternAvailable);
+    public boolean isDockPatternAvailable() {
+        return isAutomationPatternAvailable(Dock.class);
     }
 
     /**
@@ -155,8 +215,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isExpandCollapsePatternAvailable() {
-        return isPatternAvailable(PropertyID.IsExpandCollapsePatternAvailable);
+    public boolean isExpandCollapsePatternAvailable() {
+        return isAutomationPatternAvailable(ExpandCollapse.class);
     }
 
     /**
@@ -164,8 +224,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isGridItemPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsGridItemPatternAvailable);
+    public boolean isGridItemPatternAvailable() {
+        return isAutomationPatternAvailable(GridItem.class);
     }
 
     /**
@@ -173,8 +233,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isMultipleViewPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsMultipleViewPatternAvailable);
+    public boolean isMultipleViewPatternAvailable() {
+        return isAutomationPatternAvailable(MultipleView.class);
     }
 
     /**
@@ -182,8 +242,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isInvokePatternAvailable() {
-        return isPatternAvailable(PropertyID.IsInvokePatternAvailable);
+    public boolean isInvokePatternAvailable() {
+        return isAutomationPatternAvailable(Invoke.class);
     }
 
     /**
@@ -191,8 +251,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isGridPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsGridPatternAvailable);
+    public boolean isGridPatternAvailable() {
+        return isAutomationPatternAvailable(Grid.class);
     }
 
     /**
@@ -200,8 +260,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isRangeValuePatternAvailable() {
-        return isPatternAvailable(PropertyID.IsRangeValuePatternAvailable);
+    public boolean isRangeValuePatternAvailable() {
+        return isAutomationPatternAvailable(Range.class);
     }
 
     /**
@@ -209,8 +269,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isScrollPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsScrollPatternAvailable);
+    public boolean isScrollPatternAvailable() {
+        return isAutomationPatternAvailable(Scroll.class);
     }
 
     /**
@@ -218,8 +278,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isSelectionItemPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsSelectionItemPatternAvailable);
+    public boolean isSelectionItemPatternAvailable() {
+        return isAutomationPatternAvailable(SelectionItem.class);
     }
 
     /**
@@ -227,8 +287,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isScrollItemPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsScrollItemPatternAvailable);
+    public boolean isScrollItemPatternAvailable() {
+        return isAutomationPatternAvailable(ScrollItem.class);
     }
 
     /**
@@ -236,8 +296,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isWindowPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsWindowPatternAvailable);
+    public boolean isWindowPatternAvailable() {
+        return isAutomationPatternAvailable(Window.class);
     }
 
     /**
@@ -245,8 +305,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isTextPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsTextPatternAvailable);
+    public boolean isTextPatternAvailable() {
+        return isAutomationPatternAvailable(Text.class);
     }
 
     /**
@@ -254,8 +314,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isTableItemPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsTableItemPatternAvailable);
+    public boolean isTableItemPatternAvailable() {
+        return isAutomationPatternAvailable(TableItem.class);
     }
 
     /**
@@ -263,8 +323,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isTablePatternAvailable() {
-        return isPatternAvailable(PropertyID.IsTablePatternAvailable);
+    public boolean isTablePatternAvailable() {
+        return isAutomationPatternAvailable(Table.class);
     }
 
     /**
@@ -272,8 +332,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isSelectionPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsSelectionPatternAvailable);
+    public boolean isSelectionPatternAvailable() {
+        return isAutomationPatternAvailable(Selection.class);
     }
 
     /**
@@ -281,8 +341,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isTransformPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsTransformPatternAvailable);
+    public boolean isTransformPatternAvailable() {
+        return isAutomationPatternAvailable(Transform.class);
     }
 
     /**
@@ -290,8 +350,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isTogglePatternAvailable() {
-        return isPatternAvailable(PropertyID.IsTogglePatternAvailable);
+    public boolean isTogglePatternAvailable() {
+        return isAutomationPatternAvailable(Toggle.class);
     }
 
     /**
@@ -299,8 +359,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isItemContainerPatternAvailable() {
-        return isPatternAvailable(PropertyID.IsItemContainerPatternAvailable);
+    public boolean isItemContainerPatternAvailable() {
+        return isAutomationPatternAvailable(ItemContainer.class);
     }
 
     /**
@@ -308,8 +368,8 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Yes or no.
      */
-    boolean isValuePatternAvailable() {
-        return isPatternAvailable(PropertyID.IsValuePatternAvailable);
+    public boolean isValuePatternAvailable() {
+        return isAutomationPatternAvailable(Value.class);
     }
 
     /**
@@ -317,7 +377,7 @@ public abstract class AutomationBase implements Automatable {
      *
      * @return Off screen.
      */
-    boolean isOffScreen() {
+    public boolean isOffScreen() {
         try {
             return !this.element.getPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
         } catch (AutomationException ex) {
@@ -498,329 +558,6 @@ public abstract class AutomationBase implements Automatable {
     }
 
     /**
-     * Gets the underlying automation pattern.
-     *
-     * @param id The control id to look for
-     * @return The pattern
-     * @throws PatternNotFoundException Pattern not found
-     * @throws AutomationException Error in automation library
-     */
-    PointerByReference getPattern (final int id)
-            throws PatternNotFoundException, AutomationException {
-        PointerByReference unknown = this.element.getPattern(id);
-
-        if (unknown != null) {
-            return unknown;
-        } else {
-            logger.warn("Failed to find pattern");
-            throw new PatternNotFoundException();
-        }
-    }
-
-    /**
-     * <p>
-     * Gets the selectItem pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationSelectionItemPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern not found
-     * @throws AutomationException Error in automation library
-     */
-    public SelectionItem getSelectItemPattern()
-            throws PatternNotFoundException, AutomationException {
-        if (this.isSelectionItemPatternAvailable()) {
-        	SelectionItem pattern = new SelectionItem();
-            PointerByReference unknown = this.getPattern(PatternID.SelectionItem.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (SelectionItem)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the selection pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationSelectionPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern not found
-     * @throws AutomationException Error in automation library
-     */
-    Selection getSelectionPattern()
-            throws PatternNotFoundException, AutomationException {
-        if (this.isSelectionPatternAvailable()) {
-        	Selection pattern = new Selection();
-            PointerByReference unknown = this.getPattern(PatternID.Selection.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Selection)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the value pattern for this control.
-     * </p>
-     * @return Returns the IUIAutomationValuePattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Value getValuePattern() throws PatternNotFoundException, AutomationException {
-        if (this.isValuePatternAvailable()) {
-        	Value pattern = new Value();
-            PointerByReference unknown = this.getPattern(PatternID.Value.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Value)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the gridItem pattern for this control.
-     * </p>
-     * @return Returns the IUIAutomationGridItemPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    GridItem getGridItemPattern() throws PatternNotFoundException, AutomationException {
-        if (this.isGridItemPatternAvailable()) {
-        	GridItem pattern = new GridItem();
-            PointerByReference unknown = this.getPattern(PatternID.GridItem.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (GridItem)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the rangevalue pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationRangeValuePattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Range getRangePattern() throws PatternNotFoundException, AutomationException {
-        if (isRangeValuePatternAvailable()) {
-        	Range pattern = new Range();
-            PointerByReference unknown = this.getPattern(PatternID.RangeValue.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Range)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the table pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationTablePattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Table getTablePattern() throws PatternNotFoundException, AutomationException {
-        if (isTablePatternAvailable()) {
-        	Table pattern = new Table();
-            PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Table)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the window pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationWindowPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Window getWindowPattern() throws PatternNotFoundException, AutomationException {
-        if (this.isWindowPatternAvailable()) {
-        	Window pattern = new Window();
-            PointerByReference unknown = this.getPattern(PatternID.Window.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Window)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the expand/collapse pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationExpandCollapsePattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    protected ExpandCollapse getExpandCollapsePattern()
-            throws PatternNotFoundException, AutomationException {
-        if (isExpandCollapsePatternAvailable()) {
-        	ExpandCollapse pattern = new ExpandCollapse();
-            PointerByReference unknown = this.getPattern(PatternID.ExpandCollapse.getValue());
-            
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (ExpandCollapse)((PatternProvider) unknown).getPattern();
-            }
-
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the grid pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationGridPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Grid getGridPattern() throws PatternNotFoundException, AutomationException {
-        if (isGridPatternAvailable()) {
-        	Grid pattern = new Grid();
-            PointerByReference unknown = this.getPattern(PatternID.Grid.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Grid)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the toggle pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationTogglePattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Toggle getTogglePattern() throws PatternNotFoundException, AutomationException {
-        if (isTogglePatternAvailable()) {
-        	Toggle pattern = new Toggle();
-            PointerByReference unknown = this.getPattern(PatternID.Toggle.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Toggle)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the item container pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationItemContainerPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    ItemContainer getItemContainerPattern() throws PatternNotFoundException, AutomationException {
-        ItemContainer pattern = new ItemContainer();
-
-        if (isItemContainerPatternAvailable()) {
-            PointerByReference unknown = this.getPattern(PatternID.ItemContainer.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (ItemContainer)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-        }
-
-        return pattern;
-    }
-
-    /**
-     * <p>
-     * Gets the invoke pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationInvokePattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    protected Invoke getInvokePattern() throws PatternNotFoundException, AutomationException {
-        if (isInvokePatternAvailable()) {
-        	Invoke pattern = new Invoke();
-            PointerByReference unknown = this.getPattern(PatternID.Invoke.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Invoke)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
-     * <p>
-     * Gets the text pattern for this control.
-     * </p>
-     * @return  Returns the IUIAutomationTextPattern associated with this control, or null if not available
-     * @throws PatternNotFoundException Pattern is not found
-     * @throws AutomationException Error in automation library
-     */
-    Text getTextPattern() throws PatternNotFoundException, AutomationException {
-        if (this.isTextPatternAvailable()) {
-        	Text pattern = new Text();
-            PointerByReference unknown = this.getPattern(PatternID.Text.getValue());
-
-            if (unknown instanceof PatternProvider) { // Hook for mocking tests
-            	return (Text)((PatternProvider) unknown).getPattern();
-            }
-            
-            pattern.setPattern(unknown.getValue());
-            return pattern;
-        }
-        return null;
-    }
-
-    /**
      * Is the control enabled.
      *
      * @return Enabled?
@@ -952,7 +689,7 @@ public abstract class AutomationBase implements Automatable {
     public Unknown makeUnknown(Pointer pvInstance) {
         return new Unknown(pvInstance);
     }
-    
+
 
     /**
      * <p>
@@ -962,17 +699,15 @@ public abstract class AutomationBase implements Automatable {
      * @throws PatternNotFoundException Could not find the invoke pattern
      */
     public void invoke() throws AutomationException, PatternNotFoundException {
-        if (this.invokePattern == null) {
-            this.invokePattern = this.getInvokePattern();
-        }
 
-        if (this.isInvokePatternAvailable()) {
-            this.invokePattern.invoke();
+        final Invoke invokePattern = requestAutomationPattern(Invoke.class);
+        if (invokePattern.isAvailable()) {
+            invokePattern.invoke();
         } else {
             throw new PatternNotFoundException("Invoke could not be called");
         }
     }
-    
+
 
     /**
      * Gets child Elements.
@@ -986,7 +721,7 @@ public abstract class AutomationBase implements Automatable {
         return this.findAll(new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
         		this.createTrueCondition());
     }
-    
+
  // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent element
@@ -1004,13 +739,13 @@ public abstract class AutomationBase implements Automatable {
      * @param deep set to true to get also children of children
      * @return The matching element
      * @throws AutomationException Did not find the element
-     * @throws PatternNotFoundException Expected pattern not found 
+     * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationBase> getChildren(final boolean deep)
             throws AutomationException, PatternNotFoundException {
         List<AutomationElement> elements = this.getChildElements(deep);
         List<AutomationBase> collection = new LinkedList<>();
-        
+
         for (AutomationElement el: elements) {
         	collection.add(AutomationControlFactory.get(this, el));
         }
@@ -1032,10 +767,48 @@ public abstract class AutomationBase implements Automatable {
 //     *
 //     * @return The matching element
 //     * @throws AutomationException Did not find the element
-//     * @throws PatternNotFoundException Expected pattern not found 
+//     * @throws PatternNotFoundException Expected pattern not found
 //     */
 //    public AutomationBase getParent() throws AutomationException, PatternNotFoundException {
 //    	AutomationElement el = this.getParentElement();
 //    	return AutomationControlFactory.get(this, el);
 //    }
+
+    /**
+     * <p>
+     * Gets the specified pattern for this control from the underlying Windows API.
+     * </p>
+     * @return  Returns the IUIAutomationInvokePattern associated with this control, or null if not available
+     * @throws PatternNotFoundException Pattern is not found
+     * @throws AutomationException Error in automation library
+     */
+    @Override
+    public <T extends BasePattern> T requestAutomationPattern(final Class<T> automationPatternClass) throws AutomationException {
+        synchronized(patternAccessMonitor) {
+            @SuppressWarnings("unchecked")
+            T automationPattern = (T) automationPatterns.get(automationPatternClass);
+            if (automationPattern == null) {
+            	automationPattern = this.element.getProvidedPattern(automationPatternClass);
+                if (automationPattern == null) {
+	                try {
+	                    automationPattern = automationPatternClass.getConstructor(AutomationElement.class).newInstance(this.element);
+	                } catch (Throwable e) {
+	                	e = getInnerException(e);
+	                	if (e instanceof AutomationException) throw (AutomationException) e;
+	                	throw new AutomationException(e);
+	                }
+                }
+                automationPatterns.put(automationPatternClass, automationPattern);
+            }
+            return automationPattern;
+        }
+    }
+
+    private Throwable getInnerException(Throwable e) {
+    	if (e instanceof InvocationTargetException) {
+    		return  getInnerException(((InvocationTargetException) e).getCause());
+    	}
+    	return e;
+    }
+
 }

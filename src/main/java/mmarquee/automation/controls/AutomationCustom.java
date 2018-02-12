@@ -15,22 +15,13 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Value;
-
 /**
  * Wrapper for the Custom ControlId, which is usually a container.
  * @author Mark Humphreys
  * Date 08/03/2016.
  */
 public class AutomationCustom extends AutomationContainer implements Valueable {
-
-    /**
-     * The value pattern.
-     */
-    private Value valuePattern;
-
+	
     /**
      * Constructor for the AutomationCustom element.
      *
@@ -38,22 +29,5 @@ public class AutomationCustom extends AutomationContainer implements Valueable {
      */
     public AutomationCustom(final ElementBuilder builder) {
         super(builder);
-        this.valuePattern = builder.getValue();
-    }
-
-    /**
-     * Gets the value text associated with this element.
-     *
-     * @return The value of the item.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public String getValue()
-            throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        return this.valuePattern.value();
     }
 }
