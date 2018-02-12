@@ -21,9 +21,10 @@ import java.util.List;
 import com.sun.jna.*;
 
 /**
- * uuid({00000000-0000-0000-0000-000000000000})
- * helpstring()
+ * Contains values that specify the scope of various operations in the Microsoft UI Automation tree.
  *
+ * @author Mark Humphreys
+ * Date 13/07/2016.
  */
 public class TreeScope extends Structure {
     public static class ByReference extends TreeScope implements
@@ -44,17 +45,39 @@ public class TreeScope extends Structure {
         this.read();
     }
 
-    //TreeScope_Element
+    /**
+     * The scope excludes the subtree from the search.
+     */
+    public static final int None = 0;
+
+    /**
+     * The scope includes the element itself.
+     */
     public static final int Element = 1;
-    //TreeScope_Children
+
+    /**
+     * The scope includes children of the element.
+     */
     public static final int Children = 2;
-    //TreeScope_Descendants
+
+    /**
+     * The scope includes children and more distant descendants of the element.
+     */
     public static final int Descendants = 4;
-    //TreeScope_Parent
+
+    /**
+     * The scope includes the parent of the element.
+     */
     public static final int Parent = 8;
-    //TreeScope_Subtree
+
+    /**
+     * The scope includes the element and all its descendants.
+     */
     public static final int Subtree = 7;
-    //TreeScope_Ancestors
+
+    /**
+     * The scope includes the parent and more distant ancestors of the element.
+     */
     public static final int Ancestors = 16;
 
     @Override

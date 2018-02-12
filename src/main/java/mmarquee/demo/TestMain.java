@@ -143,7 +143,7 @@ public class TestMain extends TestBase {
 
             String aText = tb1.getValueFromIAccesible();
 
-            int v = tb1.getMetadata();
+            Object v = tb1.getMetadata();
 
             logger.info("Status Bar text = " + eb1Text);
             logger.info("Status Bar text (from accessible) = " + aText);
