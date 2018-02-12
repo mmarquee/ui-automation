@@ -15,17 +15,22 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.verify;
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
 
 /**
  * @author Mark Humphreys
@@ -35,16 +40,23 @@ import static org.mockito.Mockito.verify;
  */
 public class GridItemPatternTest {
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationGridItemPattern rawPattern;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.GridItem, PropertyID.IsGridItemPatternAvailable);
     }
 
     @Test
     public void test_GetColumn_Calls_GetColumn_From_Pattern() throws Exception {
-        GridItem pattern = new GridItem(rawPattern);
+        GridItem pattern = new GridItem(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.getColumn();
 
@@ -53,7 +65,8 @@ public class GridItemPatternTest {
 
     @Test
     public void test_GetRow_Calls_GetRow_From_Pattern() throws Exception {
-        GridItem pattern = new GridItem(rawPattern);
+        GridItem pattern = new GridItem(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.getRow();
 
@@ -65,7 +78,8 @@ public class GridItemPatternTest {
 
         doAnswer(invocation -> 1).when(rawPattern).getCurrentColumn(any());
 
-        GridItem pattern = new GridItem(rawPattern);
+        GridItem pattern = new GridItem(element);
+        pattern.rawPattern = rawPattern;
 
         Integer value = pattern.getColumn();
 
@@ -77,7 +91,8 @@ public class GridItemPatternTest {
 
         doAnswer(invocation -> 1).when(rawPattern).getCurrentRow(any());
 
-        GridItem pattern = new GridItem(rawPattern);
+        GridItem pattern = new GridItem(element);
+        pattern.rawPattern = rawPattern;
 
         Integer value = pattern.getRow();
 

@@ -21,6 +21,8 @@ import mmarquee.automation.pattern.LegacyIAccessible;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
+import mmarquee.automation.pattern.LegacyIAccessible;
+
 /**
  * Wrapper for the TextBox element.
  *
@@ -32,14 +34,9 @@ public final class AutomationTextBox
         implements Valueable, LegacyAccessible {
 
     /**
-     * The value pattern.
-     */
-    private Value valuePattern;
-
-    /**
      * The legacy IAccessible pattern.
      */
-    private LegacyIAccessible accessiblePattern;
+    private LegacyIAccessible accessiblePattern
 
     /**
      * Construct the AutomationTextBox.
@@ -48,31 +45,6 @@ public final class AutomationTextBox
      */
     public AutomationTextBox(final ElementBuilder builder) {
         super(builder);
-        this.valuePattern = builder.getValue();
-    }
-
-    /**
-     * Gets the text associated with this element.
-     *
-     * @return The current text.
-     * @throws AutomationException Automation library error.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public String getValue()
-            throws PatternNotFoundException, AutomationException {
-        if (this.valuePattern == null) {
-            try {
-                this.valuePattern = this.getValuePattern();
-            } catch (NullPointerException ex) {
-                logger.info("No value pattern available");
-            }
-        }
-
-        try {
-            return valuePattern.value();
-        } catch (NullPointerException ex) {
-            return "<Empty>";
-        }
     }
 
     /**

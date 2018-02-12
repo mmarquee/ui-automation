@@ -80,7 +80,7 @@ public class AutomationToolbarTest2 {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder(0).build());
     }
@@ -90,7 +90,7 @@ public class AutomationToolbarTest2 {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder(1).build());
     }
@@ -100,7 +100,7 @@ public class AutomationToolbarTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder("myName").build());
         
@@ -114,7 +114,7 @@ public class AutomationToolbarTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder("unknownName").build());
     }
@@ -125,7 +125,7 @@ public class AutomationToolbarTest2 {
         when(targetElement.getName()).thenReturn("myName");
         
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("my.*")).build());
         
@@ -139,7 +139,7 @@ public class AutomationToolbarTest2 {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("unknownName")).build());
     }
@@ -149,7 +149,7 @@ public class AutomationToolbarTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         AutomationToolBar button = ctrl.getToolBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,button.getElement());
@@ -162,7 +162,7 @@ public class AutomationToolbarTest2 {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
         AutomationToolBar ctrl = new AutomationToolBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolBar(Search.getBuilder().automationId("unknownID").build());
     }

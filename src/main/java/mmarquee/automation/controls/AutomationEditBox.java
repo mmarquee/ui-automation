@@ -17,83 +17,14 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Text;
-import mmarquee.automation.pattern.Value;
 
 /**
  * Wrapper around the edit box element.
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public class AutomationEditBox extends AutomationBase implements Valueable {
-
-    /**
-     * The value pattern.
-     */
-    private Value valuePattern;
-
-    /**
-     * The text pattern.
-     */
-    private Text textPattern;
-
-    /**
-     * Gets the value of the control.
-     * @return The string value of the control.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public String getValue() throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        return valuePattern.value();
-    }
-
-    /**
-     * Gets the text of the control.
-     * @return The string value of the control.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public String getText() throws AutomationException, PatternNotFoundException {
-        if (this.textPattern == null) {
-            this.textPattern = this.getTextPattern();
-        }
-
-        return textPattern.getText();
-    }
-
-    /**
-     * Sets the value of the edit box.
-     * @param value The value to set.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public void setValue(String value) throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        this.valuePattern.setValue(value);
-    }
-
-    /**
-     * Whether the element is read only.
-     * @return True if readonly, otherwise false.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Expected pattern not found.
-     */
-    public boolean isReadOnly()throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        return this.valuePattern.isReadOnly();
-    }
-
+public class AutomationEditBox extends AutomationBase implements Valueable, Textable {
+    
     /**
      * Whether the element is a password.
      * @return True if it's a password, otherwise false.
@@ -109,6 +40,5 @@ public class AutomationEditBox extends AutomationBase implements Valueable {
      */
     public AutomationEditBox(final ElementBuilder builder) {
         super(builder);
-        this.valuePattern = builder.getValue();
     }
 }

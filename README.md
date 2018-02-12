@@ -15,6 +15,9 @@ The build is built (for PRs and master) via [travis-ci](https://travis-ci.org/mm
 ![build status](https://travis-ci.org/mmarquee/ui-automation.svg?branch=master)
 
 # Contributors
+Thanks to everyone that has used the library and contributed ideas and suggestions and issues, in order to improve the library. 
+
+## Code Contributors
 * [Mark Humphreys](https://github.com/mmarquee)
 * [Pascal Bihler](https://github.com/pbi-qfs)
 * [Filipe Dias Lewandowski](https://github.com/diasf)

@@ -180,6 +180,7 @@ public class AutomationMainMenuTest extends BaseAutomationTest {
         list.add(menuItemElement1);
         
         ExpandCollapse expandCollapsePattern = BaseAutomationTest.mockExpandCollapsePattern(menuItemElement1);
+        
 		when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
 
         AutomationElement menuItemElement2 = Mockito.mock(AutomationElement.class);

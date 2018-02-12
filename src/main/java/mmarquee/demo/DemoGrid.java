@@ -53,7 +53,7 @@ public class DemoGrid extends TestBase {
         AutomationWindow applicationWindow = null;
 
         try {
-            applicationWindow = automation.getDesktopWindow("Main Form");
+            applicationWindow = automation.getDesktopWindow("Demo Form");
         } catch (Exception ex) {
             logger.info("Failed to find `Demo Form`");
         }

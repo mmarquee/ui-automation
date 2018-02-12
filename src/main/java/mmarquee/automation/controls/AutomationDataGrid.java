@@ -16,17 +16,12 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.Grid;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.Table;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Wrapper around the Delphi automated string gridPattern.
@@ -36,26 +31,7 @@ import java.util.List;
  */
 public final class AutomationDataGrid
         extends AutomationBase
-        implements Valueable {
-    /**
-     * The value pattern.
-     */
-    private Value valuePattern;
-
-    /**
-     * The gird pattern.
-     */
-    private Grid gridPattern;
-
-    /**
-     * The table pattern.
-     */
-    private Table tablePattern;
-
-    /**
-     * The selection pattern.
-     */
-    private Selection selectionPattern;
+        implements Valueable, ChildSelectable, Gridable, Tabulable {
 
     /**
      * Construct the AutomationDataGrid.
@@ -64,43 +40,6 @@ public final class AutomationDataGrid
      */
     public AutomationDataGrid(final ElementBuilder builder) {
         super(builder);
-
-        this.valuePattern = builder.getValue();
-        this.gridPattern = builder.getGrid();
-        this.tablePattern = builder.getTable();
-        this.selectionPattern = builder.getSelection();
-    }
-
-    /**
-     * Gets the text associated with the active cell of this element.
-     *
-     * @return The value of the item
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public String getValue()
-            throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        return this.valuePattern.value();
-    }
-
-    /**
-     * Whether the gridPattern is read only.
-     *
-     * @return Read only?
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public boolean isReadOnly()
-            throws AutomationException, PatternNotFoundException {
-        if (this.valuePattern == null) {
-            this.valuePattern = this.getValuePattern();
-        }
-
-        return this.valuePattern.isReadOnly();
     }
 
     /**
@@ -112,25 +51,10 @@ public final class AutomationDataGrid
      */
     public List<AutomationDataGridCell> selectedRow()
             throws PatternNotFoundException, AutomationException  {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
-        }
+    	
+    	List<AutomationElement> collection = getCurrentSelection();
 
-        List<AutomationElement> collection = this.selectionPattern.getCurrentSelection();
-
-        List<AutomationDataGridCell> items = new ArrayList<>();
-
-        for (AutomationElement item : collection) {
-            try {
-                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
-            } catch (NullPointerException ex) {
-                // Try and add am empty cell
-                AutomationDataGridCell cell = new AutomationDataGridCell(null);
-                items.add(cell);
-            }
-        }
-
-        return items;
+        return convertListToAutomationDataGridCells(collection);
     }
 
 
@@ -143,10 +67,8 @@ public final class AutomationDataGrid
      */
     public AutomationDataGridCell selected()
             throws PatternNotFoundException, AutomationException  {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
-        }
-        List<AutomationElement> collection = selectionPattern.getCurrentSelection();
+
+        List<AutomationElement> collection = getCurrentSelection();
 
         return new AutomationDataGridCell(new ElementBuilder(collection.get(0)));
     }
@@ -160,25 +82,23 @@ public final class AutomationDataGrid
      */
     public List<AutomationDataGridCell> getColumnHeaders()
             throws PatternNotFoundException, AutomationException  {
-        if (this.tablePattern == null) {
-            this.tablePattern = this.getTablePattern();
-        }
+        List<AutomationElement> collection = this.getCurrentColumnHeaders();
 
-        List<AutomationElement> collection = this.tablePattern.getCurrentColumnHeaders();
+        return convertListToAutomationDataGridCells(collection);
+    }
 
-        List<AutomationDataGridCell> items = new ArrayList<>();
+    /**
+     * Gets the list of the row headers.
+     *
+     * @return List of GridItems
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public List<AutomationDataGridCell> getRowHeaders ()
+            throws PatternNotFoundException, AutomationException  {
+        List<AutomationElement> collection = this.getCurrentRowHeaders();
 
-        for (AutomationElement item : collection) {
-            try {
-                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
-            } catch (NullPointerException ex) {
-                // Try and add am empty cell
-                AutomationDataGridCell cell = new AutomationDataGridCell(null);
-                items.add(cell);
-            }
-        }
-
-        return items;
+        return convertListToAutomationDataGridCells(collection);
     }
 
     /**
@@ -210,39 +130,7 @@ public final class AutomationDataGrid
     public AutomationDataGridCell getItem(final int row,
                                           final int column)
             throws PatternNotFoundException, AutomationException  {
-        if (this.gridPattern == null) {
-            this.gridPattern = this.getGridPattern();
-        }
-
-        return new AutomationDataGridCell(new ElementBuilder(this.gridPattern.getItem(row, column)));
-    }
-
-    /**
-     * Gets the row count of the gridPattern.
-     *
-     * @return The row count
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public int rowCount() throws AutomationException, PatternNotFoundException {
-        if (this.gridPattern == null) {
-            this.gridPattern = this.getGridPattern();
-        }
-        return this.gridPattern.rowCount();
-    }
-
-    /**
-     * Gets the column count of the gridPattern.
-     *
-     * @return The column count
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public int columnCount() throws AutomationException, PatternNotFoundException {
-        if (this.gridPattern == null) {
-            this.gridPattern = this.getGridPattern();
-        }
-        return this.gridPattern.columnCount();
+        return new AutomationDataGridCell(new ElementBuilder(getGridItem(row, column)));
     }
 
     /**
@@ -292,7 +180,7 @@ public final class AutomationDataGrid
     }
 
     /**
-     * Gets the column headers for the given column.
+     * Gets the column header for the given column.
      *
      * @param col The column
      * @return The header cell
@@ -307,49 +195,36 @@ public final class AutomationDataGrid
     }
 
     /**
-     * Returns whether the grid has column or row headers.
+     * Gets the row header for the given row.
      *
-     * @return RowOrColumnMajor Row or column
-     * @throws AutomationException Error thrown from automation library
-     * @throws PatternNotFoundException Failed to find pattern
+     * @param row The row
+     * @return The header cell
+     * @throws AutomationException Error in automation library
+     * @throws PatternNotFoundException Expected pattern not found
      */
-    public RowOrColumnMajor getRowOrColumnMajor()
-            throws AutomationException, PatternNotFoundException {
-        if (this.tablePattern == null) {
-            this.tablePattern = this.getTablePattern();
+    public AutomationDataGridCell getRowHeader(final int row)
+            throws PatternNotFoundException, AutomationException {
+        List<AutomationDataGridCell> headers = this.getRowHeaders();
+
+        return headers.get(row);
+    }
+    
+
+	List<AutomationDataGridCell> convertListToAutomationDataGridCells(List<AutomationElement> collection) {
+		List<AutomationDataGridCell> items = new ArrayList<>();
+
+        for (AutomationElement item : collection) {
+            try {
+                items.add(new AutomationDataGridCell(new ElementBuilder(item)));
+            } catch (NullPointerException ex) {
+                // Try and add am empty cell
+                AutomationDataGridCell cell = new AutomationDataGridCell(null);
+                items.add(cell);
+            }
         }
 
-        return this.tablePattern.getRowOrColumnMajor();
-    }
+        return items;
+	}
 
-    /**
-     * Is multiple selection allowed.
-     *
-     * @return True is multiple selection is allowed
-     * @throws AutomationException Error thrown from automation library
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    public boolean canSelectMultiple() throws AutomationException, PatternNotFoundException {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
-        }
 
-        return this.selectionPattern.canSelectMultiple();
-    }
-
-    /**
-     * Gets the selection from the data grid.
-     *
-     * @return The list of selected elements.
-     * @throws AutomationException An automation error has occurred.
-     * @throws PatternNotFoundException Pattern was not found.
-     */
-    public List<AutomationElement> getSelection()
-            throws AutomationException, PatternNotFoundException {
-        if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
-        }
-
-        return this.selectionPattern.getSelection();
-    }
 }

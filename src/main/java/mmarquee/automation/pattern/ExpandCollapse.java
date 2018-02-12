@@ -15,11 +15,13 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 
@@ -30,26 +32,21 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConver
  * Date 25/02/2016.
  */
 public class ExpandCollapse extends BasePattern {
-
-    /**
-     * Constructor for the pattern.
-     */
-    public ExpandCollapse() {
-        this.IID = IUIAutomationExpandCollapsePattern.IID;
-    }
-
+    
     /**
      * The raw pointer.
      */
-    private IUIAutomationExpandCollapsePattern rawPattern;
+    IUIAutomationExpandCollapsePattern rawPattern;
 
     /**
-     * Constructor taking a raw pattern.
-     * @param rawPattern The raw pattern
+     * Constructor for the pattern.
+     * @throws AutomationException 
      */
-    ExpandCollapse(final IUIAutomationExpandCollapsePattern rawPattern) {
-        this();
-        this.rawPattern = rawPattern;
+    public ExpandCollapse(final AutomationElement element) throws AutomationException {
+    	super(element);
+        this.IID = IUIAutomationExpandCollapsePattern.IID;
+        this.patternID = PatternID.ExpandCollapse;
+        this.availabilityPropertyID = PropertyID.IsExpandCollapsePatternAvailable;
     }
 
     /**
@@ -59,21 +56,9 @@ public class ExpandCollapse extends BasePattern {
      */
     private IUIAutomationExpandCollapsePattern getPattern()
             throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
-
+    
     /**
      * Expands the control.
      * @throws AutomationException Something has gone wrong
@@ -117,7 +102,7 @@ public class ExpandCollapse extends BasePattern {
      * @param pUnknown The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationExpandCollapsePattern convertPointerToInterface(
+    IUIAutomationExpandCollapsePattern convertPointerToInterface(
             final PointerByReference pUnknown) {
         return IUIAutomationExpandCollapsePatternConverter.pointerToInterface(pUnknown);
     }

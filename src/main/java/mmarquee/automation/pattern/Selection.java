@@ -15,17 +15,19 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
+import java.util.List;
+
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ConversionFailure;
-import mmarquee.automation.uiautomation.*;
-
-import java.util.List;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 
 /**
  *
@@ -37,25 +39,17 @@ import java.util.List;
 public class Selection extends BasePattern {
 
     /**
-     * Constructor for the Selection pattern.
+     * Constructor for the value pattern
+     * @throws AutomationException
      */
-    public Selection() {
+    public Selection(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationSelectionPattern.IID;
+        this.patternID = PatternID.Selection;
+        this.availabilityPropertyID = PropertyID.IsSelectionPatternAvailable;
     }
 
-    /**
-     * The raw pattern.
-     */
-    private IUIAutomationSelectionPattern rawPattern;
-
-    /**
-     * Constructor for the Selection pattern.
-     * @param rawPattern The raw pattern to use
-     */
-    public Selection(IUIAutomationSelectionPattern rawPattern) {
-        this.IID = IUIAutomationSelectionPattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationSelectionPattern rawPattern;
 
     /**
      * Gets the pointer.
@@ -63,19 +57,7 @@ public class Selection extends BasePattern {
      * @throws AutomationException Automation has gone wrong
      */
     private IUIAutomationSelectionPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**

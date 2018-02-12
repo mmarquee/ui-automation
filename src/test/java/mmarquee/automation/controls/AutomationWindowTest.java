@@ -71,6 +71,7 @@ public class AutomationWindowTest {
         MockitoAnnotations.initMocks(this);
         list.add(targetElement);
         menus.add(item);
+        when(window.isAvailable()).thenReturn(true);
     }
 
     @Test
@@ -84,7 +85,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
+                new ElementBuilder(element).addPattern(container, window).automation(instance));
 
         assertEquals("Name-01", windw.getName());
     }
@@ -100,7 +101,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
+                new ElementBuilder(element).addPattern(container, window).automation(instance));
 
         assertNotEquals("Wrong-01", windw.getName());
     }
@@ -115,7 +116,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window));
+                new ElementBuilder(element).addPattern(container, window));
 
         windw.getSystemMenu();
     }
@@ -130,7 +131,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window));
+                new ElementBuilder(element).addPattern(container, window));
 
         windw.getTitleBar();
     }
@@ -145,7 +146,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window));
+                new ElementBuilder(element).addPattern(container, window));
 
         windw.getAppBar(Search.getBuilder(0).build());
     }
@@ -159,7 +160,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
+                new ElementBuilder(element).addPattern(container, window).automation(instance));
 
         assertTrue(windw.isModal());
     }
@@ -173,7 +174,7 @@ public class AutomationWindowTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow windw = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).window(window).automation(instance));
+                new ElementBuilder(element).addPattern(container, window).automation(instance));
 
         assertFalse(windw.isModal());
     }

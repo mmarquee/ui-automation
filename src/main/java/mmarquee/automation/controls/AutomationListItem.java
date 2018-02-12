@@ -18,7 +18,6 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionItem;
 
 /**
  * Wrapper for the ListItem element.
@@ -28,54 +27,12 @@ import mmarquee.automation.pattern.SelectionItem;
  */
 public final class AutomationListItem extends AutomationContainer
         implements Selectable, Clickable {
-
-    /**
-     * The selectionItem pattern.
-     */
-    SelectionItem selectItemPattern;
-
     /**
      * Constructor for the AutomationListItem.
      * @param builder The builder
      */
     public AutomationListItem(final ElementBuilder builder) {
         super(builder);
-        this.selectItemPattern = builder.getSelectItem();
-    }
-
-    /**
-     * Selects this item.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public void select()
-            throws AutomationException, PatternNotFoundException {
-        if (this.selectItemPattern == null) {
-            this.selectItemPattern = this.getSelectItemPattern();
-        }
-
-        if (this.selectItemPattern != null) {
-        	this.selectItemPattern.select();
-        } else {
-            throw new PatternNotFoundException("Select pattern not found");
-        }
-    }
-
-    /**
-     * Is this item selected.
-     * @return True if selected.
-     * @throws AutomationException Something has gone wrong
-     * @throws PatternNotFoundException Expected pattern not found
-     */
-    public boolean isSelected()
-            throws AutomationException, PatternNotFoundException {
-        if (this.selectItemPattern == null) {
-            this.selectItemPattern = this.getSelectItemPattern();
-        }
-        if (this.selectItemPattern != null) {
-        	return this.selectItemPattern.isSelected();
-        }
-        throw new PatternNotFoundException("Select pattern not found");
     }
 
     /**

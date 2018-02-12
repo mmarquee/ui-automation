@@ -29,13 +29,13 @@ public class AutomationListItemTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
         when(selection.isSelected()).thenReturn(true);
-
+        when(selection.isAvailable()).thenReturn(true);
+        
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationListItem ctrl = new AutomationListItem(
-                new ElementBuilder(element).automation(instance));
-        ctrl.selectItemPattern = selection;
+                new ElementBuilder(element).automation(instance).addPattern(selection));
 
         boolean result = ctrl.isSelected();
         assertEquals(true,result);
@@ -47,13 +47,13 @@ public class AutomationListItemTest {
     public void test_Select_Selects_SelectionItem() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
-
+        when(selection.isAvailable()).thenReturn(true);
+        
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationListItem ctrl = new AutomationListItem(
-                new ElementBuilder(element).automation(instance));
-        ctrl.selectItemPattern = selection;
+                new ElementBuilder(element).automation(instance).addPattern(selection));
 
         ctrl.select();
 
@@ -64,15 +64,13 @@ public class AutomationListItemTest {
     public void test_Click_Invokes_InvokePattern() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke invokePattern = Mockito.mock(Invoke.class);
-        
-        when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(1);
+        when(invokePattern.isAvailable()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationListItem ctrl = new AutomationListItem(
-                new ElementBuilder(element).automation(instance));
-        ctrl.invokePattern = invokePattern;
+                new ElementBuilder(element).automation(instance).addPattern(invokePattern));
 
         ctrl.click();
 
@@ -83,15 +81,15 @@ public class AutomationListItemTest {
     public void test_Click_Does_Not_Invoke_If_Not_Possible() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Invoke invokePattern = Mockito.mock(Invoke.class);
-        
+        when(invokePattern.isAvailable()).thenReturn(false);
+
         when(element.getPropertyValue(PropertyID.IsInvokePatternAvailable.getValue())).thenReturn(0);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationListItem ctrl = new AutomationListItem(
-                new ElementBuilder(element).automation(instance));
-        ctrl.invokePattern = invokePattern;
+                new ElementBuilder(element).automation(instance).addPattern(invokePattern));
 
         ctrl.click();
 

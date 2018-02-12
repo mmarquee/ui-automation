@@ -15,11 +15,15 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.*;
-import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.OleAuto;
+import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationValuePatternConverter;
 
@@ -33,36 +37,23 @@ public class Value extends BasePattern {
 
     /**
      * Constructor for the value pattern
+     * @throws AutomationException
      */
-    public Value() {
+    public Value(final AutomationElement automationElement) throws AutomationException {
+    	super(automationElement);
         this.IID = IUIAutomationValuePattern.IID;
+        this.patternID = PatternID.Value;
+        this.availabilityPropertyID = PropertyID.IsValuePatternAvailable;
     }
 
-    private IUIAutomationValuePattern rawPattern;
-
-    public Value(IUIAutomationValuePattern rawPattern) {
-        this.IID = IUIAutomationValuePattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationValuePattern rawPattern;
 
     /**
      * Gets the pattern
      * @return The actual pattern itself
      */
     private IUIAutomationValuePattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+        return getPattern(rawPattern,this::convertPointerToInterface);
     }
 
     /**

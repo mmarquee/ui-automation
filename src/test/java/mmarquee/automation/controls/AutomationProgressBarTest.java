@@ -41,13 +41,14 @@ public class AutomationProgressBarTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range range = Mockito.mock(Range.class);
 
+        when(range.isAvailable()).thenReturn(true);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationProgressBar bar = new AutomationProgressBar(
-                new ElementBuilder(element).range(range).automation(instance));
+                new ElementBuilder(element).addPattern(range).automation(instance));
 
         String name = bar.getName();
 
@@ -59,13 +60,14 @@ public class AutomationProgressBarTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range range = Mockito.mock(Range.class);
 
+        when(range.isAvailable()).thenReturn(true);
         when(range.getValue()).thenReturn(99.9);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationProgressBar bar = new AutomationProgressBar(
-                new ElementBuilder(element).range(range).automation(instance));
+                new ElementBuilder(element).addPattern(range).automation(instance));
 
         double value = bar.getRangeValue();
 
@@ -73,15 +75,17 @@ public class AutomationProgressBarTest {
     }
 
     @Test
-    public void testSetRangeValue_Throws_Exception() throws Exception {
+    public void testSetRangeValue() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Range range = Mockito.mock(Range.class);
 
+        when(range.isAvailable()).thenReturn(true);
+        
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationProgressBar bar = new AutomationProgressBar(
-                new ElementBuilder(element).range(range).automation(instance));
+                new ElementBuilder(element).addPattern(range).automation(instance));
 
         bar.setRangeValue(18.99);
 

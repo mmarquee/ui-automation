@@ -15,14 +15,23 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextPatternConverter;
+import mmarquee.automation.uiautomation.IUIAutomationTextRange;
+import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
+import mmarquee.automation.uiautomation.IUIAutomationTextRangeArrayConverter;
+import mmarquee.automation.uiautomation.IUIAutomationTextRangeConverter;
 
 /**
  * Wrapper for the text pattern.
@@ -33,43 +42,29 @@ import mmarquee.automation.uiautomation.*;
 public class Text extends BasePattern {
 
     /**
-     * Constructor for the value pattern.
+     * Constructor for the text pattern
+     *
+     * @throws AutomationException
      */
-    public Text() {
+    public Text(final AutomationElement element) throws AutomationException {
+    	super(element);
+
         this.IID = IUIAutomationTextPattern.IID;
+        this.patternID = PatternID.Text;
+        this.availabilityPropertyID = PropertyID.IsTextPatternAvailable;
     }
 
-    /**
-     * The raw pattern.
-     */
-    private IUIAutomationTextPattern rawPattern;
-
-    /**
-     * Default constructor.
-     * @param rawPattern The raw pattern
-     */
-    public Text(IUIAutomationTextPattern rawPattern) {
-        this.IID = IUIAutomationTextPattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationTextPattern rawPattern;
 
     private IUIAutomationTextPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return IUIAutomationTextPatternConverter.pointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerOfTextPatternToInterface);
     }
 
-    public IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
+    IUIAutomationTextPattern convertPointerOfTextPatternToInterface(PointerByReference pUnknownA) {
+        return IUIAutomationTextPatternConverter.pointerToInterface(pUnknownA);
+    }
+
+    IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
         return IUIAutomationTextRangeArrayConverter.pointerToInterface(pUnknownA);
     }
 

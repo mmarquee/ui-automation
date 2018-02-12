@@ -16,7 +16,12 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,16 +44,23 @@ import static org.mockito.Mockito.verify;
 public class ExpandCollapsePatternTest {
 
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationExpandCollapsePattern rawPattern;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.ExpandCollapse, PropertyID.IsExpandCollapsePatternAvailable);
     }
 
     @Test
     public void testCollapse_Calls_Collapse_From_Pattern() throws Exception {
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.expand();
 
@@ -57,7 +69,8 @@ public class ExpandCollapsePatternTest {
 
     @Test
     public void testExpand_Calls_Expand_From_Pattern() throws Exception {
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.collapse();
 
@@ -77,7 +90,8 @@ public class ExpandCollapsePatternTest {
                 }
         );
 
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         boolean selected = pattern.isExpanded();
 
@@ -98,7 +112,8 @@ public class ExpandCollapsePatternTest {
             }
         );
 
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         boolean selected = pattern.isExpanded();
 
@@ -118,7 +133,8 @@ public class ExpandCollapsePatternTest {
            }
         );
 
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         boolean selected = pattern.isExpanded();
 
@@ -131,7 +147,8 @@ public class ExpandCollapsePatternTest {
             invocation -> 1
         );
 
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.collapse();
     }
@@ -142,7 +159,8 @@ public class ExpandCollapsePatternTest {
                 invocation -> 1
         );
 
-        ExpandCollapse pattern = new ExpandCollapse(rawPattern);
+        ExpandCollapse pattern = new ExpandCollapse(element);
+        pattern.rawPattern = rawPattern;
 
         pattern.expand();
     }

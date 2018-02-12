@@ -15,18 +15,11 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Memory;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextRange;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -37,10 +30,20 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
+import com.sun.jna.Memory;
+import com.sun.jna.Native;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
+import mmarquee.automation.uiautomation.IUIAutomationTextRange;
+import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
 
 /**
  * @author Mark Humphreys
@@ -51,13 +54,16 @@ import static org.mockito.Mockito.doReturn;
 @RunWith(MockitoJUnitRunner.class)
 public class TextPatternTest {
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationTextPattern rawPattern;
 
     @Spy
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -65,7 +71,8 @@ public class TextPatternTest {
     public void test_GetText_Throws_Exception_When_getDocumentRange_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getDocumentRange(any());
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
         String text = pattern.getText();
 
@@ -76,7 +83,8 @@ public class TextPatternTest {
     public void test_GetSelection_Throws_Exception_When_getSelection_Returns_Error() throws Exception {
         doAnswer(invocation -> 1).when(rawPattern).getSelection(any());
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
         String text = pattern.getSelection();
 
@@ -90,7 +98,8 @@ public class TextPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
         String text = pattern.getSelection();
 
@@ -103,9 +112,10 @@ public class TextPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
-        Text spyPattern = Mockito.spy(new Text(rawPattern));
+        Text spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -130,9 +140,10 @@ public class TextPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
-        Text spyPattern = Mockito.spy(new Text(rawPattern));
+        Text spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -183,9 +194,10 @@ public class TextPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
-        Text spyPattern = Mockito.spy(new Text(rawPattern));
+        Text spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -203,9 +215,10 @@ public class TextPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
-        Text spyPattern = Mockito.spy(new Text(rawPattern));
+        Text spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -245,9 +258,10 @@ public class TextPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Text pattern = new Text(rawPattern);
+        Text pattern = new Text(element);
+        pattern.rawPattern = rawPattern;
 
-        Text spyPattern = Mockito.spy(new Text(rawPattern));
+        Text spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)

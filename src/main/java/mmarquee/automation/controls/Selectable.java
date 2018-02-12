@@ -15,20 +15,31 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.SelectionItem;
 
 /**
+ * The Control supports the methods of the SelectionItemPattern
+ * 
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Selectable extends Automatable {
+public interface Selectable extends Automatable, CanRequestBasePattern {
     /**
      * Selects the element.
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    void select() throws AutomationException, PatternNotFoundException;
+    default void select() throws AutomationException, PatternNotFoundException {
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
+ 		if (selectionItemPattern.isAvailable()) {
+ 			selectionItemPattern.select();
+ 			return;
+ 		}
+ 		throw new PatternNotFoundException("Cannot select item");
+    }
 
     /**
      * Whether the element is selected.
@@ -36,5 +47,53 @@ public interface Selectable extends Automatable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    boolean isSelected() throws AutomationException, PatternNotFoundException;
+    default boolean isSelected() throws AutomationException, PatternNotFoundException {
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
+ 		if (selectionItemPattern.isAvailable()) {
+ 			return selectionItemPattern.isSelected();
+ 		}
+ 		throw new PatternNotFoundException("Cannot query selection state");
+    }
+
+    /**
+     * Adds to the selection.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    default void addToSelection() throws AutomationException, PatternNotFoundException {
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
+ 		if (selectionItemPattern.isAvailable()) {
+ 			selectionItemPattern.addToSelection();
+ 			return;
+ 		}
+ 		throw new PatternNotFoundException("Cannot extend selection");
+    }
+
+    /**
+     * Removes from the selection.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    default void removeFromSelection() throws AutomationException, PatternNotFoundException {
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
+ 		if (selectionItemPattern.isAvailable()) {
+ 			selectionItemPattern.removeFromSelection();
+ 			return;
+ 		}
+ 		throw new PatternNotFoundException("Cannot reduce selection");
+    }
+
+
+    /**
+     * Gets the selection container.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    default AutomationElement getSelectionContainer() throws AutomationException, PatternNotFoundException {
+    	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
+ 		if (selectionItemPattern.isAvailable()) {
+ 			return selectionItemPattern.getSelectionContainer();
+ 		}
+ 		throw new PatternNotFoundException("Cannot get the selection container");
+    }
 }

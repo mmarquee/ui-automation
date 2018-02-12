@@ -16,11 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.uiautomation.ToggleState;
-
 /**
  * Wrapper for the CheckBox element.
  *
@@ -31,43 +26,6 @@ public final class AutomationCheckBox
         extends AutomationBase
         implements Toggleable, Focusable {
 
-    /**
-     * The toggle pattern.
-     */
-    private Toggle togglePattern;
-
-    /**
-     * <p>
-     * Invokes the toggle event for this control.
-     * </p>
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public void toggle()
-            throws AutomationException, PatternNotFoundException {
-        if (this.togglePattern == null) {
-            togglePattern = this.getTogglePattern();
-        }
-
-        this.togglePattern.toggle();
-    }
-
-    /**
-     * <p>
-     * Gets the toggle state of this control.
-     * </p>
-     * @return The toggle state.
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public ToggleState getToggleState()
-            throws AutomationException, PatternNotFoundException {
-        if (this.togglePattern == null) {
-            togglePattern = this.getTogglePattern();
-        }
-
-        return this.togglePattern.currentToggleState();
-    }
 
     /**
      * Constructor for the AutomationCheckBox.
@@ -76,7 +34,6 @@ public final class AutomationCheckBox
      */
     public AutomationCheckBox(final ElementBuilder builder) {
         super(builder);
-        togglePattern = builder.getToggle();
     }
 
     /**

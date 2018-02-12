@@ -1,10 +1,12 @@
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
 import mmarquee.automation.uiautomation.IUIAutomationTogglePatternConverter;
 import mmarquee.automation.uiautomation.ToggleState;
@@ -16,27 +18,22 @@ import mmarquee.automation.uiautomation.ToggleState;
  * Wrapper for the toggle pattern.
  */
 public class Toggle extends BasePattern {
+
     /**
-     * Constructor for the value pattern.
+     * Constructor for the toggle pattern.
+     * @throws AutomationException
      */
-    public Toggle() {
+    public Toggle(final AutomationElement automationElement) throws AutomationException {
+    	super(automationElement);
         this.IID = IUIAutomationTogglePattern.IID;
+        this.patternID = PatternID.Toggle;
+        this.availabilityPropertyID = PropertyID.IsTogglePatternAvailable;
     }
 
     /**
      * The raw pattern.
      */
-    private IUIAutomationTogglePattern rawPattern;
-
-    /**
-     * Constructor for the toggle pattern.
-     *
-     * @param rawPattern The raw pattern.
-     */
-    public Toggle(final IUIAutomationTogglePattern rawPattern) {
-        this.IID = IUIAutomationTogglePattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationTogglePattern rawPattern;
 
     /**
      * Gets the pattern interface.
@@ -45,19 +42,7 @@ public class Toggle extends BasePattern {
      * @throws AutomationException Something went wrong with the automation library.
      */
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+        return getPattern(rawPattern,this::convertPointerToInterface);
     }
 
     /**

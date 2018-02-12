@@ -50,13 +50,15 @@ public class AutomationDataGridTest {
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
+        when(grid.isAvailable()).thenReturn(true);
+        when(table.isAvailable()).thenReturn(true);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(
-                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
+                new ElementBuilder(element).addPattern(value, grid, table, selection).automation(instance));
 
         String name = dataGrid.getName();
 
@@ -71,13 +73,17 @@ public class AutomationDataGridTest {
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
+        when(value.isAvailable()).thenReturn(true);
+        when(grid.isAvailable()).thenReturn(true);
+        when(table.isAvailable()).thenReturn(true);
+        
         when(value.value()).thenReturn("VALUE");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(
-                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
+                new ElementBuilder(element).addPattern(value, grid, table, selection).automation(instance));
         String name = dataGrid.getValue();
 
         assertTrue(name.equals("VALUE"));
@@ -91,13 +97,15 @@ public class AutomationDataGridTest {
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
+        when(grid.isAvailable()).thenReturn(true);
+        when(table.isAvailable()).thenReturn(true);
         when(table.getRowOrColumnMajor()).thenReturn(RowOrColumnMajor.RowMajor);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(
-                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
+                new ElementBuilder(element).addPattern(value, grid, table, selection).automation(instance));
         RowOrColumnMajor val = dataGrid.getRowOrColumnMajor();
 
         assertTrue(val == RowOrColumnMajor.RowMajor);
@@ -111,13 +119,16 @@ public class AutomationDataGridTest {
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
+        when(grid.isAvailable()).thenReturn(true);
+        when(table.isAvailable()).thenReturn(true);
+        when(value.isAvailable()).thenReturn(true);
         when(value.isReadOnly()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationDataGrid dataGrid = new AutomationDataGrid(
-                new ElementBuilder(element).value(value).grid(grid).table(table).selection(selection).automation(instance));
+                new ElementBuilder(element).addPattern(value, grid, table, selection).automation(instance));
 
         boolean val = dataGrid.isReadOnly();
 

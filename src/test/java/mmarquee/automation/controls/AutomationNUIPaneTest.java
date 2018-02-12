@@ -59,7 +59,7 @@ public class AutomationNUIPaneTest {
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         AutomationNUIPane pane = new AutomationNUIPane(
-                new ElementBuilder(element).itemContainer(container).automation(instance));
+                new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = pane.getName();
 

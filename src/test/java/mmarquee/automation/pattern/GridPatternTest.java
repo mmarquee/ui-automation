@@ -1,14 +1,12 @@
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,8 +17,16 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
 
 /**
  * @author Mark Humphreys
@@ -31,13 +37,16 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GridPatternTest {
     @Mock
+    AutomationElement element;
+    
+    @Mock
     IUIAutomationGridPattern rawPattern;
 
     @Spy
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -53,7 +62,8 @@ public class GridPatternTest {
             return 0;
         }).when(rawPattern).getCurrentRowCount(any());
 
-        Grid item = new Grid(rawPattern);
+        Grid item = new Grid(element);
+        item.rawPattern = rawPattern;
 
         int count = item.rowCount();
 
@@ -72,7 +82,8 @@ public class GridPatternTest {
             return 0;
         }).when(rawPattern).getCurrentColumnCount(any());
 
-        Grid item = new Grid(rawPattern);
+        Grid item = new Grid(element);
+        item.rawPattern = rawPattern;
 
         int count = item.columnCount();
 
@@ -91,7 +102,8 @@ public class GridPatternTest {
             return 1;
         }).when(rawPattern).getCurrentColumnCount(any());
 
-        Grid item = new Grid(rawPattern);
+        Grid item = new Grid(element);
+        item.rawPattern = rawPattern;
 
         int count = item.columnCount();
 
@@ -110,7 +122,8 @@ public class GridPatternTest {
             return 1;
         }).when(rawPattern).getCurrentRowCount(any());
 
-        Grid item = new Grid(rawPattern);
+        Grid item = new Grid(element);
+        item.rawPattern = rawPattern;
 
         int count = item.rowCount();
 
@@ -120,7 +133,8 @@ public class GridPatternTest {
     @Test
     @Ignore("Need to build up the mocking")
     public void test_getItem_Throws_Exception_When_Pattern_Returns_Error_From_GetItem() throws Exception {
-        Grid pattern = new Grid(rawPattern);
+        Grid pattern = new Grid(element);
+        pattern.rawPattern = rawPattern;
 
         Grid spyPattern = Mockito.spy(pattern);
 
@@ -140,9 +154,10 @@ public class GridPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Grid pattern = new Grid();
+        Grid pattern = new Grid(element);
+        pattern.rawPattern = rawPattern;
 
-        Grid spyPattern = Mockito.spy(new Grid());
+        Grid spyPattern = Mockito.spy(pattern);
 
         IUIAutomationGridPattern mockGrid = Mockito.mock(IUIAutomationGridPattern.class);
 
@@ -161,9 +176,10 @@ public class GridPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Grid pattern = new Grid();
+        Grid pattern = new Grid(element);
+        pattern.rawPattern = rawPattern;
 
-        Grid spyPattern = Mockito.spy(new Grid());
+        Grid spyPattern = Mockito.spy(pattern);
 
         IUIAutomationGridPattern mockGrid = Mockito.mock(IUIAutomationGridPattern.class);
 

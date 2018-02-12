@@ -16,10 +16,6 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.SelectionItem;
-
 /**
  * Wrapper for the RadioButton element.
  *
@@ -27,12 +23,7 @@ import mmarquee.automation.pattern.SelectionItem;
  * Date 31/01/2016.
  */
 public final class AutomationRadioButton extends AutomationBase implements Selectable {
-
-    /**
-     * The selection item pattern.
-     */
-    private SelectionItem selectItemPattern;
-
+	
     /**
      * Construct the AutomationRadioButton.
      *
@@ -40,37 +31,5 @@ public final class AutomationRadioButton extends AutomationBase implements Selec
      */
     public AutomationRadioButton(final ElementBuilder builder) {
         super(builder);
-        selectItemPattern = builder.getSelectItem();
-    }
-
-    /**
-     * Selects this element.
-     *
-     * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public void select()
-            throws AutomationException, PatternNotFoundException {
-        if (this.selectItemPattern == null) {
-            selectItemPattern = this.getSelectItemPattern();
-        }
-
-        this.selectItemPattern.select();
-    }
-
-    /**
-     * Gets the selection state.
-     *
-     * @return The selection state.
-     * @throws AutomationException Error in the automation library.
-     * @throws PatternNotFoundException Failed to find pattern.
-     */
-    public boolean isSelected()
-            throws AutomationException, PatternNotFoundException {
-        if (this.selectItemPattern == null) {
-            selectItemPattern = this.getSelectItemPattern();
-        }
-
-        return this.selectItemPattern.isSelected();
     }
 }

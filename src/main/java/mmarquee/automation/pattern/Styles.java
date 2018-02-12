@@ -15,11 +15,13 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
 
@@ -34,25 +36,17 @@ import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
 public class Styles extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the styles pattern
+     * @throws AutomationException
      */
-    public Styles() {
+    public Styles(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationStylesPattern.IID;
+        this.patternID = PatternID.Styles;
+        this.availabilityPropertyID = PropertyID.IsStylesPatternAvailable;
     }
 
-    /**
-     * The raw pattern.
-     */
-    private IUIAutomationStylesPattern rawPattern;
-
-    /**
-     * Default constructor.
-     * @param rawPattern The raw pattern
-     */
-    public Styles(IUIAutomationStylesPattern rawPattern) {
-        this.IID = IUIAutomationStylesPattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationStylesPattern rawPattern;
 
     /**
      * Gets the pattern.
@@ -60,19 +54,7 @@ public class Styles extends BasePattern {
      * @throws AutomationException Error in automation library
      */
     private IUIAutomationStylesPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**

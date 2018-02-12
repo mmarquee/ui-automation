@@ -15,54 +15,43 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
 
 /**
+ * Wrapper for the range valuepattern.
+ *
  * @author Mark Humphreys
  * Date 01/03/2016.
- *
- * Wrapper for the range pattern.
  */
 public class Range extends BasePattern {
 
     /**
-     * Constructor for the value pattern.
+     * Constructor for the range value pattern
+     * @throws AutomationException
      */
-    public Range() {
+    public Range(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationRangeValuePattern.IID;
+        this.patternID = PatternID.RangeValue;
+        this.availabilityPropertyID = PropertyID.IsRangeValuePatternAvailable;
     }
 
-    private IUIAutomationRangeValuePattern rawPattern;
-
-    public Range(IUIAutomationRangeValuePattern rawPattern) {
-        this.IID = IUIAutomationRangeValuePattern.IID;
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationRangeValuePattern rawPattern;
 
     public IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationRangeValuePatternConverter.pointerToInterface(pUnknownA);
     }
 
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**

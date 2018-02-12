@@ -21,7 +21,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,22 +28,41 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import mmarquee.automation.*;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
-import org.junit.*;
+import org.junit.Assume;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.Answer;
 
 import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.ptr.IntByReference;
 
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
+import mmarquee.automation.UIAutomation;
+import mmarquee.automation.pattern.Dock;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.MultipleView;
+import mmarquee.automation.pattern.Range;
+import mmarquee.automation.pattern.Scroll;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.TableItem;
+import mmarquee.automation.pattern.Text;
+import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.pattern.Value;
 import mmarquee.automation.pattern.Window;
+import mmarquee.automation.uiautomation.IUIAutomation;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -87,6 +105,8 @@ public class AutomationBaseTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        when(pattern.isAvailable()).thenReturn(true);
+        when(container.isAvailable()).thenReturn(true);
     }
 
     @Test
@@ -97,7 +117,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         window.getAriaRole();
 
@@ -112,7 +132,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         window.getClassName();
 
@@ -127,7 +147,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         AutomationElement result = window.getElement();
 
@@ -142,7 +162,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         OrientationType value = window.getOrientation();
 
@@ -157,7 +177,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         Object object = window.getFramework();
 
@@ -172,7 +192,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         String name = window.getFrameworkId();
 
@@ -180,14 +200,114 @@ public class AutomationBaseTest {
     }
 
     @Test
+    public void testIsAutomationPatternAvailablePatternID () throws Exception {
+    	
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue())).thenReturn(1);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.GridItem);
+
+        assertTrue(value);
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailableAllDefinedPatternID_no_Exception () throws Exception {
+    	
+    	AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(anyInt())).thenReturn(0);
+        
+    	for (final PatternID patternId: PatternID.values()) {
+    		window.isAutomationPatternAvailable(patternId);
+    	}
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailablePatternID_when_not_available () throws Exception {
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsRangeValuePatternAvailable.getValue())).thenReturn(0);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.RangeValue);
+
+        assertFalse(value);
+    }
+
+
+    @Test
+    public void testIsAutomationPatternAvailableInt () throws Exception {
+    	
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsWindowPatternAvailable.getValue())).thenReturn(1);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.Window.getValue());
+
+        assertTrue(value);
+    }
+
+
+    @Test
+    public void testIsAutomationPatternAvailableIntSecondVersion () throws Exception {
+    	
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsTextPattern2Available.getValue())).thenReturn(1);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.Text2.getValue());
+
+        assertTrue(value);
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailableInt_when_not_available () throws Exception {
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+        when(element.getPropertyValue(PropertyID.IsTogglePatternAvailable.getValue())).thenReturn(0);
+
+        boolean value = window.isAutomationPatternAvailable(PatternID.Toggle.getValue());
+
+        assertFalse(value);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testIsAutomationPatternAvailableInt_when_bad_number () throws Exception {
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element));
+
+        window.isAutomationPatternAvailable(-815);
+    }
+    
+    @Test
+    public void testIsAutomationPatternAvailableBasePatternClass () throws Exception {
+    	
+    	MultipleView pattern = Mockito.mock(MultipleView.class);
+    	when(pattern.isAvailable()).thenReturn(true);
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
+
+        boolean value = window.isAutomationPatternAvailable(MultipleView.class);
+
+        assertTrue(value);
+    }
+
+    @Test
+    public void testIsAutomationPatternAvailableBasePatternClass_when_not_available () throws Exception {
+    	
+    	Dock pattern = Mockito.mock(Dock.class);
+    	when(pattern.isAvailable()).thenReturn(false);
+
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
+
+        boolean value = window.isAutomationPatternAvailable(Dock.class);
+
+        assertFalse(value);
+    }
+    
+    @Test
     public void testIsMultipleViewPatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+    	
+    	MultipleView pattern = Mockito.mock(MultipleView.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isMultipleViewPatternAvailable();
 
@@ -196,13 +316,11 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsGridItemPatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
+    	GridItem pattern = Mockito.mock(GridItem.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isGridItemPatternAvailable();
 
@@ -211,28 +329,23 @@ public class AutomationBaseTest {
 
     @Test
     public void test_isSelectionItemPatternAvailable  () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
+    	SelectionItem pattern = Mockito.mock(SelectionItem.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
-        boolean value = window.isSelectionItemPatternAvailable ();
+        boolean value = window.isSelectionItemPatternAvailable();
 
         assertTrue(value);
     }
 
     @Test
     public void test_isRangeValuePatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Range pattern = Mockito.mock(Range.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isRangeValuePatternAvailable();
 
@@ -241,13 +354,10 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsTableItemPatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        TableItem pattern = Mockito.mock(TableItem.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isTableItemPatternAvailable();
 
@@ -256,13 +366,10 @@ public class AutomationBaseTest {
 
     @Test
     public void test_isItemContainerPatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        ItemContainer pattern = Mockito.mock(ItemContainer.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isItemContainerPatternAvailable();
 
@@ -271,13 +378,10 @@ public class AutomationBaseTest {
 
     @Test
     public void test_isTogglePatternAvailable() throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Toggle pattern = Mockito.mock(Toggle.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isTogglePatternAvailable();
 
@@ -286,13 +390,10 @@ public class AutomationBaseTest {
 
     @Test
     public void test_isSelectionPatternAvailable() throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Selection pattern = Mockito.mock(Selection.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isSelectionPatternAvailable();
 
@@ -301,13 +402,10 @@ public class AutomationBaseTest {
 
     @Test
     public void test_isTextPatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Text pattern = Mockito.mock(Text.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isTextPatternAvailable();
 
@@ -316,13 +414,10 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsTablePatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Table pattern = Mockito.mock(Table.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isTablePatternAvailable();
 
@@ -331,13 +426,10 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsValuePatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Value pattern = Mockito.mock(Value.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isValuePatternAvailable();
 
@@ -346,13 +438,10 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsGridPatternAvailable () throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Grid pattern = Mockito.mock(Grid.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isGridPatternAvailable();
 
@@ -361,13 +450,10 @@ public class AutomationBaseTest {
 
     @Test
     public void testisScrollPatternAvailable() throws Exception {
-        when(element.getPropertyValue(anyInt())).thenReturn(1);
+        Scroll pattern = Mockito.mock(Scroll.class);
+    	when(pattern.isAvailable()).thenReturn(true);
 
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+        AutomationWindow window = new AutomationWindow(new ElementBuilder(element).addPattern(pattern));
 
         boolean value = window.isScrollPatternAvailable();
 
@@ -382,7 +468,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isOffScreen();
 
@@ -397,7 +483,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isMultipleViewPatternAvailable();
 
@@ -412,7 +498,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isScrollItemPatternAvailable();
 
@@ -427,7 +513,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isTransformPatternAvailable();
 
@@ -442,7 +528,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isGridItemPatternAvailable();
 
@@ -457,7 +543,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isGridItemPatternAvailable();
 
@@ -472,7 +558,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isDockPatternAvailable();
 
@@ -487,7 +573,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         window.getRuntimeId();
     }
@@ -500,7 +586,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         String value = window.getProviderDescription();
 
@@ -515,7 +601,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         String value = window.getAcceleratorKey();
 
@@ -530,7 +616,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         String value = window.getItemStatus();
 
@@ -545,7 +631,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean value = window.isEnabled();
 
@@ -561,7 +647,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         Object object = window.getProcessId();
 
@@ -576,7 +662,7 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         window.getClickablePoint();
 
@@ -596,24 +682,11 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         boolean val = window.isOffScreen();
 
         assertFalse(val);
-    }
-
-    @Test(expected= PatternNotFoundException.class)
-    public void test_getPattern_throws_PatterNotFoundException_When_Pattern_Not_Found () throws Exception {
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
-
-        window.getPattern(PatternID.Text.getValue());
-
-        verify(element, atLeastOnce()).getPattern(anyInt());
     }
 
     @Test
@@ -624,41 +697,9 @@ public class AutomationBaseTest {
         UIAutomation instance = new UIAutomation(mocked_automation);
 
         AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
+                new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
         window.getBoundingRectangle();
-
-        verify(element, atLeastOnce()).getBoundingRectangle();
-    }
-
-    @Test
-    @Ignore("Need to mock variants somehow")
-    public void test_getSelectItemPattern() throws Exception {
-        IUIAutomationElement el = Mockito.mock(IUIAutomationElement.class);
-
-        AutomationElement element = Mockito.mock(AutomationElement.class);
-        element.setElement(el);
-
-        Window pattern = Mockito.mock(Window.class);
-        ItemContainer container = Mockito.mock(ItemContainer.class);
-
-        doAnswer((Answer<Integer>) invocation -> {
-
-            Object[] args = invocation.getArguments();
-            IntByReference reference = (IntByReference)args[1];
-
-            reference.setValue(0);
-
-            return 0;
-        }).when(el).getCurrentPropertyValue(any(), any());
-
-        IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
-        UIAutomation instance = new UIAutomation(mocked_automation);
-
-        AutomationWindow window = new AutomationWindow(
-                new ElementBuilder(element).itemContainer(container).automation(instance).window( pattern));
-
-        window.getSelectItemPattern();
 
         verify(element, atLeastOnce()).getBoundingRectangle();
     }

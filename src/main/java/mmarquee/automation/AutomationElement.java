@@ -22,7 +22,16 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.*;
+
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
+import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.OrientationType;
+import mmarquee.automation.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -806,5 +815,14 @@ public class AutomationElement extends BaseAutomation {
                 return sr.getValue().getInt(0);
             }
         }
+    }
+
+    /**
+     * Returns a predefined Automation Pattern bound to this element.
+     * For Testing purposes only
+     */
+    public <T extends BasePattern> T getProvidedPattern(final Class<T> automationPatternClass) {
+        // Return values will be mocked
+        return null;
     }
 }

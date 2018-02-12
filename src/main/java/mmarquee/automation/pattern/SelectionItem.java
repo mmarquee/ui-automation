@@ -23,6 +23,8 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
@@ -36,26 +38,17 @@ import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConvert
 public class SelectionItem extends BasePattern {
 
     /**
-     * Constructor for the value pattern.
+     * Constructor for the value pattern
+     * @throws AutomationException
      */
-    public SelectionItem() {
+    public SelectionItem(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationSelectionItemPattern.IID;
+        this.patternID = PatternID.SelectionItem;
+        this.availabilityPropertyID = PropertyID.IsSelectionItemPatternAvailable;
     }
 
-    /**
-     * The raw pattern.
-     */
-    private IUIAutomationSelectionItemPattern rawPattern;
-
-    /**
-     * Constructor for the value pattern.
-     * @param rawPattern The raw pattern
-     */
-    public SelectionItem(IUIAutomationSelectionItemPattern rawPattern) {
-        this.IID = IUIAutomationSelectionItemPattern.IID;
-
-        this.rawPattern = rawPattern;
-    }
+    IUIAutomationSelectionItemPattern rawPattern;
 
     /**
      * Gets the pattern.
@@ -63,19 +56,7 @@ public class SelectionItem extends BasePattern {
      * @throws AutomationException Error in automation library
      */
     private IUIAutomationSelectionItemPattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**

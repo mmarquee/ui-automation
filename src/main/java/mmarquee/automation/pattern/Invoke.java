@@ -15,10 +15,12 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
 
@@ -30,18 +32,17 @@ import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
  */
 public class Invoke extends BasePattern {
 
+    IUIAutomationInvokePattern rawPattern;
+
     /**
      * Constructor for the pattern
+     * @throws AutomationException
      */
-    public Invoke() {
+    public Invoke(final AutomationElement element) throws AutomationException {
+        super(element);
         this.IID = IUIAutomationInvokePattern.IID;
-    }
-
-    private IUIAutomationInvokePattern rawPattern;
-
-    public Invoke(IUIAutomationInvokePattern rawPattern) {
-        this.IID = IUIAutomationInvokePattern.IID;
-        this.rawPattern = rawPattern;
+        this.patternID = PatternID.Invoke;
+        this.availabilityPropertyID = PropertyID.IsInvokePatternAvailable;
     }
 
     /**
@@ -50,19 +51,7 @@ public class Invoke extends BasePattern {
      * @throws AutomationException Something went wrong getting the pattern
      */
     private IUIAutomationInvokePattern getPattern() throws AutomationException {
-        if (this.rawPattern != null) {
-            return this.rawPattern;
-        } else {
-            PointerByReference pbr = new PointerByReference();
-
-            WinNT.HRESULT result0 = this.getRawPatternPointer(pbr);
-
-            if (COMUtils.SUCCEEDED(result0)) {
-                return this.convertPointerToInterface(pbr);
-            } else {
-                throw new AutomationException(result0.intValue());
-            }
-        }
+    	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**

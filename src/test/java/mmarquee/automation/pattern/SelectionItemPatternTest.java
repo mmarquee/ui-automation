@@ -15,14 +15,15 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -32,9 +33,16 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 
 /**
  * @author Mark Humphreys
@@ -49,16 +57,20 @@ public class SelectionItemPatternTest {
     IUIAutomationSelectionItemPattern rawPattern;
 
     @Mock
+    AutomationElement element;
+    
+    @Mock
     private Unknown mockUnknown;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testSelect_Calls_Select_From_Pattern() throws Exception {
-        SelectionItem item = new SelectionItem(rawPattern);
+        SelectionItem item = new SelectionItem(element);
+        item.rawPattern = rawPattern;
 
         item.select();
 
@@ -77,7 +89,8 @@ public class SelectionItemPatternTest {
             return 0;
         }).when(rawPattern).getCurrentIsSelected(any(IntByReference.class));
 
-        SelectionItem item = new SelectionItem(rawPattern);
+        SelectionItem item = new SelectionItem(element);
+        item.rawPattern = rawPattern;
 
         boolean selected = item.isSelected();
 
@@ -96,7 +109,8 @@ public class SelectionItemPatternTest {
             return 0;
         }).when(rawPattern).getCurrentIsSelected(any(IntByReference.class));
 
-        SelectionItem item = new SelectionItem(rawPattern);
+        SelectionItem item = new SelectionItem(element);
+        item.rawPattern = rawPattern;
 
         boolean selected = item.isSelected();
 
@@ -107,7 +121,8 @@ public class SelectionItemPatternTest {
     public void testIsSelected_Throws_Exception_When_COM_Returns_One() throws Exception {
         when(rawPattern.getCurrentIsSelected(any())).thenReturn(1);
 
-        SelectionItem item = new SelectionItem(rawPattern);
+        SelectionItem item = new SelectionItem(element);
+        item.rawPattern = rawPattern;
 
         boolean selected = item.isSelected();
 
@@ -120,7 +135,8 @@ public class SelectionItemPatternTest {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        SelectionItem pattern = new SelectionItem();
+        SelectionItem pattern = new SelectionItem(element);
+        pattern.rawPattern = rawPattern;
 
         SelectionItem spyPattern = Mockito.spy(pattern);
 
@@ -143,7 +159,8 @@ public class SelectionItemPatternTest {
     public void test_That_getPattern_Gets_Pattern_When_No_Pattern_Set() throws Exception {
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
-        SelectionItem pattern = new SelectionItem(mockPattern);
+        SelectionItem pattern = new SelectionItem(element);
+        pattern.rawPattern = mockPattern;
 
         pattern.select();
 
@@ -163,7 +180,8 @@ public class SelectionItemPatternTest {
     public void test_removeFromSelection_Calls_Method_From_Pattern() throws Exception {
         IUIAutomationSelectionItemPattern mockPattern = Mockito.mock(IUIAutomationSelectionItemPattern.class);
 
-        SelectionItem pattern = new SelectionItem(mockPattern);
+        SelectionItem pattern = new SelectionItem(element);
+        pattern.rawPattern = mockPattern;
 
         pattern.removeFromSelection();
 

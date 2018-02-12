@@ -15,26 +15,34 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.COM.Unknown;
+import java.util.function.Function;
+
+import org.apache.log4j.Logger;
+
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomation;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 
-/**
- * Base for the pattern wrappers.
- *
- * @author Mark Humphreys
- * Date 29/02/2016.
- */
-public abstract class BasePattern
-        extends BaseAutomation
-        implements Pattern {
+// Temporary intermediate class
+public abstract class BasePattern extends BaseAutomation implements Pattern
+{
+
+    /**
+     * The logger.
+     */
+    final Logger logger = Logger.getLogger(BasePattern.class.getName());
 
     /**
      * The guid of the pattern.
@@ -42,45 +50,98 @@ public abstract class BasePattern
     protected Guid.IID IID;
 
     /**
-     * The underlying automation pattern.
+     * The associated automation element.
      */
-    protected Pointer pattern;
+    final protected AutomationElement element;
+    protected PatternID patternID;
+    protected PropertyID availabilityPropertyID;
 
-    /**
-     * Constructs a Pattern.
-     */
-    public BasePattern() {
-        this.pattern = null;
+
+    public BasePattern(AutomationElement element) throws AutomationException
+    {
+        super();
+        this.element = element;
     }
 
-    /**
-     * Sets the pattern.
-     * @param pattern The pattern to set
-     */
-    public void setPattern(Pointer pattern) {
-        this.pattern =  pattern;
+    public PatternID getPatternID() {
+    	return patternID;
     }
 
     /**
      * Is this pattern available.
      * @return True if available.
      */
-    public boolean isAvailable() {
-        return (pattern == null);
+    public boolean isAvailable () {
+        try {
+            return !this.element.getPropertyValue(availabilityPropertyID.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
+        }
     }
 
     /**
      * Gets the raw pointer to the pattern.
      * @param pbr The raw pointer
      * @return Result of the call from the COM library
+     * @throws PatternNotFoundException
      */
     public WinNT.HRESULT getRawPatternPointer(
-            final PointerByReference pbr) {
-        Unknown uElement = makeUnknown(this.pattern);
+            final PointerByReference pbr) throws PatternNotFoundException {
+    	PointerByReference unknown;
+		try {
+			unknown = this.element.getPattern(patternID.getValue());
+		} catch (AutomationException e) {
+        	throw new PatternNotFoundException(e);
+		}
+
+    	if (unknown == null) {
+        	logger.warn("Failed to find pattern");
+        	throw new PatternNotFoundException("Failed to find pattern");
+    	}
+
+        Unknown uElement = makeUnknown(unknown.getValue());
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }
 
     /**
+     * Returns the Class of the unmocked pattern class
+     * @return the class without mocking
+     */
+	@SuppressWarnings("unchecked")
+	public final Class<? extends BasePattern> getPatternClass() {
+		Class<? extends BasePattern> patternClass = this.getClass();
+        while (patternClass.getSimpleName().contains("Mockito")) { // Support for Pattern mocks
+            patternClass = (Class<? extends BasePattern>) patternClass.getSuperclass();
+        }
+		return patternClass;
+	}
+
+	/**
+	 * Gets a pattern from the raw pattern pointer, or returns the override pattern
+	 *
+	 * @param overridePattern the pattern to use if to
+	 * @param convertPointerToInterface the method to convert the result pointer
+	 * @return the pattern interface
+	 * @throws AutomationException if something goes wrong
+	 */
+    protected <T> T getPattern(T overridePattern, Function<PointerByReference,T> convertPointerToInterface)
+    		throws AutomationException {
+    	if (overridePattern != null) {
+            return overridePattern;
+        } else {
+            PointerByReference pbr = new PointerByReference();
+
+            WinNT.HRESULT result0 = null;
+			result0 = this.getRawPatternPointer(pbr);
+
+            if (COMUtils.SUCCEEDED(result0)) {
+                return (T) convertPointerToInterface.apply(pbr);
+            } else {
+                throw new AutomationException(result0.intValue());
+            }
+        }
+    }
+	 /**
      * Converts the unknown value to a IUIAutomationElement.
      * @param pUnknownA The Unknown pointer
      * @return The pattern

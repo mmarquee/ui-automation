@@ -53,7 +53,7 @@ public class AutomationTitleBarTest {
         when(element.getName()).thenReturn("NAME");
 
         AutomationTitleBar ctrl = new AutomationTitleBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         String name = ctrl.getName();
 
@@ -72,7 +72,7 @@ public class AutomationTitleBarTest {
         when(element.findFirst(any(), any())).thenReturn(elem);
 
         AutomationTitleBar tb = new AutomationTitleBar(
-                new ElementBuilder(element).itemContainer(container));
+                new ElementBuilder(element).addPattern(container));
 
         AutomationMainMenu menu = tb.getMenuBar();
 

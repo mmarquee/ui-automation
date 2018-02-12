@@ -5,7 +5,12 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
+
+import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomationTest;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 import org.junit.Before;
@@ -34,10 +39,15 @@ import static org.mockito.Mockito.doReturn;
 public class SelectionPatternTest2 {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
+    @Mock
+    AutomationElement element;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
+        
+        BaseAutomationTest.declarePatternAvailable(element, 
+        		PatternID.Selection, PropertyID.IsSelectionPatternAvailable);
     }
 
     @Spy
@@ -51,9 +61,10 @@ public class SelectionPatternTest2 {
 
         doAnswer(invocation -> new WinNT.HRESULT(0)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Selection pattern = new Selection(rawPattern);
+        Selection pattern = new Selection(element);
+        pattern.rawPattern = rawPattern;
 
-        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+        Selection spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -73,7 +84,10 @@ public class SelectionPatternTest2 {
 
         doAnswer(invocation -> 0).when(rawPattern).getCurrentCanSelectMultiple(any());
 
-        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+        Selection pattern = new Selection(element);
+        pattern.rawPattern = rawPattern;
+
+        Selection spyPattern = Mockito.spy(pattern);
 
         spyPattern.canSelectMultiple();
     }
@@ -83,7 +97,10 @@ public class SelectionPatternTest2 {
 
         doAnswer(invocation -> 1).when(rawPattern).getCurrentSelection(any());
 
-        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+        Selection pattern = new Selection(element);
+        pattern.rawPattern = rawPattern;
+
+        Selection spyPattern = Mockito.spy(pattern);
 
         spyPattern.getCurrentSelection();
     }
@@ -101,9 +118,10 @@ public class SelectionPatternTest2 {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(), any());
 
-        Selection pattern = new Selection(rawPattern);
+        Selection pattern = new Selection(element);
+        pattern.rawPattern = rawPattern;
 
-        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+        Selection spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -126,9 +144,10 @@ public class SelectionPatternTest2 {
             return -1;
         }).when(rawPattern).getCurrentCanSelectMultiple(any());
 
-        Selection pattern = new Selection(rawPattern);
+        Selection pattern = new Selection(element);
+        pattern.rawPattern = rawPattern;
 
-        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+        Selection spyPattern = Mockito.spy(pattern);
 
         Boolean value = pattern.canSelectMultiple();
 
@@ -148,9 +167,10 @@ public class SelectionPatternTest2 {
 
         doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(), any());
 
-        Selection pattern = new Selection(rawPattern);
+        Selection pattern = new Selection(element);
+        pattern.rawPattern = rawPattern;
 
-        Selection spyPattern = Mockito.spy(new Selection(rawPattern));
+        Selection spyPattern = Mockito.spy(pattern);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
