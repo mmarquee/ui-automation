@@ -77,7 +77,7 @@ public class AutomationButton
             throws PatternNotFoundException, AutomationException {
         if (this.accessiblePattern == null) {
             try {
-                this.accessiblePattern = this.getAccessiblePattern();
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
             } catch (NullPointerException ex) {
                 logger.info("No value pattern available");
             }
@@ -98,7 +98,7 @@ public class AutomationButton
             throws PatternNotFoundException, AutomationException {
         if (this.accessiblePattern == null)  {
             try {
-                this.accessiblePattern = this.getAccessiblePattern();
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
                 this.accessiblePattern.setCurrentValue(value);
             } catch (NullPointerException ex) {
                 logger.info("No value pattern available");

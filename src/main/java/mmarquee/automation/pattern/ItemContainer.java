@@ -40,16 +40,7 @@ public class ItemContainer extends BasePattern {
 
     /**
      * Constructor for the ItemContainer pattern
-     * @throws AutomationException
-     */
-    public ItemContainer() {
-        this.patternID = PatternID.ItemContainer;
-        this.availabilityPropertyID = PropertyID.IsItemContainerPatternAvailable;
-    }
-
-    /**
-     * Constructor for the ItemContainer pattern
-     * @throws AutomationException
+     * @throws AutomationException API issue
      */
     public ItemContainer(final AutomationElement element) throws AutomationException {
         super(element);

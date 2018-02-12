@@ -30,7 +30,7 @@ public class IUIAutomationElement7Converter {
     public static final int IUI6_CACHED_FULL_DESCRIPTION = 105;
     public static final int IUI7_GET_CURRENT_METADATA_VALUE = 110;
 
-    public static IUIAutomationElement7 PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationElement7 pointerToInterface(final PointerByReference ptr) {
         //   0-2   IUnknown,
         //   3-84  IUIAutomationElement,
         //  85-90  IUIAutomationElement2,

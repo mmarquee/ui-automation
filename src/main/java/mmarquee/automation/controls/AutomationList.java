@@ -25,7 +25,10 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.pattern.LegacyIAccessible;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.uiautomation.TreeScope;
 
 /**
@@ -34,6 +37,11 @@ import mmarquee.automation.uiautomation.TreeScope;
  * Date 26/01/2016.
  */
 public final class AutomationList extends AutomationBase implements ChildSelectable {
+
+    /**
+     * The selection pattern.
+     */
+    private Selection selectionPattern;
 
     /**
      * Constructor for the AutomationList.
@@ -165,10 +173,9 @@ public final class AutomationList extends AutomationBase implements ChildSelecta
      *
      * @return The current selection.
      * @throws AutomationException Something has gone wrong.
-     * @throws PatternNotFoundException Failed to find pattern.
      */
     public List<AutomationListItem> getSelectedItems()
-            throws AutomationException, PatternNotFoundException {
+            throws AutomationException {
         List<AutomationElement> collection = getCurrentSelection();
 
         List<AutomationListItem> list = new ArrayList<>();
@@ -180,10 +187,17 @@ public final class AutomationList extends AutomationBase implements ChildSelecta
         return list;
     }
 
+    /**
+     * Gets the currently selected item.
+     *
+     * @return The currently selected item.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
+     */
     private AutomationElement getCurrentSelectedItem()
-            throws AutomationException, PatternNotFoundException {
+            throws AutomationException {
         if (this.selectionPattern == null) {
-            this.selectionPattern = this.getSelectionPattern();
+            this.selectionPattern = this.requestAutomationPattern(Selection.class);
         }
 
         if (this.selectionPattern != null) {

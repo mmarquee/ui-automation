@@ -53,7 +53,6 @@ import mmarquee.automation.pattern.Value;
 import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
-import mmarquee.automation.utils.providers.PatternProvider;
 
 /**
  * The base for automation.
@@ -225,7 +224,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return Yes or no.
      */
     public boolean isLegacyIAccessiblePatternAvailable() {
-        return isAutomationPatternAvailable(LegacyIAccessiblePattern.class);
+        return isAutomationPatternAvailable(LegacyIAccessible.class);
     }
 
     /**
@@ -706,7 +705,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @throws AutomationException Error in the automation library
      * @throws PatternNotFoundException Could not find the invoke pattern
      */
-    public void invoke() throws AutomationException, PatternNotFoundException {
+    public void invoke() throws AutomationException {
 
         final Invoke invokePattern = requestAutomationPattern(Invoke.class);
         if (invokePattern.isAvailable()) {

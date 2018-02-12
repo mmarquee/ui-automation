@@ -17,16 +17,24 @@ package mmarquee.automation.pattern;
 
 import java.util.List;
 
+import com.sun.jna.platform.win32.COM.COMUtils;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.ConversionFailure;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern2;
+import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern2Convertor;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 
 /**

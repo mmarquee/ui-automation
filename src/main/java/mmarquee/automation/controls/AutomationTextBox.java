@@ -17,6 +17,7 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.LegacyIAccessible;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
@@ -36,7 +37,7 @@ public final class AutomationTextBox
     /**
      * The legacy IAccessible pattern.
      */
-    private LegacyIAccessible accessiblePattern
+    private LegacyIAccessible accessiblePattern;
 
     /**
      * Construct the AutomationTextBox.
@@ -57,7 +58,7 @@ public final class AutomationTextBox
             throws PatternNotFoundException, AutomationException {
         if (this.accessiblePattern == null) {
             try {
-                this.accessiblePattern = this.getAccessiblePattern();
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
             } catch (NullPointerException ex) {
                 logger.info("No value pattern available");
             }
@@ -78,7 +79,7 @@ public final class AutomationTextBox
             throws PatternNotFoundException, AutomationException {
         if (this.accessiblePattern == null)  {
             try {
-                this.accessiblePattern = this.getAccessiblePattern();
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
                 this.accessiblePattern.setCurrentValue(value);
             } catch (NullPointerException ex) {
                 logger.info("No value pattern available");

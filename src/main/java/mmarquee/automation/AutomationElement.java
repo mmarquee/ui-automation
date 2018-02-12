@@ -29,6 +29,8 @@ import mmarquee.automation.uiautomation.IUIAutomationElement3;
 import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElement6;
 import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement7;
+import mmarquee.automation.uiautomation.IUIAutomationElement7Converter;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
@@ -786,7 +788,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement7.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement7Converter.PointerToInterface(pUnknown);
+            return IUIAutomationElement7Converter.pointerToInterface(pUnknown);
         }
 
         throw new ConversionFailure("IUIAutomationElement7");
