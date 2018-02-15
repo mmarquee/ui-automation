@@ -243,20 +243,18 @@ public class BaseAutomationTest {
 	     
 	     return selectItemPattern;
 	}
-	
-	
-	
+
 	public static void declarePatternAvailable(AutomationElement element, PatternID patternId, PropertyID patternAvailablePropertyID) throws AutomationException {
 		declarePatternAvailable(element, patternId);
-		when(element.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
+//		when(element.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
 	}
 	
 	public static void declarePatternAvailable(AutomationElement element, PatternID patternId) throws AutomationException {
 		Pointer patternPointer = Mockito.mock(Pointer.class);
         PointerByReference patternPointerReference = Mockito.mock(PointerByReference.class);
-        when(patternPointerReference.getValue()).thenReturn(patternPointer);
+//        when(patternPointerReference.getValue()).thenReturn(patternPointer);
         
-		when(element.getPattern(patternId.getValue())).thenReturn(patternPointerReference);
+//		when(element.getPattern(patternId.getValue())).thenReturn(patternPointerReference);
 	}
     
 }
