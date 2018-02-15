@@ -47,7 +47,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
         super();
         this.element = element;
     }
-    
+
     public PatternID getPatternID() {
     	return patternID;
     }
@@ -63,12 +63,12 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
             return false;
         }
     }
-    
+
     /**
      * Gets the raw pointer to the pattern.
      * @param pbr The raw pointer
      * @return Result of the call from the COM library
-     * @throws PatternNotFoundException 
+     * @throws PatternNotFoundException When the pattern was not found
      */
     public WinNT.HRESULT getRawPatternPointer(
             final PointerByReference pbr) throws PatternNotFoundException {
@@ -78,12 +78,12 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 		} catch (AutomationException e) {
         	throw new PatternNotFoundException(e);
 		}
-    	
+
     	if (unknown == null) {
         	logger.warn("Failed to find pattern");
         	throw new PatternNotFoundException("Failed to find pattern");
     	}
-    	
+
         Unknown uElement = makeUnknown(unknown.getValue());
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);
     }
@@ -103,13 +103,14 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 
 	/**
 	 * Gets a pattern from the raw pattern pointer, or returns the override pattern
-	 * 
-	 * @param overridePattern the pattern to use if to 
+	 *
+	 * @param <T>  The class of the pattern to return
+	 * @param overridePattern the pattern to use if to
 	 * @param convertPointerToInterface the method to convert the result pointer
 	 * @return the pattern interface
 	 * @throws AutomationException if something goes wrong
 	 */
-    protected <T> T getPattern(T overridePattern, Function<PointerByReference,T> convertPointerToInterface) 
+    protected <T> T getPattern(T overridePattern, Function<PointerByReference,T> convertPointerToInterface)
     		throws AutomationException {
     	if (overridePattern != null) {
             return overridePattern;
