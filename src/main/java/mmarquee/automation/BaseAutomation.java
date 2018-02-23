@@ -18,6 +18,8 @@ package mmarquee.automation;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.OaIdl.VARIANT_BOOL;
+import com.sun.jna.platform.win32.WinDef.BOOL;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
@@ -149,5 +151,19 @@ public abstract class BaseAutomation {
         }
 
         return pElement.getValue();
+    }
+
+    /**
+     * Converts a propertyValue into its boolean representation
+     * @param propertyValue the result from a getPropertyValue() call
+     * @return true if true (= !0), false otherwise
+     *
+     */
+    public static boolean isPropertyValueTrue(final Object propertyValue) {
+        if (propertyValue instanceof VARIANT_BOOL) return ((VARIANT_BOOL) propertyValue).booleanValue();
+        if (propertyValue instanceof BOOL) return ((BOOL) propertyValue).booleanValue();
+        if (propertyValue instanceof Boolean) return ((Boolean) propertyValue).booleanValue();
+        if (propertyValue instanceof Number) return ((Number) propertyValue).intValue() != 0;
+        return ! propertyValue.equals(0);
     }
 }

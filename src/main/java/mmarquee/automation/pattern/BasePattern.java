@@ -58,7 +58,8 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      */
     public boolean isAvailable () {
         try {
-            return !this.element.getPropertyValue(availabilityPropertyID.getValue()).equals(0);
+            final Object propertyValue = this.element.getPropertyValue(availabilityPropertyID.getValue());
+            return BaseAutomation.isPropertyValueTrue(propertyValue);
         } catch (AutomationException ex) {
             return false;
         }
