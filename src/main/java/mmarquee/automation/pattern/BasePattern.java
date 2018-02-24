@@ -73,7 +73,8 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      */
     public boolean isAvailable () {
         try {
-            return !this.element.getPropertyValue(availabilityPropertyID.getValue()).equals(0);
+            final Object propertyValue = this.element.getPropertyValue(availabilityPropertyID.getValue());
+            return BaseAutomation.isPropertyValueTrue(propertyValue);
         } catch (AutomationException ex) {
             return false;
         }
@@ -119,6 +120,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 	/**
 	 * Gets a pattern from the raw pattern pointer, or returns the override pattern
 	 *
+	 * @param <T>  The class of the pattern to return
 	 * @param overridePattern the pattern to use if to
 	 * @param convertPointerToInterface the method to convert the result pointer
 	 * @return the pattern interface

@@ -40,6 +40,8 @@ public class ItemContainer extends BasePattern {
 
     /**
      * Constructor for the ItemContainer pattern
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      * @throws AutomationException API issue
      */
     public ItemContainer(final AutomationElement element) throws AutomationException {

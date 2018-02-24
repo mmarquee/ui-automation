@@ -37,7 +37,8 @@ public class Styles extends BasePattern {
 
     /**
      * Constructor for the styles pattern
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public Styles(final AutomationElement element) throws AutomationException {
     	super(element);

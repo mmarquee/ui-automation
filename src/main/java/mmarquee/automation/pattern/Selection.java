@@ -48,7 +48,8 @@ public class Selection extends BasePattern {
 
     /**
      * Constructor for the value pattern
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public Selection(final AutomationElement element) throws AutomationException {
     	super(element);

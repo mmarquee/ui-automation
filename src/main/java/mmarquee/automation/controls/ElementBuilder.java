@@ -122,7 +122,7 @@ public class ElementBuilder {
 
     /**
      * Create an ElementBuilder with the given pattern.
-     * @param pattern The pattern to support
+     * @param patterns The pattern to support
      * @return The ElementBuilder
      */
     public ElementBuilder addPattern(final BasePattern... patterns) {
@@ -227,7 +227,7 @@ public class ElementBuilder {
     public AutomationElement getElement() {
         return this.element;
     }
-    
+
     /**
      * Gets the process.
      * @return The process

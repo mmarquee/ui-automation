@@ -22,7 +22,7 @@ import mmarquee.automation.pattern.SelectionItem;
 
 /**
  * The Control supports the methods of the SelectionItemPattern
- * 
+ *
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
@@ -86,6 +86,7 @@ public interface Selectable extends Automatable, CanRequestBasePattern {
 
     /**
      * Gets the selection container.
+     * @return  The selection container
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */

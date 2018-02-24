@@ -39,7 +39,8 @@ public class SelectionItem extends BasePattern {
 
     /**
      * Constructor for the value pattern
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public SelectionItem(final AutomationElement element) throws AutomationException {
     	super(element);

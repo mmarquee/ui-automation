@@ -35,7 +35,8 @@ import mmarquee.automation.uiautomation.WindowVisualState;
 public class Window extends BasePattern {
     /**
      * Constructor for the window pattern
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public Window(final AutomationElement element) throws AutomationException {
     	super(element);

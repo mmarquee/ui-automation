@@ -21,10 +21,11 @@ public class Toggle extends BasePattern {
 
     /**
      * Constructor for the toggle pattern.
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
-    public Toggle(final AutomationElement automationElement) throws AutomationException {
-    	super(automationElement);
+    public Toggle(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationTogglePattern.IID;
         this.patternID = PatternID.Toggle;
         this.availabilityPropertyID = PropertyID.IsTogglePatternAvailable;

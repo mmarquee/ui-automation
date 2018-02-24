@@ -37,10 +37,11 @@ public class Value extends BasePattern {
 
     /**
      * Constructor for the value pattern
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
-    public Value(final AutomationElement automationElement) throws AutomationException {
-    	super(automationElement);
+    public Value(final AutomationElement element) throws AutomationException {
+    	super(element);
         this.IID = IUIAutomationValuePattern.IID;
         this.patternID = PatternID.Value;
         this.availabilityPropertyID = PropertyID.IsValuePatternAvailable;

@@ -44,7 +44,8 @@ public class Text extends BasePattern {
     /**
      * Constructor for the text pattern
      *
-     * @throws AutomationException
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public Text(final AutomationElement element) throws AutomationException {
     	super(element);
