@@ -31,6 +31,7 @@ import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.BaseAutomation;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
@@ -161,7 +162,9 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         	final String patternIdNameVersion = patternIdName.replaceAll("\\D", "");
         	final String propertyName = String.format("Is%sPattern%sAvailable", patternIdNameText, patternIdNameVersion);
         	final PropertyID propertyId = PropertyID.valueOf(propertyName);
-            return !this.element.getPropertyValue(propertyId.getValue()).equals(0);
+
+            final Object propertyValue = this.element.getPropertyValue(propertyId.getValue());
+            return BaseAutomation.isPropertyValueTrue(propertyValue);
         } catch (AutomationException ex) {
             return false;
         }
@@ -379,7 +382,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      */
     public boolean isOffScreen() {
         try {
-            return !this.element.getPropertyValue(PropertyID.IsOffscreen.getValue()).equals(0);
+            final Object propertyValue = this.element.getPropertyValue(PropertyID.IsOffscreen.getValue());
+            return BaseAutomation.isPropertyValueTrue(propertyValue);
         } catch (AutomationException ex) {
             return false;
         }
