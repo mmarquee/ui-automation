@@ -29,7 +29,8 @@ public class MultipleView extends BasePattern {
 
     /**
      * Constructor for the MultipleView pattern
-     * @throws AutomationException 
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public MultipleView(final AutomationElement element) throws AutomationException {
     	super(element);

@@ -32,10 +32,11 @@ import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
  * Wrapper for the GridItem pattern
  */
 public class GridItem extends BasePattern {
-	
+
     /**
      * Constructor for the pattern
-     * @throws AutomationException 
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public GridItem(final AutomationElement element) throws AutomationException {
     	super(element);

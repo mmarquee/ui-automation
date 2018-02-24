@@ -37,11 +37,10 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
 		}
 		throw new PatternNotFoundException("Cannot get value");
     }
-    
+
     /**
      * Sets the value of the element.
      * @param value the value to set
-     * @return The value
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */

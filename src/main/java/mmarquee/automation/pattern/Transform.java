@@ -29,7 +29,8 @@ public class Transform extends BasePattern {
 
     /**
      * Constructor for the Transform pattern
-     * @throws AutomationException 
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public Transform(final AutomationElement element) throws AutomationException {
     	super(element);

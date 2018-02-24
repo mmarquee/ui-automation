@@ -32,7 +32,7 @@ import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConver
  * Date 25/02/2016.
  */
 public class ExpandCollapse extends BasePattern {
-    
+
     /**
      * The raw pointer.
      */
@@ -40,7 +40,8 @@ public class ExpandCollapse extends BasePattern {
 
     /**
      * Constructor for the pattern.
-     * @throws AutomationException 
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public ExpandCollapse(final AutomationElement element) throws AutomationException {
     	super(element);
@@ -58,7 +59,7 @@ public class ExpandCollapse extends BasePattern {
             throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
-    
+
     /**
      * Expands the control.
      * @throws AutomationException Something has gone wrong

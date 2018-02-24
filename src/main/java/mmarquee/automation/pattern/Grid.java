@@ -39,7 +39,8 @@ public class Grid extends BasePattern {
 
     /**
      * Constructor for the pattern
-     * @throws AutomationException 
+     * @param element The automation element for which the pattern is valid
+     * @throws AutomationException If something goes wrong
      */
     public Grid(final AutomationElement element) throws AutomationException {
     	super(element);
