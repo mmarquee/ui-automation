@@ -283,7 +283,7 @@ public class UIAutomation extends BaseAutomation {
 
         WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
         return new AutomationApplication(
-                new ElementBuilder(rootElement).handle(handle).attached(false));
+                new ElementBuilder(rootElement).handle(handle).attached(true));
     }
 
     /**
