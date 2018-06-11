@@ -24,16 +24,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.pattern.BasePattern;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElement6;
-import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElement7;
-import mmarquee.automation.uiautomation.IUIAutomationElement7Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +54,11 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement3 interface, if possible.
-     *
+     * Gets the IUIAutomationElement3 interface, if possible
      * @return The IUIAutomationElement3 interface
      * @throws AutomationException Not able to convert interface
      */
-    public final IUIAutomationElement3 getElement3()
-            throws AutomationException {
+    public final IUIAutomationElement3 getElement3() throws AutomationException {
 
         PointerByReference pUnknown = new PointerByReference();
 
@@ -77,15 +66,14 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3Converter.pointerToInterface(pUnknown);
+            return IUIAutomationElement3Converter.PointerToInterface(pUnknown);
         } else {
-            throw new ConversionFailure("IUIAutomationElement6");
+            throw new ConversionFailure("IUIAutomationElement3");
         }
     }
 
     /**
-     * Gets the IUIAutomationElement6 interface, if possible.
-     *
+     * Gets the IUIAutomationElement6 interface, if possible
      * @return The IUIAutomationElement6 interface
      * @throws AutomationException Not able to convert interface
      */
@@ -97,7 +85,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement6Converter.pointerToInterface(pUnknown);
+            return IUIAutomationElement6Converter.PointerToInterface(pUnknown);
         } else {
             throw new ConversionFailure("IUIAutomationElement6");
         }
@@ -143,6 +131,37 @@ public class AutomationElement extends BaseAutomation {
      */
     public void setCached(final boolean value) {
         this.cached = value;
+    }
+
+    /**
+     * Gets the name from the cached property.
+     *
+     * @return The cached name
+     * @throws AutomationException Call to Automation API failed.
+     */
+    public String getCachedName() throws AutomationException {
+        return this.cachedName();
+    }
+
+    /**
+     * Gets the cached name of the control.
+     *
+     * @return The name of the element.
+     * @throws AutomationException Call to Automation API failed.
+     */
+    protected String cachedName() throws AutomationException {
+       PointerByReference sr = new PointerByReference();
+
+       final int res = this.element.getCachedName(sr);
+       if (res != 0) {
+           throw new AutomationException(res);
+       }
+
+       if (sr.getValue() == null) {
+           return "";
+       } else {
+           return sr.getValue().getWideString(0);
+       }
     }
 
     /**
@@ -251,11 +270,10 @@ public class AutomationElement extends BaseAutomation {
 
     /**
      * Returns whether the element is off screen.
-     *
      * @return True if off screen.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL offScreen() throws AutomationException {
+    public Boolean offScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsOffscreen(bbr);
@@ -263,16 +281,15 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
      * Returns whether the element is a content element.
-     *
      * @return True if content element.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isContentElement() throws AutomationException {
+    public Boolean isContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsContentElement(bbr);
@@ -280,16 +297,15 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
      * Returns whether the element is a control element.
-     *
      * @return True if control element.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isControlElement() throws AutomationException {
+    public Boolean isControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsControlElement(bbr);
@@ -297,44 +313,33 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
      * Returns whether the element is enabled.
-     *
      * @return True if enabled.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isEnabled() throws AutomationException {
+    public Boolean isEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsEnabled(bbr);
-        if (res != 0) {
+        if (res  != 0) {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
      * Gets the name, either from the current ot cache property.
      *
-     * @return The current name
+     * @return The name (either cached or current).
      * @throws AutomationException Call to Automation API failed.
      */
     public String getName() throws AutomationException {
         return this.currentName();
-    }
-
-    /**
-     * Gets the name from the cached property.
-     *
-     * @return The cached name
-     * @throws AutomationException Call to Automation API failed.
-     */
-    public String getCachedName() throws AutomationException {
-        return this.cachedName();
     }
 
     /**
@@ -358,27 +363,6 @@ public class AutomationElement extends BaseAutomation {
         }
     }
 
-    /**
-     * Gets the cached name of the control.
-     *
-     * @return The name of the element.
-     * @throws AutomationException Call to Automation API failed.
-     */
-    protected String cachedName() throws AutomationException {
-        PointerByReference sr = new PointerByReference();
-
-        final int res = this.element.getCachedName(sr);
-        if (res != 0) {
-            throw new AutomationException(res);
-        }
-
-        if (sr.getValue() == null) {
-            return "";
-        } else {
-            return sr.getValue().getWideString(0);
-        }
-    }
-
 //    /**
 //     * Sets the name of the element
 //     * @param name The name to use
@@ -391,7 +375,7 @@ public class AutomationElement extends BaseAutomation {
     /**
      * Finds the first element that matches the raw condition.
      *
-     * @param scope      Tree scope.
+     * @param scope Tree scope.
      * @param pCondition The raw condition.
      * @return The first matching element.
      * @throws AutomationException Something has gone wrong.
@@ -452,62 +436,9 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Finds all for the cache.
-     * Probably will get refactored away at some point
-     *
-     * @param scope        The scope
-     * @param condition    The condition
-     * @param cacheRequest The cache
-     * @return List of found elements from the cache
-     * @throws AutomationException Something has gone wrong
-     */
-    public List<AutomationElement> findAll(final TreeScope scope,
-                                           final PointerByReference condition,
-                                           final CacheRequest cacheRequest)
-            throws AutomationException {
-        List<AutomationElement> items = new ArrayList<>();
-
-        PointerByReference all = new PointerByReference();
-
-        final int res = this.element.findAllBuildCache(scope.value,
-                condition.getValue(),
-                cacheRequest.getValue(),
-                all);
-
-        if (res != 0) {
-            throw new AutomationException(res);
-        }
-
-        IUIAutomationElementArray collection =
-                getAutomationElementArrayFromReference(all);
-
-        IntByReference ibr = new IntByReference();
-
-        collection.getLength(ibr);
-
-        int counter = ibr.getValue();
-
-        for (int a = 0; a < counter; a++) {
-            PointerByReference pbr = new PointerByReference();
-
-            collection.getElement(a, pbr);
-
-            IUIAutomationElement elem =
-                    getAutomationElementFromReference(pbr);
-
-            AutomationElement elmnt = new AutomationElement(elem);
-            elmnt.cached = true;
-
-            items.add(elmnt);
-        }
-
-        return items;
-    }
-
-    /**
      * Gets all of the elements that match the condition and scope.
      *
-     * @param scope      The scope in the element tree.
+     * @param scope The scope in the element tree.
      * @param pCondition The condition.
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
@@ -730,9 +661,7 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element, by trying to get the
-     * IUIAutomationElement3.
-     * <p>
+     * Shows the context menu for the element, by trying to get the IUIAutomationElement3.
      * Not supported in Windows 7 and before
      *
      * @throws AutomationException Failed to get the correct interface.
@@ -745,33 +674,6 @@ public class AutomationElement extends BaseAutomation {
 
         if (res != 0) {
             throw new AutomationException(res);
-        }
-    }
-
-    /**
-     * Gets the full description for the element, by trying to get the
-     * IUIAutomationElement6.
-     * <p>
-     * Not supported in before Windows 10 build 1703
-     *
-     * @return The description, if set
-     * @throws AutomationException Something has gone wrong in automation library
-     */
-    public String getFullDescription() throws AutomationException {
-        IUIAutomationElement6 element6 = this.getElement6();
-
-        PointerByReference sr = new PointerByReference();
-
-        final int res = element6.getCurrentFullDescription(sr);
-
-        if (res != 0) {
-            throw new AutomationException(res);
-        } else {
-            if (sr.getValue() == null) {
-                return "Not set";
-            } else {
-                return sr.getValue().getWideString(0);
-            }
         }
     }
 
@@ -820,6 +722,31 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
+     * Gets the full description for the element, by trying to get the IUIAutomationElement6.
+     *
+     * Not supported in before Windows 10 build 1703
+     * @return The description, if set
+     * @throws AutomationException Something has gone wrong in automation library
+     */
+    public String getFullDescription() throws AutomationException {
+        IUIAutomationElement6 element = this.getElement6();
+
+        PointerByReference sr = new PointerByReference();
+
+        final int res = element.getCurrentFullDescription(sr);
+
+        if (res != 0) {
+            throw new AutomationException(res);
+        } else {
+            if (sr.getValue() == null) {
+                return "Not set";
+            } else {
+                return sr.getValue().getWideString(0);
+            }
+        }
+    }
+
+    /**
      * Returns a predefined Automation Pattern bound to this element.
      * For Testing purposes only
      *
@@ -827,8 +754,8 @@ public class AutomationElement extends BaseAutomation {
      * @param automationPatternClass    the class of the automation pattern
      * @return  the mocked pattern, if available
      */
-    public <T extends BasePattern> T getProvidedPattern(final Class<T> automationPatternClass) {
-        // Return values will be mocked
-        return null;
-    }
+	public <T extends BasePattern> T getProvidedPattern(final Class<T> automationPatternClass) {
+		// Return values will be mocked
+		return null;
+	}
 }
