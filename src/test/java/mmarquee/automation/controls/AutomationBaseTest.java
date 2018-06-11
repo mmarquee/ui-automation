@@ -671,7 +671,7 @@ public class AutomationBaseTest {
 
     @Test
     @Ignore("Throws odd exception")
-    public void test_isOffScreen_returns_False_When_Element_Throws_Exeception() throws Exception {
+    public void test_isOffScreen_returns_False_When_Element_Throws_Exception() throws Exception {
         when(element.getProcessId()).thenReturn(99);
 
         doThrow(AutomationException.class)
