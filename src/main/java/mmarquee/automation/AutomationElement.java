@@ -234,7 +234,7 @@ public class AutomationElement extends BaseAutomation {
      * @return True if off screen.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL offScreen() throws AutomationException {
+    public Boolean offScreen() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsOffscreen(bbr);
@@ -242,7 +242,7 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
@@ -250,7 +250,7 @@ public class AutomationElement extends BaseAutomation {
      * @return True if content element.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isContentElement() throws AutomationException {
+    public Boolean isContentElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsContentElement(bbr);
@@ -258,7 +258,7 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
@@ -266,7 +266,7 @@ public class AutomationElement extends BaseAutomation {
      * @return True if control element.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isControlElement() throws AutomationException {
+    public Boolean isControlElement() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsControlElement(bbr);
@@ -274,7 +274,7 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**
@@ -282,7 +282,7 @@ public class AutomationElement extends BaseAutomation {
      * @return True if enabled.
      * @throws AutomationException Call to Automation API failed.
      */
-    public WinDef.BOOL isEnabled() throws AutomationException {
+    public Boolean isEnabled() throws AutomationException {
         WinDef.BOOLByReference bbr = new WinDef.BOOLByReference();
 
         final int res = this.element.getCurrentIsEnabled(bbr);
@@ -290,7 +290,7 @@ public class AutomationElement extends BaseAutomation {
             throw new AutomationException(res);
         }
 
-        return bbr.getValue();
+        return bbr.getValue().booleanValue();
     }
 
     /**

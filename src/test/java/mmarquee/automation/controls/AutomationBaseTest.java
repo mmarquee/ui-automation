@@ -625,7 +625,7 @@ public class AutomationBaseTest {
 
     @Test
     public void testisEnabled_Gets_Value_From_Element() throws Exception {
-        when(element.isEnabled()).thenReturn(new WinDef.BOOL(true));
+        when(element.isEnabled()).thenReturn(true);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
