@@ -23,6 +23,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 24/12/2017.
  */
 public interface LegacyAccessible extends Automatable {
-    String getValueFromIAccesible() throws PatternNotFoundException, AutomationException;
+    String getValueFromIAccessible() throws PatternNotFoundException, AutomationException;
     void setValueFromIAccessible(final String value) throws PatternNotFoundException, AutomationException;
 }

@@ -82,7 +82,7 @@ public class TestMain extends TestBase {
             Object framework = window.getFramework();
             logger.info("Framework is " + framework.toString());
 
-            logger.info("Modal? :" + window.isModal());
+            logger.info("Modal? : " + window.isModal());
 
             java.lang.Object rect = window.getBoundingRectangle();
 
@@ -98,6 +98,10 @@ public class TestMain extends TestBase {
                     Object val111 = popup.getBoundingRectangle();
 
                     AutomationButton btn = popup.getButton(Search.getBuilder("OK").build());
+
+                    String aText = btn.getValueFromIAccessible();
+                    logger.info("From LegacyAccessible: " + aText);
+
                     Object val11 = btn.getBoundingRectangle();
 
                     boolean val1 = popup.isModal();
@@ -136,7 +140,14 @@ public class TestMain extends TestBase {
 
             String eb1Text = tb1.getValue();
 
+            String aText = tb1.getValueFromIAccessible();
+
+            Object v = tb1.getMetadata();
+            logger.info("Metadata...");
+            logger.info(v);
+
             logger.info("Status Bar text = " + eb1Text);
+            logger.info("Status Bar text (from accessible) = " + aText);
 
             try {
                 AutomationComboBox cb1 = window.getComboBox(Search.getBuilder("AutomatedCombobox1").build());

@@ -16,6 +16,10 @@
 
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.LegacyIAccessible;
+import mmarquee.automation.pattern.PatternNotFoundException;
+
 /**
  * Wrapper for the TextBox element.
  *
@@ -24,7 +28,7 @@ package mmarquee.automation.controls;
  */
 public final class AutomationTextBox
         extends AutomationBase
-        implements Valueable {
+        implements Valueable, LegacyAccessible {
 
     /**
      * Construct the AutomationTextBox.
@@ -33,5 +37,49 @@ public final class AutomationTextBox
      */
     public AutomationTextBox(final ElementBuilder builder) {
         super(builder);
+    }
+
+    /**
+     * The legacy IAccessible pattern.
+     */
+    private LegacyIAccessible accessiblePattern;
+
+    /**
+     * Gets the value from the Legacy IAccessible interface.
+     * @return The string value
+     * @throws PatternNotFoundException Failed to find pattern
+     * @throws AutomationException Issue with automation library
+     */
+    public String getValueFromIAccessible()
+            throws PatternNotFoundException, AutomationException {
+        if (this.accessiblePattern == null) {
+            try {
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
+        }
+
+        try {
+            return accessiblePattern.getCurrentValue();
+        } catch (NullPointerException ex) {
+            return "<Empty>";
+        }
+    }
+
+    /**
+     * Sets the value from the legacy IAccessible interface
+     * @param value The value to set
+     */
+    public void setValueFromIAccessible(final String value)
+            throws AutomationException {
+        if (this.accessiblePattern == null)  {
+            try {
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
+                this.accessiblePattern.setCurrentValue(value);
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
+        }
     }
 }
