@@ -73,7 +73,7 @@ public class AutomationButton
      * @throws PatternNotFoundException Failed to find pattern
      * @throws AutomationException Issue with automation library
      */
-    public String getValueFromIAccesible()
+    public String getValueFromIAccessible()
             throws PatternNotFoundException, AutomationException {
         if (this.accessiblePattern == null) {
             try {
@@ -95,7 +95,7 @@ public class AutomationButton
      * @param value The value to set
      */
     public void setValueFromIAccessible(final String value)
-            throws PatternNotFoundException, AutomationException {
+            throws AutomationException {
         if (this.accessiblePattern == null)  {
             try {
                 this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);

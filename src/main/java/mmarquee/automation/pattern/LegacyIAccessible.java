@@ -1,5 +1,5 @@
 /*
- * Copyright 20117 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,8 @@ import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePatternCon
 public class LegacyIAccessible extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
+     *
      * @throws AutomationException API issue
      */
     public LegacyIAccessible(final AutomationElement element) throws AutomationException {
@@ -45,7 +46,8 @@ public class LegacyIAccessible extends BasePattern {
     private IUIAutomationLegacyIAccessiblePattern rawPattern;
 
     /**
-     * Gets the pattern
+     * Gets the pattern.
+     *
      * @return The pattern
      * @throws AutomationException Something went wrong getting the pattern
      */
@@ -67,6 +69,7 @@ public class LegacyIAccessible extends BasePattern {
 
     /**
      * Converts a pointer to the appropriate interface.
+     *
      * @param unknown The pointer
      * @return The converted interface
      */
@@ -76,6 +79,7 @@ public class LegacyIAccessible extends BasePattern {
 
     /**
      * Gets the current value.
+     *
      * @return The current name
      * @throws AutomationException Automation issue
      */
@@ -92,6 +96,7 @@ public class LegacyIAccessible extends BasePattern {
 
     /**
      * Sets the current value.
+     *
      * @param value The value
      * @throws AutomationException Automation issue
      */

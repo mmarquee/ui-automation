@@ -123,7 +123,7 @@ public class IUIAutomationElement3Test {
 
         WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
+            this.automation = IUIAutomationConverter.pointerToInterface(pbr1);
         }
     }
 

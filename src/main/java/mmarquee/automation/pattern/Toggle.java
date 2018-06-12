@@ -51,7 +51,7 @@ public class Toggle extends BasePattern {
      *
      * @throws AutomationException Something has gone wrong
      */
-    public void toggle() throws AutomationException {
+    public void toggle () throws AutomationException {
         final int res = this.getPattern().toggle();
         if (res != 0) {
             throw new AutomationException(res);
@@ -81,7 +81,7 @@ public class Toggle extends BasePattern {
      * @param pUnknown The unknown pointer.
      * @return The interface from the pointer.
      */
-    public IUIAutomationTogglePattern convertPointerToInterface(final PointerByReference pUnknown) {
+    IUIAutomationTogglePattern convertPointerToInterface(final PointerByReference pUnknown) {
         return IUIAutomationTogglePatternConverter.pointerToInterface(pUnknown);
     }
 }

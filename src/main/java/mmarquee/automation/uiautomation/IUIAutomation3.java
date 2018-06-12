@@ -22,14 +22,17 @@ import com.sun.jna.platform.win32.Guid;
  *
  * @author Mark Humphreys
  * Date 12/09/2016.
+ *
+ * Use this like:
+ * PointerByReference pbr=new PointerByReference();
+ * HRESULT result=SomeCOMObject.QueryInterface(IID, pbr);
+ * if(COMUtils.SUCCEEDED(result)) IUIAutomation3 iua=IUIAutomation3.Converter.pointerToInterface(pbr);
+ *
  */
 public interface IUIAutomation3 extends IUIAutomation2 {
     /**
      * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{73D768DA-9B51-4B89-936E-C209290973E7}");
-
-    //addTextEditTextChangedEventHandler
-    //removeTextEditTextChangedEventHandler
 }
 

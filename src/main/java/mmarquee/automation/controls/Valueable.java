@@ -34,8 +34,9 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
 		final Value valuePattern = requestAutomationPattern(Value.class);
 		if (valuePattern.isAvailable()) {
 			return valuePattern.value();
+		} else {
+			throw new PatternNotFoundException("Cannot get value");
 		}
-		throw new PatternNotFoundException("Cannot get value");
     }
 
     /**
@@ -49,8 +50,9 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
 		if (valuePattern.isAvailable()) {
 			valuePattern.setValue(value);
 			return;
+		} else {
+			throw new PatternNotFoundException("Cannot set value");
 		}
-		throw new PatternNotFoundException("Cannot set value");
     }
 
     /**
@@ -63,7 +65,8 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
 		final Value valuePattern = requestAutomationPattern(Value.class);
 		if (valuePattern.isAvailable()) {
 			return valuePattern.isReadOnly();
+		} else {
+			throw new PatternNotFoundException("Cannot check read only state");
 		}
-		throw new PatternNotFoundException("Cannot check read only state");
     }
 }

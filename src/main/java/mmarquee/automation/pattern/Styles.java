@@ -49,11 +49,6 @@ public class Styles extends BasePattern {
 
     IUIAutomationStylesPattern rawPattern;
 
-    /**
-     * Gets the pattern.
-     * @return The pattern
-     * @throws AutomationException Error in automation library
-     */
     private IUIAutomationStylesPattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
@@ -90,12 +85,7 @@ public class Styles extends BasePattern {
         return ipr.getValue();
     }
 
-    /**
-     * Converts An Unknown pointer to the automation interface.
-     * @param pUnknown The Unknown pointer
-     * @return The converted interface
-     */
-    public IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
+    IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
         return IUIAutomationStylesPatternConverter.pointerToInterface(pUnknown);
     }
 }

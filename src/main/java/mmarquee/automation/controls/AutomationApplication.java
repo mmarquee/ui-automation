@@ -15,7 +15,6 @@
  */
 package mmarquee.automation.controls;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -304,7 +303,6 @@ public class AutomationApplication extends AutomationBase {
             Utils.quitProcess(handle);
         }
     }
-
     /**
      * Gets the windows version number.
      *
@@ -317,4 +315,5 @@ public class AutomationApplication extends AutomationBase {
 
         return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
     }
+
 }

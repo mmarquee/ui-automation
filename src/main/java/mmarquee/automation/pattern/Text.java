@@ -34,10 +34,10 @@ import mmarquee.automation.uiautomation.IUIAutomationTextRangeArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationTextRangeConverter;
 
 /**
- * Wrapper for the text pattern.
- *
  * @author Mark Humphreys
  * Date 25/02/2016.
+ *
+ * Wrapper for the text pattern
  */
 public class Text extends BasePattern {
 
@@ -171,7 +171,7 @@ public class Text extends BasePattern {
         }
     }
 
-    public IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationTextRangeConverter.pointerToInterface(pUnknownA);
     }
 }

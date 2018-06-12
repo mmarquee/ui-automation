@@ -30,10 +30,10 @@ import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
 
 /**
- * Wrapper for the SelectionItem pattern.
- *
  * @author Mark Humphreys
  * Date 25/02/2016.
+ *
+ * Wrapper for the SelectionItem pattern.
  */
 public class SelectionItem extends BasePattern {
 
@@ -51,17 +51,12 @@ public class SelectionItem extends BasePattern {
 
     IUIAutomationSelectionItemPattern rawPattern;
 
-    /**
-     * Gets the pattern.
-     * @return The pattern
-     * @throws AutomationException Error in automation library
-     */
     private IUIAutomationSelectionItemPattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**
-     * Selects the given item.
+     * Selects the given item
      * @throws AutomationException Something has gone wrong
      */
     public void select() throws AutomationException {
@@ -69,7 +64,7 @@ public class SelectionItem extends BasePattern {
     }
 
     /**
-     * Is the control selected.
+     * Is the control selected
      * @return True if selected
      * @throws AutomationException Something has gone wrong
      */
@@ -84,7 +79,7 @@ public class SelectionItem extends BasePattern {
     }
 
     /**
-     * Adds the item to the current selection.
+     * Adds the item to the current selection
      * @throws AutomationException Something went wrong in the automation library
      */
     public void addToSelection() throws AutomationException {
@@ -92,7 +87,7 @@ public class SelectionItem extends BasePattern {
     }
 
     /**
-     * Gets the selection container.
+     * Gets the selection container
      * @return The selection container
      * @throws AutomationException Something has gone wrong in automation
      */
@@ -116,19 +111,14 @@ public class SelectionItem extends BasePattern {
     }
 
     /**
-     * Removes the item from the current selection.
+     * Removes the item from the current selection
      * @throws AutomationException Something went wrong in the automation library
      */
     public void removeFromSelection() throws AutomationException {
         this.getPattern().removeFromSelection();
     }
 
-    /**
-     * Converts the given pointer to the interface.
-     * @param ref The pointer reference
-     * @return The converted pattern
-     */
-    public IUIAutomationSelectionItemPattern convertPointerToInterface(PointerByReference ref) {
+    IUIAutomationSelectionItemPattern convertPointerToInterface(PointerByReference ref) {
         return IUIAutomationSelectionItemPatternConverter.pointerToInterface(ref);
     }
 }

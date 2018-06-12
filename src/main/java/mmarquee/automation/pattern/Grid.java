@@ -129,7 +129,7 @@ public class Grid extends BasePattern {
         return ibr.getValue();
     }
 
-    public IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationGridPatternConverter.pointerToInterface(pUnknownA);
     }
 }

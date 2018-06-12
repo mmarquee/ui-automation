@@ -26,10 +26,10 @@ import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
 
 /**
- * Wrapper for the range valuepattern.
- *
  * @author Mark Humphreys
  * Date 01/03/2016.
+ *
+ * Wrapper for the range valuepattern.
  */
 public class Range extends BasePattern {
 
@@ -47,7 +47,7 @@ public class Range extends BasePattern {
 
     IUIAutomationRangeValuePattern rawPattern;
 
-    public IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationRangeValuePatternConverter.pointerToInterface(pUnknownA);
     }
 
@@ -56,11 +56,11 @@ public class Range extends BasePattern {
     }
 
     /**
-     * Sets the value.
+     * Sets the value
      * @param value The value to set
      * @throws AutomationException Something has gone wrong
      */
-    public void setValue(final double value) throws AutomationException {
+    public void setValue (double value) throws AutomationException {
         final int res = this.getPattern().setValue(value);
         if (res != 0) {
             throw new AutomationException(res);
@@ -72,7 +72,7 @@ public class Range extends BasePattern {
      * @return The value
      * @throws AutomationException Something has gone wrong
      */
-    public double getValue() throws AutomationException {
+    public double getValue () throws AutomationException {
         DoubleByReference dbr = new DoubleByReference();
 
         final int res = this.getPattern().getValue(dbr);

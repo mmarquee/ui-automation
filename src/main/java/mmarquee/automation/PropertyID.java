@@ -102,19 +102,14 @@ public enum PropertyID {
     IsSpreadsheetPatternAvailable(30128),
     IsSpreadsheetItemPatternAvailable(30132),
     IsTransformPattern2Available(30134),
+    LiveSetting(30135),
     IsTextChildPatternAvailable(30136),
     IsDragPatternAvailable(30137),
     IsDropTargetPatternAvailable(30141),
-    IsTextEditPatternAvailable(30149),
-    IsCustomNavigationPatternAvailable(30151),
-    
-
-    OptimizeForVisualContent(30111),
-
-    LiveSetting(30135),
-
     FlowsFrom(30148),
+    IsTextEditPatternAvailable(30149),
     IsPeripheral(30150),
+    IsCustomNavigationPatternAvailable(30151),
     PositionInSet(30152),
     SizeOfSet(30153),
     Level(30154),
@@ -144,7 +139,7 @@ public enum PropertyID {
         return this.value;
     }
 
-    PropertyID(final int value) {
+    PropertyID(int value) {
         this.value = value;
     }
 }

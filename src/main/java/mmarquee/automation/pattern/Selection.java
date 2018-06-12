@@ -17,32 +17,23 @@ package mmarquee.automation.pattern;
 
 import java.util.List;
 
-import com.sun.jna.platform.win32.COM.COMUtils;
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.ConversionFailure;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
 import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern2;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern2Convertor;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 
 /**
- *
- * Wrapper for the Selection pattern.
- *
  * @author Mark Humphreys
  * Date 25/02/2016.
+ *
+ * Wrapper for the Selection pattern.
  */
 public class Selection extends BasePattern {
 
@@ -61,7 +52,7 @@ public class Selection extends BasePattern {
     IUIAutomationSelectionPattern rawPattern;
 
     /**
-     * Gets the pointer.
+     * Gets the pointer
      * @return Underlying pointer
      * @throws AutomationException Automation has gone wrong
      */
@@ -70,7 +61,7 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Gets the current selection.
+     * Gets the current selection
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      */
@@ -87,12 +78,12 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Convert the unknown pointer to selection pattern.
+     * Convert the unknown pointer to selection pattern
      *
      * @param pUnknown The unknown pointer
      * @return IUIAutomationSelectionPattern the converted pointer
      */
-    public IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
+    IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
         return IUIAutomationSelectionPatternConverter.pointerToInterface(pUnknown);
     }
 
@@ -107,7 +98,7 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Gets the current selection.
+     * Gets the current selection
      * @return List of selected items
      * @throws AutomationException Something has gone wrong
      */
@@ -116,7 +107,7 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Returns whether the selection supports multiple selection.
+     * Returns whether the selection supports multiple selection
      * @return Value from automation
      * @throws AutomationException Something has gone wrong
      */
@@ -129,52 +120,5 @@ public class Selection extends BasePattern {
         }
 
         return (ibr.getValue() == 1);
-    }
-
-    /**
-     * Gets the currently selected item from the IUIAutomationSelectionPattern2 interface.
-     * @return The currently selected element, if possible
-     * @throws AutomationException Error, or unable to convert to IUIAutomationSelectionPattern2
-     */
-    public AutomationElement getCurrentSelectedItem() throws AutomationException {
-        PointerByReference pbr = new PointerByReference();
-
-        IUIAutomationSelectionPattern2 pattern2 = this.getPattern2();
-
-        final int res = pattern2.getCurrentSelection(pbr);
-        if (res != 0) {
-            throw new AutomationException(res);
-        }
-
-        PointerByReference pUnknown = new PointerByReference();
-
-        WinNT.HRESULT result = this.rawPattern.QueryInterface(
-                new Guid.REFIID(IUIAutomationElement.IID), pUnknown);
-
-        if (COMUtils.SUCCEEDED(result)) {
-            return new AutomationElement(IUIAutomationElementConverter.pointerToInterface(pUnknown));
-        } else {
-            throw new ConversionFailure("IUIAutomationElement");
-        }
-    }
-
-    /**
-     * Gets the IUIAutomationSelectionPattern2 interface, if possible.
-     * @return The IUIAutomationSelectionPattern2 interface
-     * @throws AutomationException Not able to convert interface
-     */
-    private IUIAutomationSelectionPattern2 getPattern2()
-            throws AutomationException {
-
-        PointerByReference pUnknown = new PointerByReference();
-
-        WinNT.HRESULT result = this.getPattern().QueryInterface(
-                new Guid.REFIID(IUIAutomationSelectionPattern2.IID), pUnknown);
-
-        if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationSelectionPattern2Convertor.pointerToInterface(pUnknown);
-        } else {
-            throw new ConversionFailure("IUIAutomationElement");
-        }
     }
 }

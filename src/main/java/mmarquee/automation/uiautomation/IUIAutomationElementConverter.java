@@ -35,7 +35,7 @@ public class IUIAutomationElementConverter {
     //  3-84 IUIAutomationElement
     private static int UIAutomationElement_Methods = 94;
 
-    public static IUIAutomationElement PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationElement pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[UIAutomationElement_Methods];

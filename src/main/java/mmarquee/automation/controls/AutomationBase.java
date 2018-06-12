@@ -38,20 +38,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Grid;
-import mmarquee.automation.pattern.GridItem;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Range;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.pattern.Table;
-import mmarquee.automation.pattern.Text;
-import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -231,7 +217,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     }
 
     /**
-     * Is the gird item pattern available.
+     * Is the grid item pattern available.
      *
      * @return Yes or no.
      */
@@ -576,7 +562,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @throws AutomationException Something is wrong in automation
      */
     public boolean isEnabled() throws AutomationException {
-        return this.element.isEnabled().booleanValue();
+        return this.element.isEnabled();
     }
 
     /**
@@ -781,7 +767,6 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     }
 
 // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
-// see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent control
 //     *

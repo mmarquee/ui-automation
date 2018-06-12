@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,6 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 24/12/2017.
  */
 public interface LegacyAccessible extends Automatable {
-    String getValueFromIAccesible() throws PatternNotFoundException, AutomationException;
+    String getValueFromIAccessible() throws PatternNotFoundException, AutomationException;
     void setValueFromIAccessible(final String value) throws PatternNotFoundException, AutomationException;
 }

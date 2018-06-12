@@ -107,7 +107,7 @@ public class Table extends BasePattern {
      * @param pUnknownA The Unknown pointer
      * @return The pattern
      */
-    public IUIAutomationTablePattern convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationTablePattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationTablePatternConverter.pointerToInterface(pUnknownA);
     }
 }
