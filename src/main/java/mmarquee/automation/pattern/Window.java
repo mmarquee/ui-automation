@@ -166,6 +166,6 @@ public class Window extends BasePattern {
     }
 
     IUIAutomationWindowPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationWindowPatternConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationWindowPatternConverter.pointerToInterface(pUnknownA);
     }
 }

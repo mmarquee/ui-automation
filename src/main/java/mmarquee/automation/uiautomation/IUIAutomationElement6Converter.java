@@ -11,7 +11,7 @@ import com.sun.jna.ptr.PointerByReference;
 
 public class IUIAutomationElement6Converter {
 
-    public static IUIAutomationElement6 PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationElement6 pointerToInterface(final PointerByReference ptr) {
         //  0-2  IUnknown,
         //  3-84 IUIAutomationElement,
         // 85-90 IUIAutomationElement2,

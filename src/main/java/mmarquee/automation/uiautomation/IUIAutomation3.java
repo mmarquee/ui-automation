@@ -26,7 +26,7 @@ import com.sun.jna.platform.win32.Guid;
  * Use this like:
  * PointerByReference pbr=new PointerByReference();
  * HRESULT result=SomeCOMObject.QueryInterface(IID, pbr);
- * if(COMUtils.SUCCEEDED(result)) IUIAutomation3 iua=IUIAutomation3.Converter.PointerToInterface(pbr);
+ * if(COMUtils.SUCCEEDED(result)) IUIAutomation3 iua=IUIAutomation3.Converter.pointerToInterface(pbr);
  *
  */
 public interface IUIAutomation3 extends IUIAutomation2 {

@@ -130,6 +130,6 @@ public class Grid extends BasePattern {
     }
 
     IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationGridPatternConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationGridPatternConverter.pointerToInterface(pUnknownA);
     }
 }

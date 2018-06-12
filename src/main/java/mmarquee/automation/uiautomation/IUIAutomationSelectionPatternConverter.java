@@ -29,7 +29,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationSelectionPatternConverter {
     private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationSelectionPattern
 
-    public static IUIAutomationSelectionPattern PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationSelectionPattern pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];

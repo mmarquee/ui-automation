@@ -135,7 +135,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      */
     public IUIAutomationElement convertPointerToElementInterface(
             final PointerByReference pUnknownA) {
-        return IUIAutomationElementConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationElementConverter.pointerToInterface(pUnknownA);
     }
 
     /**
@@ -145,6 +145,6 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      */
     public IUIAutomationElementArray convertPointerToElementArrayInterface(
             final PointerByReference pUnknownA) {
-        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationElementArrayConverter.pointerToInterface(pUnknownA);
     }
 }

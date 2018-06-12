@@ -62,11 +62,11 @@ public class Text extends BasePattern {
     }
 
     IUIAutomationTextPattern convertPointerOfTextPatternToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextPatternConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationTextPatternConverter.pointerToInterface(pUnknownA);
     }
 
     IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextRangeArrayConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationTextRangeArrayConverter.pointerToInterface(pUnknownA);
     }
 
     /**
@@ -172,6 +172,6 @@ public class Text extends BasePattern {
     }
 
     IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationTextRangeConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationTextRangeConverter.pointerToInterface(pUnknownA);
     }
 }

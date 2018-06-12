@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import mmarquee.automation.pattern.*;
 import org.apache.log4j.Logger;
 
 import com.sun.jna.Pointer;
@@ -37,27 +38,6 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.pattern.BasePattern;
-import mmarquee.automation.pattern.Dock;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Grid;
-import mmarquee.automation.pattern.GridItem;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.MultipleView;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Range;
-import mmarquee.automation.pattern.Scroll;
-import mmarquee.automation.pattern.ScrollItem;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.pattern.Table;
-import mmarquee.automation.pattern.TableItem;
-import mmarquee.automation.pattern.Text;
-import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.pattern.Transform;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.OrientationType;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -83,6 +63,11 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * The automation library wrapper.
      */
     protected UIAutomation automation;
+
+    /**
+     * The basic IAccessible pattern.
+     */
+    private LegacyIAccessible accessible;
 
     /**
      * The available Patterns.
@@ -223,7 +208,16 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     }
 
     /**
-     * Is the gird item pattern available.
+     * Is the legacy accessible pattern available.
+     *
+     * @return Yes or no.
+     */
+    public boolean isLegacyIAccessiblePatternAvailable() {
+        return isAutomationPatternAvailable(LegacyIAccessible.class);
+    }
+
+    /**
+     * Is the grid item pattern available.
      *
      * @return Yes or no.
      */
@@ -427,7 +421,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return The name of the element.
      * @throws AutomationException Error in automation library.
      */
-    public String getName () throws AutomationException {
+    public String getName() throws AutomationException {
         return this.element.getName();
     }
 
@@ -567,8 +561,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return Enabled?
      * @throws AutomationException Something is wrong in automation
      */
-    public boolean isEnabled () throws AutomationException {
-        return this.element.isEnabled().booleanValue();
+    public boolean isEnabled() throws AutomationException {
+        return this.element.isEnabled();
     }
 
     /**
@@ -694,7 +688,6 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         return new Unknown(pvInstance);
     }
 
-
     /**
      * <p>
      * Invokes the click event for this control.
@@ -702,7 +695,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @throws AutomationException Error in the automation library
      * @throws PatternNotFoundException Could not find the invoke pattern
      */
-    public void invoke() throws AutomationException, PatternNotFoundException {
+    public void invoke() throws AutomationException {
 
         final Invoke invokePattern = requestAutomationPattern(Invoke.class);
         if (invokePattern.isAvailable()) {
@@ -711,7 +704,6 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
             throw new PatternNotFoundException("Invoke could not be called");
         }
     }
-
 
     /**
      * Gets child Elements.
@@ -754,6 +746,15 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         	collection.add(AutomationControlFactory.get(this, el));
         }
         return collection;
+    }
+
+    /**
+     * Gets the metadata associated with the element.
+     * @return The metadata
+     * @throws AutomationException Library exception
+     */
+    public Object getMetadata() throws AutomationException {
+        return this.getElement().getCurrentMetadataValue();
     }
 
     /**

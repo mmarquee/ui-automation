@@ -84,7 +84,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationSelectionPatternConverter.PointerToInterface(pUnknown);
+        return IUIAutomationSelectionPatternConverter.pointerToInterface(pUnknown);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Selection extends BasePattern {
      * @return IUIAutomationSelectionPattern the converted pointer
      */
     public IUIAutomationElementArray convertPointerToElementArray(PointerByReference pUnknown) {
-        return IUIAutomationElementArrayConverter.PointerToInterface(pUnknown);
+        return IUIAutomationElementArrayConverter.pointerToInterface(pUnknown);
     }
 
     /**

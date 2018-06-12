@@ -28,7 +28,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationTreeWalkerConverter {
     private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationTreeWalker
 
-    public static IUIAutomationTreeWalker PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationTreeWalker pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];

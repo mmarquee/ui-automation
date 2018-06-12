@@ -86,6 +86,6 @@ public class Styles extends BasePattern {
     }
 
     IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
-        return IUIAutomationStylesPatternConverter.PointerToInterface(pUnknown);
+        return IUIAutomationStylesPatternConverter.pointerToInterface(pUnknown);
     }
 }

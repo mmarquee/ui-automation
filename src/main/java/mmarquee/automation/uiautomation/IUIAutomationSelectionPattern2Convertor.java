@@ -25,7 +25,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationSelectionPattern2Convertor {
     private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationSelectionPattern
 
-    public static IUIAutomationSelectionPattern2 PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationSelectionPattern2 pointerToInterface(final PointerByReference ptr) {
         // 0-2 IUnknown,
         // 3-5 IUIAutomationSelectionPattern
         // 6-13 IUIAutomationSelectionPattern2

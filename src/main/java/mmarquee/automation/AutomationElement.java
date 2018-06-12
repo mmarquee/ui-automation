@@ -66,7 +66,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement3.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement3Converter.PointerToInterface(pUnknown);
+            return IUIAutomationElement3Converter.pointerToInterface(pUnknown);
         } else {
             throw new ConversionFailure("IUIAutomationElement3");
         }
@@ -85,7 +85,7 @@ public class AutomationElement extends BaseAutomation {
                 new Guid.REFIID(IUIAutomationElement6.IID), pUnknown);
 
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElement6Converter.PointerToInterface(pUnknown);
+            return IUIAutomationElement6Converter.pointerToInterface(pUnknown);
         } else {
             throw new ConversionFailure("IUIAutomationElement6");
         }
@@ -270,6 +270,7 @@ public class AutomationElement extends BaseAutomation {
 
     /**
      * Returns whether the element is off screen.
+     *
      * @return True if off screen.
      * @throws AutomationException Call to Automation API failed.
      */
@@ -286,6 +287,7 @@ public class AutomationElement extends BaseAutomation {
 
     /**
      * Returns whether the element is a content element.
+     *
      * @return True if content element.
      * @throws AutomationException Call to Automation API failed.
      */
@@ -302,6 +304,7 @@ public class AutomationElement extends BaseAutomation {
 
     /**
      * Returns whether the element is a control element.
+     *
      * @return True if control element.
      * @throws AutomationException Call to Automation API failed.
      */
@@ -318,6 +321,7 @@ public class AutomationElement extends BaseAutomation {
 
     /**
      * Returns whether the element is enabled.
+     *
      * @return True if enabled.
      * @throws AutomationException Call to Automation API failed.
      */

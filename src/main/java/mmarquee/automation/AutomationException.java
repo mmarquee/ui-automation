@@ -16,10 +16,11 @@
 package mmarquee.automation;
 
 /**
- * @author Mark Humphreys Date 14/07/2016.
+ * An exception thrown when there is an error returned by the underlying
+ * automation library.
  *
- *         An exception thrown when there is an error returned by the underlying
- *         automation library.
+ * @author Mark Humphreys
+ * Date 14/07/2016.
  */
 public class AutomationException extends Exception {
 
@@ -36,8 +37,7 @@ public class AutomationException extends Exception {
 	/**
 	 * Constructor for the AutomationException.
 	 * 
-	 * @param message
-	 *            The message.
+	 * @param message The message.
 	 */
 	public AutomationException(final String message) {
 		super(message);
@@ -47,8 +47,7 @@ public class AutomationException extends Exception {
 	/**
 	 * Constructor for the AutomationException.
 	 * 
-	 * @param inErrorCode
-	 *            The error code.
+	 * @param inErrorCode The error code.
 	 */
 	public AutomationException(final int inErrorCode) {
 		super(createErrorString(inErrorCode));
@@ -58,8 +57,7 @@ public class AutomationException extends Exception {
 	/**
 	 * Constructor for the AutomationException.
 	 * 
-	 * @param cause
-	 *            The underlying exception which caused this
+	 * @param cause The underlying exception which caused this
 	 */
 	public AutomationException(final Throwable cause) {
 		super(cause);
@@ -69,8 +67,7 @@ public class AutomationException extends Exception {
 	/**
 	 * Creates the error string.
 	 * 
-	 * @param inErrorCode
-	 *            The error code to use.
+	 * @param inErrorCode The error code to use.
 	 * @return The formatted error message.
 	 */
 	private static String createErrorString(final int inErrorCode) {

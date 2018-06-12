@@ -102,14 +102,29 @@ public enum PropertyID {
     IsSpreadsheetPatternAvailable(30128),
     IsSpreadsheetItemPatternAvailable(30132),
     IsTransformPattern2Available(30134),
+    LiveSetting(30135),
     IsTextChildPatternAvailable(30136),
     IsDragPatternAvailable(30137),
     IsDropTargetPatternAvailable(30141),
+    FlowsFrom(30148),
     IsTextEditPatternAvailable(30149),
+    IsPeripheral(30150),
     IsCustomNavigationPatternAvailable(30151),
-    
-
-    LiveSetting(30135);
+    PositionInSet(30152),
+    SizeOfSet(30153),
+    Level(30154),
+    AnnotationTypes(30155),
+    AnnotationObjects(30156),
+    LandmarkType(30157),
+    LocalizedLandmark(30158),
+    FullDescription(30159),
+    FillColor(30160),
+    OutlineColor(30161),
+    FillType(30162),
+    OutlineThickness(30164),
+    CenterPoint(30165),
+    Rotation(30166),
+    Size(30167);
 
     /**
      * The actual value.
@@ -124,7 +139,7 @@ public enum PropertyID {
         return this.value;
     }
 
-    PropertyID (int value) {
+    PropertyID(int value) {
         this.value = value;
     }
 }

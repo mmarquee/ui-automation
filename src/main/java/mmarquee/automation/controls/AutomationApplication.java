@@ -27,6 +27,7 @@ import com.sun.jna.platform.win32.WinNT;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.utils.ExecutableFileInfo;
 import mmarquee.automation.utils.Utils;
 
 /**
@@ -302,4 +303,17 @@ public class AutomationApplication extends AutomationBase {
             Utils.quitProcess(handle);
         }
     }
+    /**
+     * Gets the windows version number.
+     *
+     * @param arg The path
+     * @return The version number
+     */
+    public static String getVersionNumber(String arg) {
+        ExecutableFileInfo info = new ExecutableFileInfo();
+        int[] version = info.getVersionInfo(arg);
+
+        return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
+    }
+
 }
