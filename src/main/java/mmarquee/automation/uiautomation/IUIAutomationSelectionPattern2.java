@@ -30,8 +30,8 @@ public interface IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPa
     Guid.IID IID = new Guid.IID(
                 "{0532bfae-c011-4e32-a343-6d642d798555}");
 
-    int CurrentCurrentSelectedItem(PointerByReference retval);
-    int CurrentFirstSelectedItem(PointerByReference retval);
-    int CurrentItemCount(IntByReference retval);
-    int CurrentLastSelectedItem(PointerByReference retval);
+    int currentCurrentSelectedItem(PointerByReference retval);
+    int currentFirstSelectedItem(PointerByReference retval);
+    int currentItemCount(IntByReference retval);
+    int currentLastSelectedItem(PointerByReference retval);
 }

@@ -28,7 +28,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationInvokePatternConverter {
     private static int UIAutomationInvokePattern_Methods = 4; // 0-2 IUnknown, 3 IUIAutomationInvokePattern
 
-    public static IUIAutomationInvokePattern PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationInvokePattern pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[UIAutomationInvokePattern_Methods];

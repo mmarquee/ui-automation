@@ -25,7 +25,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationSelectionPattern2Convertor {
     private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationSelectionPattern
 
-    public static IUIAutomationSelectionPattern2 PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationSelectionPattern2 pointerToInterface(final PointerByReference ptr) {
         // 0-2 IUnknown,
         // 3-5 IUIAutomationSelectionPattern
         // 6-13 IUIAutomationSelectionPattern2
@@ -66,22 +66,22 @@ public class IUIAutomationSelectionPattern2Convertor {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentCurrentSelectedItem(PointerByReference retVal){
+            public int currentCurrentSelectedItem(PointerByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentFirstSelectedItem(PointerByReference retVal){
+            public int currentFirstSelectedItem(PointerByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentItemCount(IntByReference retVal){
+            public int currentItemCount(IntByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentLastSelectedItem(PointerByReference retVal){
+            public int currentLastSelectedItem(PointerByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }

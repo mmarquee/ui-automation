@@ -48,7 +48,7 @@ public class Range extends BasePattern {
     IUIAutomationRangeValuePattern rawPattern;
 
     IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
-        return IUIAutomationRangeValuePatternConverter.PointerToInterface(pUnknownA);
+        return IUIAutomationRangeValuePatternConverter.pointerToInterface(pUnknownA);
     }
 
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {

@@ -119,6 +119,6 @@ public class SelectionItem extends BasePattern {
     }
 
     IUIAutomationSelectionItemPattern convertPointerToInterface(PointerByReference ref) {
-        return IUIAutomationSelectionItemPatternConverter.PointerToInterface(ref);
+        return IUIAutomationSelectionItemPatternConverter.pointerToInterface(ref);
     }
 }

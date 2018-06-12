@@ -28,7 +28,7 @@ import com.sun.jna.ptr.PointerByReference;
 public class IUIAutomationTextRangeConverter {
     private static int METHODS = 21; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
 
-    public static IUIAutomationTextRange PointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationTextRange pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];

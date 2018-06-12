@@ -73,7 +73,7 @@ public class IUIAutomationElementTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            return IUIAutomationElementConverter.PointerToInterface(root);
+            return IUIAutomationElementConverter.pointerToInterface(root);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -87,7 +87,7 @@ public class IUIAutomationElementTest {
 
         WinNT.HRESULT result = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), root);
         if (COMUtils.SUCCEEDED(result)) {
-            IUIAutomationElement rootElement = IUIAutomationElementConverter.PointerToInterface(root);
+            IUIAutomationElement rootElement = IUIAutomationElementConverter.pointerToInterface(root);
 
             // Get first descendant for the root element
             PointerByReference pCondition = new PointerByReference();
@@ -102,7 +102,7 @@ public class IUIAutomationElementTest {
 
             uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
-            return IUIAutomationElementConverter.PointerToInterface(element);
+            return IUIAutomationElementConverter.pointerToInterface(element);
         } else {
             throw new Exception("Failed to get root element");
         }
@@ -130,7 +130,7 @@ public class IUIAutomationElementTest {
 
         WinNT.HRESULT result = unk.QueryInterface(new Guid.REFIID(IUIAutomation.IID), pbr1);
         if (COMUtils.SUCCEEDED(result)) {
-            this.automation = IUIAutomationConverter.PointerToInterface(pbr1);
+            this.automation = IUIAutomationConverter.pointerToInterface(pbr1);
         }
     }
 
@@ -394,7 +394,7 @@ public class IUIAutomationElementTest {
 
         uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), element);
 
-        IUIAutomationElement elem = IUIAutomationElementConverter.PointerToInterface(element);
+        IUIAutomationElement elem = IUIAutomationElementConverter.pointerToInterface(element);
 
         PointerByReference sr = new PointerByReference();
 
@@ -424,7 +424,7 @@ public class IUIAutomationElementTest {
 
         uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
-        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
+        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.pointerToInterface(element);
 
         IntByReference ibr = new IntByReference();
 
@@ -448,7 +448,7 @@ public class IUIAutomationElementTest {
 
         uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), element);
 
-        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.PointerToInterface(element);
+        IUIAutomationElementArray elements = IUIAutomationElementArrayConverter.pointerToInterface(element);
 
         IntByReference ibr = new IntByReference();
 
@@ -516,7 +516,7 @@ public class IUIAutomationElementTest {
 
         //Mockito.when(mocked_function.invokeInt(any())).thenReturn(-1);
 
-        PowerMockito.when(IUIAutomationElementConverter.PointerToInterface(any())).thenReturn(mocked_element);
+        PowerMockito.when(IUIAutomationElementConverter.pointerToInterface(any())).thenReturn(mocked_element);
 
 //        PowerMockito.when(Function.getFunction(any(), any())).thenReturn(mocked_function);
 

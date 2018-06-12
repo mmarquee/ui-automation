@@ -82,6 +82,6 @@ public class Toggle extends BasePattern {
      * @return The interface from the pointer.
      */
     IUIAutomationTogglePattern convertPointerToInterface(final PointerByReference pUnknown) {
-        return IUIAutomationTogglePatternConverter.PointerToInterface(pUnknown);
+        return IUIAutomationTogglePatternConverter.pointerToInterface(pUnknown);
     }
 }

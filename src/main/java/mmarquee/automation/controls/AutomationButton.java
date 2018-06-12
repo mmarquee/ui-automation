@@ -17,6 +17,7 @@ package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.pattern.LegacyIAccessible;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -26,11 +27,16 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public class AutomationButton
         extends AutomationBase
-        implements Clickable, Focusable {
+        implements Clickable, Focusable, LegacyAccessible {
     /**
      * The control type.
      */
     public static ControlType controlType = ControlType.Button;
+
+    /**
+     * The legacy IAccessible pattern.
+     */
+    private LegacyIAccessible accessiblePattern;
 
     /**
      * Constructor for the AutomationButton.
@@ -59,5 +65,46 @@ public class AutomationButton
      */
     public void focus() {
         this.element.setFocus();
+    }
+
+    /**
+     * Gets the value from the Legacy IAccessible interface.
+     * @return The string value
+     * @throws PatternNotFoundException Failed to find pattern
+     * @throws AutomationException Issue with automation library
+     */
+    public String getValueFromIAccessible()
+            throws PatternNotFoundException, AutomationException {
+        if (this.accessiblePattern == null) {
+            try {
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
+        }
+
+        try {
+            return accessiblePattern.getCurrentValue();
+        } catch (NullPointerException ex) {
+            return "<Empty>";
+        }
+    }
+
+    /**
+     * Sets the value from the legacy IAccessible interface
+     * @param value The value to set
+     */
+    public void setValueFromIAccessible(final String value)
+            throws AutomationException {
+        if (this.accessiblePattern == null)  {
+            try {
+                this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
+                this.accessiblePattern.setCurrentValue(value);
+            } catch (NullPointerException ex) {
+                logger.info("No value pattern available");
+            }
+
+
+        }
     }
 }
