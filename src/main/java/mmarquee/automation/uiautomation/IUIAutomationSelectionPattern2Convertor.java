@@ -66,22 +66,22 @@ public class IUIAutomationSelectionPattern2Convertor {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentCurrentSelectedItem(PointerByReference retVal){
+            public int currentCurrentSelectedItem(PointerByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentFirstSelectedItem(PointerByReference retVal){
+            public int currentFirstSelectedItem(PointerByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentItemCount(IntByReference retVal){
+            public int currentItemCount(IntByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int CurrentLastSelectedItem(PointerByReference retVal){
+            public int currentLastSelectedItem(PointerByReference retVal){
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
