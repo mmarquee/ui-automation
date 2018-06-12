@@ -29,5 +29,5 @@ public interface IUIAutomationElement2 extends IUIAutomationElement {
     /**
      * The interface IID for QueryInterface et al.
      */
-    Guid.IID IID = new Guid.IID("{34723aff-0c9d-49d0-9896-7ab52df8cd8a}");
+    Guid.IID IID = new Guid.IID("{6749C683-F70D-4487-A698-5F79D55290D}");
 }
