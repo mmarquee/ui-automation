@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.Scala
+package mmarquee.demo
 
-import mmarquee.automation.controls.{AutomationWindow, Search}
 import mmarquee.automation.controls.menu.AutomationMenuItem
+import mmarquee.automation.controls.{AutomationWindow, Search}
 
 class NotepadApplication extends BaseApplication {
   private var window: AutomationWindow = _

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.Scala
+package mmarquee.demo
 
 import mmarquee.automation.controls.AutomationWindow
 

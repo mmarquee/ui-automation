@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.Scala
+package mmarquee.demo
 
 import com.sun.jna.platform.win32.{User32, WinDef}
 import mmarquee.automation.UIAutomation
