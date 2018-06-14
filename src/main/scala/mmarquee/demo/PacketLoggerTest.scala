@@ -25,8 +25,8 @@ object PacketLoggerTest {
 
     logger.launch()
 
-    // Wait for it ...
-    Thread.sleep(10000)
+    // Wait for it (enough time to collect something) ...
+    Thread.sleep(2000)
 
     // Now kill it
     logger.exit

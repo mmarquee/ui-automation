@@ -62,4 +62,8 @@ trait BaseApplication {
       case Failure(window) => false
     }
   }
+
+  def end: Unit = {
+    this.application.end();
+  }
 }

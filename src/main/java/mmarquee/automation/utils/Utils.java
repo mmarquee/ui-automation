@@ -201,6 +201,10 @@ public class Utils {
                 null);
     }
 
+    public static void end(Process process) {
+        process.destroy();
+    }
+
     
 	private static void ensureWinApiInstances() {
 		if (user32 == null) {
