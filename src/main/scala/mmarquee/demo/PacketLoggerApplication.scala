@@ -22,18 +22,13 @@ class PacketLoggerApplication extends BaseApplication {
   private var window: AutomationWindow = _
 
   applicationTitle = "C:\\Users\\inpwt\\Downloads\\windump.exe"
-//  def applicationArgumentsList = "-p",  "-nn",  "-N",  "-wcapture.dump",  "-X", "-s 0", "-i 1", "host 192.168.1.1"
-//  def dumpArguments = "-r capture.dump -nnvvvSeXX > dump.out"
 
   def launch(): Unit = {
     application = automation.launchWithDirectory(applicationTitle,
       "-p",  "-nn",  "-N",  "-wcapture.dump",  "-X", "-s 0", "-i 1", "host 192.168.1.254")
 
-    // A short wait for the expand to work, just in case
+    // A short wait for the call to gather some information
     Thread.sleep(10000)
-
-    // Find the window
-//    window = automation.getDesktopWindow(applicationTitle)
   }
 
   def dump(): Unit = {
