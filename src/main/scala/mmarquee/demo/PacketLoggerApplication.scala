@@ -25,7 +25,14 @@ class PacketLoggerApplication extends BaseApplication {
 
   def launch(): Unit = {
     application = automation.launchWithDirectory(applicationTitle,
-      "-p",  "-nn",  "-N",  "-wcapture.dump",  "-X", "-s 0", "-i 1", "host 192.168.1.254")
+                                "-p",
+                                "-nn",
+                                "-N",
+                                "-wcapture.dump",
+                                "-X",
+                                "-s 0",
+                                "-i 1",
+                                "host 192.168.1.254")
 
     // A short wait for the call to gather some information
     Thread.sleep(10000)
@@ -33,7 +40,9 @@ class PacketLoggerApplication extends BaseApplication {
 
   def dump(): Unit = {
     Thread.sleep(1000); // So it can write the file properly
-    automation.launch(applicationTitle, "-rC:\\Users\\inpwt\\Downloads\\capture.dump", "-nnvvvSeXX")
+    automation.launchWithRedirect(applicationTitle,
+      "-rC:\\Users\\inpwt\\Downloads\\capture.dump",
+      "-nnvvvSeXX")
   }
 
   override def exit(): Unit = {
