@@ -22,10 +22,11 @@ class PacketLoggerApplication extends BaseApplication {
   private var window: AutomationWindow = _
 
   applicationTitle = "C:\\Users\\inpwt\\Downloads\\windump.exe"
+  applicationArguments = "-p -nn -N -w capture.txt -X -s 0 -i 1 host 192.168.1.1"
+  def dumpArguments = "-r capture.txt -nnvvvSeXX > dump.out"
 
   def launch(): Unit = {
-    application = automation.launch(applicationTitle,
-                          "-p -nn -N -w capture.txt -X -s 0 -i 1 host 192.168.1.1")
+    application = automation.launchWithDirectory(applicationTitle, applicationArguments)
 
     // A short wait for the expand to work, just in case
     Thread.sleep(500)
@@ -35,8 +36,7 @@ class PacketLoggerApplication extends BaseApplication {
   }
 
   def dump(): Unit = {
-    automation.launch(applicationTitle,
-      "-r capture.txt -nnvvvSeXX > dump.out")
+    automation.launch(applicationTitle, dumpArguments)
   }
 }
 

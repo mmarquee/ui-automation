@@ -146,6 +146,11 @@ public class Utils {
             throws java.io.IOException {
         ProcessBuilder pb = createProcessBuilder(command);
 
+        /* Direct output to log */
+        File log = new File("log.txt");
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
+
         return pb.start();
     }
 
@@ -173,6 +178,11 @@ public class Utils {
         String directory = new File(command[0]).getParent();
 
         pb.directory(new File(directory));
+
+        /* Direct output to log */
+        File log = new File("log.txt");
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
 
         return pb.start();
     }
