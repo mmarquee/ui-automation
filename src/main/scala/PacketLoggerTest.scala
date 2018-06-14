@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-18 inpwtepydjuf@gmail.com
+ * Copyright 2018 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,22 @@
 
 package mmarquee.automation.Scala
 
-object AutomationTest {
+object PacketLoggerTest {
 
-  var notepad: NotepadApplication = _
+  var logger: PacketLoggerApplication = _
 
   def start(): Unit = {
-    notepad = new NotepadApplication()
+    logger = new PacketLoggerApplication()
 
-    notepad.launch()
-    notepad.addText("Hello there")
-    notepad.clickExit()
-    val confirm = notepad.getConfirm
+    logger.launch()
 
-    if (confirm != null) {
-      System.out.println(s"Found the confirmation popup")
-    } else {
-      System.out.println(s"Didn't find confirmation window")
-    }
+    // Wait for it ...
+    Thread.sleep(10000)
 
-    notepad.confirmExit()
+    // Now kill it
+    logger.exit
+
+    logger.dump()
   }
 
   def main(args: Array[String]) {

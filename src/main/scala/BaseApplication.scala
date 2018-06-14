@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package mmarquee.automation.Scala
+
 import com.sun.jna.platform.win32.{User32, WinDef}
 import mmarquee.automation.UIAutomation
 import mmarquee.automation.controls.{AutomationApplication, AutomationWindow}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package mmarquee.automation.Scala
+
 import mmarquee.automation.controls.{AutomationWindow, Search}
 import mmarquee.automation.controls.menu.AutomationMenuItem
 
