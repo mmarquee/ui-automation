@@ -16,11 +16,7 @@
 
 package mmarquee.demo
 
-import mmarquee.automation.controls.AutomationWindow
-
 class PacketLoggerApplication extends BaseApplication {
-  private var window: AutomationWindow = _
-
   applicationTitle = "C:\\Users\\inpwt\\Downloads\\windump.exe"
 
   def launch(): Unit = {
@@ -49,7 +45,3 @@ class PacketLoggerApplication extends BaseApplication {
     application.end()
   }
 }
-
-// start - C:\Users\inpwt\Downloads\windump.exe -p -nn -N -w capture.txt -X -s 0 -i 1 host XX.XX.XX.XX
-// dump - \".\\windump\" -r capture.txt -nnvvvSeXX > dump.out"
-// stop - just stop process?
