@@ -6,6 +6,9 @@ Tests and automation programs using ui-automation can be written with Java (or o
 
 It provides a consistent, object-oriented API, hiding the complexity of Microsoft's UIAutomation library and windows messages from the user.
 
+# Blog
+* [Blog](wiki/Blog-Home)
+
 # Developer documentation
 * [Start here](docs/developer.md)
 
