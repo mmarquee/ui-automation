@@ -678,7 +678,9 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element, by trying to get the IUIAutomationElement3.
+     * Shows the context menu for the element, by trying to get the
+     * IUIAutomationElement3.
+     *
      * Not supported in Windows 7 and before
      *
      * @throws AutomationException Failed to get the correct interface.
@@ -720,7 +722,10 @@ public class AutomationElement extends BaseAutomation {
 
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
-        final int res = this.getElement7().getCurrentMetadataValue(PropertyID.Name.getValue(), MetaDataID.SayAsInterpretAs.getValue(), value);
+        final int res = this.getElement7().getCurrentMetadataValue(
+                            PropertyID.Name.getValue(),
+                            MetaDataID.SayAsInterpretAs.getValue(),
+                            value);
 
         if (res != 0) {
             throw new AutomationException(res);
@@ -734,11 +739,13 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the full description for the element, by trying to get the IUIAutomationElement6.
+     * Gets the full description for the element, by trying to get the
+     * IUIAutomationElement6.
      *
      * Not supported in before Windows 10 build 1703
      * @return The description, if set
-     * @throws AutomationException Something has gone wrong in automation library
+     * @throws AutomationException Something has gone wrong in automation
+     *                             library
      */
     public String getFullDescription() throws AutomationException {
         PointerByReference sr = new PointerByReference();
@@ -764,8 +771,10 @@ public class AutomationElement extends BaseAutomation {
      * @param automationPatternClass the class of the automation pattern
      * @return the mocked pattern, if available
      */
-	public <T extends BasePattern> T getProvidedPattern(final Class<T> automationPatternClass) {
+	public <T extends BasePattern> T
+                getProvidedPattern(final Class<T> automationPatternClass) {
 		// Return values will be mocked
 		return null;
 	}
 }
+
