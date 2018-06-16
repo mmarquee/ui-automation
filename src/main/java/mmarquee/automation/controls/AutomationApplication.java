@@ -275,6 +275,9 @@ public class AutomationApplication extends AutomationBase {
         }
     }
 
+    /**
+     * Ends the process associated with the application.
+     */
     public void end() {
         Utils.end(process);
     }
@@ -306,10 +309,10 @@ public class AutomationApplication extends AutomationBase {
             user32 = User32.INSTANCE;
         }
 
-        final WinDef.HWND handle = Utils.findWindow(null, titlePattern);
+        final WinDef.HWND handl = Utils.findWindow(null, titlePattern);
 
-        if (handle != null) {
-            Utils.quitProcess(handle);
+        if (handl != null) {
+            Utils.quitProcess(handl);
         }
     }
     /**

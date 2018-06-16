@@ -23,6 +23,9 @@ package mmarquee.automation;
  */
 public class ItemNotFoundException extends AutomationException {
 
+    /**
+     * Serial version uid.
+     */
     private static final long serialVersionUID = -7175159800746711939L;
 
     /**

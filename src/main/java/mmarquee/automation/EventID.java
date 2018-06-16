@@ -22,9 +22,20 @@ package mmarquee.automation;
  * Date 24/05/2016.
  */
 public enum EventID {
+    /**
+     * Tool tip opened.
+     */
     ToolTipOpened(20000),
+
+    /**
+     * Tool tip closed.
+     */
     ToolTipClosed(20001),
     StructureChanged(20002),
+
+    /**
+     * Menu opened.
+     */
     MenuOpened(20003),
     PropertyChanged(20004),
     FocusChanged(20005),
@@ -38,7 +49,15 @@ public enum EventID {
     Selection_Invalidated(20013),
     Text_TextSelectionChanged(20014),
     Text_TextChanged(20015),
+
+    /**
+     * Window opened.
+     */
     Window_WindowOpened(20016),
+
+    /**
+     * Window closed.
+     */
     Window_WindowClosed(20017),
     MenuModeStart(20018),
     MenuModeEnd(20019),
@@ -59,7 +78,12 @@ public enum EventID {
         return this.value;
     }
 
-    EventID(int value) {
+    /**
+     * Constructor for EventID.
+     *
+     * @param value the value to use
+     */
+    EventID(final int value) {
         this.value = value;
     }
 }

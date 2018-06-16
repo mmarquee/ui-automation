@@ -31,7 +31,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public final class AutomationDataGrid
         extends AutomationBase
-        implements Valueable, ChildSelectable, Gridable, Tabulable {
+        implements Valueable, ChildSelectable, Gridable, Tableable {
 
     /**
      * Construct the AutomationDataGrid.
@@ -208,9 +208,14 @@ public final class AutomationDataGrid
 
         return headers.get(row);
     }
-    
 
-	List<AutomationDataGridCell> convertListToAutomationDataGridCells(List<AutomationElement> collection) {
+    /**
+     * Converts a list of automation elements to a list of data grid cells, for ease of access.
+     *
+     * @param collection The list of raw AutomationElements
+     * @return The converted list of Data Cell Grids
+     */
+	List<AutomationDataGridCell> convertListToAutomationDataGridCells(final List<AutomationElement> collection) {
 		List<AutomationDataGridCell> items = new ArrayList<>();
 
         for (AutomationElement item : collection) {
@@ -225,6 +230,4 @@ public final class AutomationDataGrid
 
         return items;
 	}
-
-
 }

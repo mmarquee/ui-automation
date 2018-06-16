@@ -43,7 +43,7 @@ public class ElementBuilder {
 
     private AutomationElement parent;
 
-    /** Predefined automation patterns (for testing purposes) */
+    /** Predefined automation patterns (for testing purposes). */
     protected final Set<BasePattern> automationPatterns = new HashSet<>();
 
     /** The handle. */
@@ -194,7 +194,9 @@ public class ElementBuilder {
      * Gets the attached flag.
      * @return True if set
      */
-    public boolean getAttached() { return this.attached; }
+    public boolean getAttached() {
+        return this.attached;
+    }
 
     /**
      * Gets the user32 instance.

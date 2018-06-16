@@ -24,12 +24,12 @@ import mmarquee.automation.pattern.Table;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
 /**
- * The Control supports the methods of the Table pattern
+ * The Control supports the methods of the Table pattern.
  * 
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Tabulable extends Automatable, CanRequestBasePattern {
+public interface Tableable extends Automatable, CanRequestBasePattern {
 	
 	/**
      * Gets the list of the column headers.

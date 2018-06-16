@@ -21,7 +21,7 @@ import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Methods to interact with the grid pattern
+ * Methods to interact with the grid pattern.
  */
 public interface Gridable extends Automatable, CanRequestBasePattern {
 	

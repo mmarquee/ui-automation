@@ -133,7 +133,7 @@ public class Search {
          * Constructor with a name criteria.
          * @param inName The name
          */
-        public Builder(final String inName ) {
+        public Builder(final String inName) {
             this.initialise();
             this.name = inName;
         }

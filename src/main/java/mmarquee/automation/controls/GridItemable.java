@@ -20,7 +20,7 @@ import mmarquee.automation.pattern.GridItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Methods to interact with the grid item pattern
+ * Methods to interact with the grid item pattern.
  */
 public interface GridItemable extends Automatable, CanRequestBasePattern {
 	
@@ -53,5 +53,4 @@ public interface GridItemable extends Automatable, CanRequestBasePattern {
         }
 		throw new PatternNotFoundException("Cannot get column");
     }
-    
 }
