@@ -72,7 +72,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     /**
      * The available Patterns.
      */
-    protected final Map<Class<? extends BasePattern>,BasePattern> automationPatterns = new HashMap<>();
+    protected final Map<Class<? extends BasePattern>, BasePattern>
+            automationPatterns = new HashMap<>();
 
     /**
      * The pattern access monitor.
