@@ -23,6 +23,9 @@ package mmarquee.automation;
  */
 public class ElementNotFoundException extends AutomationException {
 
+    /**
+     * Serial version uid.
+     */
     private static final long serialVersionUID = 5575725853478222085L;
 
     /**

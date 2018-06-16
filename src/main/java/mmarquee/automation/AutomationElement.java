@@ -24,7 +24,16 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.pattern.BasePattern;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.automation.uiautomation.IUIAutomationElement3;
+import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement6;
+import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElement7;
+import mmarquee.automation.uiautomation.IUIAutomationElement7Converter;
+import mmarquee.automation.uiautomation.IUIAutomationElementArray;
+import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.uiautomation.OrientationType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,11 +63,13 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement3 interface, if possible
+     * Gets the IUIAutomationElement3 interface, if possible.
+     *
      * @return The IUIAutomationElement3 interface
      * @throws AutomationException Not able to convert interface
      */
-    public final IUIAutomationElement3 getElement3() throws AutomationException {
+    public final IUIAutomationElement3 getElement3()
+            throws AutomationException {
 
         PointerByReference pUnknown = new PointerByReference();
 
@@ -73,11 +84,13 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the IUIAutomationElement6 interface, if possible
+     * Gets the IUIAutomationElement6 interface, if possible.
+     *
      * @return The IUIAutomationElement6 interface
      * @throws AutomationException Not able to convert interface
      */
-    public final IUIAutomationElement6 getElement6() throws AutomationException {
+    public final IUIAutomationElement6 getElement6()
+            throws AutomationException {
 
         PointerByReference pUnknown = new PointerByReference();
 
@@ -665,16 +678,15 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Shows the context menu for the element, by trying to get the IUIAutomationElement3.
+     * Shows the context menu for the element, by trying to get the
+     * IUIAutomationElement3.
+     *
      * Not supported in Windows 7 and before
      *
      * @throws AutomationException Failed to get the correct interface.
      */
     public void showContextMenu() throws AutomationException {
-
-        IUIAutomationElement3 element3 = this.getElement3();
-
-        final int res = element3.showContextMenu();
+        final int res = this.getElement3().showContextMenu();
 
         if (res != 0) {
             throw new AutomationException(res);
@@ -706,13 +718,14 @@ public class AutomationElement extends BaseAutomation {
      * @throws AutomationException Error in automation library
      */
     public int getCurrentMetadataValue() throws AutomationException {
-        IUIAutomationElement7 element7 = this.getElement7();
-
         PointerByReference sr = new PointerByReference();
 
         Variant.VARIANT.ByReference value = new Variant.VARIANT.ByReference();
 
-        final int res = element7.getCurrentMetadataValue(PropertyID.Name.getValue(), MetaDataID.SayAsInterpretAs.getValue(), value);
+        final int res = this.getElement7().getCurrentMetadataValue(
+                            PropertyID.Name.getValue(),
+                            MetaDataID.SayAsInterpretAs.getValue(),
+                            value);
 
         if (res != 0) {
             throw new AutomationException(res);
@@ -726,18 +739,18 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Gets the full description for the element, by trying to get the IUIAutomationElement6.
+     * Gets the full description for the element, by trying to get the
+     * IUIAutomationElement6.
      *
      * Not supported in before Windows 10 build 1703
      * @return The description, if set
-     * @throws AutomationException Something has gone wrong in automation library
+     * @throws AutomationException Something has gone wrong in automation
+     *                             library
      */
     public String getFullDescription() throws AutomationException {
-        IUIAutomationElement6 element = this.getElement6();
-
         PointerByReference sr = new PointerByReference();
 
-        final int res = element.getCurrentFullDescription(sr);
+        final int res = this.getElement6().getCurrentFullDescription(sr);
 
         if (res != 0) {
             throw new AutomationException(res);
@@ -754,12 +767,14 @@ public class AutomationElement extends BaseAutomation {
      * Returns a predefined Automation Pattern bound to this element.
      * For Testing purposes only
      *
-     * @param <T>       the Type of the base pattern class
-     * @param automationPatternClass    the class of the automation pattern
-     * @return  the mocked pattern, if available
+     * @param <T> the Type of the base pattern class
+     * @param automationPatternClass the class of the automation pattern
+     * @return the mocked pattern, if available
      */
-	public <T extends BasePattern> T getProvidedPattern(final Class<T> automationPatternClass) {
+	public <T extends BasePattern> T
+                getProvidedPattern(final Class<T> automationPatternClass) {
 		// Return values will be mocked
 		return null;
 	}
 }
+

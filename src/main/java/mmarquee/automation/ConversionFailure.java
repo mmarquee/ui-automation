@@ -23,6 +23,10 @@ package mmarquee.automation;
  */
 public class ConversionFailure extends AutomationException {
 
+    /**
+     * Constructor for ConversionFailure exception.
+     * @param message The value to pass as a message
+     */
     public ConversionFailure(final String message) {
         super(message);
     }

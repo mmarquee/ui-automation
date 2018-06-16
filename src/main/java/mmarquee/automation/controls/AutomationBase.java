@@ -72,7 +72,12 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     /**
      * The available Patterns.
      */
-    protected final Map<Class<? extends BasePattern>,BasePattern> automationPatterns = new HashMap<>();
+    protected final Map<Class<? extends BasePattern>, BasePattern>
+            automationPatterns = new HashMap<>();
+
+    /**
+     * The pattern access monitor.
+     */
     private Object patternAccessMonitor = new Object();
 
     /**
@@ -95,7 +100,9 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     }
 
     /**
-     * for testing purposes
+     * for testing purposes.
+     *
+     * @param pattern The pattern to look for
      */
     void setAutomationPattern(final BasePattern pattern) {
         this.automationPatterns.put(pattern.getPatternClass(), pattern);
@@ -809,6 +816,12 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         }
     }
 
+    /**
+     * Gets the inner exception.
+     *
+     * @param e The throwable
+     * @return The inner exception from the input throwable
+     */
     private Throwable getInnerException(Throwable e) {
     	if (e instanceof InvocationTargetException) {
     		return  getInnerException(((InvocationTargetException) e).getCause());

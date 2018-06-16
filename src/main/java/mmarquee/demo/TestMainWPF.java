@@ -591,7 +591,7 @@ public class TestMainWPF extends TestBase {
 
             // Same for desktop window
             try {
-                automation.getDesktopWindow("MainWindow99",2);
+                automation.getDesktopWindow("MainWindow99", 2);
             } catch (AutomationException ex) {
                 logger.info("Failed to find `MainWindow99` - " + ex.getClass());
             }
@@ -600,7 +600,7 @@ public class TestMainWPF extends TestBase {
 
             // .. and object
             try {
-                automation.getDesktopObject("MainWindow00",2);
+                automation.getDesktopObject("MainWindow00", 2);
             } catch (AutomationException ex) {
                 logger.info("Failed to find `MainWindow00` - " + ex.getClass());
             }

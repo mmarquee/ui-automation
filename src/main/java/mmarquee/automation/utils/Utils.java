@@ -135,6 +135,7 @@ public class Utils {
 
         return found;
     }
+
     /**
      * Starts the given command.
      *
@@ -145,6 +146,25 @@ public class Utils {
     public static Process startProcess(final String... command)
             throws java.io.IOException {
         ProcessBuilder pb = createProcessBuilder(command);
+
+        return pb.start();
+    }
+
+    /**
+     * Starts the given command, redirecting stdout.
+     *
+     * @param command The command to start.
+     * @return The process.
+     * @throws java.io.IOException something has gone wrong.
+     */
+    public static Process startProcessWithRedirection(final String... command)
+            throws java.io.IOException {
+        ProcessBuilder pb = createProcessBuilder(command);
+
+        /* Direct output to log */
+        File log = new File("log.txt");
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
 
         return pb.start();
     }
@@ -189,6 +209,10 @@ public class Utils {
                 WinUser.WM_QUIT,
                 null,
                 null);
+    }
+
+    public static void end(Process process) {
+        process.destroy();
     }
 
     

@@ -20,6 +20,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Value;
 
 /**
+ * The Control supports the methods of the Value Pattern.
+ *
  * @author Mark Humphreys
  * Date 19/05/2017.
  */

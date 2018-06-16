@@ -1,3 +1,18 @@
+/*
+ * Copyright 2016-18 inpwtepydjuf@gmail.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package mmarquee.automation.pattern;
 
 import java.util.function.Function;
@@ -20,10 +35,14 @@ import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 
-// Temporary intermediate class
+/**
+ * The base pattern functionality, shared for all patterns.
+ *
+ * @author Mark Humphreys
+ * Date 29/02/2016
+ */
 public abstract class BasePattern extends BaseAutomation implements Pattern
 {
-
     /**
      * The logger.
      */
@@ -40,7 +59,6 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
     final protected AutomationElement element;
     protected PatternID patternID;
     protected PropertyID availabilityPropertyID;
-
 
     public BasePattern(AutomationElement element) throws AutomationException
     {
@@ -90,7 +108,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
     }
 
     /**
-     * Returns the Class of the unmocked pattern class
+     * Returns the Class of the unmocked pattern class.
      * @return the class without mocking
      */
 	@SuppressWarnings("unchecked")
@@ -103,7 +121,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 	}
 
 	/**
-	 * Gets a pattern from the raw pattern pointer, or returns the override pattern
+	 * Gets a pattern from the raw pattern pointer, or returns the override pattern.
 	 *
 	 * @param <T>  The class of the pattern to return
 	 * @param overridePattern the pattern to use if to

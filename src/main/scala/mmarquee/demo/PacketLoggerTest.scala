@@ -1,6 +1,5 @@
-
 /*
- * Copyright 2017 inpwtepydjuf@gmail.com
+ * Copyright 2018 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-object AutomationTest {
 
-  var notepad: NotepadApplication = _
+package mmarquee.demo
+
+object PacketLoggerTest {
+
+  var logger: PacketLoggerApplication = _
 
   def start(): Unit = {
-    notepad = new NotepadApplication()
+    logger = new PacketLoggerApplication()
 
-    notepad.launch()
-    notepad.addText("Hello there")
-    notepad.clickExit()
-    val confirm = notepad.getConfirm
+    logger.launch()
 
-    if (confirm != null) {
-      System.out.println(s"Found the confirmation popup")
-    } else {
-      System.out.println(s"Didn't find confirmation window")
-    }
+    // Wait for it (enough time to collect something) ...
+    Thread.sleep(2000)
 
-    notepad.confirmExit()
+    // Now kill it
+    logger.exit
+
+    logger.dump()
   }
 
   def main(args: Array[String]) {

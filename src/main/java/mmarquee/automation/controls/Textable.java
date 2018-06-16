@@ -20,7 +20,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Text;
 
 /**
- * The Control supports the methods of the Text Pattern
+ * The Control supports the methods of the Text Pattern.
  */
 public interface Textable extends Automatable, CanRequestBasePattern {
 

@@ -154,16 +154,29 @@ public abstract class BaseAutomation {
     }
 
     /**
-     * Converts a propertyValue into its boolean representation
+     * Converts a propertyValue into its boolean representation.
+     *
      * @param propertyValue the result from a getPropertyValue() call
      * @return true if true (= !0), false otherwise
      *
      */
     public static boolean isPropertyValueTrue(final Object propertyValue) {
-        if (propertyValue instanceof VARIANT_BOOL) return ((VARIANT_BOOL) propertyValue).booleanValue();
-        if (propertyValue instanceof BOOL) return ((BOOL) propertyValue).booleanValue();
-        if (propertyValue instanceof Boolean) return ((Boolean) propertyValue).booleanValue();
-        if (propertyValue instanceof Number) return ((Number) propertyValue).intValue() != 0;
+        if (propertyValue instanceof VARIANT_BOOL) {
+            return ((VARIANT_BOOL) propertyValue).booleanValue();
+        }
+
+        if (propertyValue instanceof BOOL) {
+            return ((BOOL) propertyValue).booleanValue();
+        }
+
+        if (propertyValue instanceof Boolean) {
+            return ((Boolean) propertyValue).booleanValue();
+        }
+
+        if (propertyValue instanceof Number) {
+            return ((Number) propertyValue).intValue() != 0;
+        }
+
         return ! propertyValue.equals(0);
     }
 }
