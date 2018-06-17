@@ -70,7 +70,8 @@ public class TestNotepad extends TestBase {
 
             boolean val = window.isModal();
 
-            AutomationEditBox edit = window.getEditBox(Search.getBuilder(0).build());
+            AutomationEditBox edit =
+                    window.getEditBox(Search.getBuilder(0).build());
 
             edit.setValue("This is a test of automation");
 
@@ -84,12 +85,14 @@ public class TestNotepad extends TestBase {
 
             try {
                 AutomationMenuItem exit = menu.getMenuItem(
-                        Pattern.compile("File|Datei"), Pattern.compile("Exit|Beenden"));
+                        Pattern.compile("File|Datei"),
+                        Pattern.compile("Exit|Beenden"));
                 exit.click();
 
                 try {
                     AutomationWindow popup = window.getWindow(
-                            Search.getBuilder(Pattern.compile("Notepad|Editor")).build());
+                            Search.getBuilder(
+                                    Pattern.compile("Notepad|Editor")).build());
                     AutomationButton btn = popup.getButton(
                             Search.getBuilder(
                                     Pattern.compile("Don't Save|Nicht speichern")).build());

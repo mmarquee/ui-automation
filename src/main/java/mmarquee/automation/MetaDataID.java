@@ -15,7 +15,16 @@
  */
 package mmarquee.automation;
 
+/**
+ * Meta Data Identifiers.
+ *
+ * @author Mark Humphreys
+ * Date 24/12/2017.
+ */
 public enum MetaDataID {
+    /**
+     * Say as interpret as.
+     */
     SayAsInterpretAs(100000);
 
     /**
@@ -32,11 +41,11 @@ public enum MetaDataID {
     }
 
     /**
-     * Constructor for PatterID.
+     * Constructor for MetaDataID.
      *
-     * @param value Initial value.
+     * @param theValue Initial value.
      */
-    MetaDataID(int value) {
-        this.value = value;
+    MetaDataID(int theValue) {
+        this.value = theValue;
     }
 }
