@@ -68,7 +68,8 @@ public final class AutomationTextBox
     }
 
     /**
-     * Sets the value from the legacy IAccessible interface,
+     * Sets the value from the legacy IAccessible interface.
+     *
      * @param value The value to set
      * @throws AutomationException Issue with automation library
      */

@@ -57,7 +57,15 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      * The associated automation element.
      */
     final protected AutomationElement element;
+
+    /**
+     * The associated pattern id.
+     */
     protected PatternID patternID;
+
+    /**
+     * The associated property id.
+     */
     protected PropertyID availabilityPropertyID;
 
     public BasePattern(AutomationElement element) throws AutomationException
@@ -66,6 +74,11 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
         this.element = element;
     }
 
+    /**
+     * Gets the pattern id.
+     *
+     * @return The pattern id
+     */
     public PatternID getPatternID() {
     	return patternID;
     }

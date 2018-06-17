@@ -34,7 +34,7 @@ public interface LegacyAccessible extends Automatable {
 
     /**
      * Sets value via the IAccessible interface.
-     * @value The string value
+     * @param value The string value
      * @throws AutomationException Automation library error
      */
     void setValueFromIAccessible(final String value) throws AutomationException;

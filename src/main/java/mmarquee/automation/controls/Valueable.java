@@ -43,6 +43,7 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
 
     /**
      * Sets the value of the element.
+	 *
      * @param value the value to set
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
@@ -58,7 +59,8 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
     }
 
     /**
-     * Tests whether the Value is read only
+     * Tests whether the Value is read only.
+	 *
      * @return Read only?
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern
