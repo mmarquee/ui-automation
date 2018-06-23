@@ -7,6 +7,8 @@ import mmarquee.automation.AutomationTreeWalker.AutomationElementVisitor;
 import mmarquee.automation.UIAutomation;
 
 /**
+ * Test code for TreeWalker.
+ *
  * @author Mark Humphreys
  * Date 02/02/2017.
  */
@@ -35,17 +37,26 @@ public class DemoTreeWalker extends TestBase {
 
             AutomationElement root = automation.getRootElement();
 
-            AutomationElementVisitor logVisitor = new AutomationElementVisitor() {			
+            AutomationElementVisitor logVisitor =
+                    new AutomationElementVisitor() {
 				
             	int level = 0;
             	
             	@Override
-				public boolean visit(AutomationTreeWalker walker, AutomationElement element) throws AutomationException {
+				public boolean visit(AutomationTreeWalker walker,
+                                     AutomationElement element)
+                        throws AutomationException {
 
 				    String name = element.getName();
 					String className = element.getClassName();
-					String indent = level == 0 ? "" : String.format("%"+ level*2 + "s","");
-					String message = String.format("%s'%s' [%s]", indent, name, className);
+					String indent = level == 0 ?
+                            "" :
+                            String.format("%"+ level*2 + "s","");
+					String message =
+                            String.format("%s'%s' [%s]",
+                                    indent,
+                                    name,
+                                    className);
 					
 					logger.info(message);
 					

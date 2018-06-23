@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.demo;
 
 /**
+ * Demo of TreeWalker.
+ *
  * @author Mark Humphreys
  * Date 02/02/2017.
  */
@@ -24,7 +27,7 @@ class TreeWalker {
      * Demo the tree walker.
      * @param args Command line arguments.
      */
-    public static void main(final String[] args) {
+    static void main(final String[] args) {
         DemoTreeWalker main = new DemoTreeWalker();
 
         main.run();

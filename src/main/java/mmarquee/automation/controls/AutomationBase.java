@@ -95,7 +95,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         }
 
         for (final BasePattern pattern: builder.getAutomationPatterns()) {
-        	setAutomationPattern(pattern);
+            setAutomationPattern(pattern);
         }
     }
 
@@ -629,10 +629,12 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return The runtime id
      * @throws AutomationException Throws big error, so not implemented
      */
+    /*
     public int[] getRuntimeId() throws AutomationException {
-//        return this.element.getRuntimeId();
         throw new AutomationException("Not supported");
+        return this.element.getRuntimeId();
     }
+    */
 
     /**
      * Gets the current framework ID for the element.

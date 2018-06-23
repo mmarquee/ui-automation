@@ -582,13 +582,18 @@ public class AutomationElement extends BaseAutomation {
         return sr.getValue().getWideString(0);
     }
 
-//    /**
-//     * Get the runtime Id
-//     * @return The runtime ID
-//     */
-//    //   public int[] getRuntimeId() {
-//   //       return element.getRuntimeId();
-//    //   }
+    /**
+     * Get the runtime Id.
+     *
+     * @return The runtime ID
+     */
+    /*
+    public int[] getRuntimeId() {
+        PointerByReference pbr = new PointerByReference();
+
+        return element.getRuntimeId(pbr);
+    }
+    */
 
     /**
      * Gets the process ID.
