@@ -170,6 +170,31 @@ public class Utils {
     }
 
     /**
+     * Starts the given command, setting the working directory, and
+     * redirection of output.
+     *
+     * @param command The command to start.
+     * @return The process.
+     * @throws java.io.IOException something has gone wrong.
+     */
+    public static Process startProcessWithWorkingDirectoryWithRedirection(
+            final String... command)
+            throws java.io.IOException {
+        ProcessBuilder pb = createProcessBuilder(command);
+
+        String directory = new File(command[0]).getParent();
+
+        pb.directory(new File(directory));
+
+        /* Direct output to log */
+        File log = new File("log.txt");
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
+
+        return pb.start();
+    }
+
+    /**
      * Wrapper around creation of ProcessBuilder object.
      *
      * @param command The command line to use

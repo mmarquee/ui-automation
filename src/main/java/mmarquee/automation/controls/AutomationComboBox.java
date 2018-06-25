@@ -34,7 +34,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  */
 public final class AutomationComboBox
         extends AutomationContainer
-        implements Expandable, Valueable, Focusable, ChildSelectable {
+        implements ImplementsExpand, ImplementsValue, ImplementsFocus, ImplementsChildSelect {
 
     /**
      * Constructor for the AutomationComboBox.

@@ -45,12 +45,11 @@ public enum EventID {
     /**
      * Property changed.
      */
-    PropertyChanged(20004)
+    PropertyChanged(20004),
 
     /**
      * Focus changed.
      */
-    ,
     FocusChanged(20005),
 
     /**
@@ -64,7 +63,7 @@ public enum EventID {
     MenuClosed(20007),
 
     /**
-     * Layout invalidated
+     * Layout invalidated.
      */
     LayoutInvalidated(20008),
 
@@ -94,12 +93,12 @@ public enum EventID {
     Selection_Invalidated(20013),
 
     /**
-     * Text selection changed,
+     * Text selection changed.
      */
     Text_TextSelectionChanged(20014),
 
     /**
-     * Text text changed,
+     * Text text changed.
      */
     Text_TextChanged(20015),
 
@@ -126,12 +125,11 @@ public enum EventID {
     /**
      * Input reached target.
      */
-    InputReachedTarget(20020)
+    InputReachedTarget(20020),
 
     /**
      * Input reached other element.
      */
-    ,
     InputReachedOtherElement(20021),
 
     /**

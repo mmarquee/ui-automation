@@ -25,7 +25,7 @@ import mmarquee.automation.pattern.Value;
  * @author Mark Humphreys
  * Date 19/05/2017.
  */
-public interface Valueable extends Automatable, CanRequestBasePattern {
+public interface ImplementsValue extends Automatable, CanRequestBasePattern {
     /**
      * Gets the value of the element.
      * @return The value

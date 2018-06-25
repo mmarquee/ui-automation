@@ -102,7 +102,7 @@ public class TestMain extends TestBase {
                     AutomationButton btn = popup.getButton(Search.getBuilder("OK").build());
 
                     String aText = btn.getValueFromIAccessible();
-                    logger.info("From LegacyAccessible: " + aText);
+                    logger.info("From ImplementsLegacyIAccessible: " + aText);
 
                     Object val11 = btn.getBoundingRectangle();
 

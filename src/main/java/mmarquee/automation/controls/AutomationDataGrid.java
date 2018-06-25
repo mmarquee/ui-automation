@@ -31,7 +31,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public final class AutomationDataGrid
         extends AutomationBase
-        implements Valueable, ChildSelectable, Gridable, Tableable {
+        implements ImplementsValue, ImplementsChildSelect,
+            ImplementsGrid, ImplementsTable {
 
     /**
      * Construct the AutomationDataGrid.

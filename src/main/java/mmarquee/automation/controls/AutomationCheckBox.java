@@ -24,7 +24,7 @@ package mmarquee.automation.controls;
  */
 public final class AutomationCheckBox
         extends AutomationBase
-        implements Toggleable, Focusable {
+        implements ImplementsToggle, ImplementsFocus {
 
 
     /**

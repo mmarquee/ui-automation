@@ -28,7 +28,8 @@ import mmarquee.automation.PropertyID;
 public class Scroll extends BasePattern {
 
     /**
-     * Constructor for the Scroll pattern
+     * Constructor for the Scroll pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */

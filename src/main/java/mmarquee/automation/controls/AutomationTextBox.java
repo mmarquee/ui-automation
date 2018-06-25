@@ -28,7 +28,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public final class AutomationTextBox
         extends AutomationBase
-        implements Valueable, LegacyAccessible {
+        implements ImplementsValue, ImplementsLegacyIAccessible {
 
     /**
      * Construct the AutomationTextBox.

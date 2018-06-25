@@ -26,15 +26,16 @@ import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
 import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
 
 /**
+ * Wrapper for the GridItem pattern.
+ *
  * @author Mark Humphreys
  * Date 27/01/2017.
- *
- * Wrapper for the GridItem pattern
  */
 public class GridItem extends BasePattern {
 
     /**
-     * Constructor for the pattern
+     * Constructor for the pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -45,18 +46,35 @@ public class GridItem extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsGridItemPatternAvailable;
     }
 
+    /**
+     * The raw GridYem pattern.
+     */
     IUIAutomationGridItemPattern rawPattern;
 
-    private IUIAutomationGridItemPattern getPattern() throws AutomationException {
+    /**
+     * Gets the pattern.
+     *
+     * @return The grid pattern
+     * @throws AutomationException Exception raised by library
+     */
+    private IUIAutomationGridItemPattern getPattern()
+            throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
+    /**
+     * Gets the converted pointer.
+     *
+     * @param pUnknownA The raw pointer
+     * @return The converted pointer
+     */
     IUIAutomationGridItemPattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationGridItemPatternConverter.pointerToInterface(pUnknownA);
     }
 
     /**
-     * Gets the current column for the cell
+     * Gets the current column for the cell.
+     *
      * @return The column
      * @throws AutomationException Automation returned an error
      */
@@ -72,7 +90,8 @@ public class GridItem extends BasePattern {
     }
 
     /**
-     * Gets the current row for the cell
+     * Gets the current row for the cell.
+     *
      * @return The row
      * @throws AutomationException Automation returned an error
      */
@@ -86,5 +105,4 @@ public class GridItem extends BasePattern {
 
         return ibr.getValue();
     }
-
 }

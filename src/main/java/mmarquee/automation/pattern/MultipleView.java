@@ -28,7 +28,8 @@ import mmarquee.automation.PropertyID;
 public class MultipleView extends BasePattern {
 
     /**
-     * Constructor for the MultipleView pattern
+     * Constructor for the MultipleView pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -37,5 +38,4 @@ public class MultipleView extends BasePattern {
         this.patternID = PatternID.MultipleView;
         this.availabilityPropertyID = PropertyID.IsMultipleViewPatternAvailable;
     }
-
 }

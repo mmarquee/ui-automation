@@ -23,7 +23,7 @@ package mmarquee.automation.controls;
  */
 public final class AutomationDataGridCell
         extends AutomationBase
-        implements Valueable, Selectable, GridItemable {
+        implements ImplementsValue, ImplementsSelect, ImplementsGridItem {
 
     /**
      * Construct the AutomationDataGridCell.

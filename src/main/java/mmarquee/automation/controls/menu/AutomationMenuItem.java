@@ -24,9 +24,9 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.Clickable;
+import mmarquee.automation.controls.ImplementsClick;
 import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.controls.Expandable;
+import mmarquee.automation.controls.ImplementsExpand;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -37,7 +37,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  */
 public class AutomationMenuItem
         extends AutomationBase
-        implements Clickable, Expandable {
+        implements ImplementsClick, ImplementsExpand {
 
     /** The parent element. */
     protected AutomationElement mainMenuParentElement;

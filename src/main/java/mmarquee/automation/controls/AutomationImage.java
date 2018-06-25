@@ -21,7 +21,7 @@ package mmarquee.automation.controls;
  * @author Mark Humphreys
  * Date 26/02/2016.
  */
-public final class AutomationImage extends AutomationBase implements Selectable {
+public final class AutomationImage extends AutomationBase implements ImplementsSelect {
     /**
      * Construct the AutomationImage.
      * @param builder The builder

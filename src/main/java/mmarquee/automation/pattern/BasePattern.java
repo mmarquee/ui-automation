@@ -68,6 +68,12 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      */
     protected PropertyID availabilityPropertyID;
 
+    /**
+     * Constructor for BasePattern.
+     *
+     * @param element The Element
+     * @throws AutomationException Error from automation
+     */
     public BasePattern(AutomationElement element) throws AutomationException
     {
         super();

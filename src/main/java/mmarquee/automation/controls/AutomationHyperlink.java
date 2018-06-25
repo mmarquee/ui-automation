@@ -20,10 +20,12 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
  * Wrapper for the Hyperlink element.
+ *
  * @author Mark Humphreys
  * Date 03/02/2016.
  */
-public final class AutomationHyperlink extends AutomationBase implements Clickable {
+public final class AutomationHyperlink extends AutomationBase
+        implements ImplementsClick {
 
       /**
        * Constructor for the AutomationHyperlink.

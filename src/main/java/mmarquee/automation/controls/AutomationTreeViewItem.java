@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public final class AutomationTreeViewItem
         extends AutomationBase
-        implements Selectable, Clickable, Expandable {
+        implements ImplementsSelect, ImplementsClick, ImplementsExpand {
 
     /**
      * Construct the AutomationTreeViewItem.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,23 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Implement this interface to respond to the clickable action.
+ * Make interface for implementations of the ImplementsLegacyIAccessible pattern.
  *
  * @author Mark Humphreys
- * Date 21/09/2016.
+ * Date 24/12/2017.
  */
-public interface Clickable extends Automatable {
+public interface ImplementsLegacyIAccessible extends Automatable {
     /**
-     * Clicks the element.
+     * Gets value from the IAccessible interface.
+     * @return The string value
      * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find pattern
      */
-    void click() throws AutomationException, PatternNotFoundException;
+    String getValueFromIAccessible() throws AutomationException;
+
+    /**
+     * Sets value via the IAccessible interface.
+     * @param value The string value
+     * @throws AutomationException Automation library error
+     */
+    void setValueFromIAccessible(final String value) throws AutomationException;
 }

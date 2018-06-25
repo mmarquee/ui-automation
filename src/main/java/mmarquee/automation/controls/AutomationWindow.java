@@ -41,7 +41,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  *
  * Currently all of these tests require to run on Windows.
  */
-public class AutomationWindow extends AutomationContainer implements Focusable, Windowable {
+public class AutomationWindow extends AutomationContainer implements ImplementsFocus, ImplementsWindow {
     /**
      * The window pattern.
      */

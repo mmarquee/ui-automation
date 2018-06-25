@@ -20,12 +20,12 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Range;
 
 /**
- * The Control supports the methods of the Range pattern.
+ * The Control supports the methods of the RangeValue pattern.
  *
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface RangeValuable extends Automatable, CanRequestBasePattern {
+public interface ImplementsRangeValue extends Automatable, CanRequestBasePattern {
 
     /**
      * Gets the range value.

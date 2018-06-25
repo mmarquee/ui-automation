@@ -20,7 +20,7 @@ package mmarquee.automation.controls;
  * @author Mark Humphreys
  * Date 08/03/2016.
  */
-public class AutomationCustom extends AutomationContainer implements Valueable {
+public class AutomationCustom extends AutomationContainer implements ImplementsValue {
 	
     /**
      * Constructor for the AutomationCustom element.
