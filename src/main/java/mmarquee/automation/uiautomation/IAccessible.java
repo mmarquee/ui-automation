@@ -22,12 +22,21 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.LongByReference;
 import com.sun.jna.ptr.PointerByReference;
 
+/**
+ * The IAccessible interface.
+ */
 public interface IAccessible extends IDispatch {
     /**
      * The interface IID for QueryInterface et al
      */
     Guid.IID IID = new Guid.IID("{618736E0-3C3D-11CF-810C-00AA00389B71}");
 
+    /**
+     * Get the accessible parent.
+     *
+     * @param pdisp the accessible element
+     * @return The result
+     */
     int getAccParent(PointerByReference pdisp);
     int getAccChildCount(LongByReference pcnt);
     int getAccChild(int childId, PointerByReference cdisp);
