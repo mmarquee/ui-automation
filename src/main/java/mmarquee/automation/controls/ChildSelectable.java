@@ -23,7 +23,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 
 /**
- * The Control supports the methods of the SelectionPattern
+ * The Control supports the methods of the SelectionPattern.
  * 
  * @author Mark Humphreys
  * Date 21/09/2016.

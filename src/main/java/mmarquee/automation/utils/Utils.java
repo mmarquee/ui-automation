@@ -114,12 +114,9 @@ public class Utils {
     public static boolean findProcessEntry
                     (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
                      final Pattern filenamePattern) {
-        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class,
-                W32APIOptions.UNICODE_OPTIONS);
+        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
 
-        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(
-                Tlhelp32.TH32CS_SNAPPROCESS,
-                new WinDef.DWORD(0));
+        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
 
         boolean found = false;
 
@@ -138,6 +135,7 @@ public class Utils {
 
         return found;
     }
+
     /**
      * Starts the given command.
      *
@@ -148,6 +146,25 @@ public class Utils {
     public static Process startProcess(final String... command)
             throws java.io.IOException {
         ProcessBuilder pb = createProcessBuilder(command);
+
+        return pb.start();
+    }
+
+    /**
+     * Starts the given command, redirecting stdout.
+     *
+     * @param command The command to start.
+     * @return The process.
+     * @throws java.io.IOException something has gone wrong.
+     */
+    public static Process startProcessWithRedirection(final String... command)
+            throws java.io.IOException {
+        ProcessBuilder pb = createProcessBuilder(command);
+
+        /* Direct output to log */
+        File log = new File("log.txt");
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
 
         return pb.start();
     }
@@ -194,6 +211,11 @@ public class Utils {
                 null);
     }
 
+    public static void end(Process process) {
+        process.destroy();
+    }
+
+    
 	private static void ensureWinApiInstances() {
 		if (user32 == null) {
             user32 = User32.INSTANCE;
@@ -267,9 +289,10 @@ public class Utils {
         BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }
+    
 
     /**
-     * An implementation of user32.FindWindow with Regex pattern matching.
+     * An implementation of user32.FindWindow with Regex pattern matching
      * 
      * @param windowClass the classname of the window, or null to ignore
      * @param titlePattern the regex pattern to match the title against
@@ -323,16 +346,4 @@ public class Utils {
         
         return returnContainer[0];
 	}
-
-    /**
-     * Gets the windows version number.
-     * @param arg The path
-     * @return The version number
-     */
-    public static String getVersionNumber(String arg) {
-        ExecutableFileInfo info = new ExecutableFileInfo();
-        int[] version = info.getVersionInfo(arg);
-
-        return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
-    }
 }

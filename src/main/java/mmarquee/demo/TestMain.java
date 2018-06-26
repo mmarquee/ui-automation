@@ -84,6 +84,8 @@ public class TestMain extends TestBase {
 
             logger.info("Modal? : " + window.isModal());
 
+            logger.info("Offscreen? : " + window.isOffScreen());
+
             java.lang.Object rect = window.getBoundingRectangle();
 
             // Interact with menus

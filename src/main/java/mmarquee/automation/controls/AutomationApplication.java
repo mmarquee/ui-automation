@@ -53,6 +53,11 @@ public class AutomationApplication extends AutomationBase {
     private User32 user32;
 
     /**
+     * The process.
+     */
+    private Process process;
+
+    /**
      * A very, very long timeout.
      */
     private static final WinDef.DWORD INFINITE_TIMEOUT =
@@ -213,8 +218,8 @@ public class AutomationApplication extends AutomationBase {
         super(builder);
         this.isAttached = builder.getAttached();
         this.user32 = builder.getUser32();
-
-        Process process = builder.getProcess();
+        this.process = builder.getProcess();
+       // Process process = builder.getProcess();
 
         if (builder.getHasHandle()) {
             this.handle = builder.getHandle();
@@ -269,7 +274,14 @@ public class AutomationApplication extends AutomationBase {
             Utils.closeWindow(hwnd);
         }
     }
-    
+
+    /**
+     * Ends the process associated with the application.
+     */
+    public void end() {
+        Utils.end(process);
+    }
+
     /**
      * Quits the process.
      *
@@ -297,10 +309,10 @@ public class AutomationApplication extends AutomationBase {
             user32 = User32.INSTANCE;
         }
 
-        final WinDef.HWND handle = Utils.findWindow(null, titlePattern);
+        final WinDef.HWND handl = Utils.findWindow(null, titlePattern);
 
-        if (handle != null) {
-            Utils.quitProcess(handle);
+        if (handl != null) {
+            Utils.quitProcess(handl);
         }
     }
     /**

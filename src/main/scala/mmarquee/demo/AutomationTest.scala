@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-18 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.demo;
 
-/**
- * @author Mark Humphreys
- * Date 02/02/2017.
- */
-class TreeWalker {
-    /**
-     * Demo the tree walker.
-     * @param args Command line arguments.
-     */
-    public static void main(final String[] args) {
-        DemoTreeWalker main = new DemoTreeWalker();
+package mmarquee.demo
 
-        main.run();
+object AutomationTest {
+
+  var notepad: NotepadApplication = _
+
+  def start(): Unit = {
+    notepad = new NotepadApplication()
+
+    notepad.launch()
+    notepad.addText("Hello there")
+    notepad.clickExit()
+    val confirm = notepad.getConfirm
+
+    if (confirm != null) {
+      System.out.println(s"Found the confirmation popup")
+    } else {
+      System.out.println(s"Didn't find confirmation window")
     }
+
+    notepad.confirmExit()
+  }
+
+  def main(args: Array[String]) {
+    start()
+  }
 }

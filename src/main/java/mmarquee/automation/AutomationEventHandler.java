@@ -36,5 +36,5 @@ public class AutomationEventHandler  {
     public AutomationEventHandler(final IUIAutomationEventHandler inHandler) {
         this.handler = inHandler;
     }
-
 }
+

@@ -164,6 +164,12 @@ public class UIAutomation extends BaseAutomation {
                 new ElementBuilder(rootElement).process(process).attached(false));
     }
 
+    public AutomationApplication launchWithRedirect(final String... command)
+            throws java.io.IOException {
+        Process process = Utils.startProcessWithRedirection(command);
+        return new AutomationApplication(
+                new ElementBuilder(rootElement).process(process).attached(false));
+    }
     /**
      * Launches the application, from a given directory, with setting its working directory set to the
      * commands parent folder.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2016-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,14 @@ import mmarquee.automation.uiautomation.IUIAutomationElementArray;
 import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
 
-// Temporary intermediate class
+/**
+ * The base pattern functionality, shared for all patterns.
+ *
+ * @author Mark Humphreys
+ * Date 29/02/2016
+ */
 public abstract class BasePattern extends BaseAutomation implements Pattern
 {
-
     /**
      * The logger.
      */
@@ -55,7 +59,6 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
     final protected AutomationElement element;
     protected PatternID patternID;
     protected PropertyID availabilityPropertyID;
-
 
     public BasePattern(AutomationElement element) throws AutomationException
     {
@@ -84,7 +87,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      * Gets the raw pointer to the pattern.
      * @param pbr The raw pointer
      * @return Result of the call from the COM library
-     * @throws PatternNotFoundException
+     * @throws PatternNotFoundException When the pattern was not found
      */
     public WinNT.HRESULT getRawPatternPointer(
             final PointerByReference pbr) throws PatternNotFoundException {
@@ -105,7 +108,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
     }
 
     /**
-     * Returns the Class of the unmocked pattern class
+     * Returns the Class of the unmocked pattern class.
      * @return the class without mocking
      */
 	@SuppressWarnings("unchecked")
@@ -118,7 +121,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 	}
 
 	/**
-	 * Gets a pattern from the raw pattern pointer, or returns the override pattern
+	 * Gets a pattern from the raw pattern pointer, or returns the override pattern.
 	 *
 	 * @param <T>  The class of the pattern to return
 	 * @param overridePattern the pattern to use if to

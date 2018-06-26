@@ -21,10 +21,12 @@ import mmarquee.automation.pattern.Window;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
- * Methods to simplify interaction with the Window Pattern
+ * Methods to simplify interaction with the Window Pattern.
+ *
+ * @author Mark Humphreys
+ * Date 19/05/2017.
  */
 public interface Windowable extends Automatable, CanRequestBasePattern {
-	
 
     /**
      * Waits for this window to become idle.
@@ -110,7 +112,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
     }
 
     /**
-     * Returns whether this control is modal
+     * Returns whether this control is modal.
      * @return Is this control modal?
      * @throws AutomationException Something has gone wrong
      */
@@ -123,7 +125,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
     }
 
     /**
-     * IS this window topmost
+     * IS this window topmost.
      * @return Is the window topmost
      * @throws AutomationException Something has gone wrong
      */
@@ -136,7 +138,7 @@ public interface Windowable extends Automatable, CanRequestBasePattern {
     }
 
     /**
-     * Sets the visual state
+     * Sets the visual state.
      * @param state The state to set
      * @throws AutomationException Something has gone wrong
      */
