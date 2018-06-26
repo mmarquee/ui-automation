@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.structure;
 
 import com.sun.jna.NativeLong;
@@ -23,6 +24,9 @@ import com.sun.jna.Structure;
 
 import java.util.List;
 
+/**
+ *
+ */
 public class PointNativeLong extends Structure implements Structure.ByValue {
     public static final List<String> FIELDS = createFieldsOrder("x", "y");
     public NativeLong x;

@@ -28,20 +28,20 @@ public interface IAccessible extends IDispatch {
      */
     Guid.IID IID = new Guid.IID("{618736E0-3C3D-11CF-810C-00AA00389B71}");
 
-    int Get_accParent(PointerByReference pdisp);
-    int Get_accChildCount(LongByReference pcnt);
-    int Get_accChild(int childId, PointerByReference cdisp);
-    int Get_accName(int childId, PointerByReference pstr);
-    int Get_accValue(int childId, PointerByReference pstr);
-    int Get_accDescription(int childId, PointerByReference pstr);
-    int Get_accRole(int childId, PointerByReference roleId);
-    int Get_accState(int childId, PointerByReference stateId);
-    int Get_accHelp(int childId, PointerByReference pstr);
+    int getAccParent(PointerByReference pdisp);
+    int getAccChildCount(LongByReference pcnt);
+    int getAccChild(int childId, PointerByReference cdisp);
+    int getAccName(int childId, PointerByReference pstr);
+    int getAccValue(int childId, PointerByReference pstr);
+    int getAccDescription(int childId, PointerByReference pstr);
+    int getAccRole(int childId, PointerByReference roleId);
+    int getAccState(int childId, PointerByReference stateId);
+    int getAccHelp(int childId, PointerByReference pstr);
     int Get_accHelpTopic(PointerByReference pstr, int childId, PointerByReference topic);
-    int Get_accKeyboardShortcut(int childId, PointerByReference pstr);
-    int Get_accFocus(PointerByReference ptr);
-    int Get_accSelection(PointerByReference ptr);
-    int Get_accDefaultAction(int childId, PointerByReference pstr);
+    int getAccKeyboardShortcut(int childId, PointerByReference pstr);
+    int getAccFocus(PointerByReference ptr);
+    int getAccSelection(PointerByReference ptr);
+    int getAccDefaultAction(int childId, PointerByReference pstr);
     int accSelect(long flags, int childId);
     int accLocation(IntByReference pxLeft,
                     IntByReference pyTop,
@@ -52,6 +52,6 @@ public interface IAccessible extends IDispatch {
                     PointerByReference vv);
     int accHitTest(long xLeft, long yTop, PointerByReference res);
     int accDoDefaultAction(int childId);
-    int Set_accName(int childId, String str);
-    int Set_accValue(int childId, String str);
+    int setAccName(int childId, String str);
+    int setAccValue(int childId, String str);
 }

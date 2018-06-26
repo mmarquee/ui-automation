@@ -28,7 +28,8 @@ import mmarquee.automation.PropertyID;
 public class Transform extends BasePattern {
 
     /**
-     * Constructor for the Transform pattern
+     * Constructor for the Transform pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */

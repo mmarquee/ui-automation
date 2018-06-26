@@ -29,15 +29,15 @@ import mmarquee.automation.uiautomation.IUIAutomationTablePatternConverter;
 import mmarquee.automation.uiautomation.RowOrColumnMajor;
 
 /**
+ * Wrapper for the table pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the table pattern
  */
 public class Table extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -48,14 +48,24 @@ public class Table extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsTableItemPatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationTablePattern rawPattern;
 
+    /**
+     * Gets the pattern.
+     *
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     */
     private IUIAutomationTablePattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**
      * Gets the column headers for the grid.
+     *
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
@@ -71,7 +81,8 @@ public class Table extends BasePattern {
     }
 
     /**
-     * Gets the row or column major for the table
+     * Gets the row or column major for the table.
+     *
      * @return RowOrColumnMajor value of the table element
      * @throws AutomationException Error in automation library
      */
@@ -88,6 +99,7 @@ public class Table extends BasePattern {
 
     /**
      * Gets the row headers for the grid.
+     *
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
@@ -103,11 +115,13 @@ public class Table extends BasePattern {
     }
 
     /**
-     * Converts the unknown value to a IUIAutomationTablePattern
+     * Converts the unknown value to a IUIAutomationTablePattern.
+     *
      * @param pUnknownA The Unknown pointer
      * @return The pattern
      */
-    IUIAutomationTablePattern convertPointerToInterface(PointerByReference pUnknownA) {
+    IUIAutomationTablePattern convertPointerToInterface(
+            final PointerByReference pUnknownA) {
         return IUIAutomationTablePatternConverter.pointerToInterface(pUnknownA);
     }
 }

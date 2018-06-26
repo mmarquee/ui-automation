@@ -34,15 +34,15 @@ import mmarquee.automation.uiautomation.IUIAutomationTextRangeArrayConverter;
 import mmarquee.automation.uiautomation.IUIAutomationTextRangeConverter;
 
 /**
+ * Wrapper for the text pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the text pattern
  */
 public class Text extends BasePattern {
 
     /**
-     * Constructor for the text pattern
+     * Constructor for the text pattern.
      *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
@@ -55,17 +55,39 @@ public class Text extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsTextPatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationTextPattern rawPattern;
 
+    /**
+     * Gets the pattern.
+     *
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     */
     private IUIAutomationTextPattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerOfTextPatternToInterface);
     }
-
-    IUIAutomationTextPattern convertPointerOfTextPatternToInterface(PointerByReference pUnknownA) {
+    /**
+     * Converts the raw pointer to interface.
+     *
+     * @param pUnknownA The raw pointer
+     * @return The converted interface
+     */
+    IUIAutomationTextPattern convertPointerOfTextPatternToInterface(
+            final PointerByReference pUnknownA) {
         return IUIAutomationTextPatternConverter.pointerToInterface(pUnknownA);
     }
 
-    IUIAutomationTextRangeArray convertPointerToArrayInterface(PointerByReference pUnknownA) {
+    /**
+     * Converts the raw pointer to array interface.
+     *
+     * @param pUnknownA The raw pointer
+     * @return The converted interface
+     */
+    IUIAutomationTextRangeArray convertPointerToArrayInterface(
+            final PointerByReference pUnknownA) {
         return IUIAutomationTextRangeArrayConverter.pointerToInterface(pUnknownA);
     }
 
@@ -171,7 +193,14 @@ public class Text extends BasePattern {
         }
     }
 
-    IUIAutomationTextRange convertPointerToInterface(PointerByReference pUnknownA) {
+    /**
+     * Converts the pointer to the interface.
+     *
+     * @param pUnknownA The raw pointer
+     * @return Error in automation library
+     */
+    IUIAutomationTextRange convertPointerToInterface(
+                final PointerByReference pUnknownA) {
         return IUIAutomationTextRangeConverter.pointerToInterface(pUnknownA);
     }
 }

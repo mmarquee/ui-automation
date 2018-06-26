@@ -26,17 +26,18 @@ import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
 
 /**
+ * Wrapper around the styles pattern.
+ *
  * @author Mark Humphreys
  * Date 01/03/2016.
- *
- * Wrapper around the styles pattern.
  *
  * This looks to be unused anywhere
  */
 public class Styles extends BasePattern {
 
     /**
-     * Constructor for the styles pattern
+     * Constructor for the styles pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -47,14 +48,24 @@ public class Styles extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsStylesPatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationStylesPattern rawPattern;
 
+    /**
+     * Gets the pattern.
+     *
+     * @return The pattern
+     * @throws AutomationException Error is automation library
+     */
     private IUIAutomationStylesPattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**
-     * Gets the style by name
+     * Gets the style by name.
+     *
      * @return The style name.
      * @throws AutomationException Something has gone wrong
      */
@@ -71,6 +82,7 @@ public class Styles extends BasePattern {
 
     /**
      * Gets the style id.
+     *
      * @return The style id.
      * @throws AutomationException Something has gone wrong
      */
@@ -85,7 +97,14 @@ public class Styles extends BasePattern {
         return ipr.getValue();
     }
 
-    IUIAutomationStylesPattern convertPointerToInterface(PointerByReference pUnknown) {
+    /**
+     * Converts the raw pointer to the pattern.
+     *
+     * @param pUnknown The raw pointer
+     * @return The converted interface
+     */
+    IUIAutomationStylesPattern convertPointerToInterface
+            (final PointerByReference pUnknown) {
         return IUIAutomationStylesPatternConverter.pointerToInterface(pUnknown);
     }
 }
