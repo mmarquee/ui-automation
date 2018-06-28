@@ -117,7 +117,7 @@ public enum PatternID {
     ScrollItem(10017),
 
     /**
-     * ImplementsLegacyIAccessible pattern.
+     * LegacyIAccessible(10018), pattern.
      */
     LegacyIAccessible(10018),
 
