@@ -776,10 +776,10 @@ public class AutomationElement extends BaseAutomation {
      * @param automationPatternClass the class of the automation pattern
      * @return the mocked pattern, if available
      */
-	public <T extends BasePattern> T
+    public <T extends BasePattern> T
                 getProvidedPattern(final Class<T> automationPatternClass) {
-		// Return values will be mocked
-		return null;
-	}
+        // Return values will be mocked
+        return null;
+    }
 }
 

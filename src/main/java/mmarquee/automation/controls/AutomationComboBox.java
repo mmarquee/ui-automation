@@ -202,7 +202,6 @@ public final class AutomationComboBox
      * @throws PatternNotFoundException Failed to find pattern
      */
     public List<AutomationListItem> getSelectedItems() throws AutomationException, PatternNotFoundException {
-        
     	List<AutomationElement> collection = getCurrentSelection();
 
         List<AutomationListItem> list = new ArrayList<>();
