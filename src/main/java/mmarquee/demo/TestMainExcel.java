@@ -22,10 +22,10 @@ import mmarquee.automation.controls.*;
 import java.util.List;
 
 /**
+ * Test the automation wrapper on Excel.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Test the automation wrapper on Excel.
  */
 public class TestMainExcel extends TestBase {
 
@@ -49,8 +49,8 @@ public class TestMainExcel extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window = application.getWindow(Search.getBuilder("Book1 - Excel").build());
-            logger.info(window.getName());
+            AutomationWindow window = application.getWindow(Search.getBuilder().className("XLMAIN").build());
+            logger.info(window.getClassName());
 
             AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("XLDESK").build());
             logger.info(panelX.getName());
@@ -60,6 +60,8 @@ public class TestMainExcel extends TestBase {
             logger.info(tab.getName());
 
             List<AutomationTabItem> items = tab.getTabItems();
+
+            logger.info(items.size());
 
             for(AutomationTabItem item : items) {
                 logger.info(item.getName());

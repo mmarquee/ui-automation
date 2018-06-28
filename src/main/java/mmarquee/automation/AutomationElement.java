@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2016-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -450,6 +450,59 @@ public class AutomationElement extends BaseAutomation {
             final PointerByReference pCondition)
             throws AutomationException {
         return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
+    }
+
+    /**
+     * Finds all for the cache.
+     * Probably will get refactored away at some point
+     *
+     * @param scope        The scope
+     * @param condition    The condition
+     * @param cacheRequest The cache
+     * @return List of found elements from the cache
+     * @throws AutomationException Something has gone wrong
+     */
+    public List<AutomationElement> findAll(final TreeScope scope,
+                                           final PointerByReference condition,
+                                           final CacheRequest cacheRequest)
+            throws AutomationException {
+        List<AutomationElement> items = new ArrayList<>();
+
+        PointerByReference all = new PointerByReference();
+
+        final int res = this.element.findAllBuildCache(scope.value,
+                condition.getValue(),
+                cacheRequest.getValue(),
+                all);
+
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        IUIAutomationElementArray collection =
+                getAutomationElementArrayFromReference(all);
+
+        IntByReference ibr = new IntByReference();
+
+        collection.getLength(ibr);
+
+        int counter = ibr.getValue();
+
+        for (int a = 0; a < counter; a++) {
+            PointerByReference pbr = new PointerByReference();
+
+            collection.getElement(a, pbr);
+
+            IUIAutomationElement elem =
+                    getAutomationElementFromReference(pbr);
+
+            AutomationElement elmnt = new AutomationElement(elem);
+            elmnt.cached = true;
+
+            items.add(elmnt);
+        }
+
+        return items;
     }
 
     /**

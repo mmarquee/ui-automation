@@ -104,10 +104,11 @@ public class IUIAutomationElement7Converter {
                 return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
             }
 
-//                public int BuildUpdatedCache ( /* IUIAutomationCacheRequest */ Pointer cacheRequest, /* IUIAutomationElement */ PointerByReference updatedElement) {
-//                    Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
-//                }
+            public int buildUpdatedCache (Pointer cacheRequest,
+                                          PointerByReference updatedElement) {
+                   Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
+                    return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
+            }
 
             public int getCurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value) {
                 Function f = Function.getFunction(vTable[10], Function.ALT_CONVENTION);

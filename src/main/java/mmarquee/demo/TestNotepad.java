@@ -55,6 +55,12 @@ public class TestNotepad extends TestBase {
             logger.warn("Failed to find notepad application", ex);
         }
 
+        try {
+            logger.info(AutomationApplication.getVersionNumber("notepad.exe"));
+        } catch (Throwable ex) {
+            logger.warn("Failed to get version information", ex);
+        }
+
         // Wait for the process to start
         assert application != null;
         application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);

@@ -39,6 +39,10 @@ public interface IUIAutomationElement extends IUnknown {
     int getCurrentClassName (PointerByReference sr);
     int findAll (TreeScope scope, Pointer condition, PointerByReference sr);
     int findFirst (TreeScope scope, Pointer condition, PointerByReference sr);
+    int findAllBuildCache(int scope, Pointer condition, Pointer cr, PointerByReference sr);
+    int findFirstBuildCache(int scope, Pointer condition, Pointer cr, PointerByReference sr);
+    int buildUpdatedCache (Pointer cacheRequest,
+                           PointerByReference updatedElement);
     int getClickablePoint(WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable);
     int getCurrentIsPassword(IntByReference value);
     int getCurrentAriaRole (PointerByReference sr);
