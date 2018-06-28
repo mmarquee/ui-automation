@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.uiautomation;
 
 import com.sun.jna.Function;
@@ -23,7 +24,7 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 
 public class IUIAutomationElement7Converter {
 

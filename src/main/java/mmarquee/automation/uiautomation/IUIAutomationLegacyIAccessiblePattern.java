@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.uiautomation;
 
-import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WTypes;
@@ -30,8 +30,22 @@ public interface IUIAutomationLegacyIAccessiblePattern extends IUnknown {
 
     //   int select(Integer flagsSelect);
     //   int doDefaultAction();
+
+    /**
+     * Sets the value for the element.
+     *
+     * @param sr The value
+     * @return Result from call
+     */
     int setValue(WTypes.BSTR sr);
     //  int getCurrentChildId(PointerByReference pRetVal);
+
+    /**
+     * Gets the current name from accessibility routines.
+     *
+     * @param pszName The name
+     * @return State of the call
+     */
     int getCurrentName(PointerByReference pszName);
     //  int getCurrentValue(PointerByReference pszValue);
     //  int getCurrentDescription(PointerByReference pszDescription);

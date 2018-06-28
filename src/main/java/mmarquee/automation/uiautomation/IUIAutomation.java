@@ -22,7 +22,6 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Wrapper for the IUIAutomation COM interface.
