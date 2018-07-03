@@ -302,12 +302,12 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
+            /*
             public int getCurrentAriaProperties(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[46], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            /*
             public int getCurrentIsDataValidForForm(WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[47], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
@@ -334,6 +334,7 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
+            /*
             public int get_CachedControlType (IntByReference retVal) {
                 Function f = Function.getFunction(vTable[53], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
@@ -343,6 +344,7 @@ public class IUIAutomationElement6Converter {
                 Function f = Function.getFunction(vTable[54], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCachedName(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
