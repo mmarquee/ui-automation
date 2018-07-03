@@ -27,11 +27,11 @@ import com.sun.jna.ptr.PointerByReference;
 
 public class IUIAutomationElement6Converter {
 
-    public static final int IUI3_SHOW_CONTEXT_MENU = 91;
-    public static final int IUI3_CURRENT_IS_PERIPHERAL = 92;
-    public static final int IUI3_CACHED_IS_PERIPHERAL = 93;
-    public static final int IUI6_CURRENT_FULL_DESCRIPTION = 104;
-    public static final int IUI6_CACHED_FULL_DESCRIPTION = 105;
+    private static final int IUI3_SHOW_CONTEXT_MENU = 91;
+    private static final int IUI3_CURRENT_IS_PERIPHERAL = 92;
+    private static final int IUI3_CACHED_IS_PERIPHERAL = 93;
+    private static final int IUI6_CURRENT_FULL_DESCRIPTION = 104;
+    private static final int IUI6_CACHED_FULL_DESCRIPTION = 105;
 
     public static IUIAutomationElement6 pointerToInterface(final PointerByReference ptr) {
         //  0-2  IUnknown,
