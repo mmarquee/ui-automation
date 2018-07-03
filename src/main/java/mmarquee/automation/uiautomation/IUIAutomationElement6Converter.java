@@ -113,50 +113,54 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, value});
             }
 
+            /*
             public int getCurrentPropertyValueEx ( int propertyId,  WinDef.BOOL ignoreDefaultValue, Variant.VARIANT retVal) {
                 Function f = Function.getFunction(vTable[11], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
             }
 
-//                public int GetCachedPropertyValue ( int propertyId, Variant.VARIANT retVal) {
-//                    Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, propertyId, retVal});
-//                }
+            public int GetCachedPropertyValue ( int propertyId, Variant.VARIANT retVal) {
+                Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, propertyId, retVal});
+            }
 
-//                public int GetCachedPropertyValueEx ( int propertyId,  WinDef.BOOL ignoreDefaultValue, Variant.VARIANT retVal) {
-//                    Function f = Function.getFunction(vTable[13], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
-//                }
+            public int GetCachedPropertyValueEx ( int propertyId,  WinDef.BOOL ignoreDefaultValue, Variant.VARIANT retVal) {
+                Function f = Function.getFunction(vTable[13], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, propertyId, ignoreDefaultValue, retVal});
+            }
 
-            public int getCurrentPatternAs ( int patternId,  Guid.REFIID riid, /* [retval][iid_is][out] */ PointerByReference patternObject) {
+            public int getCurrentPatternAs ( int patternId,  Guid.REFIID riid, PointerByReference patternObject) {
                 Function f = Function.getFunction(vTable[14], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
             }
 
-//                public int GetCachedPatternAs ( int patternId,  Guid.REFIID riid, /* [retval][iid_is][out] */ PointerByReference patternObject) {
-//                    Function f = Function.getFunction(vTable[15], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
-//                }
+            public int GetCachedPatternAs ( int patternId,  Guid.REFIID riid, PointerByReference patternObject) {
+                Function f = Function.getFunction(vTable[15], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, patternId, riid, patternObject});
+            }
+            */
 
             public int getCurrentPattern(Integer patternId, PointerByReference pbr) {
                 Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, patternId, pbr});
             }
 
-//                public int GetCachedPattern ( int patternId, PointerByReference patternObject) {
-//                    Function f = Function.getFunction(vTable[17], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, patternId, patternObject});
-//                }
+            /*
+            public int GetCachedPattern ( int patternId, PointerByReference patternObject) {
+                Function f = Function.getFunction(vTable[17], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, patternId, patternObject});
+            }
 
-//                public int GetCachedParent (/* IUIAutomationElement */ PointerByReference parent) {
-//                    Function f = Function.getFunction(vTable[18], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, parent});
-//                }
+            public int GetCachedParent (PointerByReference parent) {
+                Function f = Function.getFunction(vTable[18], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, parent});
+            }
 
-//                public int GetCachedChildren (/* IUIAutomationElementArray */ PointerByReference children) {
-//                    Function f = Function.getFunction(vTable[19], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, children});
-//                }
+            public int GetCachedChildren (PointerByReference children) {
+                Function f = Function.getFunction(vTable[19], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, children});
+            }
+            */
 
             public int getCurrentProcessId (IntByReference retVal) {
                 Function f = Function.getFunction(vTable[20], Function.ALT_CONVENTION);
@@ -183,6 +187,7 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
+            /*
             public int getCurrentAccessKey(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[25], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
@@ -197,6 +202,7 @@ public class IUIAutomationElement6Converter {
                 Function f = Function.getFunction(vTable[27], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentIsEnabled(WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[28], Function.ALT_CONVENTION);
@@ -213,10 +219,12 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
+            /*
             public int getCurrentHelpText(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[31], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentCulture(IntByReference retVal) {
                 Function f = Function.getFunction(vTable[32], Function.ALT_CONVENTION);
@@ -238,6 +246,7 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, value});
             }
 
+            /*
             public int getCurrentNativeWindowHandle(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[36], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
@@ -247,6 +256,7 @@ public class IUIAutomationElement6Converter {
                 Function f = Function.getFunction(vTable[37], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentIsOffscreen(WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[38], Function.ALT_CONVENTION);
@@ -263,10 +273,12 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
+            /*
             public int getCurrentIsRequiredForForm(WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[41], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentItemStatus(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[42], Function.ALT_CONVENTION);
@@ -278,10 +290,12 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
+            /*
             public int getCurrentLabeledBy(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[44], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentAriaRole(PointerByReference sr) {
                 Function f = Function.getFunction(vTable[45], Function.ALT_CONVENTION);
@@ -293,187 +307,192 @@ public class IUIAutomationElement6Converter {
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
+            /*
             public int getCurrentIsDataValidForForm(WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[47], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentControllerFor(/* IUIAutomationElementArray */ PointerByReference retVal) {
+            public int getCurrentControllerFor(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[48], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentDescribedBy (/* IUIAutomationElementArray */ PointerByReference retVal) {
+            public int getCurrentDescribedBy (PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[49], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentFlowsTo(/* IUIAutomationElementArray */ PointerByReference retVal) {
+            public int getCurrentFlowsTo(PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[50], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentProviderDescription(PointerByReference sr) {
                 Function f = Function.getFunction(vTable[51], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
-//                public int get_CachedControlType (IntByReference retVal) {
-//                    Function f = Function.getFunction(vTable[53], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedControlType (IntByReference retVal) {
+                Function f = Function.getFunction(vTable[53], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedLocalizedControlType (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[54], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedLocalizedControlType (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[54], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-                public int getCachedName(PointerByReference retVal) {
-                    Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
-                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-                }
+            public int getCachedName(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[55], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedAcceleratorKey (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[56], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            /*
+            public int get_CachedAcceleratorKey (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[56], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedAccessKey (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[57], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedAccessKey (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[57], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedHasKeyboardFocus (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[58], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedHasKeyboardFocus (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[58], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsKeyboardFocusable (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[59], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-            //               }
+            public int get_CachedIsKeyboardFocusable (WinDef.BOOLByReference retVal) {
+               Function f = Function.getFunction(vTable[59], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsEnabled (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[60], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsEnabled (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[60], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedAutomationId (PointerByReference retVal) {
-            //                   Function f = Function.getFunction(vTable[61], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedAutomationId (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[61], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedClassName (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[62], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedClassName (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[62], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedHelpText (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[63], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedHelpText (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[63], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedCulture (IntByReference retVal) {
-//                    Function f = Function.getFunction(vTable[64], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedCulture (IntByReference retVal) {
+                Function f = Function.getFunction(vTable[64], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsControlElement (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[65], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsControlElement (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[65], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsContentElement (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[66], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsContentElement (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[66], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsPassword (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[67], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsPassword (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[67], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedNativeWindowHandle (WinDef.HWND retVal) {
-//                    Function f = Function.getFunction(vTable[68], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedNativeWindowHandle (WinDef.HWND retVal) {
+                Function f = Function.getFunction(vTable[68], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedItemType (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[69], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedItemType (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[69], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsOffscreen (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[70], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsOffscreen (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[70], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedOrientation (IntByReference retVal) {
-//                    Function f = Function.getFunction(vTable[71], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedOrientation (IntByReference retVal) {
+                Function f = Function.getFunction(vTable[71], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedFrameworkId (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[72], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedFrameworkId (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[72], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsRequiredForForm (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[73], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsRequiredForForm (WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[73], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedItemStatus (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[74], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedItemStatus (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[74], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedBoundingRectangle (WinDef.RECT retVal) {
-//                    Function f = Function.getFunction(vTable[75], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedBoundingRectangle (WinDef.RECT retVal) {
+                Function f = Function.getFunction(vTable[75], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedLabeledBy (/* IUIAutomationElement */ PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[76], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedLabeledBy (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[76], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedAriaRole (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[77], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedAriaRole (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[77], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedAriaProperties (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[78], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedAriaProperties (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[78], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedIsDataValidForForm (WinDef.BOOLByReference retVal) {
-//                    Function f = Function.getFunction(vTable[79], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedIsDataValidForForm (WinDef.BOOLByReference retVal) {
+               Function f = Function.getFunction(vTable[79], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedControllerFor (/* IUIAutomationElementArray */ PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[80], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedControllerFor (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[80], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedDescribedBy (/* IUIAutomationElementArray */ PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[81], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedDescribedBy (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[81], Function
+                        .ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedFlowsTo (/* IUIAutomationElementArray */ PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[82], Function.ALT_CONVENTION);
-//                    return f.invokeInt(new Object[]{interfacePointer, retVal});
-//                }
+            public int get_CachedFlowsTo (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[82], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
 
-//                public int get_CachedProviderDescription (PointerByReference retVal) {
-//                    Function f = Function.getFunction(vTable[83], Function.ALT_CONVENTION);
-            //                   return f.invokeInt(new Object[]{interfacePointer, retVal});
-///                }
+            public int get_CachedProviderDescription (PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[83], Function.ALT_CONVENTION);
+               return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+            */
 
-            public int getClickablePoint(/* [out] */ WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable) {
+            public int getClickablePoint(WinDef.POINT.ByReference clickable, WinDef.BOOLByReference gotClickable) {
                 Function f = Function.getFunction(vTable[84], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, clickable, gotClickable});
             }

@@ -96,7 +96,8 @@ public class AutomationApplication extends AutomationBase {
     }
 
     /**
-     * Waits for the application to accept input, i.e. not be idle, with maximum timeout.
+     * Waits for the application to accept input, i.e. not be idle, with
+     * maximum timeout.
      */
     public void waitForInputIdle() {
         if (user32 == null) {
@@ -197,7 +198,8 @@ public class AutomationApplication extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationWindow getWindow(final Search search) throws AutomationException {
+    public AutomationWindow getWindow(final Search search)
+            throws AutomationException {
         if (search.getHasNamePattern()) {
             return getWindow(search.getNamePattern());
         } else if (search.getHasName()) {
@@ -233,7 +235,8 @@ public class AutomationApplication extends AutomationBase {
                     //noinspection JavaReflectionMemberAccess
                     Field f = process.getClass().getDeclaredField("handle");
                     f.setAccessible(true);
-                    this.handle.setPointer(Pointer.createConstant(f.getLong(process)));
+                    this.handle.setPointer(Pointer.createConstant(
+                            f.getLong(process)));
                 } catch (Throwable e) {
                     // Handle the error nicely
                 }
@@ -302,30 +305,41 @@ public class AutomationApplication extends AutomationBase {
     /**
      * Quits the process.
      *
-     * @param titlePattern a pattern matching the title of the window of the process to quit
+     * @param titlePattern a pattern matching the title of the window of the
+     *                     process to quit
      */
     public void quit(final Pattern titlePattern) {
         if (user32 == null) {
             user32 = User32.INSTANCE;
         }
 
-        final WinDef.HWND handl = Utils.findWindow(null, titlePattern);
+        final WinDef.HWND handl =
+                Utils.findWindow(null, titlePattern);
 
         if (handl != null) {
             Utils.quitProcess(handl);
         }
     }
+
+    public static final int MAJOR_VERSION = 0;
+    public static final int MINOR_VERSION = 1;
+    public static final int RELEASE = 2;
+    public static final int BUILD = 3;
+
     /**
      * Gets the windows version number.
      *
      * @param arg The path
      * @return The version number
      */
-    public static String getVersionNumber(String arg) {
-        ExecutableFileInfo info = new ExecutableFileInfo();
-        int[] version = info.getVersionInfo(arg);
+    public static String getVersionNumber(final String arg) {
+        int[] version = ExecutableFileInfo.getVersionInfo(arg);
 
-        return String.format("%d.%d.%d.%d", version[0], version[1], version[2], version[3]);
+        return String.format(
+                "%d.%d.%d.%d",
+                version[MAJOR_VERSION],
+                version[MINOR_VERSION],
+                version[RELEASE],
+                version[BUILD]);
     }
-
 }
