@@ -15,6 +15,7 @@
  */
 package mmarquee.demo;
 
+import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
@@ -142,7 +143,7 @@ class TestExplorer extends TestBase {
                 btn0.click();
             }
 
-        } catch (Exception ex) {
+        } catch (AutomationException ex) {
             logger.info("Something went wrong");
             ex.printStackTrace();
         }

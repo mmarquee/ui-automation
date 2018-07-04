@@ -589,7 +589,7 @@ public class TestMainWPF extends TestBase {
             AutomationTitleBar titleBar = applicationWindow.getTitleBar();
 
             // Title bar seems to not give back a name now
-            // logger.info("TitleBar name is " + titleBar.name());
+            logger.info("TitleBar name is " + titleBar.getName());
 
 //            AutomationMainMenu menuBar = titleBar.getMenuBar();
 
@@ -624,6 +624,9 @@ public class TestMainWPF extends TestBase {
             // Still issues with get locations out of some controls
 
             WinDef.POINT clickPoint = rightClickBtn.getClickablePoint();
+
+            logger.info(clickPoint.x);
+            logger.info(clickPoint.y);
 
             WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
 
@@ -688,7 +691,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ ALL DONE ++");
 
-        } catch (Exception ex) {
+        } catch (AutomationException ex) {
             logger.info("Something went wrong - " + ex.getClass());
             ex.printStackTrace();
         }

@@ -117,10 +117,10 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
         	throw new PatternNotFoundException(e);
 		}
 
-    	if (unknown == null) {
-        	logger.warn("Failed to find pattern");
-        	throw new PatternNotFoundException("Failed to find pattern");
-    	}
+//    	if (unknown == null) {
+//        	logger.warn("Failed to find pattern");
+//        	throw new PatternNotFoundException("Failed to find pattern");
+//    	}
 
         Unknown uElement = makeUnknown(unknown.getValue());
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);

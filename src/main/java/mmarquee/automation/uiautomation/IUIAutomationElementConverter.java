@@ -187,7 +187,6 @@ public class IUIAutomationElementConverter {
                 Function f = Function.getFunction(vTable[25], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
-            */
 
             public int getCurrentHasKeyboardFocus (WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[26], Function.ALT_CONVENTION);
@@ -198,6 +197,7 @@ public class IUIAutomationElementConverter {
                 Function f = Function.getFunction(vTable[27], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentIsEnabled (WinDef.BOOLByReference retVal) {
                 Function f = Function.getFunction(vTable[28], Function.ALT_CONVENTION);
@@ -214,10 +214,12 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
+            /*
             public int getCurrentHelpText (PointerByReference retVal) {
                 Function f = Function.getFunction(vTable[31], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
+            */
 
             public int getCurrentCulture (IntByReference retVal) {
                 Function f = Function.getFunction(vTable[32], Function.ALT_CONVENTION);

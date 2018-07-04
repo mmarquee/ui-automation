@@ -105,7 +105,7 @@ public class DemoGrid extends TestBase {
 //            cell3.showContextMenu();
             cell3.invoke();
 
-        } catch (Exception ex) {
+        } catch (AutomationException ex) {
             logger.info("Something went wrong - " + ex.getClass());
         }
     }

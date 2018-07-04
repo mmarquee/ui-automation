@@ -33,7 +33,7 @@ public class DemoTreeWalker extends TestBase {
 	/**
 	 * Recursion level.
 	 */
-    final private int recurseLevel = 50;
+    private static final int recurseLevel = 50;
 
 	/**
 	 * Constructor for DemoTreeWalker.

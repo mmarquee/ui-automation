@@ -72,9 +72,11 @@ public class TestMainPowerpoint extends TestBase {
             AutomationImage image = slide.getImage(Search.getBuilder("Title TextBox").build());
             AutomationElement element = image.getSelectionContainer();
 
-            // logger.info(text.getValue());
+            logger.info(element.getName());
 
             AutomationImage image1 = slide.getImage(Search.getBuilder(0).build());
+
+            logger.info(image1.getName());
 
             logger.info("++ ALL DONE ++");
 

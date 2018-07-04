@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.utils;
 
 import java.awt.AWTException;
@@ -50,7 +51,8 @@ import mmarquee.automation.AutomationException;
  * Date 18/03/2016.
  */
 public class Utils {
-    protected static Logger logger = Logger.getLogger(Utils.class.getName());
+    protected final static Logger logger =
+            Logger.getLogger(Utils.class.getName());
 
     /**
      * The User32 instance.
@@ -101,7 +103,8 @@ public class Utils {
                      final String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
-        return findProcessEntry(processEntry,Pattern.compile(filename, Pattern.LITERAL));
+        return findProcessEntry(processEntry,Pattern.compile(filename,
+                Pattern.LITERAL));
     }
 
     /**
@@ -114,9 +117,13 @@ public class Utils {
     public static boolean findProcessEntry
                     (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
                      final Pattern filenamePattern) {
-        Kernel32 kernel32 = Native.loadLibrary(Kernel32.class, W32APIOptions.UNICODE_OPTIONS);
+        Kernel32 kernel32 =
+                Native.loadLibrary(Kernel32.class,
+                        W32APIOptions.UNICODE_OPTIONS);
 
-        WinNT.HANDLE snapshot = kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS, new WinDef.DWORD(0));
+        WinNT.HANDLE snapshot =
+                kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS,
+                        new WinDef.DWORD(0));
 
         boolean found = false;
 

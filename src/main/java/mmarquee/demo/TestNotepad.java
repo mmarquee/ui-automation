@@ -76,6 +76,8 @@ public class TestNotepad extends TestBase {
 
             boolean val = window.isModal();
 
+            logger.info("Modal?" + val);
+
             AutomationEditBox edit =
                     window.getEditBox(Search.getBuilder(0).build());
 

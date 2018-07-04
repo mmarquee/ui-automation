@@ -89,6 +89,8 @@ public class TestMain extends TestBase {
 
             java.lang.Object rect = window.getBoundingRectangle();
 
+            logger.info("Rect : " + rect.toString());
+
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();
 
@@ -130,7 +132,7 @@ public class TestMain extends TestBase {
             try {
                 ToggleState state = check.getToggleState();
                 logger.info("State: " + state);
-            } catch (Exception ex) {
+            } catch (AutomationException ex) {
                 logger.info("Failed to get toggle state");
             }
 
@@ -320,7 +322,7 @@ public class TestMain extends TestBase {
             AutomationMenuItem contextItem = context.getMenuItem("Popup Menu ");
             contextItem.click();
 
-        } catch (Exception ex) {
+        } catch (AutomationException ex) {
             logger.info("Something went wrong - " + ex.getClass());
         }
     }
