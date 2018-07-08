@@ -237,6 +237,10 @@ public class AutomationMenuItem
 	                        this.createNamePropertyCondition(parentMenuName),
 	                        this.createControlTypeCondition(ControlType.Menu)));
 
+            if (item == null) {
+                return null;
+            }
+
 	    	return new AutomationMenu(new ElementBuilder(item));
     	} catch (ElementNotFoundException ex) {
     		return null;

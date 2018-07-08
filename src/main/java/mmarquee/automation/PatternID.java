@@ -62,7 +62,7 @@ public enum PatternID {
     Grid(10006),
 
     /**
-     * GirdItem pattern.
+     * GridItem pattern.
      */
     GridItem(10007),
 

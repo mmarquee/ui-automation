@@ -47,7 +47,7 @@ public class GridItem extends BasePattern {
     }
 
     /**
-     * The raw GridYem pattern.
+     * The raw GridItem pattern.
      */
     IUIAutomationGridItemPattern rawPattern;
 
