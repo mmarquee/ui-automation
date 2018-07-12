@@ -30,15 +30,16 @@ import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
 import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
 
 /**
+ * Wrapper for the Selection pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the Selection pattern.
  */
 public class Selection extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -49,10 +50,14 @@ public class Selection extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsSelectionPatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationSelectionPattern rawPattern;
 
     /**
-     * Gets the pointer
+     * Gets the pointer.
+     *
      * @return Underlying pointer
      * @throws AutomationException Automation has gone wrong
      */
@@ -61,7 +66,8 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Gets the current selection
+     * Gets the current selection.
+     *
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      */
@@ -78,7 +84,7 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Convert the unknown pointer to selection pattern
+     * Convert the unknown pointer to selection pattern.
      *
      * @param pUnknown The unknown pointer
      * @return IUIAutomationSelectionPattern the converted pointer
@@ -98,7 +104,8 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Gets the current selection
+     * Gets the current selection.
+     *
      * @return List of selected items
      * @throws AutomationException Something has gone wrong
      */
@@ -107,7 +114,8 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * Returns whether the selection supports multiple selection
+     * Returns whether the selection supports multiple selection.
+     *
      * @return Value from automation
      * @throws AutomationException Something has gone wrong
      */

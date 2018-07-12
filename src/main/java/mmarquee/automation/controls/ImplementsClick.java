@@ -15,13 +15,20 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.PatternNotFoundException;
+
 /**
+ * Implement this interface to respond to the clickable action.
+ *
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Focusable extends Automatable {
+public interface ImplementsClick extends Automatable {
     /**
-     * Focus on the element.
+     * Clicks the element.
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Failed to find pattern
      */
-    void focus();
+    void click() throws AutomationException, PatternNotFoundException;
 }

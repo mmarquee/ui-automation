@@ -62,7 +62,7 @@ public enum PatternID {
     Grid(10006),
 
     /**
-     * GirdItem pattern.
+     * GridItem pattern.
      */
     GridItem(10007),
 
@@ -117,7 +117,7 @@ public enum PatternID {
     ScrollItem(10017),
 
     /**
-     * LegacyAccessible pattern.
+     * LegacyIAccessible(10018), pattern.
      */
     LegacyIAccessible(10018),
 

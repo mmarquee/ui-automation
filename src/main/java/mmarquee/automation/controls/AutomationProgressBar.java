@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.controls;
 
 /**
@@ -21,7 +22,8 @@ package mmarquee.automation.controls;
  * @author Mark Humphreys
  * Date 25/04/2016.
  */
-public final class AutomationProgressBar extends AutomationBase implements RangeValuable {
+public final class AutomationProgressBar extends AutomationBase
+        implements ImplementsRangeValue {
 	
     /**
      * Construct the AutomationPanel.

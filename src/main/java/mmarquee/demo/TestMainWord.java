@@ -45,22 +45,31 @@ public class TestMainWord extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window = application.getWindow(Search.getBuilder("Document1 - Word").build());
+            AutomationWindow window =
+                    application.getWindow(
+                            Search.getBuilder(
+                                    "Document1 - Word").build());
             logger.info(window.getName());
 
-            AutomationPanel pane = window.getPanel(Search.getBuilder("Document1").build());
+            AutomationPanel pane =
+                    window.getPanel(
+                            Search.getBuilder("Document1").build());
             logger.info(pane.getName());
             logger.info(pane.getClassName());
-            AutomationPanel pane1 = pane.getPanel(Search.getBuilder(0).build());
+            AutomationPanel pane1 =
+                    pane.getPanel(Search.getBuilder(0).build());
             logger.info(pane1.getName());
 
-            AutomationDocument doc = pane1.getDocument(Search.getBuilder(0).build());
+            AutomationDocument doc =
+                    pane1.getDocument(Search.getBuilder(0).build());
             logger.info(doc.getName());
 
-            AutomationDocumentPage page0 = doc.getPage(Search.getBuilder(0).build());
+            AutomationDocumentPage page0 =
+                    doc.getPage(Search.getBuilder(0).build());
             logger.info(page0.getName());
 
-            AutomationEditBox edit = page0.getEditBox(Search.getBuilder(0).build());
+            AutomationEditBox edit =
+                    page0.getEditBox(Search.getBuilder(0).build());
             logger.info(edit.getName());
 
             String text = edit.getText();

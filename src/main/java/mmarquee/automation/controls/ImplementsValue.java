@@ -25,7 +25,7 @@ import mmarquee.automation.pattern.Value;
  * @author Mark Humphreys
  * Date 19/05/2017.
  */
-public interface Valueable extends Automatable, CanRequestBasePattern {
+public interface ImplementsValue extends Automatable, CanRequestBasePattern {
     /**
      * Gets the value of the element.
      * @return The value
@@ -43,6 +43,7 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
 
     /**
      * Sets the value of the element.
+	 *
      * @param value the value to set
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
@@ -58,7 +59,8 @@ public interface Valueable extends Automatable, CanRequestBasePattern {
     }
 
     /**
-     * Tests whether the Value is read only
+     * Tests whether the Value is read only.
+	 *
      * @return Read only?
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Failed to find pattern

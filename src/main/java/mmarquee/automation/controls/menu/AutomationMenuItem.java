@@ -24,9 +24,9 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.Clickable;
+import mmarquee.automation.controls.ImplementsClick;
 import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.controls.Expandable;
+import mmarquee.automation.controls.ImplementsExpand;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.uiautomation.TreeScope;
 
@@ -37,7 +37,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  */
 public class AutomationMenuItem
         extends AutomationBase
-        implements Clickable, Expandable {
+        implements ImplementsClick, ImplementsExpand {
 
     /** The parent element. */
     protected AutomationElement mainMenuParentElement;
@@ -84,8 +84,9 @@ public class AutomationMenuItem
     		return realMenu.getItems();
     	}
     	
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
-                this.createControlTypeCondition(ControlType.MenuItem));
+        List<AutomationElement> items =
+                this.findAll(new TreeScope(TreeScope.Descendants),
+                        this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<>();
 
@@ -209,7 +210,8 @@ public class AutomationMenuItem
     		return realMenu.getMenuItemByAutomationId(automationId);
     	}
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
+        AutomationElement item =
+                this.findFirst(new TreeScope(TreeScope.Descendants),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
@@ -229,13 +231,16 @@ public class AutomationMenuItem
     		return null;
     	}
     	try {
-	    	AutomationElement item = mainMenuParentElement.findFirst(new TreeScope(TreeScope.Descendants),
-	                this.createAndCondition(
+	    	AutomationElement item = mainMenuParentElement.findFirst(
+	    	        new TreeScope(TreeScope.Descendants),
+                    this.createAndCondition(
 	                        this.createNamePropertyCondition(parentMenuName),
 	                        this.createControlTypeCondition(ControlType.Menu)));
-	    	if (item == null) {
-	    		return null;
-	    	}
+
+            if (item == null) {
+                return null;
+            }
+
 	    	return new AutomationMenu(new ElementBuilder(item));
     	} catch (ElementNotFoundException ex) {
     		return null;

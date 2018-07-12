@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package mmarquee.demo;
+package mmarquee.automation.controls;
 
 /**
  * @author Mark Humphreys
- * Date 12/02/2017.
+ * Date 21/09/2016.
  */
-public class PointerOver {
-    public static void main(String[] args) {
-        DemoPointOver main = new DemoPointOver();
-
-        main.run();
-    }
+public interface ImplementsFocus extends Automatable {
+    /**
+     * Focus on the element.
+     */
+    void focus();
 }

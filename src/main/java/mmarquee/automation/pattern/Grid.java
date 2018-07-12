@@ -38,7 +38,8 @@ import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
 public class Grid extends BasePattern {
 
     /**
-     * Constructor for the pattern
+     * Constructor for the pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -49,14 +50,24 @@ public class Grid extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsGridPatternAvailable;
     }
 
+    /**
+     * The raw grid pattern.
+     */
     IUIAutomationGridPattern rawPattern;
 
+    /**
+     * Gets the pattern.
+     *
+     * @return The grid pattern
+     * @throws AutomationException Exception raised by library
+     */
     private IUIAutomationGridPattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**
-     * Get the item associated with the given cell
+     * Get the item associated with the given cell.
+     *
      * @param x Cell X position
      * @param y Cell Y position
      * @return The item associated with the cell
@@ -74,7 +85,8 @@ public class Grid extends BasePattern {
     }
 
     /**
-     * Gets the element associated with the grid cell
+     * Gets the element associated with the grid cell.
+     *
      * @param x X position
      * @param y Y position
      * @return The Element from the grid
@@ -97,7 +109,8 @@ public class Grid extends BasePattern {
     }
 
     /**
-     * Gets the row count
+     * Gets the row count.
+     *
      * @return The tow count
      * @throws AutomationException Error thrown in automation library
      */
@@ -113,7 +126,8 @@ public class Grid extends BasePattern {
     }
 
     /**
-     * Gets the colomn count
+     * Gets the column count.
+     *
      * @return The column count
      * @throws AutomationException Error thrown in automation library
      */
@@ -129,6 +143,12 @@ public class Grid extends BasePattern {
         return ibr.getValue();
     }
 
+    /**
+     * Gets the converted pointer.
+     *
+     * @param pUnknownA The raw pointer
+     * @return The converted pointer
+     */
     IUIAutomationGridPattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationGridPatternConverter.pointerToInterface(pUnknownA);
     }

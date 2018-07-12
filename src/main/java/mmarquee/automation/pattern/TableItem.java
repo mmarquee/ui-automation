@@ -28,7 +28,8 @@ import mmarquee.automation.PropertyID;
 public class TableItem extends BasePattern {
 
     /**
-     * Constructor for the TableItem pattern
+     * Constructor for the TableItem pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -37,5 +38,4 @@ public class TableItem extends BasePattern {
         this.patternID = PatternID.TableItem;
         this.availabilityPropertyID = PropertyID.IsTableItemPatternAvailable;
     }
-
 }

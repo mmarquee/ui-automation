@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
- * Make interface for implementations of the LegacyAccessible pattern.
+ * Make interface for implementations of the ImplementsLegacyIAccessible pattern.
  *
  * @author Mark Humphreys
  * Date 24/12/2017.
  */
-public interface LegacyAccessible extends Automatable {
+public interface ImplementsLegacyIAccessible extends Automatable {
     /**
      * Gets value from the IAccessible interface.
      * @return The string value
@@ -34,7 +34,7 @@ public interface LegacyAccessible extends Automatable {
 
     /**
      * Sets value via the IAccessible interface.
-     * @value The string value
+     * @param value The string value
      * @throws AutomationException Automation library error
      */
     void setValueFromIAccessible(final String value) throws AutomationException;

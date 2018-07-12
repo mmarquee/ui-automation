@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.utils;
 
 import com.sun.jna.Memory;
@@ -23,6 +24,26 @@ import com.sun.jna.ptr.PointerByReference;
  * See https://stackoverflow.com/questions/6918022/get-version-info-for-exe
  */
 public class ExecutableFileInfo {
+
+    /**
+     * Major version.
+     */
+    public static final int MAJOR_VERSION = 0;
+
+    /**
+     * Minor version number.
+     */
+    public static final int MINOR_VERSION = 1;
+
+    /**
+     * Release number.
+     */
+    public static final int RELEASE = 2;
+
+    /**
+     * Build number.
+     */
+    public static final int BUILD = 3;
 
     /**
      * Gets the version info (if present) from the file in the path.
@@ -39,8 +60,8 @@ public class ExecutableFileInfo {
         Pointer lpData = new Memory(bufferarray.length);
         PointerByReference lplpBuffer = new PointerByReference();
         IntByReference puLen = new IntByReference();
-        boolean fileInfoResult = com.sun.jna.platform.win32.Version.INSTANCE.GetFileVersionInfo(path, 0, versionlength, lpData);
-        boolean verQueryVal = com.sun.jna.platform.win32.Version.INSTANCE.VerQueryValue(lpData, "\\", lplpBuffer, puLen);
+        com.sun.jna.platform.win32.Version.INSTANCE.GetFileVersionInfo(path, 0, versionlength, lpData);
+        com.sun.jna.platform.win32.Version.INSTANCE.VerQueryValue(lpData, "\\", lplpBuffer, puLen);
 
         VerRsrc.VS_FIXEDFILEINFO lplpBufStructure = new VerRsrc.VS_FIXEDFILEINFO(lplpBuffer.getValue());
         lplpBufStructure.read();

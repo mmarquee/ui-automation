@@ -25,17 +25,21 @@ import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
 
 /**
+ * Wrapper for the Invoke pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the Invoke pattern
  */
 public class Invoke extends BasePattern {
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationInvokePattern rawPattern;
 
     /**
-     * Constructor for the pattern
+     * Constructor for the pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -47,7 +51,8 @@ public class Invoke extends BasePattern {
     }
 
     /**
-     * Gets the pattern
+     * Gets the pattern.
+     *
      * @return The pattern
      * @throws AutomationException Something went wrong getting the pattern
      */
@@ -56,7 +61,8 @@ public class Invoke extends BasePattern {
     }
 
     /**
-     * Invokes the pattern on the control
+     * Invokes the pattern on the control.
+     *
      * @throws AutomationException Something went wrong getting the pattern
      */
     public void invoke() throws AutomationException {
@@ -66,6 +72,12 @@ public class Invoke extends BasePattern {
         }
     }
 
+    /**
+     * Gets the converted pointer.
+     *
+     * @param pUnknown The raw pointer
+     * @return The converted pointer
+     */
     IUIAutomationInvokePattern convertPointerToInterface(PointerByReference pUnknown) {
         return IUIAutomationInvokePatternConverter.pointerToInterface(pUnknown);
     }

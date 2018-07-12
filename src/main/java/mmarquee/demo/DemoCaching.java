@@ -16,28 +16,30 @@
 
 package mmarquee.demo;
 
-import mmarquee.automation.UIAutomation;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationButton;
 import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.Search;
+import mmarquee.automation.uiautomation.*;
+
+import java.util.List;
 
 /**
- * @author Mark Humphreys
- * Date 04/02/2017.
+ * Demo for the caching functionality.
  */
-public class DemoEventHandler extends TestBase {
-    public DemoEventHandler() {
+public class DemoCaching extends TestBase {
 
-    }
-
+    /**
+     * Run the thing.
+     */
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
 
         try {
-            application = automation.launchOrAttach("apps\\Project1.exe");
+            application =
+                    automation.launchOrAttach("apps\\Project1.exe");
         } catch (Throwable ex) {
             logger.warn("Failed to find application", ex);
         }
@@ -51,20 +53,35 @@ public class DemoEventHandler extends TestBase {
         }
 
         try {
-            AutomationWindow window = automation.getDesktopWindow("Form1");
-            String name = window.getName();
-            logger.info(name);
+            // Now do some caching!!!
 
-            AutomationButton button = window.getButton(Search.getBuilder("OK").build());
-/*
-            automation.addAutomationEventHandler(
-                    EventID.Invoke_Invoked,
-                    new TreeScope(TreeScope.Element),
-                    button.getElement(),
-                    new AutomationEventHandler());
-                    */
-        } catch (Throwable ex) {
-            logger.error("Failed to get window properly");
+            AutomationWindow window = automation.getDesktopWindow("Form1");
+
+            PointerByReference condition = automation.createTrueCondition();
+
+            CacheRequest cacheRequest = new CacheRequest(automation);
+
+            cacheRequest.addPattern(PatternID.Selection.getValue());
+            cacheRequest.addProperty(PropertyID.Name.getValue());
+
+            List<AutomationElement> all =
+                    window.getElement().findAll(
+                            new TreeScope(TreeScope.Children),
+                                  condition,
+                                  cacheRequest);
+
+            logger.info("Elements:" + all.size());
+
+            for(AutomationElement item: all) {
+                try {
+                    logger.info(" *" + item.getCachedName());
+                } catch (Exception ex) {
+                    logger.info("Oops, caching doesn't quite work yet");
+                }
+            }
+
+        } catch (Exception ex) {
+            logger.info("Something went wrong - " + ex.getClass());
         }
     }
 }

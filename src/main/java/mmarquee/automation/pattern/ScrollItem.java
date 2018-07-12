@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.pattern;
 
 import mmarquee.automation.AutomationElement;
@@ -28,7 +29,8 @@ import mmarquee.automation.PropertyID;
 public class ScrollItem extends BasePattern {
 
     /**
-     * Constructor for the ScrollItem pattern
+     * Constructor for the ScrollItem pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -37,5 +39,4 @@ public class ScrollItem extends BasePattern {
         this.patternID = PatternID.ScrollItem;
         this.availabilityPropertyID = PropertyID.IsScrollItemPatternAvailable;
     }
-
 }

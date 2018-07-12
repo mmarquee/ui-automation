@@ -24,7 +24,7 @@ package mmarquee.automation.controls;
  */
 public final class AutomationCheckBox
         extends AutomationBase
-        implements Toggleable, Focusable {
+        implements ImplementsToggle, ImplementsFocus {
 
 
     /**
@@ -42,6 +42,6 @@ public final class AutomationCheckBox
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 }

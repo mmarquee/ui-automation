@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.SelectionItem;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Selectable extends Automatable, CanRequestBasePattern {
+public interface ImplementsSelect extends Automatable, CanRequestBasePattern {
     /**
      * Selects the element.
      * @throws AutomationException Automation library error

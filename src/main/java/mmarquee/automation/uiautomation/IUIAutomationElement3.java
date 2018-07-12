@@ -47,7 +47,7 @@ public interface IUIAutomationElement3 extends IUIAutomationElement2 {
      * the element even if it's currently keyboard-interactive.
      *
      * Could apply to:
-     * <p><ul>
+     * <ul>
      * <li>Group
      * <li>Menu
      * <li>Pane
@@ -55,7 +55,7 @@ public interface IUIAutomationElement3 extends IUIAutomationElement2 {
      * <li>ToolTip
      * <li>Window
      * <li>Custom
-     * </ul><p>
+     * </ul>
      *
      * @param retVal The return value
      * @return Error code

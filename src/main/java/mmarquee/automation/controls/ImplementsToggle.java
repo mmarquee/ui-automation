@@ -24,7 +24,7 @@ import mmarquee.automation.uiautomation.ToggleState;
  * @author Mark Humphreys
  * Date 19/05/2017.
  */
-public interface Toggleable extends Automatable, CanRequestBasePattern {
+public interface ImplementsToggle extends Automatable, CanRequestBasePattern {
     /**
      * Toggles the element.
      * @throws AutomationException Automation library error

@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  *
  * Implements IGridProvider, IScrollProvider, ITableProvider, IValueProvider
  */
-public class AutomationCalendar extends AutomationBase implements Valueable {
+public class AutomationCalendar extends AutomationBase implements ImplementsValue {
 
     /**
      * Constructor for the AutomationCalendar.

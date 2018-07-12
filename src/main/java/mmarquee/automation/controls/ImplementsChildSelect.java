@@ -28,7 +28,7 @@ import mmarquee.automation.pattern.Selection;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface ChildSelectable extends Automatable, CanRequestBasePattern {
+public interface ImplementsChildSelect extends Automatable, CanRequestBasePattern {
 
     /**
      * Is multiple selection allowed.

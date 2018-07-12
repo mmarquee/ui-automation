@@ -55,6 +55,12 @@ public class TestNotepad extends TestBase {
             logger.warn("Failed to find notepad application", ex);
         }
 
+        try {
+            logger.info(AutomationApplication.getVersionNumber("notepad.exe"));
+        } catch (Throwable ex) {
+            logger.warn("Failed to get version information", ex);
+        }
+
         // Wait for the process to start
         assert application != null;
         application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
@@ -70,7 +76,10 @@ public class TestNotepad extends TestBase {
 
             boolean val = window.isModal();
 
-            AutomationEditBox edit = window.getEditBox(Search.getBuilder(0).build());
+            logger.info("Modal?" + val);
+
+            AutomationEditBox edit =
+                    window.getEditBox(Search.getBuilder(0).build());
 
             edit.setValue("This is a test of automation");
 
@@ -84,12 +93,14 @@ public class TestNotepad extends TestBase {
 
             try {
                 AutomationMenuItem exit = menu.getMenuItem(
-                        Pattern.compile("File|Datei"), Pattern.compile("Exit|Beenden"));
+                        Pattern.compile("File|Datei"),
+                        Pattern.compile("Exit|Beenden"));
                 exit.click();
 
                 try {
                     AutomationWindow popup = window.getWindow(
-                            Search.getBuilder(Pattern.compile("Notepad|Editor")).build());
+                            Search.getBuilder(
+                                    Pattern.compile("Notepad|Editor")).build());
                     AutomationButton btn = popup.getButton(
                             Search.getBuilder(
                                     Pattern.compile("Don't Save|Nicht speichern")).build());

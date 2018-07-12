@@ -1456,7 +1456,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(Search.getBuilder(0).build());
-        assertEquals(targetElement,passwordEditBox.element);
+        assertEquals(targetElement,passwordEditBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -1549,7 +1549,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Search.getBuilder(0).build());
-        assertEquals(targetElement,maskedEdit.element);
+        assertEquals(targetElement,maskedEdit.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -1571,7 +1571,7 @@ public class AutomationContainerTest {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
         AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Search.getBuilder("SMITH-01").build());
-        assertEquals(targetElement,maskedEdit.element);
+        assertEquals(targetElement,maskedEdit.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -1593,7 +1593,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
         AutomationMaskedEdit maskedEdit = wndw.getMaskedEdit(Search.getBuilder(Pattern.compile("SMITH-01")).build());
-        assertEquals(targetElement,maskedEdit.element);
+        assertEquals(targetElement,maskedEdit.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -1637,7 +1637,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationEditBox passwordEditBox = wndw.getPasswordEditBox(Search.getBuilder(0).build());
-        assertEquals(targetElement,passwordEditBox.element);
+        assertEquals(targetElement,passwordEditBox.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -1662,7 +1662,7 @@ public class AutomationContainerTest {
 
         AutomationWindow wndw = new AutomationWindow(new ElementBuilder(el).addPattern(window, container));
         AutomationRibbonBar ribbonBar = wndw.getRibbonBar();
-        assertEquals(targetElement,ribbonBar.element);
+        assertEquals(targetElement,ribbonBar.getElement());
 
         verify(el, atLeastOnce()).findAll(any(), any());
     }
@@ -1678,7 +1678,7 @@ public class AutomationContainerTest {
         when(element.findAll(any(), any())).thenReturn(list);
 
         AutomationList list = wndw.getList(Search.getBuilder(0).build());
-        assertEquals(targetElement,list.element);
+        assertEquals(targetElement,list.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -1695,7 +1695,7 @@ public class AutomationContainerTest {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
         AutomationList list = wndw.getList(Search.getBuilder("myName").build());
-        assertEquals(targetElement,list.element);
+        assertEquals(targetElement,list.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -1713,7 +1713,7 @@ public class AutomationContainerTest {
         BaseAutomationTest.setElementCurrentName(elem, "myName");
 
         AutomationList list = wndw.getList(Search.getBuilder(Pattern.compile("myName")).build());
-        assertEquals(targetElement,list.element);
+        assertEquals(targetElement,list.getElement());
 
         verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -1731,7 +1731,7 @@ public class AutomationContainerTest {
         when(element.findFirst(any(), any())).thenReturn(targetElement);
 
         AutomationList list = wndw.getList(Search.getBuilder().automationId("myID").build());
-        assertEquals(targetElement,list.element);
+        assertEquals(targetElement,list.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }
@@ -1754,7 +1754,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationTextBox textBox = spyWndw.getTextBox(Search.getBuilder(0).build());
-        assertEquals(targetElement,textBox.element);
+        assertEquals(targetElement,textBox.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Text.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1830,7 +1830,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationSplitButton btn = spyWndw.getSplitButton(Search.getBuilder(0).build());
-        assertEquals(targetElement,btn.element);
+        assertEquals(targetElement,btn.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.SplitButton.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1908,7 +1908,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationImage img = spyWndw.getImage(Search.getBuilder(0).build());
-        assertEquals(targetElement,img.element);
+        assertEquals(targetElement, img.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Image.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -1984,7 +1984,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationSpinner spin = spyWndw.getSpinner(Search.getBuilder(0).build());
-        assertEquals(targetElement,spin.element);
+        assertEquals(targetElement, spin.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Spinner.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -2002,7 +2002,7 @@ public class AutomationContainerTest {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
         AutomationSpinner spin = spyWndw.getSpinner(Search.getBuilder("myName").build());
-        assertEquals(targetElement,spin.getElement());
+        assertEquals(targetElement, spin.getElement());
 
         verify(spyWndw).createNamePropertyCondition("myName");
         verify(spyWndw).createControlTypeCondition(ControlType.Spinner);
@@ -2157,7 +2157,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationCustom custom = spyWndw.getCustom(Search.getBuilder(0).build());
-        assertEquals(targetElement,custom.element);
+        assertEquals(targetElement, custom.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Custom.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -2307,7 +2307,7 @@ public class AutomationContainerTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationPowerpointSlide slide = spyWndw.getPowerpointSlide(Search.getBuilder(0).build());
-        assertEquals(targetElement,slide.element);
+        assertEquals(targetElement, slide.getElement());
 
         verify(spyWndw).createIntegerVariant(ControlType.Custom.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -2384,7 +2384,7 @@ public class AutomationContainerTest {
         setElementTypeAndClassName(elem, ControlType.Slider, "");
 
         AutomationBase custom = spyWndw.getControlByControlType(0, ControlType.Slider);
-        assertEquals(targetElement,custom.element);
+        assertEquals(targetElement, custom.getElement());
         assertEquals(AutomationSlider.class,custom.getClass());
 
         verify(element, atLeastOnce()).findAll(any(), any());
@@ -2403,7 +2403,7 @@ public class AutomationContainerTest {
         setElementTypeAndClassName(elem, ControlType.Hyperlink, "FooBar");
 
         AutomationBase custom = spyWndw.getControlByControlType(0, ControlType.Hyperlink, "FooBar");
-        assertEquals(targetElement,custom.element);
+        assertEquals(targetElement, custom.getElement());
         assertEquals(AutomationHyperlink.class,custom.getClass());
 
         verify(element, atLeastOnce()).findAll(any(), any());

@@ -28,7 +28,8 @@ import mmarquee.automation.PropertyID;
 public class Dock extends BasePattern {
 
     /**
-     * Constructor for the dock pattern
+     * Constructor for the dock pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -37,5 +38,4 @@ public class Dock extends BasePattern {
         this.patternID = PatternID.Dock;
         this.availabilityPropertyID = PropertyID.IsDockPatternAvailable;
     }
-
 }

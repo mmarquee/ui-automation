@@ -8,7 +8,8 @@ package mmarquee.automation.controls;
  *
  * IRangeProvider, ISelectionProvider, IValueProvider
  */
-public final class AutomationSlider extends AutomationBase implements RangeValuable {
+public final class AutomationSlider extends AutomationBase
+        implements ImplementsRangeValue {
 
     /**
      * Construct the AutomationSlider.

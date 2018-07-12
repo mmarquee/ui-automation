@@ -27,11 +27,18 @@ import mmarquee.automation.PropertyID;
 import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
 import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePatternConverter;
 
+/**
+ * Implements the LegacyIAccessible pattern.
+ *
+ * @author Mark Humphreys
+ * Date 14/12/2018.
+ */
 public class LegacyIAccessible extends BasePattern {
 
     /**
      * Constructor for the value pattern.
      *
+     * @param element The element
      * @throws AutomationException API issue
      */
     public LegacyIAccessible(final AutomationElement element) throws AutomationException {

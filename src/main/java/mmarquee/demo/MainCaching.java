@@ -13,22 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.pattern.PatternNotFoundException;
+package mmarquee.demo;
 
-/**
- * Implement this interface to respond to the clickable action.
- *
- * @author Mark Humphreys
- * Date 21/09/2016.
- */
-public interface Clickable extends Automatable {
-    /**
-     * Clicks the element.
-     * @throws AutomationException Automation library error
-     * @throws PatternNotFoundException Failed to find pattern
-     */
-    void click() throws AutomationException, PatternNotFoundException;
+public class MainCaching {
+    public static void main(String[] args) {
+        DemoCaching main = new DemoCaching();
+
+        main.run();
+    }
 }

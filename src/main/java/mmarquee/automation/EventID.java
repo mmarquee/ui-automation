@@ -31,23 +31,75 @@ public enum EventID {
      * Tool tip closed.
      */
     ToolTipClosed(20001),
+
+    /**
+     * Structure changed.
+     */
     StructureChanged(20002),
 
     /**
      * Menu opened.
      */
     MenuOpened(20003),
+
+    /**
+     * Property changed.
+     */
     PropertyChanged(20004),
+
+    /**
+     * Focus changed.
+     */
     FocusChanged(20005),
+
+    /**
+     * Async Content Loaded.
+     */
     AsyncContentLoaded(20006),
+
+    /**
+     * Menu closed.
+     */
     MenuClosed(20007),
+
+    /**
+     * Layout invalidated.
+     */
     LayoutInvalidated(20008),
+
+    /**
+     * Invoke invoked.
+     */
     Invoke_Invoked(20009),
+
+    /**
+     * SelectionItem Element Added To Selection.
+     */
     SelectionItem_ElementAddedToSelection(20010),
+
+    /**
+     * SelectionItem Element Removed To Selection.
+     */
     SelectionItem_ElementRemovedFromSelection(20011),
+
+    /**
+     * SelectionItem Element Selection.
+     */
     SelectionItem_ElementSelected(20012),
+
+    /**
+     * Selection invalidated.
+     */
     Selection_Invalidated(20013),
+
+    /**
+     * Text selection changed.
+     */
     Text_TextSelectionChanged(20014),
+
+    /**
+     * Text text changed.
+     */
     Text_TextChanged(20015),
 
     /**
@@ -59,10 +111,30 @@ public enum EventID {
      * Window closed.
      */
     Window_WindowClosed(20017),
+
+    /**
+     * Menu mode start.
+     */
     MenuModeStart(20018),
+
+    /**
+     * Menu mode ended.
+     */
     MenuModeEnd(20019),
+
+    /**
+     * Input reached target.
+     */
     InputReachedTarget(20020),
+
+    /**
+     * Input reached other element.
+     */
     InputReachedOtherElement(20021),
+
+    /**
+     * Input discarded.
+     */
     InputDiscarded(20022);
 
     /**
@@ -81,9 +153,9 @@ public enum EventID {
     /**
      * Constructor for EventID.
      *
-     * @param value the value to use
+     * @param theValue the value to use
      */
-    EventID(final int value) {
-        this.value = value;
+    EventID(final int theValue) {
+        this.value = theValue;
     }
 }

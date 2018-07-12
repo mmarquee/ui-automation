@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
@@ -61,7 +62,8 @@ public class TestMain extends TestBase {
         AutomationApplication application = null;
 
         try {
-            application = automation.launchOrAttach("apps\\Project1.exe");
+            application =
+                    automation.launchOrAttach("apps\\Project1.exe");
         } catch (Throwable ex) {
             logger.warn("Failed to find application", ex);
         }
@@ -88,6 +90,8 @@ public class TestMain extends TestBase {
 
             java.lang.Object rect = window.getBoundingRectangle();
 
+            logger.info("Rect : " + rect.toString());
+
             // Interact with menus
             AutomationMainMenu menu = window.getMainMenu();
 
@@ -96,13 +100,17 @@ public class TestMain extends TestBase {
                 exit.click();
 
                 try {
-                    AutomationWindow popup = window.getWindow(Search.getBuilder("Project1").build());
+                    AutomationWindow popup =
+                            window.getWindow(Search.getBuilder(
+                                    "Project1").build());
                     Object val111 = popup.getBoundingRectangle();
 
-                    AutomationButton btn = popup.getButton(Search.getBuilder("OK").build());
+                    AutomationButton btn =
+                            popup.getButton(Search.getBuilder(
+                                    "OK").build());
 
                     String aText = btn.getValueFromIAccessible();
-                    logger.info("From LegacyAccessible: " + aText);
+                    logger.info("From ImplementsLegacyIAccessible: " + aText);
 
                     Object val11 = btn.getBoundingRectangle();
 
@@ -116,29 +124,35 @@ public class TestMain extends TestBase {
                 logger.info("Failed to find menu");
             }
 
-            AutomationTab tab = window.getTab(Search.getBuilder(0).build());
+            AutomationTab tab =
+                    window.getTab(Search.getBuilder(0).build());
             tab.selectTabPage("Last Tab");
             //	String tabName = tab.name();
 
-            String text = tab.getEditBox(Search.getBuilder(0).build()).getValue();
+            String text =
+                    tab.getEditBox(
+                            Search.getBuilder(0).build()).getValue();
             logger.info("Text for editBox1 is " + text);
 
-            AutomationCheckBox check = window.getCheckBox(Search.getBuilder(0).build());
+            AutomationCheckBox check =
+                    window.getCheckBox(Search.getBuilder(0).build());
             check.toggle();
 
             try {
                 ToggleState state = check.getToggleState();
                 logger.info("State: " + state);
-            } catch (Exception ex) {
+            } catch (AutomationException ex) {
                 logger.info("Failed to get toggle state");
             }
 
-            AutomationRadioButton radio = window.getRadioButton(Search.getBuilder(1).build());
+            AutomationRadioButton radio =
+                    window.getRadioButton(Search.getBuilder(1).build());
             radio.select();
 
             AutomationStatusBar statusBar = window.getStatusBar();
 
-            AutomationTextBox tb1 = statusBar.getTextBox(Search.getBuilder(1).build());
+            AutomationTextBox tb1 =
+                    statusBar.getTextBox(Search.getBuilder(1).build());
 
             String eb1Text = tb1.getValue();
 
@@ -152,7 +166,9 @@ public class TestMain extends TestBase {
             logger.info("Status Bar text (from accessible) = " + aText);
 
             try {
-                AutomationComboBox cb1 = window.getComboBox(Search.getBuilder("AutomatedCombobox1").build());
+                AutomationComboBox cb1 =
+                        window.getComboBox(Search.getBuilder(
+                                "AutomatedCombobox1").build());
                 cb1.setText("Replacements");
                 String txt = cb1.getValue();
 
@@ -164,7 +180,9 @@ public class TestMain extends TestBase {
             }
 
             try {
-                AutomationMaskedEdit me0 = window.getMaskedEdit(Search.getBuilder("AutomatedMaskEdit1").build());
+                AutomationMaskedEdit me0 =
+                        window.getMaskedEdit(Search.getBuilder(
+                                "AutomatedMaskEdit1").build());
 
                 String value = me0.getValue();
                 logger.info("Initial value " + value);
@@ -179,7 +197,10 @@ public class TestMain extends TestBase {
             }
 
             try {
-                AutomationComboBox cb0 = window.getComboBox(Search.getBuilder("AutomatedCombobox2").build());
+                AutomationComboBox cb0 =
+                        window.getComboBox(
+                                Search.getBuilder(
+                                        "AutomatedCombobox2").build());
                 cb0.expand();
 
                 this.rest();
@@ -190,18 +211,28 @@ public class TestMain extends TestBase {
             }
 
             // Now string grids
-            AutomationDataGrid grid = window.getDataGrid(Search.getBuilder("AutomationStringGrid1").className("TAutomationStringGrid").build());
+            AutomationDataGrid grid =
+                    window.getDataGrid(
+                            Search.getBuilder(
+                                    "AutomationStringGrid1").className(
+                                            "TAutomationStringGrid").build());
 
-            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1, 1).build());
+            AutomationDataGridCell cell1 =
+                    grid.getItem(
+                            Search.getBuilder(1, 1).build());
 
             String itemName = cell1.getValue();
             logger.info("Grid item is " + itemName);
 //            cell1.setName("This");
 //            logger.info("Grid item is " + cell1.name());
 
-            AutomationTreeView tree = window.getTreeView(Search.getBuilder(0).build());
+            AutomationTreeView tree =
+                    window.getTreeView(
+                            Search.getBuilder(0).build());
             try {
-                AutomationTreeViewItem treeItem = tree.getItem(Search.getBuilder("Sub-SubItem").build());
+                AutomationTreeViewItem treeItem =
+                        tree.getItem(
+                                Search.getBuilder("Sub-SubItem").build());
                 treeItem.select();
             } catch (ItemNotFoundException ex) {
                 // Not found
@@ -211,9 +242,12 @@ public class TestMain extends TestBase {
                 logger.info("ElementNotFoundException");
             }
 
-            AutomationList list = window.getList(Search.getBuilder(0).build());
+            AutomationList list =
+                    window.getList(
+                            Search.getBuilder(0).build());
             try {
-                AutomationListItem listItem = list.getItem("First (List)");
+                AutomationListItem listItem =
+                        list.getItem("First (List)");
                 listItem.select();
             } catch (ItemNotFoundException ex) {
                 // Not found
@@ -235,13 +269,16 @@ public class TestMain extends TestBase {
                 // Not found
             }
 /*
-            AutomationHyperlink link = window.getHyperlink(Search.getBuilder(0).build());
+            AutomationHyperlink link =
+            window.getHyperlink(Search.getBuilder(0).build());
             link.click();
 
             try {
-                AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
+                AutomationWindow popup1 =
+                 window.getWindow(Search.getBuilder("Project1").build());
                 try {
-                    AutomationButton btn1 = popup1.getButton(Search.getBuilder("OK").build());
+                    AutomationButton btn1 =
+                      popup1.getButton(Search.getBuilder("OK").build());
                     btn1.click();
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
@@ -252,20 +289,24 @@ public class TestMain extends TestBase {
 */
             this.rest();
 
-            AutomationToolBar toolbar = window.getToolBar(Search.getBuilder(1).build());
+            AutomationToolBar toolbar =
+                    window.getToolBar(Search.getBuilder(1).build());
             logger.info(toolbar.getName());
 
             // Looks like the button is a problem with Delphi
-            AutomationToolBarButton btn0 = toolbar.getToolbarButton(Search.getBuilder(0).build());
+            AutomationToolBarButton btn0 =
+                    toolbar.getToolbarButton(Search.getBuilder(0).build());
 
             if (btn0.isEnabled()) {
                 logger.info("btn0 Enabled");
 /*
                 btn0.click();
 
-                AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
+                AutomationWindow popup1 =
+                  window.getWindow(Search.getBuilder("Project1").build());
                 try {
-                    AutomationButton btn1 = popup1.getButton(Search.getBuilder("OK").build());
+                    AutomationButton btn1 =
+                      popup1.getButton(Search.getBuilder("OK").build());
                     btn1.click();
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
@@ -273,30 +314,35 @@ public class TestMain extends TestBase {
 */
             }
 
-            AutomationToolBarButton btn1 = toolbar.getToolbarButton(Search.getBuilder(1).build());
+            AutomationToolBarButton btn1 =
+                    toolbar.getToolbarButton(Search.getBuilder(1).build());
 
             if (btn1.isEnabled()) {
                 logger.info("btn1 Enabled");
 /*
                 btn1.click();
 
-                AutomationWindow popup1 = window.getWindow(Search.getBuilder("Project1").build());
+                AutomationWindow popup1 =
+                  window.getWindow(Search.getBuilder("Project1").build());
                 try {
-                    AutomationButton btnOK = popup1.getButton(Search.getBuilder("OK").build());
+                    AutomationButton btnOK =
+                      popup1.getButton(Search.getBuilder("OK").build());
                     btnOK.click();
                 } catch (ElementNotFoundException ex) {
                     logger.info("Failed to find button");
                 }
   */          }
 
-            AutomationToolBarButton btn2 = toolbar.getToolbarButton(Search.getBuilder(2).build());
+            AutomationToolBarButton btn2 =
+                    toolbar.getToolbarButton(Search.getBuilder(2).build());
 
             if (btn2.isEnabled()) {
                 logger.info("btn2 Enabled");
     //            btn2.click();
             }
 
-            AutomationToolBarButton btn3 = toolbar.getToolbarButton(Search.getBuilder(3).build());
+            AutomationToolBarButton btn3 =
+                    toolbar.getToolbarButton(Search.getBuilder(3).build());
 
             if (btn3.isEnabled()) {
                 logger.info("btn3 Enabled");
@@ -316,10 +362,11 @@ public class TestMain extends TestBase {
             AutomationMenu context = automation.getDesktopMenu("Context");
 
             logger.info("Found context menu");
-            AutomationMenuItem contextItem = context.getMenuItem("Popup Menu ");
+            AutomationMenuItem contextItem =
+                    context.getMenuItem("Popup Menu ");
             contextItem.click();
 
-        } catch (Exception ex) {
+        } catch (AutomationException ex) {
             logger.info("Something went wrong - " + ex.getClass());
         }
     }

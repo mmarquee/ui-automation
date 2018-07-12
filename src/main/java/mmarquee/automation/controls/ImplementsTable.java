@@ -29,7 +29,8 @@ import mmarquee.automation.uiautomation.RowOrColumnMajor;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Tableable extends Automatable, CanRequestBasePattern {
+public interface ImplementsTable extends Automatable,
+		CanRequestBasePattern {
 	
 	/**
      * Gets the list of the column headers.
