@@ -23,15 +23,16 @@ import mmarquee.automation.UIAutomation;
 import java.awt.*;
 
 /**
+ * Example for the PointOver functionality.
+ *
  * @author Mark Humphreys
  * Date 12/02/2017.
  */
 public class DemoPointOver extends TestBase {
-    public DemoPointOver() {
-
-    }
-
-    public void run() {
+    /**
+     * Run the thing.
+     */
+    public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         do {
@@ -46,7 +47,8 @@ public class DemoPointOver extends TestBase {
             point.y = (int) p.getY();
 
             try {
-                AutomationElement elementUnder = automation.getElementFromPoint(point);
+                AutomationElement elementUnder =
+                        automation.getElementFromPoint(point);
 
                 logger.info("From point = " + elementUnder.getName());
 

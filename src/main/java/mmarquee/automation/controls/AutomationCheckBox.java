@@ -42,6 +42,6 @@ public final class AutomationCheckBox
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 }

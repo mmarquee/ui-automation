@@ -51,7 +51,23 @@ public class Styles extends BasePattern {
     /**
      * The raw pattern.
      */
-    IUIAutomationStylesPattern rawPattern;
+    private IUIAutomationStylesPattern rawPattern;
+
+    /**
+     * Gets the raw pattern.
+     * @return The raw pattern
+     */
+    public IUIAutomationStylesPattern getRawPattern() {
+        return this.rawPattern;
+    }
+
+    /**
+     * Sets the raw pattern.
+     * @param pattern The raw pattern to set
+     */
+    public void setRawPattern(IUIAutomationStylesPattern pattern) {
+        this.rawPattern = pattern;
+    }
 
     /**
      * Gets the pattern.

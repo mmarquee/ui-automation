@@ -26,6 +26,26 @@ import com.sun.jna.ptr.PointerByReference;
 public class ExecutableFileInfo {
 
     /**
+     * Major version.
+     */
+    public static final int MAJOR_VERSION = 0;
+
+    /**
+     * Minor version number.
+     */
+    public static final int MINOR_VERSION = 1;
+
+    /**
+     * Release number.
+     */
+    public static final int RELEASE = 2;
+
+    /**
+     * Build number.
+     */
+    public static final int BUILD = 3;
+
+    /**
      * Gets the version info (if present) from the file in the path.
      * @param path Pathname to file
      * @return The version info array (loads of integers)

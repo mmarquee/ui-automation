@@ -31,7 +31,7 @@ public class AutomationEditBox extends AutomationBase implements ImplementsValue
      * @throws AutomationException Automation error.
      */
     public boolean isPassword() throws AutomationException {
-        return this.element.isPassword();
+        return this.getElement().isPassword();
     }
 
     /**

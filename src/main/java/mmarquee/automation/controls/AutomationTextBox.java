@@ -56,7 +56,7 @@ public final class AutomationTextBox
             try {
                 this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
             } catch (NullPointerException ex) {
-                logger.info("No value pattern available");
+                getLogger().info("No value pattern available");
             }
         }
 
@@ -80,7 +80,7 @@ public final class AutomationTextBox
                 this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
                 this.accessiblePattern.setCurrentValue(value);
             } catch (NullPointerException ex) {
-                logger.info("No value pattern available");
+                getLogger().info("No value pattern available");
             }
         }
     }

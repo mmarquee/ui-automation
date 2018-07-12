@@ -81,7 +81,7 @@ public class AutomationPanelTest {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
 
         AutomationWindow window = panel.getWindow(Search.getBuilder(0).build());
-        assertEquals(targetElement,window.element);
+        assertEquals(targetElement,window.getElement());
 
         verify(panel).createIntegerVariant(ControlType.Window.getValue());
         verify(element, atLeastOnce()).findAll(any(), any());

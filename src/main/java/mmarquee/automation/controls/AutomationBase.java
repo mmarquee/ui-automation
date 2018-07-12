@@ -22,7 +22,29 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import mmarquee.automation.pattern.*;
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.pattern.ScrollItem;
+import mmarquee.automation.pattern.Text;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Dock;
+import mmarquee.automation.pattern.LegacyIAccessible;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.GridItem;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.MultipleView;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.pattern.Scroll;
+import mmarquee.automation.pattern.Range;
+import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.pattern.TableItem;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.Transform;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.pattern.PatternNotFoundException;
+
 import org.apache.log4j.Logger;
 
 import com.sun.jna.Pointer;
@@ -53,17 +75,34 @@ public abstract class AutomationBase
     /**
      * The logger.
      */
-    final Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    private final Logger logger =
+            Logger.getLogger(AutomationBase.class.getName());
+
+    /**
+     * Gets the logger.
+     * @return The logger
+     */
+    public Logger getLogger() {
+        return this.logger;
+    }
 
     /**
      * The automation element.
      */
-    protected AutomationElement element;
+    private AutomationElement element;
 
     /**
      * The automation library wrapper.
      */
-    protected UIAutomation automation;
+    private UIAutomation automation;
+
+    /**
+     * Gets the automation wrapper.
+     * @return The automation library
+     */
+    public UIAutomation getAutomation() {
+        return this.automation;
+    }
 
     /**
      * The basic IAccessible pattern.

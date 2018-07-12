@@ -51,7 +51,10 @@ import mmarquee.automation.AutomationException;
  * Date 18/03/2016.
  */
 public class Utils {
-    protected final static Logger logger =
+    /**
+     * The logger.
+     */
+    protected static final Logger logger =
             Logger.getLogger(Utils.class.getName());
 
     /**
@@ -71,12 +74,12 @@ public class Utils {
      * @return The handle
      * @throws AutomationException Thrown if the handle cannot be determined
      */
-    public static WinNT.HANDLE getHandleFromProcessEntry
-                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry)
+    public static WinNT.HANDLE getHandleFromProcessEntry(
+            final Tlhelp32.PROCESSENTRY32.ByReference processEntry)
             throws AutomationException {
     	ensureWinApiInstances();
-    	
-        WinNT.HANDLE handle = kernel32.OpenProcess (
+
+        WinNT.HANDLE handle = kernel32.OpenProcess(
                 0x0400 |    /* PROCESS_QUERY_INFORMATION */
                 0x0800 |    /* PROCESS_SUSPEND_RESUME */
                 0x0001 |    /* PROCESS_TERMINATE */
@@ -98,8 +101,8 @@ public class Utils {
      * @param command Command.
      * @return The found process entry.
      */
-    public static boolean findProcessEntry
-                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
+    public static boolean findProcessEntry(
+            final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
                      final String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
@@ -114,21 +117,21 @@ public class Utils {
      * @param filenamePattern pattern matching the filename of the process.
      * @return The found process entry.
      */
-    public static boolean findProcessEntry
-                    (final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
-                     final Pattern filenamePattern) {
-        Kernel32 kernel32 =
+    public static boolean findProcessEntry(
+            final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
+            final Pattern filenamePattern) {
+        Kernel32 kern32 =
                 Native.loadLibrary(Kernel32.class,
                         W32APIOptions.UNICODE_OPTIONS);
 
         WinNT.HANDLE snapshot =
-                kernel32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS,
+                kern32.CreateToolhelp32Snapshot(Tlhelp32.TH32CS_SNAPPROCESS,
                         new WinDef.DWORD(0));
 
         boolean found = false;
 
         try {
-            while (kernel32.Process32Next(snapshot, processEntry)) {
+            while (kern32.Process32Next(snapshot, processEntry)) {
                 String fname = Native.toString(processEntry.szExeFile);
 
                 if (fname != null && filenamePattern.matcher(fname).matches()) {
@@ -137,7 +140,7 @@ public class Utils {
                 }
             }
         } finally {
-            kernel32.CloseHandle(snapshot);
+            kern32.CloseHandle(snapshot);
         }
 
         return found;
@@ -218,7 +221,8 @@ public class Utils {
      * @return The process.
      * @throws java.io.IOException something has gone wrong.
      */
-    public static Process startProcessWithWorkingDirectory(final String... command)
+    public static Process startProcessWithWorkingDirectory(
+            final String... command)
             throws java.io.IOException {
         ProcessBuilder pb = createProcessBuilder(command);
 
@@ -243,12 +247,18 @@ public class Utils {
                 null);
     }
 
-    public static void end(Process process) {
+    /**
+     * Ends the given process.
+     * @param process The process to end
+     */
+    public static void end(final Process process) {
         process.destroy();
     }
 
-    
-	private static void ensureWinApiInstances() {
+    /**
+     * Creates the WinApi instances, if necessary.
+     */
+    private static void ensureWinApiInstances() {
 		if (user32 == null) {
             user32 = User32.INSTANCE;
         }
@@ -290,6 +300,7 @@ public class Utils {
      * @param filename Name to save the output into.
      * @throws AWTException Robot exception.
      * @throws IOException IO Exception.
+     * @throws Win32Exception Win32 Exception
      */
     public static void capture(final WinDef.HWND hwnd,
                                final String filename)
@@ -302,7 +313,10 @@ public class Utils {
             throw new Win32Exception(kernel32.GetLastError());
         }
 
-        Rectangle rectangle = new Rectangle(rect.left, rect.top, rect.right -rect.left, rect.bottom -rect.top);
+        Rectangle rectangle =
+                new Rectangle(rect.left, rect.top,
+                        rect.right - rect.left,
+                        rect.bottom - rect.top);
 
         BufferedImage image = new Robot().createScreenCapture(rectangle);
 
@@ -318,19 +332,23 @@ public class Utils {
      */
     public static void captureScreen(final String filename)
             throws AWTException, IOException {
-        BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        BufferedImage image =
+                new Robot().createScreenCapture(
+                        new Rectangle(
+                                Toolkit.getDefaultToolkit().getScreenSize()));
         ImageIO.write(image, "png", new File(filename));
     }
     
 
     /**
-     * An implementation of user32.FindWindow with Regex pattern matching
+     * An implementation of user32.FindWindow with Regex pattern matching.
      * 
      * @param windowClass the classname of the window, or null to ignore
      * @param titlePattern the regex pattern to match the title against
      * @return the hwnd of the found window, or null if not found
      */
-	public static WinDef.HWND findWindow(final String windowClass, final Pattern titlePattern) {
+	public static WinDef.HWND findWindow(final String windowClass,
+                                         final Pattern titlePattern) {
 		ensureWinApiInstances();
 		
 		final WinDef.HWND[] returnContainer = new WinDef.HWND[1];

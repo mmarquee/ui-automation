@@ -233,6 +233,6 @@ public final class AutomationComboBox
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 }

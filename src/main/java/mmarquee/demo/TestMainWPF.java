@@ -119,7 +119,7 @@ public class TestMainWPF extends TestBase {
 
             // Actual program menu is a `Menu`
 
-            AutomationMainMenu mainMenu = applicationWindow.getMenu(0);
+            AutomationMainMenu mainMenu = applicationWindow.getMenu();
             logger.info("Menu name " + mainMenu.getName());
 
             logger.info(mainMenu.getItems().size() + " menu items");

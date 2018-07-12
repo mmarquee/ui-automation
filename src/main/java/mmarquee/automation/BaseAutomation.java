@@ -192,6 +192,6 @@ public abstract class BaseAutomation {
             return ((Number) propertyValue).intValue() != 0;
         }
 
-        return ! propertyValue.equals(0);
+        return !propertyValue.equals(0);
     }
 }

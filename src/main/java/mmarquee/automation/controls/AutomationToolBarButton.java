@@ -62,7 +62,7 @@ public final class AutomationToolBarButton extends AutomationBase
      * @throws AutomationException Automation library error.
      */
     public void click() throws AutomationException {
-        WinDef.POINT point = this.element.getClickablePoint();
+        WinDef.POINT point = this.getElement().getClickablePoint();
 
         AutomationMouse mouse = AutomationMouse.getInstance();
         mouse.setLocation(point.x, point.y);
@@ -75,6 +75,6 @@ public final class AutomationToolBarButton extends AutomationBase
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 }

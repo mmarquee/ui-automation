@@ -59,7 +59,7 @@ public class AutomationContainer extends AutomationBase {
                                               final ControlType id)
             throws AutomationException {
         PointerByReference condition =
-                this.automation.createPropertyCondition(
+                this.getAutomation().createPropertyCondition(
                         PropertyID.ControlType.getValue(),
                         this.createIntegerVariant(id.getValue()));
 
@@ -85,7 +85,7 @@ public class AutomationContainer extends AutomationBase {
             throws AutomationException {
         PointerByReference condition =
         		this.createAndCondition(
-        		        this.automation.createPropertyCondition(
+        		        this.getAutomation().createPropertyCondition(
         		                PropertyID.ControlType.getValue(),
         				        this.createIntegerVariant(id.getValue())),
                         this.createClassNamePropertyCondition(className));
@@ -887,7 +887,8 @@ public class AutomationContainer extends AutomationBase {
                 new ElementBuilder(
                         this.getElementByControlType(
                                 index,
-                                ControlType.Text)).automation(this.automation));
+                                ControlType.Text)).automation(
+                                        this.getAutomation()));
     }
 
     /**
@@ -2592,14 +2593,14 @@ public class AutomationContainer extends AutomationBase {
 
         try {
             PointerByReference propertyCondition =
-                    this.automation.createPropertyCondition(
+                    this.getAutomation().createPropertyCondition(
                             PropertyID.ControlType.getValue(), variant1);
 
             PointerByReference nameCondition =
-                    this.automation.createPropertyCondition(
+                    this.getAutomation().createPropertyCondition(
                             PropertyID.Name.getValue(), variant);
             PointerByReference condition =
-                    this.automation.createAndCondition(
+                    this.getAutomation().createAndCondition(
                             nameCondition, propertyCondition);
 
             AutomationElement elem =

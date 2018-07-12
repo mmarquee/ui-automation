@@ -24,8 +24,14 @@ import mmarquee.automation.uiautomation.*;
 
 import java.util.List;
 
+/**
+ * Demo for the caching functionality.
+ */
 public class DemoCaching extends TestBase {
 
+    /**
+     * Run the thing.
+     */
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 

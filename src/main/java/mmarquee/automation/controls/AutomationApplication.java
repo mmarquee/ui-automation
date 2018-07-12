@@ -321,11 +321,6 @@ public class AutomationApplication extends AutomationBase {
         }
     }
 
-    public static final int MAJOR_VERSION = 0;
-    public static final int MINOR_VERSION = 1;
-    public static final int RELEASE = 2;
-    public static final int BUILD = 3;
-
     /**
      * Gets the windows version number.
      *
@@ -337,9 +332,9 @@ public class AutomationApplication extends AutomationBase {
 
         return String.format(
                 "%d.%d.%d.%d",
-                version[MAJOR_VERSION],
-                version[MINOR_VERSION],
-                version[RELEASE],
-                version[BUILD]);
+                version[ExecutableFileInfo.MAJOR_VERSION],
+                version[ExecutableFileInfo.MINOR_VERSION],
+                version[ExecutableFileInfo.RELEASE],
+                version[ExecutableFileInfo.BUILD]);
     }
 }
