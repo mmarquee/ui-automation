@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 

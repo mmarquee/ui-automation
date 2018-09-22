@@ -28,7 +28,7 @@ import mmarquee.automation.controls.ImplementsClick;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.ImplementsExpand;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the MenuItem element.

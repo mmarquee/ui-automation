@@ -38,8 +38,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.sun.jna.platform.win32.WinDef;
-
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
@@ -62,9 +60,9 @@ import mmarquee.automation.pattern.Text;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.pattern.Value;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * @author Mark Humphreys

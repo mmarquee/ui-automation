@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mmarquee.automation.*;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

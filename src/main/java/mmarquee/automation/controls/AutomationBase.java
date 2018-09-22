@@ -60,8 +60,8 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * The base for automation.
@@ -175,7 +175,9 @@ public abstract class AutomationBase
 				|| (cName != null && cName.equals(expectedClassName))) {
 			return;
 		}
-		throw new ElementNotFoundException(expectedClassName + "(instead: " + cName + ")");
+
+		throw new ElementNotFoundException(
+		        expectedClassName + "(instead: " + cName + ")");
 	}
 
     /**
@@ -224,6 +226,7 @@ public abstract class AutomationBase
     	        return isAutomationPatternAvailable(patternId);
     		}
     	}
+
     	throw new IllegalArgumentException(
     	        "No PatternID constant defined for patternId " + patternIdValue);
     }
@@ -845,7 +848,7 @@ public abstract class AutomationBase
     @Override
     public <T extends BasePattern> T requestAutomationPattern(
             final Class<T> automationPatternClass) throws AutomationException {
-        synchronized(patternAccessMonitor) {
+        synchronized (patternAccessMonitor) {
             @SuppressWarnings("unchecked")
             T automationPattern = (T) automationPatterns.get(automationPatternClass);
             if (automationPattern == null) {
@@ -854,10 +857,14 @@ public abstract class AutomationBase
                 if (automationPattern == null) {
 	                try {
 	                    automationPattern =
-                                automationPatternClass.getConstructor(AutomationElement.class).newInstance(this.element);
+                                automationPatternClass.getConstructor(
+                                        AutomationElement.class)
+                                            .newInstance(this.element);
 	                } catch (Throwable e) {
 	                	e = getInnerException(e);
-	                	if (e instanceof AutomationException) throw (AutomationException) e;
+	                	if (e instanceof AutomationException) {
+	                	    throw (AutomationException) e;
+                        }
 	                	throw new AutomationException(e);
 	                }
                 }
@@ -873,7 +880,7 @@ public abstract class AutomationBase
      * @param e The throwable
      * @return The inner exception from the input throwable
      */
-    private Throwable getInnerException(Throwable e) {
+    private Throwable getInnerException(final Throwable e) {
     	if (e instanceof InvocationTargetException) {
     		return  getInnerException(e.getCause());
     	}

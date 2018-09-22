@@ -23,7 +23,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,7 +21,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Table;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
+import mmarquee.uiautomation.RowOrColumnMajor;
 
 /**
  * The Control supports the methods of the Table pattern.

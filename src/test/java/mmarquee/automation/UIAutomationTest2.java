@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import mmarquee.automation.utils.Utils;
 import org.junit.Before;
 import org.junit.Test;

@@ -26,7 +26,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the List control element.
@@ -147,7 +147,9 @@ public final class AutomationList extends AutomationBase implements ImplementsCh
      */
     public List<AutomationListItem> getItems()
             throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.ListItem));
+        List<AutomationElement> items =
+                this.findAll(new TreeScope(TreeScope.Descendants),
+                        this.createControlTypeCondition(ControlType.ListItem));
 
         List<AutomationListItem> list = new ArrayList<>();
 
@@ -194,4 +196,3 @@ public final class AutomationList extends AutomationBase implements ImplementsCh
         return list.get(0);
     }
 }
-

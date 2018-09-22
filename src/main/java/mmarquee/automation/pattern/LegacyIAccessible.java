@@ -24,8 +24,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePattern;
-import mmarquee.automation.uiautomation.IUIAutomationLegacyIAccessiblePatternConverter;
+import mmarquee.uiautomation.IUIAutomationLegacyIAccessiblePattern;
+import mmarquee.uiautomation.IUIAutomationLegacyIAccessiblePatternConverter;
 
 /**
  * Implements the LegacyIAccessible pattern.

@@ -18,7 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

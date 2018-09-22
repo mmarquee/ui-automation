@@ -41,9 +41,9 @@ import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomationCondition;
+import mmarquee.uiautomation.TreeScope;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 

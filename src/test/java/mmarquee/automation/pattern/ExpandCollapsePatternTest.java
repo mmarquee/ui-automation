@@ -22,7 +22,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.uiautomation.IUIAutomationExpandCollapsePattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

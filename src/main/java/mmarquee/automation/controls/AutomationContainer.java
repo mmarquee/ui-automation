@@ -29,7 +29,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Encapsulates the functionality of 'containers' i.e. elements that host other elements.

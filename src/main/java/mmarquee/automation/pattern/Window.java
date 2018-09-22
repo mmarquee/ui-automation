@@ -22,9 +22,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
-import mmarquee.automation.uiautomation.WindowVisualState;
+import mmarquee.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.uiautomation.IUIAutomationWindowPatternConverter;
+import mmarquee.uiautomation.WindowVisualState;
 
 /**
  * Wrapper for the window pattern.
@@ -58,7 +58,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Error in automation library
      * */
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
-        return getPattern(rawPattern,this::convertPointerToInterface);
+        return getPattern (rawPattern, this::convertPointerToInterface);
     }
 
     /**

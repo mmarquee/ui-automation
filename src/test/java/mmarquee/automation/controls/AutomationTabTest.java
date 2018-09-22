@@ -38,7 +38,7 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Tests for AutomationTab.

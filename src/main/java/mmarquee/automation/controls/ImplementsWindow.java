@@ -18,7 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.WindowVisualState;
+import mmarquee.uiautomation.WindowVisualState;
 
 /**
  * Methods to simplify interaction with the Window Pattern.

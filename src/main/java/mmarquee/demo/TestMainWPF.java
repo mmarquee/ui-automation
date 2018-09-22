@@ -26,8 +26,8 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.RowOrColumnMajor;
+import mmarquee.uiautomation.ToggleState;
 import mmarquee.automation.utils.Utils;
 
 import java.util.List;

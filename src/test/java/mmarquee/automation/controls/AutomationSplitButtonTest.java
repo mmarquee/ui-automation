@@ -12,7 +12,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 
 /**
  * @author Mark Humphreys

@@ -42,10 +42,10 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPatternConverter;
+import mmarquee.uiautomation.IUIAutomationSelectionPattern;
 
 /**
  * @author Mark Humphreys

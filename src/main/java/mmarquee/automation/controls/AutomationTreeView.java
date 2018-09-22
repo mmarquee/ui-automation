@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.*;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the TreeView element.

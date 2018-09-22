@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;

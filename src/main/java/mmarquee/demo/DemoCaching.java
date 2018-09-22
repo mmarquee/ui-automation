@@ -20,7 +20,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.AutomationApplication;
 import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.uiautomation.*;
 
 import java.util.List;
 

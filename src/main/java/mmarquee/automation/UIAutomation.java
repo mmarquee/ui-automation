@@ -26,7 +26,7 @@ import mmarquee.automation.controls.AutomationPanel;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.menu.AutomationMenu;
-import mmarquee.automation.uiautomation.*;
+import mmarquee.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
 import java.util.ArrayList;

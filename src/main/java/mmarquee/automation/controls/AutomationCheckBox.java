@@ -33,7 +33,7 @@ public final class AutomationCheckBox
      * @param builder The builder
      */
     public AutomationCheckBox (final ElementBuilder builder) {
-        super(builder);
+        super (builder);
     }
 
     /**

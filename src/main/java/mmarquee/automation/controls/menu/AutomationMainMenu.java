@@ -32,9 +32,9 @@ import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.uiautomation.IUIAutomationExpandCollapsePatternConverter;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the MainMenu element.
@@ -242,7 +242,7 @@ public class AutomationMainMenu extends AutomationMenu {
 
         List<AutomationMenuItem> list = new ArrayList<>();
         
-        for(AutomationElement item: items) {
+        for (AutomationElement item: items) {
             list.add(new AutomationMenuItem(new ElementBuilder(item)));
         }
 

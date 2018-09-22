@@ -26,12 +26,12 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextPatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTextRange;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeConverter;
+import mmarquee.uiautomation.IUIAutomationTextPattern;
+import mmarquee.uiautomation.IUIAutomationTextPatternConverter;
+import mmarquee.uiautomation.IUIAutomationTextRange;
+import mmarquee.uiautomation.IUIAutomationTextRangeArray;
+import mmarquee.uiautomation.IUIAutomationTextRangeArrayConverter;
+import mmarquee.uiautomation.IUIAutomationTextRangeConverter;
 
 /**
  * Wrapper for the text pattern.

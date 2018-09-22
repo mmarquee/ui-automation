@@ -22,7 +22,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.*;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;

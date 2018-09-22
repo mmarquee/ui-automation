@@ -45,9 +45,9 @@ import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement6;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement6;
+import mmarquee.uiautomation.TreeScope;
 import mmarquee.automation.utils.Utils;
 
 /**

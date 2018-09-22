@@ -22,8 +22,8 @@ import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.TreeScope;
 
 import org.junit.Assume;
 import org.junit.Before;

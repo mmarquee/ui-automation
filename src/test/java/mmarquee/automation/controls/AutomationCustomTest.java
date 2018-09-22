@@ -19,7 +19,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 

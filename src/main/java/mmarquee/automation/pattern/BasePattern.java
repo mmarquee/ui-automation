@@ -30,10 +30,10 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomation;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.uiautomation.IUIAutomationElementConverter;
 
 /**
  * The base pattern functionality, shared for all patterns.
@@ -148,7 +148,8 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 	 * @return the pattern interface
 	 * @throws AutomationException if something goes wrong
 	 */
-    protected <T> T getPattern(T overridePattern, Function<PointerByReference,T> convertPointerToInterface)
+    protected <T> T getPattern(T overridePattern,
+        Function<PointerByReference, T> convertPointerToInterface)
     		throws AutomationException {
     	if (overridePattern != null) {
             return overridePattern;

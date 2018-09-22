@@ -22,8 +22,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
+import mmarquee.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.uiautomation.IUIAutomationStylesPatternConverter;
 
 /**
  * Wrapper around the styles pattern.

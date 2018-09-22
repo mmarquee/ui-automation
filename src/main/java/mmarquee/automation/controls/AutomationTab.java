@@ -21,7 +21,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +43,14 @@ public class AutomationTab extends AutomationContainer {
         List<AutomationTabItem> tabItems = new ArrayList<>();
 
         try {
-            List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants),this.createControlTypeCondition(ControlType.TabItem));
+            List<AutomationElement> collection =
+                    this.findAll(new TreeScope(TreeScope.Descendants),
+                            this.createControlTypeCondition(ControlType.TabItem));
 
             for (AutomationElement elem : collection) {
-                tabItems.add(new AutomationTabItem(new ElementBuilder(elem)
-                        .automation(this.getAutomation())));
+                tabItems.add(
+                        new AutomationTabItem(new ElementBuilder(elem)
+                                .automation(this.getAutomation())));
             }
         } catch (AutomationException ex) {
             getLogger().error(ex.getMessage());
@@ -66,7 +69,7 @@ public class AutomationTab extends AutomationContainer {
 
         boolean found = false;
 
-        for(AutomationTabItem item: this.getTabItems()) {
+        for (AutomationTabItem item: this.getTabItems()) {
             if (name.equals(item.getName())) {
                 found = true;
                 item.selectItem();
@@ -88,7 +91,7 @@ public class AutomationTab extends AutomationContainer {
 
         boolean found = false;
 
-        for(AutomationTabItem item: this.getTabItems()) {
+        for (AutomationTabItem item: this.getTabItems()) {
             final String name = item.getName();
             
 			if (name != null && namePattern.matcher(name).matches()) {

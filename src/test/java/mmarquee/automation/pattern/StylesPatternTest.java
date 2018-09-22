@@ -27,7 +27,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.uiautomation.IUIAutomationStylesPattern;
 
 /**
  * @author Mark Humphreys

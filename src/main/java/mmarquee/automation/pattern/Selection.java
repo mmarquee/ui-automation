@@ -24,10 +24,10 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPatternConverter;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.uiautomation.IUIAutomationSelectionPatternConverter;
 
 /**
  * Wrapper for the Selection pattern.

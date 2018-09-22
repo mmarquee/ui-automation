@@ -26,7 +26,7 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationMenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.ToggleState;
 import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.controls.AutomationTab;
 import mmarquee.automation.controls.Search;

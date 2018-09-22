@@ -42,8 +42,8 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * @author Mark Humphreys

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;

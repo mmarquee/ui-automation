@@ -40,7 +40,7 @@ public class ElementNotFoundException extends AutomationException {
      * @param name The element name
      */
     public ElementNotFoundException(String name) {
-        super("Element " + name +" not found");
+        super("Element " + name + " not found");
     }
 
     /**

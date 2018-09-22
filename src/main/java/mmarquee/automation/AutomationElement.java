@@ -24,16 +24,16 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.pattern.BasePattern;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElement3;
-import mmarquee.automation.uiautomation.IUIAutomationElement3Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElement6;
-import mmarquee.automation.uiautomation.IUIAutomationElement6Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElement7;
-import mmarquee.automation.uiautomation.IUIAutomationElement7Converter;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.TreeScope;
-import mmarquee.automation.uiautomation.OrientationType;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement3;
+import mmarquee.uiautomation.IUIAutomationElement3Converter;
+import mmarquee.uiautomation.IUIAutomationElement6;
+import mmarquee.uiautomation.IUIAutomationElement6Converter;
+import mmarquee.uiautomation.IUIAutomationElement7;
+import mmarquee.uiautomation.IUIAutomationElement7Converter;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.TreeScope;
+import mmarquee.uiautomation.OrientationType;
 
 import java.util.ArrayList;
 import java.util.List;

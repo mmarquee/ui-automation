@@ -25,9 +25,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
-import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationGridPattern;
+import mmarquee.uiautomation.IUIAutomationGridPatternConverter;
 
 /**
  * @author Mark Humphreys

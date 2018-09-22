@@ -24,8 +24,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
-import mmarquee.automation.uiautomation.IUIAutomationValuePatternConverter;
+import mmarquee.uiautomation.IUIAutomationValuePattern;
+import mmarquee.uiautomation.IUIAutomationValuePatternConverter;
 
 /**
  * Wrapper for the value pattern.
@@ -60,7 +60,7 @@ public class Value extends BasePattern {
      * @throws AutomationException Error in automation library
      */
     private IUIAutomationValuePattern getPattern() throws AutomationException {
-        return getPattern(rawPattern,this::convertPointerToInterface);
+        return getPattern (rawPattern, this::convertPointerToInterface);
     }
 
     /**

@@ -30,8 +30,7 @@ import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.AutomationMainMenu;
 import mmarquee.automation.controls.menu.AutomationSystemMenu;
-import mmarquee.automation.pattern.Window;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * Encapsulates the 'window' element.
@@ -282,7 +281,7 @@ public class AutomationWindow
      * @throws Win32Exception WIN32 call has failed.
      * @throws AutomationException Something is wrong in automation.
      */
-    public void setTransparency(int alpha)
+    public void setTransparency(final int alpha)
             throws Win32Exception, AutomationException {
         WinDef.HWND hwnd = this.getNativeWindowHandle();
 
@@ -292,7 +291,7 @@ public class AutomationWindow
         }
 
         if (!user32.SetLayeredWindowAttributes(
-                hwnd, 0, (byte)alpha, User32.LWA_ALPHA)) {
+                hwnd, 0, (byte) alpha, User32.LWA_ALPHA)) {
             throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
         }
     }

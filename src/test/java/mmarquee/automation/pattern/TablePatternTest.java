@@ -44,9 +44,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationTablePattern;
+import mmarquee.uiautomation.RowOrColumnMajor;
 
 /**
  * @author Mark Humphreys

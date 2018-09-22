@@ -17,9 +17,9 @@ package mmarquee.automation;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElementConverter;
+import mmarquee.uiautomation.IUIAutomationTreeWalker;
 
 /**
  * Wrapper for the AutomationTreeWalker.

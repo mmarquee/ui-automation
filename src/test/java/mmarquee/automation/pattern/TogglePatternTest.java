@@ -41,8 +41,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.IUIAutomationTogglePattern;
+import mmarquee.uiautomation.ToggleState;
 
 /**
  * @author Mark Humphreys

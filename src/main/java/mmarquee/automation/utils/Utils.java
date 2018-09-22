@@ -106,7 +106,7 @@ public class Utils {
                      final String... command) {
         File file = new File(command[0]);
         String filename = file.getName();
-        return findProcessEntry(processEntry,Pattern.compile(filename,
+        return findProcessEntry(processEntry, Pattern.compile(filename,
                 Pattern.LITERAL));
     }
 

@@ -25,10 +25,10 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.uiautomation.IUIAutomationElementConverter;
 
 import java.util.ArrayList;
 import java.util.List;

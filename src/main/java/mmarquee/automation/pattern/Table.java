@@ -24,9 +24,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
-import mmarquee.automation.uiautomation.IUIAutomationTablePatternConverter;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
+import mmarquee.uiautomation.IUIAutomationTablePattern;
+import mmarquee.uiautomation.IUIAutomationTablePatternConverter;
+import mmarquee.uiautomation.RowOrColumnMajor;
 
 /**
  * Wrapper for the table pattern.

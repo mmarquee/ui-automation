@@ -24,7 +24,7 @@ import org.mockito.Mockito;
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 
 /**
  * @author Mark Humphreys

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -37,7 +37,7 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * @author Mark Humphreys

@@ -7,9 +7,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePatternConverter;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.IUIAutomationTogglePattern;
+import mmarquee.uiautomation.IUIAutomationTogglePatternConverter;
+import mmarquee.uiautomation.ToggleState;
 
 /**
  * @author Mark Humphreys
@@ -43,7 +43,7 @@ public class Toggle extends BasePattern {
      * @throws AutomationException Something went wrong with the automation library.
      */
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
-        return getPattern(rawPattern,this::convertPointerToInterface);
+        return getPattern (rawPattern, this::convertPointerToInterface);
     }
 
     /**

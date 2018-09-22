@@ -22,8 +22,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePattern;
-import mmarquee.automation.uiautomation.IUIAutomationExpandCollapsePatternConverter;
+import mmarquee.uiautomation.IUIAutomationExpandCollapsePattern;
+import mmarquee.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 
 /**
  * Wrapper for  the ExpandCollapse pattern.

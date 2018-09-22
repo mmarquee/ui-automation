@@ -21,8 +21,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
+import mmarquee.uiautomation.IUIAutomationInvokePattern;
+import mmarquee.uiautomation.IUIAutomationInvokePatternConverter;
 
 /**
  * Wrapper for the Invoke pattern.

@@ -22,8 +22,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPatternConverter;
+import mmarquee.uiautomation.IUIAutomationGridItemPattern;
+import mmarquee.uiautomation.IUIAutomationGridItemPatternConverter;
 
 /**
  * Wrapper for the GridItem pattern.

@@ -22,8 +22,8 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
+import mmarquee.uiautomation.IUIAutomationRangeValuePattern;
+import mmarquee.uiautomation.IUIAutomationRangeValuePatternConverter;
 
 /**
  * Wrapper for the range valuepattern.

@@ -63,21 +63,21 @@ public class ElementBuilder {
     /**
      * Constructor with an instance.
      *
-     * @param instance The element
+     * @param inInstance The element
      */
-    public ElementBuilder(UIAutomation instance) {
+    public ElementBuilder(final UIAutomation inInstance) {
         this.initialise();
-        this.instance = instance;
+        this.instance = inInstance;
     }
 
     /**
      * Constructor with an element.
      *
-     * @param element The element
+     * @param inElement The element
      */
-    public ElementBuilder(AutomationElement element) {
+    public ElementBuilder(final AutomationElement inElement) {
         this.initialise();
-        this.element = element;
+        this.element = inElement;
     }
 
     /**
@@ -102,21 +102,21 @@ public class ElementBuilder {
 
     /**
      * Create a ElementBuilder with a handle.
-     * @param handle The handle
+     * @param inHandle The handle
      * @return The ElementBuilder
      */
-    public ElementBuilder handle(WinNT.HANDLE handle) {
-        this.handle = handle;
+    public ElementBuilder handle(final WinNT.HANDLE inHandle) {
+        this.handle = inHandle;
         return this;
     }
 
     /**
      * Create a ElementBuilder with a process.
-     * @param process The process
+     * @param inProcess The process
      * @return The ElementBuilder
      */
-    public ElementBuilder process(Process process) {
-        this.process = process;
+    public ElementBuilder process(final Process inProcess) {
+        this.process = inProcess;
         return this;
     }
 
@@ -129,56 +129,57 @@ public class ElementBuilder {
         for (final BasePattern pattern: patterns) {
             this.automationPatterns.add(pattern);
         }
+
         return this;
     }
 
     /**
      * Create a ElementBuilder with a parent.
-     * @param parent The parent
+     * @param inParent The parent
      * @return The ElementBuilder
      */
-    public ElementBuilder parent(AutomationElement parent) {
-        this.parent = parent;
+    public ElementBuilder parent(final AutomationElement inParent) {
+        this.parent = inParent;
         return this;
     }
 
     /**
      * Create a ElementBuilder with an AutomationElement.
-     * @param element The AutomationElement
+     * @param inElement The AutomationElement
      * @return The ElementBuilder
      */
-    public ElementBuilder element(AutomationElement element) {
-        this.element = element;
+    public ElementBuilder element(final AutomationElement inElement) {
+        this.element = inElement;
         return this;
     }
 
     /**
      * Create a ElementBuilder with a User32.
-     * @param user32 The User32
+     * @param inUser32 The User32
      * @return The ElementBuilder
      */
-    public ElementBuilder user32(User32 user32) {
-        this.user32 = user32;
+    public ElementBuilder user32(final User32 inUser32) {
+        this.user32 = inUser32;
         return this;
     }
 
     /**
      * Create a ElementBuilder with an UIAutomation instance.
-     * @param automation The UIAutomation instance
+     * @param inAutomation The UIAutomation instance
      * @return The ElementBuilder
      */
-    public ElementBuilder automation(UIAutomation automation) {
-        this.instance = automation;
+    public ElementBuilder automation(final UIAutomation inAutomation) {
+        this.instance = inAutomation;
         return this;
     }
 
     /**
      * Create a ElementBuilder with the attached setting.
-     * @param attached The attached value
+     * @param inAttached The attached value
      * @return The ElementBuilder
      */
-    public ElementBuilder attached(boolean attached) {
-        this.attached = attached;
+    public ElementBuilder attached(final boolean inAttached) {
+        this.attached = inAttached;
         return this;
     }
 

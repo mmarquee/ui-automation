@@ -41,9 +41,9 @@ import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextRange;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
+import mmarquee.uiautomation.IUIAutomationTextPattern;
+import mmarquee.uiautomation.IUIAutomationTextRange;
+import mmarquee.uiautomation.IUIAutomationTextRangeArray;
 
 /**
  * @author Mark Humphreys

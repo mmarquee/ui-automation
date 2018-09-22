@@ -25,9 +25,9 @@ import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPatternConverter;
 
 /**
  * Wrapper for the SelectionItem pattern.

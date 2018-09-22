@@ -45,7 +45,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import mmarquee.uiautomation.IUIAutomationValuePattern;
 
 /**
  * @author Mark Humphreys

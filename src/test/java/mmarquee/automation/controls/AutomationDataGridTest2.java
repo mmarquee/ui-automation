@@ -36,7 +36,7 @@ import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Table;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 
 /**
  * @author Mark Humphreys

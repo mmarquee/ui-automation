@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,8 +32,8 @@ import org.mockito.Mockito;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * @author Mark Humphreys

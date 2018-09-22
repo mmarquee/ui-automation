@@ -42,7 +42,7 @@ import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPattern;
 
 /**
  * @author Mark Humphreys

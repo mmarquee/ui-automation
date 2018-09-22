@@ -30,7 +30,7 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
+import mmarquee.uiautomation.IUIAutomationGridItemPattern;
 
 /**
  * @author Mark Humphreys

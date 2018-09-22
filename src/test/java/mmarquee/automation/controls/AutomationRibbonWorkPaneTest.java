@@ -21,9 +21,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationRibbonWorkPane;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

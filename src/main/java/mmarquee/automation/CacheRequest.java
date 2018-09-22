@@ -21,8 +21,8 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationCacheRequest;
-import mmarquee.automation.uiautomation.IUIAutomationCacheRequestConverter;
+import mmarquee.uiautomation.IUIAutomationCacheRequest;
+import mmarquee.uiautomation.IUIAutomationCacheRequestConverter;
 
 /**
  * Encapsulated the cache request.
