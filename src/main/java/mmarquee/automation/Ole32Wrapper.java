@@ -54,7 +54,7 @@ public class Ole32Wrapper {
     /**
      * Constructor for the wrapper.
      */
-    Ole32Wrapper() {
+    public Ole32Wrapper() {
         createWrapper();
     }
 
