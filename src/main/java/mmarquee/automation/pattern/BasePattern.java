@@ -166,6 +166,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
             }
         }
     }
+
 	 /**
      * Converts the unknown value to a IUIAutomationElement.
      * @param pUnknownA The Unknown pointer
