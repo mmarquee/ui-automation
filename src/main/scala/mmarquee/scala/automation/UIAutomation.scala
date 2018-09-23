@@ -3,8 +3,10 @@ package mmarquee.scala.automation
 import com.sun.jna.platform.win32.COM.{COMUtils, Unknown}
 import com.sun.jna.platform.win32.{Guid, WinNT}
 import com.sun.jna.ptr.PointerByReference
-import mmarquee.automation.Ole32Wrapper
-import mmarquee.uiautomation.{IUIAutomation, IUIAutomationConverter, IUIAutomationElement, IUIAutomationElementConverter}
+import mmarquee.automation._
+import mmarquee.automation.controls.{AutomationWindow, ElementBuilder}
+import mmarquee.scala.automation.control.Window
+import mmarquee.uiautomation._
 
 class UIAutomation {
 
@@ -33,10 +35,10 @@ class UIAutomation {
     val result: WinNT.HRESULT =
       getOle32Unknown.QueryInterface(
         new Guid.REFIID(IUIAutomation.IID), pbr1)
-   // if (COMUtils.SUCCEEDED(result))
+    if (COMUtils.SUCCEEDED(result))
       this.automation = IUIAutomationConverter.pointerToInterface(pbr1)
-//    else
-//      throw new Exception // Handle a bad situation
+    else
+      throw new Exception // Handle a bad situation
   }
 
   def getOle32Unknown: Unknown = {
@@ -57,10 +59,61 @@ class UIAutomation {
       uRoot.QueryInterface(
         new Guid.REFIID(IUIAutomationElement.IID), pRoot)
 
-  //  if (COMUtils.SUCCEEDED(result0))
+    if (COMUtils.SUCCEEDED(result0))
       new Element(IUIAutomationElementConverter.pointerToInterface(pRoot))
-  //  else
-    //  throw new Exception // Handle a bad situation
+    else
+      throw new Exception // Handle a bad situation
   }
+
+  private val FIND_DESKTOP_ATTEMPTS = 25 // not final to be set in tests
+
+  def getDesktopWindow(title: String) : Window =
+    return getDesktopWindow(title, FIND_DESKTOP_ATTEMPTS)
+
+  private def getDesktopWindow(title: String, retries: Integer): Window =
+    new Window(this.get(ControlType.Window, title, TreeScope.Children, retries))
+
+  @throws[AutomationException]
+  private def get(controlType: ControlType, title: String,
+                  treeScopeConstant: Int, numberOfRetries: Int) : Element = {
+    var foundElement = null
+
+    // And Condition
+    val pAndCondition =
+      this.createAndCondition(
+        this.createNamePropertyCondition(title),
+        this.createControlTypeCondition(controlType))
+    var loop = 0
+    while ( {
+      loop < numberOfRetries
+    }) {
+//      try
+      foundElement = this.getRootElement.findFirst(
+        new TreeScope(treeScopeConstant), pAndCondition)
+//      catch {
+//        case ex: AutomationException =>
+//          logger.info("Not found, retrying " + title)
+//      }
+//      if (foundElement != null) break //todo: break is not supported
+      // Wait for it
+      try
+        Thread.sleep(AutomationWindow.SLEEP_DURATION)
+      catch {
+        case e: InterruptedException =>
+        // interrupted
+      }
+
+      {
+        loop += 1; loop - 1
+      }
+    }
+
+    if (foundElement == null) {
+      throw new ItemNotFoundException(title)
+    }
+
+    foundElement
+  }
+
 
 }

@@ -8,16 +8,16 @@ class Element (val element: IUIAutomationElement) {
   def getName : String = {
     val sr: PointerByReference = new PointerByReference
 
-    val res: Int = this.element.getCurrentName(sr)
+    val res = this.element.getCurrentName(sr)
     if (res != 0) {
       throw new AutomationException(res)
     }
 
     if (sr.getValue == null) {
-      return ""
+      ""
     }
     else {
-      return sr.getValue.getWideString(0)
+      sr.getValue.getWideString(0)
     }
   }
 }
