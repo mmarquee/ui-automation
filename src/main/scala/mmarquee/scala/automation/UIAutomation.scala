@@ -66,21 +66,18 @@ class UIAutomation {
                   title: String,
                   treeScopeConstant: Int,
                   numberOfRetries: Int): Option[Element] = {
-    val foundElement = null
-
     val pCondition =
       this.createAndCondition(
         this.createNamePropertyCondition(title).get,
         this.createControlTypeCondition(controlType).get)
 
-    foundElement =
-      this.getRootElement.findFirst(
-        new TreeScope(treeScopeConstant), pCondition.get)
-
-    if (foundElement == null)
-      None
-    else
-      Option(new Element(foundElement))
+    this.getRootElement match {
+      case Some(element) => {
+        element.findFirst (new TreeScope (treeScopeConstant),
+                                       pCondition.get)
+      }
+      case None => throw new Exception("Not found")
+    }
   }
 
   def createNamePropertyCondition(name: String): Option[PointerByReference] = {
