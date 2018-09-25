@@ -29,6 +29,13 @@ trait Pattern extends AutomationBase {
     }
   }
 
+  def getPattern(patternId: Int): PointerByReference = {
+    val pbr = new PointerByReference
+    val res = this.element.element.getCurrentPattern(patternId, pbr)
+    if (res != 0) throw new AutomationException(res)
+    pbr
+  }
+
   def getPatternID: PatternID = this.patternID
 
   protected def getPattern[T](overridePattern: T,
@@ -45,7 +52,7 @@ trait Pattern extends AutomationBase {
   def getRawPatternPointer (pbr: PointerByReference): WinNT.HRESULT = {
     var unknown: PointerByReference = null
     try {
-      unknown = this.element.getPattern (patternID.getValue)
+      unknown = this.element.getPattern(patternID.getValue).get
     } catch {
       case e: AutomationException =>
         throw new PatternNotFoundException (e)

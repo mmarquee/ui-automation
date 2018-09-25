@@ -17,6 +17,9 @@ class Window extends Pattern {
     this.setWindowState(WindowVisualState.Minimized)
   }
 
+  private def getPattern: IUIAutomationWindowPattern =
+    getPattern(rawPattern, this.convertPointerToInterface)
+
   def setWindowState(state: WindowVisualState): Unit = {
     val res = this.getPattern.setWindowVisualState(state.getValue)
     if (res != 0) throw new AutomationException(res)
