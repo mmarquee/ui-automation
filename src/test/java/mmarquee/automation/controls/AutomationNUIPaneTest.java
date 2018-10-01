@@ -49,7 +49,7 @@ public class AutomationNUIPaneTest {
     public void testName_Is_Blank() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
+        when(element.getClassName()).thenReturn(NUIPane.CLASS_NAME);
         when(element.getName()).thenReturn("");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -57,7 +57,7 @@ public class AutomationNUIPaneTest {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationNUIPane pane = new AutomationNUIPane(
+        NUIPane pane = new NUIPane(
                 new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = pane.getName();

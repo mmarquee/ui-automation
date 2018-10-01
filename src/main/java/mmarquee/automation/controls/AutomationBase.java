@@ -610,7 +610,7 @@ public abstract class AutomationBase
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(
+    protected java.util.List <AutomationElement> findAll(
             final TreeScope scope,
             final PointerByReference condition)
             throws AutomationException {

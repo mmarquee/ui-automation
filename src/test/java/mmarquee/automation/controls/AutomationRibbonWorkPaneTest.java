@@ -48,7 +48,7 @@ public class AutomationRibbonWorkPaneTest {
     @Test
     public void testName() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
-        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonWorkPane.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -56,7 +56,7 @@ public class AutomationRibbonWorkPaneTest {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonWorkPane pane = new AutomationRibbonWorkPane(
+        RibbonWorkPane pane = new RibbonWorkPane(
                 new ElementBuilder(element).automation(instance).addPattern(container));
 
         String name = pane.getName();

@@ -66,15 +66,15 @@ public class AutomationRibbonCommandBarTest2 {
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+        RibbonCommandBar commandBar = new RibbonCommandBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        RibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
@@ -104,13 +104,13 @@ public class AutomationRibbonCommandBarTest2 {
 
         collection.add(new AutomationElement(elem));
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+        RibbonCommandBar commandBar = new RibbonCommandBar(
                 new ElementBuilder(element));
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        RibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

@@ -17,14 +17,8 @@ package mmarquee.demo;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationTabItem;
-import mmarquee.automation.controls.AutomationDataGrid;
-import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.AutomationDataGridCell;
-import mmarquee.automation.controls.AutomationTab;
-import mmarquee.automation.controls.AutomationPanel;
-import mmarquee.automation.controls.Search;
+import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.Application;
 
 import java.util.List;
 
@@ -42,7 +36,7 @@ public class TestMainExcel extends TestBase {
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             // 0. Load excel - this works for Excel 2013, but not for Excel
@@ -61,34 +55,34 @@ public class TestMainExcel extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window =
+            Window window =
                     application.getWindow(
                             Search.getBuilder().className("XLMAIN").build());
             logger.info(window.getClassName());
 
-            AutomationPanel panelX =
+            Panel panelX =
                     window.getPanel(
                             Search.getBuilder(0).className("XLDESK").build());
             logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
-            AutomationTab tab = panelX.getTab(Search.getBuilder(0).build());
+            Tab tab = panelX.getTab(Search.getBuilder(0).build());
             logger.info(tab.getName());
 
-            List<AutomationTabItem> items = tab.getTabItems();
+            List<TabItem> items = tab.getTabItems();
 
             logger.info(items.size());
 
-            for(AutomationTabItem item : items) {
+            for(TabItem item : items) {
                 logger.info(item.getName());
             }
 
-            AutomationDataGrid grid =
+            DataGrid grid =
                     window.getDataGrid(Search.getBuilder(0).build());
             logger.info(grid.getName());
 
             // 3. Get some data
-            AutomationDataGridCell cell =
+            DataGridCell cell =
                     grid.getItem(
                             Search.getBuilder(0,0).build());
             logger.info(cell.getName());
@@ -96,7 +90,7 @@ public class TestMainExcel extends TestBase {
             logger.info(cell.getColumn());
             logger.info(cell.getRow());
 
-            AutomationDataGridCell cell1 =
+            DataGridCell cell1 =
                     grid.getItem(
                             Search.getBuilder(1,1).build());
             logger.info(cell1.getName());
@@ -104,7 +98,7 @@ public class TestMainExcel extends TestBase {
             logger.info(cell1.getColumn());
             logger.info(cell1.getRow());
 
-            AutomationDataGridCell cell2 =
+            DataGridCell cell2 =
                     grid.getItem(
                             Search.getBuilder(2,2).build());
             logger.info(cell2.getName());
@@ -116,7 +110,7 @@ public class TestMainExcel extends TestBase {
             cell2.setValue("XYZ");
             logger.info(cell2.getValue());
 
-            AutomationDataGridCell cell3 =
+            DataGridCell cell3 =
                     grid.getItem(
                             Search.getBuilder(3,3).build());
             logger.info(cell3.getName());
@@ -146,17 +140,17 @@ public class TestMainExcel extends TestBase {
             logger.info("Rows = " + grid.rowCount());
             logger.info("Cols = " + grid.columnCount());
 
-            List<AutomationDataGridCell> cols = grid.getColumn(0);
-            for(AutomationDataGridCell col : cols) {
+            List<DataGridCell> cols = grid.getColumn(0);
+            for(DataGridCell col : cols) {
                 logger.info(col.getValue());
             }
 
             // 4. Set some extra data - excel doesn't seem to implement
             // the correct pattern
             try {
-                List<AutomationDataGridCell> headers = grid.getColumnHeaders();
+                List<DataGridCell> headers = grid.getColumnHeaders();
 
-                for (AutomationDataGridCell header : headers) {
+                for (DataGridCell header : headers) {
                     logger.info(header.getValue());
                 }
             } catch (NullPointerException ex) {

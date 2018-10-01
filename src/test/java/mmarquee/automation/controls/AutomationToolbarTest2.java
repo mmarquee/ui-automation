@@ -79,7 +79,7 @@ public class AutomationToolbarTest2 {
     	
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder(0).build());
@@ -89,7 +89,7 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_Index_Throws_Exception_When_Out_Of_Bounds() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder(1).build());
@@ -99,10 +99,10 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_Name_Gets_Button() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder("myName").build());
+        ToolBarButton button = ctrl.getToolbarButton(Search.getBuilder("myName").build());
         
         assertEquals(targetElement,button.getElement());
 
@@ -113,7 +113,7 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_Name_Throws_Exception() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder("unknownName").build());
@@ -124,10 +124,10 @@ public class AutomationToolbarTest2 {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myName");
         
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationToolBarButton button = ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("my.*")).build());
+        ToolBarButton button = ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("my.*")).build());
         
         assertEquals(targetElement,button.getElement());
 
@@ -138,7 +138,7 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_Name_with_RegExPattern_Throws_Exception() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolbarButton(Search.getBuilder(Pattern.compile("unknownName")).build());
@@ -148,10 +148,10 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_AutomationId() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationToolBar button = ctrl.getToolBar(Search.getBuilder().automationId("myID").build());
+        ToolBar button = ctrl.getToolBar(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,button.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
@@ -161,7 +161,7 @@ public class AutomationToolbarTest2 {
     public void test_GetToolbarButton_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
         when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).addPattern(container));
 
         ctrl.getToolBar(Search.getBuilder().automationId("unknownID").build());

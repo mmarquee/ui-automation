@@ -46,7 +46,7 @@ public class AutomationToolbarTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).automation(instance).addPattern(container));
 
         String name = ctrl.getName();

@@ -67,28 +67,28 @@ public class AutomationControlFactory {
     	String className = element.getClassName();
     	switch (controlType) {
     	case Button:
-    		return new AutomationButton(new ElementBuilder(element));
+    		return new Button(new ElementBuilder(element));
     	case Calendar:
-    		return new AutomationCalendar(new ElementBuilder(element));
+    		return new Calendar(new ElementBuilder(element));
     	case CheckBox:
-    		return new AutomationCheckBox(new ElementBuilder(element));
+    		return new CheckBox(new ElementBuilder(element));
     	case ComboBox:
-    		return new AutomationComboBox(new ElementBuilder(element));
+    		return new ComboBox(new ElementBuilder(element));
     	case Edit:
-			if (AutomationPasswordEditBox.CLASS_NAME.equals(className)) {
-				return new AutomationPasswordEditBox(new ElementBuilder(element));
-			} else if (AutomationMaskedEdit.CLASS_NAME.equals(className)) {
-				return new AutomationMaskedEdit(new ElementBuilder(element));
+			if (PasswordEditBox.CLASS_NAME.equals(className)) {
+				return new PasswordEditBox(new ElementBuilder(element));
+			} else if (MaskedEdit.CLASS_NAME.equals(className)) {
+				return new MaskedEdit(new ElementBuilder(element));
 			}
-    		return new AutomationEditBox(new ElementBuilder(element));
+    		return new EditBox(new ElementBuilder(element));
     	case Hyperlink:
-    		return new AutomationHyperlink(new ElementBuilder(element));
+    		return new Hyperlink(new ElementBuilder(element));
     	case Image:
-    		return new AutomationImage(new ElementBuilder(element));
+    		return new Image(new ElementBuilder(element));
     	case ListItem:
-    		return new AutomationListItem(new ElementBuilder(element));
+    		return new ListItem(new ElementBuilder(element));
     	case List:
-    		return new AutomationList(new ElementBuilder(element));
+    		return new List(new ElementBuilder(element));
     	case Menu:
     		return new AutomationMenu(new ElementBuilder(element));
     	case MenuBar:
@@ -96,57 +96,57 @@ public class AutomationControlFactory {
     	case MenuItem:
     		return new AutomationMenuItem(new ElementBuilder(element));
     	case ProgressBar:
-    		return new AutomationProgressBar(new ElementBuilder(element));
+    		return new ProgressBar(new ElementBuilder(element));
     	case RadioButton:
-    		return new AutomationRadioButton(new ElementBuilder(element));
+    		return new RadioButton(new ElementBuilder(element));
     	case Slider:
-    		return new AutomationSlider(new ElementBuilder(element));
+    		return new Slider(new ElementBuilder(element));
     	case Spinner:
-    		return new AutomationSpinner(new ElementBuilder(element));
+    		return new Spinner(new ElementBuilder(element));
     	case StatusBar:
-    		return new AutomationStatusBar(new ElementBuilder(element));
+    		return new StatusBar(new ElementBuilder(element));
     	case Tab:
-    		return new AutomationTab(new ElementBuilder(element));
+    		return new Tab(new ElementBuilder(element));
     	case TabItem:
-    		return new AutomationTabItem(new ElementBuilder(element));
+    		return new TabItem(new ElementBuilder(element));
     	case Text:
-    		return new AutomationTextBox(new ElementBuilder(element));
+    		return new TextBox(new ElementBuilder(element));
     	case ToolBar:
-    		return new AutomationToolBar(new ElementBuilder(element));
+    		return new ToolBar(new ElementBuilder(element));
     	case Tree:
-    		return new AutomationTreeView(new ElementBuilder(element));
+    		return new TreeView(new ElementBuilder(element));
     	case TreeItem:
-    		return new AutomationTreeViewItem(new ElementBuilder(element));
+    		return new TreeViewItem(new ElementBuilder(element));
     	case Custom:
-    		return new AutomationCustom(new ElementBuilder(element));
+    		return new Custom(new ElementBuilder(element));
     	case DataGrid:
-    		return new AutomationDataGrid(new ElementBuilder(element));
+    		return new DataGrid(new ElementBuilder(element));
     	case Document:
-    		return new AutomationDocument(new ElementBuilder(element));
+    		return new Document(new ElementBuilder(element));
     	case SplitButton:
-    		return new AutomationSplitButton(new ElementBuilder(element));
+    		return new SplitButton(new ElementBuilder(element));
     	case Window:
-    		return new AutomationWindow(new ElementBuilder(element));
+    		return new Window(new ElementBuilder(element));
     	case Pane:
 			switch (className) {
-				case AutomationReBar.CLASS_NAME:
-					return new AutomationReBar(new ElementBuilder(element));
-				case AutomationRibbonBar.CLASS_NAME:
-					return new AutomationRibbonBar(new ElementBuilder(element));
-				case AutomationRibbonCommandBar.CLASS_NAME:
-					return new AutomationRibbonCommandBar(new ElementBuilder(element));
-				case AutomationRibbonWorkPane.CLASS_NAME:
-					return new AutomationRibbonWorkPane(new ElementBuilder(element));
-				case AutomationNUIPane.CLASS_NAME:
-					return new AutomationNUIPane(new ElementBuilder(element));
-				case AutomationNetUIHWND.CLASS_NAME:
-					return new AutomationNetUIHWND(new ElementBuilder(element));
+				case ReBar.CLASS_NAME:
+					return new ReBar(new ElementBuilder(element));
+				case RibbonBar.CLASS_NAME:
+					return new RibbonBar(new ElementBuilder(element));
+				case RibbonCommandBar.CLASS_NAME:
+					return new RibbonCommandBar(new ElementBuilder(element));
+				case RibbonWorkPane.CLASS_NAME:
+					return new RibbonWorkPane(new ElementBuilder(element));
+				case NUIPane.CLASS_NAME:
+					return new NUIPane(new ElementBuilder(element));
+				case NetUIHWND.CLASS_NAME:
+					return new NetUIHWND(new ElementBuilder(element));
 			}
-    		return new AutomationPanel(new ElementBuilder(element));
+    		return new Panel(new ElementBuilder(element));
     	case TitleBar:
-    		return new AutomationTitleBar(new ElementBuilder(element));
+    		return new TitleBar(new ElementBuilder(element));
     	case AppBar:
-    		return new AutomationAppBar(new ElementBuilder(element));
+    		return new AppBar(new ElementBuilder(element));
     		// No Custom controls, yet:
     	case ScrollBar:
     	case ToolTip:
@@ -160,7 +160,7 @@ public class AutomationControlFactory {
     	case SemanticZoom:
     	default:
     		// best try
-            return new AutomationContainer(new ElementBuilder(element));
+            return new Container(new ElementBuilder(element));
     	}
     }
 }

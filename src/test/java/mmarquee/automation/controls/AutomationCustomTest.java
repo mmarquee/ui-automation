@@ -41,7 +41,7 @@ public class AutomationCustomTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCustom ctrl = new AutomationCustom(
+        Custom ctrl = new Custom(
                 new ElementBuilder(element).addPattern(container).addPattern(value).automation(instance));
 
         String name = ctrl.getName();

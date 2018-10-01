@@ -64,14 +64,14 @@ public class AutomationNUIPaneTest2 {
     public void testGetNetUIHWND_Throws_Exception_When_NetUIHWND_Not_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
+        when(element.getClassName()).thenReturn(NUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationNUIPane pane = new AutomationNUIPane(
+        NUIPane pane = new NUIPane(
                 new ElementBuilder(element).addPattern(container));
 
         pane.getNetUIHWND(Search.getBuilder(0).build());
@@ -83,7 +83,7 @@ public class AutomationNUIPaneTest2 {
     public void testGetNetUIHWND_When_NetUIHWND_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationNUIPane.CLASS_NAME);
+        when(element.getClassName()).thenReturn(NUIPane.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
@@ -109,7 +109,7 @@ public class AutomationNUIPaneTest2 {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationNUIPane pane = new AutomationNUIPane(
+        NUIPane pane = new NUIPane(
                 new ElementBuilder(element).addPattern(container));
 
         pane.getNetUIHWND(Search.getBuilder(0).build());

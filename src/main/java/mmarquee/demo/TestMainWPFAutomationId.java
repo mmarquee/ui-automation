@@ -17,9 +17,9 @@ package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Button;
+import mmarquee.automation.controls.Window;
 import mmarquee.automation.controls.Search;
 
 /**
@@ -36,7 +36,7 @@ public class TestMainWPFAutomationId extends TestBase {
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             application = automation.launchOrAttach(
@@ -48,12 +48,12 @@ public class TestMainWPFAutomationId extends TestBase {
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
         assert application != null;
-        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+        application.waitForInputIdle(Application.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();
 
-        AutomationWindow applicationWindow = null;
+        Window applicationWindow = null;
 
         try {
             applicationWindow = automation.getDesktopWindow("MainWindow");
@@ -90,7 +90,7 @@ public class TestMainWPFAutomationId extends TestBase {
             // NOTE: WPF buttons will set the automationID to be the name of
             // the control
 
-            AutomationButton btnClickMe =
+            Button btnClickMe =
                     applicationWindow.getButton(
                             Search.getBuilder().automationId("idBtn1").build());
             logger.info(btnClickMe.getName());

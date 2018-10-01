@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
  * @author Mark Humphreys
  * Date 03/12/2016.
  *
- * Tests for AutomationTitleBar.
+ * Tests for TitleBar.
  */
 public class AutomationTitleBarTest {
 
@@ -52,7 +52,7 @@ public class AutomationTitleBarTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationTitleBar ctrl = new AutomationTitleBar(
+        TitleBar ctrl = new TitleBar(
                 new ElementBuilder(element).addPattern(container));
 
         String name = ctrl.getName();
@@ -71,7 +71,7 @@ public class AutomationTitleBarTest {
 
         when(element.findFirst(any(), any())).thenReturn(elem);
 
-        AutomationTitleBar tb = new AutomationTitleBar(
+        TitleBar tb = new TitleBar(
                 new ElementBuilder(element).addPattern(container));
 
         AutomationMainMenu menu = tb.getMenuBar();

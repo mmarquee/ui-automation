@@ -49,7 +49,7 @@ public class AutomationRibbonCommandBarTest {
     public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -57,7 +57,7 @@ public class AutomationRibbonCommandBarTest {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+        RibbonCommandBar commandBar = new RibbonCommandBar(
                 new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = commandBar.getName();

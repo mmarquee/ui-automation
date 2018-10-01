@@ -33,7 +33,7 @@ public class AutomationPasswordEditBoxTest {
         AutomationElement element = Mockito.mock(AutomationElement.class);
         Value value = Mockito.mock(Value.class);
         
-        when(element.getClassName()).thenReturn(AutomationPasswordEditBox.CLASS_NAME);
+        when(element.getClassName()).thenReturn(PasswordEditBox.CLASS_NAME);
 
         when(value.isAvailable()).thenReturn(true);
         when(value.value()).thenReturn("VALUE");
@@ -41,7 +41,7 @@ public class AutomationPasswordEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationPasswordEditBox control = new AutomationPasswordEditBox(
+        PasswordEditBox control = new PasswordEditBox(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         String val = control.getValue();
@@ -56,12 +56,12 @@ public class AutomationPasswordEditBoxTest {
 
         when(value.isAvailable()).thenReturn(true);
         
-        when(element.getClassName()).thenReturn(AutomationPasswordEditBox.CLASS_NAME);
+        when(element.getClassName()).thenReturn(PasswordEditBox.CLASS_NAME);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationPasswordEditBox control = new AutomationPasswordEditBox(
+        PasswordEditBox control = new PasswordEditBox(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         control.setValue("VALUE");

@@ -56,10 +56,10 @@ public class AutomationStatusBarTest2 {
 
 //        when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(
+        StatusBar statusBar = new StatusBar(
                 new ElementBuilder(element).addPattern(pattern));
 
-        AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
+        TextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }
@@ -83,10 +83,10 @@ public class AutomationStatusBarTest2 {
 
     //    when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(
+        StatusBar statusBar = new StatusBar(
                 new ElementBuilder(element).addPattern(pattern));
 
-        AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
+        TextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }

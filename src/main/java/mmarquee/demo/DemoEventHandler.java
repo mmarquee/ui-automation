@@ -17,9 +17,9 @@
 package mmarquee.demo;
 
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Button;
+import mmarquee.automation.controls.Window;
 import mmarquee.automation.controls.Search;
 
 /**
@@ -34,7 +34,7 @@ public class DemoEventHandler extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             application = automation.launchOrAttach("apps\\Project1.exe");
@@ -45,17 +45,17 @@ public class DemoEventHandler extends TestBase {
         try {
             // Wait for the process to start
             assert application != null;
-            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+            application.waitForInputIdle(Application.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait properly");
         }
 
         try {
-            AutomationWindow window = automation.getDesktopWindow("Form1");
+            Window window = automation.getDesktopWindow("Form1");
             String name = window.getName();
             logger.info(name);
 
-            AutomationButton button = window.getButton(Search.getBuilder("OK").build());
+            Button button = window.getButton(Search.getBuilder("OK").build());
 /*
             automation.addAutomationEventHandler(
                     EventID.Invoke_Invoked,

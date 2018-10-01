@@ -17,12 +17,8 @@ package mmarquee.demo;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationImage;
-import mmarquee.automation.controls.Search;
-import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.AutomationPanel;
-import mmarquee.automation.controls.AutomationPowerpointSlide;
+import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.Application;
 
 /**
  * Test the automation wrapper on Excel.
@@ -39,7 +35,7 @@ public class TestMainPowerpoint extends TestBase {
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             // 0. Load Powerpoint
@@ -58,30 +54,30 @@ public class TestMainPowerpoint extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window =
+            Window window =
                     application.getWindow(
                             Search.getBuilder().
                                     className("PPTFrameClass").build());
             logger.info(window.getName());
 
-            AutomationPanel panelX =
+            Panel panelX =
                     window.getPanel(
                             Search.getBuilder(0).className(
                                     "MDIClient").build());
             logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
-            AutomationPanel panel1 =
+            Panel panel1 =
                     panelX.getPanel(
                             Search.getBuilder(
                                     "PowerPoint Edit View - [This is text.pptx]").build());
             logger.info(panelX.getName());
-            AutomationPanel panel2 =
+            Panel panel2 =
                     panel1.getPanel(
                             Search.getBuilder(
                                     "Slide").build());
             logger.info(panel2.getName());
-            AutomationPowerpointSlide slide =
+            PowerpointSlide slide =
                     panel2.getPowerpointSlide(
                             Search.getBuilder(
                                     "Slide 1 - This is text").build());
@@ -89,14 +85,14 @@ public class TestMainPowerpoint extends TestBase {
 
             // Oddly enough this is an image control, and has text in it's
             // selection
-            AutomationImage image =
+            Image image =
                     slide.getImage(
                             Search.getBuilder("Title TextBox").build());
             AutomationElement element = image.getSelectionContainer();
 
             logger.info(element.getName());
 
-            AutomationImage image1 =
+            Image image1 =
                     slide.getImage(
                             Search.getBuilder(0).build());
 

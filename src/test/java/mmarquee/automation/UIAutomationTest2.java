@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.Application;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.IUIAutomation;
 import mmarquee.automation.utils.Utils;
@@ -108,7 +108,7 @@ public class UIAutomationTest2 {
 
         PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java.io.IOException.class);
 
-        AutomationApplication app = instance.launch("notepad.exe");
+        Application app = instance.launch("notepad.exe");
     }
 
     @Test

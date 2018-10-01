@@ -41,7 +41,7 @@ import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.uiautomation.TreeScope;
 
 /**
- * Tests for AutomationTab.
+ * Tests for Tab.
  *
  * @author Mark Humphreys
  * Date 29/11/2016.
@@ -59,7 +59,7 @@ public class AutomationTabTest {
     @Mock
     AutomationElement element;
 
-    AutomationTab automationTab;
+    Tab automationTab;
     
     List<AutomationElement> list;
     
@@ -70,7 +70,7 @@ public class AutomationTabTest {
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        automationTab = Mockito.spy(new AutomationTab(new ElementBuilder(element)));
+        automationTab = Mockito.spy(new Tab(new ElementBuilder(element)));
         
         list = new ArrayList<>();
         list.add(targetElement);
@@ -84,7 +84,7 @@ public class AutomationTabTest {
     public void test_GetTabItems_Returns_Items() throws Exception {
         when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
 
-        List<AutomationTabItem> tabItems = automationTab.getTabItems();
+        List<TabItem> tabItems = automationTab.getTabItems();
         
         assertEquals(1,tabItems.size());
         

@@ -50,7 +50,7 @@ public class AutomationToolbarButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationToolBarButton ctrl = new AutomationToolBarButton(element);
+        ToolBarButton ctrl = new ToolBarButton(element);
 
         String name = ctrl.getName();
 
@@ -63,7 +63,7 @@ public class AutomationToolbarButtonTest {
         Invoke invoke = Mockito.mock(Invoke.class);
         when(element.getClickablePoint()).thenReturn(new WinDef.POINT(0,0));
 
-        AutomationToolBarButton ctrl = new AutomationToolBarButton(element, invoke);
+        ToolBarButton ctrl = new ToolBarButton(element, invoke);
 
         ctrl.click();
 

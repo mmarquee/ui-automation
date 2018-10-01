@@ -58,22 +58,28 @@ public enum WindowVisualState {
         this.value = value;
     }
 
-    private static final Map<Integer, WindowVisualState> intToTypeMap = new HashMap<>();
+    /**
+     * Map of states to integers.
+     */
+    private static final Map<Integer, WindowVisualState> IntToTypeMap =
+            new HashMap<>();
+
     static {
         for (WindowVisualState type : WindowVisualState.values()) {
-            intToTypeMap.put(type.value, type);
+            IntToTypeMap.put(type.value, type);
         }
     }
 
     /**
-     * Gets the enumeration from the given integer
+     * Gets the enumeration from the given integer.
      * @param i The given integer
      * @return The value (as an WindowVisualState)
      */
     public static WindowVisualState fromInt(final int i) {
-        WindowVisualState type = intToTypeMap.get(i);
-        if (type == null)
+        WindowVisualState type = IntToTypeMap.get(i);
+        if (type == null) {
             return WindowVisualState.Normal;
+        }
         return type;
     }
 }

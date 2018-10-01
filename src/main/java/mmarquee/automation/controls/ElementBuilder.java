@@ -95,6 +95,7 @@ public class ElementBuilder {
         this.handle = null;
         this.process = null;
         this.parent = null;
+        this.path = "";
     }
 
     /**

@@ -38,14 +38,14 @@ public class AutomationMaskedEditTest {
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
         
-        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
+        when(element.getClassName()).thenReturn(MaskedEdit.CLASS_NAME);
 
         when(value.value()).thenReturn("VALUE");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(
+        MaskedEdit control = new MaskedEdit(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         String val = control.getValue();
@@ -59,12 +59,12 @@ public class AutomationMaskedEditTest {
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
 
-        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
+        when(element.getClassName()).thenReturn(MaskedEdit.CLASS_NAME);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(
+        MaskedEdit control = new MaskedEdit(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         control.setValue("VALUE");

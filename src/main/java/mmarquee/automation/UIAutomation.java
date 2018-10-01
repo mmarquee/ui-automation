@@ -21,9 +21,9 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationPanel;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Panel;
+import mmarquee.automation.controls.Window;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.menu.AutomationMenu;
 import mmarquee.uiautomation.*;
@@ -154,20 +154,20 @@ public class UIAutomation extends BaseAutomation {
      * Launches the application.
      *
      * @param command The command to be called.
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      * @throws java.io.IOException Cannot start application.
      */
-    public AutomationApplication launch(final String... command)
+    public Application launch(final String... command)
             throws java.io.IOException {
         Process process = Utils.startProcess(command);
-        return new AutomationApplication(
+        return new Application(
                 new ElementBuilder(rootElement).process(process).attached(false));
     }
 
-    public AutomationApplication launchWithRedirect(final String... command)
+    public Application launchWithRedirect(final String... command)
             throws java.io.IOException {
         Process process = Utils.startProcessWithRedirection(command);
-        return new AutomationApplication(
+        return new Application(
                 new ElementBuilder(rootElement).process(process).attached(false));
     }
     /**
@@ -175,13 +175,13 @@ public class UIAutomation extends BaseAutomation {
      * commands parent folder.
      *
      * @param command The command to be called.
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      * @throws java.io.IOException Cannot start application.
      */
-    public AutomationApplication launchWithDirectory(final String... command)
+    public Application launchWithDirectory(final String... command)
             throws java.io.IOException {
         Process process = Utils.startProcessWithWorkingDirectory(command);
-        return new AutomationApplication(
+        return new Application(
                 new ElementBuilder(rootElement).process(process).attached(false));
     }
 
@@ -189,10 +189,10 @@ public class UIAutomation extends BaseAutomation {
      * Attaches to the application process.
      *
      * @param process Process to attach to.
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      */
-    public AutomationApplication attach(final Process process) {
-        return new AutomationApplication(
+    public Application attach(final Process process) {
+        return new Application(
                 new ElementBuilder(rootElement).process(process).attached(false));
     }
 
@@ -200,10 +200,10 @@ public class UIAutomation extends BaseAutomation {
      * Attaches or launches the application.
      *
      * @param command Command to be started.
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      * @throws java.lang.Exception Unable to find process.
      */
-    public AutomationApplication launchOrAttach(final String... command)
+    public Application launchOrAttach(final String... command)
             throws Exception {
     	try {
     		return findProcess(command);
@@ -216,13 +216,13 @@ public class UIAutomation extends BaseAutomation {
      * Attaches or launches the application.
      *
      * @param command Command to be started.
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      * @throws java.lang.Exception Unable to find process.
      *
      * @deprecated Use {@link #launchWithDirectoryOrAttach(String...)} instead
      */
     @Deprecated
-    public AutomationApplication launchWithWorkingDirectoryOrAttach(final String... command)
+    public Application launchWithWorkingDirectoryOrAttach(final String... command)
             throws Exception {
     	return launchWithDirectoryOrAttach(command);
     }
@@ -232,10 +232,10 @@ public class UIAutomation extends BaseAutomation {
      * commands parent folder.
      *
      * @param command Command to be started.
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      * @throws java.lang.Exception Unable to find process.
      */
-    public AutomationApplication launchWithDirectoryOrAttach(final String... command)
+    public Application launchWithDirectoryOrAttach(final String... command)
             throws Exception {
         try {
                 return findProcess(command);
@@ -251,7 +251,7 @@ public class UIAutomation extends BaseAutomation {
      * @return The Application.
      * @throws AutomationException If findProcessEntry throws an exception.
      */
-    public AutomationApplication findProcess(final String... command)
+    public Application findProcess(final String... command)
             throws AutomationException {
 
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
@@ -263,7 +263,7 @@ public class UIAutomation extends BaseAutomation {
             throw new AutomationException("Process " + Arrays.toString(command) + " not found.");
         } else {
             WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-            return new AutomationApplication(
+            return new Application(
                     new ElementBuilder(rootElement).handle(handle).attached(true));
         }
     }
@@ -272,11 +272,11 @@ public class UIAutomation extends BaseAutomation {
      * Finds the given process.
      *
      * @param filenamePattern A pattern which matches the filename of the application
-     * @return AutomationApplication that represents the application.
+     * @return Application that represents the application.
      * @throws java.lang.Exception Unable to find process.
      *
      */
-    public AutomationApplication findProcess(final Pattern filenamePattern)
+    public Application findProcess(final Pattern filenamePattern)
             throws Exception {
         final Tlhelp32.PROCESSENTRY32.ByReference processEntry =
                 new Tlhelp32.PROCESSENTRY32.ByReference();
@@ -288,7 +288,7 @@ public class UIAutomation extends BaseAutomation {
         }
 
         WinNT.HANDLE handle = Utils.getHandleFromProcessEntry(processEntry);
-        return new AutomationApplication(
+        return new Application(
                 new ElementBuilder(rootElement).handle(handle).attached(true));
     }
 
@@ -299,7 +299,7 @@ public class UIAutomation extends BaseAutomation {
      * @param title Title to search for.
      * @param treeScopeConstant the treescope to search
      * @param numberOfRetries the number of tries to find the window
-     * @return AutomationWindow The found 'element'.
+     * @return Window The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
     private AutomationElement get(final ControlType controlType,
@@ -328,7 +328,7 @@ public class UIAutomation extends BaseAutomation {
 
             // Wait for it
             try {
-                Thread.sleep(AutomationWindow.SLEEP_DURATION);
+                Thread.sleep(Window.SLEEP_DURATION);
             } catch (InterruptedException e) {
                 // interrupted
             }
@@ -349,7 +349,7 @@ public class UIAutomation extends BaseAutomation {
      * @param titlePattern the pattern to match the title.
      * @param treeScopeConstant the treescope to search
      * @param numberOfRetries the number of tries to find the window
-     * @return AutomationWindow The found 'element'.
+     * @return Window The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
     private AutomationElement get(final ControlType controlType,
@@ -386,7 +386,7 @@ public class UIAutomation extends BaseAutomation {
 
             // Wait for it
             try {
-                Thread.sleep(AutomationWindow.SLEEP_DURATION);
+                Thread.sleep(Window.SLEEP_DURATION);
             } catch (InterruptedException e) {
                 // interrupted
                 logger.info("interrupted");
@@ -405,10 +405,10 @@ public class UIAutomation extends BaseAutomation {
      * Gets the desktop 'window' associated with the title.
      *
      * @param title Title to search for.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationWindow getDesktopWindow(final String title)
+    public Window getDesktopWindow(final String title)
             throws AutomationException {
         return getDesktopWindow(title, FIND_DESKTOP_ATTEMPTS);
     }
@@ -419,22 +419,22 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param title Title to search for.
      * @param retries Number of retries.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationWindow getDesktopWindow(final String title, final int retries)
+    public Window getDesktopWindow(final String title, final int retries)
             throws AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Children, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Children, retries)));
     }
 
     /**
      * Gets the desktop 'window' matching the title pattern
      *
      * @param titlePattern a pattern matching the title.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationWindow getDesktopWindow(final Pattern titlePattern)
+    public Window getDesktopWindow(final Pattern titlePattern)
             throws AutomationException {
         return getDesktopWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
     }
@@ -445,22 +445,22 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param titlePattern a pattern matching the title.
      * @param retries Number of retries.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getDesktopWindow(final Pattern titlePattern, final int retries)
+    public Window getDesktopWindow(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Children, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Children, retries)));
     }
 
     /**
      * Gets the 'window' associated with the title. Searches all windows currently opened windows.
      *
      * @param title Title to search for.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationWindow getWindow(final String title)
+    public Window getWindow(final String title)
             throws AutomationException {
         return getWindow(title, FIND_DESKTOP_ATTEMPTS);
     }
@@ -471,22 +471,22 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param title Title to search for.
      * @param retries Number of retries.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationWindow getWindow(final String title, final int retries)
+    public Window getWindow(final String title, final int retries)
             throws AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Descendants, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Descendants, retries)));
     }
 
     /**
      * Gets the 'window' matching the title pattern. Searches all windows currently opened windows.
      *
      * @param titlePattern a pattern matching the title.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationWindow getWindow(final Pattern titlePattern)
+    public Window getWindow(final Pattern titlePattern)
             throws AutomationException {
         return getWindow(titlePattern, FIND_DESKTOP_ATTEMPTS);
     }
@@ -497,12 +497,12 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param titlePattern a pattern matching the title.
      * @param retries Number of retries.
-     * @return AutomationWindow The found window.
+     * @return Window The found window.
      * @throws ElementNotFoundException Element is not found
      */
-    public AutomationWindow getWindow(final Pattern titlePattern, final int retries)
+    public Window getWindow(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new AutomationWindow(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Descendants, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Descendants, retries)));
     }
 
     /**
@@ -654,20 +654,20 @@ public class UIAutomation extends BaseAutomation {
     /**
      * Gets the main desktop object.
      *
-     * @return AutomationPanel The found object.
+     * @return Panel The found object.
      */
-    public AutomationPanel getDesktop() {
-        return new AutomationPanel(new ElementBuilder(this.rootElement));
+    public Panel getDesktop() {
+        return new Panel(new ElementBuilder(this.rootElement));
     }
 
     /**
      * Gets the desktop object (a pane) associated with the title.
      *
      * @param title Title to search for.
-     * @return AutomationPanel The found object.
+     * @return Panel The found object.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationPanel getDesktopObject(final String title)
+    public Panel getDesktopObject(final String title)
             throws AutomationException {
         return getDesktopObject(title, FIND_DESKTOP_ATTEMPTS);
     }
@@ -679,22 +679,22 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param title Title to search for.
      * @param retries Number of retries.
-     * @return AutomationPanel The found object.
+     * @return Panel The found object.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationPanel getDesktopObject(final String title, final int retries)
+    public Panel getDesktopObject(final String title, final int retries)
             throws AutomationException {
-        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, title, TreeScope.Children, retries)));
+        return new Panel(new ElementBuilder(this.get(ControlType.Pane, title, TreeScope.Children, retries)));
     }
 
     /**
      * Gets the desktop object (a pane) matching the title pattern.
      *
      * @param titlePattern a pattern matching the title.
-     * @return AutomationPanel The found object.
+     * @return Panel The found object.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationPanel getDesktopObject(final Pattern titlePattern)
+    public Panel getDesktopObject(final Pattern titlePattern)
             throws AutomationException {
         return getDesktopObject(titlePattern, FIND_DESKTOP_ATTEMPTS);
     }
@@ -706,12 +706,12 @@ public class UIAutomation extends BaseAutomation {
      *
      * @param titlePattern a pattern matching the title.
      * @param retries Number of retries.
-     * @return AutomationPanel The found object.
+     * @return Panel The found object.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationPanel getDesktopObject(final Pattern titlePattern, final int retries)
+    public Panel getDesktopObject(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new AutomationPanel(new ElementBuilder(this.get(ControlType.Pane, titlePattern, TreeScope.Children, retries)));
+        return new Panel(new ElementBuilder(this.get(ControlType.Pane, titlePattern, TreeScope.Children, retries)));
     }
 
     /**
@@ -764,14 +764,14 @@ public class UIAutomation extends BaseAutomation {
      * @return List of desktop windows.
      * @throws AutomationException Something has gone wrong.
      */
-    public List<AutomationWindow> getDesktopWindows()
+    public List<Window> getDesktopWindows()
             throws AutomationException {
-        List<AutomationWindow> result = new ArrayList<>();
+        List<Window> result = new ArrayList<>();
 
         List<AutomationElement> collection = getRootChildren(ControlType.Window);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationWindow(new ElementBuilder(element)));
+            result.add(new Window(new ElementBuilder(element)));
         }
 
         return result;
@@ -783,14 +783,14 @@ public class UIAutomation extends BaseAutomation {
      * @return List of desktop object.
      * @throws AutomationException Something has gone wrong.
      */
-    public List<AutomationPanel> getDesktopObjects()
+    public List<Panel> getDesktopObjects()
             throws AutomationException {
-        List<AutomationPanel> result = new ArrayList<>();
+        List<Panel> result = new ArrayList<>();
 
         List<AutomationElement> collection = getRootChildren(ControlType.Pane);
 
         for (AutomationElement element : collection) {
-            result.add(new AutomationPanel(new ElementBuilder(element)));
+            result.add(new Panel(new ElementBuilder(element)));
         }
 
         return result;

@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
  * Date 02/12/2016.
  */
 public class AutomationStatusBarTest {
-    protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
+    protected Logger logger = Logger.getLogger(RadioButtonTest.class.getName());
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
@@ -43,7 +43,7 @@ public class AutomationStatusBarTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(
+        StatusBar statusBar = new StatusBar(
                 new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = statusBar.getName();

@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
  * @author Mark Humphreys
  * Date 25/09/2017
  *
- * Tests for AutomationRibbonBar.
+ * Tests for RibbonBar.
  */
 public class AutomationRibbonBarTest2 {
 
@@ -66,12 +66,12 @@ public class AutomationRibbonBarTest2 {
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(
+        RibbonBar bar = new RibbonBar(
                 new ElementBuilder(element).addPattern(container));
 
         bar.getRibbonCommandBar();
@@ -83,7 +83,7 @@ public class AutomationRibbonBarTest2 {
     public void testGetRibbonCommandBar_When_Element_Is_Found() throws Exception {
         AutomationElement element = Mockito.mock(AutomationElement.class);
 
-        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonBar.CLASS_NAME);
         List<AutomationElement> collection = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
@@ -107,7 +107,7 @@ public class AutomationRibbonBarTest2 {
 
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(
+        RibbonBar bar = new RibbonBar(
                 new ElementBuilder(element));
 
         bar.getRibbonCommandBar();

@@ -66,12 +66,12 @@ public class AutomationRibbonWorkPaneTest2 {
 
         List<AutomationElement> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
+        RibbonWorkPane workPane = new RibbonWorkPane(
                 new ElementBuilder(element).addPattern(container));
 
         workPane.getNUIPane(Search.getBuilder(0).build());
@@ -103,10 +103,10 @@ public class AutomationRibbonWorkPaneTest2 {
 
         collection.add(new AutomationElement(elem));
 
-        when(element.getClassName()).thenReturn(AutomationRibbonWorkPane.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonWorkPane.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonWorkPane workPane = new AutomationRibbonWorkPane(
+        RibbonWorkPane workPane = new RibbonWorkPane(
                 new ElementBuilder(element));
 
         workPane.getNUIPane(Search.getBuilder(0).build());

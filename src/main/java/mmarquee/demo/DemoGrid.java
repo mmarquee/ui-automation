@@ -31,7 +31,7 @@ public class DemoGrid extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             application = automation.launchOrAttach("apps\\GridsDemo.exe");
@@ -42,12 +42,12 @@ public class DemoGrid extends TestBase {
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
         assert application != null;
-        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+        application.waitForInputIdle(Application.SHORT_TIMEOUT);
 
         // Sleep for WPF, to address above issue
         this.rest();
 
-        AutomationWindow applicationWindow = null;
+        Window applicationWindow = null;
 
         try {
             applicationWindow = automation.getDesktopWindow("Demo Form");
@@ -75,17 +75,17 @@ public class DemoGrid extends TestBase {
             }
 
             // GRIDS ***********************************
-            AutomationDataGrid grid = applicationWindow.getDataGrid(Search.getBuilder("AutomatedCombobox1").className("TJHCGrid").build());
+            DataGrid grid = applicationWindow.getDataGrid(Search.getBuilder("AutomatedCombobox1").className("TJHCGrid").build());
             logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids
          //   grid.showContextMenu();
 
-            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1, 1).build());
+            DataGridCell cell1 = grid.getItem(Search.getBuilder(1, 1).build());
 
             logger.info("value: " + cell1.getValue());
 
-            List<AutomationDataGridCell> cells = grid.selectedRow();
+            List<DataGridCell> cells = grid.selectedRow();
 
             logger.info("size: " + cells.size());
 
@@ -93,10 +93,10 @@ public class DemoGrid extends TestBase {
                 logger.info("value is " + cells.get(1).getValue());
             }
 
-            AutomationDataGridCell cell3 = grid.getItem(Search.getBuilder(3, 3).build());
+            DataGridCell cell3 = grid.getItem(Search.getBuilder(3, 3).build());
             cell3.select();
 
-            List<AutomationDataGridCell> cells0 = grid.selectedRow();
+            List<DataGridCell> cells0 = grid.selectedRow();
 
             logger.info("value is now " + cells0.get(1).getValue());
 

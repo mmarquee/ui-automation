@@ -39,8 +39,8 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Window;
 import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -63,8 +63,8 @@ public class BaseAutomationTest {
 		UIAutomation.FIND_DESKTOP_ATTEMPTS = 2; // speed up tests
 	}
 
-    private AutomationApplication application;
-    protected AutomationWindow window;
+    private Application application;
+    protected Window window;
     private String windowName;
 
     protected void andRest() {

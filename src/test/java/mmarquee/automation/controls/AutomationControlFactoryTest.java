@@ -79,63 +79,63 @@ public class AutomationControlFactoryTest {
 
     @Test
     public void get_returns_AutomationContainer_on_None() throws Exception {
-        testGet(ControlType.None, AutomationContainer.class);
+        testGet(ControlType.None, Container.class);
     }
 
     @Test
     public void get_returns_AutomationButton_on_Button() throws Exception {
-        testGet(ControlType.Button, AutomationButton.class);
+        testGet(ControlType.Button, Button.class);
     }
 
     @Test
     public void get_returns_AutomationCalendar_on_Calendar() throws Exception {
     	BaseAutomationTest.setElementPropertyValue(iuielement, PropertyID.IsValuePatternAvailable, Variant.VT_INT, 0);
-    	testGet(ControlType.Calendar, AutomationCalendar.class);
+    	testGet(ControlType.Calendar, Calendar.class);
     }
 
     @Test
     public void get_returns_AutomationCheckBox_on_CheckBox() throws Exception {
-        testGet(ControlType.CheckBox, AutomationCheckBox.class);
+        testGet(ControlType.CheckBox, CheckBox.class);
     }
 
     @Test
     public void get_returns_AutomationComboBox_on_ComboBox() throws Exception {
-        testGet(ControlType.ComboBox, AutomationComboBox.class);
+        testGet(ControlType.ComboBox, ComboBox.class);
     }
 
     @Test
     public void get_returns_AutomationEditBox_on_Edit() throws Exception {
-        testGet(ControlType.Edit, AutomationEditBox.class);
+        testGet(ControlType.Edit, EditBox.class);
     }
 
     @Test
     public void get_returns_AutomationPasswordEditBox_on_PasswordEdit() throws Exception {
-        testGet(ControlType.Edit, AutomationPasswordEditBox.CLASS_NAME, AutomationPasswordEditBox.class);
+        testGet(ControlType.Edit, PasswordEditBox.CLASS_NAME, PasswordEditBox.class);
     }
 
     @Test
     public void get_returns_AutomationMaskedEdit_on_MaskedEdit() throws Exception {
-        testGet(ControlType.Edit,AutomationMaskedEdit.CLASS_NAME, AutomationMaskedEdit.class);
+        testGet(ControlType.Edit, MaskedEdit.CLASS_NAME, MaskedEdit.class);
     }
 
     @Test
     public void get_returns_AutomationHyperlink_on_Hyperlink() throws Exception {
-        testGet(ControlType.Hyperlink, AutomationHyperlink.class);
+        testGet(ControlType.Hyperlink, Hyperlink.class);
     }
 
     @Test
     public void get_returns_AutomationImage_on_Image() throws Exception {
-        testGet(ControlType.Image, AutomationImage.class);
+        testGet(ControlType.Image, Image.class);
     }
 
     @Test
     public void get_returns_AutomationListItem_on_ListItem() throws Exception {
-        testGet(ControlType.ListItem, AutomationListItem.class);
+        testGet(ControlType.ListItem, ListItem.class);
     }
 
     @Test
     public void get_returns_AutomationList_on_List() throws Exception {
-        testGet(ControlType.List, AutomationList.class);
+        testGet(ControlType.List, List.class);
     }
 
     @Test
@@ -156,177 +156,177 @@ public class AutomationControlFactoryTest {
 
     @Test
     public void get_returns_AutomationProgressBar_on_ProgressBar() throws Exception {
-        testGet(ControlType.ProgressBar, AutomationProgressBar.class);
+        testGet(ControlType.ProgressBar, ProgressBar.class);
     }
 
     @Test
     public void get_returns_AutomationRadioButton_on_RadioButton() throws Exception {
-        testGet(ControlType.RadioButton, AutomationRadioButton.class);
+        testGet(ControlType.RadioButton, RadioButton.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_ScrollBar() throws Exception {
-        testGet(ControlType.ScrollBar, AutomationContainer.class);
+        testGet(ControlType.ScrollBar, Container.class);
     }
 
     @Test
     public void get_returns_AutomationSlider_on_Slider() throws Exception {
-        testGet(ControlType.Slider, AutomationSlider.class);
+        testGet(ControlType.Slider, Slider.class);
     }
 
     @Test
     public void get_returns_AutomationSpinner_on_Spinner() throws Exception {
-        testGet(ControlType.Spinner, AutomationSpinner.class);
+        testGet(ControlType.Spinner, Spinner.class);
     }
 
     @Test
     public void get_returns_AutomationStatusBar_on_StatusBar() throws Exception {
-        testGet(ControlType.StatusBar, AutomationStatusBar.class);
+        testGet(ControlType.StatusBar, StatusBar.class);
     }
 
     @Test
     public void get_returns_AutomationTab_on_Tab() throws Exception {
-        testGet(ControlType.Tab, AutomationTab.class);
+        testGet(ControlType.Tab, Tab.class);
     }
 
     @Test
     public void get_returns_AutomationTabItem_on_TabItem() throws Exception {
-        testGet(ControlType.TabItem, AutomationTabItem.class);
+        testGet(ControlType.TabItem, TabItem.class);
     }
 
     @Test
     public void get_returns_AutomationTextBox_on_Text() throws Exception {
-        testGet(ControlType.Text, AutomationTextBox.class);
+        testGet(ControlType.Text, TextBox.class);
     }
 
     @Test
     public void get_returns_AutomationToolBar_on_ToolBar() throws Exception {
-        testGet(ControlType.ToolBar, AutomationToolBar.class);
+        testGet(ControlType.ToolBar, ToolBar.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_ToolTip() throws Exception {
-        testGet(ControlType.ToolTip, AutomationContainer.class);
+        testGet(ControlType.ToolTip, Container.class);
     }
 
     @Test
     public void get_returns_AutomationTreeView_on_Tree() throws Exception {
-        testGet(ControlType.Tree, AutomationTreeView.class);
+        testGet(ControlType.Tree, TreeView.class);
     }
 
     @Test
     public void get_returns_AutomationTreeViewItem_on_TreeItem() throws Exception {
-        testGet(ControlType.TreeItem, AutomationTreeViewItem.class);
+        testGet(ControlType.TreeItem, TreeViewItem.class);
     }
 
     @Test
     public void get_returns_AutomationCustom_on_Custom() throws Exception {
-        testGet(ControlType.Custom, AutomationCustom.class);
+        testGet(ControlType.Custom, Custom.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_Group() throws Exception {
-        testGet(ControlType.Group, AutomationContainer.class);
+        testGet(ControlType.Group, Container.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_Thumb() throws Exception {
-        testGet(ControlType.Thumb, AutomationContainer.class);
+        testGet(ControlType.Thumb, Container.class);
     }
 
     @Test
     public void get_returns_AutomationDataGrid_on_DataGrid() throws Exception {
-        testGet(ControlType.DataGrid, AutomationDataGrid.class);
+        testGet(ControlType.DataGrid, DataGrid.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_DataItem() throws Exception {
-        testGet(ControlType.DataItem, AutomationContainer.class);
+        testGet(ControlType.DataItem, Container.class);
     }
 
     @Test
     public void get_returns_AutomationDocument_on_Document() throws Exception {
-        testGet(ControlType.Document, AutomationDocument.class);
+        testGet(ControlType.Document, Document.class);
     }
 
     @Test
     public void get_returns_AutomationSplitButton_on_SplitButton() throws Exception {
-        testGet(ControlType.SplitButton, AutomationSplitButton.class);
+        testGet(ControlType.SplitButton, SplitButton.class);
     }
 
     @Test
     public void get_returns_AutomationWindow_on_Window() throws Exception {
-        testGet(ControlType.Window, AutomationWindow.class);
+        testGet(ControlType.Window, Window.class);
     }
 
     @Test
     public void get_returns_AutomationPanel_on_Pane() throws Exception {
-        testGet(ControlType.Pane, AutomationPanel.class);
+        testGet(ControlType.Pane, Panel.class);
     }
 
     @Test
     public void get_returns_AutomationReBar_on_ReBar() throws Exception {
-        testGet(ControlType.Pane, AutomationReBar.CLASS_NAME, AutomationReBar.class);
+        testGet(ControlType.Pane, ReBar.CLASS_NAME, ReBar.class);
     }
 
     @Test
     public void get_returns_AutomationRibbonBar_on_RibbonBar() throws Exception {
-        testGet(ControlType.Pane, AutomationRibbonBar.CLASS_NAME, AutomationRibbonBar.class);
+        testGet(ControlType.Pane, RibbonBar.CLASS_NAME, RibbonBar.class);
     }
 
     @Test
     public void get_returns_AutomationRibbonCommandBar_on_RibbonCommandBar() throws Exception {
-        testGet(ControlType.Pane, AutomationRibbonCommandBar.CLASS_NAME, AutomationRibbonCommandBar.class);
+        testGet(ControlType.Pane, RibbonCommandBar.CLASS_NAME, RibbonCommandBar.class);
     }
 
     @Test
     public void get_returns_AutomationRibbonWorkPane_on_RibbonWorkPane() throws Exception {
-        testGet(ControlType.Pane, AutomationRibbonWorkPane.CLASS_NAME, AutomationRibbonWorkPane.class);
+        testGet(ControlType.Pane, RibbonWorkPane.CLASS_NAME, RibbonWorkPane.class);
     }
 
     @Test
     public void get_returns_AutomationNUIPane_on_NUIPane() throws Exception {
-        testGet(ControlType.Pane, AutomationNUIPane.CLASS_NAME, AutomationNUIPane.class);
+        testGet(ControlType.Pane, NUIPane.CLASS_NAME, NUIPane.class);
     }
 
     @Test
     public void get_returns_AutomationNetUIHWND_on_NetUIHWND() throws Exception {
-        testGet(ControlType.Pane, AutomationNetUIHWND.CLASS_NAME, AutomationNetUIHWND.class);
+        testGet(ControlType.Pane, NetUIHWND.CLASS_NAME, NetUIHWND.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_Header() throws Exception {
-        testGet(ControlType.Header, AutomationContainer.class);
+        testGet(ControlType.Header, Container.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_HeaderItem() throws Exception {
-        testGet(ControlType.HeaderItem, AutomationContainer.class);
+        testGet(ControlType.HeaderItem, Container.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_Table() throws Exception {
-        testGet(ControlType.Table, AutomationContainer.class);
+        testGet(ControlType.Table, Container.class);
     }
 
     @Test
     public void get_returns_AutomationTitleBar_on_TitleBar() throws Exception {
-        testGet(ControlType.TitleBar, AutomationTitleBar.class);
+        testGet(ControlType.TitleBar, TitleBar.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_Separator() throws Exception {
-        testGet(ControlType.Separator, AutomationContainer.class);
+        testGet(ControlType.Separator, Container.class);
     }
 
     @Test
     public void get_returns_AutomationContainer_on_SemanticZoom() throws Exception {
-        testGet(ControlType.SemanticZoom, AutomationContainer.class);
+        testGet(ControlType.SemanticZoom, Container.class);
     }
 
     @Test
     public void get_returns_AutomationAppBar_on_AppBar() throws Exception {
-        testGet(ControlType.AppBar, AutomationAppBar.class);
+        testGet(ControlType.AppBar, AppBar.class);
     }
 
 

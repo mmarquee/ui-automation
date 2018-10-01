@@ -33,7 +33,7 @@ public class AutomationSplitButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSplitButton button = new AutomationSplitButton(
+        SplitButton button = new SplitButton(
                 new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         String name = button.getName();
@@ -49,7 +49,7 @@ public class AutomationSplitButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSplitButton button = new AutomationSplitButton(
+        SplitButton button = new SplitButton(
                 new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         button.focus();
@@ -67,7 +67,7 @@ public class AutomationSplitButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSplitButton button = new AutomationSplitButton(
+        SplitButton button = new SplitButton(
                 new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         button.click();
@@ -85,7 +85,7 @@ public class AutomationSplitButtonTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationSplitButton button = new AutomationSplitButton(
+        SplitButton button = new SplitButton(
                 new ElementBuilder(element).automation(instance).addPattern(pattern));
 
         button.click();

@@ -17,10 +17,10 @@
 package mmarquee.demo
 
 import mmarquee.automation.controls.menu.AutomationMenuItem
-import mmarquee.automation.controls.{AutomationWindow, Search}
+import mmarquee.automation.controls.{Window, Search}
 
 class NotepadApplication extends BaseApplication {
-  private var window: AutomationWindow = _
+  private var window: Window = _
 
   def launch(): Unit = {
     application = automation.launch("notepad.exe")
@@ -50,7 +50,7 @@ class NotepadApplication extends BaseApplication {
     button.click()
   }
 
-  def getConfirm: AutomationWindow = {
+  def getConfirm: Window = {
     window.getWindow(Search.getBuilder("Notepad").build())
   }
 
