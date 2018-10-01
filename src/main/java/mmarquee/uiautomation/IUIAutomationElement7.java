@@ -41,7 +41,8 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param options The tree navigation order
      * @param root Start element
      * @param foundArray The matching elements
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int findAllWithOptions(TreeScope scope,
                            Pointer condition,
@@ -56,7 +57,8 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param options The tree navigation order
      * @param root Start element
      * @param foundArray The matching elements
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int findAllWithOptionsBuildCache(TreeScope scope,
                                      Pointer condition,
@@ -71,7 +73,8 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param options The tree navigation order
      * @param root Start element
      * @param found The matching element
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int findFirstWithOptions(TreeScope scope,
                              Pointer condition,
@@ -86,7 +89,8 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param options The tree navigation order
      * @param root Start element
      * @param found The matching element
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int findFirstWithOptionsBuildCache(TreeScope scope,
                                        Pointer condition,
@@ -101,7 +105,8 @@ public interface IUIAutomationElement7 extends IUIAutomationElement6 {
      * @param target The property to retrieve
      * @param metadata The type of metadata
      * @param retVal The metadata
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getCurrentMetadataValue(Integer target,
                                 Integer metadata,

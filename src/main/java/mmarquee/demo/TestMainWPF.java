@@ -241,23 +241,22 @@ public class TestMainWPF extends TestBase {
             slider.setRangeValue(20);
             logger.info("Slider is now = " + slider.getRangeValue());
 
-
             // TEXT BOX *********************************************
 
             logger.info("++ TEXT BOX ++");
-/*
-            AutomationTextBox tb0 =
-                    applicationWindow.getTextBox(
-                            Search.getBuilder(9).build());
-            String tb0Text = tb0.getValue();
-            logger.info("Text for text box 1 is " + tb0Text);
+
+   //         AutomationTextBox tb0 =
+   //                 applicationWindow.getTextBox(
+   //                         Search.getBuilder(5).build());
+   //         String tb0Text = tb0.getValue();
+   //         logger.info("Text for text box 1 is " + tb0Text);
 
             AutomationTextBox tb1 =
                     applicationWindow.getTextBox(
                             Search.getBuilder(18).build());
             String tb1Text = tb1.getValue();
             logger.info("Text for text box 1 is " + tb1Text);
-*/
+
             // PROGRESS BAR *********************************************
 
             logger.info("++ PROGRESS BAR ++");

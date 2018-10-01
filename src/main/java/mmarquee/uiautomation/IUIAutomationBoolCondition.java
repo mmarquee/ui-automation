@@ -30,7 +30,8 @@ public interface IUIAutomationBoolCondition extends IUIAutomationCondition {
     /**
      * Retrieves the value of the condition: either TRUE or FALSE.
      * @param boolVal The condition
-     * @return Error status
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getBooleanValue(Integer boolVal);
 }

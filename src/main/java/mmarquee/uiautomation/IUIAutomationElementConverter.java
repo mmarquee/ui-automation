@@ -66,7 +66,7 @@ public class IUIAutomationElementConverter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getRuntimeId (PointerByReference runtimeId) {
+            public int getCurrentRuntimeId (PointerByReference runtimeId) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, runtimeId});
             }

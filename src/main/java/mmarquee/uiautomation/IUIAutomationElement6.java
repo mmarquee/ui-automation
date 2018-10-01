@@ -35,14 +35,16 @@ public interface IUIAutomationElement6 extends IUIAutomationElement5 {
     /**
      * Gets the current full description of the automation element.
      * @param sr The pointer to the full description
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getCurrentFullDescription(PointerByReference sr);
 
     /**
      * Gets the cached full description of the automation element.
      * @param sr The pointer to the full description
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getCachedFullDescription(PointerByReference sr);
 }

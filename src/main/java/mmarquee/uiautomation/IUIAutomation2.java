@@ -21,14 +21,10 @@ import com.sun.jna.platform.win32.WinDef;
 /**
  * Wrapper for the IUIAutomation2 COM interface.
  *
+ * Available from Windows 8 / Server 2012.
+ *
  * @author Mark Humphreys
  * Date 12/09/2016.
- *
- * Use this like:
- * PointerByReference pbr=new PointerByReference();
- * HRESULT result=SomeCOMObject.QueryInterface(IID_IUIAUTOMATION2, pbr);
- * if(COMUtils.SUCCEEDED(result)) IUIAutomation2 iua=IUIAutomation2.Converter.pointerToInterface(pbr);
- *
  */
 public interface IUIAutomation2 extends IUIAutomation {
     /**
@@ -36,11 +32,66 @@ public interface IUIAutomation2 extends IUIAutomation {
      */
     Guid.IID IID = new Guid.IID("{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}");
 
+    /**
+     * Specifies whether calls to UI Automation control pattern methods
+     * automatically set focus to the target element.
+     *
+     * @param AutoSetFocus Value
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int getAutoSetFocus(Integer AutoSetFocus);
+
+    /**
+     * Specifies whether calls to UI Automation control pattern methods
+     * automatically set focus to the target element.
+     *
+     * @param AutoSetFocus Value to set
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int setAutoSetFocus(Integer AutoSetFocus);
+
+    /**
+     * Specifies the length of time that UI Automation will wait for a
+     * provider to respond to a client request for an automation element.
+     *
+     * @param timeout The timeout
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int getConnectionTimeout(WinDef.DWORD timeout);
+
+    /**
+     * Specifies the length of time that UI Automation will wait for a provider
+     * to respond to a client request for an automation element.
+     *
+     * @param timeout the timeout
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int setConnectionTimeout(WinDef.DWORD timeout);
+
+    /**
+     * Specifies the length of time that UI Automation will wait for a
+     * provider to respond to a client request for information about an
+     * automation element.
+     *
+     * @param timeout The timeout
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int getTransactionTimeout(WinDef.DWORD timeout);
+
+    /**
+     * Specifies the length of time that UI Automation will wait for a provider
+     * to respond to a client request for information about an automation
+     * element.
+     *
+     * @param timeout The timeout
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int setTransactionTimeout(WinDef.DWORD timeout);
 }
 

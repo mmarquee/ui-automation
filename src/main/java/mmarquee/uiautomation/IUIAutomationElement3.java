@@ -33,18 +33,23 @@ public interface IUIAutomationElement3 extends IUIAutomationElement2 {
 
     /**
      * Programmatically invokes a context menu on the target element.
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int showContextMenu();
 
     /**
      * Retrieves the current peripheral UI indicator for the element.
      *
-     * Peripheral UI appears and supports user interaction, but does not take keyboard focus when it appears.
-     * Examples of peripheral UI includes popups, flyouts, context menus, or floating notifications.
+     * Peripheral UI appears and supports user interaction, but does not take
+     * keyboard focus when it appears.
      *
-     * When the IsPeripheral property is TRUE, a client application can't assume that focus was taken by
-     * the element even if it's currently keyboard-interactive.
+     * Examples of peripheral UI includes
+     *   popups, flyouts, context menus, or floating notifications.
+     *
+     * When the IsPeripheral property is TRUE, a client application can't
+     * assume that focus was taken by the element even if it's currently
+     * keyboard-interactive.
      *
      * Could apply to:
      * <ul>
@@ -58,18 +63,22 @@ public interface IUIAutomationElement3 extends IUIAutomationElement2 {
      * </ul>
      *
      * @param retVal The return value
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getCurrentIsPeripheral(Integer retVal);
 
     /**
      * Retrieves the cached peripheral UI indicator for the element.
      *
-     * Peripheral UI appears and supports user interaction, but does not take keyboard focus when it appears.
-     * Examples of peripheral UI includes popups, flyouts, context menus, or floating notifications.
+     * Peripheral UI appears and supports user interaction, but does not take
+     * keyboard focus when it appears.
+     * Examples of peripheral UI includes popups, flyouts, context menus, or
+     * floating notifications.
      *
      * @param retVal The return value
-     * @return Error code
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getCachedIsPeripheral(Integer retVal);
 }

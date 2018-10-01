@@ -20,7 +20,8 @@ import com.sun.jna.platform.win32.Guid;
 /**
  * Wrapper for the IUIAutomation5 COM interface.
  *
- * Extends the IUIAutomation4 interface to expose additional methods for controlling UI Automation functionality.
+ * Extends the IUIAutomation4 interface to expose additional methods for
+ * controlling UI Automation functionality.
  *
  * Windows 10, version 1607 [desktop apps only]
  * Windows Server, version 1709 [desktop apps only]

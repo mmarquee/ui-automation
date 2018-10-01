@@ -247,6 +247,18 @@ public class AutomationElement extends BaseAutomation {
         return sr.getValue().getWideString(0);
     }
 
+
+    public String getRuntimeId() throws AutomationException {
+        PointerByReference sr = new PointerByReference();
+
+        final int res = this.element.getCurrentRuntimeId(sr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return sr.getValue().getWideString(0);
+    }
+
     /**
      * Gets the current localized control type of the element.
      *

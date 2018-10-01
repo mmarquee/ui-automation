@@ -36,63 +36,72 @@ public interface IUIAutomationCacheRequest extends IUnknown {
     /**
      * Adds a control pattern to the cache request.
      * @param inVal The pattern to cache
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int addPattern(int inVal);
 
     /**
      * Adds a property to the cache request.
      * @param inVal The property to cache
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int addProperty(int inVal);
 
     /**
      * Creates a copy of the cache request.
      * @param retVal The cache to copy
-     * @return COM resylt
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int clone(PointerByReference retVal);
 
     /**
      * Gets the view of the UI Automation element tree that is used when caching.
      * @param inVal The value
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getTreeScope(PointerByReference inVal);
 
     /**
      * Specifies the view of the UI Automation element tree that is used when caching.
      * @param retVal The value
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int setTreeScope(PointerByReference retVal);
 
     /**
      * Gets the view of the UI Automation element tree that is used when caching.
      * @param inVal The value
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getTreeFilter(PointerByReference inVal);
 
     /**
      * Specifies the view of the UI Automation element tree that is used when caching.
      * @param retVal The value
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int setTreeFilter(PointerByReference retVal);
 
     /**
      * Indicates whether returned elements contain full references to the underlying UI, or only cached information.
      * @param mode The mode to use
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getAutomationElementMode(PointerByReference mode);
 
     /**
      * Sets whether returned elements contain full references to the underlying UI, or only cached information.
      * @param mode The mode
-     * @return COM result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int setAutomationElementMode(PointerByReference mode);
 }

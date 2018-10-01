@@ -73,7 +73,7 @@ public class IUIAutomationElement3Converter {
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getRuntimeId (/* SAFEARRAY */ PointerByReference runtimeId) {
+            public int getCurrentRuntimeId (PointerByReference runtimeId) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, runtimeId});
             }
