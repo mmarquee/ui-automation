@@ -44,12 +44,14 @@ public class TestMainWPF extends TestBase {
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        AutomationApplication application =
+                new AutomationApplication(
+                        new ElementBuilder()
+                                .automation(automation)
+                                .applicationPath("apps\\SampleWpfApplication.exe"));
 
         try {
-            application =
-                    automation.launchOrAttach(
-                            "apps\\SampleWpfApplication.exe");
+            application.launchOrAttach();
         } catch (Throwable ex) {
             logger.warn("Failed to find application", ex);
         }
