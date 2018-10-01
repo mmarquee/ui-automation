@@ -229,10 +229,23 @@ public class TestMainWPF extends TestBase {
                             Search.getBuilder(1).build());
             radio.select();
 
+            // SLIDER *********************************************
+
+            logger.info("++ SLIDER ++");
+
+            AutomationSlider slider =
+                    applicationWindow.getSlider(
+                            Search.getBuilder(0).build());
+            logger.info("Slider value = " + slider.getRangeValue());
+
+            slider.setRangeValue(20);
+            logger.info("Slider is now = " + slider.getRangeValue());
+
+
             // TEXT BOX *********************************************
 
             logger.info("++ TEXT BOX ++");
-
+/*
             AutomationTextBox tb0 =
                     applicationWindow.getTextBox(
                             Search.getBuilder(9).build());
@@ -244,7 +257,7 @@ public class TestMainWPF extends TestBase {
                             Search.getBuilder(18).build());
             String tb1Text = tb1.getValue();
             logger.info("Text for text box 1 is " + tb1Text);
-
+*/
             // PROGRESS BAR *********************************************
 
             logger.info("++ PROGRESS BAR ++");
@@ -254,22 +267,12 @@ public class TestMainWPF extends TestBase {
                             Search.getBuilder(0).build());
             logger.info("Progress = " + progress.getRangeValue());
 
-            // Looks like this does bad things
-            //  progress.setRangeValue(100.0);
-            //  logger.info("Progress is now = " + progress.getRangeValue());
-
-            // SLIDER *********************************************
-
-            logger.info("++ SLIDER ++");
-
-            AutomationSlider slider =
-                    applicationWindow.getSlider(
-                            Search.getBuilder(0).build());
-            logger.info("Slider value = " + slider.getRangeValue());
-
-            // Looks like this does bad things too
-            //       progress.setRangeValue(25);
-            //       logger.info("Progress is now = " + progress.getRangeValue());
+            if (progress.getIsReadOnly()) {
+                logger.info("Progress range is read-only");
+            } else {
+                progress.setRangeValue(50.0);
+                logger.info("Progress is now = " + progress.getRangeValue());
+            }
 
             // Status bar *********************************************
 

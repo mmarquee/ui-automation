@@ -18,8 +18,11 @@ package mmarquee.uiautomation;
 import com.sun.jna.platform.win32.COM.IUnknown;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.ptr.DoubleByReference;
+import com.sun.jna.ptr.IntByReference;
 
 /**
+ * Provides access to a control that presents a range of values.
+ *
  * @author Mark Humphreys
  * Date 13/07/2016.
  */
@@ -30,6 +33,27 @@ public interface IUIAutomationRangeValuePattern extends IUnknown {
     Guid.IID IID = new Guid.IID(
             "{59213F4F-7346-49E5-B120-80555987A148}");
 
+    /**
+     * Sets the value of the control.
+     *
+     * @param val the value to set
+     * @return Success or failure
+     */
     int setValue(Double val);
+
+    /**
+     * Retrieves the value of the control.
+     *
+     * @param retVal The value to set
+     * @return Success or failure
+     */
     int getValue(DoubleByReference retVal);
+
+    /**
+     * Indicates whether the value of the element can be changed.
+     *
+     * @param retVal The return value
+     * @return Success or failure
+     */
+    int getIsReadOnly(IntByReference retVal);
 }

@@ -16,6 +16,7 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.DoubleByReference;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 import mmarquee.automation.AutomationElement;
@@ -97,5 +98,22 @@ public class Range extends BasePattern {
         }
 
         return dbr.getValue();
+    }
+
+    /**
+     * Whether the control range value is read only.
+     *
+     * @return True if read only
+     * @throws AutomationException Something is wrong
+     */
+    public boolean getIsReadOnly () throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        final int res = this.getPattern().getIsReadOnly(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return (ibr.getValue() == 1);
     }
 }

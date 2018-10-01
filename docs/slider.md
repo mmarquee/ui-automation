@@ -1,11 +1,15 @@
 # Discovery 
 * See [Element Discovery](element-discovery.md)
 
+# Example
+
 ```
   AutomationSlider slider = applicationWindow.getSlider(Search.getBuilder(0).build());
   logger.info("Slider value = " + slider.getRangeValue());
 
-  // Looks like this does bad things too
-  //       progress.setRangeValue(25);
-  //       logger.info("Progress is now = " + progress.getRangeValue());
+  // Set the value
+  slider.setRangeValue(20);
+  
+  // Get the new valueOn
+  logger.info("Slider value is now = " + slider.getRangeValue());
 ```

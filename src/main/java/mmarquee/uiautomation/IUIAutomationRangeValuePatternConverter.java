@@ -20,6 +20,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -27,7 +28,7 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationRangeValuePatternConverter {
-    private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationInvokePattern
+    private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationRangeValuePattern
 
     public static IUIAutomationRangeValuePattern pointerToInterface(final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
@@ -60,6 +61,11 @@ public class IUIAutomationRangeValuePatternConverter {
 
             public int getValue(DoubleByReference retVal) {
                 Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            public int getIsReadOnly(IntByReference retVal) {
+                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };
