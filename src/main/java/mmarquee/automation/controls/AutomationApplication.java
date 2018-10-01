@@ -58,6 +58,11 @@ public class AutomationApplication extends AutomationBase {
     private Process process;
 
     /**
+     * The pathname.
+     */
+    private String pathname;
+
+    /**
      * A very, very long timeout.
      */
     private static final WinDef.DWORD INFINITE_TIMEOUT =
@@ -221,24 +226,27 @@ public class AutomationApplication extends AutomationBase {
         this.isAttached = builder.getAttached();
         this.user32 = builder.getUser32();
         this.process = builder.getProcess();
-       // Process process = builder.getProcess();
 
-        if (builder.getHasHandle()) {
-            this.handle = builder.getHandle();
+        if (builder.getHasPath()) {
+            this.pathname = builder.getPath();
         } else {
+            if (builder.getHasHandle()) {
+                this.handle = builder.getHandle();
+            } else {
 
-            String name = process.getClass().getName();
+                String name = process.getClass().getName();
 
-            if (name.equals("java.lang.Wind32Process")
-                    || name.equals("java.lang.ProcessImpl")) {
-                try {
-                    //noinspection JavaReflectionMemberAccess
-                    Field f = process.getClass().getDeclaredField("handle");
-                    f.setAccessible(true);
-                    this.handle.setPointer(Pointer.createConstant(
-                            f.getLong(process)));
-                } catch (Throwable e) {
-                    // Handle the error nicely
+                if (name.equals("java.lang.Wind32Process")
+                        || name.equals("java.lang.ProcessImpl")) {
+                    try {
+                        //noinspection JavaReflectionMemberAccess
+                        Field f = process.getClass().getDeclaredField("handle");
+                        f.setAccessible(true);
+                        this.handle.setPointer(Pointer.createConstant(
+                                f.getLong(process)));
+                    } catch (Throwable e) {
+                        // Handle the error nicely
+                    }
                 }
             }
         }
@@ -336,5 +344,9 @@ public class AutomationApplication extends AutomationBase {
                 version[ExecutableFileInfo.MINOR_VERSION],
                 version[ExecutableFileInfo.RELEASE],
                 version[ExecutableFileInfo.BUILD]);
+    }
+
+    public void launchOrAttach() throws Exception {
+        this.getAutomation().launchOrAttach(this.pathname);
     }
 }

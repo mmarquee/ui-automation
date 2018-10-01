@@ -52,6 +52,10 @@ public class ElementBuilder {
     /** The process. */
     private Process process;
 
+
+    /** The application path. */
+    private String path;
+
     /** Attached. */
     private boolean attached;
 
@@ -129,6 +133,18 @@ public class ElementBuilder {
         for (final BasePattern pattern: patterns) {
             this.automationPatterns.add(pattern);
         }
+
+        return this;
+    }
+
+    /**
+     * Create a ElementBuilder with a path (this only make sense for
+     * applications).
+     * @param inPath The path
+     * @return The ElementBuilder
+     */
+    public ElementBuilder applicationPath(final String inPath) {
+        this.path = inPath;
 
         return this;
     }
@@ -240,6 +256,14 @@ public class ElementBuilder {
     }
 
     /**
+     * Gets the path (only for applications).
+     * @return The configured path
+     */
+    public String getPath() {
+        return this.path;
+    }
+
+    /**
      * Gets the parent.
      * @return The parent
      */
@@ -269,5 +293,13 @@ public class ElementBuilder {
      */
     public boolean getHasHandle() {
         return this.handle != null;
+    }
+
+    /**
+     * Has a path.
+     * @return true if path is present
+     */
+    public boolean getHasPath()  {
+        return !this.path.isEmpty();
     }
 }

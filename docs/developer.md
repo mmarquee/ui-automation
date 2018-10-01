@@ -62,7 +62,19 @@ The AutomationApplication class provides functionality to start and attach to an
 The snippet below will check whether Project1.exe is running, attaching to it if it is, or launch it if not.
 
 ```
-  AutomationApplication application = automation.launchOrAttach("...\\Project1.exe");
+  // Build the application details up, ready for launching
+  AutomationApplication application =
+    new AutomationApplication(
+        new ElementBuilder()
+                .automation(automation)
+                .applicationPath("apps\\Project1.exe"));
+
+  try {
+    application.launchOrAttach();
+  } catch (Throwable ex) {
+    logger.warn("Failed to find application", ex);
+  }
+
 ```
 
 ### Getting hold of a window
