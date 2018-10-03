@@ -23,7 +23,7 @@ public class HyperlinkTest {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -41,7 +41,7 @@ public class HyperlinkTest {
 
     @Test
     public void testClick_Called_Once_When_Invoke_Pattern_Available() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
         when(pattern.isAvailable()).thenReturn(true);
 
@@ -58,7 +58,7 @@ public class HyperlinkTest {
 
     @Test(expected=PatternNotFoundException.class)
     public void testClick_Throws_PatternNotFoundException_When_Invoke_Pattern_Not_Available() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
         when(pattern.isAvailable()).thenReturn(false);
 

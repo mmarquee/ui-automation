@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Text;
 import mmarquee.uiautomation.IUIAutomation;
@@ -36,7 +36,7 @@ public class DocumentTest {
 
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Text pattern = Mockito.mock(Text.class);
 
         when(pattern.isAvailable()).thenReturn(true);
@@ -55,7 +55,7 @@ public class DocumentTest {
 
     @Test
     public void testGetSelection_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Text pattern = Mockito.mock(Text.class);
         when(pattern.isAvailable()).thenReturn(true);
 
@@ -74,7 +74,7 @@ public class DocumentTest {
 
     @Test
     public void testGetText_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Text pattern = Mockito.mock(Text.class);
 
         when(pattern.isAvailable()).thenReturn(true);

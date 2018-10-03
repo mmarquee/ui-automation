@@ -107,7 +107,7 @@ public abstract class BaseAutomation {
      * @return The List.
      * @throws AutomationException Error in the automation library.
      */
-    public List<AutomationElement> collectionToList(
+    public List<Element> collectionToList(
             final IUIAutomationElementArray collection)
             throws AutomationException {
 
@@ -118,7 +118,7 @@ public abstract class BaseAutomation {
             throw new AutomationException(res);
         }
 
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
         for (int count = 0; count < ibr.getValue(); count++) {
 
@@ -139,7 +139,7 @@ public abstract class BaseAutomation {
                 IUIAutomationElement element =
                         IUIAutomationElementConverter.pointerToInterface(pbr);
 
-                list.add(new AutomationElement(element));
+                list.add(new Element(element));
             }
         }
 

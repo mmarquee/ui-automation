@@ -4,7 +4,7 @@
 # Example
 
 ```
-  AutomationSlider slider = applicationWindow.getSlider(Search.getBuilder(0).build());
+  Slider slider = applicationWindow.getSlider(Search.getBuilder(0).build());
   logger.info("Slider value = " + slider.getRangeValue());
 
   // Set the value

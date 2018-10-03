@@ -5,10 +5,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import mmarquee.automation.Element;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -25,7 +25,7 @@ public class AutomationSplitButtonTest {
 
     @Test
     public void testGetName_For_Button() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -43,7 +43,7 @@ public class AutomationSplitButtonTest {
 
     @Test
     public void testSetFocus_Calls_setFocus_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -59,7 +59,7 @@ public class AutomationSplitButtonTest {
 
     @Test
     public void testClick_Calls_Invoke_Once_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         when(pattern.isAvailable()).thenReturn(true);
@@ -77,7 +77,7 @@ public class AutomationSplitButtonTest {
 
     @Test(expected=PatternNotFoundException.class)
     public void testClick_Calls_Throws_PatternNotFoundException_When_Pattern_Not_Available() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         when(pattern.isAvailable()).thenReturn(false);

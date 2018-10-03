@@ -19,6 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import mmarquee.automation.controls.menu.Menu;
 import mmarquee.uiautomation.IUIAutomationElement;
 import org.apache.log4j.Logger;
 import org.junit.Assume;
@@ -29,14 +30,13 @@ import org.mockito.Mockito;
 
 import com.sun.jna.platform.win32.Variant;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -59,8 +59,8 @@ public class AutomationControlFactoryTest {
     protected Logger logger = Logger.getLogger(AutomationControlFactoryTest.class.getName());
 	
     private AutomationBase parent;
-    private AutomationElement parentElement;
-	private AutomationElement element;
+    private Element parentElement;
+	private Element element;
 	private IUIAutomationElement iuielement;
 
     static {
@@ -70,10 +70,10 @@ public class AutomationControlFactoryTest {
     @Before
     public void setUp() {
 		parent = Mockito.mock(AutomationBase.class);
-		parentElement = Mockito.mock(AutomationElement.class);
+		parentElement = Mockito.mock(Element.class);
 		when(parent.getElement()).thenReturn(parentElement);
 		iuielement = Mockito.mock(IUIAutomationElement.class);
-        element = new AutomationElement(iuielement);
+        element = new Element(iuielement);
     }
     
 
@@ -140,18 +140,18 @@ public class AutomationControlFactoryTest {
 
     @Test
     public void get_returns_AutomationMenu_on_Menu() throws Exception {
-        testGet(ControlType.Menu, AutomationMenu.class);
+        testGet(ControlType.Menu, Menu.class);
     }
 
     @Test
     public void get_returns_AutomationMainMenu_on_MenuBar() throws Exception {
-        AutomationBase control = testGet(ControlType.MenuBar, AutomationMainMenu.class);
-        assertEquals(parentElement, ((AutomationMainMenu) control ).getParentElement());
+        AutomationBase control = testGet(ControlType.MenuBar, MainMenu.class);
+        assertEquals(parentElement, ((MainMenu) control ).getParentElement());
     }
 
     @Test
     public void get_returns_AutomationMenuItem_on_MenuItem() throws Exception {
-        testGet(ControlType.MenuItem, AutomationMenuItem.class);
+        testGet(ControlType.MenuItem, MenuItem.class);
     }
 
     @Test

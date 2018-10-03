@@ -15,32 +15,60 @@
  */
 package mmarquee.uiautomation;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.Structure;
+
 import java.util.Collections;
 import java.util.List;
 
-import com.sun.jna.*;
-
 /**
- * Contains values that specify the scope of various operations in the Microsoft UI Automation tree.
+ * Contains values that specify the scope of various operations in the
+ * Microsoft UI Automation tree.
  *
  * @author Mark Humphreys
  * Date 13/07/2016.
  */
 public class TreeScope extends Structure {
-    public static class ByReference extends TreeScope implements
-            Structure.ByReference {
+    /**
+     * ByReference version of TreeScope.
+     */
+    public static class ByReference
+            extends TreeScope
+            implements Structure.ByReference {
     }
 
-    public int value;
+    /**
+     * The value.
+     */
+    private int value;
 
-    public  TreeScope() {
+    /**
+     * Accessor for the value.
+     * @return The value
+     */
+    public int getValue() {
+        return this.value;
     }
 
-    public  TreeScope(int value) {
-        this.value = value;
+    /**
+     * Default constructor.
+     */
+    public TreeScope() {
     }
 
-    public  TreeScope(Pointer pointer) {
+    /**
+     * Constructor for integers.
+     * @param inValue The value
+     */
+    public TreeScope(final int inValue) {
+        this.value = inValue;
+    }
+
+    /**
+     * Constructor for pointer value.
+     * @param pointer Pointer to value
+     */
+    public TreeScope(final Pointer pointer) {
         super(pointer);
         this.read();
     }
@@ -48,37 +76,37 @@ public class TreeScope extends Structure {
     /**
      * The scope excludes the subtree from the search.
      */
-    public static final int None = 0;
+    public static final int NONE = 0;
 
     /**
      * The scope includes the element itself.
      */
-    public static final int Element = 1;
+    public static final int ELEMENT = 1;
 
     /**
      * The scope includes children of the element.
      */
-    public static final int Children = 2;
+    public static final int CHILDREN = 2;
 
     /**
      * The scope includes children and more distant descendants of the element.
      */
-    public static final int Descendants = 4;
+    public static final int DESCENDANTS = 4;
 
     /**
      * The scope includes the parent of the element.
      */
-    public static final int Parent = 8;
+    public static final int PARENT = 8;
 
     /**
      * The scope includes the element and all its descendants.
      */
-    public static final int Subtree = 7;
+    public static final int SUBTREE = 7;
 
     /**
      * The scope includes the parent and more distant ancestors of the element.
      */
-    public static final int Ancestors = 16;
+    public static final int ANCESTORS = 16;
 
     @Override
     protected List<String> getFieldOrder() {

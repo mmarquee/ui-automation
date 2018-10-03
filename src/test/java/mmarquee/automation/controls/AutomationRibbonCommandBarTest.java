@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -47,7 +47,7 @@ public class AutomationRibbonCommandBarTest {
 
     @Test
     public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");

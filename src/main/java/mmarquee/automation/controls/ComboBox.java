@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
@@ -77,11 +77,11 @@ public final class ComboBox
 
         List<ListItem> list = new ArrayList<>();
 
-        List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.Children),
+        List<Element> collection =
+                this.findAll(new TreeScope(TreeScope.CHILDREN),
                         this.createControlTypeCondition(ControlType.ListItem));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             list.add(new ListItem(new ElementBuilder(element)));
         }
 
@@ -119,12 +119,12 @@ public final class ComboBox
     public ListItem getItem(final int index)
             throws AutomationException {
 
-        List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.Children),
+        List<Element> items =
+                this.findAll(new TreeScope(TreeScope.CHILDREN),
                              this.createControlTypeCondition(
                                      ControlType.ListItem));
 
-        AutomationElement item = items.get(index);
+        Element item = items.get(index);
 
         if (item != null) {
             return new ListItem(new ElementBuilder(item));
@@ -141,8 +141,8 @@ public final class ComboBox
      */
     public ListItem getItem(final String name)
             throws AutomationException {
-        AutomationElement item =
-                this.findFirst(new TreeScope(TreeScope.Descendants),
+        Element item =
+                this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.ListItem)));
@@ -162,14 +162,14 @@ public final class ComboBox
      */
     public ListItem getItem(final Pattern namePattern)
             throws AutomationException {
-        List<AutomationElement> collection;
+        List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createControlTypeCondition(ControlType.ListItem));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -193,8 +193,8 @@ public final class ComboBox
      */
     private ListItem getItemByAutomationId(final String automationId)
             throws AutomationException {
-        AutomationElement item =
-                this.findFirst(new TreeScope(TreeScope.Descendants),
+        Element item =
+                this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.ListItem)));
@@ -214,11 +214,11 @@ public final class ComboBox
      */
     public List<ListItem> getSelectedItems()
             throws AutomationException, PatternNotFoundException {
-    	List<AutomationElement> collection = getCurrentSelection();
+    	List<Element> collection = getCurrentSelection();
 
         List<ListItem> list = new ArrayList<>();
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             list.add(new ListItem(new ElementBuilder(element)));
         }
 

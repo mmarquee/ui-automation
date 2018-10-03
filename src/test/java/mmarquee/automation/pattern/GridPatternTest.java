@@ -7,6 +7,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+import mmarquee.automation.Element;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,7 +24,6 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.uiautomation.IUIAutomationElement;
 import mmarquee.uiautomation.IUIAutomationGridPattern;
@@ -37,7 +37,7 @@ import mmarquee.uiautomation.IUIAutomationGridPattern;
 @RunWith(MockitoJUnitRunner.class)
 public class GridPatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationGridPattern rawPattern;
@@ -146,7 +146,7 @@ public class GridPatternTest {
                 .when(spyPattern)
                 .makeUnknown(any());
 
-        AutomationElement element = spyPattern.getItem(0,0);
+        Element element = spyPattern.getItem(0,0);
     }
 
     @Test(expected=AutomationException.class)

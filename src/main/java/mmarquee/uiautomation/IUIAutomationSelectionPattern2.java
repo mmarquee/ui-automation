@@ -23,15 +23,16 @@ import com.sun.jna.ptr.PointerByReference;
  * @author Mark Humphreys
  * Date 10/12/2017
  */
-public interface IUIAutomationSelectionPattern2 extends IUIAutomationSelectionPattern {
+public interface IUIAutomationSelectionPattern2
+        extends IUIAutomationSelectionPattern {
     /**
      * The interface IID for QueryInterface et al
      */
     Guid.IID IID = new Guid.IID(
                 "{0532bfae-c011-4e32-a343-6d642d798555}");
 
-    int currentCurrentSelectedItem(PointerByReference retval);
-    int currentFirstSelectedItem(PointerByReference retval);
-    int currentItemCount(IntByReference retval);
-    int currentLastSelectedItem(PointerByReference retval);
+    int getCurrentFirstSelectedItem(PointerByReference retval);
+    int getCurrentLastSelectedItem(PointerByReference retval);
+    int getCurrentCurrentSelectedItem(PointerByReference retVal);
+    int getCurrentItemCount(IntByReference retval);
 }

@@ -112,7 +112,8 @@ public class IUIWindowPatternTest {
             automation.createPropertyCondition(PropertyID.ControlType.getValue(), variant, pCondition);
             PointerByReference first = new PointerByReference();
 
-            rootElement.findFirst(new TreeScope(TreeScope.Children), pCondition.getValue(), first);
+            rootElement.findFirst(new TreeScope(TreeScope.CHILDREN),
+                    pCondition.getValue(), first);
 
             Unknown uElement = new Unknown(first.getValue());
 

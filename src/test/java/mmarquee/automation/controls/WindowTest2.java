@@ -53,7 +53,7 @@ public class WindowTest2 {
     }
 
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Mock
     mmarquee.automation.pattern.Window window;
@@ -232,7 +232,7 @@ public class WindowTest2 {
             return 1;
         }).when(elem).getCurrentPropertyValue(anyInt(), any());
 
-        AutomationElement localElement = Mockito.mock(AutomationElement.class);
+        Element localElement = Mockito.mock(Element.class);
 
         localElement.setElement(elem);
 
@@ -359,8 +359,8 @@ public class WindowTest2 {
             return 0;
         }).when(listElement).getCurrentControlType(any());
 
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        List<Element> result = new ArrayList<>();
+        result.add(new Element(listElement));
 
         when(element.findAll(any(), any())).thenReturn(result);
 
@@ -387,8 +387,8 @@ public class WindowTest2 {
             return 0;
         }).when(listElement).getCurrentControlType(any());
 
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        List<Element> result = new ArrayList<>();
+        result.add(new Element(listElement));
 
         when(element.findAll(any(), any())).thenReturn(result);
 
@@ -415,8 +415,8 @@ public class WindowTest2 {
             return 0;
         }).when(listElement).getCurrentControlType(any());
 
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        List<Element> result = new ArrayList<>();
+        result.add(new Element(listElement));
 
         when(element.findAll(any(), any())).thenReturn(result);
 
@@ -454,7 +454,7 @@ public class WindowTest2 {
         doAnswer(invocation -> {
             IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-            return new AutomationElement(elem);
+            return new Element(elem);
         }).when(element).findFirst(any(), any());
 
         Window wndw = new Window(

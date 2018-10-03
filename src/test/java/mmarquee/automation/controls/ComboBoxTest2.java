@@ -47,14 +47,16 @@ import static org.mockito.Mockito.*;
  * Tests for ComboBox functionality
  */
 public class ComboBoxTest2 {
-	@Mock AutomationElement element;
-	@Mock AutomationElement targetElement;
+	@Mock
+    Element element;
+	@Mock
+    Element targetElement;
 	@Mock ExpandCollapse collapse;
 	@Mock Value value;
 	@Mock Selection selection;
 	@Mock
     IUIAutomationElement elem;
-	List<AutomationElement> list;
+	List<Element> list;
 
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -111,7 +113,7 @@ public class ComboBoxTest2 {
     @Deprecated
     public void test_GetList_Calls_Value_From_Pattern() throws Exception {
 
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
         Mockito.when(elem.getCurrentControlType(any())).thenAnswer(
                 invocation -> {
@@ -123,7 +125,7 @@ public class ComboBoxTest2 {
                     return 0;
                 });
 
-        list.add(new AutomationElement(elem));
+        list.add(new Element(elem));
 
         when(element.getName()).thenReturn("NAME");
         when(element.findAll(any(), any())).thenReturn(list);
@@ -167,7 +169,7 @@ public class ComboBoxTest2 {
     @Test
     public void test_GetItems_Calls_Value_From_Pattern() throws Exception {
 
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
         Mockito.when(elem.getCurrentControlType(any())).thenAnswer(
                 invocation -> {
@@ -179,7 +181,7 @@ public class ComboBoxTest2 {
                     return 0;
                 });
 
-        list.add(new AutomationElement(elem));
+        list.add(new Element(elem));
 
         when(element.getName()).thenReturn("NAME");
         when(element.findAll(any(), any())).thenReturn(list);
@@ -221,7 +223,8 @@ public class ComboBoxTest2 {
     
     @Test
     public void test_GetItem_By_Index() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(list);
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
@@ -234,8 +237,9 @@ public class ComboBoxTest2 {
     
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_GetItem_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        List<Element> list = new ArrayList<>();
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(list);
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
@@ -245,7 +249,7 @@ public class ComboBoxTest2 {
 
     @Test
     public void test_GetItem_By_Name() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(targetElement);
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
@@ -258,7 +262,7 @@ public class ComboBoxTest2 {
 
     @Test(expected=ElementNotFoundException.class)
     public void test_GetItem_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenThrow(new ElementNotFoundException());
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
@@ -268,7 +272,7 @@ public class ComboBoxTest2 {
 
     @Test
     public void test_GetItem_By_Name_with_RegExPattern() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("myWorld");
 
         ComboBox combo = new ComboBox(
@@ -283,7 +287,7 @@ public class ComboBoxTest2 {
     @Test(expected=ItemNotFoundException.class)
     public void test_GetItem_By_Name_with_RegExPattern_Throws_Exception_When_Not_found() throws Exception {
         when(targetElement.getName()).thenReturn("myWorld");
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
@@ -293,7 +297,7 @@ public class ComboBoxTest2 {
 
     @Test
     public void test_GetItem_By_AutomationId() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(targetElement);
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));
@@ -306,7 +310,7 @@ public class ComboBoxTest2 {
     
     @Test(expected=ElementNotFoundException.class)
     public void test_GetItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenThrow(new ElementNotFoundException());
 
         ComboBox combo = new ComboBox(
                 new ElementBuilder(element).addPattern(collapse).addPattern(value).addPattern(selection));

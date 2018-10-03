@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
 import mmarquee.uiautomation.IUIAutomation;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 public class AutomationPasswordEditBoxTest {
     @Test
     public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         
         when(element.getClassName()).thenReturn(PasswordEditBox.CLASS_NAME);
@@ -51,7 +51,7 @@ public class AutomationPasswordEditBoxTest {
 
     @Test
     public void testSetValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
 
         when(value.isAvailable()).thenReturn(true);

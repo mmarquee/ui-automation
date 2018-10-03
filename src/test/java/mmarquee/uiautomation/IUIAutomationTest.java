@@ -246,7 +246,7 @@ public class IUIAutomationTest {
             automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
-            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+            rootElement.findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
             IntByReference same = new IntByReference();
 

@@ -15,7 +15,7 @@
  */
 package mmarquee.demo;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.Application;
@@ -123,13 +123,13 @@ public class TestMainExcel extends TestBase {
                 cell3.addToSelection();
 
                 // something
-                List<AutomationElement> items0 = grid.getSelection();
+                List<Element> items0 = grid.getSelection();
                 logger.info(items0.size());
 
                 cell2.removeFromSelection();
 
                 // something again - should be different
-                List<AutomationElement> items1 = grid.getSelection();
+                List<Element> items1 = grid.getSelection();
                 logger.info(items1.size());
             } else {
                 logger.info("Multiple selection not allowed");

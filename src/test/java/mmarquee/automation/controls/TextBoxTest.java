@@ -1,6 +1,6 @@
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
 import mmarquee.uiautomation.IUIAutomation;
@@ -23,7 +23,7 @@ public class TextBoxTest {
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getName()).thenReturn("NAME");
 
@@ -44,7 +44,7 @@ public class TextBoxTest {
 
     @Test
     public void testGetValue_Gets_Value_From_Element_Value() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);

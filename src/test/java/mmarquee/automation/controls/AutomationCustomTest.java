@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Value;
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 public class AutomationCustomTest {
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
         Value value = Mockito.mock(Value.class);
         when(element.getName()).thenReturn("NAME");

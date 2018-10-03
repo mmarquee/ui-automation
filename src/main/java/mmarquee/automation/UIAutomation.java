@@ -25,7 +25,7 @@ import mmarquee.automation.controls.Application;
 import mmarquee.automation.controls.Panel;
 import mmarquee.automation.controls.Window;
 import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.controls.menu.AutomationMenu;
+import mmarquee.automation.controls.menu.Menu;
 import mmarquee.uiautomation.*;
 import mmarquee.automation.utils.Utils;
 
@@ -61,7 +61,7 @@ public class UIAutomation extends BaseAutomation {
     /**
      * The root element.
      */
-    private AutomationElement rootElement;
+    private Element rootElement;
 
     /**
      * Main automation interface.
@@ -101,7 +101,7 @@ public class UIAutomation extends BaseAutomation {
         WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pRoot);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            this.rootElement = new AutomationElement(IUIAutomationElementConverter.pointerToInterface(pRoot));
+            this.rootElement = new Element(IUIAutomationElementConverter.pointerToInterface(pRoot));
         }
     }
 
@@ -302,12 +302,12 @@ public class UIAutomation extends BaseAutomation {
      * @return Window The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
-    private AutomationElement get(final ControlType controlType,
-                                  final String title,
-                                  final int treeScopeConstant,
-                                  final int numberOfRetries)
+    private Element get(final ControlType controlType,
+                        final String title,
+                        final int treeScopeConstant,
+                        final int numberOfRetries)
             throws AutomationException {
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
         // And Condition
         PointerByReference pAndCondition = this.createAndCondition(
@@ -352,13 +352,13 @@ public class UIAutomation extends BaseAutomation {
      * @return Window The found 'element'.
      * @throws ElementNotFoundException Element is not found.
      */
-    private AutomationElement get(final ControlType controlType,
-                                  final Pattern titlePattern,
-                                  final int treeScopeConstant,
-                                  final int numberOfRetries)
+    private Element get(final ControlType controlType,
+                        final Pattern titlePattern,
+                        final int treeScopeConstant,
+                        final int numberOfRetries)
             throws AutomationException {
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
         // And Condition
         PointerByReference condition = this.createControlTypeCondition(controlType);
@@ -366,10 +366,10 @@ public class UIAutomation extends BaseAutomation {
         retry_loop: for (int loop = 0; loop < numberOfRetries; loop++) {
 
             try {
-                List<AutomationElement> collection =
+                List<Element> collection =
                 		this.rootElement.findAll(new TreeScope(treeScopeConstant), condition);
 
-                for (AutomationElement element : collection) {
+                for (Element element : collection) {
                     String name = element.getName();
 
                     if (name != null && titlePattern.matcher(name).matches()) {
@@ -424,7 +424,8 @@ public class UIAutomation extends BaseAutomation {
      */
     public Window getDesktopWindow(final String title, final int retries)
             throws AutomationException {
-        return new Window(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Children, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window,
+                title, TreeScope.CHILDREN, retries)));
     }
 
     /**
@@ -450,7 +451,8 @@ public class UIAutomation extends BaseAutomation {
      */
     public Window getDesktopWindow(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new Window(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Children, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window,
+                titlePattern, TreeScope.CHILDREN, retries)));
     }
 
     /**
@@ -476,7 +478,8 @@ public class UIAutomation extends BaseAutomation {
      */
     public Window getWindow(final String title, final int retries)
             throws AutomationException {
-        return new Window(new ElementBuilder(this.get(ControlType.Window, title, TreeScope.Descendants, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window,
+                title, TreeScope.DESCENDANTS, retries)));
     }
 
     /**
@@ -502,7 +505,8 @@ public class UIAutomation extends BaseAutomation {
      */
     public Window getWindow(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new Window(new ElementBuilder(this.get(ControlType.Window, titlePattern, TreeScope.Descendants, retries)));
+        return new Window(new ElementBuilder(this.get(ControlType.Window,
+                titlePattern, TreeScope.DESCENDANTS, retries)));
     }
 
     /**
@@ -684,7 +688,8 @@ public class UIAutomation extends BaseAutomation {
      */
     public Panel getDesktopObject(final String title, final int retries)
             throws AutomationException {
-        return new Panel(new ElementBuilder(this.get(ControlType.Pane, title, TreeScope.Children, retries)));
+        return new Panel(new ElementBuilder(this.get(ControlType.Pane, title,
+                TreeScope.CHILDREN, retries)));
     }
 
     /**
@@ -711,19 +716,20 @@ public class UIAutomation extends BaseAutomation {
      */
     public Panel getDesktopObject(final Pattern titlePattern, final int retries)
             throws AutomationException {
-        return new Panel(new ElementBuilder(this.get(ControlType.Pane, titlePattern, TreeScope.Children, retries)));
+        return new Panel(new ElementBuilder(this.get(ControlType.Pane,
+                titlePattern, TreeScope.CHILDREN, retries)));
     }
 
     /**
      * Gets the desktop menu associated with the title.
      *
      * @param title Title of the menu to search for.
-     * @return AutomationMenu The found menu.
+     * @return Menu The found menu.
      * @throws ElementNotFoundException Element is not found.
      */
-    public AutomationMenu getDesktopMenu(final String title)
+    public Menu getDesktopMenu(final String title)
             throws AutomationException {
-        AutomationElement element = null;
+        Element element = null;
 
         // Look for a specific title
         Variant.VARIANT.ByValue variant = new Variant.VARIANT.ByValue();
@@ -736,8 +742,9 @@ public class UIAutomation extends BaseAutomation {
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
                 try {
-                    element = this.rootElement.findFirst(new TreeScope(TreeScope.Descendants),
-                            pCondition1);
+                    element = this.rootElement.findFirst(
+                            new TreeScope(TreeScope.DESCENDANTS),
+                                    pCondition1);
                 } catch (AutomationException ex) {
                     logger.info("Not found, retrying " + title);
                 }
@@ -755,7 +762,7 @@ public class UIAutomation extends BaseAutomation {
             throw new ItemNotFoundException(title);
         }
 
-        return new AutomationMenu(new ElementBuilder(element));
+        return new Menu(new ElementBuilder(element));
     }
 
     /**
@@ -768,9 +775,9 @@ public class UIAutomation extends BaseAutomation {
             throws AutomationException {
         List<Window> result = new ArrayList<>();
 
-        List<AutomationElement> collection = getRootChildren(ControlType.Window);
+        List<Element> collection = getRootChildren(ControlType.Window);
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             result.add(new Window(new ElementBuilder(element)));
         }
 
@@ -787,9 +794,9 @@ public class UIAutomation extends BaseAutomation {
             throws AutomationException {
         List<Panel> result = new ArrayList<>();
 
-        List<AutomationElement> collection = getRootChildren(ControlType.Pane);
+        List<Element> collection = getRootChildren(ControlType.Pane);
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             result.add(new Panel(new ElementBuilder(element)));
         }
 
@@ -802,11 +809,12 @@ public class UIAutomation extends BaseAutomation {
      * @return List of Elements
      * @throws AutomationException Something went wrong
      */
-	private List<AutomationElement> getRootChildren(final ControlType controlType)
+	private List<Element> getRootChildren(final ControlType controlType)
             throws AutomationException {
         PointerByReference pCondition = this.createControlTypeCondition(controlType);
 
-		return this.rootElement.findAll(new TreeScope(TreeScope.Children), pCondition);
+		return this.rootElement.findAll(new TreeScope(TreeScope.CHILDREN),
+                pCondition);
 	}
 
     /**
@@ -870,7 +878,7 @@ public class UIAutomation extends BaseAutomation {
      * @return The actual element under the tag.
      * @throws AutomationException The automation library returned an error
      */
-    public AutomationElement getElementFromPoint(final WinDef.POINT pt)
+    public Element getElementFromPoint(final WinDef.POINT pt)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
@@ -878,7 +886,7 @@ public class UIAutomation extends BaseAutomation {
         if (res == 0) {
             IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
-            return new AutomationElement(element);
+            return new Element(element);
         } else {
             throw new AutomationException(res);
         }
@@ -891,7 +899,7 @@ public class UIAutomation extends BaseAutomation {
      * @return The actual element under the handle.
      * @throws AutomationException The automation library returned an error.
      */
-    public AutomationElement getElementFromHandle(final WinDef.HWND hwnd)
+    public Element getElementFromHandle(final WinDef.HWND hwnd)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
@@ -899,7 +907,7 @@ public class UIAutomation extends BaseAutomation {
         if (res == 0) {
             IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
-            return new AutomationElement(element);
+            return new Element(element);
         } else {
             throw new AutomationException(res);
         }
@@ -910,7 +918,7 @@ public class UIAutomation extends BaseAutomation {
      * @return The focused element.
      * @throws AutomationException Automation returned an error.
      */
-    public AutomationElement getFocusedElement()
+    public Element getFocusedElement()
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
@@ -918,7 +926,7 @@ public class UIAutomation extends BaseAutomation {
         if (res == 0) {
             IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
-            return new AutomationElement(element);
+            return new Element(element);
         } else {
             throw new AutomationException(res);
         }
@@ -929,7 +937,7 @@ public class UIAutomation extends BaseAutomation {
      *
      * @return The root element.
      */
-    public AutomationElement getRootElement() {
+    public Element getRootElement() {
         return this.rootElement;
     }
 
@@ -977,7 +985,7 @@ public class UIAutomation extends BaseAutomation {
 /*
     public void addAutomationEventHandler(EventID event,
                                           TreeScope scope,
-                                          AutomationElement element,
+                                          Element element,
                                           AutomationHandler handler) throws AutomationException {
 
         IntByReference ibr = new IntByReference();

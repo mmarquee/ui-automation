@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -41,7 +41,7 @@ public class Value extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Value(final AutomationElement element) throws AutomationException {
+    public Value(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationValuePattern.IID;
         this.patternID = PatternID.Value;

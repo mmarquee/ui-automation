@@ -15,7 +15,7 @@
  */
 package mmarquee.demo;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.Application;
@@ -88,7 +88,7 @@ public class TestMainPowerpoint extends TestBase {
             Image image =
                     slide.getImage(
                             Search.getBuilder("Title TextBox").build());
-            AutomationElement element = image.getSelectionContainer();
+            Element element = image.getSelectionContainer();
 
             logger.info(element.getName());
 

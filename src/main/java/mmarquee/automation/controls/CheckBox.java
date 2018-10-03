@@ -33,7 +33,7 @@ public final class CheckBox
      * @param builder The builder
      */
     public CheckBox(final ElementBuilder builder) {
-        super (builder);
+        super(builder);
     }
 
     /**

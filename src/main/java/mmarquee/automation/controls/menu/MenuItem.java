@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
@@ -35,21 +35,21 @@ import mmarquee.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 10/02/2016.
  */
-public class AutomationMenuItem
+public class MenuItem
         extends AutomationBase
         implements ImplementsClick, ImplementsExpand {
 
     /** The parent element. */
-    protected AutomationElement mainMenuParentElement;
+    protected Element mainMenuParentElement;
 
     /** Name of the parent. */
     protected String parentMenuName;
 
     /**
-     * Construct the AutomationMenuItem.
+     * Construct the MenuItem.
      * @param builder The builder
      */
-    public AutomationMenuItem(final ElementBuilder builder){
+    public MenuItem(final ElementBuilder builder){
         super(builder);
     }
 
@@ -69,29 +69,29 @@ public class AutomationMenuItem
 
     /**
      * Gets the list of items associated with this menu item.
-     * If the current item is known as member of an AutomationMainMenu,
+     * If the current item is known as member of an MainMenu,
      * the request is automatically redirected to the correspondent
-     * AutomationMenu, when such a menu can be found
+     * Menu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationMenuItem> getItems() throws AutomationException {
+    public List<MenuItem> getItems() throws AutomationException {
 
-    	AutomationMenu realMenu = getRealMenu();
+    	Menu realMenu = getRealMenu();
     	if (realMenu != null) {
     		return realMenu.getItems();
     	}
     	
-        List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.Descendants),
+        List<Element> items =
+                this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                         this.createControlTypeCondition(ControlType.MenuItem));
 
-        List<AutomationMenuItem> list = new ArrayList<>();
+        List<MenuItem> list = new ArrayList<>();
 
-        for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(new ElementBuilder(item)));
+        for (Element item : items) {
+            list.add(new MenuItem(new ElementBuilder(item)));
         }
 
         return list;
@@ -99,32 +99,33 @@ public class AutomationMenuItem
 
     /**
      * Gets the subItem associated with the index.
-     * If the current item is known as member of an AutomationMainMenu,
+     * If the current item is known as member of an MainMenu,
      * the request is automatically redirected to the correspondent
-     * AutomationMenu, when such a menu can be found
+     * Menu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param index The index
      * @return The found item
      * @throws AutomationException Something went wrong
      */
-    public AutomationMenuItem getMenuItem (int index) throws AutomationException {
+    public MenuItem getMenuItem (int index) throws AutomationException {
 
-    	AutomationMenu realMenu = getRealMenu();
+    	Menu realMenu = getRealMenu();
     	if (realMenu != null) {
     		return realMenu.getMenuItem(index);
     	}
     	
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
+        List<Element> items =
+                this.findAll(new TreeScope(TreeScope.CHILDREN));
 
-        return new AutomationMenuItem(new ElementBuilder(items.get(index)));
+        return new MenuItem(new ElementBuilder(items.get(index)));
     }
     
     /**
      * Get the menu item associated with the name.
-     * If the current item is known as member of an AutomationMainMenu,
+     * If the current item is known as member of an MainMenu,
      * the request is automatically redirected to the correspondent
-     * AutomationMenu, when such a menu can be found
+     * Menu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param name First Name
@@ -132,49 +133,49 @@ public class AutomationMenuItem
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem (String name)
+    public MenuItem getMenuItem (String name)
             throws PatternNotFoundException, AutomationException {
     	
-    	AutomationMenu realMenu = getRealMenu();
+    	Menu realMenu = getRealMenu();
     	if (realMenu != null) {
     		return realMenu.getMenuItem(name);
     	}
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Children),
+        Element item = this.findFirst(new TreeScope(TreeScope.CHILDREN),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(new ElementBuilder(item));
+        return new MenuItem(new ElementBuilder(item));
     }
 
     /**
      * Get the menu item matching the name.
-     * If the current item is known as member of an AutomationMainMenu,
+     * If the current item is known as member of an MainMenu,
      * the request is automatically redirected to the correspondent
-     * AutomationMenu, when such a menu can be found
+     * Menu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param namePattern a pattern matching the menu item name
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationMenuItem getMenuItem (Pattern namePattern)
+    public MenuItem getMenuItem (Pattern namePattern)
             throws AutomationException {
     	
-    	AutomationMenu realMenu = getRealMenu();
+    	Menu realMenu = getRealMenu();
     	if (realMenu != null) {
     		return realMenu.getMenuItem(namePattern);
     	}
 
-    	List<AutomationElement> collection;
+    	List<Element> collection;
 
-        AutomationElement item = null;
+        Element item = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Children),
+        collection = this.findAll(new TreeScope(TreeScope.CHILDREN),
         		this.createControlTypeCondition(ControlType.MenuItem));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -187,36 +188,36 @@ public class AutomationMenuItem
             throw new ElementNotFoundException("Failed to find element matching " + namePattern);
         }
         
-        return new AutomationMenuItem(new ElementBuilder(item));
+        return new MenuItem(new ElementBuilder(item));
     }
     
     /**
      * Get the menu item associated with the automationID.
      *
-     * If the current item is known as member of an AutomationMainMenu,
+     * If the current item is known as member of an MainMenu,
      * the request is automatically redirected to the correspondent
-     * AutomationMenu, when such a menu can be found
+     * Menu, when such a menu can be found
      * (i.e. this item is expanded)
      * 
      * @param automationId The automation ID to look for
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationMenuItem getMenuItemByAutomationId (String automationId)
+    public MenuItem getMenuItemByAutomationId (String automationId)
             throws AutomationException {
     	
-    	AutomationMenu realMenu = getRealMenu();
+    	Menu realMenu = getRealMenu();
     	if (realMenu != null) {
     		return realMenu.getMenuItemByAutomationId(automationId);
     	}
 
-        AutomationElement item =
-                this.findFirst(new TreeScope(TreeScope.Descendants),
+        Element item =
+                this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(new ElementBuilder(item));
+        return new MenuItem(new ElementBuilder(item));
     }
 
     /**
@@ -226,13 +227,13 @@ public class AutomationMenuItem
      *
      * For MainMenus, the dropdown is disconnected from the MenuItem here
      */
-    private AutomationMenu getRealMenu() throws AutomationException {
+    private Menu getRealMenu() throws AutomationException {
     	if (parentMenuName == null || mainMenuParentElement == null) {
     		return null;
     	}
     	try {
-	    	AutomationElement item = mainMenuParentElement.findFirst(
-	    	        new TreeScope(TreeScope.Descendants),
+	    	Element item = mainMenuParentElement.findFirst(
+	    	        new TreeScope(TreeScope.DESCENDANTS),
                     this.createAndCondition(
 	                        this.createNamePropertyCondition(parentMenuName),
 	                        this.createControlTypeCondition(ControlType.Menu)));
@@ -241,7 +242,7 @@ public class AutomationMenuItem
                 return null;
             }
 
-	    	return new AutomationMenu(new ElementBuilder(item));
+	    	return new Menu(new ElementBuilder(item));
     	} catch (ElementNotFoundException ex) {
     		return null;
     	}

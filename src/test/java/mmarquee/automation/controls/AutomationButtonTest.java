@@ -46,7 +46,7 @@ public class AutomationButtonTest {
 
     @Test
     public void testGetName_For_Button() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
@@ -65,7 +65,7 @@ public class AutomationButtonTest {
 
     @Test
     public void testSetFocus_Calls_setFocus_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -82,7 +82,7 @@ public class AutomationButtonTest {
 
     @Test
     public void testClick_Calls_Invoke_Once_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
         when(pattern.isAvailable()).thenReturn(true);
 
@@ -100,7 +100,7 @@ public class AutomationButtonTest {
 
     @Test(expected=PatternNotFoundException.class)
     public void testClick_Calls_Throws_PatternNotFoundException_When_Pattern_Not_Available() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
         when(pattern.isAvailable()).thenReturn(false);
 

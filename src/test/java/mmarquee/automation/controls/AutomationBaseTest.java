@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
@@ -38,13 +39,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.Element;
 import mmarquee.automation.pattern.Dock;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.GridItem;
@@ -82,8 +77,10 @@ public class AutomationBaseTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    @Mock AutomationElement element;
-    @Mock AutomationElement targetElement;
+    @Mock
+    Element element;
+    @Mock
+    Element targetElement;
     @Mock
     mmarquee.automation.pattern.Window pattern;
     @Mock ItemContainer container;
@@ -95,7 +92,7 @@ public class AutomationBaseTest {
     // Helper to test the abstract class
     static class ConcreteAutomationBase extends AutomationBase {
 
-		public ConcreteAutomationBase(AutomationElement element) {
+		public ConcreteAutomationBase(Element element) {
 			super(new ElementBuilder(element));
 		}
 	}
@@ -147,7 +144,7 @@ public class AutomationBaseTest {
         Window window = new Window(
                 new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
-        AutomationElement result = window.getElement();
+        Element result = window.getElement();
 
         assertTrue(result == element);
     }
@@ -706,11 +703,12 @@ public class AutomationBaseTest {
 
     @Test
     public void test_GetChildren_non_deep_Returns_Children_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
         list.add(targetElement);
         when(targetElement.getControlType()).thenReturn(ControlType.CheckBox.getValue());
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(list);
 
         AutomationBase base = new ConcreteAutomationBase(element);
 
@@ -720,11 +718,12 @@ public class AutomationBaseTest {
         assertEquals(targetElement, children.get(0).getElement());
         assertEquals(CheckBox.class, children.get(0).getClass());
 
-        verify(element).findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any());
+        verify(element).findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN), any());
     }
 
     @Test
-    public void test_GetChildren_non_deep_Returns_No_Items_When_List_Empty() throws Exception {
+    public void test_GetChildren_non_deep_Returns_No_Items_When_List_Empty()
+            throws Exception {
         AutomationBase base = new ConcreteAutomationBase(element);
 
         List<AutomationBase> children = base.getChildren(false);
@@ -734,11 +733,12 @@ public class AutomationBaseTest {
 
     @Test
     public void test_GetChildren_deep_Returns_Children_When_List_Not_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
         list.add(targetElement);
         when(targetElement.getControlType()).thenReturn(ControlType.ComboBox.getValue());
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS),
+                any())).thenReturn(list);
 
         AutomationBase base = new ConcreteAutomationBase(element);
 
@@ -748,7 +748,7 @@ public class AutomationBaseTest {
         assertEquals(targetElement, children.get(0).getElement());
         assertEquals(ComboBox.class, children.get(0).getClass());
 
-        verify(element).findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any());
+        verify(element).findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any());
     }
 
     @Test

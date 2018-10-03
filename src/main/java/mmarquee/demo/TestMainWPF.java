@@ -19,8 +19,8 @@ package mmarquee.demo;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.uiautomation.RowOrColumnMajor;
 import mmarquee.uiautomation.ToggleState;
@@ -106,7 +106,7 @@ public class TestMainWPF extends TestBase {
 
             logger.info("++ MENUS ++");
 
-            AutomationMainMenu menu = applicationWindow.getMainMenu(0);
+            MainMenu menu = applicationWindow.getMainMenu(0);
 
             logger.info("Menu name " + menu.getName());
 
@@ -116,7 +116,7 @@ public class TestMainWPF extends TestBase {
 
             // Actual program menu is a `Menu`
 
-            AutomationMainMenu mainMenu = applicationWindow.getMenu();
+            MainMenu mainMenu = applicationWindow.getMenu();
             logger.info("Menu name " + mainMenu.getName());
 
             logger.info(mainMenu.getItems().size() + " menu items");
@@ -124,15 +124,15 @@ public class TestMainWPF extends TestBase {
             logger.info(mainMenu.getItems().get(0).getName());
 
             // WPF menus seem to be different from Delphi VCL windows
-            // AutomationMainMenu menu = window.getMenu();
-            AutomationMenuItem file = mainMenu.getItems().get(0);
+            // MainMenu menu = window.getMenu();
+            MenuItem file = mainMenu.getItems().get(0);
             file.expand();
 
             this.rest();
             
             logger.info("Items = " + file.getItems().size());
 
-            AutomationMenuItem exit = file.getItems().get(3);
+            MenuItem exit = file.getItems().get(3);
 
             exit.click();
 
@@ -540,7 +540,7 @@ public class TestMainWPF extends TestBase {
             TrueCondition condition = new TrueCondition();
             cache.setTreeFilter(condition);
 
-            List<AutomationElement> elements = window.findAllBuildCache(
+            List<Element> elements = window.findAllBuildCache(
                     cache);
 
             if (elements == null) {
@@ -550,7 +550,7 @@ public class TestMainWPF extends TestBase {
 
                 // See what is actually in the cache
                 // Currently this causes a big crash
-                for (AutomationElement element: elements) {
+                for (Element element: elements) {
                     logger.info(": " + element.cachedName());
                 }
 
@@ -590,7 +590,7 @@ public class TestMainWPF extends TestBase {
             // Title bar seems to not give back a name now
             logger.info("TitleBar name is " + titleBar.getName());
 
-//            AutomationMainMenu menuBar = titleBar.getMenuBar();
+//            MainMenu menuBar = titleBar.getMenuBar();
 
 //            Button btnMin = titleBar.getButton("Minimize");
     //        Button btnMax = titleBar.getButton(1);

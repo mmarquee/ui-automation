@@ -22,7 +22,7 @@ import java.util.Set;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinNT;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.BasePattern;
 
@@ -33,15 +33,15 @@ import mmarquee.automation.pattern.BasePattern;
  * Date 20/11/2017
  */
 public class ElementBuilder {
-    /** The AutomationElement. */
-    private AutomationElement element;
+    /** The Element. */
+    private Element element;
 
     /** The automation instance. */
     private UIAutomation instance;
 
     /** The parent element. */
 
-    private AutomationElement parent;
+    private Element parent;
 
     /** Predefined automation patterns (for testing purposes). */
     protected final Set<BasePattern> automationPatterns = new HashSet<>();
@@ -79,7 +79,7 @@ public class ElementBuilder {
      *
      * @param inElement The element
      */
-    public ElementBuilder(final AutomationElement inElement) {
+    public ElementBuilder(final Element inElement) {
         this.initialise();
         this.element = inElement;
     }
@@ -155,17 +155,17 @@ public class ElementBuilder {
      * @param inParent The parent
      * @return The ElementBuilder
      */
-    public ElementBuilder parent(final AutomationElement inParent) {
+    public ElementBuilder parent(final Element inParent) {
         this.parent = inParent;
         return this;
     }
 
     /**
-     * Create a ElementBuilder with an AutomationElement.
-     * @param inElement The AutomationElement
+     * Create a ElementBuilder with an Element.
+     * @param inElement The Element
      * @return The ElementBuilder
      */
-    public ElementBuilder element(final AutomationElement inElement) {
+    public ElementBuilder element(final Element inElement) {
         this.element = inElement;
         return this;
     }
@@ -244,7 +244,7 @@ public class ElementBuilder {
      * The element itself.
      * @return The element
      */
-    public AutomationElement getElement() {
+    public Element getElement() {
         return this.element;
     }
 
@@ -268,7 +268,7 @@ public class ElementBuilder {
      * Gets the parent.
      * @return The parent
      */
-    public AutomationElement getParent() {
+    public Element getParent() {
         return this.parent;
     }
 

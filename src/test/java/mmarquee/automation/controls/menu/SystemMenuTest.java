@@ -31,7 +31,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ItemNotFoundException;
 
@@ -41,11 +41,13 @@ import mmarquee.automation.ItemNotFoundException;
  *
  * Tests for SystemMenu automation.
  */
-public class AutomationSystemMenuTest extends BaseAutomationTest {
+public class SystemMenuTest extends BaseAutomationTest {
 
-	@Mock AutomationElement element;
-    @Mock AutomationElement targetElement;
-    List<AutomationElement> list;
+	@Mock
+    Element element;
+    @Mock
+    Element targetElement;
+    List<Element> list;
 	
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -67,7 +69,7 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
     public void testName() throws Exception {
         when(element.getName()).thenReturn("MENU-01");
 
-        AutomationSystemMenu item = new AutomationSystemMenu(element);
+        SystemMenu item = new SystemMenu(element);
 
         assertEquals("MENU-01", item.getName());
     }
@@ -76,8 +78,8 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
     public void testGetItems_Returns_Correct_Number_Of_Elements() throws Exception {
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationSystemMenu item = new AutomationSystemMenu(element);
-        List<AutomationMenuItem> items = item.getItems();
+        SystemMenu item = new SystemMenu(element);
+        List<MenuItem> items = item.getItems();
 
         assertTrue(items.size() == 1);
     }
@@ -87,9 +89,9 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("NAME-01");
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationSystemMenu menu = new AutomationSystemMenu(element);
+        SystemMenu menu = new SystemMenu(element);
 
-        AutomationMenuItem item = menu.getItem("NAME-01");
+        MenuItem item = menu.getItem("NAME-01");
     }
 
     @Test(expected = ItemNotFoundException.class)
@@ -97,7 +99,7 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("NAME-01");
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationSystemMenu menu = new AutomationSystemMenu(element);
+        SystemMenu menu = new SystemMenu(element);
 
         menu.getItem("NAME-02");
     }
@@ -107,9 +109,9 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("NAME-01");
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationSystemMenu menu = new AutomationSystemMenu(element);
+        SystemMenu menu = new SystemMenu(element);
 
-        AutomationMenuItem item = menu.getItem(Pattern.compile(".*-\\d+"));
+        MenuItem item = menu.getItem(Pattern.compile(".*-\\d+"));
     }
 
     @Test(expected = ItemNotFoundException.class)
@@ -117,7 +119,7 @@ public class AutomationSystemMenuTest extends BaseAutomationTest {
         when(targetElement.getName()).thenReturn("NAME-01");
         when(element.findAll(any(), any())).thenReturn(list);
 
-        AutomationSystemMenu menu = new AutomationSystemMenu(element);
+        SystemMenu menu = new SystemMenu(element);
 
         menu.getItem(Pattern.compile(".*-00"));
     }

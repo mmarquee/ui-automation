@@ -16,10 +16,10 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.uiautomation.TreeScope;
 
 /**
@@ -43,15 +43,15 @@ public final class TitleBar extends Container {
      * @return The Main menu
      * @throws AutomationException Automation library error
      */
-    public AutomationMainMenu getMenuBar() throws AutomationException {
+    public MainMenu getMenuBar() throws AutomationException {
         PointerByReference condition = this.getAutomation()
                 .createControlTypeCondition(ControlType.MenuBar);
 
-        AutomationElement element =
+        Element element =
                 this.getElement().findFirst(
-                        new TreeScope(TreeScope.Descendants),
+                        new TreeScope(TreeScope.DESCENDANTS),
                         condition);
 
-        return new AutomationMainMenu(new ElementBuilder(element).parent(this.getElement()));
+        return new MainMenu(new ElementBuilder(element).parent(this.getElement()));
     }
 }

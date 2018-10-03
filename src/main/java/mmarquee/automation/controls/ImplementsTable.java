@@ -17,7 +17,7 @@ package mmarquee.automation.controls;
 
 import java.util.List;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Table;
@@ -39,7 +39,7 @@ public interface ImplementsTable extends Automatable,
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    default List<AutomationElement> getCurrentColumnHeaders ()
+    default List<Element> getCurrentColumnHeaders ()
             throws PatternNotFoundException, AutomationException  {
     	final Table tablePattern = requestAutomationPattern(Table.class);
  		if (tablePattern.isAvailable()) {
@@ -53,7 +53,7 @@ public interface ImplementsTable extends Automatable,
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
-    default List<AutomationElement> getCurrentRowHeaders() throws AutomationException {
+    default List<Element> getCurrentRowHeaders() throws AutomationException {
     	final Table tablePattern = requestAutomationPattern(Table.class);
  		if (tablePattern.isAvailable()) {
  			return tablePattern.getCurrentRowHeaders();

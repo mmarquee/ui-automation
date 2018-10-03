@@ -14,7 +14,7 @@ public final class DocumentPage extends Custom {
      *
      * @param builder The builder
      */
-    public DocumentPage(ElementBuilder builder) {
+    public DocumentPage(final ElementBuilder builder) {
         super(builder);
     }
 }

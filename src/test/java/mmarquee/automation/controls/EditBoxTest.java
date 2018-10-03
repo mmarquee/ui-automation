@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
 import mmarquee.uiautomation.IUIAutomation;
@@ -36,7 +36,7 @@ public class EditBoxTest {
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(element.getName()).thenReturn("NAME");
 
@@ -53,7 +53,7 @@ public class EditBoxTest {
 
     @Test
     public void testGetValue_Gets_Value_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
         when(value.value()).thenReturn("NAME");
@@ -71,7 +71,7 @@ public class EditBoxTest {
 
     @Test
     public void testIsReadOnly_Gets_Value_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
         when(value.isReadOnly()).thenReturn(true);
@@ -89,7 +89,7 @@ public class EditBoxTest {
 
     @Test
     public void testIsReadOnly_Gets_Value_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
         when(value.isReadOnly()).thenReturn(true);
@@ -107,7 +107,7 @@ public class EditBoxTest {
 
     @Test
     public void testSetValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
         //when(value.setValue(anyString())).thenReturn(true);

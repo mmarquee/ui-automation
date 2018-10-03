@@ -22,8 +22,10 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
 public class IUIAutomationScrollItemPatternConverter {
-    public static IUIAutomationScrollItemPattern pointerToInterface(final PointerByReference ptr) {
-        final int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationSelectionItemPattern
+    public static IUIAutomationScrollItemPattern pointerToInterface(
+            final PointerByReference ptr) {
+        final int METHODS = 8; // 0-2 IUnknown,
+                               // 3-7 IUIAutomationSelectionItemPattern
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -32,24 +34,31 @@ public class IUIAutomationScrollItemPatternConverter {
             // IUnknown
 
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference pbr) {
+                Function f = Function.getFunction(vTable[0],
+                        Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(f.invokeInt(
+                        new Object[]{interfacePointer,
+                                byValue, pbr}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int scrollIntoView() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
         };

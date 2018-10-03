@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Range;
 import mmarquee.uiautomation.IUIAutomation;
@@ -39,7 +39,7 @@ public class SliderTest {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Range pattern = Mockito.mock(Range.class);
 
         when(pattern.isAvailable()).thenReturn(true);
@@ -58,7 +58,7 @@ public class SliderTest {
 
     @Test
     public void testGetRangeValue_Gets_Value_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Range pattern = Mockito.mock(Range.class);
 
         when(pattern.isAvailable()).thenReturn(true);
@@ -77,7 +77,7 @@ public class SliderTest {
 
     @Test
     public void testSetRangeValue_Calls_setValue_From_Element_Once() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Range pattern = Mockito.mock(Range.class);
 
         when(pattern.isAvailable()).thenReturn(true);

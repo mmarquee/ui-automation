@@ -80,12 +80,14 @@ public class IUIAutomationElement7Converter {
 
             public int findFirst(TreeScope scope, Pointer condition, PointerByReference sr) {
                 Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        scope.getValue(), condition, sr});
             }
 
             public int findAll(TreeScope scope, Pointer condition, PointerByReference sr) {
                 Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        scope.getValue(), condition, sr});
             }
 
             public int findFirstBuildCache(int scope,

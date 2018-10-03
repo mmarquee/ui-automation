@@ -17,7 +17,7 @@ package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
@@ -40,7 +40,7 @@ import static org.mockito.Mockito.verify;
  */
 public class WindowPatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationWindowPattern rawPattern;

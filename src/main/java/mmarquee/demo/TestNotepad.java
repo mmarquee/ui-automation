@@ -19,8 +19,8 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.MenuItem;
 
 import java.util.regex.Pattern;
 
@@ -88,10 +88,10 @@ public class TestNotepad extends TestBase {
             this.rest();
 
             // Interact with menus
-            AutomationMainMenu menu = window.getMainMenu();
+            MainMenu menu = window.getMainMenu();
 
             try {
-                AutomationMenuItem exit = menu.getMenuItem(
+                MenuItem exit = menu.getMenuItem(
                         Pattern.compile("File|Datei"),
                         Pattern.compile("Exit|Beenden"));
                 exit.click();

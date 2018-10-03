@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.Selection;
@@ -44,7 +44,7 @@ public class DataGridTest {
 
     @Test
     public void testGetName_Get_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -67,7 +67,7 @@ public class DataGridTest {
 
     @Test
     public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -91,7 +91,7 @@ public class DataGridTest {
 
     @Test
     public void testGetRowOrColumn_Gets_Value_From_Grid_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -113,7 +113,7 @@ public class DataGridTest {
 
     @Test
     public void testIsReadOnly_Gets_Result_From_Value_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);

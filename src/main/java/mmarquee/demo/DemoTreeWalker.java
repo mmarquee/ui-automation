@@ -16,7 +16,7 @@
 
 package mmarquee.demo;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.AutomationTreeWalker;
 import mmarquee.automation.AutomationTreeWalker.AutomationElementVisitor;
@@ -51,7 +51,7 @@ public class DemoTreeWalker extends TestBase {
         try {
             AutomationTreeWalker walker = automation.getControlViewWalker();
 
-            AutomationElement root = automation.getRootElement();
+            Element root = automation.getRootElement();
 
             AutomationElementVisitor logVisitor =
                     new AutomationElementVisitor() {
@@ -60,7 +60,7 @@ public class DemoTreeWalker extends TestBase {
             	
             	@Override
 				public boolean visit(AutomationTreeWalker walker,
-                                     AutomationElement element)
+                                     Element element)
                         throws AutomationException {
 
 				    String name = element.getName();

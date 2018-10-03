@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
@@ -90,7 +90,7 @@ public interface ImplementsSelect extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-    default AutomationElement getSelectionContainer() throws AutomationException, PatternNotFoundException {
+    default Element getSelectionContainer() throws AutomationException, PatternNotFoundException {
     	final SelectionItem selectionItemPattern = requestAutomationPattern(SelectionItem.class);
  		if (selectionItemPattern.isAvailable()) {
  			return selectionItemPattern.getSelectionContainer();

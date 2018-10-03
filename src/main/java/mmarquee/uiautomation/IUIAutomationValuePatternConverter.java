@@ -28,9 +28,15 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationValuePatternConverter {
-    private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationValuePattern
+    private static int METHODS = 8; // 0-2 IUnknown,
+                                    // 3-7 IUIAutomationValuePattern
 
-    public static IUIAutomationValuePattern pointerToInterface(final PointerByReference ptr) {
+    private static final int SET_VALUE = 3;
+    private static final int GET_VALUE = 4;
+    private static final int GET_CURRENT_IS_READ_ONLY = 5;
+
+    public static IUIAutomationValuePattern pointerToInterface(
+            final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -39,34 +45,45 @@ public class IUIAutomationValuePatternConverter {
             // IUnknown
 
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference ptrByRef) {
+                Function f = Function.getFunction(vTable[0],
+                                    Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(f.invokeInt(
+                        new Object[]{interfacePointer,
+                                byValue,
+                                ptrByRef}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int setValue(WTypes.BSTR sr) {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[SET_VALUE],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
             public int getValue(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[GET_VALUE],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
             public int getCurrentIsReadOnly(IntByReference ibr) {
-                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
+                Function f =
+                        Function.getFunction(vTable[GET_CURRENT_IS_READ_ONLY],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, ibr});
             }
         };

@@ -16,7 +16,7 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.pattern.Invoke;
@@ -37,7 +37,7 @@ public final class ToolBarButton extends AutomationBase
      * Constructor for the ToolBarButton.
      * @param element The underlying automation element.
      */
-    public ToolBarButton(final AutomationElement element) {
+    public ToolBarButton(final Element element) {
         super(new ElementBuilder(element));
     }
 
@@ -46,7 +46,7 @@ public final class ToolBarButton extends AutomationBase
      * @param element The underlying automation element.
      * @param invoke The Invoke pattern.
      */
-    ToolBarButton(final AutomationElement element,
+    ToolBarButton(final Element element,
                   final Invoke invoke) {
         super(new ElementBuilder(element).addPattern(invoke));
     }

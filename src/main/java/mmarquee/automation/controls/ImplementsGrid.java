@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -34,7 +34,7 @@ public interface ImplementsGrid extends Automatable, CanRequestBasePattern {
      * @throws AutomationException Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    default AutomationElement getGridItem(final int row, final int column)
+    default Element getGridItem(final int row, final int column)
             throws PatternNotFoundException, AutomationException  {
     	
     	final Grid gridPattern = requestAutomationPattern(Grid.class);

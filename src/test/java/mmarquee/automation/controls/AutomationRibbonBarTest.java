@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomation;
@@ -46,7 +46,7 @@ public class AutomationRibbonBarTest {
 
     @Test
     public void testGetRibbonBar() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getClassName()).thenReturn(RibbonBar.CLASS_NAME);
         when(element.getName()).thenReturn("RIBBON-01");

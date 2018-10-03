@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
 import mmarquee.uiautomation.IUIAutomation;
@@ -36,7 +36,7 @@ public class DataGridCellTest {
 
     @Test
     public void testValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
 
@@ -55,7 +55,7 @@ public class DataGridCellTest {
 
     @Test
     public void testGetCellName() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
 
         when(element.getName()).thenReturn("NAME");

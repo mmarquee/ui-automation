@@ -87,7 +87,7 @@ public class IUIAutomationElement3Test {
             automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
-            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+            rootElement.findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
             Unknown uElement = new Unknown(first.getValue());
 
@@ -379,7 +379,7 @@ public class IUIAutomationElement3Test {
         automation.createTrueCondition(pCondition);
         PointerByReference first = new PointerByReference();
 
-        root.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
         Unknown uElement = new Unknown(first.getValue());
 
@@ -409,7 +409,7 @@ public class IUIAutomationElement3Test {
         automation.createTrueCondition(pCondition);
         PointerByReference first = new PointerByReference();
 
-        root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.findAll(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
         Unknown uElement = new Unknown(first.getValue());
 
@@ -433,7 +433,7 @@ public class IUIAutomationElement3Test {
         automation.createTrueCondition(pCondition);
         PointerByReference first = new PointerByReference();
 
-        root.findAll(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.findAll(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
         Unknown uElement = new Unknown(first.getValue());
 
@@ -456,7 +456,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentControlType(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getControlType();
     }
@@ -467,7 +467,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentPropertyValue(anyInt(), any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getPropertyValue(PropertyID.ProcessId.getValue());
     }
@@ -478,7 +478,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentAcceleratorKey(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getAcceleratorKey();
     }
@@ -489,7 +489,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentProcessId(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getProcessId();
     }
@@ -500,7 +500,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentAriaRole(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getAriaRole();
     }
@@ -511,7 +511,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentClassName(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getClassName();
     }
@@ -522,7 +522,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentIsPassword(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.isPassword();
     }
@@ -533,7 +533,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentLocalizedControlType(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.localizedControlType();
     }
@@ -544,7 +544,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentOrientation(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getOrientation();
     }
@@ -555,7 +555,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentProviderDescription(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getProviderDescription();
     }
@@ -566,7 +566,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentCulture(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getCulture();
     }
@@ -577,7 +577,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentFrameworkId(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getFrameworkId();
     }
@@ -588,7 +588,7 @@ public class IUIAutomationElement3Test {
 
         when(mockedElement.getCurrentItemStatus(any())).thenReturn(-1);
 
-        AutomationElement element = new AutomationElement(mockedElement);
+        Element element = new Element(mockedElement);
 
         element.getItemStatus();
     }

@@ -15,8 +15,8 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.Element;
+import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.automation.pattern.ItemContainer;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -47,7 +47,7 @@ public class AutomationTitleBarTest {
     }
     @Test
     public void testName_Returns_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -62,19 +62,19 @@ public class AutomationTitleBarTest {
 
     @Test
     public void testGetMenu() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        Element elem = Mockito.mock(Element.class);
 
         when(element.findFirst(any(), any())).thenReturn(elem);
 
         TitleBar tb = new TitleBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationMainMenu menu = tb.getMenuBar();
+        MainMenu menu = tb.getMenuBar();
 
         verify(element, atLeastOnce()).findFirst(any(),any());
     }

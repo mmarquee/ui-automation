@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -43,7 +43,7 @@ public class SelectionItem extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public SelectionItem(final AutomationElement element) throws AutomationException {
+    public SelectionItem(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationSelectionItemPattern.IID;
         this.patternID = PatternID.SelectionItem;
@@ -105,7 +105,7 @@ public class SelectionItem extends BasePattern {
      * @return The selection container
      * @throws AutomationException Something has gone wrong in automation
      */
-    public AutomationElement getSelectionContainer() throws AutomationException {
+    public Element getSelectionContainer() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.getPattern().getCurrentSelectionContainer(pbr);
@@ -118,7 +118,7 @@ public class SelectionItem extends BasePattern {
 
         WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
-            return new AutomationElement(convertPointerToElementInterface(pUnknownA));
+            return new Element(convertPointerToElementInterface(pUnknownA));
         } else {
             throw new AutomationException(resultA.intValue());
         }

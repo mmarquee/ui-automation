@@ -17,7 +17,7 @@
 package mmarquee.automation.controls.menu;
 
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
@@ -34,13 +34,13 @@ import java.util.regex.Pattern;
  * @author Mark Humphreys
  * Date 19/02/2016
  */
-public class AutomationSystemMenu extends AutomationBase {
+public class SystemMenu extends AutomationBase {
     /**
-     * Construct the AutomationSystemMenu.
+     * Construct the SystemMenu.
      * @param element The element
      * @throws AutomationException Automation issue
      */
-    public AutomationSystemMenu(AutomationElement element)
+    public SystemMenu(Element element)
             throws AutomationException {
         super(new ElementBuilder(element));
         this.getItems();
@@ -58,17 +58,17 @@ public class AutomationSystemMenu extends AutomationBase {
      * @return The menu item
      * @throws AutomationException Automation issue
      */
-    public AutomationMenuItem getItem(String name) throws AutomationException {
+    public MenuItem getItem(String name) throws AutomationException {
 
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.Descendants), condition);
+        List<Element> collection =
+                this.findAll(new TreeScope(TreeScope.DESCENDANTS), condition);
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
         boolean found = false;
 
-        for (AutomationElement elem: collection) {
+        for (Element elem: collection) {
             String eName = elem.getName();
 
             if (eName.equals(name)) {
@@ -79,7 +79,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(new ElementBuilder(foundElement));
+            return new MenuItem(new ElementBuilder(foundElement));
         } else {
             // Throw an exception
             throw  new ItemNotFoundException(name);
@@ -93,17 +93,17 @@ public class AutomationSystemMenu extends AutomationBase {
      * @return The menu item
      * @throws AutomationException Automation issue
      */
-    public AutomationMenuItem getItem(Pattern namePattern) throws AutomationException {
+    public MenuItem getItem(Pattern namePattern) throws AutomationException {
 
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection =
-                this.findAll(new TreeScope(TreeScope.Descendants), condition);
+        List<Element> collection =
+                this.findAll(new TreeScope(TreeScope.DESCENDANTS), condition);
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
         boolean found = false;
 
-        for (AutomationElement elem: collection) {
+        for (Element elem: collection) {
             String eName = elem.getName();
 
             if (eName != null && namePattern.matcher(eName).matches()) {
@@ -114,7 +114,7 @@ public class AutomationSystemMenu extends AutomationBase {
         }
 
         if (found) {
-            return new AutomationMenuItem(new ElementBuilder(foundElement));
+            return new MenuItem(new ElementBuilder(foundElement));
         } else {
             // Throw an exception
             throw  new ItemNotFoundException(namePattern.toString());
@@ -127,16 +127,16 @@ public class AutomationSystemMenu extends AutomationBase {
      * @return The list of menu items
      * @throws AutomationException Automation issue
      */
-    protected List<AutomationMenuItem> getItems() throws AutomationException {
+    protected List<MenuItem> getItems() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.Children), condition);
+        List<Element> items =
+                this.findAll(new TreeScope(TreeScope.CHILDREN), condition);
 
-        List<AutomationMenuItem> list = new ArrayList<>();
+        List<MenuItem> list = new ArrayList<>();
 
-        for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(new ElementBuilder(item)));
+        for (Element item : items) {
+            list.add(new MenuItem(new ElementBuilder(item)));
         }
 
         return list;

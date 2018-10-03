@@ -33,5 +33,6 @@ public interface IUIAutomationSelectionPattern extends IUnknown {
 
     int getCurrentSelection(PointerByReference retVal);
     int getCurrentCanSelectMultiple(IntByReference retval);
+    int getCurrentIsSelectionRequired(IntByReference retval);
 }
 

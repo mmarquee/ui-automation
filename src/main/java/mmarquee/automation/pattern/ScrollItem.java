@@ -16,7 +16,7 @@
 
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -34,7 +34,7 @@ public class ScrollItem extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public ScrollItem(final AutomationElement element) throws AutomationException {
+    public ScrollItem(final Element element) throws AutomationException {
     	super(element);
         this.patternID = PatternID.ScrollItem;
         this.availabilityPropertyID = PropertyID.IsScrollItemPatternAvailable;

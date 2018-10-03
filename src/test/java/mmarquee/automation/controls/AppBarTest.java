@@ -16,7 +16,7 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.Ole32Wrapper;
 import mmarquee.automation.UIAutomation;
 import mmarquee.uiautomation.IUIAutomation;
@@ -41,7 +41,7 @@ import static org.mockito.Mockito.when;
 public class AppBarTest {
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         when(mocked_automation.createTrueCondition(isA(PointerByReference.class))).thenReturn(0);

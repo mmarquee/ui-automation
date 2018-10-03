@@ -19,11 +19,8 @@ package mmarquee.automation.controls;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
+import mmarquee.automation.*;
+import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.TreeScope;
 
@@ -55,11 +52,11 @@ public final class List
     public ListItem getItem(final int index)
             throws AutomationException {
 
-        java.util.List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.Children),
+        java.util.List<Element> items =
+                this.findAll(new TreeScope(TreeScope.CHILDREN),
                     this.createControlTypeCondition(ControlType.ListItem));
 
-        AutomationElement item = items.get(index);
+        Element item = items.get(index);
 
         if (item != null) {
             return new ListItem(new ElementBuilder(item));
@@ -77,8 +74,9 @@ public final class List
      */
     public ListItem getItem(final String name)
             throws AutomationException {
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
-                this.createAndCondition(
+        Element item = this.findFirst(
+                new TreeScope(TreeScope.DESCENDANTS),
+                    this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.ListItem)));
 
@@ -97,14 +95,14 @@ public final class List
      * @throws AutomationException Something has gone wrong
      */
     public ListItem getItem(Pattern namePattern) throws AutomationException {
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createControlTypeCondition(ControlType.ListItem));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -129,8 +127,9 @@ public final class List
      */
     public ListItem getItemByAutomationId(final String automationId)
             throws AutomationException {
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
-                this.createAndCondition(
+        Element item = this.findFirst(
+                new TreeScope(TreeScope.DESCENDANTS),
+                    this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.ListItem)));
 
@@ -149,13 +148,13 @@ public final class List
      */
     public java.util.List<ListItem> getItems()
             throws AutomationException {
-        java.util.List<AutomationElement> items =
-                this.findAll(new TreeScope(TreeScope.Descendants),
+        java.util.List<Element> items =
+                this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                         this.createControlTypeCondition(ControlType.ListItem));
 
         java.util.List<ListItem> list = new ArrayList<>();
 
-        for (AutomationElement item: items) {
+        for (Element item: items) {
             list.add(new ListItem(new ElementBuilder(item)));
         }
 
@@ -171,11 +170,11 @@ public final class List
      */
     public java.util.List<ListItem> getSelectedItems()
             throws AutomationException, PatternNotFoundException {
-        java.util.List<AutomationElement> collection = getCurrentSelection();
+        java.util.List<Element> collection = getCurrentSelection();
 	
         java.util.List<ListItem> list = new ArrayList<>();
         
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             list.add(new ListItem(new ElementBuilder(element)));
         }
 

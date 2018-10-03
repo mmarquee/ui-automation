@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
@@ -53,14 +53,17 @@ public class WindowTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-	@Mock AutomationElement element;
+	@Mock
+    Element element;
 	@Mock
     mmarquee.automation.pattern.Window window;
 	@Mock ItemContainer container;
-	@Mock AutomationElement targetElement;
-	@Mock AutomationElement item;
-	List<AutomationElement> list = new ArrayList<>();
-	List<AutomationElement> menus = new ArrayList<>();
+	@Mock
+    Element targetElement;
+	@Mock
+    Element item;
+	List<Element> list = new ArrayList<>();
+	List<Element> menus = new ArrayList<>();
 	
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

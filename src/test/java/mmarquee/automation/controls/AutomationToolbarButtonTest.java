@@ -16,7 +16,7 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.pattern.Invoke;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -46,7 +46,7 @@ public class AutomationToolbarButtonTest {
 
     @Test
     public void testName() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getName()).thenReturn("NAME");
 
@@ -59,7 +59,7 @@ public class AutomationToolbarButtonTest {
 
     @Test
     public void testClick_Never_Calls_Invoke_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke invoke = Mockito.mock(Invoke.class);
         when(element.getClickablePoint()).thenReturn(new WinDef.POINT(0,0));
 

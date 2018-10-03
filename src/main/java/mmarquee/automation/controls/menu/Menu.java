@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
@@ -34,13 +34,13 @@ import mmarquee.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 09/02/2016
  */
-public class AutomationMenu extends AutomationBase {
+public class Menu extends AutomationBase {
     /**
-     * Construct the AutomationMenu.
+     * Construct the Menu.
      *
      * @param builder The builder
      */
-    public AutomationMenu(ElementBuilder builder) {
+    public Menu(ElementBuilder builder) {
         super(builder);
     }
 
@@ -54,16 +54,17 @@ public class AutomationMenu extends AutomationBase {
      * @return List of menu items
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationMenuItem> getItems()
+    public List<MenuItem> getItems()
             throws  AutomationException {
     	
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children),
+        List<Element> items =
+                this.findAll(new TreeScope(TreeScope.CHILDREN),
                 this.createControlTypeCondition(ControlType.MenuItem));
 
-        List<AutomationMenuItem> list = new ArrayList<>();
+        List<MenuItem> list = new ArrayList<>();
 
-        for (AutomationElement item : items) {
-            list.add(new AutomationMenuItem(new ElementBuilder(item)));
+        for (Element item : items) {
+            list.add(new MenuItem(new ElementBuilder(item)));
         }
 
         return list;
@@ -75,11 +76,12 @@ public class AutomationMenu extends AutomationBase {
      * @return The found item
      * @throws AutomationException Something went wrong
      */
-    public AutomationMenuItem getMenuItem(final int index)
+    public MenuItem getMenuItem(final int index)
             throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Children));
+        List<Element> items =
+                this.findAll(new TreeScope(TreeScope.CHILDREN));
 
-        return new AutomationMenuItem(new ElementBuilder(items.get(index)));
+        return new MenuItem(new ElementBuilder(items.get(index)));
     }
 
     /**
@@ -89,15 +91,15 @@ public class AutomationMenu extends AutomationBase {
      * @throws AutomationException Something went wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public AutomationMenuItem getMenuItem(final String name)
+    public MenuItem getMenuItem(final String name)
             throws PatternNotFoundException, AutomationException {
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Children),
+        Element item = this.findFirst(new TreeScope(TreeScope.CHILDREN),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(new ElementBuilder(item));
+        return new MenuItem(new ElementBuilder(item));
     }
 
     /**
@@ -106,16 +108,16 @@ public class AutomationMenu extends AutomationBase {
      * @return The found item
      * @throws AutomationException Something went wrong
      */
-    public AutomationMenuItem getMenuItem(final Pattern namePattern)
+    public MenuItem getMenuItem(final Pattern namePattern)
             throws  AutomationException {
-    	List<AutomationElement> collection;
+    	List<Element> collection;
 
-        AutomationElement item = null;
+        Element item = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Children),
+        collection = this.findAll(new TreeScope(TreeScope.CHILDREN),
         		this.createControlTypeCondition(ControlType.MenuItem));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -127,7 +129,7 @@ public class AutomationMenu extends AutomationBase {
         if (item == null) {
             throw new ItemNotFoundException("Failed to find element matching " + namePattern);
         }
-        return new AutomationMenuItem(new ElementBuilder(item));
+        return new MenuItem(new ElementBuilder(item));
     }
 
     /**
@@ -136,14 +138,15 @@ public class AutomationMenu extends AutomationBase {
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
+    public MenuItem getMenuItemByAutomationId(final String automationId)
             throws  AutomationException {
     	
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
-                this.createAndCondition(
+        Element item = this.findFirst(
+                new TreeScope(TreeScope.DESCENDANTS),
+                    this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
-        return new AutomationMenuItem(new ElementBuilder(item));
+        return new MenuItem(new ElementBuilder(item));
     }
 }

@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomation;
@@ -35,7 +35,7 @@ public class AutomationStatusBarTest {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");

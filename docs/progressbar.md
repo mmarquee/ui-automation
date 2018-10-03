@@ -2,7 +2,7 @@
 * See [Element Discovery](element-discovery.md)
 
 ```
-  AutomationProgressBar progress = applicationWindow.getProgressBar(Search.getBuilder(0).build());
+  ProgressBar progress = applicationWindow.getProgressBar(Search.getBuilder(0).build());
   logger.info("Progress = " + progress.getRangeValue());
 
   if (progress.getIsReadOnly()) {

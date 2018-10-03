@@ -6,11 +6,8 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
+import mmarquee.automation.*;
+import mmarquee.automation.Element;
 import mmarquee.uiautomation.IUIAutomationElementArray;
 import mmarquee.uiautomation.IUIAutomationSelectionPattern;
 import org.junit.Before;
@@ -40,7 +37,7 @@ public class SelectionPatternTest2 {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Before
     public void setup() throws Exception {

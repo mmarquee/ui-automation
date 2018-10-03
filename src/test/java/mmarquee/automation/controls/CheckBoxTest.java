@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.uiautomation.IUIAutomation;
@@ -43,7 +43,7 @@ public class CheckBoxTest {
 
     @Test
     public void testName_Gets_Value_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Toggle pattern = Mockito.mock(Toggle.class);
         when(pattern.isAvailable()).thenReturn(true);
 
@@ -63,11 +63,11 @@ public class CheckBoxTest {
 
     @Test
     public void test_getToggleState_Gets_Value_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Toggle pattern = Mockito.mock(Toggle.class);
         when(pattern.isAvailable()).thenReturn(true);
 
-        when(pattern.currentToggleState()).thenReturn(ToggleState.On);
+        when(pattern.currentToggleState()).thenReturn(ToggleState.ON);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
@@ -78,12 +78,12 @@ public class CheckBoxTest {
 
         ToggleState state = checkbox.getToggleState();
 
-        assertTrue(state == ToggleState.On);
+        assertTrue(state == ToggleState.ON);
     }
 
     @Test
     public void testToggle() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Toggle pattern = Mockito.mock(Toggle.class);
         when(pattern.isAvailable()).thenReturn(true);
 

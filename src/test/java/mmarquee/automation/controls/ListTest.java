@@ -17,7 +17,7 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
@@ -59,8 +59,10 @@ public class ListTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    @Mock AutomationElement element;
-    @Mock AutomationElement targetElement;
+    @Mock
+    Element element;
+    @Mock
+    Element targetElement;
     @Mock Selection selection;
 
     @Mock
@@ -86,7 +88,7 @@ public class ListTest {
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetItems_By_Index_Throws_Exception_When_Not_Found() throws Exception {
         java.util.List result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        result.add(new Element(listElement));
 
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
@@ -99,7 +101,7 @@ public class ListTest {
     @Test
     public void testGetItems_By_Index_Mocked() throws Exception {
         java.util.List result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        result.add(new Element(listElement));
 
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
@@ -114,7 +116,7 @@ public class ListTest {
     @Test
     public void testGetItems() throws Exception {
         java.util.List result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        result.add(new Element(listElement));
 
         when(element.findAll(any(TreeScope.class), any(PointerByReference.class))).thenReturn(result);
 
@@ -131,7 +133,8 @@ public class ListTest {
         java.util.List items = new ArrayList<>();
         items.add(targetElement);
         
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(items);
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));
@@ -145,7 +148,8 @@ public class ListTest {
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_GetItem_By_Index_Throws_Exception_When_Not_found() throws Exception {
         java.util.List items = new ArrayList<>();
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children), any())).thenReturn(items);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(items);
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));
@@ -155,7 +159,7 @@ public class ListTest {
 
     @Test
     public void test_GetItem_By_Name() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(targetElement);
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));
@@ -168,7 +172,7 @@ public class ListTest {
 
     @Test(expected=ElementNotFoundException.class)
     public void test_GetItem_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenThrow(new ElementNotFoundException());
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));
@@ -181,7 +185,7 @@ public class ListTest {
         java.util.List items = new ArrayList<>();
         items.add(targetElement);
         
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(items);
         when(targetElement.getName()).thenReturn("myWorld");
 
         List list = new List(
@@ -199,7 +203,7 @@ public class ListTest {
         items.add(targetElement);
         
         when(targetElement.getName()).thenReturn("myWorld");
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(items);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(items);
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));
@@ -209,7 +213,7 @@ public class ListTest {
 
     @Test
     public void test_GetItem_By_AutomationId() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(targetElement);
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));
@@ -222,7 +226,7 @@ public class ListTest {
     
     @Test(expected=ElementNotFoundException.class)
     public void test_GetItem_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenThrow(new ElementNotFoundException());
 
         List list = new List(
                 new ElementBuilder(element).addPattern(selection));

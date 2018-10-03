@@ -80,30 +80,42 @@ public class IUIAutomationElement3Converter {
 
             public int findFirst(TreeScope scope, Pointer condition, PointerByReference sr) {
                 Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        scope.getValue(), condition, sr});
             }
 
             public int findAll(TreeScope scope, Pointer condition, PointerByReference sr) {
                 Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        scope.getValue(), condition, sr});
             }
 
-            public int findFirstBuildCache ( int scope,  Pointer condition,
-                                             Pointer cacheRequest, PointerByReference found) {
-                Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+            public int findFirstBuildCache(int scope,
+                                           Pointer condition,
+                                           Pointer cacheRequest,
+                                           PointerByReference found) {
+                Function f = Function.getFunction(vTable[7],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope,
+                        condition, cacheRequest, found});
             }
 
-            public int findAllBuildCache ( int scope,  Pointer condition,
-                                           Pointer cacheRequest, PointerByReference found) {
-                Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+            public int findAllBuildCache(int scope,
+                                         Pointer condition,
+                                         Pointer cacheRequest,
+                                         PointerByReference found) {
+                Function f = Function.getFunction(vTable[8],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, scope,
+                        condition, cacheRequest, found});
             }
 
             public int buildUpdatedCache (Pointer cacheRequest,
                                           PointerByReference updatedElement) {
-                Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
+                Function f = Function.getFunction(vTable[9],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer,
+                        cacheRequest,  updatedElement});
             }
 
             public int getCurrentPropertyValue(int propertyId,
@@ -170,27 +182,33 @@ public class IUIAutomationElement3Converter {
             */
 
             public int getCurrentProcessId (IntByReference retVal) {
-                Function f = Function.getFunction(vTable[20], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[20],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentControlType(IntByReference ipr) {
-                Function f = Function.getFunction(vTable[21], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[21],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, ipr});
             }
 
-            public int getCurrentLocalizedControlType (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[22], Function.ALT_CONVENTION);
+            public int getCurrentLocalizedControlType(
+                    PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[22],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentName(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[23], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[23],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
-            public int getCurrentAcceleratorKey (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[24], Function.ALT_CONVENTION);
+            public int getCurrentAcceleratorKey(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[24],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
@@ -211,18 +229,21 @@ public class IUIAutomationElement3Converter {
             }
             */
 
-            public int getCurrentIsEnabled (WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[28], Function.ALT_CONVENTION);
+            public int getCurrentIsEnabled(WinDef.BOOLByReference retVal) {
+                Function f = Function.getFunction(vTable[28],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int getCurrentAutomationId (PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[29], Function.ALT_CONVENTION);
+            public int getCurrentAutomationId(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[29],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentClassName(PointerByReference sr) {
-                Function f = Function.getFunction(vTable[30], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[30],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, sr});
             }
 
@@ -234,22 +255,26 @@ public class IUIAutomationElement3Converter {
             */
 
             public int getCurrentCulture(IntByReference retVal) {
-                Function f = Function.getFunction(vTable[32], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[32],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsControlElement(WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[33], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[33],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsContentElement(WinDef.BOOLByReference retVal) {
-                Function f = Function.getFunction(vTable[34], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[34],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentIsPassword(IntByReference value) {
-                Function f = Function.getFunction(vTable[35], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[35],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, value});
             }
 

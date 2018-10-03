@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Assume;
@@ -21,7 +22,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ItemNotFoundException;
 
@@ -42,10 +42,12 @@ public class TreeViewTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
     
-    @Mock AutomationElement element;
-    @Mock AutomationElement targetElement;
+    @Mock
+    Element element;
+    @Mock
+    Element targetElement;
     
-    List<AutomationElement> list;
+    List<Element> list;
 	TreeView ctrl;
 
     static {
@@ -54,7 +56,7 @@ public class TreeViewTest {
 
     @Test
     public void testName() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getName()).thenReturn("NAME");
 

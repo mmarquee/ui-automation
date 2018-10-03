@@ -1,6 +1,6 @@
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
@@ -42,7 +42,7 @@ public class ContainerTest2 {
     }
 
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Mock
     mmarquee.automation.pattern.Window window;
@@ -52,7 +52,7 @@ public class ContainerTest2 {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         mmarquee.automation.pattern.Window pattern = Mockito.mock(mmarquee.automation.pattern.Window.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
@@ -108,11 +108,11 @@ public class ContainerTest2 {
     @Test
     @Ignore("TODO: Fix me")
     public void testGetMaskedEdit_By_Name_Calls_findFirst_From_Element() throws Exception {
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        Element elem = Mockito.mock(Element.class);
 
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
-        AutomationElement elm = Mockito.mock(AutomationElement.class);
+        Element elm = Mockito.mock(Element.class);
 
         Mockito.when(elm.getControlType()).thenReturn(ControlType.Edit.getValue());
         Mockito.when(elm.getClassName()).thenReturn("TAutomatedMaskEdit");
@@ -202,11 +202,11 @@ public class ContainerTest2 {
 
     @Test
     public void testGetCustom_By_ControlType_Calls_findAll_From_Element() throws Exception {
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        Element elem = Mockito.mock(Element.class);
 
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
-        AutomationElement elm = Mockito.mock(AutomationElement.class);
+        Element elm = Mockito.mock(Element.class);
 
         Mockito.when(elm.getName()).thenReturn("PANEL-01");
         Mockito.when(elm.getClassName()).thenReturn("CUSTOM-PANEL");
@@ -225,7 +225,7 @@ public class ContainerTest2 {
 
     @Test(expected = ElementNotFoundException.class)
     public void testGetCustom_By_ControlType_Throws_Exception_When_No_Found() throws Exception {
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        Element elem = Mockito.mock(Element.class);
 
         Window wndw = new Window(
                 new ElementBuilder(elem).addPattern(container, window));
@@ -298,11 +298,11 @@ public class ContainerTest2 {
     @Test
     @Ignore("TODO: Fix me")
     public void testgetMaskedEdit_Calls_findFirst_From_Element() throws Exception {
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        Element elem = Mockito.mock(Element.class);
 
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
-        AutomationElement elm = Mockito.mock(AutomationElement.class);
+        Element elm = Mockito.mock(Element.class);
 
         Mockito.when(elm.getControlType()).thenReturn(ControlType.Edit.getValue());
         Mockito.when(elm.getClassName()).thenReturn("TAutomatedMaskEdit");

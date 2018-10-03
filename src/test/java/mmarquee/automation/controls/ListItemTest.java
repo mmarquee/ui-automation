@@ -6,12 +6,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.SelectionItem;
 public class ListItemTest {
     @Test
     public void test_IsSelected_Gets_Value_From_SelectionItem() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
         when(selection.isSelected()).thenReturn(true);
         when(selection.isAvailable()).thenReturn(true);
@@ -45,7 +45,7 @@ public class ListItemTest {
 
     @Test
     public void test_Select_Selects_SelectionItem() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
         when(selection.isAvailable()).thenReturn(true);
         
@@ -62,7 +62,7 @@ public class ListItemTest {
 
     @Test
     public void test_Click_Invokes_InvokePattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke invokePattern = Mockito.mock(Invoke.class);
         when(invokePattern.isAvailable()).thenReturn(true);
 
@@ -79,7 +79,7 @@ public class ListItemTest {
 
     @Test(expected=PatternNotFoundException.class)
     public void test_Click_Does_Not_Invoke_If_Not_Possible() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke invokePattern = Mockito.mock(Invoke.class);
         when(invokePattern.isAvailable()).thenReturn(false);
 

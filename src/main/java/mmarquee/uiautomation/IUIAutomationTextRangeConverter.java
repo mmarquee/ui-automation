@@ -26,9 +26,11 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationTextRangeConverter {
-    private static int METHODS = 21; // 0-2 IUnknown, 3-8 IUIAutomationTextPattern
+    private static int METHODS = 21; // 0-2 IUnknown,
+                                     // 3-20 IUIAutomationTextRange
 
-    public static IUIAutomationTextRange pointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationTextRange pointerToInterface(
+            final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -37,29 +39,39 @@ public class IUIAutomationTextRangeConverter {
             // IUnknown
 
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference pbr) {
+                Function f = Function.getFunction(vTable[0],
+                        Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(
+                        f.invokeInt(
+                                new Object[]{interfacePointer,
+                                        byValue, pbr}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int getText(Integer maxLength, PointerByReference sr) {
-                Function f = Function.getFunction(vTable[12], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, maxLength, sr});
+                Function f = Function.getFunction(vTable[12],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(
+                        new Object[]{interfacePointer, maxLength, sr});
             }
 
             public int select() {
-                Function f = Function.getFunction(vTable[16], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[16],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
         };

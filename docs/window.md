@@ -9,6 +9,6 @@ Window is the ultimate container for an application, it may have menus and other
 This sets the `alpha attribute` of the window, allowing the automation API to indicate which window is beig processed (for example).
 
 ```
-AutomationWindow window = automation.getDesktopWindow("Form1");
+Window window = automation.getDesktopWindow("Form1");
 window.setTransparency(128);
 ```

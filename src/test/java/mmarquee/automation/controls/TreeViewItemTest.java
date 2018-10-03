@@ -28,7 +28,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.PropertyID;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.Invoke;
@@ -42,7 +42,8 @@ import mmarquee.automation.pattern.SelectionItem;
  * Date 02/12/2016.
  */
 public class TreeViewItemTest {
-    @Mock AutomationElement element;
+    @Mock
+    Element element;
     @Mock SelectionItem selection;
     @Mock ExpandCollapse expand;
     @Mock Invoke invoke;

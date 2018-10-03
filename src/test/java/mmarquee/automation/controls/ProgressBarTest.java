@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Range;
 import mmarquee.uiautomation.IUIAutomation;
@@ -38,7 +38,7 @@ public class ProgressBarTest {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Range range = Mockito.mock(Range.class);
 
         when(range.isAvailable()).thenReturn(true);
@@ -57,7 +57,7 @@ public class ProgressBarTest {
 
     @Test
     public void testGetRangeValue_Gets_Value_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Range range = Mockito.mock(Range.class);
 
         when(range.isAvailable()).thenReturn(true);
@@ -76,7 +76,7 @@ public class ProgressBarTest {
 
     @Test
     public void testSetRangeValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Range range = Mockito.mock(Range.class);
 
         when(range.isAvailable()).thenReturn(true);

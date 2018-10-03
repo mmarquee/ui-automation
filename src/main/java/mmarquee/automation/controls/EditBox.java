@@ -23,7 +23,10 @@ import mmarquee.automation.AutomationException;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public class EditBox extends AutomationBase implements ImplementsValue, ImplementsText {
+public class EditBox
+        extends AutomationBase
+        implements ImplementsValue,
+                   ImplementsText {
     
     /**
      * Whether the element is a password.

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.sun.jna.platform.win32.User32;
+import mmarquee.automation.*;
 import mmarquee.uiautomation.IUIAutomationElement;
 import mmarquee.automation.utils.UtilsTest;
 import org.junit.*;
@@ -26,12 +27,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.sun.jna.platform.win32.WinNT;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.Ole32Wrapper;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.Element;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.IUIAutomation;
@@ -67,7 +63,7 @@ public class ApplicationTest {
     }
 
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomation mocked_automation;
@@ -86,16 +82,17 @@ public class ApplicationTest {
     @InjectMocks
     UIAutomation automation;
     
-    List<AutomationElement> list;
+    List<Element> list;
     
     @Mock
-    AutomationElement targetElement;
+    Element targetElement;
 
     @Test
     public void testGetWindow_Returns_Window()
-            throws AutomationException, PatternNotFoundException {
+            throws AutomationException {
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children),any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("Untitled - Notepad");
         
         Application app = new Application(
@@ -109,7 +106,7 @@ public class ApplicationTest {
 
     @Test(expected=ElementNotFoundException.class)
     public void testGetWindow_Returns_Exception_When_Element_Not_Found()
-            throws AutomationException, PatternNotFoundException {
+            throws AutomationException {
 
         Application app = new Application(
                 new ElementBuilder(element).handle(handle).attached(false).automation(instance));
@@ -123,7 +120,8 @@ public class ApplicationTest {
     public void testGetWindow_with_RegExPattern_Returns_Window()
             throws AutomationException, PatternNotFoundException {
 
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Children),any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN),
+                any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("Untitled - Notepad");
         
         Application app = new Application(
@@ -167,11 +165,11 @@ public class ApplicationTest {
     @Ignore("Need to mock the elem getting a name")
     public void testGetWindow_Calls_FindAll_From_Element()
             throws AutomationException, PatternNotFoundException {
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
-        list.add(new AutomationElement(elem));
+        list.add(new Element(elem));
 
         when(element.findAll(any(), any())).thenReturn(list);
 

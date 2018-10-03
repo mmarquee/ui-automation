@@ -87,7 +87,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetRootElement() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
-        AutomationElement root = instance.getRootElement();
+        Element root = instance.getRootElement();
 
         assertTrue("root:" + root.currentName(), root.currentName().startsWith("Desktop"));
     }
@@ -333,12 +333,12 @@ public class UIAutomationTest extends BaseAutomationTest {
         instance.getRootElement(pRoot);
 
         // Get the first descendant of the root element
-        AutomationElement root = instance.getRootElement();
+        Element root = instance.getRootElement();
 
         PointerByReference pCondition = instance.createTrueCondition();
         PointerByReference first = new PointerByReference();
 
-        root.getElement().findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.getElement().findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
         instance.compareElements(pRoot.getValue(), first.getValue(), same);
 

@@ -64,8 +64,9 @@ public class TreeView extends AutomationBase {
      */
     public TreeViewItem getItem(final String name)
             throws AutomationException {
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
-                this.createAndCondition(
+        Element item = this.findFirst(
+                new TreeScope(TreeScope.DESCENDANTS),
+                    this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(ControlType.TreeItem)));
 
@@ -84,14 +85,14 @@ public class TreeView extends AutomationBase {
      */
     public TreeViewItem getItem(final Pattern namePattern)
             throws AutomationException {
-        List<AutomationElement> collection;
+        List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createControlTypeCondition(ControlType.TreeItem));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -115,8 +116,9 @@ public class TreeView extends AutomationBase {
      */
     public TreeViewItem getItemByAutomationId(final String automationId)
             throws AutomationException {
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
-                this.createAndCondition(
+        Element item = this.findFirst(
+                new TreeScope(TreeScope.DESCENDANTS),
+                    this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.TreeItem)));
 

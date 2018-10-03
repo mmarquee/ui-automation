@@ -80,32 +80,37 @@ public class IUIAutomationElement6Converter {
 
             public int findFirst(TreeScope scope, Pointer condition, PointerByReference sr) {
                 Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        scope.getValue(), condition, sr});
             }
 
             public int findAll(TreeScope scope, Pointer condition, PointerByReference sr) {
                 Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope.value, condition, sr});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        scope.getValue(), condition, sr});
             }
 
             public int findFirstBuildCache (int scope, Pointer condition,
                                              Pointer cacheRequest,
                                             PointerByReference found) {
                 Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+                return f.invokeInt(new Object[]{interfacePointer, scope,
+                        condition, cacheRequest, found});
             }
 
             public int findAllBuildCache (int scope, Pointer condition,
                                           Pointer cacheRequest,
                                           PointerByReference found) {
                 Function f = Function.getFunction(vTable[8], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, scope, condition, cacheRequest, found});
+                return f.invokeInt(new Object[]{interfacePointer, scope,
+                        condition, cacheRequest, found});
             }
 
             public int buildUpdatedCache (Pointer cacheRequest,
                                           PointerByReference updatedElement) {
                 Function f = Function.getFunction(vTable[9], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, cacheRequest, updatedElement});
+                return f.invokeInt(new Object[]{interfacePointer,
+                        cacheRequest, updatedElement});
             }
 
             public int getCurrentPropertyValue(int propertyId, Variant.VARIANT.ByReference value) {

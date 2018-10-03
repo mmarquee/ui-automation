@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.OleAuto;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -41,7 +41,7 @@ public class LegacyIAccessible extends BasePattern {
      * @param element The element
      * @throws AutomationException API issue
      */
-    public LegacyIAccessible(final AutomationElement element) throws AutomationException {
+    public LegacyIAccessible(final Element element) throws AutomationException {
         super(element);
         this.patternID = PatternID.LegacyIAccessible;
         this.availabilityPropertyID = PropertyID.IsLegacyIAccessiblePatternAvailable;

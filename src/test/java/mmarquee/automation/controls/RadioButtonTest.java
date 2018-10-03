@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.SelectionItem;
 import mmarquee.uiautomation.IUIAutomation;
@@ -35,7 +35,7 @@ public class RadioButtonTest {
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -53,7 +53,7 @@ public class RadioButtonTest {
 
     @Test
     public void test_isSelected_Gets_Value_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
         
         when(selection.isAvailable()).thenReturn(true);
@@ -72,7 +72,7 @@ public class RadioButtonTest {
 
     @Test
     public void testSelect() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         SelectionItem selection = Mockito.mock(SelectionItem.class);
 
         when(selection.isAvailable()).thenReturn(true);

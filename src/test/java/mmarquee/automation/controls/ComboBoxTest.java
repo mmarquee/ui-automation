@@ -44,8 +44,10 @@ import mmarquee.automation.pattern.Value;
  * Tests for Combobox functionality
  */
 public class ComboBoxTest {
-	@Mock AutomationElement element;
-	@Mock AutomationElement targetElement;
+	@Mock
+    Element element;
+	@Mock
+    Element targetElement;
 	@Mock ExpandCollapse collapse;
 	@Mock Value value;
 	@Mock Selection selection;
@@ -176,7 +178,7 @@ public class ComboBoxTest {
 
     @Test
     public void test_GetSelectedItems_Returns_No_Items_When_List_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
         when(selection.getCurrentSelection()).thenReturn(list);
         when(selection.isAvailable()).thenReturn(true);
 
@@ -193,7 +195,7 @@ public class ComboBoxTest {
 
     @Test(expected=ElementNotFoundException.class)
     public void test_GetSelectedItem_ThrowsException_When_List_Empty() throws Exception {
-        List<AutomationElement> list = new ArrayList<>();
+        List<Element> list = new ArrayList<>();
         when(selection.getCurrentSelection()).thenReturn(list);
         when(selection.isAvailable()).thenReturn(true);
 

@@ -16,7 +16,7 @@
 
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
@@ -43,11 +43,11 @@ public class Tab extends Container {
         List<TabItem> tabItems = new ArrayList<>();
 
         try {
-            List<AutomationElement> collection =
-                    this.findAll(new TreeScope(TreeScope.Descendants),
+            List<Element> collection =
+                    this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                             this.createControlTypeCondition(ControlType.TabItem));
 
-            for (AutomationElement elem : collection) {
+            for (Element elem : collection) {
                 tabItems.add(
                         new TabItem(new ElementBuilder(elem)
                                 .automation(this.getAutomation())));

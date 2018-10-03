@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation.controls;
 
 import java.lang.reflect.Field;
@@ -24,7 +25,7 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.utils.ExecutableFileInfo;
@@ -121,11 +122,11 @@ public class Application extends AutomationBase {
     public Window getWindow(final String title)
             throws AutomationException {
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        List<AutomationElement> collection = this.findAll();
+        List<Element> collection = this.findAll();
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
             if (name.equals(title)) {
                 foundElement = element;
@@ -149,11 +150,11 @@ public class Application extends AutomationBase {
     public Window getWindowByClassName(final String  className)
             throws AutomationException {
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        List<AutomationElement> collection = this.findAll();
+        List<Element> collection = this.findAll();
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getClassName();
             if (name != null && name.equals(className)) {
                 foundElement = element;
@@ -177,11 +178,11 @@ public class Application extends AutomationBase {
     public Window getWindow(final Pattern titlePattern)
             throws AutomationException {
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        List<AutomationElement> collection = this.findAll();
+        List<Element> collection = this.findAll();
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
             if (name != null && titlePattern.matcher(name).matches()) {
                 foundElement = element;
@@ -346,6 +347,11 @@ public class Application extends AutomationBase {
                 version[ExecutableFileInfo.BUILD]);
     }
 
+    /**
+     * Launches or attaches the application.
+     *
+     * @throws Exception Something has gone wrong
+     */
     public void launchOrAttach() throws Exception {
         this.getAutomation().launchOrAttach(this.pathname);
     }

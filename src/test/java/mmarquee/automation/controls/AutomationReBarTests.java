@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomation;
@@ -46,7 +46,7 @@ public class AutomationReBarTests {
 
     @Test
     public void testName_Is_Returned_From_The_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getClassName()).thenReturn(ReBar.CLASS_NAME);
         when(element.getName()).thenReturn("REBAR-01");
@@ -66,7 +66,7 @@ public class AutomationReBarTests {
 
     @Test
     public void testName_Is_Returned_From_The_Element_Alternative_Constructor() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
         when(element.getClassName()).thenReturn(ReBar.CLASS_NAME);
         when(element.getName()).thenReturn("REBAR-01");

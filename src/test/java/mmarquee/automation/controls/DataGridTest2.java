@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import mmarquee.automation.Element;
 import org.apache.log4j.Logger;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -30,7 +31,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.Selection;
@@ -61,7 +61,7 @@ public class DataGridTest2 {
 
     @Test
     public void testGetCell_For_DataGrid() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -83,7 +83,7 @@ public class DataGridTest2 {
 
     @Test
     public void testGetColumnHeaders_Returns_Correct_Size() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -92,9 +92,9 @@ public class DataGridTest2 {
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
         
-        List<AutomationElement> elementList = new ArrayList<>();
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        List<Element> elementList = new ArrayList<>();
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         elementList.add(element1);
         elementList.add(element2);
@@ -114,7 +114,7 @@ public class DataGridTest2 {
     @Test
     @Ignore("Gets an empty cell")
     public void testGetColumnHeader() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -123,9 +123,9 @@ public class DataGridTest2 {
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
         
-        List<AutomationElement> elementList = new ArrayList<>();
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        List<Element> elementList = new ArrayList<>();
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         when(element1.getName()).thenReturn("CELL-01");
         when(element2.getName()).thenReturn("CELL-02");
@@ -150,7 +150,7 @@ public class DataGridTest2 {
 
     @Test
     public void testGetColumnHeaders_Returns_Size_As_ColumnCount() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -159,9 +159,9 @@ public class DataGridTest2 {
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
         
-        List<AutomationElement> elementList = new ArrayList<>();
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        List<Element> elementList = new ArrayList<>();
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         elementList.add(element1);
         elementList.add(element2);
@@ -182,7 +182,7 @@ public class DataGridTest2 {
     @Test
     @Ignore("Out of bounds exception thrown now")
     public void testSelected() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
@@ -191,9 +191,9 @@ public class DataGridTest2 {
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
         
-        List<AutomationElement> elementList = new ArrayList<>();
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        List<Element> elementList = new ArrayList<>();
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         elementList.add(element1);
         elementList.add(element2);
@@ -217,14 +217,14 @@ public class DataGridTest2 {
 
     @Test
     public void testGetColumn_Returns_Size_As_RowCount() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         when(table.isAvailable()).thenReturn(true);
         when(grid.isAvailable()).thenReturn(true);
@@ -245,14 +245,14 @@ public class DataGridTest2 {
 
     @Test
     public void testGetRows_Returns_Size_As_RowCount() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         when(table.isAvailable()).thenReturn(true);
         when(grid.isAvailable()).thenReturn(true);
@@ -273,14 +273,14 @@ public class DataGridTest2 {
 
     @Test
     public void testGetRow() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         when(table.isAvailable()).thenReturn(true);
         when(grid.isAvailable()).thenReturn(true);
@@ -301,14 +301,14 @@ public class DataGridTest2 {
 
     @Test
     public void testGetColumn() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         Grid grid = Mockito.mock(Grid.class);
         Table table = Mockito.mock(Table.class);
         Selection selection = Mockito.mock(Selection.class);
 
-        AutomationElement element1 = Mockito.mock(AutomationElement.class);
-        AutomationElement element2 = Mockito.mock(AutomationElement.class);
+        Element element1 = Mockito.mock(Element.class);
+        Element element2 = Mockito.mock(Element.class);
 
         when(table.isAvailable()).thenReturn(true);
         when(grid.isAvailable()).thenReturn(true);

@@ -22,11 +22,8 @@ import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PropertyID;
+import mmarquee.automation.*;
+import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.TreeScope;
 
@@ -55,16 +52,16 @@ public class Container extends AutomationBase {
      * @return The matching element.
      * @throws AutomationException Error in the Automation library.
      */
-    AutomationElement getElementByControlType(final int index,
-                                              final ControlType id)
+    Element getElementByControlType(final int index,
+                                    final ControlType id)
             throws AutomationException {
         PointerByReference condition =
                 this.getAutomation().createPropertyCondition(
                         PropertyID.ControlType.getValue(),
                         this.createIntegerVariant(id.getValue()));
 
-        java.util.List<AutomationElement> collection = this.findAll(
-                new TreeScope(TreeScope.Subtree), condition);
+        java.util.List<Element> collection = this.findAll(
+                new TreeScope(TreeScope.SUBTREE), condition);
 
         return collection.get(index);
     }
@@ -79,9 +76,9 @@ public class Container extends AutomationBase {
      * @throws AutomationException Automation issue.
      * @throws ElementNotFoundException Failed to find element.
      */
-    protected AutomationElement getElementByControlType(final int index,
-                           final ControlType id,
-                           final String className)
+    protected Element getElementByControlType(final int index,
+                                              final ControlType id,
+                                              final String className)
             throws AutomationException {
         PointerByReference condition =
         		this.createAndCondition(
@@ -90,10 +87,10 @@ public class Container extends AutomationBase {
         				        this.createIntegerVariant(id.getValue())),
                         this.createClassNamePropertyCondition(className));
 
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
         try {
-        	collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        	collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                     condition);
         	return collection.get(index);
         } catch (IndexOutOfBoundsException ex) {
@@ -109,10 +106,10 @@ public class Container extends AutomationBase {
      * @return The matching element.
      * @throws AutomationException Error from automation library
      */
-    protected AutomationElement getElementByControlType(final String name,
-                                                        final ControlType id)
+    protected Element getElementByControlType(final String name,
+                                              final ControlType id)
             throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        return this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
                 this.createAndCondition(
                         this.createNamePropertyCondition(name),
                         this.createControlTypeCondition(id)));
@@ -127,18 +124,18 @@ public class Container extends AutomationBase {
      * @return The matching element.
      * @throws AutomationException Error from automation library
      */
-    protected AutomationElement getElementByControlType(
+    protected Element getElementByControlType(
             final Pattern namePattern,
             final ControlType id)
             throws AutomationException {
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createControlTypeCondition(id));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -164,11 +161,11 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByControlType(final String name,
-                                                        final ControlType id,
-                                                        final String className)
+    protected Element getElementByControlType(final String name,
+                                              final ControlType id,
+                                              final String className)
             throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        return this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
         		this.createAndCondition(
         				this.createAndCondition(
 	                        this.createNamePropertyCondition(name),
@@ -186,21 +183,21 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByControlType(
+    protected Element getElementByControlType(
             final Pattern namePattern,
             final ControlType id,
             final String className)
             throws AutomationException {
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createAndCondition(
         				this.createControlTypeCondition(id),
         				this.createClassNamePropertyCondition(className)));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -223,9 +220,9 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByName(final String name)
+    protected Element getElementByName(final String name)
             throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        return this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
         		this.createNamePropertyCondition(name));
     }
 
@@ -236,16 +233,16 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByName(final Pattern namePattern)
+    protected Element getElementByName(final Pattern namePattern)
             throws AutomationException {
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createTrueCondition());
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -269,11 +266,11 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByName(
+    protected Element getElementByName(
             final String name,
             final String className)
             throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        return this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
         		this.createAndCondition(
         				this.createNamePropertyCondition(name),
         				this.createClassNamePropertyCondition(className)));
@@ -287,18 +284,18 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected AutomationElement getElementByName(
+    protected Element getElementByName(
             final Pattern namePattern,
             final String className)
             throws AutomationException {
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
-        AutomationElement foundElement = null;
+        Element foundElement = null;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
         		this.createClassNamePropertyCondition(className));
 
-        for (AutomationElement element : collection) {
+        for (Element element : collection) {
             String name = element.getName();
 
             if (name != null && namePattern.matcher(name).matches()) {
@@ -326,13 +323,13 @@ public class Container extends AutomationBase {
      * @throws AutomationException Automation issue
      * @throws ElementNotFoundException Failed to find element
      */
-    protected AutomationElement getElementByIndex(
+    protected Element getElementByIndex(
             final int index,
             final String className)
             throws AutomationException {
-        java.util.List<AutomationElement> collection;
+        java.util.List<Element> collection;
 
-        collection = this.findAll(new TreeScope(TreeScope.Descendants),
+        collection = this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                 this.createClassNamePropertyCondition(className));
 
         try {
@@ -351,11 +348,11 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException An error has occurred in automation
      */
-    protected AutomationElement getElementByAutomationId(
+    protected Element getElementByAutomationId(
             final String automationId,
             final ControlType controlType)
             throws AutomationException {
-        return this.findFirst(new TreeScope(TreeScope.Descendants),
+        return this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
                 this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(controlType)));
@@ -367,11 +364,11 @@ public class Container extends AutomationBase {
      * @return The matching element
      * @throws AutomationException An error has occurred in automation
      */
-    protected AutomationElement getElementByAutomationId(
+    protected Element getElementByAutomationId(
             final String automationId)
             throws AutomationException {
         return this.findFirst(
-                new TreeScope(TreeScope.Descendants),
+                new TreeScope(TreeScope.DESCENDANTS),
                 this.createAutomationIdPropertyCondition(automationId));
     }
 
@@ -563,8 +560,7 @@ public class Container extends AutomationBase {
      */
     public Tab getTab(final String name)
             throws AutomationException {
-        return new Tab
-                (new ElementBuilder(
+        return new Tab(new ElementBuilder(
                         this.getElementByControlType(name, ControlType.Tab)));
     }
 
@@ -816,7 +812,7 @@ public class Container extends AutomationBase {
      * @return The found control
      * @throws AutomationException Something has gone wrong
      */
-    public Slider getSliderByAutomationId(String id)
+    public Slider getSliderByAutomationId(final String id)
             throws AutomationException {
         return new Slider(
             new ElementBuilder(
@@ -858,9 +854,9 @@ public class Container extends AutomationBase {
      */
     public RadioButton getRadioButton(Pattern namePattern)
             throws AutomationException {
-        return new RadioButton
-                (new ElementBuilder(this.getElementByControlType(namePattern,
-                ControlType.RadioButton)));
+        return new RadioButton(
+                new ElementBuilder(this.getElementByControlType(namePattern,
+                        ControlType.RadioButton)));
     }
 
     /**
@@ -2595,7 +2591,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByControlType(final int index,
                                                   final ControlType id)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el = this.getElementByControlType(index, id);
+    	Element el = this.getElementByControlType(index, id);
     	return AutomationControlFactory.get(this, el);
     }
 
@@ -2612,7 +2608,7 @@ public class Container extends AutomationBase {
                                                   final ControlType id,
                                                   final String className)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el =
+    	Element el =
                 this.getElementByControlType(index, id, className);
     	return AutomationControlFactory.get(this, el);
     }
@@ -2628,7 +2624,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByControlType(final String name,
                                                   final ControlType id)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el = this.getElementByControlType(name, id);
+    	Element el = this.getElementByControlType(name, id);
     	return AutomationControlFactory.get(this, el);
     }
     
@@ -2644,7 +2640,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByControlType(final Pattern namePattern,
                                                   final ControlType id)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el = this.getElementByControlType(namePattern, id);
+    	Element el = this.getElementByControlType(namePattern, id);
     	return AutomationControlFactory.get(this, el);
     }
     
@@ -2661,7 +2657,7 @@ public class Container extends AutomationBase {
                                                   final ControlType id,
                                                   final String className)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el =
+    	Element el =
                 this.getElementByControlType(name, id, className);
     	return AutomationControlFactory.get(this, el);
     }
@@ -2680,7 +2676,7 @@ public class Container extends AutomationBase {
                                                   final ControlType id,
                                                   final String className)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el =
+    	Element el =
                 this.getElementByControlType(namePattern, id, className);
     	return AutomationControlFactory.get(this, el);
     }
@@ -2696,7 +2692,7 @@ public class Container extends AutomationBase {
      */
     public AutomationBase getControlByName(final String name)
             throws AutomationException, PatternNotFoundException {
-		AutomationElement el = this.getElementByName(name);
+		Element el = this.getElementByName(name);
 		return AutomationControlFactory.get(this, el);
 	}
 
@@ -2711,7 +2707,7 @@ public class Container extends AutomationBase {
      */
     public AutomationBase getControlByName(final Pattern namePattern)
             throws AutomationException, PatternNotFoundException {
-		AutomationElement el = this.getElementByName(namePattern);
+		Element el = this.getElementByName(namePattern);
 		return AutomationControlFactory.get(this, el);
 	}
     
@@ -2726,7 +2722,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByClassName(final String className)
             throws AutomationException, PatternNotFoundException {
         try {
-        	AutomationElement el = this.getElementByIndex(0, className);
+        	Element el = this.getElementByIndex(0, className);
         	return AutomationControlFactory.get(this, el);
         } catch (IndexOutOfBoundsException ex) {
         	throw new ElementNotFoundException("with class name " + className);
@@ -2745,7 +2741,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByClassName(final int index,
                                                 final String className)
             throws AutomationException, PatternNotFoundException {
-        AutomationElement el = this.getElementByIndex(index, className);
+        Element el = this.getElementByIndex(index, className);
         return AutomationControlFactory.get(this, el);
     }
 
@@ -2761,7 +2757,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByClassName(final String name,
                                                 final String className)
             throws AutomationException, PatternNotFoundException {
-        AutomationElement el = this.getElementByName(name, className);
+        Element el = this.getElementByName(name, className);
         return AutomationControlFactory.get(this, el);
     }
 
@@ -2777,7 +2773,7 @@ public class Container extends AutomationBase {
     public AutomationBase getControlByClassName(final Pattern namePattern,
                                                 final String className)
             throws AutomationException, PatternNotFoundException {
-        AutomationElement el = this.getElementByName(namePattern, className);
+        Element el = this.getElementByName(namePattern, className);
         return AutomationControlFactory.get(this, el);
     }
 
@@ -2790,7 +2786,7 @@ public class Container extends AutomationBase {
      */
     public AutomationBase getControlByAutomationId(final String automationId)
             throws AutomationException, PatternNotFoundException {
-    	AutomationElement el = this.getElementByAutomationId(automationId);
+    	Element el = this.getElementByAutomationId(automationId);
     	return AutomationControlFactory.get(this, el);
     }
 
@@ -2834,9 +2830,9 @@ public class Container extends AutomationBase {
                     this.getAutomation().createAndCondition(
                             nameCondition, propertyCondition);
 
-            AutomationElement elem =
+            Element elem =
                     this.findFirst(
-                            new TreeScope(TreeScope.Descendants), condition);
+                            new TreeScope(TreeScope.DESCENDANTS), condition);
 
             /* Not going to work for menus */
             return type.cast(AutomationControlFactory.get(

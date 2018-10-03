@@ -23,14 +23,12 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 public class IUIAutomationSelectionPattern2Convertor {
-    private static int METHODS = 6; // 0-2 IUnknown, 3-5 IUIAutomationSelectionPattern
+    private static int METHODS = 16; // 0-2 IUnknown,
+                                     // 3-8 IUIAutomationSelectionPattern
+                                     // 9-16 IUIAutomationSelectionPattern2
 
-    public static IUIAutomationSelectionPattern2 pointerToInterface(final PointerByReference ptr) {
-        // 0-2 IUnknown,
-        // 3-5 IUIAutomationSelectionPattern
-        // 6-13 IUIAutomationSelectionPattern2
-
-        final int METHODS = 6;
+    public static IUIAutomationSelectionPattern2 pointerToInterface(
+            final PointerByReference ptr) {
 
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
@@ -57,32 +55,44 @@ public class IUIAutomationSelectionPattern2Convertor {
             }
 
             public int getCurrentSelection(PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[3],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentCanSelectMultiple(IntByReference retVal) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[4],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int currentCurrentSelectedItem(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int getCurrentIsSelectionRequired(IntByReference retVal) {
+                Function f = Function.getFunction(vTable[5],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int currentFirstSelectedItem(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int getCurrentFirstSelectedItem(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[9],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int currentItemCount(IntByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int getCurrentLastSelectedItem(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[10],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
-            public int currentLastSelectedItem(PointerByReference retVal){
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+            public int getCurrentCurrentSelectedItem(PointerByReference retVal) {
+                Function f = Function.getFunction(vTable[11],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            public int getCurrentItemCount(IntByReference retVal) {
+                Function f = Function.getFunction(vTable[12],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };

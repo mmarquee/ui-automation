@@ -45,7 +45,7 @@ import java.util.List;
  * @author Mark Humphreys
  * Date 06/03/2016.
  */
-public class AutomationElement extends BaseAutomation {
+public class Element extends BaseAutomation {
     /**
      * <p>
      * The underlying automation element.
@@ -114,20 +114,20 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
-     * Constructor of AutomationElement.
+     * Constructor of Element.
      *
      * @param inElement The element.
      */
-    public AutomationElement(final IUIAutomationElement inElement) {
+    public Element(final IUIAutomationElement inElement) {
         this.element = inElement;
     }
 
     /**
-     * Constructor of AutomationElement, for IUIAutomationElement6.
+     * Constructor of Element, for IUIAutomationElement6.
      *
      * @param inElement The element (IUIAutomationElement6)
      */
-    public AutomationElement(final IUIAutomationElement6 inElement) {
+    public Element(final IUIAutomationElement6 inElement) {
         this.element = inElement;
         this.cached = false;
     }
@@ -247,7 +247,11 @@ public class AutomationElement extends BaseAutomation {
         return sr.getValue().getWideString(0);
     }
 
-
+    /**
+     * Gets the runtime ID for the element.
+     * @return The value
+     * @throws AutomationException
+     */
     public String getRuntimeId() throws AutomationException {
         PointerByReference sr = new PointerByReference();
 
@@ -409,8 +413,8 @@ public class AutomationElement extends BaseAutomation {
      * @return The first matching element.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationElement findFirst(final TreeScope scope,
-                                       final PointerByReference pCondition)
+    public Element findFirst(final TreeScope scope,
+                             final PointerByReference pCondition)
             throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
@@ -419,7 +423,7 @@ public class AutomationElement extends BaseAutomation {
         try {
             IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
-            return new AutomationElement(elem);
+            return new Element(elem);
         } catch (NullPointerException npe) {
             throw new ElementNotFoundException();
         }
@@ -458,10 +462,10 @@ public class AutomationElement extends BaseAutomation {
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
      */
-    public List<AutomationElement> findAllDescendants(
+    public List<Element> findAllDescendants(
             final PointerByReference pCondition)
             throws AutomationException {
-        return this.findAll(new TreeScope(TreeScope.Descendants), pCondition);
+        return this.findAll(new TreeScope(TreeScope.DESCENDANTS), pCondition);
     }
 
     /**
@@ -474,15 +478,15 @@ public class AutomationElement extends BaseAutomation {
      * @return List of found elements from the cache
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> findAll(final TreeScope scope,
-                                           final PointerByReference condition,
-                                           final CacheRequest cacheRequest)
+    public List<Element> findAll(final TreeScope scope,
+                                 final PointerByReference condition,
+                                 final CacheRequest cacheRequest)
             throws AutomationException {
-        List<AutomationElement> items = new ArrayList<>();
+        List<Element> items = new ArrayList<>();
 
         PointerByReference all = new PointerByReference();
 
-        final int res = this.element.findAllBuildCache(scope.value,
+        final int res = this.element.findAllBuildCache(scope.getValue(),
                 condition.getValue(),
                 cacheRequest.getValue(),
                 all);
@@ -508,7 +512,7 @@ public class AutomationElement extends BaseAutomation {
             IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
 
-            AutomationElement elmnt = new AutomationElement(elem);
+            Element elmnt = new Element(elem);
             elmnt.cached = true;
 
             items.add(elmnt);
@@ -525,10 +529,10 @@ public class AutomationElement extends BaseAutomation {
      * @return List of matching elements.
      * @throws AutomationException Call to Automation API failed.
      */
-    public List<AutomationElement> findAll(final TreeScope scope,
-                                           final PointerByReference pCondition)
+    public List<Element> findAll(final TreeScope scope,
+                                 final PointerByReference pCondition)
             throws AutomationException {
-        List<AutomationElement> items = new ArrayList<>();
+        List<Element> items = new ArrayList<>();
 
         PointerByReference pAll = new PointerByReference();
 
@@ -555,7 +559,7 @@ public class AutomationElement extends BaseAutomation {
             IUIAutomationElement elem =
                     getAutomationElementFromReference(pbr);
 
-            items.add(new AutomationElement(elem));
+            items.add(new Element(elem));
         }
 
         return items;

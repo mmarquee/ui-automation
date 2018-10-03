@@ -64,15 +64,15 @@ public class DemoCaching extends TestBase {
             cacheRequest.addPattern(PatternID.Selection.getValue());
             cacheRequest.addProperty(PropertyID.Name.getValue());
 
-            List<AutomationElement> all =
+            List<Element> all =
                     window.getElement().findAll(
-                            new TreeScope(TreeScope.Children),
+                            new TreeScope(TreeScope.CHILDREN),
                                   condition,
                                   cacheRequest);
 
             logger.info("Elements:" + all.size());
 
-            for(AutomationElement item: all) {
+            for (Element item: all) {
                 try {
                     logger.info(" *" + item.getCachedName());
                 } catch (Exception ex) {

@@ -24,12 +24,12 @@ import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationSystemMenu;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.SystemMenu;
 import mmarquee.uiautomation.TreeScope;
 
 /**
@@ -80,13 +80,13 @@ public class Window
     public StatusBar getStatusBar() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection =
+        List<Element> collection =
                 this.findAll(
-                        new TreeScope(TreeScope.Descendants), condition);
+                        new TreeScope(TreeScope.DESCENDANTS), condition);
 
         StatusBar found = null;
 
-        for (AutomationElement element: collection) {
+        for (Element element: collection) {
             int retVal = element.getControlType();
 
             if (retVal == ControlType.StatusBar.getValue()) {
@@ -103,9 +103,9 @@ public class Window
      * @return The system menu.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationSystemMenu getSystemMenu() throws AutomationException {
+    public SystemMenu getSystemMenu() throws AutomationException {
         return (
-                new AutomationSystemMenu(
+                new SystemMenu(
                         this.getElementByControlType(
                                 0, ControlType.MenuBar)));
     }
@@ -116,7 +116,7 @@ public class Window
      * @return The main menu.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationMainMenu getMainMenu() throws AutomationException {
+    public MainMenu getMainMenu() throws AutomationException {
         return getMainMenu(1);
     }
 
@@ -127,9 +127,9 @@ public class Window
      * @return The main menu.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationMainMenu getMainMenu(final int offset)
+    public MainMenu getMainMenu(final int offset)
             throws AutomationException {
-        return (new AutomationMainMenu(
+        return (new MainMenu(
                 new ElementBuilder(
                         this.getElementByControlType(offset,
                             ControlType.MenuBar)).parent(this.getElement())));
@@ -140,9 +140,9 @@ public class Window
      * @return The menu.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationMainMenu getMenu() throws AutomationException {
+    public MainMenu getMenu() throws AutomationException {
         return (
-                new AutomationMainMenu(
+                new MainMenu(
                         new ElementBuilder(
                                 this.getElementByControlType(
                                         0, ControlType.Menu)).parent(
@@ -179,11 +179,11 @@ public class Window
      */
     public Window getWindow(final String title)
             throws AutomationException {
-        AutomationElement item = null;
+        Element item = null;
 
         for (int count = 0; count < WINDOW_RETRIES; count++) {
             try {
-                item = this.findFirst(new TreeScope(TreeScope.Descendants),
+                item = this.findFirst(new TreeScope(TreeScope.DESCENDANTS),
                         this.createAndCondition(
                                 this.createNamePropertyCondition(title),
                                 this.createControlTypeCondition(
@@ -222,16 +222,16 @@ public class Window
      */
     public Window getWindow(Pattern titlePattern)
             throws AutomationException {
-        AutomationElement item = null;
+        Element item = null;
 
         retry_loop: for (int loop = 0; loop < WINDOW_RETRIES; loop++) {
             try {
-                List<AutomationElement> collection = 
-                		this.findAll(new TreeScope(TreeScope.Descendants), 
+                List<Element> collection =
+                		this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                 				this.createControlTypeCondition(
                 				        ControlType.Window));
                 
-                for (AutomationElement element : collection) {
+                for (Element element : collection) {
                     String name = element.getName();
 
                     if (name != null && titlePattern.matcher(name).matches()) {

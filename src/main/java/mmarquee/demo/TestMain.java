@@ -21,10 +21,10 @@ import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.AutomationMenu;
+import mmarquee.automation.controls.menu.Menu;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.uiautomation.ToggleState;
 
@@ -76,10 +76,10 @@ public class TestMain extends TestBase {
             logger.info("Rect : " + rect.toString());
 
             // Interact with menus
-            AutomationMainMenu menu = window.getMainMenu();
+            MainMenu menu = window.getMainMenu();
 
             try {
-                AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+                MenuItem exit = menu.getMenuItem("File", "Exit");
                 exit.click();
 
                 try {
@@ -344,10 +344,10 @@ public class TestMain extends TestBase {
             mouse.leftClick();
             mouse.rightClick();
 
-            AutomationMenu context = automation.getDesktopMenu("Context");
+            Menu context = automation.getDesktopMenu("Context");
 
             logger.info("Found context menu");
-            AutomationMenuItem contextItem =
+            MenuItem contextItem =
                     context.getMenuItem("Popup Menu ");
             contextItem.click();
 

@@ -15,13 +15,13 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.Menu;
+import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**
@@ -33,13 +33,13 @@ public class AutomationControlFactory {
 	 * Returns an Automation Control for the given element.
 	 * 
 	 * @param parent the parent control of the new automation control (Only relevant for menuBars).
-	 * @param element The AutomationElement for which to create a specific control object.
+	 * @param element The Element for which to create a specific control object.
 	 * @return The AutomationBase child which best describes the given element.
 	 * @throws AutomationException Automation library error.
 	 * @throws PatternNotFoundException Expected pattern not found.
 	 */
 	public static AutomationBase get(final AutomationBase parent,
-									 final AutomationElement element)
+									 final Element element)
 			throws AutomationException, PatternNotFoundException {
 		if (element == null) {
 			throw new ElementNotFoundException("null");
@@ -54,14 +54,14 @@ public class AutomationControlFactory {
 	 *
 	 * @param parent the parent control of the new automation control (Only relevant for menuBars).
 	 * @param controlType The Control type to get.
-	 * @param element The AutomationElement for which to create a specific control object.
+	 * @param element The Element for which to create a specific control object.
 	 * @return The AutomationBase child which best describes the given element.
 	 * @throws AutomationException Automation library error.
 	 * @throws PatternNotFoundException Expected pattern not found.
 	 */
 	static AutomationBase get(final AutomationBase parent,
 							  final ControlType controlType,
-							  final AutomationElement element)
+							  final Element element)
             throws AutomationException, PatternNotFoundException {
 
     	String className = element.getClassName();
@@ -90,11 +90,11 @@ public class AutomationControlFactory {
     	case List:
     		return new List(new ElementBuilder(element));
     	case Menu:
-    		return new AutomationMenu(new ElementBuilder(element));
+    		return new Menu(new ElementBuilder(element));
     	case MenuBar:
-    		return new AutomationMainMenu(new ElementBuilder(element).parent(parent.getElement()));
+    		return new MainMenu(new ElementBuilder(element).parent(parent.getElement()));
     	case MenuItem:
-    		return new AutomationMenuItem(new ElementBuilder(element));
+    		return new MenuItem(new ElementBuilder(element));
     	case ProgressBar:
     		return new ProgressBar(new ElementBuilder(element));
     	case RadioButton:

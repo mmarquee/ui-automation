@@ -19,7 +19,7 @@ package mmarquee.automation.controls;
 import java.util.ArrayList;
 import java.util.List;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
@@ -53,7 +53,7 @@ public final class DataGrid
     public List<DataGridCell> selectedRow()
             throws PatternNotFoundException, AutomationException {
 
-        List<AutomationElement> collection = getCurrentSelection();
+        List<Element> collection = getCurrentSelection();
 
         return convertListToAutomationDataGridCells(collection);
     }
@@ -68,7 +68,7 @@ public final class DataGrid
     public DataGridCell selected()
             throws PatternNotFoundException, AutomationException {
 
-        List<AutomationElement> collection = getCurrentSelection();
+        List<Element> collection = getCurrentSelection();
 
         return new DataGridCell(
                 new ElementBuilder(collection.get(0)));
@@ -83,7 +83,7 @@ public final class DataGrid
      */
     public List<DataGridCell> getColumnHeaders()
             throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> collection = this.getCurrentColumnHeaders();
+        List<Element> collection = this.getCurrentColumnHeaders();
 
         return convertListToAutomationDataGridCells(collection);
     }
@@ -97,7 +97,7 @@ public final class DataGrid
      */
     public List<DataGridCell> getRowHeaders()
             throws PatternNotFoundException, AutomationException {
-        List<AutomationElement> collection = this.getCurrentRowHeaders();
+        List<Element> collection = this.getCurrentRowHeaders();
 
         return convertListToAutomationDataGridCells(collection);
     }
@@ -220,10 +220,10 @@ public final class DataGrid
      * @return The converted list of Data Cell Grids
      */
     List<DataGridCell> convertListToAutomationDataGridCells(
-            final List<AutomationElement> collection) {
+            final List<Element> collection) {
         List<DataGridCell> items = new ArrayList<>();
 
-        for (AutomationElement item : collection) {
+        for (Element item : collection) {
             try {
                 items.add(new DataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {

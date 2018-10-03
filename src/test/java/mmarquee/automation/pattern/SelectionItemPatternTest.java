@@ -40,7 +40,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.uiautomation.IUIAutomationSelectionItemPattern;
 
@@ -57,7 +57,7 @@ public class SelectionItemPatternTest {
     IUIAutomationSelectionItemPattern rawPattern;
 
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     private Unknown mockUnknown;

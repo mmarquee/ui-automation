@@ -18,7 +18,7 @@ package mmarquee.automation.controls;
 
 import java.util.List;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.uiautomation.TreeScope;
@@ -47,8 +47,8 @@ public final class Document extends AutomationBase implements ImplementsText {
      */
     public DocumentPage getPage(final int index)
             throws AutomationException {
-        List<AutomationElement> items = this.findAll(
-                new TreeScope(TreeScope.Descendants),
+        List<Element> items = this.findAll(
+                new TreeScope(TreeScope.DESCENDANTS),
                 this.createControlTypeCondition(ControlType.Custom));
 
         return new DocumentPage(new ElementBuilder(items.get(index)));

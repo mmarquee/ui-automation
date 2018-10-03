@@ -20,7 +20,7 @@ import java.util.List;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -43,7 +43,7 @@ public class Selection extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Selection(final AutomationElement element) throws AutomationException {
+    public Selection(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationSelectionPattern.IID;
         this.patternID = PatternID.Selection;
@@ -71,7 +71,7 @@ public class Selection extends BasePattern {
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getCurrentSelection() throws AutomationException {
+    public List<Element> getCurrentSelection() throws AutomationException {
 
         PointerByReference pbr = new PointerByReference();
 
@@ -109,7 +109,7 @@ public class Selection extends BasePattern {
      * @return List of selected items
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getSelection() throws AutomationException {
+    public List<Element> getSelection() throws AutomationException {
         return getCurrentSelection();
     }
 

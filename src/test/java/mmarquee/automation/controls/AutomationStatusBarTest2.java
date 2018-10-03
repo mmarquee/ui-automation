@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomation;
@@ -46,7 +46,7 @@ public class AutomationStatusBarTest2 {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetTextBox_Throws_IndexOutOfBoundsException_When_Index_Out_Of_Bounds() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -66,15 +66,15 @@ public class AutomationStatusBarTest2 {
 
     @Test
     public void testGetTextBox_Calls_Find_All_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        List<Element> result = new ArrayList<>();
+        result.add(new Element(listElement));
 
         when(element.findAll(any(), any())).thenReturn(result);
 
