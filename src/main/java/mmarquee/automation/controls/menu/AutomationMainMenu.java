@@ -77,15 +77,19 @@ public class AutomationMainMenu extends AutomationMenu {
      * @return The raw collapse pattern
      * @throws AutomationException Failed to get pattern
      */
-    public IUIAutomationExpandCollapsePattern getExpandCollapsePatternFromItem(AutomationElement item)
+    public IUIAutomationExpandCollapsePattern getExpandCollapsePatternFromItem(
+            AutomationElement item)
                         throws AutomationException {
-        PointerByReference pElement = item.getPattern(PatternID.ExpandCollapse.getValue());
+        PointerByReference pElement =
+                item.getPattern(PatternID.ExpandCollapse.getValue());
 
         Unknown unkConditionA = makeUnknown(pElement.getValue());
 
         PointerByReference pUnknownA = new PointerByReference();
 
-        WinNT.HRESULT resultA = unkConditionA.QueryInterface(new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID), pUnknownA);
+        WinNT.HRESULT resultA = unkConditionA.QueryInterface(
+                new Guid.REFIID(IUIAutomationExpandCollapsePattern.IID),
+                pUnknownA);
         if (COMUtils.SUCCEEDED(resultA)) {
             return IUIAutomationExpandCollapsePatternConverter.pointerToInterface(pUnknownA);
         } else {
@@ -105,7 +109,12 @@ public class AutomationMainMenu extends AutomationMenu {
             throws PatternNotFoundException, AutomationException {
     	return getMenuItem(name, "");
     }
-    
+
+    /**
+     * Sleep period to ensure menu is shown.
+     */
+    private final static int WAIT_TIME = 750;
+
     /**
      * Get the menu item associated with the hierarchy of names.
      * @param name0 First Name
@@ -119,8 +128,9 @@ public class AutomationMainMenu extends AutomationMenu {
             throws PatternNotFoundException, AutomationException {
 
 
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Children),
-                this.createAndCondition(
+        AutomationElement item = this.findFirst(
+                new TreeScope(TreeScope.Children),
+                    this.createAndCondition(
                         this.createNamePropertyCondition(name0),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
@@ -128,7 +138,8 @@ public class AutomationMainMenu extends AutomationMenu {
             throw new ItemNotFoundException("Failed to find element: " + name0);
         }
         
-        AutomationMenuItem menuItem = new AutomationMenuItem(new ElementBuilder(item));
+        AutomationMenuItem menuItem =
+                new AutomationMenuItem(new ElementBuilder(item));
         menuItem.parentMenuName = item.getName();
         menuItem.mainMenuParentElement = this.getParentElement();
 
@@ -140,7 +151,7 @@ public class AutomationMainMenu extends AutomationMenu {
         menuItem.expand();
         
         try {
-            Thread.sleep(750);
+            Thread.sleep(WAIT_TIME);
         } catch (Exception ex) {
             // Seems to be fine
         }
@@ -179,7 +190,8 @@ public class AutomationMainMenu extends AutomationMenu {
             throw new ItemNotFoundException("Failed to find element matching " + name0Pattern);
         }
         
-        AutomationMenuItem menuItem = new AutomationMenuItem(new ElementBuilder(item));
+        AutomationMenuItem menuItem =
+                new AutomationMenuItem(new ElementBuilder(item));
         menuItem.parentMenuName = item.getName();
         menuItem.mainMenuParentElement = this.getParentElement();
 
@@ -191,7 +203,7 @@ public class AutomationMainMenu extends AutomationMenu {
         menuItem.expand();
         
         try {
-            Thread.sleep(750);
+            Thread.sleep(WAIT_TIME);
         } catch (Exception ex) {
             // Seems to be fine
         }
@@ -205,11 +217,13 @@ public class AutomationMainMenu extends AutomationMenu {
      * @return The menu item that matches the name
      * @throws AutomationException Something has gone wrong
      */
-    public AutomationMenuItem getMenuItemByAutomationId(final String automationId)
+    public AutomationMenuItem getMenuItemByAutomationId(
+            final String automationId)
             throws AutomationException {
     	
-        AutomationElement item = this.findFirst(new TreeScope(TreeScope.Descendants),
-                this.createAndCondition(
+        AutomationElement item = this.findFirst(
+                new TreeScope(TreeScope.Descendants),
+                    this.createAndCondition(
                         this.createAutomationIdPropertyCondition(automationId),
                         this.createControlTypeCondition(ControlType.MenuItem)));
 
@@ -222,8 +236,9 @@ public class AutomationMainMenu extends AutomationMenu {
      * @throws AutomationException Something has gone wrong
      */
     public List<AutomationMenuItem> getItems() throws AutomationException {
-        List<AutomationElement> items = this.findAll(new TreeScope(TreeScope.Descendants),
-                this.createControlTypeCondition(ControlType.MenuItem));
+        List<AutomationElement> items =
+                this.findAll(new TreeScope(TreeScope.Descendants),
+                        this.createControlTypeCondition(ControlType.MenuItem));
 
         List<AutomationMenuItem> list = new ArrayList<>();
         

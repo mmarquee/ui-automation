@@ -23,7 +23,7 @@ import mmarquee.automation.AutomationException;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public class AutomationEditBox extends AutomationBase implements Valueable, Textable {
+public class AutomationEditBox extends AutomationBase implements ImplementsValue, ImplementsText {
     
     /**
      * Whether the element is a password.
@@ -31,7 +31,7 @@ public class AutomationEditBox extends AutomationBase implements Valueable, Text
      * @throws AutomationException Automation error.
      */
     public boolean isPassword() throws AutomationException {
-        return this.element.isPassword();
+        return this.getElement().isPassword();
     }
 
     /**

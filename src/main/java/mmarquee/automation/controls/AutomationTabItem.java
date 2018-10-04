@@ -24,7 +24,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 28/01/2016.
  */
-public final class AutomationTabItem extends AutomationContainer implements Selectable {
+public final class AutomationTabItem extends AutomationContainer implements ImplementsSelect {
 
    /**
      * Construct the AutomationTabItem.

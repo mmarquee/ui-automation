@@ -33,7 +33,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jna.version>4.5.0</jna.version>
+    <jna.version>4.5.2</jna.version>
     <powermock.version>1.7.3</powermock.version>
     <mockito.version>2.2.26</mockito.version>
   </properties>
@@ -84,6 +84,12 @@
           <artifactId>powermock-module-junit4</artifactId>
           <version>${powermock.version}</version>
           <scope>test</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>findbugs</artifactId>
+          <version>3.0.1</version>
       </dependency>
 
       <dependency>
@@ -147,6 +153,12 @@
         <version>2.3.2</version>
       </plugin>
 
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <version>3.0.4</version>
+        </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -200,5 +212,20 @@
       </plugin>
     </plugins>
   </build>
+  <!-- Findbugs -->
+  <reporting>
+    <plugins>
+      <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>3.0.4</version>
+          <configuration>
+              <effort>Max</effort>
+              <threshold>Low</threshold>
+              <xmlOutput>true</xmlOutput>
+          </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
 

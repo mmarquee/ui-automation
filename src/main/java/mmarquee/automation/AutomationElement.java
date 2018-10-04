@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-17 inpwtepydjuf@gmail.com
+ * Copyright 2016-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -453,6 +453,59 @@ public class AutomationElement extends BaseAutomation {
     }
 
     /**
+     * Finds all for the cache.
+     * Probably will get refactored away at some point
+     *
+     * @param scope        The scope
+     * @param condition    The condition
+     * @param cacheRequest The cache
+     * @return List of found elements from the cache
+     * @throws AutomationException Something has gone wrong
+     */
+    public List<AutomationElement> findAll(final TreeScope scope,
+                                           final PointerByReference condition,
+                                           final CacheRequest cacheRequest)
+            throws AutomationException {
+        List<AutomationElement> items = new ArrayList<>();
+
+        PointerByReference all = new PointerByReference();
+
+        final int res = this.element.findAllBuildCache(scope.value,
+                condition.getValue(),
+                cacheRequest.getValue(),
+                all);
+
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        IUIAutomationElementArray collection =
+                getAutomationElementArrayFromReference(all);
+
+        IntByReference ibr = new IntByReference();
+
+        collection.getLength(ibr);
+
+        int counter = ibr.getValue();
+
+        for (int a = 0; a < counter; a++) {
+            PointerByReference pbr = new PointerByReference();
+
+            collection.getElement(a, pbr);
+
+            IUIAutomationElement elem =
+                    getAutomationElementFromReference(pbr);
+
+            AutomationElement elmnt = new AutomationElement(elem);
+            elmnt.cached = true;
+
+            items.add(elmnt);
+        }
+
+        return items;
+    }
+
+    /**
      * Gets all of the elements that match the condition and scope.
      *
      * @param scope The scope in the element tree.
@@ -582,13 +635,18 @@ public class AutomationElement extends BaseAutomation {
         return sr.getValue().getWideString(0);
     }
 
-//    /**
-//     * Get the runtime Id
-//     * @return The runtime ID
-//     */
-//    //   public int[] getRuntimeId() {
-//   //       return element.getRuntimeId();
-//    //   }
+    /**
+     * Get the runtime Id.
+     *
+     * @return The runtime ID
+     */
+    /*
+    public int[] getRuntimeId() {
+        PointerByReference pbr = new PointerByReference();
+
+        return element.getRuntimeId(pbr);
+    }
+    */
 
     /**
      * Gets the process ID.
@@ -771,10 +829,10 @@ public class AutomationElement extends BaseAutomation {
      * @param automationPatternClass the class of the automation pattern
      * @return the mocked pattern, if available
      */
-	public <T extends BasePattern> T
+    public <T extends BasePattern> T
                 getProvidedPattern(final Class<T> automationPatternClass) {
-		// Return values will be mocked
-		return null;
-	}
+        // Return values will be mocked
+        return null;
+    }
 }
 

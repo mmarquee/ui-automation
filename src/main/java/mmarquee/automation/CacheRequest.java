@@ -45,12 +45,12 @@ public class CacheRequest {
     /**
      * The raw pointer.
      */
-    PointerByReference cache;
+    private PointerByReference cache;
 
     /**
      * The cache request.
      */
-    IUIAutomationCacheRequest request;
+    private IUIAutomationCacheRequest request;
 
     /**
      * Gets the value.
@@ -74,13 +74,16 @@ public class CacheRequest {
 
         Unknown unknown = makeUnknown(cache.getValue());
 
-        WinNT.HRESULT result0 = unknown.QueryInterface(new Guid.REFIID(IUIAutomationCacheRequest.IID), pbr);
+        WinNT.HRESULT result0 =
+                unknown.QueryInterface(
+                        new Guid.REFIID(IUIAutomationCacheRequest.IID), pbr);
 
         if (COMUtils.FAILED(result0)) {
             throw new AutomationException(result0.intValue());
         }
 
-        this.request = IUIAutomationCacheRequestConverter.pointerToInterface(pbr);
+        this.request =
+                IUIAutomationCacheRequestConverter.pointerToInterface(pbr);
     }
 
     /**

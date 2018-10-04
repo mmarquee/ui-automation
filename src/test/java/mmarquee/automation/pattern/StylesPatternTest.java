@@ -56,7 +56,7 @@ public class StylesPatternTest {
     @Test
     public void test_getStyleId_Calls_getCurrentStyleId_From_Pattern() throws Exception {
         Styles pattern = new Styles(element);
-        pattern.rawPattern = rawPattern;
+        pattern.setRawPattern(rawPattern);
         
         pattern.getStyleId();
 
@@ -68,7 +68,7 @@ public class StylesPatternTest {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentStyleId(any());
 
         Styles pattern = new Styles(element);
-        pattern.rawPattern = rawPattern;
+        pattern.setRawPattern(rawPattern);
 
         pattern.getStyleId();
     }
@@ -90,7 +90,7 @@ public class StylesPatternTest {
         }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(element);
-        pattern.rawPattern = rawPattern;
+        pattern.setRawPattern(rawPattern);
         pattern.getStyleName();
 
         verify(rawPattern, atLeastOnce()).getCurrentStyleName(any());
@@ -101,7 +101,7 @@ public class StylesPatternTest {
         doAnswer(invocation -> 1).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(element);
-        pattern.rawPattern = rawPattern;
+        pattern.setRawPattern(rawPattern);
 
         pattern.getStyleName();
     }
@@ -146,7 +146,7 @@ public class StylesPatternTest {
         }).when(rawPattern).getCurrentStyleName(any());
 
         Styles pattern = new Styles(element);
-        pattern.rawPattern = rawPattern;
+        pattern.setRawPattern(rawPattern);
 
         Styles spyPattern = Mockito.spy(pattern);
 

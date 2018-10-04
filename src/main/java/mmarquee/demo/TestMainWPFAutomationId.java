@@ -39,7 +39,8 @@ public class TestMainWPFAutomationId extends TestBase {
         AutomationApplication application = null;
 
         try {
-            application = automation.launchOrAttach("apps\\WpfApplicationWithAutomationIds.exe");
+            application = automation.launchOrAttach(
+                    "apps\\WpfApplicationWithAutomationIds.exe");
         } catch (Throwable ex) {
             logger.warn("Failed to find application", ex);
         }
@@ -86,9 +87,12 @@ public class TestMainWPFAutomationId extends TestBase {
 
             logger.info("++ BUTTONS ++");
 
-            // NOTE: WPF buttons will set the automationID to be the name of the control
+            // NOTE: WPF buttons will set the automationID to be the name of
+            // the control
 
-            AutomationButton btnClickMe = applicationWindow.getButton(Search.getBuilder().automationId("idBtn1").build());
+            AutomationButton btnClickMe =
+                    applicationWindow.getButton(
+                            Search.getBuilder().automationId("idBtn1").build());
             logger.info(btnClickMe.getName());
             btnClickMe.click();
 

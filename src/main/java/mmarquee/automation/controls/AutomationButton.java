@@ -27,7 +27,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public class AutomationButton
         extends AutomationBase
-        implements Clickable, Focusable, LegacyAccessible {
+        implements ImplementsClick, ImplementsFocus, ImplementsLegacyIAccessible {
     /**
      * The control type.
      */
@@ -64,7 +64,7 @@ public class AutomationButton
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 
     /**
@@ -79,7 +79,7 @@ public class AutomationButton
             try {
                 this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
             } catch (NullPointerException ex) {
-                logger.info("No value pattern available");
+                getLogger().info("No value pattern available");
             }
         }
 
@@ -102,7 +102,7 @@ public class AutomationButton
                 this.accessiblePattern = this.requestAutomationPattern(LegacyIAccessible.class);
                 this.accessiblePattern.setCurrentValue(value);
             } catch (NullPointerException ex) {
-                logger.info("No value pattern available");
+                getLogger().info("No value pattern available");
             }
 
 

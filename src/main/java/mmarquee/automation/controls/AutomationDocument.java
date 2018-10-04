@@ -29,7 +29,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 16/02/2016.
  */
-public final class AutomationDocument extends AutomationBase implements Textable {
+public final class AutomationDocument extends AutomationBase implements ImplementsText {
 
     /**
      * Constructor for the AutomationDocument.

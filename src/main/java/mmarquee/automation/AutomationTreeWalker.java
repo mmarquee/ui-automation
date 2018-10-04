@@ -95,7 +95,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The last child of the element, or null if not found.
      * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getLastChildElement(final AutomationElement element)
+    public AutomationElement getLastChildElement(
+            final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -118,13 +119,14 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The first child of the element, or null if not found.
      * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getFirstChildElement(final AutomationElement element)
+    public AutomationElement getFirstChildElement(
+            final AutomationElement element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
         Pointer pElement = this.getPointerFromElement(element.getElement());
         this.walker.getFirstChildElement(pElement, pChild);
-        
+
         try {
 	        IUIAutomationElement childElement =
 	                IUIAutomationElementConverter.pointerToInterface(pChild);
@@ -168,7 +170,7 @@ public class AutomationTreeWalker extends BaseAutomation {
             throws AutomationException {
     	assert visitor != null;
     	assert root != null;
-    	
+
         AutomationElement childElement = this.getFirstChildElement(root);
 
         while (childElement != null) {
@@ -176,13 +178,14 @@ public class AutomationTreeWalker extends BaseAutomation {
         	if (!cont) {
         	    break;
             }
-        	
+
         	childElement = this.getNextSiblingElement(childElement);
         }
     }
-    
+
     /**
-     * A visitor as used by {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)}.
+     * A visitor as used by
+     * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)}.
      */
     public interface AutomationElementVisitor {
     	/**
@@ -190,7 +193,8 @@ public class AutomationTreeWalker extends BaseAutomation {
     	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run.
     	 * @param walker The walker to use.
     	 * @param element The currently visited element.
-    	 * @return true to continue walking the elements siblings, false otherwise.
+    	 * @return true to continue walking the elements siblings,
+         *         false otherwise.
     	 * @throws AutomationException if something goes wrong.
     	 */
     	boolean visit(AutomationTreeWalker walker, AutomationElement element)

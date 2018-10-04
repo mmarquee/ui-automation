@@ -19,7 +19,7 @@ package mmarquee.automation.controls;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Focusable extends Automatable {
+public interface ImplementsFocus extends Automatable {
     /**
      * Focus on the element.
      */

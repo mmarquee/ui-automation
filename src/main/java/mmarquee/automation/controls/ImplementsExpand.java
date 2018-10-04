@@ -23,7 +23,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Expandable extends Automatable, CanRequestBasePattern {
+public interface ImplementsExpand extends Automatable, CanRequestBasePattern {
 
     /**
      * Expands the element.

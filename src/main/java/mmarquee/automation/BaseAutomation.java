@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package mmarquee.automation;
 
 import com.sun.jna.Pointer;
@@ -58,11 +59,14 @@ public abstract class BaseAutomation {
      * @return The IUIAutomationElement.
      * @throws AutomationException Automation library has thrown an error.
      */
-    public IUIAutomationElement getAutomationElementFromReference(final PointerByReference pbr)
+    public IUIAutomationElement getAutomationElementFromReference(
+            final PointerByReference pbr)
             throws AutomationException {
-        Unknown uElement = makeUnknown(pbr.getValue());
+        Unknown unknown = makeUnknown(pbr.getValue());
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
+        WinNT.HRESULT result0 =
+                unknown.QueryInterface(
+                        new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
         if (COMUtils.FAILED(result0)) {
             throw new AutomationException(result0.intValue());
@@ -77,12 +81,17 @@ public abstract class BaseAutomation {
      * @return The IUIAutomationElementArray.
      * @throws AutomationException Automation library has thrown an error.
      */
-    public IUIAutomationElementArray getAutomationElementArrayFromReference(final PointerByReference pbr)
+    public IUIAutomationElementArray getAutomationElementArrayFromReference(
+            final PointerByReference pbr)
             throws AutomationException {
-        Unknown uElement = this.makeUnknown(pbr.getValue());
+        Unknown unknown = this.makeUnknown(pbr.getValue());
         PointerByReference pUnknown = new PointerByReference();
 
-        WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElementArray.IID), pUnknown);
+        WinNT.HRESULT result0 =
+                unknown.QueryInterface(
+                        new Guid.REFIID(
+                                IUIAutomationElementArray.IID),
+                                pUnknown);
 
         if (COMUtils.FAILED(result0)) {
             throw new AutomationException(result0.intValue());
@@ -98,7 +107,8 @@ public abstract class BaseAutomation {
      * @return The List.
      * @throws AutomationException Error in the automation library.
      */
-    public List<AutomationElement> collectionToList(final IUIAutomationElementArray collection)
+    public List<AutomationElement> collectionToList(
+            final IUIAutomationElementArray collection)
             throws AutomationException {
 
         IntByReference ibr = new IntByReference();
@@ -121,7 +131,9 @@ public abstract class BaseAutomation {
 
             Unknown uElement = new Unknown(pbr.getValue());
 
-            WinNT.HRESULT result0 = uElement.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
+            WinNT.HRESULT result0 =
+                    uElement.QueryInterface(
+                            new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
             if (COMUtils.SUCCEEDED(result0)) {
                 IUIAutomationElement element =
@@ -139,13 +151,16 @@ public abstract class BaseAutomation {
      *
      * @param element The underlying element.
      * @return Pointer The raw pointer.
-     * @throws AutomationException An error has occurred in the automation library.
+     * @throws AutomationException An error has occurred in the automation
+     *                             library.
      */
     protected Pointer getPointerFromElement(final IUIAutomationElement element)
             throws AutomationException {
         PointerByReference pElement = new PointerByReference();
 
-        WinNT.HRESULT result1 = element.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pElement);
+        WinNT.HRESULT result1 =
+                element.QueryInterface(
+                        new Guid.REFIID(IUIAutomationElement.IID), pElement);
         if (!COMUtils.SUCCEEDED(result1)) {
             throw new AutomationException(result1.intValue());
         }
@@ -177,6 +192,6 @@ public abstract class BaseAutomation {
             return ((Number) propertyValue).intValue() != 0;
         }
 
-        return ! propertyValue.equals(0);
+        return !propertyValue.equals(0);
     }
 }

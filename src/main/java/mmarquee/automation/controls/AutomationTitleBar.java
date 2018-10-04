@@ -44,11 +44,14 @@ public final class AutomationTitleBar extends AutomationContainer {
      * @throws AutomationException Automation library error
      */
     public AutomationMainMenu getMenuBar() throws AutomationException {
-        PointerByReference condition = this.automation.createControlTypeCondition(ControlType.MenuBar);
+        PointerByReference condition = this.getAutomation()
+                .createControlTypeCondition(ControlType.MenuBar);
 
-        AutomationElement element = this.element.findFirst(new TreeScope(TreeScope.Descendants),
-                condition);
+        AutomationElement element =
+                this.getElement().findFirst(
+                        new TreeScope(TreeScope.Descendants),
+                        condition);
 
-        return new AutomationMainMenu(new ElementBuilder(element).parent(this.element));
+        return new AutomationMainMenu(new ElementBuilder(element).parent(this.getElement()));
     }
 }

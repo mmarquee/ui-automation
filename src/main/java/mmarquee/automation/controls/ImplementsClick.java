@@ -24,7 +24,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface Clickable extends Automatable {
+public interface ImplementsClick extends Automatable {
     /**
      * Clicks the element.
      * @throws AutomationException Automation library error

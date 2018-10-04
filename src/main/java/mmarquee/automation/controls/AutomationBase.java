@@ -22,7 +22,29 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import mmarquee.automation.pattern.*;
+import mmarquee.automation.pattern.BasePattern;
+import mmarquee.automation.pattern.ScrollItem;
+import mmarquee.automation.pattern.Text;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.pattern.ExpandCollapse;
+import mmarquee.automation.pattern.Dock;
+import mmarquee.automation.pattern.LegacyIAccessible;
+import mmarquee.automation.pattern.Grid;
+import mmarquee.automation.pattern.GridItem;
+import mmarquee.automation.pattern.Invoke;
+import mmarquee.automation.pattern.MultipleView;
+import mmarquee.automation.pattern.ItemContainer;
+import mmarquee.automation.pattern.Value;
+import mmarquee.automation.pattern.Scroll;
+import mmarquee.automation.pattern.Range;
+import mmarquee.automation.pattern.SelectionItem;
+import mmarquee.automation.pattern.TableItem;
+import mmarquee.automation.pattern.Table;
+import mmarquee.automation.pattern.Transform;
+import mmarquee.automation.pattern.Selection;
+import mmarquee.automation.pattern.Toggle;
+import mmarquee.automation.pattern.PatternNotFoundException;
+
 import org.apache.log4j.Logger;
 
 import com.sun.jna.Pointer;
@@ -47,22 +69,40 @@ import mmarquee.automation.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public abstract class AutomationBase implements Automatable, CanRequestBasePattern {
+public abstract class AutomationBase
+        implements Automatable, CanRequestBasePattern {
 
     /**
      * The logger.
      */
-    final Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    private final Logger logger =
+            Logger.getLogger(AutomationBase.class.getName());
+
+    /**
+     * Gets the logger.
+     * @return The logger
+     */
+    public Logger getLogger() {
+        return this.logger;
+    }
 
     /**
      * The automation element.
      */
-    protected AutomationElement element;
+    private AutomationElement element;
 
     /**
      * The automation library wrapper.
      */
-    protected UIAutomation automation;
+    private UIAutomation automation;
+
+    /**
+     * Gets the automation wrapper.
+     * @return The automation library
+     */
+    public UIAutomation getAutomation() {
+        return this.automation;
+    }
 
     /**
      * The basic IAccessible pattern.
@@ -95,7 +135,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         }
 
         for (final BasePattern pattern: builder.getAutomationPatterns()) {
-        	setAutomationPattern(pattern);
+            setAutomationPattern(pattern);
         }
     }
 
@@ -118,7 +158,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     }
 
     /**
-     * Throws an exception if the element's class name does not equal the expected one.
+     * Throws an exception if the element's class name does not equal the
+     * expected one.
      *
      * @param expectedClassName the expected className.
      * @throws AutomationException if automation access failed.
@@ -138,9 +179,9 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
 	}
 
     /**
-     * Checks whether a pattern is available. Can be used if no BasePattern class
-     * is available for the pattern, yet. Tries to get the matching propertyId to check for availability
-     * of for the given PatternId
+     * Checks whether a pattern is available. Can be used if no BasePattern
+     * class is available for the pattern, yet. Tries to get the matching
+     * propertyId to check for availability of for the given PatternId
      *
      * @param patternId
      *            the Pattern ID to test for
@@ -150,12 +191,17 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     public boolean isAutomationPatternAvailable(final PatternID patternId) {
         try {
         	final String patternIdName = patternId.name();
-        	final String patternIdNameText = patternIdName.replaceAll("\\d", "");
-        	final String patternIdNameVersion = patternIdName.replaceAll("\\D", "");
-        	final String propertyName = String.format("Is%sPattern%sAvailable", patternIdNameText, patternIdNameVersion);
+        	final String patternIdNameText =
+                    patternIdName.replaceAll("\\d", "");
+        	final String patternIdNameVersion =
+                    patternIdName.replaceAll("\\D", "");
+        	final String propertyName =
+                    String.format("Is%sPattern%sAvailable",
+                            patternIdNameText, patternIdNameVersion);
         	final PropertyID propertyId = PropertyID.valueOf(propertyName);
 
-            final Object propertyValue = this.element.getPropertyValue(propertyId.getValue());
+            final Object propertyValue =
+                    this.element.getPropertyValue(propertyId.getValue());
             return BaseAutomation.isPropertyValueTrue(propertyValue);
         } catch (AutomationException ex) {
             return false;
@@ -163,9 +209,9 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     }
 
     /**
-     * Checks whether a pattern is available. Can be used if no BasePattern class
-     * is available for the pattern, yet. Tries to get the matching propertyId to check for availability
-     * of for the given PatternId
+     * Checks whether a pattern is available. Can be used if no BasePattern
+     * class is available for the pattern, yet. Tries to get the matching
+     * propertyId to check for availability of for the given PatternId
      *
      * @param patternIdValue
      *            the numerical id of the pattern to test for
@@ -178,7 +224,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
     	        return isAutomationPatternAvailable(patternId);
     		}
     	}
-    	throw new IllegalArgumentException("No PatternID constant defined for patternId " + patternIdValue);
+    	throw new IllegalArgumentException(
+    	        "No PatternID constant defined for patternId " + patternIdValue);
     }
 
     /**
@@ -188,7 +235,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return True if available.
      *
      */
-    public boolean isAutomationPatternAvailable(final Class<? extends BasePattern> patternClass) {
+    public boolean isAutomationPatternAvailable(
+            final Class<? extends BasePattern> patternClass) {
         try {
             return requestAutomationPattern(patternClass).isAvailable();
         } catch (AutomationException ex) {
@@ -506,7 +554,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return The condition
      * @throws AutomationException Something has gone wrong
      */
-    protected PointerByReference createAutomationIdPropertyCondition(final String automationId)
+    protected PointerByReference createAutomationIdPropertyCondition(
+            final String automationId)
             throws AutomationException {
         return this.automation.createAutomationIdPropertyCondition(automationId);
     }
@@ -530,7 +579,8 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return The condition
      * @throws AutomationException Something has gone wrong.
      */
-    protected PointerByReference createClassNamePropertyCondition(final String className)
+    protected PointerByReference createClassNamePropertyCondition(
+            final String className)
             throws AutomationException {
         return this.automation.createClassNamePropertyCondition(className);
     }
@@ -542,8 +592,9 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return The And condition.
      * @throws AutomationException Error in automation.
      */
-   protected PointerByReference createAndCondition(final PointerByReference condition1,
-                                                   final PointerByReference condition2)
+   protected PointerByReference createAndCondition(
+           final PointerByReference condition1,
+           final PointerByReference condition2)
            throws AutomationException {
        return this.automation.createAndCondition(condition1, condition2);
    }
@@ -556,8 +607,9 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(final TreeScope scope,
-                                              final PointerByReference condition)
+    protected List<AutomationElement> findAll(
+            final TreeScope scope,
+            final PointerByReference condition)
             throws AutomationException {
         return this.element.findAll(scope, condition);
     }
@@ -589,8 +641,11 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @throws AutomationException Something is wrong in automation
      */
     public WinDef.HWND getNativeWindowHandle() throws AutomationException {
-        Object value = this.element.getPropertyValue(PropertyID.NativeWindowHandle.getValue());
-        return new WinDef.HWND(Pointer.createConstant(Integer.valueOf(value.toString())));
+        Object value =
+                this.element.getPropertyValue(
+                        PropertyID.NativeWindowHandle.getValue());
+        return new WinDef.HWND(Pointer.createConstant(
+                Integer.valueOf(value.toString())));
     }
 
     /**
@@ -629,10 +684,12 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      * @return The runtime id
      * @throws AutomationException Throws big error, so not implemented
      */
+    /*
     public int[] getRuntimeId() throws AutomationException {
-//        return this.element.getRuntimeId();
         throw new AutomationException("Not supported");
+        return this.element.getRuntimeId();
     }
+    */
 
     /**
      * Gets the current framework ID for the element.
@@ -721,11 +778,13 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      */
     protected List<AutomationElement> getChildElements(final boolean deep)
             throws AutomationException {
-        return this.findAll(new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
+        return this.findAll(
+                new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
         		this.createTrueCondition());
     }
 
- // TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
+// TreeScope.Parent is not yet supported,
+// see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
 //    /**
 //     * Gets the parent element
 //     *
@@ -773,37 +832,29 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
         return this.element.getFullDescription();
     }
 
-// TreeScope.Parent is not yet supported, see https://docs.microsoft.com/en-us/dotnet/api/system.windows.automation.treescope
-//    /**
-//     * Gets the parent control
-//     *
-//     * @return The matching element
-//     * @throws AutomationException Did not find the element
-//     * @throws PatternNotFoundException Expected pattern not found
-//     */
-//    public AutomationBase getParent() throws AutomationException, PatternNotFoundException {
-//    	AutomationElement el = this.getParentElement();
-//    	return AutomationControlFactory.get(this, el);
-//    }
-
     /**
      * <p>
-     * Gets the specified pattern for this control from the underlying Windows API.
+     * Gets the specified pattern for this control from the underlying Windows
+     * API.
      * </p>
-     * @return  Returns the IUIAutomationInvokePattern associated with this control, or null if not available
+     * @return  Returns the IUIAutomationInvokePattern associated with this
+     *          control, or null if not available
      * @throws PatternNotFoundException Pattern is not found
      * @throws AutomationException Error in automation library
      */
     @Override
-    public <T extends BasePattern> T requestAutomationPattern(final Class<T> automationPatternClass) throws AutomationException {
+    public <T extends BasePattern> T requestAutomationPattern(
+            final Class<T> automationPatternClass) throws AutomationException {
         synchronized(patternAccessMonitor) {
             @SuppressWarnings("unchecked")
             T automationPattern = (T) automationPatterns.get(automationPatternClass);
             if (automationPattern == null) {
-            	automationPattern = this.element.getProvidedPattern(automationPatternClass);
+            	automationPattern =
+                        this.element.getProvidedPattern(automationPatternClass);
                 if (automationPattern == null) {
 	                try {
-	                    automationPattern = automationPatternClass.getConstructor(AutomationElement.class).newInstance(this.element);
+	                    automationPattern =
+                                automationPatternClass.getConstructor(AutomationElement.class).newInstance(this.element);
 	                } catch (Throwable e) {
 	                	e = getInnerException(e);
 	                	if (e instanceof AutomationException) throw (AutomationException) e;
@@ -824,7 +875,7 @@ public abstract class AutomationBase implements Automatable, CanRequestBasePatte
      */
     private Throwable getInnerException(Throwable e) {
     	if (e instanceof InvocationTargetException) {
-    		return  getInnerException(((InvocationTargetException) e).getCause());
+    		return  getInnerException(e.getCause());
     	}
     	return e;
     }

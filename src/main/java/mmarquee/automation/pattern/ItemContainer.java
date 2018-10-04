@@ -32,6 +32,8 @@ import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.automation.uiautomation.IUIAutomationItemContainerPatternConverter;
 
 /**
+ * Wrapper for the item container.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
  *
@@ -39,7 +41,8 @@ import mmarquee.automation.uiautomation.IUIAutomationItemContainerPatternConvert
 public class ItemContainer extends BasePattern {
 
     /**
-     * Constructor for the ItemContainer pattern
+     * Constructor for the ItemContainer pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      * @throws AutomationException API issue

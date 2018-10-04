@@ -22,7 +22,7 @@ import mmarquee.automation.pattern.Text;
 /**
  * The Control supports the methods of the Text Pattern.
  */
-public interface Textable extends Automatable, CanRequestBasePattern {
+public interface ImplementsText extends Automatable, CanRequestBasePattern {
 
 	 /**
      * Gets the text for the document.

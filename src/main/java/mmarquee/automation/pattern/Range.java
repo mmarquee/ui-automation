@@ -26,15 +26,15 @@ import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
 
 /**
+ * Wrapper for the range valuepattern.
+ *
  * @author Mark Humphreys
  * Date 01/03/2016.
- *
- * Wrapper for the range valuepattern.
  */
 public class Range extends BasePattern {
 
     /**
-     * Constructor for the range value pattern
+     * Constructor for the range value pattern.
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -45,18 +45,33 @@ public class Range extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsRangeValuePatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationRangeValuePattern rawPattern;
 
+    /**
+     * Converts the pointer.
+     * @param pUnknownA The raw pointer
+     * @return The RangeValue pattern
+     */
     IUIAutomationRangeValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
         return IUIAutomationRangeValuePatternConverter.pointerToInterface(pUnknownA);
     }
 
+    /**
+     * Gets the pattern.
+     *
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     */
     private IUIAutomationRangeValuePattern getPattern() throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
     }
 
     /**
-     * Sets the value
+     * Sets the value.
+     *
      * @param value The value to set
      * @throws AutomationException Something has gone wrong
      */
@@ -68,7 +83,8 @@ public class Range extends BasePattern {
     }
 
     /**
-     * Gets the value
+     * Gets the value.
+     *
      * @return The value
      * @throws AutomationException Something has gone wrong
      */

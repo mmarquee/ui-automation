@@ -57,15 +57,34 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      * The associated automation element.
      */
     final protected AutomationElement element;
+
+    /**
+     * The associated pattern id.
+     */
     protected PatternID patternID;
+
+    /**
+     * The associated property id.
+     */
     protected PropertyID availabilityPropertyID;
 
+    /**
+     * Constructor for BasePattern.
+     *
+     * @param element The Element
+     * @throws AutomationException Error from automation
+     */
     public BasePattern(AutomationElement element) throws AutomationException
     {
         super();
         this.element = element;
     }
 
+    /**
+     * Gets the pattern id.
+     *
+     * @return The pattern id
+     */
     public PatternID getPatternID() {
     	return patternID;
     }
@@ -98,10 +117,10 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
         	throw new PatternNotFoundException(e);
 		}
 
-    	if (unknown == null) {
-        	logger.warn("Failed to find pattern");
-        	throw new PatternNotFoundException("Failed to find pattern");
-    	}
+//    	if (unknown == null) {
+//        	logger.warn("Failed to find pattern");
+//        	throw new PatternNotFoundException("Failed to find pattern");
+//    	}
 
         Unknown uElement = makeUnknown(unknown.getValue());
         return uElement.QueryInterface(new Guid.REFIID(this.IID), pbr);

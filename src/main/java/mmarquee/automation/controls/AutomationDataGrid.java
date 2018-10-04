@@ -31,7 +31,8 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public final class AutomationDataGrid
         extends AutomationBase
-        implements Valueable, ChildSelectable, Gridable, Tableable {
+        implements ImplementsValue, ImplementsChildSelect,
+            ImplementsGrid, ImplementsTable {
 
     /**
      * Construct the AutomationDataGrid.
@@ -46,42 +47,42 @@ public final class AutomationDataGrid
      * Gets the selected row from the gridPattern.
      *
      * @return List of AutomationStringGridItem
-     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException      Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationDataGridCell> selectedRow()
-            throws PatternNotFoundException, AutomationException  {
-    	
-    	List<AutomationElement> collection = getCurrentSelection();
+            throws PatternNotFoundException, AutomationException {
+
+        List<AutomationElement> collection = getCurrentSelection();
 
         return convertListToAutomationDataGridCells(collection);
     }
-
 
     /**
      * Gets the selected item from the gridPattern.
      *
      * @return AutomationStringGridItem
-     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException      Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell selected()
-            throws PatternNotFoundException, AutomationException  {
+            throws PatternNotFoundException, AutomationException {
 
         List<AutomationElement> collection = getCurrentSelection();
 
-        return new AutomationDataGridCell(new ElementBuilder(collection.get(0)));
+        return new AutomationDataGridCell(
+                new ElementBuilder(collection.get(0)));
     }
 
     /**
      * Gets the list of the column headers.
      *
      * @return List of GridItems
-     * @throws AutomationException Automation library error
+     * @throws AutomationException      Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationDataGridCell> getColumnHeaders()
-            throws PatternNotFoundException, AutomationException  {
+            throws PatternNotFoundException, AutomationException {
         List<AutomationElement> collection = this.getCurrentColumnHeaders();
 
         return convertListToAutomationDataGridCells(collection);
@@ -91,11 +92,11 @@ public final class AutomationDataGrid
      * Gets the list of the row headers.
      *
      * @return List of GridItems
-     * @throws AutomationException Automation library error
+     * @throws AutomationException      Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<AutomationDataGridCell> getRowHeaders ()
-            throws PatternNotFoundException, AutomationException  {
+    public List<AutomationDataGridCell> getRowHeaders()
+            throws PatternNotFoundException, AutomationException {
         List<AutomationElement> collection = this.getCurrentRowHeaders();
 
         return convertListToAutomationDataGridCells(collection);
@@ -106,11 +107,11 @@ public final class AutomationDataGrid
      *
      * @param search Search criteria
      * @return The GridItem at the given cell position
-     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException      Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell getItem(final Search search)
-            throws PatternNotFoundException, AutomationException  {
+            throws PatternNotFoundException, AutomationException {
         if (search.getHasRow() || search.getHasColumn()) {
             return getItem(search.getRow(), search.getColumn());
         } else {
@@ -121,16 +122,17 @@ public final class AutomationDataGrid
     /**
      * Gets the item associated with the given cell.
      *
-     * @param row X Offset
+     * @param row    X Offset
      * @param column Y Offset
      * @return The GridItem at the given cell position
-     * @throws AutomationException Something has gone wrong
+     * @throws AutomationException      Something has gone wrong
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell getItem(final int row,
                                           final int column)
-            throws PatternNotFoundException, AutomationException  {
-        return new AutomationDataGridCell(new ElementBuilder(getGridItem(row, column)));
+            throws PatternNotFoundException, AutomationException {
+        return new AutomationDataGridCell(
+                new ElementBuilder(getGridItem(row, column)));
     }
 
     /**
@@ -138,7 +140,7 @@ public final class AutomationDataGrid
      *
      * @param row The row
      * @return Collection of cells for the given row
-     * @throws AutomationException Automation library error
+     * @throws AutomationException      Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationDataGridCell> getRow(final int row)
@@ -158,7 +160,7 @@ public final class AutomationDataGrid
      *
      * @param col The column
      * @return Collection of cells for the given column
-     * @throws AutomationException Automation library error
+     * @throws AutomationException      Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
     public List<AutomationDataGridCell> getColumn(final int col)
@@ -171,7 +173,8 @@ public final class AutomationDataGrid
                 items.add(cell);
             } catch (NullPointerException ex) {
                 // Try and add am empty cell
-                AutomationDataGridCell cell = new AutomationDataGridCell(null);
+                AutomationDataGridCell cell = new AutomationDataGridCell(new
+                        ElementBuilder());
                 items.add(cell);
             }
         }
@@ -184,7 +187,7 @@ public final class AutomationDataGrid
      *
      * @param col The column
      * @return The header cell
-     * @throws AutomationException Error in automation library
+     * @throws AutomationException      Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell getColumnHeader(final int col)
@@ -199,7 +202,7 @@ public final class AutomationDataGrid
      *
      * @param row The row
      * @return The header cell
-     * @throws AutomationException Error in automation library
+     * @throws AutomationException      Error in automation library
      * @throws PatternNotFoundException Expected pattern not found
      */
     public AutomationDataGridCell getRowHeader(final int row)
@@ -210,24 +213,27 @@ public final class AutomationDataGrid
     }
 
     /**
-     * Converts a list of automation elements to a list of data grid cells, for ease of access.
+     * Converts a list of automation elements to a list of data grid cells,
+     * for ease of access.
      *
      * @param collection The list of raw AutomationElements
      * @return The converted list of Data Cell Grids
      */
-	List<AutomationDataGridCell> convertListToAutomationDataGridCells(final List<AutomationElement> collection) {
-		List<AutomationDataGridCell> items = new ArrayList<>();
+    List<AutomationDataGridCell> convertListToAutomationDataGridCells(
+            final List<AutomationElement> collection) {
+        List<AutomationDataGridCell> items = new ArrayList<>();
 
         for (AutomationElement item : collection) {
             try {
                 items.add(new AutomationDataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {
                 // Try and add am empty cell
-                AutomationDataGridCell cell = new AutomationDataGridCell(null);
+                AutomationDataGridCell cell = new AutomationDataGridCell(new
+                        ElementBuilder());
                 items.add(cell);
             }
         }
 
         return items;
-	}
+    }
 }

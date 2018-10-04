@@ -27,14 +27,15 @@ import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
 import mmarquee.automation.uiautomation.WindowVisualState;
 
 /**
+ * Wrapper for the window pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the window pattern.
  */
 public class Window extends BasePattern {
     /**
-     * Constructor for the window pattern
+     * Constructor for the window pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -45,14 +46,24 @@ public class Window extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsWindowPatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationWindowPattern rawPattern;
 
+    /**
+     * Gets the pattern.
+     *
+     * @return The pattern
+     * @throws AutomationException Error in automation library
+     * */
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
         return getPattern(rawPattern,this::convertPointerToInterface);
     }
 
     /**
-     * Waits for the window to be idle, and allow input
+     * Waits for the window to be idle, and allow input.
+     *
      * @param timeout A timeout to use
      * @throws AutomationException Something has gone wrong
      */
@@ -65,7 +76,8 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Maximize the 'window'
+     * Maximize the 'window'.
+     *
      * @throws AutomationException Something has gone wrong
      */
     public void maximize() throws AutomationException {
@@ -73,7 +85,8 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Minimize the 'window'
+     * Minimize the 'window'.
+     *
      * @throws AutomationException Something has gone wrong
      */
     public void minimize() throws AutomationException {
@@ -82,6 +95,7 @@ public class Window extends BasePattern {
 
     /**
      * Can the window be maximized.
+     *
      * @return True or false
      * @throws AutomationException Something is wrong
      */
@@ -98,6 +112,7 @@ public class Window extends BasePattern {
 
     /**
      * Can the window be minimized.
+     *
      * @return True or false
      * @throws AutomationException Something is wrong
      */
@@ -113,7 +128,8 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Returns whether this control is modal
+     * Returns whether this control is modal.
+     *
      * @return Is this control modal?
      * @throws AutomationException Something has gone wrong
      */
@@ -128,7 +144,8 @@ public class Window extends BasePattern {
     }
 
     /**
-     * IS this window topmost
+     * IS this window topmost.
+     *
      * @return Is the window topmost
      * @throws AutomationException Something has gone wrong
      */
@@ -143,7 +160,8 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Closes the 'window'
+     * Closes the 'window'.
+     *
      * @throws AutomationException Something has gone wrong
      */
     public void close() throws AutomationException {
@@ -154,7 +172,8 @@ public class Window extends BasePattern {
     }
 
     /**
-     * Sets the visual state
+     * Sets the visual state.
+     *
      * @param state The state to set
      * @throws AutomationException Something has gone wrong
      */
@@ -165,7 +184,14 @@ public class Window extends BasePattern {
         }
     }
 
-    IUIAutomationWindowPattern convertPointerToInterface(PointerByReference pUnknownA) {
+    /**
+     * Converts the raw pointer to the interface.
+     *
+     * @param pUnknownA The raw pointer
+     * @return The converted interface
+     */
+    IUIAutomationWindowPattern convertPointerToInterface(
+            final PointerByReference pUnknownA) {
         return IUIAutomationWindowPatternConverter.pointerToInterface(pUnknownA);
     }
 }

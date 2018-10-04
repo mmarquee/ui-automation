@@ -30,7 +30,8 @@ import mmarquee.automation.pattern.Invoke;
  * For some reason the invoke pattern doesn't work for these buttons, even via
  * Object Inspector - no error, just doesn't work, so have to manufacture the click.
  */
-public final class AutomationToolBarButton extends AutomationBase implements Clickable {
+public final class AutomationToolBarButton extends AutomationBase
+        implements ImplementsClick {
 
     /**
      * Constructor for the AutomationToolBarButton.
@@ -47,7 +48,7 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      */
     AutomationToolBarButton(final AutomationElement element,
                             final Invoke invoke) {
-        super (new ElementBuilder(element).addPattern(invoke));
+        super(new ElementBuilder(element).addPattern(invoke));
     }
 
     /**
@@ -61,7 +62,7 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      * @throws AutomationException Automation library error.
      */
     public void click() throws AutomationException {
-        WinDef.POINT point = this.element.getClickablePoint();
+        WinDef.POINT point = this.getElement().getClickablePoint();
 
         AutomationMouse mouse = AutomationMouse.getInstance();
         mouse.setLocation(point.x, point.y);
@@ -74,6 +75,6 @@ public final class AutomationToolBarButton extends AutomationBase implements Cli
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 }

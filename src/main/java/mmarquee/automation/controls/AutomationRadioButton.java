@@ -22,7 +22,7 @@ package mmarquee.automation.controls;
  * @author Mark Humphreys
  * Date 31/01/2016.
  */
-public final class AutomationRadioButton extends AutomationBase implements Selectable {
+public final class AutomationRadioButton extends AutomationBase implements ImplementsSelect {
 	
     /**
      * Construct the AutomationRadioButton.

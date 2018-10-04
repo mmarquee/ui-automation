@@ -38,15 +38,10 @@ import mmarquee.automation.uiautomation.TreeScope;
  *
  * @author Mark Humphreys
  * Date 26/01/2016.
- *
- * Currently all of these tests require to run on Windows.
  */
-public class AutomationWindow extends AutomationContainer implements Focusable, Windowable {
-    /**
-     * The window pattern.
-     */
-    private Window windowPattern;
-
+public class AutomationWindow
+        extends AutomationContainer
+        implements ImplementsFocus, ImplementsWindow {
     /**
      * The user32 instance.
      */
@@ -61,7 +56,7 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
      * Focuses this control.
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 
     /**
@@ -86,11 +81,13 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
     public AutomationStatusBar getStatusBar() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
-        List<AutomationElement> collection = this.findAll(new TreeScope(TreeScope.Descendants), condition);
+        List<AutomationElement> collection =
+                this.findAll(
+                        new TreeScope(TreeScope.Descendants), condition);
 
         AutomationStatusBar found = null;
 
-        for(AutomationElement element: collection) {
+        for (AutomationElement element: collection) {
             int retVal = element.getControlType();
 
             if (retVal == ControlType.StatusBar.getValue()) {
@@ -108,7 +105,10 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
      * @throws AutomationException Something has gone wrong.
      */
     public AutomationSystemMenu getSystemMenu() throws AutomationException {
-        return (new AutomationSystemMenu(this.getElementByControlType(0, ControlType.MenuBar)));
+        return (
+                new AutomationSystemMenu(
+                        this.getElementByControlType(
+                                0, ControlType.MenuBar)));
     }
 
     /**
@@ -128,19 +128,26 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
      * @return The main menu.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationMainMenu getMainMenu(int offset) throws AutomationException {
-        return (new AutomationMainMenu(new ElementBuilder(this.getElementByControlType(offset,
-                ControlType.MenuBar)).parent(this.element)));
+    public AutomationMainMenu getMainMenu(final int offset)
+            throws AutomationException {
+        return (new AutomationMainMenu(
+                new ElementBuilder(
+                        this.getElementByControlType(offset,
+                            ControlType.MenuBar)).parent(this.getElement())));
     }
 
     /**
      * Gets the menu associated with this window.
-     * @param index Index of the menu.
      * @return The menu.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationMainMenu getMenu(int index) throws AutomationException {
-        return (new AutomationMainMenu(new ElementBuilder(this.getElementByControlType(0, ControlType.Menu)).parent(this.element)));
+    public AutomationMainMenu getMenu() throws AutomationException {
+        return (
+                new AutomationMainMenu(
+                        new ElementBuilder(
+                                this.getElementByControlType(
+                                        0, ControlType.Menu)).parent(
+                                                this.getElement())));
     }
 
     /**
@@ -161,30 +168,38 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
     }
 
     /**
+     * Number of retries.
+     */
+    private static final int WINDOW_RETRIES = 10;
+
+    /**
      * Finds the child window with the given title.
      * @param title Title to search for.
      * @return The child window.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationWindow getWindow(String title) throws AutomationException {
+    public AutomationWindow getWindow(final String title)
+            throws AutomationException {
         AutomationElement item = null;
 
-        for (int count = 0; count < 10; count++) {
+        for (int count = 0; count < WINDOW_RETRIES; count++) {
             try {
                 item = this.findFirst(new TreeScope(TreeScope.Descendants),
                         this.createAndCondition(
                                 this.createNamePropertyCondition(title),
-                                this.createControlTypeCondition(ControlType.Window)));
+                                this.createControlTypeCondition(
+                                        ControlType.Window)));
             } catch (ElementNotFoundException ex) {
-                logger.warn("Failed to find `" + title + "` window");
+                getLogger().warn("Failed to find `" + title + "` window");
             }
 
             if (item != null) {
-                logger.warn("Found window");
+                getLogger().warn("Found window");
                 break;
             } else {
                 try {
-                    logger.warn("Did not find `" + title + "` window, retrying");
+                    getLogger().warn(
+                            "Did not find `" + title + "` window, retrying");
                     // Wait for it
                     Thread.sleep(SLEEP_DURATION);
                 } catch (InterruptedException ex) {
@@ -206,15 +221,16 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
      * @return The child window.
      * @throws AutomationException Something has gone wrong.
      */
-    public AutomationWindow getWindow(Pattern titlePattern) throws AutomationException {
+    public AutomationWindow getWindow(Pattern titlePattern)
+            throws AutomationException {
         AutomationElement item = null;
 
-        retry_loop: for (int loop = 0; loop < 10; loop++) {
-
+        retry_loop: for (int loop = 0; loop < WINDOW_RETRIES; loop++) {
             try {
                 List<AutomationElement> collection = 
                 		this.findAll(new TreeScope(TreeScope.Descendants), 
-                				this.createControlTypeCondition(ControlType.Window));
+                				this.createControlTypeCondition(
+                				        ControlType.Window));
                 
                 for (AutomationElement element : collection) {
                     String name = element.getName();
@@ -226,21 +242,23 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
                 }
                 
             } catch (AutomationException ex) {
-                logger.info("Failed");
+                getLogger().info("Failed");
             }
 
-            logger.warn("Did not find window matching `" + titlePattern + "`, retrying");
+            getLogger().warn(
+                    "Did not find window matching `" + titlePattern + "`, retrying");
             // Wait for it
             try {
 				Thread.sleep(SLEEP_DURATION);
 			} catch (InterruptedException e) {
                 // interrupted
-                logger.info("interrupted");
+                getLogger().info("interrupted");
 			}
         }
         
         if (item == null) {
-            throw new ElementNotFoundException("matching " + titlePattern.toString());
+            throw new ElementNotFoundException(
+                    "matching " + titlePattern.toString());
         }
 
         return new AutomationWindow(new ElementBuilder(item));
@@ -252,8 +270,10 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
      * @throws AutomationException Something has gone wrong.
      */
     public AutomationTitleBar getTitleBar() throws AutomationException {
-        return new AutomationTitleBar(new ElementBuilder(this.getElementByControlType(0,
-                ControlType.TitleBar)));
+        return new AutomationTitleBar(
+                new ElementBuilder(
+                        this.getElementByControlType(0,
+                                                     ControlType.TitleBar)));
     }
 
     /**
@@ -262,15 +282,19 @@ public class AutomationWindow extends AutomationContainer implements Focusable, 
      * @throws Win32Exception WIN32 call has failed.
      * @throws AutomationException Something is wrong in automation.
      */
-    public void setTransparency(int alpha) throws Win32Exception, AutomationException {
+    public void setTransparency(int alpha)
+            throws Win32Exception, AutomationException {
         WinDef.HWND hwnd = this.getNativeWindowHandle();
 
-        if (user32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED) == 0) {
+        if (user32.SetWindowLong(
+                hwnd, User32.GWL_EXSTYLE, User32.WS_EX_LAYERED) == 0) {
             throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
         }
 
-        if (!user32.SetLayeredWindowAttributes(hwnd, 0, (byte)alpha, User32.LWA_ALPHA)) {
+        if (!user32.SetLayeredWindowAttributes(
+                hwnd, 0, (byte)alpha, User32.LWA_ALPHA)) {
             throw new Win32Exception(Kernel32.INSTANCE.GetLastError());
         }
     }
 }
+

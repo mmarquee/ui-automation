@@ -565,6 +565,7 @@ public class AutomationBaseTest {
         assertTrue(value);
     }
 
+    /*
     @Test(expected = AutomationException.class)
     public void testgetRuntimeIdThrowsException() throws Exception {
         when(element.getPropertyValue(anyInt())).thenReturn(1);
@@ -575,8 +576,9 @@ public class AutomationBaseTest {
         AutomationWindow window = new AutomationWindow(
                 new ElementBuilder(element).addPattern(container).automation(instance).addPattern(pattern));
 
-        window.getRuntimeId();
+        window.getRuntimeID();
     }
+    */
 
     @Test
     public void testGetProviderDescription_Gets_Value_From_Element() throws Exception {

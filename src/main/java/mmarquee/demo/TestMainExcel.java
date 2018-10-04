@@ -17,29 +17,41 @@ package mmarquee.demo;
 
 import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.AutomationApplication;
+import mmarquee.automation.controls.AutomationTabItem;
+import mmarquee.automation.controls.AutomationDataGrid;
+import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.AutomationDataGridCell;
+import mmarquee.automation.controls.AutomationTab;
+import mmarquee.automation.controls.AutomationPanel;
+import mmarquee.automation.controls.Search;
 
 import java.util.List;
 
 /**
+ * Test the automation wrapper on Excel.
+ *
  * @author Mark Humphreys
  * Date 26/02/2016.
- *
- * Test the automation wrapper on Excel.
  */
 public class TestMainExcel extends TestBase {
 
+    /**
+     * Run it.
+     */
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
         AutomationApplication application = null;
 
         try {
-            // 0. Load excel - this works for Excel 2013, but not for Excel 2015,as the control hierarchy is different.
+            // 0. Load excel - this works for Excel 2013, but not for Excel
+            // 2015,as the control hierarchy is different.
 
             try {
                 // Start the application
-                application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE");
+                application = automation.launchOrAttach(
+                        "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE");
             } catch (Throwable ex) {
                 // Smother
                 logger.error("Failed to launch or attach");
@@ -49,10 +61,14 @@ public class TestMainExcel extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window = application.getWindow(Search.getBuilder().className("XLMAIN").build());
+            AutomationWindow window =
+                    application.getWindow(
+                            Search.getBuilder().className("XLMAIN").build());
             logger.info(window.getClassName());
 
-            AutomationPanel panelX = window.getPanel(Search.getBuilder(0).className("XLDESK").build());
+            AutomationPanel panelX =
+                    window.getPanel(
+                            Search.getBuilder(0).className("XLDESK").build());
             logger.info(panelX.getName());
             logger.info(panelX.getClassName());
 
@@ -67,23 +83,30 @@ public class TestMainExcel extends TestBase {
                 logger.info(item.getName());
             }
 
-            AutomationDataGrid grid = window.getDataGrid(Search.getBuilder(0).build());
+            AutomationDataGrid grid =
+                    window.getDataGrid(Search.getBuilder(0).build());
             logger.info(grid.getName());
 
             // 3. Get some data
-            AutomationDataGridCell cell = grid.getItem(Search.getBuilder(0,0).build());
+            AutomationDataGridCell cell =
+                    grid.getItem(
+                            Search.getBuilder(0,0).build());
             logger.info(cell.getName());
             logger.info(cell.getValue());
             logger.info(cell.getColumn());
             logger.info(cell.getRow());
 
-            AutomationDataGridCell cell1 = grid.getItem(Search.getBuilder(1,1).build());
+            AutomationDataGridCell cell1 =
+                    grid.getItem(
+                            Search.getBuilder(1,1).build());
             logger.info(cell1.getName());
             logger.info(cell1.getValue());
             logger.info(cell1.getColumn());
             logger.info(cell1.getRow());
 
-            AutomationDataGridCell cell2 = grid.getItem(Search.getBuilder(2,2).build());
+            AutomationDataGridCell cell2 =
+                    grid.getItem(
+                            Search.getBuilder(2,2).build());
             logger.info(cell2.getName());
             logger.info(cell2.getValue());
             logger.info(cell2.getColumn());
@@ -93,18 +116,12 @@ public class TestMainExcel extends TestBase {
             cell2.setValue("XYZ");
             logger.info(cell2.getValue());
 
-            AutomationDataGridCell cell3 = grid.getItem(Search.getBuilder(3,3).build());
+            AutomationDataGridCell cell3 =
+                    grid.getItem(
+                            Search.getBuilder(3,3).build());
             logger.info(cell3.getName());
             logger.info(cell3.getValue());
 
-            logger.info(cell3.getColumn());
-            logger.info(cell3.getRow());
-
-
-            cell3.setValue("Hey hey");
-            logger.info(cell3.getValue());
-
-            /*
             if (grid.canSelectMultiple()) {
                 // Play with selection - doesn't seem to be working yet
                 cell.addToSelection();
@@ -123,7 +140,6 @@ public class TestMainExcel extends TestBase {
             } else {
                 logger.info("Multiple selection not allowed");
             }
-            */
 
             // 3.4 More data
 
@@ -135,7 +151,8 @@ public class TestMainExcel extends TestBase {
                 logger.info(col.getValue());
             }
 
-            // 4. Set some extra data - excel doesn't seem to implement the correct pattern
+            // 4. Set some extra data - excel doesn't seem to implement
+            // the correct pattern
             try {
                 List<AutomationDataGridCell> headers = grid.getColumnHeaders();
 

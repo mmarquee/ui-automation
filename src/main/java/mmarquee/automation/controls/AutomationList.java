@@ -36,7 +36,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 26/01/2016.
  */
-public final class AutomationList extends AutomationBase implements ChildSelectable {
+public final class AutomationList extends AutomationBase implements ImplementsChildSelect {
 
     /**
      * The selection pattern.

@@ -28,15 +28,16 @@ import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
 import mmarquee.automation.uiautomation.IUIAutomationValuePatternConverter;
 
 /**
+ * Wrapper for the value pattern.
+ *
  * @author Mark Humphreys
  * Date 25/02/2016.
- *
- * Wrapper for the value pattern.
  */
 public class Value extends BasePattern {
 
     /**
-     * Constructor for the value pattern
+     * Constructor for the value pattern.
+     *
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
@@ -47,18 +48,24 @@ public class Value extends BasePattern {
         this.availabilityPropertyID = PropertyID.IsValuePatternAvailable;
     }
 
+    /**
+     * The raw pattern.
+     */
     IUIAutomationValuePattern rawPattern;
 
     /**
-     * Gets the pattern
+     * Gets the pattern.
+     *
      * @return The actual pattern itself
+     * @throws AutomationException Error in automation library
      */
     private IUIAutomationValuePattern getPattern() throws AutomationException {
         return getPattern(rawPattern,this::convertPointerToInterface);
     }
 
     /**
-     * Get the current value of the control
+     * Get the current value of the control.
+     *
      * @return The current value
      * @throws AutomationException Something has gone wrong
      */
@@ -74,7 +81,8 @@ public class Value extends BasePattern {
     }
 
     /**
-     * Gets the current readonly status of the control
+     * Gets the current readonly status of the control.
+     *
      * @return True if read-only
      * @throws AutomationException Something has gone wrong
      */
@@ -89,7 +97,8 @@ public class Value extends BasePattern {
     }
 
     /**
-     * Sets the value of the control
+     * Sets the value of the control.
+     *
      * @param value Value to use
      * @throws NullPointerException When something has gone wrong
      * @throws AutomationException Something has gone wrong
@@ -107,7 +116,14 @@ public class Value extends BasePattern {
         }
     }
 
-    IUIAutomationValuePattern convertPointerToInterface(PointerByReference pUnknownA) {
+    /**
+     * Converts the raw pointer to the interface.
+     *
+     * @param pUnknownA The raw pointer
+     * @return The converted interface
+     */
+    IUIAutomationValuePattern convertPointerToInterface(
+            final PointerByReference pUnknownA) {
         return IUIAutomationValuePatternConverter.pointerToInterface(pUnknownA);
     }
 }

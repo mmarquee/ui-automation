@@ -34,7 +34,7 @@ import mmarquee.automation.uiautomation.TreeScope;
  */
 public final class AutomationComboBox
         extends AutomationContainer
-        implements Expandable, Valueable, Focusable, ChildSelectable {
+        implements ImplementsExpand, ImplementsValue, ImplementsFocus, ImplementsChildSelect {
 
     /**
      * Constructor for the AutomationComboBox.
@@ -202,7 +202,6 @@ public final class AutomationComboBox
      * @throws PatternNotFoundException Failed to find pattern
      */
     public List<AutomationListItem> getSelectedItems() throws AutomationException, PatternNotFoundException {
-        
     	List<AutomationElement> collection = getCurrentSelection();
 
         List<AutomationListItem> list = new ArrayList<>();
@@ -234,6 +233,6 @@ public final class AutomationComboBox
      * </p>
      */
     public void focus() {
-        this.element.setFocus();
+        this.getElement().setFocus();
     }
 }

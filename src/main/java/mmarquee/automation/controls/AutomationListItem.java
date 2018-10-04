@@ -26,7 +26,7 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  * Date 09/02/2016.
  */
 public final class AutomationListItem extends AutomationContainer
-        implements Selectable, Clickable {
+        implements ImplementsSelect, ImplementsClick {
     /**
      * Constructor for the AutomationListItem.
      * @param builder The builder

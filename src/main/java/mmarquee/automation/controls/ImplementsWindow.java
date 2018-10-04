@@ -26,7 +26,7 @@ import mmarquee.automation.uiautomation.WindowVisualState;
  * @author Mark Humphreys
  * Date 19/05/2017.
  */
-public interface Windowable extends Automatable, CanRequestBasePattern {
+public interface ImplementsWindow extends Automatable, CanRequestBasePattern {
 
     /**
      * Waits for this window to become idle.
