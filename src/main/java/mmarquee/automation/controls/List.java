@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 import mmarquee.automation.*;
 import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Selection;
 import mmarquee.uiautomation.TreeScope;
 
 /**
@@ -182,6 +183,27 @@ public final class List
     }
 
     /**
+     * Gets the currently selected item.
+     *
+     * @return The currently selected item.
+     * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find pattern.
+     */
+    private Element getCurrentSelectedItem()
+            throws AutomationException {
+        if (this.selectionPattern == null) {
+            this.selectionPattern =
+                    this.requestAutomationPattern(Selection.class);
+        }
+
+        if (this.selectionPattern != null) {
+            return selectionPattern.getCurrentSelectedItem();
+        } else {
+            throw new AutomationException("Failed call getCurrentSelectedItem");
+        }
+    }
+
+    /**
      * Gets the first currently selected element.
      *
      * @return The current selection.
@@ -190,10 +212,22 @@ public final class List
      */
     public ListItem getSelectedItem()
             throws AutomationException, PatternNotFoundException {
-        java.util.List<ListItem> list = this.getSelectedItems();
-        if (list.size() == 0) {
-        	throw new ElementNotFoundException();
+
+        // Try and use the more modern interface first
+        try {
+            Element elem = this.getCurrentSelectedItem();
+
+            if (elem == null) {
+                throw new ElementNotFoundException();
+            } else {
+                return new ListItem(new ElementBuilder(elem));
+            }
+        } catch (AutomationException ex) {
+            java.util.List<ListItem> list = this.getSelectedItems();
+            if (list.size() == 0) {
+                throw new ElementNotFoundException();
+            }
+            return list.get(0);
         }
-        return list.get(0);
     }
 }
