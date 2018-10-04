@@ -194,6 +194,7 @@ public final class AutomationList extends AutomationBase implements ImplementsCh
      * @throws AutomationException Something has gone wrong.
      * @throws PatternNotFoundException Failed to find pattern.
      */
+    /*
     private AutomationElement getCurrentSelectedItem()
             throws AutomationException {
         if (this.selectionPattern == null) {
@@ -206,6 +207,7 @@ public final class AutomationList extends AutomationBase implements ImplementsCh
             throw new AutomationException("Failed to call getCurrentSelectedItem");
         }
     }
+    */
 
     /**
      * Gets the first currently selected element.
@@ -218,20 +220,20 @@ public final class AutomationList extends AutomationBase implements ImplementsCh
             throws AutomationException, PatternNotFoundException {
 
         // Try and use the more modern interface first
-        try {
-            AutomationElement elem = this.getCurrentSelectedItem();
+    //    try {
+    //        AutomationElement elem = this.getCurrentSelectedItem();
 
-            if (elem == null) {
-                throw new ElementNotFoundException();
-            } else {
-                return new AutomationListItem(new ElementBuilder(elem));
-            }
-        } catch (AutomationException ex) {
+     //       if (elem == null) {
+     //           throw new ElementNotFoundException();
+     //       } else {
+     //           return new AutomationListItem(new ElementBuilder(elem));
+     //       }
+     //   } catch (AutomationException ex) {
             List<AutomationListItem> list = this.getSelectedItems();
             if (list.size() == 0) {
                 throw new ElementNotFoundException();
             }
             return list.get(0);
-        }
+    //    }
     }
 }
