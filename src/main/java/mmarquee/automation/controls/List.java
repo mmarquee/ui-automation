@@ -35,6 +35,11 @@ public final class List
         implements ImplementsChildSelect {
 
     /**
+     * The selection pattern.
+     */
+    private Selection selectionPattern;
+
+    /**
      * Constructor for the List.
      *
      * @param builder The underlying automation element.
