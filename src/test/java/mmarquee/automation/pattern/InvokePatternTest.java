@@ -49,6 +49,7 @@ import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
 public class InvokePatternTest {
     @Mock
     IUIAutomationInvokePattern rawPattern;
+
     @Mock
     AutomationElement element;
 
@@ -58,14 +59,13 @@ public class InvokePatternTest {
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
-        
-        BaseAutomationTest.declarePatternAvailable(element, 
-        		PatternID.Invoke
-        		);
+
+        BaseAutomationTest.declarePatternAvailable(element,
+                PatternID.Invoke);
     }
 
     @Test
-    public void test_Invoke_Calls_getCurrentIsTopmost_From_Pattern() throws Exception {
+    public void test_Invoke_Calls_Invoke_From_Pattern() throws Exception {
         Invoke pattern = new Invoke(element);
         pattern.rawPattern = rawPattern;
 
@@ -87,11 +87,16 @@ public class InvokePatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation ->
+                new WinNT.HRESULT(-1)).when(mockUnknown)
+                    .QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
-        Invoke spyPattern = Mockito.spy(new Invoke(element));
+        Invoke pattern = new Invoke(element);
 
-        IUIAutomationInvokePattern mockRange = Mockito.mock(IUIAutomationInvokePattern.class);
+        Invoke spyPattern = Mockito.spy(pattern);
+
+        IUIAutomationInvokePattern mockPattern =
+                Mockito.mock(IUIAutomationInvokePattern.class);
 
         doReturn(mockUnknown)
                 .when(spyPattern)
@@ -99,7 +104,7 @@ public class InvokePatternTest {
 
         spyPattern.invoke();
 
-        verify(mockRange, atLeastOnce()).invoke();
+        verify(mockPattern, atLeastOnce()).invoke();
     }
 
     @Test

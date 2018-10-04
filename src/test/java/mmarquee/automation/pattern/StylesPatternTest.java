@@ -109,7 +109,9 @@ public class StylesPatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation ->
+                new WinNT.HRESULT(-1)).when(mockUnknown)
+                    .QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Styles pattern = new Styles(element);
 
