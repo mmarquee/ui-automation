@@ -250,7 +250,7 @@ public class Element extends BaseAutomation {
     /**
      * Gets the runtime ID for the element.
      * @return The value
-     * @throws AutomationException
+     * @throws AutomationException Call to Automation API failed.
      */
     public String getRuntimeId() throws AutomationException {
         PointerByReference sr = new PointerByReference();

@@ -80,7 +80,7 @@ public interface IUIAutomationWindowPattern extends IUnknown {
     /**
      * Gets whether the window is topmost window.
      * @param retVal Boolean value
-     * @param retVal
+     * @param retVal The topmost flag
      * @return If this method succeeds, it returns S_OK. Otherwise, it returns
      *         an HRESULT error code.
      */
