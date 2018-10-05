@@ -58,8 +58,12 @@ public class MenuTest extends BaseAutomationTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    @Mock private Element element;
-	@Mock private Element targetElement;
+    @Mock
+    private Element element;
+
+	@Mock
+    private Element targetElement;
+
 	@Mock
     IUIAutomationElement elem;
 	
@@ -163,12 +167,15 @@ public class MenuTest extends BaseAutomationTest {
 
     @Test
     public void test_GetMenuItem_By_AutomationId() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.CHILDREN), any())).thenReturn(targetElement);
+        when(element.findFirst(
+                BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS),
+                any()))
+            .thenReturn(targetElement);
 
 		Menu menu = new Menu(new ElementBuilder(element));
 
         MenuItem item = menu.getMenuItemByAutomationId("myID");
-        assertEquals(targetElement,item.getElement());
+        assertEquals(targetElement, item.getElement());
 
         verify(element, atLeastOnce()).findFirst(any(), any());
     }

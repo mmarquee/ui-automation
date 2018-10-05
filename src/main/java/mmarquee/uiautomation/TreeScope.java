@@ -40,7 +40,7 @@ public class TreeScope extends Structure {
     /**
      * The value.
      */
-    private int value;
+    public int value;
 
     /**
      * Accessor for the value.
