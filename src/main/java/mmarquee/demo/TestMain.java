@@ -132,7 +132,7 @@ public class TestMain extends TestBase {
                     window.getRadioButton(Search.getBuilder(1).build());
             radio.select();
 
-            StatusBar statusBar = window.getStatusBar();
+//            StatusBar statusBar = window.getStatusBar();
 
             // TextBox seems to be broken
 

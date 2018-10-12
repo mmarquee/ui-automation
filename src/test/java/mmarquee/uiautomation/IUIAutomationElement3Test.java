@@ -87,7 +87,9 @@ public class IUIAutomationElement3Test {
             automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
-            rootElement.findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
+            TreeScope ts = new TreeScope(TreeScope.DESCENDANTS);
+
+            rootElement.findFirst(ts, pCondition.getValue(), first);
 
             Unknown uElement = new Unknown(first.getValue());
 
