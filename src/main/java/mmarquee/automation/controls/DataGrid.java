@@ -108,7 +108,7 @@ public final class DataGrid
 
         List<DataGridCell> items = new ArrayList<>();
 
-        for (Element item : collection) {
+        for (Element item: collection) {
             try {
                 items.add(new DataGridCell(new ElementBuilder(item)));
             } catch (NullPointerException ex) {

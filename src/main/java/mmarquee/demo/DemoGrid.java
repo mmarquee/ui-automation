@@ -79,8 +79,9 @@ public class DemoGrid extends TestBase {
             }
 
             // GRIDS ***********************************
-            DataGrid grid = applicationWindow.getDataGrid(Search.getBuilder(
-                    "grdDemoGrid").className("TJHCGrid").build());
+            DataGrid grid = applicationWindow.getDataGrid(
+                                Search.getBuilder("grdDemoGrid")
+                                    .className("TJHCGrid").build());
             logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids
