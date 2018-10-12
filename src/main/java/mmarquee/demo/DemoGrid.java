@@ -31,10 +31,14 @@ public class DemoGrid extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        Application application = null;
+        Application application =
+                new Application(
+                        new ElementBuilder()
+                                .automation(automation)
+                                .applicationPath("apps\\GridsDemo.exe"));
 
         try {
-            application = automation.launchOrAttach("apps\\GridsDemo.exe");
+            application.launchOrAttach();
         } catch (Throwable ex) {
             logger.warn("Failed to find application", ex);
         }
@@ -75,7 +79,8 @@ public class DemoGrid extends TestBase {
             }
 
             // GRIDS ***********************************
-            DataGrid grid = applicationWindow.getDataGrid(Search.getBuilder("AutomatedCombobox1").className("TJHCGrid").build());
+            DataGrid grid = applicationWindow.getDataGrid(Search.getBuilder(
+                    "grdDemoGrid").className("TJHCGrid").build());
             logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids
@@ -100,10 +105,20 @@ public class DemoGrid extends TestBase {
 
             logger.info("value is now " + cells0.get(1).getValue());
 
+            logger.info("++ Column headers");
+
+            List<DataGridCell> headers = grid.getColumnHeaders();
+
+            logger.info("++ Showing column headers");
+
+            for(DataGridCell header: headers) {
+                logger.info(" *" + header.getName());
+            }
+
             logger.info("++ ALL DONE ++");
 
 //            cell3.showContextMenu();
-            cell3.invoke();
+//            cell3.invoke();
 
         } catch (AutomationException ex) {
             logger.info("Something went wrong - " + ex.getClass());
