@@ -32,10 +32,12 @@ import static org.mockito.Mockito.doReturn;
  *
  * Tests for the lower level calls to COM used in the Selection pattern.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class SelectionPatternTest2 {
+
     @Mock
     IUIAutomationSelectionPattern rawPattern;
+
     @Mock
     Element element;
 
@@ -102,6 +104,7 @@ public class SelectionPatternTest2 {
         spyPattern.getCurrentSelection();
     }
 
+    @Test
     public void test_canSelectMultiple_Returns_False_When_Interface_Returns_True() throws Exception {
 
         doAnswer(invocation -> {
@@ -151,6 +154,7 @@ public class SelectionPatternTest2 {
         assertFalse(value);
     }
 
+    @Test
     public void test_canSelectMultiple_Returns_True_When_Interface_Returns_True() throws Exception {
 
         doAnswer(invocation -> {

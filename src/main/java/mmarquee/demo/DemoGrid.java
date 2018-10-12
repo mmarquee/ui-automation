@@ -79,10 +79,8 @@ public class DemoGrid extends TestBase {
             }
 
             // GRIDS ***********************************
-            Search search = Search.getBuilder("grdDemoGrid")
-                    .className("TJHCGrid").build();
-
-            DataGrid grid = applicationWindow.getDataGrid(search);
+            DataGrid grid = applicationWindow.getDataGrid(Search.getBuilder(
+                    "grdDemoGrid").className("TJHCGrid").build());
             logger.info(grid.getName());
 
             // By convention, if there are no selected rows, then show the 'fields' memu of our grids
@@ -107,8 +105,15 @@ public class DemoGrid extends TestBase {
 
             logger.info("value is now " + cells0.get(1).getValue());
 
-            logger.info("++ Getting column headers");
+            logger.info("++ Column headers");
+
             List<DataGridCell> headers = grid.getColumnHeaders();
+
+            logger.info("++ Showing column headers");
+
+            for(DataGridCell header: headers) {
+                logger.info(" *" + header.getName());
+            }
 
             logger.info("++ ALL DONE ++");
 

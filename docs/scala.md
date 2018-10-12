@@ -1,8 +1,17 @@
 ## sbt
 To add the library as a prerequisite, use the following entry to the library dependencies in the `build.sbt` file
 
+### Stable release
+```scala
+  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.5.0"
 ```
-  libraryDependencies += "com.github.mmarquee" % "ui-automation " & "0.4.3"
+
+### Snapshot release
+```scala
+  resolvers +=
+    "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+  
+  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.5.1-SNAPSHOT"
 ```
 
 ## Examples
@@ -37,5 +46,4 @@ To simplify the code, the standard behaviour of the application has been encapsu
      start()
    }
  }
-
 ```
