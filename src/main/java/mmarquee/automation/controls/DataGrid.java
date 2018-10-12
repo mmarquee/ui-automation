@@ -89,6 +89,10 @@ public final class DataGrid
         return convertListToAutomationDataGridCells(collection);
     }
 
+    private Table getTablePattern() {
+
+    }
+
     /**
      * Gets the list of the column headers.
      *
@@ -104,7 +108,7 @@ public final class DataGrid
 
         Table tablePattern = this.getTablePattern();
 
-        List<Element> collection = this.tablePattern.getCurrentColumnHeaders();
+        List<Element> collection = tablePattern.getCurrentColumnHeaders();
 
         List<DataGridCell> items = new ArrayList<>();
 
