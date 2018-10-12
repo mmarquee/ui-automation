@@ -22,6 +22,7 @@ import java.util.List;
 import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Table;
 
 /**
  * Wrapper around the Delphi automated string gridPattern.
@@ -81,11 +82,43 @@ public final class DataGrid
      * @throws AutomationException      Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    public List<DataGridCell> getColumnHeaders()
+    public List<DataGridCell> _getColumnHeaders()
             throws PatternNotFoundException, AutomationException {
         List<Element> collection = this.getCurrentColumnHeaders();
 
         return convertListToAutomationDataGridCells(collection);
+    }
+
+    /**
+     * Gets the list of the column headers.
+     *
+     * @return List of GridItems
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    public List<DataGridCell> getColumnHeaders()
+            throws PatternNotFoundException, AutomationException  {
+        //if (this.tablePattern == null) {
+        //    this.tablePattern = this.getTablePattern();
+        //}
+
+        Table tablePattern = this.getTablePattern();
+
+        List<Element> collection = this.tablePattern.getCurrentColumnHeaders();
+
+        List<DataGridCell> items = new ArrayList<>();
+
+        for (Element item : collection) {
+            try {
+                items.add(new DataGridCell(new ElementBuilder(item)));
+            } catch (NullPointerException ex) {
+                // Try and add an empty cell
+                DataGridCell cell = new DataGridCell(null);
+                items.add(cell);
+            }
+        }
+
+        return items;
     }
 
     /**
