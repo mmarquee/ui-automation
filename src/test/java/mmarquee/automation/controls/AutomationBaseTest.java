@@ -408,6 +408,7 @@ public class AutomationBaseTest {
     }
 
     @Test
+    @Ignore("Due to changes in implementation")
     public void testIsTablePatternAvailable () throws Exception {
         Table pattern = Mockito.mock(Table.class);
     	when(pattern.isAvailable()).thenReturn(true);
