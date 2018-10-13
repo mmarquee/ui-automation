@@ -105,6 +105,9 @@ public class DemoGrid extends TestBase {
 
             logger.info("value is now " + cells0.get(1).getValue());
 
+            logger.info("Rows = " + grid.getRowCount());
+            logger.info("Columns = " + grid.getColumnCount());
+
             logger.info("++ Column headers");
 
             List<DataGridCell> headers = grid.getColumnHeaders();
