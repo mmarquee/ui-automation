@@ -118,6 +118,16 @@ public class DemoGrid extends TestBase {
                 logger.info(" *" + header.getName());
             }
 
+            logger.info("++ Row headers");
+
+            List<DataGridCell> rowHeaders = grid.getRowHeaders();
+
+            logger.info("++ Showing row headers");
+
+            for(DataGridCell header: rowHeaders) {
+                logger.info(" *" + header.getName());
+            }
+
             logger.info("++ ALL DONE ++");
 
 //            cell3.showContextMenu();

@@ -17,6 +17,7 @@ package mmarquee.automation.pattern;
 
 import java.util.List;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
@@ -52,6 +53,19 @@ public class Table extends BasePattern {
      * The raw pattern.
      */
     IUIAutomationTablePattern rawPattern;
+
+    /**
+     * The underlying automation pattern.
+     */
+    protected Pointer pattern;
+
+    /**
+     * Sets the pattern.
+     * @param pattern The pattern to set
+     */
+    public void setPattern(Pointer pattern) {
+        this.pattern =  pattern;
+    }
 
     /**
      * Gets the pattern.
