@@ -19,10 +19,14 @@ package mmarquee.automation.controls;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.jna.ptr.PointerByReference;
+
 import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.PatternID;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.automation.pattern.Table;
 import mmarquee.uiautomation.RowOrColumnMajor;
 
 /**
@@ -87,9 +91,9 @@ public final class DataGrid
      */
     public List<DataGridCell> getColumnHeaders()
             throws PatternNotFoundException, AutomationException {
-        List<Element> collection = this.getCurrentColumnHeaders();
+        return this.getCurrentColumnHeaders();
 
-        return convertListToAutomationDataGridCells(collection);
+   //     return convertListToAutomationDataGridCells(collection);
     }
 
     /**
@@ -101,9 +105,9 @@ public final class DataGrid
      */
     public List<DataGridCell> getRowHeaders()
             throws PatternNotFoundException, AutomationException {
-        List<Element> collection = this.getCurrentRowHeaders();
+        return this.getCurrentRowHeaders();
 
-        return convertListToAutomationDataGridCells(collection);
+   //     return convertListToAutomationDataGridCells(collection);
     }
 
     /**
@@ -280,9 +284,29 @@ public final class DataGrid
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    List<Element> getCurrentColumnHeaders ()
+    public List<DataGridCell> getCurrentColumnHeaders ()
             throws PatternNotFoundException, AutomationException {
+        if (isGridPatternAvailable()) {
+            Table pattern = this.getTablePattern();
 
+            List<Element> collection = pattern.getCurrentColumnHeaders();
+
+            List<DataGridCell> items = new ArrayList<>();
+
+            for (Element item : collection) {
+                try {
+                    items.add(new DataGridCell(new ElementBuilder(item)));
+                } catch (NullPointerException ex) {
+                    // Try and add am empty cell
+                    DataGridCell cell = new DataGridCell(null);
+                    items.add(cell);
+                }
+            }
+
+            return items;
+        } else {
+            throw new PatternNotFoundException("Pattern not available");
+        }
     }
 
     /**
@@ -290,8 +314,28 @@ public final class DataGrid
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
-    List<Element> getCurrentRowHeaders() throws AutomationException {
+    public List<DataGridCell> getCurrentRowHeaders() throws AutomationException {
+        if (isGridPatternAvailable()) {
+            Table pattern = this.getTablePattern();
 
+            List<Element> collection = pattern.getCurrentRowHeaders();
+
+            List<DataGridCell> items = new ArrayList<>();
+
+            for (Element item : collection) {
+                try {
+                    items.add(new DataGridCell(new ElementBuilder(item)));
+                } catch (NullPointerException ex) {
+                    // Try and add am empty cell
+                    DataGridCell cell = new DataGridCell(null);
+                    items.add(cell);
+                }
+            }
+
+            return items;
+        } else {
+            throw new PatternNotFoundException("Pattern not available");
+        }
     }
 
     /**
@@ -301,8 +345,42 @@ public final class DataGrid
      * @throws AutomationException Error thrown from automation library
      * @throws PatternNotFoundException Failed to find pattern
      */
-    RowOrColumnMajor getRowOrColumnMajor()
+    public RowOrColumnMajor getRowOrColumnMajor()
             throws AutomationException, PatternNotFoundException {
-        
+        if (isGridPatternAvailable()) {
+            Table pattern = this.getTablePattern();
+
+            return pattern.getRowOrColumnMajor();
+        } else {
+            throw new AutomationException("Search type not found");
+        }
+    }
+
+    private PointerByReference getPattern(final int id)
+        throws AutomationException {
+        PointerByReference unknown = this.getElement().getPattern(id);
+
+        if (unknown != null) {
+            return unknown;
+        } else {
+            throw new PatternNotFoundException();
+        }
+    }
+
+    private Table getTablePattern() throws AutomationException {
+        if (isTablePatternAvailable()) {
+            PointerByReference unknown = this.getPattern(PatternID.Table.getValue());
+
+            //   if (unknown instanceof PatternProvider) { // Hook for mocking
+            //   // tests
+            //       return (Table)((PatternProvider) unknown).getPattern();
+            //   }
+
+            Table pattern = new Table(this.getElement());
+            pattern.setPattern(unknown.getValue());
+
+            return pattern;
+        }
+        return null;
     }
 }

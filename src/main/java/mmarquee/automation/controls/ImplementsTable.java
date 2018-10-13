@@ -38,7 +38,7 @@ public interface ImplementsTable extends Automatable {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    List<Element> getCurrentColumnHeaders ()
+    List<DataGridCell> getCurrentColumnHeaders ()
             throws PatternNotFoundException, AutomationException;
     
     /**
@@ -46,7 +46,7 @@ public interface ImplementsTable extends Automatable {
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
-    List<Element> getCurrentRowHeaders() throws AutomationException;
+    List<DataGridCell> getCurrentRowHeaders() throws AutomationException;
     
     /**
      * Returns whether the grid has column or row headers.

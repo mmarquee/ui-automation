@@ -368,12 +368,26 @@ public abstract class AutomationBase
     }
 
     /**
+     * Checks whether a pattern is available (old style).
+     *
+     * @param property pattern to search for.
+     * @return True if available.
+     */
+    private boolean isPatternAvailable(final PropertyID property) {
+        try {
+            return !this.element.getPropertyValue(property.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
+        }
+    }
+
+    /**
      * Is the table pattern available.
      *
      * @return Yes or no.
      */
     public boolean isTablePatternAvailable() {
-        return isAutomationPatternAvailable(Table.class);
+        return isPatternAvailable(PropertyID.IsTablePatternAvailable);
     }
 
     /**
