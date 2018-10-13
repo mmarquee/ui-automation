@@ -21,7 +21,9 @@ import java.util.List;
 
 import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.uiautomation.RowOrColumnMajor;
 
 /**
  * Wrapper around the Delphi automated string gridPattern.
@@ -31,8 +33,10 @@ import mmarquee.automation.pattern.PatternNotFoundException;
  */
 public final class DataGrid
         extends AutomationBase
-        implements ImplementsValue, ImplementsChildSelect,
-            ImplementsGrid, ImplementsTable {
+        implements ImplementsValue,
+                   ImplementsChildSelect,
+                   ImplementsGrid,
+                   ImplementsTable {
 
     /**
      * Construct the DataGrid.
@@ -235,5 +239,70 @@ public final class DataGrid
         }
 
         return items;
+    }
+
+    /**
+     * Gets the row count for the grid.
+     *
+     * @return Number of rows
+     * @throws PatternNotFoundException Failed to find the correct pattern
+     * @throws AutomationException Error in Automation Library
+     */
+    public int getRowCount()
+            throws PatternNotFoundException, AutomationException {
+        final Grid pattern = requestAutomationPattern(Grid.class);
+        if (pattern.isAvailable()) {
+            return (pattern.rowCount());
+        }
+        throw new PatternNotFoundException("Cannot get row count");
+    }
+
+    /**
+     * Gets the column count for the grid.
+     *
+     * @return Number of columns
+     * @throws PatternNotFoundException Failed to find the correct pattern
+     * @throws AutomationException Error in Automation Library
+     */
+    public int getColumnCount()
+            throws PatternNotFoundException, AutomationException {
+        final Grid pattern = requestAutomationPattern(Grid.class);
+        if (pattern.isAvailable()) {
+            return (pattern.columnCount());
+        }
+        throw new PatternNotFoundException("Cannot get column count");
+    }
+
+    /**
+     * Gets the list of the column headers.
+     *
+     * @return List of GridItems
+     * @throws AutomationException Automation library error
+     * @throws PatternNotFoundException Expected pattern not found
+     */
+    List<Element> getCurrentColumnHeaders ()
+            throws PatternNotFoundException, AutomationException {
+
+    }
+
+    /**
+     * Gets the row headers for the grid.
+     * @return The list of column header
+     * @throws AutomationException Something has gone wrong
+     */
+    List<Element> getCurrentRowHeaders() throws AutomationException {
+
+    }
+
+    /**
+     * Returns whether the grid has column or row headers.
+     *
+     * @return RowOrColumnMajor Row or column
+     * @throws AutomationException Error thrown from automation library
+     * @throws PatternNotFoundException Failed to find pattern
+     */
+    RowOrColumnMajor getRowOrColumnMajor()
+            throws AutomationException, PatternNotFoundException {
+        
     }
 }
