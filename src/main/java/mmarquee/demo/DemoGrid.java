@@ -106,6 +106,9 @@ public class DemoGrid extends TestBase {
 
             logger.info("value is now " + cells0.get(1).getValue());
 
+            logger.info("Rows = " + grid.getRowCount());
+            logger.info("Columns = " + grid.getColumnCount());
+
             logger.info("++ Column headers");
 
             List<DataGridCell> headers = grid.getColumnHeaders();
@@ -113,6 +116,16 @@ public class DemoGrid extends TestBase {
             logger.info("++ Showing column headers");
 
             for(DataGridCell header: headers) {
+                logger.info(" *" + header.getName());
+            }
+
+            logger.info("++ Row headers");
+
+            List<DataGridCell> rowHeaders = grid.getRowHeaders();
+
+            logger.info("++ Showing row headers");
+
+            for(DataGridCell header: rowHeaders) {
                 logger.info(" *" + header.getName());
             }
 
