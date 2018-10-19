@@ -721,6 +721,42 @@ public class UIAutomation extends BaseAutomation {
     }
 
     /**
+     * Gets and unnamed desktop menubar.
+     * @return The menubar
+     * @throws AutomationException Error in automation library
+     * @throws ItemNotFoundException Failed to find item
+     */
+    public Menu getDeskopMenuBar ()
+            throws AutomationException, ItemNotFoundException {
+        Element element = null;
+
+        PointerByReference pCondition1 =
+                this.createControlTypeCondition(ControlType.MenuBar);
+
+        for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
+
+            try {
+                element = this.rootElement.findFirst(
+                        new TreeScope(TreeScope.DESCENDANTS),
+                        pCondition1);
+            } catch (AutomationException ex) {
+                logger.info("Not found, retrying");
+            }
+
+            if (element != null) {
+                break;
+            }
+        }
+
+        if (element == null) {
+            logger.info("Failed to find desktop menubar");
+            throw new ItemNotFoundException("Menubar");
+        }
+
+        return new Menu(new ElementBuilder(element));
+    }
+
+    /**
      * Gets the desktop menu associated with the title.
      *
      * @param title Title of the menu to search for.
@@ -737,7 +773,9 @@ public class UIAutomation extends BaseAutomation {
         variant.setValue(Variant.VT_BSTR, sysAllocated);
 
         try {
-            PointerByReference pCondition1 = this.createPropertyCondition(PropertyID.Name.getValue(), variant);
+            PointerByReference pCondition1 =
+                    this.createPropertyCondition(
+                            PropertyID.Name.getValue(), variant);
 
             for (int loop = 0; loop < FIND_DESKTOP_ATTEMPTS; loop++) {
 
