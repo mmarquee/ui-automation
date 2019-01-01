@@ -61,7 +61,12 @@ public class Application extends AutomationBase {
     /**
      * The pathname.
      */
-    private String pathname;
+    private String pathName;
+
+    /**
+     * Application arguments.
+     */
+    private String arguments;
 
     /**
      * A very, very long timeout.
@@ -229,7 +234,10 @@ public class Application extends AutomationBase {
         this.process = builder.getProcess();
 
         if (builder.getHasPath()) {
-            this.pathname = builder.getPath();
+            this.pathName = builder.getPath();
+            if (builder.getHasArguments()) {
+                this.arguments = builder.getArguments();
+            }
         } else {
             if (builder.getHasHandle()) {
                 this.handle = builder.getHandle();
@@ -353,6 +361,6 @@ public class Application extends AutomationBase {
      * @throws Exception Something has gone wrong
      */
     public void launchOrAttach() throws Exception {
-        this.getAutomation().launchOrAttach(this.pathname);
+        this.getAutomation().launchOrAttach(this.pathName, this.arguments);
     }
 }

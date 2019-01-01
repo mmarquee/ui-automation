@@ -56,6 +56,9 @@ public class ElementBuilder {
     /** The application path. */
     private String path;
 
+    /** The application arguments. */
+    private String arguments;
+
     /** Attached. */
     private boolean attached;
 
@@ -96,6 +99,7 @@ public class ElementBuilder {
         this.process = null;
         this.parent = null;
         this.path = "";
+        this.arguments = "";
     }
 
     /**
@@ -146,6 +150,12 @@ public class ElementBuilder {
      */
     public ElementBuilder applicationPath(final String inPath) {
         this.path = inPath;
+
+        return this;
+    }
+
+    public ElementBuilder applicationArguments(final String inArguments) {
+        this.arguments = inArguments;
 
         return this;
     }
@@ -264,6 +274,10 @@ public class ElementBuilder {
         return this.path;
     }
 
+    public String getArguments() {
+        return this.arguments;
+    }
+
     /**
      * Gets the parent.
      * @return The parent
@@ -302,5 +316,13 @@ public class ElementBuilder {
      */
     public boolean getHasPath()  {
         return !this.path.isEmpty();
+    }
+
+    /**
+     * Has arguments.
+     * @return true if arguments are present
+     */
+    public boolean getHasArguments() {
+        return !this.arguments.isEmpty();
     }
 }
