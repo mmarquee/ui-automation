@@ -106,7 +106,7 @@ public class Tab extends Container {
     }
 
     /**
-     * Constructor for the Tab.
+     * Constructor for the AutomationTab.
      * @param builder The builder
      */
     public Tab(final ElementBuilder builder) {

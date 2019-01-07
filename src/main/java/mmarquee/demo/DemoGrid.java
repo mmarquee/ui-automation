@@ -43,6 +43,9 @@ public class DemoGrid extends TestBase {
             logger.warn("Failed to find application", ex);
         }
 
+        // Check that the attached issue is fixed.
+        logger.info(application.getIsAttached());
+
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
         assert application != null;

@@ -18,14 +18,15 @@ As the library depends on jna (currently version 4.5.0), then there is no need t
   <dependency>
     <groupId>com.github.mmarquee</groupId>
     <artifactId>ui-automation</artifactId>
-    <version>0.4.3</version>
+    <version>0.5.0</version>
   </dependency>  
 <dependencies>  
 ```
 
 ## Snapshot build
 
-Currently the library is preparing for a 0.5 release, so builds are being snapshotted, so nto get the latest development version, use the the following in the pom.xml.
+Currently the 'stable' release of the library is 0.5.0, so the development 
+branch is being snapshotted, so to get the latest development version, use the the following in the pom.xml.
 
 ```
 <dependencies>
@@ -33,7 +34,7 @@ Currently the library is preparing for a 0.5 release, so builds are being snapsh
   <dependency>
     <groupId>com.github.mmarquee</groupId>
     <artifactId>ui-automation</artifactId>
-    <version>0.5.0-SNAPSHOT</version>
+    <version>0.5.1-SNAPSHOT</version>
   </dependency>  
 <dependencies>  
 ```
@@ -156,7 +157,7 @@ The controls that have been implemented reflect the requirements for automating 
 
 ## Real world examples
 * [Tree Walker](treewalker.md)
-* [Real word examples](examples.md)
+* [Real world examples](examples.md)
 
 ## Caching
 * [Caching](caching.md)
