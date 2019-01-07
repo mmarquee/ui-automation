@@ -25,11 +25,9 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPattern;
-import mmarquee.automation.uiautomation.IUIAutomationItemContainerPatternConverter;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationItemContainerPattern;
+import mmarquee.uiautomation.IUIAutomationItemContainerPatternConverter;
 
 /**
  * Wrapper for the item container.
@@ -94,7 +92,7 @@ public class ItemContainer extends BasePattern {
      * @param value The value of the property
      * @return The found element.
      */
-    public AutomationElement findItemByProperty(final Pointer startAfter,
+    public Element findItemByProperty(final Pointer startAfter,
                                                 final int propertyId,
                                                 final Variant.VARIANT.ByValue value)
             throws AutomationException {
@@ -105,7 +103,7 @@ public class ItemContainer extends BasePattern {
         if (res == 0) {
             IUIAutomationElement element = getAutomationElementFromReference(pbr);
 
-            return new AutomationElement(element);
+            return new Element(element);
         } else {
             throw new AutomationException(res);
         }
