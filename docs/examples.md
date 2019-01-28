@@ -9,7 +9,7 @@ This example will periodically (every 1.5 seconds) display the element that has 
     this.rest();
 
     try {
-      AutomationElement elementFocus = automation.getFocusedElement();
+      Element elementFocus = automation.getFocusedElement();
       logger.info("From focus = " + elementFocus.getName());
 
     } catch (Exception ex) {
