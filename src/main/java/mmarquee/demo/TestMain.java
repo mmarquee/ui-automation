@@ -17,12 +17,9 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.AutomationException;
+import mmarquee.automation.*;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.Menu;
-import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
@@ -74,6 +71,11 @@ public class TestMain extends TestBase {
             java.lang.Object rect = window.getBoundingRectangle();
 
             logger.info("Rect : " + rect.toString());
+
+            Element focused = automation.getFocusedElement();
+            String v = focused.getClassName();
+
+            logger.info("Focused name is : " + v);
 
             // Interact with menus
             MainMenu menu = window.getMainMenu();
