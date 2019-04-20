@@ -23,11 +23,11 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.uiautomation.IUIAutomationStylesPattern;
 
 /**
  * @author Mark Humphreys
@@ -36,7 +36,7 @@ import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
 @RunWith(MockitoJUnitRunner.class)
 public class StylesPatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationStylesPattern rawPattern;

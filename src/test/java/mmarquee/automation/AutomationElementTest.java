@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,14 +32,14 @@ import org.mockito.Mockito;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * @author Mark Humphreys
  * Date 20/07/2016.
  *
- * Tests for the AutomationElement class behaviour.
+ * Tests for the Element class behaviour.
  *
  * Currently all of these tests require to run on Windows.
  */
@@ -66,19 +66,19 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 	@Test
 	public void testGetCurrentName() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.currentName(), root.currentName().startsWith("Desktop"));
 	}
 
 	@Test
 	public void testGetFullDescription() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getFullDescription(), root.getFullDescription().equals("Not set"));
 	}
 
 	@Test
 	public void testGetClassName() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getClassName(), root.getClassName().equals("#32769"));
 	}
 
@@ -86,7 +86,7 @@ public class AutomationElementTest extends BaseAutomationTest {
     @Ignore("Needs better mocking")
     public void testGetFullDescription_Mocked() throws AutomationException {
         // Using mock since desktop does not provide an automation ID
-        AutomationElement element = getMocketAutomationElement6();
+        Element element = getMockedAutomationElement6();
 
         when(element.getElement6().getCurrentFullDescription(any()))
                 .thenAnswer(answerWithSetPointerReferenceToWideString("MyCurrentFullDescription"));
@@ -97,7 +97,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	@Test
 	public void testGetAutomationId() throws AutomationException {
 		// Using mock since desktop does not provide an automation ID
-		AutomationElement element = getMocketAutomationElement();
+		Element element = getMockedAutomationElement();
 		
         when(element.getElement().getCurrentAutomationId(any()))
         .thenAnswer(answerWithSetPointerReferenceToWideString("myAutomationId"));
@@ -107,133 +107,133 @@ public class AutomationElementTest extends BaseAutomationTest {
 	
 	@Test
 	public void testIsPassword() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.isPassword(), !root.isPassword());
 	}
 
 	@Test
 	public void testIsControlElement() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.isControlElement(), root.isControlElement().booleanValue());
 	}
 
 	@Test
 	public void testIsContentElement() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.isContentElement(), root.isContentElement().booleanValue());
 	}
 
 	@Test
 	public void testIsOffScreen() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.offScreen(), !root.offScreen().booleanValue());
 	}
 
 	@Test
 	public void testIsEnabled() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.isEnabled(), root.isEnabled().booleanValue());
 	}
 
 	@Test
 	public void testLocalizedControlType() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertEquals(getLocal("pane"), root.localizedControlType());
 	}
 
 	@Test
 	public void testCurrentControlType() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		assertTrue("root:" + root.getControlType(), root.getControlType() == ControlType.Pane.getValue());
 	}
 
 	@Test
 	public void testFrameworkID() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		assertTrue("root:" + root.getFrameworkId(), root.getFrameworkId().equals("Win32"));
 	}
 
 	@Test
 	public void testNameForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getName(), root.getName().startsWith("Desktop"));
 	}
 
 	@Test
 	public void testAriaRoleForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getAriaRole(), root.getAriaRole().equals(""));
 	}
 
 	@Test
 	public void testOrientationForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getOrientation(), root.getOrientation() == OrientationType.None);
 	}
 
 	@Test
 	public void testItemStatusForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		assertTrue("root:" + root.getItemStatus(), root.getItemStatus().equals(""));
 	}
 
 	@Test
 	public void testFindFirst() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		AutomationElement element = root.findFirst(new TreeScope(TreeScope.Descendants), condition);
+		Element element = root.findFirst(new TreeScope(TreeScope.DESCENDANTS), condition);
 
 		assertTrue("root:" + element.currentName(), !element.currentName().equals(root.currentName()));
 	}
 
 	@Test
 	public void testFindAll() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		List<AutomationElement> elements = root.findAll(new TreeScope(TreeScope.Descendants), condition);
+		List<Element> elements = root.findAll(new TreeScope(TreeScope.DESCENDANTS), condition);
 
 		assertTrue("findAll:" + elements.size(), elements.size() != 0);
 	}
 
 	@Test
 	public void testFindAllDescendants() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		PointerByReference condition = instance.createTrueCondition();
 
-		List<AutomationElement> elements = root.findAllDescendants(condition);
+		List<Element> elements = root.findAllDescendants(condition);
 
 		assertTrue("findAll:" + elements.size(), elements.size() != 0);
 	}
 
 	@Test
 	public void testProviderDescriptionForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getProviderDescription(), !root.getProviderDescription().equals(""));
 	}
 
 	@Test
 	public void testgetProcessIdForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getProcessId(), root.getProcessId() != -1);
 	}
 
 	@Test
 	public void testgetAcceleratorKeyForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 		assertTrue("root:" + root.getAcceleratorKey(), root.getAcceleratorKey().equals(""));
 	}
 
 	@Test
 	public void testGetClickablePointForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		WinDef.POINT empty = new WinDef.POINT(0, 0);
 
@@ -242,7 +242,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 	@Test
 	public void testGetCurrentBoundingRectangleForDesktop() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		WinDef.RECT empty = new WinDef.RECT();
 
@@ -251,7 +251,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 	@Test
 	public void testCurrentPropertyValue_Succeeds_When_No_Error() throws AutomationException {
-		AutomationElement root = instance.getRootElement();
+		Element root = instance.getRootElement();
 
 		Object value = root.getPropertyValue(PropertyID.FrameworkId.getValue());
 
@@ -271,7 +271,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		WinDef.POINT point = new WinDef.POINT();
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.getClickablePoint();
 	}
@@ -283,7 +283,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentBoundingRectangle(isA(WinDef.RECT.class))).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.getBoundingRectangle();
 	}
@@ -291,7 +291,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	@Test
 	public void test_SetFocus_Calls_SetFocus_From_Element() throws Exception {
 		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.setFocus();
 
@@ -304,7 +304,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentPattern(any(), any())).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.getPattern(1);
 
@@ -314,7 +314,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 	@Test
 	public void test_GetPattern_Calls_GetCurrentPattern_From_ELement() throws Exception {
 		IUIAutomationElement mocked = Mockito.mock(IUIAutomationElement.class);
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.getPattern(1);
 
@@ -327,7 +327,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentName(any())).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.getName();
 
@@ -340,7 +340,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentIsContentElement(any())).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.isContentElement();
 
@@ -353,7 +353,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentIsControlElement(any())).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.isControlElement();
 
@@ -366,7 +366,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentIsOffscreen(any())).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.offScreen();
 
@@ -379,7 +379,7 @@ public class AutomationElementTest extends BaseAutomationTest {
 
 		when(mocked.getCurrentIsEnabled(any())).thenReturn(-1);
 
-		AutomationElement element = new AutomationElement(mocked);
+		Element element = new Element(mocked);
 
 		element.isEnabled();
 

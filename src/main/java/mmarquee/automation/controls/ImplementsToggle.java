@@ -18,7 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.ToggleState;
 
 /**
  * @author Mark Humphreys

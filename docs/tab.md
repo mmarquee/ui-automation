@@ -4,6 +4,6 @@
 # Example
 
 ```
-  AutomationTab tab = applicationWindow.getTab(Search.getBuilder(0).build());
+  Tab tab = applicationWindow.getTab(Search.getBuilder(0).build());
   tab.selectTabPage("Details");
 ```

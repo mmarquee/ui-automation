@@ -57,7 +57,8 @@ public class Canalizer {
      */
     @SuppressWarnings("unchecked")
     public static <T extends Object> T canalize(final T plainInstance) {
-        final CanalizerInvocationHandler invocationHandler = new CanalizerInvocationHandler(executor,plainInstance);
+        final CanalizerInvocationHandler invocationHandler =
+                new CanalizerInvocationHandler(executor, plainInstance);
         return (T) java.lang.reflect.Proxy
                 .newProxyInstance(plainInstance.getClass().getClassLoader(),
                         getInterfaces(plainInstance),

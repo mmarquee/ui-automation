@@ -18,7 +18,7 @@ package mmarquee.automation.controls;
 import mmarquee.automation.*;
 import mmarquee.automation.pattern.Invoke;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -46,7 +46,7 @@ public class AutomationButtonTest {
 
     @Test
     public void testGetName_For_Button() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
@@ -55,7 +55,7 @@ public class AutomationButtonTest {
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationButton button = new AutomationButton(
+        Button button = new Button(
                 new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = button.getName();
@@ -65,14 +65,14 @@ public class AutomationButtonTest {
 
     @Test
     public void testSetFocus_Calls_setFocus_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationButton button = new AutomationButton(
+        Button button = new Button(
                 new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         button.focus();
@@ -82,7 +82,7 @@ public class AutomationButtonTest {
 
     @Test
     public void testClick_Calls_Invoke_Once_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
         when(pattern.isAvailable()).thenReturn(true);
 
@@ -90,7 +90,7 @@ public class AutomationButtonTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationButton button = new AutomationButton(
+        Button button = new Button(
                 new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         button.click();
@@ -100,7 +100,7 @@ public class AutomationButtonTest {
 
     @Test(expected=PatternNotFoundException.class)
     public void testClick_Calls_Throws_PatternNotFoundException_When_Pattern_Not_Available() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Invoke pattern = Mockito.mock(Invoke.class);
         when(pattern.isAvailable()).thenReturn(false);
 
@@ -108,7 +108,7 @@ public class AutomationButtonTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationButton button = new AutomationButton(
+        Button button = new Button(
                 new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         button.click();

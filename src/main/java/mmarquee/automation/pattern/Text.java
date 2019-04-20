@@ -22,16 +22,16 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationTextPattern;
-import mmarquee.automation.uiautomation.IUIAutomationTextPatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTextRange;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArray;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTextRangeConverter;
+import mmarquee.uiautomation.IUIAutomationTextPattern;
+import mmarquee.uiautomation.IUIAutomationTextPatternConverter;
+import mmarquee.uiautomation.IUIAutomationTextRange;
+import mmarquee.uiautomation.IUIAutomationTextRangeArray;
+import mmarquee.uiautomation.IUIAutomationTextRangeArrayConverter;
+import mmarquee.uiautomation.IUIAutomationTextRangeConverter;
 
 /**
  * Wrapper for the text pattern.
@@ -47,7 +47,7 @@ public class Text extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Text(final AutomationElement element) throws AutomationException {
+    public Text(final Element element) throws AutomationException {
     	super(element);
 
         this.IID = IUIAutomationTextPattern.IID;

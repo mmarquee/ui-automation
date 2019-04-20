@@ -32,5 +32,5 @@ public interface CanRequestBasePattern {
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Failed to find pattern
      */
-	<T extends BasePattern> T requestAutomationPattern(final Class<T> automationPatternClass) throws PatternNotFoundException, AutomationException;
+	<T extends BasePattern> T requestAutomationPattern(Class<T> automationPatternClass) throws PatternNotFoundException, AutomationException;
 }

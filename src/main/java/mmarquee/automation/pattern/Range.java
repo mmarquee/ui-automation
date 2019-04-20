@@ -16,14 +16,15 @@
 package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.DoubleByReference;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePattern;
-import mmarquee.automation.uiautomation.IUIAutomationRangeValuePatternConverter;
+import mmarquee.uiautomation.IUIAutomationRangeValuePattern;
+import mmarquee.uiautomation.IUIAutomationRangeValuePatternConverter;
 
 /**
  * Wrapper for the range valuepattern.
@@ -38,7 +39,7 @@ public class Range extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Range(final AutomationElement element) throws AutomationException {
+    public Range(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationRangeValuePattern.IID;
         this.patternID = PatternID.RangeValue;
@@ -97,5 +98,22 @@ public class Range extends BasePattern {
         }
 
         return dbr.getValue();
+    }
+
+    /**
+     * Whether the control range value is read only.
+     *
+     * @return True if read only
+     * @throws AutomationException Something is wrong
+     */
+    public boolean getIsReadOnly () throws AutomationException {
+        IntByReference ibr = new IntByReference();
+
+        final int res = this.getPattern().getIsReadOnly(ibr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return (ibr.getValue() == 1);
     }
 }

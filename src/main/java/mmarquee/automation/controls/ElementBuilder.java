@@ -22,7 +22,7 @@ import java.util.Set;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinNT;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.BasePattern;
 
@@ -33,15 +33,15 @@ import mmarquee.automation.pattern.BasePattern;
  * Date 20/11/2017
  */
 public class ElementBuilder {
-    /** The AutomationElement. */
-    private AutomationElement element;
+    /** The Element. */
+    private Element element;
 
     /** The automation instance. */
     private UIAutomation instance;
 
     /** The parent element. */
 
-    private AutomationElement parent;
+    private Element parent;
 
     /** Predefined automation patterns (for testing purposes). */
     protected final Set<BasePattern> automationPatterns = new HashSet<>();
@@ -51,6 +51,13 @@ public class ElementBuilder {
 
     /** The process. */
     private Process process;
+
+
+    /** The application path. */
+    private String path;
+
+    /** The application arguments. */
+    private String arguments;
 
     /** Attached. */
     private boolean attached;
@@ -63,21 +70,21 @@ public class ElementBuilder {
     /**
      * Constructor with an instance.
      *
-     * @param instance The element
+     * @param inInstance The element
      */
-    public ElementBuilder(UIAutomation instance) {
+    public ElementBuilder(final UIAutomation inInstance) {
         this.initialise();
-        this.instance = instance;
+        this.instance = inInstance;
     }
 
     /**
      * Constructor with an element.
      *
-     * @param element The element
+     * @param inElement The element
      */
-    public ElementBuilder(AutomationElement element) {
+    public ElementBuilder(final Element inElement) {
         this.initialise();
-        this.element = element;
+        this.element = inElement;
     }
 
     /**
@@ -91,6 +98,8 @@ public class ElementBuilder {
         this.handle = null;
         this.process = null;
         this.parent = null;
+        this.path = "";
+        this.arguments = "";
     }
 
     /**
@@ -102,21 +111,21 @@ public class ElementBuilder {
 
     /**
      * Create a ElementBuilder with a handle.
-     * @param handle The handle
+     * @param inHandle The handle
      * @return The ElementBuilder
      */
-    public ElementBuilder handle(WinNT.HANDLE handle) {
-        this.handle = handle;
+    public ElementBuilder handle(final WinNT.HANDLE inHandle) {
+        this.handle = inHandle;
         return this;
     }
 
     /**
      * Create a ElementBuilder with a process.
-     * @param process The process
+     * @param inProcess The process
      * @return The ElementBuilder
      */
-    public ElementBuilder process(Process process) {
-        this.process = process;
+    public ElementBuilder process(final Process inProcess) {
+        this.process = inProcess;
         return this;
     }
 
@@ -129,56 +138,75 @@ public class ElementBuilder {
         for (final BasePattern pattern: patterns) {
             this.automationPatterns.add(pattern);
         }
+
+        return this;
+    }
+
+    /**
+     * Create a ElementBuilder with a path (this only make sense for
+     * applications).
+     * @param inPath The path
+     * @return The ElementBuilder
+     */
+    public ElementBuilder applicationPath(final String inPath) {
+        this.path = inPath;
+
+        return this;
+    }
+
+    public ElementBuilder applicationArguments(final String inArguments) {
+        this.arguments = inArguments;
+
         return this;
     }
 
     /**
      * Create a ElementBuilder with a parent.
-     * @param parent The parent
+     * @param inParent The parent
      * @return The ElementBuilder
      */
-    public ElementBuilder parent(AutomationElement parent) {
-        this.parent = parent;
+    public ElementBuilder parent(final Element inParent) {
+        this.parent = inParent;
         return this;
     }
 
     /**
-     * Create a ElementBuilder with an AutomationElement.
-     * @param element The AutomationElement
+     * Create a ElementBuilder with an Element.
+     * @param inElement The Element
      * @return The ElementBuilder
      */
-    public ElementBuilder element(AutomationElement element) {
-        this.element = element;
+    public ElementBuilder element(final Element inElement) {
+        this.element = inElement;
         return this;
     }
 
     /**
      * Create a ElementBuilder with a User32.
-     * @param user32 The User32
+     * @param inUser32 The User32
      * @return The ElementBuilder
      */
-    public ElementBuilder user32(User32 user32) {
-        this.user32 = user32;
+    public ElementBuilder user32(final User32 inUser32) {
+        this.user32 = inUser32;
         return this;
     }
 
     /**
      * Create a ElementBuilder with an UIAutomation instance.
-     * @param automation The UIAutomation instance
+     * @param inAutomation The UIAutomation instance
      * @return The ElementBuilder
      */
-    public ElementBuilder automation(UIAutomation automation) {
-        this.instance = automation;
+    public ElementBuilder automation(final UIAutomation inAutomation) {
+        this.instance = inAutomation;
         return this;
     }
 
     /**
      * Create a ElementBuilder with the attached setting.
-     * @param attached The attached value
+     * @param inAttached The attached value
      * @return The ElementBuilder
      */
-    public ElementBuilder attached(boolean attached) {
-        this.attached = attached;
+    public ElementBuilder attached(final boolean inAttached) {
+        this.attached = inAttached;
         return this;
     }
 
@@ -226,7 +254,7 @@ public class ElementBuilder {
      * The element itself.
      * @return The element
      */
-    public AutomationElement getElement() {
+    public Element getElement() {
         return this.element;
     }
 
@@ -239,10 +267,22 @@ public class ElementBuilder {
     }
 
     /**
+     * Gets the path (only for applications).
+     * @return The configured path
+     */
+    public String getPath() {
+        return this.path;
+    }
+
+    public String getArguments() {
+        return this.arguments;
+    }
+
+    /**
      * Gets the parent.
      * @return The parent
      */
-    public AutomationElement getParent() {
+    public Element getParent() {
         return this.parent;
     }
 
@@ -268,5 +308,21 @@ public class ElementBuilder {
      */
     public boolean getHasHandle() {
         return this.handle != null;
+    }
+
+    /**
+     * Has a path.
+     * @return true if path is present
+     */
+    public boolean getHasPath()  {
+        return !this.path.isEmpty();
+    }
+
+    /**
+     * Has arguments.
+     * @return true if arguments are present
+     */
+    public boolean getHasArguments() {
+        return !this.arguments.isEmpty();
     }
 }

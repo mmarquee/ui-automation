@@ -15,10 +15,10 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -31,11 +31,11 @@ import static org.mockito.Mockito.when;
  * Date 02/12/2016.
  */
 public class AutomationStatusBarTest {
-    protected Logger logger = Logger.getLogger(AutomationRadioButtonTest.class.getName());
+    protected Logger logger = Logger.getLogger(RadioButtonTest.class.getName());
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -43,7 +43,7 @@ public class AutomationStatusBarTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(
+        StatusBar statusBar = new StatusBar(
                 new ElementBuilder(element).addPattern(pattern).automation(instance));
 
         String name = statusBar.getName();

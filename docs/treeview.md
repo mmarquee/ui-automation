@@ -3,8 +3,8 @@
 
 # Example
 ```
-  AutomationTreeView tree = window.getTreeView(Search.getBuilder(0).build());
+  TreeView tree = window.getTreeView(Search.getBuilder(0).build());
 
-  AutomationTreeViewItem treeItem = tree.getItem(Search.getBuilder("Sub-SubItem").build());
+  TreeViewItem treeItem = tree.getItem(Search.getBuilder("Sub-SubItem").build());
   treeItem.select();
 ```

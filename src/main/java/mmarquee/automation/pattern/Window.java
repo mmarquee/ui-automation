@@ -18,13 +18,13 @@ package mmarquee.automation.pattern;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPatternConverter;
-import mmarquee.automation.uiautomation.WindowVisualState;
+import mmarquee.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.uiautomation.IUIAutomationWindowPatternConverter;
+import mmarquee.uiautomation.WindowVisualState;
 
 /**
  * Wrapper for the window pattern.
@@ -39,7 +39,7 @@ public class Window extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Window(final AutomationElement element) throws AutomationException {
+    public Window(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationWindowPattern.IID;
         this.patternID = PatternID.Window;
@@ -58,7 +58,7 @@ public class Window extends BasePattern {
      * @throws AutomationException Error in automation library
      * */
     private IUIAutomationWindowPattern getPattern() throws AutomationException {
-        return getPattern(rawPattern,this::convertPointerToInterface);
+        return getPattern (rawPattern, this::convertPointerToInterface);
     }
 
     /**

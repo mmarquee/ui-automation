@@ -15,7 +15,7 @@
  */
 package mmarquee.automation;
 
-import mmarquee.automation.uiautomation.IUIAutomationEventHandler;
+import mmarquee.uiautomation.IUIAutomationEventHandler;
 
 /**
  * @author Mark Humphreys

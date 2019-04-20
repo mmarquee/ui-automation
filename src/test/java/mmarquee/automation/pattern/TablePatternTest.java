@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
+import mmarquee.automation.Element;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,13 +41,12 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationTablePattern;
-import mmarquee.automation.uiautomation.RowOrColumnMajor;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationTablePattern;
+import mmarquee.uiautomation.RowOrColumnMajor;
 
 /**
  * @author Mark Humphreys
@@ -55,7 +55,7 @@ import mmarquee.automation.uiautomation.RowOrColumnMajor;
 @RunWith(MockitoJUnitRunner.class)
 public class TablePatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationTablePattern rawPattern;
@@ -159,7 +159,7 @@ public class TablePatternTest {
         Table pattern = new Table(element);
         pattern.rawPattern = rawPattern;
 
-        List<AutomationElement> elements = pattern.getCurrentColumnHeaders();
+        List<Element> elements = pattern.getCurrentColumnHeaders();
     }
 
     @Test(expected= AutomationException.class)
@@ -169,7 +169,7 @@ public class TablePatternTest {
         Table pattern = new Table(element);
         pattern.rawPattern = rawPattern;
 
-        List<AutomationElement> elements = pattern.getCurrentRowHeaders();
+        List<Element> elements = pattern.getCurrentRowHeaders();
     }
 
     @Test(expected=AutomationException.class)

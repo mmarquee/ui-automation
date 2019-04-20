@@ -22,6 +22,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+import mmarquee.automation.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,12 +38,11 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.IUIAutomationTogglePattern;
+import mmarquee.uiautomation.ToggleState;
 
 /**
  * @author Mark Humphreys
@@ -55,7 +55,7 @@ public class TogglePatternTest {
     @Mock
     IUIAutomationTogglePattern rawPattern;
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Spy
     private Unknown mockUnknown;
@@ -95,7 +95,7 @@ public class TogglePatternTest {
 
         ToggleState state = pattern.currentToggleState();
 
-        assertTrue(state == ToggleState.On);
+        assertTrue(state == ToggleState.ON);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class TogglePatternTest {
 
         ToggleState state = pattern.currentToggleState();
 
-        assertTrue(state == ToggleState.Off);
+        assertTrue(state == ToggleState.OFF);
     }
 
     @Test
@@ -135,7 +135,7 @@ public class TogglePatternTest {
 
         ToggleState state = pattern.currentToggleState();
 
-        assertTrue(state == ToggleState.Indeterminate);
+        assertTrue(state == ToggleState.INDETERMINATE);
     }
 
     @Test(expected=AutomationException.class)
@@ -155,7 +155,7 @@ public class TogglePatternTest {
 
         ToggleState state = pattern.currentToggleState();
 
-        assertTrue(state == ToggleState.Indeterminate);
+        assertTrue(state == ToggleState.INDETERMINATE);
     }
 
     @Test(expected=AutomationException.class)
@@ -175,7 +175,7 @@ public class TogglePatternTest {
 
         ToggleState state = pattern.currentToggleState();
 
-        assertTrue(state == ToggleState.Indeterminate);
+        assertTrue(state == ToggleState.INDETERMINATE);
     }
 
     @Test(expected=AutomationException.class)

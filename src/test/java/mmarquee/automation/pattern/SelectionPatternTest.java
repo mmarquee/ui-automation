@@ -38,14 +38,14 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPattern;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionItemPatternConverter;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPattern;
+import mmarquee.uiautomation.IUIAutomationSelectionItemPatternConverter;
+import mmarquee.uiautomation.IUIAutomationSelectionPattern;
 
 /**
  * @author Mark Humphreys
@@ -59,7 +59,7 @@ public class SelectionPatternTest {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Spy
     private Unknown mockUnknown;
@@ -178,7 +178,7 @@ public class SelectionPatternTest {
     //            .when(spyPattern)
       //          .makeUnknown(any());
 
-//        List<AutomationElement> list = new ArrayList<>();
+//        List<Element> list = new ArrayList<>();
 
   //      doReturn(list)
     //        .when(spyPattern)

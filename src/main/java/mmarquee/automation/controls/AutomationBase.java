@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import mmarquee.automation.*;
 import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ScrollItem;
 import mmarquee.automation.pattern.Text;
@@ -52,16 +53,9 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomation;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.UIAutomation;
-import mmarquee.automation.uiautomation.OrientationType;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.automation.Element;
+import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.TreeScope;
 
 /**
  * The base for automation.
@@ -89,7 +83,7 @@ public abstract class AutomationBase
     /**
      * The automation element.
      */
-    private AutomationElement element;
+    private Element element;
 
     /**
      * The automation library wrapper.
@@ -153,7 +147,7 @@ public abstract class AutomationBase
      *
      * @return The automation element.
      */
-    public AutomationElement getElement() {
+    public Element getElement() {
         return this.element;
     }
 
@@ -164,7 +158,7 @@ public abstract class AutomationBase
      * @param expectedClassName the expected className.
      * @throws AutomationException if automation access failed.
      */
-	protected void assertClassName(final String expectedClassName)
+    protected void assertClassName(final String expectedClassName)
             throws AutomationException {
 		if (element == null) {
 			throw new ElementNotFoundException("null");
@@ -175,7 +169,9 @@ public abstract class AutomationBase
 				|| (cName != null && cName.equals(expectedClassName))) {
 			return;
 		}
-		throw new ElementNotFoundException(expectedClassName + "(instead: " + cName + ")");
+
+		throw new ElementNotFoundException(
+		        expectedClassName + "(instead: " + cName + ")");
 	}
 
     /**
@@ -224,6 +220,7 @@ public abstract class AutomationBase
     	        return isAutomationPatternAvailable(patternId);
     		}
     	}
+
     	throw new IllegalArgumentException(
     	        "No PatternID constant defined for patternId " + patternIdValue);
     }
@@ -371,12 +368,26 @@ public abstract class AutomationBase
     }
 
     /**
+     * Checks whether a pattern is available (old style).
+     *
+     * @param property pattern to search for.
+     * @return True if available.
+     */
+    private boolean isPatternAvailable(final PropertyID property) {
+        try {
+            return !this.element.getPropertyValue(property.getValue()).equals(0);
+        } catch (AutomationException ex) {
+            return false;
+        }
+    }
+
+    /**
      * Is the table pattern available.
      *
      * @return Yes or no.
      */
     public boolean isTablePatternAvailable() {
-        return isAutomationPatternAvailable(Table.class);
+        return isPatternAvailable(PropertyID.IsTablePatternAvailable);
     }
 
     /**
@@ -427,7 +438,7 @@ public abstract class AutomationBase
     /**
      * Is the control off screen.
      *
-     * @return Off screen.
+     * @return OFF screen.
      */
     public boolean isOffScreen() {
         try {
@@ -494,8 +505,8 @@ public abstract class AutomationBase
      * @return List List of elements.
      * @throws AutomationException Something is up with automation.
      */
-    protected List<AutomationElement> findAll() throws AutomationException {
-        return this.findAll(new TreeScope(TreeScope.Children));
+    protected List<Element> findAll() throws AutomationException {
+        return this.findAll(new TreeScope(TreeScope.CHILDREN));
     }
 
     /**
@@ -503,11 +514,11 @@ public abstract class AutomationBase
      *
      * @param scope The scope of where to look.
      * @param condition The condition to use.
-     * @return The found AutomationElement.
+     * @return The found Element.
      * @throws AutomationException An error has occurred in automation.
      */
-   protected AutomationElement findFirst(final TreeScope scope,
-                                         final PointerByReference condition)
+   protected Element findFirst(final TreeScope scope,
+                               final PointerByReference condition)
            throws AutomationException {
         return this.element.findFirst(scope, condition);
    }
@@ -519,7 +530,7 @@ public abstract class AutomationBase
      * @return List list of all the elements found.
      * @throws AutomationException Something is wrong in automation.
      */
-    protected List<AutomationElement> findAll(final TreeScope scope)
+    protected List<Element> findAll(final TreeScope scope)
             throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
         return this.findAll(scope, condition);
@@ -607,7 +618,7 @@ public abstract class AutomationBase
      * @return IUIAutomationElementArray
      * @throws AutomationException Error in automation library
      */
-    protected List<AutomationElement> findAll(
+    protected java.util.List <Element> findAll(
             final TreeScope scope,
             final PointerByReference condition)
             throws AutomationException {
@@ -748,7 +759,7 @@ public abstract class AutomationBase
      * @param pvInstance The pointer to use
      * @return An Unknown object
      */
-    public Unknown makeUnknown(Pointer pvInstance) {
+    public Unknown makeUnknown(final Pointer pvInstance) {
         return new Unknown(pvInstance);
     }
 
@@ -776,10 +787,11 @@ public abstract class AutomationBase
      * @return The matching element
      * @throws AutomationException Did not find the element
      */
-    protected List<AutomationElement> getChildElements(final boolean deep)
+    protected List<Element> getChildElements(final boolean deep)
             throws AutomationException {
         return this.findAll(
-                new TreeScope(deep ? TreeScope.Descendants : TreeScope.Children),
+                new TreeScope(deep ? TreeScope.DESCENDANTS :
+                        TreeScope.CHILDREN),
         		this.createTrueCondition());
     }
 
@@ -791,7 +803,7 @@ public abstract class AutomationBase
 //     * @return The matching element
 //     * @throws AutomationException Did not find the element
 //     */
-//    protected AutomationElement getParentElement() throws AutomationException {
+//    protected Element getParentElement() throws AutomationException {
 //        return this.findFirst(new TreeScope(TreeScope.Parent), this.createTrueCondition());
 //    }
 
@@ -805,10 +817,10 @@ public abstract class AutomationBase
      */
     public List<AutomationBase> getChildren(final boolean deep)
             throws AutomationException, PatternNotFoundException {
-        List<AutomationElement> elements = this.getChildElements(deep);
+        List<Element> elements = this.getChildElements(deep);
         List<AutomationBase> collection = new LinkedList<>();
 
-        for (AutomationElement el: elements) {
+        for (Element el: elements) {
         	collection.add(AutomationControlFactory.get(this, el));
         }
         return collection;
@@ -845,7 +857,7 @@ public abstract class AutomationBase
     @Override
     public <T extends BasePattern> T requestAutomationPattern(
             final Class<T> automationPatternClass) throws AutomationException {
-        synchronized(patternAccessMonitor) {
+        synchronized (patternAccessMonitor) {
             @SuppressWarnings("unchecked")
             T automationPattern = (T) automationPatterns.get(automationPatternClass);
             if (automationPattern == null) {
@@ -854,10 +866,14 @@ public abstract class AutomationBase
                 if (automationPattern == null) {
 	                try {
 	                    automationPattern =
-                                automationPatternClass.getConstructor(AutomationElement.class).newInstance(this.element);
+                                automationPatternClass.getConstructor(
+                                        Element.class)
+                                            .newInstance(this.element);
 	                } catch (Throwable e) {
 	                	e = getInnerException(e);
-	                	if (e instanceof AutomationException) throw (AutomationException) e;
+	                	if (e instanceof AutomationException) {
+	                	    throw (AutomationException) e;
+                        }
 	                	throw new AutomationException(e);
 	                }
                 }
@@ -873,7 +889,7 @@ public abstract class AutomationBase
      * @param e The throwable
      * @return The inner exception from the input throwable
      */
-    private Throwable getInnerException(Throwable e) {
+    private Throwable getInnerException(final Throwable e) {
     	if (e instanceof InvocationTargetException) {
     		return  getInnerException(e.getCause());
     	}

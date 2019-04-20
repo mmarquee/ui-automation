@@ -17,6 +17,7 @@ package mmarquee.automation.pattern;
 
 import java.util.function.Function;
 
+import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 
 import com.sun.jna.platform.win32.Guid;
@@ -25,15 +26,11 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomation;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationElementArrayConverter;
-import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
+import mmarquee.automation.Element;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
+import mmarquee.uiautomation.IUIAutomationElementConverter;
 
 /**
  * The base pattern functionality, shared for all patterns.
@@ -41,8 +38,9 @@ import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
  * @author Mark Humphreys
  * Date 29/02/2016
  */
-public abstract class BasePattern extends BaseAutomation implements Pattern
-{
+public abstract class BasePattern
+        extends BaseAutomation
+        implements Pattern {
     /**
      * The logger.
      */
@@ -56,7 +54,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
     /**
      * The associated automation element.
      */
-    final protected AutomationElement element;
+    final protected Element element;
 
     /**
      * The associated pattern id.
@@ -74,8 +72,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      * @param element The Element
      * @throws AutomationException Error from automation
      */
-    public BasePattern(AutomationElement element) throws AutomationException
-    {
+    public BasePattern(Element element) throws AutomationException {
         super();
         this.element = element;
     }
@@ -93,7 +90,7 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
      * Is this pattern available.
      * @return True if available.
      */
-    public boolean isAvailable () {
+    public boolean isAvailable() {
         try {
             final Object propertyValue = this.element.getPropertyValue(availabilityPropertyID.getValue());
             return BaseAutomation.isPropertyValueTrue(propertyValue);
@@ -148,7 +145,8 @@ public abstract class BasePattern extends BaseAutomation implements Pattern
 	 * @return the pattern interface
 	 * @throws AutomationException if something goes wrong
 	 */
-    protected <T> T getPattern(T overridePattern, Function<PointerByReference,T> convertPointerToInterface)
+    protected <T> T getPattern(final T overridePattern,
+        Function<PointerByReference, T> convertPointerToInterface)
     		throws AutomationException {
     	if (overridePattern != null) {
             return overridePattern;

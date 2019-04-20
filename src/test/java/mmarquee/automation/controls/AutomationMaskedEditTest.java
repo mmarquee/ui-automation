@@ -15,10 +15,10 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -34,18 +34,18 @@ import static org.mockito.Mockito.when;
 public class AutomationMaskedEditTest {
     @Test
     public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
         
-        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
+        when(element.getClassName()).thenReturn(MaskedEdit.CLASS_NAME);
 
         when(value.value()).thenReturn("VALUE");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(
+        MaskedEdit control = new MaskedEdit(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         String val = control.getValue();
@@ -55,16 +55,16 @@ public class AutomationMaskedEditTest {
 
     @Test
     public void testSetValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         when(value.isAvailable()).thenReturn(true);
 
-        when(element.getClassName()).thenReturn(AutomationMaskedEdit.CLASS_NAME);
+        when(element.getClassName()).thenReturn(MaskedEdit.CLASS_NAME);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationMaskedEdit control = new AutomationMaskedEdit(
+        MaskedEdit control = new MaskedEdit(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         control.setValue("VALUE");

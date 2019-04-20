@@ -3,13 +3,13 @@ package mmarquee.automation.pattern;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePattern;
-import mmarquee.automation.uiautomation.IUIAutomationTogglePatternConverter;
-import mmarquee.automation.uiautomation.ToggleState;
+import mmarquee.uiautomation.IUIAutomationTogglePattern;
+import mmarquee.uiautomation.IUIAutomationTogglePatternConverter;
+import mmarquee.uiautomation.ToggleState;
 
 /**
  * @author Mark Humphreys
@@ -24,7 +24,7 @@ public class Toggle extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Toggle(final AutomationElement element) throws AutomationException {
+    public Toggle(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationTogglePattern.IID;
         this.patternID = PatternID.Toggle;
@@ -43,7 +43,7 @@ public class Toggle extends BasePattern {
      * @throws AutomationException Something went wrong with the automation library.
      */
     private IUIAutomationTogglePattern getPattern() throws AutomationException {
-        return getPattern(rawPattern,this::convertPointerToInterface);
+        return getPattern (rawPattern, this::convertPointerToInterface);
     }
 
     /**

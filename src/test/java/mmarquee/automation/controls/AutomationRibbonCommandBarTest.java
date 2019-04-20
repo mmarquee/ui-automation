@@ -15,15 +15,14 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationRibbonCommandBar;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -48,9 +47,9 @@ public class AutomationRibbonCommandBarTest {
 
     @Test
     public void testGetRibbonCommandBar_Gets_Correct_Name() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -58,7 +57,7 @@ public class AutomationRibbonCommandBarTest {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+        RibbonCommandBar commandBar = new RibbonCommandBar(
                 new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = commandBar.getName();

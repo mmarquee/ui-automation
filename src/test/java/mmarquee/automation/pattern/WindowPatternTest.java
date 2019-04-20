@@ -17,13 +17,13 @@ package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.IntByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationWindowPattern;
-import mmarquee.automation.uiautomation.WindowVisualState;
+import mmarquee.uiautomation.IUIAutomationWindowPattern;
+import mmarquee.uiautomation.WindowVisualState;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -40,7 +40,7 @@ import static org.mockito.Mockito.verify;
  */
 public class WindowPatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationWindowPattern rawPattern;

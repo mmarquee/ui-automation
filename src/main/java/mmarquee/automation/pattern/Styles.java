@@ -18,12 +18,12 @@ package mmarquee.automation.pattern;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPattern;
-import mmarquee.automation.uiautomation.IUIAutomationStylesPatternConverter;
+import mmarquee.uiautomation.IUIAutomationStylesPattern;
+import mmarquee.uiautomation.IUIAutomationStylesPatternConverter;
 
 /**
  * Wrapper around the styles pattern.
@@ -41,7 +41,7 @@ public class Styles extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Styles(final AutomationElement element) throws AutomationException {
+    public Styles(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationStylesPattern.IID;
         this.patternID = PatternID.Styles;

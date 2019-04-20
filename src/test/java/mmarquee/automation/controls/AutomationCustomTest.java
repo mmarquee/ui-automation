@@ -15,11 +15,11 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.automation.pattern.Value;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 public class AutomationCustomTest {
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
         Value value = Mockito.mock(Value.class);
         when(element.getName()).thenReturn("NAME");
@@ -41,7 +41,7 @@ public class AutomationCustomTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationCustom ctrl = new AutomationCustom(
+        Custom ctrl = new Custom(
                 new ElementBuilder(element).addPattern(container).addPattern(value).automation(instance));
 
         String name = ctrl.getName();

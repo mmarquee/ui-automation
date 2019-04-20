@@ -17,9 +17,9 @@ package mmarquee.automation;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationElementConverter;
-import mmarquee.automation.uiautomation.IUIAutomationTreeWalker;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationElementConverter;
+import mmarquee.uiautomation.IUIAutomationTreeWalker;
 
 /**
  * Wrapper for the AutomationTreeWalker.
@@ -47,8 +47,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The sibling element, or null if not found.
      * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getNextSiblingElement(
-                        final AutomationElement element)
+    public Element getNextSiblingElement(
+                        final Element element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -59,7 +59,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         try {
 	        IUIAutomationElement childElement =
 	                IUIAutomationElementConverter.pointerToInterface(pChild);
-	        return new AutomationElement(childElement);
+	        return new Element(childElement);
         } catch (NullPointerException ex) {
         	return null;
         }
@@ -71,8 +71,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The previous sibling element, or null if not found.
      * @throws AutomationException Something is up in automation.
      */
-    public AutomationElement getPreviousSiblingElement(
-                        final AutomationElement element)
+    public Element getPreviousSiblingElement(
+                        final Element element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -83,7 +83,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         try {
 	        IUIAutomationElement childElement =
 	                IUIAutomationElementConverter.pointerToInterface(pChild);
-	        return new AutomationElement(childElement);
+	        return new Element(childElement);
         } catch (NullPointerException ex) {
         	return null;
         }
@@ -95,8 +95,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The last child of the element, or null if not found.
      * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getLastChildElement(
-            final AutomationElement element)
+    public Element getLastChildElement(
+            final Element element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -107,7 +107,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         try {
 	        IUIAutomationElement childElement =
 	                IUIAutomationElementConverter.pointerToInterface(pChild);
-	        return new AutomationElement(childElement);
+	        return new Element(childElement);
         } catch (NullPointerException ex) {
         	return null;
         }
@@ -119,8 +119,8 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The first child of the element, or null if not found.
      * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getFirstChildElement(
-            final AutomationElement element)
+    public Element getFirstChildElement(
+            final Element element)
             throws AutomationException {
         PointerByReference pChild = new PointerByReference();
 
@@ -130,7 +130,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         try {
 	        IUIAutomationElement childElement =
 	                IUIAutomationElementConverter.pointerToInterface(pChild);
-	        return new AutomationElement(childElement);
+	        return new Element(childElement);
         } catch (NullPointerException ex) {
         	return null;
         }
@@ -143,7 +143,7 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @return The parent of the element, or null if not found.
      * @throws AutomationException Automation has returned an error.
      */
-    public AutomationElement getParentElement(final AutomationElement element)
+    public Element getParentElement(final Element element)
             throws AutomationException {
         PointerByReference pParent = new PointerByReference();
 
@@ -153,7 +153,7 @@ public class AutomationTreeWalker extends BaseAutomation {
         try {
             IUIAutomationElement parentElement =
                     IUIAutomationElementConverter.pointerToInterface(pParent);
-            return new AutomationElement(parentElement);
+            return new Element(parentElement);
         } catch (NullPointerException ex) {
             return null;
         }
@@ -166,12 +166,12 @@ public class AutomationTreeWalker extends BaseAutomation {
      * @throws AutomationException Exception in the automation library.
      */
     public void walk(final AutomationElementVisitor visitor,
-                     final AutomationElement root)
+                     final Element root)
             throws AutomationException {
     	assert visitor != null;
     	assert root != null;
 
-        AutomationElement childElement = this.getFirstChildElement(root);
+        Element childElement = this.getFirstChildElement(root);
 
         while (childElement != null) {
         	boolean cont = visitor.visit(this, childElement);
@@ -185,19 +185,19 @@ public class AutomationTreeWalker extends BaseAutomation {
 
     /**
      * A visitor as used by
-     * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)}.
+     * {@link AutomationTreeWalker#walk(AutomationElementVisitor, Element)}.
      */
     public interface AutomationElementVisitor {
     	/**
     	 * Visits an element during an
-    	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, AutomationElement)} run.
+    	 * {@link AutomationTreeWalker#walk(AutomationElementVisitor, Element)} run.
     	 * @param walker The walker to use.
     	 * @param element The currently visited element.
     	 * @return true to continue walking the elements siblings,
          *         false otherwise.
     	 * @throws AutomationException if something goes wrong.
     	 */
-    	boolean visit(AutomationTreeWalker walker, AutomationElement element)
+    	boolean visit(AutomationTreeWalker walker, Element element)
                 throws AutomationException;
     }
 }

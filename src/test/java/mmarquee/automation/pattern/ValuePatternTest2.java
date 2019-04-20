@@ -21,12 +21,12 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationValuePattern;
+import mmarquee.uiautomation.IUIAutomationValuePattern;
 import org.junit.*;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -55,7 +55,7 @@ public class ValuePatternTest2 {
     @Mock
     IUIAutomationValuePattern rawPattern;
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Spy
     private Unknown mockUnknown;

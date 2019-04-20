@@ -15,11 +15,11 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class AutomationStatusBarTest2 {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void testGetTextBox_Throws_IndexOutOfBoundsException_When_Index_Out_Of_Bounds() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
@@ -56,25 +56,25 @@ public class AutomationStatusBarTest2 {
 
 //        when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(
+        StatusBar statusBar = new StatusBar(
                 new ElementBuilder(element).addPattern(pattern));
 
-        AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
+        TextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }
 
     @Test
     public void testGetTextBox_Calls_Find_All_From_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer pattern = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
         IUIAutomationElement listElement = Mockito.mock(IUIAutomationElement.class);
 
-        List<AutomationElement> result = new ArrayList<>();
-        result.add(new AutomationElement(listElement));
+        List<Element> result = new ArrayList<>();
+        result.add(new Element(listElement));
 
         when(element.findAll(any(), any())).thenReturn(result);
 
@@ -83,10 +83,10 @@ public class AutomationStatusBarTest2 {
 
     //    when(mocked_automation.createPropertyCondition(any(), any(), any())).thenReturn(1);
 
-        AutomationStatusBar statusBar = new AutomationStatusBar(
+        StatusBar statusBar = new StatusBar(
                 new ElementBuilder(element).addPattern(pattern));
 
-        AutomationTextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
+        TextBox textBox = statusBar.getTextBox(Search.getBuilder(0).build());
 
         verify(element, times(1)).findAll(any(), any());
     }

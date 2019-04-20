@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.Element;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -33,15 +34,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.TreeScope;
 
 /**
- * Tests for AutomationTab.
+ * Tests for Tab.
  *
  * @author Mark Humphreys
  * Date 29/11/2016.
@@ -57,20 +57,20 @@ public class AutomationTabTest {
     }
 
     @Mock
-    AutomationElement element;
+    Element element;
 
-    AutomationTab automationTab;
+    Tab automationTab;
     
-    List<AutomationElement> list;
+    List<Element> list;
     
     @Mock
-    AutomationElement targetElement;
+    Element targetElement;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        automationTab = Mockito.spy(new AutomationTab(new ElementBuilder(element)));
+        automationTab = Mockito.spy(new Tab(new ElementBuilder(element)));
         
         list = new ArrayList<>();
         list.add(targetElement);
@@ -82,9 +82,9 @@ public class AutomationTabTest {
     
     @Test
     public void test_GetTabItems_Returns_Items() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
 
-        List<AutomationTabItem> tabItems = automationTab.getTabItems();
+        List<TabItem> tabItems = automationTab.getTabItems();
         
         assertEquals(1,tabItems.size());
         
@@ -96,7 +96,7 @@ public class AutomationTabTest {
 
     @Test
     public void test_SelectTabPage_By_Name_Succeeds_When_Tab_Present() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("TEST-01");
         SelectionItem mockSelectItemPattern = BaseAutomationTest.mockSelectItemPattern(targetElement);
 
@@ -109,7 +109,7 @@ public class AutomationTabTest {
     
     @Test(expected = ElementNotFoundException.class)
     public void test_SelectTabPage_By_Name_Throws_Exception_When_Tab_Not_Present() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("TEST-01");
         
         automationTab.selectTabPage("TEST");
@@ -117,7 +117,7 @@ public class AutomationTabTest {
 
     @Test
     public void test_SelectTabPage_By_Name_with_RegExPattern_Succeeds_When_Tab_Present() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("TEST-01");
         SelectionItem mockSelectItemPattern = BaseAutomationTest.mockSelectItemPattern(targetElement);
 
@@ -130,7 +130,7 @@ public class AutomationTabTest {
     
     @Test(expected = ElementNotFoundException.class)
     public void test_SelectTabPage_By_Name_with_RegExPattern_Throws_Exception_When_Tab_Not_Present() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
         when(targetElement.getName()).thenReturn("TEST-01");
         
         automationTab.selectTabPage(Pattern.compile("test.*"));

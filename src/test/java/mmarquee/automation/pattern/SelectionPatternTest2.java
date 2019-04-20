@@ -6,13 +6,10 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElementArray;
-import mmarquee.automation.uiautomation.IUIAutomationSelectionPattern;
+import mmarquee.automation.*;
+import mmarquee.automation.Element;
+import mmarquee.uiautomation.IUIAutomationElementArray;
+import mmarquee.uiautomation.IUIAutomationSelectionPattern;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -35,12 +32,14 @@ import static org.mockito.Mockito.doReturn;
  *
  * Tests for the lower level calls to COM used in the Selection pattern.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class SelectionPatternTest2 {
+
     @Mock
     IUIAutomationSelectionPattern rawPattern;
+
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Before
     public void setup() throws Exception {
@@ -105,6 +104,7 @@ public class SelectionPatternTest2 {
         spyPattern.getCurrentSelection();
     }
 
+    @Test
     public void test_canSelectMultiple_Returns_False_When_Interface_Returns_True() throws Exception {
 
         doAnswer(invocation -> {
@@ -154,6 +154,7 @@ public class SelectionPatternTest2 {
         assertFalse(value);
     }
 
+    @Test
     public void test_canSelectMultiple_Returns_True_When_Interface_Returns_True() throws Exception {
 
         doAnswer(invocation -> {

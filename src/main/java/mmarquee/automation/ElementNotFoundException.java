@@ -39,15 +39,15 @@ public class ElementNotFoundException extends AutomationException {
      * Constructor, with a name of the not found element.
      * @param name The element name
      */
-    public ElementNotFoundException(String name) {
-        super("Element " + name +" not found");
+    public ElementNotFoundException(final String name) {
+        super("Element " + name + " not found");
     }
 
     /**
      * Constructor, with a cause.
      * @param cause The cause
      */
-    public ElementNotFoundException(Throwable cause) {
+    public ElementNotFoundException(final Throwable cause) {
         super(cause);
     }
 }

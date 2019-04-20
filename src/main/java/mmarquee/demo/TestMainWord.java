@@ -29,7 +29,7 @@ public class TestMainWord extends TestBase {
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             // 0. Load Word
@@ -45,30 +45,30 @@ public class TestMainWord extends TestBase {
 
             // 2. Get the sheet
             assert application != null;
-            AutomationWindow window =
+            Window window =
                     application.getWindow(
                             Search.getBuilder(
                                     "Document1 - Word").build());
             logger.info(window.getName());
 
-            AutomationPanel pane =
+            Panel pane =
                     window.getPanel(
                             Search.getBuilder("Document1").build());
             logger.info(pane.getName());
             logger.info(pane.getClassName());
-            AutomationPanel pane1 =
+            Panel pane1 =
                     pane.getPanel(Search.getBuilder(0).build());
             logger.info(pane1.getName());
 
-            AutomationDocument doc =
+            Document doc =
                     pane1.getDocument(Search.getBuilder(0).build());
             logger.info(doc.getName());
 
-            AutomationDocumentPage page0 =
+            DocumentPage page0 =
                     doc.getPage(Search.getBuilder(0).build());
             logger.info(page0.getName());
 
-            AutomationEditBox edit =
+            EditBox edit =
                     page0.getEditBox(Search.getBuilder(0).build());
             logger.info(edit.getName());
 

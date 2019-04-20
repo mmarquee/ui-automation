@@ -2,7 +2,7 @@
 * See [Element Discovery](element-discovery.md)
 
 ```
-AutomationCheckBox check = window.getCheckBox(Search.getBuilder(0).build());
+CheckBox check = window.getCheckBox(Search.getBuilder(0).build());
 check.toggle();
 
 try {

@@ -20,17 +20,14 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
+import mmarquee.automation.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
+import mmarquee.automation.Element;
+import mmarquee.uiautomation.IUIAutomationGridItemPattern;
 
 /**
  * @author Mark Humphreys
@@ -40,7 +37,7 @@ import mmarquee.automation.uiautomation.IUIAutomationGridItemPattern;
  */
 public class GridItemPatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationGridItemPattern rawPattern;

@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Panel;
+import mmarquee.automation.controls.Window;
 import org.junit.*;
 import org.mockito.Mockito;
 
@@ -37,13 +40,10 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationPanel;
-import mmarquee.automation.controls.AutomationWindow;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.uiautomation.IUIAutomation;
-import mmarquee.automation.uiautomation.IUIAutomationCondition;
-import mmarquee.automation.uiautomation.TreeScope;
+import mmarquee.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomationCondition;
+import mmarquee.uiautomation.TreeScope;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
@@ -87,7 +87,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetRootElement() throws AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
-        AutomationElement root = instance.getRootElement();
+        Element root = instance.getRootElement();
 
         assertTrue("root:" + root.currentName(), root.currentName().startsWith("Desktop"));
     }
@@ -96,7 +96,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetDesktop() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
-        AutomationPanel desktop = instance.getDesktop();
+        Panel desktop = instance.getDesktop();
         
         assertEquals(instance.getRootElement(),desktop.getElement());
         assertTrue("desktop is correct: " + desktop.getName(), desktop.getName().startsWith("Desktop"));
@@ -143,7 +143,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetDesktopWindows() throws PatternNotFoundException, AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
-        List<AutomationWindow> windows = instance.getDesktopWindows();
+        List<Window> windows = instance.getDesktopWindows();
 
         assertFalse("getDesktopWindows finds more than one window", windows.size() == 0);
     }
@@ -152,7 +152,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testGetDesktopObjects() throws PatternNotFoundException, AutomationException {
         UIAutomation instance = UIAutomation.getInstance();
 
-        List<AutomationPanel> objects = instance.getDesktopObjects();
+        List<Panel> objects = instance.getDesktopObjects();
 
         assertFalse("getDesktopObjects finds more than one object", objects.size() == 0);
     }
@@ -333,12 +333,12 @@ public class UIAutomationTest extends BaseAutomationTest {
         instance.getRootElement(pRoot);
 
         // Get the first descendant of the root element
-        AutomationElement root = instance.getRootElement();
+        Element root = instance.getRootElement();
 
         PointerByReference pCondition = instance.createTrueCondition();
         PointerByReference first = new PointerByReference();
 
-        root.getElement().findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+        root.getElement().findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
         instance.compareElements(pRoot.getValue(), first.getValue(), same);
 
@@ -394,7 +394,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void testLaunchOrAttach_Succeeds_When_Not_Running() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
-        AutomationApplication app = null;
+        Application app = null;
         try {
         	app = instance.launchOrAttach("notepad.exe");
         } finally {
@@ -406,12 +406,12 @@ public class UIAutomationTest extends BaseAutomationTest {
     }
 
     interface TestWithNotepad {
-    	void doTest(UIAutomation instance, AutomationApplication app) throws Exception;
+    	void doTest(UIAutomation instance, Application app) throws Exception;
     }
     
     void doTestWithNotepad(TestWithNotepad test) throws Exception {
 		UIAutomation instance = UIAutomation.getInstance();
-        AutomationApplication app = instance.launch("notepad.exe");
+        Application app = instance.launch("notepad.exe");
         this.andRest();
 
         try {
@@ -424,7 +424,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
     	doTestWithNotepad((instance, app) -> {
-            AutomationApplication launched = instance.launchOrAttach("notepad.exe");
+            Application launched = instance.launchOrAttach("notepad.exe");
             assertTrue("Should be the same name", launched.getName().equals(app.getName()));
         });
     }
@@ -444,7 +444,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void findProcess_Succeeds_When_Already_Running() throws Exception {
     	doTestWithNotepad((instance, app) -> {
-    	    AutomationApplication launched = instance.findProcess("notepad.exe");
+    	    Application launched = instance.findProcess("notepad.exe");
             assertTrue("Should be the same name", launched.getName().equals(app.getName()));
         });
     }
@@ -465,12 +465,12 @@ public class UIAutomationTest extends BaseAutomationTest {
     public void findProcess_ByRegexPattern_Succeeds_When_Already_Running() throws Exception {
         UIAutomation instance = UIAutomation.getInstance();
 
-        AutomationApplication app = instance.launch("notepad.exe");
+        Application app = instance.launch("notepad.exe");
 
         try {
             this.andRest();
 
-            AutomationApplication launched = instance.findProcess(Pattern.compile("n\\S+pad\\.exe"));
+            Application launched = instance.findProcess(Pattern.compile("n\\S+pad\\.exe"));
 
             assertTrue("Should be the same name", launched.getName().equals(app.getName()));
 
@@ -552,7 +552,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void testGetDesktopWindow_succeeds() throws Exception {
     	doTestWithNotepad((instance, app) -> {
-            AutomationWindow window = instance.getDesktopWindow(getLocal("notepad.title"));
+            Window window = instance.getDesktopWindow(getLocal("notepad.title"));
             assertNotNull(window);
         });
     }
@@ -565,7 +565,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void testGetDesktopWindow_WithRegexp_succeeds() throws Exception {
     	doTestWithNotepad((instance, app) -> {
-            AutomationWindow window = instance.getDesktopWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+            Window window = instance.getDesktopWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
             assertNotNull(window);
         });
     }
@@ -578,7 +578,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void testGetWindow_succeeds() throws Exception {
     	doTestWithNotepad((instance, app) -> {
-            AutomationWindow window = instance.getWindow(getLocal("notepad.title"));
+            Window window = instance.getWindow(getLocal("notepad.title"));
             assertNotNull(window);
         });
     }
@@ -591,7 +591,7 @@ public class UIAutomationTest extends BaseAutomationTest {
     @Test
     public void testGetWindow_WithRegexp_succeeds() throws Exception {
     	doTestWithNotepad((instance, app) -> {
-            AutomationWindow window = instance.getWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
+            Window window = instance.getWindow(Pattern.compile(Pattern.quote(getLocal("notepad.title"))));
             assertNotNull(window);
         });
     }

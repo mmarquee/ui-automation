@@ -17,12 +17,12 @@ package mmarquee.automation.pattern;
 
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePatternConverter;
+import mmarquee.uiautomation.IUIAutomationInvokePattern;
+import mmarquee.uiautomation.IUIAutomationInvokePatternConverter;
 
 /**
  * Wrapper for the Invoke pattern.
@@ -43,7 +43,7 @@ public class Invoke extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Invoke(final AutomationElement element) throws AutomationException {
+    public Invoke(final Element element) throws AutomationException {
         super(element);
         this.IID = IUIAutomationInvokePattern.IID;
         this.patternID = PatternID.Invoke;

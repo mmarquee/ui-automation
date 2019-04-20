@@ -15,11 +15,10 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationReBar;
 import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.uiautomation.IUIAutomation;
+import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -47,9 +46,9 @@ public class AutomationReBarTests {
 
     @Test
     public void testName_Is_Returned_From_The_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(ReBar.CLASS_NAME);
         when(element.getName()).thenReturn("REBAR-01");
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
@@ -57,7 +56,7 @@ public class AutomationReBarTests {
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationReBar pane = new AutomationReBar(
+        ReBar pane = new ReBar(
                 new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = pane.getName();
@@ -67,9 +66,9 @@ public class AutomationReBarTests {
 
     @Test
     public void testName_Is_Returned_From_The_Element_Alternative_Constructor() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        when(element.getClassName()).thenReturn(AutomationReBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(ReBar.CLASS_NAME);
         when(element.getName()).thenReturn("REBAR-01");
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
@@ -77,7 +76,7 @@ public class AutomationReBarTests {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationReBar pane = new AutomationReBar(
+        ReBar pane = new ReBar(
                 new ElementBuilder(element).addPattern(container).automation(instance));
 
         String name = pane.getName();

@@ -15,8 +15,8 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
+import mmarquee.automation.Element;
+import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.automation.pattern.ItemContainer;
 import org.junit.Assume;
 import org.junit.BeforeClass;
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
  * @author Mark Humphreys
  * Date 03/12/2016.
  *
- * Tests for AutomationTitleBar.
+ * Tests for TitleBar.
  */
 public class AutomationTitleBarTest {
 
@@ -47,12 +47,12 @@ public class AutomationTitleBarTest {
     }
     @Test
     public void testName_Returns_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationTitleBar ctrl = new AutomationTitleBar(
+        TitleBar ctrl = new TitleBar(
                 new ElementBuilder(element).addPattern(container));
 
         String name = ctrl.getName();
@@ -62,19 +62,19 @@ public class AutomationTitleBarTest {
 
     @Test
     public void testGetMenu() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
         when(element.getName()).thenReturn("NAME");
 
-        AutomationElement elem = Mockito.mock(AutomationElement.class);
+        Element elem = Mockito.mock(Element.class);
 
         when(element.findFirst(any(), any())).thenReturn(elem);
 
-        AutomationTitleBar tb = new AutomationTitleBar(
+        TitleBar tb = new TitleBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationMainMenu menu = tb.getMenuBar();
+        MainMenu menu = tb.getMenuBar();
 
         verify(element, atLeastOnce()).findFirst(any(),any());
     }

@@ -21,13 +21,13 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.uiautomation.IUIAutomationElement;
-import mmarquee.automation.uiautomation.IUIAutomationGridPattern;
-import mmarquee.automation.uiautomation.IUIAutomationGridPatternConverter;
+import mmarquee.uiautomation.IUIAutomationElement;
+import mmarquee.uiautomation.IUIAutomationGridPattern;
+import mmarquee.uiautomation.IUIAutomationGridPatternConverter;
 
 /**
  * @author Mark Humphreys
@@ -43,7 +43,7 @@ public class Grid extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Grid(final AutomationElement element) throws AutomationException {
+    public Grid(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationGridPattern.IID;
         this.patternID = PatternID.Grid;
@@ -92,7 +92,7 @@ public class Grid extends BasePattern {
      * @return The Element from the grid
      * @throws AutomationException Something amiss with automation
      */
-    public AutomationElement getItem(int x, int y) throws AutomationException {
+    public Element getItem(int x, int y) throws AutomationException {
         PointerByReference cell = this.getRawItem(x, y);
 
         Unknown uRoot = makeUnknown(cell.getValue());
@@ -102,7 +102,7 @@ public class Grid extends BasePattern {
         WinNT.HRESULT result0 = uRoot.QueryInterface(new Guid.REFIID(IUIAutomationElement.IID), pbr);
 
         if (COMUtils.SUCCEEDED(result0)) {
-            return new AutomationElement(convertPointerToElementInterface(pbr));
+            return new Element(convertPointerToElementInterface(pbr));
         } else {
             throw new AutomationException(result0.intValue());
         }

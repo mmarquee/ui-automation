@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -33,7 +33,7 @@ public class Dock extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Dock(final AutomationElement element) throws AutomationException {
+    public Dock(final Element element) throws AutomationException {
     	super(element);
         this.patternID = PatternID.Dock;
         this.availabilityPropertyID = PropertyID.IsDockPatternAvailable;

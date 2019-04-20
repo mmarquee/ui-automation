@@ -35,11 +35,11 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
-import mmarquee.automation.uiautomation.IUIAutomationInvokePattern;
+import mmarquee.uiautomation.IUIAutomationInvokePattern;
 
 /**
  * @author Mark Humphreys
@@ -51,7 +51,7 @@ public class InvokePatternTest {
     IUIAutomationInvokePattern rawPattern;
 
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Spy
     private Unknown mockUnknown;
