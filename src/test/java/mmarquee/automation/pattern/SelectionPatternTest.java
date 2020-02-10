@@ -30,8 +30,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
@@ -54,7 +52,6 @@ import mmarquee.uiautomation.IUIAutomationSelectionPattern;
  * Tests for the Selection pattern.
  */
 @RunWith(MockitoJUnitRunner.class)
-@PrepareForTest(IUIAutomationSelectionItemPatternConverter.class)
 public class SelectionPatternTest {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
@@ -184,7 +181,8 @@ public class SelectionPatternTest {
     //        .when(spyPattern)
       //      .collectionToList(any());
 
-        PowerMockito.mockStatic(IUIAutomationSelectionItemPatternConverter.class);
+   //     PowerMockito.mockStatic(IUIAutomationSelectionItemPatternConverter
+        //     .class);
 
         IUIAutomationSelectionItemPattern rawPattern
                 = Mockito.mock(IUIAutomationSelectionItemPattern.class);

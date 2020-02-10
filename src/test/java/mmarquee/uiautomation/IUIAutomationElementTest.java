@@ -24,11 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
 import org.apache.log4j.Logger;
 import org.junit.*;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -44,8 +40,6 @@ import static org.mockito.Mockito.atLeastOnce;
  *
  * Currently all of these tests require to run on Windows.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({IUIAutomationElementConverter.class})
 public class IUIAutomationElementTest {
 
     @BeforeClass
@@ -510,13 +504,14 @@ public class IUIAutomationElementTest {
         IUIAutomationElement mocked_element = //this.getRootElement();
                 Mockito.mock(IUIAutomationElement.class);
 
-        PowerMockito.mockStatic(IUIAutomationElementConverter.class);
+     //   PowerMockito.mockStatic(IUIAutomationElementConverter.class);
 
         //Function mocked_function = Mockito.mock(Function.class);
 
         //Mockito.when(mocked_function.invokeInt(any())).thenReturn(-1);
 
-        PowerMockito.when(IUIAutomationElementConverter.pointerToInterface(any())).thenReturn(mocked_element);
+     //   PowerMockito.when(IUIAutomationElementConverter.pointerToInterface
+        //   (any())).thenReturn(mocked_element);
 
 //        PowerMockito.when(Function.getFunction(any(), any())).thenReturn(mocked_function);
 

@@ -10,7 +10,9 @@ The library is held in the Sonatype OSS repository, so is
 available for download via Maven (or other tools, 
 such as SBT for Scala). 
 
-As the library depends on jna (currently version 4.5.0), then there is no need to specify the JNA library version in YOUR project's dependencies, the library will guide the dependencies and bring down the correct version. 
+As the library depends on jna (currently version 5.5.0), then there is no
+ need to specify the JNA library version in YOUR project's dependencies, the 
+ library will guide the dependencies and bring down the correct version. 
 
 ```
 <dependencies>
@@ -26,7 +28,8 @@ As the library depends on jna (currently version 4.5.0), then there is no need t
 ## Snapshot build
 
 Currently the 'stable' release of the library is 0.5.0, so the development 
-branch is being snapshotted, so to get the latest development version, use the the following in the pom.xml.
+branch is being snapshotted, so to get the latest development version, use
+ the following in the pom.xml.
 
 ```
 <dependencies>

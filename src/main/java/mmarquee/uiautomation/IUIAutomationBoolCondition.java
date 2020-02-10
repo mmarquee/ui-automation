@@ -24,8 +24,8 @@ public interface IUIAutomationBoolCondition extends IUIAutomationCondition {
     /**
      * The interface IID for QueryInterface et al.
      */
-    Guid.IID IID = new Guid.IID(
-            "1B4E1F2E-75EB-4D0B-8952-5A69988E2307");
+    Guid.IID IID = new
+            Guid.IID("1B4E1F2E-75EB-4D0B-8952-5A69988E2307");
 
     /**
      * Retrieves the value of the condition: either TRUE or FALSE.

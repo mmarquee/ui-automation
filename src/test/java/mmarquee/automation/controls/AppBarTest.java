@@ -17,14 +17,10 @@ package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.Element;
-import mmarquee.automation.Ole32Wrapper;
 import mmarquee.automation.UIAutomation;
 import mmarquee.uiautomation.IUIAutomation;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.isA;
@@ -36,8 +32,6 @@ import static org.mockito.Mockito.when;
  * @author Mark Humphreys
  * Date 28/12/2016.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest( { Ole32Wrapper.class })
 public class AppBarTest {
     @Test
     public void testGetName_Gets_Name_From_Element() throws Exception {
