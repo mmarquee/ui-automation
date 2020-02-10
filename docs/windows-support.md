@@ -40,3 +40,9 @@ The functionality supported by this library is the addition of the `getFullDescr
 ## Windows 10 (Build 1709)
 * `IUIAutomationSelectionPattern2`
 * `IUIAutomation6`
+
+## Windows 10 (Build 1803)
+* `IUIAutomationElement8`
+
+## Windows 10 (Build 1809)
+* `IUIAutomationElement9`
