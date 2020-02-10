@@ -23,7 +23,8 @@ import mmarquee.automation.pattern.Table;
 import mmarquee.automation.pattern.Value;
 import mmarquee.uiautomation.IUIAutomation;
 import mmarquee.uiautomation.RowOrColumnMajor;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -37,7 +38,8 @@ import static org.mockito.Mockito.when;
  */
 public class DataGridTest {
 
-    protected Logger logger = Logger.getLogger(DataGridTest.class.getName());
+    protected Logger logger =
+            LogManager.getLogger(DataGridTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

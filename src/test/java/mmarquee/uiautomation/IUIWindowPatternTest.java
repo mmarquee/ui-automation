@@ -21,7 +21,8 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.*;
 
 import static org.junit.Assert.assertFalse;
@@ -46,7 +47,8 @@ public class IUIWindowPatternTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    protected Logger logger = Logger.getLogger(IUIWindowPatternTest.class.getName());
+    protected Logger logger =
+            LogManager.getLogger(IUIWindowPatternTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

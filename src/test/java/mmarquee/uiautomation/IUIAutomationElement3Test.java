@@ -22,7 +22,8 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.*;
 import org.mockito.Mockito;
 
@@ -50,7 +51,8 @@ public class IUIAutomationElement3Test {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    private Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    private Logger logger =
+            LogManager.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
