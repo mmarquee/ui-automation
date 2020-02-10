@@ -121,7 +121,7 @@ public class Utils {
             final Tlhelp32.PROCESSENTRY32.ByReference processEntry,
             final Pattern filenamePattern) {
         Kernel32 kern32 =
-                Native.loadLibrary(Kernel32.class,
+                Native.load(Kernel32.class,
                         W32APIOptions.UNICODE_OPTIONS);
 
         WinNT.HANDLE snapshot =
