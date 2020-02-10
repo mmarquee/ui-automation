@@ -30,8 +30,8 @@ public interface IUIAutomationCacheRequest extends IUnknown {
     /**
      * The interface IID for QueryInterface et al
      */
-    Guid.IID IID = new Guid.IID(
-            "B32A92B5-BC25-4078-9C08-D7EE95C48E03");
+    Guid.IID IID =
+            new Guid.IID("B32A92B5-BC25-4078-9C08-D7EE95C48E03");
 
     /**
      * Adds a control pattern to the cache request.

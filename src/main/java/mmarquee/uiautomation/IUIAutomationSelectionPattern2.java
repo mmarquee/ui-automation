@@ -28,8 +28,8 @@ public interface IUIAutomationSelectionPattern2
     /**
      * The interface IID for QueryInterface et al
      */
-    Guid.IID IID = new Guid.IID(
-                "{0532bfae-c011-4e32-a343-6d642d798555}");
+    Guid.IID IID =
+            new Guid.IID("{0532bfae-c011-4e32-a343-6d642d798555}");
 
     int getCurrentFirstSelectedItem(PointerByReference retval);
     int getCurrentLastSelectedItem(PointerByReference retval);

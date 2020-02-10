@@ -17,13 +17,10 @@ import mmarquee.automation.*;
 import mmarquee.uiautomation.IUIAutomationElement;
 import mmarquee.automation.utils.UtilsTest;
 import org.junit.*;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.sun.jna.platform.win32.WinNT;
 
@@ -41,8 +38,6 @@ import mmarquee.uiautomation.TreeScope;
  * @author Mark Humphreys
  * Date 13/01/2017.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest( { Ole32Wrapper.class })
 public class ApplicationTest {
     @BeforeClass
     public static void checkOs() throws Exception {
