@@ -18,8 +18,8 @@ package mmarquee.demo;
 
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Window;
 import mmarquee.uiautomation.*;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class DemoCaching extends TestBase {
     public void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        AutomationApplication application = null;
+        Application application = null;
 
         try {
             application =
@@ -47,7 +47,7 @@ public class DemoCaching extends TestBase {
         try {
             // Wait for the process to start
             assert application != null;
-            application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+            application.waitForInputIdle(Application.SHORT_TIMEOUT);
         } catch (Throwable ex) {
             logger.error("Failed to wait properly");
         }
@@ -55,7 +55,7 @@ public class DemoCaching extends TestBase {
         try {
             // Now do some caching!!!
 
-            AutomationWindow window = automation.getDesktopWindow("Form1");
+            Window window = automation.getDesktopWindow("Form1");
 
             PointerByReference condition = automation.createTrueCondition();
 
@@ -64,15 +64,15 @@ public class DemoCaching extends TestBase {
             cacheRequest.addPattern(PatternID.Selection.getValue());
             cacheRequest.addProperty(PropertyID.Name.getValue());
 
-            List<AutomationElement> all =
+            List<Element> all =
                     window.getElement().findAll(
-                            new TreeScope(TreeScope.Children),
+                            new TreeScope(TreeScope.CHILDREN),
                                   condition,
                                   cacheRequest);
 
             logger.info("Elements:" + all.size());
 
-            for(AutomationElement item: all) {
+            for (Element item: all) {
                 try {
                     logger.info(" *" + item.getCachedName());
                 } catch (Exception ex) {

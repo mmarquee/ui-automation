@@ -18,7 +18,7 @@ package mmarquee.uiautomation;
 import com.sun.jna.platform.win32.Guid;
 
 /**
- * Wrapper around the IUIAutomation4 interface, only implementing the extra methods.
+ * Wrapper around the IUIAutomation4 interface.
  *
  * This interface is supported in Windows 10 [desktop apps only] upwards
  *
@@ -30,5 +30,14 @@ public interface IUIAutomationElement4 extends IUIAutomationElement3 {
      * The interface IID for QueryInterface et al.
      */
     Guid.IID IID = new Guid.IID("{3B6E233C-52FB-4063-A4C9-77C075C2A06B}");
+
+        /*
+    CachedLevel
+    CachedPositionInSet
+    CachedSizeOfSet
+    CurrentLevel
+    CurrentPositionInSet
+    CurrentSizeOfSet
+     */
 
 }

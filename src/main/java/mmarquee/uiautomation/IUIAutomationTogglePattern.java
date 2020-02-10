@@ -29,7 +29,19 @@ public interface IUIAutomationTogglePattern extends IUnknown {
      */
     Guid.IID IID = new Guid.IID("{94CF8058-9B8D-4AB9-8BFD-4CD0A33C8C70}");
 
+    /**
+     * Toggles the element via the pattern.
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int toggle();
+
+    /**
+     * Gets the toggle state of the element, via the pattern.
+     * @param ibr Toggle state
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
+     */
     int getCurrentToggleState(IntByReference ibr);
 }
 

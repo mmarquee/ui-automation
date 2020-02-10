@@ -17,20 +17,32 @@ The library seems to be present in Windows 7, but doesn't seem to work as it doe
 * `IUIAutomation3`
 * `IUIAutomationElement3`
 
-The functionality supported by this library is only important issue is the addition of the `showContextMenu()` method that is available in
+The functionality supported by this library is the addition of the
+ `showContextMenu()` method that is available in
 `IUIAutomationElement3`.
        
 ## Windows 10
 * `IUIAutomationElement4`
+
+## Windows 10 (Build 1607)
+* `IUIAutomation4`
+* `IUIAutomation5`
+
 ## Windows 10 (Build 1703)
 * `IUIAutomationElement5`
 * `IUIAutomationElement6`
 
-The functionality supported by this library is only important issue is the addition of the `getFullDescription()` method that is available in
+The functionality supported by this library is the addition of the `getFullDescription()` method that is available in
 `IUIAutomationElement6`.
 
-* `IUIAutomationElement7`
+* `IUIAutomationElement7`  
 
 ## Windows 10 (Build 1709)
 * `IUIAutomationSelectionPattern2`
+* `IUIAutomation6`
 
+## Windows 10 (Build 1803)
+* `IUIAutomationElement8`
+
+## Windows 10 (Build 1809)
+* `IUIAutomationElement9`

@@ -61,12 +61,15 @@ public enum TreeTraversalOptions {
         this.value = inValue;
     }
 
-    private static final Map<Integer, TreeTraversalOptions> IntToTypeMap =
+    /**
+     * Map integer to options.
+     */
+    private static final Map<Integer, TreeTraversalOptions> INT_TO_TYPE_MAP =
             new HashMap<>();
 
     static {
         for (TreeTraversalOptions type : TreeTraversalOptions.values()) {
-            IntToTypeMap.put(type.value, type);
+            INT_TO_TYPE_MAP.put(type.value, type);
         }
     }
 
@@ -76,7 +79,7 @@ public enum TreeTraversalOptions {
      * @return The value (as an TreeTraversalOptions).
      */
     public static TreeTraversalOptions fromInt(final int value) {
-        TreeTraversalOptions type = IntToTypeMap.get(value);
+        TreeTraversalOptions type = INT_TO_TYPE_MAP.get(value);
         if (type == null) {
             return TreeTraversalOptions.Default;
         }

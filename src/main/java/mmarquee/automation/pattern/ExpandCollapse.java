@@ -18,7 +18,7 @@ package mmarquee.automation.pattern;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -43,7 +43,7 @@ public class ExpandCollapse extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public ExpandCollapse(final AutomationElement element) throws AutomationException {
+    public ExpandCollapse(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationExpandCollapsePattern.IID;
         this.patternID = PatternID.ExpandCollapse;

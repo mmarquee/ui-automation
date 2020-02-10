@@ -18,10 +18,10 @@ package mmarquee.automation.controls;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import mmarquee.automation.Element;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import mmarquee.automation.AutomationElement;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomation;
@@ -38,7 +38,7 @@ public class AutomationToolbarTest {
 
     @Test
     public void testGetName_Returns_Name_From_Element() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         ItemContainer container = Mockito.mock(ItemContainer.class);
         when(element.getName()).thenReturn("NAME");
 
@@ -46,7 +46,7 @@ public class AutomationToolbarTest {
 
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationToolBar ctrl = new AutomationToolBar(
+        ToolBar ctrl = new ToolBar(
                 new ElementBuilder(element).automation(instance).addPattern(container));
 
         String name = ctrl.getName();

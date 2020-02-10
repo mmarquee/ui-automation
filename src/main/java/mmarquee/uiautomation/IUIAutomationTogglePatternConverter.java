@@ -27,9 +27,14 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationTogglePatternConverter {
-    private static int METHODS = 8; // 0-2 IUnknown, 3-7 IUIAutomationInvokePattern
+    private static int METHODS = 8; // 0-2 IUnknown,
+                                    // 3-7 IUIAutomationTogglePattern
 
-    public static IUIAutomationTogglePattern pointerToInterface(final PointerByReference ptr) {
+    private static final int TOGGLE = 3;
+    private static final int CURRENT_TOGGLE_STATE = 4;
+
+    public static IUIAutomationTogglePattern pointerToInterface(
+            final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -38,29 +43,37 @@ public class IUIAutomationTogglePatternConverter {
             // IUnknown
 
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference pointerByReference) {
+                Function f = Function.getFunction(vTable[0],
+                        Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(f.invokeInt(
+                        new Object[]{interfacePointer,
+                                byValue, pointerByReference}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int toggle() {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[TOGGLE],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int getCurrentToggleState(IntByReference ibr) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[CURRENT_TOGGLE_STATE],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, ibr});
             }
         };

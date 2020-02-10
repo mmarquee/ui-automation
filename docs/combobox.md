@@ -2,7 +2,7 @@
 * See [Element Discovery](element-discovery.md)
 
 ```
-AutomationComboBox cb1 = window.getCombobox(Search.getBuilder("AutomatedCombobox1").build());
+ComboBox cb1 = window.getCombobox(Search.getBuilder("AutomatedCombobox1").build());
 String oldTxt = cb1.text();
 cb1.setText("Replacements");
 String txt = cb1.text();

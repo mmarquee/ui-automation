@@ -57,27 +57,33 @@ public enum OrientationType {
      * Constructor for OrientationType.
      * @param inValue The value.
      */
-    OrientationType (final int inValue) {
+    OrientationType(final int inValue) {
         this.value = inValue;
     }
 
-    private static final Map<Integer, OrientationType> intToTypeMap = new HashMap<>();
+    /**
+     * Map of integer to values.
+     */
+    private static final Map<Integer, OrientationType> INT_TO_TYPE_MAP =
+            new HashMap<>();
 
     static {
         for (OrientationType type : OrientationType.values()) {
-            intToTypeMap.put(type.value, type);
+            INT_TO_TYPE_MAP.put(type.value, type);
         }
     }
 
     /**
-     * Gets the enumeration from the given integer
+     * Gets the enumeration from the given integer.
+     *
      * @param i The given integer
      * @return The value (as an OrientationType)
      */
-    public static OrientationType fromInt(int i) {
-        OrientationType type = intToTypeMap.get(i);
-        if (type == null)
+    public static OrientationType fromInt(final int i) {
+        OrientationType type = INT_TO_TYPE_MAP.get(i);
+        if (type == null) {
             return OrientationType.None;
+        }
         return type;
     }
 }

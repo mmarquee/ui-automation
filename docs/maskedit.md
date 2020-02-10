@@ -7,7 +7,7 @@ There does not seem to be an equivalent WPF control.
 
 ```
   try {
-    AutomationMaskedEdit me0 = window.getMaskedEdit(Search.getBuilder("AutomatedMaskEdit1").build());
+    MaskedEdit me0 = window.getMaskedEdit(Search.getBuilder("AutomatedMaskEdit1").build());
 
     // Get the current value
     String value = me0.getValue();

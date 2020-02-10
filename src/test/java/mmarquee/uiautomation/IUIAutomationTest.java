@@ -21,7 +21,8 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -47,7 +48,8 @@ public class IUIAutomationTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    protected Logger logger = Logger.getLogger(IUIAutomationTest.class.getName());
+    protected Logger logger =
+            LogManager.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -246,7 +248,7 @@ public class IUIAutomationTest {
             automation.createTrueCondition(pCondition);
             PointerByReference first = new PointerByReference();
 
-            rootElement.findFirst(new TreeScope(TreeScope.Descendants), pCondition.getValue(), first);
+            rootElement.findFirst(new TreeScope(TreeScope.DESCENDANTS), pCondition.getValue(), first);
 
             IntByReference same = new IntByReference();
 

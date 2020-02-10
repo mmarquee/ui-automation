@@ -8,7 +8,7 @@ The example below shows the current (as of 25/04/2016) support for 2 level menus
 
 ```
   try {
-    AutomationMenuItem exit = menu.getMenuItem("File", "Exit");
+    MenuItem exit = menu.getMenuItem("File", "Exit");
     exit.click();
   } catch (ElementNotFoundException ex) {
     ..
@@ -18,10 +18,10 @@ The example below shows the current (as of 25/04/2016) support for 2 level menus
 ### WPF Menus
 
 ```
-  AutomationMainMenu mainMenu = window.getMenu(0);
+  MainMenu mainMenu = window.getMenu(0);
 
   // Get the first menu item (i.e. "File")
-  AutomationMenuItem file = mainMenu.getItems().get(0);
+  MenuItem file = mainMenu.getItems().get(0);
   file.expand();
 
   // A short wait for the expand to work
@@ -32,7 +32,7 @@ The example below shows the current (as of 25/04/2016) support for 2 level menus
   }
 
   // Look for a specific menu item (in this case 'exit' is the 4th entry)
-  AutomationMenuItem exit = file.getItems().get(3);
+  MenuItem exit = file.getItems().get(3);
 
   exit.click();
 ```
@@ -53,6 +53,6 @@ A popup menu is just another menu, and can be accessed in the same manner. In th
   }
 
   // Should be able to get the popup menu here
-  AutomationMenu popup = window.getMenu(0)
+  Menu popup = window.getMenu(0)
   
 ```

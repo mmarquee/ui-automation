@@ -1,7 +1,8 @@
 package mmarquee.demo;
 
 import mmarquee.automation.controls.AutomationBase;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Mark Humphreys
@@ -9,7 +10,8 @@ import org.apache.log4j.Logger;
  */
 public class TestBase {
 
-    protected Logger logger = Logger.getLogger(AutomationBase.class.getName());
+    protected Logger logger =
+            LogManager.getLogger(AutomationBase.class.getName());
 
     protected void rest() {
         try {

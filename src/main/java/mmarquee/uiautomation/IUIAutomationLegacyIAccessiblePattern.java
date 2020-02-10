@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 inpwtepydjuf@gmail.com
+ * Copyright 2017-18 inpwtepydjuf@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,14 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
 
+/**
+ * Exposes methods and properties that enable Microsoft UI Automation clients
+ * to retrieve UI information from Microsoft Active Accessibility (MSAA)
+ * servers.
+ *
+ * @author Mark Humphreys
+ * Date 14/12/2018.
+ */
 public interface IUIAutomationLegacyIAccessiblePattern extends IUnknown {
     /**
      * The interface IID for QueryInterface et al.
@@ -35,7 +43,8 @@ public interface IUIAutomationLegacyIAccessiblePattern extends IUnknown {
      * Sets the value for the element.
      *
      * @param sr The value
-     * @return Result from call
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int setValue(WTypes.BSTR sr);
     //  int getCurrentChildId(PointerByReference pRetVal);
@@ -44,9 +53,11 @@ public interface IUIAutomationLegacyIAccessiblePattern extends IUnknown {
      * Gets the current name from accessibility routines.
      *
      * @param pszName The name
-     * @return State of the call
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getCurrentName(PointerByReference pszName);
+
     //  int getCurrentValue(PointerByReference pszValue);
     //  int getCurrentDescription(PointerByReference pszDescription);
     //  int getCurrentRole(PointerByReference pdwRole);

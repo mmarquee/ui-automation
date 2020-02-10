@@ -26,17 +26,17 @@ public enum ToggleState {
     /**
      * Toggled off.
      */
-    Off(0),
+    OFF(0),
 
     /**
-     * Togggled on.
+     * Toggled on.
      */
-    On(1),
+    ON(1),
 
     /**
-     * Indeterminate toggle.
+     * INDETERMINATE toggle.
      */
-    Indeterminate(2);
+    INDETERMINATE(2);
 
     /**
      * The underlying value.
@@ -59,12 +59,15 @@ public enum ToggleState {
         this.value = inValue;
     }
 
-    private static final Map<Integer, ToggleState> IntToTypeMap =
+    /**
+     * Map of integer to value.
+     */
+    private static final Map<Integer, ToggleState> INT_TO_TYPE_MAP =
             new HashMap<>();
 
     static {
         for (ToggleState type : ToggleState.values()) {
-            IntToTypeMap.put(type.value, type);
+            INT_TO_TYPE_MAP.put(type.value, type);
         }
     }
 
@@ -74,9 +77,9 @@ public enum ToggleState {
      * @return The value (as an ToggleState).
      */
     public static ToggleState fromInt(final int i) {
-        ToggleState type = IntToTypeMap.get(i);
+        ToggleState type = INT_TO_TYPE_MAP.get(i);
         if (type == null) {
-            return ToggleState.Off;
+            return ToggleState.OFF;
         }
 
         return type;

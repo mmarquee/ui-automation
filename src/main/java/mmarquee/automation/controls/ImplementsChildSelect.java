@@ -17,7 +17,7 @@ package mmarquee.automation.controls;
 
 import java.util.List;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
@@ -52,7 +52,7 @@ public interface ImplementsChildSelect extends Automatable, CanRequestBasePatter
      * @throws AutomationException An automation error has occurred.
      * @throws PatternNotFoundException Pattern was not found.
      */
-    default List<AutomationElement> getSelection()
+    default List<Element> getSelection()
             throws AutomationException, PatternNotFoundException {
         final Selection selectionPattern = requestAutomationPattern(Selection.class);
 		if (selectionPattern.isAvailable()) {
@@ -68,7 +68,7 @@ public interface ImplementsChildSelect extends Automatable, CanRequestBasePatter
      * @throws AutomationException An automation error has occurred.
      * @throws PatternNotFoundException Pattern was not found.
      */
-    default List<AutomationElement> getCurrentSelection()
+    default List<Element> getCurrentSelection()
             throws AutomationException, PatternNotFoundException {
         final Selection selectionPattern = requestAutomationPattern(Selection.class);
 		if (selectionPattern.isAvailable()) {

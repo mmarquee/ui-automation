@@ -17,7 +17,7 @@ package mmarquee.automation.controls;
 
 import java.util.List;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Table;
@@ -29,8 +29,7 @@ import mmarquee.uiautomation.RowOrColumnMajor;
  * @author Mark Humphreys
  * Date 21/09/2016.
  */
-public interface ImplementsTable extends Automatable,
-		CanRequestBasePattern {
+public interface ImplementsTable extends Automatable {
 	
 	/**
      * Gets the list of the column headers.
@@ -39,27 +38,15 @@ public interface ImplementsTable extends Automatable,
      * @throws AutomationException Automation library error
      * @throws PatternNotFoundException Expected pattern not found
      */
-    default List<AutomationElement> getCurrentColumnHeaders ()
-            throws PatternNotFoundException, AutomationException  {
-    	final Table tablePattern = requestAutomationPattern(Table.class);
- 		if (tablePattern.isAvailable()) {
- 			return tablePattern.getCurrentColumnHeaders();
- 		}
- 		throw new PatternNotFoundException("Cannot get current column headers");
-    }
+    List<DataGridCell> getCurrentColumnHeaders ()
+            throws PatternNotFoundException, AutomationException;
     
     /**
      * Gets the row headers for the grid.
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
-    default List<AutomationElement> getCurrentRowHeaders() throws AutomationException {
-    	final Table tablePattern = requestAutomationPattern(Table.class);
- 		if (tablePattern.isAvailable()) {
- 			return tablePattern.getCurrentRowHeaders();
- 		}
- 		throw new PatternNotFoundException("Cannot get current row headers");
-    }
+    List<DataGridCell> getCurrentRowHeaders() throws AutomationException;
     
     /**
      * Returns whether the grid has column or row headers.
@@ -68,14 +55,6 @@ public interface ImplementsTable extends Automatable,
      * @throws AutomationException Error thrown from automation library
      * @throws PatternNotFoundException Failed to find pattern
      */
-    default RowOrColumnMajor getRowOrColumnMajor()
-            throws AutomationException, PatternNotFoundException {
-    	final Table tablePattern = requestAutomationPattern(Table.class);
- 		if (tablePattern.isAvailable()) {
- 			return tablePattern.getRowOrColumnMajor();
- 		}
- 		throw new PatternNotFoundException("Cannot get row or column major");
-    }
-    
-    
+    RowOrColumnMajor getRowOrColumnMajor()
+            throws AutomationException, PatternNotFoundException;
 }

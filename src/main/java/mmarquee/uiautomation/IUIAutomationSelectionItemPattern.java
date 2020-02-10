@@ -28,8 +28,8 @@ public interface IUIAutomationSelectionItemPattern extends IUnknown {
     /**
      * The interface IID for QueryInterface et al
      */
-    Guid.IID IID = new Guid.IID(
-            "{A8EFA66A-0FDA-421A-9194-38021F3578EA}");
+    Guid.IID IID =
+            new Guid.IID("{A8EFA66A-0FDA-421A-9194-38021F3578EA}");
 
     int select();
     int getCurrentIsSelected(IntByReference ibr);

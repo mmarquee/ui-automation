@@ -26,9 +26,11 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationTreeWalkerConverter {
-    private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationTreeWalker
+    private static int METHODS = 16; // 0-2 IUnknown,
+                                     // 3-15 IUIAutomationTreeWalker
 
-    public static IUIAutomationTreeWalker pointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationTreeWalker pointerToInterface(
+            final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -37,52 +39,73 @@ public class IUIAutomationTreeWalkerConverter {
             // IUnknown
 
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference pbr) {
+                Function f = Function.getFunction(vTable[0],
+                        Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(
+                        f.invokeInt(
+                                new Object[]{interfacePointer, byValue, pbr}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
-            public int getParentElement(Pointer element, PointerByReference parent) {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, element, parent});
+            public int getParentElement(Pointer element,
+                                        PointerByReference parent) {
+                Function f = Function.getFunction(vTable[3],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(
+                        new Object[]{interfacePointer, element, parent});
             }
 
-            public int getFirstChildElement(Pointer element, PointerByReference first) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, element, first});
+            public int getFirstChildElement(Pointer element,
+                                            PointerByReference first) {
+                Function f = Function.getFunction(vTable[4],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(
+                        new Object[]{interfacePointer, element, first});
             }
 
-            public int getLastChildElement(Pointer element, PointerByReference last) {
-                Function f = Function.getFunction(vTable[5], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, element, last});
+            public int getLastChildElement(Pointer element,
+                                           PointerByReference last) {
+                Function f = Function.getFunction(vTable[5],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(
+                        new Object[]{interfacePointer, element, last});
             }
 
-            public int getNextSiblingElement(Pointer element, PointerByReference next) {
-                Function f = Function.getFunction(vTable[6], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, element, next});
+            public int getNextSiblingElement(Pointer element,
+                                             PointerByReference next) {
+                Function f = Function.getFunction(vTable[6],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(
+                        new Object[]{interfacePointer, element, next});
             }
 
-            public int getPreviousSiblingElement(Pointer element, PointerByReference previous) {
-                Function f = Function.getFunction(vTable[7], Function.ALT_CONVENTION);
-                return f.invokeInt(new Object[]{interfacePointer, element, previous});
+            public int getPreviousSiblingElement(Pointer element,
+                                                 PointerByReference previous) {
+                Function f = Function.getFunction(vTable[7],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(
+                        new Object[]{interfacePointer, element, previous});
             }
 
             public int getCondition(PointerByReference condition) {
-                Function f = Function.getFunction(vTable[15], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[15],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, condition});
             }
-
         };
     }
 }

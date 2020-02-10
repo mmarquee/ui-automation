@@ -16,11 +16,11 @@
 
 package mmarquee.demo
 
-import mmarquee.automation.controls.menu.AutomationMenuItem
-import mmarquee.automation.controls.{AutomationWindow, Search}
+import mmarquee.automation.controls.menu.MenuItem
+import mmarquee.automation.controls.{Search, Window}
 
 class NotepadApplication extends BaseApplication {
-  private var window: AutomationWindow = _
+  private var window: Window = _
 
   def launch(): Unit = {
     application = automation.launch("notepad.exe")
@@ -40,7 +40,7 @@ class NotepadApplication extends BaseApplication {
 
   def clickExit(): Unit = {
     val menu = window.getMainMenu(1)
-    val exit: AutomationMenuItem = menu.getMenuItem("File", "Exit")
+    val exit: MenuItem = menu.getMenuItem("File", "Exit")
     exit.click()
   }
 
@@ -50,7 +50,7 @@ class NotepadApplication extends BaseApplication {
     button.click()
   }
 
-  def getConfirm: AutomationWindow = {
+  def getConfirm: Window = {
     window.getWindow(Search.getBuilder("Notepad").build())
   }
 

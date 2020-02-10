@@ -17,7 +17,7 @@
 package mmarquee.demo;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 
 import java.awt.*;
@@ -47,12 +47,12 @@ public class DemoPointOver extends TestBase {
             point.y = (int) p.getY();
 
             try {
-                AutomationElement elementUnder =
+                Element elementUnder =
                         automation.getElementFromPoint(point);
 
                 logger.info("From point = " + elementUnder.getName());
 
-                AutomationElement elementFocus = automation.getFocusedElement();
+                Element elementFocus = automation.getFocusedElement();
                 logger.info("From focus = " + elementFocus.getName());
 
             } catch (Exception ex) {

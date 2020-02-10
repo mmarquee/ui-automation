@@ -27,9 +27,11 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationStylesPatternConverter {
-    private static int METHODS = 19; // 0-2 IUnknown, 3-18 IUIAutomationStylesPattern
+    private static int METHODS = 19; // 0-2 IUnknown,
+                                     // 3-18 IUIAutomationStylesPattern
 
-    public static IUIAutomationStylesPattern pointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationStylesPattern pointerToInterface(
+            final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -38,29 +40,37 @@ public class IUIAutomationStylesPatternConverter {
             // IUnknown
 
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference pbr) {
+                Function f = Function.getFunction(vTable[0],
+                        Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(f.invokeInt(
+                        new Object[]{interfacePointer,
+                                byValue, pbr}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int getCurrentStyleId(IntByReference retVal) {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[3],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
 
             public int getCurrentStyleName(PointerByReference retVal) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[4],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };

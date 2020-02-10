@@ -20,6 +20,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.DoubleByReference;
+import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
@@ -27,9 +28,11 @@ import com.sun.jna.ptr.PointerByReference;
  * Date 05/06/2017.
  */
 public class IUIAutomationRangeValuePatternConverter {
-    private static int METHODS = 16; // 0-2 IUnknown, 3-15 IUIAutomationInvokePattern
+    private static int METHODS = 16; // 0-2 IUnknown,
+                                     // 3-15 IUIAutomationRangeValuePattern
 
-    public static IUIAutomationRangeValuePattern pointerToInterface(final PointerByReference ptr) {
+    public static IUIAutomationRangeValuePattern pointerToInterface(
+            final PointerByReference ptr) {
         final Pointer interfacePointer = ptr.getValue();
         final Pointer vTablePointer = interfacePointer.getPointer(0);
         final Pointer[] vTable = new Pointer[METHODS];
@@ -37,29 +40,43 @@ public class IUIAutomationRangeValuePatternConverter {
         return new IUIAutomationRangeValuePattern() {
             // IUnknown
             @Override
-            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue, PointerByReference pointerByReference) {
-                Function f = Function.getFunction(vTable[0], Function.ALT_CONVENTION);
-                return new WinNT.HRESULT(f.invokeInt(new Object[]{interfacePointer, byValue, pointerByReference}));
+            public WinNT.HRESULT QueryInterface(Guid.REFIID byValue,
+                                                PointerByReference pbr) {
+                Function f = Function.getFunction(vTable[0],
+                        Function.ALT_CONVENTION);
+                return new WinNT.HRESULT(f.invokeInt(
+                        new Object[]{interfacePointer,
+                                byValue, pbr}));
             }
 
             @Override
             public int AddRef() {
-                Function f = Function.getFunction(vTable[1], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[1],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int Release() {
-                Function f = Function.getFunction(vTable[2], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[2],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer});
             }
 
             public int setValue(Double val) {
-                Function f = Function.getFunction(vTable[3], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[3],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, val});
             }
 
             public int getValue(DoubleByReference retVal) {
-                Function f = Function.getFunction(vTable[4], Function.ALT_CONVENTION);
+                Function f = Function.getFunction(vTable[4],
+                        Function.ALT_CONVENTION);
+                return f.invokeInt(new Object[]{interfacePointer, retVal});
+            }
+
+            public int getIsReadOnly(IntByReference retVal) {
+                Function f = Function.getFunction(vTable[5],
+                        Function.ALT_CONVENTION);
                 return f.invokeInt(new Object[]{interfacePointer, retVal});
             }
         };

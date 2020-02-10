@@ -19,7 +19,7 @@ import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomationElement;
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
  * @author Mark Humphreys
  * Date 25/09/2017
  *
- * Tests for AutomationRibbonBar.
+ * Tests for RibbonBar.
  */
 public class AutomationRibbonBarTest2 {
 
@@ -62,16 +62,16 @@ public class AutomationRibbonBarTest2 {
 
     @Test(expected = ElementNotFoundException.class)
     public void testGetRibbonCommandBar_Throws_Exception_When_Not_Found() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        List<AutomationElement> collection = new ArrayList<>();
+        List<Element> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(
+        RibbonBar bar = new RibbonBar(
                 new ElementBuilder(element).addPattern(container));
 
         bar.getRibbonCommandBar();
@@ -81,10 +81,10 @@ public class AutomationRibbonBarTest2 {
 
     @Test
     public void testGetRibbonCommandBar_When_Element_Is_Found() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        when(element.getClassName()).thenReturn(AutomationRibbonBar.CLASS_NAME);
-        List<AutomationElement> collection = new ArrayList<>();
+        when(element.getClassName()).thenReturn(RibbonBar.CLASS_NAME);
+        List<Element> collection = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
@@ -103,11 +103,11 @@ public class AutomationRibbonBarTest2 {
                 }
         );
 
-        collection.add(new AutomationElement(elem));
+        collection.add(new Element(elem));
 
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonBar bar = new AutomationRibbonBar(
+        RibbonBar bar = new RibbonBar(
                 new ElementBuilder(element));
 
         bar.getRibbonCommandBar();

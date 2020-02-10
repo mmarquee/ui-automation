@@ -23,6 +23,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+import mmarquee.automation.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,11 +41,7 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
+import mmarquee.automation.Element;
 import mmarquee.uiautomation.IUIAutomationValuePattern;
 
 /**
@@ -58,7 +55,7 @@ public class ValuePatternTest {
     @Mock
     IUIAutomationValuePattern rawPattern;
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Spy
     private Unknown mockUnknown;

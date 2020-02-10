@@ -18,13 +18,13 @@ package mmarquee.demo
 
 import com.sun.jna.platform.win32.{User32, WinDef}
 import mmarquee.automation.UIAutomation
-import mmarquee.automation.controls.{AutomationApplication, AutomationWindow}
+import mmarquee.automation.controls.{Application, Window}
 
 import scala.util.{Failure, Success, Try}
 
 trait BaseApplication {
   val automation = UIAutomation.getInstance
-  var application: AutomationApplication = _
+  var application: Application = _
 
   var applicationName = ""
   var applicationArguments = ""
@@ -48,7 +48,7 @@ trait BaseApplication {
     }
   }
 
-  def getDesktopWindow: Try[AutomationWindow] = {
+  def getDesktopWindow: Try[Window] = {
     System.out.println(s"Looking for $applicationTitle")
     Try(automation.getDesktopWindow(applicationTitle, 3))
   }

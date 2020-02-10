@@ -19,7 +19,7 @@ import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomationElement;
@@ -62,28 +62,28 @@ public class AutomationRibbonCommandBarTest2 {
 
     @Test (expected = ElementNotFoundException.class)
     public void testGetRibbonCommandBar_Throws_Exception_When_No_WorkPane_Found() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        List<AutomationElement> collection = new ArrayList<>();
+        List<Element> collection = new ArrayList<>();
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
         ItemContainer container = Mockito.mock(ItemContainer.class);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+        RibbonCommandBar commandBar = new RibbonCommandBar(
                 new ElementBuilder(element).addPattern(container));
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        RibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }
 
     @Test
     public void testGetRibbonCommandBar_When_WorkPane_Found() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
 
-        List<AutomationElement> collection = new ArrayList<>();
+        List<Element> collection = new ArrayList<>();
 
         IUIAutomationElement elem = Mockito.mock(IUIAutomationElement.class);
 
@@ -102,15 +102,15 @@ public class AutomationRibbonCommandBarTest2 {
                 }
         );
 
-        collection.add(new AutomationElement(elem));
+        collection.add(new Element(elem));
 
-        when(element.getClassName()).thenReturn(AutomationRibbonCommandBar.CLASS_NAME);
+        when(element.getClassName()).thenReturn(RibbonCommandBar.CLASS_NAME);
         when(element.findAll(any(), any())).thenReturn(collection);
 
-        AutomationRibbonCommandBar commandBar = new AutomationRibbonCommandBar(
+        RibbonCommandBar commandBar = new RibbonCommandBar(
                 new ElementBuilder(element));
 
-        AutomationRibbonWorkPane workPane = commandBar.getRibbonWorkPane();
+        RibbonWorkPane workPane = commandBar.getRibbonWorkPane();
 
         Mockito.verify(element, atLeastOnce()).findAll(any(), any());
     }

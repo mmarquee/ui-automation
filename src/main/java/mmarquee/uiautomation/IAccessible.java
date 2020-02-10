@@ -35,7 +35,8 @@ public interface IAccessible extends IDispatch {
      * Get the accessible parent.
      *
      * @param pdisp the accessible element
-     * @return The result
+     * @return If this method succeeds, it returns S_OK. Otherwise, it returns
+     *         an HRESULT error code.
      */
     int getAccParent(PointerByReference pdisp);
     int getAccChildCount(LongByReference pcnt);

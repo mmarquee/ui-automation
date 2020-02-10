@@ -39,8 +39,8 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationWindow;
+import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.Window;
 import mmarquee.automation.pattern.BasePattern;
 import mmarquee.automation.pattern.ExpandCollapse;
 import mmarquee.automation.pattern.PatternNotFoundException;
@@ -63,8 +63,8 @@ public class BaseAutomationTest {
 		UIAutomation.FIND_DESKTOP_ATTEMPTS = 2; // speed up tests
 	}
 
-    private AutomationApplication application;
-    protected AutomationWindow window;
+    private Application application;
+    protected Window window;
     private String windowName;
 
     protected void andRest() {
@@ -108,14 +108,14 @@ public class BaseAutomationTest {
 		return locals.getString(key);
 	}
 
-	protected AutomationElement getMocketAutomationElement() {
+	protected Element getMockedAutomationElement() {
         IUIAutomationElement mockedElement = Mockito.mock(IUIAutomationElement.class);
-        return new AutomationElement(mockedElement);
+        return new Element(mockedElement);
 	}
 
-    protected AutomationElement getMocketAutomationElement6() {
+    protected Element getMockedAutomationElement6() {
         IUIAutomationElement6 mockedElement = Mockito.mock(IUIAutomationElement6.class);
-        return new AutomationElement(mockedElement);
+        return new Element(mockedElement);
     }
 	
 	protected Answer<Integer> answerWithSetPointerReferenceToWideString(final String expectedString) {
@@ -209,49 +209,47 @@ public class BaseAutomationTest {
     	}
     	
         public boolean matches(TreeScope list) {
-            return list.value == expectedValue;
+            return list.getValue() == expectedValue;
         }
     }
 
 	@SuppressWarnings("rawtypes")
-	static public void addPatternForElementMock(AutomationElement automationElementMock, PatternID patternId,
-			PropertyID patternAvailablePropertyID, BasePattern pattern) throws AutomationException {
-		declarePatternAvailable(automationElementMock, patternId, patternAvailablePropertyID);
+	static public void addPatternForElementMock(Element elementMock, PatternID patternId,
+												PropertyID patternAvailablePropertyID, BasePattern pattern) throws AutomationException {
+		declarePatternAvailable(elementMock, patternId, patternAvailablePropertyID);
 		when(pattern.isAvailable()).thenReturn(true);
-		when(automationElementMock.getProvidedPattern(pattern.getPatternClass())).thenAnswer(new Answer(){
+		when(elementMock.getProvidedPattern(pattern.getPatternClass())).thenAnswer(new Answer(){
 			@Override
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				return pattern;
 			}});
 	}
 	
-	static public ExpandCollapse mockExpandCollapsePattern(AutomationElement automationElementMock) throws AutomationException {
+	static public ExpandCollapse mockExpandCollapsePattern(Element elementMock) throws AutomationException {
 		 PatternID patternId = PatternID.ExpandCollapse;
 	     PropertyID patternAvailablePropertyID = PropertyID.IsExpandCollapsePatternAvailable;
 	     ExpandCollapse expandCollapsePattern = Mockito.mock(ExpandCollapse.class);
-	     addPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
+	     addPatternForElementMock(elementMock, patternId, patternAvailablePropertyID, expandCollapsePattern);
 	     
 	     return expandCollapsePattern;
 	}
 
 	
-	static public SelectionItem mockSelectItemPattern(AutomationElement automationElementMock) throws AutomationException {
+	static public SelectionItem mockSelectItemPattern(Element elementMock) throws AutomationException {
 		 PatternID patternId = PatternID.SelectionItem;
 	     PropertyID patternAvailablePropertyID = PropertyID.IsSelectionItemPatternAvailable;
 	     SelectionItem selectItemPattern = Mockito.mock(SelectionItem.class);
-	     addPatternForElementMock(automationElementMock, patternId, patternAvailablePropertyID, selectItemPattern);
+	     addPatternForElementMock(elementMock, patternId, patternAvailablePropertyID, selectItemPattern);
 	     
 	     return selectItemPattern;
 	}
-	
-	
-	
-	public static void declarePatternAvailable(AutomationElement element, PatternID patternId, PropertyID patternAvailablePropertyID) throws AutomationException {
+
+	public static void declarePatternAvailable(Element element, PatternID patternId, PropertyID patternAvailablePropertyID) throws AutomationException {
 		declarePatternAvailable(element, patternId);
 		when(element.getPropertyValue(patternAvailablePropertyID.getValue())).thenReturn(1);
 	}
 	
-	public static void declarePatternAvailable(AutomationElement element, PatternID patternId) throws AutomationException {
+	public static void declarePatternAvailable(Element element, PatternID patternId) throws AutomationException {
 		Pointer patternPointer = Mockito.mock(Pointer.class);
         PointerByReference patternPointerReference = Mockito.mock(PointerByReference.class);
         when(patternPointerReference.getValue()).thenReturn(patternPointer);

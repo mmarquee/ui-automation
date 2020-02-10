@@ -59,4 +59,13 @@ public interface ImplementsRangeValue extends Automatable, CanRequestBasePattern
 		}
 		throw new PatternNotFoundException("Cannot set range value");
     }
+
+    default boolean getIsReadOnly()
+			throws AutomationException {
+		final Range rangePattern = requestAutomationPattern(Range.class);
+		if (rangePattern.isAvailable()) {
+			return rangePattern.getIsReadOnly();
+		}
+		throw new PatternNotFoundException("Cannot getIsReadOnly value");
+	}
 }

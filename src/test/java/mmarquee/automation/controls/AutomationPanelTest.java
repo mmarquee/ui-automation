@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.*;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,11 +35,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import mmarquee.automation.AutomationElement;
-import mmarquee.automation.BaseAutomationTest;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.UIAutomation;
+import mmarquee.automation.Element;
 import mmarquee.uiautomation.TreeScope;
 
 public class AutomationPanelTest {
@@ -52,23 +49,23 @@ public class AutomationPanelTest {
     }
 
     @Mock
-    AutomationElement element;
+    Element element;
 
     @InjectMocks
     UIAutomation automation;
     
-    AutomationPanel panel;
+    Panel panel;
     
-    List<AutomationElement> list;
+    List<Element> list;
     
     @Mock
-    AutomationElement targetElement;
+    Element targetElement;
 
     @Before
     public void setup() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        panel = Mockito.spy(new AutomationPanel(
+        panel = Mockito.spy(new Panel(
                 new ElementBuilder(element)));
         
         list = new ArrayList<>();
@@ -78,9 +75,10 @@ public class AutomationPanelTest {
     
     @Test
     public void test_GetWindow_By_Index() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Subtree), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.SUBTREE),
+                any())).thenReturn(list);
 
-        AutomationWindow window = panel.getWindow(Search.getBuilder(0).build());
+        Window window = panel.getWindow(Search.getBuilder(0).build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createIntegerVariant(ControlType.Window.getValue());
@@ -89,16 +87,16 @@ public class AutomationPanelTest {
 
     @Test(expected=IndexOutOfBoundsException.class)
     public void test_GetWindow_By_Index_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
 
         panel.getTextBox(Search.getBuilder(99).build());
     }
 
     @Test
     public void test_GetWindow_By_Name() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(targetElement);
 
-        AutomationWindow window = panel.getWindow(Search.getBuilder("myName").build());
+        Window window = panel.getWindow(Search.getBuilder("myName").build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createNamePropertyCondition("myName");
@@ -108,7 +106,7 @@ public class AutomationPanelTest {
 
     @Test(expected=ElementNotFoundException.class)
     public void test_GetWindow_By_Name_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenThrow(new ElementNotFoundException());
 
         panel.getWindow(Search.getBuilder("unknownName").build());
     }
@@ -116,9 +114,9 @@ public class AutomationPanelTest {
     @Test
     public void test_GetWindow_By_Name_with_RegexPattern() throws Exception {
     	when(targetElement.getName()).thenReturn("myName");
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
 
-        AutomationWindow window = panel.getWindow(Search.getBuilder(Pattern.compile(".+Name")).build());
+        Window window = panel.getWindow(Search.getBuilder(Pattern.compile(".+Name")).build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createControlTypeCondition(ControlType.Window);
@@ -128,16 +126,16 @@ public class AutomationPanelTest {
     @Test(expected=ElementNotFoundException.class)
     public void test_GetWindow_By_Name_with_RegexPatternThrows_Exception_When_Not_found() throws Exception {
     	when(targetElement.getName()).thenReturn("myName");
-        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(list);
+        when(element.findAll(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(list);
     	
         panel.getWindow(Search.getBuilder(Pattern.compile("unknownName")).build());
     }
 
     @Test
     public void test_GetWindow_By_AutomationId() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenReturn(targetElement);
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenReturn(targetElement);
 
-        AutomationWindow window = panel.getWindow(Search.getBuilder().automationId("myID").build());
+        Window window = panel.getWindow(Search.getBuilder().automationId("myID").build());
         assertEquals(targetElement,window.getElement());
 
         verify(panel).createAutomationIdPropertyCondition("myID");
@@ -147,7 +145,7 @@ public class AutomationPanelTest {
 
     @Test(expected=ElementNotFoundException.class)
     public void test_GetWindow_By_AutomationId_Throws_Exception_When_Not_found() throws Exception {
-        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.Descendants), any())).thenThrow(new ElementNotFoundException());
+        when(element.findFirst(BaseAutomationTest.isTreeScope(TreeScope.DESCENDANTS), any())).thenThrow(new ElementNotFoundException());
 
         panel.getTextBox(Search.getBuilder().automationId("unknownID").build());
     }

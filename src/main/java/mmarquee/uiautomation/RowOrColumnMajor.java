@@ -34,7 +34,7 @@ public enum RowOrColumnMajor {
     ColumnMajor(1),
 
     /**
-     * Indeterminate major.
+     * INDETERMINATE major.
      */
     Indeterminate(2);
 
@@ -55,14 +55,19 @@ public enum RowOrColumnMajor {
      * Constructor for RowOrColumnMajor.
      * @param inValue The value.
      */
-    RowOrColumnMajor (final int inValue) {
+    RowOrColumnMajor(final int inValue) {
         this.value = inValue;
     }
 
-    private static final Map<Integer, RowOrColumnMajor> intToTypeMap = new HashMap<>();
+    /**
+     * Map of values to integer.
+     */
+    private static final Map<Integer, RowOrColumnMajor> INT_TO_TYPE_MAP =
+            new HashMap<>();
+
     static {
         for (RowOrColumnMajor type : RowOrColumnMajor.values()) {
-            intToTypeMap.put(type.value, type);
+            INT_TO_TYPE_MAP.put(type.value, type);
         }
     }
 
@@ -72,10 +77,11 @@ public enum RowOrColumnMajor {
      * @param i The given integer
      * @return The value (as an RowOrColumnMajor)
      */
-    public static RowOrColumnMajor fromInt(int i) {
-        RowOrColumnMajor type = intToTypeMap.get(i);
-        if (type == null)
+    public static RowOrColumnMajor fromInt(final int i) {
+        RowOrColumnMajor type = INT_TO_TYPE_MAP.get(i);
+        if (type == null) {
             return RowOrColumnMajor.Indeterminate;
+        }
         return type;
     }
 }

@@ -20,14 +20,11 @@ import java.util.List;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.uiautomation.IUIAutomationElementArray;
-import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
-import mmarquee.uiautomation.IUIAutomationSelectionPattern;
-import mmarquee.uiautomation.IUIAutomationSelectionPatternConverter;
+import mmarquee.uiautomation.*;
 
 /**
  * Wrapper for the Selection pattern.
@@ -43,7 +40,7 @@ public class Selection extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Selection(final AutomationElement element) throws AutomationException {
+    public Selection(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationSelectionPattern.IID;
         this.patternID = PatternID.Selection;
@@ -51,9 +48,14 @@ public class Selection extends BasePattern {
     }
 
     /**
-     * The raw pattern.
+     * The raw IUIAutomationSelectionPattern pattern.
      */
     IUIAutomationSelectionPattern rawPattern;
+
+    /**
+     * The raw IUIAutomationSelectionPattern2 pattern.
+     */
+    IUIAutomationSelectionPattern2 rawPattern2;
 
     /**
      * Gets the pointer.
@@ -61,8 +63,20 @@ public class Selection extends BasePattern {
      * @return Underlying pointer
      * @throws AutomationException Automation has gone wrong
      */
-    private IUIAutomationSelectionPattern getPattern() throws AutomationException {
+    private IUIAutomationSelectionPattern getPattern()
+            throws AutomationException {
     	return getPattern(rawPattern, this::convertPointerToInterface);
+    }
+
+    /**
+     * Gets the pointer to the second selection pattern.
+     *
+     * @return Underlying pointer to the selection2 pattern
+     * @throws AutomationException Automation has gone wrong
+     */
+    private IUIAutomationSelectionPattern2 getPattern2()
+            throws AutomationException {
+        return getPattern(rawPattern2, this::convertPointerToInterface2);
     }
 
     /**
@@ -71,7 +85,7 @@ public class Selection extends BasePattern {
      * @return The current selection
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getCurrentSelection() throws AutomationException {
+    public List<Element> getCurrentSelection() throws AutomationException {
 
         PointerByReference pbr = new PointerByReference();
 
@@ -84,6 +98,23 @@ public class Selection extends BasePattern {
     }
 
     /**
+     * Gets the current selected item.
+     *
+     * @return The current selected item
+     * @throws AutomationException Something has gone wrong
+     */
+    public Element getCurrentSelectedItem() throws AutomationException {
+        PointerByReference pbr = new PointerByReference();
+
+        final int res = this.getPattern2().getCurrentCurrentSelectedItem(pbr);
+        if (res != 0) {
+            throw new AutomationException(res);
+        }
+
+        return new Element(getAutomationElementFromReference(pbr));
+    }
+
+    /**
      * Convert the unknown pointer to selection pattern.
      *
      * @param pUnknown The unknown pointer
@@ -91,6 +122,16 @@ public class Selection extends BasePattern {
      */
     IUIAutomationSelectionPattern convertPointerToInterface(PointerByReference pUnknown) {
         return IUIAutomationSelectionPatternConverter.pointerToInterface(pUnknown);
+    }
+
+    /**
+     * Convert the unknown pointer to selection2 pattern.
+     *
+     * @param pUnknown The unknown pointer
+     * @return IUIAutomationSelectionPattern2 the converted pointer
+     */
+    IUIAutomationSelectionPattern2 convertPointerToInterface2(PointerByReference pUnknown) {
+        return IUIAutomationSelectionPattern2Convertor.pointerToInterface(pUnknown);
     }
 
     /**
@@ -109,7 +150,7 @@ public class Selection extends BasePattern {
      * @return List of selected items
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getSelection() throws AutomationException {
+    public List<Element> getSelection() throws AutomationException {
         return getCurrentSelection();
     }
 

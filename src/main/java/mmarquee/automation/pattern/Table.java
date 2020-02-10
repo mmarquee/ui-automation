@@ -17,10 +17,11 @@ package mmarquee.automation.pattern;
 
 import java.util.List;
 
+import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
@@ -41,7 +42,7 @@ public class Table extends BasePattern {
      * @param element The automation element for which the pattern is valid
      * @throws AutomationException If something goes wrong
      */
-    public Table(final AutomationElement element) throws AutomationException {
+    public Table(final Element element) throws AutomationException {
     	super(element);
         this.IID = IUIAutomationTablePattern.IID;
         this.patternID = PatternID.Table;
@@ -52,6 +53,19 @@ public class Table extends BasePattern {
      * The raw pattern.
      */
     IUIAutomationTablePattern rawPattern;
+
+    /**
+     * The underlying automation pattern.
+     */
+    protected Pointer pattern;
+
+    /**
+     * Sets the pattern.
+     * @param pattern The pattern to set
+     */
+    public void setPattern(Pointer pattern) {
+        this.pattern =  pattern;
+    }
 
     /**
      * Gets the pattern.
@@ -69,7 +83,7 @@ public class Table extends BasePattern {
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getCurrentColumnHeaders() throws AutomationException {
+    public List<Element> getCurrentColumnHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.getPattern().getCurrentColumnHeaders(pbr);
@@ -103,7 +117,7 @@ public class Table extends BasePattern {
      * @return The list of column header
      * @throws AutomationException Something has gone wrong
      */
-    public List<AutomationElement> getCurrentRowHeaders() throws AutomationException {
+    public List<Element> getCurrentRowHeaders() throws AutomationException {
         PointerByReference pbr = new PointerByReference();
 
         final int res = this.getPattern().getCurrentRowHeaders(pbr);

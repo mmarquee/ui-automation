@@ -4,7 +4,7 @@
 
   <groupId>com.github.mmarquee</groupId>
   <artifactId>ui-automation</artifactId>
-  <version>0.5.0-SNAPSHOT</version>
+  <version>0.5.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>ui-automation</name>
@@ -33,8 +33,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jna.version>4.5.2</jna.version>
-    <powermock.version>1.7.3</powermock.version>
+    <jna.version>5.5.0</jna.version>
     <mockito.version>2.2.26</mockito.version>
   </properties>
 
@@ -63,9 +62,14 @@
     <!-- log4j -->
 
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.13.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.13.0</version>
     </dependency>
 
     <!-- Mockito -->
@@ -77,31 +81,15 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- powermock -->
-
-      <dependency>
-          <groupId>org.powermock</groupId>
-          <artifactId>powermock-module-junit4</artifactId>
-          <version>${powermock.version}</version>
-          <scope>test</scope>
-      </dependency>
-
       <dependency>
           <groupId>com.google.code.findbugs</groupId>
           <artifactId>findbugs</artifactId>
           <version>3.0.1</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.powermock</groupId>
-        <artifactId>powermock-api-mockito2</artifactId>
-        <version>${powermock.version}</version>
-        <scope>test</scope>
-      </dependency>
+    </dependencies>
 
-  </dependencies>
-
-  <!-- distribution management -->
+    <!-- distribution management -->
 
   <distributionManagement>
     <snapshotRepository>

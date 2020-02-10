@@ -52,28 +52,34 @@ public enum WindowVisualState {
 
     /**
      * Constructor for WindowVisualState.
-     * @param value The value of the state.
+     * @param inValue The value of the state.
      */
-    WindowVisualState(final int value) {
-        this.value = value;
+    WindowVisualState(final int inValue) {
+        this.value = inValue;
     }
 
-    private static final Map<Integer, WindowVisualState> intToTypeMap = new HashMap<>();
+    /**
+     * Map of states to integers.
+     */
+    private static final Map<Integer, WindowVisualState> INT_TO_TYPE_MAP =
+            new HashMap<>();
+
     static {
         for (WindowVisualState type : WindowVisualState.values()) {
-            intToTypeMap.put(type.value, type);
+            INT_TO_TYPE_MAP.put(type.value, type);
         }
     }
 
     /**
-     * Gets the enumeration from the given integer
+     * Gets the enumeration from the given integer.
      * @param i The given integer
-     * @return The value (as an WindowVisualState)
+     * @return The inValue (as an WindowVisualState)
      */
     public static WindowVisualState fromInt(final int i) {
-        WindowVisualState type = intToTypeMap.get(i);
-        if (type == null)
+        WindowVisualState type = INT_TO_TYPE_MAP.get(i);
+        if (type == null) {
             return WindowVisualState.Normal;
+        }
         return type;
     }
 }

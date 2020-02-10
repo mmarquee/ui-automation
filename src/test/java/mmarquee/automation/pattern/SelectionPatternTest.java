@@ -30,15 +30,13 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
@@ -54,12 +52,11 @@ import mmarquee.uiautomation.IUIAutomationSelectionPattern;
  * Tests for the Selection pattern.
  */
 @RunWith(MockitoJUnitRunner.class)
-@PrepareForTest(IUIAutomationSelectionItemPatternConverter.class)
 public class SelectionPatternTest {
     @Mock
     IUIAutomationSelectionPattern rawPattern;
     @Mock
-    AutomationElement element;
+    Element element;
 
     @Spy
     private Unknown mockUnknown;
@@ -178,13 +175,14 @@ public class SelectionPatternTest {
     //            .when(spyPattern)
       //          .makeUnknown(any());
 
-//        List<AutomationElement> list = new ArrayList<>();
+//        List<Element> list = new ArrayList<>();
 
   //      doReturn(list)
     //        .when(spyPattern)
       //      .collectionToList(any());
 
-        PowerMockito.mockStatic(IUIAutomationSelectionItemPatternConverter.class);
+   //     PowerMockito.mockStatic(IUIAutomationSelectionItemPatternConverter
+        //     .class);
 
         IUIAutomationSelectionItemPattern rawPattern
                 = Mockito.mock(IUIAutomationSelectionItemPattern.class);

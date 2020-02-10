@@ -18,18 +18,13 @@ package mmarquee.demo;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
-import mmarquee.automation.controls.AutomationApplication;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.AutomationEditBox;
-import mmarquee.automation.controls.Search;
-import mmarquee.automation.controls.AutomationWindow;
-import mmarquee.automation.controls.AutomationButton;
-import mmarquee.automation.controls.menu.AutomationMainMenu;
-import mmarquee.automation.controls.menu.AutomationMenuItem;
+import mmarquee.automation.controls.*;
+import mmarquee.automation.controls.menu.MainMenu;
+import mmarquee.automation.controls.menu.MenuItem;
 
 import java.util.regex.Pattern;
-
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Test the automation wrapper on a Delphi VCL application.
@@ -45,28 +40,33 @@ public class TestNotepad extends TestBase {
     public final void run() {
         UIAutomation automation = UIAutomation.getInstance();
 
-        Logger logger = Logger.getLogger(AutomationBase.class.getName());
+        Logger logger =
+                LogManager.getLogger(AutomationBase.class.getName());
 
-        AutomationApplication application = null;
+        Application application =
+                new Application(
+                        new ElementBuilder()
+                                .automation(automation)
+                                .applicationPath("notepad.exe"));
 
         try {
-            application = automation.launchOrAttach("notepad.exe");
+            application.launchOrAttach();
         } catch (Throwable ex) {
             logger.warn("Failed to find notepad application", ex);
         }
 
         try {
-            logger.info(AutomationApplication.getVersionNumber("notepad.exe"));
+            logger.info(Application.getVersionNumber("notepad.exe"));
         } catch (Throwable ex) {
             logger.warn("Failed to get version information", ex);
         }
 
         // Wait for the process to start
         assert application != null;
-        application.waitForInputIdle(AutomationApplication.SHORT_TIMEOUT);
+        application.waitForInputIdle(Application.SHORT_TIMEOUT);
 
         try {
-            AutomationWindow window = automation.getDesktopWindow(
+            Window window = automation.getDesktopWindow(
                     Pattern.compile("Untitled - Notepad|Unbenannt - Editor"));
             String name = window.getName();
             logger.info(name);
@@ -78,7 +78,7 @@ public class TestNotepad extends TestBase {
 
             logger.info("Modal?" + val);
 
-            AutomationEditBox edit =
+            EditBox edit =
                     window.getEditBox(Search.getBuilder(0).build());
 
             edit.setValue("This is a test of automation");
@@ -89,19 +89,19 @@ public class TestNotepad extends TestBase {
             this.rest();
 
             // Interact with menus
-            AutomationMainMenu menu = window.getMainMenu();
+            MainMenu menu = window.getMainMenu();
 
             try {
-                AutomationMenuItem exit = menu.getMenuItem(
+                MenuItem exit = menu.getMenuItem(
                         Pattern.compile("File|Datei"),
                         Pattern.compile("Exit|Beenden"));
                 exit.click();
 
                 try {
-                    AutomationWindow popup = window.getWindow(
+                    Window popup = window.getWindow(
                             Search.getBuilder(
                                     Pattern.compile("Notepad|Editor")).build());
-                    AutomationButton btn = popup.getButton(
+                    Button btn = popup.getButton(
                             Search.getBuilder(
                                     Pattern.compile("Don't Save|Nicht speichern")).build());
 

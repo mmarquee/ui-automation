@@ -15,7 +15,7 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.Value;
 import mmarquee.uiautomation.IUIAutomation;
@@ -30,10 +30,10 @@ import static org.mockito.Mockito.when;
 public class AutomationPasswordEditBoxTest {
     @Test
     public void testGetValue_Gets_Value_From_Value_Pattern() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
         
-        when(element.getClassName()).thenReturn(AutomationPasswordEditBox.CLASS_NAME);
+        when(element.getClassName()).thenReturn(PasswordEditBox.CLASS_NAME);
 
         when(value.isAvailable()).thenReturn(true);
         when(value.value()).thenReturn("VALUE");
@@ -41,7 +41,7 @@ public class AutomationPasswordEditBoxTest {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationPasswordEditBox control = new AutomationPasswordEditBox(
+        PasswordEditBox control = new PasswordEditBox(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         String val = control.getValue();
@@ -51,17 +51,17 @@ public class AutomationPasswordEditBoxTest {
 
     @Test
     public void testSetValue() throws Exception {
-        AutomationElement element = Mockito.mock(AutomationElement.class);
+        Element element = Mockito.mock(Element.class);
         Value value = Mockito.mock(Value.class);
 
         when(value.isAvailable()).thenReturn(true);
         
-        when(element.getClassName()).thenReturn(AutomationPasswordEditBox.CLASS_NAME);
+        when(element.getClassName()).thenReturn(PasswordEditBox.CLASS_NAME);
 
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
-        AutomationPasswordEditBox control = new AutomationPasswordEditBox(
+        PasswordEditBox control = new PasswordEditBox(
                 new ElementBuilder(element).addPattern(value).automation(instance));
 
         control.setValue("VALUE");

@@ -23,7 +23,7 @@ import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
 
-import mmarquee.automation.AutomationElement;
+import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.PatternID;
@@ -36,7 +36,7 @@ import mmarquee.uiautomation.IUIAutomationStylesPattern;
 @RunWith(MockitoJUnitRunner.class)
 public class StylesPatternTest {
     @Mock
-    AutomationElement element;
+    Element element;
     
     @Mock
     IUIAutomationStylesPattern rawPattern;
@@ -109,7 +109,9 @@ public class StylesPatternTest {
     @Test(expected=AutomationException.class)
     public void test_That_getPattern_Throws_Exception_When_Pattern_Returns_Error() throws Exception {
 
-        doAnswer(invocation -> new WinNT.HRESULT(-1)).when(mockUnknown).QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
+        doAnswer(invocation ->
+                new WinNT.HRESULT(-1)).when(mockUnknown)
+                    .QueryInterface(any(Guid.REFIID.class), any(PointerByReference.class));
 
         Styles pattern = new Styles(element);
 
