@@ -24,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mmarquee.automation.Element;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -53,7 +54,8 @@ public class DataGridTest2 {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    protected Logger logger = Logger.getLogger(DataGridTest2.class.getName());
+    protected Logger logger =
+            LogManager.getLogger(DataGridTest2.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

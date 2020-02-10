@@ -18,13 +18,15 @@ package mmarquee.automation.pattern;
 import java.util.function.Function;
 
 import mmarquee.automation.*;
-import org.apache.log4j.Logger;
 
 import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.PointerByReference;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import mmarquee.automation.Element;
 import mmarquee.uiautomation.IUIAutomationElement;
@@ -44,7 +46,7 @@ public abstract class BasePattern
     /**
      * The logger.
      */
-    final Logger logger = Logger.getLogger(BasePattern.class.getName());
+    final Logger logger = LogManager.getLogger(BasePattern.class.getName());
 
     /**
      * The guid of the pattern.

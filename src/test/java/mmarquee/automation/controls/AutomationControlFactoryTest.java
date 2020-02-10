@@ -21,7 +21,8 @@ import static org.mockito.Mockito.when;
 
 import mmarquee.automation.controls.menu.Menu;
 import mmarquee.uiautomation.IUIAutomationElement;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -56,7 +57,8 @@ public class AutomationControlFactoryTest {
         return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
-    protected Logger logger = Logger.getLogger(AutomationControlFactoryTest.class.getName());
+    protected Logger logger =
+            LogManager.getLogger(AutomationControlFactoryTest.class.getName());
 	
     private AutomationBase parent;
     private Element parentElement;

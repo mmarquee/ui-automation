@@ -46,7 +46,8 @@ import mmarquee.automation.pattern.Selection;
 import mmarquee.automation.pattern.Toggle;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.WinDef;
@@ -70,7 +71,7 @@ public abstract class AutomationBase
      * The logger.
      */
     private final Logger logger =
-            Logger.getLogger(AutomationBase.class.getName());
+            LogManager.getLogger(AutomationBase.class.getName());
 
     /**
      * Gets the logger.
