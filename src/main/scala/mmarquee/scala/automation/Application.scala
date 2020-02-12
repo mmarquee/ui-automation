@@ -19,7 +19,7 @@ class Application (auto: UIAutomation) {
     getWindow(title, FIND_DESKTOP_ATTEMPTS)
 
   def getWindow(title: String, retries: Int) : Option[Window] = {
-    auto.getElement(ControlType.Window, title, TreeScope.Children, retries) match {
+    auto.getElement(ControlType.Window, title, TreeScope.CHILDREN, retries) match {
       case Some(element) => Some(new Window(element))
       case None => None
     }
