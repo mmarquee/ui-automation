@@ -16,7 +16,6 @@
 package mmarquee.automation.controls;
 
 import mmarquee.automation.Element;
-import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.automation.pattern.ItemContainer;
 import org.junit.Assume;
 import org.junit.BeforeClass;

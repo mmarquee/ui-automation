@@ -25,7 +25,7 @@ import mmarquee.automation.controls.Application;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.Panel;
 import mmarquee.automation.controls.Window;
-import mmarquee.automation.controls.menu.Menu;
+import mmarquee.automation.controls.Menu;
 import mmarquee.automation.utils.Utils;
 import mmarquee.uiautomation.*;
 
@@ -922,7 +922,8 @@ public class UIAutomation extends BaseAutomation {
 
         final int res = this.automation.elementFromPoint(pt, pbr);
         if (res == 0) {
-            IUIAutomationElement element = getAutomationElementFromReference(pbr);
+            mmarquee.uiautomation.IUIAutomationElement element =
+                    getAutomationElementFromReference(pbr);
 
             return new Element(element);
         } else {
@@ -943,7 +944,8 @@ public class UIAutomation extends BaseAutomation {
 
         final int res = this.automation.getElementFromHandle(hwnd, pbr);
         if (res == 0) {
-            IUIAutomationElement element = getAutomationElementFromReference(pbr);
+            mmarquee.uiautomation.IUIAutomationElement element =
+                    getAutomationElementFromReference(pbr);
 
             return new Element(element);
         } else {
@@ -962,7 +964,8 @@ public class UIAutomation extends BaseAutomation {
 
         final int res = this.automation.getFocusedElement(pbr);
         if (res == 0) {
-            IUIAutomationElement element = getAutomationElementFromReference(pbr);
+            mmarquee.uiautomation.IUIAutomationElement element =
+                    getAutomationElementFromReference(pbr);
 
             return new Element(element);
         } else {

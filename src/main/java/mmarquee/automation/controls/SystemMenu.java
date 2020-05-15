@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package mmarquee.automation.controls.menu;
+package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.Element;
 import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.uiautomation.TreeScope;
 
 import java.util.ArrayList;
@@ -133,7 +131,7 @@ public class SystemMenu extends AutomationBase {
         List<Element> items =
                 this.findAll(new TreeScope(TreeScope.CHILDREN), condition);
 
-        List<MenuItem> list = new ArrayList<>();
+        List<MenuItem> list = new ArrayList<MenuItem>();
 
         for (Element item : items) {
             list.add(new MenuItem(new ElementBuilder(item)));

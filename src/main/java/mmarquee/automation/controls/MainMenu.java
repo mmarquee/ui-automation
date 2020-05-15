@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.menu;
+package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
@@ -21,7 +21,6 @@ import com.sun.jna.platform.win32.Guid;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.uiautomation.IUIAutomationExpandCollapsePatternConverter;

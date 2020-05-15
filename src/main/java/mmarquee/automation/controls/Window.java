@@ -24,8 +24,6 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.menu.MainMenu;
-import mmarquee.automation.controls.menu.SystemMenu;
 import mmarquee.uiautomation.TreeScope;
 
 import java.util.List;

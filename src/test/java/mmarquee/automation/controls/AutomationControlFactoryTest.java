@@ -19,7 +19,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import mmarquee.automation.controls.menu.Menu;
 import mmarquee.uiautomation.IUIAutomationElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,8 +35,6 @@ import mmarquee.automation.AutomationException;
 import mmarquee.automation.BaseAutomationTest;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.PropertyID;
-import mmarquee.automation.controls.menu.MainMenu;
-import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.pattern.PatternNotFoundException;
 
 /**

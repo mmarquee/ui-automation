@@ -16,7 +16,7 @@
 
 package mmarquee.demo
 
-import mmarquee.automation.controls.menu.MenuItem
+import mmarquee.automation.controls.MenuItem
 import mmarquee.automation.controls.{Search, Window}
 
 class NotepadApplication extends BaseApplication {

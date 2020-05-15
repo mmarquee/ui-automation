@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.menu;
+package mmarquee.automation.controls;
 
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
 import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.controls.ImplementsClick;
-import mmarquee.automation.controls.ImplementsExpand;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.TreeScope;
 
