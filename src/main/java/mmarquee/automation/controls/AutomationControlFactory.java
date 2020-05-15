@@ -15,9 +15,9 @@
  */
 package mmarquee.automation.controls;
 
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.automation.controls.menu.Menu;

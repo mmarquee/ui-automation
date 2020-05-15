@@ -15,17 +15,13 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.*;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.uiautomation.TreeScope;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import mmarquee.automation.Element;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.ItemNotFoundException;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the ComboBox element.

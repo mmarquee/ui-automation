@@ -19,8 +19,8 @@ import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.Application;
 import mmarquee.automation.controls.Button;
-import mmarquee.automation.controls.Window;
 import mmarquee.automation.controls.Search;
+import mmarquee.automation.controls.Window;
 
 /**
  * @author Mark Humphreys

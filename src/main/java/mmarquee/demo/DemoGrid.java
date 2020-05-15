@@ -15,7 +15,8 @@
  */
 package mmarquee.demo;
 
-import mmarquee.automation.*;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
 import java.util.List;

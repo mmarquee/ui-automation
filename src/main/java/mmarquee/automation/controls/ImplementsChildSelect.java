@@ -15,12 +15,12 @@
  */
 package mmarquee.automation.controls;
 
-import java.util.List;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
+
+import java.util.List;
 
 /**
  * The Control supports the methods of the SelectionPattern.

@@ -20,7 +20,7 @@ As the library depends on jna (currently version 5.5.0), then there is no
   <dependency>
     <groupId>com.github.mmarquee</groupId>
     <artifactId>ui-automation</artifactId>
-    <version>0.4.3</version>
+    <version>0.5.1</version>
   </dependency>  
 <dependencies>  
 ```
@@ -28,7 +28,8 @@ As the library depends on jna (currently version 5.5.0), then there is no
 ## Snapshot build
 
 Currently the 'stable' release of the library is 0.4.3, so the development 
-branch is being snapshotted, so to get the latest development version (current 0.5.1-SNAPSHOT), use
+branch is being snapshotted, so to get the latest development version
+ (currently 0.5.2-SNAPSHOT), use
  the following in the pom.xml.
 
 ```
@@ -37,7 +38,7 @@ branch is being snapshotted, so to get the latest development version (current 0
   <dependency>
     <groupId>com.github.mmarquee</groupId>
     <artifactId>ui-automation</artifactId>
-    <version>0.5.1-SNAPSHOT</version>
+    <version>0.5.2-SNAPSHOT</version>
   </dependency>  
 <dependencies>  
 ```

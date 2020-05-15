@@ -17,9 +17,9 @@
 package mmarquee.automation.controls.menu;
 
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.controls.AutomationBase;
 import mmarquee.automation.controls.ElementBuilder;

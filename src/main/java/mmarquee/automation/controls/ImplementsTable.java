@@ -15,13 +15,11 @@
  */
 package mmarquee.automation.controls;
 
-import java.util.List;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.automation.pattern.Table;
 import mmarquee.uiautomation.RowOrColumnMajor;
+
+import java.util.List;
 
 /**
  * The Control supports the methods of the Table pattern.

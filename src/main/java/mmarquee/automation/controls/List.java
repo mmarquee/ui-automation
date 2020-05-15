@@ -16,14 +16,13 @@
 
 package mmarquee.automation.controls;
 
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import mmarquee.automation.*;
-import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.uiautomation.TreeScope;
+
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Wrapper for the List control element.

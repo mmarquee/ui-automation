@@ -15,23 +15,21 @@
  */
 package mmarquee.automation.controls.menu;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-
 import mmarquee.automation.*;
-import mmarquee.automation.Element;
 import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.IUIAutomationExpandCollapsePattern;
 import mmarquee.uiautomation.IUIAutomationExpandCollapsePatternConverter;
 import mmarquee.uiautomation.TreeScope;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Wrapper for the MainMenu element.

@@ -15,17 +15,15 @@
  */
 package mmarquee.automation.controls;
 
-import java.util.regex.Pattern;
-
 import com.sun.jna.platform.win32.OleAuto;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.PointerByReference;
-
 import mmarquee.automation.*;
-import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.TreeScope;
+
+import java.util.regex.Pattern;
 
 /**
  * Encapsulates the functionality of 'containers' i.e. elements that host

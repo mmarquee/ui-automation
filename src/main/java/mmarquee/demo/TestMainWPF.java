@@ -22,9 +22,9 @@ import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.automation.controls.menu.MenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
+import mmarquee.automation.utils.Utils;
 import mmarquee.uiautomation.RowOrColumnMajor;
 import mmarquee.uiautomation.ToggleState;
-import mmarquee.automation.utils.Utils;
 
 import java.util.regex.Pattern;
 

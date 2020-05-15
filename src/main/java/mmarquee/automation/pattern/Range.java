@@ -18,9 +18,8 @@ package mmarquee.automation.pattern;
 import com.sun.jna.ptr.DoubleByReference;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.uiautomation.IUIAutomationRangeValuePattern;

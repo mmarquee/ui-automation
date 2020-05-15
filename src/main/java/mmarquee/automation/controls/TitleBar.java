@@ -16,9 +16,9 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
 import mmarquee.automation.controls.menu.MainMenu;
 import mmarquee.uiautomation.TreeScope;
 

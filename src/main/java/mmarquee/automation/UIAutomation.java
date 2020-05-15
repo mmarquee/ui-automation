@@ -22,12 +22,12 @@ import com.sun.jna.platform.win32.*;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.Application;
+import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.Panel;
 import mmarquee.automation.controls.Window;
-import mmarquee.automation.controls.ElementBuilder;
 import mmarquee.automation.controls.menu.Menu;
-import mmarquee.uiautomation.*;
 import mmarquee.automation.utils.Utils;
+import mmarquee.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

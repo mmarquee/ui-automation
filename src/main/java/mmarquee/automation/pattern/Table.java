@@ -15,19 +15,18 @@
  */
 package mmarquee.automation.pattern;
 
-import java.util.List;
-
 import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.uiautomation.IUIAutomationTablePattern;
 import mmarquee.uiautomation.IUIAutomationTablePatternConverter;
 import mmarquee.uiautomation.RowOrColumnMajor;
+
+import java.util.List;
 
 /**
  * Wrapper for the table pattern.
