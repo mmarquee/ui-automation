@@ -1,5 +1,5 @@
 The library is a programmers tool, in order to automate an application under tests developers will need to 'explore' 
-the application to get the names of controls, etc. using a tool like[inspect](https://msdn.microsoft.com/en-us/library/windows/desktop/dd318521(v=vs.85).aspx). 
+the application to get the names of controls, etc. using a tool like [inspect](https://msdn.microsoft.com/en-us/library/windows/desktop/dd318521(v=vs.85).aspx). 
 It will also help to have the original source code, but it is not essential.
  
 The MS UIAutomation Library is a COM library, and the classes that represent this have been wrapped using native 
@@ -20,15 +20,15 @@ As the library depends on jna (currently version 5.5.0), then there is no
   <dependency>
     <groupId>com.github.mmarquee</groupId>
     <artifactId>ui-automation</artifactId>
-    <version>0.5.0</version>
+    <version>0.4.3</version>
   </dependency>  
 <dependencies>  
 ```
 
 ## Snapshot build
 
-Currently the 'stable' release of the library is 0.5.0, so the development 
-branch is being snapshotted, so to get the latest development version, use
+Currently the 'stable' release of the library is 0.4.3, so the development 
+branch is being snapshotted, so to get the latest development version (current 0.5.1-SNAPSHOT), use
  the following in the pom.xml.
 
 ```
