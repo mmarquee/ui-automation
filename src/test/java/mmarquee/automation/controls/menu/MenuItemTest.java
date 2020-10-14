@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import mmarquee.automation.Element;
+import mmarquee.automation.controls.MenuItem;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -365,12 +366,11 @@ public class MenuItemTest extends BaseAutomationTest {
         Mockito.verify(collapse, atLeastOnce()).collapse();
     }
 
-
-
-	private Element enableMainMenuReference(MenuItem item, List<Element> childElements)
+	private Element enableMainMenuReference (MenuItem item,
+                                             List<Element> childElements)
 			throws AutomationException {
-		Element mainMenuParent =  Mockito.mock(Element.class);
-    	Element mainMenu =  Mockito.mock(Element.class);
+        Element mainMenuParent = Mockito.mock(Element.class);
+        Element mainMenu = Mockito.mock(Element.class);
 
         when(mainMenuParent.findFirst(any(), any())).thenReturn(mainMenu);
         when(mainMenu.findAll(any(), any())).thenReturn(childElements);
@@ -380,5 +380,5 @@ public class MenuItemTest extends BaseAutomationTest {
         item.mainMenuParentElement = mainMenuParent;
 
         return mainMenu;
-	}
+    }
 }

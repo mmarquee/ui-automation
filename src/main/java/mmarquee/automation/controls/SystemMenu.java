@@ -125,7 +125,7 @@ public class SystemMenu extends AutomationBase {
      * @return The list of menu items
      * @throws AutomationException Automation issue
      */
-    protected List<MenuItem> getItems() throws AutomationException {
+    public List<MenuItem> getItems() throws AutomationException {
         PointerByReference condition = this.createTrueCondition();
 
         List<Element> items =

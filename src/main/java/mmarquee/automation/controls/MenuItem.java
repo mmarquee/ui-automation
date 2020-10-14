@@ -36,10 +36,10 @@ public class MenuItem
         implements ImplementsClick, ImplementsExpand {
 
     /** The parent element. */
-    protected Element mainMenuParentElement;
+    public Element mainMenuParentElement;
 
     /** Name of the parent. */
-    protected String parentMenuName;
+    public String parentMenuName;
 
     /**
      * Construct the MenuItem.
