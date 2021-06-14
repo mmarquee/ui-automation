@@ -90,6 +90,7 @@ public class ItemContainer extends BasePattern {
      * @param propertyId The property
      * @param value The value of the property
      * @return The found element.
+     * @throws AutomationException Error with automation library.
      */
     public Element findItemByProperty(final Pointer startAfter,
                                                 final int propertyId,

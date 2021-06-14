@@ -3,14 +3,14 @@ the application to get the names of controls, etc. using a tool like [inspect](h
 It will also help to have the original source code, but it is not essential.
  
 The MS UIAutomation Library is a COM library, and the classes that represent this have been wrapped using native 
-JNA calls (currently using 4.5.0).
+JNA calls (currently using 5.6.0).
 
 ## Maven
 The library is held in the Sonatype OSS repository, so is 
 available for download via Maven (or other tools, 
 such as SBT for Scala). 
 
-As the library depends on jna (currently version 5.5.0), then there is no
+As the library depends on jna (currently version 5.6.0), then there is no
  need to specify the JNA library version in YOUR project's dependencies, the 
  library will guide the dependencies and bring down the correct version. 
 
@@ -27,7 +27,7 @@ As the library depends on jna (currently version 5.5.0), then there is no
 
 ## Snapshot build
 
-Currently the 'stable' release of the library is 0.4.3, so the development 
+Currently the 'stable' release of the library is 0.5.1, so the development 
 branch is being snapshotted, so to get the latest development version
  (currently 0.5.2-SNAPSHOT), use
  the following in the pom.xml.

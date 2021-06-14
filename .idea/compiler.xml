@@ -9,7 +9,7 @@
         <module name="ui-automation" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="11">
       <module name="ui-automation" target="1.8" />
     </bytecodeTargetLevel>
   </component>

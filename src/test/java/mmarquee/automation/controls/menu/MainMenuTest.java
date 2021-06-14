@@ -69,7 +69,7 @@ public class MainMenuTest extends BaseAutomationTest {
 
 	@Mock
     Element targetElement;
-	List<Element> list;
+    List<Element> list;
 	
 	@Before
     public void setup() {
