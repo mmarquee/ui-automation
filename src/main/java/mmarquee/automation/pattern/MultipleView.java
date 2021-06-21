@@ -15,8 +15,8 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 

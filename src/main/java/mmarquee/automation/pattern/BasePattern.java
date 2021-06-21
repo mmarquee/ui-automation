@@ -15,24 +15,20 @@
  */
 package mmarquee.automation.pattern;
 
-import java.util.function.Function;
-
-import mmarquee.automation.*;
-
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import mmarquee.automation.Element;
+import mmarquee.automation.*;
 import mmarquee.uiautomation.IUIAutomationElement;
 import mmarquee.uiautomation.IUIAutomationElementArray;
 import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.uiautomation.IUIAutomationElementConverter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.function.Function;
 
 /**
  * The base pattern functionality, shared for all patterns.

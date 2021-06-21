@@ -16,14 +16,13 @@
 
 package mmarquee.automation.controls;
 
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import mmarquee.automation.*;
-import mmarquee.automation.Element;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Selection;
 import mmarquee.uiautomation.TreeScope;
+
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Wrapper for the List control element.
@@ -130,6 +129,7 @@ public final class List
      * @param automationId AutomationId to look for.
      * @return The selected item.
      * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException Failed to find the pattern.
      */
     public ListItem getItemByAutomationId(final String automationId)
             throws AutomationException {
@@ -172,6 +172,7 @@ public final class List
      *
      * @return The current selection.
      * @throws AutomationException Something has gone wrong.
+     * @throws PatternNotFoundException The pattern was not found.
      */
     public java.util.List<ListItem> getSelectedItems()
             throws AutomationException, PatternNotFoundException {

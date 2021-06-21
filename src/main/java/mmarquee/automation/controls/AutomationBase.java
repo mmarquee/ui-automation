@@ -16,47 +16,23 @@
 
 package mmarquee.automation.controls;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.*;
+import mmarquee.automation.pattern.Window;
+import mmarquee.automation.pattern.*;
+import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.TreeScope;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import mmarquee.automation.*;
-import mmarquee.automation.pattern.BasePattern;
-import mmarquee.automation.pattern.ScrollItem;
-import mmarquee.automation.pattern.Text;
-import mmarquee.automation.pattern.Window;
-import mmarquee.automation.pattern.ExpandCollapse;
-import mmarquee.automation.pattern.Dock;
-import mmarquee.automation.pattern.LegacyIAccessible;
-import mmarquee.automation.pattern.Grid;
-import mmarquee.automation.pattern.GridItem;
-import mmarquee.automation.pattern.Invoke;
-import mmarquee.automation.pattern.MultipleView;
-import mmarquee.automation.pattern.ItemContainer;
-import mmarquee.automation.pattern.Value;
-import mmarquee.automation.pattern.Scroll;
-import mmarquee.automation.pattern.Range;
-import mmarquee.automation.pattern.SelectionItem;
-import mmarquee.automation.pattern.TableItem;
-import mmarquee.automation.pattern.Table;
-import mmarquee.automation.pattern.Transform;
-import mmarquee.automation.pattern.Selection;
-import mmarquee.automation.pattern.Toggle;
-import mmarquee.automation.pattern.PatternNotFoundException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.sun.jna.Pointer;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.COM.Unknown;
-import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
-import mmarquee.uiautomation.OrientationType;
-import mmarquee.uiautomation.TreeScope;
 
 /**
  * The base for automation.

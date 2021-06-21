@@ -23,7 +23,6 @@ import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.controls.Application;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.uiautomation.IUIAutomation;
-import mmarquee.automation.utils.Utils;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -33,11 +32,8 @@ import java.io.IOException;
 
 import static mmarquee.automation.BaseAutomationTest.getLocal;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Mark Humphreys
@@ -54,11 +50,6 @@ public class UIAutomationTest2 {
     public void testLaunch_Throws_Exception_When_startProcess_Fails() throws Exception {
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation local_instance = new UIAutomation(mocked_automation);
-
-     //   PowerMockito.mockStatic(Utils.class);
-
-     //   PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java
-        //   .io.IOException.class);
 
         local_instance.launch("notepad99.exe");
     }
@@ -98,11 +89,6 @@ public class UIAutomationTest2 {
     @Test
     public void testLaunch_Does_Not_Throw_Exception_When_startProcess_Succeeds() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
-//
-    //    PowerMockito.mockStatic(Utils.class);
-
-    //    PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java
-        //    .io.IOException.class);
 
         Application app = instance.launch("notepad.exe");
     }
@@ -111,11 +97,6 @@ public class UIAutomationTest2 {
     public void testLaunchOrAttach_Does_Not_Throw_Exception_When_Launching_startProcess_Succeeds() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
 
-  //      PowerMockito.mockStatic(Utils.class);
-
-  //      PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class)
-        //      )).thenReturn(true);
-
         instance.launchOrAttach("notepad.exe");
     }
 
@@ -123,26 +104,12 @@ public class UIAutomationTest2 {
     public void test_LaunchWithDirectoryOrAttach_Does_Not_Throw_Exception_When_Launching_startProcess_Succeeds() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
 
-    //    PowerMockito.mockStatic(Utils.class);
-
-   //     PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class)
-        //     )).thenReturn(true);
-
         instance.launchWithDirectoryOrAttach("notepad.exe");
     }
 
     @Test
     public void testLaunchOrAttach_Succeeds_When_Already_Running() throws Exception {
         UIAutomation instance = Mockito.mock(UIAutomation.class);
-
-  //      PowerMockito.mockStatic(Utils.class);
-
-    //    PowerMockito.when(Utils.findProcessEntry(any(), any(String[].class)
-   // //    //    )).thenReturn(true);
-    //    PowerMockito.when(Utils.startProcess(anyString())).thenThrow(java
-        //    .io.IOException.class);
-    //    PowerMockito.when(Utils.getHandleFromProcessEntry(any()))
-        //    .thenReturn(new WinNT.HANDLE());
 
         instance.launchOrAttach("notepad.exe");
     }

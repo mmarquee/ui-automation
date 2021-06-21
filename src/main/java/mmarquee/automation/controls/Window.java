@@ -15,22 +15,19 @@
  */
 package mmarquee.automation.controls;
 
-import java.util.List;
-import java.util.regex.Pattern;
-
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.Win32Exception;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.menu.MainMenu;
-import mmarquee.automation.controls.menu.SystemMenu;
 import mmarquee.uiautomation.TreeScope;
+
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Encapsulates the 'window' element.

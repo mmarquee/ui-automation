@@ -19,9 +19,8 @@ import com.sun.jna.platform.win32.OleAuto;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
 import mmarquee.uiautomation.IUIAutomationValuePattern;

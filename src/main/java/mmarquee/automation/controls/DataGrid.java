@@ -16,18 +16,17 @@
 
 package mmarquee.automation.controls;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.pattern.Grid;
 import mmarquee.automation.pattern.PatternNotFoundException;
 import mmarquee.automation.pattern.Table;
 import mmarquee.uiautomation.RowOrColumnMajor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Wrapper around the Delphi automated string gridPattern.

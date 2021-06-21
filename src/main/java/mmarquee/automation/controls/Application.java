@@ -16,20 +16,19 @@
 
 package mmarquee.automation.controls;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.regex.Pattern;
-
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.utils.ExecutableFileInfo;
 import mmarquee.automation.utils.Utils;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Wrapper around the Application element.

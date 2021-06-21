@@ -16,10 +16,10 @@
 
 package mmarquee.demo;
 
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.AutomationTreeWalker;
 import mmarquee.automation.AutomationTreeWalker.AutomationElementVisitor;
+import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 
 /**

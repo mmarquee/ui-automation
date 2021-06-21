@@ -15,11 +15,14 @@
  */
 package mmarquee.automation.controls;
 
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
+import mmarquee.automation.ItemNotFoundException;
+import mmarquee.uiautomation.TreeScope;
+
 import java.util.List;
 import java.util.regex.Pattern;
-
-import mmarquee.automation.*;
-import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the TreeView element.

@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import mmarquee.automation.controls.MenuItem;
+import mmarquee.automation.controls.SystemMenu;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;

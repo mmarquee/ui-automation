@@ -15,16 +15,15 @@
  */
 package mmarquee.automation.controls;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinNT;
-
 import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.BasePattern;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The element builder.

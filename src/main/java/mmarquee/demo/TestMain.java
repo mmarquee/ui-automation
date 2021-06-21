@@ -19,9 +19,9 @@ package mmarquee.demo;
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.Menu;
-import mmarquee.automation.controls.menu.MainMenu;
-import mmarquee.automation.controls.menu.MenuItem;
+import mmarquee.automation.controls.MainMenu;
+import mmarquee.automation.controls.Menu;
+import mmarquee.automation.controls.MenuItem;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.uiautomation.ToggleState;
 

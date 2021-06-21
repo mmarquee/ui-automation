@@ -15,23 +15,17 @@
  */
 package mmarquee.automation.pattern;
 
-import com.sun.jna.platform.win32.Guid;
-import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
+import com.sun.jna.platform.win32.Guid;
+import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.PatternID;
 import mmarquee.automation.PropertyID;
-import mmarquee.uiautomation.IUIAutomationTextPattern;
-import mmarquee.uiautomation.IUIAutomationTextPatternConverter;
-import mmarquee.uiautomation.IUIAutomationTextRange;
-import mmarquee.uiautomation.IUIAutomationTextRangeArray;
-import mmarquee.uiautomation.IUIAutomationTextRangeArrayConverter;
-import mmarquee.uiautomation.IUIAutomationTextRangeConverter;
+import mmarquee.uiautomation.*;
 
 /**
  * Wrapper for the text pattern.

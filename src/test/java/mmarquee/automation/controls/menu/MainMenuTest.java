@@ -28,6 +28,9 @@ import java.util.regex.Pattern;
 
 import mmarquee.automation.Element;
 import mmarquee.automation.controls.ElementBuilder;
+import mmarquee.automation.controls.MainMenu;
+import mmarquee.automation.controls.Menu;
+import mmarquee.automation.controls.MenuItem;
 import mmarquee.uiautomation.IUIAutomationElement;
 import org.junit.Assume;
 import org.junit.Before;
@@ -66,7 +69,7 @@ public class MainMenuTest extends BaseAutomationTest {
 
 	@Mock
     Element targetElement;
-	List<Element> list;
+    List<Element> list;
 	
 	@Before
     public void setup() {

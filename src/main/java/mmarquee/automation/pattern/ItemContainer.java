@@ -15,16 +15,15 @@
  */
 package mmarquee.automation.pattern;
 
-import mmarquee.automation.Element;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.PatternID;
-import mmarquee.automation.PropertyID;
-
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.Variant;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
+import mmarquee.automation.PatternID;
+import mmarquee.automation.PropertyID;
 import mmarquee.uiautomation.IUIAutomationElement;
 import mmarquee.uiautomation.IUIAutomationItemContainerPattern;
 import mmarquee.uiautomation.IUIAutomationItemContainerPatternConverter;
@@ -91,6 +90,7 @@ public class ItemContainer extends BasePattern {
      * @param propertyId The property
      * @param value The value of the property
      * @return The found element.
+     * @throws AutomationException Error with automation library.
      */
     public Element findItemByProperty(final Pointer startAfter,
                                                 final int propertyId,

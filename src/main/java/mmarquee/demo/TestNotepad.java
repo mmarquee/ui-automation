@@ -19,12 +19,12 @@ import mmarquee.automation.ElementNotFoundException;
 import mmarquee.automation.ItemNotFoundException;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
-import mmarquee.automation.controls.menu.MainMenu;
-import mmarquee.automation.controls.menu.MenuItem;
-
-import java.util.regex.Pattern;
+import mmarquee.automation.controls.MainMenu;
+import mmarquee.automation.controls.MenuItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.regex.Pattern;
 
 /**
  * Test the automation wrapper on a Delphi VCL application.

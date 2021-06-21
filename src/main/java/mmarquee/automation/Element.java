@@ -22,18 +22,8 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-
 import mmarquee.automation.pattern.BasePattern;
-import mmarquee.uiautomation.IUIAutomationElement;
-import mmarquee.uiautomation.IUIAutomationElement3;
-import mmarquee.uiautomation.IUIAutomationElement3Converter;
-import mmarquee.uiautomation.IUIAutomationElement6;
-import mmarquee.uiautomation.IUIAutomationElement6Converter;
-import mmarquee.uiautomation.IUIAutomationElement7;
-import mmarquee.uiautomation.IUIAutomationElement7Converter;
-import mmarquee.uiautomation.IUIAutomationElementArray;
-import mmarquee.uiautomation.TreeScope;
-import mmarquee.uiautomation.OrientationType;
+import mmarquee.uiautomation.*;
 
 import java.util.ArrayList;
 import java.util.List;

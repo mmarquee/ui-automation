@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package mmarquee.automation.controls.menu;
+package mmarquee.automation.controls;
+
+import mmarquee.automation.AutomationException;
+import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
+import mmarquee.automation.ElementNotFoundException;
+import mmarquee.automation.pattern.PatternNotFoundException;
+import mmarquee.uiautomation.TreeScope;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import mmarquee.automation.Element;
-import mmarquee.automation.AutomationException;
-import mmarquee.automation.ControlType;
-import mmarquee.automation.ElementNotFoundException;
-import mmarquee.automation.controls.AutomationBase;
-import mmarquee.automation.controls.ImplementsClick;
-import mmarquee.automation.controls.ElementBuilder;
-import mmarquee.automation.controls.ImplementsExpand;
-import mmarquee.automation.pattern.PatternNotFoundException;
-import mmarquee.uiautomation.TreeScope;
 
 /**
  * Wrapper for the MenuItem element.
@@ -40,10 +36,10 @@ public class MenuItem
         implements ImplementsClick, ImplementsExpand {
 
     /** The parent element. */
-    protected Element mainMenuParentElement;
+    public Element mainMenuParentElement;
 
     /** Name of the parent. */
-    protected String parentMenuName;
+    public String parentMenuName;
 
     /**
      * Construct the MenuItem.

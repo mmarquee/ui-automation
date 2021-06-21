@@ -22,8 +22,8 @@ import com.sun.jna.platform.win32.Ole32;
 import com.sun.jna.platform.win32.WTypes;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.ptr.PointerByReference;
-import mmarquee.uiautomation.IUIAutomation;
 import mmarquee.automation.utils.Canalizer;
+import mmarquee.uiautomation.IUIAutomation;
 
 /**
  * Wrapper for the access to Ole32, which only exists on Windows,

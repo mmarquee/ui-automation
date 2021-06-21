@@ -16,8 +16,8 @@
 package mmarquee.automation.controls;
 
 import com.sun.jna.platform.win32.WinDef;
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
+import mmarquee.automation.Element;
 import mmarquee.automation.controls.mouse.AutomationMouse;
 import mmarquee.automation.pattern.Invoke;
 

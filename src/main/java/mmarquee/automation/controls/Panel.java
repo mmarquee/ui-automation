@@ -15,10 +15,10 @@
  */
 package mmarquee.automation.controls;
 
-import java.util.regex.Pattern;
-
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+
+import java.util.regex.Pattern;
 
 /**
  * Wrapper for the Panel element.

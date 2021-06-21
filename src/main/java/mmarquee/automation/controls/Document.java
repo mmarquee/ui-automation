@@ -16,12 +16,12 @@
 
 package mmarquee.automation.controls;
 
-import java.util.List;
-
-import mmarquee.automation.Element;
 import mmarquee.automation.AutomationException;
 import mmarquee.automation.ControlType;
+import mmarquee.automation.Element;
 import mmarquee.uiautomation.TreeScope;
+
+import java.util.List;
 
 /**
  * Wrapper for the Document element.
