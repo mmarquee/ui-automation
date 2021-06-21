@@ -3,7 +3,7 @@ To add the library as a prerequisite, use the following entry to the library dep
 
 ### Stable release
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.5.0"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.5.1"
 ```
 
 ### Snapshot release
