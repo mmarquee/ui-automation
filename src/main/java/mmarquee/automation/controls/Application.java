@@ -360,6 +360,14 @@ public class Application extends AutomationBase {
      * @throws Exception Something has gone wrong
      */
     public void launchOrAttach() throws Exception {
-        this.getAutomation().launchOrAttach(this.pathName, this.arguments);
+        this.getAutomation().launchOrAttach(this.pathName);
+    }
+
+    public void launchOrAttachWithArgs() throws Exception {
+
+        // Explode arguments???
+        String[] args = this.arguments.split(" ");
+
+        this.getAutomation().launchOrAttachWithArgs(this.pathName, args);
     }
 }

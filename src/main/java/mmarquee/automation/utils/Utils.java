@@ -29,6 +29,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -149,6 +150,14 @@ public class Utils {
         return pb.start();
     }
 
+    public static Process startProcessWithArgs(final String command,
+                                       final String... args)
+            throws java.io.IOException {
+        ProcessBuilder pb = createProcessBuilderWithArgs(command, args);
+
+        return pb.start();
+    }
+
     /**
      * Starts the given command, redirecting stdout.
      *
@@ -201,6 +210,21 @@ public class Utils {
      */
     public static ProcessBuilder createProcessBuilder(final String... command) {
         return new ProcessBuilder(command);
+    }
+
+    public static ProcessBuilder createProcessBuilderWithArgs(final String command, final String... args) {
+
+        ArrayList<String> ar = new ArrayList<String>();
+
+        ar.add(command);
+
+        if (args != null) {
+            for (String arg : args) {
+                ar.add(arg);
+            }
+        }
+
+        return new ProcessBuilder(ar);
     }
 
     /**

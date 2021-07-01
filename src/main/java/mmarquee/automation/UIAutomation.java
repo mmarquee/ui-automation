@@ -164,6 +164,15 @@ public class UIAutomation extends BaseAutomation {
                 new ElementBuilder(rootElement).process(process).attached(false));
     }
 
+
+    public Application launchWithArgs(final String command,
+                                      final String... args)
+            throws java.io.IOException {
+        Process process = Utils.startProcessWithArgs(command, args);
+        return new Application(
+                new ElementBuilder(rootElement).process(process).attached(false));
+    }
+
     public Application launchWithRedirect(final String... command)
             throws java.io.IOException {
         Process process = Utils.startProcessWithRedirection(command);
@@ -210,6 +219,16 @@ public class UIAutomation extends BaseAutomation {
     	} catch (AutomationException ex) {
     		return this.launch(command);
     	}
+    }
+
+    public Application launchOrAttachWithArgs(final String command,
+                                      final String... args)
+            throws Exception {
+        try {
+            return findProcess(command);
+        } catch (AutomationException ex) {
+            return this.launchWithArgs(command, args);
+        }
     }
 
     /**
