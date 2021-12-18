@@ -3,7 +3,7 @@ To add the library as a prerequisite, use the following entry to the library dep
 
 ### Stable release
 ```scala
-  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.5.1"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.6.0"
 ```
 
 ### Snapshot release
@@ -11,7 +11,7 @@ To add the library as a prerequisite, use the following entry to the library dep
   resolvers +=
     "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
   
-  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.5.2-SNAPSHOT"
+  libraryDependencies += "com.github.mmarquee" % "ui-automation" % "0.7.0-SNAPSHOT"
 ```
 
 ## Examples
