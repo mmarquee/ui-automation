@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mmarquee.automation.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -68,7 +68,7 @@ import mmarquee.uiautomation.TreeScope;
  */
 public class AutomationBaseTest {
     protected Logger logger =
-            LogManager.getLogger(AutomationBaseTest.class.getName());
+            LoggerFactory.getLogger(AutomationBaseTest.class.getName());
 
     @BeforeClass
     public static void checkOs() throws Exception {

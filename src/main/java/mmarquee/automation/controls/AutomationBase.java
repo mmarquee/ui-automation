@@ -25,8 +25,8 @@ import mmarquee.automation.pattern.Window;
 import mmarquee.automation.pattern.*;
 import mmarquee.uiautomation.OrientationType;
 import mmarquee.uiautomation.TreeScope;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -47,7 +47,7 @@ public abstract class AutomationBase
      * The logger.
      */
     private final Logger logger =
-            LogManager.getLogger(AutomationBase.class.getName());
+            LoggerFactory.getLogger(AutomationBase.class.getName());
 
     /**
      * Gets the logger.

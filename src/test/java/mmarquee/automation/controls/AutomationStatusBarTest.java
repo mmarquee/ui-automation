@@ -19,8 +19,8 @@ import mmarquee.automation.Element;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.pattern.ItemContainer;
 import mmarquee.uiautomation.IUIAutomation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
  */
 public class AutomationStatusBarTest {
     protected Logger logger =
-            LogManager.getLogger(RadioButtonTest.class.getName());
+            LoggerFactory.getLogger(RadioButtonTest.class.getName());
 
     @Test
     public void testName_Gets_Name_From_Element() throws Exception {

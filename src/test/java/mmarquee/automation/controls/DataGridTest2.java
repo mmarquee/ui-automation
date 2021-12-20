@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mmarquee.automation.Element;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -55,7 +55,7 @@ public class DataGridTest2 {
     }
 
     protected Logger logger =
-            LogManager.getLogger(DataGridTest2.class.getName());
+            LoggerFactory.getLogger(DataGridTest2.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

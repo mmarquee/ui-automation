@@ -45,7 +45,7 @@ public class DemoGrid extends TestBase {
         }
 
         // Check that the attached issue is fixed.
-        logger.info(application.getIsAttached());
+        logger.info("{}", application.getIsAttached());
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
@@ -77,7 +77,7 @@ public class DemoGrid extends TestBase {
             try {
                 boolean val = applicationWindow.isModal();
 
-                logger.info(val);
+                logger.info("{}", val);
             } catch (Exception ex) {
                 logger.info("Ouch");
             }

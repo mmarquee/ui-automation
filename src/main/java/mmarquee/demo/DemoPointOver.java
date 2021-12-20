@@ -56,7 +56,7 @@ public class DemoPointOver extends TestBase {
                 logger.info("From focus = " + elementFocus.getName());
 
             } catch (Exception ex) {
-                logger.info(ex.getStackTrace());
+                logger.info(ex.getMessage(), ex);
             }
         } while (true);
     }

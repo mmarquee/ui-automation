@@ -70,7 +70,7 @@ public class TestMainExcel extends TestBase {
 
             List<TabItem> items = tab.getTabItems();
 
-            logger.info(items.size());
+            logger.info("{}", items.size());
 
             for(TabItem item : items) {
                 logger.info(item.getName());
@@ -86,24 +86,24 @@ public class TestMainExcel extends TestBase {
                             Search.getBuilder(0,0).build());
             logger.info(cell.getName());
             logger.info(cell.getValue());
-            logger.info(cell.getColumn());
-            logger.info(cell.getRow());
+            logger.info("{}", cell.getColumn());
+            logger.info("{}", cell.getRow());
 
             DataGridCell cell1 =
                     grid.getItem(
                             Search.getBuilder(1,1).build());
             logger.info(cell1.getName());
             logger.info(cell1.getValue());
-            logger.info(cell1.getColumn());
-            logger.info(cell1.getRow());
+            logger.info("{}", cell1.getColumn());
+            logger.info("{}", cell1.getRow());
 
             DataGridCell cell2 =
                     grid.getItem(
                             Search.getBuilder(2,2).build());
             logger.info(cell2.getName());
             logger.info(cell2.getValue());
-            logger.info(cell2.getColumn());
-            logger.info(cell2.getRow());
+            logger.info("{}", cell2.getColumn());
+            logger.info("{}", cell2.getRow());
 
             // 3.5 Set some data
             cell2.setValue("XYZ");
@@ -123,13 +123,13 @@ public class TestMainExcel extends TestBase {
 
                 // something
                 List<Element> items0 = grid.getSelection();
-                logger.info(items0.size());
+                logger.info("{}", items0.size());
 
                 cell2.removeFromSelection();
 
                 // something again - should be different
                 List<Element> items1 = grid.getSelection();
-                logger.info(items1.size());
+                logger.info("{}", items1.size());
             } else {
                 logger.info("Multiple selection not allowed");
             }

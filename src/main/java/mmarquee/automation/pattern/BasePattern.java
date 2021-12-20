@@ -25,8 +25,8 @@ import mmarquee.uiautomation.IUIAutomationElement;
 import mmarquee.uiautomation.IUIAutomationElementArray;
 import mmarquee.uiautomation.IUIAutomationElementArrayConverter;
 import mmarquee.uiautomation.IUIAutomationElementConverter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.util.function.Function;
 
@@ -42,7 +42,7 @@ public abstract class BasePattern
     /**
      * The logger.
      */
-    final Logger logger = LogManager.getLogger(BasePattern.class.getName());
+    final Logger logger = LoggerFactory.getLogger(BasePattern.class.getName());
 
     /**
      * The guid of the pattern.

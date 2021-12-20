@@ -97,7 +97,7 @@ public class TestMainWPF extends TestBase {
             try {
                 boolean val = applicationWindow.isModal();
 
-                logger.info(val);
+                logger.info("{}", val);
             } catch (Exception ex) {
                 logger.info("Ouch");
             }
@@ -624,8 +624,8 @@ public class TestMainWPF extends TestBase {
 
             WinDef.POINT clickPoint = rightClickBtn.getClickablePoint();
 
-            logger.info(clickPoint.x);
-            logger.info(clickPoint.y);
+            logger.info("{}", clickPoint.x);
+            logger.info("{}", clickPoint.y);
 
             WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
 

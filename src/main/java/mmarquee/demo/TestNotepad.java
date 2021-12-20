@@ -21,10 +21,11 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.MainMenu;
 import mmarquee.automation.controls.MenuItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
+
 
 /**
  * Test the automation wrapper on a Delphi VCL application.
@@ -41,7 +42,7 @@ public class TestNotepad extends TestBase {
         UIAutomation automation = UIAutomation.getInstance();
 
         Logger logger =
-                LogManager.getLogger(AutomationBase.class.getName());
+                LoggerFactory.getLogger(AutomationBase.class.getName());
 
         Application application =
                 new Application(

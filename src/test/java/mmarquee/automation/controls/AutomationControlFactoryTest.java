@@ -20,8 +20,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import mmarquee.uiautomation.IUIAutomationElement;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -55,7 +55,7 @@ public class AutomationControlFactoryTest {
     }
 
     protected Logger logger =
-            LogManager.getLogger(AutomationControlFactoryTest.class.getName());
+            LoggerFactory.getLogger(AutomationControlFactoryTest.class.getName());
 	
     private AutomationBase parent;
     private Element parentElement;

@@ -78,7 +78,7 @@ public class TestMainWPFAutomationId extends TestBase {
             try {
                 boolean val = applicationWindow.isModal();
 
-                logger.info(val);
+                logger.info("{}", val);
             } catch (Exception ex) {
                 logger.info("Ouch");
             }

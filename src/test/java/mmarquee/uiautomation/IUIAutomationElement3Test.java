@@ -22,8 +22,8 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.*;
 import org.mockito.Mockito;
 
@@ -52,7 +52,7 @@ public class IUIAutomationElement3Test {
     }
 
     private Logger logger =
-            LogManager.getLogger(IUIAutomationTest.class.getName());
+            LoggerFactory.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
