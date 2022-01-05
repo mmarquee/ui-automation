@@ -20,16 +20,16 @@ As the library depends on jna (currently version 5.6.0), then there is no
   <dependency>
     <groupId>com.github.mmarquee</groupId>
     <artifactId>ui-automation</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
   </dependency>  
 <dependencies>  
 ```
 
 ## Snapshot build
 
-Currently the 'stable' release of the library is 0.6.0, so the development 
-branch is being snapshotted, so to get the latest development version
- (currently 0.7.0-SNAPSHOT, if it exists), use the following in the pom.xml.
+The 'stable' release of the library is 0.7.0, so the development 
+branch is being snapshotted. To get the latest development version
+ (currently 0.8.0-SNAPSHOT, if it exists), use the following in the `pom.xml`.
 
 ```
 <dependencies>
