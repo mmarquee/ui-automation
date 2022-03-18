@@ -21,8 +21,6 @@ import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -30,6 +28,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.logging.Logger;
 
 /**
  * @author Mark Humphreys
@@ -49,7 +49,7 @@ public class IUIAutomationTest {
     }
 
     protected Logger logger =
-            LogManager.getLogger(IUIAutomationTest.class.getName());
+            Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

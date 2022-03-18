@@ -16,6 +16,8 @@
 
 package mmarquee.demo;
 
+import java.util.logging.Level;
+
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.Application;
 import mmarquee.automation.controls.Button;
@@ -39,7 +41,7 @@ public class DemoEventHandler extends TestBase {
         try {
             application = automation.launchOrAttach("apps\\Project1.exe");
         } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
+            logger.log(Level.WARNING, "Failed to find application", ex);
         }
 
         try {
@@ -47,7 +49,7 @@ public class DemoEventHandler extends TestBase {
             assert application != null;
             application.waitForInputIdle(Application.SHORT_TIMEOUT);
         } catch (Throwable ex) {
-            logger.error("Failed to wait properly");
+            logger.severe("Failed to wait properly");
         }
 
         try {
@@ -64,7 +66,7 @@ public class DemoEventHandler extends TestBase {
                     new AutomationEventHandler());
                     */
         } catch (Throwable ex) {
-            logger.error("Failed to get window properly");
+            logger.severe("Failed to get window properly");
         }
     }
 }

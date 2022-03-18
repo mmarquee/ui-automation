@@ -22,8 +22,6 @@ import com.sun.jna.platform.win32.COM.Unknown;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 import mmarquee.automation.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.*;
 import org.mockito.Mockito;
 
@@ -32,6 +30,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
+
+import java.util.logging.Logger;
 
 /**
  * @author Mark Humphreys
@@ -53,7 +53,7 @@ public class IUIAutomationElementTest {
     }
 
     private Logger logger =
-            LogManager.getLogger(IUIAutomationTest.class.getName());
+            Logger.getLogger(IUIAutomationTest.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);

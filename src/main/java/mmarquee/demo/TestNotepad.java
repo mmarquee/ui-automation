@@ -21,9 +21,9 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 import mmarquee.automation.controls.MainMenu;
 import mmarquee.automation.controls.MenuItem;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -41,7 +41,7 @@ public class TestNotepad extends TestBase {
         UIAutomation automation = UIAutomation.getInstance();
 
         Logger logger =
-                LogManager.getLogger(AutomationBase.class.getName());
+                Logger.getLogger(AutomationBase.class.getName());
 
         Application application =
                 new Application(
@@ -52,13 +52,13 @@ public class TestNotepad extends TestBase {
         try {
             application.launchOrAttach();
         } catch (Throwable ex) {
-            logger.warn("Failed to find notepad application", ex);
+            logger.log(Level.WARNING, "Failed to find notepad application", ex);
         }
 
         try {
             logger.info(Application.getVersionNumber("notepad.exe"));
         } catch (Throwable ex) {
-            logger.warn("Failed to get version information", ex);
+            logger.log(Level.WARNING, "Failed to get version information", ex);
         }
 
         // Wait for the process to start

@@ -22,10 +22,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import mmarquee.automation.Element;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -55,7 +54,7 @@ public class DataGridTest2 {
     }
 
     protected Logger logger =
-            LogManager.getLogger(DataGridTest2.class.getName());
+            Logger.getLogger(DataGridTest2.class.getName());
 
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
@@ -71,7 +70,7 @@ public class DataGridTest2 {
 
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
-        
+
         IUIAutomation mocked_automation = Mockito.mock(IUIAutomation.class);
         UIAutomation instance = new UIAutomation(mocked_automation);
 
@@ -94,7 +93,7 @@ public class DataGridTest2 {
 
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
-        
+
         List<Element> elementList = new ArrayList<>();
         Element element1 = Mockito.mock(Element.class);
         Element element2 = Mockito.mock(Element.class);
@@ -125,7 +124,7 @@ public class DataGridTest2 {
 
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
-        
+
         List<Element> elementList = new ArrayList<>();
         Element element1 = Mockito.mock(Element.class);
         Element element2 = Mockito.mock(Element.class);
@@ -162,7 +161,7 @@ public class DataGridTest2 {
 
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
-        
+
         List<Element> elementList = new ArrayList<>();
         Element element1 = Mockito.mock(Element.class);
         Element element2 = Mockito.mock(Element.class);
@@ -194,7 +193,7 @@ public class DataGridTest2 {
 
         when(grid.isAvailable()).thenReturn(true);
         when(table.isAvailable()).thenReturn(true);
-        
+
         List<Element> elementList = new ArrayList<>();
         Element element1 = Mockito.mock(Element.class);
         Element element2 = Mockito.mock(Element.class);

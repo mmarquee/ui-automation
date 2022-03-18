@@ -47,7 +47,7 @@ public class TestMainExcel extends TestBase {
                         "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE");
             } catch (Throwable ex) {
                 // Smother
-                logger.error("Failed to launch or attach");
+                logger.severe("Failed to launch or attach");
             }
 
             // 1. Load a file in excel
@@ -70,7 +70,7 @@ public class TestMainExcel extends TestBase {
 
             List<TabItem> items = tab.getTabItems();
 
-            logger.info(items.size());
+            logger.info("size: " + items.size());
 
             for(TabItem item : items) {
                 logger.info(item.getName());
@@ -84,26 +84,26 @@ public class TestMainExcel extends TestBase {
             DataGridCell cell =
                     grid.getItem(
                             Search.getBuilder(0,0).build());
-            logger.info(cell.getName());
-            logger.info(cell.getValue());
-            logger.info(cell.getColumn());
-            logger.info(cell.getRow());
+            logger.info("name: " + cell.getName());
+            logger.info("value: " + cell.getValue());
+            logger.info("col: " + cell.getColumn());
+            logger.info("row: " + cell.getRow());
 
             DataGridCell cell1 =
                     grid.getItem(
                             Search.getBuilder(1,1).build());
-            logger.info(cell1.getName());
-            logger.info(cell1.getValue());
-            logger.info(cell1.getColumn());
-            logger.info(cell1.getRow());
+            logger.info("name: " + cell1.getName());
+            logger.info("value: " + cell1.getValue());
+            logger.info("col: " + cell1.getColumn());
+            logger.info("row: " + cell1.getRow());
 
             DataGridCell cell2 =
                     grid.getItem(
                             Search.getBuilder(2,2).build());
-            logger.info(cell2.getName());
-            logger.info(cell2.getValue());
-            logger.info(cell2.getColumn());
-            logger.info(cell2.getRow());
+            logger.info("name: " + cell2.getName());
+            logger.info("value: " + cell2.getValue());
+            logger.info("col: " + cell2.getColumn());
+            logger.info("row: " + cell2.getRow());
 
             // 3.5 Set some data
             cell2.setValue("XYZ");
@@ -112,8 +112,8 @@ public class TestMainExcel extends TestBase {
             DataGridCell cell3 =
                     grid.getItem(
                             Search.getBuilder(3,3).build());
-            logger.info(cell3.getName());
-            logger.info(cell3.getValue());
+            logger.info("name: " + cell3.getName());
+            logger.info("value: " + cell3.getValue());
 
             if (grid.canSelectMultiple()) {
                 // Play with selection - doesn't seem to be working yet
@@ -123,13 +123,13 @@ public class TestMainExcel extends TestBase {
 
                 // something
                 List<Element> items0 = grid.getSelection();
-                logger.info(items0.size());
+                logger.info("size: " + items0.size());
 
                 cell2.removeFromSelection();
 
                 // something again - should be different
                 List<Element> items1 = grid.getSelection();
-                logger.info(items1.size());
+                logger.info("size: " + items1.size());
             } else {
                 logger.info("Multiple selection not allowed");
             }

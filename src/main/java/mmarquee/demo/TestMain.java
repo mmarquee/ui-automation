@@ -16,6 +16,8 @@
 
 package mmarquee.demo;
 
+import java.util.logging.Level;
+
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.*;
 import mmarquee.automation.controls.*;
@@ -45,7 +47,7 @@ public class TestMain extends TestBase {
         try {
             application.launchOrAttach();
         } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
+            logger.log(Level.WARNING, "Failed to find application", ex);
         }
 
         try {
@@ -53,7 +55,7 @@ public class TestMain extends TestBase {
             assert application != null;
             application.waitForInputIdle(Application.SHORT_TIMEOUT);
         } catch (Throwable ex) {
-            logger.error("Failed to wait properly");
+            logger.severe("Failed to wait properly");
         }
 
         try {
@@ -163,7 +165,7 @@ public class TestMain extends TestBase {
 
                 logger.info("Text for AutomatedCombobox1 is " + txt);
             } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find element");
+                logger.severe("Failed to find element");
             }
 
             try {
@@ -180,7 +182,7 @@ public class TestMain extends TestBase {
                 logger.info("Changed value is " + value1);
 
             } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find maskededit");
+                logger.severe("Failed to find maskededit");
             }
 
             try {
@@ -194,7 +196,7 @@ public class TestMain extends TestBase {
 
                 java.util.List litems = cb0.getItems();
             } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find combobox");
+                logger.severe("Failed to find combobox");
             }
 
             // Now string grids

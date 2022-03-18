@@ -53,7 +53,7 @@ public class Tab extends Container {
                                 .automation(this.getAutomation())));
             }
         } catch (AutomationException ex) {
-            getLogger().error(ex.getMessage());
+            getLogger().severe(ex.getMessage());
         }
 
         return tabItems;
@@ -93,7 +93,7 @@ public class Tab extends Container {
 
         for (TabItem item: this.getTabItems()) {
             final String name = item.getName();
-            
+
 			if (name != null && namePattern.matcher(name).matches()) {
                 found = true;
                 item.selectItem();

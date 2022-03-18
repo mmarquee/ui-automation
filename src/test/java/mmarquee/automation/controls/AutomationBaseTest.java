@@ -27,10 +27,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import mmarquee.automation.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -68,7 +67,7 @@ import mmarquee.uiautomation.TreeScope;
  */
 public class AutomationBaseTest {
     protected Logger logger =
-            LogManager.getLogger(AutomationBaseTest.class.getName());
+            Logger.getLogger(AutomationBaseTest.class.getName());
 
     @BeforeClass
     public static void checkOs() throws Exception {
@@ -90,7 +89,7 @@ public class AutomationBaseTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
-    
+
     // Helper to test the abstract class
     static class ConcreteAutomationBase extends AutomationBase {
 
@@ -198,7 +197,7 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsAutomationPatternAvailablePatternID () throws Exception {
-    	
+
         Window window = new Window(new ElementBuilder(element));
         when(element.getPropertyValue(PropertyID.IsGridItemPatternAvailable.getValue())).thenReturn(1);
 
@@ -209,10 +208,10 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsAutomationPatternAvailableAllDefinedPatternID_no_Exception () throws Exception {
-    	
+
     	Window window = new Window(new ElementBuilder(element));
         when(element.getPropertyValue(anyInt())).thenReturn(0);
-        
+
     	for (final PatternID patternId: PatternID.values()) {
     		window.isAutomationPatternAvailable(patternId);
     	}
@@ -232,7 +231,7 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsAutomationPatternAvailableInt () throws Exception {
-    	
+
         Window window = new Window(new ElementBuilder(element));
         when(element.getPropertyValue(PropertyID.IsWindowPatternAvailable.getValue())).thenReturn(1);
 
@@ -244,7 +243,7 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsAutomationPatternAvailableIntSecondVersion () throws Exception {
-    	
+
         Window window = new Window(new ElementBuilder(element));
         when(element.getPropertyValue(PropertyID.IsTextPattern2Available.getValue())).thenReturn(1);
 
@@ -271,10 +270,10 @@ public class AutomationBaseTest {
 
         window.isAutomationPatternAvailable(-815);
     }
-    
+
     @Test
     public void testIsAutomationPatternAvailableBasePatternClass () throws Exception {
-    	
+
     	MultipleView pattern = Mockito.mock(MultipleView.class);
     	when(pattern.isAvailable()).thenReturn(true);
 
@@ -287,7 +286,7 @@ public class AutomationBaseTest {
 
     @Test
     public void testIsAutomationPatternAvailableBasePatternClass_when_not_available () throws Exception {
-    	
+
     	Dock pattern = Mockito.mock(Dock.class);
     	when(pattern.isAvailable()).thenReturn(false);
 
@@ -297,10 +296,10 @@ public class AutomationBaseTest {
 
         assertFalse(value);
     }
-    
+
     @Test
     public void testIsMultipleViewPatternAvailable () throws Exception {
-    	
+
     	MultipleView pattern = Mockito.mock(MultipleView.class);
     	when(pattern.isAvailable()).thenReturn(true);
 

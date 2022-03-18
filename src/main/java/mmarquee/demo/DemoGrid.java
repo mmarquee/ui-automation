@@ -20,6 +20,7 @@ import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.*;
 
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * @author Mark Humphreys
@@ -41,11 +42,11 @@ public class DemoGrid extends TestBase {
         try {
             application.launchOrAttach();
         } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
+            logger.log(Level.WARNING, "Failed to find application", ex);
         }
 
         // Check that the attached issue is fixed.
-        logger.info(application.getIsAttached());
+        logger.info("attached: " + application.getIsAttached());
 
         // Wait for the process to start
         // This doesn't seem to wait for WPF examples
@@ -77,7 +78,7 @@ public class DemoGrid extends TestBase {
             try {
                 boolean val = applicationWindow.isModal();
 
-                logger.info(val);
+                logger.info("isModal: " + val);
             } catch (Exception ex) {
                 logger.info("Ouch");
             }
