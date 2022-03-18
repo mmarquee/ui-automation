@@ -55,9 +55,9 @@ public class DemoTreeWalker extends TestBase {
 
             AutomationElementVisitor logVisitor =
                     new AutomationElementVisitor() {
-				
+
             	int level = 0;
-            	
+
             	@Override
 				public boolean visit(AutomationTreeWalker walker,
                                      Element element)
@@ -73,26 +73,26 @@ public class DemoTreeWalker extends TestBase {
                                     indent,
                                     name,
                                     className);
-					
+
 					logger.info(message);
-					
+
 					if (recurseLevel > level) {
 						level++;
 						walker.walk(this, element);
 						level--;
 					}
-					
+
 					return true;
 				}
 			};
-            
+
 			walker.walk(logVisitor, root);
 
 			logger.info("All done");
 
         } catch (Throwable ex) {
             // Smother
-            logger.error("Exception thrown - " + ex.toString());
+            logger.severe("Exception thrown - " + ex.toString());
             ex.printStackTrace();
         }
     }

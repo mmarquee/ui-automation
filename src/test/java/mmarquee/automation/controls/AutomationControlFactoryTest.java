@@ -19,9 +19,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.logging.Logger;
+
 import mmarquee.uiautomation.IUIAutomationElement;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -55,8 +55,8 @@ public class AutomationControlFactoryTest {
     }
 
     protected Logger logger =
-            LogManager.getLogger(AutomationControlFactoryTest.class.getName());
-	
+            Logger.getLogger(AutomationControlFactoryTest.class.getName());
+
     private AutomationBase parent;
     private Element parentElement;
 	private Element element;
@@ -65,7 +65,7 @@ public class AutomationControlFactoryTest {
     static {
         ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
     }
-    
+
     @Before
     public void setUp() {
 		parent = Mockito.mock(AutomationBase.class);
@@ -74,7 +74,7 @@ public class AutomationControlFactoryTest {
 		iuielement = Mockito.mock(IUIAutomationElement.class);
         element = new Element(iuielement);
     }
-    
+
 
     @Test
     public void get_returns_AutomationContainer_on_None() throws Exception {
@@ -335,12 +335,12 @@ public class AutomationControlFactoryTest {
 			throws AutomationException, PatternNotFoundException {
 		return testGet(controlType, "", expectedClass);
 	}
-	
+
 	private AutomationBase testGet(ControlType controlType, String className, Class<? extends AutomationBase> expectedClass)
 			throws AutomationException, PatternNotFoundException {
 		BaseAutomationTest.answerIntByReference(controlType.getValue()).when(iuielement).getCurrentControlType(any());
 		BaseAutomationTest.answerStringByReference(className).when(iuielement).getCurrentClassName(any());
-        
+
         AutomationBase control = AutomationControlFactory.get(parent, element);
 		assertEquals(expectedClass, control.getClass());
         assertEquals(element,control.getElement());

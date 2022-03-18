@@ -23,6 +23,7 @@ import mmarquee.automation.controls.Window;
 import mmarquee.uiautomation.TreeScope;
 
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * Demo for the caching functionality.
@@ -41,7 +42,7 @@ public class DemoCaching extends TestBase {
             application =
                     automation.launchOrAttach("apps\\Project1.exe");
         } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
+            logger.log(Level.WARNING, "Failed to find application", ex);
         }
 
         try {
@@ -49,7 +50,7 @@ public class DemoCaching extends TestBase {
             assert application != null;
             application.waitForInputIdle(Application.SHORT_TIMEOUT);
         } catch (Throwable ex) {
-            logger.error("Failed to wait properly");
+            logger.log(Level.WARNING, "Failed to wait properly");
         }
 
         try {

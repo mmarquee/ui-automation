@@ -26,6 +26,7 @@ import mmarquee.automation.utils.Utils;
 import mmarquee.uiautomation.RowOrColumnMajor;
 import mmarquee.uiautomation.ToggleState;
 
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 
 /**
@@ -48,7 +49,7 @@ public class TestMainWPF extends TestBase {
         try {
             application.launchOrAttach();
         } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
+            logger.log(Level.WARNING, "Failed to find application", ex);
         }
 
         // Wait for the process to start
@@ -97,7 +98,7 @@ public class TestMainWPF extends TestBase {
             try {
                 boolean val = applicationWindow.isModal();
 
-                logger.info(val);
+                logger.info("isModal: " + val);
             } catch (Exception ex) {
                 logger.info("Ouch");
             }
@@ -129,7 +130,7 @@ public class TestMainWPF extends TestBase {
             file.expand();
 
             this.rest();
-            
+
             logger.info("Items = " + file.getItems().size());
 
             MenuItem exit = file.getItems().get(3);
@@ -304,7 +305,7 @@ public class TestMainWPF extends TestBase {
 //                String txt = cb0.text();
 //                logger.info("Text for Combobox is `" + txt + "`");
             } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find element");
+                logger.severe("Failed to find element");
             }
 
             // EDITTABLE COMBOBOX ************************************
@@ -324,7 +325,7 @@ public class TestMainWPF extends TestBase {
                 logger.info("Text for Combobox is now `" + cb1.getValue() + "`");
 
             } catch (ElementNotFoundException ex) {
-                logger.error("Failed to find element");
+                logger.severe("Failed to find element");
             }
 
             // DATAGRIDS ***********************************************************
@@ -624,8 +625,8 @@ public class TestMainWPF extends TestBase {
 
             WinDef.POINT clickPoint = rightClickBtn.getClickablePoint();
 
-            logger.info(clickPoint.x);
-            logger.info(clickPoint.y);
+            logger.info("x: " + clickPoint.x);
+            logger.info("y: " + clickPoint.y);
 
             WinDef.RECT rect0 = rightClickBtn.getBoundingRectangle();
 

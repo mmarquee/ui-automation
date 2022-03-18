@@ -15,6 +15,8 @@
  */
 package mmarquee.demo;
 
+import java.util.logging.Level;
+
 import com.sun.jna.platform.win32.WinDef;
 import mmarquee.automation.UIAutomation;
 import mmarquee.automation.controls.Application;
@@ -42,7 +44,7 @@ public class TestMainWPFAutomationId extends TestBase {
             application = automation.launchOrAttach(
                     "apps\\WpfApplicationWithAutomationIds.exe");
         } catch (Throwable ex) {
-            logger.warn("Failed to find application", ex);
+            logger.log(Level.WARNING, "Failed to find application", ex);
         }
 
         // Wait for the process to start
@@ -78,7 +80,7 @@ public class TestMainWPFAutomationId extends TestBase {
             try {
                 boolean val = applicationWindow.isModal();
 
-                logger.info(val);
+                logger.info("isModal: " + val);
             } catch (Exception ex) {
                 logger.info("Ouch");
             }

@@ -22,6 +22,8 @@ import mmarquee.automation.UIAutomation;
 
 import java.awt.*;
 
+import java.util.logging.Level;
+
 /**
  * Example for the PointOver functionality.
  *
@@ -56,7 +58,7 @@ public class DemoPointOver extends TestBase {
                 logger.info("From focus = " + elementFocus.getName());
 
             } catch (Exception ex) {
-                logger.info(ex.getStackTrace());
+                logger.log(Level.WARNING, "Exception", ex);
             }
         } while (true);
     }

@@ -186,15 +186,15 @@ public class Window
                                 this.createControlTypeCondition(
                                         ControlType.Window)));
             } catch (ElementNotFoundException ex) {
-                getLogger().warn("Failed to find `" + title + "` window");
+                getLogger().warning("Failed to find `" + title + "` window");
             }
 
             if (item != null) {
-                getLogger().warn("Found window");
+                getLogger().warning("Found window");
                 break;
             } else {
                 try {
-                    getLogger().warn(
+                    getLogger().warning(
                             "Did not find `" + title + "` window, retrying");
                     // Wait for it
                     Thread.sleep(SLEEP_DURATION);
@@ -227,7 +227,7 @@ public class Window
                 		this.findAll(new TreeScope(TreeScope.DESCENDANTS),
                 				this.createControlTypeCondition(
                 				        ControlType.Window));
-                
+
                 for (Element element : collection) {
                     String name = element.getName();
 
@@ -236,12 +236,12 @@ public class Window
                         break retry_loop;
                     }
                 }
-                
+
             } catch (AutomationException ex) {
                 getLogger().info("Failed");
             }
 
-            getLogger().warn(
+            getLogger().warning(
                     "Did not find window matching `" + titlePattern + "`, retrying");
             // Wait for it
             try {
@@ -251,7 +251,7 @@ public class Window
                 getLogger().info("interrupted");
 			}
         }
-        
+
         if (item == null) {
             throw new ElementNotFoundException(
                     "matching " + titlePattern.toString());

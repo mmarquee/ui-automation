@@ -38,7 +38,7 @@ public class TestMainWord extends TestBase {
                 application = automation.launchOrAttach("C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE");
             } catch (Throwable ex) {
                 // Smother
-                logger.error("Failed to launch or attach");
+                logger.severe("Failed to launch or attach");
             }
 
             // 1. Load a file in Word

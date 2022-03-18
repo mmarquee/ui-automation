@@ -44,14 +44,14 @@ class TestExplorer extends TestBase {
             application = automation.launchOrAttach("explorer");
         } catch (Throwable ex) {
             // Smother
-            logger.error("Failed to launch or attach");
+            logger.severe("Failed to launch or attach");
         }
 
         try {
             assert application != null;
             application.waitForInputIdle(Application.SHORT_TIMEOUT);
         } catch (Throwable ex) {
-            logger.error("Failed to wait for input idle for some reason");
+            logger.severe("Failed to wait for input idle for some reason");
         }
 
         // Get the main explorer window

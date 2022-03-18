@@ -44,7 +44,7 @@ public class TestMainPowerpoint extends TestBase {
                         "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE\"");
             } catch (Throwable ex) {
                 // Smother
-                logger.error("Failed to launch or attach Powerpoint");
+                logger.severe("Failed to launch or attach Powerpoint");
             }
 
             // 1. Load the file
